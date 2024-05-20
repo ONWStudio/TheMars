@@ -45,7 +45,7 @@ public sealed class Dispatcher : UpdatingClass, IDispatcher
         }
     }
 
-    protected override void Update()
+    protected internal override void Update()
     {
         invokePending();
         invokeLoopPending();

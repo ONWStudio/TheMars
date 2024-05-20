@@ -66,7 +66,6 @@ public class AnimatorEventReceiver : MonoBehaviour
     #region Inspector
 
     public List<AnimationClip> animationClips = new List<AnimationClip>();
-    public PetFeedbacksList FeedbacksList;
 
     #endregion
 
@@ -102,11 +101,6 @@ public class AnimatorEventReceiver : MonoBehaviour
 
     private void Awake()
     {
-        if (FeedbacksList == null)
-        {
-            FeedbacksList = gameObject.GetComponent<PetFeedbacksList>();
-        }
-
         // 애니메이터 내에 있는 모든 애니메이션 클립의 시작과 끝에 이벤트를 생성한다.
         _animator = GetComponent<Animator>();
         for (int i = 0; i < _animator.runtimeAnimatorController.animationClips.Length; i++)
@@ -162,26 +156,26 @@ public class AnimatorEventReceiver : MonoBehaviour
         _isPlayingAnimator = false;
     }
 
-    public void PlayFeedbacksName(string _name)
-    {
-        if (FeedbacksList == null)
-        {
-#if DEBUG
-            Debug.LogError("FeedbacksList Is Null");
-#endif
-            return;
-        }
+//    public void PlayFeedbacksName(string _name)
+//    {
+//        if (FeedbacksList == null)
+//        {
+//#if DEBUG
+//            Debug.LogError("FeedbacksList Is Null");
+//#endif
+//            return;
+//        }
 
-        MMFeedbacks feedbacks = FeedbacksList.GetFeedbacks(_name);
-        if (feedbacks == null)
-        {
-#if DEBUG
-            Debug.LogError("Not Found Feedbacks");
-#endif
-        }
-        else
-        {
-            feedbacks.PlayFeedbacks();
-        }
-    }
+//        MMFeedbacks feedbacks = FeedbacksList.GetFeedbacks(_name);
+//        if (feedbacks == null)
+//        {
+//#if DEBUG
+//            Debug.LogError("Not Found Feedbacks");
+//#endif
+//        }
+//        else
+//        {
+//            feedbacks.PlayFeedbacks();
+//        }
+//    }
 }
