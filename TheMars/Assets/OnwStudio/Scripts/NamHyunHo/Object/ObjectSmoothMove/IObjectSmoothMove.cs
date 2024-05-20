@@ -1,0 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public interface IObjectSmoothMove
+{
+    float Ratio { get; set; }
+
+    Vector3 GetVector(Vector3 objectPosition, Vector3 targetPosition)
+    {
+        Vector3 direction = (targetPosition - objectPosition).normalized;
+        return Ratio * Vector3.Distance(objectPosition, targetPosition) * direction;
+    }
+}
