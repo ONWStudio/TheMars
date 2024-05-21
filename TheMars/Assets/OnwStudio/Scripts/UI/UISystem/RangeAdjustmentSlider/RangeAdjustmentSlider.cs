@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using static UITools.UITool;
 
 #if UNITY_EDITOR
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("RangeAdjustmentSliderEditors")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("AssemblyRangeAdjustmentSliderEditors")]
 #endif
 
 [DisallowMultipleComponent]

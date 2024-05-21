@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 #if UNITY_EDITOR
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("AssemblyHorizontalEnumeratedItemEditor")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("AssemblyHorizontalEnumeratedItemEditors")]
 #endif
 
 [DisallowMultipleComponent]

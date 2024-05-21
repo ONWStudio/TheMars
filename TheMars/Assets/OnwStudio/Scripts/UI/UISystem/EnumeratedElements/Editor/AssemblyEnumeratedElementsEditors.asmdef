@@ -1,0 +1,17 @@
+{
+    "name": "AssemblyEnumeratedElementsEditors",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6e3364be98747427c96c68a9fc73a3e1",
+        "GUID:83c64b5664c9b4e2cbeb853c005f9fa2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

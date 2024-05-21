@@ -1,0 +1,17 @@
+{
+    "name": "AssemblyHorizontalEnumeratedItemEditors",
+    "rootNamespace": "",
+    "references": [
+        "GUID:875b33bc4b508460c95eb1868920368b",
+        "GUID:6e3364be98747427c96c68a9fc73a3e1"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

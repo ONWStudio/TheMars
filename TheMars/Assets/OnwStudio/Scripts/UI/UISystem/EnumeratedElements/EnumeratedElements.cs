@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 #if UNITY_EDITOR
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("EnumeratedElementsEditors")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("AssemblyEnumeratedElementsEditors")]
 #endif
 
 [RequireComponent(typeof(GridLayoutGroup)), RequireComponent(typeof(ContentSizeFitter)), DisallowMultipleComponent]

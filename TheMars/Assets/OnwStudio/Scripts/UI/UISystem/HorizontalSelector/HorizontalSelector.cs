@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 #if UNITY_EDITOR
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("AssemblyHorizontalSelectorEditor")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("AssemblyHorizontalSelectorEditors")]
 #endif
 
 [DisallowMultipleComponent]
