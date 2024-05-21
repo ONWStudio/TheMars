@@ -9,7 +9,7 @@ namespace TheMarsGUITool
 {
     internal sealed partial class TheMarsGUIToolDrawer : EditorWindow
     {
-
+        internal sealed class 
     }
 }
 #endif
