@@ -1,0 +1,17 @@
+{
+    "name": "AssemblyTheMarsEditor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6e3364be98747427c96c68a9fc73a3e1",
+        "GUID:6bf8cb0bd6f964fde839f52dcbc0bbcd"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
