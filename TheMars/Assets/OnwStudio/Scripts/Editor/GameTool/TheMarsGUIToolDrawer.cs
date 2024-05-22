@@ -10,6 +10,7 @@ namespace TheMarsGUITool
 {
     internal sealed partial class TheMarsGUIToolDrawer : EditorWindow
     {
+        private int _prevPage = 0;
         private int _selectedTab = 0;
         private string[] _tabs = null;
 
@@ -24,6 +25,7 @@ namespace TheMarsGUITool
         private void OnEnable()
         {
             _playFabDataGUIDrawers.AddRange(ReflectionHelper.GetInterfacesFromType<IGUIDrawer>());
+            _playFabDataGUIDrawers.ForEach(guiDrawer => guiDrawer.Awake());
 
             _tabs = _playFabDataGUIDrawers
                 .Select(drawer => drawer.GetType().Name)
@@ -40,13 +42,17 @@ namespace TheMarsGUITool
                 MessageType.Info,
                 true);
 
+            if (_playFabDataGUIDrawers.Count <= 0)
+            {
+                return;
+            }
+
             int selectedTab = GUILayout.Toolbar(_selectedTab, _tabs);
 
             if (selectedTab != _selectedTab)
             {
                 _selectedTab = selectedTab;
 
-                _playFabDataGUIDrawers[_selectedTab].LoadDataFromLocal();
                 _playFabDataGUIDrawers[_selectedTab].OnEnable();
             }
 
@@ -97,6 +103,15 @@ namespace TheMarsGUITool
 
                 pagingCallback?.Invoke();
             });
+
+            IMovedPage movedPage = _playFabDataGUIDrawers[_selectedTab] as IMovedPage;
+
+            if (movedPage is not null && _prevPage != _playFabDataGUIDrawers[_selectedTab].Page)
+            {
+                movedPage.OnMove();
+            }
+
+            _prevPage = _playFabDataGUIDrawers[_selectedTab].Page;
 
             ActionEditorVertical(() => _playFabDataGUIDrawers[_selectedTab].OnDraw(), GUI.skin.box);
 
