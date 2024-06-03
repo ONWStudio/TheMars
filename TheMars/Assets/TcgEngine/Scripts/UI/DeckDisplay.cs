@@ -69,13 +69,15 @@ namespace TcgEngine.UI
                     card_count.color = deck.GetQuantity() >= GameplayData.Get().deck_size ? Color.white : Color.red;
                 }
 
-                List<CardDataQ> cards = new List<CardDataQ>();
+                List<CardDataQ> cards = new();
                 foreach (UserCardData ucard in deck.cards)
                 {
-                    CardDataQ card = new CardDataQ();
-                    card.card = CardData.Get(ucard.tid);
-                    card.variant = VariantData.Get(ucard.variant);
-                    card.quantity = ucard.quantity;
+                    CardDataQ card = new()
+                    {
+                        card = CardData.Get(ucard.tid),
+                        variant = VariantData.Get(ucard.variant),
+                        quantity = ucard.quantity
+                    };
                     if (card.card != null)
                         cards.Add(card);
                 }
@@ -109,26 +111,27 @@ namespace TcgEngine.UI
                 {
                     if (icard != null)
                     {
-                        CardDataQ card = new CardDataQ();
-                        card.card = icard;
-                        card.variant = variant;
-                        card.quantity = 1;
-                        dcards.Add(card);
+                        dcards.Add(new()
+                        {
+                            card = icard,
+                            variant = variant,
+                            quantity = 1
+                        });
                     }
                 }
 
-                if (deck is DeckPuzzleData)
+                if (deck is DeckPuzzleData pdeck)
                 {
-                    DeckPuzzleData pdeck = (DeckPuzzleData)deck;
                     foreach (DeckCardSlot slot in pdeck.board_cards)
                     {
                         if (slot.card != null)
                         {
-                            CardDataQ card = new CardDataQ();
-                            card.card = slot.card;
-                            card.variant = variant;
-                            card.quantity = 1;
-                            dcards.Add(card);
+                            dcards.Add(new()
+                            {
+                                card = slot.card,
+                                variant = variant,
+                                quantity = 1
+                            });
                         }
                     }
                 }
