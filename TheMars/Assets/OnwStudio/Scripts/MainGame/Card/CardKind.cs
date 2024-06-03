@@ -7,7 +7,7 @@ public sealed partial class Card : ScriptableObject
     /// <summary>
     /// .. 발동 효과와 필요 자원에 따른 분류
     /// </summary>
-    public enum CARD_KIND
+    public enum CARD_KIND : byte
     {
         /// <summary> .. 건설 </summary>
         CONSTRUCTION,

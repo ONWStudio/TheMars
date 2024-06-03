@@ -14,7 +14,7 @@ namespace TheMarsGUITool
         private int _selectedTab = 0;
         private string[] _tabs = null;
 
-        private readonly List<IGUIDrawer> _playFabDataGUIDrawers = new();
+        private readonly List<IGUIDrawer> _guiDrawers = new(ReflectionHelper.GetInterfacesFromType<IGUIDrawer>());
 
         [MenuItem("Onw Studio/The Mars Tool GUI Drawer")]
         internal static void OnWindow()
@@ -24,15 +24,14 @@ namespace TheMarsGUITool
 
         private void OnEnable()
         {
-            _playFabDataGUIDrawers.AddRange(ReflectionHelper.GetInterfacesFromType<IGUIDrawer>());
-            _playFabDataGUIDrawers.ForEach(guiDrawer => guiDrawer.Awake());
+            _guiDrawers.ForEach(guiDrawer => guiDrawer.Awake());
 
-            _tabs = _playFabDataGUIDrawers
+            _tabs = _guiDrawers
                 .Select(drawer => drawer.GetType().Name)
                 .ToArray();
 
-            _playFabDataGUIDrawers[_selectedTab].LoadDataFromLocal();
-            _playFabDataGUIDrawers[_selectedTab].OnEnable();
+            _guiDrawers[_selectedTab].LoadDataFromLocal();
+            _guiDrawers[_selectedTab].OnEnable();
         }
 
         private void OnGUI()
@@ -42,7 +41,7 @@ namespace TheMarsGUITool
                 MessageType.Info,
                 true);
 
-            if (_playFabDataGUIDrawers.Count <= 0)
+            if (_guiDrawers.Count <= 0)
             {
                 return;
             }
@@ -53,69 +52,69 @@ namespace TheMarsGUITool
             {
                 _selectedTab = selectedTab;
 
-                _playFabDataGUIDrawers[_selectedTab].OnEnable();
+                _guiDrawers[_selectedTab].OnEnable();
             }
 
             if (GUILayout.Button("데이터 저장 (로컬)"))
             {
-                _playFabDataGUIDrawers[_selectedTab].SaveDataToLocal();
+                _guiDrawers[_selectedTab].SaveDataToLocal();
             }
 
             EditorGUILayout.Space();
 
             ActionHorizontal(() =>
             {
-                _playFabDataGUIDrawers[_selectedTab].Page = EditorGUILayout.IntField(
-                    $"Page {_playFabDataGUIDrawers[_selectedTab].MaxPage} / {_playFabDataGUIDrawers[_selectedTab].Page}",
-                    _playFabDataGUIDrawers[_selectedTab].Page);
+                _guiDrawers[_selectedTab].Page = EditorGUILayout.IntField(
+                    $"Page {_guiDrawers[_selectedTab].MaxPage} / {_guiDrawers[_selectedTab].Page}",
+                    _guiDrawers[_selectedTab].Page);
 
-                IGUIPagingHandler pagingHandler = _playFabDataGUIDrawers[_selectedTab] as IGUIPagingHandler;
+                IGUIPagingHandler pagingHandler = _guiDrawers[_selectedTab] as IGUIPagingHandler;
                 System.Action pagingCallback = null;
 
                 if (GUILayout.Button("<<"))
                 {
-                    _playFabDataGUIDrawers[_selectedTab].Page = 1;
+                    _guiDrawers[_selectedTab].Page = 1;
                     pagingCallback = () => pagingHandler?.OnFirst();
                 }
 
                 if (GUILayout.Button("<"))
                 {
-                    _playFabDataGUIDrawers[_selectedTab].Page--;
+                    _guiDrawers[_selectedTab].Page--;
                     pagingCallback = () => pagingHandler?.OnLeft();
                 }
 
                 if (GUILayout.Button(">"))
                 {
-                    _playFabDataGUIDrawers[_selectedTab].Page++;
+                    _guiDrawers[_selectedTab].Page++;
                     pagingCallback = () => pagingHandler?.OnRight();
                 }
 
                 if (GUILayout.Button(">>"))
                 {
-                    _playFabDataGUIDrawers[_selectedTab].Page = _playFabDataGUIDrawers[_selectedTab].MaxPage;
+                    _guiDrawers[_selectedTab].Page = _guiDrawers[_selectedTab].MaxPage;
                     pagingCallback = () => pagingHandler?.OnLast();
                 }
 
-                _playFabDataGUIDrawers[_selectedTab].Page = Mathf.Clamp(
-                    _playFabDataGUIDrawers[_selectedTab].Page,
-                    _playFabDataGUIDrawers[_selectedTab].MaxPage == 0 ? 0 : 1,
-                    _playFabDataGUIDrawers[_selectedTab].MaxPage);
+                _guiDrawers[_selectedTab].Page = Mathf.Clamp(
+                    _guiDrawers[_selectedTab].Page,
+                    _guiDrawers[_selectedTab].MaxPage == 0 ? 0 : 1,
+                    _guiDrawers[_selectedTab].MaxPage);
 
                 pagingCallback?.Invoke();
             });
 
-            IMovedPage movedPage = _playFabDataGUIDrawers[_selectedTab] as IMovedPage;
+            IMovedPage movedPage = _guiDrawers[_selectedTab] as IMovedPage;
 
-            if (movedPage is not null && _prevPage != _playFabDataGUIDrawers[_selectedTab].Page)
+            if (movedPage is not null && _prevPage != _guiDrawers[_selectedTab].Page)
             {
                 movedPage.OnMove();
             }
 
-            _prevPage = _playFabDataGUIDrawers[_selectedTab].Page;
+            _prevPage = _guiDrawers[_selectedTab].Page;
 
-            ActionEditorVertical(() => _playFabDataGUIDrawers[_selectedTab].OnDraw(), GUI.skin.box);
+            ActionEditorVertical(() => _guiDrawers[_selectedTab].OnDraw(), GUI.skin.box);
 
-            if (_playFabDataGUIDrawers[_selectedTab].HasErrors)
+            if (_guiDrawers[_selectedTab].HasErrors)
             {
                 ActionEditorHorizontal(() =>
                 {
@@ -123,24 +122,24 @@ namespace TheMarsGUITool
 
                     if (GUILayout.Button("OK"))
                     {
-                        _playFabDataGUIDrawers[_selectedTab].HasErrors = false;
+                        _guiDrawers[_selectedTab].HasErrors = false;
                     }
                 });
             }
 
-            if (_playFabDataGUIDrawers[_selectedTab].IsSuccess ||
-                !string.IsNullOrEmpty(_playFabDataGUIDrawers[_selectedTab].Message))
+            if (_guiDrawers[_selectedTab].IsSuccess ||
+                !string.IsNullOrEmpty(_guiDrawers[_selectedTab].Message))
             {
                 ActionEditorHorizontal(() =>
                 {
                     EditorGUILayout.HelpBox(
-                        _playFabDataGUIDrawers[_selectedTab].Message,
-                        _playFabDataGUIDrawers[_selectedTab].IsSuccess ? MessageType.Info : MessageType.Error);
+                        _guiDrawers[_selectedTab].Message,
+                        _guiDrawers[_selectedTab].IsSuccess ? MessageType.Info : MessageType.Error);
 
                     if (GUILayout.Button("확인"))
                     {
-                        _playFabDataGUIDrawers[_selectedTab].IsSuccess = false;
-                        _playFabDataGUIDrawers[_selectedTab].Message = string.Empty;
+                        _guiDrawers[_selectedTab].IsSuccess = false;
+                        _guiDrawers[_selectedTab].Message = string.Empty;
                     }
                 });
             }

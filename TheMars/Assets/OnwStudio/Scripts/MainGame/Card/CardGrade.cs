@@ -7,7 +7,7 @@ public sealed partial class Card : ScriptableObject
     /// <summary>
     /// .. 발동 효과에 따른 카드 등급
     /// </summary>
-    public enum CARD_GRADE
+    public enum CARD_GRADE : byte
     {
         /// <summary> .. 일반 </summary>>
         NORMAL,
