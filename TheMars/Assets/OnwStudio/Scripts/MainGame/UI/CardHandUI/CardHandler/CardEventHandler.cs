@@ -38,17 +38,11 @@ public sealed class CardEventHandler : MonoBehaviour, IPointerEnterHandler, IPoi
         => _clickAction = null;
 
     public void OnPointerClick(PointerEventData eventData)
-    {
-        _clickAction?.Invoke();
-    }
+        => _clickAction?.Invoke();
 
     public void OnPointerEnter(PointerEventData eventData)
-    {
-        _enterAction?.Invoke();
-    }
+        => _enterAction?.Invoke();
 
     public void OnPointerExit(PointerEventData eventData)
-    {
-        _exitAction?.Invoke();
-    }
+        => _exitAction?.Invoke();
 }

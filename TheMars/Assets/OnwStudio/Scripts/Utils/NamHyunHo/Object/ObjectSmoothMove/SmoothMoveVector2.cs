@@ -11,11 +11,24 @@ public sealed class SmoothMoveVector2 : MonoBehaviour, IObjectSmoothMove
 
     [field: Header("Move Options")]
     [field: SerializeField] public float Ratio { get; set; } = 0.45f;
+    [field: SerializeField] public bool IsLocal { get; set; } = false;
 
     private void FixedUpdate()
     {
         if (float.IsInfinity(TargetPosition.x) || float.IsInfinity(TargetPosition.y)) return;
 
-        transform.position += (this as IObjectSmoothMove).GetVector(transform.position, (Vector3)TargetPosition);
+        Vector3 target = (this as IObjectSmoothMove)
+            .GetVector(
+            IsLocal ? transform.localPosition : transform.position ,
+            (Vector3)TargetPosition);
+
+        if (IsLocal)
+        {
+            transform.localPosition += new Vector3(target.x, target.y, 0f);
+        }
+        else
+        {
+            transform.position += new Vector3(target.x, target.y, 0f);
+        }
     }
 }

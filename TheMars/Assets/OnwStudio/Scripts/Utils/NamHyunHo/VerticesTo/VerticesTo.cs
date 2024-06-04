@@ -89,7 +89,7 @@ public static class VerticesTo
 
     public static List<Vector3> GetVerticesFromSkinndedMeshRenderer(GameObject obj)
     {
-        List<Vector3> vertices = new List<Vector3>();
+        List<Vector3> vertices = new();
 
         SkinnedMeshRenderer[] filters = obj.GetComponentsInChildren<SkinnedMeshRenderer>();
 

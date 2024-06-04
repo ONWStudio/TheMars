@@ -1,54 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
-using TcgEngine;
 using UnityEngine;
+using static UITools.UITool;
 
+/// <summary>
+/// .. 카드를 부채꼴의 형태로 정렬시키는 클래스 입니다
+/// 높이는 너비 기준 비율로 정합니다
+/// </summary>
 public sealed class SectorForm : ICardSorter
 {
-    private const float MAX_ANGLE = 128f;
+    /// <summary>
+    /// .. 최대 앵글 값
+    /// </summary>    
+    public float MaxAngle { get; init; } = 128f;
+    /// <summary>
+    /// .. 높이 비율
+    /// </summary>
+    public float HeightRatioFromWidth { get; init; } = 0.25f;
 
-    public void BatchCard(CardMovementBase[] cardMovementBases, int index, Vector3 pivot, float width)
+    /// <summary>
+    /// .. 특정 인덱스의 카드를 올바른 위치로 배치 시킵니다
+    /// </summary>
+    /// <param name="cardMovementBases"> .. 카드의 움직임을 정하는 무브먼트 클래스를 받습니다 </param>
+    /// <param name="index"> .. 배치시킬 카드의 인덱스 </param>
+    /// <param name="rectTransform"> .. 비율로 배치시키기 때문에 기준이 되는 렉트 트랜스폼을 인자값으로 넣어줍니다 </param> 
+    public void ArrangeCard(CardMovementBase[] cardMovementBases, int index, RectTransform rectTransform)
     {
         if (cardMovementBases.Length <= 0 || cardMovementBases.Length <= index) return;
 
-        float angleStep = MAX_ANGLE / (cardMovementBases.Length - 1);
-        float startAngle = -(MAX_ANGLE / 2);
+        float angleStep = MaxAngle / (cardMovementBases.Length - 1);
+        float startAngle = -MaxAngle * 0.5f;
 
-        float angle = startAngle + angleStep * index;
-        float radian = (angle + 90f) * Mathf.Deg2Rad;
-
-        float x = pivot.x + Mathf.Cos(radian) * width;
-        float y = pivot.y + Mathf.Sin(radian) * (width * 0.35f);
-
-        cardMovementBases[index].TargetTransform = new()
-        {
-            Position = new Vector3(x, y, 0),
-            Rotation = Quaternion.Euler(0, 0, angle)
-        };
-
-        cardMovementBases[index].MoveCard();
+        runTargetTransform(cardMovementBases[index], index, angleStep, startAngle, rectTransform);
     }
 
-    public void SortCards(CardMovementBase[] cardMovementBases, Vector3 pivot, float width)
+    /// <summary>
+    /// .. 카드들을 올바른 위치로 배치 시킵니다
+    /// </summary>
+    /// <param name="cardMovementBases"> .. 카드의 움직임을 정하는 무브먼트 클래스를 받습니다 </param>
+    /// <param name="rectTransform"> .. 비율로 배치시키기 때문에 기준이 되는 렉트 트랜스폼을 인자값으로 넣어줍니다 </param> 
+    public void SortCards(CardMovementBase[] cardMovementBases, RectTransform rectTransform)
     {
-        float angleStep = MAX_ANGLE / (cardMovementBases.Length - 1);
-        float startAngle = -(MAX_ANGLE / 2);
+        float angleStep = MaxAngle / (cardMovementBases.Length - 1);
+        float startAngle = -MaxAngle * 0.5f;
 
         for (int i = 0; i < cardMovementBases.Length; i++)
         {
-            float angle = startAngle + angleStep * i;
-            float radian = (angle + 90f) * Mathf.Deg2Rad;
-
-            float x = pivot.x + Mathf.Cos(radian) * width;
-            float y = pivot.y + Mathf.Sin(radian) * (width * 0.35f);
-
-            cardMovementBases[i].TargetTransform = new()
-            {
-                Position = new Vector3(x, y, 0),
-                Rotation = Quaternion.Euler(0, 0, angle)
-            };
-
-            cardMovementBases[i].MoveCard();
+            runTargetTransform(cardMovementBases[i], i, angleStep, startAngle, rectTransform);
         }
+    }
+
+    private void runTargetTransform(CardMovementBase cardMovement, int index, float angleStep, float startAngle, RectTransform rectTransform)
+    {
+        float angle = startAngle + angleStep * index;
+        float radian = angle * Mathf.Deg2Rad;
+        float width = rectTransform.rect.width * 0.5f;
+
+        cardMovement.TargetTransform = new()
+        {
+            Position = new Vector3(
+                rectTransform.rect.center.x + Mathf.Sin(radian) * width,
+                rectTransform.rect.min.y + Mathf.Cos(radian) * (width * HeightRatioFromWidth),
+                0),
+            Rotation = Quaternion.Euler(0, 0, -angle)
+        };
+
+        cardMovement.MoveCard();
     }
 }

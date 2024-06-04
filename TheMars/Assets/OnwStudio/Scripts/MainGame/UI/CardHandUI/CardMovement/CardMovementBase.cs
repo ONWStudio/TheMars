@@ -2,10 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using CoroutineExtensions;
-using MoreMountains.Tools;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
 
 public abstract class CardMovementBase : MonoBehaviour
 {
@@ -14,7 +11,6 @@ public abstract class CardMovementBase : MonoBehaviour
     {
         [field: SerializeField] public Quaternion Rotation { get; set; }
         [field: SerializeField] public Vector3 Position { get; set; }
-
         [field: SerializeField] public Vector3 Offset { get; set; }
     }
 
@@ -29,8 +25,14 @@ public abstract class CardMovementBase : MonoBehaviour
             _normalizedValue = Mathf.Clamp01(value);
 
             transform.SetLocalPositionAndRotation(
-                Vector3.Lerp(CurrentTransform.Position + CurrentTransform.Offset, TargetTransform.Position + TargetTransform.Offset, _normalizedValue) ,
-                Quaternion.Slerp(CurrentTransform.Rotation, TargetTransform.Rotation, _normalizedValue));
+                Vector3.Lerp(
+                    CurrentTransform.Position + CurrentTransform.Offset,
+                    TargetTransform.Position + TargetTransform.Offset,
+                    _normalizedValue),
+                Quaternion.Slerp(
+                    CurrentTransform.Rotation,
+                    TargetTransform.Rotation,
+                    _normalizedValue));
         }
     }
 
@@ -38,6 +40,20 @@ public abstract class CardMovementBase : MonoBehaviour
 
     public abstract void MoveCard();
     protected abstract void SetNormalized();
+
+    private void Start()
+    {
+        CurrentTransform = new()
+        {
+            Rotation = transform.rotation,
+            Position = transform.position
+        };
+    }
+
+    private void OnValidate()
+    {
+        NormalizedValue = _normalizedValue;
+    }
 
     protected IEnumerator iEOnMove()
     {
@@ -62,19 +78,5 @@ public abstract class CardMovementBase : MonoBehaviour
         CurrentTransform = TargetTransform;
 
         (this as ICardMoveEnd)?.OnMoveEnd();
-    }
-
-    private void Start()
-    {
-        CurrentTransform = new()
-        {
-            Rotation = transform.rotation,
-            Position = transform.position
-        };
-    }
-
-    private void OnValidate()
-    {
-        NormalizedValue = _normalizedValue;
     }
 }

@@ -7,29 +7,13 @@ using UnityEngine;
 
 public static class ReflectionHelper
 {
-    public static IEnumerable<T> GetInterfacesFromType<T>()
-    {
-        Type interfaceType = typeof(T);
-        if (!interfaceType.IsInterface)
-        {
-            throw new ArgumentException("T는 interface가 될 수 없습니다");
-        }
-
-        List<T> implementingTypes = new();
-
-        foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
-        {
-            foreach (Type type in assembly.GetTypes())
-            {
-                if (!interfaceType.IsAssignableFrom(type) || type.IsInterface || type.IsAbstract) continue;
-
-                T instance = (T)Activator.CreateInstance(type);
-                implementingTypes.Add(instance);
-            }
-        }
-
-        return implementingTypes;
-    }
+    public static IEnumerable<T> GetChildClassesFromType<T>() where T : class
+         => AppDomain
+            .CurrentDomain
+            .GetAssemblies()
+            .SelectMany(assembly => assembly.GetTypes())
+            .Where(type => typeof(T).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract)
+            .Select(type => Activator.CreateInstance(type) as T);
 
     public static IEnumerable<string> GetClassNamesFromParent(string baseClass)
     {
@@ -52,6 +36,13 @@ public static class ReflectionHelper
 
         return childClassNames;
     }
+
+    public static IEnumerable<Type> GetChildClassesFromBaseType(Type baseType)
+        => AppDomain
+            .CurrentDomain
+            .GetAssemblies()
+            .SelectMany(assembly => assembly.GetTypes())
+            .Where(type => baseType.IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract);
 
     public static IEnumerable<string> GetEnumValuesFromEnumName(string enumTypeName)
     {

@@ -14,7 +14,7 @@ namespace TheMarsGUITool
         private int _selectedTab = 0;
         private string[] _tabs = null;
 
-        private readonly List<IGUIDrawer> _guiDrawers = new(ReflectionHelper.GetInterfacesFromType<IGUIDrawer>());
+        private readonly List<IGUIDrawer> _guiDrawers = new(ReflectionHelper.GetChildClassesFromType<IGUIDrawer>());
 
         [MenuItem("Onw Studio/The Mars Tool GUI Drawer")]
         internal static void OnWindow()

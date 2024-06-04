@@ -666,8 +666,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.14852084, y: 0}
   m_AnchorMax: {x: 0.851146, y: 0.252}
-  m_AnchoredPosition: {x: 0, y: -0.070007324}
-  m_SizeDelta: {x: 0.48999023, y: -0.13000488}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2057403479
 MonoBehaviour:
@@ -719,6 +719,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9a4dba62787a4dcfa0d1cda013a769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cardSorter:
+    rid: 4678431970304196631
   <CardHandUIs>k__BackingField:
   - {fileID: 0}
   - {fileID: 0}
@@ -730,6 +732,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4678431970304196631
+      type: {class: CycleForm, ns: , asm: Assembly-CSharp}
+      data:
+        <RadiusRatioOffset>k__BackingField: 0.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
 public sealed class TMCardUI : MonoBehaviour
 {
     public CardMovementBase CardMovement { get; private set; } = null;
@@ -31,11 +33,12 @@ public sealed class TMCardUI : MonoBehaviour
         _cardImage.transform.localPosition = Vector3.zero;
 
         SmoothMoveVector2 smoothMove = _cardImage.gameObject.AddComponent<SmoothMoveVector2>();
+        smoothMove.IsLocal = true;
 
         _cardEventHandler.AddListenerPointerEnterAction(()
-            => smoothMove.TargetPosition = smoothMove.transform.TransformPoint(0.45f * rectTransform.rect.height * transform.up));
+            => smoothMove.TargetPosition = 0.5f * rectTransform.rect.height * new Vector3(0f, 1f, 0f));
 
         _cardEventHandler.AddListenerPointerExitAction(()
-            => smoothMove.TargetPosition = smoothMove.transform.TransformPoint(Vector3.zero));
+            => smoothMove.TargetPosition = Vector2.zero);
     }
 }
