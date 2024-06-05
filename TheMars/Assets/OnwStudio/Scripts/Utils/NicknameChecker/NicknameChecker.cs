@@ -7,7 +7,7 @@ using UnityEngine;
 public static class NicknameChecker
 {
     /// <summary>
-    /// 닉네임이 올바른지 체크하고 warningMessage를 콜백으로 넘겨줍니다
+    /// .. 닉네임이 올바른지 체크하고 warningMessage를 콜백으로 넘겨줍니다
     /// </summary>
     /// <param name="nickname"> .. 올바른지 검사할 닉네임 </param>
     /// <param name="warningCall"> .. 올바르지 않은 닉네임일시 넘겨줄 콜백 메세지 </param>

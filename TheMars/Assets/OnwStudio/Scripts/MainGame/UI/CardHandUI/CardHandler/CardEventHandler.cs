@@ -6,26 +6,26 @@ using UnityEngine.EventSystems;
 
 public sealed class CardEventHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    private Action _enterAction = null;
-    private Action _exitAction = null;
-    private Action _clickAction = null;
+    private Action<PointerEventData> _enterAction = null;
+    private Action<PointerEventData> _exitAction = null;
+    private Action<PointerEventData> _clickAction = null;
 
-    public void AddListenerPointerEnterAction(Action action)
+    public void AddListenerPointerEnterAction(Action<PointerEventData> action)
         => _enterAction += action;
 
-    public void AddListenerPointerExitAction(Action action)
+    public void AddListenerPointerExitAction(Action<PointerEventData> action)
         => _exitAction += action;
 
-    public void AddListenerPointerClickAction(Action action)
+    public void AddListenerPointerClickAction(Action<PointerEventData> action)
         => _clickAction += action;
 
-    public void RemoveListenerPointerEnterAction(Action action)
+    public void RemoveListenerPointerEnterAction(Action<PointerEventData> action)
         => _enterAction -= action;
 
-    public void RemoveListenerPointerExitAction(Action action)
+    public void RemoveListenerPointerExitAction(Action<PointerEventData> action)
         => _exitAction -= action;
 
-    public void RemoveListenerPointerClickAction(Action action)
+    public void RemoveListenerPointerClickAction(Action<PointerEventData> action)
         => _clickAction -= action;
 
     public void RemoveAllListenerPointerEnterAction()
@@ -38,11 +38,11 @@ public sealed class CardEventHandler : MonoBehaviour, IPointerEnterHandler, IPoi
         => _clickAction = null;
 
     public void OnPointerClick(PointerEventData eventData)
-        => _clickAction?.Invoke();
+        => _clickAction?.Invoke(eventData);
 
     public void OnPointerEnter(PointerEventData eventData)
-        => _enterAction?.Invoke();
+        => _enterAction?.Invoke(eventData);
 
     public void OnPointerExit(PointerEventData eventData)
-        => _exitAction?.Invoke();
+        => _exitAction?.Invoke(eventData);
 }

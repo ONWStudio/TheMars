@@ -9,6 +9,7 @@ using SubClassSelectorSpace;
 /// .. 카드 패 UI 들을 관리하는 클래스
 /// 카드 패들의 움직임과 상호작용에 관한 관리를 하는 클래스 입니다
 /// </summary>
+[DisallowMultipleComponent]
 public sealed class CardHandUI : MonoBehaviour
 {
     private const int MAX_CARD = 10;
@@ -35,7 +36,9 @@ public sealed class CardHandUI : MonoBehaviour
             CardHandUIs[i] = tMCardUI;
         }
 
-        var cardMovements = CardHandUIs.Select(cardUI => cardUI.CardMovement).ToArray();
+        var cardMovements = CardHandUIs
+            .Select(cardUI => cardUI.CardMovement)
+            .ToArray();
 
         _cardSorter.SortCards(cardMovements, rectTransform);
 

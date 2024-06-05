@@ -12,11 +12,11 @@ public sealed class SectorForm : ICardSorter
     /// <summary>
     /// .. 최대 앵글 값
     /// </summary>    
-    public float MaxAngle { get; init; } = 128f;
+    [field: SerializeField, Range(20f, 180f)] public float MaxAngle { get; set; } = 128f;
     /// <summary>
     /// .. 높이 비율
     /// </summary>
-    public float HeightRatioFromWidth { get; init; } = 0.25f;
+    [field: SerializeField, Range(0.1f, 0.5f)] public float HeightRatioFromWidth { get; set; } = 0.25f;
 
     /// <summary>
     /// .. 특정 인덱스의 카드를 올바른 위치로 배치 시킵니다
@@ -64,7 +64,5 @@ public sealed class SectorForm : ICardSorter
                 0),
             Rotation = Quaternion.Euler(0, 0, -angle)
         };
-
-        cardMovement.MoveCard();
     }
 }

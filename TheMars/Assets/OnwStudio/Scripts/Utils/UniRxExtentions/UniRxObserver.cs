@@ -4,11 +4,6 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
-public interface IRegistUI
-{
-    void Regist();
-}
-
 public static class UniRxObserver
 {
     public static void ObserveInfomation<R>(MonoBehaviour monoBehaviour, Func<Unit, R> selector, Action<R> observer, int skip = 0)
@@ -21,6 +16,7 @@ public static class UniRxObserver
             .Subscribe(observer)
             .AddTo(monoBehaviour);
     }
+
     public static void ObserveInfomation<R>(CompositeDisposable disposables, MonoBehaviour monoBehaviour, Func<Unit, R> selector, Action<R> observer, int skip = 0)
     {
         monoBehaviour
@@ -31,6 +27,7 @@ public static class UniRxObserver
             .Subscribe(observer)
             .AddTo(disposables);
     }
+
     public static void ObserveInfomationWhere<R>(MonoBehaviour monoBehaviour, Func<Unit, R> selector, Action<R> observer, Func<R, bool> where, int skip = 0)
     {
         monoBehaviour
@@ -42,6 +39,7 @@ public static class UniRxObserver
             .Subscribe(observer)
             .AddTo(monoBehaviour);
     }
+
     public static void ObserveInfomationWhere<R>(CompositeDisposable disposables, MonoBehaviour monoBehaviour, Func<Unit, R> selector, Action<R> observer, Func<R, bool> where, int skip = 0)
     {
         monoBehaviour
@@ -53,6 +51,7 @@ public static class UniRxObserver
             .Subscribe(observer)
             .AddTo(disposables);
     }
+
     public static void ObserveInfomationBuffer<R, TR>(MonoBehaviour monoBehaviour, Func<Unit, R> selector, Func<IList<R>, TR> buffer, Action<TR> observer)
     {
         monoBehaviour
@@ -64,6 +63,7 @@ public static class UniRxObserver
             .Subscribe(observer)
             .AddTo(monoBehaviour);
     }
+
     public static void ObserveInfomationBuffer<R, TR>(CompositeDisposable disposables, MonoBehaviour monoBehaviour, Func<Unit, R> selector, Func<IList<R>, TR> buffer, Action<TR> observer)
     {
         monoBehaviour

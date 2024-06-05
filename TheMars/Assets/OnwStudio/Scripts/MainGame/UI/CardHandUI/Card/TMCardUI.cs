@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UITools.UITool;
 
-
-
+[DisallowMultipleComponent]
 public sealed class TMCardUI : MonoBehaviour
 {
     public CardMovementBase CardMovement { get; private set; } = null;
@@ -12,15 +12,11 @@ public sealed class TMCardUI : MonoBehaviour
     private CardEventHandler _cardEventHandler = null;
     private Image _cardImage = null;
 
-    private void Start()
+    public void SetCardUI(Transform parent, CardMovementBase cardMovementBase)
     {
-
-    }
-
-    public void SetCardUI(Transform parent, CardMovementBase cardMovement)
-    {
-        CardMovement = cardMovement;
         transform.SetParent(parent, false);
+
+        CardMovement = cardMovementBase;
 
         RectTransform rectTransform = gameObject.AddComponent<RectTransform>();
         Image raycastingImage = gameObject.AddComponent<Image>();
@@ -35,10 +31,13 @@ public sealed class TMCardUI : MonoBehaviour
         SmoothMoveVector2 smoothMove = _cardImage.gameObject.AddComponent<SmoothMoveVector2>();
         smoothMove.IsLocal = true;
 
-        _cardEventHandler.AddListenerPointerEnterAction(()
+        _cardEventHandler.AddListenerPointerEnterAction(pointerEventData
             => smoothMove.TargetPosition = 0.5f * rectTransform.rect.height * new Vector3(0f, 1f, 0f));
 
-        _cardEventHandler.AddListenerPointerExitAction(()
+        _cardEventHandler.AddListenerPointerExitAction(pointerEventData
             => smoothMove.TargetPosition = Vector2.zero);
+
+        _cardEventHandler.AddListenerPointerClickAction(pointerEventData
+            => { });
     }
 }

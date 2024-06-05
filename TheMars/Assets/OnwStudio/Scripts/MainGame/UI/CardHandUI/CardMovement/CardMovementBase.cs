@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using CoroutineExtensions;
 using UnityEngine;
 
+// .. 사용하지 않음
+[DisallowMultipleComponent, RequireComponent(typeof(MovementTracker))]
 public abstract class CardMovementBase : MonoBehaviour
 {
     [Serializable]
@@ -14,8 +16,18 @@ public abstract class CardMovementBase : MonoBehaviour
         [field: SerializeField] public Vector3 Offset { get; set; }
     }
 
-    [field: SerializeField] public TransformData TargetTransform { get; set; }
     [field: SerializeField] public TransformData CurrentTransform { get; protected set; }
+
+    public TransformData TargetTransform
+    {
+        get => _targetTransform;
+        set
+        {
+            CurrentTransform = _targetTransform;
+            _targetTransform = value;
+            _normalizedValue = 0f;
+        }
+    }
 
     public float NormalizedValue
     {
@@ -36,10 +48,17 @@ public abstract class CardMovementBase : MonoBehaviour
         }
     }
 
+    [SerializeField] TransformData _targetTransform;
     [SerializeField, Range(0f, 1f)] private float _normalizedValue = 0f;
 
-    public abstract void MoveCard();
+    private MovementTracker _movementTracker = null;
+
     protected abstract void SetNormalized();
+
+    private void Awake()
+    {
+        _movementTracker = GetComponent<MovementTracker>();
+    }
 
     private void Start()
     {
@@ -48,35 +67,24 @@ public abstract class CardMovementBase : MonoBehaviour
             Rotation = transform.rotation,
             Position = transform.position
         };
+
+        _movementTracker.AddListenerOnMoveBegined(()
+            => (this as ICardMoveBegin)?.OnMoveBegin());
+
+        _movementTracker.AddListenerOnMoveOnGoing(()
+            => (this as ICardMove)?.OnMove());
+
+        _movementTracker.AddListenerOnMoveEnded(()
+            => (this as ICardMoveEnd)?.OnMoveEnd());
+    }
+
+    private void FixedUpdate()
+    {
+        SetNormalized();
     }
 
     private void OnValidate()
     {
         NormalizedValue = _normalizedValue;
-    }
-
-    protected IEnumerator iEOnMove()
-    {
-        (this as ICardMoveBegin)?.OnMoveBegin();
-        ICardMove cardMoveHandler = this as ICardMove;
-
-        NormalizedValue = 0f;
-        CurrentTransform = new()
-        {
-            Position = transform.localPosition,
-            Rotation = transform.localRotation
-        };
-
-        while (NormalizedValue < 0.98f)
-        {
-            SetNormalized();
-            cardMoveHandler?.OnMove();
-            yield return CoroutineHelper.WaitForFixedUpdate;
-        }
-
-        NormalizedValue = 1f;
-        CurrentTransform = TargetTransform;
-
-        (this as ICardMoveEnd)?.OnMoveEnd();
     }
 }

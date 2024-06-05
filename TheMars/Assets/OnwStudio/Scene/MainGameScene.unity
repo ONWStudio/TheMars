@@ -720,7 +720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cardSorter:
-    rid: 4678431970304196631
+    rid: 4678431986309398557
   <CardHandUIs>k__BackingField:
   - {fileID: 0}
   - {fileID: 0}
@@ -735,10 +735,12 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 4678431970304196631
+    - rid: 4678431986309398557
       type: {class: CycleForm, ns: , asm: Assembly-CSharp}
       data:
-        <RadiusRatioOffset>k__BackingField: 0.5
+        <MaxAngle>k__BackingField: 89.6
+        <RadiusRatioOffset>k__BackingField: 1.37
+        <PositionRatioOffset>k__BackingField: {x: 0, y: -0.594}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

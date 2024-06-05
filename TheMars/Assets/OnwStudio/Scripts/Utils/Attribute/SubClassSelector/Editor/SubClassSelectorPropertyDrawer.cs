@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using SubClassSelectorSpace;
+using static EditorTool.EditorTool;
 
 namespace SubClassSelectorEditor
 {
@@ -36,7 +37,7 @@ namespace SubClassSelectorEditor
                 .Select(type => type.FullName)
                 .ToArray();
 
-            string currentSubClass = property.managedReferenceValue.GetType().Name;
+            string currentSubClass = property.managedReferenceValue?.GetType().Name;
 
             int selectedIndex = Array
                 .FindIndex(subClassNames, className => className == currentSubClass);
@@ -55,16 +56,31 @@ namespace SubClassSelectorEditor
             if (selectedIndex >= 0 && selectedIndex < _subClasses.Count)
             {
                 Type selectedType = _subClasses[selectedIndex];
+
                 if (property.managedReferenceValue == null || property.managedReferenceValue.GetType() != selectedType)
                 {
-                    property.managedReferenceValue = Activator.CreateInstance(selectedType);
+                    property.managedReferenceValue = Activator
+                        .CreateInstance(selectedType);
                 }
 
                 EditorGUILayout.LabelField("Options");
-                EditorGUILayout.PropertyField(property);
+                ActionEditorVertical(() =>
+                {
+                    SerializedProperty iterator = property.Copy();
+                    SerializedProperty endProperty = property.GetEndProperty();
+
+                    iterator.NextVisible(true);
+                    while (!SerializedProperty.EqualContents(iterator, endProperty))
+                    {
+                        EditorGUILayout.PropertyField(iterator, true);
+                        iterator.NextVisible(false);
+                    }
+                }, GUI.skin.box);
             }
 
-            property.serializedObject.ApplyModifiedProperties();
+            property
+                .serializedObject
+                .ApplyModifiedProperties();
         }
     }
 }
