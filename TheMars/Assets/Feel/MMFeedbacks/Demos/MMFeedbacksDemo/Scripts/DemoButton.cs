@@ -15,6 +15,7 @@ namespace MoreMountains.Feedbacks
 	/// A simple class used to handle demo buttons in the MMF_PlayerDemo and MMFeedbacksDemo scenes
 	/// </summary>
 	[ExecuteAlways]
+	[AddComponentMenu("")]
 	public class DemoButton : MonoBehaviour
 	{
 		[Header("Behaviour")]

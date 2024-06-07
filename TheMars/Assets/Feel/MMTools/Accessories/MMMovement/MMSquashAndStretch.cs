@@ -90,10 +90,6 @@ namespace MoreMountains.Tools
 		[Tooltip("the spring's frequency")]
 		[MMCondition("Spring", true)] 
 		public float SpringFrequency = 3f;
-		/// the speed of the spring
-		[Tooltip("the speed of the spring")]
-		[MMCondition("Spring", true)] 
-		public float SpringSpeed = 10f;
         
 		[Header("Debug")]
 		[MMReadOnly]
@@ -275,7 +271,7 @@ namespace MoreMountains.Tools
 
 			if (Spring)
 			{
-				MMMaths.Spring(ref _springScale, _newLocalScale, ref _springVelocity, SpringDamping, SpringFrequency, SpringSpeed, Time.deltaTime);
+				MMMaths.Spring(ref _springScale, _newLocalScale, ref _springVelocity, SpringDamping, SpringFrequency, Time.deltaTime);
 				_newLocalScale = _springScale;
 			}
 			

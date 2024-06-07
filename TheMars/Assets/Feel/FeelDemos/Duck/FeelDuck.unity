@@ -5219,6 +5219,12 @@ MonoBehaviour:
     OnSkipToTheEnd:
       m_PersistentCalls:
         m_Calls: []
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
   DebugActive: 0
   FeedbacksList:
   - rid: 0
@@ -5303,6 +5309,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 263465341}
         DebugActive: 0
         RepeatUntilStopped: 0
@@ -5383,6 +5391,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
         Owner: {fileID: 263465341}
         DebugActive: 0
         BoundAnimator: {fileID: 787869660}
@@ -5486,6 +5496,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 263465341}
         DebugActive: 0
         Duration: 0.15
@@ -5598,6 +5610,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 263465341}
         DebugActive: 0
         Sfx: {fileID: 8300000, guid: 4cf47ad5b31ea6640addd4045fa77c8b, type: 3}
@@ -5721,6 +5735,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 263465341}
         DebugActive: 0
         Sfx: {fileID: 8300000, guid: 86aa66a501648034f8ec69ba5d404514, type: 3}
@@ -5936,6 +5952,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &639369222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 639369223}
+  - component: {fileID: 639369224}
+  m_Layer: 0
+  m_Name: FeelDuckContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &639369223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639369222}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.612, y: -0.375, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1720066185}
+  m_Father: {fileID: 1212517703}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &639369224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639369222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e08cd56fd2838f45bb3577428403529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetBool: 0
+  TimeScaleMode: 1
+  ChannelMode: 0
+  Channel: 0
+  MMChannelDefinition: {fileID: 0}
+  FloatSpring:
+    Damping: 0.5
+    Frequency: 3
+    CurrentValue: 0
+    TargetValue: 0
+    Velocity: 0
+    SpringDebug:
+      CurrentValue: 0
+      TargetValue: 0
+  MoveToRandomValue: {x: -2, y: 2}
+  BumpAmountRandomValue: {x: 20, y: 100}
+  TestMoveToValue: 2
+  MoveToToolbar: 0
+  TestBumpAmount: 75
+  BumpToToolbar: 0
+  OtherControlsToToolbar: 0
+  Target: {fileID: 0}
+  Axis: 0
 --- !u!1 &787869659
 GameObject:
   m_ObjectHideFlags: 0
@@ -6236,6 +6320,12 @@ MonoBehaviour:
     OnSkipToTheEnd:
       m_PersistentCalls:
         m_Calls: []
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
   DebugActive: 0
   FeedbacksList:
   - rid: 0
@@ -6321,6 +6411,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 897481198}
         DebugActive: 0
         RepeatUntilStopped: 0
@@ -6401,6 +6493,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
         Owner: {fileID: 897481198}
         DebugActive: 0
         BoundAnimator: {fileID: 1720066186}
@@ -6504,6 +6598,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 897481198}
         DebugActive: 0
         Duration: 0.15
@@ -6616,6 +6712,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 897481198}
         DebugActive: 0
         Sfx: {fileID: 8300000, guid: 4cf47ad5b31ea6640addd4045fa77c8b, type: 3}
@@ -6739,6 +6837,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 897481198}
         DebugActive: 0
         Sfx: {fileID: 8300000, guid: 86aa66a501648034f8ec69ba5d404514, type: 3}
@@ -6862,6 +6962,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
         Owner: {fileID: 897481198}
         DebugActive: 0
         Preset: 4
@@ -7509,6 +7611,12 @@ MonoBehaviour:
     OnSkipToTheEnd:
       m_PersistentCalls:
         m_Calls: []
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
   DebugActive: 0
   FeedbacksList:
   - rid: 0
@@ -7518,6 +7626,7 @@ MonoBehaviour:
   - rid: 4
   - rid: 5
   - rid: 6
+  - rid: 1779414926392557571
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   StopFeedbacksOnDisable: 0
@@ -7595,6 +7704,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
         Owner: {fileID: 1099164946}
         DebugActive: 0
         Mode: 0
@@ -7679,6 +7790,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 1099164946}
         DebugActive: 0
         RepeatUntilStopped: 0
@@ -7760,6 +7873,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 1099164946}
         DebugActive: 0
         Duration: 0.25
@@ -7898,6 +8013,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 1099164946}
         DebugActive: 0
         Sfx: {fileID: 8300000, guid: 1739ff78014ab3f44a5757aede3c7ea9, type: 3}
@@ -8021,6 +8138,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
         Owner: {fileID: 1099164946}
         DebugActive: 0
         AnimatePositionTarget: {fileID: 2014058847}
@@ -8464,6 +8583,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
         Owner: {fileID: 1099164946}
         DebugActive: 0
         AnimatePositionTarget: {fileID: 1507647151}
@@ -8907,6 +9028,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
         Owner: {fileID: 1099164946}
         DebugActive: 0
         Preset: 6
@@ -8917,6 +9040,91 @@ MonoBehaviour:
           OnlyPlayIfAdvancedRequirementsMet: 0
           OnlyPlayIfAmplitudeModulationSupported: 0
           OnlyPlayIfFrequencyModulationSupported: 0
+    - rid: 1779414926392557571
+      type: {class: MMF_SpringFloat, ns: MoreMountains.Feedbacks, asm: MoreMountains.Tools}
+      data:
+        Active: 1
+        UniqueID: 1692974507
+        Label: Spring Float
+        ChannelMode: 0
+        Channel: 0
+        MMChannelDefinition: {fileID: 0}
+        Chance: 100
+        DisplayColor: {r: 0, g: 0, b: 0, a: 1}
+        Timing:
+          TimescaleMode: 0
+          ExcludeFromHoldingPauses: 0
+          ContributeToTotalDuration: 1
+          InitialDelay: 0
+          CooldownDuration: 0
+          InterruptsOnStop: 1
+          NumberOfRepeats: 0
+          RepeatForever: 0
+          DelayBetweenRepeats: 1
+          PlayCount: 0
+          LimitPlayCount: 0
+          MaxPlayCount: 3
+          SetPlayCountToZeroOnReset: 0
+          MMFeedbacksDirectionCondition: 0
+          PlayDirection: 0
+          ConstantIntensity: 0
+          UseIntensityInterval: 0
+          IntensityIntervalMin: 0
+          IntensityIntervalMax: 0
+          Sequence: {fileID: 0}
+          TrackID: 0
+          Quantized: 0
+          TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
+        RandomizeOutput: 0
+        RandomMultiplier: {x: 0.8, y: 1}
+        RandomizeDuration: 0
+        RandomDurationMultiplier: {x: 0.5, y: 2}
+        UseRange: 0
+        RangeDistance: 5
+        UseRangeFalloff: 0
+        RangeFalloff:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
+        Owner: {fileID: 1099164946}
+        DebugActive: 0
+        TargetSpring: {fileID: 639369224}
+        DeclaredDuration: 0
+        Command: 5
+        MoveToValue: 2
+        BumpAmount: 75
+        MoveToRandomValue: {x: -2, y: 2}
+        BumpAmountRandomValue: {x: -50, y: 50}
+        OverrideDamping: 0
+        NewDamping: 0.8
+        OverrideFrequency: 0
+        NewFrequency: 5
 --- !u!1 &1179364278
 GameObject:
   m_ObjectHideFlags: 0
@@ -9028,7 +9236,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1720066185}
+  - {fileID: 639369223}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1321556131
@@ -14310,6 +14518,12 @@ MonoBehaviour:
     OnSkipToTheEnd:
       m_PersistentCalls:
         m_Calls: []
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
   DebugActive: 0
   FeedbacksList:
   - rid: 0
@@ -14391,6 +14605,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 1514456390}
         DebugActive: 0
         Sfx: {fileID: 8300000, guid: 5e569d2a692222842bfc96e94520ab9a, type: 3}
@@ -14514,6 +14730,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
         Owner: {fileID: 1514456390}
         DebugActive: 0
         AnimatePositionTarget: {fileID: 620087095}
@@ -19944,7 +20162,7 @@ Transform:
   m_GameObject: {fileID: 1720066184}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.612, y: -0.056, z: 0}
+  m_LocalPosition: {x: 0, y: 0.319, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19952,7 +20170,7 @@ Transform:
   - {fileID: 897481191}
   - {fileID: 1099164938}
   - {fileID: 1766191522}
-  m_Father: {fileID: 1212517703}
+  m_Father: {fileID: 639369223}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1720066186
 Animator:
@@ -20166,6 +20384,12 @@ MonoBehaviour:
     OnSkipToTheEnd:
       m_PersistentCalls:
         m_Calls: []
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
   DebugActive: 0
   FeedbacksList:
   - rid: 0
@@ -20248,6 +20472,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 1766191526}
         DebugActive: 0
         Sfx: {fileID: 8300000, guid: 5e569d2a692222842bfc96e94520ab9a, type: 3}
@@ -20371,6 +20597,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
         Owner: {fileID: 1766191526}
         DebugActive: 0
         AnimatePositionTarget: {fileID: 620087095}
@@ -20814,6 +21042,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
         Owner: {fileID: 1766191526}
         DebugActive: 0
         Preset: 2
@@ -26137,6 +26367,12 @@ MonoBehaviour:
     OnSkipToTheEnd:
       m_PersistentCalls:
         m_Calls: []
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
   DebugActive: 0
   FeedbacksList:
   - rid: 0
@@ -26222,6 +26458,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
         Owner: {fileID: 1984084856}
         DebugActive: 0
         Mode: 0
@@ -26306,6 +26544,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 1984084856}
         DebugActive: 0
         RepeatUntilStopped: 0
@@ -26387,6 +26627,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 1984084856}
         DebugActive: 0
         Duration: 0.25
@@ -26525,6 +26767,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 1984084856}
         DebugActive: 0
         Sfx: {fileID: 8300000, guid: 1739ff78014ab3f44a5757aede3c7ea9, type: 3}
@@ -26648,6 +26892,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
         Owner: {fileID: 1984084856}
         DebugActive: 0
         AnimatePositionTarget: {fileID: 2014058847}
@@ -27091,6 +27337,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
         Owner: {fileID: 1984084856}
         DebugActive: 0
         AnimatePositionTarget: {fileID: 1507647151}

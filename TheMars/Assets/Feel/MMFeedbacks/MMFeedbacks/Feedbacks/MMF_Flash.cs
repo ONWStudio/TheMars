@@ -1,6 +1,7 @@
 ﻿using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace MoreMountains.Feedbacks
@@ -42,6 +43,11 @@ namespace MoreMountains.Feedbacks
 		[Tooltip("the ID of the flash (usually 0). You can specify on each MMFlash object an ID, allowing you to have different flash images in one scene and call them separately (one for damage, one for health pickups, etc)")]
 		public int FlashID = 0;
 
+		[Header("Optional Target")] 
+		/// this field lets you bind a specific MMFlash to this feedback. If left empty, the feedback will trigger a MMFlashEvent instead, targeting all matching flashes. If you fill it, only that specific MMFlash will be targeted.
+		[Tooltip("this field lets you bind a specific MMFlash to this feedback. If left empty, the feedback will trigger a MMFlashEvent instead, targeting all matching flashes. If you fill it, only that specific MMFlash will be targeted.")]
+		public MMFlash TargetFlash;
+
 		/// <summary>
 		/// On Play we trigger a flash event
 		/// </summary>
@@ -54,7 +60,14 @@ namespace MoreMountains.Feedbacks
 				return;
 			}
 			float intensityMultiplier = ComputeIntensity(feedbacksIntensity, position);
-			MMFlashEvent.Trigger(FlashColor, FeedbackDuration * intensityMultiplier, FlashAlpha, FlashID, ChannelData, ComputedTimescaleMode);
+			if (TargetFlash != null)
+			{
+				TargetFlash.Flash(FlashColor, FlashDuration * intensityMultiplier, FlashAlpha, ComputedTimescaleMode);
+			}
+			else
+			{
+				MMFlashEvent.Trigger(FlashColor, FeedbackDuration * intensityMultiplier, FlashAlpha, FlashID, ChannelData, ComputedTimescaleMode);	
+			}
 		}
 
 		/// <summary>

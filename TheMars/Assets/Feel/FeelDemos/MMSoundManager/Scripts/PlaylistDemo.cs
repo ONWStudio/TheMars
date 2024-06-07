@@ -9,6 +9,7 @@ namespace MoreMountains.Feel
 	/// <summary>
 	/// A small script used to power the FeelMMSoundManagerPlaylistManager demo scene
 	/// </summary>
+	[AddComponentMenu("")]
 	public class PlaylistDemo : MonoBehaviour
 	{
 		/// the playlist manager to read data on

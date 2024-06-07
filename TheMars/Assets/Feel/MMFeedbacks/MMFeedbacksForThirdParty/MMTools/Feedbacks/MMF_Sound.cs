@@ -47,6 +47,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiresSetupText { get { return "This feedback requires that you set an Audio clip in its Sfx slot below, or one or more clips in the Random Sfx array."; } }
 		#endif
 		public override bool HasRandomness => true;
+		/// the duration of this feedback is the duration of the clip being played
+		public override float FeedbackDuration { get { return GetDuration(); } }
 
 		/// <summary>
 		/// The possible methods to play the sound with. 
@@ -173,10 +175,6 @@ namespace MoreMountains.Feedbacks
 		[MMFCondition("UseSpreadCurve", true)]
 		public AnimationCurve SpreadCurve;
 
-
-		/// the duration of this feedback is the duration of the clip being played
-		public override float FeedbackDuration { get { return GetDuration(); } }
-
 		protected AudioClip _randomClip;
 		protected AudioSource _cachedAudioSource;
 		protected AudioSource[] _pool;
@@ -184,6 +182,7 @@ namespace MoreMountains.Feedbacks
 		protected float _duration;
 		protected AudioSource _editorAudioSource;
 		protected AudioSource _audioSource;
+		protected AudioClip _lastPlayedClip;
 
 		public override void InitializeCustomAttributes()
 		{
@@ -203,6 +202,7 @@ namespace MoreMountains.Feedbacks
 			{
 				_cachedAudioSource = CreateAudioSource(owner.gameObject, "CachedFeedbackAudioSource");
 			}
+			_lastPlayedClip = null;
 			if (PlayMethod == PlayMethods.Pool)
 			{
 				// create a pool
@@ -272,6 +272,11 @@ namespace MoreMountains.Feedbacks
 			float longest = 0f;
 			if ((RandomSfx != null) && (RandomSfx.Length > 0))
 			{
+				if (_lastPlayedClip != null)
+				{
+					return _lastPlayedClip.length;	
+				}
+				
 				foreach (AudioClip clip in RandomSfx)
 				{
 					if ((clip != null) && (clip.length > longest))
@@ -308,6 +313,9 @@ namespace MoreMountains.Feedbacks
 			{
 				pitch = -pitch;
 			}
+			
+			_lastPlayedClip = sfx;
+			Owner.ComputeCachedTotalDuration();
 
 			switch (PlayMethod)
 			{
@@ -322,9 +330,26 @@ namespace MoreMountains.Feedbacks
 						options = MMSoundManagerPlayOptions.Default;
 						options.Location = Owner.transform.position;
 						options.AudioGroup = SfxAudioMixerGroup;
-						options.DoNotAutoRecycleIfNotDonePlaying = false;
+						options.DoNotAutoRecycleIfNotDonePlaying = true;
 						options.Volume = volume;
 						options.Pitch = pitch;
+						options.PanStereo = PanStereo;
+						options.SpatialBlend = SpatialBlend;
+						options.Priority = Priority;
+						options.DopplerLevel = DopplerLevel;
+						options.Spread = Spread;
+						options.RolloffMode = RolloffMode;
+						options.MinDistance = MinDistance;
+						options.MaxDistance = MaxDistance;
+						options.UseSpreadCurve = UseSpreadCurve;
+						options.SpreadCurve = SpreadCurve;
+						options.UseCustomRolloffCurve = UseCustomRolloffCurve;
+						options.CustomRolloffCurve = CustomRolloffCurve;
+						options.UseSpatialBlendCurve = UseSpatialBlendCurve;
+						options.SpatialBlendCurve = SpatialBlendCurve;
+						options.UseReverbZoneMixCurve = UseReverbZoneMixCurve;
+						options.ReverbZoneMixCurve = ReverbZoneMixCurve;
+
 						if (Priority >= 0)
 						{
 							options.Priority = Mathf.Min(Priority, 256);

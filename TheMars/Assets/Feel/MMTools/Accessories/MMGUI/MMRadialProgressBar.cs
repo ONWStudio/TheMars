@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using MoreMountains.Tools;
 using UnityEngine.UI;
@@ -11,7 +12,7 @@ namespace MoreMountains.Tools
 	/// (make sure you pick FillAmount as the FillMode)
 	/// and much more options, such as delayed bars, events, bump, and more!
 	/// </summary>
-	[AddComponentMenu("More Mountains/Tools/GUI/MMRadialProgressBar")]
+	[Obsolete("This component is obsolete, it's recommended to use MMProgressBar instead", true)]
 	public class MMRadialProgressBar : MonoBehaviour 
 	{
 		/// the start fill amount value 

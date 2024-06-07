@@ -37,7 +37,7 @@ namespace MoreMountains.Tools
 		public MMPoolingMethods PoolingMethod = MMPoolingMethods.RandomPoolSizeBased;
 		[MMInformation("If you set CanPoolSameObjectTwice to false, the Pooler will try to prevent the same object from being pooled twice to avoid repetition. This will only affect random pooling methods, not ordered pooling.",MoreMountains.Tools.MMInformationAttribute.InformationType.Info,false)]
 		/// whether or not the same object can be pooled twice in a row. If you set CanPoolSameObjectTwice to false, the Pooler will try to prevent the same object from being pooled twice to avoid repetition. This will only affect random pooling methods, not ordered pooling.
-		public bool CanPoolSameObjectTwice=true;
+		public bool CanPoolSameObjectTwice = true;
 		/// a unique name that should match on all MMMultipleObjectPoolers you want to use together
 		[MMCondition("MutualizeWaitingPools", true)]
 		public string MutualizedPoolName = "";
@@ -85,7 +85,7 @@ namespace MoreMountains.Tools
 			// if there's only one item in the Pool, we force CanPoolSameObjectTwice to true
 			if (Pool.Count <= 1)
 			{
-				CanPoolSameObjectTwice=true;
+				CanPoolSameObjectTwice = true;
 			}
 
 			bool stillObjectsToPool;
@@ -346,13 +346,17 @@ namespace MoreMountains.Tools
 			}
 
 			// if we can't pool the same object twice, we'll loop for a while to try and get another one
+			bool test = _objectPool.PooledGameObjects[randomIndex] == _lastPooledObject;
 			overflowCounter = 0;
-			while (!CanPoolSameObjectTwice 
-			       && _objectPool.PooledGameObjects[randomIndex] == _lastPooledObject 
-			       && overflowCounter < _objectPool.PooledGameObjects.Count)
+			if (_lastPooledObject != null)
 			{
-				randomIndex = UnityEngine.Random.Range(0, _objectPool.PooledGameObjects.Count);
-				overflowCounter++;
+				while (!CanPoolSameObjectTwice 
+				       && _objectPool.PooledGameObjects[randomIndex].name == _lastPooledObject.name 
+				       && overflowCounter < _objectPool.PooledGameObjects.Count * 10)
+				{
+					randomIndex = UnityEngine.Random.Range(0, _objectPool.PooledGameObjects.Count);
+					overflowCounter++;
+				}	
 			}
 
 			//  if the item we've picked is active
@@ -403,11 +407,17 @@ namespace MoreMountains.Tools
 			int overflowCounter=0;
 
 			// if we can't pool the same object twice, we'll loop for a while to try and get another one
-			while (!CanPoolSameObjectTwice && Pool[randomIndex].GameObjectToPool == _lastPooledObject && overflowCounter < _objectPool.PooledGameObjects.Count )
+			if (_lastPooledObject != null)
 			{
-				randomIndex = UnityEngine.Random.Range(0, Pool.Count);
-				overflowCounter++;
+				while (!CanPoolSameObjectTwice
+				       && Pool[randomIndex].GameObjectToPool.name == _lastPooledObject.name
+				       && overflowCounter < _objectPool.PooledGameObjects.Count * 10)
+				{
+					randomIndex = UnityEngine.Random.Range(0, Pool.Count);
+					overflowCounter++;
+				}
 			}
+			
 			int originalRandomIndex = randomIndex+1;
 
 			bool objectFound = false;

@@ -31,21 +31,15 @@ public sealed class CardHandUI : MonoBehaviour
         for (int i = 0; i < MAX_CARD; i++)
         {
             TMCardUI tMCardUI = new GameObject().AddComponent<TMCardUI>();
-            tMCardUI.SetCardUI(transform, tMCardUI.gameObject.AddComponent<SmoothMove>());
+            tMCardUI.SetCardUI(transform);
 
             CardHandUIs[i] = tMCardUI;
         }
 
-        var cardMovements = CardHandUIs
-            .Select(cardUI => cardUI.CardMovement)
-            .ToArray();
-
-        _cardSorter.SortCards(cardMovements, rectTransform);
-
         UniRxObserver.ObserveInfomation(
             this,
             selector => _cardSorter,
-            sorter => sorter.SortCards(cardMovements, rectTransform));
+            sorter => sorter.SortCards(CardHandUIs, rectTransform));
     }
 
     /// <summary>

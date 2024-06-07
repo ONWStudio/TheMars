@@ -166,16 +166,16 @@ namespace MoreMountains.Tools
 	[RequireComponent(typeof(CanvasGroup))]
 	[RequireComponent(typeof(Image))]
 	[AddComponentMenu("More Mountains/Tools/GUI/MMFader")]
-	public class MMFader : MonoBehaviour, MMEventListener<MMFadeEvent>, MMEventListener<MMFadeInEvent>, MMEventListener<MMFadeOutEvent>, MMEventListener<MMFadeStopEvent>
+	public class MMFader : MMMonoBehaviour, MMEventListener<MMFadeEvent>, MMEventListener<MMFadeInEvent>, MMEventListener<MMFadeOutEvent>, MMEventListener<MMFadeStopEvent>
 	{
 		public enum ForcedInitStates { None, Active, Inactive }
         
-		[Header("Identification")]
+		[MMInspectorGroup("Identification", true, 122)] 
 		/// the ID for this fader (0 is default), set more IDs if you need more than one fader
 		[Tooltip("the ID for this fader (0 is default), set more IDs if you need more than one fader")]
 		public int ID;
         
-		[Header("Opacity")]
+		[MMInspectorGroup("Opacity", true, 123)]
 		/// the opacity the fader should be at when inactive
 		[Tooltip("the opacity the fader should be at when inactive")]
 		public float InactiveAlpha = 0f;
@@ -186,7 +186,7 @@ namespace MoreMountains.Tools
 		[Tooltip("determines whether a state should be forced on init")]
 		public ForcedInitStates ForcedInitState = ForcedInitStates.Inactive;
         
-		[Header("Timing")]
+		[MMInspectorGroup("Timing", true, 124)]
 		/// the default duration of the fade in/out
 		[Tooltip("the default duration of the fade in/out")]
 		public float DefaultDuration = 0.2f;
@@ -200,21 +200,18 @@ namespace MoreMountains.Tools
 		[Tooltip("whether or not this fader can cause a fade if the requested final alpha is the same as the current one")] 
 		public bool CanFadeToCurrentAlpha = true;
 
-		[Header("Interaction")]
+		[MMInspectorGroup("Interaction", true, 125)]
 		/// whether or not the fader should block raycasts when visible
 		[Tooltip("whether or not the fader should block raycasts when visible")]
 		public bool ShouldBlockRaycasts = false;
 
-		[Header("Debug")]
-		[MMInspectorButton("FadeIn1Second")]
-		public bool FadeIn1SecondButton;
-		[MMInspectorButton("FadeOut1Second")]
-		public bool FadeOut1SecondButton;
-		[MMInspectorButton("DefaultFade")]
-		public bool DefaultFadeButton;
-		[MMInspectorButton("ResetFader")]
-		public bool ResetFaderButton;
-
+		[MMInspectorGroup("Debug", true, 126)]
+		[MMInspectorButtonBar(new string[] { "FadeIn1Second", "FadeOut1Second", "DefaultFade", "ResetFader" }, 
+			new string[] { "FadeIn1Second", "FadeOut1Second", "DefaultFade", "ResetFader" }, 
+			new bool[] { true, true, true, true },
+			new string[] { "main-call-to-action", "", "", "" })]
+		public bool DebugToolbar;
+		
 		protected CanvasGroup _canvasGroup;
 		protected Image _image;
 
@@ -377,13 +374,8 @@ namespace MoreMountains.Tools
 		/// <param name="curve"></param>
 		/// <param name="id"></param>
 		/// <param name="ignoreTimeScale"></param>
-		protected virtual void StartFading(float initialAlpha, float endAlpha, float duration, MMTweenType curve, int id, bool ignoreTimeScale)
+		protected virtual void StartFading(float initialAlpha, float endAlpha, float duration, MMTweenType curve, bool ignoreTimeScale)
 		{
-			if (id != ID)
-			{
-				return;
-			}
-
 			if ((!CanFadeToCurrentAlpha) && (_canvasGroup.alpha == endAlpha))
 			{
 				return;
@@ -409,8 +401,11 @@ namespace MoreMountains.Tools
 		/// <param name="fadeEvent">Fade event.</param>
 		public virtual void OnMMEvent(MMFadeEvent fadeEvent)
 		{
-			_currentTargetAlpha = (fadeEvent.TargetAlpha == -1) ? ActiveAlpha : fadeEvent.TargetAlpha;
-			StartFading(_canvasGroup.alpha, _currentTargetAlpha, fadeEvent.Duration, fadeEvent.Curve, fadeEvent.ID, fadeEvent.IgnoreTimeScale);
+			if (fadeEvent.ID != ID)
+			{
+				return;
+			}
+			Fade(fadeEvent.TargetAlpha, fadeEvent.Duration, fadeEvent.Curve, fadeEvent.IgnoreTimeScale);
 		}
 
 		/// <summary>
@@ -419,7 +414,11 @@ namespace MoreMountains.Tools
 		/// <param name="fadeEvent">Fade event.</param>
 		public virtual void OnMMEvent(MMFadeInEvent fadeEvent)
 		{
-			StartFading(InactiveAlpha, ActiveAlpha, fadeEvent.Duration, fadeEvent.Curve, fadeEvent.ID, fadeEvent.IgnoreTimeScale);
+			if (fadeEvent.ID != ID)
+			{
+				return;
+			}
+			FadeIn(fadeEvent.Duration, fadeEvent.Curve, fadeEvent.IgnoreTimeScale);
 		}
 
 		/// <summary>
@@ -428,7 +427,46 @@ namespace MoreMountains.Tools
 		/// <param name="fadeEvent">Fade event.</param>
 		public virtual void OnMMEvent(MMFadeOutEvent fadeEvent)
 		{
-			StartFading(ActiveAlpha, InactiveAlpha, fadeEvent.Duration, fadeEvent.Curve, fadeEvent.ID, fadeEvent.IgnoreTimeScale);
+			if (fadeEvent.ID != ID)
+			{
+				return;
+			}
+			FadeOut(fadeEvent.Duration, fadeEvent.Curve, fadeEvent.IgnoreTimeScale);
+		}
+		
+		/// <summary>
+		/// Use this method to fade towards the specified target alpha
+		/// </summary>
+		/// <param name="targetAlpha"></param>
+		/// <param name="duration"></param>
+		/// <param name="curve"></param>
+		/// <param name="ignoreTimeScale"></param>
+		public virtual void Fade(float targetAlpha, float duration, MMTweenType curve, bool ignoreTimeScale)
+		{
+			_currentTargetAlpha = (targetAlpha == -1) ? ActiveAlpha : targetAlpha;
+			StartFading(_canvasGroup.alpha, _currentTargetAlpha, duration, curve, ignoreTimeScale);
+		}
+
+		/// <summary>
+		/// Use this method to cause a fade in over the specified duration and curve
+		/// </summary>
+		/// <param name="duration"></param>
+		/// <param name="curve"></param>
+		/// <param name="ignoreTimeScale"></param>
+		public virtual void FadeIn(float duration, MMTweenType curve, bool ignoreTimeScale = true)
+		{
+			StartFading(InactiveAlpha, ActiveAlpha, duration, curve, ignoreTimeScale);
+		}
+
+		/// <summary>
+		/// Use this method to cause a fade out over the specified duration and curve
+		/// </summary>
+		/// <param name="duration"></param>
+		/// <param name="curve"></param>
+		/// <param name="ignoreTimeScale"></param>
+		public virtual void FadeOut(float duration, MMTweenType curve, bool ignoreTimeScale = true)
+		{
+			StartFading(ActiveAlpha, InactiveAlpha, duration, curve, ignoreTimeScale);
 		}
 
 		/// <summary>

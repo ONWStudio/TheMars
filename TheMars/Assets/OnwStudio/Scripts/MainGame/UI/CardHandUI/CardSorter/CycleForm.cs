@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
+using TcgEngine.UI;
 using UnityEngine;
 using Vector2RangeSpace;
 
@@ -19,49 +21,79 @@ public sealed class CycleForm : ICardSorter
     /// <summary>
     /// .. 특정 인덱스의 카드를 올바른 위치로 배치 시킵니다
     /// </summary>
-    /// <param name="cardMovementBases"> .. 카드의 움직임을 정하는 무브먼트 클래스를 받습니다 </param>
+    /// <param name="cardUIs"> .. 카드의 움직임을 정하는 무브먼트 클래스를 받습니다 </param>
     /// <param name="index"> .. 배치시킬 카드의 인덱스 </param>
     /// <param name="rectTransform"> .. 반지름의 기준이 될 렉트 트랜스폼 입니다 </param>
-    public void ArrangeCard(CardMovementBase[] cardMovementBases, int index, RectTransform rectTransform)
+    public void ArrangeCard(TMCardUI[] cardUIs, int index, RectTransform rectTransform)
     {
-        if (cardMovementBases.Length <= 0 || cardMovementBases.Length <= index) return;
+        if (cardUIs.Length <= 0 || cardUIs.Length <= index) return;
 
-        float angleStep = MaxAngle / (cardMovementBases.Length - 1);
+        float angleStep = MaxAngle / (cardUIs.Length - 1);
         float startAngle = -MaxAngle * 0.5f;
 
-        runTargetTransform(cardMovementBases[index], index, angleStep, startAngle, rectTransform);
+        runTargetTransform(cardUIs[index], index, angleStep, startAngle, rectTransform);
     }
 
     /// <summary>
     /// .. 카드들을 올바른 위치로 배치 시킵니다
     /// </summary>
-    /// <param name="cardMovementBases"> .. 카드의 움직임을 정하는 무브먼트 클래스를 받습니다</param>
+    /// <param name="cardUIs"> .. 카드의 움직임을 정하는 무브먼트 클래스를 받습니다</param>
     /// <param name="rectTransform"> .. 반지름의 기준이 될 렉트 트랜스폼 입니다 </param>
-    public void SortCards(CardMovementBase[] cardMovementBases, RectTransform rectTransform)
+    public void SortCards(TMCardUI[] cardUIs, RectTransform rectTransform)
     {
-        float angleStep = MaxAngle / (cardMovementBases.Length - 1);
+        float angleStep = MaxAngle / (cardUIs.Length - 1);
         float startAngle = -MaxAngle * 0.5f;
 
-        for (int i = 0; i < cardMovementBases.Length; i++)
+        for (int i = 0; i < cardUIs.Length; i++)
         {
-            runTargetTransform(cardMovementBases[i], i, angleStep, startAngle, rectTransform);
+            runTargetTransform(cardUIs[i], i, angleStep, startAngle, rectTransform);
         }
     }
 
-    private void runTargetTransform(CardMovementBase cardMovement, int index, float angleStep, float startAngle, RectTransform rectTransform)
+    private void runTargetTransform(TMCardUI cardUI, int index, float angleStep, float startAngle, RectTransform rectTransform)
     {
         float angle = startAngle + angleStep * index;
         float radian = angle * Mathf.Deg2Rad;
         float radius = rectTransform.rect.height * RadiusRatioOffset;
         Vector2 pivot = new(rectTransform.rect.center.x, rectTransform.rect.min.y);
 
-        cardMovement.TargetTransform = new()
+        Vector3 targetPosition = new(
+        pivot.x + (rectTransform.rect.width * PositionRatioOffset.x) + Mathf.Sin(radian) * radius,
+        pivot.y + (rectTransform.rect.height * PositionRatioOffset.y) + Mathf.Cos(radian) * radius,
+        0);
+
+        Quaternion targetAngle = Quaternion.Euler(0, 0, -angle);
+
+        AnimationCurve logCurve = AnimationCurveLoader.Instance.AnimationCurves["LogCurve"];
+
+        MMF_Position mmfPosition = new()
         {
-            Position = new Vector3(
-                pivot.x + (rectTransform.rect.width * PositionRatioOffset.x) + Mathf.Sin(radian) * radius,
-                pivot.y + (rectTransform.rect.height * PositionRatioOffset.y) + Mathf.Cos(radian) * radius,
-                0),
-            Rotation = Quaternion.Euler(0, 0, -angle)
+            Label = "Position",
+            AnimatePositionTarget = cardUI.gameObject,
+            DestinationPosition = targetPosition,
+            Mode = MMF_Position.Modes.ToDestination,
+            Space = MMF_Position.Spaces.Local,
+            FeedbackDuration = 0.5f,
+            RelativePosition = false,
+            AnimatePositionCurveX = logCurve,
+            AnimatePositionCurveY = logCurve,
+            AnimatePositionCurveZ = logCurve,
+            AnimatePositionCurve = logCurve
         };
+
+        MMF_Rotation mmfRotation = new()
+        {
+            Label = "Rotation",
+            AnimateRotationTarget = cardUI.transform,
+            DestinationAngles = targetAngle.eulerAngles,
+            Mode = MMF_Rotation.Modes.ToDestination,
+            RotationSpace = Space.Self,
+            FeedbackDuration = 0.5f,
+            AnimateRotationX = logCurve,
+            AnimateRotationY = logCurve,
+            AnimateRotationZ = logCurve
+        };
+
+        cardUI.EventReceiver.PlayEvent(mmfPosition, mmfRotation);
     }
 }

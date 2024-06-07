@@ -168,6 +168,9 @@ namespace MoreMountains.Feedbacks
 		/// if this is true, the Range group will be displayed, otherwise it'll be hidden        
 		public virtual bool HasRange => false;
 
+		/// the total amount of plays this feedback has left
+		public virtual int PlaysLeft => _playsLeft;
+
 		public virtual bool HasCustomInspectors => false;
 		/// an overridable color for your feedback, that can be redefined per feedback. White is the only reserved color, and the feedback will revert to 
 		/// normal (light or dark skin) when left to White
@@ -455,6 +458,7 @@ namespace MoreMountains.Feedbacks
 
 			SetIndexInFeedbacksList(index);
 			_lastPlayTimestamp = -1f;
+			Timing.PlayCount = 0;
 			_initialized = true;
 			Owner = owner;
 			_playsLeft = Timing.NumberOfRepeats + 1;

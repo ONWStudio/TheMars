@@ -23,6 +23,7 @@ namespace MoreMountains.Feedbacks
 		public override string RequiredTargetText { get { return Mode.ToString();  } }
 		#endif
 		public override bool HasRandomness => true;
+		public override bool HasCustomInspectors => true; 
 
 		/// the possible modes for this feedback
 		public enum Modes { OverTime, Instant }

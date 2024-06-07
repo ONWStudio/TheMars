@@ -65,6 +65,7 @@ namespace MoreMountains.FeedbacksForThirdParty
 		/// if the property is a gradient, the new gradient to set
 		[Tooltip("if the property is a gradient, the new gradient to set")] 
 		[MMFEnumCondition("PropertyType", (int)PropertyTypes.Gradient)]
+		[GradientUsage(true)]
 		public Gradient NewGradient = new Gradient();
 		/// if the property is an int, the new int to set
 		[Tooltip("if the property is an int, the new int to set")]

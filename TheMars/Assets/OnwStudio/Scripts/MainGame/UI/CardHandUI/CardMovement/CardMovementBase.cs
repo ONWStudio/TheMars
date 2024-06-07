@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using CoroutineExtensions;
 using UnityEngine;
 
-// .. 사용하지 않음
+// .. 사용하지 않음 레거시
 [DisallowMultipleComponent, RequireComponent(typeof(MovementTracker))]
 public abstract class CardMovementBase : MonoBehaviour
 {

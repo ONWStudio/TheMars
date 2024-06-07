@@ -142,6 +142,11 @@ namespace MoreMountains.Feedbacks
 				return;
 			}
 
+			if ((ParticlesPrefab == null) && (RandomParticlePrefabs.Count == 0))
+			{
+				return;
+			}
+
 			if (!_poolCreatedOrFound)
 			{
 				if (_objectPooler != null)

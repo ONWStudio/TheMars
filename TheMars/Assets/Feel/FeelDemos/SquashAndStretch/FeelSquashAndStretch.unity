@@ -401,7 +401,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -785,7 +784,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -997,7 +995,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -1128,7 +1125,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -1259,7 +1255,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -2093,7 +2088,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -2225,7 +2219,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -2324,7 +2317,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -3011,7 +3003,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -3193,7 +3184,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -8643,7 +8633,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -15816,7 +15805,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -16582,7 +16570,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -16707,6 +16694,12 @@ MonoBehaviour:
     OnSkipToTheEnd:
       m_PersistentCalls:
         m_Calls: []
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
   DebugActive: 0
   FeedbacksList:
   - rid: 0
@@ -16788,6 +16781,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
         Owner: {fileID: 1143243862}
         DebugActive: 0
         Mode: 0
@@ -16872,6 +16867,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 1143243862}
         DebugActive: 0
         Sfx: {fileID: 0}
@@ -17326,7 +17323,6 @@ MonoBehaviour:
   Spring: 0
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -20162,7 +20158,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -20433,11 +20428,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1668458838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ecb76331b2602f4ba888267530cbfce, type: 3}
+  m_Script: {fileID: 11500000, guid: 32dd23bf97680be41a75b45b50f0d8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetFPS: 300
+  TargetFPS: 0
+  RenderFrameInterval: 0
   VSyncCount: 0
+  EnableNumberShortcuts: 0
 --- !u!1 &1717966781
 GameObject:
   m_ObjectHideFlags: 0
@@ -20533,7 +20530,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -20753,7 +20749,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -21114,7 +21109,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0
@@ -22359,7 +22353,6 @@ MonoBehaviour:
   Spring: 1
   SpringDamping: 0.3
   SpringFrequency: 3
-  SpringSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
   RemappedVelocity: 0
   VelocityMagnitude: 0

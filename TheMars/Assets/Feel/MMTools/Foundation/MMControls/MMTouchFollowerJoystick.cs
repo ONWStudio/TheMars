@@ -126,7 +126,7 @@ namespace MoreMountains.Tools
 			if (SpringFollowInterpolation)
 			{
 				_newBackgroundPosition = BackgroundCanvasGroup.transform.position;
-				MMMaths.Spring(ref _newBackgroundPosition, _backgroundPositionTarget, ref _springVelocity, SpringDamping, SpringFrequency, InterpolateFollowMovementSpeed, Time.unscaledDeltaTime);
+				MMMaths.Spring(ref _newBackgroundPosition, _backgroundPositionTarget, ref _springVelocity, SpringDamping, SpringFrequency, Time.unscaledDeltaTime);
 				BackgroundCanvasGroup.transform.position = _newBackgroundPosition;
 			}
 			else

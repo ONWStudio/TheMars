@@ -1093,9 +1093,10 @@ namespace MoreMountains.Feedbacks
 			int count = FeedbacksList.Count;
 			for (int i = 0; i < count; i++)
 			{
-				if ((FeedbacksList[i].IsPlaying 
+				if ((FeedbacksList[i].IsPlaying
 				     && !FeedbacksList[i].Timing.ExcludeFromHoldingPauses)
-				    || FeedbacksList[i].Timing.RepeatForever)
+				    || FeedbacksList[i].Timing.RepeatForever
+				    || ((FeedbacksList[i].Timing.NumberOfRepeats > 0) && (FeedbacksList[i].PlaysLeft > 0)))
 				{
 					return true;
 				}

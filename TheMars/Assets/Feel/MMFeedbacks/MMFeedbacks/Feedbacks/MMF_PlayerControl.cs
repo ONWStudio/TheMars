@@ -24,6 +24,21 @@ namespace MoreMountains.Feedbacks
 		
 		public override bool HasChannel => false;
 
+		public override bool IsPlaying
+		{
+			get
+			{
+				foreach (MMF_Player player in TargetPlayers)
+				{
+					if (player.IsPlaying)
+					{
+						return true;
+					}
+				}
+				return false;
+			}
+		}
+
 		public enum Modes
 		{
 			PlayFeedbacks,

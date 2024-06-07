@@ -185,6 +185,15 @@ namespace MoreMountains.Tools
 			return startValue;
 		}
 
+		public static Vector4 Tween(float currentTime, float initialTime, float endTime, Vector4 startValue, Vector4 endValue, MMTweenCurve curve)
+		{
+			startValue.x = Tween(currentTime, initialTime, endTime, startValue.x, endValue.x, curve);
+			startValue.y = Tween(currentTime, initialTime, endTime, startValue.y, endValue.y, curve);
+			startValue.z = Tween(currentTime, initialTime, endTime, startValue.z, endValue.z, curve);
+			startValue.w = Tween(currentTime, initialTime, endTime, startValue.w, endValue.w, curve);
+			return startValue;
+		}
+
 		public static Quaternion Tween(float currentTime, float initialTime, float endTime, Quaternion startValue, Quaternion endValue, MMTweenCurve curve)
 		{
 			float turningRate = Tween(currentTime, initialTime, endTime, 0f, 1f, curve);
@@ -213,6 +222,15 @@ namespace MoreMountains.Tools
 			startValue.x = Tween(currentTime, initialTime, endTime, startValue.x, endValue.x, curve);
 			startValue.y = Tween(currentTime, initialTime, endTime, startValue.y, endValue.y, curve);
 			startValue.z = Tween(currentTime, initialTime, endTime, startValue.z, endValue.z, curve);
+			return startValue;
+		}
+
+		public static Vector4 Tween(float currentTime, float initialTime, float endTime, Vector4 startValue, Vector4 endValue, AnimationCurve curve)
+		{
+			startValue.x = Tween(currentTime, initialTime, endTime, startValue.x, endValue.x, curve);
+			startValue.y = Tween(currentTime, initialTime, endTime, startValue.y, endValue.y, curve);
+			startValue.z = Tween(currentTime, initialTime, endTime, startValue.z, endValue.z, curve);
+			startValue.w = Tween(currentTime, initialTime, endTime, startValue.w, endValue.w, curve);
 			return startValue;
 		}
 
@@ -250,6 +268,18 @@ namespace MoreMountains.Tools
 			return Vector2.zero;
 		}
 		public static Vector3 Tween(float currentTime, float initialTime, float endTime, Vector3 startValue, Vector3 endValue, MMTweenType tweenType)
+		{
+			if (tweenType.MMTweenDefinitionType == MMTweenDefinitionTypes.MMTween)
+			{
+				return Tween(currentTime, initialTime, endTime, startValue, endValue, tweenType.MMTweenCurve);
+			}
+			if (tweenType.MMTweenDefinitionType == MMTweenDefinitionTypes.AnimationCurve)
+			{
+				return Tween(currentTime, initialTime, endTime, startValue, endValue, tweenType.Curve);
+			}
+			return Vector3.zero;
+		}
+		public static Vector4 Tween(float currentTime, float initialTime, float endTime, Vector4 startValue, Vector4 endValue, MMTweenType tweenType)
 		{
 			if (tweenType.MMTweenDefinitionType == MMTweenDefinitionTypes.MMTween)
 			{
