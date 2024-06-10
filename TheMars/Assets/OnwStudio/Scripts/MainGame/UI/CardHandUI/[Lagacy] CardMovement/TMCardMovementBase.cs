@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using CoroutineExtensions;
 using UnityEngine;
 
-// .. 사용하지 않음 레거시
+/// <summary>
+/// .. 사용하지 않음 레거시
+/// </summary>
 [DisallowMultipleComponent, RequireComponent(typeof(MovementTracker))]
-public abstract class CardMovementBase : MonoBehaviour
+public abstract class TMCardMovementBase : MonoBehaviour
 {
     [Serializable]
     public struct TransformData
@@ -69,13 +71,13 @@ public abstract class CardMovementBase : MonoBehaviour
         };
 
         _movementTracker.AddListenerOnMoveBegined(()
-            => (this as ICardMoveBegin)?.OnMoveBegin());
+            => (this as ITMCardMoveBegin)?.OnMoveBegin());
 
         _movementTracker.AddListenerOnMoveOnGoing(()
-            => (this as ICardMove)?.OnMove());
+            => (this as ITMCardMove)?.OnMove());
 
         _movementTracker.AddListenerOnMoveEnded(()
-            => (this as ICardMoveEnd)?.OnMoveEnd());
+            => (this as ITMCardMoveEnd)?.OnMoveEnd());
     }
 
     private void FixedUpdate()

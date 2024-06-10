@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MoreMountains.Feedbacks;
-using MoreMountains.Feel;
-using static UITools.UITool;
 
 /// <summary>
 /// .. 카드를 부채꼴의 형태로 정렬시키는 클래스 입니다
@@ -26,11 +23,11 @@ public sealed class SectorForm : ICardSorter
     /// <param name="cardUIs"> .. 카드의 움직임을 정하는 무브먼트 클래스를 받습니다 </param>
     /// <param name="index"> .. 배치시킬 카드의 인덱스 </param>
     /// <param name="rectTransform"> .. 비율로 배치시키기 때문에 기준이 되는 렉트 트랜스폼을 인자값으로 넣어줍니다 </param> 
-    public void ArrangeCard(TMCardUI[] cardUIs, int index, RectTransform rectTransform)
+    public void ArrangeCard(List<TMCardUIController> cardUIs, int index, RectTransform rectTransform)
     {
-        if (cardUIs.Length <= 0 || cardUIs.Length <= index) return;
+        if (cardUIs.Count <= 0 || cardUIs.Count <= index) return;
 
-        float angleStep = MaxAngle / (cardUIs.Length - 1);
+        float angleStep = MaxAngle / (cardUIs.Count - 1);
         float startAngle = -MaxAngle * 0.5f;
 
         SortCards(cardUIs[index], index, angleStep, startAngle, rectTransform);
@@ -41,18 +38,18 @@ public sealed class SectorForm : ICardSorter
     /// </summary>
     /// <param name="cardUIs"> .. 카드의 움직임을 정하는 무브먼트 클래스를 받습니다 </param>
     /// <param name="rectTransform"> .. 비율로 배치시키기 때문에 기준이 되는 렉트 트랜스폼을 인자값으로 넣어줍니다 </param> 
-    public void SortCards(TMCardUI[] cardUIs, RectTransform rectTransform)
+    public void SortCards(List<TMCardUIController> cardUIs, RectTransform rectTransform)
     {
-        float angleStep = MaxAngle / (cardUIs.Length - 1);
+        float angleStep = MaxAngle / (cardUIs.Count - 1);
         float startAngle = -MaxAngle * 0.5f;
 
-        for (int i = 0; i < cardUIs.Length; i++)
+        for (int i = 0; i < cardUIs.Count; i++)
         {
             SortCards(cardUIs[i], i, angleStep, startAngle, rectTransform);
         }
     }
 
-    private void SortCards(TMCardUI cardUI, int index, float angleStep, float startAngle, RectTransform rectTransform)
+    private void SortCards(TMCardUIController cardUI, int index, float angleStep, float startAngle, RectTransform rectTransform)
     {
         float angle = startAngle + angleStep * index;
         float radian = angle * Mathf.Deg2Rad;
@@ -64,37 +61,18 @@ public sealed class SectorForm : ICardSorter
                 0);
 
         Quaternion targetRotation = Quaternion.Euler(0, 0, -angle);
+        MMF_Parallel feedbackParallel = new();
 
-        AnimationCurve logCurve = AnimationCurveLoader.Instance.AnimationCurves["LogCurve"];
+        feedbackParallel
+            .Feedbacks
+            .Add(EventCreator
+                .CreateSmoothPositionEvent(cardUI.gameObject, targetPosition));
 
-        MMF_Position mmfPosition = new()
-        {
-            Label = "Position",
-            AnimatePositionTarget = cardUI.gameObject,
-            DestinationPosition = targetPosition,
-            Mode = MMF_Position.Modes.ToDestination,
-            Space = MMF_Position.Spaces.Local,
-            FeedbackDuration = 0.5f,
-            RelativePosition = false,
-            AnimatePositionCurveX = logCurve,
-            AnimatePositionCurveY = logCurve,
-            AnimatePositionCurveZ = logCurve,
-            AnimatePositionCurve = logCurve
-        };
+        feedbackParallel
+            .Feedbacks
+            .Add(EventCreator
+                .CreateSmoothRotationEvent(cardUI.transform, targetRotation.eulerAngles));
 
-        MMF_Rotation mmfRotation = new()
-        {
-            Label = "Rotation",
-            AnimateRotationTarget = cardUI.transform,
-            DestinationAngles = targetRotation.eulerAngles,
-            Mode = MMF_Rotation.Modes.ToDestination,
-            RotationSpace = Space.Self,
-            FeedbackDuration = 0.5f,
-            AnimateRotationX = logCurve,
-            AnimateRotationY = logCurve,
-            AnimateRotationZ = logCurve
-        };
-
-        cardUI.EventReceiver.PlayEvent(mmfPosition, mmfRotation);
+        cardUI.EventReceiver.PlayEvent(feedbackParallel);
     }
 }

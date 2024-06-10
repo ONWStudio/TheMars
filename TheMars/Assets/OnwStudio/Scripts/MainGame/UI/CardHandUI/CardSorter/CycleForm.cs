@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using MoreMountains.Feedbacks;
-using TcgEngine.UI;
 using UnityEngine;
 using Vector2RangeSpace;
 
@@ -24,11 +22,11 @@ public sealed class CycleForm : ICardSorter
     /// <param name="cardUIs"> .. 카드의 움직임을 정하는 무브먼트 클래스를 받습니다 </param>
     /// <param name="index"> .. 배치시킬 카드의 인덱스 </param>
     /// <param name="rectTransform"> .. 반지름의 기준이 될 렉트 트랜스폼 입니다 </param>
-    public void ArrangeCard(TMCardUI[] cardUIs, int index, RectTransform rectTransform)
+    public void ArrangeCard(List<TMCardUIController> cardUIs, int index, RectTransform rectTransform)
     {
-        if (cardUIs.Length <= 0 || cardUIs.Length <= index) return;
+        if (cardUIs.Count <= 0 || cardUIs.Count <= index) return;
 
-        float angleStep = MaxAngle / (cardUIs.Length - 1);
+        float angleStep = MaxAngle / (cardUIs.Count - 1);
         float startAngle = -MaxAngle * 0.5f;
 
         runTargetTransform(cardUIs[index], index, angleStep, startAngle, rectTransform);
@@ -39,18 +37,18 @@ public sealed class CycleForm : ICardSorter
     /// </summary>
     /// <param name="cardUIs"> .. 카드의 움직임을 정하는 무브먼트 클래스를 받습니다</param>
     /// <param name="rectTransform"> .. 반지름의 기준이 될 렉트 트랜스폼 입니다 </param>
-    public void SortCards(TMCardUI[] cardUIs, RectTransform rectTransform)
+    public void SortCards(List<TMCardUIController> cardUIs, RectTransform rectTransform)
     {
-        float angleStep = MaxAngle / (cardUIs.Length - 1);
+        float angleStep = MaxAngle / (cardUIs.Count - 1);
         float startAngle = -MaxAngle * 0.5f;
 
-        for (int i = 0; i < cardUIs.Length; i++)
+        for (int i = 0; i < cardUIs.Count; i++)
         {
             runTargetTransform(cardUIs[i], i, angleStep, startAngle, rectTransform);
         }
     }
 
-    private void runTargetTransform(TMCardUI cardUI, int index, float angleStep, float startAngle, RectTransform rectTransform)
+    private void runTargetTransform(TMCardUIController cardUI, int index, float angleStep, float startAngle, RectTransform rectTransform)
     {
         float angle = startAngle + angleStep * index;
         float radian = angle * Mathf.Deg2Rad;
@@ -62,38 +60,15 @@ public sealed class CycleForm : ICardSorter
         pivot.y + (rectTransform.rect.height * PositionRatioOffset.y) + Mathf.Cos(radian) * radius,
         0);
 
-        Quaternion targetAngle = Quaternion.Euler(0, 0, -angle);
+        Quaternion targetRotation = Quaternion.Euler(0, 0, -angle);
+        MMF_Parallel feedbackParallel = new();
 
-        AnimationCurve logCurve = AnimationCurveLoader.Instance.AnimationCurves["LogCurve"];
+        feedbackParallel.Feedbacks.Add(EventCreator
+            .CreateSmoothPositionEvent(cardUI.gameObject, targetPosition));
 
-        MMF_Position mmfPosition = new()
-        {
-            Label = "Position",
-            AnimatePositionTarget = cardUI.gameObject,
-            DestinationPosition = targetPosition,
-            Mode = MMF_Position.Modes.ToDestination,
-            Space = MMF_Position.Spaces.Local,
-            FeedbackDuration = 0.5f,
-            RelativePosition = false,
-            AnimatePositionCurveX = logCurve,
-            AnimatePositionCurveY = logCurve,
-            AnimatePositionCurveZ = logCurve,
-            AnimatePositionCurve = logCurve
-        };
+        feedbackParallel.Feedbacks.Add(EventCreator
+            .CreateSmoothRotationEvent(cardUI.transform, targetRotation.eulerAngles));
 
-        MMF_Rotation mmfRotation = new()
-        {
-            Label = "Rotation",
-            AnimateRotationTarget = cardUI.transform,
-            DestinationAngles = targetAngle.eulerAngles,
-            Mode = MMF_Rotation.Modes.ToDestination,
-            RotationSpace = Space.Self,
-            FeedbackDuration = 0.5f,
-            AnimateRotationX = logCurve,
-            AnimateRotationY = logCurve,
-            AnimateRotationZ = logCurve
-        };
-
-        cardUI.EventReceiver.PlayEvent(mmfPosition, mmfRotation);
+        cardUI.EventReceiver.PlayEvent(feedbackParallel);
     }
 }

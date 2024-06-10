@@ -24,12 +24,12 @@ namespace TheMarsGUITool
 
             private GUIStyle _cardBoxStyle = null;
 
-            private readonly List<Card> _cards = new();
+            private readonly List<TMCardData> _cards = new();
             private string _newCardName = string.Empty;
 
             public void Awake()
             {
-                _cards.AddRange(DataHandler<Card>
+                _cards.AddRange(DataHandler<TMCardData>
                     .LoadAllScriptableObjects()
                     .OrderBy(card => card.No));
 
@@ -69,7 +69,7 @@ namespace TheMarsGUITool
                             return;
                         }
 
-                        _cards.Add(DataHandler<Card>.CreateScriptableObject(DATA_PATH, $"Card_No.{_cards.Count + 1}"));
+                        _cards.Add(DataHandler<TMCardData>.CreateScriptableObject(DATA_PATH, $"Card_No.{_cards.Count + 1}"));
                         _cards[^1].CardName = _newCardName;
                         _cards[^1].No = _cards.Count;
                     }
@@ -102,7 +102,7 @@ namespace TheMarsGUITool
             public void LoadDataFromLocal()
             {
                 _cards.Clear();
-                _cards.AddRange(DataHandler<Card>
+                _cards.AddRange(DataHandler<TMCardData>
                     .LoadAllScriptableObjects()
                     .OrderBy(card => card.No));
             }
@@ -112,7 +112,7 @@ namespace TheMarsGUITool
 
             }
 
-            private void setNewName(Card card, string name)
+            private void setNewName(TMCardData card, string name)
             {
                 if (string.IsNullOrEmpty(name))
                 {

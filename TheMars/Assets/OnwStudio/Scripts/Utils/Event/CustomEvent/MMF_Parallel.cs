@@ -3,25 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CoroutineExtensions;
-using MoreMountains.Feel;
 using MoreMountains.Feedbacks;
 
-public sealed class FeedbackParallel : MMF_Feedback
+public sealed class MMF_Parallel : MMF_Feedback
 {
-    [field: SerializeField] public List<MMF_Feedback> Feedbacks { get; } = new();
+    [field: SerializeField] public List<MMF_Feedback> Feedbacks { get; private set; } = new();
 
     private Coroutine _playedFeedbackCoroutine = null;
 
     public override float FeedbackDuration
     {
-        get => Feedbacks.Sum(feedback => feedback.TotalDuration);
+        get => Feedbacks.Max(feedback => feedback.FeedbackDuration);
         set { }
+    }
+
+    protected override void CustomInitialization(MMF_Player owner)
+    {
+        for (int i = 0; i < Feedbacks.Count; i++)
+        {
+            Feedbacks[i].Initialization(owner, i);
+        }
     }
 
     protected override void CustomPlayFeedback(Vector3 position, float feedbacksIntensity = 1.0f)
     {
         IsPlaying = true;
-        _playedFeedbackCoroutine = Owner.StartCoroutine(iEPlayAllFeedback(position, feedbacksIntensity));
+
+        _playedFeedbackCoroutine = Owner
+            .StartCoroutine(iEPlayAllFeedback(position, feedbacksIntensity));
     }
 
     protected override void CustomStopFeedback(Vector3 position, float feedbacksIntensity = 1.0f)
@@ -45,20 +54,10 @@ public sealed class FeedbackParallel : MMF_Feedback
 
     private IEnumerator iEPlayAllFeedback(Vector3 position, float feedbacksIntensity)
     {
-        IEnumerable<Coroutine> coroutines = Feedbacks
-            .Select(feedback => Owner.StartCoroutine(iEPlayFeedback(feedback, position, feedbacksIntensity)));
+        Feedbacks
+            .ForEach(feedback => feedback.Play(position, feedbacksIntensity));
 
-        foreach (Coroutine coroutine in coroutines)
-        {
-            yield return coroutine;
-        }
-
+        yield return CoroutineHelper.WaitForSeconds(FeedbackDuration);
         IsPlaying = false;
-    }
-
-    private IEnumerator iEPlayFeedback(MMF_Feedback feedback, Vector3 position, float feedbacksIntensity)
-    {
-        feedback.Play(position, feedbacksIntensity);
-        yield return CoroutineHelper.WaitForSeconds(feedback.TotalDuration);
     }
 }

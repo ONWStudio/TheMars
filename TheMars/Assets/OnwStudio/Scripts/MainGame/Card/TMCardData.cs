@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed partial class Card : ScriptableObject
+public sealed partial class TMCardData : ScriptableObject
 {
     public int No { get; internal set; }
     public string CardName { get; internal set; }
@@ -13,9 +13,4 @@ public sealed partial class Card : ScriptableObject
 
     // .. 발동효과
     protected Dictionary<string, ICardEffect> _cardEffects = new();
-
-    public void OnDraw()
-    {
-
-    }
 }

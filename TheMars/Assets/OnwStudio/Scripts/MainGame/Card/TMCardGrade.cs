@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed partial class Card : ScriptableObject
+public sealed partial class TMCardData : ScriptableObject
 {
     /// <summary>
     /// .. 발동 효과에 따른 카드 등급

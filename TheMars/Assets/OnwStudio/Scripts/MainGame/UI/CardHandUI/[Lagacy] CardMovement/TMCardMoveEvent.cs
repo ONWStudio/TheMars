@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICardMoveBegin
+public interface ITMCardMoveBegin
 {
     void OnMoveBegin();
 }
 
-public interface ICardMoveEnd
+public interface ITMCardMoveEnd
 {
     void OnMoveEnd();
 }
 
-public interface ICardMove
+public interface ITMCardMove
 {
     void OnMove();
 }
