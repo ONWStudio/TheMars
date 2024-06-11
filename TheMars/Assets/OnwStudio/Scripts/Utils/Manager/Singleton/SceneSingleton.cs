@@ -1,20 +1,39 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using System;
 
+/// <summary>
+/// ..
+/// </summary>
+/// <typeparam name="T"></typeparam>
 [DisallowMultipleComponent]
-public abstract class SingletonReset<T> : MonoBehaviour where T : SingletonReset<T>
+public abstract class SceneSingleton<T> : MonoBehaviour where T : SceneSingleton<T>
 {
     public static T _instance = null;
-    public static T Instance => _instance ??= FindObjectOfType<T>() ?? new GameObject(typeof(T).Name).AddComponent<T>();
+    public static T Instance
+    {
+        get
+        {
+            if (!_instance)
+            {
+                _instance = FindObjectOfType<T>() ?? new GameObject(typeof(T).Name).AddComponent<T>();
+                _instance.Init();
+            }
 
-    protected Action _destroyAction = () => { };
+            return _instance;
+        }
+    }
+
+    /// <summary>
+    /// .. 특정 씬에만 존재해야하는 싱글톤이므로 올바르지 않은 씬에서 생성될경우 Destroy
+    /// </summary>
+    protected abstract string SceneName { get; }
 
     protected void Awake() // protected로 상속 클래스에서 재정의시 경고문 띄워주기
     {
-        if (!IsOKScene())
+        if (SceneManager.GetActiveScene().name != SceneName)
         {
             Destroy(gameObject);
             return;
@@ -43,13 +62,11 @@ public abstract class SingletonReset<T> : MonoBehaviour where T : SingletonReset
     private void OnDestroy()
     {
         _instance = null;
-        _destroyAction.Invoke();
     }
 
-    protected abstract void Init();
     /// <summary>
-    /// .. 특정 씬에만 존재해야하는 싱글톤이므로 올바르지 않은 씬에서 생성될경우 Destroy
+    /// .. Awake 대체용 메서드
     /// </summary>
-    protected abstract bool IsOKScene();
+    protected abstract void Init();
 }
 

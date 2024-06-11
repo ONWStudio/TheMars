@@ -34,7 +34,7 @@ namespace SubClassSelectorEditor
             }
 
             string[] subClassNames = _subClasses
-                .Select(type => type.FullName)
+                .Select(type => type.Name)
                 .ToArray();
 
             string currentSubClass = property.managedReferenceValue?.GetType().Name;

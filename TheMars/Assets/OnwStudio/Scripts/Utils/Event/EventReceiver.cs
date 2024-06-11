@@ -11,9 +11,11 @@ using MoreMountains.Feedbacks;
 [DisallowMultipleComponent]
 public sealed class EventReceiver : MonoBehaviour
 {
+    [field: SerializeField] public UnityEvent OnStartEvent { get; private set; } = new();
     [field: SerializeField] public UnityEvent OnComplitedEvent { get; private set; } = new();
 
     private MMF_Player _eventReceiver = null;
+    public bool IsPlaying { get; private set; } = false;
 
     private void Awake()
     {
@@ -22,6 +24,8 @@ public sealed class EventReceiver : MonoBehaviour
 
     public void PlayEvent(params MMF_Feedback[] feedbacks)
     {
+        IsPlaying = true;
+        OnStartEvent.Invoke();
         _eventReceiver.StopFeedbacks();
         _eventReceiver.FeedbacksList.Clear();
         StartCoroutine(iEPlayFeedbacks(feedbacks));
@@ -32,6 +36,7 @@ public sealed class EventReceiver : MonoBehaviour
 #if DEBUG
         Debug.Log("Event Complited!");
 #endif
+        IsPlaying = false;
         OnComplitedEvent.Invoke();
     }
 
