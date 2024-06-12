@@ -57,7 +57,7 @@ namespace TMCardUISystemModules
         {
             foreach (TMCardUIController card in cards)
             {
-                card.SetCardUI(transform);
+                card.transform.SetParent(transform, false);
                 card.transform.localPosition = DeckTransform.localPosition;
                 card.OnUseStarted.AddListener(onUseCardStarted);
                 card.OnUseEnded.AddListener(onUseCardEnded);
@@ -100,6 +100,10 @@ namespace TMCardUISystemModules
                 () => cards.ForEach(card => card.SetOn(true)));
         }
 
+        /// <summary>
+        /// .. 카드를 사용할때마다 리스너들에게 알려주고 손패 카드들을 정렬합니다
+        /// </summary>
+        /// <param name="cardUI"></param>
         private void onUseCardStarted(TMCardUIController cardUI)
         {
             UsingCardCount++;

@@ -11,6 +11,5 @@ public sealed partial class TMCardData : ScriptableObject
     public CARD_KIND CardKind { get; internal set; }
     public CARD_GRADE CardGrade { get; internal set; }
 
-    // .. 발동효과
-    protected Dictionary<string, ICardEffect> _cardEffects = new();
+    public List<ICardEffect> CardEffects { get; internal set; } = new();
 }

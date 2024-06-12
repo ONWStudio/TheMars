@@ -8,7 +8,7 @@ using static EditorTool.EditorTool;
 
 namespace TheMarsGUITool
 {
-    internal sealed partial class TheMarsGUIToolDrawer : EditorWindow
+    public sealed partial class TheMarsGUIToolDrawer : EditorWindow
     {
         private int _prevPage = 0;
         private int _selectedTab = 0;

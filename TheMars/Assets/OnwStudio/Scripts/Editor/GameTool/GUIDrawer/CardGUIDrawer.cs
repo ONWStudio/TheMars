@@ -9,9 +9,9 @@ using UnityEditor.VersionControl;
 
 namespace TheMarsGUITool
 {
-    internal sealed partial class TheMarsGUIToolDrawer : EditorWindow
+    private sealed partial class TheMarsGUIToolDrawer : EditorWindow
     {
-        internal sealed class CardGUIDrawer : IGUIDrawer
+        private sealed class CardGUIDrawer : IGUIDrawer
         {
             private const string DATA_PATH = "Assets/OnwStudio/ScriptableObject/Cards";
 

@@ -9,14 +9,14 @@ using static UnityEditor.AssetDatabase;
 
 namespace TheMarsGUITool
 {
-    internal sealed partial class TheMarsGUIToolDrawer : EditorWindow
+    private sealed partial class TheMarsGUIToolDrawer : EditorWindow
     {
-        internal static class DataHandler<T> where T : ScriptableObject
+        private static class DataHandler<T> where T : ScriptableObject
         {
-            internal static bool CheckDuplicatedName(string dataPath, string assetName)
+            public static bool CheckDuplicatedName(string dataPath, string assetName)
                 => File.Exists($"{dataPath}/{assetName}.asset");
 
-            internal static T CreateScriptableObject(string dataPath, string assetName)
+            public static T CreateScriptableObject(string dataPath, string assetName)
             {
                 T asset = CreateInstance<T>();
 
@@ -35,11 +35,11 @@ namespace TheMarsGUITool
                 return asset;
             }
 
-            internal static IEnumerable<T> LoadAllScriptableObjects()
+            public static IEnumerable<T> LoadAllScriptableObjects()
                 => FindAssets($"t:{typeof(T).Name}")
                     .Select(guid => LoadAssetAtPath<T>(GUIDToAssetPath(guid)));
 
-            internal static void RenameScriptableObject(T asset, string dataPath, string newName)
+            public static void RenameScriptableObject(T asset, string dataPath, string newName)
             {
                 string path = $"{dataPath}/{asset.name}.asset";
 
@@ -48,7 +48,7 @@ namespace TheMarsGUITool
                 Refresh();
             }
 
-            internal static void SaveData(T asset)
+            public static void SaveData(T asset)
             {
                 EditorUtility.SetDirty(asset);
                 SaveAssets();

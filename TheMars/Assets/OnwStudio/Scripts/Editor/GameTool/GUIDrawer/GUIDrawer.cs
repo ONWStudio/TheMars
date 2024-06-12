@@ -6,7 +6,7 @@ using UnityEditor;
 
 namespace TheMarsGUITool
 {
-    internal sealed partial class TheMarsGUIToolDrawer : EditorWindow
+    private sealed partial class TheMarsGUIToolDrawer : EditorWindow
     {
         /// <summary>
         /// .. gui기능을 구현하는 인터페이스입니다 

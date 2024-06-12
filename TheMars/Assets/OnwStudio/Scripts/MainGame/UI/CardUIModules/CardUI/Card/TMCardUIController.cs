@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,8 +15,12 @@ namespace TMCardUISystemModules
         [field: SerializeField] public UnityEvent<TMCardUIController> OnUseStarted { get; private set; } = new();
         [field: SerializeField] public UnityEvent<TMCardUIController> OnUseEnded { get; private set; } = new();
 
+        [field: SerializeField] public UnityEvent<TMCardUIController> OnMoveToTomb { get; private set; } = new();
+        [field: SerializeField] public UnityEvent<TMCardUIController> OnDrawFromDeck { get; private set; } = new();
+
         public EventReceiver EventReceiver { get; private set; } = null;
         public TMCardInputHandler InputHandler { get; private set; } = null;
+        public TMCardData CardData { get; private set; } = null;
 
         private SmoothMoveVector2 _smoothMove = null;
         private RectTransform _rectTransform = null;
@@ -58,6 +63,11 @@ namespace TMCardUISystemModules
             }
         }
 
+        /// <summary>
+        /// .. 카드를 사용합니다
+        /// 카드 사용시 카드는 효과가 발동되며 카드 효과는 이벤트 기반입니다 
+        /// </summary>
+        /// <param name="pointerEventData"></param>
         private void onClickCard(PointerEventData pointerEventData)
         {
             if (!OnCard) return;
@@ -69,6 +79,10 @@ namespace TMCardUISystemModules
 
             OnUseStarted.Invoke(this);
             OnUseStarted.RemoveAllListeners();
+
+            List<MMF_Feedback> events = new(); //new(CardData
+            //    .CardEffects
+            //    .SelectMany(cardEffect => cardEffect.OnEffectStart(gameObject, CardData)));
 
             Vector3 targetWorldPosition = pointerEventData
                 .enterEventCamera
@@ -91,24 +105,25 @@ namespace TMCardUISystemModules
                 PlayEvents = new()
             };
 
+            events.Add(parallelEvent);
+            events.Add(endCallbackEvent);
+            //events.AddRange(CardData
+            //    .CardEffects
+            //    .SelectMany(cardEffect => cardEffect.OnEffectEnded(gameObject, CardData)));
+
             endCallbackEvent.PlayEvents.AddListener(() =>
             {
                 OnUseEnded.Invoke(this);
                 OnUseEnded.RemoveAllListeners();
             });
 
-            EventReceiver.PlayEvent(parallelEvent, endCallbackEvent);
+            EventReceiver.PlayEvent(events.ToArray());
         }
 
         public void SetOn(bool isOn)
         {
             OnCard = isOn;
             _smoothMove.enabled = isOn;
-        }
-
-        public void SetCardUI(Transform parent)
-        {
-            transform.SetParent(parent, false);
         }
     }
 }

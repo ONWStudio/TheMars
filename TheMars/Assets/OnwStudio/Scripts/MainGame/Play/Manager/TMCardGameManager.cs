@@ -17,14 +17,10 @@ namespace TMCardUISystemModules
     {
         private const int DRAW_CARD_MAX = 5;
 
-        protected override string SceneName => "MainGameScene";
+        public override string SceneName => "MainGameScene";
 
         public int HandCardCount => _cardHandUIController.CardCount;
         public int DeckCardCount => _cardDeckUIController.CardCount;
-
-        // .. 패
-        [Header("Hand Controller")]
-        [SerializeField] private TMCardHandUIController _cardHandUIController = null;
 
         [Header("Controller Object")]
         [SerializeField] private GameObject _deckUIObject = null;
@@ -34,6 +30,9 @@ namespace TMCardUISystemModules
         [Header("Card Importer")]
         [SerializeField] private TMCardHandImporter _cardHandImporter = null;
 
+        // .. 패
+        [Header("Hand Controller")]
+        [SerializeField] private TMCardHandUIController _cardHandUIController = null;
         // .. 덱
         private TMCardDeckUIController _cardDeckUIController = null;
         // .. 무덤
@@ -49,10 +48,14 @@ namespace TMCardUISystemModules
 
         private void Start()
         {
-            _cardHandImporter.PushCards(_cardDeckUIController.GetCards(DRAW_CARD_MAX));
+            _cardHandImporter
+                .PushCards(_cardDeckUIController.GetCards(DRAW_CARD_MAX));
 
             // .. 핸드에서 사용 한 카드를 받아 무덤에 넘겨줍니다
-            _cardHandUIController.OnUseCardEnded.AddListener(decideUsedCardState);
+            _cardHandUIController
+                .OnUseCardEnded
+                .AddListener(decideUsedCardState);
+
             DrawCardFromDeck();
         }
 
@@ -61,7 +64,7 @@ namespace TMCardUISystemModules
         /// </summary>
         private void decideUsedCardState(TMCardUIController cardUI)
         {
-            cardUI.SetCardUI(_tombUIObject.transform);
+            cardUI.transform.SetParent(_tombUIObject.transform, false);
         }
 
         public void DrawCardFromDeck()
@@ -79,17 +82,27 @@ namespace TMCardUISystemModules
 
                 // .. 무덤으로 이동하는 애니메이션 연출
                 MMF_Parallel parallelEvent = new();
-                parallelEvent.Feedbacks.Add(EventCreator.CreateSmoothPositionEvent(cardUI.gameObject, _cardHandUIController.TombTransform.localPosition));
-                parallelEvent.Feedbacks.Add(EventCreator.CreateSmoothRotationEvent(cardUI.transform, Vector3.zero));
 
+                parallelEvent.Feedbacks.Add(EventCreator
+                    .CreateSmoothPositionEvent(cardUI.gameObject, _cardHandUIController.TombTransform.localPosition));
+
+                parallelEvent.Feedbacks.Add(EventCreator
+                    .CreateSmoothRotationEvent(cardUI.transform, Vector3.zero));
+
+                // .. TODO : 파괴되거나 회수 하는 경우 분기 
                 MMF_Events mmfEvents = new()
                 {
                     PlayEvents = new()
                 };
 
                 // .. 연출 후 실제 트랜스폼 무덤 오브젝트를 부모로 설정
-                mmfEvents.PlayEvents.AddListener(() => cardUI.SetCardUI(_tombUIObject.transform));
-                cardUI.EventReceiver.PlayEvent(parallelEvent, mmfEvents); // .. 이벤트 시작
+                mmfEvents
+                    .PlayEvents
+                    .AddListener(() => cardUI.transform.SetParent(_tombUIObject.transform, false));
+
+                cardUI
+                    .EventReceiver
+                    .PlayEvent(parallelEvent, mmfEvents); // .. 이벤트 시작
             }
 
             this.WaitCompletedConditions(
@@ -97,13 +110,13 @@ namespace TMCardUISystemModules
                 () =>
                 {
                     int count = DRAW_CARD_MAX; // .. 최대 드로우 갯수만큼 카드 드로우
-                    List<TMCardUIController> importerCard = _cardHandImporter.GetCards(count); // .. 다음 턴에 무조건 나와야 할 카드부터 드로우
+                    List<TMCardUIController> importerCards = _cardHandImporter.GetCards(count); // .. 다음 턴에 무조건 나와야 할 카드부터 드로우
 
-                    importerCard.AddRange(_cardDeckUIController.GetCards(count - importerCard.Count)); // .. 무조건 나와야 할 카드 갯수만큼 제외해서 덱에서 드로우
-                    _cardHandUIController.SetCards(importerCard); // .. 손 패에 카드 세팅
+                    importerCards.AddRange(_cardDeckUIController.GetCards(count - importerCards.Count)); // .. 무조건 나와야 할 카드 갯수만큼 제외해서 덱에서 드로우
+                    _cardHandUIController.SetCards(importerCards); // .. 손 패에 카드 세팅
 
                     this.WaitCompletedConditions(
-                        () => importerCard.All(cardUI => cardUI.OnCard), // .. 카드 정렬 이벤트가 끝날때까지 대기
+                        () => importerCards.All(cardUI => cardUI.OnCard), // .. 카드 정렬 이벤트가 끝날때까지 대기
                         () => _isDraw = false); // .. 턴 끝내기 버튼 활성화
                 });
         }

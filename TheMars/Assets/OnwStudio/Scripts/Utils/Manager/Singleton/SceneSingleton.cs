@@ -29,7 +29,7 @@ public abstract class SceneSingleton<T> : MonoBehaviour where T : SceneSingleton
     /// <summary>
     /// .. 특정 씬에만 존재해야하는 싱글톤이므로 올바르지 않은 씬에서 생성될경우 Destroy
     /// </summary>
-    protected abstract string SceneName { get; }
+    public abstract string SceneName { get; }
 
     protected void Awake() // protected로 상속 클래스에서 재정의시 경고문 띄워주기
     {

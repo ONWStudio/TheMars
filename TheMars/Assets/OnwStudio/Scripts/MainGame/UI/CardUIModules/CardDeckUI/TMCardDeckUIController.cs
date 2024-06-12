@@ -20,7 +20,7 @@ namespace TMCardUISystemModules
         private void Awake()
         {
             _cards.AddRange(TMCardUICreator.Instance.CreateCards(CARD_MAX));
-            _cards.ForEach(card => card.SetCardUI(transform));
+            _cards.ForEach(card => card.transform.SetParent(transform, false));
         }
 
         public List<TMCardUIController> GetCards(int count)

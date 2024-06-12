@@ -8,7 +8,7 @@ namespace TMCardUISystemModules
     [DisallowMultipleComponent]
     public sealed class TMCardUICreator : SceneSingleton<TMCardUICreator>
     {
-        protected override string SceneName => "MainGameScene";
+        public override string SceneName => "MainGameScene";
         protected override void Init() { }
 
         public List<TMCardUIController> CreateCards(int createCount)
