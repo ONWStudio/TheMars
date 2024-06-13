@@ -11,19 +11,11 @@ namespace TMCardUISystemModules
     [DisallowMultipleComponent]
     public sealed class TMCardDeckUIController : MonoBehaviour
     {
-        private const int CARD_MAX = 50;
-
         public int CardCount => _cards.Count;
 
-        [SerializeField] private List<TMCardUIController> _cards = new(CARD_MAX);
+        [SerializeField] private List<TMCardUIController> _cards = new();
 
-        private void Awake()
-        {
-            _cards.AddRange(TMCardUICreator.Instance.CreateCards(CARD_MAX));
-            _cards.ForEach(card => card.transform.SetParent(transform, false));
-        }
-
-        public List<TMCardUIController> GetCards(int count)
+        public List<TMCardUIController> DequeueCards(int count)
         {
             count = Mathf.Clamp(count, 0, 10);
             List<TMCardUIController> someCards = new(count);
@@ -37,6 +29,12 @@ namespace TMCardUISystemModules
             }
 
             return someCards;
+        }
+
+        public void PushCards(List<TMCardUIController> cards)
+        {
+            cards.ForEach(card => card.transform.SetParent(transform, false));
+            _cards.AddRange(cards);
         }
     }
 }

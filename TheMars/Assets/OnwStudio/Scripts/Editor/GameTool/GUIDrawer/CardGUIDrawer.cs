@@ -9,7 +9,7 @@ using UnityEditor.VersionControl;
 
 namespace TheMarsGUITool
 {
-    private sealed partial class TheMarsGUIToolDrawer : EditorWindow
+    internal sealed partial class TheMarsGUIToolDrawer : EditorWindow
     {
         private sealed class CardGUIDrawer : IGUIDrawer
         {

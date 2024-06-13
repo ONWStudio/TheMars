@@ -9,7 +9,7 @@ using static UnityEditor.AssetDatabase;
 
 namespace TheMarsGUITool
 {
-    private sealed partial class TheMarsGUIToolDrawer : EditorWindow
+    internal sealed partial class TheMarsGUIToolDrawer : EditorWindow
     {
         private static class DataHandler<T> where T : ScriptableObject
         {

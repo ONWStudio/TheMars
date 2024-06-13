@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 
 /// <summary>
-/// ..
+/// .. SceneName이 일치하는 씬에서만 해당 싱글톤이 존재할 수 있도록 하는 제네릭 싱글톤 패턴입니다
+/// 전역적인 접근이 가능합니다
 /// </summary>
 /// <typeparam name="T"></typeparam>
 [DisallowMultipleComponent]

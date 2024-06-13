@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using CoroutineExtensions;
 using SubClassSelectorSpace;
+using TcgEngine;
 
 namespace TMCardUISystemModules
 {
@@ -15,24 +16,17 @@ namespace TMCardUISystemModules
     [DisallowMultipleComponent]
     public sealed class TMCardHandUIController : MonoBehaviour
     {
-        [field: Header("Event")]
-        [field: SerializeField] public UnityEvent<TMCardUIController> OnUseCardStarted { get; private set; } = new();
-        [field: SerializeField] public UnityEvent<TMCardUIController> OnUseCardEnded { get; private set; } = new();
-
         [field: Header("Transform")]
         [field: SerializeField] public RectTransform DeckTransform { get; private set; }
         [field: SerializeField] public RectTransform HandTransform { get; private set; }
         [field: SerializeField] public RectTransform TombTransform { get; private set; }
 
         public int CardCount => _cards.Count;
-        public int UsingCardCount { get; private set; } = 0;
 
         [SerializeReference, SubClassSelector(typeof(ICardSorter))] private ICardSorter _cardSorter = null;
 
         [Header("Cards")]
         [SerializeField] private List<TMCardUIController> _cards = new(10);
-
-        private RectTransform _rectTransform = null;
 
         private void Awake()
         {
@@ -41,8 +35,6 @@ namespace TMCardUISystemModules
                 MaxAngle = 128f,
                 HeightRatioFromWidth = 0.25f
             };
-
-            _rectTransform = transform as RectTransform;
         }
 
         private void Start()
@@ -55,16 +47,30 @@ namespace TMCardUISystemModules
 
         public void SetCards(List<TMCardUIController> cards)
         {
-            foreach (TMCardUIController card in cards)
-            {
-                card.transform.SetParent(transform, false);
-                card.transform.localPosition = DeckTransform.localPosition;
-                card.OnUseStarted.AddListener(onUseCardStarted);
-                card.OnUseEnded.AddListener(onUseCardEnded);
-            }
-
+            cards.ForEach(setCardUI);
             _cards.AddRange(cards);
-            sortCards(_cards);
+            SortCards();
+        }
+
+        public void AddCard(TMCardUIController cardUI)
+        {
+            setCardUI(cardUI);
+
+            _cards.Add(cardUI);
+            SortCards();
+        }
+
+        public void AddCardToFirst(TMCardUIController cardUI)
+        {
+            setCardUI(cardUI);
+
+            _cards.Insert(0, cardUI);
+            SortCards();
+        }
+
+        public void RemoveCard(TMCardUIController cardUI)
+        {
+            _cards.Remove(cardUI);
         }
 
         public void SetOn(bool isOn)
@@ -80,6 +86,12 @@ namespace TMCardUISystemModules
             return cards;
         }
 
+        private void setCardUI(TMCardUIController cardUI)
+        {
+            cardUI.transform.SetParent(transform, false);
+            cardUI.transform.localPosition = DeckTransform.localPosition;
+        }
+
         /// <summary>
         /// .. 카드 패의 형태를 결정하는 UI의 세팅을 합니다
         /// </summary>
@@ -89,35 +101,15 @@ namespace TMCardUISystemModules
             _cardSorter ??= cardSoter;
         }
 
-        private void sortCards(List<TMCardUIController> cards)
+        public void SortCards()
         {
             _cards.ForEach(cardUI => cardUI.SetOn(false));
-            _cardSorter.SortCards(cards, HandTransform);
+            _cardSorter.SortCards(_cards, HandTransform);
 
             // .. 카드의 정렬이 끝날때까지 상호작용 불가
             this.WaitCompletedConditions(
-                () => cards.All(card => !card.EventReceiver.IsPlaying),
-                () => cards.ForEach(card => card.SetOn(true)));
-        }
-
-        /// <summary>
-        /// .. 카드를 사용할때마다 리스너들에게 알려주고 손패 카드들을 정렬합니다
-        /// </summary>
-        /// <param name="cardUI"></param>
-        private void onUseCardStarted(TMCardUIController cardUI)
-        {
-            UsingCardCount++;
-
-            _cards.Remove(cardUI);
-            OnUseCardStarted.Invoke(cardUI);
-
-            sortCards(_cards);
-        }
-
-        private void onUseCardEnded(TMCardUIController cardUI)
-        {
-            UsingCardCount--;
-            OnUseCardEnded.Invoke(cardUI);
+                () => _cards.All(card => !card.EventReceiver.IsPlaying),
+                () => _cards.ForEach(card => card.SetOn(true)));
         }
     }
 }

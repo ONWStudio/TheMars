@@ -22,7 +22,26 @@ public sealed class EventReceiver : MonoBehaviour
         _eventReceiver = gameObject.AddComponent<MMF_Player>();
     }
 
+    private void OnDestroy()
+    {
+        if (!IsPlaying) return;
+
+        onComplitedEvents();
+    }
+
+    private void OnDisable()
+    {
+        if (!IsPlaying) return;
+
+        onComplitedEvents();
+    }
+
     public void PlayEvent(params MMF_Feedback[] feedbacks)
+    {
+        PlayEvents(feedbacks);
+    }
+
+    public void PlayEvents(IEnumerable<MMF_Feedback> feedbacks)
     {
         IsPlaying = true;
         OnStartEvent.Invoke();
@@ -40,7 +59,7 @@ public sealed class EventReceiver : MonoBehaviour
         OnComplitedEvent.Invoke();
     }
 
-    private IEnumerator iEPlayFeedbacks(MMF_Feedback[] feedbacks)
+    private IEnumerator iEPlayFeedbacks(IEnumerable<MMF_Feedback> feedbacks)
     {
         foreach (MMF_Feedback feedback in feedbacks)
         {

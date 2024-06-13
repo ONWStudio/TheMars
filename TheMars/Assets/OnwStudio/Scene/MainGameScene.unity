@@ -166,10 +166,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e1a17ec525ce4dbc92e01f92a64aabe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardHandUIController: {fileID: 2057403481}
-  _deckUIObject: {fileID: 222218908}
-  _tombUIObject: {fileID: 466624811}
+  <CardHandUIController>k__BackingField: {fileID: 2057403481}
+  <CardDeckUIController>k__BackingField: {fileID: 222218914}
+  <CardTombUIController>k__BackingField: {fileID: 466624817}
   _cardHandImporter: {fileID: 1133853264}
+  _cardSystemCamera: {fileID: 1515806359}
 --- !u!1 &222218908
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +183,7 @@ GameObject:
   - component: {fileID: 222218911}
   - component: {fileID: 222218913}
   - component: {fileID: 222218912}
+  - component: {fileID: 222218914}
   m_Layer: 0
   m_Name: TMCardDeckUIController
   m_TagString: Untagged
@@ -256,6 +258,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &222218914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222218908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8d61e22f0b2147ef8a9df6f1f21faf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cards: []
 --- !u!1 &466624811
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +283,7 @@ GameObject:
   - component: {fileID: 466624814}
   - component: {fileID: 466624816}
   - component: {fileID: 466624815}
+  - component: {fileID: 466624817}
   m_Layer: 0
   m_Name: TMCardTombUIController
   m_TagString: Untagged
@@ -342,6 +358,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &466624817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466624811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a62a764ac3504ab895bb7e4685f5256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deadCards: []
 --- !u!1 &585174639
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,7 +1163,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1604,11 +1633,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9a4dba62787a4dcfa0d1cda013a769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardSorter:
-    rid: 4678432124608708621
   <DeckTransform>k__BackingField: {fileID: 1912238804}
   <HandTransform>k__BackingField: {fileID: 880654030}
   <TombTransform>k__BackingField: {fileID: 921509768}
+  _cardSorter:
+    rid: 4678432124608708621
   _cards: []
   references:
     version: 2

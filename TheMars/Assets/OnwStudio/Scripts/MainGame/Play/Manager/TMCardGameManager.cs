@@ -1,9 +1,8 @@
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using MoreMountains.Feedbacks;
+using System.Linq;
 using CoroutineExtensions;
+using MoreMountains.Feedbacks;
+using UnityEngine;
 
 namespace TMCardUISystemModules
 {
@@ -15,110 +14,115 @@ namespace TMCardUISystemModules
     [DisallowMultipleComponent]
     public sealed class TMCardGameManager : SceneSingleton<TMCardGameManager>
     {
+        private const int ALL_CARD_MAX = 50;
         private const int DRAW_CARD_MAX = 5;
 
         public override string SceneName => "MainGameScene";
 
-        public int HandCardCount => _cardHandUIController.CardCount;
-        public int DeckCardCount => _cardDeckUIController.CardCount;
+        public int HandCardCount => CardHandUIController.CardCount;
+        public int DeckCardCount => CardDeckUIController.CardCount;
 
-        [Header("Controller Object")]
-        [SerializeField] private GameObject _deckUIObject = null;
-        [SerializeField] private GameObject _tombUIObject = null;
+        public int AnimatedCardCount { get; private set; } = 0;
 
-        // .. 임포터
+        [field: Header("Hand Controller")]
+        // .. 패
+        [field: SerializeField] public TMCardHandUIController CardHandUIController { get; private set; } = null;
+        // .. 덱
+        [field: SerializeField] public TMCardDeckUIController CardDeckUIController { get; private set; } = null;
+        // .. 무덤
+        [field: SerializeField] public TMCardTombUIController CardTombUIController { get; private set; } = null;
+
         [Header("Card Importer")]
         [SerializeField] private TMCardHandImporter _cardHandImporter = null;
 
-        // .. 패
-        [Header("Hand Controller")]
-        [SerializeField] private TMCardHandUIController _cardHandUIController = null;
-        // .. 덱
-        private TMCardDeckUIController _cardDeckUIController = null;
-        // .. 무덤
-        private TMCardTombUIController _cardTombUIController = null;
+        [Header("Camera")]
+        [SerializeField] private Camera _cardSystemCamera = null;
 
-        private bool _isDraw = false;
-
-        protected override void Init()
-        {
-            _cardDeckUIController = _deckUIObject.AddComponent<TMCardDeckUIController>();
-            _cardTombUIController = _tombUIObject.AddComponent<TMCardTombUIController>();
-        }
+        protected override void Init() { }
 
         private void Start()
         {
-            _cardHandImporter
-                .PushCards(_cardDeckUIController.GetCards(DRAW_CARD_MAX));
+            List<TMCardUIController> cards = TMCardUICreator.CreateCards(ALL_CARD_MAX);
+            cards.ForEach(addListenerToCard);
 
-            // .. 핸드에서 사용 한 카드를 받아 무덤에 넘겨줍니다
-            _cardHandUIController
-                .OnUseCardEnded
-                .AddListener(decideUsedCardState);
+            CardDeckUIController.PushCards(cards);
+
+            _cardHandImporter
+                .PushCards(CardDeckUIController.DequeueCards(DRAW_CARD_MAX));
 
             DrawCardFromDeck();
         }
 
-        /// <summary>
-        /// .. 카드가 파괴될 카드인지 무덤으로 갈 카드인지 판별합니다
-        /// </summary>
-        private void decideUsedCardState(TMCardUIController cardUI)
-        {
-            cardUI.transform.SetParent(_tombUIObject.transform, false);
-        }
-
         public void DrawCardFromDeck()
         {
-            if (_isDraw || _cardHandUIController.UsingCardCount > 0) return; // .. 카드가 드로우 중이거나 카드를 사용중일때는 드로우 불가
-
-            _isDraw = true;
+            if (AnimatedCardCount > 0) return; // .. 카드가 드로우 중이거나 카드를 사용중일때는 드로우 불가
 
             // .. 핸드에서 카드 건네받기
-            List<TMCardUIController> cards = _cardHandUIController.DequeueCards();
-            foreach (TMCardUIController cardUI in cards)
-            {
-                // .. 카드 효과 비활성화 (이벤트 비활성화, 상호작용 비활성화)
-                cardUI.SetOn(false);
-
-                // .. 무덤으로 이동하는 애니메이션 연출
-                MMF_Parallel parallelEvent = new();
-
-                parallelEvent.Feedbacks.Add(EventCreator
-                    .CreateSmoothPositionEvent(cardUI.gameObject, _cardHandUIController.TombTransform.localPosition));
-
-                parallelEvent.Feedbacks.Add(EventCreator
-                    .CreateSmoothRotationEvent(cardUI.transform, Vector3.zero));
-
-                // .. TODO : 파괴되거나 회수 하는 경우 분기 
-                MMF_Events mmfEvents = new()
-                {
-                    PlayEvents = new()
-                };
-
-                // .. 연출 후 실제 트랜스폼 무덤 오브젝트를 부모로 설정
-                mmfEvents
-                    .PlayEvents
-                    .AddListener(() => cardUI.transform.SetParent(_tombUIObject.transform, false));
-
-                cardUI
-                    .EventReceiver
-                    .PlayEvent(parallelEvent, mmfEvents); // .. 이벤트 시작
-            }
+            List<TMCardUIController> cards = CardHandUIController.DequeueCards();
+            cards.ForEach(notifyTurnEndToCard); // .. 카드에게 턴이 종료됐다고 알려주기
 
             this.WaitCompletedConditions(
-                () => cards.Count <= 0 || cards.All(cardUI => !cardUI.EventReceiver.IsPlaying), // .. 해당 조건이 만족된다면 콜백 호출
+                () => AnimatedCardCount <= 0, // .. 해당 조건이 만족된다면 콜백 호출
                 () =>
                 {
                     int count = DRAW_CARD_MAX; // .. 최대 드로우 갯수만큼 카드 드로우
                     List<TMCardUIController> importerCards = _cardHandImporter.GetCards(count); // .. 다음 턴에 무조건 나와야 할 카드부터 드로우
 
-                    importerCards.AddRange(_cardDeckUIController.GetCards(count - importerCards.Count)); // .. 무조건 나와야 할 카드 갯수만큼 제외해서 덱에서 드로우
-                    _cardHandUIController.SetCards(importerCards); // .. 손 패에 카드 세팅
+                    importerCards.AddRange(CardDeckUIController.DequeueCards(count - importerCards.Count)); // .. 무조건 나와야 할 카드 갯수만큼 제외해서 덱에서 드로우
 
-                    this.WaitCompletedConditions(
-                        () => importerCards.All(cardUI => cardUI.OnCard), // .. 카드 정렬 이벤트가 끝날때까지 대기
-                        () => _isDraw = false); // .. 턴 끝내기 버튼 활성화
+                    if (importerCards.Count < DRAW_CARD_MAX) // .. 덱에 카드가 부족하다면?
+                    {
+                        CardDeckUIController.PushCards(CardTombUIController.DequeueDeadCards()); // .. 무덤에서 덱으로 카드 옮기기
+                        importerCards.AddRange(CardDeckUIController.DequeueCards(DRAW_CARD_MAX - importerCards.Count)); // .. 부족한 카드 수만 큼 다시 덱에서 뽑아오기 
+                    }
+
+                    CardHandUIController.SetCards(importerCards); // .. 손 패에 카드 세팅
                 });
+        }
+
+        private void addListenerToCard(TMCardUIController card)
+        {
+            card.EventReceiver.OnStartEvent.AddListener(() => AnimatedCardCount++);
+            card.EventReceiver.OnComplitedEvent.AddListener(() => AnimatedCardCount--);
+
+            card.OnUseStarted.AddListener(onUseCardStarted);
+            card.OnMoveToTomb.AddListener(moveToTomb);
+            card.OnRecycleToHand.AddListener(onRecycleToHand);
+        }
+
+        private void onUseCardStarted(TMCardUIController cardUI)
+        {
+            CardHandUIController.RemoveCard(cardUI);
+            CardHandUIController.SortCards();
+        }
+
+        /// <summary>
+        /// .. 카드에게 턴이 종료됐다는 걸 알립니다 카드 내부에서 턴이 종료되었을때 특수한 상황이나 카드 효과에 따라 올바른 이벤트 메서드를 호출합니다
+        /// </summary>
+        /// <param name="cardUI"></param>
+        private void notifyTurnEndToCard(TMCardUIController cardUI)
+        {
+            cardUI.OnTurnEnd();
+        }
+
+        /// <summary>
+        /// .. 카드를 무덤으로 보냅니다
+        /// </summary>
+        private void moveToTomb(TMCardUIController cardUI)
+        {
+            List<MMF_Feedback> events = new()
+            {
+                EventCreator.CreateSmoothPositionAndRotationEvent(cardUI.gameObject, CardHandUIController.TombTransform.localPosition, Vector3.zero),
+                EventCreator.CreateUnityEvent(() => CardTombUIController.EnqueueDeadCard(cardUI), null, null, null)
+            };
+
+            cardUI.EventReceiver.PlayEvents(events);
+        }
+
+        private void onRecycleToHand(TMCardUIController cardUI)
+        {
+            CardHandUIController.AddCardToFirst(cardUI);
+            CardHandUIController.SortCards();
         }
     }
 }

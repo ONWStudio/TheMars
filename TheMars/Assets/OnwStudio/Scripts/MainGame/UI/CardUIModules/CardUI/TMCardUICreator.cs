@@ -5,13 +5,9 @@ using UnityEngine.Events;
 
 namespace TMCardUISystemModules
 {
-    [DisallowMultipleComponent]
-    public sealed class TMCardUICreator : SceneSingleton<TMCardUICreator>
+    public static class TMCardUICreator
     {
-        public override string SceneName => "MainGameScene";
-        protected override void Init() { }
-
-        public List<TMCardUIController> CreateCards(int createCount)
+        public static List<TMCardUIController> CreateCards(int createCount)
         {
             List<TMCardUIController> cardList = new(createCount);
 
@@ -23,7 +19,7 @@ namespace TMCardUISystemModules
             return cardList;
         }
 
-        public TMCardUIController CreateCard()
+        public static TMCardUIController CreateCard()
             => new GameObject("Card").AddComponent<TMCardUIController>();
     }
 }
