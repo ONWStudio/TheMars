@@ -10,21 +10,77 @@ using MoreMountains.Feedbacks;
 namespace TMCardUISystemModules
 {
     [DisallowMultipleComponent]
-    public sealed class TMCardUIController : MonoBehaviour
+    public sealed class TMCardUIController : MonoBehaviour, ITMCardController<TMCardUIController>
     {
-        [field: SerializeField] public UnityEvent<TMCardUIController> OnUseStarted { get; private set; } = new();
-        [field: SerializeField] public UnityEvent<TMCardUIController> OnUseEnded { get; private set; } = new();
-        [field: SerializeField] public UnityEvent<TMCardUIController> OnMoveToTomb { get; private set; } = new();
-        [field: SerializeField] public UnityEvent<TMCardUIController> OnDrawFromDeck { get; private set; } = new();
-        [field: SerializeField] public UnityEvent<TMCardUIController> OnRecycleToHand { get; private set; } = new();
-        [field: SerializeField] public UnityEvent<TMCardUIController> OnDestroyCard { get; private set; } = new();
+        /// <summary>
+        /// .. 카드를 사용할때 (연출효과) 호출되는 콜백 이벤트
+        /// </summary>
+        public UnityEvent<TMCardUIController> OnUseStarted => _onUseStarted;
+        /// <summary>
+        /// .. 카드의 사용 후 (연출효과) 호출되는 콜백 이벤트 
+        /// </summary>
+        public UnityEvent<TMCardUIController> OnUseEnded => _onUseEnded;
+        /// .. 카드가 무덤으로 이동해야 되는 경우 리스너들에게 알려주는 콜백 이벤트
+        /// 카드 UI에서는 무덤으로 이동 할 방법을 알지못하기 때문에 무덤의 위치정보를 가지고 있는 객체가 카드 UI를 참조해서 알려주어야 함
+        /// </summary>
+        public UnityEvent<TMCardUIController> OnMoveToTomb => _onMoveToTomb;
+        /// <summary>
+        /// .. 카드가 사용 후 다시 패로 돌아가야 하는 경우 리스너들에게 알려주는 콜백 이벤트 입니다
+        /// </summary>
+        public UnityEvent<TMCardUIController> OnRecycleToHand => _onRecycleToHand;
+        /// <summary>
+        /// .. 카드가 드로우 카드 인 경우 드로우 시 사용됐을때 리스너들에게 알려주는 콜백 이벤트 입니다
+        /// </summary>
+        public UnityEvent<TMCardUIController> OnDrawUse => _onDrawUse;
+        /// <summary>
+        /// .. 카드가 파괴되는 경우 리스너들에게 알려줍니다
+        /// </summary>
+        public UnityEvent<TMCardUIController> OnDestroyCard => _onDestroyCard;
+        /// <summary>
+        /// .. 카드가 소요일 경우 리스너들에게 알려줍니다 시간
+        /// </summary>
+        public UnityEvent<TMCardUIController, float> OnDelaySeconds => _onDelaySeconds;
+        /// <summary>
+        /// .. 카드가 소요일 경우 리스너들에게 알려줍니다 턴
+        /// </summary>
+        public UnityEvent<TMCardUIController, int> OnDelayTurn => _onDelayTurn;
+        /// <summary>
+        /// .. 카드가 보유일 경우 리스너들에게 알려줍니다
+        /// </summary>
+        public UnityEvent<TMCardUIController, int> OnHoldCard => _onHoldCard;
 
-        public EventReceiver EventReceiver { get; private set; } = null;
+        /// <summary>
+        /// .. 이벤트 센더 클래스 입니다 외부에서 이벤트 연출 효과를 발생시킬때 사용할 수 있는 프로퍼티 입니다
+        /// </summary>
+        public EventSender EventSender { get; private set; } = null;
+        /// <summary>
+        /// .. 카드에 사용자 입력을 받아오는 핸들러 입니다
+        /// </summary>
         public TMCardInputHandler InputHandler { get; private set; } = null;
-        public TMCardData CardData { get; private set; } = null;
+        /// <summary>
+        /// .. 카드의 상세한 기본 데이터 입니다
+        /// </summary>
+        public RectTransform RectTransform { get; private set; } = null;
+        public TMCardUIController Follower { get; set; } = null;
+        public TMCardData CardData => _cardData;
 
+        /// <summary>
+        /// .. 핸들러에서 마우스 포인터가 카드 위에 존재할 시 카드가 선택된 듯이 보이게 하기 위한 Mover 클래스 입니다
+        /// </summary>
+        ///
+
+        [SerializeField] private UnityEvent<TMCardUIController> _onUseStarted = new();
+        [SerializeField] private UnityEvent<TMCardUIController> _onUseEnded = new();
+        [SerializeField] private UnityEvent<TMCardUIController> _onMoveToTomb = new();
+        [SerializeField] private UnityEvent<TMCardUIController> _onRecycleToHand = new();
+        [SerializeField] private UnityEvent<TMCardUIController> _onDrawUse = new();
+        [SerializeField] private UnityEvent<TMCardUIController> _onDestroyCard = new();
+        [SerializeField] private UnityEvent<TMCardUIController, float> _onDelaySeconds = new();
+        [SerializeField] private UnityEvent<TMCardUIController, int> _onDelayTurn = new();
+        [SerializeField] private UnityEvent<TMCardUIController, int> _onHoldCard = new();
+
+        private TMCardData _cardData = null;
         private SmoothMoveVector2 _smoothMove = null;
-        private RectTransform _rectTransform = null;
         private Image _raycastingImage = null;
         private Image _cardImage = null;
 
@@ -32,12 +88,12 @@ namespace TMCardUISystemModules
 
         private void Awake()
         {
-            EventReceiver = gameObject.AddComponent<EventReceiver>();
+            RectTransform = transform as RectTransform;
+            EventSender = gameObject.AddComponent<EventSender>();
             InputHandler = gameObject.AddComponent<TMCardInputHandler>();
             _raycastingImage = gameObject.AddComponent<Image>();
             _cardImage = new GameObject("CardImage").AddComponent<Image>();
             _smoothMove = _cardImage.gameObject.AddComponent<SmoothMoveVector2>();
-            _rectTransform = transform as RectTransform;
         }
 
         private void Start()
@@ -53,7 +109,7 @@ namespace TMCardUISystemModules
             Debug.Log("destroyed Card!");
 #endif
 
-            OnDestroyCard.Invoke(this);
+            _onDestroyCard.Invoke(this);
         }
 
         private void initializeImages()
@@ -78,7 +134,7 @@ namespace TMCardUISystemModules
         private void initalizeInputHandle()
         {
             InputHandler.AddListenerPointerEnterAction(pointerEventData
-                 => _smoothMove.TargetPosition = 0.5f * _rectTransform.rect.height * new Vector3(0f, 1f, 0f));
+                 => _smoothMove.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f));
 
             InputHandler.AddListenerPointerExitAction(pointerEventData
                 => _smoothMove.TargetPosition = Vector2.zero);
@@ -95,73 +151,44 @@ namespace TMCardUISystemModules
         {
             if (!OnCard) return;
 
-            _smoothMove.transform.localPosition = Vector3.zero;
-
-            SetOn(false);
-
-            OnUseStarted.Invoke(this);
-
-            Vector3 targetWorldPosition = pointerEventData
-                .enterEventCamera
-                .ScreenToWorldPoint(new(Screen.width * 0.5f, Screen.height * 0.5f));
-
-            Vector3 targetPosition = transform
-                .parent
-                .InverseTransformPoint(new(targetWorldPosition.x, targetWorldPosition.y, 0f));
-
-            UnityAction endedCallback = () =>
-            {
-                OnUseEnded.Invoke(this);
-
-                switch (CardData?.CardSpecialEffect)
-                {
-                    case CARD_SPECIAL_EFFECT.DISPOSABLE or CARD_SPECIAL_EFFECT.MIRAGE:
-                        Destroy(gameObject);
-                        break;
-                    case CARD_SPECIAL_EFFECT.RECYCLING:
-                        OnRecycleToHand.Invoke(this);
-                        break;
-                    default:
-                        OnMoveToTomb.Invoke(this);
-                        break;
-                }
-            };
-
-            List<MMF_Feedback> events = new()
-            {
-                EventCreator.CreateSmoothPositionAndRotationEvent(gameObject, new Vector3(targetPosition.x, targetPosition.y, 0f), Vector3.zero),
-                EventCreator.CreateUnityEvent(endedCallback, null, null, null)
-            };
-
-            EventReceiver.PlayEvents(events);
+            UseCard();
         }
 
+        public void UseCard()
+        {
+            _cardData.StateMachine.OnUseStarted(this);
+        }
+
+        /// <summary>
+        /// .. 카드가 덱에서 드로우 될 때 호출되는 메서드 입니다
+        /// </summary>
+        public void OnDrawBegin()
+        {
+            _cardData.StateMachine.OnDrawBegin(this);
+        }
+
+        public void OnDrawEnded()
+        {
+            _cardData.StateMachine.OnDrawEnded(this);
+        }
+
+        /// <summary>
+        /// .. 턴이 종료되었을때 TurnEnd메서드를 호출합니다
+        /// </summary>
         public void OnTurnEnd()
         {
-            switch (CardData?.CardSpecialEffect)
-            {
-                case CARD_SPECIAL_EFFECT.MIRAGE:
-                    Vector3 targetPosition = transform.localPosition + (Vector3)(transform.up * _rectTransform.rect.size * 0.5f);
-                    List<MMF_Feedback> events = new()
-                    {
-                        EventCreator.CreateSmoothPositionAndRotationEvent(gameObject, targetPosition, Vector3.zero),
-                        EventCreator.CreateUnityEvent(() => Destroy(gameObject), null, null, null)
-                    };
-                    EventReceiver.PlayEvents(events);
-                    break;
-                case CARD_SPECIAL_EFFECT.DROP:
-
-                    break;
-                default:
-                    OnMoveToTomb.Invoke(this);
-                    break;
-            }
+            _cardData.StateMachine.OnTurnEnd(this);
         }
 
+        /// <summary>
+        /// .. 카드의 상호작용 상태를 전환 하는 메서드 입니다 false 일시 카드와 상호작용이 불가능 합니다
+        /// </summary>
+        /// <param name="isOn"> .. 카드의 상호작용 상태를 전환시킬 boolen 값 </param>
         public void SetOn(bool isOn)
         {
             OnCard = isOn;
             _smoothMove.enabled = isOn;
+            _smoothMove.transform.localPosition = Vector3.zero;
         }
     }
 }

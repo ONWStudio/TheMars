@@ -15,6 +15,11 @@ namespace TMCardUISystemModules
 
         [SerializeField] private List<TMCardUIController> _cards = new();
 
+        /// <summary>
+        /// .. 카드를 List의 형태로 받아옵니다
+        /// </summary>
+        /// <param name="count"> .. 받아올 카드 개수 덱에 카드가 부족한 경우 가지고 있는 만큼만 반환합니다 </param>
+        /// <returns> .. 덱에서 반환된 카드들 </returns>
         public List<TMCardUIController> DequeueCards(int count)
         {
             count = Mathf.Clamp(count, 0, 10);
@@ -31,6 +36,10 @@ namespace TMCardUISystemModules
             return someCards;
         }
 
+        /// <summary>
+        /// .. 덱에 카드들을 넘겨줍니다
+        /// </summary>
+        /// <param name="cards"> .. 넘겨줄 카드 리스트 </param>
         public void PushCards(List<TMCardUIController> cards)
         {
             cards.ForEach(card => card.transform.SetParent(transform, false));

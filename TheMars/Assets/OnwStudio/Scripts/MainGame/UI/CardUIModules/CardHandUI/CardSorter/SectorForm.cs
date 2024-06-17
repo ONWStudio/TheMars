@@ -74,7 +74,7 @@ namespace TMCardUISystemModules
                 .Add(EventCreator
                     .CreateSmoothRotationEvent(cardUI.transform, new(0f, 0f, -angle)));
 
-            cardUI.EventReceiver.PlayEvent(feedbackParallel);
+            cardUI.EventSender.PlayEvent(feedbackParallel);
         }
     }
 }

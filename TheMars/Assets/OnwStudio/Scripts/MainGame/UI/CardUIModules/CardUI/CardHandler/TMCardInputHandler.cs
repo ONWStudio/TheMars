@@ -6,6 +6,9 @@ using UnityEngine.EventSystems;
 
 namespace TMCardUISystemModules
 {
+    /// <summary>
+    /// .. Card UI의 입력 이벤트를 받아옵니다
+    /// </summary>
     public sealed class TMCardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         private Action<PointerEventData> _enterAction = null;

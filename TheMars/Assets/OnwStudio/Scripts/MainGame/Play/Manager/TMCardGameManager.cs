@@ -1,8 +1,10 @@
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
 using CoroutineExtensions;
 using MoreMountains.Feedbacks;
-using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace TMCardUISystemModules
 {
@@ -21,6 +23,7 @@ namespace TMCardUISystemModules
 
         public int HandCardCount => CardHandUIController.CardCount;
         public int DeckCardCount => CardDeckUIController.CardCount;
+        public int TombCardCount => CardTombUIController.CardCount;
 
         public int AnimatedCardCount { get; private set; } = 0;
 
@@ -32,13 +35,19 @@ namespace TMCardUISystemModules
         // .. 무덤
         [field: SerializeField] public TMCardTombUIController CardTombUIController { get; private set; } = null;
 
+        [field: Header("Manager Event")]
+        [field: SerializeField] public UnityEvent OnTurnEnd { get; private set; } = new();
+
         [Header("Card Importer")]
         [SerializeField] private TMCardHandImporter _cardHandImporter = null;
 
         [Header("Camera")]
         [SerializeField] private Camera _cardSystemCamera = null;
 
-        protected override void Init() { }
+        protected override void Init()
+        {
+            OnTurnEnd.AddListener(DelayEffectManager.Instance.OnNextTurn);
+        }
 
         private void Start()
         {
@@ -56,6 +65,8 @@ namespace TMCardUISystemModules
         public void DrawCardFromDeck()
         {
             if (AnimatedCardCount > 0) return; // .. 카드가 드로우 중이거나 카드를 사용중일때는 드로우 불가
+
+            OnTurnEnd.Invoke();
 
             // .. 핸드에서 카드 건네받기
             List<TMCardUIController> cards = CardHandUIController.DequeueCards();
@@ -82,18 +93,59 @@ namespace TMCardUISystemModules
 
         private void addListenerToCard(TMCardUIController card)
         {
-            card.EventReceiver.OnStartEvent.AddListener(() => AnimatedCardCount++);
-            card.EventReceiver.OnComplitedEvent.AddListener(() => AnimatedCardCount--);
-
+            card.EventSender.OnStartBeginEvent.AddListener(() =>
+            {
+                if (card.EventSender.IsPlaying) return;
+                AnimatedCardCount++;
+            });
+            card.EventSender.OnComplitedEndEvent.AddListener(() => AnimatedCardCount--);
             card.OnUseStarted.AddListener(onUseCardStarted);
             card.OnMoveToTomb.AddListener(moveToTomb);
             card.OnRecycleToHand.AddListener(onRecycleToHand);
+            card.OnDrawUse.AddListener(onDrawUse);
+            card.OnDelaySeconds.AddListener(onDelaySeconds);
+            card.OnDelayTurn.AddListener(onDelayTurn);
+            card.OnHoldCard.AddListener(onHoldCard);
+            card.OnDestroyCard.AddListener(onDestroyCard);
         }
 
         private void onUseCardStarted(TMCardUIController cardUI)
         {
             CardHandUIController.RemoveCard(cardUI);
-            CardHandUIController.SortCards();
+
+            cardUI.SetOn(false);
+
+            Vector3 targetWorldPosition = _cardSystemCamera
+                .ScreenToWorldPoint(new(Screen.width * 0.5f, Screen.height * 0.5f));
+
+            Vector3 targetPosition = transform
+                .parent
+                .InverseTransformPoint(new(targetWorldPosition.x, targetWorldPosition.y, 0f));
+
+            List<MMF_Feedback> events = new()
+            {
+                EventCreator.CreateSmoothPositionAndRotationEvent(
+                    gameObject,
+                    new Vector3(targetPosition.x, targetPosition.y, 0f),
+                    Vector3.zero),
+                EventCreator.CreateUnityEvent(
+                    () =>
+                    {
+                        cardUI.CardData.StateMachine.OnUseEnded(cardUI);
+
+                        if (cardUI.Follower)
+                        {
+                            cardUI.Follower.CardData.UseCard(cardUI.Follower.gameObject);
+                            onUseCardStarted(cardUI.Follower);
+                            cardUI.Follower = null;
+                        }
+                    },
+                    null,
+                    null,
+                    null)
+            };
+
+            cardUI.EventSender.PlayEvents(events);
         }
 
         /// <summary>
@@ -101,9 +153,7 @@ namespace TMCardUISystemModules
         /// </summary>
         /// <param name="cardUI"></param>
         private void notifyTurnEndToCard(TMCardUIController cardUI)
-        {
-            cardUI.OnTurnEnd();
-        }
+            => cardUI.OnTurnEnd();
 
         /// <summary>
         /// .. 카드를 무덤으로 보냅니다
@@ -112,17 +162,77 @@ namespace TMCardUISystemModules
         {
             List<MMF_Feedback> events = new()
             {
-                EventCreator.CreateSmoothPositionAndRotationEvent(cardUI.gameObject, CardHandUIController.TombTransform.localPosition, Vector3.zero),
-                EventCreator.CreateUnityEvent(() => CardTombUIController.EnqueueDeadCard(cardUI), null, null, null)
+                EventCreator.CreateSmoothPositionAndRotationEvent(
+                    cardUI.gameObject,
+                    CardHandUIController.TombTransform.localPosition,
+                    Vector3.zero),
+                EventCreator.CreateUnityEvent(
+                    () => CardTombUIController.EnqueueDeadCard(cardUI),
+                    null,
+                    null,
+                    null)
             };
 
-            cardUI.EventReceiver.PlayEvents(events);
+            cardUI.EventSender.PlayEvents(events);
         }
 
         private void onRecycleToHand(TMCardUIController cardUI)
+            => CardHandUIController.AddCardToFirst(cardUI);
+
+        private void onDrawUse(TMCardUIController cardUI)
         {
-            CardHandUIController.AddCardToFirst(cardUI);
-            CardHandUIController.SortCards();
+            CardHandUIController.RemoveCard(cardUI);
+            onUseCardStarted(cardUI);
+        }
+
+        private void onDelaySeconds(TMCardUIController cardUI, float delayTime)
+        {
+            DelayEffectManager.Instance.WaitForSecondsEffect(cardUI, delayTime, remainingTime =>
+            {
+                setActiveDelayCardByCondition(remainingTime < 0f, cardUI);
+            });
+
+            cardUI.gameObject.SetActive(false);
+        }
+
+        private void onDelayTurn(TMCardUIController cardUI, int turnCount)
+        {
+            DelayEffectManager.Instance.WaitForTurnCountEffect(cardUI, turnCount, remainingTurn =>
+            {
+                setActiveDelayCardByCondition(remainingTurn == 0, cardUI);
+            });
+
+            cardUI.gameObject.SetActive(false);
+        }
+
+        private void onHoldCard(TMCardUIController cardUI, int friendlyCardID)
+        {
+            TMCardUIController friendlyCard = CardHandUIController.GetCardFromID(friendlyCardID);
+
+            if (friendlyCard)
+            {
+                cardUI.Follower = friendlyCard;
+            }
+        }
+
+        private void onDestroyCard(TMCardUIController cardUI)
+        {
+            Vector3 targetPosition = transform.localPosition + (Vector3)(transform.up * cardUI.RectTransform.rect.size * 0.5f);
+            List<MMF_Feedback> events = new()
+            {
+                EventCreator.CreateSmoothPositionAndRotationEvent(gameObject, targetPosition, Vector3.zero),
+                EventCreator.CreateUnityEvent(() => Destroy(gameObject), null, null, null)
+            };
+
+            cardUI.EventSender.PlayEvents(events);
+        }
+
+        private void setActiveDelayCardByCondition(bool condition, TMCardUIController cardUI)
+        {
+            if (!condition) return;
+
+            cardUI.gameObject.SetActive(true);
+            moveToTomb(cardUI);
         }
     }
 }

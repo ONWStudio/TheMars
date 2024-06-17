@@ -21,8 +21,15 @@ namespace TMCardUISystemModules
         [field: SerializeField] public RectTransform HandTransform { get; private set; }
         [field: SerializeField] public RectTransform TombTransform { get; private set; }
 
+        public ICardSorter CardSorter
+        {
+            get => _cardSorter;
+            set => _cardSorter ??= value;
+        }
+
         public int CardCount => _cards.Count;
 
+        [Header("Sorter")]
         [SerializeReference, SubClassSelector(typeof(ICardSorter))] private ICardSorter _cardSorter = null;
 
         [Header("Cards")]
@@ -45,6 +52,10 @@ namespace TMCardUISystemModules
                 sorter => sorter.SortCards(_cards, HandTransform));
         }
 
+        /// <summary>
+        /// .. 카드를 여러개 배치 시킵니다 자동으로 카드를 올바르게 정렬합니다
+        /// </summary>
+        /// <param name="cards"> .. 패에 세팅할 카드들 </param>
         public void SetCards(List<TMCardUIController> cards)
         {
             cards.ForEach(setCardUI);
@@ -52,6 +63,10 @@ namespace TMCardUISystemModules
             SortCards();
         }
 
+        /// <summary>
+        /// .. 카드 하나를 패에 추가합니다 카드는 가장 끝 자리에 배치됩니다 자동으로 정렬됩니다 
+        /// </summary>
+        /// <param name="cardUI"> .. 패에 추가 할 카드 </param>
         public void AddCard(TMCardUIController cardUI)
         {
             setCardUI(cardUI);
@@ -60,6 +75,15 @@ namespace TMCardUISystemModules
             SortCards();
         }
 
+        public TMCardUIController GetCardFromID(int id)
+        {
+            return _cards.SingleOrDefault(cardUI => cardUI.CardData.No == id);
+        }
+
+        /// <summary>
+        /// .. 카드 하나를 패에 추가합니다 카드는 가장 앞 자리에 배치됩니다 자동으로 정렬됩니다
+        /// </summary>
+        /// <param name="cardUI"></param>
         public void AddCardToFirst(TMCardUIController cardUI)
         {
             setCardUI(cardUI);
@@ -68,16 +92,29 @@ namespace TMCardUISystemModules
             SortCards();
         }
 
+        /// <summary>
+        /// .. 패에 존재하는 카드를 제거합니다 존재하지 않으면 제거하지 않습니다 자동으로 정렬됩니다
+        /// </summary>
+        /// <param name="cardUI"> .. 제거 할 카드 객체 </param>
         public void RemoveCard(TMCardUIController cardUI)
         {
             _cards.Remove(cardUI);
+            SortCards();
         }
 
+        /// <summary>
+        /// .. 패에 존재하는 모든 카드의 상호작용 상태를 세팅하는 메서드입니다
+        /// </summary>
+        /// <param name="isOn"> .. 카드의 상호작용 상태를 결정하는 boolen 값 </param>
         public void SetOn(bool isOn)
         {
             _cards.ForEach(card => card.SetOn(isOn));
         }
 
+        /// <summary>
+        /// ..카드들을 패에서 모두 꺼내오는 메서드
+        /// </summary>
+        /// <returns> .. 패에서 꺼내온 카드들 </returns>
         public List<TMCardUIController> DequeueCards()
         {
             List<TMCardUIController> cards = _cards.ToList();
@@ -86,21 +123,9 @@ namespace TMCardUISystemModules
             return cards;
         }
 
-        private void setCardUI(TMCardUIController cardUI)
-        {
-            cardUI.transform.SetParent(transform, false);
-            cardUI.transform.localPosition = DeckTransform.localPosition;
-        }
-
         /// <summary>
-        /// .. 카드 패의 형태를 결정하는 UI의 세팅을 합니다
+        /// .. 카드를 정렬해야하는 경우 해당 메서드를 호출하면 리스트에 존재하는 카드들을 올바른 위치로 정렬 시킵니다 이벤트 기반입니다
         /// </summary>
-        /// <param name="cardSoter"> .. CardSorter는 카드를 어떤 형태로 정렬시킬지 정하는 인터페이스 입니다 셋터는 한번 호출후 다시 결정할 수 없습니다 .. 인스펙터에서 변경 가능 </param>
-        public void SetHandUI(ICardSorter cardSoter)
-        {
-            _cardSorter ??= cardSoter;
-        }
-
         public void SortCards()
         {
             _cards.ForEach(cardUI => cardUI.SetOn(false));
@@ -108,8 +133,22 @@ namespace TMCardUISystemModules
 
             // .. 카드의 정렬이 끝날때까지 상호작용 불가
             this.WaitCompletedConditions(
-                () => _cards.All(card => !card.EventReceiver.IsPlaying),
-                () => _cards.ForEach(card => card.SetOn(true)));
+                () => _cards.All(card => !card.EventSender.IsPlaying),
+                () =>
+                {
+                    foreach (TMCardUIController cardUI in _cards)
+                    {
+                        cardUI.SetOn(true);
+                        cardUI.OnDrawEnded();
+                    }
+                });
+        }
+
+        private void setCardUI(TMCardUIController cardUI)
+        {
+            cardUI.transform.SetParent(transform, false);
+            cardUI.transform.localPosition = DeckTransform.localPosition;
+            cardUI.OnDrawBegin();
         }
     }
 }
