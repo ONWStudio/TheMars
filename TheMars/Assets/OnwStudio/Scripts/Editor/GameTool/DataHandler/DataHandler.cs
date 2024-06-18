@@ -19,7 +19,6 @@ namespace TheMarsGUITool
             public static T CreateScriptableObject(string dataPath, string assetName)
             {
                 T asset = CreateInstance<T>();
-
                 string fullpath = $"{dataPath}/{assetName}.asset";
                 string directory = Path.GetDirectoryName(fullpath);
 

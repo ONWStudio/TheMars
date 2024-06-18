@@ -21,7 +21,7 @@ public static class ReflectionHelper
 
         foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
         {
-            Type baseType = assembly.GetType("BaseSkill");
+            Type baseType = assembly.GetType(baseClass);
 
             if (baseType is not null)
             {

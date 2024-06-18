@@ -12,3 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
   m_Name: Card_No.1
   m_EditorClassIdentifier: 
+  <Guid>k__BackingField: 8c2447e8-0bf2-4b58-8387-4bb162a8a221
+  <MarsLithium>k__BackingField: 0
+  <CardKind>k__BackingField: 0
+  <CardGrade>k__BackingField: 0
+  <StateMachine>k__BackingField:
+    rid: 4678432286412898334
+  _cardNames:
+    _serializedList:
+    - Key: ko-KR
+      Value: adfss
+  _descriptions:
+    _serializedList: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4678432286412898334
+      type: {class: TimeDelayCard, ns: , asm: AssebmlyTMCard}
+      data:
+        <DelayTime>k__BackingField: 1

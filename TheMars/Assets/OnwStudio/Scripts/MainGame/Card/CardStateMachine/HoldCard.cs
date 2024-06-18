@@ -4,7 +4,7 @@ using UnityEngine;
 
 public sealed class HoldCard : CardStateMachine
 {
-    public int FriendlyCardID { get; internal set; } = 0;
+    [field: SerializeField] public string FriendlyCardID { get; private set; } = string.Empty;
 
     public override void OnUseStarted<T>(T cardController) {}
     public override void OnUseEnded<T>(T cardController) {}

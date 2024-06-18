@@ -4,7 +4,9 @@
     "references": [
         "AssebmlyTMCard",
         "AssemblyEditorTool",
-        "AssemblyReflectionHelper"
+        "AssemblyReflectionHelper",
+        "AssemblyEnumerableExtensions",
+        "AYellowpaper.SerializedCollections"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

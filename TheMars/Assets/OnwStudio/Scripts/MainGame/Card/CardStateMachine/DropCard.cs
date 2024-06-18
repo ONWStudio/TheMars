@@ -4,11 +4,13 @@ using UnityEngine;
 
 public sealed class DropCard : CardStateMachine
 {
-    public List<ICardEffect> CardEffects { get; internal set; } = new();
+    public IReadOnlyList<ICardEffect> CardEffects => _cardEffects;
+
+    [SerializeField] private List<ICardEffect> _cardEffects = new();
 
     public override void OnTurnEnd<T>(T cardController)
     {
-        CardEffects
+        _cardEffects
             .ForEach(cardEffect => cardEffect.OnEffect(cardController.gameObject, cardController.CardData));
 
         base.OnTurnEnd(cardController);

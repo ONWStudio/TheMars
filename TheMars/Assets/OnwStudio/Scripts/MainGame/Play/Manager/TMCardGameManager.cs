@@ -128,21 +128,17 @@ namespace TMCardUISystemModules
                     gameObject,
                     new Vector3(targetPosition.x, targetPosition.y, 0f),
                     Vector3.zero),
-                EventCreator.CreateUnityEvent(
-                    () =>
-                    {
-                        cardUI.CardData.StateMachine.OnUseEnded(cardUI);
+                EventCreator.CreateUnityEvent(() =>
+                {
+                    cardUI.CardData.StateMachine.OnUseEnded(cardUI);
 
-                        if (cardUI.Follower)
-                        {
-                            cardUI.Follower.CardData.UseCard(cardUI.Follower.gameObject);
-                            onUseCardStarted(cardUI.Follower);
-                            cardUI.Follower = null;
-                        }
-                    },
-                    null,
-                    null,
-                    null)
+                    if (cardUI.Follower)
+                    {
+                        cardUI.Follower.CardData.UseCard(cardUI.Follower.gameObject);
+                        onUseCardStarted(cardUI.Follower);
+                        cardUI.Follower = null;
+                    }
+                }, null, null, null)
             };
 
             cardUI.EventSender.PlayEvents(events);
@@ -153,7 +149,9 @@ namespace TMCardUISystemModules
         /// </summary>
         /// <param name="cardUI"></param>
         private void notifyTurnEndToCard(TMCardUIController cardUI)
-            => cardUI.OnTurnEnd();
+        { 
+            cardUI.OnTurnEnd();
+        }
 
         /// <summary>
         /// .. 카드를 무덤으로 보냅니다
@@ -177,7 +175,9 @@ namespace TMCardUISystemModules
         }
 
         private void onRecycleToHand(TMCardUIController cardUI)
-            => CardHandUIController.AddCardToFirst(cardUI);
+        {
+            CardHandUIController.AddCardToFirst(cardUI);
+        }
 
         private void onDrawUse(TMCardUIController cardUI)
         {
@@ -205,7 +205,7 @@ namespace TMCardUISystemModules
             cardUI.gameObject.SetActive(false);
         }
 
-        private void onHoldCard(TMCardUIController cardUI, int friendlyCardID)
+        private void onHoldCard(TMCardUIController cardUI, string friendlyCardID)
         {
             TMCardUIController friendlyCard = CardHandUIController.GetCardFromID(friendlyCardID);
 

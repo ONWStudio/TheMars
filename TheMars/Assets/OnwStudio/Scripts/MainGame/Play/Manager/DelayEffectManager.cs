@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMCardUISystemModules;
-using CoroutineExtensions;
 
 /// <summary>
 /// .. 해당 클래스는 Effect를 받아서 N턴 또는 N초의 시간이 흐른 후 스킬이나 카드효과를 발동시키는 클래스입니다
@@ -28,6 +27,12 @@ public sealed class DelayEffectManager : SceneSingleton<DelayEffectManager>
     public void WaitForSecondsEffect(TMCardUIController owner, float delayTime, Action<float> onNotifyRemainingTime)
         => StartCoroutine(iEWaitForSecondsEffect(owner, delayTime, onNotifyRemainingTime));
 
+    /// <summary>
+    /// .. 특정 카운트만큼 턴 진행 후 카드 효과를 발동시킵니다
+    /// </summary>
+    /// <param name="owner"> .. 발동시킬 카드 </param>
+    /// <param name="delayTurn"> .. 얼마나 턴을 기다릴 것인가 </param>
+    /// <param name="onNotifyTurnCount"> .. 매턴마다 호출되는 콜백 메서드 입니다 </param>
     public void WaitForTurnCountEffect(TMCardUIController owner, int delayTurn, Action<int> onNotifyTurnCount)
         => StartCoroutine(iEWaitForTurnCountEffect(owner, delayTurn, onNotifyTurnCount));
 

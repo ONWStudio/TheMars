@@ -4,7 +4,7 @@ using UnityEngine;
 
 public sealed class TurnDelayCard : CardStateMachine
 {
-    public int DelayTurnCount { get; internal set; } = 5;
+    [field: SerializeField] public int DelayTurnCount { get; private set; } = 5;
 
     public override void OnUseEnded<T>(T cardController)
     {

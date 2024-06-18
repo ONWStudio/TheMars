@@ -2,7 +2,11 @@
     "name": "AssebmlyTMCard",
     "rootNamespace": "",
     "references": [
-        "GUID:4a1cb1490dc4df8409b2580d6b44e75e"
+        "GUID:4a1cb1490dc4df8409b2580d6b44e75e",
+        "GUID:d525ad6bd40672747bde77962f1c401e",
+        "GUID:6b844ddce86e549dc99873b73d6230cd",
+        "GUID:6e53dad58bc40421abfac4a52c2e10be",
+        "GUID:c98f9bf61a6bc4e288590900fc777db4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

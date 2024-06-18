@@ -36,11 +36,11 @@ public interface ITMCardController<T> where T : MonoBehaviour, ITMCardController
     /// </summary>
     public UnityEvent<T, float> OnDelaySeconds { get; }
     /// <summary>
+    /// .. 카드가 보유일 경우 리스너들에게 알려줍니다
+    /// </summary>
+    public UnityEvent<T, string> OnHoldCard { get; }
+    /// <summary>
     /// .. 카드가 소요일 경우 리스너들에게 알려줍니다 턴
     /// </summary>
     public UnityEvent<T, int> OnDelayTurn { get; }
-    /// <summary>
-    /// .. 카드가 보유일 경우 리스너들에게 알려줍니다
-    /// </summary>
-    public UnityEvent<T, int> OnHoldCard { get; }
 }

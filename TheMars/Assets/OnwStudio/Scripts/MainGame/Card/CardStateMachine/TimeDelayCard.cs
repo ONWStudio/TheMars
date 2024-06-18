@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TimeDelayCard : CardStateMachine
 {
-    public float DelayTime { get; internal set; } = 1f;
+    [field: SerializeField] public float DelayTime { get; private set; } = 1f;
 
     public override void OnUseEnded<T>(T cardController)
     {

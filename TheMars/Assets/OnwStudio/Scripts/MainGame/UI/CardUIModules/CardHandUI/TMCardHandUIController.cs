@@ -75,9 +75,9 @@ namespace TMCardUISystemModules
             SortCards();
         }
 
-        public TMCardUIController GetCardFromID(int id)
+        public TMCardUIController GetCardFromID(string id)
         {
-            return _cards.SingleOrDefault(cardUI => cardUI.CardData.No == id);
+            return _cards.SingleOrDefault(cardUI => cardUI.CardData.Guid == id);
         }
 
         /// <summary>
