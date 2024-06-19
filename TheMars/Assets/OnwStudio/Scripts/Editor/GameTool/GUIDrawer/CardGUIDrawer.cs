@@ -1,196 +1,93 @@
-//#if UNITY_EDITOR
-//using System;
-//using System.Linq;
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
-//using UnityEditor;
-//using EditorTool;
-//using static EditorTool.EditorTool;
+#if UNITY_EDITOR
+using System;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+using EditorTool;
+using static EditorTool.EditorTool;
 
-//namespace TheMarsGUITool
-//{
-//    internal sealed partial class TheMarsGUIToolDrawer : EditorWindow
-//    {
-//        private sealed class CardGUIDrawer : IGUIDrawer
-//        {
-//            private const string DATA_PATH = "Assets/OnwStudio/ScriptableObject/Cards";
+namespace TheMarsGUITool
+{
+    internal sealed partial class TheMarsGUIToolDrawer : EditorWindow
+    {
+        private sealed class CardGUIDrawer : IGUIDrawer
+        {
+            private const string DATA_PATH = "Assets/OnwStudio/ScriptableObject/Cards";
+            private Editor _editor = null;
 
-//            public int Page { get; set; }
-//            public int MaxPage => _cards.Count;
+            public int Page { get; set; }
+            public int MaxPage => _cards.Count;
 
-//            public bool HasErrors { get; set; } = false;
-//            public bool IsSuccess { get; set; } = false;
-//            public string Message { get; set; } = string.Empty;
+            public bool HasErrors { get; set; } = false;
+            public bool IsSuccess { get; set; } = false;
+            public string Message { get; set; } = string.Empty;
 
-//            private GUIStyle _cardBoxStyle = null;
+            private readonly List<TMCardData> _cards = new();
+            private readonly EditorScrollController _scrollViewController = new();
 
-//            private readonly EditorDropdownController<ICardCondition> _conditionSelector = new(
-//                "추가 조건",
-//                ReflectionHelper
-//                    .GetChildClassesFromType<ICardCondition>()
-//                    .ToDictionary(condition => condition.GetType().Name, condition => condition));
+            public void Awake()
+            {
+                LoadDataFromLocal();
+                Page = 1;
+            }
 
-//            private readonly EditorDropdownController<string> _localizingDropdown = new("지역", new() { { "한글", "ko-KR" }, { "공통 (영어)", "en-US" } });
-//            private readonly ToggleEnumerator<ICardCondition> _conditionEnumerator = new();
+            public void OnEnable()
+            {
 
-//            private readonly List<TMCardData> _cards = new();
-//            private string _newCardName = string.Empty;
+            }
 
-//            public void Awake()
-//            {
-//                _cards.AddRange(DataHandler<TMCardData>
-//                    .LoadAllScriptableObjects());
+            public void OnDraw()
+            {
+                TMCardData cardData = null;
 
-//                _cards.ForEach(insertLocalizingOptions);
-//                Page = 1;
-//            }
+                ActionEditorHorizontal(() =>
+                {
+                    if (!GUILayout.Button("새 카드 추가")) return;
 
-//            public void OnEnable()
-//            {
-                
-//            }
+                    _cards.Add(DataHandler<TMCardData>.CreateScriptableObject(DATA_PATH, $"Card_No.{_cards.Count + 1}"));
+                    insertLocalizingOptions(_cards[^1]);
+                    DataHandler<TMCardData>.SaveData(_cards[^1]);
+                });
 
-//            public void OnDraw()
-//            {
-//                TMCardData cardData = null;
+                int page = Page - 1;
 
-//                if (!_conditionEnumerator.IsInitializeOnGetDataList)
-//                {
-//                    _conditionEnumerator.SetOnGetDataList(() => cardData ? cardData.AdditionalCondition : null);
-//                }
+                if (page >= 0 && _cards.Count > page)
+                {
+                    _scrollViewController.ActionScrollSpace(() =>
+                    {
+                        cardData = _cards[page];
 
-//                if (!_conditionEnumerator.IsInitializeGUIStyle)
-//                {
-//                    _conditionEnumerator.InitializeGUIStyle(Color.white, Color.gray);
-//                }
+                        if (_editor == null || _editor.target != cardData)
+                        {
+                            _editor = Editor.CreateEditor(cardData);
+                        }
 
-//                if (_cardBoxStyle is null)
-//                {
-//                    _cardBoxStyle = new(GUI.skin.box);
-//                    _cardBoxStyle.normal.background = GetTexture2D(Color.black, _cardBoxStyle);
-//                }
+                        _editor.OnInspectorGUI();
+                    });
+                }
+            }
 
-//                _localizingDropdown.Dropdown(name => { });
+            public void LoadDataFromLocal()
+            {
+                _cards.Clear();
+                _cards.AddRange(DataHandler<TMCardData>
+                    .LoadAllScriptableObjects());
 
-//                ActionEditorHorizontal(() =>
-//                {
-//                    bool isCreateNewCard = GUILayout.Button("새 카드 추가");
+                _cards.ForEach(insertLocalizingOptions);
+            }
 
-//                    _newCardName = EditorGUILayout.TextField("Card Name : ", _newCardName);
+            public void SaveDataToLocal()
+            {
 
-//                    if (isCreateNewCard)
-//                    {
-//                        if (string.IsNullOrEmpty(_newCardName))
-//                        {
-//                            Message = "카드의 이름이 정해지지 않았습니다";
-//                        }
-//                        else
-//                        {
-//                            _cards.Add(DataHandler<TMCardData>.CreateScriptableObject(DATA_PATH, $"Card_No.{_cards.Count + 1}"));
-//                            insertLocalizingOptions(_cards[^1]);
-//                            _cards[^1].CardNames[_localizingDropdown.SelectedItem.Value] = _newCardName;
-//                            _cards[^1].Guid = Guid.NewGuid().ToString();
-//                            DataHandler<TMCardData>.SaveData(_cards[^1]);
-//                        }
-//                    }
-//                });
+            }
 
-//                int page = Page - 1;
+            private void insertLocalizingOptions(TMCardData cardData)
+            {
 
-//                if (page >= 0 && _cards.Count > page)
-//                {
-//                    cardData = _cards[page];
-
-//                    ActionEditorVertical(() =>
-//                    {
-//                        ActionEditorHorizontal(() =>
-//                        {
-//                            EditorGUILayout.LabelField($"Guid : {cardData.Guid}");
-
-//                            if (GUILayout.Button("new GUID"))
-//                            {
-//                                cardData.Guid = Guid.NewGuid().ToString();
-//                            }
-//                        });
-
-//                        cardData.CardNames[_localizingDropdown.SelectedItem.Value] = EditorGUILayout.TextField(
-//                            "Card Name",
-//                            cardData.CardNames[_localizingDropdown.SelectedItem.Value]);
-
-//                        IsVaildName(cardData);
-
-//                        EditorGUILayout.LabelField("소모 자원");
-//                        ActionEditorHorizontal(() =>
-//                        {
-//                            cardData.MarsLithium = Mathf.Clamp(
-//                                EditorGUILayout.IntField("마르스 리튬 : ", cardData.MarsLithium),
-//                                0,
-//                                int.MaxValue);
-//                        });
-//                    }, _cardBoxStyle);
-
-//                    ActionEditorVertical(() =>
-//                    {
-//                        ActionEditorHorizontal(() =>
-//                        {
-//                            ActionEditorVertical(() =>
-//                            {
-//                                _conditionSelector.Dropdown(additionalCondition =>
-//                                {
-//                                    if (cardData.AdditionalCondition.Any(condition => condition.GetType().Name == additionalCondition.GetType().Name)) return;
-
-//                                    cardData.AdditionalCondition.Add(Activator.CreateInstance(additionalCondition.GetType()) as ICardCondition);
-//                                });
-
-//                                _conditionEnumerator.SelectEnumeratedToggles(additionalCondition => additionalCondition.GetType().Name);
-//                            });
-
-//                            ActionEditorVertical(() =>
-//                            {
-
-//                            });
-//                        });
-//                    }, _cardBoxStyle);
-//                }
-//            }
-
-//            public void LoadDataFromLocal()
-//            {
-//                _cards.Clear();
-//                _cards.AddRange(DataHandler<TMCardData>
-//                    .LoadAllScriptableObjects()
-//                    .OrderBy(card => card.Guid));
-//            }
-
-//            public void SaveDataToLocal()
-//            {
-
-//            }
-
-//            private void IsVaildName(TMCardData cardData)
-//            {
-//                if (cardData.CardNames.Values.All(name => !string.IsNullOrEmpty(name))) return;
-
-//                Message = "카드의 이름을 입력해주세요";
-//            }
-
-//            private void insertLocalizingOptions(TMCardData cardData)
-//            {
-//                foreach (string option in _localizingDropdown.Options.Values)
-//                {
-//                    if (!cardData.Descriptions.ContainsKey(option))
-//                    {
-//                        cardData.Descriptions.Add(option, "");
-//                    }
-
-//                    if (!cardData.CardNames.ContainsKey(option))
-//                    {
-//                        cardData.CardNames.Add(option, "");
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
-//#endif
+            }
+        }
+    }
+}
+#endif

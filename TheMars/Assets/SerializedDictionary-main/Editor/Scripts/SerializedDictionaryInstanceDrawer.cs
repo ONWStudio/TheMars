@@ -15,22 +15,22 @@ namespace AYellowpaper.SerializedCollections.Editor
 {
     public class SerializedDictionaryInstanceDrawer
     {
-        private FieldInfo _fieldInfo;
-        private ReorderableList _unexpandedList;
-        private SingleEditingData _singleEditingData;
-        private FieldInfo _keyFieldInfo;
+        private readonly FieldInfo _fieldInfo;
+        private readonly ReorderableList _unexpandedList;
+        private readonly SingleEditingData _singleEditingData;
+        private readonly FieldInfo _keyFieldInfo;
         private GUIContent _label;
         private Rect _totalRect;
-        private GUIStyle _keyValueStyle;
-        private SerializedDictionaryAttribute _dictionaryAttribute;
+        private readonly GUIStyle _keyValueStyle;
+        private readonly SerializedDictionaryAttribute _dictionaryAttribute;
         private PropertyData _propertyData;
         private bool _propertyListSettingsInitialized = false;
-        private List<int> _pagedIndices;
-        private PagingElement _pagingElement;
+        private readonly List<int> _pagedIndices;
+        private readonly PagingElement _pagingElement;
         private int _lastListSize = -1;
-        private IReadOnlyList<KeyListGeneratorData> _keyGeneratorsWithoutWindow;
-        private IReadOnlyList<KeyListGeneratorData> _keyGeneratorsWithWindow;
-        private SearchField _searchField;
+        private readonly IReadOnlyList<KeyListGeneratorData> _keyGeneratorsWithoutWindow;
+        private readonly IReadOnlyList<KeyListGeneratorData> _keyGeneratorsWithWindow;
+        private readonly SearchField _searchField;
         private GUIContent _shortDetailsContent;
         private GUIContent _detailsContent;
         private bool _showSearchBar = false;
@@ -168,10 +168,10 @@ namespace AYellowpaper.SerializedCollections.Editor
             {
                 var genericArgs = _fieldInfo.FieldType.GetGenericArguments();
                 var firstProperty = ListProperty.GetArrayElementAtIndex(0);
-                var keySettings = CreateDisplaySettings(GetElementProperty(firstProperty, fieldFlag), genericArgs[fieldFlag == SCEditorUtility.KeyFlag ? 0 : 1]);
+                var (displayType, canToggleListDrawer) = CreateDisplaySettings(GetElementProperty(firstProperty, fieldFlag), genericArgs[fieldFlag == SCEditorUtility.KeyFlag ? 0 : 1]);
                 var settings = _propertyData.GetElementData(fieldFlag).Settings;
-                settings.DisplayType = keySettings.displayType;
-                settings.HasListDrawerToggle = keySettings.canToggleListDrawer;
+                settings.DisplayType = displayType;
+                settings.HasListDrawerToggle = canToggleListDrawer;
             }
 
             if (!_propertyListSettingsInitialized && ListProperty.minArraySize > 0)
@@ -252,8 +252,10 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         private ReorderableList MakeUnexpandedList()
         {
-            var list = new ReorderableList(SerializedDictionaryDrawer.NoEntriesList, typeof(int));
-            list.drawHeaderCallback = DrawUnexpandedHeader;
+            var list = new ReorderableList(SerializedDictionaryDrawer.NoEntriesList, typeof(int))
+            {
+                drawHeaderCallback = DrawUnexpandedHeader
+            };
             return list;
         }
 

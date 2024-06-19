@@ -82,6 +82,11 @@ namespace SubClassSelectorEditor
                 .serializedObject
                 .ApplyModifiedProperties();
         }
+
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUIUtility.singleLineHeight;
+        }
     }
 }
 #endif

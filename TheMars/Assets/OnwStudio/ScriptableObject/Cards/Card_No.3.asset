@@ -10,29 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
-  m_Name: Card_No.2
+  m_Name: Card_No.3
   m_EditorClassIdentifier: 
-  <Guid>k__BackingField: 01fdba64-7bc9-4233-8782-1d6d0caf51ce
+  <Guid>k__BackingField: 4e78b3b1-5534-424c-9a59-6cc229b3ca5e
   <MarsLithium>k__BackingField: 0
   <CardKind>k__BackingField: 0
   <CardGrade>k__BackingField: 0
   <StateMachine>k__BackingField:
-    rid: 4678432303730393088
+    rid: 4678432303730393092
   _cardNames:
     _serializedList: []
   _descriptions:
-    _serializedList:
-    - Key: 
-      Value: 
-  _cardEffects:
-  - rid: -2
+    _serializedList: []
+  _cardEffects: []
   _addtionalConditions: []
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 4678432303730393088
-      type: {class: HoldCard, ns: , asm: AssebmlyTMCard}
-      data:
-        <FriendlyCardID>k__BackingField: 
+    - rid: 4678432303730393092
+      type: {class: CardStateMachine, ns: , asm: AssebmlyTMCard}
+      data: 

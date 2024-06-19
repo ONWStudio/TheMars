@@ -17,17 +17,23 @@ MonoBehaviour:
   <CardKind>k__BackingField: 0
   <CardGrade>k__BackingField: 0
   <StateMachine>k__BackingField:
-    rid: 4678432286412898334
+    rid: 4678432303730393091
   _cardNames:
     _serializedList:
     - Key: ko-KR
       Value: adfss
   _descriptions:
     _serializedList: []
+  _cardEffects:
+  - rid: -2
+  - rid: -2
+  _addtionalConditions:
+  - rid: -2
   references:
     version: 2
     RefIds:
-    - rid: 4678432286412898334
-      type: {class: TimeDelayCard, ns: , asm: AssebmlyTMCard}
-      data:
-        <DelayTime>k__BackingField: 1
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4678432303730393091
+      type: {class: DropCard, ns: , asm: AssebmlyTMCard}
+      data: 

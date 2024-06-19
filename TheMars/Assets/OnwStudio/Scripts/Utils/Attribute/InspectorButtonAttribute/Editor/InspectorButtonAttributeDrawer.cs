@@ -9,7 +9,7 @@ using UnityEditor;
 namespace ButtonAttributeEditorSpace
 {
     [CustomEditor(typeof(Object), true), CanEditMultipleObjects]
-    internal sealed class ButtonAttributeDrawer : Editor
+    internal sealed class InspectorButtonAttributeDrawer : Editor
     {
         private readonly List<KeyValuePair<string, MethodInfo>> _buttonMethods = new();
 
@@ -18,7 +18,7 @@ namespace ButtonAttributeEditorSpace
             _buttonMethods.AddRange(target
                 .GetType()
                 .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
-                .Select(method => new KeyValuePair<string, MethodInfo>((method.GetCustomAttribute(typeof(ButtonAttribute)) as ButtonAttribute)?.ButtonName, method))
+                .Select(method => new KeyValuePair<string, MethodInfo>((method.GetCustomAttribute(typeof(InspectorButtonAttribute)) as InspectorButtonAttribute)?.ButtonName, method))
                 .Where(kvp => kvp.Key != null));
         }
 
