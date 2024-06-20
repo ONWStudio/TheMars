@@ -9,11 +9,15 @@ using MoreMountains.Feedbacks;
 
 namespace TMCardUISystemModules
 {
+    /// <summary>
+    /// .. TMCardController는 동작에 대한 정의만 수행합니다 카드의 구체적인 동작 사이클을 컨트롤러와 
+    /// CardStateMachine이 수행하며 필요한 동작에 대한 구체적인 구현은 각 콜백 메서드에 바인딩하여 외부에서 구현합니다
+    /// 컨트롤러는 카드 데이터, EventSender, InputHandler와 각 동작에 대한 이벤트에 대한 인터페이스만을 제공하며 다른 기능은 포함하고 있지 않습니다
+    /// </summary>
     [DisallowMultipleComponent]
     public sealed class TMCardUIController : MonoBehaviour, ITMCardController<TMCardUIController>
     {
-        public UnityEvent<TMCardUIController> OnUseStarted => _onUseStarted;
-        public UnityEvent<TMCardUIController> OnUseEnded => _onUseEnded;
+        public UnityEvent<TMCardUIController> OnUseCard => _onUseCard;
         public UnityEvent<TMCardUIController> OnMoveToTomb => _onMoveToTomb;
         public UnityEvent<TMCardUIController> OnRecycleToHand => _onRecycleToHand;
         public UnityEvent<TMCardUIController> OnDrawUse => _onDrawUse;
@@ -35,10 +39,6 @@ namespace TMCardUISystemModules
         /// </summary>
         public RectTransform RectTransform { get; private set; } = null;
         /// <summary>
-        /// .. 보유인 카드가 존재할 경우 해당 카드를 팔로우중일수 있습니다. 팔로워가 있다면 카드를 사용후 팔로워의 카드효과도 발동됩니다
-        /// </summary>
-        public TMCardUIController Follower { get; set; } = null;
-        /// <summary>
         /// .. 카드가 상호작용 가능한 활성화인지 상태를 반환합니다
         /// </summary>
         public bool OnCard { get; private set; } = false;
@@ -47,8 +47,7 @@ namespace TMCardUISystemModules
         /// </summary>
         public TMCardData CardData => _cardData;
 
-        [SerializeField] private UnityEvent<TMCardUIController> _onUseStarted = new();
-        [SerializeField] private UnityEvent<TMCardUIController> _onUseEnded = new();
+        [SerializeField] private UnityEvent<TMCardUIController> _onUseCard = new();
         [SerializeField] private UnityEvent<TMCardUIController> _onMoveToTomb = new();
         [SerializeField] private UnityEvent<TMCardUIController> _onRecycleToHand = new();
         [SerializeField] private UnityEvent<TMCardUIController> _onDrawUse = new();
@@ -88,9 +87,14 @@ namespace TMCardUISystemModules
             _onDestroyCard.Invoke(this);
         }
 
-        public void UseCard()
+        public void OnUseStart()
         {
             _cardData.StateMachine.OnUseStarted(this);
+        }
+
+        public void OnUseEnded()
+        {
+            _cardData.StateMachine.OnUseEnded(this);
         }
 
         /// <summary>
@@ -126,6 +130,13 @@ namespace TMCardUISystemModules
             OnCard = isOn;
             _smoothMove.enabled = isOn;
             _smoothMove.transform.localPosition = Vector3.zero;
+        }
+
+        public void InitializeCard(TMCardData cardData)
+        {
+            if (_cardData) return;
+
+            _cardData = cardData;
         }
 
         private void initializeImages()
@@ -166,7 +177,7 @@ namespace TMCardUISystemModules
         {
             if (!OnCard || CardData.IsAvailable(1)) return;
 
-            UseCard();
+            OnUseCard.Invoke(this);
         }
     }
 }

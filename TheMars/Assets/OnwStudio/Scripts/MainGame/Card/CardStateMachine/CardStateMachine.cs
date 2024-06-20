@@ -11,7 +11,6 @@ public class CardStateMachine
     public virtual void OnUseStarted<T>(T cardController) where T : MonoBehaviour, ITMCardController<T>
     {
         cardController.CardData.UseCard(cardController.gameObject);
-        cardController.OnUseStarted.Invoke(cardController);
     }
 
     public virtual void OnUseEnded<T>(T cardController) where T : MonoBehaviour, ITMCardController<T>

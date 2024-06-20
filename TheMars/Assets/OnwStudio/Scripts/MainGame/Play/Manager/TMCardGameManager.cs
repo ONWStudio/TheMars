@@ -99,7 +99,8 @@ namespace TMCardUISystemModules
                 AnimatedCardCount++;
             });
             card.EventSender.OnComplitedEndEvent.AddListener(() => AnimatedCardCount--);
-            card.OnUseStarted.AddListener(onUseCardStarted);
+
+            card.OnUseCard.AddListener(onUseCard);
             card.OnMoveToTomb.AddListener(moveToTomb);
             card.OnRecycleToHand.AddListener(onRecycleToHand);
             card.OnDrawUse.AddListener(onDrawUse);
@@ -109,11 +110,12 @@ namespace TMCardUISystemModules
             card.OnDestroyCard.AddListener(onDestroyCard);
         }
 
-        private void onUseCardStarted(TMCardUIController cardUI)
+        private void onUseCard(TMCardUIController cardUI)
         {
             CardHandUIController.RemoveCard(cardUI);
 
             cardUI.SetOn(false);
+            cardUI.OnUseStart();
 
             Vector3 targetWorldPosition = _cardSystemCamera
                 .ScreenToWorldPoint(new(Screen.width * 0.5f, Screen.height * 0.5f));
@@ -128,17 +130,7 @@ namespace TMCardUISystemModules
                     gameObject,
                     new Vector3(targetPosition.x, targetPosition.y, 0f),
                     Vector3.zero),
-                EventCreator.CreateUnityEvent(() =>
-                {
-                    cardUI.CardData.StateMachine.OnUseEnded(cardUI);
-
-                    if (cardUI.Follower)
-                    {
-                        cardUI.Follower.CardData.UseCard(cardUI.Follower.gameObject);
-                        onUseCardStarted(cardUI.Follower);
-                        cardUI.Follower = null;
-                    }
-                }, null, null, null)
+                EventCreator.CreateUnityEvent(cardUI.OnUseEnded, null, null, null)
             };
 
             cardUI.EventSender.PlayEvents(events);
@@ -182,7 +174,7 @@ namespace TMCardUISystemModules
         private void onDrawUse(TMCardUIController cardUI)
         {
             CardHandUIController.RemoveCard(cardUI);
-            onUseCardStarted(cardUI);
+            onUseCard(cardUI);
         }
 
         private void onDelaySeconds(TMCardUIController cardUI, float delayTime)
@@ -208,11 +200,7 @@ namespace TMCardUISystemModules
         private void onHoldCard(TMCardUIController cardUI, string friendlyCardID)
         {
             TMCardUIController friendlyCard = CardHandUIController.GetCardFromID(friendlyCardID);
-
-            if (friendlyCard)
-            {
-                cardUI.Follower = friendlyCard;
-            }
+            // TODO : 보유 효과 처리
         }
 
         private void onDestroyCard(TMCardUIController cardUI)
