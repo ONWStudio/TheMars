@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using CoroutineExtensions;
-using SubClassSelectorSpace;
-using TcgEngine;
 
 namespace TMCardUISystemModules
 {
@@ -30,9 +28,8 @@ namespace TMCardUISystemModules
         public int CardCount => _cards.Count;
 
         [Header("Sorter")]
-        [SerializeReference, SubClassSelector(typeof(ICardSorter))] private ICardSorter _cardSorter = null;
+        [SerializeReference, SerializeReferenceDropdown] private ICardSorter _cardSorter = null;
 
-        [Header("Cards")]
         [SerializeField] private List<TMCardUIController> _cards = new(10);
 
         private void Awake()

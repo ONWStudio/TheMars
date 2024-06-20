@@ -44,6 +44,55 @@ public static class ReflectionHelper
             .SelectMany(assembly => assembly.GetTypes())
             .Where(type => baseType.IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract);
 
+    public static IEnumerable<Type> GetChildClassesFromFieldTypeName(string typeName)
+    {
+        Type baseType = GetTypeFromFieldName(typeName);
+
+        if (baseType is null)
+        {
+            Debug.LogWarning("Not Found BaseType!");
+            return null;
+        }
+
+        return GetChildClassesFromBaseType(baseType);
+    }
+
+    public static Type GetTypeFromFieldName(string typeName)
+    {
+        string[] splitTypeNames = typeName.Split(' ', '.');
+
+        if (splitTypeNames.Length <= 0)
+        {
+            Debug.LogWarning("typeName is Empty");
+            return null;
+        }
+
+        string assemblyName = splitTypeNames[0];
+        string baseTypeName = splitTypeNames[^1];
+
+        Assembly targetAssembly = AppDomain
+            .CurrentDomain
+            .GetAssemblies()
+            .SingleOrDefault(assembly => assembly.GetName().Name == assemblyName);
+
+        if (targetAssembly is null)
+        {
+            Debug.LogWarning("Not Found Assembly!");
+            return null;
+        }
+
+        Type baseType = targetAssembly
+            .GetTypes()
+            .SingleOrDefault(type => type.Name == baseTypeName);
+
+        if (baseType is null)
+        {
+            Debug.LogWarning("Not Found BaseType!");
+        }
+
+        return baseType;
+    }
+
     public static IEnumerable<string> GetEnumValuesFromEnumName(string enumTypeName)
     {
         IEnumerable<string> enumValues = null;

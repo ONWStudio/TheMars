@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AYellowpaper.SerializedCollections;
-using SubClassSelectorSpace;
 
 /// <summary>
 /// .. 카드의 랜덤
@@ -35,7 +34,8 @@ public sealed class TMCardData : ScriptableObject
     /// .. 카드의 특수효과입니다
     /// CardStateMachine는 ITMCardController 상속받은 실제 카드 구현체를 바인딩하여 필요한 기능을 구현합니다
     /// </summary>
-    [field: SerializeReference, InspectorName("특수 효과"), Space, SubClassSelector(typeof(CardStateMachine))]
+    [field: Space]
+    [field: SerializeReference, InspectorName("특수 효과"), Tooltip("특수 효과"), SerializeReferenceDropdown]
     public CardStateMachine StateMachine { get; private set; } = new();
     /// <summary>
     /// .. 카드의 고유 이름
@@ -72,10 +72,10 @@ public sealed class TMCardData : ScriptableObject
     [SerializeField, Tooltip("카드 설명 관리자 지역별 설명을 작성합니다 로컬라이징은 국가 코드를 참고해주세요"), SerializedDictionary("Culture Code", "Description")]
     private SerializedDictionary<string, string> _descriptions = new() { { "en-US", ""}, { "ko-KR", "" } };
 
-    [SerializeReference, Tooltip("카드 발동 효과 리스트")]
+    [SerializeReference, Tooltip("카드 발동 효과 리스트"), SerializeReferenceDropdown]
     private List<ICardEffect> _cardEffects = new();
 
-    [SerializeReference, Tooltip("카드 추가 조건 리스트")]
+    [SerializeReference, Tooltip("카드 추가 조건 리스트"), SerializeReferenceDropdown]
     private List<ICardCondition> _addtionalConditions = new();
 
     /// <summary>

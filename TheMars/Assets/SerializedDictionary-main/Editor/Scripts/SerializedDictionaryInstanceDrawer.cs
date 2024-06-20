@@ -675,11 +675,6 @@ namespace AYellowpaper.SerializedCollections.Editor
         {
             _activeState.RemoveElementAt(_pagedIndices[list.index]);
             UpdatePaging();
-            //int actualIndex = _pagedIndices[list.index];
-            //ListProperty.DeleteArrayElementAtIndex(actualIndex);
-            //UpdatePaging();
-            //if (actualIndex >= ListProperty.minArraySize)
-            //    list.index = _pagedIndices.Count - 1;
         }
     }
 }

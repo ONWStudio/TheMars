@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Vector2RangeSpace;
-using static EditorTool.EditorTool;
 
 namespace Vector2RangeEditor
 {
@@ -15,15 +14,27 @@ namespace Vector2RangeEditor
         {
             Vector2RangeAttribute range = attribute as Vector2RangeAttribute;
 
-            EditorGUILayout.LabelField(property.displayName);
+            // Label field
+            Rect labelRect = new(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
+            EditorGUI.LabelField(labelRect, label);
+
+            // Adjust the position rect for the sliders
+            Rect sliderRectX = new(position.x, position.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing, position.width, EditorGUIUtility.singleLineHeight);
+            Rect sliderRectY = new(position.x, sliderRectX.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing, position.width, EditorGUIUtility.singleLineHeight);
+
             Vector2 vector = property.vector2Value;
-            ActionEditorVertical(() =>
-            {
-                vector.x = EditorGUILayout.Slider("X", vector.x, range.Min, range.Max);
-                vector.y = EditorGUILayout.Slider("Y", vector.y, range.Min, range.Max);
-            }, GUI.skin.box);
+
+            EditorGUI.indentLevel++;
+            vector.x = EditorGUI.Slider(sliderRectX, "X", vector.x, range.Min, range.Max);
+            vector.y = EditorGUI.Slider(sliderRectY, "Y", vector.y, range.Min, range.Max);
+            EditorGUI.indentLevel--;
 
             property.vector2Value = vector;
+        }
+
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUIUtility.singleLineHeight * 3 + EditorGUIUtility.standardVerticalSpacing * 2;
         }
     }
 }

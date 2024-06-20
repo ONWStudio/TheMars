@@ -4,6 +4,6 @@ using UnityEngine;
 
 public sealed class ElectricCondition : ICardCondition
 {
-    public int Electric { get; internal set; } = 0;
+    [field: SerializeField] public int Electric { get; internal set; } = 0;
     public bool AdditionalCondition => true;
 }

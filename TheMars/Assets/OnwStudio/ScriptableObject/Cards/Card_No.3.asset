@@ -17,16 +17,30 @@ MonoBehaviour:
   <CardKind>k__BackingField: 0
   <CardGrade>k__BackingField: 0
   <StateMachine>k__BackingField:
-    rid: 4678432303730393092
+    rid: 4678432333304168553
   _cardNames:
     _serializedList: []
   _descriptions:
     _serializedList: []
-  _cardEffects: []
-  _addtionalConditions: []
+  _cardEffects:
+  - rid: -2
+  _addtionalConditions:
+  - rid: 4678432333304168548
+  - rid: 4678432328098775045
   references:
     version: 2
     RefIds:
-    - rid: 4678432303730393092
-      type: {class: CardStateMachine, ns: , asm: AssebmlyTMCard}
-      data: 
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4678432328098775045
+      type: {class: ElectricCondition, ns: , asm: AssebmlyTMCard}
+      data:
+        <Electric>k__BackingField: 0
+    - rid: 4678432333304168548
+      type: {class: ElectricCondition, ns: , asm: AssebmlyTMCard}
+      data:
+        <Electric>k__BackingField: 0
+    - rid: 4678432333304168553
+      type: {class: HoldCard, ns: , asm: AssebmlyTMCard}
+      data:
+        <FriendlyCardID>k__BackingField: 
