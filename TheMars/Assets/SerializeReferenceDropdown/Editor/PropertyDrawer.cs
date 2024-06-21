@@ -118,7 +118,7 @@ namespace SerializeReferenceDropdown.Editor
             static Rect GetDropdownIMGUIRect(Rect mainRect)
             {
                 var dropdownOffset = EditorGUIUtility.labelWidth;
-                Rect rect = new Rect(mainRect);
+                Rect rect = new(mainRect);
                 rect.width -= dropdownOffset;
                 rect.x += dropdownOffset;
                 rect.height = EditorGUIUtility.singleLineHeight;
