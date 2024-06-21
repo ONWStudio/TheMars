@@ -1,6 +1,3 @@
 ﻿using UnityEngine;
 
-public class SerializeReferenceDropdownAttribute : PropertyAttribute
-{
-    
-}
+public class SerializeReferenceDropdownAttribute : PropertyAttribute {}

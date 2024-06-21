@@ -6,7 +6,8 @@
         "AssemblyEditorTool",
         "AssemblyReflectionHelper",
         "AssemblyEnumerableExtensions",
-        "AYellowpaper.SerializedCollections"
+        "AYellowpaper.SerializedCollections",
+        "AddressableAssetBundleCreator"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

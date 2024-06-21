@@ -7,9 +7,9 @@ using UnityEngine;
 using UnityEditor;
 using static UnityEditor.AssetDatabase;
 
-namespace TheMarsGUITool
+namespace TMGUITool
 {
-    internal sealed partial class TheMarsGUIToolDrawer : EditorWindow
+    internal sealed partial class TMGUIToolDrawer : EditorWindow
     {
         private static class DataHandler<T> where T : ScriptableObject
         {

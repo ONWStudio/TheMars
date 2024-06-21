@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// .. 드로우
+/// </summary>
+[SerializeReferenceDropdownName("드로우")]
 public sealed class DrawCard : CardStateMachine
 {
     public override void OnUseStarted<T>(T cardController) {}

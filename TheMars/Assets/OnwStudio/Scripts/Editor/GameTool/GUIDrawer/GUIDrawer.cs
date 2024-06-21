@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace TheMarsGUITool
+namespace TMGUITool
 {
-    internal sealed partial class TheMarsGUIToolDrawer : EditorWindow
+    internal sealed partial class TMGUIToolDrawer : EditorWindow
     {
         /// <summary>
         /// .. gui기능을 구현하는 인터페이스입니다 

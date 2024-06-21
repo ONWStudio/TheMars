@@ -83,6 +83,35 @@ namespace EditorTool
             GUILayout.EndVertical();
         }
 
+        public static object GetPropertyValue(SerializedProperty property) => property?.propertyType switch
+        {
+            SerializedPropertyType.Generic or SerializedPropertyType.ManagedReference => property.managedReferenceValue,
+            SerializedPropertyType.Integer or SerializedPropertyType.LayerMask or SerializedPropertyType.Character => property.intValue,
+            SerializedPropertyType.Boolean => property.boolValue,
+            SerializedPropertyType.Float => property.floatValue,
+            SerializedPropertyType.String => property.stringValue,
+            SerializedPropertyType.Color => property.colorValue,
+            SerializedPropertyType.ObjectReference => property.objectReferenceValue,
+            SerializedPropertyType.Enum => property.enumNames[property.enumValueIndex],
+            SerializedPropertyType.Vector2 => property.vector2Value,
+            SerializedPropertyType.Vector3 => property.vector3Value,
+            SerializedPropertyType.Vector4 => property.vector4Value,
+            SerializedPropertyType.Rect => property.rectValue,
+            SerializedPropertyType.ArraySize => property.arraySize,
+            SerializedPropertyType.AnimationCurve => property.animationCurveValue,
+            SerializedPropertyType.Bounds => property.boundsValue,
+            SerializedPropertyType.Gradient => property.gradientValue,
+            SerializedPropertyType.Quaternion => property.quaternionValue,
+            SerializedPropertyType.ExposedReference => property.exposedReferenceValue,
+            SerializedPropertyType.FixedBufferSize => property.fixedBufferSize,
+            SerializedPropertyType.Vector2Int => property.vector2IntValue,
+            SerializedPropertyType.Vector3Int => property.vector3IntValue,
+            SerializedPropertyType.RectInt => property.rectIntValue,
+            SerializedPropertyType.BoundsInt => property.boundsIntValue,
+            SerializedPropertyType.Hash128 => property.hash128Value,
+            _ => null,
+        };
+
         /// <summary>
         /// .. 어떤 데이터 리스트가 있을 때 해당 데이터들의 요소를 토글 기능을 가진 스크롤뷰에 수직으로 열거시키는 기능 입니다 열거된 데이터에서 토글 선택된 데이터 요소를 반환합니다.
         /// </summary>
@@ -166,6 +195,12 @@ namespace EditorTool
         /// </param>
         /// <returns></returns>
         public static string GetBackingFieldName(string propertyName) => $"<{propertyName}>k__BackingField";
+
+        public static SerializedProperty GetProperty(SerializedObject serializedObject, string propertyName)
+        {
+            return serializedObject.FindProperty(propertyName) ??
+                serializedObject.FindProperty(GetBackingFieldName(propertyName));
+        }
     }
 }
 #endif

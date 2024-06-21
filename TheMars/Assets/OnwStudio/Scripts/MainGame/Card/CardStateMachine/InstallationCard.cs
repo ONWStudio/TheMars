@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// .. 설치
+/// </summary>
+[SerializeReferenceDropdownName("설치")]
 public sealed class InstallationCard : CardStateMachine
 {
     private static readonly Dictionary<string, int> _cardStack = new();

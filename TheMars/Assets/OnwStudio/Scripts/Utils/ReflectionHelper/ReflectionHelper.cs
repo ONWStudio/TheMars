@@ -7,8 +7,14 @@ using UnityEngine;
 
 public static class ReflectionHelper
 {
+    public static IEnumerable<MethodInfo> GetMethodsFromAttribute<AttributeType>(object @object) where AttributeType : class
+        => @object
+            .GetType()
+            .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+            .Where(method => method.GetCustomAttribute(typeof(AttributeType)) is AttributeType);
+
     public static IEnumerable<T> GetChildClassesFromType<T>() where T : class
-         => AppDomain
+        => AppDomain
             .CurrentDomain
             .GetAssemblies()
             .SelectMany(assembly => assembly.GetTypes())

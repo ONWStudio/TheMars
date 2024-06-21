@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
   m_Name: Card_No.4
   m_EditorClassIdentifier: 
-  <Guid>k__BackingField: b95b735b-d8d5-4961-8ae7-4307da176687
+  <Guid>k__BackingField: 3990c45c-c2ff-4f86-b581-ba5b7dc2790c
+  <StackID>k__BackingField: 6
+  <GroupStackID>k__BackingField: 2
   <MarsLithium>k__BackingField: 0
   <CardKind>k__BackingField: 0
   <CardGrade>k__BackingField: 0
+  <CardGroup>k__BackingField: 0
   <StateMachine>k__BackingField:
-    rid: 4678432333304168602
+    rid: 4678432349227057175
   _cardNames:
     _serializedList: []
   _descriptions:
@@ -27,6 +30,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 4678432333304168602
+    - rid: 4678432349227057175
       type: {class: CardStateMachine, ns: , asm: AssebmlyTMCard}
       data: 

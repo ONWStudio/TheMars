@@ -12,36 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
   m_Name: Card_No.1
   m_EditorClassIdentifier: 
-  <Guid>k__BackingField: 8c2447e8-0bf2-4b58-8387-4bb162a8a221
+  <Guid>k__BackingField: e48240f9-054a-4e51-b67c-814a701d1312
+  <StackID>k__BackingField: 6
+  <GroupStackID>k__BackingField: 2
   <MarsLithium>k__BackingField: 0
   <CardKind>k__BackingField: 0
   <CardGrade>k__BackingField: 0
+  <CardGroup>k__BackingField: 1
   <StateMachine>k__BackingField:
-    rid: 4678432333304168611
+    rid: 4678432349227057172
   _cardNames:
-    _serializedList:
-    - Key: ko-KR
-      Value: adfss
+    _serializedList: []
   _descriptions:
     _serializedList: []
-  _cardEffects:
-  - rid: -2
-  _addtionalConditions:
-  - rid: 4678432333304168612
-  - rid: 4678432328098775069
+  _cardEffects: []
+  _addtionalConditions: []
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 4678432328098775069
-      type: {class: ElectricCondition, ns: , asm: AssebmlyTMCard}
-      data:
-        <Electric>k__BackingField: 0
-    - rid: 4678432333304168611
-      type: {class: MirageCard, ns: , asm: AssebmlyTMCard}
+    - rid: 4678432349227057172
+      type: {class: CardStateMachine, ns: , asm: AssebmlyTMCard}
       data: 
-    - rid: 4678432333304168612
-      type: {class: ElectricCondition, ns: , asm: AssebmlyTMCard}
-      data:
-        <Electric>k__BackingField: 0
