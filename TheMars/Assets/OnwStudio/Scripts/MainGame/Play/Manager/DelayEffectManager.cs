@@ -24,8 +24,8 @@ public sealed class DelayEffectManager : SceneSingleton<DelayEffectManager>
     /// </summary>
     /// <param name="delayTime"> .. 딜레이 시킬 시간 </param>
     /// <param name="onNotifyRemainingTime"> .. 콜백 메서드로 남은 시간을 받아옵니다 1초마다 콜백을 호출시킵니다 </param>
-    public void WaitForSecondsEffect(TMCardUIController owner, float delayTime, Action<float> onNotifyRemainingTime)
-        => StartCoroutine(iEWaitForSecondsEffect(owner, delayTime, onNotifyRemainingTime));
+    public void WaitForSecondsEffect(float delayTime, Action onSuccessSeconds, Action<float> onNotifyRemainingTime)
+        => StartCoroutine(iEWaitForSecondsEffect(delayTime, onSuccessSeconds, onNotifyRemainingTime));
 
     /// <summary>
     /// .. 특정 카운트만큼 턴 진행 후 카드 효과를 발동시킵니다
@@ -33,10 +33,10 @@ public sealed class DelayEffectManager : SceneSingleton<DelayEffectManager>
     /// <param name="owner"> .. 발동시킬 카드 </param>
     /// <param name="delayTurn"> .. 얼마나 턴을 기다릴 것인가 </param>
     /// <param name="onNotifyTurnCount"> .. 매턴마다 호출되는 콜백 메서드 입니다 </param>
-    public void WaitForTurnCountEffect(TMCardUIController owner, int delayTurn, Action<int> onNotifyTurnCount)
-        => StartCoroutine(iEWaitForTurnCountEffect(owner, delayTurn, onNotifyTurnCount));
+    public void WaitForTurnCountEffect(int delayTurn, Action onSuccessTurn, Action<int> onNotifyTurnCount)
+        => StartCoroutine(iEWaitForTurnCountEffect(delayTurn, onSuccessTurn, onNotifyTurnCount));
 
-    private IEnumerator iEWaitForSecondsEffect(TMCardUIController owner, float delayTime, Action<float> onNotifyRemainingTime)
+    private IEnumerator iEWaitForSecondsEffect(float delayTime, Action onSuccessSeconds, Action<float> onNotifyRemainingTime)
     {
         float prevTime = delayTime;
         while (delayTime > 0f)
@@ -52,10 +52,10 @@ public sealed class DelayEffectManager : SceneSingleton<DelayEffectManager>
         }
 
         onNotifyRemainingTime?.Invoke(-1f);
-        owner.CardData.UseCard(owner.gameObject);
+        onSuccessSeconds?.Invoke();
     }
 
-    private IEnumerator iEWaitForTurnCountEffect(TMCardUIController owner, int delayTurn, Action<int> onNotifyTurnCount)
+    private IEnumerator iEWaitForTurnCountEffect(int delayTurn, Action onSuccessTurn, Action<int> onNotifyTurnCount)
     {
         while (delayTurn > 0)
         {
@@ -67,6 +67,6 @@ public sealed class DelayEffectManager : SceneSingleton<DelayEffectManager>
         }
 
         onNotifyTurnCount?.Invoke(0);
-        owner.CardData.UseCard(owner.gameObject);
+        onSuccessTurn?.Invoke();
     }
 }

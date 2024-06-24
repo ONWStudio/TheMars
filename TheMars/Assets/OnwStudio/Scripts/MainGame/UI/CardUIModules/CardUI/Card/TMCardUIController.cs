@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using OnwAttributeExtensions;
 using MoreMountains.Feedbacks;
 
 namespace TMCardUISystemModules
@@ -47,6 +48,12 @@ namespace TMCardUISystemModules
         /// </summary>
         public TMCardData CardData => _cardData;
 
+        public List<ICardState> UseStartStates { get; } = new();
+        public List<ICardState> UseEndStates { get; } = new();
+        public List<ICardState> DrawBeginStates { get; } = new();
+        public List<ICardState> DrawEndStates { get; } = new();
+        public List<ICardState> TurnEndStates { get; } = new();
+
         [SerializeField] private UnityEvent<TMCardUIController> _onUseCard = new();
         [SerializeField] private UnityEvent<TMCardUIController> _onMoveToTomb = new();
         [SerializeField] private UnityEvent<TMCardUIController> _onRecycleToHand = new();
@@ -55,15 +62,15 @@ namespace TMCardUISystemModules
         [SerializeField] private UnityEvent<TMCardUIController, float> _onDelaySeconds = new();
         [SerializeField] private UnityEvent<TMCardUIController, string> _onHoldCard = new();
         [SerializeField] private UnityEvent<TMCardUIController, int> _onDelayTurn = new();
+        [SerializeField, ReadOnly] private TMCardData _cardData = null;
 
-        private TMCardData _cardData = null;
         private SmoothMoveVector2 _smoothMove = null;
         private Image _raycastingImage = null;
         private Image _cardImage = null;
 
         private void Awake()
         {
-            RectTransform = transform as RectTransform;
+            RectTransform = gameObject.AddComponent<RectTransform>();
             EventSender = gameObject.AddComponent<EventSender>();
             InputHandler = gameObject.AddComponent<TMCardInputHandler>();
             _raycastingImage = gameObject.AddComponent<Image>();
@@ -76,6 +83,20 @@ namespace TMCardUISystemModules
             initializeImages();
             initalizeInputHandle();
             initializeSmoothMove();
+
+            List<ICardSpecialEffect> cardSpecialEffects = new();
+
+            var filterCards = _cardData
+                .SpecialEffect
+                .GroupBy(specialEffect => specialEffect.GetType().Name)
+                .Select(group => group.First());
+
+            foreach (ICardSpecialEffect specialEffect in filterCards)
+            {
+                
+            }
+
+            _cardData.SpecialEffect.ForEach(specialEffect => specialEffect.ApplyEffect(this));
         }
 
         private void OnDestroy()
@@ -89,12 +110,12 @@ namespace TMCardUISystemModules
 
         public void OnUseStart()
         {
-            _cardData.StateMachine.OnUseStarted(this);
+            UseStartStates.ForEach(state => state.OnFire(this));
         }
 
         public void OnUseEnded()
         {
-            _cardData.StateMachine.OnUseEnded(this);
+            UseEndStates.ForEach(state => state.OnFire(this));
         }
 
         /// <summary>
@@ -102,7 +123,7 @@ namespace TMCardUISystemModules
         /// </summary>
         public void OnDrawBegin()
         {
-            _cardData.StateMachine.OnDrawBegin(this);
+            DrawBeginStates.ForEach(state => state.OnFire(this));
         }
 
         /// <summary>
@@ -110,7 +131,7 @@ namespace TMCardUISystemModules
         /// </summary>
         public void OnDrawEnded()
         {
-            _cardData.StateMachine.OnDrawEnded(this);
+            DrawEndStates.ForEach(state => state.OnFire(this));
         }
 
         /// <summary>
@@ -118,7 +139,7 @@ namespace TMCardUISystemModules
         /// </summary>
         public void OnTurnEnd()
         {
-            _cardData.StateMachine.OnTurnEnd(this);
+            TurnEndStates.ForEach(state => state.OnFire(this));
         }
 
         /// <summary>
@@ -159,8 +180,10 @@ namespace TMCardUISystemModules
 
         private void initalizeInputHandle()
         {
-            InputHandler.AddListenerPointerEnterAction(pointerEventData
-                 => _smoothMove.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f));
+            InputHandler.AddListenerPointerEnterAction(pointerEventData =>
+            {
+                _smoothMove.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f);
+            });
 
             InputHandler.AddListenerPointerExitAction(pointerEventData
                 => _smoothMove.TargetPosition = Vector2.zero);
@@ -175,7 +198,7 @@ namespace TMCardUISystemModules
         /// <param name="pointerEventData"></param>
         private void onClickCard(PointerEventData pointerEventData)
         {
-            if (!OnCard || CardData.IsAvailable(1)) return;
+            if (!OnCard || !CardData.IsAvailable(1)) return;
 
             OnUseCard.Invoke(this);
         }

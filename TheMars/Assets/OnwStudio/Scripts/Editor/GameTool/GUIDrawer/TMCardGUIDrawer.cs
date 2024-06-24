@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using EditorTool;
+using AddressableAssetBundleSpace;
 using static EditorTool.EditorTool;
 
 namespace TMGUITool
@@ -80,7 +81,10 @@ namespace TMGUITool
 
             public void SaveDataToLocal()
             {
-
+                for (int i = 0; i < _cards.Count; i++)
+                {
+                    AddressableAssetBundleCreator.CreateAssetBundle($"TMCard_{i + 1}", "TMCardData", _cards[i], "TMCardData");
+                }
             }
 
             private void insertLocalizingOptions(TMCardData cardData)

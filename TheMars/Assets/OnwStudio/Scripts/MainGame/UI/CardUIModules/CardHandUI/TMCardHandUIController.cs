@@ -133,7 +133,8 @@ namespace TMCardUISystemModules
                 () => _cards.All(card => !card.EventSender.IsPlaying),
                 () =>
                 {
-                    foreach (TMCardUIController cardUI in _cards)
+                    // .. 내부에서 콜백으로 인해 Remove작업이 발생하므로 배열자체를 복사해서 처리
+                    foreach (TMCardUIController cardUI in _cards.ToArray())
                     {
                         cardUI.SetOn(true);
                         cardUI.OnDrawEnded();

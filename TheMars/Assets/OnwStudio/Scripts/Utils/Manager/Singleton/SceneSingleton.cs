@@ -62,6 +62,8 @@ public abstract class SceneSingleton<T> : MonoBehaviour where T : SceneSingleton
 
     private void OnDestroy()
     {
+        if (_instance != this) return;
+
         _instance = null;
     }
 

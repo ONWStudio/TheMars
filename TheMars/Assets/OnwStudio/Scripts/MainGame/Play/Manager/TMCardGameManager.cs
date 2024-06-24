@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using CoroutineExtensions;
+using OnwAttributeExtensions;
 using MoreMountains.Feedbacks;
-using UnityEngine.EventSystems;
 
 namespace TMCardUISystemModules
 {
@@ -25,7 +25,7 @@ namespace TMCardUISystemModules
         public int DeckCardCount => CardDeckUIController.CardCount;
         public int TombCardCount => CardTombUIController.CardCount;
 
-        public int AnimatedCardCount { get; private set; } = 0;
+        [field: SerializeField, ReadOnly] public int AnimatedCardCount { get; private set; } = 0;
 
         [field: Header("Hand Controller")]
         // .. 패
@@ -51,14 +51,10 @@ namespace TMCardUISystemModules
 
         private void Start()
         {
-            List<TMCardUIController> cards = TMCardUICreator.CreateCards(ALL_CARD_MAX);
+            List<TMCardUIController> cards = TMCardUICreator.Instance.CreateCards(ALL_CARD_MAX);
             cards.ForEach(addListenerToCard);
-
             CardDeckUIController.PushCards(cards);
-
-            _cardHandImporter
-                .PushCards(CardDeckUIController.DequeueCards(DRAW_CARD_MAX));
-
+            _cardHandImporter.PushCards(CardDeckUIController.DequeueCards(DRAW_CARD_MAX));
             DrawCardFromDeck();
         }
 
@@ -121,7 +117,6 @@ namespace TMCardUISystemModules
                 .ScreenToWorldPoint(new(Screen.width * 0.5f, Screen.height * 0.5f));
 
             Vector3 targetPosition = transform
-                .parent
                 .InverseTransformPoint(new(targetWorldPosition.x, targetWorldPosition.y, 0f));
 
             List<MMF_Feedback> events = new()
@@ -179,20 +174,20 @@ namespace TMCardUISystemModules
 
         private void onDelaySeconds(TMCardUIController cardUI, float delayTime)
         {
-            DelayEffectManager.Instance.WaitForSecondsEffect(cardUI, delayTime, remainingTime =>
-            {
-                setActiveDelayCardByCondition(remainingTime < 0f, cardUI);
-            });
+            DelayEffectManager.Instance.WaitForSecondsEffect(
+                delayTime,
+                () => setActiveDelayCard(cardUI),
+                remainingTime => { });
 
             cardUI.gameObject.SetActive(false);
         }
 
         private void onDelayTurn(TMCardUIController cardUI, int turnCount)
         {
-            DelayEffectManager.Instance.WaitForTurnCountEffect(cardUI, turnCount, remainingTurn =>
-            {
-                setActiveDelayCardByCondition(remainingTurn == 0, cardUI);
-            });
+            DelayEffectManager.Instance.WaitForTurnCountEffect(
+                turnCount,
+                () => setActiveDelayCard(cardUI),
+                remainingTurn => { });
 
             cardUI.gameObject.SetActive(false);
         }
@@ -215,10 +210,8 @@ namespace TMCardUISystemModules
             cardUI.EventSender.PlayEvents(events);
         }
 
-        private void setActiveDelayCardByCondition(bool condition, TMCardUIController cardUI)
+        private void setActiveDelayCard(TMCardUIController cardUI)
         {
-            if (!condition) return;
-
             cardUI.gameObject.SetActive(true);
             moveToTomb(cardUI);
         }

@@ -6,6 +6,13 @@ using UnityEngine.Events;
 public interface ITMCardController<T> where T : MonoBehaviour, ITMCardController<T>
 {
     public TMCardData CardData { get; }
+
+    public List<ICardState> UseStartStates { get; }
+    public List<ICardState> UseEndStates { get; }
+    public List<ICardState> DrawBeginStates { get; }
+    public List<ICardState> DrawEndStates { get; }
+    public List<ICardState> TurnEndStates { get; }
+
     public UnityEvent<T> OnUseCard { get; }
     /// <summary>
     /// .. 카드가 무덤으로 이동해야 되는 경우 리스너들에게 알려주는 콜백 이벤트

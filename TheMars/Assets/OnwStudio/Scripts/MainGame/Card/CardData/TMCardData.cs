@@ -13,21 +13,31 @@ public sealed partial class TMCardData : ScriptableObject
     /// </summary>
     [field: SerializeField, Tooltip("카드의 고유 ID"), ReadOnly]
     public string Guid { get; private set; } = System.Guid.NewGuid().ToString();
+
     /// <summary>
     /// .. 카드 전체와 공유하는 스택 ID
     /// </summary>
-    [field: SerializeField, Tooltip("Stack ID"), ReadOnly]
+    [field: SerializeField, Tooltip("Stack ID")]
     public int StackID { get; private set; } = 0;
+
     /// <summary>
-    /// .. 같은 그룹 카드와 공유하는 스택 ID
+    /// .. 같은 그룹간에 공유하는 스택 ID
     /// </summary>
-    [field: SerializeField, Tooltip("Group Stack ID"), ReadOnly]
+    [field: SerializeField, Tooltip("그룹 Stack ID")]
     public int GroupStackID { get; private set; } = 0;
+
+    /// <summary>
+    /// .. 테라
+    /// </summary>
+    [field: SerializeField, DisplayAs("소모 재화 (테라)"), Tooltip("테라")]
+    public int Tera { get; private set; } = 0;
+
     /// <summary>
     /// .. 마르스 리튬
     /// </summary>
     [field: SerializeField, DisplayAs("소모 재화 (마르스 리튬)"), Tooltip("마르스 리튬")]
     public int MarsLithium { get; private set; } = 0;
+
     /// <summary>
     /// .. 카드의 종류
     /// </summary>
@@ -39,6 +49,9 @@ public sealed partial class TMCardData : ScriptableObject
     [field: SerializeField, DisplayAs("등급"), Tooltip("카드의 등급")]
     public TM_CARD_GRADE CardGrade { get; private set; } = TM_CARD_GRADE.NORMAL;
 
+    /// <summary>
+    /// .. 카드의 그룹
+    /// </summary>
     [field: SerializeField, DisplayAs("그룹"), Tooltip("카드의 그룹")]
     public TM_CARD_GROUP CardGroup { get; private set; } = TM_CARD_GROUP.COMMON;
 
@@ -46,9 +59,8 @@ public sealed partial class TMCardData : ScriptableObject
     /// .. 카드의 특수효과입니다
     /// CardStateMachine는 ITMCardController 상속받은 실제 카드 구현체를 바인딩하여 필요한 기능을 구현합니다
     /// </summary>
-    [field: Space]
-    [field: SerializeReference, DisplayAs("특수 효과"), Tooltip("특수 효과"), SerializeReferenceDropdown]
-    public CardStateMachine StateMachine { get; private set; } = new();
+    public IReadOnlyList<ICardSpecialEffect> SpecialEffect => _specialEffect;
+
     /// <summary>
     /// .. 카드의 고유 이름
     /// </summary>
@@ -60,22 +72,14 @@ public sealed partial class TMCardData : ScriptableObject
     public string Description
         => _descriptions.TryGetValue(CultureInfo.CurrentCulture.Name, out string description) ? description : string.Empty;
 
-    /// <summary>
-    /// .. 읽기 전용 카드 이름 딕셔너리 각 지역별 이름을 반환합니다
-    /// </summary>
     public IReadOnlyDictionary<string, string> ReadOnlyCardNames => _cardNames;
-    /// <summary>
-    /// .. 읽기 전용 카드 설명 딕셔너리 각 지역별 설명을 반환합니다
-    /// </summary>
     public IReadOnlyDictionary<string, string> ReadOnlyDescriptions => _descriptions;
-    /// <summary>
-    /// .. 읽기 전용 카드 발동효과 리스트
-    /// </summary>
     public IReadOnlyList<ICardEffect> ReadOnlyCardEffects => _cardEffects;
-    /// <summary>
-    /// .. 읽기 전용 카드 추가조건 리스트
-    /// </summary>
     public IReadOnlyList<ICardCondition> ReadOnlyAdditionalCondition => _addtionalConditions;
+
+    [Space]
+    [SerializeReference, DisplayAs("특수 효과"), Tooltip("특수 효과"), SerializeReferenceDropdown]
+    private List<ICardSpecialEffect> _specialEffect = new();
 
     [Space]
     [SerializeField, DisplayAs("이름"), Tooltip("카드 이름 관리자 지역별 이름을 작성합니다 로컬라이징은 국가 코드를 참고해주세요"), SerializedDictionary("Culture Code", "Name")]
@@ -106,8 +110,7 @@ public sealed partial class TMCardData : ScriptableObject
     /// <returns></returns>
     public bool IsAvailable(int marsLithium)
     {
-        return MarsLithium <= marsLithium &&
+        return MarsLithium <= marsLithium && 
             _addtionalConditions.All(additionalCondition => additionalCondition.AdditionalCondition);
     }
-
 }
