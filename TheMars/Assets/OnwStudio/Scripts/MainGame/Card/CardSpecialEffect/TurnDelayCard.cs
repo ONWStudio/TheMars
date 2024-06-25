@@ -14,13 +14,12 @@ public sealed class TurnDelayCard : ICardSpecialEffect
     /// </summary>
     [field: SerializeField, DisplayAs("소요 턴")] public int DelayTurn { get; private set; } = 5;
 
-    public void ApplyEffect<T>(T cardController) where T : MonoBehaviour, ITMCardController<T>
+    public void ApplyEffect<T>(T cardController) where T : TMCardController<T>
     {
-        throw new System.NotImplementedException();
-    }
-
-    public bool CanCoexistWith(IEnumerable<ICardSpecialEffect> cardSpecialEffects)
-    {
-        throw new System.NotImplementedException();
+        cardController.UseStartedState = () =>
+        {
+            cardController.OnMoveToScreenCenter.Invoke(cardController);
+            cardController.OnDelayTurn.Invoke(cardController, DelayTurn);
+        };
     }
 }

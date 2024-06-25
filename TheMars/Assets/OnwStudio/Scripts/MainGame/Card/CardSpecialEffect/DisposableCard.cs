@@ -9,13 +9,8 @@ using UnityEngine;
 [SerializeReferenceDropdownName("일회용")]
 public sealed class DisposableCard : ICardSpecialEffect
 {
-    public void ApplyEffect<T>(T cardController) where T : MonoBehaviour, ITMCardController<T>
+    public void ApplyEffect<T>(T cardController) where T : TMCardController<T>
     {
-
-    }
-
-    public bool CanCoexistWith(IEnumerable<ICardSpecialEffect> cardSpecialEffects)
-    {
-        return true;
+        cardController.UseEndedState = () => cardController.OnDestroyCard.Invoke(cardController);
     }
 }

@@ -16,13 +16,12 @@ public sealed class DropCard : ICardSpecialEffect
 
     [SerializeReference, DisplayAs("버리기 효과"), SerializeReferenceDropdown] private List<ICardEffect> _cardEffects = new();
 
-    public void ApplyEffect<T>(T cardController) where T : MonoBehaviour, ITMCardController<T>
+    public void ApplyEffect<T>(T cardController) where T : TMCardController<T>
     {
-        throw new System.NotImplementedException();
-    }
-
-    public bool CanCoexistWith(IEnumerable<ICardSpecialEffect> cardSpecialEffects)
-    {
-        throw new System.NotImplementedException();
+        cardController.TurnEndedState = () =>
+        {
+            _cardEffects.ForEach(cardEffect => cardEffect.OnEffect(cardController.gameObject, cardController.CardData));
+            cardController.OnMoveToScreenCenter.Invoke(cardController);
+        };
     }
 }

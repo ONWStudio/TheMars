@@ -14,12 +14,12 @@ public sealed class TimeDelayCard : ICardSpecialEffect
     /// </summary>
     [field: SerializeField, DisplayAs("딜레이 시간 (초)")] public float DelayTime { get; private set; } = 1f;
 
-    public void ApplyEffect<T>(T cardController) where T : MonoBehaviour, ITMCardController<T>
+    public void ApplyEffect<T>(T cardController) where T : TMCardController<T>
     {
-    }
-
-    public bool CanCoexistWith(IEnumerable<ICardSpecialEffect> cardSpecialEffects)
-    {
-        return true;
+        cardController.UseStartedState = () =>
+        {
+            cardController.OnMoveToScreenCenter.Invoke(cardController);
+            cardController.OnDelaySeconds.Invoke(cardController, DelayTime);
+        };
     }
 }

@@ -8,13 +8,8 @@ using UnityEngine;
 [SerializeReferenceDropdownName("드로우")]
 public sealed class DrawCard : ICardSpecialEffect
 {
-    public void ApplyEffect<T>(T cardController) where T : MonoBehaviour, ITMCardController<T>
+    public void ApplyEffect<T>(T cardController) where T : TMCardController<T>
     {
-        throw new System.NotImplementedException();
-    }
-
-    public bool CanCoexistWith(IEnumerable<ICardSpecialEffect> cardSpecialEffects)
-    {
-        throw new System.NotImplementedException();
+        cardController.UseEndedState = () => cardController.OnRecycleToHand.Invoke(cardController);
     }
 }

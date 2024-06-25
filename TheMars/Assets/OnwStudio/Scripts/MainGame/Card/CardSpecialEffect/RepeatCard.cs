@@ -8,13 +8,8 @@ using UnityEngine;
 [SerializeReferenceDropdownName("반복")]
 public sealed class RepeatCard : ICardSpecialEffect
 {
-    public void ApplyEffect<T>(T cardController) where T : MonoBehaviour, ITMCardController<T>
-    {
-        throw new System.NotImplementedException();
-    }
 
-    public bool CanCoexistWith(IEnumerable<ICardSpecialEffect> cardSpecialEffects)
+    public void ApplyEffect<T>(T cardController) where T : TMCardController<T>
     {
-        throw new System.NotImplementedException();
     }
 }

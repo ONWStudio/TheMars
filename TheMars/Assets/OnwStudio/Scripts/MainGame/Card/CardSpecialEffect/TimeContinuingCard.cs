@@ -13,14 +13,7 @@ public sealed class TimeContinuingCard : ICardSpecialEffect
     /// .. 지속 시간
     /// </summary>
     [field: SerializeField, DisplayAs("지속 시간")] public float ContinuingTime { get; private set; } = 1f;
-
-    public void ApplyEffect<T>(T cardController) where T : MonoBehaviour, ITMCardController<T>
+    public void ApplyEffect<T>(T cardController) where T : TMCardController<T>
     {
-        throw new System.NotImplementedException();
-    }
-
-    public bool CanCoexistWith(IEnumerable<ICardSpecialEffect> cardSpecialEffects)
-    {
-        throw new System.NotImplementedException();
     }
 }

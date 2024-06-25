@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TcgEngine;
 using UnityEngine;
 
 namespace TMCardUISystemModules
@@ -22,7 +23,7 @@ namespace TMCardUISystemModules
             {
                 TMCardData cardData = _cards[Random.Range(0, _cards.Count)];
                 cardList.Add(new GameObject(cardData.name).AddComponent<TMCardUIController>());
-                cardList[i].InitializeCard(cardData);
+                cardList[i].CardData = cardData;
             }
 
             return cardList;
@@ -34,7 +35,7 @@ namespace TMCardUISystemModules
 
             TMCardData cardData = _cards[Random.Range(0, _cards.Count)];
             TMCardUIController cardUI = new GameObject(cardData.name).AddComponent<TMCardUIController>();
-            cardUI.InitializeCard(cardData);
+            cardUI.CardData = cardData;
 
             return cardUI;
         }

@@ -14,12 +14,7 @@ public sealed class TurnContinuingCard : ICardSpecialEffect
     /// </summary>
     [field: SerializeField, DisplayAs("지속 턴")] public int ContinuingTurn { get; private set; } = 1;
 
-    public void ApplyEffect<T>(T cardController) where T : MonoBehaviour, ITMCardController<T>
+    public void ApplyEffect<T>(T cardController) where T : TMCardController<T>
     {
-    }
-
-    public bool CanCoexistWith(IEnumerable<ICardSpecialEffect> cardSpecialEffects)
-    {
-        return true;
     }
 }

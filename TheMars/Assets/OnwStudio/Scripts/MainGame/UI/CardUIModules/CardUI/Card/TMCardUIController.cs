@@ -16,17 +16,9 @@ namespace TMCardUISystemModules
     /// 컨트롤러는 카드 데이터, EventSender, InputHandler와 각 동작에 대한 이벤트에 대한 인터페이스만을 제공하며 다른 기능은 포함하고 있지 않습니다
     /// </summary>
     [DisallowMultipleComponent]
-    public sealed class TMCardUIController : MonoBehaviour, ITMCardController<TMCardUIController>
+    public sealed class TMCardUIController : TMCardController<TMCardUIController>
     {
-        public UnityEvent<TMCardUIController> OnUseCard => _onUseCard;
-        public UnityEvent<TMCardUIController> OnMoveToTomb => _onMoveToTomb;
-        public UnityEvent<TMCardUIController> OnRecycleToHand => _onRecycleToHand;
-        public UnityEvent<TMCardUIController> OnDrawUse => _onDrawUse;
-        public UnityEvent<TMCardUIController> OnDestroyCard => _onDestroyCard;
-        public UnityEvent<TMCardUIController, float> OnDelaySeconds => _onDelaySeconds;
-        public UnityEvent<TMCardUIController, string> OnHoldCard => _onHoldCard;
-        public UnityEvent<TMCardUIController, int> OnDelayTurn => _onDelayTurn;
-
+        [field: SerializeField] public UnityEvent<TMCardUIController> OnClickCard { get; private set; } = new();
         /// <summary>
         /// .. 이벤트 센더 클래스 입니다 외부에서 이벤트 연출 효과를 발생시킬때 사용할 수 있는 프로퍼티 입니다
         /// </summary>
@@ -43,26 +35,6 @@ namespace TMCardUISystemModules
         /// .. 카드가 상호작용 가능한 활성화인지 상태를 반환합니다
         /// </summary>
         public bool OnCard { get; private set; } = false;
-        /// <summary>
-        /// .. 카드의 상세한 기본 데이터 입니다
-        /// </summary>
-        public TMCardData CardData => _cardData;
-
-        public List<ICardState> UseStartStates { get; } = new();
-        public List<ICardState> UseEndStates { get; } = new();
-        public List<ICardState> DrawBeginStates { get; } = new();
-        public List<ICardState> DrawEndStates { get; } = new();
-        public List<ICardState> TurnEndStates { get; } = new();
-
-        [SerializeField] private UnityEvent<TMCardUIController> _onUseCard = new();
-        [SerializeField] private UnityEvent<TMCardUIController> _onMoveToTomb = new();
-        [SerializeField] private UnityEvent<TMCardUIController> _onRecycleToHand = new();
-        [SerializeField] private UnityEvent<TMCardUIController> _onDrawUse = new();
-        [SerializeField] private UnityEvent<TMCardUIController> _onDestroyCard = new();
-        [SerializeField] private UnityEvent<TMCardUIController, float> _onDelaySeconds = new();
-        [SerializeField] private UnityEvent<TMCardUIController, string> _onHoldCard = new();
-        [SerializeField] private UnityEvent<TMCardUIController, int> _onDelayTurn = new();
-        [SerializeField, ReadOnly] private TMCardData _cardData = null;
 
         private SmoothMoveVector2 _smoothMove = null;
         private Image _raycastingImage = null;
@@ -70,11 +42,11 @@ namespace TMCardUISystemModules
 
         private void Awake()
         {
+            _cardImage = new GameObject("CardImage").AddComponent<Image>();
             RectTransform = gameObject.AddComponent<RectTransform>();
             EventSender = gameObject.AddComponent<EventSender>();
             InputHandler = gameObject.AddComponent<TMCardInputHandler>();
             _raycastingImage = gameObject.AddComponent<Image>();
-            _cardImage = new GameObject("CardImage").AddComponent<Image>();
             _smoothMove = _cardImage.gameObject.AddComponent<SmoothMoveVector2>();
         }
 
@@ -84,38 +56,33 @@ namespace TMCardUISystemModules
             initalizeInputHandle();
             initializeSmoothMove();
 
-            List<ICardSpecialEffect> cardSpecialEffects = new();
-
-            var filterCards = _cardData
-                .SpecialEffect
-                .GroupBy(specialEffect => specialEffect.GetType().Name)
-                .Select(group => group.First());
-
-            foreach (ICardSpecialEffect specialEffect in filterCards)
+            UseStartedState = () =>
             {
-                
-            }
+                _cardData.UseCard(gameObject);
+                OnMoveToScreenCenter.Invoke(this);
+            };
 
-            _cardData.SpecialEffect.ForEach(specialEffect => specialEffect.ApplyEffect(this));
+            UseEndedState = () => OnMoveToTomb.Invoke(this);
+            TurnEndedState = () => OnMoveToTomb.Invoke(this);
+
+            _cardData.SpecialEffects.ForEach(specialEffect => specialEffect?.ApplyEffect(this));
         }
 
         private void OnDestroy()
         {
-#if UNITY_EDITOR
+#if DEBUG
             Debug.Log("destroyed Card!");
 #endif
-
-            _onDestroyCard.Invoke(this);
         }
 
         public void OnUseStart()
         {
-            UseStartStates.ForEach(state => state.OnFire(this));
+            UseStartedState?.Invoke();
         }
 
         public void OnUseEnded()
         {
-            UseEndStates.ForEach(state => state.OnFire(this));
+            UseEndedState?.Invoke();
         }
 
         /// <summary>
@@ -123,7 +90,7 @@ namespace TMCardUISystemModules
         /// </summary>
         public void OnDrawBegin()
         {
-            DrawBeginStates.ForEach(state => state.OnFire(this));
+            DrawBeginState?.Invoke();
         }
 
         /// <summary>
@@ -131,7 +98,7 @@ namespace TMCardUISystemModules
         /// </summary>
         public void OnDrawEnded()
         {
-            DrawEndStates.ForEach(state => state.OnFire(this));
+            DrawEndedState?.Invoke();
         }
 
         /// <summary>
@@ -139,7 +106,7 @@ namespace TMCardUISystemModules
         /// </summary>
         public void OnTurnEnd()
         {
-            TurnEndStates.ForEach(state => state.OnFire(this));
+            TurnEndedState?.Invoke();
         }
 
         /// <summary>
@@ -151,13 +118,6 @@ namespace TMCardUISystemModules
             OnCard = isOn;
             _smoothMove.enabled = isOn;
             _smoothMove.transform.localPosition = Vector3.zero;
-        }
-
-        public void InitializeCard(TMCardData cardData)
-        {
-            if (_cardData) return;
-
-            _cardData = cardData;
         }
 
         private void initializeImages()
@@ -181,9 +141,7 @@ namespace TMCardUISystemModules
         private void initalizeInputHandle()
         {
             InputHandler.AddListenerPointerEnterAction(pointerEventData =>
-            {
-                _smoothMove.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f);
-            });
+                _smoothMove.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f));
 
             InputHandler.AddListenerPointerExitAction(pointerEventData
                 => _smoothMove.TargetPosition = Vector2.zero);
@@ -200,7 +158,7 @@ namespace TMCardUISystemModules
         {
             if (!OnCard || !CardData.IsAvailable(1)) return;
 
-            OnUseCard.Invoke(this);
+            OnClickCard.Invoke(this);
         }
     }
 }

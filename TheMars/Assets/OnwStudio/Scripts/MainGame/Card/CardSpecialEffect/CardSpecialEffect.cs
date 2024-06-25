@@ -8,12 +8,5 @@ using UnityEngine.Events;
 /// </summary>
 public interface ICardSpecialEffect
 {
-    void ApplyEffect<T>(T cardController) where T : MonoBehaviour, ITMCardController<T>;
-
-    /// <summary>
-    /// .. 카드의 특수효과 중 함께 있을 수 없는 카드효과들을 정의합니다
-    /// </summary>
-    /// <param name="cardSpecialEffects"></param>
-    /// <returns></returns>
-    bool CanCoexistWith(IEnumerable<ICardSpecialEffect> cardSpecialEffects);
+    void ApplyEffect<T>(T cardController) where T : TMCardController<T>;
 }

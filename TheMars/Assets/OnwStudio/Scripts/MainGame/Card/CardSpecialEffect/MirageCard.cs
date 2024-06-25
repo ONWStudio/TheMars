@@ -8,13 +8,9 @@ using UnityEngine;
 [SerializeReferenceDropdownName("신기루")]
 public sealed class MirageCard : ICardSpecialEffect
 {
-    public void ApplyEffect<T>(T cardController) where T : MonoBehaviour, ITMCardController<T>
+    public void ApplyEffect<T>(T cardController) where T : TMCardController<T>
     {
-        throw new System.NotImplementedException();
-    }
-
-    public bool CanCoexistWith(IEnumerable<ICardSpecialEffect> cardSpecialEffects)
-    {
-        throw new System.NotImplementedException();
+        cardController.UseEndedState = () => cardController.OnDestroyCard.Invoke(cardController);
+        cardController.TurnEndedState = () => cardController.OnDestroyCard.Invoke(cardController);
     }
 }

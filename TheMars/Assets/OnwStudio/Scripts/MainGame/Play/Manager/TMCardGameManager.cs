@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using CoroutineExtensions;
 using OnwAttributeExtensions;
 using MoreMountains.Feedbacks;
+using TcgEngine;
 
 namespace TMCardUISystemModules
 {
@@ -27,7 +28,7 @@ namespace TMCardUISystemModules
 
         [field: SerializeField, ReadOnly] public int AnimatedCardCount { get; private set; } = 0;
 
-        [field: Header("Hand Controller")]
+        [field: Header("Card Controller")]
         // .. 패
         [field: SerializeField] public TMCardHandUIController CardHandUIController { get; private set; } = null;
         // .. 덱
@@ -96,7 +97,8 @@ namespace TMCardUISystemModules
             });
             card.EventSender.OnComplitedEndEvent.AddListener(() => AnimatedCardCount--);
 
-            card.OnUseCard.AddListener(onUseCard);
+            card.OnClickCard.AddListener(card => card.OnUseStart());
+            card.OnMoveToScreenCenter.AddListener(onMoveToScreenCenter);
             card.OnMoveToTomb.AddListener(moveToTomb);
             card.OnRecycleToHand.AddListener(onRecycleToHand);
             card.OnDrawUse.AddListener(onDrawUse);
@@ -106,23 +108,24 @@ namespace TMCardUISystemModules
             card.OnDestroyCard.AddListener(onDestroyCard);
         }
 
-        private void onUseCard(TMCardUIController cardUI)
+        private void onMoveToScreenCenter(TMCardUIController cardUI)
         {
             CardHandUIController.RemoveCard(cardUI);
 
             cardUI.SetOn(false);
-            cardUI.OnUseStart();
 
             Vector3 targetWorldPosition = _cardSystemCamera
                 .ScreenToWorldPoint(new(Screen.width * 0.5f, Screen.height * 0.5f));
 
-            Vector3 targetPosition = transform
+            Vector3 targetPosition = cardUI
+                .transform
+                .parent
                 .InverseTransformPoint(new(targetWorldPosition.x, targetWorldPosition.y, 0f));
 
             List<MMF_Feedback> events = new()
             {
                 EventCreator.CreateSmoothPositionAndRotationEvent(
-                    gameObject,
+                    cardUI.gameObject,
                     new Vector3(targetPosition.x, targetPosition.y, 0f),
                     Vector3.zero),
                 EventCreator.CreateUnityEvent(cardUI.OnUseEnded, null, null, null)
@@ -163,13 +166,14 @@ namespace TMCardUISystemModules
 
         private void onRecycleToHand(TMCardUIController cardUI)
         {
+
             CardHandUIController.AddCardToFirst(cardUI);
         }
 
         private void onDrawUse(TMCardUIController cardUI)
         {
             CardHandUIController.RemoveCard(cardUI);
-            onUseCard(cardUI);
+            onMoveToScreenCenter(cardUI);
         }
 
         private void onDelaySeconds(TMCardUIController cardUI, float delayTime)
@@ -200,11 +204,11 @@ namespace TMCardUISystemModules
 
         private void onDestroyCard(TMCardUIController cardUI)
         {
-            Vector3 targetPosition = transform.localPosition + (Vector3)(transform.up * cardUI.RectTransform.rect.size * 0.5f);
+            Vector3 targetPosition = cardUI.transform.localPosition + (Vector3)(cardUI.transform.up * cardUI.RectTransform.rect.size * 0.5f);
             List<MMF_Feedback> events = new()
             {
-                EventCreator.CreateSmoothPositionAndRotationEvent(gameObject, targetPosition, Vector3.zero),
-                EventCreator.CreateUnityEvent(() => Destroy(gameObject), null, null, null)
+                EventCreator.CreateSmoothPositionAndRotationEvent(cardUI.gameObject, targetPosition, Vector3.zero),
+                EventCreator.CreateUnityEvent(() => Destroy(cardUI.gameObject), null, null, null)
             };
 
             cardUI.EventSender.PlayEvents(events);

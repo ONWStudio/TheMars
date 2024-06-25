@@ -21,7 +21,8 @@ MonoBehaviour:
   <CardGrade>k__BackingField: 0
   <CardGroup>k__BackingField: 0
   _specialEffect:
-  - rid: -2
+  - rid: 4678432438938763267
+  - rid: 4678432438938763275
   _cardNames:
     _serializedList: []
   _descriptions:
@@ -31,5 +32,10 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 4678432438938763267
+      type: {class: DropCard, ns: , asm: AssebmlyTMCard}
+      data:
+        _cardEffects: []
+    - rid: 4678432438938763275
+      type: {class: RecyclingCard, ns: , asm: AssebmlyTMCard}
+      data: 

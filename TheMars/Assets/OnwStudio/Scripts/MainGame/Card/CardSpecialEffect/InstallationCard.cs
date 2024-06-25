@@ -16,13 +16,28 @@ public sealed class InstallationCard : ICardSpecialEffect
         _cardStack.Clear();
     }
 
-    public void ApplyEffect<T>(T cardController) where T : MonoBehaviour, ITMCardController<T>
+    public void ApplyEffect<T>(T cardController) where T : TMCardController<T>
     {
-        throw new System.NotImplementedException();
+        cardController.UseStartedState = () => cardController.OnMoveToScreenCenter.Invoke(cardController);
+        cardController.DrawEndedState = () => onDraw(cardController);
     }
 
-    public bool CanCoexistWith(IEnumerable<ICardSpecialEffect> cardSpecialEffects)
+    private void onDraw<T>(T cardController) where T : TMCardController<T>
     {
-        throw new System.NotImplementedException();
+        if (!_cardStack.ContainsKey(cardController.CardData.CardName))
+        {
+            _cardStack.Add(cardController.CardData.CardName, 0);
+        }
+
+        _cardStack[cardController.CardData.CardName]++;
+
+        if (_cardStack[cardController.CardData.CardName] > 1)
+        {
+            cardController.DrawEndedState = () =>
+            {
+                cardController.CardData.UseCard(cardController.gameObject);
+                cardController.OnMoveToScreenCenter.Invoke(cardController);
+            };
+        }
     }
 }

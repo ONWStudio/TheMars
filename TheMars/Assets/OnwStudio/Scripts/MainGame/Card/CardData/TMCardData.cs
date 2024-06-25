@@ -56,12 +56,6 @@ public sealed partial class TMCardData : ScriptableObject
     public TM_CARD_GROUP CardGroup { get; private set; } = TM_CARD_GROUP.COMMON;
 
     /// <summary>
-    /// .. 카드의 특수효과입니다
-    /// CardStateMachine는 ITMCardController 상속받은 실제 카드 구현체를 바인딩하여 필요한 기능을 구현합니다
-    /// </summary>
-    public IReadOnlyList<ICardSpecialEffect> SpecialEffect => _specialEffect;
-
-    /// <summary>
     /// .. 카드의 고유 이름
     /// </summary>
     public string CardName
@@ -74,11 +68,15 @@ public sealed partial class TMCardData : ScriptableObject
 
     public IReadOnlyDictionary<string, string> ReadOnlyCardNames => _cardNames;
     public IReadOnlyDictionary<string, string> ReadOnlyDescriptions => _descriptions;
-    public IReadOnlyList<ICardEffect> ReadOnlyCardEffects => _cardEffects;
     public IReadOnlyList<ICardCondition> ReadOnlyAdditionalCondition => _addtionalConditions;
+    public IReadOnlyList<ICardSpecialEffect> SpecialEffects => _specialEffect;
 
+    /// <summary>
+    /// .. 카드의 특수효과입니다
+    /// ICardSpecialUseStart는 ITMCardController 상속받은 실제 카드 구현체를 바인딩하여 필요한 기능을 구현합니다
+    /// </summary>
     [Space]
-    [SerializeReference, DisplayAs("특수 효과"), Tooltip("특수 효과"), SerializeReferenceDropdown]
+    [SerializeReference, DisplayAs("특수 효과 (사용 시)"), Tooltip("특수 효과 (사용 시)"), SerializeReferenceDropdown]
     private List<ICardSpecialEffect> _specialEffect = new();
 
     [Space]

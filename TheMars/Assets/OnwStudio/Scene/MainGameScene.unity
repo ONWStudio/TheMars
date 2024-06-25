@@ -306,11 +306,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cards:
   - {fileID: 11400000, guid: e50cf8b5c6e884f63ba9159d7aff9ae4, type: 2}
-  - {fileID: 11400000, guid: cac0d9463934b474f9b7753adaebc428, type: 2}
-  - {fileID: 11400000, guid: cc66b7e0f7e7846a9a9d6c6be384edbc, type: 2}
-  - {fileID: 11400000, guid: 2670e5688b5dd4d5c86a36f1ce4bdd2b, type: 2}
-  - {fileID: 11400000, guid: a82806dcbcc6948228d07a45c3343f02, type: 2}
-  - {fileID: 11400000, guid: 67b00e066b4c944e4b6a8d44f250119a, type: 2}
 --- !u!4 &441722214
 Transform:
   m_ObjectHideFlags: 0
