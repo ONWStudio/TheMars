@@ -20,7 +20,8 @@ MonoBehaviour:
   <CardKind>k__BackingField: 0
   <CardGrade>k__BackingField: 0
   <CardGroup>k__BackingField: 0
-  _specialEffect: []
+  _specialEffect:
+  - rid: 4678432463386312718
   _cardNames:
     _serializedList: []
   _descriptions:
@@ -29,4 +30,7 @@ MonoBehaviour:
   _addtionalConditions: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 4678432463386312718
+      type: {class: InstallationCard, ns: , asm: AssebmlyTMCard}
+      data: 

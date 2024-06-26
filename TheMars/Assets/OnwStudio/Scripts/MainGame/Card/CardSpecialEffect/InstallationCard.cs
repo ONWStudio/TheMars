@@ -67,9 +67,17 @@ public sealed class InstallationCard : ICardSpecialEffect
         eventValuePair.OnUpdateStack -= onUpdateStack;
     }
 
+    public static void RemoveAllListenerOnUpdataStack(string cardName)
+    {
+        if (!_cardStack.TryGetValue(cardName, out EventValuePair eventValuePair) || eventValuePair.OnUpdateStack is null) return;
+
+        eventValuePair.OnUpdateStack = null;
+    }
+
+
     private void onEffect<T>(T cardController) where T : TMCardController<T>
     {
-        cardController.OnMoveToScreenCenter.Invoke(cardController, false);
+        cardController.OnMoveToTomb.Invoke(cardController);
 
         if (!_cardStack.ContainsKey(cardController.CardData.CardName))
         {
