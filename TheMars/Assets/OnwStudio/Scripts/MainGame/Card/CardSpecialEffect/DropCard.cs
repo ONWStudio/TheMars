@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using OnwAttributeExtensions;
 
@@ -21,7 +22,7 @@ public sealed class DropCard : ICardSpecialEffect
         cardController.TurnEndedState = () =>
         {
             _cardEffects.ForEach(cardEffect => cardEffect.OnEffect(cardController.gameObject, cardController.CardData));
-            cardController.OnMoveToScreenCenter.Invoke(cardController);
+            cardController.OnMoveToScreenCenter.Invoke(cardController, false);
         };
     }
 }

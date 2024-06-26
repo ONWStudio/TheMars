@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using OnwAttributeExtensions;
+using CoroutineExtensions;
 
 namespace TMCardUISystemModules
 {
@@ -25,14 +26,14 @@ namespace TMCardUISystemModules
         /// <param name="cardUIs"> .. 카드의 움직임을 정하는 무브먼트 클래스를 받습니다 </param>
         /// <param name="index"> .. 배치시킬 카드의 인덱스 </param>
         /// <param name="rectTransform"> .. 반지름의 기준이 될 렉트 트랜스폼 입니다 </param>
-        public void ArrangeCard(List<TMCardUIController> cardUIs, int index, RectTransform rectTransform)
+        public void ArrangeCard(List<TMCardUIController> cardUIs, int index, RectTransform rectTransform, float duration = 1.0f)
         {
             if (cardUIs.Count <= 0 || cardUIs.Count <= index) return;
 
             float angleStep = MaxAngle / (cardUIs.Count > 1 ? (cardUIs.Count - 1) : 2);
             float startAngle = -MaxAngle * 0.5f;
 
-            runTargetTransform(cardUIs[index], cardUIs.Count > 1 ? index : 1, angleStep, startAngle, rectTransform);
+            runTargetTransform(cardUIs[index], cardUIs.Count > 1 ? index : 1, angleStep, startAngle, rectTransform, duration);
         }
 
         /// <summary>
@@ -40,18 +41,18 @@ namespace TMCardUISystemModules
         /// </summary>
         /// <param name="cardUIs"> .. 카드의 움직임을 정하는 무브먼트 클래스를 받습니다</param>
         /// <param name="rectTransform"> .. 반지름의 기준이 될 렉트 트랜스폼 입니다 </param>
-        public void SortCards(List<TMCardUIController> cardUIs, RectTransform rectTransform)
+        public void SortCards(List<TMCardUIController> cardUIs, RectTransform rectTransform, float duration = 1.0f)
         {
             float angleStep = MaxAngle / (cardUIs.Count > 1 ? (cardUIs.Count - 1) : 2);
             float startAngle = -MaxAngle * 0.5f;
 
             for (int i = 0; i < cardUIs.Count; i++)
             {
-                runTargetTransform(cardUIs[i], cardUIs.Count > 1 ? i : 1, angleStep, startAngle, rectTransform);
+                runTargetTransform(cardUIs[i], cardUIs.Count > 1 ? i : 1, angleStep, startAngle, rectTransform, duration);
             }
         }
 
-        private void runTargetTransform(TMCardUIController cardUI, int index, float angleStep, float startAngle, RectTransform rectTransform)
+        private void runTargetTransform(TMCardUIController cardUI, int index, float angleStep, float startAngle, RectTransform rectTransform, float duration)
         {
             float angle = startAngle + angleStep * index;
             float radian = angle * Mathf.Deg2Rad;
@@ -63,15 +64,9 @@ namespace TMCardUISystemModules
             pivot.y + (rectTransform.rect.height * PositionRatioOffset.y) + Mathf.Cos(radian) * radius,
             0f);
 
-            MMF_Parallel feedbackParallel = new();
-
-            feedbackParallel.Feedbacks.Add(EventCreator
-                .CreateSmoothPositionEvent(cardUI.gameObject, targetPosition));
-
-            feedbackParallel.Feedbacks.Add(EventCreator
-                .CreateSmoothRotationEvent(cardUI.transform, new(0f, 0f, -angle)));
-
-            cardUI.EventSender.PlayEvent(feedbackParallel);
+            cardUI.EventSender.PlayEvent(
+                EventCreator
+                    .CreateSmoothPositionAndRotationEvent(cardUI.gameObject, targetPosition, new(0f, 0f, -angle), duration));
         }
     }
 }

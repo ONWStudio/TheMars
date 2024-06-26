@@ -4,7 +4,7 @@ using UnityEngine;
 using OnwAttributeExtensions;
 
 /// <summary>
-/// 소요 (시간)
+/// .. 소요 (시간)
 /// </summary>
 [SerializeReferenceDropdownName("소요 (시간)")]
 public sealed class TimeDelayCard : ICardSpecialEffect
@@ -18,7 +18,7 @@ public sealed class TimeDelayCard : ICardSpecialEffect
     {
         cardController.UseStartedState = () =>
         {
-            cardController.OnMoveToScreenCenter.Invoke(cardController);
+            cardController.OnMoveToScreenCenter.Invoke(cardController, true);
             cardController.OnDelaySeconds.Invoke(cardController, DelayTime);
         };
     }

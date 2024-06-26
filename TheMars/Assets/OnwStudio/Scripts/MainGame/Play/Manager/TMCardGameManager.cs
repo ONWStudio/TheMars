@@ -1,11 +1,11 @@
 using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using CoroutineExtensions;
 using OnwAttributeExtensions;
 using MoreMountains.Feedbacks;
-using TcgEngine;
 
 namespace TMCardUISystemModules
 {
@@ -67,25 +67,38 @@ namespace TMCardUISystemModules
 
             // .. 핸드에서 카드 건네받기
             List<TMCardUIController> cards = CardHandUIController.DequeueCards();
-            cards.ForEach(notifyTurnEndToCard); // .. 카드에게 턴이 종료됐다고 알려주기
 
-            this.WaitCompletedConditions(
-                () => AnimatedCardCount <= 0, // .. 해당 조건이 만족된다면 콜백 호출
-                () =>
-                {
-                    int count = DRAW_CARD_MAX; // .. 최대 드로우 갯수만큼 카드 드로우
-                    List<TMCardUIController> importerCards = _cardHandImporter.GetCards(count); // .. 다음 턴에 무조건 나와야 할 카드부터 드로우
+            cards.ForEach(cardUI => cardUI.SetOn(false));
+            StartCoroutine(iEDrawCardFromDeck(cards));
+        }
 
-                    importerCards.AddRange(CardDeckUIController.DequeueCards(count - importerCards.Count)); // .. 무조건 나와야 할 카드 갯수만큼 제외해서 덱에서 드로우
+        private IEnumerator iEDrawCardFromDeck(List<TMCardUIController> cardUIs)
+        {
+            foreach (TMCardUIController cardUI in cardUIs)
+            {
+                notifyTurnEndToCard(cardUI);
+                yield return new WaitUntil(() => !cardUI.EventSender.IsPlaying);
+            }
 
-                    if (importerCards.Count < DRAW_CARD_MAX) // .. 덱에 카드가 부족하다면?
-                    {
-                        CardDeckUIController.PushCards(CardTombUIController.DequeueDeadCards()); // .. 무덤에서 덱으로 카드 옮기기
-                        importerCards.AddRange(CardDeckUIController.DequeueCards(DRAW_CARD_MAX - importerCards.Count)); // .. 부족한 카드 수만 큼 다시 덱에서 뽑아오기 
-                    }
+            int count = DRAW_CARD_MAX; // .. 최대 드로우 갯수만큼 카드 드로우
+            List<TMCardUIController> importerCards = _cardHandImporter.GetCards(count); // .. 다음 턴에 무조건 나와야 할 카드부터 드로우
 
-                    CardHandUIController.SetCards(importerCards); // .. 손 패에 카드 세팅
-                });
+            importerCards.AddRange(CardDeckUIController.DequeueCards(count - importerCards.Count)); // .. 무조건 나와야 할 카드 갯수만큼 제외해서 덱에서 드로우
+
+            if (importerCards.Count < DRAW_CARD_MAX) // .. 덱에 카드가 부족하다면?
+            {
+                CardDeckUIController.PushCards(CardTombUIController.DequeueDeadCards()); // .. 무덤에서 덱으로 카드 옮기기
+                importerCards.AddRange(CardDeckUIController.DequeueCards(DRAW_CARD_MAX - importerCards.Count)); // .. 부족한 카드 수만 큼 다시 덱에서 뽑아오기 
+            }
+
+            foreach (TMCardUIController cardUI in importerCards)
+            {
+                cardUI.transform.localPosition = CardHandUIController.DeckTransform.localPosition;
+                cardUI.OnDrawBegin();
+            }
+
+            CardHandUIController.SetCards(importerCards); // .. 손 패에 카드 세팅
+            CardHandUIController.SortCardsInOrder(cardUI => cardUI.OnDrawEnded());
         }
 
         private void addListenerToCard(TMCardUIController card)
@@ -108,28 +121,22 @@ namespace TMCardUISystemModules
             card.OnDestroyCard.AddListener(onDestroyCard);
         }
 
-        private void onMoveToScreenCenter(TMCardUIController cardUI)
+        private void onMoveToScreenCenter(TMCardUIController cardUI, bool isUseEndedCall)
         {
             CardHandUIController.RemoveCard(cardUI);
+            CardHandUIController.SortCards();
 
             cardUI.SetOn(false);
 
-            Vector3 targetWorldPosition = _cardSystemCamera
-                .ScreenToWorldPoint(new(Screen.width * 0.5f, Screen.height * 0.5f));
-
-            Vector3 targetPosition = cardUI
-                .transform
-                .parent
-                .InverseTransformPoint(new(targetWorldPosition.x, targetWorldPosition.y, 0f));
-
             List<MMF_Feedback> events = new()
             {
-                EventCreator.CreateSmoothPositionAndRotationEvent(
-                    cardUI.gameObject,
-                    new Vector3(targetPosition.x, targetPosition.y, 0f),
-                    Vector3.zero),
-                EventCreator.CreateUnityEvent(cardUI.OnUseEnded, null, null, null)
+                getMoveToScreenCenterEvent(cardUI)
             };
+
+            if (isUseEndedCall == true)
+            {
+                events.Add(EventCreator.CreateUnityEvent(cardUI.OnUseEnded, null, null, null));
+            }
 
             cardUI.EventSender.PlayEvents(events);
         }
@@ -166,14 +173,20 @@ namespace TMCardUISystemModules
 
         private void onRecycleToHand(TMCardUIController cardUI)
         {
-
-            CardHandUIController.AddCardToFirst(cardUI);
+            CardHandUIController.AddCardToFirstAndSort(cardUI);
         }
 
         private void onDrawUse(TMCardUIController cardUI)
         {
-            CardHandUIController.RemoveCard(cardUI);
-            onMoveToScreenCenter(cardUI);
+            Vector3 keepPosition = cardUI.transform.localPosition;
+            Vector3 keepEulerAngle = cardUI.transform.localRotation.eulerAngles;
+            List<MMF_Feedback> events = new()
+            {
+                getMoveToScreenCenterEvent(cardUI),
+                EventCreator.CreateSmoothPositionAndRotationEvent(cardUI.gameObject, keepPosition, keepEulerAngle, 0.8f)
+            };
+
+            cardUI.EventSender.PlayEvents(events);
         }
 
         private void onDelaySeconds(TMCardUIController cardUI, float delayTime)
@@ -218,6 +231,22 @@ namespace TMCardUISystemModules
         {
             cardUI.gameObject.SetActive(true);
             moveToTomb(cardUI);
+        }
+
+        private MMF_Feedback getMoveToScreenCenterEvent(TMCardUIController cardUI)
+        {
+            Vector3 targetWorldPosition = _cardSystemCamera
+                .ScreenToWorldPoint(new(Screen.width * 0.5f, Screen.height * 0.5f));
+
+            Vector3 targetPosition = cardUI
+                .transform
+                .parent
+                .InverseTransformPoint(new(targetWorldPosition.x, targetWorldPosition.y, 0f));
+
+            return EventCreator.CreateSmoothPositionAndRotationEvent(
+                    cardUI.gameObject,
+                    new(targetPosition.x, targetPosition.y, 0f),
+                    Vector3.zero);
         }
     }
 }

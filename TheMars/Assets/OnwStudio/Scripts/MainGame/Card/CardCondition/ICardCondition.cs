@@ -6,3 +6,8 @@ public interface ICardCondition
 {
     bool AdditionalCondition { get; }
 }
+
+public interface ICardCondtionProcessing
+{
+    void UseProcessing();
+}

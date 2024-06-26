@@ -306,6 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cards:
   - {fileID: 11400000, guid: e50cf8b5c6e884f63ba9159d7aff9ae4, type: 2}
+  - {fileID: 11400000, guid: 3eca4993bd01a4b08b5359e109420772, type: 2}
 --- !u!4 &441722214
 Transform:
   m_ObjectHideFlags: 0

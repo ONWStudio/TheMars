@@ -18,7 +18,7 @@ public sealed class TurnDelayCard : ICardSpecialEffect
     {
         cardController.UseStartedState = () =>
         {
-            cardController.OnMoveToScreenCenter.Invoke(cardController);
+            cardController.OnMoveToScreenCenter.Invoke(cardController, true);
             cardController.OnDelayTurn.Invoke(cardController, DelayTurn);
         };
     }

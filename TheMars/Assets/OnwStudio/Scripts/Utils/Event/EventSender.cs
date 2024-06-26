@@ -29,6 +29,7 @@ public sealed class EventSender : MonoBehaviour
     [field: SerializeField] public UnityEvent OnComplitedEndEvent { get; private set; } = new();
 
     private MMF_Player _eventReceiver = null;
+    private Coroutine _playCoroutine = null;
     public bool IsPlaying { get; private set; } = false;
 
     private void Awake()
@@ -63,10 +64,17 @@ public sealed class EventSender : MonoBehaviour
     {
         OnStartBeginEvent.Invoke();
         IsPlaying = true;
+        OnStartEndEvent.Invoke();
+
         _eventReceiver.StopFeedbacks();
         _eventReceiver.FeedbacksList.Clear();
-        StartCoroutine(iEPlayFeedbacks(feedbacks));
-        OnStartEndEvent.Invoke();
+
+        if (_playCoroutine is not null) // .. 기존 이벤트 강제종료
+        {
+            StopCoroutine(_playCoroutine);
+        }
+
+        _playCoroutine = StartCoroutine(iEPlayFeedbacks(feedbacks));
     }
 
     private void onComplitedEvents()

@@ -30,7 +30,7 @@ public static class EventCreator
         DestinationPosition = targetPosition,
         Mode = MMF_Position.Modes.ToDestination,
         Space = MMF_Position.Spaces.Local,
-        FeedbackDuration = 1.0f,
+        FeedbackDuration = feedbackDuration,
         RelativePosition = false,
         AnimatePositionTween = SmootyTween
     };

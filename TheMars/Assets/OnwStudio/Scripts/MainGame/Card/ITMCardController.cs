@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using MoreMountains.Feedbacks;
 using OnwAttributeExtensions;
 
 public abstract class TMCardController<T> : MonoBehaviour where T : TMCardController<T>
 {
-    [field: SerializeField] public UnityEvent<T> OnMoveToScreenCenter { get; private set; } = new();
+    [field: SerializeField] public UnityEvent<T, bool> OnMoveToScreenCenter { get; private set; } = new();
     /// <summary>
     /// .. 카드가 무덤으로 이동해야 되는 경우 리스너들에게 알려주는 콜백 이벤트
     /// 카드 UI에서는 무덤으로 이동 할 방법을 알지못하기 때문에 무덤의 위치정보를 가지고 있는 객체가 카드 UI를 참조해서 알려주어야 함
@@ -18,7 +19,7 @@ public abstract class TMCardController<T> : MonoBehaviour where T : TMCardContro
     /// </summary>
     [field: SerializeField] public UnityEvent<T> OnRecycleToHand { get; private set; } = new();
     /// <summary>
-    /// .. 카드가 드로우 일 경우 리스너들에게 알려줍니다
+    /// .. 카드가 드로우할때 사용되는 경우 리스너들에게 알려줍니다
     /// </summary>
     [field: SerializeField] public UnityEvent<T> OnDrawUse { get; private set; } = new();
     /// <summary>
@@ -54,9 +55,9 @@ public abstract class TMCardController<T> : MonoBehaviour where T : TMCardContro
 
     [SerializeField, ReadOnly] protected TMCardData _cardData = null;
 
-    public Action UseStartedState { get;  set; } = null;
-    public Action UseEndedState { get;  set; } = null;
-    public Action DrawBeginState { get;  set; } = null;
-    public Action DrawEndedState { get;  set; } = null;
-    public Action TurnEndedState { get;  set; } = null;
+    public Action UseStartedState { get; set; } = null;
+    public Action UseEndedState { get; set; } = null;
+    public Action DrawBeginState { get; set; } = null;
+    public Action DrawEndedState { get; set; } = null;
+    public Action TurnEndedState { get; set; } = null;
 }

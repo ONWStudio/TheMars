@@ -59,7 +59,7 @@ namespace TMCardUISystemModules
             UseStartedState = () =>
             {
                 _cardData.UseCard(gameObject);
-                OnMoveToScreenCenter.Invoke(this);
+                OnMoveToScreenCenter.Invoke(this, true);
             };
 
             UseEndedState = () => OnMoveToTomb.Invoke(this);

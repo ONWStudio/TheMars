@@ -2,14 +2,15 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using CoroutineExtensions;
+using TcgEngine.UI;
 
 namespace TMCardUISystemModules
 {
     /// <summary>
     /// .. 카드 패 UI 들을 관리하는 클래스
     /// 카드 패들의 움직임과 상호작용에 관한 관리를 하는 클래스 입니다
+    /// 카드를 추가하거나 제거할때 카드를 생성/파괴하는 것이 아닌 리스트의 자료구조에서만 제거합니다 카드의 생명주기는 외부에서 관리합니다
     /// </summary>
     [DisallowMultipleComponent]
     public sealed class TMCardHandUIController : MonoBehaviour
@@ -30,7 +31,7 @@ namespace TMCardUISystemModules
         [Header("Sorter")]
         [SerializeReference, SerializeReferenceDropdown] private ICardSorter _cardSorter = null;
 
-        [SerializeField] private List<TMCardUIController> _cards = new(10);
+        [SerializeField] private List<TMCardUIController> _cards = new(5);
 
         private void Awake()
         {
@@ -46,7 +47,7 @@ namespace TMCardUISystemModules
             UniRxObserver.ObserveInfomation(
                 this,
                 selector => _cardSorter,
-                sorter => sorter.SortCards(_cards, HandTransform));
+                sorter => sorter.SortCards(_cards, HandTransform, 1.0f));
         }
 
         /// <summary>
@@ -57,7 +58,6 @@ namespace TMCardUISystemModules
         {
             cards.ForEach(setCardUI);
             _cards.AddRange(cards);
-            SortCards();
         }
 
         /// <summary>
@@ -67,8 +67,12 @@ namespace TMCardUISystemModules
         public void AddCard(TMCardUIController cardUI)
         {
             setCardUI(cardUI);
-
             _cards.Add(cardUI);
+        }
+
+        public void AddCardAndSort(TMCardUIController cardUI)
+        {
+            AddCard(cardUI);
             SortCards();
         }
 
@@ -78,7 +82,7 @@ namespace TMCardUISystemModules
         }
 
         /// <summary>
-        /// .. 카드 하나를 패에 추가합니다 카드는 가장 앞 자리에 배치됩니다 자동으로 정렬됩니다
+        /// .. 카드 하나를 패에 추가합니다 카드는 가장 앞 자리에 배치됩니다
         /// </summary>
         /// <param name="cardUI"></param>
         public void AddCardToFirst(TMCardUIController cardUI)
@@ -86,6 +90,11 @@ namespace TMCardUISystemModules
             setCardUI(cardUI);
 
             _cards.Insert(0, cardUI);
+        }
+
+        public void AddCardToFirstAndSort(TMCardUIController cardUI)
+        {
+            AddCardToFirst(cardUI);
             SortCards();
         }
 
@@ -96,6 +105,11 @@ namespace TMCardUISystemModules
         public void RemoveCard(TMCardUIController cardUI)
         {
             _cards.Remove(cardUI);
+        }
+
+        public void RemoveCardAndSort(TMCardUIController cardUI)
+        {
+            RemoveCard(cardUI);
             SortCards();
         }
 
@@ -123,30 +137,46 @@ namespace TMCardUISystemModules
         /// <summary>
         /// .. 카드를 정렬해야하는 경우 해당 메서드를 호출하면 리스트에 존재하는 카드들을 올바른 위치로 정렬 시킵니다 이벤트 기반입니다
         /// </summary>
-        public void SortCards()
+        public void SortCards(float duration = 1.0f, System.Action<TMCardUIController> endedDrawCall = null)
         {
             _cards.ForEach(cardUI => cardUI.SetOn(false));
-            _cardSorter.SortCards(_cards, HandTransform);
+            _cardSorter.SortCards(_cards, HandTransform, duration);
 
             // .. 카드의 정렬이 끝날때까지 상호작용 불가
             this.WaitCompletedConditions(
                 () => _cards.All(card => !card.EventSender.IsPlaying),
                 () =>
                 {
-                    // .. 내부에서 콜백으로 인해 Remove작업이 발생하므로 배열자체를 복사해서 처리
                     foreach (TMCardUIController cardUI in _cards.ToArray())
                     {
                         cardUI.SetOn(true);
-                        cardUI.OnDrawEnded();
+                        endedDrawCall?.Invoke(cardUI);
                     }
                 });
+        }
+
+        public void SortCardsInOrder(System.Action<TMCardUIController> endedDrawCall = null)
+        {
+            _cards.ForEach(cardUI => cardUI.SetOn(false));
+            StartCoroutine(iESortCardInOrder(endedDrawCall));
+        }
+
+        private IEnumerator iESortCardInOrder(System.Action<TMCardUIController> endedDrawCall)
+        {
+            for (int i = 0; i < _cards.Count; i++)
+            {
+                _cardSorter.ArrangeCard(_cards, i, HandTransform, 0.55f);
+                yield return new WaitUntil(() => !_cards[i].EventSender.IsPlaying);
+                endedDrawCall.Invoke(_cards[i]);
+                yield return new WaitUntil(() => !_cards[i].EventSender.IsPlaying); // .. 카드 UI가 드로우 중이라면
+            }
+
+            _cards.ForEach(cardUI => cardUI.SetOn(true));
         }
 
         private void setCardUI(TMCardUIController cardUI)
         {
             cardUI.transform.SetParent(transform, false);
-            cardUI.transform.localPosition = DeckTransform.localPosition;
-            cardUI.OnDrawBegin();
         }
     }
 }
