@@ -21,16 +21,21 @@ MonoBehaviour:
   <CardGrade>k__BackingField: 0
   <CardGroup>k__BackingField: 0
   _specialEffect:
-  - rid: 4678432463386312718
+  - rid: 4678432487059488778
   _cardNames:
     _serializedList: []
   _descriptions:
     _serializedList: []
-  _cardEffects: []
+  _cardEffects:
+  - rid: 4678432487059488780
   _addtionalConditions: []
   references:
     version: 2
     RefIds:
-    - rid: 4678432463386312718
-      type: {class: InstallationCard, ns: , asm: AssebmlyTMCard}
+    - rid: 4678432487059488778
+      type: {class: RepeatCard, ns: , asm: AssebmlyTMCard}
       data: 
+    - rid: 4678432487059488780
+      type: {class: TeraResourceEffect, ns: , asm: Assembly-CSharp}
+      data:
+        <Amount>k__BackingField: 20

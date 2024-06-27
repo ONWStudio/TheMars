@@ -42,16 +42,8 @@ namespace TMCardUISystemModules
             };
         }
 
-        private void Start()
-        {
-            UniRxObserver.ObserveInfomation(
-                this,
-                selector => _cardSorter,
-                sorter => sorter.SortCards(_cards, HandTransform, 1.0f));
-        }
-
         /// <summary>
-        /// .. 카드를 여러개 배치 시킵니다 자동으로 카드를 올바르게 정렬합니다
+        /// .. 카드를 여러개 배치 시킵니다
         /// </summary>
         /// <param name="cards"> .. 패에 세팅할 카드들 </param>
         public void SetCards(List<TMCardUIController> cards)
@@ -166,9 +158,8 @@ namespace TMCardUISystemModules
             for (int i = 0; i < _cards.Count; i++)
             {
                 _cardSorter.ArrangeCard(_cards, i, HandTransform, 0.55f);
-                Debug.Log("?");
                 yield return new WaitUntil(() => !_cards[i].EventSender.IsPlaying);
-                endedDrawCall.Invoke(_cards[i]);
+                endedDrawCall?.Invoke(_cards[i]);
                 yield return new WaitUntil(() => !_cards[i].EventSender.IsPlaying); // .. 카드 UI가 드로우 중이라면
             }
 

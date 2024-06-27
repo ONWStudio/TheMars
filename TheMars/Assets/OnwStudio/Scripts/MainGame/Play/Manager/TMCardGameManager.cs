@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using CoroutineExtensions;
+using UITools; 
 using OnwAttributeExtensions;
 using MoreMountains.Feedbacks;
 
@@ -109,36 +109,16 @@ namespace TMCardUISystemModules
                 AnimatedCardCount++;
             });
             card.EventSender.OnComplitedEndEvent.AddListener(() => AnimatedCardCount--);
-
-            card.OnClickCard.AddListener(card => card.OnUseStart());
-            card.OnMoveToScreenCenter.AddListener(onMoveToScreenCenter);
-            card.OnMoveToTomb.AddListener(moveToTomb);
+            card.OnClickCard.AddListener(card => card.OnUsed());
+            card.OnEffectCard.AddListener(onEffectCard);
+            card.OnMoveToTomb.AddListener(onMoveToTomb);
             card.OnRecycleToHand.AddListener(onRecycleToHand);
             card.OnDrawUse.AddListener(onDrawUse);
             card.OnDelaySeconds.AddListener(onDelaySeconds);
             card.OnDelayTurn.AddListener(onDelayTurn);
             card.OnHoldCard.AddListener(onHoldCard);
             card.OnDestroyCard.AddListener(onDestroyCard);
-        }
-
-        private void onMoveToScreenCenter(TMCardUIController cardUI, bool isUseEndedCall)
-        {
-            CardHandUIController.RemoveCard(cardUI);
-            CardHandUIController.SortCards();
-
-            cardUI.SetOn(false);
-
-            List<MMF_Feedback> events = new()
-            {
-                getMoveToScreenCenterEvent(cardUI)
-            };
-
-            if (isUseEndedCall == true)
-            {
-                events.Add(EventCreator.CreateUnityEvent(cardUI.OnUseEnded, null, null, null));
-            }
-
-            cardUI.EventSender.PlayEvents(events);
+            card.OnDisposableCard.AddListener(onDisposableCard);
         }
 
         /// <summary>
@@ -146,34 +126,45 @@ namespace TMCardUISystemModules
         /// </summary>
         /// <param name="cardUI"></param>
         private void notifyTurnEndToCard(TMCardUIController cardUI)
-        { 
+        {
             cardUI.OnTurnEnd();
         }
 
-        /// <summary>
-        /// .. 카드를 무덤으로 보냅니다
-        /// </summary>
-        private void moveToTomb(TMCardUIController cardUI)
+        private void onEffectCard(TMCardUIController cardUI)
         {
+            CardHandUIController.RemoveCardAndSort(cardUI);
+
             List<MMF_Feedback> events = new()
             {
-                EventCreator.CreateSmoothPositionAndRotationEvent(
-                    cardUI.gameObject,
-                    CardHandUIController.TombTransform.localPosition,
-                    Vector3.zero),
-                EventCreator.CreateUnityEvent(
-                    () => CardTombUIController.EnqueueDeadCard(cardUI),
-                    null,
-                    null,
-                    null)
+                getMoveToScreenCenterEvent(cardUI)
             };
+
+            events.AddRange(getMoveToTombEvent(cardUI));
 
             cardUI.EventSender.PlayEvents(events);
         }
 
+        private void onDestroyCard(TMCardUIController cardUI)
+        {
+            cardUI.EventSender.PlayEvents(getDestroyEvent(cardUI));
+        }
+
+        private void onMoveToTomb(TMCardUIController cardUI)
+        {
+            CardHandUIController.RemoveCardAndSort(cardUI);
+            cardUI.EventSender.PlayEvents(getMoveToTombEvent(cardUI));
+        }
+
         private void onRecycleToHand(TMCardUIController cardUI)
         {
-            CardHandUIController.AddCardToFirstAndSort(cardUI);
+            CardHandUIController.RemoveCardAndSort(cardUI);
+            List<MMF_Feedback> events = new()
+            {
+                getMoveToScreenCenterEvent(cardUI),
+                EventCreator.CreateUnityEvent(() => CardHandUIController.AddCardToFirstAndSort(cardUI))
+            };
+
+            cardUI.EventSender.PlayEvents(events);
         }
 
         private void onDrawUse(TMCardUIController cardUI)
@@ -215,13 +206,15 @@ namespace TMCardUISystemModules
             // TODO : 보유 효과 처리
         }
 
-        private void onDestroyCard(TMCardUIController cardUI)
+        private void onDisposableCard(TMCardUIController cardUI)
         {
-            Vector3 targetPosition = cardUI.transform.localPosition + (Vector3)(cardUI.transform.up * cardUI.RectTransform.rect.size * 0.5f);
+            CardHandUIController.RemoveCardAndSort(cardUI);
+
             List<MMF_Feedback> events = new()
             {
-                EventCreator.CreateSmoothPositionAndRotationEvent(cardUI.gameObject, targetPosition, Vector3.zero),
-                EventCreator.CreateUnityEvent(() => Destroy(cardUI.gameObject), null, null, null)
+                getMoveToScreenCenterEvent(cardUI),
+                EventCreator.CreateUnityEvent(()
+                    => cardUI.EventSender.PlayEvents(getDestroyEvent(cardUI)))
             };
 
             cardUI.EventSender.PlayEvents(events);
@@ -230,23 +223,58 @@ namespace TMCardUISystemModules
         private void setActiveDelayCard(TMCardUIController cardUI)
         {
             cardUI.gameObject.SetActive(true);
-            moveToTomb(cardUI);
+            CardHandUIController.SetOn(false);
+
+            List<MMF_Feedback> events = new(getMoveToTombEvent(cardUI))
+            {
+                EventCreator.CreateUnityEvent(() => CardHandUIController.SetOn(true))
+            };
+
+            cardUI.EventSender.PlayEvents(events);
+        }
+
+        private Vector3 getScreenCenter(TMCardUIController cardUI)
+        {
+            Vector2 targetWorldPosition = _cardSystemCamera.GetScreenCenterWorldPoint();
+
+            return cardUI
+                .transform
+                .parent
+                .InverseTransformPoint(new(targetWorldPosition.x, targetWorldPosition.y, 0f));
         }
 
         private MMF_Feedback getMoveToScreenCenterEvent(TMCardUIController cardUI)
         {
-            Vector3 targetWorldPosition = _cardSystemCamera
-                .ScreenToWorldPoint(new(Screen.width * 0.5f, Screen.height * 0.5f));
-
-            Vector3 targetPosition = cardUI
-                .transform
-                .parent
-                .InverseTransformPoint(new(targetWorldPosition.x, targetWorldPosition.y, 0f));
+            Vector3 targetPosition = getScreenCenter(cardUI);
 
             return EventCreator.CreateSmoothPositionAndRotationEvent(
-                    cardUI.gameObject,
-                    new(targetPosition.x, targetPosition.y, 0f),
-                    Vector3.zero);
+                cardUI.gameObject,
+                new(targetPosition.x, targetPosition.y, 0f),
+                Vector3.zero);
         }
+
+        private MMF_Feedback getMoveToUp(TMCardUIController cardUI) => EventCreator.CreateSmoothPositionAndRotationEvent(
+                cardUI.gameObject,
+                cardUI.transform.localPosition + (Vector3)(cardUI.transform.up * cardUI.RectTransform.rect.size * 0.5f),
+                Vector3.zero);
+
+        private List<MMF_Feedback> getDestroyEvent(TMCardUIController cardUI) => new()
+        {
+            getMoveToUp(cardUI),
+            EventCreator.CreateUnityEvent(() => Destroy(cardUI.gameObject), null, null, null)
+        };
+
+        private List<MMF_Feedback> getMoveToTombEvent(TMCardUIController cardUI) => new()
+        {
+            EventCreator.CreateSmoothPositionAndRotationEvent(
+                cardUI.gameObject,
+                CardHandUIController.TombTransform.localPosition,
+                Vector3.zero),
+            EventCreator.CreateUnityEvent(
+                () => CardTombUIController.EnqueueDeadCard(cardUI),
+                null,
+                null,
+                null)
+        };
     }
 }

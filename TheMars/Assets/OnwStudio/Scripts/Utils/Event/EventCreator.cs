@@ -55,7 +55,7 @@ public static class EventCreator
     /// <param name="initializeEvent"></param>
     /// <param name="resetEvent"></param>
     /// <returns></returns>
-    public static MMF_Events CreateUnityEvent(UnityAction playEvent, UnityAction stopEvent, UnityAction initializeEvent, UnityAction resetEvent)
+    public static MMF_Events CreateUnityEvent(UnityAction playEvent, UnityAction stopEvent = null, UnityAction initializeEvent = null, UnityAction resetEvent = null)
     {
         MMF_Events mmfEvents = new()
         {

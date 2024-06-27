@@ -56,13 +56,12 @@ namespace TMCardUISystemModules
             initalizeInputHandle();
             initializeSmoothMove();
 
-            UseStartedState = () =>
+            UseState = () =>
             {
-                _cardData.UseCard(gameObject);
-                OnMoveToScreenCenter.Invoke(this, true);
+                _cardData.UseCard();
+                OnEffectCard.Invoke(this);
             };
 
-            UseEndedState = () => OnMoveToTomb.Invoke(this);
             TurnEndedState = () => OnMoveToTomb.Invoke(this);
 
             _cardData.SpecialEffects.ForEach(specialEffect => specialEffect?.ApplyEffect(this));
@@ -75,14 +74,9 @@ namespace TMCardUISystemModules
 #endif
         }
 
-        public void OnUseStart()
+        public void OnUsed()
         {
-            UseStartedState?.Invoke();
-        }
-
-        public void OnUseEnded()
-        {
-            UseEndedState?.Invoke();
+            UseState?.Invoke();
         }
 
         /// <summary>
@@ -93,9 +87,6 @@ namespace TMCardUISystemModules
             DrawBeginState?.Invoke();
         }
 
-        /// <summary>
-        /// .. 카드가 덱어서 드로우 된 후 이벤트가 끝날때 호출되는 메서드 입니다
-        /// </summary>
         public void OnDrawEnded()
         {
             DrawEndedState?.Invoke();
