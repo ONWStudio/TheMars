@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using OnwAttributeExtensions;
+using Onw.Attribute;
 
-/// <summary>
-/// .. 지속 (턴)
-/// </summary>
-[SerializeReferenceDropdownName("지속 (턴)")]
-public sealed class TurnContinuingCard : ICardSpecialEffect
+namespace TMCard
 {
-    /// <summary>
-    /// .. 지속 할 턴
-    /// </summary>
-    [field: SerializeField, DisplayAs("지속 턴")] public int ContinuingTurn { get; private set; } = 1;
+    using UI;
 
-    public void ApplyEffect<T>(T cardController) where T : TMCardController<T>
+    /// <summary>
+    /// .. 지속 (턴)
+    /// </summary>
+    [SerializeReferenceDropdownName("지속 (턴)")]
+    public sealed class TurnContinuingCard : ICardSpecialEffect
     {
+        /// <summary>
+        /// .. 지속 할 턴
+        /// </summary>
+        [field: SerializeField, DisplayAs("지속 턴")] public int ContinuingTurn { get; private set; } = 1;
+
+        public void ApplyEffect(TMCardController cardController)
+        {
+        }
     }
 }

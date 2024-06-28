@@ -1,55 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public sealed class Dispatcher : UpdatingClass, IDispatcher
+namespace Onw.Dispatcher
 {
-    public static Dispatcher Instance { get; } = new Dispatcher();
+    using Manager;
 
-    private readonly Stack<Action> _pending = new();
-    private readonly List<Action> _loopPending = new();
-
-    // Schedule code for execution in the main-thread.
-    //
-    public void Invoke(Action fn)
+    public sealed class Dispatcher : UpdatingClass, IDispatcher
     {
-        lock (_pending)
+        public static Dispatcher Instance { get; } = new Dispatcher();
+
+        private readonly Stack<Action> _pending = new();
+        private readonly List<Action> _loopPending = new();
+
+        // Schedule code for execution in the main-thread.
+        //
+        public void Invoke(Action fn)
         {
-            _pending.Push(fn);
+            lock (_pending)
+            {
+                _pending.Push(fn);
+            }
         }
-    }
 
-    public void InvokeLoop(Action fn)
-    {
-        lock (_loopPending)
+        public void InvokeLoop(Action fn)
         {
-            _loopPending.Add(fn);
+            lock (_loopPending)
+            {
+                _loopPending.Add(fn);
+            }
         }
-    }
 
-    //
-    // Execute pending actions.
-    //
-    private void invokePending()
-    {
-        lock (_pending)
+        //
+        // Execute pending actions.
+        //
+        private void invokePending()
         {
-            while (_pending.Count > 0) _pending.Pop().Invoke();
+            lock (_pending)
+            {
+                while (_pending.Count > 0) _pending.Pop().Invoke();
+            }
         }
-    }
 
-    private void invokeLoopPending()
-    {
-        lock (_loopPending)
+        private void invokeLoopPending()
         {
-            _loopPending.ForEach(action => action.Invoke());
+            lock (_loopPending)
+            {
+                _loopPending.ForEach(action => action.Invoke());
+            }
         }
-    }
 
-    protected internal override void Update()
-    {
-        invokePending();
-        invokeLoopPending();
-    }
+        protected internal override void Update()
+        {
+            invokePending();
+            invokeLoopPending();
+        }
 
-    private Dispatcher() {}
+        private Dispatcher() { }
+    }
 }

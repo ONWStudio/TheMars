@@ -3,11 +3,10 @@
     "rootNamespace": "",
     "references": [
         "AssebmlyTMCard",
-        "AssemblyEditorTool",
-        "AssemblyReflectionHelper",
-        "AssemblyEnumerableExtensions",
         "AYellowpaper.SerializedCollections",
-        "AddressableAssetBundleCreator"
+        "AddressableAssetBundleCreator",
+        "AssemblyOnw",
+        "AssemblyEditorHelper"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

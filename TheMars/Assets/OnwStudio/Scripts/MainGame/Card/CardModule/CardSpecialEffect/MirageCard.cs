@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// .. 신기루
-/// </summary>
-[SerializeReferenceDropdownName("신기루")]
-public sealed class MirageCard : ICardSpecialEffect
+namespace TMCard
 {
-    public void ApplyEffect<T>(T cardController) where T : TMCardController<T>
+    using UI;
+
+    /// <summary>
+    /// .. 신기루
+    /// </summary>
+    [SerializeReferenceDropdownName("신기루")]
+    public sealed class MirageCard : ICardSpecialEffect
     {
-        cardController.UseState = () => cardController.OnDisposableCard.Invoke(cardController);
-        cardController.TurnEndedState = () => cardController.OnDestroyCard.Invoke(cardController);
+        public void ApplyEffect(TMCardController cardController)
+        {
+            cardController.UseState = () => TMCardGameManager.Instance.DisposeCard(cardController);
+            cardController.TurnEndedState = () => TMCardGameManager.Instance.DestroyCard(cardController);
+        }
     }
 }

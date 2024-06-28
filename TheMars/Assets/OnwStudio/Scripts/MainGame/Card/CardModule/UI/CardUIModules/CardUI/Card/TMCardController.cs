@@ -1,0 +1,171 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
+using Onw.Attribute;
+using Onw.Components.Movement;
+using Onw.Extensions;
+using Onw.Event;
+using UnityEngine.EventSystems;
+
+namespace TMCard.UI
+{
+    public sealed class TMCardController : MonoBehaviour
+    {
+        /// <summary>
+        /// .. 카드의 상세한 기본 데이터 입니다
+        /// </summary>
+        public TMCardData CardData
+        {
+            get => _cardData;
+            set
+            {
+                if (_cardData) return;
+
+                _cardData = value;
+            }
+        }
+
+        [SerializeField, ReadOnly] private TMCardData _cardData = null;
+
+        public Action UseState { get; set; } = null;
+        public Action DrawBeginState { get; set; } = null;
+        public Action DrawEndedState { get; set; } = null;
+        public Action TurnEndedState { get; set; } = null;
+
+        /// <summary>
+        /// .. 이벤트 센더 클래스 입니다 외부에서 이벤트 연출 효과를 발생시킬때 사용할 수 있는 프로퍼티 입니다
+        /// </summary>
+        public EventSender EventSender { get; private set; } = null;
+        /// <summary>
+        /// .. 카드에 사용자 입력을 받아오는 핸들러 입니다
+        /// </summary>
+        public TMCardInputHandler InputHandler { get; private set; } = null;
+        /// <summary>
+        /// .. RectTransform
+        /// </summary>
+        public RectTransform RectTransform { get; private set; } = null;
+        /// <summary>
+        /// .. 카드가 상호작용 가능한 활성화인지 상태를 반환합니다
+        /// </summary>
+        public bool OnCard { get; private set; } = false;
+
+        private Vector2SmoothMover _smoothMove = null;
+        private Image _raycastingImage = null;
+        private Image _cardImage = null;
+
+        private void Awake()
+        {
+            _cardImage = new GameObject("CardImage").AddComponent<Image>();
+            RectTransform = gameObject.AddComponent<RectTransform>();
+            EventSender = gameObject.AddComponent<EventSender>();
+            InputHandler = gameObject.AddComponent<TMCardInputHandler>();
+            _raycastingImage = gameObject.AddComponent<Image>();
+            _smoothMove = _cardImage.gameObject.AddComponent<Vector2SmoothMover>();
+        }
+
+        private void Start()
+        {
+            initializeImages();
+            initalizeInputHandle();
+            initializeSmoothMove();
+
+            UseState = () =>
+            {
+                _cardData.UseCard();
+                TMCardGameManager.Instance.EffectCard(this);
+            };
+
+            TurnEndedState = () => TMCardGameManager.Instance.MoveToTomb(this);
+
+            _cardData.SpecialEffects.ForEach(specialEffect => specialEffect?.ApplyEffect(this));
+        }
+
+        private void OnDestroy()
+        {
+#if DEBUG
+            Debug.Log("destroyed Card!");
+#endif
+        }
+
+        public void OnUsed()
+        {
+            UseState?.Invoke();
+        }
+
+        /// <summary>
+        /// .. 카드가 덱에서 드로우 될 때 호출되는 메서드 입니다
+        /// </summary>
+        public void OnDrawBegin()
+        {
+            DrawBeginState?.Invoke();
+        }
+
+        public void OnDrawEnded()
+        {
+            DrawEndedState?.Invoke();
+        }
+
+        /// <summary>
+        /// .. 턴이 종료되었을때 TurnEnd메서드를 호출합니다
+        /// </summary>
+        public void OnTurnEnd()
+        {
+            TurnEndedState?.Invoke();
+        }
+
+        /// <summary>
+        /// .. 카드의 상호작용 상태를 전환 하는 메서드 입니다 false 일시 카드와 상호작용이 불가능 합니다
+        /// </summary>
+        /// <param name="isOn"> .. 카드의 상호작용 상태를 전환시킬 boolen 값 </param>
+        public void SetOn(bool isOn)
+        {
+            OnCard = isOn;
+            _smoothMove.enabled = isOn;
+            _smoothMove.transform.localPosition = Vector3.zero;
+        }
+
+        private void initializeImages()
+        {
+            _raycastingImage.color = new(255f, 255f, 255f, 0f);
+            _cardImage.transform.SetParent(transform, false);
+            _cardImage.raycastTarget = false;
+            _cardImage.transform.localPosition = Vector3.zero;
+        }
+
+        private void initializeSmoothMove()
+        {
+            _smoothMove.IsLocal = true;
+
+            if (!OnCard)
+            {
+                _smoothMove.enabled = false;
+            }
+        }
+
+        private void initalizeInputHandle()
+        {
+            InputHandler.AddListenerPointerEnterAction(pointerEventData =>
+                _smoothMove.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f));
+
+            InputHandler.AddListenerPointerExitAction(pointerEventData
+                => _smoothMove.TargetPosition = Vector2.zero);
+
+            InputHandler.AddListenerPointerClickAction(onClickCard);
+        }
+
+        /// <summary>
+        /// .. 카드를 사용합니다
+        /// 카드 사용시 카드는 효과가 발동되며 카드 효과는 이벤트 기반입니다 
+        /// </summary>
+        /// <param name="pointerEventData"></param>
+        private void onClickCard(PointerEventData pointerEventData)
+        {
+            if (!OnCard || !CardData.IsAvailable(1)) return;
+
+            TMCardGameManager.Instance.OnClickCard(this);
+        }
+    }
+}

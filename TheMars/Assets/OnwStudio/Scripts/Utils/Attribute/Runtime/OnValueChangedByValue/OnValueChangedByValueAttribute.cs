@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OnwAttributeExtensions
+namespace Onw.Attribute
 {
     [AttributeUsage(AttributeTargets.Field, Inherited = true, AllowMultiple = false)]
     public sealed class OnValueChangedByValueAttribute : PropertyAttribute

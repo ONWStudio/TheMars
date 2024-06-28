@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// .. 재활용
-/// </summary>
-[SerializeReferenceDropdownName("재활용")]
-public sealed class RecyclingCard : ICardSpecialEffect
+namespace TMCard
 {
-    public void ApplyEffect<T>(T cardController) where T : TMCardController<T>
+    using UI;
+
+    /// <summary>
+    /// .. 재활용
+    /// </summary>
+    [SerializeReferenceDropdownName("재활용")]
+    public sealed class RecyclingCard : ICardSpecialEffect
     {
-        cardController.UseState = () => cardController.OnRecycleToHand.Invoke(cardController);
+        public void ApplyEffect(TMCardController cardController)
+        {
+            cardController.UseState = () => TMCardGameManager.Instance.RecycleToHand(cardController);
+        }
     }
 }

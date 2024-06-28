@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using OnwAttributeExtensions;
+using Onw.Attribute;
 
 namespace OnValueChangedAttributeEditor
 {

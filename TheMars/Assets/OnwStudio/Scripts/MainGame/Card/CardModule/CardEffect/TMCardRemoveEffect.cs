@@ -1,0 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace TMCard
+{
+    [SerializeReferenceDropdownName("카드 제거")]
+    public sealed class TMCardRemoveEffect : ITMCardEffect
+    {
+        public void OnEffect(TMCardData cardData)
+        {
+            Debug.Log("카드 제거");
+        }
+    }
+}

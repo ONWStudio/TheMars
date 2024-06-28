@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ITMCardEffect
+namespace TMCard
 {
-    /// <summary>
-    /// .. 카드 사용시
-    /// </summary>
-    /// <returns></returns>
-    void OnEffect(TMCardData cardData);
+    public interface ITMCardEffect
+    {
+        /// <summary>
+        /// .. 카드 사용시
+        /// </summary>
+        /// <returns></returns>
+        void OnEffect(TMCardData cardData);
+    }
 }

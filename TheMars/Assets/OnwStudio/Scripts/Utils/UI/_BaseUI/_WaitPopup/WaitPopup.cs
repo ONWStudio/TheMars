@@ -4,31 +4,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public sealed class WaitPopup : BaseUI
+namespace Onw.UI.Components
 {
-    [Header("Wait Text")]
-    [SerializeField] private TMP_Text _waitText;
+    using Coroutine;
 
-    protected override void EnableUI()
-        => StartCoroutine(iEWaitEvent());
-
-    private IEnumerator iEWaitEvent()
+    public sealed class WaitPopup : BaseUI
     {
-        string getDotFromCount(int count) => (count % 3) switch
-        {
-            0 => ".",
-            1 => "..",
-            2 => "...",
-            _ => string.Empty
-        };
+        [Header("Wait Text")]
+        [SerializeField] private TMP_Text _waitText;
 
-        int count = 0;
+        protected override void EnableUI()
+            => StartCoroutine(iEWaitEvent());
 
-        while (true)
+        private IEnumerator iEWaitEvent()
         {
-            yield return CoroutineExtensions.CoroutineHelper.WaitForSeconds(1f);
-            count++;
-            _waitText.text = $"잠깐 기다려주세요 {getDotFromCount(count)}";
+            string getDotFromCount(int count) => (count % 3) switch
+            {
+                0 => ".",
+                1 => "..",
+                2 => "...",
+                _ => string.Empty
+            };
+
+            int count = 0;
+
+            while (true)
+            {
+                yield return CoroutineHelper.WaitForSeconds(1f);
+                count++;
+                _waitText.text = $"잠깐 기다려주세요 {getDotFromCount(count)}";
+            }
         }
     }
 }

@@ -1,12 +1,14 @@
 #if UNITY_EDITOR
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using static EditorTool.EditorTool;
-using OnwAttributeExtensions;
+using Onw.Attribute;
+using Onw.Helpers;
+using static OnwEditor.EditorHelper;
 
 namespace OnwAttributeExtensionsEditor
 {
@@ -14,18 +16,20 @@ namespace OnwAttributeExtensionsEditor
     {
         private readonly struct PropertyMethodPair
         {
-            public List<MethodInfo> Methods { get; }
-            public SerializedProperty TargetProperty { get; }
+            public List<Action> Methods { get; }
+            public FieldInfo TargetField { get; }
+            public object TargetInstance { get; }
 
-            public PropertyMethodPair(List<MethodInfo> methods, SerializedProperty targetProperty)
+            public PropertyMethodPair(List<Action> methods, FieldInfo targetField, object targetInstance)
             {
                 Methods = methods;
-                TargetProperty = targetProperty;
+                TargetField = targetField;
+                TargetInstance = targetInstance;
             }
         }
 
         private readonly Dictionary<string, PropertyMethodPair> _observerMethods = new();
-        private readonly List<KeyValuePair<string, SerializedProperty>> _prevProperties = new();
+        private readonly List<KeyValuePair<string, string>> _prevProperties = new();
 
         public void OnEnable(Editor editor)
         {
@@ -34,29 +38,32 @@ namespace OnwAttributeExtensionsEditor
             _observerMethods.Clear();
             _prevProperties.Clear();
 
-            foreach (MethodInfo methodInfo in ReflectionHelper.GetMethodsFromAttribute<OnValueChangedByMethodAttribute>(editor.target))
+            foreach (Action action in ReflectionHelper.GetActionsFromAttributeAllSearch<OnValueChangedByMethodAttribute>(editor.target))
             {
-                OnValueChangedByMethodAttribute onValueChangedByMethodAttribute = methodInfo.GetCustomAttribute<OnValueChangedByMethodAttribute>();
+                OnValueChangedByMethodAttribute onValueChangedByMethodAttribute = action.Method.GetCustomAttribute<OnValueChangedByMethodAttribute>();
 
                 if (!_observerMethods.TryGetValue(onValueChangedByMethodAttribute.FieldName, out PropertyMethodPair methods))
                 {
-                    SerializedProperty targetProperty = GetProperty(editor.serializedObject, onValueChangedByMethodAttribute.FieldName);
+                    FieldInfo targetField = action
+                        .Target
+                        .GetType()
+                        .GetField(onValueChangedByMethodAttribute.FieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
 
-                    if (targetProperty is null)
+                    if (targetField == null)
                     {
                         Debug.LogWarning("Not found Target Property!");
+                        continue;
                     }
 
-                    methods = new(new(), targetProperty);
+                    methods = new(new(), targetField, action.Target);
                     _observerMethods.Add(onValueChangedByMethodAttribute.FieldName, methods);
                 }
 
-                methods.Methods.Add(methodInfo);
+                methods.Methods.Add(action);
             }
 
             _prevProperties.AddRange(_observerMethods
-                .Values
-                .Select(pair => new KeyValuePair<string, SerializedProperty>(GetPropertyValue(pair.TargetProperty).ToString(), pair.TargetProperty)));
+                .Select(pair => new KeyValuePair<string, string>(pair.Key, GetPropertyValueFromObject(pair.Value.TargetField.GetValue(pair.Value.TargetInstance)).ToString())));
         }
 
         public void OnInspectorGUI(Editor editor)
@@ -65,18 +72,17 @@ namespace OnwAttributeExtensionsEditor
 
             for (int i = 0; i < _prevProperties.Count; i++)
             {
-                string key = _prevProperties[i].Value.displayName.Replace(" ", "");
-                string nowValue = GetPropertyValue(_observerMethods[key].TargetProperty).ToString();
+                string key = _prevProperties[i].Key;
+                var propertyMethodPair = _observerMethods[key];
+                string nowValue = GetPropertyValueFromObject(propertyMethodPair.TargetField.GetValue(propertyMethodPair.TargetInstance)).ToString();
 
-                if (_prevProperties[i].Key != nowValue)
+                if (_prevProperties[i].Value != nowValue)
                 {
-                    _observerMethods[key]
-                        .Methods
-                        .ForEach(method => method.Invoke(editor.target, null));
+                    propertyMethodPair.Methods.ForEach(method => method.Invoke());
 
                     _prevProperties[i] = new(
-                        GetPropertyValue(_observerMethods[key].TargetProperty).ToString(),
-                        _observerMethods[key].TargetProperty);
+                         key,
+                         GetPropertyValueFromObject(propertyMethodPair.TargetField.GetValue(propertyMethodPair.TargetInstance)).ToString());
                 }
             }
         }

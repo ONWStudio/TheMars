@@ -2,23 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
-using OnwAttributeExtensions;
+using Onw.Attribute;
 
-/// <summary>
-/// .. 드로우
-/// </summary>
-[SerializeReferenceDropdownName("드로우")]
-public sealed class DrawCard : ICardSpecialEffect
+namespace TMCard
 {
-    [SerializeReference, DisplayAs("드로우 효과"), FormerlySerializedAs("_drawEffects"), SerializeReferenceDropdown] private List<ITMCardEffect> _drawEffects = new();
+    using UI;
 
-    public void ApplyEffect<T>(T cardController) where T : TMCardController<T>
+    /// <summary>
+    /// .. 드로우
+    /// </summary>
+    [SerializeReferenceDropdownName("드로우")]
+    public sealed class DrawCard : ICardSpecialEffect
     {
-        cardController.DrawEndedState = () =>
+        [SerializeReference, DisplayAs("드로우 효과"), FormerlySerializedAs("_drawEffects"), SerializeReferenceDropdown] private List<ITMCardEffect> _drawEffects = new();
+
+        public void ApplyEffect(TMCardController cardController)
         {
-            _drawEffects
-                .ForEach(drawEffect => drawEffect.OnEffect(cardController.CardData));
-            cardController.OnDrawUse.Invoke(cardController);
-        };
+            cardController.DrawEndedState = () =>
+            {
+                _drawEffects
+                    .ForEach(drawEffect => drawEffect.OnEffect(cardController.CardData));
+
+                TMCardGameManager.Instance.DrawUse(cardController);
+            };
+        }
     }
 }

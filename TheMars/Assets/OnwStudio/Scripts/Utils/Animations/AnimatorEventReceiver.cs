@@ -4,178 +4,183 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Feedbacks;
-using CoroutineExtensions;
 
-public static class AnimatorEventExtension
+namespace Onw.Animation
 {
-    private static AnimatorEventReceiver AttachReceiever(Animator animator)
-        => animator.gameObject.TryGetComponent<AnimatorEventReceiver>(out var receiever) ? receiever : animator.gameObject.AddComponent<AnimatorEventReceiver>();
+    using Onw.Coroutine;
+    using Coroutine = UnityEngine.Coroutine;
 
-    public static void SetInteger(this Animator animator, string name, int value, Action onFinished)
+    public static class AnimatorEventExtension
     {
-        animator.SetInteger(name, value);
-        AttachReceiever(animator).OnStateEnd(onFinished);
-    }
+        private static AnimatorEventReceiver AttachReceiever(Animator animator)
+            => animator.gameObject.TryGetComponent<AnimatorEventReceiver>(out var receiever) ? receiever : animator.gameObject.AddComponent<AnimatorEventReceiver>();
 
-    public static void SetInteger(this Animator animator, int id, int value, Action onFinished)
-    {
-        animator.SetInteger(id, value);
-        AttachReceiever(animator).OnStateEnd(onFinished);
-    }
-
-    public static void SetFloat(this Animator animator, string name, float value, Action onFinished)
-    {
-        animator.SetFloat(name, value);
-        AttachReceiever(animator).OnStateEnd(onFinished);
-    }
-
-    public static void SetFloat(this Animator animator, int id, float value, Action onFinished)
-    {
-        animator.SetFloat(id, value);
-        AttachReceiever(animator).OnStateEnd(onFinished);
-    }
-
-    public static void SetBool(this Animator animator, string name, bool value, Action onFinished)
-    {
-        animator.SetBool(name, value);
-        AttachReceiever(animator).OnStateEnd(onFinished);
-    }
-
-    public static void SetBool(this Animator animator, int id, bool value, Action onFinished)
-    {
-        animator.SetBool(id, value);
-        AttachReceiever(animator).OnStateEnd(onFinished);
-    }
-
-    public static void SetTrigger(this Animator animator, string name, Action onFinished)
-    {
-        animator.SetTrigger(name);
-        AttachReceiever(animator).OnStateEnd(onFinished);
-    }
-
-    public static void SetTrigger(this Animator animator, int hashid, Action onFinished)
-    {
-        animator.SetTrigger(hashid);
-        AttachReceiever(animator).OnStateEnd(onFinished);
-    }
-}
-
-[RequireComponent(typeof(Animator))]
-public class AnimatorEventReceiver : MonoBehaviour
-{
-    #region Inspector
-
-    public List<AnimationClip> animationClips = new List<AnimationClip>();
-
-    #endregion
-
-    private Animator _animator = null;
-    private readonly Dictionary<string, List<Action>> _startEvnets = new Dictionary<string, List<Action>>();
-    private readonly Dictionary<string, List<Action>> _endEvents = new Dictionary<string, List<Action>>();
-
-    private Coroutine _coroutine = null;
-    private bool _isPlayingAnimator = false;
-
-    public void OnStateEnd(Action onFinished)
-    {
-        if (_coroutine != null)
-            StopCoroutine(_coroutine);
-        _coroutine = StartCoroutine(OnStateEndCheck(onFinished));
-    }
-
-    public IEnumerator OnStateEndCheck(Action onFinished)
-    {
-        _isPlayingAnimator = true;
-        while (true)
+        public static void SetInteger(this Animator animator, string name, int value, Action onFinished)
         {
-            yield return CoroutineHelper.WaitForEndOfFrame;
-            if (!_isPlayingAnimator)
+            animator.SetInteger(name, value);
+            AttachReceiever(animator).OnStateEnd(onFinished);
+        }
+
+        public static void SetInteger(this Animator animator, int id, int value, Action onFinished)
+        {
+            animator.SetInteger(id, value);
+            AttachReceiever(animator).OnStateEnd(onFinished);
+        }
+
+        public static void SetFloat(this Animator animator, string name, float value, Action onFinished)
+        {
+            animator.SetFloat(name, value);
+            AttachReceiever(animator).OnStateEnd(onFinished);
+        }
+
+        public static void SetFloat(this Animator animator, int id, float value, Action onFinished)
+        {
+            animator.SetFloat(id, value);
+            AttachReceiever(animator).OnStateEnd(onFinished);
+        }
+
+        public static void SetBool(this Animator animator, string name, bool value, Action onFinished)
+        {
+            animator.SetBool(name, value);
+            AttachReceiever(animator).OnStateEnd(onFinished);
+        }
+
+        public static void SetBool(this Animator animator, int id, bool value, Action onFinished)
+        {
+            animator.SetBool(id, value);
+            AttachReceiever(animator).OnStateEnd(onFinished);
+        }
+
+        public static void SetTrigger(this Animator animator, string name, Action onFinished)
+        {
+            animator.SetTrigger(name);
+            AttachReceiever(animator).OnStateEnd(onFinished);
+        }
+
+        public static void SetTrigger(this Animator animator, int hashid, Action onFinished)
+        {
+            animator.SetTrigger(hashid);
+            AttachReceiever(animator).OnStateEnd(onFinished);
+        }
+    }
+
+    [RequireComponent(typeof(Animator))]
+    public class AnimatorEventReceiver : MonoBehaviour
+    {
+        #region Inspector
+
+        public List<AnimationClip> animationClips = new List<AnimationClip>();
+
+        #endregion
+
+        private Animator _animator = null;
+        private readonly Dictionary<string, List<Action>> _startEvnets = new Dictionary<string, List<Action>>();
+        private readonly Dictionary<string, List<Action>> _endEvents = new Dictionary<string, List<Action>>();
+
+        private Coroutine _coroutine = null;
+        private bool _isPlayingAnimator = false;
+
+        public void OnStateEnd(Action onFinished)
+        {
+            if (_coroutine != null)
+                StopCoroutine(_coroutine);
+            _coroutine = StartCoroutine(OnStateEndCheck(onFinished));
+        }
+
+        public IEnumerator OnStateEndCheck(Action onFinished)
+        {
+            _isPlayingAnimator = true;
+            while (true)
             {
-                // 다음 애니메이션 클립이 재생되는지 1프레임 더 기다림
                 yield return CoroutineHelper.WaitForEndOfFrame;
-                if (!_isPlayingAnimator) break;
+                if (!_isPlayingAnimator)
+                {
+                    // 다음 애니메이션 클립이 재생되는지 1프레임 더 기다림
+                    yield return CoroutineHelper.WaitForEndOfFrame;
+                    if (!_isPlayingAnimator) break;
+                }
             }
+            onFinished?.Invoke();
         }
-        onFinished?.Invoke();
-    }
 
-    private void Awake()
-    {
-        // 애니메이터 내에 있는 모든 애니메이션 클립의 시작과 끝에 이벤트를 생성한다.
-        _animator = GetComponent<Animator>();
-        for (int i = 0; i < _animator.runtimeAnimatorController.animationClips.Length; i++)
+        private void Awake()
         {
-            AnimationClip clip = _animator.runtimeAnimatorController.animationClips[i];
-            animationClips.Add(clip);
-
-            AnimationEvent animationStartEvent = new AnimationEvent();
-            animationStartEvent.time = 0;
-            animationStartEvent.functionName = "AnimationStartHandler";
-            animationStartEvent.stringParameter = clip.name;
-            clip.AddEvent(animationStartEvent);
-
-            AnimationEvent animationEndEvent = new AnimationEvent();
-            animationEndEvent.time = clip.length;
-            animationEndEvent.functionName = "AnimationEndHandler";
-            animationEndEvent.stringParameter = clip.name;
-            clip.AddEvent(animationEndEvent);
-        }
-    }
-
-    /// <summary>
-    /// 각 클립 별 시작 이벤트
-    /// </summary>
-    /// <param name="name"></param>
-    private void AnimationStartHandler(string name)
-    {
-        if (_startEvnets.TryGetValue(name, out var actions))
-        {
-            for (int i = 0; i < actions.Count; i++)
+            // 애니메이터 내에 있는 모든 애니메이션 클립의 시작과 끝에 이벤트를 생성한다.
+            _animator = GetComponent<Animator>();
+            for (int i = 0; i < _animator.runtimeAnimatorController.animationClips.Length; i++)
             {
-                actions[i]?.Invoke();
-            }
-            actions.Clear();
-        }
-        _isPlayingAnimator = true;
-    }
+                AnimationClip clip = _animator.runtimeAnimatorController.animationClips[i];
+                animationClips.Add(clip);
 
-    /// <summary>
-    /// 클립 별 종료 이벤트
-    /// </summary>
-    /// <param name="name"></param>
-    private void AnimationEndHandler(string name)
-    {
-        if (_endEvents.TryGetValue(name, out var actions))
+                AnimationEvent animationStartEvent = new AnimationEvent();
+                animationStartEvent.time = 0;
+                animationStartEvent.functionName = "AnimationStartHandler";
+                animationStartEvent.stringParameter = clip.name;
+                clip.AddEvent(animationStartEvent);
+
+                AnimationEvent animationEndEvent = new AnimationEvent();
+                animationEndEvent.time = clip.length;
+                animationEndEvent.functionName = "AnimationEndHandler";
+                animationEndEvent.stringParameter = clip.name;
+                clip.AddEvent(animationEndEvent);
+            }
+        }
+
+        /// <summary>
+        /// 각 클립 별 시작 이벤트
+        /// </summary>
+        /// <param name="name"></param>
+        private void AnimationStartHandler(string name)
         {
-            for (int i = 0; i < actions.Count; i++)
+            if (_startEvnets.TryGetValue(name, out var actions))
             {
-                actions[i]?.Invoke();
+                for (int i = 0; i < actions.Count; i++)
+                {
+                    actions[i]?.Invoke();
+                }
+                actions.Clear();
             }
-            actions.Clear();
+            _isPlayingAnimator = true;
         }
-        _isPlayingAnimator = false;
+
+        /// <summary>
+        /// 클립 별 종료 이벤트
+        /// </summary>
+        /// <param name="name"></param>
+        private void AnimationEndHandler(string name)
+        {
+            if (_endEvents.TryGetValue(name, out var actions))
+            {
+                for (int i = 0; i < actions.Count; i++)
+                {
+                    actions[i]?.Invoke();
+                }
+                actions.Clear();
+            }
+            _isPlayingAnimator = false;
+        }
+
+        //    public void PlayFeedbacksName(string _name)
+        //    {
+        //        if (FeedbacksList == null)
+        //        {
+        //#if DEBUG
+        //            Debug.LogError("FeedbacksList Is Null");
+        //#endif
+        //            return;
+        //        }
+
+        //        MMFeedbacks feedbacks = FeedbacksList.GetFeedbacks(_name);
+        //        if (feedbacks == null)
+        //        {
+        //#if DEBUG
+        //            Debug.LogError("Not Found Feedbacks");
+        //#endif
+        //        }
+        //        else
+        //        {
+        //            feedbacks.PlayFeedbacks();
+        //        }
+        //    }
     }
-
-//    public void PlayFeedbacksName(string _name)
-//    {
-//        if (FeedbacksList == null)
-//        {
-//#if DEBUG
-//            Debug.LogError("FeedbacksList Is Null");
-//#endif
-//            return;
-//        }
-
-//        MMFeedbacks feedbacks = FeedbacksList.GetFeedbacks(_name);
-//        if (feedbacks == null)
-//        {
-//#if DEBUG
-//            Debug.LogError("Not Found Feedbacks");
-//#endif
-//        }
-//        else
-//        {
-//            feedbacks.PlayFeedbacks();
-//        }
-//    }
 }

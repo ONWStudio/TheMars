@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
   m_Name: Card_No.1
   m_EditorClassIdentifier: 
-  <Guid>k__BackingField: 2256f61c-b76e-4ae3-8d50-e911f2c2990f
+  <Guid>k__BackingField: 10187949-dc48-48d7-990d-a624eec8b226
   <StackID>k__BackingField: 0
   <GroupStackID>k__BackingField: 0
   <Tera>k__BackingField: 0
@@ -21,21 +21,17 @@ MonoBehaviour:
   <CardGrade>k__BackingField: 0
   <CardGroup>k__BackingField: 0
   _specialEffect:
-  - rid: 4678432487059488778
+  - rid: 4678432514189033473
   _cardNames:
     _serializedList: []
   _descriptions:
     _serializedList: []
-  _cardEffects:
-  - rid: 4678432487059488780
+  _cardEffects: []
   _addtionalConditions: []
   references:
     version: 2
     RefIds:
-    - rid: 4678432487059488778
-      type: {class: RepeatCard, ns: , asm: AssebmlyTMCard}
-      data: 
-    - rid: 4678432487059488780
-      type: {class: TeraResourceEffect, ns: , asm: Assembly-CSharp}
+    - rid: 4678432514189033473
+      type: {class: HoldCard, ns: TMCard, asm: AssebmlyTMCard}
       data:
-        <Amount>k__BackingField: 20
+        _friendlyCard: {fileID: 0}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OnwAttributeExtensions
+namespace Onw.Attribute
 {
     public sealed class Vector2RangeAttribute : PropertyAttribute
     {

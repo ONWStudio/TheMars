@@ -4,31 +4,34 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public sealed class MessagePopupUI : BaseUI
+namespace Onw.UI.Components
 {
-    [Header("Button")]
-    [SerializeField] private Button _okButton;
-
-    [Header("Text")]
-    [SerializeField] private TMP_Text _warningText;
-    [SerializeField] private TMP_Text _titleText;
-
-    public string WarningText
+    public sealed class MessagePopupUI : BaseUI
     {
-        get => _warningText.text;
-        set => _warningText.text = value;
-    }
+        [Header("Button")]
+        [SerializeField] private Button _okButton;
 
-    public string TitleText
-    {
-        get => _titleText.text;
-        set => _titleText.text = value;
-    }
+        [Header("Text")]
+        [SerializeField] private TMP_Text _warningText;
+        [SerializeField] private TMP_Text _titleText;
 
-    protected override void EnableUI() {}
+        public string WarningText
+        {
+            get => _warningText.text;
+            set => _warningText.text = value;
+        }
 
-    private void Start()
-    {
-        _okButton.onClick.AddListener(() => UIManager.Instance.CloseUI(this));
+        public string TitleText
+        {
+            get => _titleText.text;
+            set => _titleText.text = value;
+        }
+
+        protected override void EnableUI() { }
+
+        private void Start()
+        {
+            _okButton.onClick.AddListener(() => UIManager.Instance.CloseUI(this));
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace Data
+namespace Onw.Data
 {
     [Serializable]
     public sealed class JsonList<T>

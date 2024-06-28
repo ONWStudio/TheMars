@@ -1,22 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using OnwAttributeExtensions;
+using Onw.Attribute;
 
-/// <summary>
-/// .. 소요 (시간)
-/// </summary>
-[SerializeReferenceDropdownName("소요 (시간)")]
-public sealed class TimeDelayCard : ICardSpecialEffect
+namespace TMCard
 {
-    /// <summary>
-    /// .. 딜레이 타임
-    /// </summary>
-    [field: SerializeField, DisplayAs("딜레이 시간 (초)")] public float DelayTime { get; private set; } = 1f;
+    using UI;
 
-    public void ApplyEffect<T>(T cardController) where T : TMCardController<T>
+    /// <summary>
+    /// .. 소요 (시간)
+    /// </summary>
+    [SerializeReferenceDropdownName("소요 (시간)")]
+    public sealed class TimeDelayCard : ICardSpecialEffect
     {
-        cardController.UseState = () =>
-            cardController.OnDelaySeconds.Invoke(cardController, DelayTime);
+        /// <summary>
+        /// .. 딜레이 타임
+        /// </summary>
+        [field: SerializeField, DisplayAs("딜레이 시간 (초)")] public float DelayTime { get; private set; } = 1f;
+
+        public void ApplyEffect(TMCardController cardController)
+        {
+            cardController.UseState = () => TMCardGameManager.Instance.DelaySeconds(cardController, DelayTime);
+        }
     }
 }

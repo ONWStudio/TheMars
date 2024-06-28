@@ -4,7 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using static EditorTool.EditorTool;
+using Onw.Helpers;
+using static OnwEditor.EditorHelper;
 
 namespace TMGUITool
 {

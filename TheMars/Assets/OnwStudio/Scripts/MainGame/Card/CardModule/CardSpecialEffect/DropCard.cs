@@ -1,28 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
-using OnwAttributeExtensions;
+using Onw.Attribute;
 
-/// <summary>
-/// .. 버리기
-/// </summary>
-[SerializeReferenceDropdownName("버리기")]
-public sealed class DropCard : ICardSpecialEffect
+namespace TMCard
 {
+    using UI;
+
     /// <summary>
-    /// .. 버리기 효과
+    /// .. 버리기
     /// </summary>
-    public IReadOnlyList<ITMCardEffect> CardEffects => _cardEffects;
-
-    [SerializeReference, DisplayAs("버리기 효과"), SerializeReferenceDropdown] private List<ITMCardEffect> _cardEffects = new();
-
-    public void ApplyEffect<T>(T cardController) where T : TMCardController<T>
+    [SerializeReferenceDropdownName("버리기")]
+    public sealed class DropCard : ICardSpecialEffect
     {
-        cardController.TurnEndedState = () =>
+        /// <summary>
+        /// .. 버리기 효과
+        /// </summary>
+        public IReadOnlyList<ITMCardEffect> CardEffects => _cardEffects;
+
+        [SerializeReference, DisplayAs("버리기 효과"), SerializeReferenceDropdown] private List<ITMCardEffect> _cardEffects = new();
+
+        public void ApplyEffect(TMCardController cardController)
         {
-            _cardEffects.ForEach(cardEffect => cardEffect.OnEffect(cardController.CardData));
-            cardController.OnDisposableCard.Invoke(cardController);
-        };
+            cardController.TurnEndedState = () =>
+            {
+                _cardEffects.ForEach(cardEffect => cardEffect.OnEffect(cardController.CardData));
+                TMCardGameManager.Instance.DisposeCard(cardController);
+            };
+        }
     }
 }

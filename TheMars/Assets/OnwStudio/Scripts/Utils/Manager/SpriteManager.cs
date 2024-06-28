@@ -5,29 +5,32 @@ using UnityEngine;
 using UnityEngine.UI;
 using AYellowpaper.SerializedCollections;
 
-public sealed class SpriteManager : Singleton<SpriteManager>
+namespace Onw.Manager
 {
-    [Header("Sprite Atlases")]
-    [SerializeField] private SerializedDictionary<string, Sprite> _spriteDictionary = new();
-
-    protected override void Init() {}
-
-    public Sprite GetSprite(string name)
-        => _spriteDictionary.TryGetValue(name, out Sprite sprite) ? sprite : null;
-
-    public void SetImageSprite(string name, Image image)
+    public sealed class SpriteManager : Singleton<SpriteManager>
     {
-        Sprite sprite = GetSprite(name);
+        [Header("Sprite Atlases")]
+        [SerializeField] private SerializedDictionary<string, Sprite> _spriteDictionary = new();
 
-        image.sprite = sprite;
-        image.enabled = sprite;
-    }
+        protected override void Init() { }
 
-    public void SetSpriteRendererSprite(string name, SpriteRenderer spriteRenderer)
-    {
-        Sprite sprite = GetSprite(name);
+        public Sprite GetSprite(string name)
+            => _spriteDictionary.TryGetValue(name, out Sprite sprite) ? sprite : null;
 
-        spriteRenderer.sprite = sprite;
-        spriteRenderer.enabled = sprite;
+        public void SetImageSprite(string name, Image image)
+        {
+            Sprite sprite = GetSprite(name);
+
+            image.sprite = sprite;
+            image.enabled = sprite;
+        }
+
+        public void SetSpriteRendererSprite(string name, SpriteRenderer spriteRenderer)
+        {
+            Sprite sprite = GetSprite(name);
+
+            spriteRenderer.sprite = sprite;
+            spriteRenderer.enabled = sprite;
+        }
     }
 }

@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICardCondition
+namespace TMCard
 {
-    bool AdditionalCondition { get; }
-}
+    public interface ICardCondition
+    {
+        bool AdditionalCondition { get; }
+    }
 
-public interface ICardCondtionProcessing
-{
-    void UseProcessing();
+    public interface ICardCondtionProcessing
+    {
+        void UseProcessing();
+    }
 }

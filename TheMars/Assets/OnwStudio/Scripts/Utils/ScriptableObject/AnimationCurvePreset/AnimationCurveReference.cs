@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AnimcaitonCurve", menuName = "Scriptable Object/Animation Curve")]
-public sealed class AnimationCurveReference : ScriptableObject
+namespace Onw.ScritableObjects
 {
-    [field: SerializeField] public AnimationCurve Curve { get; private set; } = null;
-
-    private void OnValidate()
+    [CreateAssetMenu(fileName = "AnimcaitonCurve", menuName = "Scriptable Object/Animation Curve")]
+    public sealed class AnimationCurveReference : ScriptableObject
     {
-        for (int i = 0; i < Curve.keys.Length; i++)
+        [field: SerializeField] public AnimationCurve Curve { get; private set; } = null;
+
+        private void OnValidate()
         {
-            Debug.Log("in : " + Curve.keys[i].inTangent);
-            Debug.Log("out : " + Curve.keys[i].outTangent);
+            for (int i = 0; i < Curve.keys.Length; i++)
+            {
+                Debug.Log("in : " + Curve.keys[i].inTangent);
+                Debug.Log("out : " + Curve.keys[i].outTangent);
+            }
         }
     }
 }

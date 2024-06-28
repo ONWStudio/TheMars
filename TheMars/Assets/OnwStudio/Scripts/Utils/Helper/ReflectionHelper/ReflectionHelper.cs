@@ -1,0 +1,225 @@
+using System;
+using System.Linq;
+using System.Reflection;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+
+namespace Onw.Helpers
+{
+    using Attribute = System.Attribute;
+
+    public static class ReflectionHelper
+    {
+        public static IEnumerable<MethodInfo> GetMethodsFromAttribute<AttributeType>(object @object) where AttributeType : class
+            => @object
+                .GetType()
+                .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+                .Where(method => method.GetCustomAttribute(typeof(AttributeType)) is AttributeType);
+
+        public static IEnumerable<Action> GetActionsFromAttributeAllSearch<AttributeType>(object target, HashSet<object> visited = null) where AttributeType : class
+        {
+            visited ??= new HashSet<object>();
+
+            if (target == null || visited.Contains(target))
+            {
+                yield break;
+            }
+
+            visited.Add(target);
+            BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+
+            Type type = target.GetType();
+            foreach (MethodInfo method in GetMethodsFromAttribute<AttributeType>(target))
+            {
+                if (method.IsStatic)
+                {
+                    yield return (Action)Delegate.CreateDelegate(typeof(Action), method);
+                }
+                else
+                {
+                    yield return (Action)Delegate.CreateDelegate(typeof(Action), target, method);
+                }
+            }
+
+            foreach (FieldInfo field in type.GetFields(bindingFlags))
+            {
+                if (!field.FieldType.IsClass && !field.FieldType.IsInterface) continue;
+
+                object fieldValue = field.GetValue(target);
+                if (fieldValue != null)
+                {
+                    if (field.GetCustomAttribute<SerializeReference>() != null)
+                    {
+                        foreach (Action action in GetActionsFromAttributeAllSearch<AttributeType>(fieldValue, visited))
+                        {
+                            yield return action;
+                        }
+                    }
+
+                    if (fieldValue is IEnumerable enumerable && fieldValue is not string)
+                    {
+                        foreach (var item in enumerable)
+                        {
+                            if (item != null)
+                            {
+                                foreach (Action action in GetActionsFromAttributeAllSearch<AttributeType>(item, visited))
+                                {
+                                    yield return action;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public static FieldInfo GetFieldFromMethod(MethodInfo method, string fieldName)
+        {
+            if (method == null || string.IsNullOrEmpty(fieldName)) return null;
+
+            // 메서드가 속한 클래스의 타입을 가져옴
+            Type targetType = method.DeclaringType;
+
+            // 필드 이름으로 필드를 검색
+            FieldInfo fieldInfo = targetType.GetField(fieldName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            return fieldInfo;
+        }
+
+        public static IEnumerable<T> GetChildClassesFromType<T>() where T : class
+            => AppDomain
+                .CurrentDomain
+                .GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(type => typeof(T).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract)
+                .Select(type => Activator.CreateInstance(type) as T);
+
+        public static IEnumerable<string> GetClassNamesFromParent(string baseClass)
+        {
+            IEnumerable<string> childClassNames = null;
+
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                Type baseType = assembly.GetType(baseClass);
+
+                if (baseType is not null)
+                {
+                    childClassNames = assembly
+                        .GetTypes()
+                        .Where(type => type.IsSubclassOf(baseType))
+                        .Select(type => type.Name);
+
+                    break;
+                }
+            }
+
+            return childClassNames;
+        }
+
+        public static IEnumerable<Type> GetChildClassesFromBaseType(Type baseType)
+            => AppDomain
+                .CurrentDomain
+                .GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(type => baseType.IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract);
+
+        public static IEnumerable<Type> GetChildClassesFromFieldTypeName(string typeName)
+        {
+            Type baseType = GetTypeFromFieldName(typeName);
+
+            if (baseType is null)
+            {
+                Debug.LogWarning("Not Found BaseType!");
+                return null;
+            }
+
+            return GetChildClassesFromBaseType(baseType);
+        }
+
+        public static Type GetTypeFromFieldName(string typeName)
+        {
+            string[] splitTypeNames = typeName.Split(' ', '.');
+
+            if (splitTypeNames.Length <= 0)
+            {
+                Debug.LogWarning("typeName is Empty");
+                return null;
+            }
+
+            string assemblyName = splitTypeNames[0];
+            string baseTypeName = splitTypeNames[^1];
+
+            Assembly targetAssembly = AppDomain
+                .CurrentDomain
+                .GetAssemblies()
+                .SingleOrDefault(assembly => assembly.GetName().Name == assemblyName);
+
+            if (targetAssembly is null)
+            {
+                Debug.LogWarning("Not Found Assembly!");
+                return null;
+            }
+
+            Type baseType = targetAssembly
+                .GetTypes()
+                .SingleOrDefault(type => type.Name == baseTypeName);
+
+            if (baseType is null)
+            {
+                Debug.LogWarning("Not Found BaseType!");
+            }
+
+            return baseType;
+        }
+
+        public static IEnumerable<string> GetEnumValuesFromEnumName(string enumTypeName)
+        {
+            IEnumerable<string> enumValues = null;
+            bool isFind = false;
+
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if (isFind) break;
+
+                foreach (Type type in assembly.GetTypes())
+                {
+                    if (!type.IsEnum || type.Name != enumTypeName) continue;
+
+                    enumValues = Enum.GetNames(type);
+                    isFind = true;
+                }
+            }
+
+            return enumValues;
+        }
+
+        public static Dictionary<string, int> GetEnumKVPFromEnumName(string enumTypeName)
+        {
+            Dictionary<string, int> enumValues = new();
+
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                var enumType = assembly
+                    .GetTypes()
+                    .FirstOrDefault(t => t.IsEnum && t.Name == enumTypeName);
+
+                if (enumType != null)
+                {
+                    var underlyingType = Enum.GetUnderlyingType(enumType);
+
+                    foreach (var name in Enum.GetNames(enumType))
+                    {
+                        var enumValue = Enum.Parse(enumType, name);
+                        var value = Convert.ToInt32(Convert.ChangeType(enumValue, underlyingType));
+                        enumValues.Add(name, value);
+                    }
+
+                    break;
+                }
+            }
+
+            return enumValues;
+        }
+    }
+}

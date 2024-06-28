@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEditor;
-using OnwAttributeExtensions;
+using Onw.Attribute;
+using Onw.Helpers;
+using Onw.Extensions;
 
 namespace OnwAttributeExtensionsEditor
 {

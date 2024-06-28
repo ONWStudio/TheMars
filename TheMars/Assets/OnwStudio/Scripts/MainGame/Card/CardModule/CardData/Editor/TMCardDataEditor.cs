@@ -4,14 +4,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using OnwAttributeExtensions;
+using Onw.Attribute;
 
-public sealed partial class TMCardData : ScriptableObject
+namespace TMCard
 {
-    [InspectorButton("Generate GUID")]
-    private void generateNewGUID()
+    public sealed partial class TMCardData : ScriptableObject
     {
-        Guid = System.Guid.NewGuid().ToString();
+        [InspectorButton("Generate GUID")]
+        private void generateNewGUID()
+        {
+            Guid = System.Guid.NewGuid().ToString();
+        }
     }
 }
 #endif

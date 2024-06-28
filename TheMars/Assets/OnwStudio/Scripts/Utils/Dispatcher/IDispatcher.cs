@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public interface IDispatcher
+namespace Onw.Dispatcher
 {
-    void Invoke(Action fn);
+    public interface IDispatcher
+    {
+        void Invoke(Action fn);
+    }
 }
 

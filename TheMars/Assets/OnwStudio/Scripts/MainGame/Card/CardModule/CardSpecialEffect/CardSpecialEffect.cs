@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
 
-/// <summary>
-/// .. 특수 효과에 따라서 카드의 동작이 바뀌기 때문에 인터페이스를 통해 카드의 실제 구현된 객체에 접근하고 콜백 메서드로 동작을 정의합니다
-/// </summary>
-public interface ICardSpecialEffect
+namespace TMCard
 {
-    void ApplyEffect<T>(T cardController) where T : TMCardController<T>;
+    using UI;
+
+    /// <summary>
+    /// .. 특수 효과에 따라서 카드의 동작이 바뀌기 때문에 인터페이스를 통해 카드의 실제 구현된 객체에 접근하고 콜백 메서드로 동작을 정의합니다
+    /// </summary>
+    public interface ICardSpecialEffect
+    {
+        void ApplyEffect(TMCardController cardController);
+    }
 }

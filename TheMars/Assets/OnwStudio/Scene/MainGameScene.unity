@@ -1708,13 +1708,13 @@ MonoBehaviour:
   <HandTransform>k__BackingField: {fileID: 880654030}
   <TombTransform>k__BackingField: {fileID: 921509768}
   _cardSorter:
-    rid: 4678432333304168619
+    rid: 4678432511697879042
   _cards: []
   references:
     version: 2
     RefIds:
-    - rid: 4678432333304168619
-      type: {class: CycleForm, ns: TMCardUISystemModules, asm: Assembly-CSharp}
+    - rid: 4678432511697879042
+      type: {class: CycleForm, ns: TMCard.UI, asm: AssebmlyTMCard}
       data:
         <MaxAngle>k__BackingField: 90
         <RadiusRatioOffset>k__BackingField: 0.5
