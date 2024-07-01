@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
-  m_Name: Card_No.1
+  m_Name: Card_No.2
   m_EditorClassIdentifier: 
-  <Guid>k__BackingField: 10187949-dc48-48d7-990d-a624eec8b226
+  <Guid>k__BackingField: c676630d-853c-4c74-9703-8c6815a63e8e
   <StackID>k__BackingField: 0
   <GroupStackID>k__BackingField: 0
   <Tera>k__BackingField: 0
@@ -21,7 +21,8 @@ MonoBehaviour:
   <CardGrade>k__BackingField: 0
   <CardGroup>k__BackingField: 0
   _specialEffect:
-  - rid: 2707482537575317509
+  - rid: 2707482537575317556
+  - rid: 2707482537575317557
   _cardNames:
     _serializedList: []
   _descriptions:
@@ -31,9 +32,10 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 2707482537575317509
-      type: {class: HoldCard, ns: TMCard, asm: AssebmlyTMCard}
+    - rid: 2707482537575317556
+      type: {class: RecyclingCard, ns: TMCard, asm: AssebmlyTMCard}
+      data: 
+    - rid: 2707482537575317557
+      type: {class: DropCard, ns: TMCard, asm: AssebmlyTMCard}
       data:
-        _friendlyCard: {fileID: 11400000, guid: 016b84c53cb8b4e48bccbeb98cd928f4,
-          type: 2}
-        _holdEffects: []
+        _cardEffects: []

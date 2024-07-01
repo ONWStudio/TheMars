@@ -24,6 +24,7 @@ namespace TMCard.UI
                 TMCardData cardData = _cards[Random.Range(0, _cards.Count)];
                 cardList.Add(new GameObject(cardData.name).AddComponent<TMCardController>());
                 cardList[i].CardData = cardData;
+                cardList[i].Initialize();
             }
 
             return cardList;

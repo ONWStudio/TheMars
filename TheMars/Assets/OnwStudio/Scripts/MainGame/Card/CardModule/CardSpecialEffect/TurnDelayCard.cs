@@ -20,7 +20,8 @@ namespace TMCard
 
         public void ApplyEffect(TMCardController cardController)
         {
-            cardController.UseState = () => TMCardGameManager.Instance.DelayTurn(cardController, DelayTurn);
+            cardController.UseState = ()
+                => TMCardGameManager.Instance.DelayTurn(cardController, DelayTurn);
         }
     }
 }

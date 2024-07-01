@@ -28,7 +28,10 @@ namespace TMCard.UI
             }
         }
 
-        [SerializeField, ReadOnly] private TMCardData _cardData = null;
+        [field: SerializeField, ReadOnly] public bool OnField { get; set; } = false;
+        [field: SerializeField, ReadOnly] public bool OnCard { get; private set; } = false;
+
+        [field: SerializeField] public UnityEvent<Transform> OnChangedParent { get; private set; } = new();
 
         public Action UseState { get; set; } = null;
         public Action DrawBeginState { get; set; } = null;
@@ -50,7 +53,8 @@ namespace TMCard.UI
         /// <summary>
         /// .. 카드가 상호작용 가능한 활성화인지 상태를 반환합니다
         /// </summary>
-        public bool OnCard { get; private set; } = false;
+
+        [SerializeField, ReadOnly] private TMCardData _cardData = null;
 
         private Vector2SmoothMover _smoothMove = null;
         private Image _raycastingImage = null;
@@ -66,7 +70,8 @@ namespace TMCard.UI
             _smoothMove = _cardImage.gameObject.AddComponent<Vector2SmoothMover>();
         }
 
-        private void Start()
+        // .. 라이프 사이
+        public void Initialize()
         {
             initializeImages();
             initalizeInputHandle();
@@ -83,16 +88,14 @@ namespace TMCard.UI
             _cardData.SpecialEffects.ForEach(specialEffect => specialEffect?.ApplyEffect(this));
         }
 
-        private void OnDestroy()
-        {
-#if DEBUG
-            Debug.Log("destroyed Card!");
-#endif
-        }
-
         public void OnUsed()
         {
             UseState?.Invoke();
+        }
+
+        private void OnTransformParentChanged()
+        {
+            OnChangedParent.Invoke(transform.parent);
         }
 
         /// <summary>
@@ -124,7 +127,11 @@ namespace TMCard.UI
         {
             OnCard = isOn;
             _smoothMove.enabled = isOn;
-            _smoothMove.transform.localPosition = Vector3.zero;
+
+            if (!isOn)
+            {
+                _smoothMove.transform.localPosition = Vector3.zero;
+            }
         }
 
         private void initializeImages()
