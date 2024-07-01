@@ -173,6 +173,9 @@ MonoBehaviour:
   <OnTurnEnd>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
+  <OnUsedCard>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
   _cardHandImporter: {fileID: 1133853264}
   _cardSystemCamera: {fileID: 1515806359}
 --- !u!1 &222218908
@@ -306,6 +309,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cards:
   - {fileID: 11400000, guid: e50cf8b5c6e884f63ba9159d7aff9ae4, type: 2}
+  - {fileID: 11400000, guid: 016b84c53cb8b4e48bccbeb98cd928f4, type: 2}
+  - {fileID: 11400000, guid: 728979c1af5a645a287814149e950b7e, type: 2}
 --- !u!4 &441722214
 Transform:
   m_ObjectHideFlags: 0

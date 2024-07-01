@@ -51,6 +51,12 @@ namespace TMCard.UI
             _cards.AddRange(cards);
         }
 
+        public void SetCardsAndSort(List<TMCardController> cards)
+        {
+            SetCards(cards);
+            SortCards();
+        }
+
         /// <summary>
         /// .. 카드 하나를 패에 추가합니다 카드는 가장 끝 자리에 배치됩니다 자동으로 정렬됩니다 
         /// </summary>
@@ -79,7 +85,6 @@ namespace TMCard.UI
         public void AddCardToFirst(TMCardController cardUI)
         {
             setCardUI(cardUI);
-
             _cards.Insert(0, cardUI);
         }
 
@@ -120,8 +125,13 @@ namespace TMCard.UI
         public List<TMCardController> DequeueCards()
         {
             List<TMCardController> cards = _cards.ToList();
-            _cards.Clear();
 
+            foreach (TMCardController cardUI in cards)
+            {
+                cardUI.SetOn(false);
+            }
+
+            _cards.Clear();
             return cards;
         }
 
@@ -130,7 +140,6 @@ namespace TMCard.UI
         /// </summary>
         public void SortCards(float duration = 1.0f, System.Action<TMCardController> endedDrawCall = null)
         {
-            _cards.ForEach(cardUI => cardUI.SetOn(false));
             _cardSorter.SortCards(_cards, HandTransform, duration);
 
             // .. 카드의 정렬이 끝날때까지 상호작용 불가
@@ -140,7 +149,6 @@ namespace TMCard.UI
                 {
                     foreach (TMCardController cardUI in _cards.ToArray())
                     {
-                        cardUI.SetOn(true);
                         endedDrawCall?.Invoke(cardUI);
                     }
                 });
@@ -148,7 +156,6 @@ namespace TMCard.UI
 
         public void SortCardsInOrder(System.Action<TMCardController> endedDrawCall = null)
         {
-            _cards.ForEach(cardUI => cardUI.SetOn(false));
             StartCoroutine(iESortCardInOrder(endedDrawCall));
         }
 
@@ -156,13 +163,11 @@ namespace TMCard.UI
         {
             for (int i = 0; i < _cards.Count; i++)
             {
-                _cardSorter.ArrangeCard(_cards, i, HandTransform, 0.55f);
+                _cardSorter.ArrangeCard(_cards, i, HandTransform, 0.5f);
                 yield return new WaitUntil(() => !_cards[i].EventSender.IsPlaying);
                 endedDrawCall?.Invoke(_cards[i]);
                 yield return new WaitUntil(() => !_cards[i].EventSender.IsPlaying); // .. 카드 UI가 드로우 중이라면
             }
-
-            _cards.ForEach(cardUI => cardUI.SetOn(true));
         }
 
         private void setCardUI(TMCardController cardUI)

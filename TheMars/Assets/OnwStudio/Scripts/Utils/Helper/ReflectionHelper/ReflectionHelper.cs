@@ -4,12 +4,9 @@ using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 namespace Onw.Helpers
 {
-    using Attribute = System.Attribute;
-
     public static class ReflectionHelper
     {
         public static IEnumerable<MethodInfo> GetMethodsFromAttribute<AttributeType>(object @object) where AttributeType : class
@@ -31,44 +28,61 @@ namespace Onw.Helpers
             BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 
             Type type = target.GetType();
+
             foreach (MethodInfo method in GetMethodsFromAttribute<AttributeType>(target))
             {
-                if (method.IsStatic)
-                {
-                    yield return (Action)Delegate.CreateDelegate(typeof(Action), method);
-                }
-                else
-                {
-                    yield return (Action)Delegate.CreateDelegate(typeof(Action), target, method);
-                }
+                yield return method.IsStatic ? (Action)Delegate.CreateDelegate(typeof(Action), method) :
+                    (Action)Delegate.CreateDelegate(typeof(Action), target, method);
             }
 
             foreach (FieldInfo field in type.GetFields(bindingFlags))
             {
-                if (!field.FieldType.IsClass && !field.FieldType.IsInterface) continue;
+                if ((!field.FieldType.IsClass && !field.FieldType.IsInterface) ||
+                    field.IsDefined(typeof(ObsoleteAttribute), true) ||
+                    (field.GetCustomAttribute<SerializeReference>() is null && field.GetCustomAttribute<SerializeField>() is null)) continue;
 
                 object fieldValue = field.GetValue(target);
-                if (fieldValue != null)
+                foreach(Action action in getActionEnumerableFromInfo(fieldValue))
                 {
-                    if (field.GetCustomAttribute<SerializeReference>() != null)
+                    yield return action;
+                }
+            }
+
+            foreach (PropertyInfo property in type.GetProperties(bindingFlags))
+            {
+                if (!property.CanRead ||
+                    (!property.PropertyType.IsClass && !property.PropertyType.IsInterface) ||
+                    property.GetIndexParameters().Length > 0 ||
+                    property.GetMethod is null ||
+                    (!property.GetMethod.IsStatic && target is null) ||
+                    property.IsDefined(typeof(ObsoleteAttribute), true) ||
+                    (property.GetCustomAttribute<SerializeReference>() is null && property.GetCustomAttribute<SerializeField>() is null)) continue;
+
+                object propertyValue = property.GetValue(target);
+                foreach (Action action in getActionEnumerableFromInfo(propertyValue))
+                {
+                    yield return action;
+                }
+            }
+
+            IEnumerable<Action> getActionEnumerableFromInfo(object value)
+            {
+                if (value is null) yield break;
+
+                foreach (Action action in GetActionsFromAttributeAllSearch<AttributeType>(value, visited))
+                {
+                    yield return action;
+                }
+
+                if (value is IEnumerable enumerable)
+                {
+                    foreach (var item in enumerable)
                     {
-                        foreach (Action action in GetActionsFromAttributeAllSearch<AttributeType>(fieldValue, visited))
+                        if (item is null) continue;
+
+                        foreach (Action action in GetActionsFromAttributeAllSearch<AttributeType>(item, visited))
                         {
                             yield return action;
-                        }
-                    }
-
-                    if (fieldValue is IEnumerable enumerable && fieldValue is not string)
-                    {
-                        foreach (var item in enumerable)
-                        {
-                            if (item != null)
-                            {
-                                foreach (Action action in GetActionsFromAttributeAllSearch<AttributeType>(item, visited))
-                                {
-                                    yield return action;
-                                }
-                            }
                         }
                     }
                 }

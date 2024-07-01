@@ -28,7 +28,7 @@ namespace TMCard
             }
         }
 
-        private static Dictionary<string, EffectInitialAmountPair> _resourceEffectInitalAmounts = new();
+        private static readonly Dictionary<string, EffectInitialAmountPair> _resourceEffectInitalAmounts = new();
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void initialize()

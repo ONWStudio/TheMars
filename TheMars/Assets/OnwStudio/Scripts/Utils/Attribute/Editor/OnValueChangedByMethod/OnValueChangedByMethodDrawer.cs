@@ -63,7 +63,9 @@ namespace OnwAttributeExtensionsEditor
             }
 
             _prevProperties.AddRange(_observerMethods
-                .Select(pair => new KeyValuePair<string, string>(pair.Key, GetPropertyValueFromObject(pair.Value.TargetField.GetValue(pair.Value.TargetInstance)).ToString())));
+                .Select(pair => new KeyValuePair<string, string>(
+                    pair.Key,
+                    GetPropertyValueFromObject(pair.Value.TargetField.GetValue(pair.Value.TargetInstance))?.ToString() ?? "NULL")));
         }
 
         public void OnInspectorGUI(Editor editor)
@@ -74,15 +76,18 @@ namespace OnwAttributeExtensionsEditor
             {
                 string key = _prevProperties[i].Key;
                 var propertyMethodPair = _observerMethods[key];
-                string nowValue = GetPropertyValueFromObject(propertyMethodPair.TargetField.GetValue(propertyMethodPair.TargetInstance)).ToString();
+                string nowValue = GetPropertyValueFromObject(
+                    propertyMethodPair.TargetField.GetValue(propertyMethodPair.TargetInstance))?.ToString() ?? "NULL";
 
                 if (_prevProperties[i].Value != nowValue)
                 {
-                    propertyMethodPair.Methods.ForEach(method => method.Invoke());
+                    propertyMethodPair
+                        .Methods
+                        .ForEach(method => method.Invoke());
 
                     _prevProperties[i] = new(
                          key,
-                         GetPropertyValueFromObject(propertyMethodPair.TargetField.GetValue(propertyMethodPair.TargetInstance)).ToString());
+                         GetPropertyValueFromObject(propertyMethodPair.TargetField.GetValue(propertyMethodPair.TargetInstance))?.ToString() ?? "NULL");
                 }
             }
         }

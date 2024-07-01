@@ -18,8 +18,14 @@ namespace TMCard
         /// </summary>
         [field: SerializeField, DisplayAs("지속 시간")] public float ContinuingTime { get; private set; } = 1f;
 
+        // .. TODO : 버프 디버프류 이펙트 추가
+
         public void ApplyEffect(TMCardController cardController)
         {
+            cardController.UseState = () => TMCardGameManager.Instance.OnContinuingSeconds(
+                cardController,
+                ContinuingTime,
+                () => { });
         }
     }
 }
