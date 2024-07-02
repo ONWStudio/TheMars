@@ -7,13 +7,15 @@ using Onw.Helpers;
 
 namespace OnwAttributeExtensionsEditor
 {
-    [CustomEditor(typeof(Object), true), CanEditMultipleObjects]
+    [CustomEditor(typeof(Object), true, isFallback = true)]
     internal sealed class EditorUsingAttributeHelper : Editor
     {
         private readonly List<IObjectEditorAttributeDrawer> _objectEditorAttributeDrawers = new();
 
         private void OnEnable()
         {
+            Debug.Log("EditorUsingHelper Enable");
+
             _objectEditorAttributeDrawers.AddRange(ReflectionHelper
                 .GetChildClassesFromType<IObjectEditorAttributeDrawer>());
 
@@ -23,6 +25,8 @@ namespace OnwAttributeExtensionsEditor
 
         public override void OnInspectorGUI()
         {
+            Debug.Log("EditorUsingHelper OnGUI");
+
             DrawDefaultInspector();
 
             _objectEditorAttributeDrawers.

@@ -21,7 +21,7 @@ MonoBehaviour:
   <CardGrade>k__BackingField: 0
   <CardGroup>k__BackingField: 0
   _specialEffect:
-  - rid: 2707482537575317509
+  - rid: 2707482563521806346
   _cardNames:
     _serializedList: []
   _descriptions:
@@ -31,7 +31,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 2707482537575317509
+    - rid: 2707482563521806346
       type: {class: HoldCard, ns: TMCard, asm: AssebmlyTMCard}
       data:
         _friendlyCard: {fileID: 11400000, guid: 016b84c53cb8b4e48bccbeb98cd928f4,

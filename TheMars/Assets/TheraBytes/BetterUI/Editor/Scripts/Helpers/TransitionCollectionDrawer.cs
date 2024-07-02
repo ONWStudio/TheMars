@@ -6,14 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using TheraBytes.BetterUi.Editor.ThirdParty;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
 
 namespace TheraBytes.BetterUi.Editor
 {
-#if ODIN_INSPECTOR
-    [Sirenix.OdinInspector.Editor.DrawerPriority(0, 0, 1)]
-#endif
     [CustomPropertyDrawer(typeof(List<Transitions>))]
     public class TransitionCollectionDrawer : PropertyDrawer
     {

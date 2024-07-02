@@ -9,8 +9,8 @@ namespace Onw.Attribute
     /// <summary>
     /// .. 에디터에서 특정 프로퍼티의 값이 변경되면 메서드를 호출하게 하는 어트리뷰트 입니다
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
-    public sealed class OnValueChangedByMethodAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Method, Inherited = true)]
+    public sealed class OnValueChangedByMethodAttribute : PropertyAttribute
     {
         public string FieldName { get; }
 
