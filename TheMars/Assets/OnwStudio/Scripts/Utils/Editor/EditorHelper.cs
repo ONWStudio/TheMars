@@ -113,33 +113,30 @@ namespace OnwEditor
             _ => null,
         };
 
-        public static object GetPropertyValueFromObject(object obj)
+        public static object GetPropertyValueFromObject(object obj) => obj switch
         {
-            return obj switch
-            {
-                int intValue => intValue,
-                bool boolValue => boolValue,
-                float floatValue => floatValue,
-                string stringValue => stringValue,
-                Color colorValue => colorValue,
-                UnityEngine.Object objectReferenceValue => objectReferenceValue,
-                Enum enumValue => enumValue.ToString(),
-                Vector2 vector2Value => vector2Value,
-                Vector3 vector3Value => vector3Value,
-                Vector4 vector4Value => vector4Value,
-                Rect rectValue => rectValue,
-                AnimationCurve animationCurveValue => animationCurveValue,
-                Bounds boundsValue => boundsValue,
-                Quaternion quaternionValue => quaternionValue,
-                Vector2Int vector2IntValue => vector2IntValue,
-                Vector3Int vector3IntValue => vector3IntValue,
-                RectInt rectIntValue => rectIntValue,
-                BoundsInt boundsIntValue => boundsIntValue,
-                Hash128 hash128Value => hash128Value,
-                IEnumerable enumerable => enumerable.Cast<object>().Count(),
-                _ => null,
-            };
-        }
+            int intValue => intValue,
+            bool boolValue => boolValue,
+            float floatValue => floatValue,
+            string stringValue => stringValue,
+            Color colorValue => colorValue,
+            UnityEngine.Object objectReferenceValue => objectReferenceValue,
+            Enum enumValue => enumValue.ToString(),
+            Vector2 vector2Value => vector2Value,
+            Vector3 vector3Value => vector3Value,
+            Vector4 vector4Value => vector4Value,
+            Rect rectValue => rectValue,
+            AnimationCurve animationCurveValue => animationCurveValue,
+            Bounds boundsValue => boundsValue,
+            Quaternion quaternionValue => quaternionValue,
+            Vector2Int vector2IntValue => vector2IntValue,
+            Vector3Int vector3IntValue => vector3IntValue,
+            RectInt rectIntValue => rectIntValue,
+            BoundsInt boundsIntValue => boundsIntValue,
+            Hash128 hash128Value => hash128Value,
+            IEnumerable enumerable => enumerable.Cast<object>().Count(),
+            _ => null,
+        };
 
         /// <summary>
         /// .. 어떤 데이터 리스트가 있을 때 해당 데이터들의 요소를 토글 기능을 가진 스크롤뷰에 수직으로 열거시키는 기능 입니다 열거된 데이터에서 토글 선택된 데이터 요소를 반환합니다.
