@@ -11,7 +11,7 @@ namespace TMCard
 {
     public sealed partial class TMCardData : ScriptableObject
     {
-        [Button("Generate GUID")]
+        [InspectorButton("Generate GUID")]
         private void generateNewGUID()
         {
             Guid = System.Guid.NewGuid().ToString();

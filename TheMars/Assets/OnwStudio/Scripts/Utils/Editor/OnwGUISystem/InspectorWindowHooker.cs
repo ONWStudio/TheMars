@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using System;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace OnwEditor
 {
     internal static class InspectorWindowHooker
     {
+
         [InitializeOnLoadMethod]
         private static void HookInspectorWindow()
         {
@@ -38,6 +40,7 @@ namespace OnwEditor
             }
         }
 
+
         private static void HookDrawChain(object tracker)
         {
             // 여기에서 트래커의 내부 필드나 메서드를 후킹하여 커스텀 드로우 체인을 추가합니다.
@@ -46,12 +49,10 @@ namespace OnwEditor
             {
                 foreach (var editor in activeEditors)
                 {
-                    // 이미 후킹된 에디터인지 확인합니다.
-                    if (editor.GetType().GetMethod("OnInspectorGUI") is not null)
-                    {
-                        // 에디터의 OnInspectorGUI를 확장합니다.
-                        ExtendEditor(editor);
-                    }
+                    if (editor.GetType().GetMethod("OnInspectorGUI") is null) continue; // 이미 후킹된 에디터인지 확인합니다.
+
+                    // 에디터의 OnInspectorGUI를 확장합니다.
+                    ExtendEditor(editor);
                 }
             }
         }
@@ -59,43 +60,42 @@ namespace OnwEditor
         private static void ExtendEditor(Editor editor)
         {
             var originalMethod = editor.GetType().GetMethod("OnInspectorGUI", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            if (originalMethod is not null)
+            if (originalMethod != null)
             {
                 var originalDelegate = (Action)Delegate.CreateDelegate(typeof(Action), editor, originalMethod);
-                void customDraw()
+                Action customDraw = () =>
                 {
-                    // 원래 OnInspectorGUI를 호출합니다.
-                    originalDelegate.Invoke();
-
-                    // 커스텀 드로우 기능을 추가합니다.
+                    originalDelegate();
                     GUILayout.Label("Custom Draw Chain Added!", EditorStyles.boldLabel);
-                }
+                };
 
-                // OnInspectorGUI 메서드를 대체합니다.
-                ReplaceMethod(editor, originalMethod, customDraw);
+                ReplaceVirtualMethod(editor, originalMethod, customDraw.Method);
             }
         }
 
-        private static void ReplaceMethod(Editor editor, MethodInfo originalMethod, Action customDraw)
+        private static void ReplaceVirtualMethod(object instance, MethodInfo originalMethod, MethodInfo customMethod)
         {
-            var originalMethodPointer = originalMethod.MethodHandle.GetFunctionPointer();
-            var customMethodPointer = customDraw.Method.MethodHandle.GetFunctionPointer();
+            RuntimeHelpers.PrepareMethod(originalMethod.MethodHandle);
+            RuntimeHelpers.PrepareMethod(customMethod.MethodHandle);
 
-            //unsafe
-            //{
-            //    if (IntPtr.Size == 4)
-            //    {
-            //        int* originalPtr = (int*)originalMethodPointer.ToPointer();
-            //        int* customPtr = (int*)customMethodPointer.ToPointer();
-            //        *originalPtr = *customPtr;
-            //    }
-            //    else
-            //    {
-            //        long* originalPtr = (long*)originalMethodPointer.ToPointer();
-            //        long* customPtr = (long*)customMethodPointer.ToPointer();
-            //        *originalPtr = *customPtr;
-            //    }
-            //}
+            IntPtr originalMethodPointer = originalMethod.MethodHandle.GetFunctionPointer();
+            IntPtr customMethodPointer = customMethod.MethodHandle.GetFunctionPointer();
+
+            unsafe
+            {
+                IntPtr* classPointer = (IntPtr*)instance.GetType().TypeHandle.Value.ToPointer();
+                IntPtr* vtable = (IntPtr*)*classPointer;
+
+                // Find the method in the vtable and replace it
+                for (int i = 0; i < 100; i++) // Arbitrary limit to prevent infinite loops
+                {
+                    if (vtable[i] == originalMethodPointer)
+                    {
+                        vtable[i] = customMethodPointer;
+                        break;
+                    }
+                }
+            }
         }
     }
 }
