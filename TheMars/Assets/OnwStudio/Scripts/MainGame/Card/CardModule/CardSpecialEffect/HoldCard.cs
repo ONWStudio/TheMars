@@ -43,7 +43,7 @@ namespace TMCard
             }
         }
 #if UNITY_EDITOR
-        [method: OnValueChangedByMethod(nameof(_friendlyCard))]
+        // .. 사용 불가[OnValueChangedByMethod(nameof(_friendlyCard))]
         private void onChangedFriendlyCard()
         {
             Debug.Log("changed friendlyCard");

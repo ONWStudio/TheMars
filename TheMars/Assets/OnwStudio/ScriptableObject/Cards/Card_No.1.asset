@@ -34,6 +34,5 @@ MonoBehaviour:
     - rid: 2707482563521806346
       type: {class: HoldCard, ns: TMCard, asm: AssebmlyTMCard}
       data:
-        _friendlyCard: {fileID: 11400000, guid: 016b84c53cb8b4e48bccbeb98cd928f4,
-          type: 2}
+        _friendlyCard: {fileID: 11400000}
         _holdEffects: []

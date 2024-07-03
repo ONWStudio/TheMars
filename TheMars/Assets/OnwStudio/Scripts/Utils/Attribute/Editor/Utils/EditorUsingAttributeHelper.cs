@@ -1,37 +1,41 @@
-#if UNITY_EDITOR
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-using Onw.Helpers;
+//#if UNITY_EDITOR
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
+//using UnityEditor;
+//using Onw.Helpers;
 
-namespace OnwAttributeExtensionsEditor
-{
-    [CustomEditor(typeof(Object), true, isFallback = true)]
-    internal sealed class EditorUsingAttributeHelper : Editor
-    {
-        private readonly List<IObjectEditorAttributeDrawer> _objectEditorAttributeDrawers = new();
+//namespace OnwAttributeExtensionsEditor
+//{
+//    [InitializeOnLoad]
+//    internal sealed class EditorUsingAttributeHelper : Editor
+//    {
+//        static EditorUsingAttributeHelper()
+//        {
+//            Selection.selectionChanged += () => { Selection.activeObject as EditorWindow; };
+//        }
 
-        private void OnEnable()
-        {
-            Debug.Log("EditorUsingHelper Enable");
+//        private readonly List<IObjectEditorAttributeDrawer> _objectEditorAttributeDrawers = new();
 
-            _objectEditorAttributeDrawers.AddRange(ReflectionHelper
-                .GetChildClassesFromType<IObjectEditorAttributeDrawer>());
+//        private void OnEnable()
+//        {
+//            Debug.Log("EditorUsingHelper Enable");
 
-            _objectEditorAttributeDrawers
-                .ForEach(objectEditorAttributeDrawer => objectEditorAttributeDrawer.OnEnable(this));
-        }
+//            _objectEditorAttributeDrawers.AddRange(ReflectionHelper
+//                .GetChildClassesFromType<IObjectEditorAttributeDrawer>());
+//            _objectEditorAttributeDrawers
+//                .ForEach(objectEditorAttributeDrawer => objectEditorAttributeDrawer.OnEnable(this));
+//        }
 
-        public override void OnInspectorGUI()
-        {
-            Debug.Log("EditorUsingHelper OnGUI");
+//        public override void OnInspectorGUI()
+//        {
+//            Debug.Log("EditorUsingHelper OnGUI");
 
-            DrawDefaultInspector();
+//            DrawDefaultInspector();
 
-            _objectEditorAttributeDrawers.
-                ForEach(objectEditorAttributeDrawer => objectEditorAttributeDrawer.OnInspectorGUI(this));
-        }
-    }
-}
-#endif
+//            _objectEditorAttributeDrawers.
+//                ForEach(objectEditorAttributeDrawer => objectEditorAttributeDrawer.OnInspectorGUI(this));
+//        }
+//    }
+//}
+//#endif
