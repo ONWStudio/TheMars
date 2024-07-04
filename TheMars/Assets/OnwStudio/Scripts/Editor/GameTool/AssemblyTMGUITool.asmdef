@@ -6,7 +6,8 @@
         "AYellowpaper.SerializedCollections",
         "AddressableAssetBundleCreator",
         "AssemblyOnw",
-        "AssemblyEditorHelper"
+        "AssemblyEditorHelper",
+        "AssemblyOnwAttributeEditor"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

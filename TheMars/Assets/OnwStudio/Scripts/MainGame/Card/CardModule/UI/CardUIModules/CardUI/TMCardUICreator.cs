@@ -9,6 +9,8 @@ namespace TMCard.UI
     {
         [SerializeField] private List<TMCardData> _cards = new();
 
+        [SerializeField] private TMCardController _templatePrefab = null;
+
         protected override void Init()
         {
         }
@@ -22,7 +24,7 @@ namespace TMCard.UI
             for (int i = 0; i < createCount; i++)
             {
                 TMCardData cardData = _cards[Random.Range(0, _cards.Count)];
-                cardList.Add(new GameObject(cardData.name).AddComponent<TMCardController>());
+                cardList.Add(Instantiate(_templatePrefab));
                 cardList[i].CardData = cardData;
                 cardList[i].Initialize();
             }
@@ -35,8 +37,9 @@ namespace TMCard.UI
             if (_cards.Count <= 0) return null;
 
             TMCardData cardData = _cards[Random.Range(0, _cards.Count)];
-            TMCardController cardUI = new GameObject(cardData.name).AddComponent<TMCardController>();
+            TMCardController cardUI = Instantiate(_templatePrefab);
             cardUI.CardData = cardData;
+            cardUI.Initialize();
 
             return cardUI;
         }

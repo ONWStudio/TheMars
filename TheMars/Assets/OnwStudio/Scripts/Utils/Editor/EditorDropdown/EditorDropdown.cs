@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace OnwEditor
+namespace Onw.Editor
 {
     public sealed class EditorDropdownController<T>
     {

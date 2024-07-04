@@ -20,6 +20,8 @@ MonoBehaviour:
   <CardKind>k__BackingField: 0
   <CardGrade>k__BackingField: 0
   <CardGroup>k__BackingField: 0
+  <CardImage>k__BackingField: {fileID: 21300000, guid: 679cd4d2881744be5bb6977827b4805b,
+    type: 3}
   _specialEffect:
   - rid: 2707482537575317556
   - rid: 2707482537575317557

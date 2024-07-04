@@ -58,6 +58,8 @@ namespace TMCard
         [field: SerializeField, FormerlySerializedAs("<CardGroup>k__BackingField"), DisplayAs("그룹"), Tooltip("카드의 그룹")]
         public TM_CARD_GROUP CardGroup { get; private set; } = TM_CARD_GROUP.COMMON;
 
+        [field: SerializeField, SpritePreview(128f)] public Sprite CardImage { get; private set; } = null;
+
         /// <summary>
         /// .. 카드의 고유 이름
         /// </summary>
@@ -94,6 +96,7 @@ namespace TMCard
 
         [SerializeReference, FormerlySerializedAs("_addtionalConditions"), DisplayAs("추가 조건"), Tooltip("카드 추가 조건 리스트"), SerializeReferenceDropdown]
         private List<ICardCondition> _addtionalConditions = new();
+
 
         /// <summary>
         /// .. 발동 효과 입니다

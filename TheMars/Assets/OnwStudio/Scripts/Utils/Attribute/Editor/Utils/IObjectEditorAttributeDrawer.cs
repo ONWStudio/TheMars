@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace OnwAttributeExtensionsEditor
+namespace Onw.Editor
 {
-    internal interface IObjectEditorAttributeDrawer
+    using Editor = UnityEditor.Editor;
+
+    public interface IObjectEditorAttributeDrawer
     {
         void OnEnable(Editor editor);
         void OnInspectorGUI(Editor editor);

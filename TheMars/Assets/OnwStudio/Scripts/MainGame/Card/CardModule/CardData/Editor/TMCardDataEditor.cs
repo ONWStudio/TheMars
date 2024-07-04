@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Onw.Attribute;
-using NaughtyAttributes;
 
 namespace TMCard
 {

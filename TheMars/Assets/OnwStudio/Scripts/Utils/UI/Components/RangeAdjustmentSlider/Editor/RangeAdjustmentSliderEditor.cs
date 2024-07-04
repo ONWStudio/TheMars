@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 using Onw.UI.Components;
-using static OnwEditor.EditorHelper;
+using static Onw.Editor.EditorHelper;
 
 [CustomEditor(typeof(RangeAdjustmentSlider))]
 internal sealed class RangeAdjustmentSliderEditor : Editor

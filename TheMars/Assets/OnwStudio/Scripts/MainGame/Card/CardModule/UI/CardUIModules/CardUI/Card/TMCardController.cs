@@ -12,6 +12,9 @@ using UnityEngine.EventSystems;
 
 namespace TMCard.UI
 {
+    [RequireComponent(typeof(EventSender))]
+    [RequireComponent(typeof(TMCardInputHandler))]
+    [RequireComponent(typeof(TMCardUIController))]
     public sealed class TMCardController : MonoBehaviour
     {
         /// <summary>
@@ -25,10 +28,24 @@ namespace TMCard.UI
                 if (_cardData) return;
 
                 _cardData = value;
+                UIController.CardSprite = _cardData.CardImage;
             }
         }
 
+        /// <summary>
+        /// .. 이벤트 센더 클래스 입니다 외부에서 이벤트 연출 효과를 발생시킬때 사용할 수 있는 프로퍼티 입니다
+        /// </summary>
+        [field: SerializeField] public EventSender EventSender { get; private set; } = null;
+        /// <summary>
+        /// .. 카드에 사용자 입력을 받아오는 핸들러 입니다
+        /// </summary>
+        [field: SerializeField] public TMCardInputHandler InputHandler { get; private set; } = null;
+        [field: SerializeField] public TMCardUIController UIController { get; private set; } = null;
+
         [field: SerializeField, ReadOnly] public bool OnField { get; set; } = false;
+        /// <summary>
+        /// .. 카드가 상호작용 가능한 활성화인지 상태를 반환합니다
+        /// </summary>
         [field: SerializeField, ReadOnly] public bool OnCard { get; private set; } = false;
 
         [field: SerializeField] public UnityEvent<Transform> OnChangedParent { get; private set; } = new();
@@ -39,41 +56,24 @@ namespace TMCard.UI
         public Action TurnEndedState { get; set; } = null;
 
         /// <summary>
-        /// .. 이벤트 센더 클래스 입니다 외부에서 이벤트 연출 효과를 발생시킬때 사용할 수 있는 프로퍼티 입니다
-        /// </summary>
-        public EventSender EventSender { get; private set; } = null;
-        /// <summary>
-        /// .. 카드에 사용자 입력을 받아오는 핸들러 입니다
-        /// </summary>
-        public TMCardInputHandler InputHandler { get; private set; } = null;
-        /// <summary>
         /// .. RectTransform
         /// </summary>
         public RectTransform RectTransform { get; private set; } = null;
-        /// <summary>
-        /// .. 카드가 상호작용 가능한 활성화인지 상태를 반환합니다
-        /// </summary>
 
+        [Space]
         [SerializeField, ReadOnly] private TMCardData _cardData = null;
-
-        private Vector2SmoothMover _smoothMove = null;
-        private Image _raycastingImage = null;
-        private Image _cardImage = null;
+        [SerializeField] private Vector2SmoothMover _smoothMove = null;
 
         private void Awake()
         {
-            _cardImage = new GameObject("CardImage").AddComponent<Image>();
-            RectTransform = gameObject.AddComponent<RectTransform>();
-            EventSender = gameObject.AddComponent<EventSender>();
-            InputHandler = gameObject.AddComponent<TMCardInputHandler>();
-            _raycastingImage = gameObject.AddComponent<Image>();
-            _smoothMove = _cardImage.gameObject.AddComponent<Vector2SmoothMover>();
+            RectTransform = transform is RectTransform rectTransform ?
+                rectTransform :
+                gameObject.AddComponent<RectTransform>();
         }
 
         // .. 라이프 사이
         public void Initialize()
         {
-            initializeImages();
             initalizeInputHandle();
             initializeSmoothMove();
 
@@ -132,14 +132,6 @@ namespace TMCard.UI
             {
                 _smoothMove.transform.localPosition = Vector3.zero;
             }
-        }
-
-        private void initializeImages()
-        {
-            _raycastingImage.color = new(255f, 255f, 255f, 0f);
-            _cardImage.transform.SetParent(transform, false);
-            _cardImage.raycastTarget = false;
-            _cardImage.transform.localPosition = Vector3.zero;
         }
 
         private void initializeSmoothMove()

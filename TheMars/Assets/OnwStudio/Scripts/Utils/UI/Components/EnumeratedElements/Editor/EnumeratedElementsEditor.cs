@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 using Onw.UI.Components;
-using static OnwEditor.EditorHelper;
+using static Onw.Editor.EditorHelper;
 
 [CustomEditor(typeof(EnumeratedElements))]
 internal sealed class EnumeratedElementsEditor : Editor

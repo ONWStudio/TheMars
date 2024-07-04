@@ -73,11 +73,6 @@ namespace TMCard.UI
             SortCards();
         }
 
-        public TMCardController GetCardFromID(string id)
-        {
-            return _cards.SingleOrDefault(cardUI => cardUI.CardData.Guid == id);
-        }
-
         /// <summary>
         /// .. 카드 하나를 패에 추가합니다 카드는 가장 앞 자리에 배치됩니다
         /// </summary>
@@ -126,10 +121,7 @@ namespace TMCard.UI
         {
             List<TMCardController> cards = _cards.ToList();
 
-            foreach (TMCardController cardUI in cards)
-            {
-                cardUI.SetOn(false);
-            }
+            cards.ForEach(cardUI => cardUI.SetOn(false));
 
             _cards.Clear();
             return cards;
@@ -142,6 +134,7 @@ namespace TMCard.UI
         {
             _cardSorter.SortCards(_cards, HandTransform, duration);
 
+            _cards.ForEach(card => card.transform.SetAsLastSibling());
             // .. 카드의 정렬이 끝날때까지 상호작용 불가
             this.WaitCompletedConditions(
                 () => _cards.All(card => !card.EventSender.IsPlaying),

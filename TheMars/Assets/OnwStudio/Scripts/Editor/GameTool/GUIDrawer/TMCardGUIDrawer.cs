@@ -6,9 +6,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using TMCard;
-using OnwEditor;
+using Onw.Editor;
+using Onw.Helpers;
 using AddressableAssetBundleSpace;
-using static OnwEditor.EditorHelper;
+using static Onw.Editor.EditorHelper;
 
 namespace TMGUITool
 {
@@ -27,6 +28,7 @@ namespace TMGUITool
             public string Message { get; set; } = string.Empty;
 
             private readonly List<TMCardData> _cards = new();
+            private readonly List<IObjectEditorAttributeDrawer> _attrubuteDrawers = new(ReflectionHelper.GetChildClassesFromType<IObjectEditorAttributeDrawer>());
             private readonly EditorScrollController _scrollViewController = new();
 
             public void Awake()
@@ -37,7 +39,6 @@ namespace TMGUITool
 
             public void OnEnable()
             {
-
             }
 
             public void OnDraw()
@@ -64,9 +65,11 @@ namespace TMGUITool
                         if (_editor == null || _editor.target != cardData)
                         {
                             _editor = Editor.CreateEditor(cardData);
+                            _attrubuteDrawers.ForEach(drawer => drawer.OnEnable(_editor));
                         }
 
                         _editor.OnInspectorGUI();
+                        _attrubuteDrawers.ForEach(drawer => drawer.OnInspectorGUI(_editor));
                     });
                 }
             }
