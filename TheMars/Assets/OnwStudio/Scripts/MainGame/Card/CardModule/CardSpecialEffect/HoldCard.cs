@@ -42,6 +42,7 @@ namespace TMCard
                 }
             }
         }
+
 #if UNITY_EDITOR
         [OnValueChangedByMethod(nameof(_friendlyCard))]
         private void onChangedFriendlyCard()
