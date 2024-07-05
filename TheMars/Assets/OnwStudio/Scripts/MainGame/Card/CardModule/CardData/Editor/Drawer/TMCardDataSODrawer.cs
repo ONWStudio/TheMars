@@ -7,32 +7,31 @@ using Onw.Editor;
 
 namespace TMCard.Editor
 {
-    //using Editor = UnityEditor.Editor;
+    using Editor = UnityEditor.Editor;
 
-    //[CustomEditor(typeof(TMCardData), false), CanEditMultipleObjects]
-    //public sealed class TMCardDataSODrawer : OnwEditor
-    //{
-    //    private RenderTexture _renderTexture = null;
-    //    private GameObject previewInstance = null;
-    //    private Editor previewEditor = null;
+    [CustomEditor(typeof(TMCardData), false), CanEditMultipleObjects]
+    public sealed class TMCardDataSODrawer : Editor
+    {
+        private RenderTexture _renderTexture = null;
+        private GameObject previewInstance = null;
+        private Editor previewEditor = null;
 
-    //    protected override void OnEnable()
-    //    {
-    //        Debug.Log("TMCardDataSODrawer Enable");
-    //        base.OnEnable();
+        private void OnEnable()
+        {
+            Debug.Log("TMCardDataSODrawer Enable");
 
-    //        if (target is GameObject targetObject)
-    //        {
-    //            previewInstance = Instantiate(targetObject);
-    //            previewEditor = CreateEditor(previewInstance);
-    //        }
-    //    }
+            if (target is GameObject targetObject)
+            {
+                previewInstance = Instantiate(targetObject);
+                previewEditor = CreateEditor(previewInstance);
+            }
+        }
 
-    //    public override void OnInspectorGUI()
-    //    {
-    //        Debug.Log("TMCardDataSODrawer");
-    //        base.OnInspectorGUI();
-    //    }
-    //}
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+            Debug.Log("TMCardDataSODrawer");
+        }
+    }
 }
 #endif

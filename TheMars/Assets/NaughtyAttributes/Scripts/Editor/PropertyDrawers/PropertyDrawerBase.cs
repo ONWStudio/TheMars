@@ -74,7 +74,7 @@ namespace NaughtyAttributes.Editor
         public void DrawDefaultPropertyAndHelpBox(Rect rect, SerializedProperty property, string message, MessageType messageType)
         {
             float indentLength = NaughtyEditorGUI.GetIndentLength(rect);
-            Rect helpBoxRect = new Rect(
+            Rect helpBoxRect = new(
                 rect.x + indentLength,
                 rect.y,
                 rect.width - indentLength,
@@ -82,7 +82,7 @@ namespace NaughtyAttributes.Editor
 
             NaughtyEditorGUI.HelpBox(helpBoxRect, message, MessageType.Warning, context: property.serializedObject.targetObject);
 
-            Rect propertyRect = new Rect(
+            Rect propertyRect = new(
                 rect.x,
                 rect.y + GetHelpBoxHeight(),
                 rect.width,

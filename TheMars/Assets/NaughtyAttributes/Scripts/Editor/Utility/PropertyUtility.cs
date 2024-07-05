@@ -33,7 +33,7 @@ namespace NaughtyAttributes.Editor
                 ? property.displayName
                 : labelAttribute.Label;
 
-            GUIContent label = new GUIContent(labelText);
+            GUIContent label = new(labelText);
             return label;
         }
 
@@ -195,7 +195,7 @@ namespace NaughtyAttributes.Editor
 
         internal static List<bool> GetConditionValues(object target, string[] conditions)
         {
-            List<bool> conditionValues = new List<bool>();
+            List<bool> conditionValues = new();
             foreach (var condition in conditions)
             {
                 FieldInfo conditionField = ReflectionUtility.GetField(target, condition);
@@ -280,7 +280,7 @@ namespace NaughtyAttributes.Editor
             {
                 if (element.Contains("["))
                 {
-                    string elementName = element.Substring(0, element.IndexOf("["));
+                    string elementName = element[..element.IndexOf("[")];
                     int index = Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
                     obj = GetValue_Imp(obj, elementName, index);
                 }
@@ -309,8 +309,8 @@ namespace NaughtyAttributes.Editor
                 string element = elements[i];
                 if (element.Contains("["))
                 {
-                    string elementName = element.Substring(0, element.IndexOf("["));
-                    int index = Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
+                    string elementName = element[..element.IndexOf("[")];
+                    int index = Convert.ToInt32(element[element.IndexOf("[")..].Replace("[", "").Replace("]", ""));
                     obj = GetValue_Imp(obj, elementName, index);
                 }
                 else
@@ -353,8 +353,7 @@ namespace NaughtyAttributes.Editor
 
         private static object GetValue_Imp(object source, string name, int index)
         {
-            IEnumerable enumerable = GetValue_Imp(source, name) as IEnumerable;
-            if (enumerable == null)
+            if (GetValue_Imp(source, name) is not IEnumerable enumerable)
             {
                 return null;
             }

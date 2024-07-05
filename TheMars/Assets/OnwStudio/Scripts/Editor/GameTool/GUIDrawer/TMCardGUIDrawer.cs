@@ -28,8 +28,8 @@ namespace TMGUITool
             public string Message { get; set; } = string.Empty;
 
             private readonly List<TMCardData> _cards = new();
-            private readonly List<IObjectEditorAttributeDrawer> _attrubuteDrawers = new(ReflectionHelper.GetChildClassesFromType<IObjectEditorAttributeDrawer>());
             private readonly EditorScrollController _scrollViewController = new();
+            private readonly Dictionary<string, List<IObjectEditorAttributeDrawer>> _attrubuteDrawers = new();
 
             public void Awake()
             {
@@ -39,6 +39,7 @@ namespace TMGUITool
 
             public void OnEnable()
             {
+
             }
 
             public void OnDraw()
@@ -65,11 +66,18 @@ namespace TMGUITool
                         if (_editor == null || _editor.target != cardData)
                         {
                             _editor = Editor.CreateEditor(cardData);
-                            _attrubuteDrawers.ForEach(drawer => drawer.OnEnable(_editor));
+                        }
+
+                        if (!_attrubuteDrawers.TryGetValue(_editor.target.GetInstanceID().ToString(), out List<IObjectEditorAttributeDrawer> drawers))
+                        {
+                            drawers = new(ReflectionHelper.GetChildClassesFromType<IObjectEditorAttributeDrawer>());
+                            drawers.ForEach(drawer => drawer.OnEnable(_editor));
+                            _attrubuteDrawers.Add(_editor.target.GetInstanceID().ToString(), drawers);
                         }
 
                         _editor.OnInspectorGUI();
-                        _attrubuteDrawers.ForEach(drawer => drawer.OnInspectorGUI(_editor));
+                        drawers
+                            .ForEach(drawer => drawer.OnInspectorGUI(_editor));
                     });
                 }
             }
@@ -87,7 +95,8 @@ namespace TMGUITool
             {
                 for (int i = 0; i < _cards.Count; i++)
                 {
-                    AddressableAssetBundleCreator.CreateAssetBundle($"TMCard_{i + 1}", "TMCardData", _cards[i], "TMCardData");
+                    AddressableAssetBundleCreator
+                        .CreateAssetBundle($"TMCard_{i + 1}", "TMCardData", _cards[i], "TMCardData");
                 }
             }
 
