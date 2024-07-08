@@ -1,11 +1,13 @@
 #if UNITY_EDITOR
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEditor;
-using UnityEditor.Search;
+using UnityEditor.SceneManagement;
 using Onw.Editor;
+using Onw.UI;
 using TMCard.UI;
 
 namespace TMCard.Editor
@@ -15,68 +17,101 @@ namespace TMCard.Editor
     [CustomEditor(typeof(TMCardData), false), CanEditMultipleObjects]
     public sealed class TMCardDataSODrawer : Editor
     {
-        private Texture2D _renderTexture = null;
+        private const int PREVIEW_CARD_WIDTH = 256;
+
+        private RenderTexture _renderTexture = null;
+        private Scene _previewScene;
+        private Camera _previewCamera = null;
+        private Canvas _previewCanvas = null;
         private TMCardUIController _previewInstance = null;
         private TMCardData _cardData = null;
 
         private void OnEnable()
         {
-            Debug.Log("TMCardDataSODrawer Enable");
+            if (target is not TMCardData targetObject) return;
 
-            if (target is TMCardData targetObject)
+            _cardData = targetObject;
+            string[] prefabGUIDs = AssetDatabase.FindAssets("t:prefab");
+
+            foreach (string prefabGUID in prefabGUIDs)
             {
-                _cardData = targetObject;
+                string path = AssetDatabase.GUIDToAssetPath(prefabGUID);
+                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
 
-                string[] prefabGUIDs = AssetDatabase.FindAssets("t:prefab");
-
-                foreach (string prefabGUID in prefabGUIDs)
+                if (prefab && prefab.TryGetComponent(out TMCardUIController previewInstance))
                 {
-                    string path = AssetDatabase.GUIDToAssetPath(prefabGUID);
-                    GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                    _previewScene = EditorSceneManager.NewPreviewScene();
+                    _previewScene.name = "Preview Scene";
 
-                    if (prefab && prefab.TryGetComponent(out TMCardUIController previewInstance))
+                    GameObject canvasGO = new("Preview Canvas");
+                    _previewCamera = new GameObject("Preview Camera").AddComponent<Camera>();
+
+                    SceneManager.MoveGameObjectToScene(canvasGO, _previewScene);
+                    SceneManager.MoveGameObjectToScene(_previewCamera.gameObject, _previewScene);
+
+                    _previewCamera.clearFlags = CameraClearFlags.SolidColor;
+                    _previewCamera.backgroundColor = Color.gray;
+                    _previewCamera.orthographic = true;
+                    _previewCamera.orthographicSize = 5;
+                    _previewCamera.cullingMask = LayerMask.GetMask("UI");
+                    _previewCamera.scene = _previewScene;
+                    _previewCamera.cameraType = CameraType.Preview;
+
+                    _previewCanvas = canvasGO.AddComponent<Canvas>();
+                    _previewCanvas.renderMode = RenderMode.ScreenSpaceCamera;
+                    _previewCanvas.worldCamera = _previewCamera;
+                    _previewCanvas.gameObject.layer = LayerMask.NameToLayer("UI");
+                    canvasGO.AddComponent<CanvasScaler>();
+                    canvasGO.AddComponent<GraphicRaycaster>();
+
+                    _previewInstance = Instantiate(previewInstance, _previewCanvas.transform, false);
+                    _previewCamera.transform.position = _previewInstance.transform.position - Vector3.forward * 10;
+
+                    if (_previewInstance.transform is RectTransform rectTransform)
                     {
-                        _previewInstance = Instantiate(previewInstance);
-
-                        break;
+                        float ratio = rectTransform.rect.height / rectTransform.rect.width;
+                        _renderTexture = new RenderTexture(PREVIEW_CARD_WIDTH, (int)(PREVIEW_CARD_WIDTH * ratio), 16);
+                        _previewCamera.targetTexture = _renderTexture;
                     }
+
+                    break;
                 }
-            }
-        }
-
-        private void OnDisable()
-        {
-            if (_previewInstance)
-            {
-                DestroyImmediate(_previewInstance.gameObject);
-                _previewInstance = null;
-            }
-
-            if (_renderTexture)
-            {
-                DestroyImmediate(_renderTexture);
-                _renderTexture = null;
             }
         }
 
         public override void OnInspectorGUI()
         {
-            DrawDefaultInspector();
-
-            Debug.Log("TMCardDataSODrawer");
-
-            if (!_renderTexture && _previewInstance)
+            if (_previewInstance.CardSprite != _cardData.CardImage)
             {
-                _renderTexture = AssetPreview.GetAssetPreview(_previewInstance.gameObject);
+                _previewInstance.CardSprite = _cardData.CardImage;
             }
 
             if (_previewInstance && _renderTexture)
             {
-                GUILayout.Label("Loaded Card Prefab Preview:");
+                GUILayout.Label("Card Preview");
+
                 EditorGUI.DrawPreviewTexture(
-                    GUILayoutUtility.GetRect(256, 256, GUILayout.ExpandWidth(false)),
-                    _renderTexture);
+                    GUILayoutUtility.GetRect(
+                        _renderTexture.width,
+                        _renderTexture.height,
+                        GUILayout.ExpandWidth(false),
+                        GUILayout.ExpandHeight(false)),
+                    _renderTexture,
+                    null,
+                    ScaleMode.ScaleToFit);
             }
+
+            EditorGUILayout.Space(10);
+            DrawDefaultInspector();
+        }
+
+        private void OnDisable()
+        {
+            EditorHelper.DestroyObjectByComponent(ref _previewInstance);
+            EditorHelper.DestroyObjectByComponent(ref _previewCamera);
+            EditorHelper.DestroyObjectByComponent(ref _previewCanvas);
+            EditorHelper.ReleaseRenderTexture(ref _renderTexture);
+            EditorSceneManager.ClosePreviewScene(_previewScene);
         }
     }
 }

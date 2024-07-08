@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TMCard
+namespace TMCard.Effect
 {
     [SerializeReferenceDropdownName("카드 드로우")]
     public sealed class TMCardDrawEffect : ITMCardEffect

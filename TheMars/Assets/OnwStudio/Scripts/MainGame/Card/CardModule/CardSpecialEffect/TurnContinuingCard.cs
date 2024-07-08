@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Onw.Attribute;
 
-namespace TMCard
+namespace TMCard.SpecialEffect
 {
     using UI;
 
@@ -11,7 +11,7 @@ namespace TMCard
     /// .. 지속 (턴)
     /// </summary>
     [SerializeReferenceDropdownName("지속 (턴)")]
-    public sealed class TurnContinuingCard : ICardSpecialEffect
+    public sealed class TurnContinuingCard : ITMCardSpecialEffect
     {
         /// <summary>
         /// .. 지속 할 턴

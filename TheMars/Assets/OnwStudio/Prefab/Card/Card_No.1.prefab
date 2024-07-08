@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 38075375519361866}
   - component: {fileID: 8381949205591957350}
   - component: {fileID: 3845239031405876139}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Card_No.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 2881209283947717462}
   - component: {fileID: 1242621844710434452}
   - component: {fileID: 2790600352443847834}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CardImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}

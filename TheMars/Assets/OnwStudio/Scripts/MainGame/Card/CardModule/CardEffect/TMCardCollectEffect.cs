@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMCard;
 
-namespace TMCard
+namespace TMCard.Effect
 {
     [SerializeReferenceDropdownName("카드 획득")]
     public sealed class TMCardCollectEffect : ITMCardEffect

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Onw.Attribute;
 
-namespace TMCard
+namespace TMCard.Effect.Resource
 {
     public abstract class TMCardResourceEffect : ITMCardEffect
     {

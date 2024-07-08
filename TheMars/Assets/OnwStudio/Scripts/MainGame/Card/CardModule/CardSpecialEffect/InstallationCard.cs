@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TMCard
+namespace TMCard.SpecialEffect
 {
     using UI;
 
@@ -12,7 +12,7 @@ namespace TMCard
     /// .. 설치
     /// </summary>
     [SerializeReferenceDropdownName("설치")]
-    public sealed class InstallationCard : ICardSpecialEffect
+    public sealed class InstallationCard : ITMCardSpecialEffect
     {
         private class EventValuePair
         {

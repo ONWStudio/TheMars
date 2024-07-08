@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace TMCard
+namespace TMCard.SpecialEffect
 {
     using UI;
 
@@ -12,7 +12,7 @@ namespace TMCard
     /// .. 일회용
     /// </summary>
     [SerializeReferenceDropdownName("일회용")]
-    public sealed class DisposableCard : ICardSpecialEffect
+    public sealed class DisposableCard : ITMCardSpecialEffect
     {
         public void ApplyEffect(TMCardController cardController)
         {

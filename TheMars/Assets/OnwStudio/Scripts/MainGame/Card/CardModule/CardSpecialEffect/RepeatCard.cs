@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Onw.Extensions;
 
-namespace TMCard
+namespace TMCard.SpecialEffect
 {
     using UI;
+    using Effect;
+    using Effect.Resource;
 
     /// <summary>
     /// .. 반복
     /// </summary>
     [SerializeReferenceDropdownName("반복")]
-    public sealed class RepeatCard : ICardSpecialEffect
+    public sealed class RepeatCard : ITMCardSpecialEffect
     {
         private sealed class EffectInitialAmountPair
         {

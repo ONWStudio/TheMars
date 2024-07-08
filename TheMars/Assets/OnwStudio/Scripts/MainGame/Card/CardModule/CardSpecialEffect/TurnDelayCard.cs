@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Onw.Attribute;
 
-namespace TMCard
+namespace TMCard.SpecialEffect
 {
     using UI;
 
@@ -11,7 +11,7 @@ namespace TMCard
     /// .. 소요 (턴)
     /// </summary>
     [SerializeReferenceDropdownName("소요 (턴)")]
-    public sealed class TurnDelayCard : ICardSpecialEffect
+    public sealed class TurnDelayCard : ITMCardSpecialEffect
     {
         /// <summary>
         /// .. 소요시킬 턴

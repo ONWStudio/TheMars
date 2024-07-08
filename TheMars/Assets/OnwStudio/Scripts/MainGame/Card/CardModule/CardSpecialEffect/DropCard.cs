@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Onw.Attribute;
 
-namespace TMCard
+namespace TMCard.SpecialEffect
 {
     using UI;
+    using Effect;
 
     /// <summary>
     /// .. 버리기
     /// </summary>
     [SerializeReferenceDropdownName("버리기")]
-    public sealed class DropCard : ICardSpecialEffect
+    public sealed class DropCard : ITMCardSpecialEffect
     {
         /// <summary>
         /// .. 버리기 효과

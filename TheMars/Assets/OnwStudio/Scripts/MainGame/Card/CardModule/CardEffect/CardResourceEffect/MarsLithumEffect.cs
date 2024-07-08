@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TMCard
+namespace TMCard.Effect.Resource
 {
     [SerializeReferenceDropdownName("자원 획득 (마르스 리튬)")]
     public sealed class MarsLithumEffect : TMCardResourceEffect

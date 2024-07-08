@@ -15,8 +15,8 @@ MonoBehaviour:
   <Guid>k__BackingField: c676630d-853c-4c74-9703-8c6815a63e8e
   <StackID>k__BackingField: 0
   <GroupStackID>k__BackingField: 0
-  <Tera>k__BackingField: 0
-  <MarsLithium>k__BackingField: 0
+  <RequiredResource>k__BackingField: 0
+  <Resource>k__BackingField: 0
   <CardKind>k__BackingField: 0
   <CardGrade>k__BackingField: 0
   <CardGroup>k__BackingField: 0
@@ -34,9 +34,10 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 2707482537575317556
       type: {class: RecyclingCard, ns: TMCard, asm: AssebmlyTMCard}
-      data: 
     - rid: 2707482537575317557
       type: {class: DropCard, ns: TMCard, asm: AssebmlyTMCard}
       data:

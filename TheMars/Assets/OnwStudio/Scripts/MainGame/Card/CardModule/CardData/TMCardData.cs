@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Globalization;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,6 +8,10 @@ using Onw.Attribute;
 
 namespace TMCard
 {
+    using Effect;
+    using AddtionalCondition;
+    using SpecialEffect;
+
     public sealed partial class TMCardData : ScriptableObject
     {
         /// <summary>
@@ -29,18 +32,19 @@ namespace TMCard
         [field: SerializeField, FormerlySerializedAs("<GroupStackID>k__BackingField"), Tooltip("그룹 Stack ID")]
         public int GroupStackID { get; private set; } = 0;
 
+        [field: Space]
         /// <summary>
-        /// .. 테라
+        /// .. 소모 재화 종류
         /// </summary>
-        [field: SerializeField, FormerlySerializedAs("<Tera>k__BackingField"), DisplayAs("소모 재화 (테라)"), Tooltip("테라")]
-        public int Tera { get; private set; } = 0;
-
+        [field: SerializeField, FormerlySerializedAs("<RequiredResource>k__BackingField"), DisplayAs("소모 재화 종류"), Tooltip("소모 재화 종류")]
+        public TM_REQUIRED_RESOURCE RequiredResource { get; private set; } = TM_REQUIRED_RESOURCE.TERA;
         /// <summary>
-        /// .. 마르스 리튬
+        /// .. 사용될 재화
         /// </summary>
-        [field: SerializeField, FormerlySerializedAs("<MarsLithium>k__BackingField"), DisplayAs("소모 재화 (마르스 리튬)"), Tooltip("마르스 리튬")]
-        public int MarsLithium { get; private set; } = 0;
+        [field: SerializeField, FormerlySerializedAs("<Resource>k__BackingField"), DisplayAs("소모 재화량"), Tooltip("소모 재화량")]
+        public int Resource { get; private set; } = 0;
 
+        [field: Space]
         /// <summary>
         /// .. 카드의 종류
         /// </summary>
@@ -73,8 +77,8 @@ namespace TMCard
 
         public IReadOnlyDictionary<string, string> ReadOnlyCardNames => _cardNames;
         public IReadOnlyDictionary<string, string> ReadOnlyDescriptions => _descriptions;
-        public IReadOnlyList<ICardCondition> ReadOnlyAdditionalCondition => _addtionalConditions;
-        public IReadOnlyList<ICardSpecialEffect> SpecialEffects => _specialEffect;
+        public IReadOnlyList<ITMCardAddtionalCondition> ReadOnlyAdditionalCondition => _addtionalConditions;
+        public IReadOnlyList<ITMCardSpecialEffect> SpecialEffects => _specialEffect;
 
         /// <summary>
         /// .. 카드의 특수효과입니다
@@ -82,7 +86,7 @@ namespace TMCard
         /// </summary>
         [Space]
         [SerializeReference, FormerlySerializedAs("_specialEffect"), DisplayAs("특수 효과"), Tooltip("특수 효과"), SerializeReferenceDropdown]
-        private List<ICardSpecialEffect> _specialEffect = new();
+        private List<ITMCardSpecialEffect> _specialEffect = new();
 
         [Space]
         [SerializeField, FormerlySerializedAs("_cardNames"), DisplayAs("이름"), Tooltip("카드 이름 관리자 지역별 이름을 작성합니다 로컬라이징은 국가 코드를 참고해주세요"), SerializedDictionary("Culture Code", "Name")]
@@ -95,7 +99,7 @@ namespace TMCard
         private List<ITMCardEffect> _cardEffects = new();
 
         [SerializeReference, FormerlySerializedAs("_addtionalConditions"), DisplayAs("추가 조건"), Tooltip("카드 추가 조건 리스트"), SerializeReferenceDropdown]
-        private List<ICardCondition> _addtionalConditions = new();
+        private List<ITMCardAddtionalCondition> _addtionalConditions = new();
 
 
         /// <summary>
@@ -116,9 +120,9 @@ namespace TMCard
         /// </summary>
         /// <param name="marsLithium"> .. 현재 재화량 </param>
         /// <returns></returns>
-        public bool IsAvailable(int marsLithium)
+        public bool IsAvailable(int resource)
         {
-            return MarsLithium <= marsLithium &&
+            return Resource <= resource &&
                 _addtionalConditions.All(additionalCondition => additionalCondition?.AdditionalCondition ?? false);
         }
     }

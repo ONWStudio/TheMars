@@ -4,15 +4,16 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Onw.Attribute;
 
-namespace TMCard
+namespace TMCard.SpecialEffect
 {
     using UI;
+    using Effect;
 
     /// <summary>
     /// .. 드로우
     /// </summary>
     [SerializeReferenceDropdownName("드로우")]
-    public sealed class DrawCard : ICardSpecialEffect
+    public sealed class DrawCard : ITMCardSpecialEffect
     {
         [SerializeReference, DisplayAs("드로우 효과"), FormerlySerializedAs("_drawEffects"), SerializeReferenceDropdown] private List<ITMCardEffect> _drawEffects = new();
 

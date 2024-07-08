@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 222218913}
   - component: {fileID: 222218912}
   - component: {fileID: 222218914}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TMCardDeckUIController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 466624816}
   - component: {fileID: 466624815}
   - component: {fileID: 466624817}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TMCardTombUIController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 585174643}
   - component: {fileID: 585174642}
   - component: {fileID: 585174641}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -574,7 +574,7 @@ GameObject:
   - component: {fileID: 650379402}
   - component: {fileID: 650379404}
   - component: {fileID: 650379403}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -828,7 +828,7 @@ GameObject:
   - component: {fileID: 880654030}
   - component: {fileID: 880654032}
   - component: {fileID: 880654031}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -903,7 +903,7 @@ GameObject:
   - component: {fileID: 921509768}
   - component: {fileID: 921509770}
   - component: {fileID: 921509769}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Tomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1112,7 +1112,7 @@ GameObject:
   - component: {fileID: 1439010219}
   - component: {fileID: 1439010218}
   - component: {fileID: 1439010217}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CardCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1445,7 +1445,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1484,7 +1484,7 @@ GameObject:
   - component: {fileID: 1745114180}
   - component: {fileID: 1745114182}
   - component: {fileID: 1745114181}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HandImporterTempSpace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1559,7 +1559,7 @@ GameObject:
   - component: {fileID: 1912238804}
   - component: {fileID: 1912238806}
   - component: {fileID: 1912238805}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Deck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1635,7 +1635,7 @@ GameObject:
   - component: {fileID: 2057403480}
   - component: {fileID: 2057403479}
   - component: {fileID: 2057403481}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TMCardHandUIController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1740,7 +1740,7 @@ GameObject:
   - component: {fileID: 2064802128}
   - component: {fileID: 2064802130}
   - component: {fileID: 2064802129}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}

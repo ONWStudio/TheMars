@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TMCard
+namespace TMCard.SpecialEffect
 {
     using UI;
 
@@ -10,7 +10,7 @@ namespace TMCard
     /// .. 신기루
     /// </summary>
     [SerializeReferenceDropdownName("신기루")]
-    public sealed class MirageCard : ICardSpecialEffect
+    public sealed class MirageCard : ITMCardSpecialEffect
     {
         public void ApplyEffect(TMCardController cardController)
         {

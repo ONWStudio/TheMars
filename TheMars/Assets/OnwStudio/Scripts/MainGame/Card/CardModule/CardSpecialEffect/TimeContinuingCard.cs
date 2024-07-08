@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Onw.Attribute;
 
-namespace TMCard
+namespace TMCard.SpecialEffect
 {
     using UI;
 
@@ -11,7 +11,7 @@ namespace TMCard
     /// .. 지속 (시간)
     /// </summary>
     [SerializeReferenceDropdownName("지속 (시간)")]
-    public sealed class TimeContinuingCard : ICardSpecialEffect
+    public sealed class TimeContinuingCard : ITMCardSpecialEffect
     {
         /// <summary>
         /// .. 지속 시간

@@ -1,18 +1,18 @@
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Onw.Attribute;
 
-namespace TMCard
+namespace TMCard.SpecialEffect
 {
     using UI;
+    using Effect;
 
     /// <summary>
     /// .. 보유
     /// </summary>
     [SerializeReferenceDropdownName("보유")]
-    public sealed class HoldCard : ICardSpecialEffect
+    public sealed partial class HoldCard : ITMCardSpecialEffect
     {
         [SerializeField, DisplayAs("발동 트리거 카드"), Tooltip("보유 효과가 발동할때 참조할 카드 ID")]
         private TMCardData _friendlyCard = null;
@@ -31,36 +31,22 @@ namespace TMCard
             {
                 if (!cardController)
                 {
-                    TMCardGameManager.Instance.OnUsedCard.RemoveListener(onHoldEffectByFriendlyCard);
+                    TMCardGameManager
+                        .Instance
+                        .OnUsedCard
+                        .RemoveListener(onHoldEffectByFriendlyCard);
+
                     return;
                 }
 
                 if (cardController.OnField && _friendlyCard.Guid == usedCard.CardData.Guid)
                 {
-                    _holdEffects.ForEach(holdEffect => holdEffect?.OnEffect(cardController.CardData));
+                    _holdEffects
+                        .ForEach(holdEffect => holdEffect?.OnEffect(cardController.CardData));
+
                     Debug.Log("보유 효과 발동");
                 }
             }
         }
-
-#if UNITY_EDITOR
-        [OnValueChangedByMethod(nameof(_friendlyCard))]
-        private void onChangedFriendlyCard()
-        {
-            Debug.Log("changed friendlyCard");
-
-            TMCardData ownerCard = UnityEditor
-                .AssetDatabase
-                .FindAssets($"t:{typeof(TMCardData).Name}")
-                .Select(guid => UnityEditor.AssetDatabase.LoadAssetAtPath<TMCardData>(UnityEditor.AssetDatabase.GUIDToAssetPath(guid)))
-                .FirstOrDefault(cardData => cardData.SpecialEffects.Any(specialEffect => specialEffect == this));
-
-            if (ownerCard && ownerCard == _friendlyCard)
-            {
-                Debug.LogWarning("보유 효과의 카드는 자기 자신을 트리거 카드로 지정할 수 없습니다");
-                _friendlyCard = null;
-            }
-        }
-#endif
     }
 }

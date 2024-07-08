@@ -19,7 +19,7 @@ namespace Onw.Helpers
         {
             visited ??= new HashSet<object>();
 
-            if (target == null || visited.Contains(target))
+            if (target == null || visited.Contains(target)) // .. 해쉬셋으로 중복검사 방지
             {
                 yield break;
             }
@@ -29,12 +29,14 @@ namespace Onw.Helpers
 
             Type type = target.GetType();
 
+            // .. target에 대한 attribute가 적용된 메서드 찾아내기
             foreach (MethodInfo method in GetMethodsFromAttribute<AttributeType>(target))
             {
                 yield return method.IsStatic ? (Action)Delegate.CreateDelegate(typeof(Action), method) :
                     (Action)Delegate.CreateDelegate(typeof(Action), target, method);
             }
 
+            // .. target이 계층적으로 클래스를 보유중이라면 target이 보유한 클래스들까지 검사
             foreach (FieldInfo field in type.GetFields(bindingFlags))
             {
                 if ((!field.FieldType.IsClass && !field.FieldType.IsInterface) ||
@@ -48,6 +50,7 @@ namespace Onw.Helpers
                 }
             }
 
+            // .. 마찬가지로 자동구현 프로퍼티에 의한 참조 클래스들도 검사
             foreach (PropertyInfo property in type.GetProperties(bindingFlags))
             {
                 if (!property.CanRead ||
@@ -69,11 +72,13 @@ namespace Onw.Helpers
             {
                 if (value is null) yield break;
 
+                // .. 필드라면
                 foreach (Action action in GetActionsFromAttributeAllSearch<AttributeType>(value, visited))
                 {
                     yield return action;
                 }
 
+                // .. 만약 열거된 데이터 자료구조라면?
                 if (value is IEnumerable enumerable)
                 {
                     foreach (var item in enumerable)
