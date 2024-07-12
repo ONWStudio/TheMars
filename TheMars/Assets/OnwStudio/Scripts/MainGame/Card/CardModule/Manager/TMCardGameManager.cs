@@ -125,15 +125,6 @@ namespace TMCard.UI
                 card.OnField = parent == CardHandUIController.transform);
         }
 
-        /// <summary>
-        /// .. 카드에게 턴이 종료됐다는 걸 알립니다 카드 내부에서 턴이 종료되었을때 특수한 상황이나 카드 효과에 따라 올바른 이벤트 메서드를 호출합니다
-        /// </summary>
-        /// <param name="cardUI"></param>
-        private void notifyTurnEndToCard(TMCardController cardUI)
-        {
-            cardUI.OnTurnEnd();
-        }
-
         public void OnClickCard(TMCardController cardUI)
         {
             cardUI.OnUsed();
@@ -260,6 +251,15 @@ namespace TMCard.UI
             };
 
             cardUI.EventSender.PlayEvents(events);
+        }
+
+        /// <summary>
+        /// .. 카드에게 턴이 종료됐다는 걸 알립니다 카드 내부에서 턴이 종료되었을때 특수한 상황이나 카드 효과에 따라 올바른 이벤트 메서드를 호출합니다
+        /// </summary>
+        /// <param name="cardUI"></param>
+        private void notifyTurnEndToCard(TMCardController cardUI)
+        {
+            cardUI.OnTurnEnd();
         }
 
         private void setActiveDelayCard(TMCardController cardUI)

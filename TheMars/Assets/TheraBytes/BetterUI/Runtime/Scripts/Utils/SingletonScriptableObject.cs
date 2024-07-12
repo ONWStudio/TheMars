@@ -23,7 +23,7 @@ namespace TheraBytes.BetterUi
             }
         }
 
-        public static bool HasInstance { get { return instance != null; } }
+        public static bool HasInstance => instance != null;
 
         public static bool ScriptableObjectFileExists
         {
@@ -85,13 +85,9 @@ namespace TheraBytes.BetterUi
         private static string GetFilePathWithExtention(bool fullPath)
         {
             Type t = typeof(T);
-            var prop = t.GetProperty("FilePath", BindingFlags.Static | BindingFlags.GetProperty | BindingFlags.NonPublic);
+            var prop = t.GetProperty("FilePath", BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic) ?? throw new Exception("No static Property 'FilePath' in " + t.ToString());
 
-            if (prop == null) throw new Exception("No static Property 'FilePath' in " + t.ToString());
-
-            string filePath = prop.GetValue(null, null) as string;
-
-            if (filePath == null) throw new Exception("static property 'FilePath' is not a string or null in " + t.ToString());
+            if (prop.GetValue(null, null) is not string filePath) throw new Exception("static property 'FilePath' is not a string or null in " + t.ToString());
             if (!filePath.Contains("Resources")) throw new Exception("static property 'FilePath' must contain a Resources folder.");
             if (filePath.Contains("Plugins")) throw new Exception("static property 'FilePath' must not contain a Plugin folder.");
 

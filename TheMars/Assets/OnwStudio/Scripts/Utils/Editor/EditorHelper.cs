@@ -134,7 +134,7 @@ namespace Onw.Editor
             RectInt rectIntValue => rectIntValue,
             BoundsInt boundsIntValue => boundsIntValue,
             Hash128 hash128Value => hash128Value,
-            IEnumerable enumerable => enumerable.Cast<object>().Count(),
+            IEnumerable enumerable => enumerable.OfType<object>().Count(),
             _ => null,
         };
 

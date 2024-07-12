@@ -36,6 +36,6 @@ namespace AYellowpaper.SerializedCollections.Editor
         public static Rect CutVertical(this Rect rect, float top, float bottom) => new Rect(rect.x, rect.y + top, rect.width, rect.height - top - bottom);
 
         public static Rect Cut(this Rect rect, float topBottom, float leftRight) => Cut(rect, topBottom, leftRight, topBottom, leftRight);
-        public static Rect Cut(this Rect rect, float top, float right, float bottom, float left) => new Rect(rect.x + left, rect.y + top, rect.width - left - right, rect.height - top - bottom);
+        public static Rect Cut(this Rect rect, float top, float right, float bottom, float left) => new(rect.x + left, rect.y + top, rect.width - left - right, rect.height - top - bottom);
     }
 }

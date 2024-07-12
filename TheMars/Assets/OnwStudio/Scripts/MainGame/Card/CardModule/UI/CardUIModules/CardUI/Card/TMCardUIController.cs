@@ -13,7 +13,12 @@ namespace TMCard.UI
             set => _cardImage.sprite = value;
         }
 
+        [Header("Image")]
         [SerializeField] private Image _cardImage = null;
+
+        [Header("Descriptor")]
+        [SerializeField] private TMCardDescriptor _descriptor;
+
         private Image _raycastingImage = null;
 
         private void Awake()
@@ -21,7 +26,6 @@ namespace TMCard.UI
             _raycastingImage = gameObject.GetComponent<Image>();
         }
 
-        // Start is called before the first frame update
         private void Start()
         {
             initializeImages();
@@ -33,6 +37,11 @@ namespace TMCard.UI
             _cardImage.transform.SetParent(transform, false);
             _cardImage.raycastTarget = false;
             _cardImage.transform.localPosition = Vector3.zero;
+        }
+
+        public void SetDescription(TMCardData cardData)
+        {
+            
         }
     }
 }

@@ -98,6 +98,8 @@ namespace Onw.Editor
                 string nowValue = GetPropertyValueFromObject( // .. 현재 키값에 해당하는 필드의 값을 불러옵니다
                     propertyMethodPair.TargetField.GetValue(propertyMethodPair.TargetInstance))?.ToString() ?? "NULL";
 
+                Debug.Log(nowValue);
+
                 if (_prevProperties[i].Value != nowValue) // .. 만약 값이 변했다면?
                 {
                     propertyMethodPair // .. 해당 Field를 타겟으로 하는 모든 메서드 호출

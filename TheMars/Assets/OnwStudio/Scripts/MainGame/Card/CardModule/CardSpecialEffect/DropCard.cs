@@ -12,7 +12,7 @@ namespace TMCard.SpecialEffect
     /// .. 버리기
     /// </summary>
     [SerializeReferenceDropdownName("버리기")]
-    public sealed class DropCard : ITMCardSpecialEffect
+    public sealed class DropCard : ICardSpecialEffect
     {
         /// <summary>
         /// .. 버리기 효과

@@ -111,7 +111,7 @@ namespace TheraBytes.BetterUi
 
         public static bool AddScreenTag(string screenTag)
         {
-            if(screenTags.Add(screenTag))
+            if (screenTags.Add(screenTag))
             {
                 isDirty = true;
                 Update();
@@ -289,7 +289,7 @@ namespace TheraBytes.BetterUi
 
         private static void PlayModeStateChanged()
         {
-            if(!UnityEditor.EditorApplication.isPlaying)
+            if (!UnityEditor.EditorApplication.isPlaying)
             {
                 ClearScreenTags();
             }
@@ -305,17 +305,15 @@ namespace TheraBytes.BetterUi
 
         public static float InvokeStaticMethod(ImpactMode mode, Component caller, Vector2 optimizedResolution, Vector2 actualResolution, float optimizedDpi, float actualDpi)
         {
-            int idx = 0;
-            switch (mode)
+            int idx = mode switch
             {
-                case ImpactMode.StaticMethod1: idx = 0; break;
-                case ImpactMode.StaticMethod2: idx = 1; break;
-                case ImpactMode.StaticMethod3: idx = 2; break;
-                case ImpactMode.StaticMethod4: idx = 3; break;
-                case ImpactMode.StaticMethod5: idx = 4; break;
-                default: throw new ArgumentException();
-            }
-
+                ImpactMode.StaticMethod1 => 0,
+                ImpactMode.StaticMethod2 => 1,
+                ImpactMode.StaticMethod3 => 2,
+                ImpactMode.StaticMethod4 => 3,
+                ImpactMode.StaticMethod5 => 4,
+                _ => throw new ArgumentException(),
+            };
             return (ResolutionMonitor.HasInstance && Instance.staticSizerMethods[idx] != null)
                 ? Instance.staticSizerMethods[idx].Invoke(caller, optimizedResolution, actualResolution, optimizedDpi, actualDpi)
                 : 1;
@@ -374,7 +372,7 @@ namespace TheraBytes.BetterUi
         {
 #if UNITY_EDITOR
             // check if file was deleted
-            if(!HasInstance)
+            if (!HasInstance)
             {
                 UnregisterCallbacks();
                 return;
@@ -388,7 +386,7 @@ namespace TheraBytes.BetterUi
                 || GetCurrentResolution() != lastScreenResolution;
 
 #if UNITY_EDITOR && UNITY_2018_3_OR_NEWER
-            if(!isDirty)
+            if (!isDirty)
             {
                 var stage = UnityEditor.SceneManagement.StageUtility.GetCurrentStageHandle();
                 if (stage != currentStage)
@@ -450,8 +448,7 @@ namespace TheraBytes.BetterUi
 
                     try
                     {
-                        if (method != null)
-                            method.Invoke(gameViewWindow, null);
+                        method?.Invoke(gameViewWindow, null);
                     }
                     catch (Exception) { }
                 }
@@ -509,7 +506,7 @@ namespace TheraBytes.BetterUi
 
             if (prefabStage != null)
             {
-                foreach(GameObject root in prefabStage.scene.GetRootGameObjects())
+                foreach (GameObject root in prefabStage.scene.GetRootGameObjects())
                 {
                     foreach (GameObject go in IterateHierarchy(root))
                     {
@@ -605,7 +602,7 @@ namespace TheraBytes.BetterUi
             this.optimizedResolutionFallback = resolution;
         }
 #endif
-        }
+    }
 }
 
 #pragma warning restore 0618

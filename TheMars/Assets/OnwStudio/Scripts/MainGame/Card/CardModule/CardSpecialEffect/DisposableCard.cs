@@ -12,7 +12,7 @@ namespace TMCard.SpecialEffect
     /// .. 일회용
     /// </summary>
     [SerializeReferenceDropdownName("일회용")]
-    public sealed class DisposableCard : ITMCardSpecialEffect
+    public sealed class DisposableCard : ICardSpecialEffect
     {
         public void ApplyEffect(TMCardController cardController)
         {

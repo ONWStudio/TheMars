@@ -14,7 +14,7 @@ namespace TMCard.SpecialEffect
     /// .. 반복
     /// </summary>
     [SerializeReferenceDropdownName("반복")]
-    public sealed class RepeatCard : ITMCardSpecialEffect
+    public sealed class RepeatCard : ICardSpecialEffect
     {
         private sealed class EffectInitialAmountPair
         {

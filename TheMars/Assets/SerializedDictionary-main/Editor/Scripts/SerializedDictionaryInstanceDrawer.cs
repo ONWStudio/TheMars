@@ -159,7 +159,7 @@ namespace AYellowpaper.SerializedCollections.Editor
             CheckPaging();
             var elementsPerPage = EditorUserSettings.Get().ElementsPerPage;
             int pageCount = Mathf.Max(1, Mathf.CeilToInt((float)DefaultState.ListSize / elementsPerPage));
-            ToggleSearchBar(_propertyData.AlwaysShowSearch ? true : SCEditorUtility.ShouldShowSearch(pageCount));
+            ToggleSearchBar(_propertyData.AlwaysShowSearch || SCEditorUtility.ShouldShowSearch(pageCount));
         }
 
         private void InitializeSettingsIfNeeded()
@@ -239,7 +239,8 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         private ReorderableList MakeList()
         {
-            var list = new ReorderableList(_pagedIndices, typeof(int), true, true, true, true);
+            bool isWrtie = !(_dictionaryAttribute?.IsLocked ?? false);
+            var list = new ReorderableList(_pagedIndices, typeof(int), true, true, isWrtie, isWrtie);
             list.onAddCallback += OnAdd;
             list.onRemoveCallback += OnRemove;
             list.onReorderCallbackWithDetails += OnReorder;
@@ -593,13 +594,23 @@ namespace AYellowpaper.SerializedCollections.Editor
             }
 
             var keyDisplayData = _propertyData.GetElementData(SerializedDictionaryDrawer.KeyFlag);
+            if (_dictionaryAttribute?.IsReadOnlyKey ?? false)
+            {
+                GUI.enabled = false;
+            }
             DrawGroupedElement(keyRect, 20, keyProperty, keyDisplayData.EffectiveDisplayType);
+            GUI.enabled = true;
 
             EditorGUI.DrawRect(lineRect, new Color(36 / 255f, 36 / 255f, 36 / 255f));
             GUI.color = prevColor;
 
             var valueDisplayData = _propertyData.GetElementData(SerializedDictionaryDrawer.ValueFlag);
+            if (_dictionaryAttribute?.IsReadOnlyValue ?? false)
+            {
+                GUI.enabled = false;
+            }
             DrawGroupedElement(valueRect, lineRightSpace, valueProperty, valueDisplayData.EffectiveDisplayType);
+            GUI.enabled = true;
         }
 
         private void DrawGroupedElement(Rect rect, int spaceForProperty, SerializedProperty property, DisplayType displayType)
@@ -610,7 +621,7 @@ namespace AYellowpaper.SerializedCollections.Editor
                 Rect groupRect = rect.CutLeft(-spaceForProperty).WithHeight(height);
                 GUI.BeginGroup(groupRect);
 
-                Rect elementRect = new Rect(spaceForProperty, 0, rect.width, height);
+                Rect elementRect = new(spaceForProperty, 0, rect.width, height);
                 _activeState.DrawElement(elementRect, property, displayType);
 
                 DrawInvisibleProperty(rect.WithWidth(spaceForProperty), property);

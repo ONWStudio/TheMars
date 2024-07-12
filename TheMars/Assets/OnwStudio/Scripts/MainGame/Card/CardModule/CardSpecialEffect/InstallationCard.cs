@@ -12,7 +12,7 @@ namespace TMCard.SpecialEffect
     /// .. 설치
     /// </summary>
     [SerializeReferenceDropdownName("설치")]
-    public sealed class InstallationCard : ITMCardSpecialEffect
+    public sealed class InstallationCard : ICardSpecialEffect
     {
         private class EventValuePair
         {

@@ -53,8 +53,7 @@ namespace AYellowpaper.SerializedCollections.Editor.Search
                 {
                     if (matcher.IsMatch(child))
                     {
-                        if (matchingProperties == null)
-                            matchingProperties = new();
+                        matchingProperties ??= new();
                         matchingProperties.Add(new PropertySearchResult(child.Copy()));
                     }
                 }

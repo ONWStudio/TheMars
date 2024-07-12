@@ -6,7 +6,7 @@ using Onw.Attribute;
 
 namespace TMCard.SpecialEffect
 {
-    public sealed partial class HoldCard : ITMCardSpecialEffect
+    public sealed partial class HoldCard : ICardSpecialEffect
     {
         [OnValueChangedByMethod(nameof(_friendlyCard))]
         private void onChangedFriendlyCard()

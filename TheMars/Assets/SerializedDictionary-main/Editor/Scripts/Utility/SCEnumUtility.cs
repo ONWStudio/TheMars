@@ -10,7 +10,7 @@ namespace AYellowpaper.SerializedCollections.Editor
 {
     internal static class SCEnumUtility
     {
-        private static Dictionary<Type, EnumCache> _cache = new Dictionary<Type, EnumCache>();
+        private static readonly Dictionary<Type, EnumCache> _cache = new Dictionary<Type, EnumCache>();
 
         internal static EnumCache GetEnumCache(Type enumType)
         {

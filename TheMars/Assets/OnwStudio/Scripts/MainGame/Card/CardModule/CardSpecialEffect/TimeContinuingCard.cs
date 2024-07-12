@@ -11,7 +11,7 @@ namespace TMCard.SpecialEffect
     /// .. 지속 (시간)
     /// </summary>
     [SerializeReferenceDropdownName("지속 (시간)")]
-    public sealed class TimeContinuingCard : ITMCardSpecialEffect
+    public sealed class TimeContinuingCard : ICardSpecialEffect
     {
         /// <summary>
         /// .. 지속 시간

@@ -11,7 +11,7 @@ namespace TMCard.SpecialEffect
     /// .. 소요 (턴)
     /// </summary>
     [SerializeReferenceDropdownName("소요 (턴)")]
-    public sealed class TurnDelayCard : ITMCardSpecialEffect
+    public sealed class TurnDelayCard : ICardSpecialEffect
     {
         /// <summary>
         /// .. 소요시킬 턴

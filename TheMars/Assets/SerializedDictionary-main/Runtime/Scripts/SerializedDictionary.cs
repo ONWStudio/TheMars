@@ -8,15 +8,14 @@ namespace AYellowpaper.SerializedCollections
     public partial class SerializedDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
     {
         [SerializeField]
-        internal List<SerializedKeyValuePair<TKey, TValue>> _serializedList = new List<SerializedKeyValuePair<TKey, TValue>>();
+        internal List<SerializedKeyValuePair<TKey, TValue>> _serializedList = new();
 
 #if UNITY_EDITOR
         internal IKeyable LookupTable
         {
             get
             {
-                if (_lookupTable == null)
-                    _lookupTable = new DictionaryLookupTable<TKey, TValue>(this);
+                _lookupTable ??= new DictionaryLookupTable<TKey, TValue>(this);
                 return _lookupTable;
             }
         }
@@ -43,6 +42,11 @@ namespace AYellowpaper.SerializedCollections
 #else
             _serializedList.Clear();
 #endif
+        }
+
+        public void NewAdd(TKey key, TValue value)
+        {
+            _serializedList.Add(new(key, value));
         }
 
         public void OnBeforeSerialize()

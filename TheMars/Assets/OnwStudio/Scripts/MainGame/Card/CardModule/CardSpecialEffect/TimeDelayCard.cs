@@ -11,7 +11,7 @@ namespace TMCard.SpecialEffect
     /// .. 소요 (시간)
     /// </summary>
     [SerializeReferenceDropdownName("소요 (시간)")]
-    public sealed class TimeDelayCard : ITMCardSpecialEffect
+    public sealed class TimeDelayCard : ICardSpecialEffect
     {
         /// <summary>
         /// .. 딜레이 타임

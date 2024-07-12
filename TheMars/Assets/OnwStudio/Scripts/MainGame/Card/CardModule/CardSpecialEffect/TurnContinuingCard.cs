@@ -11,7 +11,7 @@ namespace TMCard.SpecialEffect
     /// .. 지속 (턴)
     /// </summary>
     [SerializeReferenceDropdownName("지속 (턴)")]
-    public sealed class TurnContinuingCard : ITMCardSpecialEffect
+    public sealed class TurnContinuingCard : ICardSpecialEffect
     {
         /// <summary>
         /// .. 지속 할 턴

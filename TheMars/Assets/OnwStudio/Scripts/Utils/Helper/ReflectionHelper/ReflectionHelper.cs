@@ -126,7 +126,7 @@ namespace Onw.Helpers
                 {
                     childClassNames = assembly
                         .GetTypes()
-                        .Where(type => type.IsSubclassOf(baseType))
+                        .Where(type => type.IsSubclassOf(baseType) || type.GetInterfaces().Contains(type))
                         .Select(type => type.Name);
 
                     break;
@@ -134,6 +134,20 @@ namespace Onw.Helpers
             }
 
             return childClassNames;
+        }
+
+        public static IEnumerable<string> GetClassNamesFromParent<BaseType>() where BaseType : class
+        {
+            Type type = typeof(BaseType);
+
+            foreach (Type someType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()))
+            {
+                if (someType.IsAbstract  ||
+                    someType.IsInterface ||
+                    (!someType.IsSubclassOf(type) && !someType.GetInterfaces().Contains(type))) continue;
+
+                yield return someType.Name;
+            }
         }
 
         public static IEnumerable<Type> GetChildClassesFromBaseType(Type baseType)

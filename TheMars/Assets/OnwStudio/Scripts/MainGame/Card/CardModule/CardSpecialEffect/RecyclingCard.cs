@@ -10,7 +10,7 @@ namespace TMCard.SpecialEffect
     /// .. 재활용
     /// </summary>
     [SerializeReferenceDropdownName("재활용")]
-    public sealed class RecyclingCard : ITMCardSpecialEffect
+    public sealed class RecyclingCard : ICardSpecialEffect
     {
         public void ApplyEffect(TMCardController cardController)
         {

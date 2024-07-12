@@ -12,7 +12,7 @@ namespace TMCard.SpecialEffect
     /// .. 보유
     /// </summary>
     [SerializeReferenceDropdownName("보유")]
-    public sealed partial class HoldCard : ITMCardSpecialEffect
+    public sealed partial class HoldCard : ICardSpecialEffect
     {
         [SerializeField, DisplayAs("발동 트리거 카드"), Tooltip("보유 효과가 발동할때 참조할 카드 ID")]
         private TMCardData _friendlyCard = null;

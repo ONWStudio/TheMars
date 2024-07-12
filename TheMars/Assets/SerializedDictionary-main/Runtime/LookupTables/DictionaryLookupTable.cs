@@ -6,8 +6,8 @@ namespace AYellowpaper.SerializedCollections
 {
     internal class DictionaryLookupTable<TKey, TValue> : IKeyable
     {
-        private SerializedDictionary<TKey, TValue> _dictionary;
-        private Dictionary<TKey, List<int>> _occurences = new Dictionary<TKey, List<int>>();
+        private readonly SerializedDictionary<TKey, TValue> _dictionary;
+        private readonly Dictionary<TKey, List<int>> _occurences = new();
 
         private static readonly List<int> EmptyList = new List<int>();
 
@@ -74,8 +74,10 @@ namespace AYellowpaper.SerializedCollections
 
         public void AddKey(object key)
         {
-            var entry = new SerializedKeyValuePair<TKey, TValue>();
-            entry.Key = (TKey) key;
+            var entry = new SerializedKeyValuePair<TKey, TValue>
+            {
+                Key = (TKey)key
+            };
             _dictionary._serializedList.Add(entry);
         }
     }

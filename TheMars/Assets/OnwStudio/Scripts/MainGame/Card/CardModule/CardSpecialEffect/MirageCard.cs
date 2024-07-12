@@ -10,7 +10,7 @@ namespace TMCard.SpecialEffect
     /// .. 신기루
     /// </summary>
     [SerializeReferenceDropdownName("신기루")]
-    public sealed class MirageCard : ITMCardSpecialEffect
+    public sealed class MirageCard : ICardSpecialEffect
     {
         public void ApplyEffect(TMCardController cardController)
         {
