@@ -1,5 +1,5 @@
 {
-    "name": "AssemblyTMGUITool",
+    "name": "AssemblyGUIToolDrawer",
     "rootNamespace": "",
     "references": [
         "AssebmlyTMCard",

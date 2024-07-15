@@ -24,9 +24,7 @@ MonoBehaviour:
     type: 3}
   _specialEffect: []
   _cardNames:
-    _serializedList:
-    - Key: 
-      Value: 
+    _serializedList: []
   _descriptions:
     _serializedList: []
   _cardEffects: []

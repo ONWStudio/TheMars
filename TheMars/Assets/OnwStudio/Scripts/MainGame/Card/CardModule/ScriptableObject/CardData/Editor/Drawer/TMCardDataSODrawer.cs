@@ -65,6 +65,7 @@ namespace TMCard.Editor
                     canvasGO.AddComponent<GraphicRaycaster>();
 
                     _previewInstance = Instantiate(previewInstance, _previewCanvas.transform, false);
+                    _previewInstance.SetDescription(targetObject);
                     _previewCamera.transform.position = _previewInstance.transform.position - Vector3.forward * 10;
 
                     if (_previewInstance.transform is RectTransform rectTransform)

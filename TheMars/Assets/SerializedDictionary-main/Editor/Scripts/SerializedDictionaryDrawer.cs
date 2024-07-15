@@ -1,6 +1,7 @@
 ﻿using AYellowpaper.SerializedCollections.Editor.Data;
 using AYellowpaper.SerializedCollections.Editor.States;
 using AYellowpaper.SerializedCollections.KeysGenerators;
+using NUnit.Framework.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,6 +21,9 @@ namespace AYellowpaper.SerializedCollections.Editor
         public const string ValueName = nameof(SerializedKeyValuePair<int, int>.Value);
         public const string SerializedListName = nameof(SerializedDictionary<int, int>._serializedList);
         public const string LookupTableName = nameof(SerializedDictionary<int, int>.LookupTable);
+        public const string IsReadOnlyKeyName = "<" + nameof(SerializedDictionary<int, int>.IsReadOnlyKey) + ">k__BackingField";
+        public const string IsReadOnlyValueName = "<" + nameof(SerializedDictionary<int, int>.IsReadOnlyValue) + ">k__BackingField";
+        public const string IsLooked = "<" + nameof(SerializedDictionary<int, int>.IsLocked) + ">k__BackingField";
 
         public const int TopHeaderClipHeight = 20;
         public const int TopHeaderHeight = 19;
@@ -27,8 +31,8 @@ namespace AYellowpaper.SerializedCollections.Editor
         public const int KeyValueHeaderHeight = 18;
         public const bool KeyFlag = true;
         public const bool ValueFlag = false;
-        public static readonly Color BorderColor = new Color(36 / 255f, 36 / 255f, 36 / 255f);
-        public static readonly List<int> NoEntriesList = new List<int>();
+        public static readonly Color BorderColor = new(36 / 255f, 36 / 255f, 36 / 255f);
+        public static readonly List<int> NoEntriesList = new();
         internal static GUIContent DisplayTypeToggleContent
         {
             get
@@ -43,7 +47,7 @@ namespace AYellowpaper.SerializedCollections.Editor
         }
         private static GUIContent _displayTypeToggleContent;
 
-        private Dictionary<string, SerializedDictionaryInstanceDrawer> _arrayData = new();
+        private readonly Dictionary<string, SerializedDictionaryInstanceDrawer> _arrayData = new();
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {

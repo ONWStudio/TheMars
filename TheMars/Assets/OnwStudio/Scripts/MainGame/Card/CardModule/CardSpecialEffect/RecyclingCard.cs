@@ -10,8 +10,10 @@ namespace TMCard.SpecialEffect
     /// .. 재활용
     /// </summary>
     [SerializeReferenceDropdownName("재활용")]
-    public sealed class RecyclingCard : ICardSpecialEffect
+    public sealed class RecyclingCard : ITMCardSpecialEffect
     {
+        public int No => 1;
+
         public void ApplyEffect(TMCardController cardController)
         {
             cardController.UseState = () => TMCardGameManager.Instance.RecycleToHand(cardController);

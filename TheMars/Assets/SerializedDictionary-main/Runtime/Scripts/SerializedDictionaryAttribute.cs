@@ -9,19 +9,19 @@ namespace AYellowpaper.SerializedCollections
     [Conditional("UNITY_EDITOR")]
     public class SerializedDictionaryAttribute : Attribute
     {
+        /// <summary>
+        /// .. Key의 Label
+        /// /// </summary>
         public readonly string KeyName;
+        /// <summary>
+        /// .. Value의 Label
+        /// </summary>
         public readonly string ValueName;
-        public readonly bool IsReadOnlyKey;
-        public readonly bool IsReadOnlyValue;
-        public readonly bool IsLocked;
 
-        public SerializedDictionaryAttribute(string keyName = null, string valueName = null, bool isReadOnlyKey = false, bool isReadOnlyValue = false, bool isLooked = false)
+        public SerializedDictionaryAttribute(string keyName = null, string valueName = null)
         {
             KeyName = keyName;
             ValueName = valueName;
-            IsReadOnlyKey = isReadOnlyKey;
-            IsReadOnlyValue = isReadOnlyValue;
-            IsLocked = isLooked;
         }
     }
 }

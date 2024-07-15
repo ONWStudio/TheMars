@@ -4,40 +4,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using TMCard.Manager;
+using Onw.Editor;
 
 namespace TMGUITool
 {
-    internal sealed partial class TMGUIToolDrawer : EditorWindow
+    internal sealed partial class GUIToolDrawer : EditorWindow
     {
-        private sealed class TMCardSpecialEffectNameDrawer : IGUIDrawer
+        private sealed class TMCardSpecialEffectNameDrawer : CustomInspectorEditorWindow, IGUIDrawer
         {
-            public int Page { get; set; }
-
-            public int MaxPage => 0;
-
             public bool HasErrors { get; set; }
             public bool IsSuccess { get; set; }
             public string Message { get; set; }
 
-            public void Awake()
-            {
-                _ = TMSpecialEffectNameManager.Instance;
-            }
-
-            public void LoadDataFromLocal()
-            {
-            }
+            private readonly EditorScrollController _scrollViewController = new();
+            public void Awake() {}
+            public void OnEnable() {}
 
             public void OnDraw()
             {
-            }
-
-            public void OnEnable()
-            {
-            }
-
-            public void SaveDataToLocal()
-            {
+                _scrollViewController
+                    .ActionScrollSpace(() => OnInspectorGUI(TMSpecialEffectNameManager.Instance));
             }
         }
     }

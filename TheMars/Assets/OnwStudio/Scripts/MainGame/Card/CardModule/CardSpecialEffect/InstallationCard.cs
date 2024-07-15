@@ -12,7 +12,7 @@ namespace TMCard.SpecialEffect
     /// .. 설치
     /// </summary>
     [SerializeReferenceDropdownName("설치")]
-    public sealed class InstallationCard : ICardSpecialEffect
+    public sealed class InstallationCard : ITMCardSpecialEffect
     {
         private class EventValuePair
         {
@@ -33,6 +33,8 @@ namespace TMCard.SpecialEffect
 
         // .. UI에 알려주기
         private static readonly Dictionary<string, EventValuePair> _cardStack = new();
+
+        public int No => 6;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void initialize()

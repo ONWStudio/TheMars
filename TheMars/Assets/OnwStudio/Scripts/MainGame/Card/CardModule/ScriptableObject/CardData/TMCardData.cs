@@ -78,7 +78,8 @@ namespace TMCard
         public IReadOnlyDictionary<string, string> ReadOnlyCardNames => _cardNames;
         public IReadOnlyDictionary<string, string> ReadOnlyDescriptions => _descriptions;
         public IReadOnlyList<ITMCardAddtionalCondition> ReadOnlyAdditionalCondition => _addtionalConditions;
-        public IReadOnlyList<ICardSpecialEffect> SpecialEffects => _specialEffect;
+        public IReadOnlyList<ITMCardSpecialEffect> SpecialEffects => _specialEffect;
+        public IReadOnlyList<ITMCardEffect> CardEffects => _cardEffects;
 
         /// <summary>
         /// .. 카드의 특수효과입니다
@@ -86,7 +87,7 @@ namespace TMCard
         /// </summary>
         [Space]
         [SerializeReference, FormerlySerializedAs("_specialEffect"), DisplayAs("특수 효과"), Tooltip("특수 효과"), SerializeReferenceDropdown]
-        private List<ICardSpecialEffect> _specialEffect = new();
+        private List<ITMCardSpecialEffect> _specialEffect = new();
 
         [Space]
         [SerializeField, FormerlySerializedAs("_cardNames"), DisplayAs("이름"), Tooltip("카드 이름 관리자 지역별 이름을 작성합니다 로컬라이징은 국가 코드를 참고해주세요"), SerializedDictionary("Culture Code", "Name")]
@@ -100,7 +101,6 @@ namespace TMCard
 
         [SerializeReference, FormerlySerializedAs("_addtionalConditions"), DisplayAs("추가 조건"), Tooltip("카드 추가 조건 리스트"), SerializeReferenceDropdown]
         private List<ITMCardAddtionalCondition> _addtionalConditions = new();
-
 
         /// <summary>
         /// .. 발동 효과 입니다

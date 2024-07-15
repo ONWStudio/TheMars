@@ -15,7 +15,8 @@ namespace TMCard.UI
 
         public void SetDescription(TMCardData cardData)
         {
-            
+            //cardData.CardEffects.
+            //_descriptors.Add()
         }
     }
 }

@@ -9,9 +9,8 @@ using static Onw.Editor.EditorHelper;
 
 namespace TMGUITool
 {
-    internal sealed partial class TMGUIToolDrawer : EditorWindow
+    internal sealed partial class GUIToolDrawer : EditorWindow
     {
-        private int _prevPage = 0;
         private int _selectedTab = 0;
         private string[] _tabs = null;
 
@@ -20,7 +19,7 @@ namespace TMGUITool
         [MenuItem("Onw Studio/TM Tool GUI Drawer")]
         internal static void OnWindow()
         {
-            GetWindow<TMGUIToolDrawer>().Show();
+            GetWindow<GUIToolDrawer>().Show();
         }
 
         private void OnEnable()
@@ -31,87 +30,79 @@ namespace TMGUITool
                 .Select(drawer => drawer.GetType().Name)
                 .ToArray();
 
-            _guiDrawers[_selectedTab].LoadDataFromLocal();
+            (_guiDrawers[_selectedTab] as ILoadable)?.LoadDataFromLocal();
             _guiDrawers[_selectedTab].OnEnable();
         }
 
         private void OnGUI()
         {
-            EditorGUILayout.HelpBox(
-                "카테고리를 변경하거나 창을 종료 시 저장이 되지 않습니다 카테고리 변경전에 로컬에 저장해주세요",
-                MessageType.Info,
-                true);
-
-            if (_guiDrawers.Count <= 0)
-            {
-                return;
-            }
+            if (_guiDrawers.Count <= 0) return;
 
             int selectedTab = GUILayout.Toolbar(_selectedTab, _tabs);
 
             if (selectedTab != _selectedTab)
             {
                 _selectedTab = selectedTab;
-
                 _guiDrawers[_selectedTab].OnEnable();
             }
 
-            if (GUILayout.Button("데이터 저장 (로컬)"))
+            if (_guiDrawers[_selectedTab] is ILoadable loader &&
+                GUILayout.Button("데이터 저장 (로컬)"))
             {
-                _guiDrawers[_selectedTab].SaveDataToLocal();
+                loader.SaveDataToLocal();
             }
 
             EditorGUILayout.Space();
 
             ActionHorizontal(() =>
             {
-                _guiDrawers[_selectedTab].Page = EditorGUILayout.IntField(
-                    $"Page {_guiDrawers[_selectedTab].MaxPage} / {_guiDrawers[_selectedTab].Page}",
-                    _guiDrawers[_selectedTab].Page);
+                if (_guiDrawers[_selectedTab] is not IPagable pager) return;
 
-                IGUIPagingHandler pagingHandler = _guiDrawers[_selectedTab] as IGUIPagingHandler;
+                pager.Page = EditorGUILayout.IntField(
+                $"Page {pager.MaxPage} / {pager.Page}",
+                pager.Page);
+
                 System.Action pagingCallback = null;
+                IGUIPagingHandler<IPagable> handler = pager as IGUIPagingHandler<IPagable>;
 
                 if (GUILayout.Button("<<"))
                 {
-                    _guiDrawers[_selectedTab].Page = 1;
-                    pagingCallback = () => pagingHandler?.OnFirst();
+                    pager.Page = 1;
+                    pagingCallback = () => handler?.OnFirst();
                 }
 
                 if (GUILayout.Button("<"))
                 {
-                    _guiDrawers[_selectedTab].Page--;
-                    pagingCallback = () => pagingHandler?.OnLeft();
+                    pager.Page--;
+                    pagingCallback = () => handler?.OnLeft();
                 }
 
                 if (GUILayout.Button(">"))
                 {
-                    _guiDrawers[_selectedTab].Page++;
-                    pagingCallback = () => pagingHandler?.OnRight();
+                    pager.Page++;
+                    pagingCallback = () => handler?.OnRight();
                 }
 
                 if (GUILayout.Button(">>"))
                 {
-                    _guiDrawers[_selectedTab].Page = _guiDrawers[_selectedTab].MaxPage;
-                    pagingCallback = () => pagingHandler?.OnLast();
+                    pager.Page = pager.MaxPage;
+                    pagingCallback = () => handler?.OnLast();
                 }
 
-                _guiDrawers[_selectedTab].Page = Mathf.Clamp(
-                    _guiDrawers[_selectedTab].Page,
-                    _guiDrawers[_selectedTab].MaxPage == 0 ? 0 : 1,
-                    _guiDrawers[_selectedTab].MaxPage);
+                pager.Page = Mathf.Clamp(
+                    pager.Page,
+                    pager.MaxPage == 0 ? 0 : 1,
+                    pager.MaxPage);
 
                 pagingCallback?.Invoke();
+
+                if (pager is IMovedPage<IPagable> pageMoveHandler && pager.PrevPage != pager.Page)
+                {
+                    pageMoveHandler.OnMove();
+                }
+
+                pager.PrevPage = pager.Page;
             });
-
-            IMovedPage movedPage = _guiDrawers[_selectedTab] as IMovedPage;
-
-            if (movedPage is not null && _prevPage != _guiDrawers[_selectedTab].Page)
-            {
-                movedPage.OnMove();
-            }
-
-            _prevPage = _guiDrawers[_selectedTab].Page;
 
             ActionEditorVertical(() => _guiDrawers[_selectedTab].OnDraw(), GUI.skin.box);
 

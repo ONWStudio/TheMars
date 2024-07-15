@@ -32,7 +32,7 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         public static float CalculateHeight(SerializedProperty property, DisplayType displayType)
         {
-            return CalculateHeight(property, displayType == DisplayType.List ? true : false);
+            return CalculateHeight(property, displayType == DisplayType.List);
         }
 
         public static float CalculateHeight(SerializedProperty property, bool drawAsList)
@@ -75,6 +75,7 @@ namespace AYellowpaper.SerializedCollections.Editor
             var json = EditorPrefs.GetString(EditorPrefsPrefix + property.propertyPath, null);
             if (json != null)
                 EditorJsonUtility.FromJsonOverwrite(json, data);
+
             return data;
         }
 
@@ -141,8 +142,8 @@ namespace AYellowpaper.SerializedCollections.Editor
             {
                 if (element.Contains("["))
                 {
-                    var elementName = element.Substring(0, element.IndexOf("["));
-                    var index = Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
+                    var elementName = element[..element.IndexOf("[")];
+                    var index = Convert.ToInt32(element[element.IndexOf("[")..].Replace("[", "").Replace("]", ""));
                     target = GetValue(target, elementName, index);
                 }
                 else
@@ -155,8 +156,8 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         public static object GetValue(object source, string name)
         {
-            if (source == null)
-                return null;
+            if (source == null) return null;
+
             var type = source.GetType();
             var f = type.GetField(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
             if (f == null)

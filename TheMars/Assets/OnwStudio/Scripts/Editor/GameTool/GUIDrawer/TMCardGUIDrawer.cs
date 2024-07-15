@@ -13,14 +13,14 @@ using static Onw.Editor.EditorHelper;
 
 namespace TMGUITool
 {
-    internal sealed partial class TMGUIToolDrawer : EditorWindow
+    internal sealed partial class GUIToolDrawer : EditorWindow
     {
-        private sealed class TMCardGUIDrawer : IGUIDrawer
+        private sealed class TMCardGUIDrawer : CustomInspectorEditorWindow, IGUIDrawer, IPagable
         {
             private const string DATA_PATH = "Assets/OnwStudio/ScriptableObject/Cards";
-            private Editor _editor = null;
 
             public int Page { get; set; }
+            public int PrevPage { get; set; }
             public int MaxPage => _cards.Count;
 
             public bool HasErrors { get; set; } = false;
@@ -29,7 +29,6 @@ namespace TMGUITool
 
             private readonly List<TMCardData> _cards = new();
             private readonly EditorScrollController _scrollViewController = new();
-            private readonly Dictionary<string, List<IObjectEditorAttributeDrawer>> _attrubuteDrawers = new();
 
             public void Awake()
             {
@@ -37,15 +36,9 @@ namespace TMGUITool
                 Page = 1;
             }
 
-            public void OnEnable()
-            {
-
-            }
-
+            public void OnEnable() {}
             public void OnDraw()
             {
-                TMCardData cardData = null;
-
                 ActionEditorHorizontal(() =>
                 {
                     if (!GUILayout.Button("새 카드 추가")) return;
@@ -59,26 +52,8 @@ namespace TMGUITool
 
                 if (page >= 0 && _cards.Count > page)
                 {
-                    _scrollViewController.ActionScrollSpace(() =>
-                    {
-                        cardData = _cards[page];
-
-                        if (_editor == null || _editor.target != cardData)
-                        {
-                            _editor = Editor.CreateEditor(cardData);
-                        }
-
-                        if (!_attrubuteDrawers.TryGetValue(_editor.target.GetInstanceID().ToString(), out List<IObjectEditorAttributeDrawer> drawers))
-                        {
-                            drawers = new(ReflectionHelper.GetChildClassesFromType<IObjectEditorAttributeDrawer>());
-                            drawers.ForEach(drawer => drawer.OnEnable(_editor));
-                            _attrubuteDrawers.Add(_editor.target.GetInstanceID().ToString(), drawers);
-                        }
-
-                        _editor.OnInspectorGUI();
-                        drawers
-                            .ForEach(drawer => drawer.OnInspectorGUI(_editor));
-                    });
+                    _scrollViewController
+                        .ActionScrollSpace(() => OnInspectorGUI(_cards[page]));
                 }
             }
 
@@ -87,7 +62,6 @@ namespace TMGUITool
                 _cards.Clear();
                 _cards.AddRange(DataHandler<TMCardData>
                     .LoadAllScriptableObjects());
-
                 _cards.ForEach(insertLocalizingOptions);
             }
 

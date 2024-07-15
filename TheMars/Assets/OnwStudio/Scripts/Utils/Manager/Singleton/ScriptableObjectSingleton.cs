@@ -1,15 +1,13 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Onw.Manager
 {
-    using System;
-    using System.IO;
-    using System.Linq;
-    using System.Reflection;
-    using Onw.Helpers;
-
     public abstract class ScriptableObjectSingleton<T> : ScriptableObject where T : ScriptableObjectSingleton<T>
     {
         public static T Instance => EnsureInstance();
@@ -61,10 +59,14 @@ namespace Onw.Manager
             Type t = typeof(T);
             var prop = t.GetField("FILE_PATH", BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic) ?? throw new Exception($"No static Property 'FilePath' in {t}");
 
+            // .. 하위 클래스에 식별자가 'FILE_PATH'인 전역 string type 필드가 선언되지 않았을 경우
             if (prop.GetValue(null) is not string filePath) throw new Exception($"static property 'FILE_PATH' is not a string or null in {t}");
+            // .. Resource를 통해 불러오므로 FILE_PATH에 Resources라는 경로가 포함되어 있어야 함 
             if (!filePath.Contains("Resources")) throw new Exception("static property 'FILE_PATH' must contain a Resources folder.");
+            // .. Plugins경로가 포함되어 있을 경우
             if (filePath.Contains("Plugins")) throw new Exception("static property 'FILE_PATH' must not contain a Plugin folder.");
 
+            // .. 스크립터블 오브젝트의 확장자는 .asset이므로 없다면 추가
             if (!filePath.EndsWith(".asset"))
             {
                 filePath += ".asset";

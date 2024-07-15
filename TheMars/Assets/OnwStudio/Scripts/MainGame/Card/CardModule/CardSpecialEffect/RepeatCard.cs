@@ -14,7 +14,7 @@ namespace TMCard.SpecialEffect
     /// .. 반복
     /// </summary>
     [SerializeReferenceDropdownName("반복")]
-    public sealed class RepeatCard : ICardSpecialEffect
+    public sealed class RepeatCard : ITMCardSpecialEffect
     {
         private sealed class EffectInitialAmountPair
         {
@@ -29,6 +29,8 @@ namespace TMCard.SpecialEffect
                 NormalEffects = normalEffects;
             }
         }
+
+        public int No => 9;
 
         private static readonly Dictionary<string, EffectInitialAmountPair> _resourceEffectInitalAmounts = new();
 

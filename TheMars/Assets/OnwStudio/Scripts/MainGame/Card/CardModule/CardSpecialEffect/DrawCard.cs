@@ -13,8 +13,10 @@ namespace TMCard.SpecialEffect
     /// .. 드로우
     /// </summary>
     [SerializeReferenceDropdownName("드로우")]
-    public sealed class DrawCard : ICardSpecialEffect
+    public sealed class DrawCard : ITMCardSpecialEffect
     {
+        public int No => 11;
+
         [SerializeReference, DisplayAs("드로우 효과"), FormerlySerializedAs("_drawEffects"), SerializeReferenceDropdown] private List<ITMCardEffect> _drawEffects = new();
 
         public void ApplyEffect(TMCardController cardController)

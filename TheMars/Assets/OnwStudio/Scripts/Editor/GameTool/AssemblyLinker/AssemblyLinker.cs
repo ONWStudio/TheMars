@@ -1,3 +1,3 @@
 #if UNITY_EDITOR
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("AssemblyTMGUITool")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("AssemblyGUIToolDrawer")]
 #endif

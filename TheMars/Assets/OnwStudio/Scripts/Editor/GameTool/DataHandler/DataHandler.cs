@@ -9,7 +9,7 @@ using static UnityEditor.AssetDatabase;
 
 namespace TMGUITool
 {
-    internal sealed partial class TMGUIToolDrawer : EditorWindow
+    internal sealed partial class GUIToolDrawer : EditorWindow
     {
         private static class DataHandler<T> where T : ScriptableObject
         {

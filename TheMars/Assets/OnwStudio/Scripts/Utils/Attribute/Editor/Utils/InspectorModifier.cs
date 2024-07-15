@@ -46,7 +46,7 @@ namespace Onw.Editor
 
             foreach (var inspector in inspectors)
             {
-                // rootVisualElement를 리플렉션으로 가져옴 (2022.3.29f1) 기준 에디터 VisualElement는 editorsElement 프로퍼티
+                // rootVisualElement를 리플렉션으로 가져옴 (2022.3.29f1) 기준 인스펙터 에디터 VisualElement는 editorsElement 프로퍼티
                 var rootVisualElementProperty = inspectorWindowType.GetProperty("editorsElement", BindingFlags.NonPublic | BindingFlags.Instance);
 
                 if (rootVisualElementProperty?.GetValue(inspector) is VisualElement rootVisualElement)
@@ -66,11 +66,12 @@ namespace Onw.Editor
             {
                 if (editorElement.Q<IMGUIContainer>("onw-custom-attribute-drawer") != null) continue; // .. 중첩 방지 안해두면 2번이상호출된후 무한 호출반복 
 
-                var editorField = editorElement
+                // .. (2022.3.29f1) 기준 editor 프로퍼티
+                var editorProperty = editorElement
                     .GetType()
                     .GetProperty("editor", BindingFlags.NonPublic | BindingFlags.Instance);
 
-                if (editorField.GetValue(editorElement) is Editor editor && // .. 에디터 찾아오기
+                if (editorProperty.GetValue(editorElement) is Editor editor && // .. 에디터 찾아오기
                     (editor.target is MonoBehaviour || editor.target is ScriptableObject)) // .. 타겟이 모노비하이비어거나 스크립터블 오브젝트 일 경우
                 {
                     IMGUIContainer iMGUIContainer = editorElement.Q<IMGUIContainer>(); // .. 에디터의 IMGUI컨테이너 찾아오기

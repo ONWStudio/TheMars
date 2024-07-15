@@ -116,24 +116,23 @@ namespace Onw.Helpers
 
         public static IEnumerable<string> GetClassNamesFromParent(string baseClass)
         {
-            IEnumerable<string> childClassNames = null;
-
             foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
                 Type baseType = assembly.GetType(baseClass);
 
                 if (baseType is not null)
                 {
-                    childClassNames = assembly
+                    var names = assembly
                         .GetTypes()
                         .Where(type => type.IsSubclassOf(baseType) || type.GetInterfaces().Contains(type))
                         .Select(type => type.Name);
 
-                    break;
+                    foreach (string name in names)
+                    {
+                        yield return name;
+                    }
                 }
             }
-
-            return childClassNames;
         }
 
         public static IEnumerable<string> GetClassNamesFromParent<BaseType>() where BaseType : class
@@ -208,23 +207,15 @@ namespace Onw.Helpers
 
         public static IEnumerable<string> GetEnumValuesFromEnumName(string enumTypeName)
         {
-            IEnumerable<string> enumValues = null;
-            bool isFind = false;
-
-            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (Type type in AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()))
             {
-                if (isFind) break;
+                if (!type.IsEnum || type.Name != enumTypeName) continue;
 
-                foreach (Type type in assembly.GetTypes())
+                foreach (string name in Enum.GetNames(type))
                 {
-                    if (!type.IsEnum || type.Name != enumTypeName) continue;
-
-                    enumValues = Enum.GetNames(type);
-                    isFind = true;
+                    yield return name;
                 }
             }
-
-            return enumValues;
         }
 
         public static Dictionary<string, int> GetEnumKVPFromEnumName(string enumTypeName)

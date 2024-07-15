@@ -23,7 +23,7 @@ namespace AYellowpaper.SerializedCollections.Editor
         private Rect _totalRect;
         private readonly GUIStyle _keyValueStyle;
         private readonly SerializedDictionaryAttribute _dictionaryAttribute;
-        private PropertyData _propertyData;
+        private readonly PropertyData _propertyData;
         private bool _propertyListSettingsInitialized = false;
         private readonly List<int> _pagedIndices;
         private readonly PagingElement _pagingElement;
@@ -34,6 +34,9 @@ namespace AYellowpaper.SerializedCollections.Editor
         private GUIContent _shortDetailsContent;
         private GUIContent _detailsContent;
         private bool _showSearchBar = false;
+        private bool _isReadOnlyKey = false;
+        private bool _isReadOnlyValue = false;
+        private bool _isLocked = false;
         private ListState _activeState;
 
         internal ReorderableList ReorderableList { get; private set; }
@@ -57,11 +60,16 @@ namespace AYellowpaper.SerializedCollections.Editor
         {
             _fieldInfo = fieldInfo;
             ListProperty = property.FindPropertyRelative(SerializedDictionaryDrawer.SerializedListName);
+            _isReadOnlyKey = property.FindPropertyRelative(SerializedDictionaryDrawer.IsReadOnlyKeyName).boolValue;
+            _isReadOnlyValue = property.FindPropertyRelative(SerializedDictionaryDrawer.IsReadOnlyValueName).boolValue;
+            _isLocked = property.FindPropertyRelative(SerializedDictionaryDrawer.IsLooked).boolValue;
 
-            _keyValueStyle = new GUIStyle(EditorStyles.toolbarButton);
-            _keyValueStyle.padding = new RectOffset(0, 0, 0, 0);
-            _keyValueStyle.border = new RectOffset(0, 0, 0, 0);
-            _keyValueStyle.alignment = TextAnchor.MiddleCenter;
+            _keyValueStyle = new GUIStyle(EditorStyles.toolbarButton)
+            {
+                padding = new RectOffset(0, 0, 0, 0),
+                border = new RectOffset(0, 0, 0, 0),
+                alignment = TextAnchor.MiddleCenter
+            };
 
             DefaultState = new DefaultListState(this);
             SearchState = new SearchListState(this);
@@ -72,6 +80,7 @@ namespace AYellowpaper.SerializedCollections.Editor
             _propertyData = SCEditorUtility.GetPropertyData(ListProperty);
             _propertyData.GetElementData(SCEditorUtility.KeyFlag).Settings.DisplayName = _dictionaryAttribute?.KeyName ?? "Key";
             _propertyData.GetElementData(SCEditorUtility.ValueFlag).Settings.DisplayName = _dictionaryAttribute?.ValueName ?? "Value";
+
             SavePropertyData();
 
             _pagingElement = new PagingElement();
@@ -229,7 +238,7 @@ namespace AYellowpaper.SerializedCollections.Editor
             for (int i = startIndex; i < endIndex; i++)
                 _pagedIndices.Add(i);
 
-            string shortDetailsString = (_activeState.ListSize + " " + (_pagedIndices.Count == 1 ? "Element" : "Elements"));
+            string shortDetailsString = _activeState.ListSize + " " + (_pagedIndices.Count == 1 ? "Element" : "Elements");
             string detailsString = _pagingElement.PageCount > 1
                 ? $"{_pagedIndices[0] + 1}..{_pagedIndices.Last() + 1} / {_activeState.ListSize} Elements"
                 : shortDetailsString;
@@ -239,8 +248,7 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         private ReorderableList MakeList()
         {
-            bool isWrtie = !(_dictionaryAttribute?.IsLocked ?? false);
-            var list = new ReorderableList(_pagedIndices, typeof(int), true, true, isWrtie, isWrtie);
+            var list = new ReorderableList(_pagedIndices, typeof(int), true, true, !_isLocked, !_isLocked);
             list.onAddCallback += OnAdd;
             list.onRemoveCallback += OnRemove;
             list.onReorderCallbackWithDetails += OnReorder;
@@ -513,7 +521,7 @@ namespace AYellowpaper.SerializedCollections.Editor
                 var dictionary = SCEditorUtility.GetPropertyValue(ListProperty, targetObject);
                 var lookupTable = GetLookupTable(dictionary);
 
-                List<int> duplicateIndices = new List<int>();
+                List<int> duplicateIndices = new();
 
                 foreach (var key in lookupTable.Keys)
                 {
@@ -558,7 +566,7 @@ namespace AYellowpaper.SerializedCollections.Editor
         {
             int actualIndex = _pagedIndices[index];
             var element = _activeState.GetPropertyAtIndex(actualIndex);
-            return CalculateHeightOfElement(element, _propertyData.GetElementData(SerializedDictionaryDrawer.KeyFlag).EffectiveDisplayType == DisplayType.List ? true : false, _propertyData.GetElementData(SerializedDictionaryDrawer.ValueFlag).EffectiveDisplayType == DisplayType.List ? true : false);
+            return CalculateHeightOfElement(element, _propertyData.GetElementData(SerializedDictionaryDrawer.KeyFlag).EffectiveDisplayType == DisplayType.List, _propertyData.GetElementData(SerializedDictionaryDrawer.ValueFlag).EffectiveDisplayType == DisplayType.List ? true : false);
         }
 
         private void OnDrawElement(Rect rect, int index, bool isActive, bool isFocused)
@@ -583,18 +591,18 @@ namespace AYellowpaper.SerializedCollections.Editor
             {
                 var keyObject = _keyFieldInfo.GetValue(_singleEditingData.LookupTable.GetKeyAt(actualIndex));
                 var occurences = _singleEditingData.LookupTable.GetOccurences(keyObject);
+
                 if (occurences.Count > 1)
                 {
-                    GUI.color = occurences[0] == actualIndex ? Color.yellow : Color.red;
-                }
-                if (!SerializedCollectionsUtility.IsValidKey(keyObject))
-                {
-                    GUI.color = Color.red;
+                    GUI.color = occurences[0] == actualIndex &&
+                        SerializedCollectionsUtility.IsValidKey(keyObject) ?
+                            Color.yellow :
+                            Color.red;
                 }
             }
 
             var keyDisplayData = _propertyData.GetElementData(SerializedDictionaryDrawer.KeyFlag);
-            if (_dictionaryAttribute?.IsReadOnlyKey ?? false)
+            if (_isReadOnlyKey)
             {
                 GUI.enabled = false;
             }
@@ -605,7 +613,7 @@ namespace AYellowpaper.SerializedCollections.Editor
             GUI.color = prevColor;
 
             var valueDisplayData = _propertyData.GetElementData(SerializedDictionaryDrawer.ValueFlag);
-            if (_dictionaryAttribute?.IsReadOnlyValue ?? false)
+            if (_isReadOnlyValue)
             {
                 GUI.enabled = false;
             }
