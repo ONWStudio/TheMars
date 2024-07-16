@@ -4,8 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Onw.Editor
+namespace Onw.Editor.GUI
 {
+    using GUI = UnityEngine.GUI;
+
     public sealed class ToggleEnumerator<T>
     {
         public T ChooseTarget { get; private set; } = default;
@@ -27,8 +29,8 @@ namespace Onw.Editor
             _selectedGUIStyle = new(GUI.skin.box);
             _defaultGUIStyle = new(GUI.skin.box);
 
-            _selectedGUIStyle.normal.background = EditorHelper.GetTexture2D(selectedStyleColor, _selectedGUIStyle);
-            _defaultGUIStyle.normal.background = EditorHelper.GetTexture2D(defaultStyleColor, _defaultGUIStyle);
+            _selectedGUIStyle.normal.background = EditorGUIHelper.GetTexture2D(selectedStyleColor, _selectedGUIStyle);
+            _defaultGUIStyle.normal.background = EditorGUIHelper.GetTexture2D(defaultStyleColor, _defaultGUIStyle);
         }
 
         public T SelectEnumeratedToggles(Func<T, string> onSelectedText, params GUILayoutOption[] options)

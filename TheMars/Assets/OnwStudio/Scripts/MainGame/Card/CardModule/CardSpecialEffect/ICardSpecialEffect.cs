@@ -1,7 +1,5 @@
-
 namespace TMCard.SpecialEffect
 {
-    using System.Collections.Generic;
     using UI;
 
     /// <summary>

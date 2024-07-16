@@ -5,14 +5,13 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using AYellowpaper.SerializedCollections;
 using Onw.Attribute;
+using TMCard.Effect;
+using TMCard.AddtionalCondition;
+using TMCard.SpecialEffect;
 
 namespace TMCard
 {
-    using Effect;
-    using AddtionalCondition;
-    using SpecialEffect;
-
-    public sealed partial class TMCardData : ScriptableObject
+    public sealed partial class TMCardData : ScriptableObject, IDescriptable
     {
         /// <summary>
         /// .. 카드의 고유 ID

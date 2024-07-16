@@ -1,15 +1,11 @@
 #if UNITY_EDITOR
-using System;
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Onw.Editor.GUI;
 using TMCard;
-using Onw.Editor;
-using Onw.Helpers;
 using AddressableAssetBundleSpace;
-using static Onw.Editor.EditorHelper;
+using static Onw.Editor.EditorGUIHelper;
 
 namespace TMGUITool
 {
@@ -49,19 +45,19 @@ namespace TMGUITool
                 });
 
                 int page = Page - 1;
-
                 if (page >= 0 && _cards.Count > page)
                 {
+                    TMCardData cardData = _cards[page];
+
                     _scrollViewController
-                        .ActionScrollSpace(() => OnInspectorGUI(_cards[page]));
+                        .ActionScrollSpace(() => OnInspectorGUI(cardData));
                 }
             }
 
             public void LoadDataFromLocal()
             {
                 _cards.Clear();
-                _cards.AddRange(DataHandler<TMCardData>
-                    .LoadAllScriptableObjects());
+                _cards.AddRange(DataHandler<TMCardData>.LoadAllScriptableObjects());
                 _cards.ForEach(insertLocalizingOptions);
             }
 

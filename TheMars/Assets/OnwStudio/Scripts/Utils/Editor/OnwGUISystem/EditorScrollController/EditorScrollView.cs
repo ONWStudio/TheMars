@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Onw.Editor
+namespace Onw.Editor.GUI
 {
     public sealed class EditorScrollController
     {

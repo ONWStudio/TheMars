@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using TMCard.Manager;
-using Onw.Editor;
+using Onw.Editor.GUI;
 
 namespace TMGUITool
 {

@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Onw.UI.Components;
-using static Onw.Editor.EditorHelper;
+using static Onw.Editor.EditorGUIHelper;
+using static Onw.Editor.EditorReflectionHelper;
 
 [CustomEditor(typeof(HorizontalSelector))]
 internal sealed class HorizontalSelectorEditor : Editor

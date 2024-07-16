@@ -8,9 +8,4 @@ namespace TMCard.AddtionalCondition
     {
         bool AdditionalCondition { get; }
     }
-
-    public interface ITMCardAddtionalCondtionProcessing
-    {
-        void UseProcessing();
-    }
 }

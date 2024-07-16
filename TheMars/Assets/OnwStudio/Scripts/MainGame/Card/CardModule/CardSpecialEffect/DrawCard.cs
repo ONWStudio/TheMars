@@ -8,6 +8,7 @@ namespace TMCard.SpecialEffect
 {
     using UI;
     using Effect;
+    using Manager;
 
     /// <summary>
     /// .. 드로우

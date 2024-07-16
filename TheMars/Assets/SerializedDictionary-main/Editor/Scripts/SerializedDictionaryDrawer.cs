@@ -21,9 +21,6 @@ namespace AYellowpaper.SerializedCollections.Editor
         public const string ValueName = nameof(SerializedKeyValuePair<int, int>.Value);
         public const string SerializedListName = nameof(SerializedDictionary<int, int>._serializedList);
         public const string LookupTableName = nameof(SerializedDictionary<int, int>.LookupTable);
-        public const string IsReadOnlyKeyName = "<" + nameof(SerializedDictionary<int, int>.IsReadOnlyKey) + ">k__BackingField";
-        public const string IsReadOnlyValueName = "<" + nameof(SerializedDictionary<int, int>.IsReadOnlyValue) + ">k__BackingField";
-        public const string IsLooked = "<" + nameof(SerializedDictionary<int, int>.IsLocked) + ">k__BackingField";
 
         public const int TopHeaderClipHeight = 20;
         public const int TopHeaderHeight = 19;

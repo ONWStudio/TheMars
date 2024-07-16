@@ -41,6 +41,7 @@ namespace TMCard.UI
 
         public void SetDescription(TMCardData cardData)
         {
+            _descriptor.SetDescription(cardData);
         }
     }
 }

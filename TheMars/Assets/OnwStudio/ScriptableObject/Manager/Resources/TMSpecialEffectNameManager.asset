@@ -13,103 +13,76 @@ MonoBehaviour:
   m_Name: TMSpecialEffectNameManager
   m_EditorClassIdentifier: 
   _specialEffectNames:
-    <IsReadOnlyKey>k__BackingField: 1
-    <IsReadOnlyValue>k__BackingField: 0
-    <IsLocked>k__BackingField: 1
     _serializedList:
     - Key: DrawCard
       Value:
-        <IsReadOnlyKey>k__BackingField: 0
-        <IsReadOnlyValue>k__BackingField: 0
-        <IsLocked>k__BackingField: 0
-        _serializedList:
-        - Key: ko-KR
-          Value: "\uB4DC\uB85C\uC6B0"
+        <EffectNames>k__BackingField:
+          _serializedList:
+          - Key: ko-KR
+            Value: "\uB4DC\uB85C\uC6B0"
     - Key: DisposableCard
       Value:
-        <IsReadOnlyKey>k__BackingField: 0
-        <IsReadOnlyValue>k__BackingField: 0
-        <IsLocked>k__BackingField: 0
-        _serializedList:
-        - Key: ko-KR
-          Value: "\uC77C\uD68C\uC6A9"
+        <EffectNames>k__BackingField:
+          _serializedList:
+          - Key: ko-KR
+            Value: "\uC77C\uD68C\uC6A9"
     - Key: DropCard
       Value:
-        <IsReadOnlyKey>k__BackingField: 0
-        <IsReadOnlyValue>k__BackingField: 0
-        <IsLocked>k__BackingField: 0
-        _serializedList:
-        - Key: ko-KR
-          Value: "\uBC84\uB9AC\uAE30"
+        <EffectNames>k__BackingField:
+          _serializedList:
+          - Key: ko-KR
+            Value: "\uBC84\uB9AC\uAE30"
     - Key: HoldCard
       Value:
-        <IsReadOnlyKey>k__BackingField: 0
-        <IsReadOnlyValue>k__BackingField: 0
-        <IsLocked>k__BackingField: 0
-        _serializedList:
-        - Key: ko-KR
-          Value: "\uBCF4\uC720"
+        <EffectNames>k__BackingField:
+          _serializedList:
+          - Key: ko-KR
+            Value: "\uBCF4\uC720"
     - Key: InstallationCard
       Value:
-        <IsReadOnlyKey>k__BackingField: 0
-        <IsReadOnlyValue>k__BackingField: 0
-        <IsLocked>k__BackingField: 0
-        _serializedList:
-        - Key: ko-KR
-          Value: "\uC124\uCE58"
+        <EffectNames>k__BackingField:
+          _serializedList:
+          - Key: ko-KR
+            Value: "\uC124\uCE58"
     - Key: RecyclingCard
       Value:
-        <IsReadOnlyKey>k__BackingField: 0
-        <IsReadOnlyValue>k__BackingField: 0
-        <IsLocked>k__BackingField: 0
-        _serializedList:
-        - Key: ko-KR
-          Value: "\uC7AC\uD65C\uC6A9"
+        <EffectNames>k__BackingField:
+          _serializedList:
+          - Key: ko-KR
+            Value: "\uC7AC\uD65C\uC6A9"
     - Key: MirageCard
       Value:
-        <IsReadOnlyKey>k__BackingField: 0
-        <IsReadOnlyValue>k__BackingField: 0
-        <IsLocked>k__BackingField: 0
-        _serializedList:
-        - Key: ko-KR
-          Value: "\uC2E0\uAE30\uB8E8"
+        <EffectNames>k__BackingField:
+          _serializedList:
+          - Key: ko-KR
+            Value: "\uC2E0\uAE30\uB8E8"
     - Key: RepeatCard
       Value:
-        <IsReadOnlyKey>k__BackingField: 0
-        <IsReadOnlyValue>k__BackingField: 0
-        <IsLocked>k__BackingField: 0
-        _serializedList:
-        - Key: ko-KR
-          Value: "\uBC18\uBCF5"
+        <EffectNames>k__BackingField:
+          _serializedList:
+          - Key: ko-KR
+            Value: "\uBC18\uBCF5"
     - Key: TimeContinuingCard
       Value:
-        <IsReadOnlyKey>k__BackingField: 0
-        <IsReadOnlyValue>k__BackingField: 0
-        <IsLocked>k__BackingField: 0
-        _serializedList:
-        - Key: ko-KR
-          Value: "\uC9C0\uC18D (\uC2DC\uAC04)"
+        <EffectNames>k__BackingField:
+          _serializedList:
+          - Key: ko-KR
+            Value: "\uC9C0\uC18D (\uC2DC\uAC04)"
     - Key: TimeDelayCard
       Value:
-        <IsReadOnlyKey>k__BackingField: 0
-        <IsReadOnlyValue>k__BackingField: 0
-        <IsLocked>k__BackingField: 0
-        _serializedList:
-        - Key: ko-KR
-          Value: "\uC18C\uC694 (\uC2DC\uAC04)"
+        <EffectNames>k__BackingField:
+          _serializedList:
+          - Key: ko-KR
+            Value: "\uC18C\uC694 (\uC2DC\uAC04)"
     - Key: TurnContinuingCard
       Value:
-        <IsReadOnlyKey>k__BackingField: 0
-        <IsReadOnlyValue>k__BackingField: 0
-        <IsLocked>k__BackingField: 0
-        _serializedList:
-        - Key: ko-KR
-          Value: "\uC9C0\uC18D (\uD134)"
+        <EffectNames>k__BackingField:
+          _serializedList:
+          - Key: ko-KR
+            Value: "\uC9C0\uC18D (\uD134)"
     - Key: TurnDelayCard
       Value:
-        <IsReadOnlyKey>k__BackingField: 0
-        <IsReadOnlyValue>k__BackingField: 0
-        <IsLocked>k__BackingField: 0
-        _serializedList:
-        - Key: ko-KR
-          Value: "\uC18C\uC694 (\uD134)"
+        <EffectNames>k__BackingField:
+          _serializedList:
+          - Key: ko-KR
+            Value: "\uC18C\uC694 (\uD134)"

@@ -1,11 +1,13 @@
 {
     "name": "AssemblyEditorHelper",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:df519a9f9c9d24e0d9f7c37a804fad86"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": true,
-    "overrideReferences": true,
+    "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],

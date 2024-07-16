@@ -22,7 +22,8 @@ MonoBehaviour:
   <CardGroup>k__BackingField: 0
   <CardImage>k__BackingField: {fileID: 21300000, guid: 5f446478856344afd9446c118f164af7,
     type: 3}
-  _specialEffect: []
+  _specialEffect:
+  - rid: 2707482883356360704
   _cardNames:
     _serializedList: []
   _descriptions:
@@ -31,4 +32,7 @@ MonoBehaviour:
   _addtionalConditions: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2707482883356360704
+      type: {class: MirageCard, ns: TMCard.SpecialEffect, asm: AssebmlyTMCard}
+      data: 

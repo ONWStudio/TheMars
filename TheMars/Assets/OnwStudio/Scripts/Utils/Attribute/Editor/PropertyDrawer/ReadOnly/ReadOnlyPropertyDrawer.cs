@@ -7,6 +7,8 @@ using Onw.Attribute;
 
 namespace Onw.Editor.Attribute
 {
+    using GUI = UnityEngine.GUI;
+
     [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
     internal sealed class ReadOnlyPropertyDrawer : PropertyDrawer
     {

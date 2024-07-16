@@ -60,9 +60,7 @@ namespace AYellowpaper.SerializedCollections.Editor
         {
             _fieldInfo = fieldInfo;
             ListProperty = property.FindPropertyRelative(SerializedDictionaryDrawer.SerializedListName);
-            _isReadOnlyKey = property.FindPropertyRelative(SerializedDictionaryDrawer.IsReadOnlyKeyName).boolValue;
-            _isReadOnlyValue = property.FindPropertyRelative(SerializedDictionaryDrawer.IsReadOnlyValueName).boolValue;
-            _isLocked = property.FindPropertyRelative(SerializedDictionaryDrawer.IsLooked).boolValue;
+
 
             _keyValueStyle = new GUIStyle(EditorStyles.toolbarButton)
             {
@@ -76,6 +74,10 @@ namespace AYellowpaper.SerializedCollections.Editor
             _activeState = DefaultState;
 
             _dictionaryAttribute = _fieldInfo.GetCustomAttribute<SerializedDictionaryAttribute>();
+
+            _isReadOnlyKey = _dictionaryAttribute?.IsReadOnlyKey ?? false;
+            _isReadOnlyValue = _dictionaryAttribute?.IsReadOnlyValue ?? false;
+            _isLocked = _dictionaryAttribute?.IsLocked ?? false;
 
             _propertyData = SCEditorUtility.GetPropertyData(ListProperty);
             _propertyData.GetElementData(SCEditorUtility.KeyFlag).Settings.DisplayName = _dictionaryAttribute?.KeyName ?? "Key";

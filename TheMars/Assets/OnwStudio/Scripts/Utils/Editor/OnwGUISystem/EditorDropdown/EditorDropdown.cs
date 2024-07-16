@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace Onw.Editor
+namespace Onw.Editor.GUI
 {
     public sealed class EditorDropdownController<T>
     {
@@ -19,7 +19,7 @@ namespace Onw.Editor
 
         public void Dropdown(Action<T> onChangeValue)
         {
-            EditorHelper.ActionEditorHorizontal(() =>
+            EditorGUIHelper.ActionEditorHorizontal(() =>
             {
                 EditorGUILayout.LabelField(_label, GUILayout.ExpandWidth(true));
                 if (EditorGUILayout.DropdownButton(

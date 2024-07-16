@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Onw.Helpers;
-using static Onw.Editor.EditorHelper;
+using Onw.Extensions;
+using static Onw.Editor.EditorGUIHelper;
 
 namespace TMGUITool
 {
@@ -59,8 +60,8 @@ namespace TMGUITool
                 if (_guiDrawers[_selectedTab] is not IPagable pager) return;
 
                 pager.Page = EditorGUILayout.IntField(
-                $"Page {pager.MaxPage} / {pager.Page}",
-                pager.Page);
+                    $"Page {pager.MaxPage} / {pager.Page}",
+                    pager.Page);
 
                 System.Action pagingCallback = null;
                 IGUIPagingHandler<IPagable> handler = pager as IGUIPagingHandler<IPagable>;
@@ -68,30 +69,30 @@ namespace TMGUITool
                 if (GUILayout.Button("<<"))
                 {
                     pager.Page = 1;
-                    pagingCallback = () => handler?.OnFirst();
+                    pagingCallback = handler is not null ? handler.OnFirst : null;
                 }
 
                 if (GUILayout.Button("<"))
                 {
                     pager.Page--;
-                    pagingCallback = () => handler?.OnLeft();
+                    pagingCallback = handler is not null ? handler.OnLeft : null;
                 }
 
                 if (GUILayout.Button(">"))
                 {
                     pager.Page++;
-                    pagingCallback = () => handler?.OnRight();
+                    pagingCallback = handler is not null ? handler.OnRight : null;
                 }
 
                 if (GUILayout.Button(">>"))
                 {
                     pager.Page = pager.MaxPage;
-                    pagingCallback = () => handler?.OnLast();
+                    pagingCallback = handler is not null ? handler.OnLast : null;
                 }
 
                 pager.Page = Mathf.Clamp(
                     pager.Page,
-                    pager.MaxPage == 0 ? 0 : 1,
+                    pager.MaxPage > 0 ? 1 : 0,
                     pager.MaxPage);
 
                 pagingCallback?.Invoke();
@@ -135,6 +136,13 @@ namespace TMGUITool
                     }
                 });
             }
+        }
+
+        private void OnDisable()
+        {
+            _guiDrawers
+                .OfType<CustomInspectorEditorWindow>()
+                .ForEach(customInspectorWindow => customInspectorWindow.OnDisable());
         }
     }
 }

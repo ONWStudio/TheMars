@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Onw.UI.Components;
-using static Onw.Editor.EditorHelper;
+using static Onw.Editor.EditorGUIHelper;
+using static Onw.Editor.EditorReflectionHelper;
 using static Onw.UI.Components.HorizontalEnumeratedItem;
 
 [CustomEditor(typeof(HorizontalEnumeratedItem))]

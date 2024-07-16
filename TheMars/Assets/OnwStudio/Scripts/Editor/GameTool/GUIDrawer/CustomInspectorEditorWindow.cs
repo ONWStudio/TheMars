@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Onw.Editor;
-using TMCard;
 using Onw.Helpers;
 
 namespace TMGUITool
@@ -18,14 +17,9 @@ namespace TMGUITool
 
             protected void OnInspectorGUI(Object target)
             {
-                if (!_editor)
+                if (!_editor || _editor.target != target)
                 {
                     _editor = Editor.CreateEditor(target);
-                }
-
-                if (_editor && !_editor.target)
-                {
-                    _editor.target = target;
                 }
 
                 if (!_attrubuteDrawers.TryGetValue(_editor.target.GetInstanceID().ToString(), out List<IObjectEditorAttributeDrawer> drawers))
@@ -38,6 +32,15 @@ namespace TMGUITool
                 _editor.OnInspectorGUI();
                 drawers
                     .ForEach(drawer => drawer.OnInspectorGUI(_editor));
+            }
+
+            public void OnDisable()
+            {
+                if (_editor)
+                {
+                    DestroyImmediate(_editor);
+                    _editor = null;
+                }
             }
         }
     }

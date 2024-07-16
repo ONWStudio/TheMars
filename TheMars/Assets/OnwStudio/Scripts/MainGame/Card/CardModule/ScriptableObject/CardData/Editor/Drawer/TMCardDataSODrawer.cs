@@ -108,10 +108,10 @@ namespace TMCard.Editor
 
         private void OnDisable()
         {
-            EditorHelper.DestroyObjectByComponent(ref _previewInstance);
-            EditorHelper.DestroyObjectByComponent(ref _previewCamera);
-            EditorHelper.DestroyObjectByComponent(ref _previewCanvas);
-            EditorHelper.ReleaseRenderTexture(ref _renderTexture);
+            EditorGUIHelper.DestroyObjectByComponent(ref _previewInstance);
+            EditorGUIHelper.DestroyObjectByComponent(ref _previewCamera);
+            EditorGUIHelper.DestroyObjectByComponent(ref _previewCanvas);
+            EditorGUIHelper.ReleaseRenderTexture(ref _renderTexture);
             EditorSceneManager.ClosePreviewScene(_previewScene);
         }
     }

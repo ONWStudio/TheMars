@@ -12,9 +12,6 @@ using UnityEngine.EventSystems;
 
 namespace TMCard.UI
 {
-    [RequireComponent(typeof(EventSender))]
-    [RequireComponent(typeof(TMCardInputHandler))]
-    [RequireComponent(typeof(TMCardUIController))]
     public sealed class TMCardController : MonoBehaviour
     {
         /// <summary>
@@ -35,12 +32,12 @@ namespace TMCard.UI
         /// <summary>
         /// .. 이벤트 센더 클래스 입니다 외부에서 이벤트 연출 효과를 발생시킬때 사용할 수 있는 프로퍼티 입니다
         /// </summary>
-        [field: SerializeField] public EventSender EventSender { get; private set; } = null;
+        [field: SerializeField, InitializeRequireComponent] public EventSender EventSender { get; private set; } = null;
         /// <summary>
         /// .. 카드에 사용자 입력을 받아오는 핸들러 입니다
         /// </summary>
-        [field: SerializeField] public TMCardInputHandler InputHandler { get; private set; } = null;
-        [field: SerializeField] public TMCardUIController UIController { get; private set; } = null;
+        [field: SerializeField, InitializeRequireComponent] public TMCardInputHandler InputHandler { get; private set; } = null;
+        [field: SerializeField, InitializeRequireComponent] public TMCardUIController UIController { get; private set; } = null;
 
         [field: SerializeField, ReadOnly] public bool OnField { get; set; } = false;
         /// <summary>
