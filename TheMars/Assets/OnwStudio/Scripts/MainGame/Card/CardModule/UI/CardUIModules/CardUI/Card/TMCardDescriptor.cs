@@ -37,6 +37,7 @@ namespace TMCard.UI
                     .gameObject
                     .AddComponent<TextMeshProUGUI>();
 
+                tmpText.alignment = TextAlignmentOptions.Center;
                 tmpText.text = stringBuilder.ToString();
             }
 
