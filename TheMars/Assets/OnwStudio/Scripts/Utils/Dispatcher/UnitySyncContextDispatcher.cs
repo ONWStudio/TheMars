@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using Onw.Extensions;
 
 namespace Onw.Dispatcher
 {
@@ -22,8 +23,16 @@ namespace Onw.Dispatcher
         private static void Initialize()
         {
             Debug.Log("Run Unity SyncContext Dispatcher");
+            // .. InitializedOnLoadMethod를 호출하는 Context는 유니티의 메인 스레드이므로 현재 선택된 스레드는 메인 스레드이다 현재 스레드를 캐쉬해둔다
             _unityContext = SynchronizationContext.Current;
-            Application.quitting += () => _unityContext = null;
+            Application.quitting += () =>
+            {
+                _unityContext = null;
+                lock (_executionQueue)
+                {
+                    _executionQueue.Clear();
+                }
+            };
         }
 
         private static void ExecuteActions()
@@ -34,9 +43,16 @@ namespace Onw.Dispatcher
 
             lock (_executionQueue)
             {
-                while (_executionQueue.Count > 0)
+                foreach (Action action in _executionQueue.Dequeueable())
                 {
-                    _executionQueue.Dequeue().Invoke();
+                    try // .. 예외 발생시 큐에 담긴 나머지 콜백들이 처리되도록 보장
+                    {
+                        action.Invoke();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogError($"Exception in UnitySyncContextDispatcher.ExecuteActions: {ex}");
+                    }
                 }
             }
         }
@@ -51,7 +67,7 @@ namespace Onw.Dispatcher
             lock (_executionQueue)
             {
                 _executionQueue.Enqueue(action);
-                _unityContext.Post(_ => ExecuteActions(), null);
+                _unityContext.Post(_ => ExecuteActions(), null); // .. 유니티 스레드의 메세지큐에 동기화 시켜서 호출할 메서드를 보낸다
             }
         }
     }

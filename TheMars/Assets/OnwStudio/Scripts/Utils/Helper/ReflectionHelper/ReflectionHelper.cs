@@ -15,6 +15,16 @@ namespace Onw.Helpers
                 .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
                 .Where(method => method.GetCustomAttribute(typeof(AttributeType)) is AttributeType);
 
+        /// <summary>
+        /// .. 해당 메서드는 검사기에 표시가능한 클래스나 인터페이스에서 어떤 Attribute를 소유한 메서드를 딜리게이트화(인스턴스 정보를 가지고 있는 메서드 정보)를 해서 찾아옵니다
+        /// 클래스 인스턴스에서 MonoBehaviour, Component, ScriptableObject를 제외하고 참조가능한 클래스 인스턴스가 있을때 해당 인스턴스를 모두 탐색하여 Attirbute를 찾아옵니다
+        /// 만약 클래스간 상호참조가 있을 경우는 이미 검사한 인스턴스는 제외함으로써 무한 순환 참조를 방지합니다
+        /// SerializedReference로 어떤 인스턴스를 참조중인 경우에 사용할 수 있습니다
+        /// </summary>
+        /// <typeparam name="AttributeType"></typeparam>
+        /// <param name="target"></param>
+        /// <param name="visited"></param>
+        /// <returns></returns>
         public static IEnumerable<Action> GetActionsFromAttributeAllSearch<AttributeType>(object target, HashSet<object> visited = null) where AttributeType : class
         {
             visited ??= new HashSet<object>();
@@ -28,6 +38,10 @@ namespace Onw.Helpers
             BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 
             Type type = target.GetType();
+            Type monoType = typeof(MonoBehaviour);
+            Type componentType = typeof(Component);
+            Type scriptableObjectType = typeof(ScriptableObject);
+            Type obsoleteAttributeType = typeof(ObsoleteAttribute);
 
             // .. target에 대한 attribute가 적용된 메서드 찾아내기
             foreach (MethodInfo method in GetMethodsFromAttribute<AttributeType>(target))
@@ -39,12 +53,10 @@ namespace Onw.Helpers
             // .. target이 계층적으로 클래스를 보유중이라면 target이 보유한 클래스들까지 검사
             foreach (FieldInfo field in type.GetFields(bindingFlags))
             {
-                if ((!field.FieldType.IsClass && !field.FieldType.IsInterface) ||
-                    field.IsDefined(typeof(ObsoleteAttribute), true) ||
-                    (field.GetCustomAttribute<SerializeReference>() is null && field.GetCustomAttribute<SerializeField>() is null)) continue;
+                if (checkIgnoreInfo(field, obsoleteAttributeType) ||
+                    checkIgnoreType(field.FieldType, monoType, componentType, scriptableObjectType)) continue;
 
-                object fieldValue = field.GetValue(target);
-                foreach(Action action in getActionEnumerableFromInfo(fieldValue))
+                foreach (Action action in getActionEnumerableFromInfo(field.GetValue(target), visited))
                 {
                     yield return action;
                 }
@@ -54,23 +66,34 @@ namespace Onw.Helpers
             foreach (PropertyInfo property in type.GetProperties(bindingFlags))
             {
                 if (!property.CanRead ||
-                    (!property.PropertyType.IsClass && !property.PropertyType.IsInterface) ||
-                    property.GetIndexParameters().Length > 0 ||
                     property.GetMethod is null ||
                     (!property.GetMethod.IsStatic && target is null) ||
-                    property.IsDefined(typeof(ObsoleteAttribute), true) ||
-                    (property.GetCustomAttribute<SerializeReference>() is null && property.GetCustomAttribute<SerializeField>() is null)) continue;
+                    checkIgnoreInfo(property, obsoleteAttributeType) ||
+                    checkIgnoreType(property.PropertyType, monoType, componentType, scriptableObjectType)) continue;
 
-                object propertyValue = property.GetValue(target);
-                foreach (Action action in getActionEnumerableFromInfo(propertyValue))
+                foreach (Action action in getActionEnumerableFromInfo(property.GetValue(target), visited))
                 {
                     yield return action;
                 }
             }
 
-            IEnumerable<Action> getActionEnumerableFromInfo(object value)
+            static bool checkIgnoreType(Type fieldType, Type monoType, Type componentType, Type scriptableObjectType)
             {
-                if (value is null) yield break;
+                return (!fieldType.IsClass && !fieldType.IsInterface) ||
+                    monoType.IsAssignableFrom(fieldType) ||
+                    componentType.IsAssignableFrom(fieldType) ||
+                    scriptableObjectType.IsAssignableFrom(fieldType);
+            }
+
+            static bool checkIgnoreInfo(MemberInfo memInfo, Type obsoleteAttributeType)
+            {
+                return memInfo.IsDefined(obsoleteAttributeType, true) ||
+                    (memInfo.GetCustomAttribute<SerializeReference>() is null && memInfo.GetCustomAttribute<SerializeField>() is null);
+            }
+
+            static IEnumerable<Action> getActionEnumerableFromInfo(object value, HashSet<object> visited)
+            {
+                if (value == null) yield break;
 
                 // .. 필드라면
                 foreach (Action action in GetActionsFromAttributeAllSearch<AttributeType>(value, visited))
@@ -107,12 +130,16 @@ namespace Onw.Helpers
         }
 
         public static IEnumerable<T> GetChildClassesFromType<T>() where T : class
-            => AppDomain
-                .CurrentDomain
-                .GetAssemblies()
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(type => typeof(T).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract)
-                .Select(type => Activator.CreateInstance(type) as T);
+        {
+            Type baseType = typeof(T);
+
+            foreach (Type type in AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()))
+            {
+                if (type.IsInterface || type.IsAbstract || !baseType.IsAssignableFrom(type)) continue;
+
+                yield return Activator.CreateInstance(type) as T;
+            }
+        }
 
         public static IEnumerable<string> GetClassNamesFromParent(string baseClass)
         {
@@ -141,7 +168,7 @@ namespace Onw.Helpers
 
             foreach (Type someType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()))
             {
-                if (someType.IsAbstract  ||
+                if (someType.IsAbstract ||
                     someType.IsInterface ||
                     (!someType.IsSubclassOf(type) && !someType.GetInterfaces().Contains(type))) continue;
 

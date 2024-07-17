@@ -54,9 +54,6 @@ namespace Onw.Editor
             _prevProperties.Clear();
 
             // .. 리플렉션 헬퍼를 통해 어떤 인스턴스의 어트리뷰트를 탐색합니다 만약 타겟으로 하는 인스턴스가 계층적으로 타겟으로 하는 어트리뷰트를 보유한 인스턴스를 List나 필드의 형태로 보유하는 모든 경우를 탐색합니다
-            // 내부적으로 ReflectionHelper.GetActionsFromAttributeAllSearch<OnValueChangedByMethodAttribute>() 메서드를 계속해서 호출하기 때문에
-            // 구조적으로 클래스간 상호 참조가 일어나는 경우 스택 오버 플로우가 발생할 수 있습니다
-            // 클래스간 상호 참조에 의한 함수의 무한 호출을 방지하기 위해서 내부적으로 HashSet을 통해 중복 클래스 검사를 방지하고 있습니다
             foreach (Action action in ReflectionHelper.GetActionsFromAttributeAllSearch<OnValueChangedByMethodAttribute>(editor.target))
             {
                 OnValueChangedByMethodAttribute onValueChangedByMethodAttribute = action.Method.GetCustomAttribute<OnValueChangedByMethodAttribute>();

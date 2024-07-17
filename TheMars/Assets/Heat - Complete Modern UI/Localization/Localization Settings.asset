@@ -18,7 +18,7 @@ MonoBehaviour:
     localizedName: English (US)
     localizationLanguage: {fileID: 11400000, guid: 7f0d34462af20e740a7fc45541f666a0,
       type: 2}
-    isExpanded: 1
+    isExpanded: 0
   - languageID: de-DE
     languageName: German
     localizedName: Deutsch
@@ -27,8 +27,8 @@ MonoBehaviour:
     isExpanded: 0
   - languageID: ko-KR
     languageName: Korean
-    localizedName: Korean (KR)
-    localizationLanguage: {fileID: 11400000, guid: 7f0d34462af20e740a7fc45541f666a0,
+    localizedName: "\uD55C\uAD6D\uC5B4"
+    localizationLanguage: {fileID: 11400000, guid: a080cda4cf79c4d72ab47d7caacd10c6,
       type: 2}
     isExpanded: 1
   - languageID: tr-TR
@@ -36,12 +36,12 @@ MonoBehaviour:
     localizedName: "T\xFCrk\xE7e"
     localizationLanguage: {fileID: 11400000, guid: 8d3376ccffec1fb4eb27e25b3629b305,
       type: 2}
-    isExpanded: 0
+    isExpanded: 1
   tables:
   - tableID: UI
     localizationTable: {fileID: 11400000, guid: c4d223e438e911a44aecec230da547ea,
       type: 2}
-    isExpanded: 0
+    isExpanded: 1
   defaultLanguageID: English (en-US)
   defaultLanguageIndex: 0
   enableExperimental: 0

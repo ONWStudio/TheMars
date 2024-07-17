@@ -184,12 +184,24 @@ namespace Michsky.UI.Heat
 
             if (sprite.rect.width != sprite.texture.width)
             {
-                Texture2D newText = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
-                Color[] newColors = sprite.texture.GetPixels((int)sprite.textureRect.x,
-                                                             (int)sprite.textureRect.y,
-                                                             (int)sprite.textureRect.width,
-                                                             (int)sprite.textureRect.height);
-                newText.SetPixels(newColors);
+                Texture2D newText = new((int)sprite.rect.width, (int)sprite.rect.height);
+                Texture2D spriteTexture = sprite.texture;
+                Rect textureRect = sprite.textureRect;
+
+                Color32[] fullTexturePixels = spriteTexture.GetPixels32();
+                Color32[] newColors = new Color32[(int)textureRect.width * (int)textureRect.height];
+
+                for (int y = 0; y < textureRect.height; y++)
+                {
+                    for (int x = 0; x < textureRect.width; x++)
+                    {
+                        int newIndex = x + y * (int)textureRect.width;
+                        int oldIndex = x + (int)textureRect.x + (y + (int)textureRect.y) * spriteTexture.width;
+                        newColors[newIndex] = fullTexturePixels[oldIndex];
+                    }
+                }
+
+                newText.SetPixels32(newColors);
                 newText.Apply();
                 return newText;
             }
