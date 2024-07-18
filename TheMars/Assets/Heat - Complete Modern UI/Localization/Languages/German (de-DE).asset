@@ -767,3 +767,7 @@ MonoBehaviour:
       value: Belastung
       audioValue: {fileID: 0}
       spriteValue: {fileID: 0}
+    - key: Key 174
+      value: 
+      audioValue: {fileID: 0}
+      spriteValue: {fileID: 0}

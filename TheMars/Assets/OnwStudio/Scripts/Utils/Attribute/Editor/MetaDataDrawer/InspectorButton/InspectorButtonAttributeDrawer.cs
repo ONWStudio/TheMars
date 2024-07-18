@@ -19,7 +19,7 @@ namespace Onw.Editor.Attribute
 
         public void OnEnable(Editor editor)
         {
-            _buttonMethods.AddRange(ReflectionHelper
+            _buttonMethods.AddRange(EditorReflectionHelper
                 .GetMethodsFromAttribute<InspectorButtonAttribute>(editor.target)
                 .Select(method => new KeyValuePair<string, MethodInfo>(method.GetCustomAttribute<InspectorButtonAttribute>().ButtonName, method)));
         }

@@ -7,7 +7,8 @@
         "AddressableAssetBundleCreator",
         "AssemblyOnw",
         "AssemblyEditorHelper",
-        "AssemblyOnwAttributeEditor"
+        "AssemblyOnwAttributeEditor",
+        "Michsky.UI.Heat.Core"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

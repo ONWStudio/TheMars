@@ -4,7 +4,7 @@ using UnityEditor;
 
 namespace Michsky.UI.Heat
 {
-    [CustomEditor(typeof(LocalizationTable))]
+    [CustomEditor(typeof(LocalizationTable), true)]
     public class LocalizationTableEditor : Editor
     {
         private GUISkin customSkin;

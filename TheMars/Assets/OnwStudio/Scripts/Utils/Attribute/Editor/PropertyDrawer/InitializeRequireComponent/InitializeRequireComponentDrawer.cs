@@ -35,10 +35,11 @@ namespace Onw.Attribute.Editor
             {
                 if (!component.TryGetComponent(requireComponentType, out Component requireComponent))
                 {
-                    requireComponent = component.gameObject.AddComponent(Type.GetType(property.type));
+                    requireComponent = component.gameObject.AddComponent(requireComponentType);
                 }
 
                 property.objectReferenceValue = requireComponent;
+                property.serializedObject.ApplyModifiedProperties();
             }
         }
 

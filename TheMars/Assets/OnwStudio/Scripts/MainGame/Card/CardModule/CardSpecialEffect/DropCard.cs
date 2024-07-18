@@ -1,7 +1,11 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Onw.Attribute;
+using Onw.Interface;
+using TMCard.UI;
+using TMCard.Effect;
 
 namespace TMCard.SpecialEffect
 {
@@ -12,14 +16,13 @@ namespace TMCard.SpecialEffect
     /// .. 버리기
     /// </summary>
     [SerializeReferenceDropdownName("버리기")]
-    public sealed class DropCard : ITMCardSpecialEffect
+    public sealed class DropCard : ITMCardSpecialEffect, IDescriptable
     {
         public int No => 3;
 
-        /// <summary>
-        /// .. 버리기 효과
-        /// </summary>
-        public IReadOnlyList<ITMCardEffect> CardEffects => _cardEffects;
+        public string Description => _cardEffects
+            .OfType<IDescriptable>()
+            .BuildToString();
 
         [SerializeReference, DisplayAs("버리기 효과"), SerializeReferenceDropdown] private List<ITMCardEffect> _cardEffects = new();
 

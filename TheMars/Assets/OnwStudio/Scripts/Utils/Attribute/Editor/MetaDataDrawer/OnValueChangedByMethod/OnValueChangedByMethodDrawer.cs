@@ -54,7 +54,7 @@ namespace Onw.Editor
             _prevProperties.Clear();
 
             // .. 리플렉션 헬퍼를 통해 어떤 인스턴스의 어트리뷰트를 탐색합니다 만약 타겟으로 하는 인스턴스가 계층적으로 타겟으로 하는 어트리뷰트를 보유한 인스턴스를 List나 필드의 형태로 보유하는 모든 경우를 탐색합니다
-            foreach (Action action in ReflectionHelper.GetActionsFromAttributeAllSearch<OnValueChangedByMethodAttribute>(editor.target))
+            foreach (Action action in EditorReflectionHelper.GetActionsFromAttributeAllSearch<OnValueChangedByMethodAttribute>(editor.target))
             {
                 OnValueChangedByMethodAttribute onValueChangedByMethodAttribute = action.Method.GetCustomAttribute<OnValueChangedByMethodAttribute>();
 
@@ -94,8 +94,6 @@ namespace Onw.Editor
                 var propertyMethodPair = _observerMethods[key];
                 string nowValue = GetPropertyValueFromObject( // .. 현재 키값에 해당하는 필드의 값을 불러옵니다
                     propertyMethodPair.TargetField.GetValue(propertyMethodPair.TargetInstance))?.ToString() ?? "NULL";
-
-                Debug.Log(nowValue);
 
                 if (_prevProperties[i].Value != nowValue) // .. 만약 값이 변했다면?
                 {

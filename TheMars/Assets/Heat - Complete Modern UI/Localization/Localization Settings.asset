@@ -25,12 +25,6 @@ MonoBehaviour:
     localizationLanguage: {fileID: 11400000, guid: 2a9a82013d1c09f42adc6f25c4631b63,
       type: 2}
     isExpanded: 0
-  - languageID: ko-KR
-    languageName: Korean
-    localizedName: "\uD55C\uAD6D\uC5B4"
-    localizationLanguage: {fileID: 11400000, guid: a080cda4cf79c4d72ab47d7caacd10c6,
-      type: 2}
-    isExpanded: 1
   - languageID: tr-TR
     languageName: Turkish
     localizedName: "T\xFCrk\xE7e"

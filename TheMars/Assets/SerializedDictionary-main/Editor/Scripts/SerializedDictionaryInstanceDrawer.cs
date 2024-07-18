@@ -34,9 +34,9 @@ namespace AYellowpaper.SerializedCollections.Editor
         private GUIContent _shortDetailsContent;
         private GUIContent _detailsContent;
         private bool _showSearchBar = false;
-        private bool _isReadOnlyKey = false;
-        private bool _isReadOnlyValue = false;
-        private bool _isLocked = false;
+        private readonly bool _isReadOnlyKey = false;
+        private readonly bool _isReadOnlyValue = false;
+        private readonly bool _isLocked = false;
         private ListState _activeState;
 
         internal ReorderableList ReorderableList { get; private set; }
@@ -60,7 +60,6 @@ namespace AYellowpaper.SerializedCollections.Editor
         {
             _fieldInfo = fieldInfo;
             ListProperty = property.FindPropertyRelative(SerializedDictionaryDrawer.SerializedListName);
-
 
             _keyValueStyle = new GUIStyle(EditorStyles.toolbarButton)
             {
@@ -121,10 +120,9 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         public float GetPropertyHeight(GUIContent label)
         {
-            if (!ListProperty.isExpanded)
-                return SerializedDictionaryDrawer.TopHeaderClipHeight;
-
-            return ReorderableList.GetHeight();
+            return !ListProperty.isExpanded ?
+                SerializedDictionaryDrawer.TopHeaderClipHeight :
+                ReorderableList.GetHeight();
         }
 
         private void DoList(Rect position)

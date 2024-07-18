@@ -54,6 +54,11 @@ namespace AYellowpaper.SerializedCollections
             _serializedList.Add(new(key, value));
         }
 
+        public void NewRemove(TKey key)
+        {
+            _lookupTable.RemoveKey(key);
+        }
+
         public void OnBeforeSerialize()
         {
 #if UNITY_EDITOR

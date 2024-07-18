@@ -5,9 +5,12 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using AYellowpaper.SerializedCollections;
 using Onw.Attribute;
-using TMCard.Effect;
+using Onw.Interface;
 using TMCard.AddtionalCondition;
 using TMCard.SpecialEffect;
+using TMCard.Manager;
+using TMCard.Effect;
+using TMCard.UI;
 
 namespace TMCard
 {
@@ -77,8 +80,16 @@ namespace TMCard
         public IReadOnlyDictionary<string, string> ReadOnlyCardNames => _cardNames;
         public IReadOnlyDictionary<string, string> ReadOnlyDescriptions => _descriptions;
         public IReadOnlyList<ITMCardAddtionalCondition> ReadOnlyAdditionalCondition => _addtionalConditions;
-        public IReadOnlyList<ITMCardSpecialEffect> SpecialEffects => _specialEffect;
-        public IReadOnlyList<ITMCardEffect> CardEffects => _cardEffects;
+        public IEnumerable<string> SpecialEffectTypeNames
+        {
+            get
+            {
+                foreach (ITMCardSpecialEffect specialEffect in _specialEffect)
+                {
+                    yield return specialEffect.GetType().Name;
+                }
+            }
+        }
 
         /// <summary>
         /// .. 카드의 특수효과입니다
@@ -109,9 +120,34 @@ namespace TMCard
             _cardEffects.ForEach(cardEffect => cardEffect?.OnEffect(this));
         }
 
-        public IEnumerable<T> GetEffectOfType<T>() where T : ITMCardEffect
+        public void ApplySpecialEffect(TMCardController cardController)
         {
-            return _cardEffects.OfType<T>();
+            _specialEffect.ForEach(specialEffect => specialEffect?.ApplyEffect(cardController));
+        }
+
+        public string GetSpecialEffectName(string specialEffectTypeName)
+        {
+            return "";
+            //return TMSpecialEffectNameManager.Instance.GetName(specialEffectTypeName);
+        }
+
+        public string GetSpecialEffectDescption(string specialEffectTypeName)
+        {
+            string desciption = "";
+
+            foreach (ITMCardSpecialEffect specialEffect in _specialEffect)
+            {
+                if (specialEffect.GetType().Name != specialEffectTypeName || specialEffect is not IDescriptable descriptable) continue;
+
+                desciption = descriptable.Description;
+            }
+
+            return desciption;
+        }
+
+        public IEnumerable<EffectType> GetEffectOfType<EffectType>() where EffectType : ITMCardEffect
+        {
+            return _cardEffects.OfType<EffectType>();
         }
 
         /// <summary>
