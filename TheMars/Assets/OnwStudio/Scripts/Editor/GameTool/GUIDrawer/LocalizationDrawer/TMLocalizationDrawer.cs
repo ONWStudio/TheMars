@@ -1,14 +1,15 @@
 #if UNITY_EDITOR
+using System;
 using System.Linq;
+using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using TMCard.Manager;
 using Onw.Manager;
+using Onw.Editor;
 using Onw.Editor.GUI;
 using Michsky.UI.Heat;
-using System;
 
 namespace TMGUITool
 {
@@ -28,22 +29,26 @@ namespace TMGUITool
 
             public void Awake()
             {
-                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
                 Type baseType = typeof(LocalizationSingleton<>);
 
-                Debug.Log(typeof(TMSpecialEffectNameTable).BaseType.GetGenericTypeDefinition());
+                var tables = EditorReflectionHelper
+                    .GetSubclassesOfGenericClass<LocalizationTable>(baseType)
+                    .ToArray();
 
-                foreach (var assembly in assemblies)
+                BindingFlags flags = BindingFlags.Static | BindingFlags.Public;
+                foreach (Type subType in EditorReflectionHelper.GetSubclassTypeFromGenericType(baseType))
                 {
-                    foreach (var type in assembly.GetTypes())
-                    {
-                        if (type.BaseType is null || !type.BaseType.IsGenericType || type.BaseType.GetGenericTypeDefinition() != baseType.GetGenericTypeDefinition()) continue;
-                        Debug.Log(type);
+                    if (tables.Any(table => table.GetType() == subType)) continue;
 
-                        var instances = Resources.FindObjectsOfTypeAll(type);
-                        _localizationTables.AddRange(instances.Cast<LocalizationTable>());
+                    // .. 인스턴스가 존재하지 않을 경우 ..
+                    PropertyInfo property = subType.BaseType.GetProperty("Instance", flags);
+                    if (property.GetValue(null) is LocalizationTable localizationTable)
+                    {
+                        _localizationTables.Add(localizationTable);
                     }
                 }
+
+                _localizationTables.AddRange(tables);
 
                 _tabs = _localizationTables
                     .Select(localizationTable => localizationTable.tableID)

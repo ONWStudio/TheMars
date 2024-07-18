@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce99107b6dbfa41829936088515afb93, type: 3}
   m_Name: TMSpecialEffectNameTable
   m_EditorClassIdentifier: 
-  tableID: 
+  tableID: TMSpecialEffectNameTable
   localizationSettings: {fileID: 0}
   tableContent:
   - key: 

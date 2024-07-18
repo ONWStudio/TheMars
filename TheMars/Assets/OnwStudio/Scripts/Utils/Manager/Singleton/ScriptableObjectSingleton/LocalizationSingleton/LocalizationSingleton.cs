@@ -12,6 +12,7 @@ namespace Onw.Manager
     public abstract class LocalizationSingleton<T> : LocalizationTable where T : LocalizationSingleton<T>
     {
         public static T Instance => EnsureInstance();
+
         public static bool HasInstance => _instance != null;
 
         public static bool ScriptableObjectFileExists

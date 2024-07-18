@@ -33,7 +33,7 @@ MonoBehaviour:
     isExpanded: 1
   tables:
   - tableID: SpecialEffectName
-    localizationTable: {fileID: 11400000, guid: df135d2a9f8784d33aade63b43e86464,
+    localizationTable: {fileID: 11400000, guid: 6ad80145c41a24ef3acaa71b155466fd,
       type: 2}
     isExpanded: 1
   defaultLanguageID: FreindlyID (FriendlyID)

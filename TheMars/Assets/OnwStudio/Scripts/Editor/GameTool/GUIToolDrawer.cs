@@ -15,7 +15,7 @@ namespace TMGUITool
         private int _selectedTab = 0;
         private string[] _tabs = null;
 
-        private readonly List<IGUIDrawer> _guiDrawers = new(ReflectionHelper.GetChildClassesFromType<IGUIDrawer>());
+        private readonly List<IGUIDrawer> _guiDrawers = new(ReflectionHelper.CreateChildClassesFromType<IGUIDrawer>());
 
         [MenuItem("Onw Studio/TM Tool GUI Drawer")]
         internal static void OnWindow()

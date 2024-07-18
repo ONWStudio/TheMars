@@ -25,10 +25,47 @@ namespace Onw.Editor
             return fieldInfo;
         }
 
+        public static IEnumerable<CastType> GetSubclassesOfGenericClass<CastType>(Type genericType) where CastType : class
+        {
+            if (!genericType.IsGenericTypeDefinition)
+            {
+                Debug.LogWarning("Is Not GenericType");
+                yield break;
+            }
+
+            foreach (Type type in AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()))
+            {
+                if (type.BaseType is null || 
+                    !type.BaseType.IsGenericType || 
+                    type.BaseType.GetGenericTypeDefinition() != genericType.GetGenericTypeDefinition()) continue;
+
+                foreach (CastType castObject in Resources.FindObjectsOfTypeAll(type).OfType<CastType>())
+                {
+                    yield return castObject;
+                }
+            }
+        }
+
+        public static IEnumerable<Type> GetSubclassTypeFromGenericType(Type genericType)
+        {
+            if (!genericType.IsGenericTypeDefinition)
+            {
+                Debug.LogWarning("Is Not GenericType");
+                yield break;
+            }
+
+            foreach (Type type in AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()))
+            {
+                if (type.BaseType is null ||
+                    !type.BaseType.IsGenericType ||
+                    type.BaseType.GetGenericTypeDefinition() != genericType.GetGenericTypeDefinition()) continue;
+
+                yield return type;
+            }
+        }
         /// <summary>
         /// .. 자동구현 프로퍼티의 백킹 필드의 직렬화 된 이름을 가져옵니다.
         /// </summary>
-        /// <param name="propertyName">
         /// 프로퍼티 이름
         /// </param>
         /// <returns></returns>
@@ -51,6 +88,7 @@ namespace Onw.Editor
                 yield return methodInfo;
             }
         }
+
         /// <summary>
         /// .. 해당 메서드는 검사기에 표시가능한 클래스나 인터페이스에서 어떤 Attribute를 소유한 메서드를 딜리게이트화(인스턴스 정보를 가지고 있는 메서드 정보)를 해서 찾아옵니다
         /// 클래스 인스턴스에서 MonoBehaviour, Component, ScriptableObject를 제외하고 참조가능한 클래스 인스턴스가 있을때 해당 인스턴스를 모두 탐색하여 Attirbute를 찾아옵니다

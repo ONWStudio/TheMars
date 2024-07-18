@@ -9,7 +9,7 @@ namespace Onw.Helpers
 {
     public static class ReflectionHelper
     {
-        public static IEnumerable<T> GetChildClassesFromType<T>() where T : class
+        public static IEnumerable<T> CreateChildClassesFromType<T>() where T : class
         {
             Type baseType = typeof(T);
 

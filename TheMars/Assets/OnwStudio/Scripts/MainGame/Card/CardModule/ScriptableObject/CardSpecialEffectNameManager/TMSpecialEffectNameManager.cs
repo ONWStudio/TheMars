@@ -21,18 +21,19 @@ namespace TMCard.Manager
         //    public SerializedDictionary<string, string> EffectNames { get; private set; } = new();
         //}
 
-#if UNITY_EDITOR
-        [UnityEditor.InitializeOnLoadMethod]
-        private static void Initialize()
-        {
-            _ = Instance;
-        }
-#endif
+//#if UNITY_EDITOR
+//        [UnityEditor.InitializeOnLoadMethod]
+//        private static void Initialize()
+//        {
+//            _ = Instance;
+//        }
+//#endif
 
         private void OnEnable()
         {
-            var subClasses = ReflectionHelper.GetChildClassesFromType<ITMCardSpecialEffect>();
+            var subClasses = ReflectionHelper.CreateChildClassesFromType<ITMCardSpecialEffect>();
             tableContent.AddRange(subClasses.Select(subClass => new TableContent() { }));
+            tableID = nameof(TMSpecialEffectNameTable);
         }
 
         //private const string FILE_PATH = "OnwStudio/ScriptableObject/Manager/Resources/" + nameof(TMSpecialEffectNameTable);

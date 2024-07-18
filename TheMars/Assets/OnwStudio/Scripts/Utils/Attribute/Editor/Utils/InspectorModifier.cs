@@ -80,7 +80,7 @@ namespace Onw.Editor
                     // .. Editor마다 드로어 인스턴스 생성 적용되는 오브젝트마다 처리되는 데이터의 양이 다를 수 있으므로
                     if (!_attributeDrawers.TryGetValue(editor.target.GetInstanceID().ToString(), out List<IObjectEditorAttributeDrawer> drawers))
                     {
-                        drawers = new(ReflectionHelper.GetChildClassesFromType<IObjectEditorAttributeDrawer>()); // .. 드로어를 상속받는 클래스들의 인스턴스 생성 후 반환
+                        drawers = new(ReflectionHelper.CreateChildClassesFromType<IObjectEditorAttributeDrawer>()); // .. 드로어를 상속받는 클래스들의 인스턴스 생성 후 반환
                         _attributeDrawers.Add(editor.target.GetInstanceID().ToString(), drawers); // .. 추가
                         drawers.ForEach(drawer => drawer.OnEnable(editor)); // .. Enable 호출 사실상 Awake와 같다
                     }

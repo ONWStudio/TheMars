@@ -24,7 +24,7 @@ namespace TMGUITool
 
                 if (!_attrubuteDrawers.TryGetValue(_editor.target.GetInstanceID().ToString(), out List<IObjectEditorAttributeDrawer> drawers))
                 {
-                    drawers = new(ReflectionHelper.GetChildClassesFromType<IObjectEditorAttributeDrawer>());
+                    drawers = new(ReflectionHelper.CreateChildClassesFromType<IObjectEditorAttributeDrawer>());
                     drawers.ForEach(drawer => drawer.OnEnable(_editor));
                     _attrubuteDrawers.Add(_editor.target.GetInstanceID().ToString(), drawers);
                 }
