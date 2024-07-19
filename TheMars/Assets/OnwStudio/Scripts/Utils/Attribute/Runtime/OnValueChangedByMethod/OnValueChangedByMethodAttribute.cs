@@ -12,9 +12,9 @@ namespace Onw.Attribute
     [AttributeUsage(AttributeTargets.Method, Inherited = true), Conditional("UNITY_EDITOR")]
     public sealed class OnValueChangedByMethodAttribute : PropertyAttribute
     {
-        public string FieldName { get; }
+        public string[] FieldName { get; }
 
-        public OnValueChangedByMethodAttribute(string fieldName)
+        public OnValueChangedByMethodAttribute(params string[] fieldName)
         {
             FieldName = fieldName;
         }

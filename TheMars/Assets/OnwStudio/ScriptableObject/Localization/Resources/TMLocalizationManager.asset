@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 134aebb6b491f4b23ae60ebceffd6336, type: 3}
+  m_Name: TMLocalizationManager
+  m_EditorClassIdentifier: 
+  _languageSetting: {fileID: 11400000, guid: b70d685ef1d19435b9e4d55637cde8f8, type: 2}
+  _specialEffectNames:
+    _serializedList:
+    - Key: DisposableCard
+      Value:
+        <Names>k__BackingField:
+          _serializedList: []
+    - Key: DrawCard
+      Value:
+        <Names>k__BackingField:
+          _serializedList: []
+    - Key: DropCard
+      Value:
+        <Names>k__BackingField:
+          _serializedList: []
+    - Key: HoldCard
+      Value:
+        <Names>k__BackingField:
+          _serializedList: []
+    - Key: InstallationCard
+      Value:
+        <Names>k__BackingField:
+          _serializedList: []
+    - Key: MirageCard
+      Value:
+        <Names>k__BackingField:
+          _serializedList: []
+    - Key: RecyclingCard
+      Value:
+        <Names>k__BackingField:
+          _serializedList: []
+    - Key: RepeatCard
+      Value:
+        <Names>k__BackingField:
+          _serializedList: []
+    - Key: TimeContinuingCard
+      Value:
+        <Names>k__BackingField:
+          _serializedList: []
+    - Key: TimeDelayCard
+      Value:
+        <Names>k__BackingField:
+          _serializedList: []
+    - Key: TurnContinuingCard
+      Value:
+        <Names>k__BackingField:
+          _serializedList: []
+    - Key: TurnDelayCard
+      Value:
+        <Names>k__BackingField:
+          _serializedList: []
+  _cardNames:
+    _serializedList: []
+  _cardDescription:
+    _serializedList: []

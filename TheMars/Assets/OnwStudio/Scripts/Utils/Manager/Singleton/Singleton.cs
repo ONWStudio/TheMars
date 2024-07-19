@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Onw.Manager
 {
     /// <summary>
-    /// .. Awake를 자식에서 재정의할시 싱글톤의 단일객체라는 기능을 상실하게 됩니다. Awake대신 Init함수를 정의하여 사용하십시오.
+    /// .. Awake를 자식에서 재정의할시 싱글톤의 단일객체라는 기능을 상실하게 됩니다. Awake대신 Init함수를 정의하여 사용해야합니다.
     /// </summary>
     [DisallowMultipleComponent]
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>

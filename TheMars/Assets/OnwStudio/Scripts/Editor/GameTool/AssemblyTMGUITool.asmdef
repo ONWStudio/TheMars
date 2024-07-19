@@ -2,13 +2,13 @@
     "name": "AssemblyGUIToolDrawer",
     "rootNamespace": "",
     "references": [
-        "AssebmlyTMCard",
         "AYellowpaper.SerializedCollections",
         "AddressableAssetBundleCreator",
         "AssemblyOnw",
         "AssemblyEditorHelper",
         "AssemblyOnwAttributeEditor",
-        "Michsky.UI.Heat.Core"
+        "Michsky.UI.Heat.Core",
+        "AssemblyTheMars"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

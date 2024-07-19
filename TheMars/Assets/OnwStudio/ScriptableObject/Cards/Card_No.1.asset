@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
   m_Name: Card_No.1
   m_EditorClassIdentifier: 
-  <Guid>k__BackingField: e31aca8d-a7ab-4b95-b63f-81751fa33f29
+  <Guid>k__BackingField: 651f51c7-ebb4-441e-b56f-b9137441ebd3
   <StackID>k__BackingField: 0
   <GroupStackID>k__BackingField: 0
   <RequiredResource>k__BackingField: 0
@@ -20,10 +20,10 @@ MonoBehaviour:
   <CardKind>k__BackingField: 0
   <CardGrade>k__BackingField: 0
   <CardGroup>k__BackingField: 0
-  <CardImage>k__BackingField: {fileID: 21300000, guid: 5f446478856344afd9446c118f164af7,
+  <CardImage>k__BackingField: {fileID: 21300000, guid: b6d3ddf54d5b9b043b6dff48c11ff35c,
     type: 3}
   _specialEffect:
-  - rid: 2707482902064005120
+  - rid: 2707482949249925142
   _cardNames:
     _serializedList: []
   _descriptions:
@@ -33,8 +33,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 2707482902064005120
-      type: {class: HoldCard, ns: TMCard.SpecialEffect, asm: AssebmlyTMCard}
+    - rid: 2707482949249925142
+      type: {class: HoldCard, ns: TMCard.SpecialEffect, asm: AssemblyTheMars}
       data:
         _friendlyCard: {fileID: 0}
         _holdEffects: []

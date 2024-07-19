@@ -86,6 +86,8 @@ namespace TMCard
             {
                 foreach (ITMCardSpecialEffect specialEffect in _specialEffect)
                 {
+                    if (specialEffect is null) continue;
+
                     yield return specialEffect.GetType().Name;
                 }
             }

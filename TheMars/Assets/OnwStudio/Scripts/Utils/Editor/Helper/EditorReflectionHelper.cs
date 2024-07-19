@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEditor;
 using System.Linq;
 
@@ -81,12 +82,25 @@ namespace Onw.Editor
 
         public static IEnumerable<MethodInfo> GetMethodsFromAttribute<AttributeType>(object @object) where AttributeType : class
         {
-            foreach (MethodInfo methodInfo in @object.GetType().GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
-            {
-                if (methodInfo.GetCustomAttribute(typeof(AttributeType)) is not AttributeType) continue;
+            Type currentType = @object.GetType();
 
-                yield return methodInfo;
+            while (isSearch(currentType))
+            {
+                foreach (MethodInfo methodInfo in currentType.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
+                {
+                    if (methodInfo.GetCustomAttribute(typeof(AttributeType)) is not AttributeType) continue;
+
+                    yield return methodInfo;
+                }
+
+                currentType = currentType.BaseType;
             }
+
+            static bool isSearch(Type currentType) => currentType != null &&
+                currentType != typeof(MonoBehaviour) &&
+                currentType != typeof(Component) &&
+                currentType != typeof(ScriptableObject) &&
+                currentType != typeof(GameObject);
         }
 
         /// <summary>
@@ -109,7 +123,7 @@ namespace Onw.Editor
             }
 
             visited.Add(target);
-            BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+            BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
 
             Type type = target.GetType();
             Type monoType = typeof(MonoBehaviour);
@@ -151,20 +165,6 @@ namespace Onw.Editor
                 }
             }
 
-            static bool checkIgnoreType(Type fieldType, Type monoType, Type componentType, Type scriptableObjectType)
-            {
-                return (!fieldType.IsClass && !fieldType.IsInterface) ||
-                    monoType.IsAssignableFrom(fieldType) ||
-                    componentType.IsAssignableFrom(fieldType) ||
-                    scriptableObjectType.IsAssignableFrom(fieldType);
-            }
-
-            static bool checkIgnoreInfo(MemberInfo memInfo, Type obsoleteAttributeType)
-            {
-                return memInfo.IsDefined(obsoleteAttributeType, true) ||
-                    (memInfo.GetCustomAttribute<SerializeReference>() is null && memInfo.GetCustomAttribute<SerializeField>() is null);
-            }
-
             static IEnumerable<Action> getActionEnumerableFromInfo(object value, HashSet<object> visited)
             {
                 if (value == null) yield break;
@@ -185,6 +185,80 @@ namespace Onw.Editor
                         foreach (Action action in GetActionsFromAttributeAllSearch<AttributeType>(item, visited))
                         {
                             yield return action;
+                        }
+                    }
+                }
+            }
+        }
+
+        // .. Count를 가지고 있는 
+        public static IEnumerable<ICollection> GetCollectionsFromSerializedField(object target, HashSet<object> visited = null)
+        {
+            visited ??= new();
+
+            if (target == null || visited.Contains(target)) // .. 해쉬셋으로 중복검사 방지
+            {
+                yield break;
+            }
+
+            visited.Add(target);
+
+            BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+
+            Type type = target.GetType();
+            Type monoType = typeof(MonoBehaviour);
+            Type componentType = typeof(Component);
+            Type scriptableObjectType = typeof(ScriptableObject);
+            Type obsoleteAttributeType = typeof(ObsoleteAttribute);
+
+            foreach (FieldInfo field in type.GetFields(bindingFlags))
+            {
+                if (checkIgnoreInfo(field, obsoleteAttributeType) ||
+                    checkIgnoreType(field.FieldType, monoType, componentType, scriptableObjectType)) continue;
+
+                foreach (var collection in getCollectionsFromValue(field.GetValue(target), visited))
+                {
+                    yield return collection;
+                }
+            }
+
+            foreach (PropertyInfo property in type.GetProperties(bindingFlags))
+            {
+                if (!property.CanRead ||
+                    property.GetMethod is null ||
+                    (!property.GetMethod.IsStatic && target is null) ||
+                    checkIgnoreInfo(property, obsoleteAttributeType) ||
+                    checkIgnoreType(property.PropertyType, monoType, componentType, scriptableObjectType)) continue;
+
+                foreach (var collection in getCollectionsFromValue(property.GetValue(target), visited))
+                {
+                    yield return collection;
+                }
+            }
+
+            static IEnumerable<ICollection> getCollectionsFromValue(object value, HashSet<object> visited)
+            {
+                if (value == null) yield break;
+
+                if (value is ICollection collection)
+                {
+                    yield return collection;
+                }
+
+                foreach (var subCollection in GetCollectionsFromSerializedField(value, visited))
+                {
+                    yield return subCollection;
+                }
+
+                if (value is IEnumerable enumerable)
+                {
+                    foreach (var item in enumerable)
+                    {
+                        if (item is null) continue;
+
+                        foreach (var subCollection in GetCollectionsFromSerializedField(item, visited))
+                        {
+                            yield return subCollection;
                         }
                     }
                 }
@@ -245,6 +319,20 @@ namespace Onw.Editor
 
         public static string GetBackingFieldName(string propertyName)
             => $"<{propertyName}>k__BackingField";
+
+        private static bool checkIgnoreType(Type fieldType, Type monoType, Type componentType, Type scriptableObjectType)
+        {
+            return (!fieldType.IsClass && !fieldType.IsInterface) ||
+                monoType.IsAssignableFrom(fieldType) ||
+                componentType.IsAssignableFrom(fieldType) ||
+                scriptableObjectType.IsAssignableFrom(fieldType);
+        }
+
+        private static bool checkIgnoreInfo(MemberInfo memInfo, Type obsoleteAttributeType)
+        {
+            return memInfo.IsDefined(obsoleteAttributeType, true) ||
+                (memInfo.GetCustomAttribute<SerializeReference>() is null && memInfo.GetCustomAttribute<SerializeField>() is null);
+        }
     }
 }
 #endif
