@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Unity.EditorCoroutines.Editor;
 using UnityEditor;
 using Onw.Helpers;
 
 namespace Onw.Editor
 {
+    using Object = UnityEngine.Object;
     using Editor = UnityEditor.Editor;
 
     /// <summary>
@@ -28,12 +30,19 @@ namespace Onw.Editor
     {
         static InspectorWindowModifier()
         {
-            EditorApplication.delayCall += ModifyInspector;
+            EditorCoroutineUtility.StartCoroutineOwnerless(runModifier());
+
+            static IEnumerator runModifier()
+            {
+                yield return null;
+                modifyInspector();
+            }
         }
 
         private static readonly Dictionary<string, List<IObjectEditorAttributeDrawer>> _attributeDrawers = new();
+        private static bool _isDelay = false;
 
-        private static void ModifyInspector()
+        private static void modifyInspector()
         {
             // InspectorWindow 타입을 얻어옴
             var inspectorWindowType = typeof(Editor).Assembly.GetType("UnityEditor.InspectorWindow");
@@ -51,19 +60,53 @@ namespace Onw.Editor
 
                 if (rootVisualElementProperty?.GetValue(inspector) is VisualElement rootVisualElement)
                 {
-                    // Inspector의 VisualTree를 수정하는 콜백 추가
                     rootVisualElement.RegisterCallback<GeometryChangedEvent>(evt =>
-                       CallCustomDrawerMethods(rootVisualElement));
+                       callCustomDrawerMethods(rootVisualElement));
+
+                    EditorCoroutineUtility.StartCoroutineOwnerless(iETrackSelectionChanged(rootVisualElement));
+                }
+            }
+
+            static IEnumerator iETrackSelectionChanged(VisualElement visualElement)
+            {
+                Object selectedObject = null;
+                Type scriptableObjectType = typeof(ScriptableObject);
+
+                while (true)
+                {
+                    yield return new WaitUntil(() => selectedObject != Selection.activeObject &&
+                        Selection.activeObject != null &&
+                        Selection.activeObject.GetType().IsSubclassOf(scriptableObjectType));
+
+                    selectedObject = Selection.activeObject;
+                    float originalWidth = visualElement.resolvedStyle.width;
+                    visualElement.style.width = originalWidth + 1;
+                    visualElement.MarkDirtyRepaint();
+                    EditorCoroutineUtility.StartCoroutineOwnerless(setOriginalWidth(visualElement, originalWidth));
+                }
+
+                static IEnumerator setOriginalWidth(VisualElement visualElement, float originalWidth)
+                {
+                    yield return null;
+                    visualElement.style.width = originalWidth;
+                    visualElement.MarkDirtyRepaint();
                 }
             }
         }
 
-        private static void CallCustomDrawerMethods(VisualElement root)
+        private static void callCustomDrawerMethods(VisualElement root)
         {
+            Debug.Log("asdf");
+
+            if (_isDelay) return;
+
+            _isDelay = true;
+            EditorCoroutineUtility.StartCoroutineOwnerless(iEWaitSetIsDelayToFalse());
             var editorElements = root.Query<VisualElement>(null, "unity-inspector-element").ToList(); // .. 인스펙터 엘리먼트 쿼리로 검색
 
             foreach (var editorElement in editorElements)
             {
+                Debug.Log("editorElement");
                 if (editorElement.Q<IMGUIContainer>("onw-custom-attribute-drawer") != null) continue; // .. 중첩 방지 안해두면 2번이상호출된후 무한 호출반복 
 
                 // .. (2022.3.29f1) 기준 editor 프로퍼티
@@ -74,10 +117,10 @@ namespace Onw.Editor
                 if (editorProperty.GetValue(editorElement) is Editor editor && // .. 에디터 찾아오기
                     (editor.target is MonoBehaviour || editor.target is ScriptableObject)) // .. 타겟이 모노비하이비어거나 스크립터블 오브젝트 일 경우
                 {
-                    IMGUIContainer iMGUIContainer = editorElement.Q<IMGUIContainer>(); // .. 에디터의 IMGUI컨테이너 찾아오기
-                    iMGUIContainer.name = "onw-custom-attribute-drawer"; // .. 컨테이너에 중첩방지용 이름 부여
+                    IMGUIContainer iMGUIContainer = editorElement.Q<IMGUIContainer>("onw-custom-attribute-drawer");
 
                     // .. Editor마다 드로어 인스턴스 생성 적용되는 오브젝트마다 처리되는 데이터의 양이 다를 수 있으므로
+
                     if (!_attributeDrawers.TryGetValue(editor.target.GetInstanceID().ToString(), out List<IObjectEditorAttributeDrawer> drawers))
                     {
                         drawers = new(ReflectionHelper.CreateChildClassesFromType<IObjectEditorAttributeDrawer>()); // .. 드로어를 상속받는 클래스들의 인스턴스 생성 후 반환
@@ -85,12 +128,21 @@ namespace Onw.Editor
                         drawers.ForEach(drawer => drawer.OnEnable(editor)); // .. Enable 호출 사실상 Awake와 같다
                     }
 
-                    foreach (IObjectEditorAttributeDrawer drawerInstance in drawers) // .. onGUIHandler 콜백에 커스텀 콜백 추가
+                    if (iMGUIContainer == null)
                     {
-                        iMGUIContainer.onGUIHandler += ()
-                            => drawerInstance.OnInspectorGUI(editor);
+                        iMGUIContainer = new(() => drawers.ForEach(drawer => drawer.OnInspectorGUI(editor)))
+                        {
+                            name = "onw-custom-attribute-drawer" // .. 컨테이너에 중첩방지용 이름 부여
+                        };
+                        editorElement.Add(iMGUIContainer);
                     }
                 }
+            }
+
+            static IEnumerator iEWaitSetIsDelayToFalse()
+            {
+                yield return null;
+                _isDelay = false;
             }
         }
     }

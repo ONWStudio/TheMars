@@ -374,7 +374,7 @@ namespace AYellowpaper.SerializedCollections.Editor
             if (GUI.Button(rect, EditorGUIUtility.IconContent("pane options@2x"), EditorStyles.iconButton))
             {
                 var gm = new GenericMenu();
-                SCEditorUtility.AddGenericMenuItem(gm, false, ListProperty.minArraySize > 0, new GUIContent("Clear"), () => QueueAction(ClearList));
+                SCEditorUtility.AddGenericMenuItem(gm, false, !_isLocked && ListProperty.minArraySize > 0, new GUIContent("Clear"), () => QueueAction(ClearList));
                 SCEditorUtility.AddGenericMenuItem(gm, false, true, new GUIContent("Remove Conflicts"), () => QueueAction(RemoveConflicts));
                 SCEditorUtility.AddGenericMenuItem(gm, false, _keyGeneratorsWithWindow.Count > 0, new GUIContent("Bulk Edit..."), () => OpenKeysGeneratorSelectorWindow(screenRect));
                 if (_keyGeneratorsWithoutWindow.Count > 0)

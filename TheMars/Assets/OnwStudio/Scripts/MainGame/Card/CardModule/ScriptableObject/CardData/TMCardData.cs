@@ -133,18 +133,14 @@ namespace TMCard
             //return TMSpecialEffectNameManager.Instance.GetName(specialEffectTypeName);
         }
 
-        public string GetSpecialEffectDescption(string specialEffectTypeName)
+        public IEnumerable<string> GetSpecialEffectDescption(string specialEffectTypeName)
         {
-            string desciption = "";
-
             foreach (ITMCardSpecialEffect specialEffect in _specialEffect)
             {
                 if (specialEffect.GetType().Name != specialEffectTypeName || specialEffect is not IDescriptable descriptable) continue;
 
-                desciption = descriptable.Description;
+                yield return descriptable.Description;
             }
-
-            return desciption;
         }
 
         public IEnumerable<EffectType> GetEffectOfType<EffectType>() where EffectType : ITMCardEffect

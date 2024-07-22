@@ -21,7 +21,7 @@ namespace TMCard
         {
             for (int i = 0; i < _specialEffect.Count - 1; i++)
             {
-                if (_specialEffect[^1].GetType().Name != _specialEffect[i].GetType().Name) continue;
+                if (_specialEffect[^1]?.GetType().Name != _specialEffect[i]?.GetType().Name) continue;
 
                 Debug.LogWarning("특수 효과는 같은 효과가 중첩 될 수 없습니다");
                 _specialEffect.RemoveAt(_specialEffect.Count - 1);

@@ -26,7 +26,7 @@ namespace AYellowpaper.SerializedCollections
         /// </summary>
         public readonly bool IsReadOnlyValue;
         /// <summary>
-        /// .. 추가 삽입이 가능한가? (인스펙터만 적용) 
+        /// .. 추가/제거가 가능한가? (인스펙터만 적용) 
         /// </summary>
         public readonly bool IsLocked;
 

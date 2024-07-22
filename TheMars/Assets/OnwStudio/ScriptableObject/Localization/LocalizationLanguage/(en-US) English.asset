@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcc5a6c5f98034250b9ecaa83ab2bd77, type: 3}
-  m_Name: (ko) Korean
+  m_Name: (en-US) English
   m_EditorClassIdentifier: 
-  <LocalizationID>k__BackingField: ko-KR
-  <LocalizationName>k__BackingField: Korean
-  <LocalizedName>k__BackingField: sdfdfsd
+  <LocalizationID>k__BackingField: en-US
+  <LocalizationName>k__BackingField: English
+  <LocalizedName>k__BackingField: "\uC601\uC5B4"

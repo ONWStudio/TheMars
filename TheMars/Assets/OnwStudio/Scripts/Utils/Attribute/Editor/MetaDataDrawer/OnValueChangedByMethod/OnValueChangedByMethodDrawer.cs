@@ -2,10 +2,12 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Unity.EditorCoroutines.Editor;
 using Onw.Attribute;
 using static Onw.Editor.EditorHelper;
 
@@ -31,9 +33,6 @@ namespace Onw.Editor
 
         private readonly Dictionary<string, PropertyMethodPair> _observerMethods = new();
         private readonly List<KeyValuePair<string, string>> _prevProperties = new();
-        private readonly List<ICollection> _collections = new();
-        private readonly List<int> _prevCollectionCounts = new();
-        private readonly List<string> _prevCollectionStates = new();
 
         public void OnEnable(Editor editor)
         {
@@ -46,13 +45,6 @@ namespace Onw.Editor
 
             _observerMethods.Clear();
             _prevProperties.Clear();
-            _collections.Clear();
-            _prevCollectionCounts.Clear();
-            _prevCollectionStates.Clear();
-
-            _collections.AddRange(EditorReflectionHelper.GetCollectionsFromSerializedField(editor.target));
-            _prevCollectionCounts.AddRange(_collections.Select(collection => collection.Count));
-            _prevCollectionStates.AddRange(_collections.Select(collection => computeCollectionState(collection)));
 
             foreach (Action action in EditorReflectionHelper.GetActionsFromAttributeAllSearch<OnValueChangedByMethodAttribute>(editor.target))
             {
@@ -97,33 +89,31 @@ namespace Onw.Editor
             if (Application.isPlaying) return;
 
             bool isUpdate = false;
-            for (int i = 0; i < _collections.Count; i++)
-            {
-                if (_collections[i].Count != _prevCollectionCounts[i] || computeCollectionState(_collections[i]) != _prevCollectionStates[i])
-                {
-                    isUpdate = true;
-                    break;
-                }
-            }
 
             for (int i = 0; i < _prevProperties.Count; i++)
             {
+                StringBuilder builder = new();
                 string key = _prevProperties[i].Key;
                 var propertyMethodPair = _observerMethods[key];
-                string nowValue = GetPropertyValueFromObject(
-                    propertyMethodPair.TargetField.GetValue(propertyMethodPair.TargetInstance))?.ToString() ?? "NULL";
+                object target = propertyMethodPair.TargetField.GetValue(propertyMethodPair.TargetInstance);
+                bool isCollection = false;
+
+                builder.Append(GetPropertyValueFromObject(target)?.ToString() ?? "NULL");
+
+                if (target is ICollection collection)
+                {
+                    isCollection = true;
+                    builder.Append(computeCollectionState(collection));
+                }
+
+                string nowValue = builder.ToString();
 
                 if (_prevProperties[i].Value != nowValue)
                 {
-                    propertyMethodPair.Methods.ForEach(method => EditorApplication.delayCall += () =>
-                    {
-                        method.Invoke();
-                        EditorUtility.SetDirty(editor.target);
-                    });
+                    isUpdate = isCollection;
 
-                    _prevProperties[i] = new KeyValuePair<string, string>(
-                        key,
-                        GetPropertyValueFromObject(propertyMethodPair.TargetField.GetValue(propertyMethodPair.TargetInstance))?.ToString() ?? "NULL");
+                    EditorCoroutineUtility.StartCoroutineOwnerless(iEInvokeMethod(propertyMethodPair));
+                    _prevProperties[i] = new KeyValuePair<string, string>(key, nowValue);
                 }
             }
 
@@ -131,12 +121,18 @@ namespace Onw.Editor
             {
                 Initialize(editor);
             }
-        }
 
-        private string computeCollectionState(ICollection collection)
-        {
-            var elementStates = collection.Cast<object>().Select(e => e?.GetHashCode().ToString() ?? "null");
-            return string.Join(",", elementStates);
+            static IEnumerator iEInvokeMethod(PropertyMethodPair propertyMethodPair)
+            {
+                yield return null;
+                propertyMethodPair.Methods.ForEach(method => method.Invoke());
+            }
+
+            static string computeCollectionState(ICollection collection)
+            {
+                var elementStates = collection.Cast<object>().Select(e => e?.GetHashCode().ToString() ?? "null");
+                return string.Join(",", elementStates);
+            }
         }
     }
 }
