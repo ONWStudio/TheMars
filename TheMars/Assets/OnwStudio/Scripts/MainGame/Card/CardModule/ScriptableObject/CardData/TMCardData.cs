@@ -40,6 +40,7 @@ namespace TMCard
         /// </summary>
         [field: SerializeField, FormerlySerializedAs("<RequiredResource>k__BackingField"), DisplayAs("소모 재화 종류"), Tooltip("소모 재화 종류")]
         public TM_REQUIRED_RESOURCE RequiredResource { get; private set; } = TM_REQUIRED_RESOURCE.TERA;
+
         /// <summary>
         /// .. 사용될 재화
         /// </summary>
@@ -52,6 +53,7 @@ namespace TMCard
         /// </summary>
         [field: SerializeField, FormerlySerializedAs("<CardKind>k__BackingField"), DisplayAs("카드 종류"), Tooltip("카드의 종류")]
         public TM_CARD_KIND CardKind { get; private set; } = TM_CARD_KIND.CONSTRUCTION;
+
         /// <summary>
         /// .. 카드의 등급
         /// </summary>
@@ -70,15 +72,13 @@ namespace TMCard
         /// .. 카드의 고유 이름
         /// </summary>
         public string CardName
-            => _cardNames.TryGetValue(CultureInfo.CurrentCulture.Name, out string name) ? name : string.Empty;
+            => TMLocalizationManager.Instance.GetCardName(StackID.ToString());
         /// <summary>
         /// .. 카드 설명
         /// </summary>
         public string Description
-            => _descriptions.TryGetValue(CultureInfo.CurrentCulture.Name, out string description) ? description : string.Empty;
+            => TMLocalizationManager.Instance.GetDescription(StackID.ToString());
 
-        public IReadOnlyDictionary<string, string> ReadOnlyCardNames => _cardNames;
-        public IReadOnlyDictionary<string, string> ReadOnlyDescriptions => _descriptions;
         public IReadOnlyList<ITMCardAddtionalCondition> ReadOnlyAdditionalCondition => _addtionalConditions;
         public IEnumerable<string> SpecialEffectTypeNames
         {
@@ -93,20 +93,9 @@ namespace TMCard
             }
         }
 
-        /// <summary>
-        /// .. 카드의 특수효과입니다
-        /// ICardSpecialUseStart는 ITMCardController 상속받은 실제 카드 구현체를 바인딩하여 필요한 기능을 구현합니다
-        /// </summary>
         [Space]
         [SerializeReference, FormerlySerializedAs("_specialEffect"), DisplayAs("특수 효과"), Tooltip("특수 효과"), SerializeReferenceDropdown]
         private List<ITMCardSpecialEffect> _specialEffect = new();
-
-        [Space]
-        [SerializeField, FormerlySerializedAs("_cardNames"), DisplayAs("이름"), Tooltip("카드 이름 관리자 지역별 이름을 작성합니다 로컬라이징은 국가 코드를 참고해주세요"), SerializedDictionary("Culture Code", "Name")]
-        private SerializedDictionary<string, string> _cardNames = new() { { "en-US", "" }, { "ko-KR", "" } };
-
-        [SerializeField, FormerlySerializedAs("_descriptions"), DisplayAs("설명"), Tooltip("카드 설명 관리자 지역별 설명을 작성합니다 로컬라이징은 국가 코드를 참고해주세요"), SerializedDictionary("Culture Code", "Description")]
-        private SerializedDictionary<string, string> _descriptions = new() { { "en-US", "" }, { "ko-KR", "" } };
 
         [SerializeReference, FormerlySerializedAs("_cardEffects"), DisplayAs("발동 효과"), Tooltip("카드 발동 효과 리스트"), SerializeReferenceDropdown]
         private List<ITMCardEffect> _cardEffects = new();
@@ -151,7 +140,7 @@ namespace TMCard
         /// <summary>
         /// .. 카드의 사용 전 카드가 사용가능한 상태인지 확인합니다
         /// </summary>
-        /// <param name="marsLithium"> .. 현재 재화량 </param>
+        /// <param name="resource"> .. 현재 재화량 </param>
         /// <returns></returns>
         public bool IsAvailable(int resource)
         {

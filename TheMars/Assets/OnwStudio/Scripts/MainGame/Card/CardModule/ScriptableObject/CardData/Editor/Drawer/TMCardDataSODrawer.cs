@@ -23,14 +23,12 @@ namespace TMCard.Editor
         private Scene _previewScene;
         private Camera _previewCamera = null;
         private Canvas _previewCanvas = null;
-        private TMCardUIController _previewInstance = null;
-        private TMCardData _cardData = null;
+        private TMCardController _previewInstance = null;
 
         private void OnEnable()
         {
             if (target is not TMCardData targetObject) return;
 
-            _cardData = targetObject;
             string[] prefabGUIDs = AssetDatabase.FindAssets("t:prefab");
 
             foreach (string prefabGUID in prefabGUIDs)
@@ -38,7 +36,7 @@ namespace TMCard.Editor
                 string path = AssetDatabase.GUIDToAssetPath(prefabGUID);
                 GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
 
-                if (prefab && prefab.TryGetComponent(out TMCardUIController previewInstance))
+                if (prefab && prefab.TryGetComponent(out TMCardController previewInstance))
                 {
                     _previewScene = EditorSceneManager.NewPreviewScene();
                     _previewScene.name = "Preview Scene";
@@ -65,7 +63,7 @@ namespace TMCard.Editor
                     canvasGO.AddComponent<GraphicRaycaster>();
 
                     _previewInstance = Instantiate(previewInstance, _previewCanvas.transform, false);
-                    _previewInstance.SetDescription(targetObject);
+                    _previewInstance.CardData = targetObject;
                     _previewCamera.transform.position = _previewInstance.transform.position - Vector3.forward * 10;
 
                     if (_previewInstance.transform is RectTransform rectTransform)
@@ -82,11 +80,6 @@ namespace TMCard.Editor
 
         public override void OnInspectorGUI()
         {
-            if (_previewInstance.CardSprite != _cardData.CardImage)
-            {
-                _previewInstance.CardSprite = _cardData.CardImage;
-            }
-
             if (_previewInstance && _renderTexture)
             {
                 GUILayout.Label("Card Preview");

@@ -36,6 +36,7 @@ namespace TMGUITool
 
             public void OnDisable()
             {
+                DestroyImmediate(_editor);
                 _editor = null;
             }
         }

@@ -96,8 +96,6 @@ namespace Onw.Editor
 
         private static void callCustomDrawerMethods(VisualElement root)
         {
-            Debug.Log("asdf");
-
             if (_isDelay) return;
 
             _isDelay = true;
@@ -106,7 +104,6 @@ namespace Onw.Editor
 
             foreach (var editorElement in editorElements)
             {
-                Debug.Log("editorElement");
                 if (editorElement.Q<IMGUIContainer>("onw-custom-attribute-drawer") != null) continue; // .. 중첩 방지 안해두면 2번이상호출된후 무한 호출반복 
 
                 // .. (2022.3.29f1) 기준 editor 프로퍼티
@@ -120,7 +117,6 @@ namespace Onw.Editor
                     IMGUIContainer iMGUIContainer = editorElement.Q<IMGUIContainer>("onw-custom-attribute-drawer");
 
                     // .. Editor마다 드로어 인스턴스 생성 적용되는 오브젝트마다 처리되는 데이터의 양이 다를 수 있으므로
-
                     if (!_attributeDrawers.TryGetValue(editor.target.GetInstanceID().ToString(), out List<IObjectEditorAttributeDrawer> drawers))
                     {
                         drawers = new(ReflectionHelper.CreateChildClassesFromType<IObjectEditorAttributeDrawer>()); // .. 드로어를 상속받는 클래스들의 인스턴스 생성 후 반환

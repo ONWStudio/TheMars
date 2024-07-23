@@ -37,11 +37,11 @@ namespace TMCard.UI
             if (_cards.Count <= 0) return null;
 
             TMCardData cardData = _cards[Random.Range(0, _cards.Count)];
-            TMCardController cardUI = Instantiate(_templatePrefab);
-            cardUI.CardData = cardData;
-            cardUI.Initialize();
+            TMCardController card = Instantiate(_templatePrefab);
+            card.CardData = cardData;
+            card.Initialize();
 
-            return cardUI;
+            return card;
         }
     }
 }

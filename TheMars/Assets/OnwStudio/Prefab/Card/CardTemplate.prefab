@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 38075375519361866}
   - component: {fileID: 8381949205591957350}
   - component: {fileID: 3845239031405876139}
+  - component: {fileID: 2209908774391452699}
   m_Layer: 5
   m_Name: CardTemplate
   m_TagString: Untagged
@@ -106,8 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <EventSender>k__BackingField: {fileID: 8381949205591957350}
+  <CardObserver>k__BackingField: {fileID: 2209908774391452699}
   <InputHandler>k__BackingField: {fileID: 6932311871222619316}
-  <UIController>k__BackingField: {fileID: 3845239031405876139}
   <OnField>k__BackingField: 0
   <OnCard>k__BackingField: 0
   <OnChangedParent>k__BackingField:
@@ -151,9 +152,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac3771cc95724a378b358fe0afab8b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cardController: {fileID: 38075375519361866}
   _cardImage: {fileID: 1242621844710434452}
   _backgroundImage: {fileID: 6760737446521074974}
   _descriptor: {fileID: 2928742289247591831}
+--- !u!114 &2209908774391452699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453917086621522708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78af4c921c4984242a3a237615b46c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7689474802019870538
 GameObject:
   m_ObjectHideFlags: 0

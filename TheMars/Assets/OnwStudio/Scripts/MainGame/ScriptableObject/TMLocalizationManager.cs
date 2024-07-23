@@ -51,10 +51,22 @@ namespace TMCard
             }
         }
 
+        public string GetDescription(string stackID)
+        {
+            return _cardDescription.TryGetValue(stackID, out NestedSerializedDictionary localizationDescription) &&
+                localizationDescription.Names.TryGetValue(_languageSetting.LocalizationID, out string description) ? description : "";
+        }
+
+        public string GetCardName(string stackID)
+        {
+            return _cardNames.TryGetValue(stackID, out NestedSerializedDictionary localizationNames) &&
+                localizationNames.Names.TryGetValue(_languageSetting.LocalizationID, out string name) ? name : "";
+        }
+
         public string GetSpecialCardName(string key)
         {
             return _specialEffectNames.TryGetValue(key, out NestedSerializedDictionary localizingNames) &&
-                localizingNames.Names.TryGetValue("ko-KR", out string name) ? name : "";
+                localizingNames.Names.TryGetValue(_languageSetting.LocalizationID, out string name) ? name : "";
         }
     }
 }

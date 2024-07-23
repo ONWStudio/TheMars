@@ -3,16 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Onw.Attribute;
-using Michsky.UI.Heat;
+using UniRx;
 
 namespace TMCard.UI
 {
-    public sealed class TMCardUIController : MonoBehaviour
+    // .. View
+    [DisallowMultipleComponent]
+    public sealed class TMCardViewer : MonoBehaviour
     {
         public Sprite CardSprite
         {
             get => _cardImage.sprite;
             set => _cardImage.sprite = value;
+        }
+
+        public Sprite BackgroundSprite
+        {
+            get => _backgroundImage.sprite;
+            set => _backgroundImage.sprite = value;
         }
 
         [Header("Image")]
@@ -22,18 +30,9 @@ namespace TMCard.UI
         [Header("Descriptor")]
         [SerializeField] private TMCardDescriptor _descriptor;
 
-        [Header("Localization Option")]
-        private Image _raycastingImage = null;
+        [SerializeField, InitializeRequireComponent] private Image _raycastingImage = null;
 
-        private void Awake()
-        {
-            _raycastingImage = gameObject.GetComponent<Image>();
-        }
-
-        private void Start()
-        {
-            initializeImages();
-        }
+        private bool _isInit = false;
 
         private void initializeImages()
         {
@@ -41,6 +40,14 @@ namespace TMCard.UI
             _cardImage.transform.SetParent(transform, false);
             _cardImage.raycastTarget = false;
             _cardImage.transform.localPosition = Vector3.zero;
+        }
+
+        public void Initialize()
+        {
+            if (_isInit) return;
+
+            _isInit = true;
+            initializeImages();
         }
 
         public void SetDescription(TMCardData cardData)

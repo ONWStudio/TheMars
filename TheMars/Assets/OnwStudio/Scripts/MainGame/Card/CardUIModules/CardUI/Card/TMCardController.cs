@@ -12,63 +12,45 @@ using UnityEngine.EventSystems;
 
 namespace TMCard.UI
 {
+    // .. Model
+    [DisallowMultipleComponent]
     public sealed class TMCardController : MonoBehaviour
     {
-        /// <summary>
-        /// .. 카드의 상세한 기본 데이터 입니다
-        /// </summary>
-        public TMCardData CardData
-        {
-            get => _cardData;
-            set
-            {
-                if (_cardData) return;
-
-                _cardData = value;
-                UIController.CardSprite = _cardData.CardImage;
-            }
-        }
-
+        [field: SerializeField, ReadOnly] public TMCardData CardData { get; set; } = null;
         /// <summary>
         /// .. 이벤트 센더 클래스 입니다 외부에서 이벤트 연출 효과를 발생시킬때 사용할 수 있는 프로퍼티 입니다
         /// </summary>
+        [field: Header("Event Sender")]
         [field: SerializeField, InitializeRequireComponent] public EventSender EventSender { get; private set; } = null;
         /// <summary>
         /// .. 카드에 사용자 입력을 받아오는 핸들러 입니다
         /// </summary>
+        [field: Header("Input Handler")]
         [field: SerializeField, InitializeRequireComponent] public TMCardInputHandler InputHandler { get; private set; } = null;
-        [field: SerializeField, InitializeRequireComponent] public TMCardUIController UIController { get; private set; } = null;
 
+        [field: Header("State")]
         [field: SerializeField, ReadOnly] public bool OnField { get; set; } = false;
         /// <summary>
         /// .. 카드가 상호작용 가능한 활성화인지 상태를 반환합니다
         /// </summary>
         [field: SerializeField, ReadOnly] public bool OnCard { get; private set; } = false;
 
+        [field: Header("Event")]
         [field: SerializeField] public UnityEvent<Transform> OnChangedParent { get; private set; } = new();
+        [field: SerializeField, InitializeRequireComponent] public RectTransform RectTransform { get; private set; } = null;
 
         public Action UseState { get; set; } = null;
         public Action DrawBeginState { get; set; } = null;
         public Action DrawEndedState { get; set; } = null;
         public Action TurnEndedState { get; set; } = null;
 
-        /// <summary>
-        /// .. RectTransform
-        /// </summary>
-        public RectTransform RectTransform { get; private set; } = null;
-
         [Space]
-        [SerializeField, ReadOnly] private TMCardData _cardData = null;
+        /// <summary>
+        /// .. 카드의 상세한 기본 데이터 입니다
+        /// </summary>
+        [Header("Require Option")]
         [SerializeField] private Vector2SmoothMover _smoothMove = null;
 
-        private void Awake()
-        {
-            RectTransform = transform is RectTransform rectTransform ?
-                rectTransform :
-                gameObject.AddComponent<RectTransform>();
-        }
-
-        // .. 라이프 사이
         public void Initialize()
         {
             initalizeInputHandle();
@@ -76,12 +58,12 @@ namespace TMCard.UI
 
             UseState = () =>
             {
-                _cardData.UseCard();
+                CardData.UseCard();
                 TMCardGameManager.Instance.EffectCard(this);
             };
 
             TurnEndedState = () => TMCardGameManager.Instance.MoveToTomb(this);
-            _cardData.ApplySpecialEffect(this);
+            CardData.ApplySpecialEffect(this);
         }
 
         public void OnUsed()

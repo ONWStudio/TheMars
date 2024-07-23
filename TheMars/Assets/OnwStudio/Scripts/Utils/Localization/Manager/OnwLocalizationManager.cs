@@ -20,7 +20,7 @@ namespace Onw.Localization
             public SerializedDictionary<string, string> Names { get; private set; } = new();
         }
 
-        [SerializeField, DisplayAs("선택 언어")] private LanguageSetting _languageSetting = null;
+        [SerializeField, DisplayAs("선택 언어")] protected LanguageSetting _languageSetting = null;
 
 #if UNITY_EDITOR
         [InspectorButton("Create New LanguageSetting")]
