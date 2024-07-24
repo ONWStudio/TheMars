@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using Onw.Attribute;
-using UniRx;
 
 namespace TMCard.UI
 {
@@ -23,20 +23,25 @@ namespace TMCard.UI
             set => _backgroundImage.sprite = value;
         }
 
+        public string CardName
+        {
+            get => _cardNameText.text;
+            set => _cardNameText.text = value;
+        }
+
+        [SerializeField, SelectableSerializeField] private TextMeshProUGUI _cardNameText = null;
+
         [Header("Image")]
-        [SerializeField] private Image _cardImage = null;
+        [SerializeField, SelectableSerializeField] private Image _cardImage = null;
         [SerializeField, InitializeRequireComponent] private Image _backgroundImage = null;
 
         [Header("Descriptor")]
-        [SerializeField] private TMCardDescriptor _descriptor;
-
-        [SerializeField, InitializeRequireComponent] private Image _raycastingImage = null;
+        [SerializeField, SelectableSerializeField] private TMCardDescriptor _descriptor;
 
         private bool _isInit = false;
 
         private void initializeImages()
         {
-            _raycastingImage.color = new(255f, 255f, 255f, 0f);
             _cardImage.transform.SetParent(transform, false);
             _cardImage.raycastTarget = false;
             _cardImage.transform.localPosition = Vector3.zero;

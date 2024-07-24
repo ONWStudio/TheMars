@@ -14,7 +14,7 @@ namespace Onw.State
 
     public sealed class StateMachine<T> where T : class, IStateObject<T>
     {
-        private Dictionary<string, IState<T>> _stateList = new Dictionary<string, IState<T>>(); // .. 상태들을 저장. 상태들을 매번 new로 생성하면 가비지가 생성되고 비용이 크기 때문
+        private readonly Dictionary<string, IState<T>> _stateList = new(); // .. 상태들을 저장. 상태들을 매번 new로 생성하면 가비지가 생성되고 비용이 크기 때문
         private IState<T> _state = null; // .. 현재 상태
 
         public void Update(T controller) => _state?.Update(controller);

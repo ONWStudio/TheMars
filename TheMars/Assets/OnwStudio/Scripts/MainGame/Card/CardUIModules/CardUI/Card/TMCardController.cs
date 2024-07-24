@@ -49,7 +49,7 @@ namespace TMCard.UI
         /// .. 카드의 상세한 기본 데이터 입니다
         /// </summary>
         [Header("Require Option")]
-        [SerializeField] private Vector2SmoothMover _smoothMove = null;
+        [SerializeField, SelectableSerializeField] private Vector2SmoothMover _smoothMove = null;
 
         public void Initialize()
         {

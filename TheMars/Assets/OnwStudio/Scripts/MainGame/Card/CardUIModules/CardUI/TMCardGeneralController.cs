@@ -25,10 +25,10 @@ namespace TMCard.UI
 
         private void initializeReactiveProperties()
         {
-            observe(cardData => cardData.CardName, Action<T> );
-            observe(cardData => cardData.Description, _description);
-            observe(cardData => cardData.CardImage, _cardImage);
-            observe(cardData => cardData.Resource, _resource);
+            observe(cardData => cardData.CardName, _ => { });
+            observe(cardData => cardData.Description, _ => { });
+            observe(cardData => cardData.CardImage, _ => { });
+            observe(cardData => cardData.Resource, _ => { });
 
             void observe<T>(Func<TMCardData, T> selector, Action<T> action)
             {
