@@ -29,11 +29,6 @@ namespace Onw.Extensions
             return source;
         }
 
-        public static void ForEach<T>(this IList<T> source, Action<T> action)
-        {
-            for (int i = 0; i < source.Count; i++) action.Invoke(source[i]);
-        }
-
         public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
             foreach (T element in source) action.Invoke(element);

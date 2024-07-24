@@ -9,14 +9,52 @@ using UnityEditor.IMGUI.Controls;
 
 namespace Onw.Editor.Attribute
 {
+    using static Codice.CM.WorkspaceServer.WorkspaceTreeDataStore;
+    using GUI = UnityEngine.GUI;
+
     internal sealed class ComponentDropdown : TreeView
     {
-        private readonly Action<GameObject> _onSelected;
-        private readonly GameObject _rootObject;
-        private readonly Type _filterType;
-        private readonly Dictionary<int, GameObject> _itemsMap = new();
-        private readonly StringBuilder _stringBuilder = new();
-        private readonly ComponentDropdownPopupContent _content;
+        private class ComponentDropdownPopupContent : PopupWindowContent
+        {
+            private readonly ComponentDropdown _dropdown;
+            private readonly SearchField _searchField;
+
+            public ComponentDropdownPopupContent(ComponentDropdown dropdown)
+            {
+                _dropdown = dropdown;
+                _searchField = new SearchField();
+            }
+
+            public override Vector2 GetWindowSize()
+            {
+                return new Vector2(250f, Mathf.Clamp(_dropdown.ItemCount * _dropdown.rowHeight, 200, 500));
+            }
+
+            public override void OnGUI(Rect rect)
+            {
+                float voidWidth = rect.width * 0.1f;
+                rect.y += 3.0f;
+                Rect searchRect = new(rect.x + voidWidth * 0.5f, rect.y, rect.width - voidWidth, EditorGUIUtility.singleLineHeight);
+
+                _dropdown.searchString = _searchField.OnGUI(searchRect, _dropdown.searchString);
+
+                GUIStyle guiStyle = new(EditorStyles.boldLabel);
+                guiStyle.alignment = TextAnchor.MiddleCenter;
+
+                EditorGUI.LabelField(
+                    new(rect.x, rect.y + EditorGUIUtility.singleLineHeight * 1.35f, rect.width, EditorGUIUtility.singleLineHeight),
+                    "Nested Object",
+                    guiStyle);
+
+                Rect treeViewRect = new(
+                    rect.x, 
+                    rect.y + EditorGUIUtility.singleLineHeight * 2.5f, 
+                    rect.width,
+                    rect.height - EditorGUIUtility.singleLineHeight);
+
+                _dropdown.OnGUI(treeViewRect);
+            }
+        }
 
         public int ItemCount
         {
@@ -31,22 +69,32 @@ namespace Onw.Editor.Attribute
             }
         }
 
+        private readonly Action<GameObject> _onSelected;
+        private readonly GameObject _rootObject;
+        private readonly Type _filterType;
+        private readonly Dictionary<int, GameObject> _itemsMap = new();
+        private readonly StringBuilder _stringBuilder = new();
+        private readonly ComponentDropdownPopupContent _content;
+
         public ComponentDropdown(TreeViewState state, GameObject rootObject, Type filterType, Action<GameObject> onSelected) : base(state)
         {
             _rootObject = rootObject;
             _filterType = filterType;
             _onSelected = onSelected;
-            _content = new ComponentDropdownPopupContent(this);
-            Reload();
+            rowHeight *= 1.5f;
+            _content = new(this);
         }
 
         public void Show(Rect rect)
         {
+            Reload();
+            ExpandAll();
             PopupWindow.Show(rect, _content);
         }
 
         protected override TreeViewItem BuildRoot()
         {
+            _itemsMap.Clear();
             var root = new TreeViewItem(0, -1, "root");
 
             if (_filterType == typeof(GameObject))
@@ -63,9 +111,9 @@ namespace Onw.Editor.Attribute
                     AddComponentToDropdown(component.gameObject, new() { { _rootObject, rootItem } });
                 }
 
-                setDepth(rootItem);
+                SetDepth(rootItem);
 
-                static void setDepth(TreeViewItem item, int depth = 0)
+                static void SetDepth(TreeViewItem item, int depth = 0)
                 {
                     item.depth = depth;
 
@@ -73,33 +121,52 @@ namespace Onw.Editor.Attribute
                     {
                         foreach (TreeViewItem treeViewItem in item.children)
                         {
-                            setDepth(treeViewItem, depth + 1);
-                        }
-                    }
-                }
-
-                static void setIcon(TreeViewItem item, Type filterType, Dictionary<int, GameObject> itemsMap)
-                {
-                    Component component = itemsMap.TryGetValue(item.id, out GameObject go) ? go.GetComponent(filterType) : null;
-
-                    item.icon = component ?
-                        EditorGUIUtility.ObjectContent(component, filterType).image as Texture2D :
-                        EditorGUIUtility.ObjectContent(null, typeof(GameObject)).image as Texture2D;
-
-                    if (item.hasChildren)
-                    {
-                        foreach (TreeViewItem treeViewItem in item.children)
-                        {
-                            setIcon(treeViewItem, filterType, itemsMap);
+                            SetDepth(treeViewItem, depth + 1);
                         }
                     }
                 }
 
                 root.AddChild(rootItem);
-                setIcon(rootItem, _filterType, _itemsMap);
             }
 
             return root;
+        }
+
+        protected override IList<TreeViewItem> BuildRows(TreeViewItem root)
+        {
+            var rows = base.BuildRows(root);
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                rows = rows.Where(item => item.displayName.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            }
+
+            return rows;
+        }
+
+        protected override void RowGUI(RowGUIArgs args)
+        {
+            var item = args.item;
+            // Calculate the rect for the label to be vertically centered
+            Rect labelRect = new(
+                args.rowRect.x + 15 + (args.item.depth * 15),
+                args.rowRect.y + (args.rowRect.height - EditorGUIUtility.singleLineHeight) / 2, 
+                args.rowRect.width,
+                EditorGUIUtility.singleLineHeight);
+
+            var icon = GetIconForItem(item);
+            var content = new GUIContent(item.displayName, icon);
+
+            EditorGUI.LabelField(labelRect, content);
+        }
+
+        private Texture2D GetIconForItem(TreeViewItem item)
+        {
+            return _filterType == typeof(GameObject) ||
+                   !_itemsMap.TryGetValue(item.id, out var gameObject) ||
+                   !gameObject.TryGetComponent(_filterType, out Component component) ? 
+                EditorGUIUtility.ObjectContent(null, typeof(GameObject)).image as Texture2D :
+                EditorGUIUtility.ObjectContent(component, _filterType).image as Texture2D;
         }
 
         protected override void DoubleClickedItem(int id)
@@ -134,7 +201,6 @@ namespace Onw.Editor.Attribute
         private void AddGameObjectToDropdown(TreeViewItem parent, GameObject gameObject, int depth = 0)
         {
             var gameObjectItem = CreateItem(gameObject, depth);
-            gameObjectItem.icon = EditorGUIUtility.ObjectContent(null, typeof(GameObject)).image as Texture2D;
 
             parent.AddChild(gameObjectItem);
             _itemsMap.Add(gameObjectItem.id, gameObject);
@@ -159,26 +225,6 @@ namespace Onw.Editor.Attribute
             string name = _stringBuilder.ToString();
             _stringBuilder.Clear();
             return name;
-        }
-
-        private class ComponentDropdownPopupContent : PopupWindowContent
-        {
-            private readonly ComponentDropdown _dropdown;
-
-            public ComponentDropdownPopupContent(ComponentDropdown dropdown)
-            {
-                _dropdown = dropdown;
-            }
-
-            public override Vector2 GetWindowSize()
-            {
-                return new Vector2(250, _dropdown.rowHeight * _dropdown.ItemCount);
-            }
-
-            public override void OnGUI(Rect rect)
-            {
-                _dropdown.OnGUI(rect);
-            }
         }
     }
 }
