@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 using Onw.Manager;
 using Onw.Extensions;
-using TMCard.SpecialEffect;
+using TMCard.Effect;
 using AYellowpaper.SerializedCollections;
 using Michsky.UI.Heat;
 

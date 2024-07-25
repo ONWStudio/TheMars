@@ -39,8 +39,8 @@ namespace AYellowpaper.SerializedCollections.Editor
         private readonly bool _isLocked = false;
         private ListState _activeState;
 
-        internal ReorderableList ReorderableList { get; private set; }
         internal SerializedProperty ListProperty { get; private set; }
+        internal ReorderableList ReorderableList { get; private set; }
         internal string SearchText { get; private set; } = string.Empty;
         internal SearchListState SearchState { get; private set; }
         internal DefaultListState DefaultState { get; private set; }

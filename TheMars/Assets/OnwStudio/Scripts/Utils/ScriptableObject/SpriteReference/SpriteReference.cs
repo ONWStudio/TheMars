@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Onw.ScritableObjects
+namespace Onw.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "SpriteReference", menuName = "Scriptable Object/Sprite Reference")]
     public sealed class SpriteReference : ScriptableObject

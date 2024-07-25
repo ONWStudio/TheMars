@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Onw.Attribute;
 
-namespace TMCard.UI
+namespace TMCard.Runtime
 {
     [DisallowMultipleComponent, RequireComponent(typeof(VerticalLayoutGroup))]
     public sealed class TMCardEffectDescriptor : MonoBehaviour

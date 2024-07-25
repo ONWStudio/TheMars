@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMCard.Runtime;
 
 namespace TMCard.Effect
 {
@@ -9,7 +10,6 @@ namespace TMCard.Effect
         /// <summary>
         /// .. 카드 사용시
         /// </summary>
-        /// <returns></returns>
-        void OnEffect(TMCardData cardData);
+        void ApplyEffect(TMCardController controller);
     }
 }

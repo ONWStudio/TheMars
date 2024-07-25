@@ -12,7 +12,7 @@ namespace Onw.Localization
         [field: SerializeField] public string LocalizedName { get; private set; }
 
 #if UNITY_EDITOR
-        [OnValueChangedByMethod(nameof(LocalizationID), nameof(LocalizationName))]
+        [OnChangedValueByMethod(nameof(LocalizationID), nameof(LocalizationName))]
         private void onChangedIDOrName()
         {
             string assetPath = UnityEditor.AssetDatabase.GetAssetPath(GetInstanceID());

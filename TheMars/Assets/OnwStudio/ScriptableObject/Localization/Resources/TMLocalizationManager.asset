@@ -12,54 +12,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 134aebb6b491f4b23ae60ebceffd6336, type: 3}
   m_Name: TMLocalizationManager
   m_EditorClassIdentifier: 
-  _languageSetting: {fileID: 11400000, guid: b70d685ef1d19435b9e4d55637cde8f8, type: 2}
-  _specialEffectNames:
+  _languageSetting: {fileID: 11400000, guid: 99d8cc3b7999c4fae9f72d28c7164930, type: 2}
+  _specialEffectLabels:
     _serializedList:
-    - Key: DisposableCard
+    - Key: "\uC77C\uD68C\uC6A9"
       Value:
         <Names>k__BackingField:
           _serializedList: []
-    - Key: DrawCard
+    - Key: "\uB4DC\uB85C\uC6B0"
       Value:
         <Names>k__BackingField:
           _serializedList: []
-    - Key: DropCard
+    - Key: "\uBC84\uB9AC\uAE30"
       Value:
         <Names>k__BackingField:
           _serializedList: []
-    - Key: HoldCard
+    - Key: "\uBCF4\uC720"
       Value:
         <Names>k__BackingField:
           _serializedList: []
-    - Key: InstallationCard
+    - Key: "\uC124\uCE58"
       Value:
         <Names>k__BackingField:
           _serializedList: []
-    - Key: MirageCard
+    - Key: "\uC2E0\uAE30\uB8E8"
       Value:
         <Names>k__BackingField:
           _serializedList: []
-    - Key: RecyclingCard
+    - Key: "\uC7AC\uD65C\uC6A9"
       Value:
         <Names>k__BackingField:
           _serializedList: []
-    - Key: RepeatCard
+    - Key: "\uBC18\uBCF5"
       Value:
         <Names>k__BackingField:
           _serializedList: []
-    - Key: TimeContinuingCard
+    - Key: "\uC9C0\uC18D(\uC2DC\uAC04)"
       Value:
         <Names>k__BackingField:
           _serializedList: []
-    - Key: TimeDelayCard
+    - Key: "\uC18C\uC694(\uC2DC\uAC04)"
       Value:
         <Names>k__BackingField:
           _serializedList: []
-    - Key: TurnContinuingCard
+    - Key: "\uC9C0\uC18D(\uD134)"
       Value:
         <Names>k__BackingField:
           _serializedList: []
-    - Key: TurnDelayCard
+    - Key: "\uC18C\uC694(\uD134)"
       Value:
         <Names>k__BackingField:
           _serializedList: []

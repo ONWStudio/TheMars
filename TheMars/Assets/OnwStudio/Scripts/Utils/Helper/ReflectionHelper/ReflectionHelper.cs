@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Onw.Attribute;
 
 namespace Onw.Helpers
 {
@@ -50,6 +51,26 @@ namespace Onw.Helpers
                     (!someType.IsSubclassOf(type) && !someType.GetInterfaces().Contains(type))) continue;
 
                 yield return someType.Name;
+            }
+        }
+
+        /// <summary>
+        /// .. 어떤 클래스의 상속된 클래스와 부모 클래스를 포함해서 해당 클래스의 고유 라벨을 불러옵니다 Substitution 어트리뷰트가 부착되어 있어야합니다
+        /// </summary>
+        /// <typeparam name=""></typeparam>
+        /// <returns></returns>
+        public static IEnumerable<string> GetCustomLabelFromNestedClass<T>() where T : class
+        {
+            var classTypes = GetChildClassesFromBaseType(typeof(T));
+
+            foreach (Type type in classTypes)
+            {
+                SubstitutionAttribute attribute = type.GetCustomAttribute<SubstitutionAttribute>();
+
+                if (attribute is not null)
+                {
+                    yield return attribute.Label;
+                }
             }
         }
 

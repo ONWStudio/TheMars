@@ -5,16 +5,25 @@ using UnityEngine;
 using UnityEditor;
 using Onw.Attribute;
 
-namespace Onw.Editor.Attribute
+namespace Onw.Attribute.Editor
 {
     using GUI = UnityEngine.GUI;
 
     [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
-    internal sealed class ReadOnlyPropertyDrawer : PropertyDrawer
+    internal sealed class ReadOnlyPropertyDrawer : InitializablePropertyDrawer
     {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        private int? _arraySize = null;
+
+        protected override void OnEnable(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (property.propertyType != SerializedPropertyType.Generic || !property.isArray)
+            if (property.propertyType != SerializedPropertyType.Generic || !property.isArray) return;
+
+            _arraySize = property.FindPropertyRelative("Array.size").intValue;
+        }
+
+        protected override void OnPropertyGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            if (_arraySize is null)
             {
                 GUI.enabled = false;
                 EditorGUI.PropertyField(position, property, label, true);
@@ -28,10 +37,7 @@ namespace Onw.Editor.Attribute
 
             if (property.isExpanded)
             {
-                SerializedProperty arraySizeProp = property.FindPropertyRelative("Array.size");
-                int arraySize = arraySizeProp.intValue;
-
-                for (int i = 0; i < arraySize; i++)
+                for (int i = 0; i < _arraySize; i++)
                 {
                     SerializedProperty element = property.GetArrayElementAtIndex(i);
                     EditorGUI.PropertyField(position, element, GUIContent.none, true);
@@ -45,28 +51,23 @@ namespace Onw.Editor.Attribute
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            if (property.propertyType != SerializedPropertyType.Generic || !property.isArray)
+            if (_arraySize is null)
             {
                 return EditorGUI.GetPropertyHeight(property, label, true);
             }
 
+            float height = EditorGUIUtility.singleLineHeight;
+
             if (property.isExpanded)
             {
-                float height = EditorGUIUtility.singleLineHeight;
-
-                SerializedProperty arraySizeProp = property.FindPropertyRelative("Array.size");
-                int arraySize = arraySizeProp.intValue;
-
-                for (int i = 0; i < arraySize; i++)
+                for (int i = 0; i < _arraySize; i++)
                 {
                     SerializedProperty element = property.GetArrayElementAtIndex(i);
                     height += EditorGUI.GetPropertyHeight(element, true) + EditorGUIUtility.standardVerticalSpacing;
                 }
-
-                return height;
             }
 
-            return EditorGUIUtility.singleLineHeight;
+            return height;
         }
     }
 }

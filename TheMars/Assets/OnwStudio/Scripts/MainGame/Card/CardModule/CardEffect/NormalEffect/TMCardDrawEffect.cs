@@ -1,0 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMCard.Runtime;
+using UnityEngine;
+
+namespace TMCard.Effect
+{
+    [SerializeReferenceDropdownName("카드 드로우")]
+    public sealed class TMCardDrawEffect : ITMNormalEffect
+    {
+        public void ApplyEffect(TMCardController controller)
+        {
+            Debug.Log("카드 드로우");
+        }
+    }
+}

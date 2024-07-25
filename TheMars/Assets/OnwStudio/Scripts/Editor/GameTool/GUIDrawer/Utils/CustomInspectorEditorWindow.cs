@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using Onw.Editor;
 using Onw.Helpers;
+using UnityEditorInternal.VR;
 
 namespace TMGUITool
 {
@@ -17,8 +18,14 @@ namespace TMGUITool
 
             protected void OnInspectorGUI(Object target)
             {
-                if (!_editor || _editor.target != target)
+                if (!_editor)
                 {
+                    _editor = Editor.CreateEditor(target);
+                }
+
+                if (!_editor.target || _editor.target != target || _editor.serializedObject is null || !_editor.serializedObject.targetObject)
+                {
+                    DestroyEditor();
                     _editor = Editor.CreateEditor(target);
                 }
 
@@ -36,7 +43,14 @@ namespace TMGUITool
 
             public void OnDisable()
             {
-                DestroyImmediate(_editor);
+                DestroyEditor();
+            }
+
+            private void DestroyEditor()
+            {
+                Debug.Log("destroyed");
+
+                DestroyImmediate(_editor, true);
                 _editor = null;
             }
         }

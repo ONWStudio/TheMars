@@ -14,7 +14,7 @@ using UnityEngine;
 
 namespace AYellowpaper.SerializedCollections.Editor
 {
-    [CustomPropertyDrawer(typeof(SerializedDictionary<,>))]
+    [CustomPropertyDrawer(typeof(SerializedDictionary<,>), true)]
     public class SerializedDictionaryDrawer : PropertyDrawer
     {
         public const string KeyName = nameof(SerializedKeyValuePair<int, int>.Key);
@@ -48,16 +48,18 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (!_arrayData.ContainsKey(property.propertyPath))
-                _arrayData.Add(property.propertyPath, new SerializedDictionaryInstanceDrawer(property, fieldInfo));
-            _arrayData[property.propertyPath].OnGUI(position, label);
+            if (!_arrayData.TryGetValue(property.propertyPath, out SerializedDictionaryInstanceDrawer drawer))
+            {
+                drawer = new SerializedDictionaryInstanceDrawer(property, fieldInfo);
+                _arrayData.Add(property.propertyPath, drawer);
+            }
+
+            drawer.OnGUI(position, label);
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            if (!_arrayData.ContainsKey(property.propertyPath))
-                _arrayData.Add(property.propertyPath, new SerializedDictionaryInstanceDrawer(property, fieldInfo));
-            return _arrayData[property.propertyPath].GetPropertyHeight(label);
+            return _arrayData.TryGetValue(property.propertyPath, out SerializedDictionaryInstanceDrawer drawer) ? drawer.GetPropertyHeight(label) : 0;
         }
     }
 }

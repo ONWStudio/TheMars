@@ -9,11 +9,10 @@ using Onw.Extensions;
 using Onw.UI;
 using TMCard.Manager;
 using TMCard.AddtionalCondition;
-using TMCard.SpecialEffect;
 using TMCard.Effect;
 using TMCard.Effect.Resource;
 
-namespace TMCard.UI
+namespace TMCard.Runtime
 {
     [DisallowMultipleComponent]
     public sealed class TMCardDescriptor : MonoBehaviour
@@ -27,19 +26,19 @@ namespace TMCard.UI
 
         public void SetDescription(TMCardData cardData)
         {
-            foreach (string specialEffectTypeName in cardData.SpecialEffectTypeNames)
-            {
-                StringBuilder stringBuilder = new();
-                stringBuilder.Append(cardData.GetSpecialEffectName(specialEffectTypeName));
+            //foreach (string specialEffectTypeName in cardData.SpecialEffectTypeNames)
+            //{
+            //    StringBuilder stringBuilder = new();
+            //    stringBuilder.Append(cardData.GetSpecialEffectName(specialEffectTypeName));
 
-                TextMeshProUGUI tmpText = UIHelper
-                    .GetNewUIObject(transform, specialEffectTypeName)
-                    .gameObject
-                    .AddComponent<TextMeshProUGUI>();
+            //    TextMeshProUGUI tmpText = UIHelper
+            //        .GetNewUIObject(transform, specialEffectTypeName)
+            //        .gameObject
+            //        .AddComponent<TextMeshProUGUI>();
 
-                tmpText.alignment = TextAlignmentOptions.Center;
-                tmpText.text = stringBuilder.ToString();
-            }
+            //    tmpText.alignment = TextAlignmentOptions.Center;
+            //    tmpText.text = stringBuilder.ToString();
+            //}
 
             //foreach (ITMCardEffect specialEffect in cardData.CardEffects)
             //{

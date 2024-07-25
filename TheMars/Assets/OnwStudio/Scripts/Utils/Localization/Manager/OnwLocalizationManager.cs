@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Onw.Manager;
-using Onw.Helpers;
 using Onw.Attribute;
 using AYellowpaper.SerializedCollections;
 using System.IO;
@@ -21,6 +20,11 @@ namespace Onw.Localization
         }
 
         [SerializeField, DisplayAs("선택 언어")] protected LanguageSetting _languageSetting = null;
+
+        protected override sealed void OnAwake()
+        {
+
+        }
 
 #if UNITY_EDITOR
         [InspectorButton("Create New LanguageSetting")]

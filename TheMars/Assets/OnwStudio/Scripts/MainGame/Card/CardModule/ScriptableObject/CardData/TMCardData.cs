@@ -6,14 +6,31 @@ using UnityEngine.Serialization;
 using AYellowpaper.SerializedCollections;
 using Onw.Attribute;
 using Onw.Interface;
+using Onw.Localization;
 using TMCard.AddtionalCondition;
-using TMCard.SpecialEffect;
-using TMCard.Manager;
 using TMCard.Effect;
-using TMCard.UI;
+using TMCard.Manager;
+using TMCard.Runtime;
 
 namespace TMCard
 {
+    public readonly struct TMCardEffectArgs
+    {
+        public bool HasDescription { get; }
+        public bool HasLabel { get; }
+
+        public string Description { get; }
+        public string Label { get; }
+
+        public TMCardEffectArgs(bool hasDescription, bool hasLabel, string description, string label)
+        {
+            HasDescription = hasDescription;
+            HasLabel = hasLabel;
+            Description = description;
+            Label = label;
+        }
+    }
+
     public sealed partial class TMCardData : ScriptableObject, IDescriptable
     {
         /// <summary>
@@ -73,66 +90,57 @@ namespace TMCard
         /// </summary>
         public string CardName
             => TMLocalizationManager.Instance.GetCardName(StackID.ToString());
+
         /// <summary>
         /// .. 카드 설명
         /// </summary>
         public string Description
             => TMLocalizationManager.Instance.GetDescription(StackID.ToString());
 
-        public IReadOnlyList<ITMCardAddtionalCondition> ReadOnlyAdditionalCondition => _addtionalConditions;
-        public IEnumerable<string> SpecialEffectTypeNames
+        [field: SerializeField, FormerlySerializedAs("<IsCustomDescription>k__BackingField"), DisplayAs("커스텀 설명"), Tooltip("체크 시 기본 설명이 나오지 않습니다")]
+        public string IsCustomDescription { get; private set; }
+
+        public IEnumerable<TMCardEffectArgs> EffectArgs
         {
             get
             {
-                foreach (ITMCardSpecialEffect specialEffect in _specialEffect)
+                foreach (ITMNormalEffect effect in _cardEffects)
                 {
-                    if (specialEffect is null) continue;
+                    bool hasDescription = false;
+                    bool hasLabel = false;
+                    string description = string.Empty;
+                    string labelStr = string.Empty;
 
-                    yield return specialEffect.GetType().Name;
+                    if (effect is IDescriptable descriptable)
+                    {
+                        hasDescription = true;
+                        description = descriptable.Description;
+                    }
+
+                    if (effect is ILabel label)
+                    {
+                        hasLabel = true;
+                        labelStr = label.Label;
+                    }
+
+                    yield return new(hasDescription, hasLabel, description, labelStr);
                 }
             }
         }
 
         [Space]
-        [SerializeReference, FormerlySerializedAs("_specialEffect"), DisplayAs("특수 효과"), Tooltip("특수 효과"), SerializeReferenceDropdown]
-        private List<ITMCardSpecialEffect> _specialEffect = new();
-
-        [SerializeReference, FormerlySerializedAs("_cardEffects"), DisplayAs("발동 효과"), Tooltip("카드 발동 효과 리스트"), SerializeReferenceDropdown]
-        private List<ITMCardEffect> _cardEffects = new();
+        [SerializeReference, FormerlySerializedAs("_cardEffects"), DisplayAs("카드 효과"), Tooltip("카드 효과 리스트"), SerializeReferenceDropdown]
+        private List<ITMNormalEffect> _cardEffects = new();
 
         [SerializeReference, FormerlySerializedAs("_addtionalConditions"), DisplayAs("추가 조건"), Tooltip("카드 추가 조건 리스트"), SerializeReferenceDropdown]
         private List<ITMCardAddtionalCondition> _addtionalConditions = new();
 
-        /// <summary>
-        /// .. 발동 효과 입니다
-        /// </summary>
-        public void UseCard()
+        public void ApplyEffect(TMCardController controller)
         {
-            _cardEffects.ForEach(cardEffect => cardEffect?.OnEffect(this));
+            _cardEffects.ForEach(cardEffect => cardEffect?.ApplyEffect(controller));
         }
 
-        public void ApplySpecialEffect(TMCardController cardController)
-        {
-            _specialEffect.ForEach(specialEffect => specialEffect?.ApplyEffect(cardController));
-        }
-
-        public string GetSpecialEffectName(string specialEffectTypeName)
-        {
-            return "";
-            //return TMSpecialEffectNameManager.Instance.GetName(specialEffectTypeName);
-        }
-
-        public IEnumerable<string> GetSpecialEffectDescption(string specialEffectTypeName)
-        {
-            foreach (ITMCardSpecialEffect specialEffect in _specialEffect)
-            {
-                if (specialEffect.GetType().Name != specialEffectTypeName || specialEffect is not IDescriptable descriptable) continue;
-
-                yield return descriptable.Description;
-            }
-        }
-
-        public IEnumerable<EffectType> GetEffectOfType<EffectType>() where EffectType : ITMCardEffect
+        public IEnumerable<EffectType> GetEffectOfType<EffectType>() where EffectType : ITMNormalEffect
         {
             return _cardEffects.OfType<EffectType>();
         }

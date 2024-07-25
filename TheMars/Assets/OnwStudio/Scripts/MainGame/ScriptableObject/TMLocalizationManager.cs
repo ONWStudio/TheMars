@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 using Onw.Localization;
 using Onw.Attribute;
 using Onw.Helpers;
-using TMCard.SpecialEffect;
+using TMCard.Effect;
 using AYellowpaper.SerializedCollections;
 
 namespace TMCard
@@ -16,7 +16,7 @@ namespace TMCard
         private const string FILE_PATH = "OnwStudio/ScriptableObject/Localization/Resources/" + nameof(TMLocalizationManager);
 
         [SerializeField, SerializedDictionary("Special Effect", "Name", true, isLocked: true), FormerlySerializedAs("_specialEffectNames"), DisplayAs("특수 효과 이름")]
-        private SerializedDictionary<string, NestedSerializedDictionary> _specialEffectNames = new();
+        private SerializedDictionary<string, NestedSerializedDictionary> _specialEffectLabels = new();
 
         [SerializeField, SerializedDictionary("Card Name", "Name", true, isLocked: true), FormerlySerializedAs("_cardNames"), DisplayAs("카드 이름")]
         private SerializedDictionary<string, NestedSerializedDictionary> _cardNames = new();
@@ -34,20 +34,22 @@ namespace TMCard
 
         private void OnEnable()
         {
-            var subClassNames = ReflectionHelper.GetClassNamesFromParent<ITMCardSpecialEffect>();
+            //_specialEffectLabels.Clear();
+
+            var subClassNames = ReflectionHelper.GetCustomLabelFromNestedClass<ITMCardSpecialEffect>();
 
             foreach (string subClassName in subClassNames)
             {
-                if (_specialEffectNames.ContainsKey(subClassName)) continue;
+                if (_specialEffectLabels.ContainsKey(subClassName)) continue;
 
-                _specialEffectNames.NewAdd(subClassName, new NestedSerializedDictionary());
+                _specialEffectLabels.NewAdd(subClassName, new NestedSerializedDictionary());
             }
 
-            foreach (string name in _specialEffectNames.Keys)
+            foreach (var kvp in _specialEffectLabels)
             {
-                if (subClassNames.Any(subClassName => subClassName == name)) continue;
+                if (subClassNames.Any(subClassName => subClassName == kvp.Key)) continue;
 
-                _specialEffectNames.NewRemove(name);
+                _specialEffectLabels.NewRemove(kvp.Key, kvp.Value);
             }
         }
 
@@ -63,9 +65,9 @@ namespace TMCard
                 localizationNames.Names.TryGetValue(_languageSetting.LocalizationID, out string name) ? name : "";
         }
 
-        public string GetSpecialCardName(string key)
+        public string GetSpecialEffectLabel(string key)
         {
-            return _specialEffectNames.TryGetValue(key, out NestedSerializedDictionary localizingNames) &&
+            return _specialEffectLabels.TryGetValue(key, out NestedSerializedDictionary localizingNames) &&
                 localizingNames.Names.TryGetValue(_languageSetting.LocalizationID, out string name) ? name : "";
         }
     }

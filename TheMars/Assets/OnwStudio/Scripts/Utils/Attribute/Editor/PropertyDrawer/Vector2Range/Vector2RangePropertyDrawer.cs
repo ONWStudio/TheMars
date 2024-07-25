@@ -3,22 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using Onw.Attribute;
 
-namespace Onw.Editor.Attribute
+namespace Onw.Attribute.Editor
 {
     [CustomPropertyDrawer(typeof(Vector2RangeAttribute), true)]
-    public sealed class Vector2RangePropertyDrawer : PropertyDrawer
+    internal sealed class Vector2RangePropertyDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             Vector2RangeAttribute range = attribute as Vector2RangeAttribute;
 
-            // Label field
             Rect labelRect = new(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
             EditorGUI.LabelField(labelRect, label);
 
-            // Adjust the position rect for the sliders
             Rect sliderRectX = new(position.x, position.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing, position.width, EditorGUIUtility.singleLineHeight);
             Rect sliderRectY = new(position.x, sliderRectX.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing, position.width, EditorGUIUtility.singleLineHeight);
 

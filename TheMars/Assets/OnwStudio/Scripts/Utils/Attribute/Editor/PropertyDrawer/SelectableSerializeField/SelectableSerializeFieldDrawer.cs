@@ -1,16 +1,11 @@
 #if UNITY_EDITOR
-using System;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
-using Onw.Helpers;
-using Onw.Attribute;
-using Onw.Attribute.Editor;
 
-namespace Onw.Editor.Attribute
+namespace Onw.Attribute.Editor
 {
     using GUI = UnityEngine.GUI;
 
@@ -19,6 +14,7 @@ namespace Onw.Editor.Attribute
     {
         private readonly TreeViewState _dropdownState = new();
         private ComponentDropdown _dropdown = null;
+        private GUIContent _buttonContent = null;
 
         protected override void OnEnable(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -35,6 +31,8 @@ namespace Onw.Editor.Attribute
 
                 property.serializedObject.ApplyModifiedProperties();
             });
+
+            _buttonContent = new(EditorGUIUtility.IconContent("icon dropdown").image);
         }
 
         protected override void OnPropertyGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -58,9 +56,8 @@ namespace Onw.Editor.Attribute
                 content = GUIContent.none;
 
                 EditorGUI.LabelField(labelRect, label);
-                var icon = EditorGUIUtility.IconContent("icon dropdown").image;
 
-                if (GUI.Button(buttonRect, new GUIContent(icon)))
+                if (GUI.Button(buttonRect, _buttonContent))
                 {
                     _dropdown.Show(buttonRect);
                 }

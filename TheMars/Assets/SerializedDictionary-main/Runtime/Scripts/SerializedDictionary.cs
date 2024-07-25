@@ -54,9 +54,9 @@ namespace AYellowpaper.SerializedCollections
             _serializedList.Add(new(key, value));
         }
 
-        public void NewRemove(TKey key)
+        public void NewRemove(TKey key, TValue value)
         {
-            _lookupTable.RemoveKey(key);
+            _serializedList.Remove(new SerializedKeyValuePair<TKey, TValue>(key, value));
         }
 
         public void OnBeforeSerialize()

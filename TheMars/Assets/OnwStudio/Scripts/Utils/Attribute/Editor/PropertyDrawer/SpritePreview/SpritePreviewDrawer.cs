@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using Onw.Attribute;
 
-namespace Onw.Editor.Attribute
+namespace Onw.Attribute.Editor
 {
     [CustomPropertyDrawer(typeof(SpritePreviewAttribute))]
     internal sealed class SpritePreviewDrawer : PropertyDrawer

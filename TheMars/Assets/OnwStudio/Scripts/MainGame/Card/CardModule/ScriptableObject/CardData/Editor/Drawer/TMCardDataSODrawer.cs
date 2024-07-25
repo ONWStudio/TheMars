@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using Onw.Editor;
 using Onw.UI;
-using TMCard.UI;
+using TMCard.Runtime;
 
 namespace TMCard.Editor
 {

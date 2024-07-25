@@ -7,21 +7,23 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 
-namespace Onw.Editor.Attribute
+namespace Onw.Attribute.Editor
 {
-    using static Codice.CM.WorkspaceServer.WorkspaceTreeDataStore;
-    using GUI = UnityEngine.GUI;
-
     internal sealed class ComponentDropdown : TreeView
     {
         private class ComponentDropdownPopupContent : PopupWindowContent
         {
             private readonly ComponentDropdown _dropdown;
             private readonly SearchField _searchField;
+            private readonly GUIStyle _labelStyle;
 
             public ComponentDropdownPopupContent(ComponentDropdown dropdown)
             {
                 _dropdown = dropdown;
+                _labelStyle = new(EditorStyles.boldLabel)
+                {
+                    alignment = TextAnchor.MiddleCenter
+                };
                 _searchField = new SearchField();
             }
 
@@ -38,13 +40,10 @@ namespace Onw.Editor.Attribute
 
                 _dropdown.searchString = _searchField.OnGUI(searchRect, _dropdown.searchString);
 
-                GUIStyle guiStyle = new(EditorStyles.boldLabel);
-                guiStyle.alignment = TextAnchor.MiddleCenter;
-
                 EditorGUI.LabelField(
                     new(rect.x, rect.y + EditorGUIUtility.singleLineHeight * 1.35f, rect.width, EditorGUIUtility.singleLineHeight),
                     "Nested Object",
-                    guiStyle);
+                    _labelStyle);
 
                 Rect treeViewRect = new(
                     rect.x, 
@@ -71,10 +70,14 @@ namespace Onw.Editor.Attribute
 
         private readonly Action<GameObject> _onSelected;
         private readonly GameObject _rootObject;
+        private readonly Type _defaultType;
         private readonly Type _filterType;
+        private readonly Texture2D _gameObjectImage;
         private readonly Dictionary<int, GameObject> _itemsMap = new();
+        private readonly Dictionary<int, GUIContent> _itemContentMap = new();
         private readonly StringBuilder _stringBuilder = new();
         private readonly ComponentDropdownPopupContent _content;
+        private Texture2D _targetTexture = null;
 
         public ComponentDropdown(TreeViewState state, GameObject rootObject, Type filterType, Action<GameObject> onSelected) : base(state)
         {
@@ -82,38 +85,34 @@ namespace Onw.Editor.Attribute
             _filterType = filterType;
             _onSelected = onSelected;
             rowHeight *= 1.5f;
+            _defaultType = typeof(GameObject);
+            _gameObjectImage = EditorGUIUtility.ObjectContent(null, _defaultType).image as Texture2D;
             _content = new(this);
-        }
-
-        public void Show(Rect rect)
-        {
-            Reload();
-            ExpandAll();
-            PopupWindow.Show(rect, _content);
         }
 
         protected override TreeViewItem BuildRoot()
         {
             _itemsMap.Clear();
+            _itemContentMap.Clear();
             var root = new TreeViewItem(0, -1, "root");
 
             if (_filterType == typeof(GameObject))
             {
-                AddGameObjectToDropdown(root, _rootObject);
+                addGameObjectToDropdown(root, _rootObject);
             }
             else
             {
-                var rootItem = CreateItem(_rootObject, 0);
+                var rootItem = createItem(_rootObject, 0);
 
                 foreach (Component component in _rootObject.GetComponentsInChildren(_filterType))
                 {
                     _itemsMap.Add(component.gameObject.GetHashCode(), component.gameObject);
-                    AddComponentToDropdown(component.gameObject, new() { { _rootObject, rootItem } });
+                    addComponentToDropdown(component.gameObject, new() { { _rootObject, rootItem } });
                 }
 
-                SetDepth(rootItem);
+                setDepth(rootItem);
 
-                static void SetDepth(TreeViewItem item, int depth = 0)
+                static void setDepth(TreeViewItem item, int depth = 0)
                 {
                     item.depth = depth;
 
@@ -121,7 +120,7 @@ namespace Onw.Editor.Attribute
                     {
                         foreach (TreeViewItem treeViewItem in item.children)
                         {
-                            SetDepth(treeViewItem, depth + 1);
+                            setDepth(treeViewItem, depth + 1);
                         }
                     }
                 }
@@ -147,26 +146,19 @@ namespace Onw.Editor.Attribute
         protected override void RowGUI(RowGUIArgs args)
         {
             var item = args.item;
-            // Calculate the rect for the label to be vertically centered
+
             Rect labelRect = new(
-                args.rowRect.x + 15 + (args.item.depth * 15),
-                args.rowRect.y + (args.rowRect.height - EditorGUIUtility.singleLineHeight) / 2, 
+                args.rowRect.x + (string.IsNullOrEmpty(searchString) ? EditorGUIUtility.singleLineHeight + (args.item.depth * EditorGUIUtility.singleLineHeight) : 0),
+                args.rowRect.y + (args.rowRect.height - EditorGUIUtility.singleLineHeight) * 0.5f, 
                 args.rowRect.width,
                 EditorGUIUtility.singleLineHeight);
 
-            var icon = GetIconForItem(item);
-            var content = new GUIContent(item.displayName, icon);
+            if (!_itemContentMap.TryGetValue(args.item.id, out GUIContent guiContent))
+            {
+                guiContent = new GUIContent(item.displayName, getIconForItem(item));
+            }
 
-            EditorGUI.LabelField(labelRect, content);
-        }
-
-        private Texture2D GetIconForItem(TreeViewItem item)
-        {
-            return _filterType == typeof(GameObject) ||
-                   !_itemsMap.TryGetValue(item.id, out var gameObject) ||
-                   !gameObject.TryGetComponent(_filterType, out Component component) ? 
-                EditorGUIUtility.ObjectContent(null, typeof(GameObject)).image as Texture2D :
-                EditorGUIUtility.ObjectContent(component, _filterType).image as Texture2D;
+            EditorGUI.LabelField(labelRect, guiContent);
         }
 
         protected override void DoubleClickedItem(int id)
@@ -177,7 +169,33 @@ namespace Onw.Editor.Attribute
             _onSelected?.Invoke(@object);
         }
 
-        private void AddComponentToDropdown(GameObject selectedObject, Dictionary<GameObject, TreeViewItem> visited, TreeViewItem prevItem = null)
+        public void Show(Rect rect)
+        {
+            Reload();
+            ExpandAll();
+            PopupWindow.Show(rect, _content);
+        }
+
+        private Texture2D getIconForItem(TreeViewItem item)
+        {
+            Texture2D getFilterTypeToTexture(Component component)
+            {
+                if (!_targetTexture)
+                {
+                    _targetTexture = EditorGUIUtility.ObjectContent(component, _filterType).image as Texture2D;
+                }
+
+                return _targetTexture;
+            }
+
+            return _filterType == _defaultType ||
+                   !_itemsMap.TryGetValue(item.id, out var gameObject) ||
+                   !gameObject.TryGetComponent(_filterType, out Component component) ?
+                _gameObjectImage :
+                getFilterTypeToTexture(component);
+        }
+
+        private void addComponentToDropdown(GameObject selectedObject, Dictionary<GameObject, TreeViewItem> visited, TreeViewItem prevItem = null)
         {
             if (visited.TryGetValue(selectedObject, out TreeViewItem advancedDropdownItem))
             {
@@ -189,38 +207,38 @@ namespace Onw.Editor.Attribute
                 return;
             }
 
-            var gameObjectItem = CreateItem(selectedObject, 0);
+            var gameObjectItem = createItem(selectedObject, 0);
             if (prevItem is not null)
             {
                 gameObjectItem.AddChild(prevItem);
             }
 
-            AddComponentToDropdown(selectedObject.transform.parent.gameObject, visited, gameObjectItem);
+            addComponentToDropdown(selectedObject.transform.parent.gameObject, visited, gameObjectItem);
         }
 
-        private void AddGameObjectToDropdown(TreeViewItem parent, GameObject gameObject, int depth = 0)
+        private void addGameObjectToDropdown(TreeViewItem parent, GameObject gameObject, int depth = 0)
         {
-            var gameObjectItem = CreateItem(gameObject, depth);
+            var gameObjectItem = createItem(gameObject, depth);
 
             parent.AddChild(gameObjectItem);
             _itemsMap.Add(gameObjectItem.id, gameObject);
 
             foreach (Transform child in gameObject.transform)
             {
-                AddGameObjectToDropdown(gameObjectItem, child.gameObject, depth + 1);
+                addGameObjectToDropdown(gameObjectItem, child.gameObject, depth + 1);
             }
         }
 
-        private TreeViewItem CreateItem(GameObject gameObject, int depth)
+        private TreeViewItem createItem(GameObject gameObject, int depth)
         {
-            return new TreeViewItem(gameObject.GetHashCode(), depth, BuildString(gameObject));
+            return new TreeViewItem(gameObject.GetHashCode(), depth, buildString(gameObject));
         }
 
-        private string BuildString(GameObject go)
+        private string buildString(GameObject go)
         {
             _stringBuilder.Append(go.name);
             _stringBuilder.Append(" (");
-            _stringBuilder.Append(_filterType == typeof(GameObject) || go.TryGetComponent(_filterType, out Component _) ? _filterType.Name : typeof(GameObject).Name);
+            _stringBuilder.Append(_filterType == _defaultType || go.TryGetComponent(_filterType, out Component _) ? _filterType.Name : _defaultType.Name);
             _stringBuilder.Append(")");
             string name = _stringBuilder.ToString();
             _stringBuilder.Clear();

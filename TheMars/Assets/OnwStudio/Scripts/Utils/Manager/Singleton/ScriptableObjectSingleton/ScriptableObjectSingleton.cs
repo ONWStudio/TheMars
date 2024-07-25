@@ -49,10 +49,13 @@ namespace Onw.Manager
                 }
 
                 _instance = instance;
+                _instance.OnAwake();
             }
 
             return _instance;
         }
+
+        protected virtual void OnAwake() {}
 
         private static string GetFilePathWithExtention(bool fullPath)
         {

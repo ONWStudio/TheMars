@@ -404,10 +404,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cards:
   - {fileID: 11400000, guid: e50cf8b5c6e884f63ba9159d7aff9ae4, type: 2}
-  - {fileID: 11400000, guid: 016b84c53cb8b4e48bccbeb98cd928f4, type: 2}
-  - {fileID: 11400000, guid: 728979c1af5a645a287814149e950b7e, type: 2}
-  - {fileID: 11400000, guid: dc38a4f12296f49068c5cf5c41361342, type: 2}
-  - {fileID: 11400000, guid: d932120f230194d2485f96e84a1247b8, type: 2}
   _templatePrefab: {fileID: 38075375519361866, guid: d7803182f172a42c699b32751eb7fade,
     type: 3}
 --- !u!4 &441722214
@@ -1954,6 +1950,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 4678432511697879042
       type: {class: CycleForm, ns: TMCard.UI, asm: AssebmlyTMCard}
       data:
