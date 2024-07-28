@@ -24,15 +24,21 @@ namespace TMGUITool
         private interface ILoadable
         {
             /// <summary>
-            /// .. 불러오기 버튼을 눌렀을때 호출되는 메서드 입니다
-            /// </summary>
-            void LoadDataFromLocal();
-            /// <summary>
             /// .. 저장 버튼을 눌렀을때 호출되는 메서드 입니다
             /// </summary>
             void SaveDataToLocal();
-
         }
+
+        private interface ISaveable
+        {
+            /// <summary>
+            /// .. 불러오기 버튼을 눌렀을때 호출되는 메서드 입니다
+            /// </summary>
+            void LoadDataFromLocal();
+        }
+
+        private interface IDataHandler : ILoadable, ISaveable {}
+
         /// <summary>
         /// .. gui기능을 구현하는 인터페이스입니다 
         /// </summary>

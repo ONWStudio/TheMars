@@ -23,13 +23,12 @@ MonoBehaviour:
   <CardImage>k__BackingField: {fileID: 21300000, guid: 97c65912ff502db46a5c3ddd055fce34,
     type: 3}
   <IsCustomDescription>k__BackingField: 
-  _cardEffects:
-  - rid: 2707483088633987072
+  _cardEffects: []
+  _effectCreators:
+  - rid: -2
   _addtionalConditions: []
   references:
     version: 2
     RefIds:
-    - rid: 2707483088633987072
-      type: {class: DrawCard, ns: TMCard.Effect, asm: AssemblyTheMars}
-      data:
-        _drawEffects: []
+    - rid: -2
+      type: {class: , ns: , asm: }

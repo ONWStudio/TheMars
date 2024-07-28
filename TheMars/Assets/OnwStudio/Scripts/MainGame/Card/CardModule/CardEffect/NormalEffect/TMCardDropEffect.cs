@@ -5,7 +5,6 @@ using TMCard.Runtime;
 
 namespace TMCard.Effect
 {
-    [SerializeReferenceDropdownName("카드 버리기")]
     public sealed class TMCardDropEffect : ITMNormalEffect
     {
         public void ApplyEffect(TMCardController controller)

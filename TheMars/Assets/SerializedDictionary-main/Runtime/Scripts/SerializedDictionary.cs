@@ -5,7 +5,7 @@ using UnityEngine;
 namespace AYellowpaper.SerializedCollections
 {
     [System.Serializable]
-    public partial class SerializedDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
+    public class SerializedDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
     {
 #if UNITY_EDITOR
         internal IKeyable LookupTable

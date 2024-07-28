@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 134aebb6b491f4b23ae60ebceffd6336, type: 3}
   m_Name: TMLocalizationManager
   m_EditorClassIdentifier: 
-  _languageSetting: {fileID: 11400000, guid: 99d8cc3b7999c4fae9f72d28c7164930, type: 2}
+  _languageSetting: {fileID: 11400000, guid: b70d685ef1d19435b9e4d55637cde8f8, type: 2}
   _specialEffectLabels:
     _serializedList:
     - Key: "\uC77C\uD68C\uC6A9"

@@ -12,4 +12,9 @@ namespace TMCard.Effect
         /// </summary>
         void ApplyEffect(TMCardController controller);
     }
+
+    public interface ITMInitializableEffect<T> where T : ITMEffectCreator
+    {
+        void Initialize(T effectCreator);
+    }
 }

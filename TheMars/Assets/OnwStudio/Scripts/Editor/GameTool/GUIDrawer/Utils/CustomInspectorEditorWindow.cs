@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Unity.EditorCoroutines;
 using Onw.Editor;
 using Onw.Helpers;
-using UnityEditorInternal.VR;
+using Onw.Editor.Extensions;
+using Unity.EditorCoroutines.Editor;
 
 namespace TMGUITool
 {
@@ -20,13 +22,13 @@ namespace TMGUITool
             {
                 if (!_editor)
                 {
-                    _editor = Editor.CreateEditor(target);
+                    createEditor(target);
                 }
 
                 if (!_editor.target || _editor.target != target || _editor.serializedObject is null || !_editor.serializedObject.targetObject)
                 {
-                    DestroyEditor();
-                    _editor = Editor.CreateEditor(target);
+                    destroyEditor();
+                    createEditor(target);
                 }
 
                 if (!_attrubuteDrawers.TryGetValue(_editor.target.GetInstanceID().ToString(), out List<IObjectEditorAttributeDrawer> drawers))
@@ -41,16 +43,30 @@ namespace TMGUITool
                     .ForEach(drawer => drawer.OnInspectorGUI(_editor));
             }
 
-            public void OnDisable()
+            private void createEditor(Object target)
             {
-                DestroyEditor();
+                _editor = Editor.CreateEditor(target);
+                Object prveObject = Selection.activeObject;
+                EditorApplication.delayCall += () => Selection.activeObject = prveObject;
+                Selection.activeObject = target;
             }
 
-            private void DestroyEditor()
+            private IEnumerator iESetSelectionActiveObjectPrevTarget(Object prevTarget)
             {
-                Debug.Log("destroyed");
+                yield return null;
+                Selection.activeObject = prevTarget;
+            }
 
-                DestroyImmediate(_editor, true);
+            public void OnDisable()
+            {
+                destroyEditor();
+            }
+
+            private void destroyEditor()
+            {
+                if (!_editor) return;
+
+                DestroyImmediate(_editor);
                 _editor = null;
             }
         }

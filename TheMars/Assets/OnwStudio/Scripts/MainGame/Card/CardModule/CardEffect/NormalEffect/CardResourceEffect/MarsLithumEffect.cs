@@ -2,13 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMCard.Runtime;
+using Onw.Attribute;
 
 namespace TMCard.Effect.Resource
 {
-    [SerializeReferenceDropdownName("자원 획득 (마르스 리튬)")]
-    public sealed class MarsLithumEffect : TMCardResourceEffect
+    public sealed class MarsLithumEffect : ITMCardResourceEffect, ITMInitializableEffect<MarsLithumEffectCreator>
     {
-        public override void OnResourceEffect(TMCardController controller, int addtionalAmount)
+        [field: SerializeField, DisplayAs("소모 재화"), Tooltip("소모 재화"), ReadOnly] public int Amount { get; private set; }
+
+        public void ApplyEffect(TMCardController controller)
+        {
+            OnResourceEffect(controller);
+        }
+
+        public void Initialize(MarsLithumEffectCreator effectCreator)
+        {
+            Amount = effectCreator.Amount;
+        }
+
+        public void OnResourceEffect(TMCardController controller, int addtionalAmount = 0)
         {
             Debug.Log(Amount + addtionalAmount);
             Debug.Log("마르스 리튬 획득");

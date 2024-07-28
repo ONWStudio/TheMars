@@ -78,7 +78,7 @@ namespace Onw.Helpers
         {
             foreach (Type type in AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()))
             {
-                if (!baseType.IsAssignableFrom(type) || type.IsInterface || type.IsAbstract) continue;
+                if (type.IsInterface || type.IsAbstract || !baseType.IsAssignableFrom(type)) continue;
 
                 yield return type;
             }

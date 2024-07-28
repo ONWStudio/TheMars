@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace TMCard.Effect
 {
-    [SerializeReferenceDropdownName("카드 드로우")]
     public sealed class TMCardDrawEffect : ITMNormalEffect
     {
         public void ApplyEffect(TMCardController controller)

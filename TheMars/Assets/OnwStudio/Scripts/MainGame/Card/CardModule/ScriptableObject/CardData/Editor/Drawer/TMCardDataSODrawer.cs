@@ -99,7 +99,7 @@ namespace TMCard.Editor
             DrawDefaultInspector();
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             EditorGUIHelper.DestroyObjectByComponent(ref _previewInstance);
             EditorGUIHelper.DestroyObjectByComponent(ref _previewCamera);

@@ -18,13 +18,14 @@ namespace TMGUITool
 
             private readonly EditorScrollController _scrollViewController = new();
 
-            public void Awake() {}
+            public void Awake() 
+            {
+            
+            }
             public void OnEnable() {}
 
             public void OnDraw()
             {
-                Debug.Log(TMLocalizationManager.Instance);
-
                 _scrollViewController
                     .ActionScrollSpace(() => OnInspectorGUI(TMLocalizationManager.Instance));
             }

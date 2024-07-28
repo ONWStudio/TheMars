@@ -104,7 +104,7 @@ namespace TMCard
         {
             get
             {
-                foreach (ITMNormalEffect effect in _cardEffects)
+                foreach (ITMCardEffect effect in _cardEffects)
                 {
                     bool hasDescription = false;
                     bool hasLabel = false;
@@ -128,9 +128,13 @@ namespace TMCard
             }
         }
 
+
         [Space]
         [SerializeReference, FormerlySerializedAs("_cardEffects"), DisplayAs("카드 효과"), Tooltip("카드 효과 리스트"), SerializeReferenceDropdown]
-        private List<ITMNormalEffect> _cardEffects = new();
+        private List<ITMCardEffect> _cardEffects = new();
+
+        [SerializeReference, DisplayAs("카드 효과"), Tooltip("카드 효과 리스트"), SerializeReferenceDropdown]
+        private List<ITMEffectCreator> _effectCreators = new();
 
         [SerializeReference, FormerlySerializedAs("_addtionalConditions"), DisplayAs("추가 조건"), Tooltip("카드 추가 조건 리스트"), SerializeReferenceDropdown]
         private List<ITMCardAddtionalCondition> _addtionalConditions = new();
@@ -140,7 +144,7 @@ namespace TMCard
             _cardEffects.ForEach(cardEffect => cardEffect?.ApplyEffect(controller));
         }
 
-        public IEnumerable<EffectType> GetEffectOfType<EffectType>() where EffectType : ITMNormalEffect
+        public IEnumerable<EffectType> GetEffectOfType<EffectType>() where EffectType : ITMCardEffect
         {
             return _cardEffects.OfType<EffectType>();
         }

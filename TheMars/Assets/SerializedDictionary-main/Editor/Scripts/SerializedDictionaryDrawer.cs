@@ -1,15 +1,10 @@
 ﻿using AYellowpaper.SerializedCollections.Editor.Data;
 using AYellowpaper.SerializedCollections.Editor.States;
 using AYellowpaper.SerializedCollections.KeysGenerators;
-using NUnit.Framework.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using UnityEditor;
-using UnityEditor.IMGUI.Controls;
-using UnityEditorInternal;
 using UnityEngine;
 
 namespace AYellowpaper.SerializedCollections.Editor
@@ -30,6 +25,7 @@ namespace AYellowpaper.SerializedCollections.Editor
         public const bool ValueFlag = false;
         public static readonly Color BorderColor = new(36 / 255f, 36 / 255f, 36 / 255f);
         public static readonly List<int> NoEntriesList = new();
+
         internal static GUIContent DisplayTypeToggleContent
         {
             get
@@ -59,6 +55,8 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
+            Debug.Log(property);
+
             return _arrayData.TryGetValue(property.propertyPath, out SerializedDictionaryInstanceDrawer drawer) ? drawer.GetPropertyHeight(label) : 0;
         }
     }
