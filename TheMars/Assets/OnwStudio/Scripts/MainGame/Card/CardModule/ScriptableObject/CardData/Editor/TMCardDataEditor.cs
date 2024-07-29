@@ -17,16 +17,16 @@ namespace TMCard
             Guid = System.Guid.NewGuid().ToString();
         }
 
-        [OnChangedValueByMethod(nameof(_cardEffects))]
+        [OnChangedValueByMethod(nameof(_effectCreators))]
         private void onChangedSpecialEffect()
         {
-            for (int i = 0; i < _cardEffects.Count; i++)
+            for (int i = 0; i < _effectCreators.Count; i++)
             {
-                if (_cardEffects[i] is not ITMCardSpecialEffect) continue;
+                if (_effectCreators[i] is not ITMSpecialEffectCreator) continue;
 
-                for (int j = i + 1; j < _cardEffects.Count; j++)
+                for (int j = i + 1; j < _effectCreators.Count; j++)
                 {
-                    if (_cardEffects[j] is not ITMCardSpecialEffect || _cardEffects[i]?.GetType().Name != _cardEffects[j]?.GetType().Name) continue;
+                    if (_effectCreators[j] is not ITMSpecialEffectCreator || _effectCreators[i]?.GetType().Name != _effectCreators[j]?.GetType().Name) continue;
 
                     Debug.LogWarning("특수 효과는 같은 효과가 중첩 될 수 없습니다");
                 }

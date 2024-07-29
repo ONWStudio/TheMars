@@ -7,7 +7,7 @@ namespace TMCard.Effect
 {
     public sealed class TMCardDropEffect : ITMNormalEffect
     {
-        public void ApplyEffect(TMCardController controller)
+        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             Debug.Log("카드 버리기");
         }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 namespace TMCard.Effect
 {
-    public interface ITMNormalEffectCreator : ITMEffectCreator {}
-
     public interface ITMEffectCreator
     {
         protected static class EffectGenerator

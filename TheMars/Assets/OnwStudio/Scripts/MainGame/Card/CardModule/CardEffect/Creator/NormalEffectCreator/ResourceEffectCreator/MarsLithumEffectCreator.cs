@@ -7,10 +7,10 @@ namespace TMCard.Effect.Resource
 {
     using static ITMEffectCreator;
 
-    [SerializeReferenceDropdownName("ÀÚ¿ø È¹µæ (¸¶¸£½º ¸®Æ¬)")]
+    [SerializeReferenceDropdownName("ìì› íšë“ (ë§ˆë¥´ìŠ¤ ë¦¬íŠ¬)")]
     public sealed class MarsLithumEffectCreator : IResourceEffectCreator
     {
-        [field: SerializeField, DisplayAs("¼Ò¸ğ ÀçÈ­"), Tooltip("¼Ò¸ğ ÀçÈ­")] public int Amount { get; private set; }
+        [field: SerializeField, DisplayAs("íšë“ëŸ‰"), Tooltip("ë§ˆë¥´ìŠ¤ ë¦¬íŠ¬")] public int Amount { get; private set; }
 
         public ITMCardEffect CreateEffect()
         {

@@ -18,15 +18,14 @@ namespace TMCard.Effect
 
         public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("소요(턴)");
 
-        public void ApplyEffect(TMCardController cardController)
-        {
-            cardController.UseState = ()
-                => TMCardGameManager.Instance.DelayTurn(cardController, DelayTurn);
-        }
-
         public void Initialize(TurnDelayEffectCreator effectCreator)
         {
             DelayTurn = effectCreator.DelayTurn;
+        }
+
+        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
+        {
+            controller.OnClickEvent.RemoveAllToAddListener(() => TMCardGameManager.Instance.DelayTurn(controller, DelayTurn));
         }
     }
 }

@@ -7,10 +7,10 @@ namespace TMCard.Effect
 {
     using static ITMEffectCreator;
 
-    [SerializeReferenceDropdownName("Áö¼Ó (ÅÏ)"), Substitution("Áö¼Ó(ÅÏ)")]
-    public class TurnContinuingEffectCreator : ITMEffectCreator
+    [SerializeReferenceDropdownName("(íŠ¹ìˆ˜) ì§€ì† (í„´)"), Substitution("ì§€ì†(í„´)")]
+    public class TurnContinuingEffectCreator : ITMSpecialEffectCreator
     {
-        [field: SerializeField, DisplayAs("Áö¼Ó ÅÏ")] public int ContinuingTurn { get; private set; } = 1;
+        [field: SerializeField, DisplayAs("ì§€ì†ì‹œí‚¬ í„´")] public int ContinuingTurn { get; private set; } = 1;
 
         public ITMCardEffect CreateEffect()
         {

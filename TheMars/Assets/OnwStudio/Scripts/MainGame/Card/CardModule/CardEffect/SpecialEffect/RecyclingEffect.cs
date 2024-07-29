@@ -14,9 +14,13 @@ namespace TMCard.Effect
     {
         public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("재활용");
 
-        public void ApplyEffect(TMCardController cardController)
+        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            cardController.UseState = () => TMCardGameManager.Instance.RecycleToHand(cardController);
+            controller.OnClickEvent.RemoveAllToAddListener(() =>
+            {
+                trigger.OnEffectEvent.Invoke();
+                TMCardGameManager.Instance.RecycleToHand(controller);
+            });
         }
     }
 }

@@ -9,10 +9,10 @@ namespace TMCard.Effect
 {
     using static ITMEffectCreator;
 
-    [SerializeReferenceDropdownName("¹ö¸®±â"), Substitution("¹ö¸®±â")]
-    public sealed class DropEffectCreator : ITMEffectCreator
+    [SerializeReferenceDropdownName("(íŠ¹ìˆ˜) ë²„ë¦¬ê¸°"), Substitution("ë²„ë¦¬ê¸°")]
+    public sealed class DropEffectCreator : ITMSpecialEffectCreator
     {
-        [SerializeReference, DisplayAs("¹ö¸®±â È¿°ú"), FormerlySerializedAs("_cardEffectCreators"), SerializeReferenceDropdown] private List<ITMNormalEffectCreator> _cardEffectCreators = new();
+        [SerializeReference, DisplayAs("ë²„ë¦¬ê¸°"), FormerlySerializedAs("_cardEffectCreators"), SerializeReferenceDropdown] private List<ITMNormalEffectCreator> _cardEffectCreators = new();
 
         public IEnumerable<ITMNormalEffect> DropEffects => _cardEffectCreators
             .Select(creator => creator.CreateEffect())

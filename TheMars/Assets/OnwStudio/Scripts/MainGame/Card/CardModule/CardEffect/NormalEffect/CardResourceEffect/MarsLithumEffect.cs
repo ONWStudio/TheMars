@@ -10,20 +10,23 @@ namespace TMCard.Effect.Resource
     {
         [field: SerializeField, DisplayAs("소모 재화"), Tooltip("소모 재화"), ReadOnly] public int Amount { get; private set; }
 
-        public void ApplyEffect(TMCardController controller)
-        {
-            OnResourceEffect(controller);
-        }
-
         public void Initialize(MarsLithumEffectCreator effectCreator)
         {
             Amount = effectCreator.Amount;
         }
 
-        public void OnResourceEffect(TMCardController controller, int addtionalAmount = 0)
+        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            Debug.Log(Amount + addtionalAmount);
-            Debug.Log("마르스 리튬 획득");
+            trigger.OnEffectEvent.AddListener(() =>
+            {
+                Debug.Log(Amount);
+                Debug.Log("마르스 리튬 획득");
+            });
+        }
+
+        public void AddRequiredResource(int addtionalAmount)
+        {
+            Amount += addtionalAmount;
         }
     }
 }

@@ -18,13 +18,12 @@ namespace TMCard.Effect
 
         public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("지속(시간)");
 
-        // .. TODO : 버프 디버프류 이펙트 추가
-        public void ApplyEffect(TMCardController cardController)
+        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            //cardController.UseState = () => TMCardGameManager.Instance.OnContinuingSeconds(
-            //    cardController,
-            //    ContinuingTime,
-            //    () => { });
+            controller.OnClickEvent.RemoveAllToAddListener(() => TMCardGameManager.Instance.OnContinuingSeconds(
+                controller,
+                ContinuingTime,
+                trigger.OnEffectEvent.Invoke));
         }
 
         public void Initialize(TimeContinuingEffectCreator effectCreator)

@@ -64,6 +64,11 @@ namespace TMCard.Editor
 
                     _previewInstance = Instantiate(previewInstance, _previewCanvas.transform, false);
                     _previewInstance.CardData = targetObject;
+                    _previewInstance.Initialize();
+
+                    TMCardViewer cardViewer = _previewInstance.GetComponent<TMCardViewer>();
+                    cardViewer.SetUI(_previewInstance);
+
                     _previewCamera.transform.position = _previewInstance.transform.position - Vector3.forward * 10;
 
                     if (_previewInstance.transform is RectTransform rectTransform)

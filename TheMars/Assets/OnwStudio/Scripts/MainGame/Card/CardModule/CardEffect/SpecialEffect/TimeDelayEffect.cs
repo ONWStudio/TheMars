@@ -17,9 +17,10 @@ namespace TMCard.Effect
 
         public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("소요(시간)");
 
-        public void ApplyEffect(TMCardController cardController)
+        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            cardController.UseState = () => TMCardGameManager.Instance.DelaySeconds(cardController, DelayTime);
+            // .. TODO : 수정
+            controller.OnClickEvent.RemoveAllToAddListener(() => TMCardGameManager.Instance.DelaySeconds(controller, DelayTime));
         }
 
         public void Initialize(TimeDelayEffectCreator effectCreator)

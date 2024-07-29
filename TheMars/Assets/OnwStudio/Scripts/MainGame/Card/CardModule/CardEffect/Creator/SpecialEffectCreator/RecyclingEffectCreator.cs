@@ -7,8 +7,8 @@ namespace TMCard.Effect
 {
     using static ITMEffectCreator;
 
-    [SerializeReferenceDropdownName("ÀçÈ°¿ë"), Substitution("ÀçÈ°¿ë")]
-    public sealed class RecyclingEffectCreator : ITMEffectCreator
+    [SerializeReferenceDropdownName("(íŠ¹ìˆ˜) ìž¬í™œìš©"), Substitution("ìž¬í™œìš©")]
+    public sealed class RecyclingEffectCreator : ITMSpecialEffectCreator
     {
         public ITMCardEffect CreateEffect()
         {

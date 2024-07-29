@@ -7,10 +7,10 @@ namespace TMCard.Effect
 {
     using static ITMEffectCreator;
 
-    [SerializeReferenceDropdownName("¼Ò¿ä (½Ã°£)"), Substitution("¼Ò¿ä(½Ã°£)")]
-    public class TimeDelayEffectCreator : ITMEffectCreator
+    [SerializeReferenceDropdownName("(íŠ¹ìˆ˜) ì†Œìš” (ì‹œê°„)"), Substitution("ì†Œìš”(ì‹œê°„)")]
+    public class TimeDelayEffectCreator : ITMSpecialEffectCreator
     {
-        [field: SerializeField, DisplayAs("µô·¹ÀÌ ½Ã°£ (ÃÊ)")] public float DelayTime { get; private set; } = 1f;
+        [field: SerializeField, DisplayAs("ë”œë ˆì´ ì‹œê°„ (ì´ˆ)")] public float DelayTime { get; private set; } = 1f;
 
         public ITMCardEffect CreateEffect()
         {

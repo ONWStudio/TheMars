@@ -2,19 +2,39 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
-using Onw.Attribute;
-using Onw.Components.Movement;
-using Onw.Extensions;
-using Onw.Event;
 using UnityEngine.EventSystems;
+using Onw.Components.Movement;
+using Onw.BehaviorTree;
+using Onw.Extensions;
+using Onw.Interface;
+using Onw.Attribute;
+using Onw.Event;
+using TMCard.Effect;
+using TMCard.Effect.Resource;
 
 namespace TMCard.Runtime
 {
+    public readonly struct TMCardEffectArgs
+    {
+        public bool HasDescription { get; }
+        public bool HasLabel { get; }
+
+        public string Description { get; }
+        public string Label { get; }
+
+        public TMCardEffectArgs(bool hasDescription, bool hasLabel, string description, string label)
+        {
+            HasDescription = hasDescription;
+            HasLabel = hasLabel;
+            Description = description;
+            Label = label;
+        }
+    }
+
     // .. Model
     [DisallowMultipleComponent]
-    public sealed class TMCardController : MonoBehaviour
+    public class TMCardController : MonoBehaviour, ITMEffectTrigger
     {
         [field: SerializeField, ReadOnly] public TMCardData CardData { get; set; } = null;
         /// <summary>
@@ -39,10 +59,52 @@ namespace TMCard.Runtime
         [field: SerializeField] public UnityEvent<Transform> OnChangedParent { get; private set; } = new();
         [field: SerializeField, InitializeRequireComponent] public RectTransform RectTransform { get; private set; } = null;
 
-        public Action UseState { get; set; } = null;
-        public Action DrawBeginState { get; set; } = null;
-        public Action DrawEndedState { get; set; } = null;
-        public Action TurnEndedState { get; set; } = null;
+        public IEnumerable<TMCardEffectArgs> EffectArgs
+        {
+            get
+            {
+                foreach (ITMCardEffect effect in _cardEffects)
+                {
+                    bool hasDescription = false;
+                    bool hasLabel = false;
+                    string description = string.Empty;
+                    string labelStr = string.Empty;
+
+                    if (effect is IDescriptable descriptable)
+                    {
+                        hasDescription = true;
+                        description = descriptable.Description;
+                    }
+
+                    if (effect is ILabel label)
+                    {
+                        hasLabel = true;
+                        labelStr = label.Label;
+                    }
+
+                    yield return new(hasDescription, hasLabel, description, labelStr);
+                }
+            }
+        }
+
+        public IEnumerable<ITMCardResourceEffect> ResourceEffects
+        {
+            get
+            {
+                foreach (ITMCardEffect effect in _cardEffects)
+                {
+                    if (effect is not ITMCardResourceEffect resourceEffect) continue;
+
+                    yield return resourceEffect;
+                }
+            }
+        }
+
+        public CardEvent OnClickEvent { get; } = new();
+        public CardEvent OnDrawBeginEvent { get; } = new();
+        public CardEvent OnDrawEndedEvent { get; } = new();
+        public CardEvent OnTurnEndedEvent { get; } = new();
+        public CardEvent OnEffectEvent { get; } = new();
 
         [Space]
         /// <summary>
@@ -51,29 +113,41 @@ namespace TMCard.Runtime
         [Header("Require Option")]
         [SerializeField, SelectableSerializeField] private Vector2SmoothMover _smoothMove = null;
 
+        private readonly List<ITMCardEffect> _cardEffects = new();
+        private bool _isInitEffect = false;
+
+        private void OnTransformParentChanged()
+        {
+            OnChangedParent.Invoke(transform.parent);
+        }
+
         public void Initialize()
         {
             initalizeInputHandle();
             initializeSmoothMove();
 
-            //UseState = () =>
-            //{
-            //    CardData.UseCard();
-            //    TMCardGameManager.Instance.EffectCard(this);
-            //};
+            OnClickEvent.AddListener(() =>
+            {
+                TMCardGameManager.Instance.MoveToScreenCenterAfterToTomb(this);
+                OnEffectEvent.Invoke();
+            });
 
-            TurnEndedState = () => TMCardGameManager.Instance.MoveToTomb(this);
+            OnTurnEndedEvent.AddListener(() => TMCardGameManager.Instance.MoveToTomb(this));
             CardData.ApplyEffect(this);
+        }
+
+        public void SetEffect(IEnumerable<ITMCardEffect> effects)
+        {
+            if (_isInitEffect) return;
+
+            _isInitEffect = true;
+            _cardEffects.AddRange(effects);
+            _cardEffects.ForEach(effect => effect.ApplyEffect(this, this));
         }
 
         public void OnUsed()
         {
-            UseState?.Invoke();
-        }
-
-        private void OnTransformParentChanged()
-        {
-            OnChangedParent.Invoke(transform.parent);
+            OnClickEvent.Invoke();
         }
 
         /// <summary>
@@ -81,12 +155,12 @@ namespace TMCard.Runtime
         /// </summary>
         public void OnDrawBegin()
         {
-            DrawBeginState?.Invoke();
+            OnDrawBeginEvent.Invoke();
         }
 
         public void OnDrawEnded()
         {
-            DrawEndedState?.Invoke();
+            OnDrawEndedEvent.Invoke();
         }
 
         /// <summary>
@@ -94,7 +168,7 @@ namespace TMCard.Runtime
         /// </summary>
         public void OnTurnEnd()
         {
-            TurnEndedState?.Invoke();
+            OnTurnEndedEvent.Invoke();
         }
 
         /// <summary>

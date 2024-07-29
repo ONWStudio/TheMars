@@ -16,8 +16,19 @@ namespace TMCard.Effect
 
         public void ApplyEffect(TMCardController cardController)
         {
-            cardController.UseState = () => TMCardGameManager.Instance.DisposeCard(cardController);
-            cardController.TurnEndedState = () => TMCardGameManager.Instance.DestroyCard(cardController);
+            //cardController.UseState = () => TMCardGameManager.Instance.DisposeCard(cardController);
+            //cardController.TurnEndedState = () => TMCardGameManager.Instance.DestroyCard(cardController);
+        }
+
+        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
+        {
+            controller.OnClickEvent.RemoveAllToAddListener(() =>
+            {
+                trigger.OnEffectEvent.Invoke();
+                TMCardGameManager.Instance.DisposeCard(controller);
+            });
+
+            controller.OnTurnEndedEvent.RemoveAllToAddListener(() => TMCardGameManager.Instance.DestroyCard(controller));
         }
     }
 }

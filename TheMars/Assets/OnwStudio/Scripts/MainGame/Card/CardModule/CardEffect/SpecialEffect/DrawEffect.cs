@@ -13,30 +13,23 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 드로우
     /// </summary>
-    public sealed class DrawEffect : ITMCardSpecialEffect, ITMInitializableEffect<DrawEffectCreator>, IDescriptionList
+    public sealed class DrawEffect : ITMCardSpecialEffect, ITMInitializableEffect<DrawEffectCreator>, ITMEffectTrigger
     {
         public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("드로우");
 
-        public IEnumerable<string> Descriptions => _drawEffects
-            .OfType<IDescriptable>()
-            .Select(descriptable => descriptable.Description);
+        public CardEvent OnEffectEvent { get; } = new();
 
         private readonly List<ITMNormalEffect> _drawEffects = new();
-
-        public void ApplyEffect(TMCardController cardController)
-        {
-            cardController.DrawEndedState = () =>
-            {
-                _drawEffects
-                    .ForEach(drawEffect => drawEffect.ApplyEffect(cardController));
-
-                TMCardGameManager.Instance.DrawUse(cardController);
-            };
-        }
 
         public void Initialize(DrawEffectCreator effectCreator)
         {
             _drawEffects.AddRange(effectCreator.DrawEffects);
+        }
+
+        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
+        {
+            _drawEffects.ForEach(effect => effect.ApplyEffect(controller, this));
+            controller.OnDrawEndedEvent.RemoveAllToAddListener(OnEffectEvent.Invoke);
         }
     }
 }

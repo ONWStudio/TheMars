@@ -10,20 +10,20 @@ namespace TMCard.Effect.Resource
     {
         [field: SerializeField, DisplayAs("소모 재화"), Tooltip("소모 재화"), ReadOnly] public int Amount { get; private set; }
 
-        public void ApplyEffect(TMCardController controller)
-        {
-            OnResourceEffect(controller);
-        }
-
         public void Initialize(TeraResourceEffectCreator effectCreator)
         {
             Amount = effectCreator.Amount;
         }
 
-        public void OnResourceEffect(TMCardController controller, int addtionalAmount = 0)
+        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            Debug.Log(Amount + addtionalAmount);
+            Debug.Log(Amount);
             Debug.Log("테라 획득");
+        }
+
+        public void AddRequiredResource(int addtionalAmount)
+        {
+            Amount += addtionalAmount;
         }
     }
 }

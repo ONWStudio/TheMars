@@ -1,9 +1,11 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Onw.Attribute;
+using Onw.Extensions;
 
 namespace TMCard.Runtime
 {
@@ -11,14 +13,13 @@ namespace TMCard.Runtime
     [DisallowMultipleComponent]
     public sealed class TMCardViewer : MonoBehaviour
     {
-        [SerializeField, SelectableSerializeField] private TextMeshProUGUI _cardNameText = null;
-
         [Header("Image")]
         [SerializeField, SelectableSerializeField] private Image _cardImage = null;
         [SerializeField, InitializeRequireComponent] private Image _backgroundImage = null;
 
         //[Header("Descriptor")]
         //[SerializeField, SelectableSerializeField] private TMCardDescriptor _descriptor;
+        [SerializeField, SelectableSerializeField] private RectTransform _effectField = null;
 
         private bool _isInit = false;
 
@@ -37,8 +38,44 @@ namespace TMCard.Runtime
             initializeImages();
         }
 
-        public void SetUI(TMCardData cardData)
+        public void SetUI(TMCardController controller)
         {
+            _cardImage.sprite = controller.CardData.CardImage;
+
+            var args = controller.EffectArgs;
+
+            Debug.Log("Set UI");
+            args
+                .Where(effectArg => !effectArg.HasLabel)
+                .ForEach(effectArg => createEffectUI(_effectField, false, effectArg));
+
+            args
+                .Where(effectArg => effectArg.HasLabel)
+                .ForEach(effectArg => createEffectUI(_effectField, true, effectArg));
+
+            static void createEffectUI(Transform effectField, bool hasLabel, TMCardEffectArgs effectArg)
+            {
+                GameObject effectUIObject = new("Effect UI Field");
+                effectUIObject.AddComponent<RectTransform>();
+                VerticalLayoutGroup verticalLayoutGroup = effectUIObject.AddComponent<VerticalLayoutGroup>();
+                effectUIObject.transform.SetParent(effectField.transform, false);
+
+                if (hasLabel)
+                {
+                    GameObject labelObject = new("Label Object");
+                    labelObject.AddComponent<RectTransform>();
+                    labelObject.transform.SetParent(effectUIObject.transform, false);
+                    TextMeshProUGUI labelText = labelObject.AddComponent<TextMeshProUGUI>();
+                    labelText.text = effectArg.Label;
+                    labelText.color = Color.red;
+                }
+
+                GameObject descriptionObject = new("Description Field");
+                descriptionObject.AddComponent<RectTransform>();
+                descriptionObject.transform.SetParent(effectUIObject.transform, false);
+                TextMeshProUGUI textGUI = descriptionObject.AddComponent<TextMeshProUGUI>();
+                textGUI.text = effectArg.Description;
+            }
         }
     }
 }

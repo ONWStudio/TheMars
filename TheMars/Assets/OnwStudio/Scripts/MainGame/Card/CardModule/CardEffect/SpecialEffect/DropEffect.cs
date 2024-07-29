@@ -5,33 +5,28 @@ using UnityEngine;
 using Onw.Attribute;
 using Onw.Interface;
 using TMCard.Runtime;
-using TMCard.Effect;
 
 namespace TMCard.Effect
 {
-    using Runtime;
-    using Effect;
-
     /// <summary>
     /// .. 버리기
     /// </summary>
-    public sealed class DropEffect : ITMCardSpecialEffect, ITMInitializableEffect<DropEffectCreator>, IDescriptionList
+    public sealed class DropEffect : ITMCardSpecialEffect, ITMInitializableEffect<DropEffectCreator>, ITMEffectTrigger
     {
         public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("버리기");
-        public IEnumerable<string> Descriptions =>
-            _dropEffect
-            .OfType<IDescriptable>()
-            .Select(descriptable => descriptable.Description);
+
+        public CardEvent OnEffectEvent { get; } = new();
 
         private readonly List<ITMNormalEffect> _dropEffect = new();
 
-        public void ApplyEffect(TMCardController cardController)
+        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            cardController.TurnEndedState = () =>
+            _dropEffect.ForEach(effect => effect.ApplyEffect(controller, this));
+            controller.OnTurnEndedEvent.RemoveAllToAddListener(() =>
             {
-                _dropEffect.ForEach(cardEffect => cardEffect.ApplyEffect(cardController));
-                TMCardGameManager.Instance.DisposeCard(cardController);
-            };
+                OnEffectEvent.Invoke();
+                TMCardGameManager.Instance.DisposeCard(controller);
+            });
         }
 
         public void Initialize(DropEffectCreator effectCreator)

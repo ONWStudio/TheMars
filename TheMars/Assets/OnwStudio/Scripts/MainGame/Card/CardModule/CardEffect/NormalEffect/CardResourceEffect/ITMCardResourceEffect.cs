@@ -13,6 +13,6 @@ namespace TMCard.Effect.Resource
         /// </summary>
         /// <param name="controller"></param>
         /// <param name="addtionalAmount"></param>
-        void OnResourceEffect(TMCardController controller, int addtionalAmount = 0);
+        void AddRequiredResource(int addtionalAmount);
     }
 }

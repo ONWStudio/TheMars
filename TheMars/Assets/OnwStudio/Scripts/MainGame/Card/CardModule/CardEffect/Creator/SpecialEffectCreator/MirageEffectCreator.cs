@@ -7,8 +7,8 @@ namespace TMCard.Effect
 {
     using static ITMEffectCreator;
 
-    [SerializeReferenceDropdownName("½Å±â·ç"), Substitution("½Å±â·ç")]
-    public sealed class MirageEffectCreator : ITMEffectCreator
+    [SerializeReferenceDropdownName("(íŠ¹ìˆ˜) ì‹ ê¸°ë£¨"), Substitution("ì‹ ê¸°ë£¨")]
+    public sealed class MirageEffectCreator : ITMSpecialEffectCreator
     {
         public ITMCardEffect CreateEffect()
         {

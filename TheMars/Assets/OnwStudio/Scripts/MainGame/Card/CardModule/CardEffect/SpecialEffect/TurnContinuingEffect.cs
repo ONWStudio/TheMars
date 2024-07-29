@@ -18,9 +18,9 @@ namespace TMCard.Effect
 
         public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("지속(턴)");
 
-        public void ApplyEffect(TMCardController cardController)
+        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            cardController.UseState = () => TMCardGameManager.Instance.OnContinuingTurns(cardController, ContinuingTurn);
+            controller.OnClickEvent.RemoveAllToAddListener(() => TMCardGameManager.Instance.OnContinuingTurns(controller, ContinuingTurn));
         }
 
         public void Initialize(TurnContinuingEffectCreator effectCreator)

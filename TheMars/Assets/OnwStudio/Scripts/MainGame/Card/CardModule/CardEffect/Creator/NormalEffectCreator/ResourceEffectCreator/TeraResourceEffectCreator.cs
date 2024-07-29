@@ -8,10 +8,10 @@ namespace TMCard.Effect.Resource
 {
     using static ITMEffectCreator;
 
-    [SerializeReferenceDropdownName("ÀÚ¿ø È¹µæ (Å×¶ó)")]
+    [SerializeReferenceDropdownName("ìì› íšë“ (í…Œë¼)")]
     public sealed class TeraResourceEffectCreator : IResourceEffectCreator
     {
-        [field: SerializeField, DisplayAs("¼Ò¸ğ ÀçÈ­"), Tooltip("¼Ò¸ğ ÀçÈ­")] public int Amount { get; private set; } 
+        [field: SerializeField, DisplayAs("íšë“ëŸ‰"), Tooltip("í…Œë¼")] public int Amount { get; private set; } 
 
         public ITMCardEffect CreateEffect()
         {

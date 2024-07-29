@@ -12,10 +12,9 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 설치
     /// </summary>
-    [SerializeReferenceDropdownName("설치"), Substitution("설치")]
     public sealed class InstallationEffect : ITMCardSpecialEffect
     {
-        private class EventValuePair
+        private sealed class EventValuePair
         {
             public int Stack
             {
@@ -28,25 +27,18 @@ namespace TMCard.Effect
             }
 
             public Action<int> OnUpdateStack { get; set; } = null;
-
             private int _stack = 0;
         }
 
-        // .. UI에 알려주기
-        private static readonly Dictionary<string, EventValuePair> _cardStack = new();
         public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("설치");
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void initialize()
-        {
-            _cardStack.Clear();
-        }
+        // .. UI에 알려주기
+        private static readonly Dictionary<string, EventValuePair> _cardStack = new();
 
-        public void ApplyEffect(TMCardController cardController)
+        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            // .. 효과 발동없이 화면 중앙 이동 후 무덤 이동 (무덤 이동은 카드 기본 효과이므로 생략)
-            cardController.UseState = () => onEffect(cardController);
-            cardController.DrawEndedState = () => onDraw(cardController);
+            controller.OnClickEvent.RemoveAllToAddListener(() => onEffect(controller));
+            controller.OnDrawEndedEvent.RemoveAllToAddListener(() => onDraw(controller));
         }
 
         public static void AddListenerOnUpdateStack(string cardName, Action<int> onUpdateStack)
@@ -86,17 +78,16 @@ namespace TMCard.Effect
             }
 
             eventValuePair.Stack++;
-
             TMCardGameManager.Instance.MoveToTomb(cardController);
         }
 
-        private void onDraw(TMCardController cardController)
+        private void onDraw(TMCardController controller)
         {
-            if (!_cardStack.ContainsKey(cardController.CardData.CardName) || _cardStack[cardController.CardData.CardName].Stack <= 0) return;
+            if (!_cardStack.ContainsKey(controller.CardData.CardName) || _cardStack[controller.CardData.CardName].Stack <= 0) return;
 
-            _cardStack[cardController.CardData.CardName].Stack--;
-            cardController.CardData.ApplyEffect(cardController);
-            TMCardGameManager.Instance.DrawUse(cardController);
+            _cardStack[controller.CardData.CardName].Stack--;
+            controller.OnEffectEvent.Invoke();
+            TMCardGameManager.Instance.DrawUse(controller);
         }
     }
 }

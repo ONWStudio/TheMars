@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using TMCard.Effect;
 using UnityEngine;
 
-namespace TMCard.Efffect
+namespace TMCard.Effect
 {
     using static ITMEffectCreator;
 
-    [SerializeReferenceDropdownName("�ݺ�"), Substitution("�ݺ�")]
-    public sealed class RepeatEffectCreator : ITMEffectCreator
+    [SerializeReferenceDropdownName("(특수) 반복"), Substitution("반복")]
+    public sealed class RepeatEffectCreator : ITMSpecialEffectCreator
     {
         public ITMCardEffect CreateEffect()
         {

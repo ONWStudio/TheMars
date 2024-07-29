@@ -6,7 +6,7 @@ namespace TMCard.Effect
 {
     using static ITMEffectCreator;
 
-    [SerializeReferenceDropdownName("Ä«µå Á¦°Å")]
+    [SerializeReferenceDropdownName("ì¹´ë“œ ì œê±°")]
     public sealed class TMCardRemoveEffectCreator : ITMNormalEffectCreator
     {
         public ITMCardEffect CreateEffect()

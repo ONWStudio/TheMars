@@ -18,52 +18,132 @@ MonoBehaviour:
     - Key: "\uC77C\uD68C\uC6A9"
       Value:
         <Names>k__BackingField:
-          _serializedList: []
+          _serializedList:
+          - Key: en-US
+            Value: Disposable
+          - Key: ko-KR
+            Value: "\uC77C\uD68C\uC6A9"
     - Key: "\uB4DC\uB85C\uC6B0"
       Value:
         <Names>k__BackingField:
-          _serializedList: []
+          _serializedList:
+          - Key: en-US
+            Value: Draw
+          - Key: ko-KR
+            Value: "\uB4DC\uB85C\uC6B0"
     - Key: "\uBC84\uB9AC\uAE30"
       Value:
         <Names>k__BackingField:
-          _serializedList: []
+          _serializedList:
+          - Key: en-US
+            Value: Drop
+          - Key: ko-KR
+            Value: "\uBC84\uB9AC\uAE30"
     - Key: "\uBCF4\uC720"
       Value:
         <Names>k__BackingField:
-          _serializedList: []
+          _serializedList:
+          - Key: en-US
+            Value: Hold
+          - Key: ko-KR
+            Value: "\uBCF4\uC720"
     - Key: "\uC124\uCE58"
       Value:
         <Names>k__BackingField:
-          _serializedList: []
+          _serializedList:
+          - Key: en-US
+            Value: Installation
+          - Key: ko-KR
+            Value: "\uC124\uCE58"
     - Key: "\uC2E0\uAE30\uB8E8"
       Value:
         <Names>k__BackingField:
-          _serializedList: []
+          _serializedList:
+          - Key: en-US
+            Value: Mirage
+          - Key: ko-KR
+            Value: "\uC2E0\uAE30\uB8E8"
     - Key: "\uC7AC\uD65C\uC6A9"
       Value:
         <Names>k__BackingField:
-          _serializedList: []
+          _serializedList:
+          - Key: en-US
+            Value: Recycling
+          - Key: ko-KR
+            Value: "\uC7AC\uD65C\uC6A9"
     - Key: "\uBC18\uBCF5"
       Value:
         <Names>k__BackingField:
-          _serializedList: []
+          _serializedList:
+          - Key: en-US
+            Value: Repeat
+          - Key: ko-KR
+            Value: "\uBC18\uBCF5"
     - Key: "\uC9C0\uC18D(\uC2DC\uAC04)"
       Value:
         <Names>k__BackingField:
-          _serializedList: []
+          _serializedList:
+          - Key: en-US
+            Value: TimeContinuing
+          - Key: ko-KR
+            Value: "\uC9C0\uC18D (\uC2DC\uAC04)"
     - Key: "\uC18C\uC694(\uC2DC\uAC04)"
       Value:
         <Names>k__BackingField:
-          _serializedList: []
+          _serializedList:
+          - Key: en-US
+            Value: TimeDelay
+          - Key: ko-KR
+            Value: "\uC18C\uC694 (\uC2DC\uAC04)"
     - Key: "\uC9C0\uC18D(\uD134)"
       Value:
         <Names>k__BackingField:
-          _serializedList: []
+          _serializedList:
+          - Key: en-US
+            Value: TurnContinuing
+          - Key: ko-KR
+            Value: "\uC9C0\uC18D (\uD134)"
     - Key: "\uC18C\uC694(\uD134)"
       Value:
         <Names>k__BackingField:
-          _serializedList: []
+          _serializedList:
+          - Key: en-US
+            Value: TurnDelay
+          - Key: ko-KR
+            Value: "\uC18C\uC694 (\uD134)"
   _cardNames:
-    _serializedList: []
-  _cardDescription:
-    _serializedList: []
+    _serializedList:
+    - Key: Card_No.1
+      Value:
+        <Names>k__BackingField:
+          _serializedList:
+          - Key: en-US
+            Value: some
+          - Key: ko-KR
+            Value: "\uCE74\uB4DC 1"
+    - Key: Card_No.2
+      Value:
+        <Names>k__BackingField:
+          _serializedList:
+          - Key: en-US
+            Value: somesome
+          - Key: ko-KR
+            Value: "\uCE74\uB4DC_2"
+  _cardDescriptions:
+    _serializedList:
+    - Key: Card_No.1
+      Value:
+        <Names>k__BackingField:
+          _serializedList:
+          - Key: en-US
+            Value: 
+          - Key: ko-KR
+            Value: 
+    - Key: Card_No.2
+      Value:
+        <Names>k__BackingField:
+          _serializedList:
+          - Key: en-US
+            Value: 
+          - Key: ko-KR
+            Value: 

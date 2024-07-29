@@ -14,13 +14,14 @@ namespace TMCard.Effect
     {
         public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("일회용");
 
-        public void ApplyEffect(TMCardController cardController)
+        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            //cardController.UseState = () =>
-            //{
-            //    cardController.CardData.ApplyEffect();
-            //    TMCardGameManager.Instance.DisposeCard(cardController);
-            //};
+            controller.OnClickEvent.RemoveAllListener();
+            controller.OnClickEvent.AddListener(() =>
+            {
+                trigger.OnEffectEvent.Invoke();
+                TMCardGameManager.Instance.DisposeCard(controller);
+            });
         }
     }
 }

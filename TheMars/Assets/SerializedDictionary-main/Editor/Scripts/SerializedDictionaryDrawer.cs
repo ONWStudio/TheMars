@@ -55,8 +55,6 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            Debug.Log(property);
-
             return _arrayData.TryGetValue(property.propertyPath, out SerializedDictionaryInstanceDrawer drawer) ? drawer.GetPropertyHeight(label) : 0;
         }
     }

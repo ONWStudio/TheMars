@@ -9,17 +9,17 @@ namespace TMCard.Effect
 {
     using static ITMEffectCreator;
 
-    [SerializeReferenceDropdownName("º¸À¯"), Substitution("º¸À¯")]
-    public sealed partial class HoldEffectCreator : ITMEffectCreator
+    [SerializeReferenceDropdownName("(íŠ¹ìˆ˜) ë³´ìœ "), Substitution("ë³´ìœ ")]
+    public sealed partial class HoldEffectCreator : ITMSpecialEffectCreator
     {
         public IEnumerable<ITMNormalEffect> NormalEffects => _holdEffects
             .Select(creator => creator.CreateEffect())
             .OfType<ITMNormalEffect>();
 
-        [field: SerializeField, FormerlySerializedAs("<FriendlyCard>k__BackingField"), DisplayAs("¹ßµ¿ Æ®¸®°Å Ä«µå"), Tooltip("º¸À¯ È¿°ú°¡ ¹ßµ¿ÇÒ¶§ ÂüÁ¶ÇÒ Ä«µå ID")]
+        [field: SerializeField, FormerlySerializedAs("<FriendlyCard>k__BackingField"), DisplayAs("íŠ¸ë¦¬ê±° ì¹´ë“œ"), Tooltip("ë³´ìœ  íš¨ê³¼ì˜ íŠ¸ë¦¬ê±°ê°€ ë  ì¹´ë“œ")]
         public TMCardData FriendlyCard { get; private set; } = null;
 
-        [SerializeReference, FormerlySerializedAs("_holdEffects"), DisplayAs("º¸À¯ È¿°ú"), Tooltip("º¸À¯ È¿°ú"), SerializeReferenceDropdown]
+        [SerializeReference, FormerlySerializedAs("_holdEffects"), DisplayAs("ë³´ìœ  íš¨ê³¼"), Tooltip("ë³´ìœ  íš¨ê³¼"), SerializeReferenceDropdown]
         private List<ITMNormalEffectCreator> _holdEffects = new();
 
         public ITMCardEffect CreateEffect()
