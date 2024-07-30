@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: 22029da3c916f4a938a24712fc25be19
   m_SerializeEntries:
   - m_GUID: 9b81cfbae8e274bdbbbf27325dc0a09a
-    m_Address: CardSpecialName_en
+    m_Address: CardSpecialEffectName_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

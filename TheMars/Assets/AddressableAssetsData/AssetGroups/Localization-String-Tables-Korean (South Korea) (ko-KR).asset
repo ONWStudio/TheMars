@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: b42fd829c56f845b18e06561430d34fb
   m_SerializeEntries:
   - m_GUID: 3795ef49bb841410ca8e1f58d47ad42b
-    m_Address: CardSpecialName_ko-KR
+    m_Address: CardSpecialEffectName_ko-KR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko-KR
