@@ -17,14 +17,14 @@ namespace TMCard.Effect
     /// </summary>
     public sealed class RepeatEffect : ITMCardSpecialEffect
     {
-        public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("반복");
+        public string Label => "Repeat";
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             controller.OnClickEvent.RemoveAllToAddListener(() =>
             {
                 trigger.OnEffectEvent.Invoke();
-                controller.ResourceEffects.ForEach(resourceEffect => resourceEffect.AddRequiredResource(resourceEffect.Amount));
+                controller.ResourceEffects.ForEach(resourceEffect => resourceEffect.AddRewardResource(resourceEffect.Amount));
                 TMCardGameManager.Instance.MoveToScreenCenterAfterToTomb(controller);
             });
         }

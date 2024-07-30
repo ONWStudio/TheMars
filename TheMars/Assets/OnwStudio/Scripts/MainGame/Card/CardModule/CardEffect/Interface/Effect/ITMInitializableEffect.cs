@@ -1,18 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMCard.Effect;
 using UnityEngine;
 
-public class ITMInitializableEffect : MonoBehaviour
+namespace TMCard.Effect
 {
-    // Start is called before the first frame update
-    void Start()
+    public interface ITMInitializableEffect<T> where T : ITMEffectCreator
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        void Initialize(T effectCreator);
     }
 }

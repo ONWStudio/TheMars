@@ -104,10 +104,11 @@ namespace Onw.Attribute.Editor
             {
                 var rootItem = createItem(_rootObject, 0);
 
+                Dictionary<GameObject, TreeViewItem> visited = new() { { _rootObject, rootItem } };
                 foreach (Component component in _rootObject.GetComponentsInChildren(_filterType))
                 {
                     _itemsMap.Add(component.gameObject.GetHashCode(), component.gameObject);
-                    addComponentToDropdown(component.gameObject, new() { { _rootObject, rootItem } });
+                    addComponentToDropdown(component.gameObject, visited);
                 }
 
                 setDepth(rootItem);
@@ -208,6 +209,7 @@ namespace Onw.Attribute.Editor
             }
 
             var gameObjectItem = createItem(selectedObject, 0);
+            visited.Add(selectedObject, gameObjectItem);
             if (prevItem is not null)
             {
                 gameObjectItem.AddChild(prevItem);

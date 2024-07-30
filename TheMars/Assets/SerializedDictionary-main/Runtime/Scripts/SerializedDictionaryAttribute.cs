@@ -18,6 +18,10 @@ namespace AYellowpaper.SerializedCollections
         /// </summary>
         public readonly string ValueName;
         /// <summary>
+        /// .. 페이징을 시킬 카운트 5일 경우 내부 요소가 5씩 증가할때마다 페이지 증가
+        /// </summary>
+        public readonly int PagingCount;
+        /// <summary>
         /// .. 직렬화 딕셔너리의 키가 읽기 전용인가? (인스펙터만 적용)
         /// </summary>
         public readonly bool IsReadOnlyKey;

@@ -30,7 +30,7 @@ namespace TMCard.Effect
             private int _stack = 0;
         }
 
-        public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("설치");
+        public string Label => "Installation";
 
         // .. UI에 알려주기
         private static readonly Dictionary<string, EventValuePair> _cardStack = new();
@@ -69,23 +69,23 @@ namespace TMCard.Effect
             eventValuePair.OnUpdateStack = null;
         }
 
-        private void onEffect(TMCardController cardController)
+        private void onEffect(TMCardController controller)
         {
-            if (!_cardStack.TryGetValue(cardController.CardData.CardName, out EventValuePair eventValuePair))
+            if (!_cardStack.TryGetValue(controller.CardData.GetInstanceID().ToString(), out EventValuePair eventValuePair))
             {
                 eventValuePair = new();
-                _cardStack.Add(cardController.CardData.CardName, eventValuePair);
+                _cardStack.Add(controller.CardData.GetInstanceID().ToString(), eventValuePair);
             }
 
             eventValuePair.Stack++;
-            TMCardGameManager.Instance.MoveToTomb(cardController);
+            TMCardGameManager.Instance.MoveToTomb(controller);
         }
 
         private void onDraw(TMCardController controller)
         {
-            if (!_cardStack.ContainsKey(controller.CardData.CardName) || _cardStack[controller.CardData.CardName].Stack <= 0) return;
+            if (!_cardStack.TryGetValue(controller.CardData.GetInstanceID().ToString(), out EventValuePair eventValuePair) || eventValuePair.Stack <= 0) return;
 
-            _cardStack[controller.CardData.CardName].Stack--;
+            eventValuePair.Stack--;
             controller.OnEffectEvent.Invoke();
             TMCardGameManager.Instance.DrawUse(controller);
         }

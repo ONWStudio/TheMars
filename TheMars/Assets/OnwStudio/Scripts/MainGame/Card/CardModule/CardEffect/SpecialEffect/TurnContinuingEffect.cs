@@ -16,7 +16,7 @@ namespace TMCard.Effect
         /// </summary>
         [field: SerializeField, DisplayAs("지속 턴")] public int ContinuingTurn { get; private set; } = 1;
 
-        public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("지속(턴)");
+        public string Label => "TurnContinuing";
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {

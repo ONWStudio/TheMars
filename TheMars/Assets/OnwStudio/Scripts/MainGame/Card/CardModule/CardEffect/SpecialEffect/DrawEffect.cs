@@ -13,9 +13,9 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 드로우
     /// </summary>
-    public sealed class DrawEffect : ITMCardSpecialEffect, ITMInitializableEffect<DrawEffectCreator>, ITMEffectTrigger
+    public sealed class DrawEffect : ITMCardSpecialEffect, ITMCardEffect, ITMInitializableEffect<DrawEffectCreator>, ITMEffectTrigger
     {
-        public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("드로우");
+        public string Label => "Draw";
 
         public CardEvent OnEffectEvent { get; } = new();
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TM;
 using TMCard.Runtime;
 using Onw.Attribute;
 
@@ -19,12 +20,13 @@ namespace TMCard.Effect.Resource
         {
             trigger.OnEffectEvent.AddListener(() =>
             {
+                PlayerManager.Instance.MarsLithum += Amount;
                 Debug.Log(Amount);
                 Debug.Log("마르스 리튬 획득");
             });
         }
 
-        public void AddRequiredResource(int addtionalAmount)
+        public void AddRewardResource(int addtionalAmount)
         {
             Amount += addtionalAmount;
         }

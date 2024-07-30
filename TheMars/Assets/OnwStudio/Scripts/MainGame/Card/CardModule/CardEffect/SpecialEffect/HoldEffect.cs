@@ -16,7 +16,7 @@ namespace TMCard.Effect
 
         private readonly List<ITMNormalEffect> _holdEffects = new();
 
-        public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("보유");
+        public string Label => "Hold";
 
         public CardEvent OnEffectEvent { get; } = new();
 
@@ -43,7 +43,7 @@ namespace TMCard.Effect
                     return;
                 }
 
-                if (controller.OnField && _friendlyCard.Guid == usedCard.CardData.Guid)
+                if (controller.OnField && _friendlyCard.GetInstanceID() == usedCard.CardData.GetInstanceID())
                 {
                     OnEffectEvent.Invoke();
                     Debug.Log("보유 효과 발동");

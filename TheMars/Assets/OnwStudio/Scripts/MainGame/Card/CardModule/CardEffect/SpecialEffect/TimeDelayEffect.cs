@@ -15,7 +15,7 @@ namespace TMCard.Effect
         /// </summary>
         [field: SerializeField, DisplayAs("딜레이 시간 (초)"), ReadOnly] public float DelayTime { get; private set; } = 1f;
 
-        public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("소요(시간)");
+        public string Label => "TimeDelay";
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {

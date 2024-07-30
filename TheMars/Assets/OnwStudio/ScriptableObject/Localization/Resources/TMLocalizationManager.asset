@@ -111,6 +111,8 @@ MonoBehaviour:
             Value: TurnDelay
           - Key: ko-KR
             Value: "\uC18C\uC694 (\uD134)"
+  _effectDescriptions:
+    _serializedList: []
   _cardNames:
     _serializedList:
     - Key: Card_No.1
@@ -129,6 +131,14 @@ MonoBehaviour:
             Value: somesome
           - Key: ko-KR
             Value: "\uCE74\uB4DC_2"
+    - Key: Card_No.3
+      Value:
+        <Names>k__BackingField:
+          _serializedList:
+          - Key: en-US
+            Value: 
+          - Key: ko-KR
+            Value: 
   _cardDescriptions:
     _serializedList:
     - Key: Card_No.1
@@ -140,6 +150,14 @@ MonoBehaviour:
           - Key: ko-KR
             Value: 
     - Key: Card_No.2
+      Value:
+        <Names>k__BackingField:
+          _serializedList:
+          - Key: en-US
+            Value: 
+          - Key: ko-KR
+            Value: 
+    - Key: Card_No.3
       Value:
         <Names>k__BackingField:
           _serializedList:

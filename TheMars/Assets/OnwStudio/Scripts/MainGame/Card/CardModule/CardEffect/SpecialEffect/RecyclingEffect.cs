@@ -12,7 +12,7 @@ namespace TMCard.Effect
     /// </summary>
     public sealed class RecyclingEffect : ITMCardSpecialEffect
     {
-        public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("재활용");
+        public string Label => "Recycling";
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {

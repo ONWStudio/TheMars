@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Onw.Attribute;
-using TMCard;
 using TMCard.Runtime;
+using UnityEngine.Localization;
 
 namespace TMCard.Effect
 {
     /// <summary>
     /// .. 일회용
     /// </summary>
-    public sealed class DisposableEffect : ITMCardSpecialEffect
+    public sealed class DisposableEffect : ITMCardSpecialEffect, ITMCardEffect
     {
-        public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("일회용");
+        public string Label => "Disposable";
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {

@@ -7,7 +7,6 @@ using TMPro;
 using Onw.Attribute;
 using Onw.Extensions;
 using Onw.UI;
-using TMCard.Manager;
 using TMCard.AddtionalCondition;
 using TMCard.Effect;
 using TMCard.Effect.Resource;

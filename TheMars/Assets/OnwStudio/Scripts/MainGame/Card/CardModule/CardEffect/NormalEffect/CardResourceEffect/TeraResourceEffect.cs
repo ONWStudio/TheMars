@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Onw.Attribute;
+using TM;
 using TMCard.Runtime;
 
 namespace TMCard.Effect.Resource
@@ -17,11 +18,15 @@ namespace TMCard.Effect.Resource
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            Debug.Log(Amount);
-            Debug.Log("테라 획득");
+            trigger.OnEffectEvent.AddListener(() =>
+            {
+                PlayerManager.Instance.Tera += Amount;
+                Debug.Log(Amount);
+                Debug.Log("테라 획득");
+            });
         }
 
-        public void AddRequiredResource(int addtionalAmount)
+        public void AddRewardResource(int addtionalAmount)
         {
             Amount += addtionalAmount;
         }

@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: CardSpecialEffectName_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: f9544d03681cc42339e5f4ce22e52167, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 107444428800
+    m_Localized: Disposable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 233806225408
+    m_Localized: Recycling
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5087748415488
+    m_Localized: Mirage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5196720627712
+    m_Localized: Draw
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5377419632640
+    m_Localized: TimeDelay
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5473599217664
+    m_Localized: TurnDelay
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5703585488896
+    m_Localized: TimeContinuing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5783252099072
+    m_Localized: TurnContinuing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5893545517056
+    m_Localized: Installation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5954027380736
+    m_Localized: Repeat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6003570499584
+    m_Localized: Drop
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

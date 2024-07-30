@@ -22,14 +22,18 @@ MonoBehaviour:
   <CardGroup>k__BackingField: 0
   <CardImage>k__BackingField: {fileID: 21300000, guid: 5f446478856344afd9446c118f164af7,
     type: 3}
-  _specialEffect:
-  - rid: 2707483011783327802
-  _cardEffects: []
+  <IsCustomDescription>k__BackingField: 
+  _effectCreators:
+  - rid: 2707483192642240513
+  - rid: 2707483192642240514
   _addtionalConditions: []
   references:
     version: 2
     RefIds:
-    - rid: 2707483011783327802
-      type: {class: DropCard, ns: TMCard.SpecialEffect, asm: AssemblyTheMars}
+    - rid: 2707483192642240513
+      type: {class: RecyclingEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+      data: 
+    - rid: 2707483192642240514
+      type: {class: DropEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
       data:
-        _cardEffects: []
+        _cardEffectCreators: []

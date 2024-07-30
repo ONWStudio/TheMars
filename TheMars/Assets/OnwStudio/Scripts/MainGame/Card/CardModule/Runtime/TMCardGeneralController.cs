@@ -21,37 +21,27 @@ namespace TMCard.Runtime
         [SerializeField, InitializeRequireComponent] private TMCardViewer _cardViewer;
 
         private TMCardData _cardData = null;
-        private readonly CompositeDisposable _disposables = new();
 
-        private void initializeReactiveProperties()
+        private void Start()
         {
-            observe(cardData => cardData.CardName, _ => { });
-            observe(cardData => cardData.Description, _ => { });
-            observe(cardData => cardData.CardImage, _ => { });
-            observe(cardData => cardData.Resource, _ => { });
-
-            void observe<T>(Func<TMCardData, T> selector, Action<T> action)
+            if (_cardController.CardData)
             {
-                if (!_cardData) return;
-
+                SetCardData(_cardController.CardData);
+            }
+            else
+            {
                 this
-                    .ObserveEveryValueChanged(_ => selector.Invoke(_cardData))
-                    .Subscribe(action)
-                    .AddTo(_disposables);
+                    .ObserveEveryValueChanged(controller => _cardController.CardData)
+                    .Take(1)
+                    .Subscribe(SetCardData)
+                    .AddTo(this);
             }
         }
 
         public void SetCardData(TMCardData cardData)
         {
-            if (Application.isPlaying && _cardData) return;
-
             _cardData = cardData;
-            initializeReactiveProperties();
-        }
-
-        private void OnDestroy()
-        {
-            _disposables.Dispose();
+            _cardViewer.SetUI(_cardController);
         }
     }
 }

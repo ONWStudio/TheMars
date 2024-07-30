@@ -16,7 +16,7 @@ namespace TMCard.Effect
         /// </summary>
         [field: SerializeField, ReadOnly] public float ContinuingTime { get; private set; } = 1f;
 
-        public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("지속(시간)");
+        public string Label => "TimeContinuing";
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {

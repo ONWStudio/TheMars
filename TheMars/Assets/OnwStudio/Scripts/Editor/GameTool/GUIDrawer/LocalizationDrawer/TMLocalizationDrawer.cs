@@ -26,8 +26,8 @@ namespace TMGUITool
 
             public void OnDraw()
             {
-                _scrollViewController
-                    .ActionScrollSpace(() => OnInspectorGUI(TMLocalizationManager.Instance));
+                //_scrollViewController
+                //    .ActionScrollSpace(() => OnInspectorGUI(Onw.Instance));
             }
         }
     }

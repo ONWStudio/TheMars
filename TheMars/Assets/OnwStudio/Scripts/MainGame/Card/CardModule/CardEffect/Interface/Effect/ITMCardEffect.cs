@@ -5,7 +5,6 @@ using TMCard.Runtime;
 
 namespace TMCard.Effect
 {
-
     public interface ITMCardEffect
     {
         /// <summary>
@@ -14,8 +13,4 @@ namespace TMCard.Effect
         void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger);
     }
 
-    public interface ITMInitializableEffect<T> where T : ITMEffectCreator
-    {
-        void Initialize(T effectCreator);
-    }
 }

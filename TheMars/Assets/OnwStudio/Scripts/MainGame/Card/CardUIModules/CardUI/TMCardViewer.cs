@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization;
 using TMPro;
 using Onw.Attribute;
 using Onw.Extensions;
@@ -15,10 +17,11 @@ namespace TMCard.Runtime
     {
         [Header("Image")]
         [SerializeField, SelectableSerializeField] private Image _cardImage = null;
-        [SerializeField, InitializeRequireComponent] private Image _backgroundImage = null;
+        [SerializeField, SelectableSerializeField] private Image _backgroundImage = null;
 
         //[Header("Descriptor")]
         //[SerializeField, SelectableSerializeField] private TMCardDescriptor _descriptor;
+        [Header("Effect Field")]
         [SerializeField, SelectableSerializeField] private RectTransform _effectField = null;
 
         private bool _isInit = false;
@@ -44,14 +47,9 @@ namespace TMCard.Runtime
 
             var args = controller.EffectArgs;
 
-            Debug.Log("Set UI");
-            args
-                .Where(effectArg => !effectArg.HasLabel)
-                .ForEach(effectArg => createEffectUI(_effectField, false, effectArg));
-
-            args
-                .Where(effectArg => effectArg.HasLabel)
-                .ForEach(effectArg => createEffectUI(_effectField, true, effectArg));
+            controller
+                .EffectArgs
+                .ForEach(effectArg => createEffectUI(_effectField, effectArg.HasLabel, effectArg));
 
             static void createEffectUI(Transform effectField, bool hasLabel, TMCardEffectArgs effectArg)
             {
@@ -63,10 +61,14 @@ namespace TMCard.Runtime
                 if (hasLabel)
                 {
                     GameObject labelObject = new("Label Object");
+                    LocalizeStringEvent localizeStringEvent = labelObject.AddComponent<LocalizeStringEvent>();
+                    localizeStringEvent.SetTable("CardSpecialEffectName");
                     labelObject.AddComponent<RectTransform>();
                     labelObject.transform.SetParent(effectUIObject.transform, false);
                     TextMeshProUGUI labelText = labelObject.AddComponent<TextMeshProUGUI>();
-                    labelText.text = effectArg.Label;
+                    localizeStringEvent.SetEntry(effectArg.Label);
+                    localizeStringEvent.OnUpdateString.AddListener(text => labelText.text = text);
+                    localizeStringEvent.RefreshString();
                     labelText.color = Color.red;
                 }
 

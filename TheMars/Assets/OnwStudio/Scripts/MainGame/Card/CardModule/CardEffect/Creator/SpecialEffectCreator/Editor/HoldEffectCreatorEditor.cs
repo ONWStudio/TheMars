@@ -25,10 +25,11 @@ namespace TMCard.Effect
                 {
                     foreach (ITMEffectCreator cardSpecialEffect in specialEffects)
                     {
-                        if (cardSpecialEffect is not HoldEffectCreator holdCard || holdCard != this) continue;
+                        if (cardSpecialEffect is not HoldEffectCreator holdCard || holdCard != this || FriendlyCard != cardData) continue;
 
-                        Debug.LogWarning("º¸À¯ È¿°úÀÇ Ä«µå´Â ÀÚ±â ÀÚ½ÅÀ» Æ®¸®°Å Ä«µå·Î ÁöÁ¤ÇÒ ¼ö ¾ø½À´Ï´Ù");
+                        Debug.LogWarning("ë³´ìœ  íš¨ê³¼ì˜ ì¹´ë“œëŠ” ìê¸° ìì‹ ì„ íŠ¸ë¦¬ê±°ë¡œ ì¹´ë“œë¡œ ì§€ì •í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤");
                         FriendlyCard = null;
+                        return;
                     }
                 }
             }

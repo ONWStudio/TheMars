@@ -12,7 +12,7 @@ namespace TMCard.Effect
     /// </summary>
     public sealed class MirageEffect : ITMCardSpecialEffect
     {
-        public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("신기루");
+        public string Label => "Mirage";
 
         public void ApplyEffect(TMCardController cardController)
         {

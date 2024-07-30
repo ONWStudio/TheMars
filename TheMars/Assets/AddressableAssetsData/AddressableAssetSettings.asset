@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 5c7f4d8a09da64846bbd349816a81786
   m_currentHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: 7dba0c25353450ae54687ff544e1b4af
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -47,6 +47,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 40b0ebb2126894056bc1175b6e069520, type: 2}
   - {fileID: 11400000, guid: bf47dcc74b3d34396a32c6bdf8b30968, type: 2}
   - {fileID: 11400000, guid: 8caff715e54324cbf8f02ef30252864a, type: 2}
+  - {fileID: 11400000, guid: 23484df2eff2346fcb670977754dd84b, type: 2}
+  - {fileID: 11400000, guid: 6f35a6b20ba824683b37b5e4078d57d1, type: 2}
+  - {fileID: 11400000, guid: a74251ac960eb48039123bcb11b1c778, type: 2}
+  - {fileID: 11400000, guid: 608d55f62b6804740a6acf5922553155, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -89,6 +93,9 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - TMCardData
+    - Locale
+    - Locale-en
+    - Locale-ko-KR
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: cecc78280af604956bb8154b8ee40b95, type: 2}

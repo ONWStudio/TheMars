@@ -1,5 +1,80 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &376730036375333192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5399077774927552157}
+  - component: {fileID: 3413884528145921065}
+  - component: {fileID: 3251446557581205986}
+  m_Layer: 5
+  m_Name: CardImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5399077774927552157
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376730036375333192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5303476956876019993}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000005722, y: 75.36}
+  m_SizeDelta: {x: 186.94, y: 133.29}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3413884528145921065
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376730036375333192}
+  m_CullTransparentMesh: 1
+--- !u!114 &3251446557581205986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376730036375333192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1453917086621522708
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,7 +110,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1255000191441709847}
   - {fileID: 5303476956876019993}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -65,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -108,13 +182,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CardData>k__BackingField: {fileID: 0}
   <EventSender>k__BackingField: {fileID: 8381949205591957350}
-  <InputHandler>k__BackingField: {fileID: 6932311871222619316}
   <OnField>k__BackingField: 0
   <OnCard>k__BackingField: 0
   <OnChangedParent>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
   <RectTransform>k__BackingField: {fileID: 6485339371614455860}
+  _inputHandler: {fileID: 6932311871222619316}
   _smoothMove: {fileID: 2790600352443847834}
 --- !u!114 &8381949205591957350
 MonoBehaviour:
@@ -152,9 +226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac3771cc95724a378b358fe0afab8b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardNameText: {fileID: 0}
-  _cardImage: {fileID: 1242621844710434452}
-  _backgroundImage: {fileID: 6760737446521074974}
+  _cardImage: {fileID: 3251446557581205986}
+  _backgroundImage: {fileID: 1242621844710434452}
   _effectField: {fileID: 1255000191441709847}
 --- !u!114 &2209908774391452699
 MonoBehaviour:
@@ -183,7 +256,7 @@ GameObject:
   - component: {fileID: 1242621844710434452}
   - component: {fileID: 2790600352443847834}
   m_Layer: 5
-  m_Name: CardImage
+  m_Name: CardBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,13 +273,15 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5399077774927552157}
+  - {fileID: 1255000191441709847}
   m_Father: {fileID: 6485339371614455860}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.057761908, y: 0.5}
-  m_AnchorMax: {x: 0.947, y: 0.96000004}
-  m_AnchoredPosition: {x: -0.5, y: 0.19999695}
-  m_SizeDelta: {x: -0.05999756, y: 0.3999939}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.0000076293945, y: 0}
+  m_SizeDelta: {x: 0.26000023, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2881209283947717462
 CanvasRenderer:
@@ -293,12 +368,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6485339371614455860}
+  m_Father: {fileID: 5303476956876019993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.053000003, y: 0.053333335}
   m_AnchorMax: {x: 0.947, y: 0.48666668}
   m_AnchoredPosition: {x: -0.0000076293945, y: 0.17999268}
-  m_SizeDelta: {x: -0.79999995, y: 0.37000084}
+  m_SizeDelta: {x: -1.0324371, y: 0.37000084}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9010741079963414924
 CanvasRenderer:

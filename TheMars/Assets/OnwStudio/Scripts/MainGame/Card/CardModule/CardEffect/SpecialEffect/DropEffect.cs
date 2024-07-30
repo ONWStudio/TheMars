@@ -13,7 +13,7 @@ namespace TMCard.Effect
     /// </summary>
     public sealed class DropEffect : ITMCardSpecialEffect, ITMInitializableEffect<DropEffectCreator>, ITMEffectTrigger
     {
-        public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("버리기");
+        public string Label => "Drop";
 
         public CardEvent OnEffectEvent { get; } = new();
 

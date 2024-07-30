@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Onw.Components.Movement;
-using Onw.BehaviorTree;
 using Onw.Extensions;
 using Onw.Interface;
 using Onw.Attribute;
@@ -43,11 +42,8 @@ namespace TMCard.Runtime
         [field: Header("Event Sender")]
         [field: SerializeField, InitializeRequireComponent] public EventSender EventSender { get; private set; } = null;
         /// <summary>
-        /// .. 카드에 사용자 입력을 받아오는 핸들러 입니다
+        /// .. 카드가 현재 손 패 위에 있는지 확인하는 값입니다
         /// </summary>
-        [field: Header("Input Handler")]
-        [field: SerializeField, InitializeRequireComponent] public TMCardInputHandler InputHandler { get; private set; } = null;
-
         [field: Header("State")]
         [field: SerializeField, ReadOnly] public bool OnField { get; set; } = false;
         /// <summary>
@@ -105,6 +101,9 @@ namespace TMCard.Runtime
         public CardEvent OnDrawEndedEvent { get; } = new();
         public CardEvent OnTurnEndedEvent { get; } = new();
         public CardEvent OnEffectEvent { get; } = new();
+
+        [Header("Input Handler")]
+        [SerializeField, InitializeRequireComponent] private TMCardInputHandler _inputHandler = null;
 
         [Space]
         /// <summary>
@@ -198,13 +197,13 @@ namespace TMCard.Runtime
 
         private void initalizeInputHandle()
         {
-            InputHandler.AddListenerPointerEnterAction(pointerEventData =>
+            _inputHandler.AddListenerPointerEnterAction(pointerEventData =>
                 _smoothMove.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f));
 
-            InputHandler.AddListenerPointerExitAction(pointerEventData
+            _inputHandler.AddListenerPointerExitAction(pointerEventData
                 => _smoothMove.TargetPosition = Vector2.zero);
 
-            InputHandler.AddListenerPointerClickAction(onClickCard);
+            _inputHandler.AddListenerPointerClickAction(onClickCard);
         }
 
         /// <summary>

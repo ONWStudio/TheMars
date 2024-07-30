@@ -16,7 +16,7 @@ namespace TMCard.Effect
         /// </summary>
         [field: SerializeField, DisplayAs("소요 턴"), ReadOnly] public int DelayTurn { get; private set; } = 5;
 
-        public string Label => TMLocalizationManager.Instance.GetSpecialEffectLabel("소요(턴)");
+        public string Label => "TurnDelay";
 
         public void Initialize(TurnDelayEffectCreator effectCreator)
         {

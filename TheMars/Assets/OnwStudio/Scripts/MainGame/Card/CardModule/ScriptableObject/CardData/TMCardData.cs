@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.Localization.Tables;
 using Onw.Attribute;
 using Onw.Interface;
 using TMCard.AddtionalCondition;
@@ -11,7 +12,7 @@ using TMCard.Runtime;
 
 namespace TMCard
 {
-    public sealed partial class TMCardData : ScriptableObject, IDescriptable
+    public sealed partial class TMCardData : ScriptableObject
     {
         /// <summary>
         /// .. 카드의 고유 ID
@@ -65,24 +66,10 @@ namespace TMCard
 
         [field: SerializeField, SpritePreview(128f)] public Sprite CardImage { get; private set; } = null;
 
-        /// <summary>
-        /// .. 카드의 고유 이름
-        /// </summary>
-        public string CardName
-            => TMLocalizationManager.Instance.GetCardName(name);
-
-        /// <summary>
-        /// .. 카드 설명
-        /// </summary>
-        public string Description
-            => TMLocalizationManager.Instance.GetDescription(name);
-
         [field: SerializeField, FormerlySerializedAs("<IsCustomDescription>k__BackingField"), DisplayAs("커스텀 설명"), Tooltip("체크 시 기본 설명이 나오지 않습니다")]
         public string IsCustomDescription { get; private set; }
 
-        //[Space]
-        //[SerializeReference, FormerlySerializedAs("_cardEffects"), DisplayAs("카드 효과"), Tooltip("카드 효과 리스트"), SerializeReferenceDropdown]
-        //private List<ITMCardEffect> _cardEffects = new();
+        [field: SerializeField] public StringTable CardName { get; private set; }
 
         [SerializeReference, DisplayAs("카드 효과"), Tooltip("카드 효과 리스트"), SerializeReferenceDropdown]
         private List<ITMEffectCreator> _effectCreators = new();
