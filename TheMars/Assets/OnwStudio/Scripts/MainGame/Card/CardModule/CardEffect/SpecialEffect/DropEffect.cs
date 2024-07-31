@@ -11,15 +11,13 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 버리기
     /// </summary>
-    public sealed class DropEffect : ITMCardSpecialEffect, ITMInitializableEffect<DropEffectCreator>, ITMEffectTrigger
+    public sealed class DropEffect : TMCardSpecialEffect, ITMInitializableEffect<DropEffectCreator>, ITMEffectTrigger
     {
-        public string Label => "Drop";
-
         public CardEvent OnEffectEvent { get; } = new();
 
         private readonly List<ITMNormalEffect> _dropEffect = new();
 
-        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
+        public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             _dropEffect.ForEach(effect => effect.ApplyEffect(controller, this));
             controller.OnTurnEndedEvent.RemoveAllToAddListener(() =>
@@ -33,5 +31,7 @@ namespace TMCard.Effect
         {
             _dropEffect.AddRange(effectCreator.DropEffects);
         }
+
+        public DropEffect() : base("Drop") {}
     }
 }

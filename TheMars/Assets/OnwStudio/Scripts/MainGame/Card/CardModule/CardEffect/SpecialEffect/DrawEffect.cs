@@ -7,16 +7,15 @@ using UnityEngine.Serialization;
 using Onw.Attribute;
 using Onw.Interface;
 using TMCard.Runtime;
+using Onw.Localization;
 
 namespace TMCard.Effect
 {
     /// <summary>
     /// .. 드로우
     /// </summary>
-    public sealed class DrawEffect : ITMCardSpecialEffect, ITMCardEffect, ITMInitializableEffect<DrawEffectCreator>, ITMEffectTrigger
+    public sealed class DrawEffect : TMCardSpecialEffect, ITMInitializableEffect<DrawEffectCreator>, ITMEffectTrigger
     {
-        public string Label => "Draw";
-
         public CardEvent OnEffectEvent { get; } = new();
 
         private readonly List<ITMNormalEffect> _drawEffects = new();
@@ -26,10 +25,12 @@ namespace TMCard.Effect
             _drawEffects.AddRange(effectCreator.DrawEffects);
         }
 
-        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
+        public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             _drawEffects.ForEach(effect => effect.ApplyEffect(controller, this));
             controller.OnDrawEndedEvent.RemoveAllToAddListener(OnEffectEvent.Invoke);
         }
+
+        public DrawEffect() : base("Draw") { }
     }
 }

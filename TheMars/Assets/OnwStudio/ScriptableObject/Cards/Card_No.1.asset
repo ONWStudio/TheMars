@@ -23,14 +23,24 @@ MonoBehaviour:
   <CardImage>k__BackingField: {fileID: 21300000, guid: 4df1ddd2c83f83649b0a1e2444d7461f,
     type: 3}
   <IsCustomDescription>k__BackingField: 
-  <CardName>k__BackingField: {fileID: 11400000, guid: 3795ef49bb841410ca8e1f58d47ad42b,
-    type: 2}
+  <CardName>k__BackingField:
+    _localizedString:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
   _effectCreators:
-  - rid: 2707483170769731584
+  - rid: 2707483215611559948
   _addtionalConditions: []
   references:
     version: 2
     RefIds:
-    - rid: 2707483170769731584
-      type: {class: InstallationEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
-      data: 
+    - rid: 2707483215611559948
+      type: {class: HoldEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+      data:
+        <FriendlyCard>k__BackingField: {fileID: 0}
+        _holdEffects: []

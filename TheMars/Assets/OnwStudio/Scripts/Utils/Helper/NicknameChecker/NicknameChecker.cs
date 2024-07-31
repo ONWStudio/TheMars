@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace Onw.Helpers
+namespace Onw.Helper
 {
     public static class NicknameChecker
     {

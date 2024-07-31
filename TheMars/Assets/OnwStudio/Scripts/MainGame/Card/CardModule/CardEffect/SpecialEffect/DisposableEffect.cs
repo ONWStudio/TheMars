@@ -4,17 +4,16 @@ using UnityEngine;
 using Onw.Attribute;
 using TMCard.Runtime;
 using UnityEngine.Localization;
+using Onw.Localization;
 
 namespace TMCard.Effect
 {
     /// <summary>
     /// .. 일회용
     /// </summary>
-    public sealed class DisposableEffect : ITMCardSpecialEffect, ITMCardEffect
+    public sealed class DisposableEffect : TMCardSpecialEffect
     {
-        public string Label => "Disposable";
-
-        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
+        public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             controller.OnClickEvent.RemoveAllListener();
             controller.OnClickEvent.AddListener(() =>
@@ -23,5 +22,7 @@ namespace TMCard.Effect
                 TMCardGameManager.Instance.DisposeCard(controller);
             });
         }
+
+        public DisposableEffect() : base("Disposable") { }
     }
 }

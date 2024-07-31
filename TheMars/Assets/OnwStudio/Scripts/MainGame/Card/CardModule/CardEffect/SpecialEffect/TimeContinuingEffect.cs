@@ -9,16 +9,14 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 지속 (시간)
     /// </summary>
-    public sealed class TimeContinuingEffect : ITMCardSpecialEffect, ITMInitializableEffect<TimeContinuingEffectCreator>
+    public sealed class TimeContinuingEffect : TMCardSpecialEffect, ITMInitializableEffect<TimeContinuingEffectCreator>
     {
         /// <summary>
         /// .. 지속 시간
         /// </summary>
         [field: SerializeField, ReadOnly] public float ContinuingTime { get; private set; } = 1f;
 
-        public string Label => "TimeContinuing";
-
-        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
+        public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             controller.OnClickEvent.RemoveAllToAddListener(() => TMCardGameManager.Instance.OnContinuingSeconds(
                 controller,
@@ -30,5 +28,7 @@ namespace TMCard.Effect
         {
             ContinuingTime = effectCreator.ContinuingTime;
         }
+
+        public TimeContinuingEffect() : base("TimeContinuing") {}
     }
 }

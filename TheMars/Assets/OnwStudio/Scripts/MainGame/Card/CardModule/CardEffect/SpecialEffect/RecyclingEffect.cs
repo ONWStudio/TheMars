@@ -10,11 +10,9 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 재활용
     /// </summary>
-    public sealed class RecyclingEffect : ITMCardSpecialEffect
+    public sealed class RecyclingEffect : TMCardSpecialEffect
     {
-        public string Label => "Recycling";
-
-        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
+        public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             controller.OnClickEvent.RemoveAllToAddListener(() =>
             {
@@ -22,5 +20,7 @@ namespace TMCard.Effect
                 TMCardGameManager.Instance.RecycleToHand(controller);
             });
         }
+
+        public RecyclingEffect() : base("Recycling") {}
     }
 }

@@ -1,5 +1,5 @@
 
-namespace Onw.Helpers
+namespace Onw.Helper
 {
     public static class ValueHelper
     {

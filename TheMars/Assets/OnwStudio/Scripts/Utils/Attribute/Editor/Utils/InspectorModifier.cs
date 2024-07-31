@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Unity.EditorCoroutines.Editor;
 using UnityEditor;
-using Onw.Helpers;
+using Onw.Helper;
 
 namespace Onw.Editor
 {
@@ -60,7 +60,7 @@ namespace Onw.Editor
 
                 if (rootVisualElementProperty?.GetValue(inspector) is VisualElement rootVisualElement)
                 {
-                    rootVisualElement.RegisterCallback<GeometryChangedEvent>(evt =>
+                    rootVisualElement.RegisterCallback<GeometryChangedEvent>(_ =>
                        callCustomDrawerMethods(rootVisualElement));
 
                     EditorCoroutineUtility.StartCoroutineOwnerless(iETrackSelectionChanged(rootVisualElement));
@@ -80,15 +80,19 @@ namespace Onw.Editor
 
                     selectedObject = Selection.activeObject;
                     float originalWidth = visualElement.resolvedStyle.width;
-                    visualElement.style.width = originalWidth + 1;
-                    visualElement.MarkDirtyRepaint();
+                    setVisualElementWidth(visualElement, originalWidth + 1);
                     EditorCoroutineUtility.StartCoroutineOwnerless(setOriginalWidth(visualElement, originalWidth));
                 }
 
                 static IEnumerator setOriginalWidth(VisualElement visualElement, float originalWidth)
                 {
                     yield return null;
-                    visualElement.style.width = originalWidth;
+                    setVisualElementWidth(visualElement, originalWidth);
+                }
+
+                static void setVisualElementWidth(VisualElement visualElement, float width)
+                {
+                    visualElement.style.width = width;
                     visualElement.MarkDirtyRepaint();
                 }
             }

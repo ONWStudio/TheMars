@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 using UnityEngine.Localization.Tables;
 using Onw.Attribute;
 using Onw.Interface;
+using Onw.Localization;
 using TMCard.AddtionalCondition;
 using TMCard.Effect;
 using TMCard.Runtime;
@@ -69,9 +70,9 @@ namespace TMCard
         [field: SerializeField, FormerlySerializedAs("<IsCustomDescription>k__BackingField"), DisplayAs("커스텀 설명"), Tooltip("체크 시 기본 설명이 나오지 않습니다")]
         public string IsCustomDescription { get; private set; }
 
-        [field: SerializeField] public StringTable CardName { get; private set; }
+        [field: SerializeField] public LocalizedStringOption CardName { get; private set; }
 
-        [SerializeReference, DisplayAs("카드 효과"), Tooltip("카드 효과 리스트"), SerializeReferenceDropdown]
+        [SerializeReference, FormerlySerializedAs("_effectCreators"), DisplayAs("카드 효과"), Tooltip("카드 효과 리스트"), SerializeReferenceDropdown]
         private List<ITMEffectCreator> _effectCreators = new();
 
         [SerializeReference, FormerlySerializedAs("_addtionalConditions"), DisplayAs("추가 조건"), Tooltip("카드 추가 조건 리스트"), SerializeReferenceDropdown]

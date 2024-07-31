@@ -8,16 +8,14 @@ namespace TMCard.Effect
 {
     /// <summary>
     /// .. 소요 (시간)
-    public sealed class TimeDelayEffect : ITMCardSpecialEffect, ITMInitializableEffect<TimeDelayEffectCreator>
+    public sealed class TimeDelayEffect : TMCardSpecialEffect, ITMInitializableEffect<TimeDelayEffectCreator>
     {
         /// <summary>
         /// .. 딜레이 타임
         /// </summary>
         [field: SerializeField, DisplayAs("딜레이 시간 (초)"), ReadOnly] public float DelayTime { get; private set; } = 1f;
 
-        public string Label => "TimeDelay";
-
-        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
+        public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             // .. TODO : 수정
             controller.OnClickEvent.RemoveAllToAddListener(() => TMCardGameManager.Instance.DelaySeconds(controller, DelayTime));
@@ -27,5 +25,7 @@ namespace TMCard.Effect
         {
             DelayTime = effectCreator.DelayTime;
         }
+
+        public TimeDelayEffect() : base("TurnDelay") {}
     }
 }

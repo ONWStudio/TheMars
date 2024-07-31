@@ -14,23 +14,6 @@ using TMCard.Effect.Resource;
 
 namespace TMCard.Runtime
 {
-    public readonly struct TMCardEffectArgs
-    {
-        public bool HasDescription { get; }
-        public bool HasLabel { get; }
-
-        public string Description { get; }
-        public string Label { get; }
-
-        public TMCardEffectArgs(bool hasDescription, bool hasLabel, string description, string label)
-        {
-            HasDescription = hasDescription;
-            HasLabel = hasLabel;
-            Description = description;
-            Label = label;
-        }
-    }
-
     // .. Model
     [DisallowMultipleComponent]
     public class TMCardController : MonoBehaviour, ITMEffectTrigger
@@ -55,46 +38,7 @@ namespace TMCard.Runtime
         [field: SerializeField] public UnityEvent<Transform> OnChangedParent { get; private set; } = new();
         [field: SerializeField, InitializeRequireComponent] public RectTransform RectTransform { get; private set; } = null;
 
-        public IEnumerable<TMCardEffectArgs> EffectArgs
-        {
-            get
-            {
-                foreach (ITMCardEffect effect in _cardEffects)
-                {
-                    bool hasDescription = false;
-                    bool hasLabel = false;
-                    string description = string.Empty;
-                    string labelStr = string.Empty;
-
-                    if (effect is IDescriptable descriptable)
-                    {
-                        hasDescription = true;
-                        description = descriptable.Description;
-                    }
-
-                    if (effect is ILabel label)
-                    {
-                        hasLabel = true;
-                        labelStr = label.Label;
-                    }
-
-                    yield return new(hasDescription, hasLabel, description, labelStr);
-                }
-            }
-        }
-
-        public IEnumerable<ITMCardResourceEffect> ResourceEffects
-        {
-            get
-            {
-                foreach (ITMCardEffect effect in _cardEffects)
-                {
-                    if (effect is not ITMCardResourceEffect resourceEffect) continue;
-
-                    yield return resourceEffect;
-                }
-            }
-        }
+        public IReadOnlyList<ITMCardEffect> Effects => _cardEffects;
 
         public CardEvent OnClickEvent { get; } = new();
         public CardEvent OnDrawBeginEvent { get; } = new();

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Onw.Helpers
+namespace Onw.Helper
 {
     public static class VerticesTo
     {

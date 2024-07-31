@@ -12,7 +12,7 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 설치
     /// </summary>
-    public sealed class InstallationEffect : ITMCardSpecialEffect
+    public sealed class InstallationEffect : TMCardSpecialEffect
     {
         private sealed class EventValuePair
         {
@@ -30,12 +30,10 @@ namespace TMCard.Effect
             private int _stack = 0;
         }
 
-        public string Label => "Installation";
-
         // .. UI에 알려주기
         private static readonly Dictionary<string, EventValuePair> _cardStack = new();
 
-        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
+        public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             controller.OnClickEvent.RemoveAllToAddListener(() => onEffect(controller));
             controller.OnDrawEndedEvent.RemoveAllToAddListener(() => onDraw(controller));
@@ -89,5 +87,7 @@ namespace TMCard.Effect
             controller.OnEffectEvent.Invoke();
             TMCardGameManager.Instance.DrawUse(controller);
         }
+
+        public InstallationEffect() : base("Installation") {}
     }
 }
