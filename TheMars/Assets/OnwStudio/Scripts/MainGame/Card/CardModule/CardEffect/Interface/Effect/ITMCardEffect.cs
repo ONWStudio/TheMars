@@ -12,5 +12,4 @@ namespace TMCard.Effect
         /// </summary>
         void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger);
     }
-
 }
