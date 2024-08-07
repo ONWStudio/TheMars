@@ -41,13 +41,11 @@ namespace TMCard.Runtime
             initializeImages();
         }
 
-        public void SetUI(TMCardController controller)
+        public void SetUI(TMCardData cardData, IEnumerable<ITMCardEffect> effects)
         {
-            _cardImage.sprite = controller.CardData.CardImage;
+            _cardImage.sprite = cardData.CardImage;
 
-            controller
-                .Effects
-                .ForEach(effectArg => createEffectUI(this, _effectField, effectArg));
+            effects.ForEach(effectArg => createEffectUI(this, _effectField, effectArg));
 
             static void createEffectUI(MonoBehaviour mono, Transform effectField, ITMCardEffect effect)
             {

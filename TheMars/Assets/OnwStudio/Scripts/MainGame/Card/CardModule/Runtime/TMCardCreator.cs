@@ -5,15 +5,12 @@ using Onw.Manager;
 
 namespace TMCard.Runtime
 {
-    public sealed class TMCardUICreator : Singleton<TMCardUICreator>
+    public sealed class TMCardCreator : Singleton<TMCardCreator>
     {
         [SerializeField] private List<TMCardData> _cards = new();
-
         [SerializeField] private TMCardController _templatePrefab = null;
 
-        protected override void Init()
-        {
-        }
+        protected override void Init() {}
 
         public List<TMCardController> CreateCards(int createCount)
         {

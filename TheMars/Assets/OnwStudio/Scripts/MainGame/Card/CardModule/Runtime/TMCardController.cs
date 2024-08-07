@@ -57,7 +57,7 @@ namespace TMCard.Runtime
         [SerializeField, SelectableSerializeField] private Vector2SmoothMover _smoothMove = null;
 
         private readonly List<ITMCardEffect> _cardEffects = new();
-        private bool _isInitEffect = false;
+        private bool _isInit = false;
 
         private void OnTransformParentChanged()
         {
@@ -66,6 +66,10 @@ namespace TMCard.Runtime
 
         public void Initialize()
         {
+            if (_isInit) return;
+
+            _isInit = true;
+
             initalizeInputHandle();
             initializeSmoothMove();
 
@@ -81,9 +85,6 @@ namespace TMCard.Runtime
 
         public void SetEffect(IEnumerable<ITMCardEffect> effects)
         {
-            if (_isInitEffect) return;
-
-            _isInitEffect = true;
             _cardEffects.AddRange(effects);
             _cardEffects.ForEach(effect => effect.ApplyEffect(this, this));
         }

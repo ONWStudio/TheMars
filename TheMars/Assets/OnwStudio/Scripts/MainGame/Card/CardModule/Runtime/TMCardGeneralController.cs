@@ -41,7 +41,7 @@ namespace TMCard.Runtime
         public void SetCardData(TMCardData cardData)
         {
             _cardData = cardData;
-            _cardViewer.SetUI(_cardController);
+            _cardViewer.SetUI(cardData, _cardController.Effects);
         }
     }
 }

@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Localization.Components;
+using UnityEngine.Events;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Tables;
+using UnityEngine.Localization.Components;
 using Onw.Extensions;
 using Onw.Attribute;
 using TMPro;
@@ -42,7 +43,7 @@ namespace Onw.Localization
             }
 
             localizeStringEvent.OnUpdateString.AddListener(text => tmpText.text = text);
-            localizeStringEvent.OnUpdateString.SetPersistentListenerState(UnityEngine.Events.UnityEventCallState.EditorAndRuntime);
+            localizeStringEvent.OnUpdateString.SetPersistentListenerState(UnityEventCallState.EditorAndRuntime);
             localizeStringEvent.RefreshString();
 
             static LocalizeStringEvent getLocalizeStringEvent(GameObject go, LocalizedString localizedString)

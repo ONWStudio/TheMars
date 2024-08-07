@@ -6,13 +6,12 @@ using Onw.Attribute;
 using Onw.Interface;
 using Onw.Localization;
 using TMCard.Runtime;
-using UnityEngine.Localization.Tables;
 
 namespace TMCard.Effect
 {
     public abstract class TMCardSpecialEffect : ILocalizable, ITMCardEffect
     {
-        [field: SerializeField] public LocalizedStringOption StringOption { get; }
+        [field: SerializeField] public LocalizedStringOption StringOption { get; private set; }
 
         public TMCardSpecialEffect(string entryReference)
         {

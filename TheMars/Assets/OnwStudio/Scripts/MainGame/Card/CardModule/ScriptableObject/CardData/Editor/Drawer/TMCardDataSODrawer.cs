@@ -23,7 +23,7 @@ namespace TMCard.Editor
         private Scene _previewScene;
         private Camera _previewCamera = null;
         private Canvas _previewCanvas = null;
-        private TMCardController _previewInstance = null;
+        private TMCardGeneralController _previewInstance = null;
 
         private void OnEnable()
         {
@@ -36,7 +36,7 @@ namespace TMCard.Editor
                 string path = AssetDatabase.GUIDToAssetPath(prefabGUID);
                 GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
 
-                if (prefab && prefab.TryGetComponent(out TMCardController previewInstance))
+                if (prefab && prefab.TryGetComponent(out TMCardGeneralController previewInstance))
                 {
                     _previewScene = EditorSceneManager.NewPreviewScene();
                     _previewScene.name = "Preview Scene";
@@ -63,11 +63,10 @@ namespace TMCard.Editor
                     canvasGO.AddComponent<GraphicRaycaster>();
 
                     _previewInstance = Instantiate(previewInstance, _previewCanvas.transform, false);
-                    _previewInstance.CardData = targetObject;
-                    _previewInstance.Initialize();
-
-                    TMCardViewer cardViewer = _previewInstance.GetComponent<TMCardViewer>();
-                    cardViewer.SetUI(_previewInstance);
+                    TMCardController controller = _previewInstance.GetComponent<TMCardController>();
+                    controller.CardData = targetObject;
+                    controller.Initialize();
+                    _previewInstance.SetCardData(targetObject);
 
                     _previewCamera.transform.position = _previewInstance.transform.position - Vector3.forward * 10;
 

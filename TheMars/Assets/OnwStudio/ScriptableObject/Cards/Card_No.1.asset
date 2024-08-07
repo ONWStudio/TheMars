@@ -34,13 +34,17 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
   _effectCreators:
-  - rid: 2707483215611559948
+  - rid: 1917347228981133314
   _addtionalConditions: []
   references:
     version: 2
     RefIds:
-    - rid: 2707483215611559948
-      type: {class: HoldEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+    - rid: 1917347228981133314
+      type: {class: DrawEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
       data:
-        <FriendlyCard>k__BackingField: {fileID: 0}
-        _holdEffects: []
+        _drawEffectCreators:
+        - rid: 1917347228981133315
+    - rid: 1917347228981133315
+      type: {class: TMCardCollectEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+      data:
+        <CollectCount>k__BackingField: 2

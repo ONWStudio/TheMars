@@ -49,7 +49,7 @@ namespace TMCard.Runtime
         /// <param name="cards"> .. 패에 세팅할 카드들 </param>
         public void SetCards(List<TMCardController> cards)
         {
-            cards.ForEach(setCardUI);
+            cards.ForEach(setCard);
             _cards.AddRange(cards);
         }
 
@@ -65,7 +65,7 @@ namespace TMCard.Runtime
         /// <param name="cardUI"> .. 패에 추가 할 카드 </param>
         public void AddCard(TMCardController cardUI)
         {
-            setCardUI(cardUI);
+            setCard(cardUI);
             _cards.Add(cardUI);
         }
 
@@ -81,7 +81,7 @@ namespace TMCard.Runtime
         /// <param name="cardUI"></param>
         public void AddCardToFirst(TMCardController cardUI)
         {
-            setCardUI(cardUI);
+            setCard(cardUI);
             _cards.Insert(0, cardUI);
         }
 
@@ -132,34 +132,60 @@ namespace TMCard.Runtime
         /// <summary>
         /// .. 카드를 정렬해야하는 경우 해당 메서드를 호출하면 리스트에 존재하는 카드들을 올바른 위치로 정렬 시킵니다 이벤트 기반입니다
         /// </summary>
-        public void SortCards(float duration = 1.0f, System.Action<TMCardController> endedDrawCall = null)
+        public void SortCards(float duration = 1.0f, System.Action<TMCardController> endedSortCall = null)
         {
             _cardSorter.SortCards(_cards, HandTransform, duration);
-
             _cards.ForEach(card => card.transform.SetAsLastSibling());
+
             // .. 카드의 정렬이 끝날때까지 상호작용 불가
             this.WaitCompletedConditions(
                 () => _cards.All(card => !card.EventSender.IsPlaying),
-                () => _cards.ToArray().ForEach(cardUI => endedDrawCall?.Invoke(cardUI)));
+                () => _cards.ToArray().ForEach(cardUI => endedSortCall?.Invoke(cardUI)));
         }
 
-        public void SortCardsInOrder(System.Action<TMCardController> endedDrawCall = null)
+        public void SortCardsInOrder(int startIndex = 0, System.Action<TMCardController> endedSortCall = null)
         {
-            StartCoroutine(iESortCardInOrder(endedDrawCall));
-        }
+            StartCoroutine(iESortCardInOrder(startIndex, _cards, endedSortCall));
 
-        private IEnumerator iESortCardInOrder(System.Action<TMCardController> endedDrawCall)
-        {
-            for (int i = 0; i < _cards.Count; i++)
+            IEnumerator iESortCardInOrder(int startIndex, IEnumerable<TMCardController> cards, System.Action<TMCardController> endedSortCall)
             {
-                _cardSorter.ArrangeCard(_cards, i, HandTransform, 0.5f);
-                yield return new WaitUntil(() => !_cards[i].EventSender.IsPlaying);
-                endedDrawCall?.Invoke(_cards[i]);
-                yield return new WaitUntil(() => !_cards[i].EventSender.IsPlaying); // .. 카드 UI가 드로우 중이라면
+                List<TMCardController> cardList = cards.ToList();
+
+                for (int i = startIndex; i < cardList.Count; i++)
+                {
+                    TMCardController pivot = cardList[i];
+                    WaitUntil waitUntil = new(() => !pivot.EventSender.IsPlaying);
+
+                    _cardSorter.ArrangeCard(_cards, i, HandTransform, 0.5f);
+                    yield return waitUntil;
+                    endedSortCall?.Invoke(pivot);
+                    yield return waitUntil; // .. 카드 UI가 드로우 중이라면
+                }
             }
         }
 
-        private void setCardUI(TMCardController cardUI)
+        public void PushCardsAndSortInOrder(IEnumerable<TMCardController> controllers, System.Action<TMCardController> endedSortCall = null)
+        {
+            StartCoroutine(iEPushCardsAndSortInOrder(controllers, endedSortCall));
+
+            IEnumerator iEPushCardsAndSortInOrder(IEnumerable<TMCardController> controllers, System.Action<TMCardController> endedSortCall)
+            {
+                foreach (TMCardController controller in controllers)
+                {
+                    WaitUntil waitUntil = new(() => !controller.EventSender.IsPlaying);
+
+                    _cards.Add(controller);
+                    setCard(controller);
+                    int index = _cards.Count - 1;
+                    _cardSorter.SortCards(_cards, HandTransform, 0.5f);
+                    yield return waitUntil;
+                    endedSortCall?.Invoke(controller);
+                    yield return waitUntil;
+                }
+            }
+        }
+
+        private void setCard(TMCardController cardUI)
         {
             cardUI.transform.SetParent(transform, false);
         }

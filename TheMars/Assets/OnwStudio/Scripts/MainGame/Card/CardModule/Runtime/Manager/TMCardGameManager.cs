@@ -7,6 +7,7 @@ using Onw.Attribute;
 using Onw.Manager;
 using Onw.Event;
 using MoreMountains.Feedbacks;
+using Onw.Coroutine;
 
 namespace TMCard.Runtime
 {
@@ -54,14 +55,14 @@ namespace TMCard.Runtime
 
         private void Start()
         {
-            List<TMCardController> controllers = TMCardUICreator.Instance.CreateCards(ALL_CARD_MAX);
+            List<TMCardController> controllers = TMCardCreator.Instance.CreateCards(ALL_CARD_MAX);
             controllers.ForEach(addListenerToCard);
             CardDeckUIController.PushCards(controllers);
             _cardHandImporter.PushCards(CardDeckUIController.DequeueCards(DRAW_CARD_MAX));
-            DrawCardFromDeck();
+            DrawCardsFromDeck();
         }
 
-        public void DrawCardFromDeck()
+        public void DrawCardsFromDeck()
         {
             if (AnimatedCardCount > 0) return; // .. 카드가 드로우 중이거나 카드를 사용중일때는 드로우 불가
 
@@ -69,10 +70,10 @@ namespace TMCard.Runtime
 
             // .. 핸드에서 카드 건네받기
             List<TMCardController> cards = CardHandUIController.DequeueCards();
-            StartCoroutine(iEDrawCardFromDeck(cards));
+            StartCoroutine(iEDrawCardsFromDeck(cards));
         }
 
-        private IEnumerator iEDrawCardFromDeck(List<TMCardController> controllers)
+        private IEnumerator iEDrawCardsFromDeck(List<TMCardController> controllers)
         {
             foreach (TMCardController controller in controllers)
             {
@@ -97,8 +98,9 @@ namespace TMCard.Runtime
                 controller.OnDrawBegin();
             }
 
-            CardHandUIController.SetCards(importerCards); // .. 손 패에 카드 세팅
-            CardHandUIController.SortCardsInOrder(controller => controller.OnDrawEnded());
+            CardHandUIController.PushCardsAndSortInOrder(
+                importerCards, 
+                controller => controller.OnDrawEnded());
         }
 
         private void addListenerToCard(TMCardController controller)
@@ -141,6 +143,28 @@ namespace TMCard.Runtime
 
             events.AddRange(getMoveToTombEvent(controller, 1.0f));
             controller.EventSender.PlayEvents(events);
+        }
+
+        public void CollectCard(TMCardController controller, int collectCount)
+        {
+            setPositionNewCardToHand(
+                controller, 
+                TMCardCreator.Instance.CreateCards(collectCount),
+                Vector3.zero);
+        }
+
+        public void DrawCardFromDeck(TMCardController controller, int drawCount)
+        {
+            if (DeckCardCount <= 0)
+            {
+                CardDeckUIController.PushCards(CardTombUIController.DequeueDeadCards());
+            }
+
+            setPositionNewCardToHand(
+                controller, 
+                CardDeckUIController.DequeueCards(drawCount),
+                CardHandUIController.DeckTransform.localPosition, 
+                endedSortCall: sortedController => sortedController.OnDrawEnded());
         }
 
         public void DestroyCard(TMCardController controller)
@@ -265,6 +289,53 @@ namespace TMCard.Runtime
             controller.gameObject.SetActive(true);
             List<MMF_Feedback> events = new(getMoveToTombEvent(controller));
             controller.EventSender.PlayEvents(events);
+        }
+
+        private void setPositionNewCardToHand(TMCardController controller, List<TMCardController> newCards, Vector3 spawn, int pivotIndex = 0, System.Action<TMCardController> endedSortCall = null)
+        {
+            if (pivotIndex >= newCards.Count) return;
+
+            // .. 새로운 카드의 이동 효과는 효과를 발동한 카드의 이벤트로 적용합니다
+            List<MMF_Feedback> events = new();
+
+            TMCardController newCard = newCards[pivotIndex];
+            MMF_Parallel parallelEvent = new();
+
+            parallelEvent.Feedbacks.Add(EventCreator.CreateUnityEvent(() =>
+            {
+                addListenerToCard(newCard);
+                CardHandUIController.AddCard(newCard);
+                newCard.transform.localPosition = spawn;
+            }));
+
+            Vector3 targetPosition = getScreenCenter(controller);
+            parallelEvent.Feedbacks.Add(EventCreator.CreateSmoothPositionAndRotationEvent(
+                newCard.gameObject,
+                new(targetPosition.x, targetPosition.y, 0f),
+                Vector3.zero));
+
+            events.Add(parallelEvent);
+            events.Add(EventCreator.CreateUnityEvent(() =>
+            {
+                CardHandUIController.SortCards();
+                endedSortCall?.Invoke(newCard);
+                setPositionNewCardToHand(controller, newCards, spawn, pivotIndex + 1, endedSortCall);
+            }));
+
+            if (controller.EventSender.IsPlaying)
+            {
+                controller.EventSender.OnComplitedEndEvent.AddListener(playEvent);
+            }
+            else
+            {
+                controller.EventSender.PlayEvents(events);
+            }
+
+            void playEvent()
+            {
+                controller.EventSender.PlayEvents(events);
+                controller.EventSender.OnComplitedEndEvent.RemoveListener(playEvent);
+            }
         }
 
         private Vector3 getScreenCenter(TMCardController controller)

@@ -7,16 +7,14 @@ namespace Onw.BehaviorTree
 {
     public class ActionNode : BehaviorTreeNode
     {
-        private readonly Action _action = null;
+        private readonly Func<NODE_STATE> _action = null;
 
         public override NODE_STATE Evaluate()
         {
-            _action.Invoke();
-            _nodeState = NODE_STATE.SUCCESS;
-            return _nodeState;
+            return _action?.Invoke() ?? NODE_STATE.FAILURE;
         }
 
-        public ActionNode(Action action)
+        public ActionNode(Func<NODE_STATE> action)
         {
             _action = action;
         }

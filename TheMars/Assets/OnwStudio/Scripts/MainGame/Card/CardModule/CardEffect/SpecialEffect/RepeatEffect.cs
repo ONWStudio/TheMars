@@ -17,16 +17,33 @@ namespace TMCard.Effect
     /// </summary>
     public sealed class RepeatEffect : TMCardSpecialEffect
     {
+        public readonly struct ResourcePair
+        {
+            public ITMCardResourceEffect ResourceEffect { get; }
+            public int OriginalAmount { get; }
+
+            public ResourcePair(ITMCardResourceEffect resourceEffect, int originalAmount)
+            {
+                ResourceEffect = resourceEffect;
+                OriginalAmount = originalAmount;
+            }
+        }
+
+        public readonly List<ResourcePair> _resourcePairs = new(); 
+
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
+           _resourcePairs.AddRange(controller
+                .Effects
+                .OfType<ITMCardResourceEffect>()
+                .Select(effect => new ResourcePair(effect, effect.Amount)));
+
             controller.OnClickEvent.RemoveAllToAddListener(() =>
             {
                 trigger.OnEffectEvent.Invoke();
 
-                controller
-                    .Effects
-                    .OfType<ITMCardResourceEffect>()
-                    .ForEach(resourceEffect => resourceEffect.AddRewardResource(resourceEffect.Amount));
+                _resourcePairs
+                    .ForEach(resourcePair => resourcePair.ResourceEffect.AddRewardResource(resourcePair.OriginalAmount));
 
                 TMCardGameManager.Instance.MoveToScreenCenterAfterToTomb(controller);
             });

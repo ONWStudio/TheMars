@@ -85,7 +85,7 @@ namespace Onw.Event
             if (!IsPlaying) return;
 
 #if DEBUG
-            Debug.Log("Event Complited!");
+            Debug.Log("Event Completed!");
 #endif
             OnComplitedBeginEvent.Invoke();
             IsPlaying = false;

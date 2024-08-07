@@ -30,6 +30,14 @@ namespace Onw.Editor
     {
         static InspectorWindowModifier()
         {
+            initialize();
+        }
+
+        private static readonly Dictionary<string, List<IObjectEditorAttributeDrawer>> _attributeDrawers = new();
+        private static bool _isDelay = false;
+
+        private static void initialize() 
+        {
             EditorCoroutineUtility.StartCoroutineOwnerless(runModifier());
 
             static IEnumerator runModifier()
@@ -39,8 +47,6 @@ namespace Onw.Editor
             }
         }
 
-        private static readonly Dictionary<string, List<IObjectEditorAttributeDrawer>> _attributeDrawers = new();
-        private static bool _isDelay = false;
 
         private static void modifyInspector()
         {
@@ -63,7 +69,7 @@ namespace Onw.Editor
                     rootVisualElement.RegisterCallback<GeometryChangedEvent>(_ =>
                        callCustomDrawerMethods(rootVisualElement));
 
-                    EditorCoroutineUtility.StartCoroutineOwnerless(iETrackSelectionChanged(rootVisualElement));
+                    // EditorCoroutineUtility.StartCoroutineOwnerless(iETrackSelectionChanged(rootVisualElement));
                 }
             }
 
@@ -93,7 +99,7 @@ namespace Onw.Editor
                 static void setVisualElementWidth(VisualElement visualElement, float width)
                 {
                     visualElement.style.width = width;
-                    visualElement.MarkDirtyRepaint();
+                    Debug.Log(visualElement.style.alignSelf = Align.Auto);
                 }
             }
         }
@@ -128,7 +134,7 @@ namespace Onw.Editor
                         drawers.ForEach(drawer => drawer.OnEnable(editor)); // .. Enable 호출 사실상 Awake와 같다
                     }
 
-                    if (iMGUIContainer == null)
+                    if (iMGUIContainer is null)
                     {
                         iMGUIContainer = new(() => drawers.ForEach(drawer => drawer.OnInspectorGUI(editor)))
                         {
@@ -141,6 +147,7 @@ namespace Onw.Editor
 
             static IEnumerator iEWaitSetIsDelayToFalse()
             {
+
                 yield return null;
                 _isDelay = false;
             }

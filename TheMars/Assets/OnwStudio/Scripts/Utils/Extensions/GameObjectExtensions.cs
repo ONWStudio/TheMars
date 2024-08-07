@@ -15,5 +15,20 @@ namespace Onw.Extensions
             => ObjectPool.Instance.PopOrCreate<T>(() => Object.Instantiate(original));
         public static T Instantiate<T>(this Component requestObject, T original, Transform parent) where T : PoolingObject
             => ObjectPool.Instance.PopOrCreate<T>(() => Object.Instantiate(original, parent));
+
+        public static void SetPositionX(this GameObject gameObject, float x)
+        {
+            gameObject.transform.SetPositionX(x);
+        }
+
+        public static void SetPositionY(this GameObject gameObject, float y)
+        {
+            gameObject.transform.SetPositionY(y);
+        }
+
+        public static void SetPositionZ(this GameObject gameObject, float z)
+        {
+            gameObject.transform.SetPositionZ(z);
+        }
     }
 }

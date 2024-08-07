@@ -15,28 +15,40 @@ namespace Onw.Attribute.Editor
         private readonly TreeViewState _dropdownState = new();
         private ComponentDropdown _dropdown = null;
         private GUIContent _buttonContent = null;
+        private bool _isMonoBehaviour = false;
 
         protected override void OnEnable(Rect position, SerializedProperty property, GUIContent label)
         {
-            _dropdown = new(_dropdownState, (property.serializedObject.targetObject as Component).gameObject, fieldInfo.FieldType, go =>
+            _isMonoBehaviour = property.serializedObject.targetObject is MonoBehaviour;
+
+            if (_isMonoBehaviour)
             {
-                if (fieldInfo.FieldType == typeof(GameObject))
+                _dropdown = new(_dropdownState, (property.serializedObject.targetObject as Component).gameObject, fieldInfo.FieldType, go =>
                 {
-                    property.objectReferenceValue = go;
-                }
-                else
-                {
-                    property.objectReferenceValue = go.GetComponent(fieldInfo.FieldType);
-                }
+                    if (fieldInfo.FieldType == typeof(GameObject))
+                    {
+                        property.objectReferenceValue = go;
+                    }
+                    else
+                    {
+                        property.objectReferenceValue = go.GetComponent(fieldInfo.FieldType);
+                    }
 
-                property.serializedObject.ApplyModifiedProperties();
-            });
+                    property.serializedObject.ApplyModifiedProperties();
+                });
 
-            _buttonContent = new(EditorGUIUtility.IconContent("icon dropdown").image);
+                _buttonContent = new(EditorGUIUtility.IconContent("icon dropdown").image);
+            }
         }
 
         protected override void OnPropertyGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            if (!_isMonoBehaviour)
+            {
+                EditorGUI.HelpBox(position, "this object is not MonoBehaviour!", MessageType.Error);
+                return;
+            }
+
             EditorGUI.BeginProperty(position, label, property);
 
             Rect fieldRect = position;
@@ -54,7 +66,6 @@ namespace Onw.Attribute.Editor
                     position.height);
 
                 content = GUIContent.none;
-
                 EditorGUI.LabelField(labelRect, label);
 
                 if (GUI.Button(buttonRect, _buttonContent))
@@ -78,7 +89,6 @@ namespace Onw.Attribute.Editor
         {
             return EditorGUI.GetPropertyHeight(property, label, true);
         }
-
     }
 }
 #endif
