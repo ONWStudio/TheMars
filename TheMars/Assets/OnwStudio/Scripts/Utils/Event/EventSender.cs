@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using MoreMountains.Feedbacks;
+using Onw.Attribute;
+using Onw.Extensions;
 
 namespace Onw.Event
 {
@@ -25,29 +27,25 @@ namespace Onw.Event
         /// <summary>
         /// .. 이벤트 메서드 호출 시 IsPlaying이 false가 되기 전에 호출됩니다
         /// </summary>
-        [field: SerializeField] public UnityEvent OnComplitedBeginEvent { get; private set; } = new();
+        [field: SerializeField] public UnityEvent OnCompletedBeginEvent { get; private set; } = new();
         /// <summary>
         /// .. 이벤트 메서드 호출 시 IsPlaying이 false가 된 후 호출됩니다
         /// </summary>
-        [field: SerializeField] public UnityEvent OnComplitedEndEvent { get; private set; } = new();
+        [field: SerializeField] public UnityEvent OnCompletedEndEvent { get; private set; } = new();
 
-        private MMF_Player _eventReceiver = null;
+        [field: SerializeField, InitializeRequireComponent] public MMF_Player EventPlayer { get; private set; } = null;
+        [field: SerializeField, ReadOnly] public bool IsPlaying { get; private set; } = false;
+
         private Coroutine _playCoroutine = null;
-        public bool IsPlaying { get; private set; } = false;
-
-        private void Awake()
-        {
-            _eventReceiver = gameObject.AddComponent<MMF_Player>();
-        }
 
         private void OnDestroy()
         {
-            onComplitedEvents();
+            onCompletedEvents();
         }
 
         private void OnDisable()
         {
-            onComplitedEvents();
+            onCompletedEvents();
         }
 
         /// <summary>
@@ -69,8 +67,8 @@ namespace Onw.Event
             IsPlaying = true;
             OnStartEndEvent.Invoke();
 
-            _eventReceiver.StopFeedbacks();
-            _eventReceiver.FeedbacksList.Clear();
+            EventPlayer.StopFeedbacks();
+            EventPlayer.FeedbacksList.Clear();
 
             if (_playCoroutine is not null) // .. 기존 이벤트 강제종료
             {
@@ -80,30 +78,30 @@ namespace Onw.Event
             _playCoroutine = StartCoroutine(iEPlayFeedbacks(feedbacks));
         }
 
-        private void onComplitedEvents()
+        private void onCompletedEvents()
         {
             if (!IsPlaying) return;
 
 #if DEBUG
             Debug.Log("Event Completed!");
 #endif
-            OnComplitedBeginEvent.Invoke();
+            OnCompletedBeginEvent.Invoke();
             IsPlaying = false;
-            OnComplitedEndEvent.Invoke();
+            OnCompletedEndEvent.Invoke();
         }
 
         private IEnumerator iEPlayFeedbacks(IEnumerable<MMF_Feedback> feedbacks)
         {
             foreach (MMF_Feedback feedback in feedbacks)
             {
-                _eventReceiver.AddFeedback(feedback);
-                _eventReceiver.Initialization();
+                EventPlayer.AddFeedback(feedback);
+                EventPlayer.Initialization();
 
-                yield return _eventReceiver.PlayFeedbacksCoroutine(transform.position);
-                _eventReceiver.FeedbacksList.Clear();
+                yield return EventPlayer.PlayFeedbacksCoroutine(transform.position);
+                EventPlayer.FeedbacksList.Clear();
             }
 
-            onComplitedEvents();
+            onCompletedEvents();
         }
     }
 }

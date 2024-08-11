@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Onw.Event;
 
 namespace TMCard.Effect
 {
-    public interface ITMEffectTrigger
+    public interface ITMInnerEffector
     {
-        CardEvent OnEffectEvent { get; }
+        public IReadOnlyList<ITMNormalEffect> InnerEffect { get; }
     }
 }

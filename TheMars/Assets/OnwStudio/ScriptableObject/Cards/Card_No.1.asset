@@ -43,8 +43,8 @@ MonoBehaviour:
       type: {class: DrawEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
       data:
         _drawEffectCreators:
-        - rid: 1917347228981133315
-    - rid: 1917347228981133315
-      type: {class: TMCardCollectEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+        - rid: 1917347251055493120
+    - rid: 1917347251055493120
+      type: {class: TMCardDrawEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
       data:
-        <CollectCount>k__BackingField: 2
+        <DrawCount>k__BackingField: 1

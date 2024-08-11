@@ -11,7 +11,7 @@ namespace TM.UI
     {
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _teraText;
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _marsLithumText;
-
+        
         private void Start()
         {
             UniRxObserver.ObserveInfomation(

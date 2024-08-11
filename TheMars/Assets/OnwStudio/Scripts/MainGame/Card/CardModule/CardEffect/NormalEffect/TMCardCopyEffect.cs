@@ -10,7 +10,10 @@ namespace TMCard.Effect
     {
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            Debug.Log("카드 카피");
+            trigger.OnEffectEvent.AddListener(() => 
+            {
+                Debug.Log("카드 카피");
+            });
         }
     }
 }

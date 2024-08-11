@@ -196,10 +196,7 @@ namespace MoreMountains.Feedbacks
 			int count = FeedbacksList.Count;
 			for (int i = 0; i < count; i++)
 			{
-				if (FeedbacksList[i] != null)
-				{
-					FeedbacksList[i].Initialization(this, i);
-				}
+				FeedbacksList[i]?.Initialization(this, i);
 			}
 
 			_initialized = true;
@@ -261,8 +258,7 @@ namespace MoreMountains.Feedbacks
 		/// </summary>
 		public override void PlayFeedbacksOnlyIfReversed()
 		{
-            
-			if ( (Direction == Directions.BottomToTop && !ShouldRevertOnNextPlay)
+			if ((Direction == Directions.BottomToTop && !ShouldRevertOnNextPlay)
 			     || ((Direction == Directions.TopToBottom) && ShouldRevertOnNextPlay) )
 			{
 				PlayFeedbacks();
@@ -274,9 +270,8 @@ namespace MoreMountains.Feedbacks
 		/// </summary>
 		public override void PlayFeedbacksOnlyIfReversed(Vector3 position, float feedbacksIntensity = 1.0f, bool forceRevert = false)
 		{
-            
-			if ( (Direction == Directions.BottomToTop && !ShouldRevertOnNextPlay)
-			     || ((Direction == Directions.TopToBottom) && ShouldRevertOnNextPlay) )
+			if ((Direction == Directions.BottomToTop && !ShouldRevertOnNextPlay)
+			     || ((Direction == Directions.TopToBottom) && ShouldRevertOnNextPlay))
 			{
 				PlayFeedbacks(position, feedbacksIntensity, forceRevert);
 			}

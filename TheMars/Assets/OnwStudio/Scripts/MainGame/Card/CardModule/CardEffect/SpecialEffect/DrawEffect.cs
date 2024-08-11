@@ -14,9 +14,10 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 드로우
     /// </summary>
-    public sealed class DrawEffect : TMCardSpecialEffect, ITMInitializableEffect<DrawEffectCreator>, ITMEffectTrigger
+    public sealed class DrawEffect : TMCardSpecialEffect, ITMInitializableEffect<DrawEffectCreator>, ITMEffectTrigger, ITMInnerEffector
     {
         public CardEvent OnEffectEvent { get; } = new();
+        public IReadOnlyList<ITMNormalEffect> InnerEffect => _drawEffects;
 
         private readonly List<ITMNormalEffect> _drawEffects = new();
 

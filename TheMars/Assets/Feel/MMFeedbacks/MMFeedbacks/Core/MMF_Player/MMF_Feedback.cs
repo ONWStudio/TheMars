@@ -993,7 +993,7 @@ namespace MoreMountains.Feedbacks
 
 			if (RandomizeDuration)
 			{
-				duration = duration * _randomDurationMultiplier;
+				duration *= _randomDurationMultiplier;
 			}
 
 			return Owner.ApplyTimeMultiplier(duration);
@@ -1066,63 +1066,38 @@ namespace MoreMountains.Feedbacks
 			return NormalPlayDirection ? normalizedTime : 1 - normalizedTime;
 		}
 
-		/// <summary>
-		/// Returns true if this feedback should play normally, or false if it should play in rewind
-		/// </summary>
-		public virtual bool NormalPlayDirection
-		{
-			get
-			{
-				switch (Timing.PlayDirection)
-				{
-					case MMFeedbackTiming.PlayDirections.FollowMMFeedbacksDirection:
-						return (Owner.Direction == MMF_Player.Directions.TopToBottom);
-					case MMFeedbackTiming.PlayDirections.AlwaysNormal:
-						return true;
-					case MMFeedbackTiming.PlayDirections.AlwaysRewind:
-						return false;
-					case MMFeedbackTiming.PlayDirections.OppositeMMFeedbacksDirection:
-						return !(Owner.Direction == MMF_Player.Directions.TopToBottom);
-				}
+        /// <summary>
+        /// Returns true if this feedback should play normally, or false if it should play in rewind
+        /// </summary>
+        public virtual bool NormalPlayDirection => Timing.PlayDirection switch
+        {
+            MMFeedbackTiming.PlayDirections.FollowMMFeedbacksDirection => Owner.Direction == MMF_Player.Directions.TopToBottom,
+            MMFeedbackTiming.PlayDirections.AlwaysNormal => true,
+            MMFeedbackTiming.PlayDirections.AlwaysRewind => false,
+            MMFeedbackTiming.PlayDirections.OppositeMMFeedbacksDirection => !(Owner.Direction == MMF_Player.Directions.TopToBottom),
+            _ => true,
+        };
 
-				return true;
-			}
-		}
+        /// <summary>
+        /// Returns true if this feedback should play in the current parent MMFeedbacks direction, according to its MMFeedbacksDirectionCondition setting
+        /// </summary>
+        public virtual bool ShouldPlayInThisSequenceDirection => Timing == null || Timing.MMFeedbacksDirectionCondition switch
+        {
+            MMFeedbackTiming.MMFeedbacksDirectionConditions.Always => true,
+            MMFeedbackTiming.MMFeedbacksDirectionConditions.OnlyWhenForwards => (Owner.Direction == MMF_Player.Directions.TopToBottom),
+            MMFeedbackTiming.MMFeedbacksDirectionConditions.OnlyWhenBackwards => (Owner.Direction == MMF_Player.Directions.BottomToTop),
+            _ => true,
+        };
 
-		/// <summary>
-		/// Returns true if this feedback should play in the current parent MMFeedbacks direction, according to its MMFeedbacksDirectionCondition setting
-		/// </summary>
-		public virtual bool ShouldPlayInThisSequenceDirection
-		{
-			get
-			{
-				if (Timing == null)
-				{
-					return true;
-				}
-				switch (Timing.MMFeedbacksDirectionCondition)
-				{
-					case MMFeedbackTiming.MMFeedbacksDirectionConditions.Always:
-						return true;
-					case MMFeedbackTiming.MMFeedbacksDirectionConditions.OnlyWhenForwards:
-						return (Owner.Direction == MMF_Player.Directions.TopToBottom);
-					case MMFeedbackTiming.MMFeedbacksDirectionConditions.OnlyWhenBackwards:
-						return (Owner.Direction == MMF_Player.Directions.BottomToTop);
-				}
+        #endregion Direction
 
-				return true;
-			}
-		}
+        #region Overrides
 
-		#endregion Direction
-
-		#region Overrides
-
-		/// <summary>
-		/// This method describes all custom initialization processes the feedback requires, in addition to the main Initialization method
-		/// </summary>
-		/// <param name="owner"></param>
-		protected virtual void CustomInitialization(MMF_Player owner) { }
+        /// <summary>
+        /// This method describes all custom initialization processes the feedback requires, in addition to the main Initialization method
+        /// </summary>
+        /// <param name="owner"></param>
+        protected virtual void CustomInitialization(MMF_Player owner) { }
 
 		/// <summary>
 		/// This method describes what happens when the feedback gets played

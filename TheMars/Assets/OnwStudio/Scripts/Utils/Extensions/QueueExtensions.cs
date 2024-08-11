@@ -23,5 +23,10 @@ namespace Onw.Extensions
                 yield return queue.Dequeue();
             }
         }
+
+        public static void EnqueueItems<T>(this Queue<T> queue, IEnumerable<T> items)
+        {
+            items.ForEach(queue.Enqueue);
+        }
     }
 }

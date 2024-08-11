@@ -48,6 +48,7 @@ namespace TMCard.Runtime
         [Header("Camera")]
         [SerializeField] private Camera _cardSystemCamera = null;
 
+
         protected override void Init()
         {
             OnTurnEnd.AddListener(DelayEffectManager.Instance.OnNextTurn);
@@ -98,10 +99,12 @@ namespace TMCard.Runtime
                 controller.OnDrawBegin();
             }
 
-            CardHandUIController.PushCardsAndSortInOrder(
+            CardHandUIController.PushCardsInSortQueue(
                 importerCards, 
                 controller => controller.OnDrawEnded());
         }
+
+
 
         private void addListenerToCard(TMCardController controller)
         {
@@ -115,7 +118,7 @@ namespace TMCard.Runtime
                     CardHandUIController.SetOn(false);
                 }
             });
-            controller.EventSender.OnComplitedEndEvent.AddListener(() =>
+            controller.EventSender.OnCompletedEndEvent.AddListener(() =>
             {
                 if ((--AnimatedCardCount) > 0) return;
 
@@ -291,66 +294,39 @@ namespace TMCard.Runtime
             controller.EventSender.PlayEvents(events);
         }
 
-        private void setPositionNewCardToHand(TMCardController controller, List<TMCardController> newCards, Vector3 spawn, int pivotIndex = 0, System.Action<TMCardController> endedSortCall = null)
+        private void setPositionNewCardToHand(TMCardController controller, List<TMCardController> newCards, Vector3 spawn, System.Action<TMCardController> endedSortCall = null)
         {
-            if (pivotIndex >= newCards.Count) return;
-
-            // .. 새로운 카드의 이동 효과는 효과를 발동한 카드의 이벤트로 적용합니다
-            List<MMF_Feedback> events = new();
-
-            TMCardController newCard = newCards[pivotIndex];
-            MMF_Parallel parallelEvent = new();
-
-            parallelEvent.Feedbacks.Add(EventCreator.CreateUnityEvent(() =>
+            foreach (TMCardController card in newCards)
             {
-                addListenerToCard(newCard);
-                CardHandUIController.AddCard(newCard);
-                newCard.transform.localPosition = spawn;
-            }));
+                // .. 새로운 카드의 이동 효과는 효과를 발동한 카드의 이벤트로 적용합니다
+                MMF_Parallel parallelEvent = new();
 
-            Vector3 targetPosition = getScreenCenter(controller);
-            parallelEvent.Feedbacks.Add(EventCreator.CreateSmoothPositionAndRotationEvent(
-                newCard.gameObject,
-                new(targetPosition.x, targetPosition.y, 0f),
-                Vector3.zero));
+                parallelEvent.Feedbacks.Add(EventCreator.CreateUnityEvent(() =>
+                {
+                    Debug.Log("Trigger");
 
-            events.Add(parallelEvent);
-            events.Add(EventCreator.CreateUnityEvent(() =>
-            {
-                CardHandUIController.SortCards();
-                endedSortCall?.Invoke(newCard);
-                setPositionNewCardToHand(controller, newCards, spawn, pivotIndex + 1, endedSortCall);
-            }));
+                    addListenerToCard(card);
+                    card.transform.localPosition = spawn;
+                }));
 
-            if (controller.EventSender.IsPlaying)
-            {
-                controller.EventSender.OnComplitedEndEvent.AddListener(playEvent);
-            }
-            else
-            {
-                controller.EventSender.PlayEvents(events);
-            }
+                parallelEvent.Feedbacks.Add(getMoveToScreenCenterEvent(card));
 
-            void playEvent()
-            {
-                controller.EventSender.PlayEvents(events);
-                controller.EventSender.OnComplitedEndEvent.RemoveListener(playEvent);
+                // CardHandUIController.PushCardInSortQueue(card, endedSortCall, new() { parallelEvent });
             }
         }
 
-        private Vector3 getScreenCenter(TMCardController controller)
+        private Vector3 getScreenCenter()
         {
             Vector2 targetWorldPosition = _cardSystemCamera.GetScreenCenterWorldPoint();
 
-            return controller
+            return CardHandUIController
                 .transform
-                .parent
                 .InverseTransformPoint(new(targetWorldPosition.x, targetWorldPosition.y, 0f));
         }
 
         private MMF_Feedback getMoveToScreenCenterEvent(TMCardController controller)
         {
-            Vector3 targetPosition = getScreenCenter(controller);
+            Vector3 targetPosition = getScreenCenter();
 
             return EventCreator.CreateSmoothPositionAndRotationEvent(
                 controller.gameObject,

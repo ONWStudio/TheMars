@@ -6,9 +6,7 @@ using TMCard.Runtime;
 
 namespace TMCard.Effect
 {
-    /// <summary>
-    /// .. 추후 반복 효과 적용 가능 시 인터페이스 통합
-    /// </summary>
+    // .. TODO : 드로우 효과로 드로우 카드 획득 시 두장 겹쳐서 나오는 버그, 중간중간 알 수 없는 이유로 화면 중앙으로 이동하지 않고 바로 패로 이동하는 
     public sealed class TMCardDrawEffect : ITMNormalEffect, ITMInitializableEffect<TMCardDrawEffectCreator>
     {
         [SerializeField, ReadOnly] private int _drawCount = 0;
@@ -20,8 +18,10 @@ namespace TMCard.Effect
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            trigger.OnEffectEvent.AddListener(() 
-                => TMCardGameManager.Instance.DrawCardFromDeck(controller, _drawCount));
+            trigger.OnEffectEvent.AddListener(() =>
+            {
+                TMCardGameManager.Instance.DrawCardFromDeck(controller, _drawCount);
+            });
         }
     }
 }
