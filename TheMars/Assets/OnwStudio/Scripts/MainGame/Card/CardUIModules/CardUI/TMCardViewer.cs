@@ -19,8 +19,6 @@ namespace TMCard.Runtime
         [SerializeField, SelectableSerializeField] private Image _cardImage = null;
         [SerializeField, SelectableSerializeField] private Image _backgroundImage = null;
 
-        //[Header("Descriptor")]
-        //[SerializeField, SelectableSerializeField] private TMCardDescriptor _descriptor;
         [Header("Effect Field")]
         [SerializeField, SelectableSerializeField] private RectTransform _effectField = null;
 
@@ -49,7 +47,7 @@ namespace TMCard.Runtime
             {
                 GameObject effectUIObject = new("Effect UI Field");
                 effectUIObject.AddComponent<RectTransform>();
-                VerticalLayoutGroup verticalLayoutGroup = effectUIObject.AddComponent<VerticalLayoutGroup>();
+                effectUIObject.AddComponent<VerticalLayoutGroup>();
                 effectUIObject.transform.SetParent(_effectField.transform, false);
 
                 if (effect is ILocalizable localizable)
@@ -64,7 +62,7 @@ namespace TMCard.Runtime
                     labelText.fontSizeMin = labelText.fontSizeMax * 0.75f;
                     labelText.color = Color.red;
 
-                    if (!localizable.StringOption.TrySetOption(this, labelText, out LocalizeStringEvent localizeStringEvent))
+                    if (!localizable.StringOption.TrySetOption(this, labelText, out LocalizeStringEvent localizeStringEvent)) // .. AddComponent
                     {
                         Debug.LogWarning("UI가 초기화 되지 않았습니다");
                     }

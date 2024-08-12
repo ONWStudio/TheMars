@@ -15,7 +15,7 @@ namespace Onw.Localization
     [Serializable]
     public sealed class LocalizedStringOption
     {
-        [SerializeField, ReadOnly] private LocalizedString _localizedString;
+        [SerializeField] private LocalizedString _localizedString;
 
         public bool TrySetOption(MonoBehaviour monoBehaviour, TextMeshProUGUI tmpText, out LocalizeStringEvent localizeStringEvent)
         {

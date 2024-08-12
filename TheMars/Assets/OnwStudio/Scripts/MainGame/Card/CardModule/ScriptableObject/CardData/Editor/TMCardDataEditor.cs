@@ -11,12 +11,6 @@ namespace TMCard
 {
     public sealed partial class TMCardData : ScriptableObject
     {
-        [InspectorButton("Generate GUID")]
-        private void generateNewGUID()
-        {
-            Guid = System.Guid.NewGuid().ToString();
-        }
-
         [OnChangedValueByMethod(nameof(_effectCreators))]
         private void onChangedSpecialEffect()
         {

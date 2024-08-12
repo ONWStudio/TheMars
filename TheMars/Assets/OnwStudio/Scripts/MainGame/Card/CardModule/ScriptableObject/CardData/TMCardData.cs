@@ -16,22 +16,10 @@ namespace TMCard
     public sealed partial class TMCardData : ScriptableObject
     {
         /// <summary>
-        /// .. 카드의 고유 ID
-        /// </summary>
-        [field: SerializeField, FormerlySerializedAs("<Guid>k__BackingField"), Tooltip("카드의 고유 ID"), ReadOnly]
-        public string Guid { get; private set; } = System.Guid.NewGuid().ToString();
-
-        /// <summary>
         /// .. 카드 전체와 공유하는 스택 ID
         /// </summary>
         [field: SerializeField, FormerlySerializedAs("<StackID>k__BackingField"), Tooltip("Stack ID")]
         public int StackID { get; private set; } = 0;
-
-        /// <summary>
-        /// .. 같은 그룹간에 공유하는 스택 ID
-        /// </summary>
-        [field: SerializeField, FormerlySerializedAs("<GroupStackID>k__BackingField"), Tooltip("그룹 Stack ID")]
-        public int GroupStackID { get; private set; } = 0;
 
         [field: Space]
         /// <summary>
