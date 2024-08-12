@@ -51,7 +51,7 @@ namespace TMCard
         /// .. 카드의 종류
         /// </summary>
         [field: SerializeField, FormerlySerializedAs("<CardKind>k__BackingField"), DisplayAs("카드 종류"), Tooltip("카드의 종류")]
-        public TM_CARD_KIND CardKind { get; private set; } = TM_CARD_KIND.CONSTRUCTION;
+        public TM_CARD_KIND CardKind { get; private set; } = TM_CARD_KIND.NONE;
 
         /// <summary>
         /// .. 카드의 등급

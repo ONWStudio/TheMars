@@ -10,8 +10,10 @@ namespace TMCard
     public enum TM_CARD_KIND : byte
     {
         /// <summary> .. 건설 </summary>
-        [InspectorName("건설")] CONSTRUCTION,
+        [InspectorName("일반")] NONE = 1 << 0,
         /// <summary> .. 노동 </summary>
-        [InspectorName("일반")] NORMAL,
+        [InspectorName("드론")] DRON = 1 << 1,
+        [InspectorName("미생물")] MICROBE = 1 << 2,
+        [InspectorName("모두")] ALL = NONE | DRON | MICROBE 
     }
 }

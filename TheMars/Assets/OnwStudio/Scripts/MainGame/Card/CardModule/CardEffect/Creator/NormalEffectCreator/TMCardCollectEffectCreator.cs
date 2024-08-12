@@ -1,7 +1,9 @@
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
-using TMCard.Runtime;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Onw.Attribute;
 
 namespace TMCard.Effect
 {
@@ -10,7 +12,11 @@ namespace TMCard.Effect
     [SerializeReferenceDropdownName("카드 획득")]
     public sealed class TMCardCollectEffectCreator : ITMNormalEffectCreator
     {
-        [field: SerializeField, Min(1)] public int CollectCount { get; private set; } = 1;
+        [field: SerializeField, Range(1, 4), FormerlySerializedAs("<CollecCount>k__BackingField"), DisplayAs("선택 카드 개수")]
+        public int CollectCount { get; private set; } = 1;
+
+        [field: SerializeField, FormerlySerializedAs("<SelectKind>k__BackingField"), DisplayAs("카드군")]
+        public TM_CARD_KIND SelectKind { get; private set; } = TM_CARD_KIND.NONE;
 
         public ITMCardEffect CreateEffect()
         {

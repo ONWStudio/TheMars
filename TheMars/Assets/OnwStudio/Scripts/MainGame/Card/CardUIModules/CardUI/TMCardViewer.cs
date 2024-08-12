@@ -45,14 +45,12 @@ namespace TMCard.Runtime
         {
             _cardImage.sprite = cardData.CardImage;
 
-            effects.ForEach(effectArg => createEffectUI(this, _effectField, effectArg));
-
-            static void createEffectUI(MonoBehaviour mono, Transform effectField, ITMCardEffect effect)
+            foreach (ITMCardEffect effect in effects)
             {
                 GameObject effectUIObject = new("Effect UI Field");
                 effectUIObject.AddComponent<RectTransform>();
                 VerticalLayoutGroup verticalLayoutGroup = effectUIObject.AddComponent<VerticalLayoutGroup>();
-                effectUIObject.transform.SetParent(effectField.transform, false);
+                effectUIObject.transform.SetParent(_effectField.transform, false);
 
                 if (effect is ILocalizable localizable)
                 {
@@ -66,18 +64,11 @@ namespace TMCard.Runtime
                     labelText.fontSizeMin = labelText.fontSizeMax * 0.75f;
                     labelText.color = Color.red;
 
-                    if (!localizable.StringOption.TrySetOption(mono, labelText, out LocalizeStringEvent localizeStringEvent))
+                    if (!localizable.StringOption.TrySetOption(this, labelText, out LocalizeStringEvent localizeStringEvent))
                     {
                         Debug.LogWarning("UI가 초기화 되지 않았습니다");
                     }
                 }
-
-                //if ()
-                //GameObject descriptionObject = new("Description Field");
-                //descriptionObject.AddComponent<RectTransform>();
-                //descriptionObject.transform.SetParent(effectUIObject.transform, false);
-                //TextMeshProUGUI textGUI = descriptionObject.AddComponent<TextMeshProUGUI>();
-                //textGUI.text = effectArg.Description;
             }
         }
     }

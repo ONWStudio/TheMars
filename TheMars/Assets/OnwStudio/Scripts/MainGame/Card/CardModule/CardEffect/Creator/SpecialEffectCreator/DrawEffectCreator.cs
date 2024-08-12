@@ -9,7 +9,7 @@ namespace TMCard.Effect
 {
     using static ITMEffectCreator;
 
-    [SerializeReferenceDropdownName("(특수) 드로우"), Substitution("드로우")]
+    [SerializeReferenceDropdownName("(특수) 드로우")]
     public sealed class DrawEffectCreator : ITMSpecialEffectCreator
     {
         [SerializeReference, DisplayAs("드로우 효과"), FormerlySerializedAs("_drawEffectCreators"), SerializeReferenceDropdown] private List<ITMNormalEffectCreator> _drawEffectCreators = new();

@@ -10,9 +10,6 @@ namespace Onw.EffectSystem.Sample
 
     public class SkillExample : MonoBehaviour
     {
-
-
-
         private void Start()
         {
             //if (_rootTriggers.TryGetValue("Start", out Effect serialize))
