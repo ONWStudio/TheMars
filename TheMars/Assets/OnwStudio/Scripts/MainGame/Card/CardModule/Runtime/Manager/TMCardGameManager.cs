@@ -148,15 +148,14 @@ namespace TMCard.Runtime
             controller.EventSender.PlayEvents(events);
         }
 
-        public void CollectCard(TMCardController controller, int collectCount)
+        public void CollectCard(int collectCount)
         {
             setPositionNewCardToHand(
-                controller, 
                 TMCardCreator.Instance.CreateCards(collectCount),
                 Vector3.zero);
         }
 
-        public void DrawCardFromDeck(TMCardController controller, int drawCount)
+        public void DrawCardFromDeck(int drawCount)
         {
             if (DeckCardCount <= 0)
             {
@@ -164,10 +163,9 @@ namespace TMCard.Runtime
             }
 
             setPositionNewCardToHand(
-                controller, 
                 CardDeckUIController.DequeueCards(drawCount),
                 CardHandUIController.DeckTransform.localPosition, 
-                endedSortCall: sortedController => sortedController.OnDrawEnded());
+                sortedController => sortedController.OnDrawEnded());
         }
 
         public void DestroyCard(TMCardController controller)
@@ -294,7 +292,7 @@ namespace TMCard.Runtime
             controller.EventSender.PlayEvents(events);
         }
 
-        private void setPositionNewCardToHand(TMCardController controller, List<TMCardController> newCards, Vector3 spawn, System.Action<TMCardController> endedSortCall = null)
+        private void setPositionNewCardToHand(List<TMCardController> newCards, Vector3 spawn, System.Action<TMCardController> endedSortCall = null)
         {
             foreach (TMCardController card in newCards)
             {
@@ -311,7 +309,7 @@ namespace TMCard.Runtime
 
                 parallelEvent.Feedbacks.Add(getMoveToScreenCenterEvent(card));
 
-                // CardHandUIController.PushCardInSortQueue(card, endedSortCall, new() { parallelEvent });
+                CardHandUIController.PushCardInSortQueue(card, endedSortCall, new() { parallelEvent });
             }
         }
 

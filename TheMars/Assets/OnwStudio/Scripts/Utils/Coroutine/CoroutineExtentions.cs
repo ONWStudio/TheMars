@@ -11,6 +11,13 @@ namespace Onw.Coroutine
     public static class CoroutineExtensions
     {
         #region 공개 인터페이스
+        public static void StopCoroutineIfNotNull(this MonoBehaviour monoBehaviour, Coroutine coroutine)
+        {
+            if (coroutine is null) return;
+
+            monoBehaviour.StopCoroutine(coroutine);
+        }
+
         public static Coroutine DoCallWaitForOneFrame(this MonoBehaviour monoBehaviour, Action action)
          => monoBehaviour.StartCoroutine(iEDoCallWaitForOneFrame(action));
 

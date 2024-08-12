@@ -129,7 +129,6 @@ namespace TheraBytes.BetterUi
 
         void CrossFadeColor(Color startValue, Color targetValue, float duration)
         {
-
             // Stop clashing coroutines
             foreach (var key in activeCoroutines.Keys)
             {

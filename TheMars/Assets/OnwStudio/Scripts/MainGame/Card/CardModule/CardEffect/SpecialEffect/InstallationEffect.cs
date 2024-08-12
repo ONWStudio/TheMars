@@ -1,11 +1,8 @@
 using System;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Onw.Attribute;
 using TMCard.Runtime;
-using TMCard;
 
 namespace TMCard.Effect
 {
@@ -37,6 +34,27 @@ namespace TMCard.Effect
         {
             controller.OnClickEvent.RemoveAllToAddListener(() => onEffect(controller));
             controller.OnDrawEndedEvent.RemoveAllToAddListener(() => onDraw(controller));
+
+            static void onEffect(TMCardController controller)
+            {
+                if (!_cardStack.TryGetValue(controller.CardData.GetInstanceID().ToString(), out EventValuePair eventValuePair))
+                {
+                    eventValuePair = new();
+                    _cardStack.Add(controller.CardData.GetInstanceID().ToString(), eventValuePair);
+                }
+
+                eventValuePair.Stack++;
+                TMCardGameManager.Instance.MoveToTomb(controller);
+            }
+
+            static void onDraw(TMCardController controller)
+            {
+                if (!_cardStack.TryGetValue(controller.CardData.GetInstanceID().ToString(), out EventValuePair eventValuePair) || eventValuePair.Stack <= 0) return;
+
+                eventValuePair.Stack--;
+                controller.OnEffectEvent.Invoke();
+                TMCardGameManager.Instance.DrawUse(controller);
+            }
         }
 
         public static void AddListenerOnUpdateStack(string cardName, Action<int> onUpdateStack)
@@ -65,27 +83,6 @@ namespace TMCard.Effect
             if (!_cardStack.TryGetValue(cardName, out EventValuePair eventValuePair) || eventValuePair.OnUpdateStack is null) return;
 
             eventValuePair.OnUpdateStack = null;
-        }
-
-        private void onEffect(TMCardController controller)
-        {
-            if (!_cardStack.TryGetValue(controller.CardData.GetInstanceID().ToString(), out EventValuePair eventValuePair))
-            {
-                eventValuePair = new();
-                _cardStack.Add(controller.CardData.GetInstanceID().ToString(), eventValuePair);
-            }
-
-            eventValuePair.Stack++;
-            TMCardGameManager.Instance.MoveToTomb(controller);
-        }
-
-        private void onDraw(TMCardController controller)
-        {
-            if (!_cardStack.TryGetValue(controller.CardData.GetInstanceID().ToString(), out EventValuePair eventValuePair) || eventValuePair.Stack <= 0) return;
-
-            eventValuePair.Stack--;
-            controller.OnEffectEvent.Invoke();
-            TMCardGameManager.Instance.DrawUse(controller);
         }
 
         public InstallationEffect() : base("Installation") {}

@@ -19,6 +19,22 @@ namespace TMCard.Runtime
     [DisallowMultipleComponent]
     public sealed class TMCardHandUIController : MonoBehaviour
     {
+        private readonly struct SortCardEventPair
+        {
+            public TMCardController Owner { get; }
+            public Action<TMCardController> EndedCallback { get; }
+            public List<MMF_Feedback> PrefixEvent { get; }
+            public List<MMF_Feedback> SuffixEvent { get; }
+
+            public SortCardEventPair(TMCardController owner, Action<TMCardController> endedCallback, List<MMF_Feedback> prefixEvent, List<MMF_Feedback> suffixEvent)
+            {
+                Owner = owner;
+                EndedCallback = endedCallback;
+                PrefixEvent = prefixEvent;
+                SuffixEvent = suffixEvent;
+            }
+        }
+
         [field: Header("Transform")]
         [field: SerializeField, SelectableSerializeField] public RectTransform DeckTransform { get; private set; }
         [field: SerializeField, SelectableSerializeField] public RectTransform HandTransform { get; private set; }
@@ -37,7 +53,7 @@ namespace TMCard.Runtime
 
         [SerializeField] private List<TMCardController> _cards = new(5);
 
-        private readonly List<TMCardController> _sortQueue = new();
+        private readonly Queue<SortCardEventPair> _sortQueue = new();
         private bool _hasSortingCard = false;
 
         private void Awake()
@@ -167,29 +183,8 @@ namespace TMCard.Runtime
 
             void onEndedSort()
             {
-                Debug.Log("Ended");
-
-                endedSortCall?.Invoke(card);
                 card.EventSender.OnCompletedEndEvent.RemoveListener(onEndedSort);
-            }
-        }
-
-        public void SortCardsInOrder(int startIndex = 0, Action<TMCardController> endedSortCall = null)
-        {
-            StartCoroutine(iESortCardInOrder(startIndex, _cards, endedSortCall));
-
-            IEnumerator iESortCardInOrder(int startIndex, IEnumerable<TMCardController> cards, Action<TMCardController> endedSortCall)
-            {
-                List<TMCardController> cardList = cards.ToList();
-
-                for (int i = startIndex; i < cardList.Count; i++)
-                {
-                    TMCardController pivot = cardList[i];
-                    WaitUntil waitUntil = new(() => !pivot.EventSender.IsPlaying);
-
-                    sortCard(_cardSorter.ArrangeCard(_cards, i, HandTransform), 0.5f, null, null, endedSortCall);
-                    yield return waitUntil; // .. 카드 UI가 드로우 중이라면
-                }
+                endedSortCall?.Invoke(card);
             }
         }
 
@@ -200,48 +195,36 @@ namespace TMCard.Runtime
 
         public void PushCardInSortQueue(TMCardController controller, Action<TMCardController> endedSortCall = null, List<MMF_Feedback> prefixEvent = null, List<MMF_Feedback> suffixEvent = null)
         {
-            _sortQueue.Add(controller);
+            _sortQueue.Enqueue(new(controller, endedSortCall, prefixEvent, suffixEvent));
             setCard(controller);
 
             // .. 큐에 더 이상 정렬 대기중인 카드가 없을때
-            sortQueue(endedSortCall, prefixEvent, suffixEvent);
-        }
-
-        public void PushCardInSortQueueFirst(TMCardController controller, Action<TMCardController> endedSortCall = null, List<MMF_Feedback> prefixEvent = null, List<MMF_Feedback> suffixEvent = null)
-        {
-            _sortQueue.Insert(0, controller);
-            setCard(controller);
-
-            sortQueue(endedSortCall, prefixEvent, suffixEvent);
-        }
-
-        private void sortQueue(Action<TMCardController> endedSortCall, List<MMF_Feedback> prefixEvent, List<MMF_Feedback> suffixEvent)
-        {
-            // .. 큐에 더 이상 정렬 대기중인 카드가 없을때
-            if (_sortQueue.Count <= 1 && !_hasSortingCard)
+            if (!_hasSortingCard)
             {
-                sortCard();
+                sortCard(this);
             }
 
-            void sortCard()
+            static void sortCard(TMCardHandUIController handController)
             {
-                _hasSortingCard = _sortQueue.TryPopFirst(out TMCardController selectedCard);
+                handController._hasSortingCard = handController._sortQueue.TryDequeue(out SortCardEventPair selectedCard);
 
-                Debug.Log(_sortQueue.Count);
-                Debug.Log(_hasSortingCard);
-
-                if (_hasSortingCard)
+                if (handController._hasSortingCard)
                 {
-                    _cards.Add(selectedCard);
-                    SortCards(0.5f, endedSortCall, prefixEvent, suffixEvent);
-                    selectedCard.EventSender.OnCompletedEndEvent.AddListener(sortCard);
-                    selectedCard.EventSender.OnCompletedEndEvent.AddListener(onCompleted);
+                    Debug.Log(handController._sortQueue.Count);
+                    Debug.Log(selectedCard.EndedCallback.Target);
 
-                    void onCompleted()
-                    {
-                        selectedCard.EventSender.OnCompletedEndEvent.RemoveListener(onCompleted);
-                        selectedCard.EventSender.OnCompletedEndEvent.RemoveListener(sortCard);
-                    }
+                    handController._cards.Add(selectedCard.Owner);
+                    selectedCard.Owner.EventSender.OnCompletedEndEvent.AddListener(OnSortCompleted);
+                    handController.SortCards(0.5f, selectedCard.EndedCallback, selectedCard.PrefixEvent, selectedCard.SuffixEvent);
+                }
+
+                void OnSortCompleted()
+                {
+                    // 이벤트 발생 시 리스너 제거
+                    selectedCard.Owner.EventSender.OnCompletedEndEvent.RemoveListener(OnSortCompleted);
+
+                    // 즉시 다음 카드 처리
+                    sortCard(handController);
                 }
             }
         }

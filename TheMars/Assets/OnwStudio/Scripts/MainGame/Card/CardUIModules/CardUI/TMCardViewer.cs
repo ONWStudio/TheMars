@@ -62,7 +62,7 @@ namespace TMCard.Runtime
                     labelText.fontSizeMin = labelText.fontSizeMax * 0.75f;
                     labelText.color = Color.red;
 
-                    if (!localizable.StringOption.TrySetOption(this, labelText, out LocalizeStringEvent localizeStringEvent)) // .. AddComponent
+                    if (!localizable.StringOption.TrySetOption(this, label => labelText.text = label, out LocalizeStringEvent localizeStringEvent)) // .. AddComponent
                     {
                         Debug.LogWarning("UI가 초기화 되지 않았습니다");
                     }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using MoreMountains.Feedbacks;
 using Onw.Attribute;
-using Onw.Extensions;
+using Onw.Coroutine;
 
 namespace Onw.Event
 {
@@ -40,12 +40,25 @@ namespace Onw.Event
 
         private void OnDestroy()
         {
-            onCompletedEvents();
+            stopSenderAndDisable();
         }
 
         private void OnDisable()
         {
+            stopSenderAndDisable();
+        }
+
+        private void stopSenderAndDisable()
+        {
+            stopSender();
             onCompletedEvents();
+        }
+
+        private void stopSender()
+        {
+            EventPlayer.StopFeedbacks();
+            EventPlayer.FeedbacksList.Clear();
+            this.StopCoroutineIfNotNull(_playCoroutine);
         }
 
         /// <summary>
@@ -67,13 +80,7 @@ namespace Onw.Event
             IsPlaying = true;
             OnStartEndEvent.Invoke();
 
-            EventPlayer.StopFeedbacks();
-            EventPlayer.FeedbacksList.Clear();
-
-            if (_playCoroutine is not null) // .. 기존 이벤트 강제종료
-            {
-                StopCoroutine(_playCoroutine);
-            }
+            stopSender();
 
             _playCoroutine = StartCoroutine(iEPlayFeedbacks(feedbacks));
         }
@@ -82,9 +89,6 @@ namespace Onw.Event
         {
             if (!IsPlaying) return;
 
-#if DEBUG
-            Debug.Log("Event Completed!");
-#endif
             OnCompletedBeginEvent.Invoke();
             IsPlaying = false;
             OnCompletedEndEvent.Invoke();
