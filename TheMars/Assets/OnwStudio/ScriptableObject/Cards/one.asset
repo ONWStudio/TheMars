@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
-  m_Name: Card_No.6
+  m_Name: one
   m_EditorClassIdentifier: 
   <StackID>k__BackingField: 0
   <RequiredResource>k__BackingField: 0
@@ -24,9 +24,9 @@ MonoBehaviour:
   <CardName>k__BackingField:
     _localizedString:
       m_TableReference:
-        m_TableCollectionName: 
+        m_TableCollectionName: GUID:d980be908d5ad4cfc8c5ca05a4f17d26
       m_TableEntryReference:
-        m_KeyId: 0
+        m_KeyId: 26343366656
         m_Key: 
       m_FallbackState: 0
       m_WaitForCompletion: 0

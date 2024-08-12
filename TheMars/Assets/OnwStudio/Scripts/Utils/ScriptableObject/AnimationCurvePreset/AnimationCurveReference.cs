@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Onw.ScritableObjects
+namespace Onw.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "AnimcaitonCurve", menuName = "Scriptable Object/Animation Curve")]
     public sealed class AnimationCurveReference : ScriptableObject

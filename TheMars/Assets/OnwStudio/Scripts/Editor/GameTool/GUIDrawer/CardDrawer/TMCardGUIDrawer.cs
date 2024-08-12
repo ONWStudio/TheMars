@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using Onw.Editor.GUI;
 using TMCard;
+using Onw.ScriptableObjects.Editor;
+using Onw.Editor.GUI;
 using AddressableAssetBundleSpace;
 using static Onw.Editor.EditorGUIHelper;
 
@@ -39,9 +40,8 @@ namespace TMGUITool
                 {
                     if (!GUILayout.Button("새 카드 추가")) return;
 
-                    _cards.Add(DataHandler<TMCardData>.CreateScriptableObject(DATA_PATH, $"Card_No.{_cards.Count + 1}"));
-                    insertLocalizingOptions(_cards[^1]);
-                    DataHandler<TMCardData>.SaveData(_cards[^1]);
+                    _cards.Add(ScriptableObjectHandler<TMCardData>.CreateScriptableObject(DATA_PATH, $"Card_No.{_cards.Count + 1}"));
+                    ScriptableObjectHandler<TMCardData>.SaveData(_cards[^1]);
                 });
 
                 int page = Page - 1;
@@ -57,8 +57,7 @@ namespace TMGUITool
             public void LoadDataFromLocal()
             {
                 _cards.Clear();
-                _cards.AddRange(DataHandler<TMCardData>.LoadAllScriptableObjects());
-                _cards.ForEach(insertLocalizingOptions);
+                _cards.AddRange(ScriptableObjectHandler<TMCardData>.LoadAllScriptableObjects());
             }
 
             public void SaveDataToLocal()
@@ -68,11 +67,6 @@ namespace TMGUITool
                     AddressableAssetBundleCreator
                         .CreateAssetBundle($"TMCard_{i + 1}", "TMCardData", _cards[i], "TMCardData");
                 }
-            }
-
-            private void insertLocalizingOptions(TMCardData cardData)
-            {
-
             }
         }
     }

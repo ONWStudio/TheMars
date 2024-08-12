@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using MoreMountains.Feedbacks;
 using Onw.Extensions;
 using Onw.Attribute;
 using Onw.Manager;
 using Onw.Event;
-using MoreMountains.Feedbacks;
-using Onw.Coroutine;
 
 namespace TMCard.Runtime
 {

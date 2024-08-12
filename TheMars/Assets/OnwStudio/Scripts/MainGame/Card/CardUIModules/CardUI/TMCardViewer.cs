@@ -64,7 +64,7 @@ namespace TMCard.Runtime
 
                     if (!localizable.StringOption.TrySetOption(this, label => labelText.text = label, out LocalizeStringEvent localizeStringEvent)) // .. AddComponent
                     {
-                        Debug.LogWarning("UI가 초기화 되지 않았습니다");
+                        Debug.LogWarning("모노비하이비어가 아닙니다");
                     }
                 }
             }
