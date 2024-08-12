@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace Onw.Attribute.Editor
+namespace Onw.Editor
 {
-    internal abstract class InitializablePropertyDrawer : PropertyDrawer
+    public abstract class InitializablePropertyDrawer : PropertyDrawer
     {
         private bool _isInitialized = false;
 

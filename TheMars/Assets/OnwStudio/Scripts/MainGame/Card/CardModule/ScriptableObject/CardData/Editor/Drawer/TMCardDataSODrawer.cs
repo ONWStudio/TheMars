@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using Onw.Editor;
+using Onw.Helper;
 using Onw.ScriptableObjects.Editor;
 using TMCard.Runtime;
 
@@ -120,10 +121,10 @@ namespace TMCard.Editor
 
         private void OnDestroy()
         {
-            EditorGUIHelper.DestroyObjectByComponent(ref _previewInstance);
-            EditorGUIHelper.DestroyObjectByComponent(ref _previewCamera);
-            EditorGUIHelper.DestroyObjectByComponent(ref _previewCanvas);
-            EditorGUIHelper.ReleaseRenderTexture(ref _renderTexture);
+            OnwUnityHelper.DestroyImmediateObjectByComponent(ref _previewInstance);
+            OnwUnityHelper.DestroyImmediateObjectByComponent(ref _previewCamera);
+            OnwUnityHelper.DestroyImmediateObjectByComponent(ref _previewCanvas);
+            OnwUnityHelper.ReleaseRenderTexture(ref _renderTexture);
             EditorSceneManager.ClosePreviewScene(_previewScene);
         }
     }

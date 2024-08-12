@@ -60,7 +60,7 @@ namespace TMGUITool
                 if (_guiDrawers[_selectedTab] is not IPagable pager) return;
 
                 pager.Page = EditorGUILayout.IntField(
-                    $"Page {pager.MaxPage} / {pager.Page}",
+                    $"Page {pager.Page} / {pager.MaxPage}",
                     pager.Page);
 
                 System.Action pagingCallback = null;

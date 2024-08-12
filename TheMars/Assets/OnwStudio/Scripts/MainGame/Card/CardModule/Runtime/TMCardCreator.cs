@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Onw.ScriptableObjects;
+using Onw.Attribute;
 using Onw.Manager;
 
 namespace TMCard.Runtime
 {
     public sealed class TMCardCreator : Singleton<TMCardCreator>
     {
-        [SerializeField] private List<TMCardData> _cards = new();
+        [SerializeField] private LoadableScriptableObject<TMCardData> _cards = new();
         [SerializeField] private TMCardController _templatePrefab = null;
 
         protected override void Init() {}
