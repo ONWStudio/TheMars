@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <StackID>k__BackingField: 0
   <RequiredResource>k__BackingField: 0
-  <Resource>k__BackingField: 10
+  <Resource>k__BackingField: 0
   <CardKind>k__BackingField: 1
   <CardGrade>k__BackingField: 0
   <CardGroup>k__BackingField: 0
-  <CardImage>k__BackingField: {fileID: 21300000, guid: 1ca0e8f96f4106a4a8404447828a385d,
+  <CardImage>k__BackingField: {fileID: 21300000, guid: 15029ce663337054bb0c0a31a5746af5,
     type: 3}
   <IsCustomDescription>k__BackingField: 
   <CardName>k__BackingField:
@@ -31,8 +31,22 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-  _effectCreators: []
+  _effectCreators:
+  - rid: 4776280985179258921
+  - rid: 4776280985179258922
+  - rid: 4776280985179258923
   _addtionalConditions: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 4776280985179258921
+      type: {class: TeraResourceEffectCreator, ns: TMCard.Effect.Resource, asm: AssemblyTheMars}
+      data:
+        <Amount>k__BackingField: 100
+    - rid: 4776280985179258922
+      type: {class: InstallationEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+      data: 
+    - rid: 4776280985179258923
+      type: {class: TeraResourceEffectCreator, ns: TMCard.Effect.Resource, asm: AssemblyTheMars}
+      data:
+        <Amount>k__BackingField: -150

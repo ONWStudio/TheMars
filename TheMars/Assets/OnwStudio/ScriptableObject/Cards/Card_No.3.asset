@@ -12,40 +12,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
   m_Name: Card_No.3
   m_EditorClassIdentifier: 
-  <Guid>k__BackingField: aa715d2a-37a7-4aed-b054-572420946c32
   <StackID>k__BackingField: 0
-  <GroupStackID>k__BackingField: 0
   <RequiredResource>k__BackingField: 0
-  <Resource>k__BackingField: 0
-  <CardKind>k__BackingField: 0
+  <Resource>k__BackingField: 30
+  <CardKind>k__BackingField: 1
   <CardGrade>k__BackingField: 0
   <CardGroup>k__BackingField: 0
-  <CardImage>k__BackingField: {fileID: 21300000, guid: b6d3ddf54d5b9b043b6dff48c11ff35c,
+  <CardImage>k__BackingField: {fileID: 21300000, guid: bc340abcf4951964bbfc6c0f5ac2286c,
     type: 3}
   <IsCustomDescription>k__BackingField: 
   <CardName>k__BackingField:
     _localizedString:
       m_TableReference:
-        m_TableCollectionName: 
+        m_TableCollectionName: GUID:d980be908d5ad4cfc8c5ca05a4f17d26
       m_TableEntryReference:
-        m_KeyId: 0
+        m_KeyId: 4694772995231744
         m_Key: 
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
   _effectCreators:
-  - rid: 2707483192642240516
+  - rid: 4776280985179258915
+  - rid: 4776280985179258916
+  - rid: 4776280985179258918
   _addtionalConditions: []
   references:
     version: 2
     RefIds:
-    - rid: 2707483192642240516
-      type: {class: HoldEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
-      data:
-        <FriendlyCard>k__BackingField: {fileID: 11400000, guid: e50cf8b5c6e884f63ba9159d7aff9ae4,
-          type: 2}
-        _holdEffects:
-        - rid: 2707483192642240517
-    - rid: 2707483192642240517
-      type: {class: TMCardSelectEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+    - rid: 4776280985179258915
+      type: {class: DisposableEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
       data: 
+    - rid: 4776280985179258916
+      type: {class: DrawEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+      data:
+        _drawEffectCreators:
+        - rid: 4776280985179258917
+    - rid: 4776280985179258917
+      type: {class: TMCardDropEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+      data:
+        <DropCount>k__BackingField: 1
+    - rid: 4776280985179258918
+      type: {class: TMCardCopyEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+      data:
+        <CopyCardData>k__BackingField: {fileID: 0}
+        <CopyCount>k__BackingField: 1
