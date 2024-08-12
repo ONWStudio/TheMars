@@ -30,7 +30,6 @@ namespace TMCard.Editor
             if (target is not TMCardData targetObject) return;
 
             string name = targetObject.CardName.EntryKeyName;
-
             if (!string.IsNullOrEmpty(name) && name != target.name)
             {
                 string path = AssetDatabase.GetAssetPath(targetObject);
