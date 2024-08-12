@@ -12,6 +12,7 @@ namespace TMCard.Effect
 
         public void Initialize(TMCardDropEffectCreator effectCreator)
         {
+            _dropCount = effectCreator.DropCount;
         }
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
