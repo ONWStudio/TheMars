@@ -23,7 +23,7 @@ namespace TMCard.Effect
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             trigger.OnEffectEvent.AddListener(() 
-                => TMCardGameManager.Instance.CollectCard(controller, _collectCount));
+                => TMCardGameManager.Instance.CollectCard(_collectCount));
         }
     }
 }

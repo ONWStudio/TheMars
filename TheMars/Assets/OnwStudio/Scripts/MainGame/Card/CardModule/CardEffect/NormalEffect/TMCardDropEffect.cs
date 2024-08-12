@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Onw.Attribute;
 using TMCard.Runtime;
 
 namespace TMCard.Effect
 {
-    public sealed class TMCardDropEffect : ITMNormalEffect
+    public sealed class TMCardDropEffect : ITMNormalEffect, ITMInitializableEffect<TMCardDropEffectCreator>
     {
+        [SerializeField, ReadOnly] private int _dropCount = 1;
+
+        public void Initialize(TMCardDropEffectCreator effectCreator)
+        {
+        }
+
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            Debug.Log("카드 버리기");
+            trigger.OnEffectEvent.AddListener(() => Debug.Log("카드 버리기"));
         }
     }
 }

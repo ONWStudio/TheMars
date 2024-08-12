@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,19 +6,17 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Tables;
 using UnityEngine.Localization.Components;
 using Onw.Extensions;
-using Onw.Attribute;
-using TMPro;
 
 namespace Onw.Localization
 {
-    [Serializable]
+    [System.Serializable]
     public sealed class LocalizedStringOption
     {
         [SerializeField] private LocalizedString _localizedString;
 
-        public bool TrySetOption(MonoBehaviour monoBehaviour, TextMeshProUGUI tmpText, out LocalizeStringEvent localizeStringEvent)
+        public bool TrySetOption(MonoBehaviour monoBehaviour, UnityAction<string> onChangedText, out LocalizeStringEvent localizeStringEvent)
         {
-            if (!tmpText || !monoBehaviour)
+            if (!monoBehaviour)
             {
                 localizeStringEvent = null;
                 return false;
@@ -42,7 +39,7 @@ namespace Onw.Localization
                 }
             }
 
-            localizeStringEvent.OnUpdateString.AddListener(text => tmpText.text = text);
+            localizeStringEvent.OnUpdateString.AddListener(onChangedText);
             localizeStringEvent.OnUpdateString.SetPersistentListenerState(UnityEventCallState.EditorAndRuntime);
             localizeStringEvent.RefreshString();
 

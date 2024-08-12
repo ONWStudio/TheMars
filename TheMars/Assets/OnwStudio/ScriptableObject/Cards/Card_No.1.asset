@@ -12,21 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
   m_Name: Card_No.1
   m_EditorClassIdentifier: 
-  <Guid>k__BackingField: 62ad8d83-1c73-4002-99e2-3d6601836e75
   <StackID>k__BackingField: 0
-  <GroupStackID>k__BackingField: 0
   <RequiredResource>k__BackingField: 0
   <Resource>k__BackingField: 0
-  <CardKind>k__BackingField: 0
+  <CardKind>k__BackingField: 1
   <CardGrade>k__BackingField: 0
   <CardGroup>k__BackingField: 0
-  <CardImage>k__BackingField: {fileID: 21300000, guid: 4df1ddd2c83f83649b0a1e2444d7461f,
+  <CardImage>k__BackingField: {fileID: 21300000, guid: e73be87636869234498a5156aa80fd7a,
     type: 3}
   <IsCustomDescription>k__BackingField: 
   <CardName>k__BackingField:
     _localizedString:
       m_TableReference:
-        m_TableCollectionName: 
+        m_TableCollectionName: GUID:d980be908d5ad4cfc8c5ca05a4f17d26
       m_TableEntryReference:
         m_KeyId: 0
         m_Key: 
@@ -34,17 +32,12 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
   _effectCreators:
-  - rid: 1917347228981133314
+  - rid: 3847364081704763484
   _addtionalConditions: []
   references:
     version: 2
     RefIds:
-    - rid: 1917347228981133314
-      type: {class: DrawEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
-      data:
-        _drawEffectCreators:
-        - rid: 1917347251055493120
-    - rid: 1917347251055493120
+    - rid: 3847364081704763484
       type: {class: TMCardDrawEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
       data:
         <DrawCount>k__BackingField: 1

@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
   m_Name: Card_No.2
   m_EditorClassIdentifier: 
-  <Guid>k__BackingField: a8f3cc4b-dce2-425b-afed-1bbd8fe75cd8
   <StackID>k__BackingField: 0
-  <GroupStackID>k__BackingField: 0
   <RequiredResource>k__BackingField: 0
   <Resource>k__BackingField: 0
   <CardKind>k__BackingField: 0
@@ -35,20 +33,10 @@ MonoBehaviour:
       m_LocalVariables: []
   _effectCreators:
   - rid: 2707483192642240513
-  - rid: 2707483192642240514
   _addtionalConditions: []
   references:
     version: 2
     RefIds:
-    - rid: 1917347274156146691
-      type: {class: TMCardDrawEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
-      data:
-        <DrawCount>k__BackingField: 1
     - rid: 2707483192642240513
       type: {class: RecyclingEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
       data: 
-    - rid: 2707483192642240514
-      type: {class: DropEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
-      data:
-        _cardEffectCreators:
-        - rid: 1917347274156146691
