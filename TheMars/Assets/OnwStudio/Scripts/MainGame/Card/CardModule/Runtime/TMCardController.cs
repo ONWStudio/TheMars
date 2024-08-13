@@ -1,16 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Onw.Components.Movement;
-using Onw.Extensions;
-using Onw.Interface;
 using Onw.Attribute;
 using Onw.Event;
 using TMCard.Effect;
-using TMCard.Effect.Resource;
 
 namespace TMCard.Runtime
 {
@@ -158,7 +154,8 @@ namespace TMCard.Runtime
         /// <param name="pointerEventData"></param>
         private void onClickCard(PointerEventData pointerEventData)
         {
-            if (!OnCard || !CardData.IsAvailable(1)) return;
+            if (!OnCard) return;
+            // if (!CardData.IsAvailable(1)) return;
 
             TMCardGameManager.Instance.OnClickCard(this);
         }

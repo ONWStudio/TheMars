@@ -35,14 +35,20 @@ namespace Onw.Event
 
             _playedFeedbackCoroutine = Owner
                 .StartCoroutine(iEPlayAllFeedback(position, feedbacksIntensity));
+
+            IEnumerator iEPlayAllFeedback(Vector3 position, float feedbacksIntensity)
+            {
+                Feedbacks
+                    .ForEach(feedback => feedback.Play(position, feedbacksIntensity));
+
+                yield return CoroutineHelper.WaitForSeconds(FeedbackDuration);
+                IsPlaying = false;
+            }
         }
 
         protected override void CustomStopFeedback(Vector3 position, float feedbacksIntensity = 1.0f)
         {
-            if (_playedFeedbackCoroutine is not null)
-            {
-                Owner.StopCoroutine(_playedFeedbackCoroutine);
-            }
+            Owner.StopCoroutineIfNotNull(_playedFeedbackCoroutine);
 
             Feedbacks
                 .ForEach(feedback => feedback.Stop(position, feedbacksIntensity));
@@ -50,19 +56,7 @@ namespace Onw.Event
 
         protected override void CustomReset()
         {
-            if (_playedFeedbackCoroutine is not null)
-            {
-                Owner.StopCoroutine(_playedFeedbackCoroutine);
-            }
-        }
-
-        private IEnumerator iEPlayAllFeedback(Vector3 position, float feedbacksIntensity)
-        {
-            Feedbacks
-                .ForEach(feedback => feedback.Play(position, feedbacksIntensity));
-
-            yield return CoroutineHelper.WaitForSeconds(FeedbackDuration);
-            IsPlaying = false;
+            Owner.StopCoroutineIfNotNull(_playedFeedbackCoroutine);
         }
     }
 }

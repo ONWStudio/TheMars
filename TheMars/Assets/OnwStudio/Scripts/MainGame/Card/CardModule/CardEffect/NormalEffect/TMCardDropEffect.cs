@@ -17,7 +17,7 @@ namespace TMCard.Effect
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            trigger.OnEffectEvent.AddListener(() => Debug.Log("카드 버리기"));
+            trigger.OnEffectEvent.AddListener(() => { });
         }
     }
 }

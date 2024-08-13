@@ -203,19 +203,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e7c922b7c3944aabf8db33032e9c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <OnStartBeginEvent>k__BackingField:
+  <OnPlay>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  <OnStartEndEvent>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <OnComplitedBeginEvent>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <OnComplitedEndEvent>k__BackingField:
+  <OnCompleted>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
   <EventPlayer>k__BackingField: {fileID: 854004821501962612}
+  <IsPlaying>k__BackingField: 0
 --- !u!114 &3845239031405876139
 MonoBehaviour:
   m_ObjectHideFlags: 0

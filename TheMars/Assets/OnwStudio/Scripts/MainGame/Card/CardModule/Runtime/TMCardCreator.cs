@@ -7,12 +7,11 @@ using Onw.Manager;
 
 namespace TMCard.Runtime
 {
-    public sealed class TMCardCreator : Singleton<TMCardCreator>
+    [System.Serializable]
+    public sealed class TMCardCreator
     {
-        [SerializeField] private LoadableScriptableObject<TMCardData> _cards = new();
+        [SerializeField] private List<TMCardData> _cards = new();
         [SerializeField] private TMCardController _templatePrefab = null;
-
-        protected override void Init() {}
 
         public List<TMCardController> CreateCards(int createCount)
         {
@@ -23,7 +22,7 @@ namespace TMCard.Runtime
             for (int i = 0; i < createCount; i++)
             {
                 TMCardData cardData = _cards[Random.Range(0, _cards.Count)];
-                cardList.Add(Instantiate(_templatePrefab));
+                cardList.Add(Object.Instantiate(_templatePrefab));
                 cardList[i].CardData = cardData;
                 cardList[i].Initialize();
             }
@@ -36,7 +35,7 @@ namespace TMCard.Runtime
             if (_cards.Count <= 0) return null;
 
             TMCardData cardData = _cards[Random.Range(0, _cards.Count)];
-            TMCardController card = Instantiate(_templatePrefab);
+            TMCardController card = Object.Instantiate(_templatePrefab);
             card.CardData = cardData;
             card.Initialize();
 

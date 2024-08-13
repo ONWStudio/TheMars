@@ -31,13 +31,8 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-  _effectCreators:
-  - rid: 4776280985179258919
+  _effectCreators: []
   _addtionalConditions: []
   references:
     version: 2
-    RefIds:
-    - rid: 4776280985179258919
-      type: {class: TMCardDrawEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
-      data:
-        <DrawCount>k__BackingField: 2
+    RefIds: []

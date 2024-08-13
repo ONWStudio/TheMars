@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,24 +20,17 @@ namespace Onw.Event
         /// <summary>
         /// .. 이벤트 메서드 호출 시 IsPlaying이 true가 되기전에 호출됩니다
         /// </summary>
-        [field: SerializeField] public UnityEvent OnStartBeginEvent { get; private set; } = new();
-        /// <summary>
-        /// .. 이벤트 메서드 호출 시 IsPlaying이 true가 된 후 호출됩니다
-        /// </summary>
-        [field: SerializeField] public UnityEvent OnStartEndEvent { get; private set; } = new();
-        /// <summary>
-        /// .. 이벤트 메서드 호출 시 IsPlaying이 false가 되기 전에 호출됩니다
-        /// </summary>
-        [field: SerializeField] public UnityEvent OnCompletedBeginEvent { get; private set; } = new();
+        [field: SerializeField] public UnityEvent OnPlay { get; private set; } = new();
         /// <summary>
         /// .. 이벤트 메서드 호출 시 IsPlaying이 false가 된 후 호출됩니다
         /// </summary>
-        [field: SerializeField] public UnityEvent OnCompletedEndEvent { get; private set; } = new();
+        [field: SerializeField] public UnityEvent OnCompleted { get; private set; } = new();
 
         [field: SerializeField, InitializeRequireComponent] public MMF_Player EventPlayer { get; private set; } = null;
         [field: SerializeField, ReadOnly] public bool IsPlaying { get; private set; } = false;
 
         private Coroutine _playCoroutine = null;
+        private readonly Queue<IEnumerable<MMF_Feedback>> _eventQueue = new();
 
         private void OnDestroy()
         {
@@ -56,9 +50,10 @@ namespace Onw.Event
 
         private void stopSender()
         {
+            this.StopCoroutineIfNotNull(_playCoroutine);
             EventPlayer.StopFeedbacks();
             EventPlayer.FeedbacksList.Clear();
-            this.StopCoroutineIfNotNull(_playCoroutine);
+            _eventQueue.Clear();
         }
 
         /// <summary>
@@ -76,33 +71,60 @@ namespace Onw.Event
         /// <param name="feedbacks"></param>
         public void PlayEvents(IEnumerable<MMF_Feedback> feedbacks)
         {
-            OnStartBeginEvent.Invoke();
+            OnPlay.Invoke();
             IsPlaying = true;
-            OnStartEndEvent.Invoke();
 
             stopSender();
 
-            _playCoroutine = StartCoroutine(iEPlayFeedbacks(feedbacks));
+            _eventQueue.Enqueue(feedbacks);
+            _playCoroutine = StartCoroutine(iEPlayFeedbacks());
+        }
+
+        public void QueueEvents(IEnumerable<MMF_Feedback> feedbacks)
+        {
+            if (!IsPlaying)
+            {
+                PlayEvents(feedbacks);
+            }
+            else
+            {
+                _eventQueue.Enqueue(feedbacks);
+            }
+        }
+
+        public void QueueEvent(params MMF_Feedback[] feedbacks)
+        {
+            if (!IsPlaying)
+            {
+                PlayEvents(feedbacks);
+            }
+            else
+            {
+                _eventQueue.Enqueue(feedbacks);
+            }
         }
 
         private void onCompletedEvents()
         {
             if (!IsPlaying) return;
 
-            OnCompletedBeginEvent.Invoke();
             IsPlaying = false;
-            OnCompletedEndEvent.Invoke();
+            OnCompleted.Invoke();
+            _playCoroutine = null;
         }
 
-        private IEnumerator iEPlayFeedbacks(IEnumerable<MMF_Feedback> feedbacks)
+        private IEnumerator iEPlayFeedbacks()
         {
-            foreach (MMF_Feedback feedback in feedbacks)
+            while (_eventQueue.TryDequeue(out IEnumerable<MMF_Feedback> feedbacks))
             {
-                EventPlayer.AddFeedback(feedback);
-                EventPlayer.Initialization();
+                foreach (MMF_Feedback feedback in feedbacks)
+                {
+                    EventPlayer.AddFeedback(feedback);
+                    EventPlayer.Initialization();
 
-                yield return EventPlayer.PlayFeedbacksCoroutine(transform.position);
-                EventPlayer.FeedbacksList.Clear();
+                    yield return EventPlayer.PlayFeedbacksCoroutine(transform.position);
+                    EventPlayer.FeedbacksList.Clear();
+                }
             }
 
             onCompletedEvents();

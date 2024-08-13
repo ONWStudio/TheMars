@@ -176,7 +176,12 @@ MonoBehaviour:
   <OnUsedCard>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  _cardHandImporter: {fileID: 1133853264}
+  _cardCreator:
+    _cards:
+    - {fileID: 11400000, guid: 47d4e20895d6b4d6eb1b77bf07590bea, type: 2}
+    - {fileID: 11400000, guid: 9eb5dbe6ee0a81a498a7c21cd4c1525f, type: 2}
+    _templatePrefab: {fileID: 38075375519361866, guid: d7803182f172a42c699b32751eb7fade,
+      type: 3}
   _cardSystemCamera: {fileID: 1515806359}
 --- !u!1 &222218908
 GameObject:
@@ -279,61 +284,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cards: []
---- !u!1 &441722212
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 441722214}
-  - component: {fileID: 441722213}
-  m_Layer: 0
-  m_Name: TMCardCreator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &441722213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 441722212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffcf1381a14184e1dba3e8627665a2d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cards:
-    _scriptableObjects:
-    - {fileID: 11400000, guid: 9eb5dbe6ee0a81a498a7c21cd4c1525f, type: 2}
-    - {fileID: 11400000, guid: b2382fa66b5dfa44cbdd1036e1c81848, type: 2}
-    - {fileID: 11400000, guid: 9a3392ef87aae45158496fe861eef269, type: 2}
-    - {fileID: 11400000, guid: 995fb5ae507e14c958426843467466c4, type: 2}
-    - {fileID: 11400000, guid: 53c6a5c9251ed114c9150dcb0cb94d90, type: 2}
-    - {fileID: 11400000, guid: e50cf8b5c6e884f63ba9159d7aff9ae4, type: 2}
-    - {fileID: 11400000, guid: 33ed742e206ab4f4082990d2aab36a80, type: 2}
-  _templatePrefab: {fileID: 38075375519361866, guid: d7803182f172a42c699b32751eb7fade,
-    type: 3}
---- !u!4 &441722214
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 441722212}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.703854, y: -1.3502398, z: -11.668207}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &466624811
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,7 +606,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 99719989}
         m_TargetAssemblyTypeName: TMCard.Runtime.TMCardGameManager, AssemblyTheMars
-        m_MethodName: DrawCardsFromDeck
+        m_MethodName: TurnEndToDrawCardsFromDeck
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1394,50 +1344,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 921509767}
   m_CullTransparentMesh: 1
---- !u!1 &1133853263
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1133853265}
-  - component: {fileID: 1133853264}
-  m_Layer: 0
-  m_Name: TMCardHandImporter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1133853264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133853263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aef1881176d934a35817137dbc399e9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1133853265
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133853263}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.608766, y: -0.15525663, z: 1782.3207}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1149772027
 GameObject:
   m_ObjectHideFlags: 0
@@ -2546,7 +2452,5 @@ SceneRoots:
   - {fileID: 1515806360}
   - {fileID: 1149772030}
   - {fileID: 1279074345}
-  - {fileID: 1133853265}
   - {fileID: 99719988}
-  - {fileID: 441722214}
   - {fileID: 647099833}

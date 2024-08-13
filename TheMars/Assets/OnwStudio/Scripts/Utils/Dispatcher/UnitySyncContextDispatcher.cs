@@ -22,7 +22,6 @@ namespace Onw.Dispatcher
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Initialize()
         {
-            Debug.Log("Run Unity SyncContext Dispatcher");
             // .. InitializedOnLoadMethod를 호출하는 Context는 유니티의 메인 스레드이므로 현재 선택된 스레드는 메인 스레드이다 현재 스레드를 캐쉬해둔다
             _unityContext = SynchronizationContext.Current;
             Application.quitting += () =>
@@ -66,8 +65,11 @@ namespace Onw.Dispatcher
 
             lock (_executionQueue)
             {
-                _executionQueue.Enqueue(action);
-                _unityContext.Post(_ => ExecuteActions(), null); // .. 유니티 스레드의 메세지큐에 동기화 시켜서 호출할 메서드를 보낸다
+                if (action is not null)
+                {
+                    _executionQueue.Enqueue(action);
+                    _unityContext.Post(_ => ExecuteActions(), null); // .. 유니티 스레드의 메세지큐에 동기화 시켜서 호출할 메서드를 보낸다
+                }
             }
         }
     }

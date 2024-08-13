@@ -19,7 +19,7 @@ namespace TMCard.Effect
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             trigger.OnEffectEvent.AddListener(()
-                => TMCardGameManager.Instance.DrawCardFromDeck(_drawCount));
+                => TMCardGameManager.Instance.DrawCardFromDeck(controller, _drawCount));
         }
     }
 }
