@@ -7,17 +7,20 @@ namespace Michsky.UI.Heat
     public class CanvasGroupAnimator : MonoBehaviour
     {
         [Header("Resources")]
-        [SerializeField] private CanvasGroup canvasGroup;
+        [SerializeField]
+        private CanvasGroup canvasGroup;
 
         [Header("Settings")]
         [Tooltip("Enable or disable the object after the animation.")]
-        [SerializeField] private bool setActive = true;
+        [SerializeField]
+        private bool setActive = true;
         [Range(0.5f, 10)] public float fadeSpeed = 4f;
-        [SerializeField] private StartBehaviour startBehaviour;
+        [SerializeField]
+        private StartBehaviour startBehaviour;
 
         public enum StartBehaviour { Default, FadeIn, FadeOut }
 
-        void Start()
+        private void Start()
         {
             if (canvasGroup == null) { canvasGroup = GetComponent<CanvasGroup>(); }
             if (startBehaviour == StartBehaviour.FadeIn) { FadeIn(); }
@@ -42,7 +45,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("FadeOutHelper");
         }
 
-        IEnumerator FadeInHelper()
+        private IEnumerator FadeInHelper()
         {    
             canvasGroup.alpha = 0;
             canvasGroup.interactable = true;
@@ -57,7 +60,7 @@ namespace Michsky.UI.Heat
             canvasGroup.alpha = 1;
         }
 
-        IEnumerator FadeOutHelper()
+        private IEnumerator FadeOutHelper()
         {
             canvasGroup.alpha = 1;
 

@@ -13,7 +13,7 @@ namespace TcgEngine.Client
 
         private static RewardManager instance;
 
-        void Awake()
+        private void Awake()
         {
             instance = this;
         }
@@ -23,7 +23,7 @@ namespace TcgEngine.Client
             GameClient.Get().onGameEnd += OnGameEnd;
         }
 
-        void OnGameEnd(int winner)
+        private void OnGameEnd(int winner)
         {
             int player_id = GameClient.Get().GetPlayerID();
             if (GameClient.game_settings.game_type == GameType.Adventure && winner == player_id)

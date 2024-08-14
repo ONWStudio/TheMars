@@ -10,7 +10,7 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableEndDragTrigger : ObservableTriggerBase, IEventSystemHandler, IEndDragHandler
     {
-        Subject<PointerEventData> onEndDrag;
+        private Subject<PointerEventData> onEndDrag;
 
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {

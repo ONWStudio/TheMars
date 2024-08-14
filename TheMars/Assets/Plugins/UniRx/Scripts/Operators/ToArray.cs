@@ -5,7 +5,7 @@ namespace UniRx.Operators
 {
     internal class ToArrayObservable<TSource> : OperatorObservableBase<TSource[]>
     {
-        readonly IObservable<TSource> source;
+        private readonly IObservable<TSource> source;
 
         public ToArrayObservable(IObservable<TSource> source)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -18,9 +18,9 @@ namespace UniRx.Operators
             return source.Subscribe(new ToArray(observer, cancel));
         }
 
-        class ToArray : OperatorObserverBase<TSource, TSource[]>
+        private class ToArray : OperatorObserverBase<TSource, TSource[]>
         {
-            readonly List<TSource> list = new List<TSource>();
+            private readonly List<TSource> list = new List<TSource>();
 
             public ToArray(IObserver<TSource[]> observer, IDisposable cancel)
                 : base(observer, cancel)

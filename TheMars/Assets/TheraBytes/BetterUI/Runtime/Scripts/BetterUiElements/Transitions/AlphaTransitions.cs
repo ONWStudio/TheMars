@@ -24,13 +24,13 @@ namespace TheraBytes.BetterUi
         public float FadeDurtaion { get { return fadeDuration; } set { fadeDuration = value; } }
 
         [SerializeField]
-        Graphic target;
+        private Graphic target;
 
         [SerializeField]
-        float fadeDuration = 0.1f;
+        private float fadeDuration = 0.1f;
 
         [SerializeField]
-        List<AlphaTransitionState> states = new List<AlphaTransitionState>();
+        private List<AlphaTransitionState> states = new List<AlphaTransitionState>();
 
 
         public AlphaTransitions(params string[] stateNames)

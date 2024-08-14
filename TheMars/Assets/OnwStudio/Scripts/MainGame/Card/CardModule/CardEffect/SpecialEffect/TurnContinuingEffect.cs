@@ -23,7 +23,7 @@ namespace TMCard.Effect
 
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            controller.OnClickEvent.RemoveAllToAddListener(() => TMCardGameManager.Instance.OnContinuingTurns(controller, ContinuingTurn));
+            controller.OnClickEvent.RemoveAllToAddListener(() => TMCardHelper.Instance.OnContinuingTurns(controller, ContinuingTurn));
         }
 
         public TurnContinuingEffect() : base("TurnContinuing") {}

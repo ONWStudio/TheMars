@@ -6,9 +6,9 @@ namespace UniRx.Operators
 {
     internal class GroupedObservable<TKey, TElement> : IGroupedObservable<TKey, TElement>
     {
-        readonly TKey key;
-        readonly IObservable<TElement> subject;
-        readonly RefCountDisposable refCount;
+        private readonly TKey key;
+        private readonly IObservable<TElement> subject;
+        private readonly RefCountDisposable refCount;
 
         public TKey Key
         {
@@ -32,11 +32,11 @@ namespace UniRx.Operators
 
     internal class GroupByObservable<TSource, TKey, TElement> : OperatorObservableBase<IGroupedObservable<TKey, TElement>>
     {
-        readonly IObservable<TSource> source;
-        readonly Func<TSource, TKey> keySelector;
-        readonly Func<TSource, TElement> elementSelector;
-        readonly int? capacity;
-        readonly IEqualityComparer<TKey> comparer;
+        private readonly IObservable<TSource> source;
+        private readonly Func<TSource, TKey> keySelector;
+        private readonly Func<TSource, TElement> elementSelector;
+        private readonly int? capacity;
+        private readonly IEqualityComparer<TKey> comparer;
 
         public GroupByObservable(IObservable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, int? capacity, IEqualityComparer<TKey> comparer)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -53,14 +53,14 @@ namespace UniRx.Operators
             return new GroupBy(this, observer, cancel).Run();
         }
 
-        class GroupBy : OperatorObserverBase<TSource, IGroupedObservable<TKey, TElement>>
+        private class GroupBy : OperatorObserverBase<TSource, IGroupedObservable<TKey, TElement>>
         {
-            readonly GroupByObservable<TSource, TKey, TElement> parent;
-            readonly Dictionary<TKey, ISubject<TElement>> map;
-            ISubject<TElement> nullKeySubject;
+            private readonly GroupByObservable<TSource, TKey, TElement> parent;
+            private readonly Dictionary<TKey, ISubject<TElement>> map;
+            private ISubject<TElement> nullKeySubject;
 
-            CompositeDisposable groupDisposable;
-            RefCountDisposable refCountDisposable;
+            private CompositeDisposable groupDisposable;
+            private RefCountDisposable refCountDisposable;
 
             public GroupBy(GroupByObservable<TSource, TKey, TElement> parent, IObserver<IGroupedObservable<TKey, TElement>> observer, IDisposable cancel)
                 : base(observer, cancel)
@@ -173,7 +173,7 @@ namespace UniRx.Operators
                 }
             }
 
-            void Error(Exception exception)
+            private void Error(Exception exception)
             {
                 try
                 {

@@ -45,7 +45,7 @@ namespace MoreMountains.Feedbacks
 		[Header("Help settings")]
 		/// if this is true, inspector tips will be shown for MMFeedbacks
 		public bool ShowInspectorTips = true;
-        
+
 		private void OnDestroy(){ _instantiated = false; }
 	}    
 }

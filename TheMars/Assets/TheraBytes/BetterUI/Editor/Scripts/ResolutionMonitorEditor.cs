@@ -11,19 +11,19 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(ResolutionMonitor))]
     public class ResolutionMonitorEditor : UnityEditor.Editor
     {
-        enum Category
+        private enum Category
         {
             ScreenConfigs,
             StaticMethods,
             DpiOverwrites,
         }
 
-        string[] aspectRatioNames;
+        private string[] aspectRatioNames;
 
-        ReorderableList dpiList;
-        SerializedProperty curOptRes, curOptDpi, fallbackName, dpiManager, staticSizerMethods;
-        Category category = Category.ScreenConfigs;
-        Vector2 scroll;
+        private ReorderableList dpiList;
+        private SerializedProperty curOptRes, curOptDpi, fallbackName, dpiManager, staticSizerMethods;
+        private Category category = Category.ScreenConfigs;
+        private Vector2 scroll;
 
         public static string GetButtonText(ScreenTypeConditions config)
         {
@@ -37,7 +37,7 @@ namespace TheraBytes.BetterUi.Editor
                 config.Name);
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             this.staticSizerMethods = serializedObject.FindProperty("staticSizerMethods");
             this.dpiManager = serializedObject.FindProperty("dpiManager");
@@ -415,7 +415,7 @@ namespace TheraBytes.BetterUi.Editor
             ResolutionMonitor.Instance.OptimizedScreens.Insert(idx, config);
         }
 
-        void DrawConfigPart<T>(string title, T obj, Action<T> drawObject)
+        private void DrawConfigPart<T>(string title, T obj, Action<T> drawObject)
             where T : IIsActive
         {
             GUIStyle style = (obj.IsActive) ? EditorStyles.boldLabel : EditorStyles.label;

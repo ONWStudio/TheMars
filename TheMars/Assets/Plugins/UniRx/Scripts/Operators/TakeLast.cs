@@ -6,14 +6,14 @@ namespace UniRx.Operators
 {
     internal class TakeLastObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
+        private readonly IObservable<T> source;
 
         // count
-        readonly int count;
+        private readonly int count;
 
         // duration
-        readonly TimeSpan duration;
-        readonly IScheduler scheduler;
+        private readonly TimeSpan duration;
+        private readonly IScheduler scheduler;
 
         public TakeLastObservable(IObservable<T> source, int count)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -43,10 +43,10 @@ namespace UniRx.Operators
         }
 
         // count
-        class TakeLast : OperatorObserverBase<T, T>
+        private class TakeLast : OperatorObserverBase<T, T>
         {
-            readonly TakeLastObservable<T> parent;
-            readonly Queue<T> q;
+            private readonly TakeLastObservable<T> parent;
+            private readonly Queue<T> q;
 
             public TakeLast(TakeLastObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -84,11 +84,11 @@ namespace UniRx.Operators
         }
 
         // time
-        class TakeLast_ : OperatorObserverBase<T, T>
+        private class TakeLast_ : OperatorObserverBase<T, T>
         {
-            DateTimeOffset startTime;
-            readonly TakeLastObservable<T> parent;
-            readonly Queue<TimeInterval<T>> q;
+            private DateTimeOffset startTime;
+            private readonly TakeLastObservable<T> parent;
+            private readonly Queue<TimeInterval<T>> q;
 
             public TakeLast_(TakeLastObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -128,7 +128,7 @@ namespace UniRx.Operators
                 try { observer.OnCompleted(); } finally { Dispose(); };
             }
 
-            void Trim(TimeSpan now)
+            private void Trim(TimeSpan now)
             {
                 while (q.Count > 0 && now - q.Peek().Interval >= parent.duration)
                 {

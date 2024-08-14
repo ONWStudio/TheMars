@@ -9,13 +9,13 @@ namespace Michsky.UI.Heat
     [AddComponentMenu("Heat UI/Misc/Text Time Counter")]
     public class TextTimeCounter : MonoBehaviour
     {
-        TextMeshProUGUI tmpText;
-        RectTransform tmpRect;
+        private TextMeshProUGUI tmpText;
+        private RectTransform tmpRect;
 
-        int minutes;
-        float seconds;
+        private int minutes;
+        private float seconds;
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (tmpText == null) { tmpText = GetComponent<TextMeshProUGUI>(); }
             if (tmpRect == null) { tmpRect = tmpText.GetComponent<RectTransform>(); }
@@ -33,7 +33,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("Count");
         }
 
-        IEnumerator Count()
+        private IEnumerator Count()
         {
             while (true)
             {

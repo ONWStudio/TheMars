@@ -4,7 +4,7 @@ namespace UniRx.Operators
 {
     internal class OfTypeObservable<TSource, TResult> : OperatorObservableBase<TResult>
     {
-        readonly IObservable<TSource> source;
+        private readonly IObservable<TSource> source;
 
         public OfTypeObservable(IObservable<TSource> source)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -17,7 +17,7 @@ namespace UniRx.Operators
             return source.Subscribe(new OfType(observer, cancel));
         }
 
-        class OfType : OperatorObserverBase<TSource, TResult>
+        private class OfType : OperatorObserverBase<TSource, TResult>
         {
             public OfType(IObserver<TResult> observer, IDisposable cancel)
                 : base(observer, cancel)

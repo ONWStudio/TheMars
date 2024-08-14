@@ -18,7 +18,7 @@ namespace TheraBytes.BetterUi
         public int Bottom { get { return bottom; } set { bottom = value; } }
 
         [SerializeField]
-        int left, right, top, bottom;
+        private int left, right, top, bottom;
 
         public int this[int idx]
         {

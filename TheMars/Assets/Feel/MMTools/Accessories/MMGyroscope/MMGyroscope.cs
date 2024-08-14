@@ -45,7 +45,7 @@ namespace MoreMountains.Tools
 
 		public static Vector3 LerpedCalibratedInputAcceleration { get { GetValues(); return m_LerpedCalibratedInputAcceleration; } }
 		public static Vector3 LerpedCalibratedGyroscopeGravity { get { GetValues(); return m_LerpedCalibratedGyroscopeGravity; } }
-        
+
 		private static Quaternion m_GyroscopeAttitude;
 		private static Vector3 m_GyroscopeRotationRate;
 		private static Vector3 m_GyroscopeAcceleration;

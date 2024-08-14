@@ -20,7 +20,7 @@ namespace MoreMountains.Tools
 		}
 		protected MMSoundManagerSettingsSO _settingsSO;
 		protected MMSoundManager _mmSoundManager;
-        
+
 		private static float _masterVolume, _musicVolume, _sfxVolume, _uiVolume;
 
 		protected Color _originalBackgroundColor;

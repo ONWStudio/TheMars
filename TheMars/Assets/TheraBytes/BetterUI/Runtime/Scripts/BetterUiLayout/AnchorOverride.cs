@@ -37,11 +37,16 @@ namespace TheraBytes.BetterUi
                 UpperRight,
             }
 
-            [SerializeField] RectTransform reference;
-            [SerializeField] ReferenceLocation minX;
-            [SerializeField] ReferenceLocation maxX;
-            [SerializeField] ReferenceLocation minY;
-            [SerializeField] ReferenceLocation maxY;
+            [SerializeField]
+            private RectTransform reference;
+            [SerializeField]
+            private ReferenceLocation minX;
+            [SerializeField]
+            private ReferenceLocation maxX;
+            [SerializeField]
+            private ReferenceLocation minY;
+            [SerializeField]
+            private ReferenceLocation maxY;
 
             public RectTransform Reference { get { return reference; } set { reference = value; } }
             public ReferenceLocation MinX { get { return minX; } }
@@ -55,12 +60,13 @@ namespace TheraBytes.BetterUi
         [Serializable]
         public class AnchorReferenceCollection : IScreenConfigConnection
         {
-            [SerializeField] List<AnchorReference> elements = new List<AnchorReference>();
+            [SerializeField]
+            private List<AnchorReference> elements = new List<AnchorReference>();
 
             public List<AnchorReference> Elements { get { return elements; } }
 
             [SerializeField]
-            string screenConfigName;
+            private string screenConfigName;
             public string ScreenConfigName { get { return screenConfigName; } set { screenConfigName = value; } }
         }
 
@@ -70,19 +76,24 @@ namespace TheraBytes.BetterUi
 
 
         [SerializeField]
-        AnchorReferenceCollection anchorsFallback = new AnchorReferenceCollection();
+        private AnchorReferenceCollection anchorsFallback = new AnchorReferenceCollection();
 
         [SerializeField]
-        AnchorReferenceCollectionConfigCollection anchorsConfigs = new AnchorReferenceCollectionConfigCollection();
+        private AnchorReferenceCollectionConfigCollection anchorsConfigs = new AnchorReferenceCollectionConfigCollection();
 
-        [SerializeField] Modus mode;
-        [SerializeField] bool isAnimated;
-        [SerializeField] float acceleration = 1;
-        [SerializeField] float maxMoveSpeed = 0.05f;
-        [SerializeField] float snapThreshold = 0.002f;
+        [SerializeField]
+        private Modus mode;
+        [SerializeField]
+        private bool isAnimated;
+        [SerializeField]
+        private float acceleration = 1;
+        [SerializeField]
+        private float maxMoveSpeed = 0.05f;
+        [SerializeField]
+        private float snapThreshold = 0.002f;
 
 
-        AnchorReferenceCollection currentAnchors;
+        private AnchorReferenceCollection currentAnchors;
 
         public AnchorReferenceCollection CurrentAnchors
         {
@@ -105,18 +116,18 @@ namespace TheraBytes.BetterUi
 
         public bool IsCurrentlyAnimating { get { return IsCurrentlyAnimating; } }
 
-        Canvas canvas;
+        private Canvas canvas;
 
-        RectTransform RectTransform { get { return this.transform as RectTransform; } }
+        private RectTransform RectTransform { get { return this.transform as RectTransform; } }
 
-        DrivenRectTransformTracker rectTransformTracker = new DrivenRectTransformTracker();
+        private DrivenRectTransformTracker rectTransformTracker = new DrivenRectTransformTracker();
 
-        float currentVelocity = 0;
+        private float currentVelocity = 0;
 
         // instantUpdate doesn't work if triggered before the UI is fully initialized.
         // This counter enforces instantUpdates for the specified number of frames as a workaround.
-        int instantApplyFrames;
-        bool isCurrentlyAnimating;
+        private int instantApplyFrames;
+        private bool isCurrentlyAnimating;
 
         protected override void OnEnable()
         {
@@ -347,7 +358,7 @@ namespace TheraBytes.BetterUi
             return localPos;
         }
 
-        bool TryGetAnchor(AnchorReference anchorRef, out Rect anchorObject)
+        private bool TryGetAnchor(AnchorReference anchorRef, out Rect anchorObject)
         {
             anchorObject = new Rect();
             if (anchorRef.Reference == null)
@@ -401,7 +412,7 @@ namespace TheraBytes.BetterUi
             return false;
         }
 
-        bool IsParentOf(Transform transform)
+        private bool IsParentOf(Transform transform)
         {
             if (transform.parent == this.transform)
                 return true;
@@ -414,7 +425,7 @@ namespace TheraBytes.BetterUi
 
 
 #if UNITY_EDITOR && UNITY_2017_2_OR_NEWER
-        void OnDrawGizmos()
+        private void OnDrawGizmos()
         {
             // Ensure continuous Update calls.
             if (!Application.isPlaying)

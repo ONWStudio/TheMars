@@ -36,14 +36,14 @@ namespace TheraBytes.BetterUi
             public bool HasMaxHeight;
 
             [SerializeField]
-            string screenConfigName;
+            private string screenConfigName;
             public string ScreenConfigName { get { return screenConfigName; } set { screenConfigName = value; } }
         }
 
         [Serializable]
         public class SettingsConfigCollection : SizeConfigCollection<Settings> { }
 
-        RectTransform rectTransform { get { return this.transform as RectTransform; } }
+        private RectTransform rectTransform { get { return this.transform as RectTransform; } }
 
         public Settings CurrentSettings { get { return customSettings.GetCurrentItem(settingsFallback); } }
 
@@ -74,50 +74,50 @@ namespace TheraBytes.BetterUi
         }
 
         [SerializeField]
-        RectTransform source;
+        private RectTransform source;
 
         [SerializeField]
-        Settings settingsFallback = new Settings();
+        private Settings settingsFallback = new Settings();
 
         [SerializeField]
-        SettingsConfigCollection customSettings = new SettingsConfigCollection();
+        private SettingsConfigCollection customSettings = new SettingsConfigCollection();
 
         [SerializeField]
-        FloatSizeModifier minWidthSizerFallback = new FloatSizeModifier(0, 0, 4000);
+        private FloatSizeModifier minWidthSizerFallback = new FloatSizeModifier(0, 0, 4000);
         [SerializeField]
-        FloatSizeConfigCollection minWidthSizers = new FloatSizeConfigCollection();
-
-
-        [SerializeField]
-        FloatSizeModifier minHeightSizerFallback = new FloatSizeModifier(0, 0, 4000);
-        [SerializeField]
-        FloatSizeConfigCollection minHeightSizers = new FloatSizeConfigCollection();
-
-        [SerializeField]
-        FloatSizeModifier maxWidthSizerFallback = new FloatSizeModifier(1000, 0, 4000);
-        [SerializeField]
-        FloatSizeConfigCollection maxWidthSizers = new FloatSizeConfigCollection();
+        private FloatSizeConfigCollection minWidthSizers = new FloatSizeConfigCollection();
 
 
         [SerializeField]
-        FloatSizeModifier maxHeightSizerFallback = new FloatSizeModifier(1000, 0, 4000);
+        private FloatSizeModifier minHeightSizerFallback = new FloatSizeModifier(0, 0, 4000);
         [SerializeField]
-        FloatSizeConfigCollection maxHeightSizers = new FloatSizeConfigCollection();
-
-
-        [SerializeField]
-        Vector2SizeModifier paddingFallback = new Vector2SizeModifier(new Vector2(), new Vector2(-5000, -5000), new Vector2(5000, 5000));
-        [SerializeField]
-        Vector2SizeConfigCollection paddingSizers = new Vector2SizeConfigCollection();
+        private FloatSizeConfigCollection minHeightSizers = new FloatSizeConfigCollection();
 
         [SerializeField]
-        bool treatAsLayoutElement = true;
+        private FloatSizeModifier maxWidthSizerFallback = new FloatSizeModifier(1000, 0, 4000);
+        [SerializeField]
+        private FloatSizeConfigCollection maxWidthSizers = new FloatSizeConfigCollection();
 
-        RectTransformData start = new RectTransformData();
-        RectTransformData end = new RectTransformData();
 
-        bool isAnimating;
-        Vector2 lastCalculatedSize;
+        [SerializeField]
+        private FloatSizeModifier maxHeightSizerFallback = new FloatSizeModifier(1000, 0, 4000);
+        [SerializeField]
+        private FloatSizeConfigCollection maxHeightSizers = new FloatSizeConfigCollection();
+
+
+        [SerializeField]
+        private Vector2SizeModifier paddingFallback = new Vector2SizeModifier(new Vector2(), new Vector2(-5000, -5000), new Vector2(5000, 5000));
+        [SerializeField]
+        private Vector2SizeConfigCollection paddingSizers = new Vector2SizeConfigCollection();
+
+        [SerializeField]
+        private bool treatAsLayoutElement = true;
+
+        private RectTransformData start = new RectTransformData();
+        private RectTransformData end = new RectTransformData();
+
+        private bool isAnimating;
+        private Vector2 lastCalculatedSize;
 
         protected override void OnEnable()
         {
@@ -136,7 +136,7 @@ namespace TheraBytes.BetterUi
             Apply();
         }
 
-        void Apply()
+        private void Apply()
         {
             Settings settings = CurrentSettings;
             base.m_HorizontalFit = settings.HorizontalFit;
@@ -155,7 +155,7 @@ namespace TheraBytes.BetterUi
             SetLayout(1);
         }
 
-        void SetLayout(int axis)
+        private void SetLayout(int axis)
         {
             if (axis == 0 && CurrentSettings.HorizontalFit == FitMode.Unconstrained)
                 return;
@@ -199,7 +199,7 @@ namespace TheraBytes.BetterUi
             this.treatAsLayoutElement = wasLayoutElement;
         }
 
-        void ApplyOffsetToDefaultSize(int axis, FitMode fitMode)
+        private void ApplyOffsetToDefaultSize(int axis, FitMode fitMode)
         {
             Vector2 padding = paddingSizers.GetCurrentItem(paddingFallback).CalculateSize(this);
             bool hasMax = (axis == 0) ? CurrentSettings.HasMaxWidth : CurrentSettings.HasMaxHeight;
@@ -223,7 +223,7 @@ namespace TheraBytes.BetterUi
         }
 
 
-        float ClampSize(RectTransform.Axis axis, float size)
+        private float ClampSize(RectTransform.Axis axis, float size)
         {
             switch (axis)
             {
@@ -257,7 +257,7 @@ namespace TheraBytes.BetterUi
             return size;
         }
 
-        Bounds GetChildBounds()
+        private Bounds GetChildBounds()
         {
             RectTransform rt = this.transform as RectTransform;
             Bounds bounds = new Bounds();
@@ -331,7 +331,7 @@ namespace TheraBytes.BetterUi
             ChildChanged();
         }
 
-        void ChildChanged()
+        private void ChildChanged()
         {
             bool tmp = CurrentSettings.IsAnimated;
             CurrentSettings.IsAnimated = false;

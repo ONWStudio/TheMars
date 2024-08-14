@@ -27,11 +27,11 @@ namespace TcgEngine.Server
         private float win_expiration = 0f;
         private bool is_dedicated_server = false;
 
-        private List<ClientData> players = new List<ClientData>();            //Exclude observers, stays in array when disconnected, only players can send commands
-        private List<ClientData> connected_clients = new List<ClientData>();  //Include obervers, removed from array when disconnected, all clients receive refreshes
-        private List<AIPlayer> ai_list = new List<AIPlayer>();                //List of all AI players
+        private List<ClientData> players = new List<ClientData>();                      //Exclude observers, stays in array when disconnected, only players can send commands
+        private List<ClientData> connected_clients = new List<ClientData>();            //Include obervers, removed from array when disconnected, all clients receive refreshes
+        private List<AIPlayer> ai_list = new List<AIPlayer>();                          //List of all AI players
         private Queue<QueuedGameAction> queued_actions = new Queue<QueuedGameAction>(); //List of action waiting to be processed
-        
+
         private Dictionary<ushort, CommandEvent> registered_commands = new Dictionary<ushort, CommandEvent>();
 
         public GameServer(string uid, int players, bool online)

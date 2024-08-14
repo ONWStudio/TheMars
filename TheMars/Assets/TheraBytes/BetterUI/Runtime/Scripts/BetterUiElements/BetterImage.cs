@@ -21,8 +21,8 @@ namespace TheraBytes.BetterUi
     [AddComponentMenu("Better UI/Controls/Better Image", 30)]
     public class BetterImage : Image, IResolutionDependency, IImageAppearanceProvider
     {
-        static readonly Vector2[] vertScratch = new Vector2[4];
-        static readonly Vector2[] uvScratch = new Vector2[4];
+        private static readonly Vector2[] vertScratch = new Vector2[4];
+        private static readonly Vector2[] uvScratch = new Vector2[4];
 
         #region Nested Types
         [Serializable]
@@ -34,7 +34,7 @@ namespace TheraBytes.BetterUi
             public Color SecondaryColor;
 
             [SerializeField]
-            string screenConfigName;
+            private string screenConfigName;
             public string ScreenConfigName { get { return screenConfigName; } set { screenConfigName = value; } }
 
 
@@ -117,40 +117,40 @@ namespace TheraBytes.BetterUi
         }
 
         [SerializeField]
-        ColorMode colorMode = ColorMode.Color;
+        private ColorMode colorMode = ColorMode.Color;
 
         [SerializeField]
-        Color secondColor = Color.white;
+        private Color secondColor = Color.white;
 
 
         [SerializeField]
-        VertexMaterialData materialProperties = new VertexMaterialData();
+        private VertexMaterialData materialProperties = new VertexMaterialData();
 
         [SerializeField]
-        string materialType;
+        private string materialType;
 
         [SerializeField]
-        MaterialEffect materialEffect;
+        private MaterialEffect materialEffect;
 
         [SerializeField]
-        float materialProperty1, materialProperty2, materialProperty3;
+        private float materialProperty1, materialProperty2, materialProperty3;
 
         [SerializeField]
-        bool keepBorderAspectRatio;
+        private bool keepBorderAspectRatio;
 
         [FormerlySerializedAs("spriteBorderScale")]
         [SerializeField]
-        Vector2SizeModifier spriteBorderScaleFallback =
+        private Vector2SizeModifier spriteBorderScaleFallback =
             new Vector2SizeModifier(Vector2.one, Vector2.zero, 3 * Vector2.one);
 
         [SerializeField]
-        Vector2SizeConfigCollection customBorderScales = new Vector2SizeConfigCollection();
+        private Vector2SizeConfigCollection customBorderScales = new Vector2SizeConfigCollection();
 
         [SerializeField]
-        SpriteSettings fallbackSpriteSettings;
+        private SpriteSettings fallbackSpriteSettings;
 
         [SerializeField]
-        SpriteSettingsConfigCollection customSpriteSettings = new SpriteSettingsConfigCollection();
+        private SpriteSettingsConfigCollection customSpriteSettings = new SpriteSettingsConfigCollection();
 
         public SpriteSettings CurrentSpriteSettings
         {
@@ -160,8 +160,8 @@ namespace TheraBytes.BetterUi
                 return customSpriteSettings.GetCurrentItem(fallbackSpriteSettings);
             } 
         }
-        
-        Animator animator;
+
+        private Animator animator;
 
         private Sprite activeSprite => (overrideSprite != null) ? overrideSprite : sprite;
 
@@ -242,6 +242,7 @@ namespace TheraBytes.BetterUi
         }
 
         #region Simple
+
         private void GenerateSimpleSprite(VertexHelper vh, bool preserveAspect)
         {
             Rect rect = GetDrawingRect(preserveAspect);
@@ -307,7 +308,8 @@ namespace TheraBytes.BetterUi
         #endregion
 
         #region Sliced
-        void GenerateSlicedSprite(VertexHelper toFill)
+
+        private void GenerateSlicedSprite(VertexHelper toFill)
         {
             if (!hasBorder)
             {
@@ -412,6 +414,7 @@ namespace TheraBytes.BetterUi
         #endregion
 
         #region Tiled
+
         private void GenerateTiledSprite(VertexHelper toFill)
         {
             Vector4 outerUV, innerUV, border;
@@ -575,9 +578,9 @@ namespace TheraBytes.BetterUi
         {
             ImageAppearanceProviderHelper.AddQuad(vertexHelper, bounds, posMin, posMax, mode, colorA, colorB, uvMin, uvMax, materialProperties);
         }
-        
 
-        Vector4 GetAdjustedBorders(Vector4 border, Rect rect, bool keepAspect, Vector2 texSize)
+
+        private Vector4 GetAdjustedBorders(Vector4 border, Rect rect, bool keepAspect, Vector2 texSize)
         {
             float scale = 1;
             for (int axis = 0; axis <= 1; axis++)

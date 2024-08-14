@@ -15,7 +15,7 @@ namespace TcgEngine.UI
         public Image bg;
         public Text text;
 
-        void Start()
+        private void Start()
         {
 
         }

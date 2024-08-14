@@ -40,7 +40,7 @@ namespace MoreMountains.Feedbacks
 
 	public struct MMTimeScaleEvent
 	{
-		static private event Delegate OnEvent;
+		private static event Delegate OnEvent;
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] private static void RuntimeInitialization() { OnEvent = null; }
 		static public void Register(Delegate callback) { OnEvent += callback; }
 		static public void Unregister(Delegate callback) { OnEvent -= callback; }
@@ -59,7 +59,7 @@ namespace MoreMountains.Feedbacks
     
 	public struct MMFreezeFrameEvent
 	{
-		static private event Delegate OnEvent;
+		private static event Delegate OnEvent;
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] private static void RuntimeInitialization() { OnEvent = null; }
 		static public void Register(Delegate callback) { OnEvent += callback; }
 		static public void Unregister(Delegate callback) { OnEvent -= callback; }
@@ -385,7 +385,7 @@ namespace MoreMountains.Feedbacks
 		/// <summary>
 		/// On enable, starts listening for FreezeFrame events
 		/// </summary>
-		void OnEnable()
+		private void OnEnable()
 		{
 			MMFreezeFrameEvent.Register(OnMMFreezeFrameEvent);
 			MMTimeScaleEvent.Register(OnTimeScaleEvent);
@@ -394,7 +394,7 @@ namespace MoreMountains.Feedbacks
 		/// <summary>
 		/// On disable, stops listening for FreezeFrame events
 		/// </summary>
-		void OnDisable()
+		private void OnDisable()
 		{
 			MMFreezeFrameEvent.Unregister(OnMMFreezeFrameEvent);
 			MMTimeScaleEvent.Unregister(OnTimeScaleEvent);

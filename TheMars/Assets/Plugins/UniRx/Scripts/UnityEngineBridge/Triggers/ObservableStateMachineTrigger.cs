@@ -37,7 +37,7 @@ namespace UniRx.Triggers
 
         // OnStateExit
 
-        Subject<OnStateInfo> onStateExit;
+        private Subject<OnStateInfo> onStateExit;
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -51,7 +51,7 @@ namespace UniRx.Triggers
 
         // OnStateEnter
 
-        Subject<OnStateInfo> onStateEnter;
+        private Subject<OnStateInfo> onStateEnter;
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -65,7 +65,7 @@ namespace UniRx.Triggers
 
         // OnStateIK
 
-        Subject<OnStateInfo> onStateIK;
+        private Subject<OnStateInfo> onStateIK;
 
         public override void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -98,7 +98,7 @@ namespace UniRx.Triggers
 
         // OnStateUpdate
 
-        Subject<OnStateInfo> onStateUpdate;
+        private Subject<OnStateInfo> onStateUpdate;
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -112,7 +112,7 @@ namespace UniRx.Triggers
 
         // OnStateMachineEnter
 
-        Subject<OnStateMachineInfo> onStateMachineEnter;
+        private Subject<OnStateMachineInfo> onStateMachineEnter;
 
         public override void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
         {
@@ -126,7 +126,7 @@ namespace UniRx.Triggers
 
         // OnStateMachineExit
 
-        Subject<OnStateMachineInfo> onStateMachineExit;
+        private Subject<OnStateMachineInfo> onStateMachineExit;
 
         public override void OnStateMachineExit(Animator animator, int stateMachinePathHash)
         {

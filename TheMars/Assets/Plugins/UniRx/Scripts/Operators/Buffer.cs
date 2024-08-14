@@ -6,13 +6,13 @@ namespace UniRx.Operators
 {
     internal class BufferObservable<T> : OperatorObservableBase<IList<T>>
     {
-        readonly IObservable<T> source;
-        readonly int count;
-        readonly int skip;
+        private readonly IObservable<T> source;
+        private readonly int count;
+        private readonly int skip;
 
-        readonly TimeSpan timeSpan;
-        readonly TimeSpan timeShift;
-        readonly IScheduler scheduler;
+        private readonly TimeSpan timeSpan;
+        private readonly TimeSpan timeShift;
+        private readonly IScheduler scheduler;
 
         public BufferObservable(IObservable<T> source, int count, int skip)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -76,10 +76,10 @@ namespace UniRx.Operators
         }
 
         // count only
-        class Buffer : OperatorObserverBase<T, IList<T>>
+        private class Buffer : OperatorObserverBase<T, IList<T>>
         {
-            readonly BufferObservable<T> parent;
-            List<T> list;
+            private readonly BufferObservable<T> parent;
+            private List<T> list;
 
             public Buffer(BufferObservable<T> parent, IObserver<IList<T>> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -118,11 +118,11 @@ namespace UniRx.Operators
         }
 
         // count and skip
-        class Buffer_ : OperatorObserverBase<T, IList<T>>
+        private class Buffer_ : OperatorObserverBase<T, IList<T>>
         {
-            readonly BufferObservable<T> parent;
-            Queue<List<T>> q;
-            int index;
+            private readonly BufferObservable<T> parent;
+            private Queue<List<T>> q;
+            private int index;
 
             public Buffer_(BufferObservable<T> parent, IObserver<IList<T>> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -177,14 +177,14 @@ namespace UniRx.Operators
         }
 
         // timespan = timeshift
-        class BufferT : OperatorObserverBase<T, IList<T>>
+        private class BufferT : OperatorObserverBase<T, IList<T>>
         {
-            static readonly T[] EmptyArray = new T[0];
+            private static readonly T[] EmptyArray = new T[0];
 
-            readonly BufferObservable<T> parent;
-            readonly object gate = new object();
+            private readonly BufferObservable<T> parent;
+            private readonly object gate = new object();
 
-            List<T> list;
+            private List<T> list;
 
             public BufferT(BufferObservable<T> parent, IObserver<IList<T>> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -227,9 +227,9 @@ namespace UniRx.Operators
                 try { observer.OnCompleted(); } finally { Dispose(); }
             }
 
-            class Buffer : IObserver<long>
+            private class Buffer : IObserver<long>
             {
-                BufferT parent;
+                private BufferT parent;
 
                 public Buffer(BufferT parent)
                 {
@@ -267,16 +267,16 @@ namespace UniRx.Operators
         }
 
         // timespan + timeshift
-        class BufferTS : OperatorObserverBase<T, IList<T>>
+        private class BufferTS : OperatorObserverBase<T, IList<T>>
         {
-            readonly BufferObservable<T> parent;
-            readonly object gate = new object();
+            private readonly BufferObservable<T> parent;
+            private readonly object gate = new object();
 
-            Queue<IList<T>> q;
-            TimeSpan totalTime;
-            TimeSpan nextShift;
-            TimeSpan nextSpan;
-            SerialDisposable timerD;
+            private Queue<IList<T>> q;
+            private TimeSpan totalTime;
+            private TimeSpan nextShift;
+            private TimeSpan nextSpan;
+            private SerialDisposable timerD;
 
             public BufferTS(BufferObservable<T> parent, IObserver<IList<T>> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -300,7 +300,7 @@ namespace UniRx.Operators
                 return StableCompositeDisposable.Create(subscription, timerD);
             }
 
-            void CreateTimer()
+            private void CreateTimer()
             {
                 var m = new SingleAssignmentDisposable();
                 timerD.Disposable = m;
@@ -377,16 +377,16 @@ namespace UniRx.Operators
         }
 
         // timespan + count
-        class BufferTC : OperatorObserverBase<T, IList<T>>
+        private class BufferTC : OperatorObserverBase<T, IList<T>>
         {
-            static readonly T[] EmptyArray = new T[0]; // cache
+            private static readonly T[] EmptyArray = new T[0]; // cache
 
-            readonly BufferObservable<T> parent;
-            readonly object gate = new object();
+            private readonly BufferObservable<T> parent;
+            private readonly object gate = new object();
 
-            List<T> list;
-            long timerId;
-            SerialDisposable timerD;
+            private List<T> list;
+            private long timerId;
+            private SerialDisposable timerD;
 
             public BufferTC(BufferObservable<T> parent, IObserver<IList<T>> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -405,7 +405,7 @@ namespace UniRx.Operators
                 return StableCompositeDisposable.Create(subscription, timerD);
             }
 
-            void CreateTimer()
+            private void CreateTimer()
             {
                 var currentTimerId = timerId;
                 var timerS = new SingleAssignmentDisposable();
@@ -423,7 +423,7 @@ namespace UniRx.Operators
                 }
             }
 
-            void OnNextTick(long currentTimerId)
+            private void OnNextTick(long currentTimerId)
             {
                 var isZero = false;
                 List<T> currentList;
@@ -445,7 +445,7 @@ namespace UniRx.Operators
                 observer.OnNext((isZero) ? (IList<T>)EmptyArray : currentList);
             }
 
-            void OnNextRecursive(long currentTimerId, Action<TimeSpan> self)
+            private void OnNextRecursive(long currentTimerId, Action<TimeSpan> self)
             {
                 var isZero = false;
                 List<T> currentList;
@@ -509,8 +509,8 @@ namespace UniRx.Operators
 
     internal class BufferObservable<TSource, TWindowBoundary> : OperatorObservableBase<IList<TSource>>
     {
-        readonly IObservable<TSource> source;
-        readonly IObservable<TWindowBoundary> windowBoundaries;
+        private readonly IObservable<TSource> source;
+        private readonly IObservable<TWindowBoundary> windowBoundaries;
 
         public BufferObservable(IObservable<TSource> source, IObservable<TWindowBoundary> windowBoundaries)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -524,13 +524,13 @@ namespace UniRx.Operators
             return new Buffer(this, observer, cancel).Run();
         }
 
-        class Buffer : OperatorObserverBase<TSource, IList<TSource>>
+        private class Buffer : OperatorObserverBase<TSource, IList<TSource>>
         {
-            static readonly TSource[] EmptyArray = new TSource[0]; // cache
+            private static readonly TSource[] EmptyArray = new TSource[0]; // cache
 
-            readonly BufferObservable<TSource, TWindowBoundary> parent;
-            object gate = new object();
-            List<TSource> list;
+            private readonly BufferObservable<TSource, TWindowBoundary> parent;
+            private object gate = new object();
+            private List<TSource> list;
 
             public Buffer(BufferObservable<TSource, TWindowBoundary> parent, IObserver<IList<TSource>> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -574,9 +574,9 @@ namespace UniRx.Operators
                 }
             }
 
-            class Buffer_ : IObserver<TWindowBoundary>
+            private class Buffer_ : IObserver<TWindowBoundary>
             {
-                readonly Buffer parent;
+                private readonly Buffer parent;
 
                 public Buffer_(Buffer parent)
                 {

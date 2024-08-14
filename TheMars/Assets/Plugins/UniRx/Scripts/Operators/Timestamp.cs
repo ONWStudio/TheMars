@@ -4,8 +4,8 @@ namespace UniRx.Operators
 {
     internal class TimestampObservable<T> : OperatorObservableBase<Timestamped<T>>
     {
-        readonly IObservable<T> source;
-        readonly IScheduler scheduler;
+        private readonly IObservable<T> source;
+        private readonly IScheduler scheduler;
 
         public TimestampObservable(IObservable<T> source, IScheduler scheduler)
             : base(scheduler == Scheduler.CurrentThread || source.IsRequiredSubscribeOnCurrentThread())
@@ -19,9 +19,9 @@ namespace UniRx.Operators
             return source.Subscribe(new Timestamp(this, observer, cancel));
         }
 
-        class Timestamp : OperatorObserverBase<T, Timestamped<T>>
+        private class Timestamp : OperatorObserverBase<T, Timestamped<T>>
         {
-            readonly TimestampObservable<T> parent;
+            private readonly TimestampObservable<T> parent;
 
             public Timestamp(TimestampObservable<T> parent, IObserver<Timestamped<T>> observer, IDisposable cancel)
                 : base(observer, cancel)

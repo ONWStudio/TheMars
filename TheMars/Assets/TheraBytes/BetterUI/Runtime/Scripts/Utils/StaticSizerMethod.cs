@@ -12,9 +12,12 @@ namespace TheraBytes.BetterUi
     public class StaticSizerMethod
     {
 
-        [SerializeField] string assemblyName = "Assembly-CSharp";
-        [SerializeField] string typeName;
-        [SerializeField] string methodName;
+        [SerializeField]
+        private string assemblyName = "Assembly-CSharp";
+        [SerializeField]
+        private string typeName;
+        [SerializeField]
+        private string methodName;
 
         public float Invoke(Component caller, Vector2 optimizedResolution, Vector2 actualResolution, float optimizedDpi, float actualDpi)
         {

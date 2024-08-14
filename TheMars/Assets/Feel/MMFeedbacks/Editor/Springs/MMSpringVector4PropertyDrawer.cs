@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 namespace MoreMountains.Feedbacks
 {
 	[CustomPropertyDrawer(typeof(MMSpringVector4))]
-	class MMSpringVector4PropertyDrawer : PropertyDrawer
+	internal class MMSpringVector4PropertyDrawer : PropertyDrawer
 	{
 		protected float _lastTarget;
 		protected float _max;
@@ -90,7 +90,7 @@ namespace MoreMountains.Feedbacks
 			
 			return root;
 		}
-		
+
 		private void ToggleFields(bool show)
 		{
 			_unifiedSpringField.style.display = show ? DisplayStyle.None : DisplayStyle.Flex;

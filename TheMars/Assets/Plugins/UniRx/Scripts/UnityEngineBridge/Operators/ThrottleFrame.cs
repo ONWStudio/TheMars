@@ -10,9 +10,9 @@ namespace UniRx.Operators
 {
     internal class ThrottleFrameObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly int frameCount;
-        readonly FrameCountType frameCountType;
+        private readonly IObservable<T> source;
+        private readonly int frameCount;
+        private readonly FrameCountType frameCountType;
 
         public ThrottleFrameObservable(IObservable<T> source, int frameCount, FrameCountType frameCountType) : base(source.IsRequiredSubscribeOnCurrentThread())
         {
@@ -26,14 +26,14 @@ namespace UniRx.Operators
             return new ThrottleFrame(this, observer, cancel).Run();
         }
 
-        class ThrottleFrame : OperatorObserverBase<T, T>
+        private class ThrottleFrame : OperatorObserverBase<T, T>
         {
-            readonly ThrottleFrameObservable<T> parent;
-            readonly object gate = new object();
-            T latestValue = default(T);
-            bool hasValue = false;
-            SerialDisposable cancelable;
-            ulong id = 0;
+            private readonly ThrottleFrameObservable<T> parent;
+            private readonly object gate = new object();
+            private T latestValue = default(T);
+            private bool hasValue = false;
+            private SerialDisposable cancelable;
+            private ulong id = 0;
 
             public ThrottleFrame(ThrottleFrameObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -93,10 +93,10 @@ namespace UniRx.Operators
                 }
             }
 
-            class ThrottleFrameTick : IObserver<long>
+            private class ThrottleFrameTick : IObserver<long>
             {
-                readonly ThrottleFrame parent;
-                readonly ulong currentid;
+                private readonly ThrottleFrame parent;
+                private readonly ulong currentid;
 
                 public ThrottleFrameTick(ThrottleFrame parent, ulong currentid)
                 {

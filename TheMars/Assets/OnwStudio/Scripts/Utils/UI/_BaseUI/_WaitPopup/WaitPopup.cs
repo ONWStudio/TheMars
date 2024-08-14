@@ -11,7 +11,8 @@ namespace Onw.UI.Components
     public sealed class WaitPopup : BaseUI
     {
         [Header("Wait Text")]
-        [SerializeField] private TMP_Text _waitText;
+        [SerializeField]
+        private TMP_Text _waitText;
 
         protected override void EnableUI()
             => StartCoroutine(iEWaitEvent());

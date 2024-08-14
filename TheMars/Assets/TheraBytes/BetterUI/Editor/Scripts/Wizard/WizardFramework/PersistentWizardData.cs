@@ -9,10 +9,10 @@ namespace TheraBytes.BetterUi.Editor
 {
     public class PersistentWizardData
     {
-        const char SEPARATOR = '=';
+        private const char SEPARATOR = '=';
 
-        string filePath;
-        Dictionary<string, string> data;
+        private string filePath;
+        private Dictionary<string, string> data;
 
         public int SavedDataCount { get { return (data != null) ? data.Count : 0; } }
 

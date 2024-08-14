@@ -13,7 +13,7 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(BetterSelectable)), CanEditMultipleObjects]
     public class BetterSelectableEditor : SelectableEditor
     {
-        BetterElementHelper<Selectable, BetterSelectable> helper =
+        private BetterElementHelper<Selectable, BetterSelectable> helper =
             new BetterElementHelper<Selectable, BetterSelectable>();
 
         public override void OnInspectorGUI()

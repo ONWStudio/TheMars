@@ -5,8 +5,8 @@ namespace UniRx.Operators
 {
     internal class DistinctObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly IEqualityComparer<T> comparer;
+        private readonly IObservable<T> source;
+        private readonly IEqualityComparer<T> comparer;
 
         public DistinctObservable(IObservable<T> source, IEqualityComparer<T> comparer)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -20,9 +20,9 @@ namespace UniRx.Operators
             return source.Subscribe(new Distinct(this, observer, cancel));
         }
 
-        class Distinct : OperatorObserverBase<T, T>
+        private class Distinct : OperatorObserverBase<T, T>
         {
-            readonly HashSet<T> hashSet;
+            private readonly HashSet<T> hashSet;
 
             public Distinct(DistinctObservable<T> parent, IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)
@@ -67,9 +67,9 @@ namespace UniRx.Operators
 
     internal class DistinctObservable<T, TKey> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly IEqualityComparer<TKey> comparer;
-        readonly Func<T, TKey> keySelector;
+        private readonly IObservable<T> source;
+        private readonly IEqualityComparer<TKey> comparer;
+        private readonly Func<T, TKey> keySelector;
 
         public DistinctObservable(IObservable<T> source, Func<T, TKey> keySelector, IEqualityComparer<TKey> comparer)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -84,10 +84,10 @@ namespace UniRx.Operators
             return source.Subscribe(new Distinct(this, observer, cancel));
         }
 
-        class Distinct : OperatorObserverBase<T, T>
+        private class Distinct : OperatorObserverBase<T, T>
         {
-            readonly DistinctObservable<T, TKey> parent;
-            readonly HashSet<TKey> hashSet;
+            private readonly DistinctObservable<T, TKey> parent;
+            private readonly HashSet<TKey> hashSet;
 
             public Distinct(DistinctObservable<T, TKey> parent, IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)

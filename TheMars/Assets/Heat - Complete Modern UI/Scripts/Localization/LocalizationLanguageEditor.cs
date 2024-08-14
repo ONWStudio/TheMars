@@ -68,7 +68,7 @@ namespace Michsky.UI.Heat
             serializedObject.ApplyModifiedProperties();
         }
 
-        void Import()
+        private void Import()
         {
             string path = EditorUtility.OpenFilePanel("Select a file to import", "", "");
 
@@ -204,7 +204,7 @@ namespace Michsky.UI.Heat
             }
         }
 
-        void Export()
+        private void Export()
         {
             for (int i = 0; i < lTarget.tableList.Count; i++)
             {

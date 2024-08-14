@@ -34,16 +34,16 @@ namespace TheraBytes.BetterUi
         }
 
         [SerializeField]
-        FittingMode fitting = FittingMode.StayInBounds;
+        private FittingMode fitting = FittingMode.StayInBounds;
 
         [FormerlySerializedAs("fontSizer")]
         [SerializeField]
-        FloatSizeModifier fontSizerFallback = new FloatSizeModifier(40, 0, 500);
+        private FloatSizeModifier fontSizerFallback = new FloatSizeModifier(40, 0, 500);
 
         [SerializeField]
-        FloatSizeConfigCollection customFontSizers = new FloatSizeConfigCollection();
+        private FloatSizeConfigCollection customFontSizers = new FloatSizeConfigCollection();
 
-        bool isCalculatingSize;
+        private bool isCalculatingSize;
 
         protected override void OnEnable()
         {
@@ -68,7 +68,7 @@ namespace TheraBytes.BetterUi
             CalculateSize();
         }
 
-        void CalculateSize()
+        private void CalculateSize()
         {
             if (isCalculatingSize)
                 return;

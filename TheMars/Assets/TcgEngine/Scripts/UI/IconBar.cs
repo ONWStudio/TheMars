@@ -20,12 +20,12 @@ namespace TcgEngine.UI
         public Sprite sprite_full;
         public Sprite sprite_empty;
 
-        void Awake()
+        private void Awake()
         {
 
         }
 
-        void Update()
+        private void Update()
         {
             if (auto_refresh)
                 Refresh();

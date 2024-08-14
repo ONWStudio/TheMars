@@ -13,9 +13,9 @@ namespace TheraBytes.BetterUi.Editor
     public class ExampleScenesPage : WizardPage
     {
 
-        const string OVERVIEW_PACK = "TheraBytes/BetterUI/packages/Example_Overiew.unitypackage";
+        private const string OVERVIEW_PACK = "TheraBytes/BetterUI/packages/Example_Overiew.unitypackage";
 
-        InstallPackageSelectionWizardPageElement customScreenTagExample;
+        private InstallPackageSelectionWizardPageElement customScreenTagExample;
 
         public override string NameId { get { return "ExampleScenesPage"; } }
 
@@ -168,7 +168,7 @@ namespace TheraBytes.BetterUi.Editor
             });
         }
 
-        InstallPackageSelectionWizardPageElement CreateSelection(string exampleName)
+        private InstallPackageSelectionWizardPageElement CreateSelection(string exampleName)
         {
             string package = Path.Combine(Application.dataPath, string.Format("TheraBytes/BetterUI/packages/Example_{0}.unitypackage", exampleName));
             string folder = Path.Combine(Application.dataPath, string.Format("TheraBytes/BetterUI/Example/{0}", exampleName));
@@ -178,13 +178,13 @@ namespace TheraBytes.BetterUi.Editor
 
             return result;
         }
-        
-        bool IsFallbackLandscape()
+
+        private bool IsFallbackLandscape()
         {
             return !IsFallbackPortrait();
         }
 
-        bool IsFallbackPortrait()
+        private bool IsFallbackPortrait()
         {
             var fallback = ResolutionMonitor.OptimizedResolutionFallback;
             return fallback.x < fallback.y;

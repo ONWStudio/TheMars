@@ -250,7 +250,7 @@ namespace UniRx
             return RepeatInfinite(source).Concat();
         }
 
-        static IEnumerable<IObservable<T>> RepeatInfinite<T>(IObservable<T> source)
+        private static IEnumerable<IObservable<T>> RepeatInfinite<T>(IObservable<T> source)
         {
             while (true)
             {

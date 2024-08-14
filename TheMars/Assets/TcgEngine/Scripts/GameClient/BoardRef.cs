@@ -24,12 +24,12 @@ namespace TcgEngine.Client
 
         private static List<BoardRef> ref_list = new List<BoardRef>();
 
-        void Awake()
+        private void Awake()
         {
             ref_list.Add(this);
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             ref_list.Remove(this);
         }

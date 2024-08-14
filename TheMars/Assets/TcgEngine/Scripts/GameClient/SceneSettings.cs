@@ -21,7 +21,7 @@ namespace TcgEngine.Client
             instance = this;
         }
 
-        void Start()
+        private void Start()
         {
             AudioTool.Get().PlaySFX("game_sfx", start_audio);
             if (game_music.Length > 0)
@@ -30,7 +30,7 @@ namespace TcgEngine.Client
                 AudioTool.Get().PlaySFX("ambience", game_ambience[Random.Range(0, game_ambience.Length)], 0.5f, true);
         }
 
-        void Update()
+        private void Update()
         {
 
         }

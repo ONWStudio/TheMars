@@ -20,14 +20,14 @@ namespace TcgEngine.Client
 
         private static GameCamera instance;
 
-        void Awake()
+        private void Awake()
         {
             instance = this;
             start_pos = transform.position;
             cam = GetComponent<Camera>();
         }
 
-        void Update()
+        private void Update()
         {
             //Shake FX
             if (shake_timer > 0f)

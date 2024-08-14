@@ -11,8 +11,8 @@ namespace TheraBytes.BetterUi
     public abstract class SingletonScriptableObject<T> : ScriptableObject
         where T : SingletonScriptableObject<T>
     {
-        static T instance;
-        static bool creatingInstance = false;
+        private static T instance;
+        private static bool creatingInstance = false;
 
         public static T Instance
         {

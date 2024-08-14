@@ -19,9 +19,9 @@ namespace UniRx.Examples
         // You can monitor/modifie in inspector by SpecializedReactiveProperty
         public IntReactiveProperty IntRxProp = new IntReactiveProperty();
 
-        Enemy enemy = new Enemy(1000);
+        private Enemy enemy = new Enemy(1000);
 
-        void Start()
+        private void Start()
         {
             // UnityEvent as Observable
             // (shortcut, MyButton.OnClickAsObservable())

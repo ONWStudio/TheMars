@@ -13,7 +13,7 @@ namespace Michsky.UI.Heat
         [Range(0.1f, 0.9f)] public float opacity = 0.5f;
 
         // Helpers
-        Image bgImage;
+        private Image bgImage;
         public List<Sprite> filters = new List<Sprite>();
 
         public enum Filter
@@ -34,12 +34,12 @@ namespace Michsky.UI.Heat
             Random
         }
 
-        void Awake()
+        private void Awake()
         {
             bgImage = GetComponent<Image>();
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             UpdateFilter();
         }

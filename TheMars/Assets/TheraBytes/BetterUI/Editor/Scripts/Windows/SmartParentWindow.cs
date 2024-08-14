@@ -9,14 +9,14 @@ namespace TheraBytes.BetterUi.Editor
 {
     public class SmartParentWindow : EditorWindow
     {
-        bool isFreeMovementEnabled;
+        private bool isFreeMovementEnabled;
 
-        RectTransform selection;
-        RectTransformData previousTransform;
+        private RectTransform selection;
+        private RectTransformData previousTransform;
 
 
-        Texture2D snapAllPic, snapVerticalPic, snapHorizontalPic, freeParentModeOnPic, freeParentModeOffPic;
-        GUIContent snapAllContent, snapVerticalContent, snapHorizontalContent, freeParentModeOnContent, freeParentModeOffContent;
+        private Texture2D snapAllPic, snapVerticalPic, snapHorizontalPic, freeParentModeOnPic, freeParentModeOffPic;
+        private GUIContent snapAllContent, snapVerticalContent, snapHorizontalContent, freeParentModeOnContent, freeParentModeOffContent;
 
         [MenuItem("Tools/Better UI/Smart Parent", false, 61)]
         public static void ShowWindow()
@@ -24,7 +24,7 @@ namespace TheraBytes.BetterUi.Editor
             EditorWindow.GetWindow(typeof(SmartParentWindow), false, "Smart Parent");
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             minSize = new Vector2(195, 245);
             isFreeMovementEnabled = false;
@@ -47,7 +47,7 @@ namespace TheraBytes.BetterUi.Editor
             SelectionChanged();
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             isFreeMovementEnabled = false;
 
@@ -56,7 +56,7 @@ namespace TheraBytes.BetterUi.Editor
         }
 
 
-        void OnGUI()
+        private void OnGUI()
         {
             EditorGUILayout.Space();
 

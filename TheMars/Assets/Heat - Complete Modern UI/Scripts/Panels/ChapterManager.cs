@@ -14,26 +14,42 @@ namespace Michsky.UI.Heat
         public int currentChapterIndex;
 
         // Resources
-        [SerializeField] private GameObject chapterPreset;
-        [SerializeField] private Transform chapterParent;
-        [SerializeField] private ButtonManager previousButton;
-        [SerializeField] private ButtonManager nextButton;
-        [SerializeField] private Image progressFill;
+        [SerializeField]
+        private GameObject chapterPreset;
+        [SerializeField]
+        private Transform chapterParent;
+        [SerializeField]
+        private ButtonManager previousButton;
+        [SerializeField]
+        private ButtonManager nextButton;
+        [SerializeField]
+        private Image progressFill;
 
         // Settings
-        [SerializeField] private bool showLockedChapters = true;
-        [SerializeField] private bool setPanelAuto = true;
-        [SerializeField] private bool checkChapterData = true;
-        [SerializeField] private bool useLocalization = true;
-        [SerializeField] [Range(0.5f, 10)] private float barCurveSpeed = 2f;
-        [SerializeField] private AnimationCurve barCurve = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
-        [SerializeField] [Range(0.75f, 2)] private float animationSpeed = 1;
+        [SerializeField]
+        private bool showLockedChapters = true;
+        [SerializeField]
+        private bool setPanelAuto = true;
+        [SerializeField]
+        private bool checkChapterData = true;
+        [SerializeField]
+        private bool useLocalization = true;
+        [SerializeField] [Range(0.5f, 10)]
+        private float barCurveSpeed = 2f;
+        [SerializeField]
+        private AnimationCurve barCurve = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
+        [SerializeField] [Range(0.75f, 2)]
+        private float animationSpeed = 1;
 
         // Background Animation
-        [SerializeField] private bool backgroundStretch = true;
-        [SerializeField] [Range(0, 100)] private float maxStretch = 75;
-        [SerializeField] [Range(0.02f, 0.5f)] private float stretchCurveSpeed = 0.1f;
-        [SerializeField] private AnimationCurve stretchCurve = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
+        [SerializeField]
+        private bool backgroundStretch = true;
+        [SerializeField] [Range(0, 100)]
+        private float maxStretch = 75;
+        [SerializeField] [Range(0.02f, 0.5f)]
+        private float stretchCurveSpeed = 0.1f;
+        [SerializeField]
+        private AnimationCurve stretchCurve = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
 
         // Events
         [System.Serializable] public class ChapterChangeCallback : UnityEvent<int> { }
@@ -41,8 +57,8 @@ namespace Michsky.UI.Heat
 
         // Helpers
         [HideInInspector] public RectTransform currentBackgroundRect;
-        LocalizedObject localizedObject;
-        string animSpeedKey = "AnimSpeed";
+        private LocalizedObject localizedObject;
+        private string animSpeedKey = "AnimSpeed";
 
         public enum ChapterState { Locked, Unlocked, Completed, Current }
 
@@ -65,17 +81,17 @@ namespace Michsky.UI.Heat
             public UnityEvent onReplay;
         }
 
-        void Awake()
+        private void Awake()
         {
             InitializeChapters();
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             OpenCurrentPanel();
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             if (backgroundStretch == false)
                 return;
@@ -253,7 +269,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("DisablePanels");
         }
 
-        void OpenCurrentPanel()
+        private void OpenCurrentPanel()
         {
             if (identifiers[currentChapterIndex] == null)
                 return;
@@ -265,7 +281,7 @@ namespace Michsky.UI.Heat
             identifiers[currentChapterIndex].UpdateBackgroundRect();
         }
 
-        void UpdateButtonState()
+        private void UpdateButtonState()
         {
             if (currentChapterIndex >= identifiers.Count - 1 && nextButton != null) { nextButton.isInteractable = false; nextButton.UpdateUI(); }
             else if (nextButton != null) { nextButton.isInteractable = true; nextButton.UpdateUI(); }
@@ -293,7 +309,7 @@ namespace Michsky.UI.Heat
         public static void SetCurrent(string chapterID) { PlayerPrefs.SetString("ChapterState_" + chapterID, "current"); }
         public static void SetCompleted(string chapterID) { PlayerPrefs.SetString("ChapterState_" + chapterID, "completed"); }
 
-        IEnumerator StretchPhaseOne()
+        private IEnumerator StretchPhaseOne()
         {
             float elapsedTime = 0;
             Vector2 startPos = currentBackgroundRect.offsetMin;
@@ -310,7 +326,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("StretchPhaseTwo");
         }
 
-        IEnumerator StretchPhaseTwo()
+        private IEnumerator StretchPhaseTwo()
         {
             float elapsedTime = 0;
             Vector2 startPos = currentBackgroundRect.offsetMin;
@@ -327,7 +343,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("StretchPhaseOne");
         }
 
-        IEnumerator DisablePanels()
+        private IEnumerator DisablePanels()
         {
             yield return new WaitForSecondsRealtime(0.5f);
 
@@ -342,7 +358,7 @@ namespace Michsky.UI.Heat
             }
         }
 
-        IEnumerator PlayProgressFill()
+        private IEnumerator PlayProgressFill()
         {
             float startingPoint = progressFill.fillAmount;
             float dividedFill = 1f / chapters.Count;

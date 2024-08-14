@@ -4,8 +4,8 @@ namespace UniRx.Operators
 {
     internal class SynchronizedObserver<T> : IObserver<T>
     {
-        readonly IObserver<T> observer;
-        readonly object gate;
+        private readonly IObserver<T> observer;
+        private readonly object gate;
 
         public SynchronizedObserver(IObserver<T> observer, object gate)
         {

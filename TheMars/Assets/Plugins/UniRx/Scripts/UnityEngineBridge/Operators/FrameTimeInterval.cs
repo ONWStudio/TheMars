@@ -4,8 +4,8 @@ namespace UniRx.Operators
 {
     internal class FrameTimeIntervalObservable<T> : OperatorObservableBase<UniRx.TimeInterval<T>>
     {
-        readonly IObservable<T> source;
-        readonly bool ignoreTimeScale;
+        private readonly IObservable<T> source;
+        private readonly bool ignoreTimeScale;
 
         public FrameTimeIntervalObservable(IObservable<T> source, bool ignoreTimeScale)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -19,10 +19,10 @@ namespace UniRx.Operators
             return source.Subscribe(new FrameTimeInterval(this, observer, cancel));
         }
 
-        class FrameTimeInterval : OperatorObserverBase<T, UniRx.TimeInterval<T>>
+        private class FrameTimeInterval : OperatorObserverBase<T, UniRx.TimeInterval<T>>
         {
-            readonly FrameTimeIntervalObservable<T> parent;
-            float lastTime;
+            private readonly FrameTimeIntervalObservable<T> parent;
+            private float lastTime;
 
             public FrameTimeInterval(FrameTimeIntervalObservable<T> parent, IObserver<UniRx.TimeInterval<T>> observer, IDisposable cancel)
                 : base(observer, cancel)

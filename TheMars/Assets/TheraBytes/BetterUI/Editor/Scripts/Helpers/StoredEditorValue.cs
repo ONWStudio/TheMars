@@ -106,8 +106,8 @@ namespace TheraBytes.BetterUi.Editor
             }
         }
 
-        T defaultValue;
-        string id;
+        private T defaultValue;
+        private string id;
 
         protected StoredEditorValue(string id, T defaultValue)
         {

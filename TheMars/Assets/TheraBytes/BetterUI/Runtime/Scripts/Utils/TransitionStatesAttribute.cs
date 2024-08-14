@@ -15,7 +15,7 @@ namespace TheraBytes.BetterUi
 
     public class TransitionStatesAttribute : Attribute
     {
-        string[] states;
+        private string[] states;
         public string[] States { get { return states; } }
 
         public TransitionStatesAttribute(params string[] states)

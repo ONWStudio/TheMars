@@ -8,7 +8,8 @@ namespace TMCard.Effect
 {
     public sealed class TMCardDropEffect : ITMNormalEffect, ITMInitializableEffect<TMCardDropEffectCreator>
     {
-        [SerializeField, ReadOnly] private int _dropCount = 1;
+        [SerializeField, ReadOnly]
+        private int _dropCount = 1;
 
         public void Initialize(TMCardDropEffectCreator effectCreator)
         {

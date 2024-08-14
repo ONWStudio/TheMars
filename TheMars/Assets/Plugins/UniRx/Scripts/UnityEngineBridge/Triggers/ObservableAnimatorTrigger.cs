@@ -6,10 +6,10 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableAnimatorTrigger : ObservableTriggerBase
     {
-        Subject<int> onAnimatorIK;
+        private Subject<int> onAnimatorIK;
 
         /// <summary>Callback for setting up animation IK (inverse kinematics).</summary>
-        void OnAnimatorIK(int layerIndex)
+        private void OnAnimatorIK(int layerIndex)
         {
             if (onAnimatorIK != null) onAnimatorIK.OnNext(layerIndex);
         }
@@ -20,10 +20,10 @@ namespace UniRx.Triggers
             return onAnimatorIK ?? (onAnimatorIK = new Subject<int>());
         }
 
-        Subject<Unit> onAnimatorMove;
+        private Subject<Unit> onAnimatorMove;
 
         /// <summary>Callback for processing animation movements for modifying root motion.</summary>
-        void OnAnimatorMove()
+        private void OnAnimatorMove()
         {
             if (onAnimatorMove != null) onAnimatorMove.OnNext(Unit.Default);
         }

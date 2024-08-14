@@ -4,7 +4,7 @@ namespace UniRx.Operators
 {
     internal class DematerializeObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<Notification<T>> source;
+        private readonly IObservable<Notification<T>> source;
 
         public DematerializeObservable(IObservable<Notification<T>> source)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -17,9 +17,9 @@ namespace UniRx.Operators
             return new Dematerialize(this, observer, cancel).Run();
         }
 
-        class Dematerialize : OperatorObserverBase<Notification<T>, T>
+        private class Dematerialize : OperatorObserverBase<Notification<T>, T>
         {
-            readonly DematerializeObservable<T> parent;
+            private readonly DematerializeObservable<T> parent;
 
             public Dematerialize(DematerializeObservable<T> parent, IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)

@@ -27,7 +27,7 @@ namespace MoreMountains.Tools
 			}
 		}
 		#endif
-        
+
 		private bool GetConditionAttributeResult(MMConditionAttribute conditionAttribute, SerializedProperty property)
 		{
 			bool enabled = true;

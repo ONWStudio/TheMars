@@ -42,7 +42,7 @@ namespace TcgEngine
 
         private static ApiClient instance;
 
-        void Awake()
+        private void Awake()
         {
             //API client should be on OnDestroyOnLoad
             //dont assign here if already assigned cause new one will be destroyed in TheNetwork Awake

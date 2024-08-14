@@ -9,7 +9,7 @@ namespace TheraBytes.BetterUi.Editor
     [CustomPropertyDrawer(typeof(MarginSizeModifier))]
     public class MarginSizeModifierDrawer : ScreenDependentSizeDrawer<Margin>
     {
-        Dictionary<string, bool> foldouts = new Dictionary<string, bool>();
+        private Dictionary<string, bool> foldouts = new Dictionary<string, bool>();
 
         protected override void DrawModifiers(SerializedProperty property)
         {

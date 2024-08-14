@@ -4,8 +4,8 @@ namespace UniRx.Operators
 {
     internal class FinallyObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly Action finallyAction;
+        private readonly IObservable<T> source;
+        private readonly Action finallyAction;
 
         public FinallyObservable(IObservable<T> source, Action finallyAction)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -19,9 +19,9 @@ namespace UniRx.Operators
             return new Finally(this, observer, cancel).Run();
         }
 
-        class Finally : OperatorObserverBase<T, T>
+        private class Finally : OperatorObserverBase<T, T>
         {
-            readonly FinallyObservable<T> parent;
+            private readonly FinallyObservable<T> parent;
 
             public Finally(FinallyObservable<T> parent, IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)

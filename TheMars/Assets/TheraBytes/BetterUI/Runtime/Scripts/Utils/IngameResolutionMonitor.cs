@@ -11,9 +11,10 @@ namespace TheraBytes.BetterUi
     [AddComponentMenu("Better UI/In-Game Resolution Monitor", 30)]
     public class IngameResolutionMonitor : MonoBehaviour
     {
-        static IngameResolutionMonitor instance;
+        private static IngameResolutionMonitor instance;
 
-        [SerializeField] bool onlyPresentInThisScene= false;
+        [SerializeField]
+        private bool onlyPresentInThisScene= false;
 
         public static GameObject Create()
         {

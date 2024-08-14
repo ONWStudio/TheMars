@@ -56,10 +56,10 @@ namespace UniRx
 
     public class ReactiveCommand<T> : IReactiveCommand<T>, IDisposable
     {
-        readonly Subject<T> trigger = new Subject<T>();
-        readonly IDisposable canExecuteSubscription;
+        private readonly Subject<T> trigger = new Subject<T>();
+        private readonly IDisposable canExecuteSubscription;
 
-        ReactiveProperty<bool> canExecute;
+        private ReactiveProperty<bool> canExecute;
         public IReadOnlyReactiveProperty<bool> CanExecute
         {
             get
@@ -173,11 +173,11 @@ namespace UniRx
     /// </summary>
     public class AsyncReactiveCommand<T> : IAsyncReactiveCommand<T>
     {
-        UniRx.InternalUtil.ImmutableList<Func<T, IObservable<Unit>>> asyncActions = UniRx.InternalUtil.ImmutableList<Func<T, IObservable<Unit>>>.Empty;
+        private UniRx.InternalUtil.ImmutableList<Func<T, IObservable<Unit>>> asyncActions = UniRx.InternalUtil.ImmutableList<Func<T, IObservable<Unit>>>.Empty;
 
-        readonly object gate = new object();
-        readonly IReactiveProperty<bool> canExecuteSource;
-        readonly IReadOnlyReactiveProperty<bool> canExecute;
+        private readonly object gate = new object();
+        private readonly IReactiveProperty<bool> canExecuteSource;
+        private readonly IReadOnlyReactiveProperty<bool> canExecute;
 
         public IReadOnlyReactiveProperty<bool> CanExecute
         {
@@ -283,10 +283,10 @@ namespace UniRx
             IsDisposed = true;
             asyncActions = UniRx.InternalUtil.ImmutableList<Func<T, IObservable<Unit>>>.Empty;
         }
-        class Subscription : IDisposable
+        private class Subscription : IDisposable
         {
-            readonly AsyncReactiveCommand<T> parent;
-            readonly Func<T, IObservable<Unit>> asyncAction;
+            private readonly AsyncReactiveCommand<T> parent;
+            private readonly Func<T, IObservable<Unit>> asyncAction;
 
             public Subscription(AsyncReactiveCommand<T> parent, Func<T, IObservable<Unit>> asyncAction)
             {
@@ -324,9 +324,9 @@ namespace UniRx
 
 #if CSHARP_7_OR_LATER || (UNITY_2018_3_OR_NEWER && (NET_STANDARD_2_0 || NET_4_6))
 
-        static readonly Action<object> Callback = CancelCallback;
+        private static readonly Action<object> Callback = CancelCallback;
 
-        static void CancelCallback(object state)
+        private static void CancelCallback(object state)
         {
             var tuple = (Tuple<ICancellableTaskCompletionSource, IDisposable>)state;
             tuple.Item2.Dispose();
@@ -410,9 +410,9 @@ namespace UniRx
 
 #if CSHARP_7_OR_LATER || (UNITY_2018_3_OR_NEWER && (NET_STANDARD_2_0 || NET_4_6))
 
-        static readonly Action<object> Callback = CancelCallback;
+        private static readonly Action<object> Callback = CancelCallback;
 
-        static void CancelCallback(object state)
+        private static void CancelCallback(object state)
         {
             var tuple = (Tuple<ICancellableTaskCompletionSource, IDisposable>)state;
             tuple.Item2.Dispose();

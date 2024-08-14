@@ -24,10 +24,10 @@ namespace TheraBytes.BetterUi
         public override UnityEngine.Object Target { get { return target; } }
 
         [SerializeField]
-        LocationAnimations target;
+        private LocationAnimations target;
 
         [SerializeField]
-        List<LocationAnimationTransitionState> states = new List<LocationAnimationTransitionState>();
+        private List<LocationAnimationTransitionState> states = new List<LocationAnimationTransitionState>();
 
 
         public LocationAnimationTransitions(params string[] stateNames)

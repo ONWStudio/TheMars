@@ -9,8 +9,10 @@ namespace Michsky.UI.Heat
     public class SwitchManager : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler, ISubmitHandler
     {
         // Resources
-        [SerializeField] private Animator switchAnimator;
-        [SerializeField] private CanvasGroup highlightCG;
+        [SerializeField]
+        private Animator switchAnimator;
+        [SerializeField]
+        private CanvasGroup highlightCG;
 
         // Saving
         public bool saveValue = false;
@@ -32,9 +34,9 @@ namespace Michsky.UI.Heat
         [System.Serializable]
         public class SwitchEvent : UnityEvent<bool> { }
 
-        bool isInitialized = false;
+        private bool isInitialized = false;
 
-        void Awake()
+        private void Awake()
         {
             if (saveValue) { GetSavedData(); }
             else
@@ -67,13 +69,13 @@ namespace Michsky.UI.Heat
             isInitialized = true;
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (UIManagerAudio.instance == null) { useSounds = false; }
             if (isInitialized) { UpdateUI(); }
         }
 
-        void GetSavedData()
+        private void GetSavedData()
         {
             if (gameObject.activeInHierarchy)
             {
@@ -235,13 +237,13 @@ namespace Michsky.UI.Heat
             StartCoroutine("SetNormal");
         }
 
-        IEnumerator DisableAnimator()
+        private IEnumerator DisableAnimator()
         {
             yield return new WaitForSeconds(0.5f);
             switchAnimator.enabled = false;
         }
 
-        IEnumerator SetNormal()
+        private IEnumerator SetNormal()
         {
             StopCoroutine("SetHighlight");
 
@@ -254,7 +256,7 @@ namespace Michsky.UI.Heat
             highlightCG.alpha = 0;
         }
 
-        IEnumerator SetHighlight()
+        private IEnumerator SetHighlight()
         {
             StopCoroutine("SetNormal");
 

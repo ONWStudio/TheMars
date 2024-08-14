@@ -11,7 +11,7 @@ namespace TheraBytes.BetterUi
     [HelpURL("https://documentation.therabytes.de/better-ui/ResolutionMonitor.html")]
     public class ResolutionMonitor : SingletonScriptableObject<ResolutionMonitor>
     {
-        static string FilePath { get { return "TheraBytes/Resources/ResolutionMonitor"; } }
+        private static string FilePath { get { return "TheraBytes/Resources/ResolutionMonitor"; } }
 
 
         #region Obsolete
@@ -77,36 +77,36 @@ namespace TheraBytes.BetterUi
 
         [FormerlySerializedAs("optimizedResolution")]
         [SerializeField]
-        Vector2 optimizedResolutionFallback = new Vector2(1080, 1920);
+        private Vector2 optimizedResolutionFallback = new Vector2(1080, 1920);
 
         [FormerlySerializedAs("optimizedDpi")]
         [SerializeField]
-        float optimizedDpiFallback = 96;
+        private float optimizedDpiFallback = 96;
 
         [SerializeField]
-        string fallbackName = "Portrait";
+        private string fallbackName = "Portrait";
 
         [SerializeField]
-        StaticSizerMethod[] staticSizerMethods = new StaticSizerMethod[5];
+        private StaticSizerMethod[] staticSizerMethods = new StaticSizerMethod[5];
 
         [SerializeField]
-        DpiManager dpiManager = new DpiManager();
+        private DpiManager dpiManager = new DpiManager();
 
-        ScreenTypeConditions currentScreenConfig;
+        private ScreenTypeConditions currentScreenConfig;
 
         [SerializeField]
-        List<ScreenTypeConditions> optimizedScreens = new List<ScreenTypeConditions>()
+        private List<ScreenTypeConditions> optimizedScreens = new List<ScreenTypeConditions>()
         {
             new ScreenTypeConditions("Landscape", typeof(IsCertainScreenOrientation)),
         };
 
         public List<ScreenTypeConditions> OptimizedScreens { get { return optimizedScreens; } }
 
-        static Dictionary<string, ScreenTypeConditions> lookUpScreens = new Dictionary<string, ScreenTypeConditions>();
+        private static Dictionary<string, ScreenTypeConditions> lookUpScreens = new Dictionary<string, ScreenTypeConditions>();
 
         #region Screen Tags
 
-        static HashSet<string> screenTags = new HashSet<string>();
+        private static HashSet<string> screenTags = new HashSet<string>();
         public static IEnumerable<string> CurrentScreenTags { get { return screenTags; } }
 
         public static bool AddScreenTag(string screenTag)
@@ -143,7 +143,7 @@ namespace TheraBytes.BetterUi
         #endregion
 
 #if UNITY_EDITOR && UNITY_2018_3_OR_NEWER
-        static UnityEditor.SceneManagement.StageHandle currentStage;
+        private static UnityEditor.SceneManagement.StageHandle currentStage;
 #endif
 
         public static ScreenTypeConditions CurrentScreenConfiguration
@@ -210,17 +210,17 @@ namespace TheraBytes.BetterUi
         }
 
 
-        static Vector2 lastScreenResolution;
-        static float lastDpi;
+        private static Vector2 lastScreenResolution;
+        private static float lastDpi;
 
-        static bool isDirty;
+        private static bool isDirty;
 
 #if UNITY_EDITOR
-        static Type gameViewType = null;
-        static UnityEditor.EditorWindow gameViewWindow = null;
-        static Version unityVersion;
+        private static Type gameViewType = null;
+        private static UnityEditor.EditorWindow gameViewWindow = null;
+        private static Version unityVersion;
 
-        static ScreenTypeConditions simulatedScreenConfig;
+        private static ScreenTypeConditions simulatedScreenConfig;
         public static ScreenTypeConditions SimulatedScreenConfig
         {
             get { return simulatedScreenConfig; }
@@ -233,17 +233,17 @@ namespace TheraBytes.BetterUi
             }
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             RegisterCallbacks();
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             UnregisterCallbacks();
         }
 
-        static void RegisterCallbacks()
+        private static void RegisterCallbacks()
         {
             unityVersion = UnityEditorInternal.InternalEditorUtility.GetUnityVersion();
 
@@ -262,7 +262,7 @@ namespace TheraBytes.BetterUi
 #endif
         }
 
-        static void UnregisterCallbacks()
+        private static void UnregisterCallbacks()
         {
             UnityEditor.EditorApplication.update -= Update;
 
@@ -456,7 +456,7 @@ namespace TheraBytes.BetterUi
 #endif
         }
 
-        static IEnumerable<IResolutionDependency> AllResolutionDependencies()
+        private static IEnumerable<IResolutionDependency> AllResolutionDependencies()
         {
             var allObjects = GetAllEditableObjects();
 
@@ -484,7 +484,7 @@ namespace TheraBytes.BetterUi
             }
         }
 
-        static IEnumerable<GameObject> GetAllEditableObjects()
+        private static IEnumerable<GameObject> GetAllEditableObjects()
         {
             var allObjects =
 #if UNITY_2022_2_OR_NEWER
@@ -517,7 +517,7 @@ namespace TheraBytes.BetterUi
 #endif
         }
 
-        static IEnumerable<GameObject> IterateHierarchy(GameObject root)
+        private static IEnumerable<GameObject> IterateHierarchy(GameObject root)
         {
             yield return root;
 
@@ -530,7 +530,7 @@ namespace TheraBytes.BetterUi
             }
         }
 
-        static Vector2 GetCurrentResolution()
+        private static Vector2 GetCurrentResolution()
         {
 #if UNITY_EDITOR
             FindAndStoreGameView();
@@ -545,7 +545,7 @@ namespace TheraBytes.BetterUi
 #endif
         }
 
-        float GetCurrentDpi()
+        private float GetCurrentDpi()
         {
 #if UNITY_EDITOR
 
@@ -573,7 +573,7 @@ namespace TheraBytes.BetterUi
         }
 
 #if UNITY_EDITOR
-        static void FindAndStoreGameView()
+        private static void FindAndStoreGameView()
         {
             if (gameViewType == null)
             {

@@ -10,7 +10,7 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservablePointerClickTrigger : ObservableTriggerBase, IEventSystemHandler, IPointerClickHandler
     {
-        Subject<PointerEventData> onPointerClick;
+        private Subject<PointerEventData> onPointerClick;
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {

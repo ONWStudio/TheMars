@@ -5,8 +5,8 @@ namespace UniRx.Operators
 {
     internal class DistinctUntilChangedObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly IEqualityComparer<T> comparer;
+        private readonly IObservable<T> source;
+        private readonly IEqualityComparer<T> comparer;
 
         public DistinctUntilChangedObservable(IObservable<T> source, IEqualityComparer<T> comparer)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -20,11 +20,11 @@ namespace UniRx.Operators
             return source.Subscribe(new DistinctUntilChanged(this, observer, cancel));
         }
 
-        class DistinctUntilChanged : OperatorObserverBase<T, T>
+        private class DistinctUntilChanged : OperatorObserverBase<T, T>
         {
-            readonly DistinctUntilChangedObservable<T> parent;
-            bool isFirst = true;
-            T prevKey = default(T);
+            private readonly DistinctUntilChangedObservable<T> parent;
+            private bool isFirst = true;
+            private T prevKey = default(T);
 
             public DistinctUntilChanged(DistinctUntilChangedObservable<T> parent, IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)
@@ -84,9 +84,9 @@ namespace UniRx.Operators
 
     internal class DistinctUntilChangedObservable<T, TKey> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly IEqualityComparer<TKey> comparer;
-        readonly Func<T, TKey> keySelector;
+        private readonly IObservable<T> source;
+        private readonly IEqualityComparer<TKey> comparer;
+        private readonly Func<T, TKey> keySelector;
 
         public DistinctUntilChangedObservable(IObservable<T> source, Func<T, TKey> keySelector, IEqualityComparer<TKey> comparer)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -101,11 +101,11 @@ namespace UniRx.Operators
             return source.Subscribe(new DistinctUntilChanged(this, observer, cancel));
         }
 
-        class DistinctUntilChanged : OperatorObserverBase<T, T>
+        private class DistinctUntilChanged : OperatorObserverBase<T, T>
         {
-            readonly DistinctUntilChangedObservable<T, TKey> parent;
-            bool isFirst = true;
-            TKey prevKey = default(TKey);
+            private readonly DistinctUntilChangedObservable<T, TKey> parent;
+            private bool isFirst = true;
+            private TKey prevKey = default(TKey);
 
             public DistinctUntilChanged(DistinctUntilChangedObservable<T, TKey> parent, IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)

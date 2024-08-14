@@ -12,7 +12,7 @@ namespace TheraBytes.BetterUi.Editor
 
     public class SnapAnchorsWindow : EditorWindow
     {
-        const string HighlightColor = "#0ef05d";
+        private const string HighlightColor = "#0ef05d";
 
         public enum AnchorMode
         {
@@ -21,16 +21,16 @@ namespace TheraBytes.BetterUi.Editor
         }
 
 
-        List<RectTransform> objects;
+        private List<RectTransform> objects;
 
-        AnchorMode mode = AnchorMode.Border;
-        bool parentPosition;
-        Vector2 point = new Vector2(0.5f, 0.5f);
+        private AnchorMode mode = AnchorMode.Border;
+        private bool parentPosition;
+        private Vector2 point = new Vector2(0.5f, 0.5f);
 
-        Texture2D allBorderPic, verticalBorderPic, horizontalBorderPic, matchParentPic, 
+        private Texture2D allBorderPic, verticalBorderPic, horizontalBorderPic, matchParentPic, 
             pointPic, verticalPointPic, horizontalPointPic;
 
-        GUIStyle setPivotStyle, selectPointStyle;
+        private GUIStyle setPivotStyle, selectPointStyle;
 
         [MenuItem("Tools/Better UI/Snap Anchors", false, 60)]
         public static void ShowWindow()
@@ -38,7 +38,7 @@ namespace TheraBytes.BetterUi.Editor
             EditorWindow.GetWindow(typeof(SnapAnchorsWindow), false, "Snap Anchors");
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             minSize = new Vector2(195, 245);
 
@@ -54,7 +54,7 @@ namespace TheraBytes.BetterUi.Editor
 
         }
 
-        void OnGUI()
+        private void OnGUI()
         {
             #region init styles
             if (selectPointStyle == null)
@@ -198,7 +198,7 @@ namespace TheraBytes.BetterUi.Editor
             point = new Vector2(x, y);
         }
 
-        Vector2 GetPivotOffset(RectTransform obj)
+        private Vector2 GetPivotOffset(RectTransform obj)
         {
             if (mode == AnchorMode.Border)
                 return Vector2.zero;
@@ -229,7 +229,7 @@ namespace TheraBytes.BetterUi.Editor
             return result;
         }
 
-        void DrawPointButtons()
+        private void DrawPointButtons()
         {
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
@@ -316,7 +316,7 @@ namespace TheraBytes.BetterUi.Editor
             return content;
         }
 
-        void DrawModeSelection()
+        private void DrawModeSelection()
         {
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Toggle((mode == AnchorMode.Border), "Border", EditorStyles.miniButtonLeft)
@@ -335,7 +335,7 @@ namespace TheraBytes.BetterUi.Editor
         }
 
 
-        void SnapBorder(bool left, bool right, bool top, bool bottom)
+        private void SnapBorder(bool left, bool right, bool top, bool bottom)
         {
             Undo.SetCurrentGroupName("Border" + DateTime.Now.ToFileTime());
             int group = Undo.GetCurrentGroup();
@@ -394,7 +394,7 @@ namespace TheraBytes.BetterUi.Editor
             obj.localScale = objLocalScale;
         }
 
-        void SnapPoint(bool horizontal, bool vertical)
+        private void SnapPoint(bool horizontal, bool vertical)
         {
             Undo.SetCurrentGroupName("Border" + DateTime.Now.ToFileTime());
             int group = Undo.GetCurrentGroup();
@@ -408,7 +408,7 @@ namespace TheraBytes.BetterUi.Editor
             Undo.CollapseUndoOperations(group);
         }
 
-        void SnapPoint(RectTransform obj, Vector2 pivotOffset, bool horizontal, bool vertical)
+        private void SnapPoint(RectTransform obj, Vector2 pivotOffset, bool horizontal, bool vertical)
         {
             Undo.RecordObject(obj.transform, "Snap Anchors Point");
 
@@ -465,17 +465,17 @@ namespace TheraBytes.BetterUi.Editor
             obj.localScale = objLocalScale;
         }
 
-        static float CalculateMinAnchor(bool calculate, float innerPos, float outerPos, float outerSize, float fallback)
+        private static float CalculateMinAnchor(bool calculate, float innerPos, float outerPos, float outerSize, float fallback)
         {
             return (calculate) ? (innerPos - outerPos) / outerSize : fallback;
         }
 
-        static float CalculateMaxAnchor(bool calculate, float innerPos, float outerPos, float outerSize, float fallback)
+        private static float CalculateMaxAnchor(bool calculate, float innerPos, float outerPos, float outerSize, float fallback)
         {
             return (calculate) ? 1 - ((outerPos - innerPos) / outerSize) : fallback;
         }
 
-        static float CalculateSize(float size, bool front, bool back)
+        private static float CalculateSize(float size, bool front, bool back)
         {
             if (front && back)
             {
@@ -491,7 +491,7 @@ namespace TheraBytes.BetterUi.Editor
             }
         }
 
-        static float CalculateAncherPos(float pivot, float size, bool front, bool back, float fallback)
+        private static float CalculateAncherPos(float pivot, float size, bool front, bool back, float fallback)
         {
             if (!(front) && !(back))
                 return fallback;

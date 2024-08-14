@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace TMCard.Runtime
 {
@@ -9,11 +10,13 @@ namespace TMCard.Runtime
     /// .. 덱에 있는 카드들을 관리하는 클래스 덱 컨트롤러 -> HandImporter -> 패 컨트롤러로 카드를 가져갑니다
     /// </summary>
     [DisallowMultipleComponent]
-    public sealed class TMCardDeckUIController : MonoBehaviour
+    public sealed class TMCardDeckController : MonoBehaviour
     {
         public int CardCount => _cards.Count;
 
-        [SerializeField] private List<TMCardController> _cards = new();
+        [FormerlySerializedAs("cards")]
+        [SerializeField]
+        private List<TMCardController> _cards = new();
 
         /// <summary>
         /// .. 카드를 List의 형태로 받아옵니다
@@ -43,7 +46,7 @@ namespace TMCard.Runtime
         public void PushCards(List<TMCardController> cards)
         {
             cards.ForEach(card => card.transform.SetParent(transform, false));
-            _cards.AddRange(cards);
+            this._cards.AddRange(cards);
         }
     }
 }

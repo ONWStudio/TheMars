@@ -5,13 +5,13 @@ namespace UniRx
 {
     public sealed class BehaviorSubject<T> : ISubject<T>, IDisposable, IOptimizedObservable<T>
     {
-        object observerLock = new object();
+        private object observerLock = new object();
 
-        bool isStopped;
-        bool isDisposed;
-        T lastValue;
-        Exception lastError;
-        IObserver<T> outObserver = EmptyObserver<T>.Instance;
+        private bool isStopped;
+        private bool isDisposed;
+        private T lastValue;
+        private Exception lastError;
+        private IObserver<T> outObserver = EmptyObserver<T>.Instance;
 
         public BehaviorSubject(T defaultValue)
         {
@@ -153,7 +153,7 @@ namespace UniRx
             }
         }
 
-        void ThrowIfDisposed()
+        private void ThrowIfDisposed()
         {
             if (isDisposed) throw new ObjectDisposedException("");
         }
@@ -163,11 +163,11 @@ namespace UniRx
             return false;
         }
 
-        class Subscription : IDisposable
+        private class Subscription : IDisposable
         {
-            readonly object gate = new object();
-            BehaviorSubject<T> parent;
-            IObserver<T> unsubscribeTarget;
+            private readonly object gate = new object();
+            private BehaviorSubject<T> parent;
+            private IObserver<T> unsubscribeTarget;
 
             public Subscription(BehaviorSubject<T> parent, IObserver<T> unsubscribeTarget)
             {

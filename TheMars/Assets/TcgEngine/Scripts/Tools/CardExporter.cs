@@ -26,7 +26,7 @@ namespace TcgEngine
         private RenderTexture texture;
         private Texture2D export_texture;
 
-        void Start()
+        private void Start()
         {
             if (variant == null)
                 variant = VariantData.GetDefault();

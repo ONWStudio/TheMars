@@ -5,10 +5,10 @@ namespace UniRx.Operators
 {
     internal class DelaySubscriptionObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly IScheduler scheduler;
-        readonly TimeSpan? dueTimeT;
-        readonly DateTimeOffset? dueTimeD;
+        private readonly IObservable<T> source;
+        private readonly IScheduler scheduler;
+        private readonly TimeSpan? dueTimeT;
+        private readonly DateTimeOffset? dueTimeD;
 
         public DelaySubscriptionObservable(IObservable<T> source,TimeSpan dueTime, IScheduler scheduler)
             : base(scheduler == Scheduler.CurrentThread || source.IsRequiredSubscribeOnCurrentThread())

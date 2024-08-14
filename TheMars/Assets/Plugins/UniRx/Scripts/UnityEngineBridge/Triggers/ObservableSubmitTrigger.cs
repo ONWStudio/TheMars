@@ -10,7 +10,7 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableSubmitTrigger : ObservableTriggerBase, IEventSystemHandler, ISubmitHandler
     {
-        Subject<BaseEventData> onSubmit;
+        private Subject<BaseEventData> onSubmit;
 
         void ISubmitHandler.OnSubmit(BaseEventData eventData)
         {

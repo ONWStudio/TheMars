@@ -19,12 +19,12 @@ namespace TcgEngine.UI
 
         private string deck_id;
 
-        void Awake()
+        private void Awake()
         {
             Clear();
         }
 
-        void Update()
+        private void Update()
         {
 
         }

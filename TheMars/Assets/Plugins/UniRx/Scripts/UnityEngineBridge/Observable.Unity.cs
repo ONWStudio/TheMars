@@ -61,14 +61,14 @@ namespace UniRx
 
     public class ObservableYieldInstruction<T> : IEnumerator<T>, ICustomYieldInstructionErrorHandler
     {
-        readonly IDisposable subscription;
-        readonly CancellationToken cancel;
-        bool reThrowOnError;
-        T current;
-        T result;
-        bool moveNext;
-        bool hasResult;
-        Exception error;
+        private readonly IDisposable subscription;
+        private readonly CancellationToken cancel;
+        private bool reThrowOnError;
+        private T current;
+        private T result;
+        private bool moveNext;
+        private bool hasResult;
+        private Exception error;
 
         public ObservableYieldInstruction(IObservable<T> source, bool reThrowOnError, CancellationToken cancel)
         {
@@ -192,9 +192,9 @@ namespace UniRx
             throw new NotSupportedException();
         }
 
-        class ToYieldInstruction : IObserver<T>
+        private class ToYieldInstruction : IObserver<T>
         {
-            readonly ObservableYieldInstruction<T> parent;
+            private readonly ObservableYieldInstruction<T> parent;
 
             public ToYieldInstruction(ObservableYieldInstruction<T> parent)
             {
@@ -227,7 +227,7 @@ namespace UniRx
     public static partial class Observable
 #endif
     {
-        readonly static HashSet<Type> YieldInstructionTypes = new HashSet<Type>
+        private readonly static HashSet<Type> YieldInstructionTypes = new HashSet<Type>
         {
             #if UNITY_2018_3_OR_NEWER
 #pragma warning disable CS0618
@@ -245,11 +245,11 @@ namespace UniRx
 
 #if SupportCustomYieldInstruction
 
-        class EveryAfterUpdateInvoker : IEnumerator
+        private class EveryAfterUpdateInvoker : IEnumerator
         {
-            long count = -1;
-            readonly IObserver<long> observer;
-            readonly CancellationToken cancellationToken;
+            private long count = -1;
+            private readonly IObserver<long> observer;
+            private readonly CancellationToken cancellationToken;
 
             public EveryAfterUpdateInvoker(IObserver<long> observer, CancellationToken cancellationToken)
             {
@@ -327,7 +327,7 @@ namespace UniRx
             return FromMicroCoroutine<Unit>((observer, cancellationToken) => WrapEnumerator(coroutine(cancellationToken), observer, cancellationToken, publishEveryYield), frameCountType);
         }
 
-        static IEnumerator WrapEnumerator(IEnumerator enumerator, IObserver<Unit> observer, CancellationToken cancellationToken, bool publishEveryYield)
+        private static IEnumerator WrapEnumerator(IEnumerator enumerator, IObserver<Unit> observer, CancellationToken cancellationToken, bool publishEveryYield)
         {
             var hasNext = default(bool);
             var raisedError = false;
@@ -442,7 +442,7 @@ namespace UniRx
             return FromCoroutine<T>((observer, cancellationToken) => WrapEnumeratorYieldValue<T>(coroutine(cancellationToken), observer, cancellationToken, nullAsNextUpdate));
         }
 
-        static IEnumerator WrapEnumeratorYieldValue<T>(IEnumerator enumerator, IObserver<T> observer, CancellationToken cancellationToken, bool nullAsNextUpdate)
+        private static IEnumerator WrapEnumeratorYieldValue<T>(IEnumerator enumerator, IObserver<T> observer, CancellationToken cancellationToken, bool nullAsNextUpdate)
         {
             var hasNext = default(bool);
             var current = default(object);
@@ -569,7 +569,7 @@ namespace UniRx
             return FromMicroCoroutine<T>((observer, cancellationToken) => WrapToCancellableEnumerator(coroutine(observer), observer, cancellationToken), frameCountType);
         }
 
-        static IEnumerator WrapToCancellableEnumerator<T>(IEnumerator enumerator, IObserver<T> observer, CancellationToken cancellationToken)
+        private static IEnumerator WrapToCancellableEnumerator<T>(IEnumerator enumerator, IObserver<T> observer, CancellationToken cancellationToken)
         {
             var hasNext = default(bool);
             do
@@ -688,7 +688,7 @@ namespace UniRx
             return FromMicroCoroutine<long>((observer, cancellationToken) => EveryCycleCore(observer, cancellationToken), FrameCountType.EndOfFrame);
         }
 
-        static IEnumerator EveryCycleCore(IObserver<long> observer, CancellationToken cancellationToken)
+        private static IEnumerator EveryCycleCore(IObserver<long> observer, CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested) yield break;
             var count = 0L;
@@ -739,7 +739,7 @@ namespace UniRx
             return FromMicroCoroutine<Unit>((observer, cancellation) => NextFrameCore(observer, cancellation), frameCountType);
         }
 
-        static IEnumerator NextFrameCore(IObserver<Unit> observer, CancellationToken cancellation)
+        private static IEnumerator NextFrameCore(IObserver<Unit> observer, CancellationToken cancellation)
         {
             yield return null;
 
@@ -765,7 +765,7 @@ namespace UniRx
             return FromMicroCoroutine<long>((observer, cancellation) => TimerFrameCore(observer, dueTimeFrameCount, periodFrameCount, cancellation), frameCountType);
         }
 
-        static IEnumerator TimerFrameCore(IObserver<long> observer, int dueTimeFrameCount, CancellationToken cancel)
+        private static IEnumerator TimerFrameCore(IObserver<long> observer, int dueTimeFrameCount, CancellationToken cancel)
         {
             // normalize
             if (dueTimeFrameCount <= 0) dueTimeFrameCount = 0;
@@ -785,7 +785,7 @@ namespace UniRx
             }
         }
 
-        static IEnumerator TimerFrameCore(IObserver<long> observer, int dueTimeFrameCount, int periodFrameCount, CancellationToken cancel)
+        private static IEnumerator TimerFrameCore(IObserver<long> observer, int dueTimeFrameCount, int periodFrameCount, CancellationToken cancel)
         {
             // normalize
             if (dueTimeFrameCount <= 0) dueTimeFrameCount = 0;
@@ -1087,7 +1087,7 @@ namespace UniRx
             return RepeatUntilCore(RepeatInfinite(source), target.OnDisableAsObservable(), (target != null) ? target.gameObject : null);
         }
 
-        static IObservable<T> RepeatUntilCore<T>(this IEnumerable<IObservable<T>> sources, IObservable<Unit> trigger, GameObject lifeTimeChecker)
+        private static IObservable<T> RepeatUntilCore<T>(this IEnumerable<IObservable<T>> sources, IObservable<Unit> trigger, GameObject lifeTimeChecker)
         {
             return new UniRx.Operators.RepeatUntilObservable<T>(sources, trigger, lifeTimeChecker);
         }

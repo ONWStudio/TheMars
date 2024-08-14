@@ -24,14 +24,14 @@ namespace TcgEngine.UI
 
         private static HoverTextBox instance;
 
-        void Awake()
+        private void Awake()
         {
             instance = this;
             rect_left = panel_left.GetComponent<RectTransform>();
             rect_right = panel_right.GetComponent<RectTransform>();
         }
 
-        void Update()
+        private void Update()
         {
             if (current != null || current_ui != null)
             {

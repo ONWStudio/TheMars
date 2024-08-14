@@ -20,7 +20,7 @@ namespace TheraBytes.BetterUi.Editor
         private SerializedProperty textureSetingsCollectionProp;
         private SerializedProperty maskable;
 
-        ImageAppearanceProviderEditorHelper materialDrawer;
+        private ImageAppearanceProviderEditorHelper materialDrawer;
 
         /// <summary>
         ///   <para>A string cointaining the Image details to be used as a overlay on the component Preview.</para>

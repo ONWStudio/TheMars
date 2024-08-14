@@ -11,19 +11,19 @@ namespace TMCard.Effect
     public sealed partial class HoldEffectCreator : ITMEffectCreator
     {
         [OnChangedValueByMethod(nameof(FriendlyCard))]
-        private void onChangedFriendlyCard()
+        private void OnChangedFriendlyCard()
         {
             Debug.Log("changed friendlyCard");
 
             foreach (string guid in AssetDatabase.FindAssets($"t:{typeof(TMCardData).Name}"))
             {
-                TMCardData cardData = AssetDatabase
+                var cardData = AssetDatabase
                     .LoadAssetAtPath<TMCardData>(AssetDatabase.GUIDToAssetPath(guid));
 
-                FieldInfo fieldInfo = cardData.GetType().GetField("_effectCreators", BindingFlags.Instance | BindingFlags.NonPublic);
+                var fieldInfo = cardData.GetType().GetField("_effectCreators", BindingFlags.Instance | BindingFlags.NonPublic);
                 if (fieldInfo?.GetValue(cardData) is List<ITMEffectCreator> specialEffects)
                 {
-                    foreach (ITMEffectCreator cardSpecialEffect in specialEffects)
+                    foreach (var cardSpecialEffect in specialEffects)
                     {
                         if (cardSpecialEffect is not HoldEffectCreator holdCard || holdCard != this || FriendlyCard != cardData) continue;
 

@@ -10,7 +10,7 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservablePointerEnterTrigger : ObservableTriggerBase, IEventSystemHandler, IPointerEnterHandler
     {
-        Subject<PointerEventData> onPointerEnter;
+        private Subject<PointerEventData> onPointerEnter;
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {

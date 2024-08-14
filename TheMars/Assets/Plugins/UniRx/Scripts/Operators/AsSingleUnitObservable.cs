@@ -5,7 +5,7 @@ namespace UniRx.Operators
 {
     internal class AsSingleUnitObservableObservable<T> : OperatorObservableBase<Unit>
     {
-        readonly IObservable<T> source;
+        private readonly IObservable<T> source;
 
         public AsSingleUnitObservableObservable(IObservable<T> source)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -18,7 +18,7 @@ namespace UniRx.Operators
             return source.Subscribe(new AsSingleUnitObservable(observer, cancel));
         }
 
-        class AsSingleUnitObservable : OperatorObserverBase<T, Unit>
+        private class AsSingleUnitObservable : OperatorObserverBase<T, Unit>
         {
             public AsSingleUnitObservable(IObserver<Unit> observer, IDisposable cancel) : base(observer, cancel)
             {

@@ -14,12 +14,12 @@ namespace TcgEngine.FX
 
         private bool hover = false;
 
-        void Start()
+        private void Start()
         {
 
         }
 
-        void Update()
+        private void Update()
         {
             if (hover != fx.activeSelf)
                 fx.SetActive(hover);

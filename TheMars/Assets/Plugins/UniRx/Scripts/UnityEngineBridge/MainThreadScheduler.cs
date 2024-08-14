@@ -22,7 +22,7 @@ namespace UniRx
             Scheduler.DefaultSchedulers.AsyncConversions = Scheduler.ThreadPool;
         }
 #endif
-        static IScheduler mainThread;
+        private static IScheduler mainThread;
 
         /// <summary>
         /// Unity native MainThread Queue Scheduler. Run on mainthread and delayed on coroutine update loop, elapsed time is calculated based on Time.time.
@@ -35,7 +35,7 @@ namespace UniRx
             }
         }
 
-        static IScheduler mainThreadIgnoreTimeScale;
+        private static IScheduler mainThreadIgnoreTimeScale;
 
         /// <summary>
         /// Another MainThread scheduler, delay elapsed time is calculated based on Time.unscaledDeltaTime.
@@ -48,7 +48,7 @@ namespace UniRx
             }
         }
 
-        static IScheduler mainThreadFixedUpdate;
+        private static IScheduler mainThreadFixedUpdate;
 
         /// <summary>
         /// Run on fixed update mainthread, delay elapsed time is calculated based on Time.fixedTime.
@@ -61,7 +61,7 @@ namespace UniRx
             }
         }
 
-        static IScheduler mainThreadEndOfFrame;
+        private static IScheduler mainThreadEndOfFrame;
 
         /// <summary>
         /// Run on end of frame mainthread, delay elapsed time is calculated based on Time.deltaTime.
@@ -74,9 +74,9 @@ namespace UniRx
             }
         }
 
-        class MainThreadScheduler : IScheduler, ISchedulerPeriodic, ISchedulerQueueing
+        private class MainThreadScheduler : IScheduler, ISchedulerPeriodic, ISchedulerQueueing
         {
-            readonly Action<object> scheduleAction;
+            private readonly Action<object> scheduleAction;
 
             public MainThreadScheduler()
             {
@@ -86,7 +86,7 @@ namespace UniRx
 
             // delay action is run in StartCoroutine
             // Okay to action run synchronous and guaranteed run on MainThread
-            IEnumerator DelayAction(TimeSpan dueTime, Action action, ICancelable cancellation)
+            private IEnumerator DelayAction(TimeSpan dueTime, Action action, ICancelable cancellation)
             {
                 // zero == every frame
                 if (dueTime == TimeSpan.Zero)
@@ -102,7 +102,7 @@ namespace UniRx
                 MainThreadDispatcher.UnsafeSend(action);
             }
 
-            IEnumerator PeriodicAction(TimeSpan period, Action action, ICancelable cancellation)
+            private IEnumerator PeriodicAction(TimeSpan period, Action action, ICancelable cancellation)
             {
                 // zero == every frame
                 if (period == TimeSpan.Zero)
@@ -135,7 +135,7 @@ namespace UniRx
                 get { return Scheduler.Now; }
             }
 
-            void Schedule(object state)
+            private void Schedule(object state)
             {
                 var t = (Tuple<BooleanDisposable, Action>)state;
                 if (!t.Item1.IsDisposed)
@@ -176,7 +176,7 @@ namespace UniRx
                 return d;
             }
 
-            void ScheduleQueueing<T>(object state)
+            private void ScheduleQueueing<T>(object state)
             {
                 var t = (Tuple<ICancelable, T, Action<T>>)state;
                 if (!t.Item1.IsDisposed)
@@ -190,7 +190,7 @@ namespace UniRx
                 MainThreadDispatcher.Post(QueuedAction<T>.Instance, Tuple.Create(cancel, state, action));
             }
 
-            static class QueuedAction<T>
+            private static class QueuedAction<T>
             {
                 public static readonly Action<object> Instance = new Action<object>(Invoke);
 
@@ -206,9 +206,9 @@ namespace UniRx
             }
         }
 
-        class IgnoreTimeScaleMainThreadScheduler : IScheduler, ISchedulerPeriodic, ISchedulerQueueing
+        private class IgnoreTimeScaleMainThreadScheduler : IScheduler, ISchedulerPeriodic, ISchedulerQueueing
         {
-            readonly Action<object> scheduleAction;
+            private readonly Action<object> scheduleAction;
 
             public IgnoreTimeScaleMainThreadScheduler()
             {
@@ -216,7 +216,7 @@ namespace UniRx
                 scheduleAction = new Action<object>(Schedule);
             }
 
-            IEnumerator DelayAction(TimeSpan dueTime, Action action, ICancelable cancellation)
+            private IEnumerator DelayAction(TimeSpan dueTime, Action action, ICancelable cancellation)
             {
                 if (dueTime == TimeSpan.Zero)
                 {
@@ -244,7 +244,7 @@ namespace UniRx
                 }
             }
 
-            IEnumerator PeriodicAction(TimeSpan period, Action action, ICancelable cancellation)
+            private IEnumerator PeriodicAction(TimeSpan period, Action action, ICancelable cancellation)
             {
                 // zero == every frame
                 if (period == TimeSpan.Zero)
@@ -281,7 +281,7 @@ namespace UniRx
                 get { return Scheduler.Now; }
             }
 
-            void Schedule(object state)
+            private void Schedule(object state)
             {
                 var t = (Tuple<BooleanDisposable, Action>)state;
                 if (!t.Item1.IsDisposed)
@@ -327,7 +327,7 @@ namespace UniRx
                 MainThreadDispatcher.Post(QueuedAction<T>.Instance, Tuple.Create(cancel, state, action));
             }
 
-            static class QueuedAction<T>
+            private static class QueuedAction<T>
             {
                 public static readonly Action<object> Instance = new Action<object>(Invoke);
 
@@ -343,14 +343,14 @@ namespace UniRx
             }
         }
 
-        class FixedUpdateMainThreadScheduler : IScheduler, ISchedulerPeriodic, ISchedulerQueueing
+        private class FixedUpdateMainThreadScheduler : IScheduler, ISchedulerPeriodic, ISchedulerQueueing
         {
             public FixedUpdateMainThreadScheduler()
             {
                 MainThreadDispatcher.Initialize();
             }
 
-            IEnumerator ImmediateAction<T>(T state, Action<T> action, ICancelable cancellation)
+            private IEnumerator ImmediateAction<T>(T state, Action<T> action, ICancelable cancellation)
             {
                 yield return null;
                 if (cancellation.IsDisposed) yield break;
@@ -358,7 +358,7 @@ namespace UniRx
                 MainThreadDispatcher.UnsafeSend(action, state);
             }
 
-            IEnumerator DelayAction(TimeSpan dueTime, Action action, ICancelable cancellation)
+            private IEnumerator DelayAction(TimeSpan dueTime, Action action, ICancelable cancellation)
             {
                 if (dueTime == TimeSpan.Zero)
                 {
@@ -386,7 +386,7 @@ namespace UniRx
                 }
             }
 
-            IEnumerator PeriodicAction(TimeSpan period, Action action, ICancelable cancellation)
+            private IEnumerator PeriodicAction(TimeSpan period, Action action, ICancelable cancellation)
             {
                 // zero == every frame
                 if (period == TimeSpan.Zero)
@@ -460,14 +460,14 @@ namespace UniRx
             }
         }
 
-        class EndOfFrameMainThreadScheduler : IScheduler, ISchedulerPeriodic, ISchedulerQueueing
+        private class EndOfFrameMainThreadScheduler : IScheduler, ISchedulerPeriodic, ISchedulerQueueing
         {
             public EndOfFrameMainThreadScheduler()
             {
                 MainThreadDispatcher.Initialize();
             }
 
-            IEnumerator ImmediateAction<T>(T state, Action<T> action, ICancelable cancellation)
+            private IEnumerator ImmediateAction<T>(T state, Action<T> action, ICancelable cancellation)
             {
                 yield return null;
                 if (cancellation.IsDisposed) yield break;
@@ -475,7 +475,7 @@ namespace UniRx
                 MainThreadDispatcher.UnsafeSend(action, state);
             }
 
-            IEnumerator DelayAction(TimeSpan dueTime, Action action, ICancelable cancellation)
+            private IEnumerator DelayAction(TimeSpan dueTime, Action action, ICancelable cancellation)
             {
                 if (dueTime == TimeSpan.Zero)
                 {
@@ -503,7 +503,7 @@ namespace UniRx
                 }
             }
 
-            IEnumerator PeriodicAction(TimeSpan period, Action action, ICancelable cancellation)
+            private IEnumerator PeriodicAction(TimeSpan period, Action action, ICancelable cancellation)
             {
                 // zero == every frame
                 if (period == TimeSpan.Zero)

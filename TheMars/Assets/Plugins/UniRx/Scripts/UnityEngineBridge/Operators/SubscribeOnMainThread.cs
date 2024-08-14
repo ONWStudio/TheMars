@@ -4,8 +4,8 @@ namespace UniRx.Operators
 {
     internal class SubscribeOnMainThreadObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly IObservable<long> subscribeTrigger;
+        private readonly IObservable<T> source;
+        private readonly IObservable<long> subscribeTrigger;
 
         public SubscribeOnMainThreadObservable(IObservable<T> source, IObservable<long> subscribeTrigger)
             : base(source.IsRequiredSubscribeOnCurrentThread())

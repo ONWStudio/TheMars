@@ -11,7 +11,8 @@ namespace MoreMountains.Tools
 	public class MMReferencedScriptableObject<T> : ScriptableObject where T : ScriptableObject
 	{
 		private MMReferenceHolder<T> _instances;
-		protected virtual T Typed => _typed = _typed ?? this as T; private T _typed;
+		protected virtual T Typed => _typed = _typed ?? this as T;
+		private T _typed;
 
 		protected virtual void OnReferenced() {}
 		protected virtual void OnEnable()
@@ -52,7 +53,7 @@ namespace MoreMountains.Tools
 		}
 
 		public static void CleanUp() => RepackNonNullReferences();
-		static void RepackNonNullReferences()
+		private static void RepackNonNullReferences()
 		{
 			if (_instances == null) return;
 			for(int n=_instances.Count-1; n >=0; --n)

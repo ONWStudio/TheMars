@@ -132,7 +132,7 @@ namespace UniRx.InternalUtil
             return false;
         }
 
-        struct IndexedItem : IComparable<IndexedItem>
+        private struct IndexedItem : IComparable<IndexedItem>
         {
             public T Value;
             public long Id;

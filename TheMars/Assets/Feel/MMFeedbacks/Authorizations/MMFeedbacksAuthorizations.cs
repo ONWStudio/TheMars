@@ -212,7 +212,7 @@ namespace MoreMountains.Feedbacks
 		#endif
 		
 		#region ToggleMethods
-		
+
 		private void ToggleAnimation()
 		{
 			AnimationParameter = !AnimationParameter;

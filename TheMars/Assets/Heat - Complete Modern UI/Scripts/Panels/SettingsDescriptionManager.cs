@@ -7,19 +7,27 @@ namespace Michsky.UI.Heat
     public class SettingsDescriptionManager : MonoBehaviour
     {
         [Header("Default Content")]
-        [SerializeField] private Sprite cover;
-        [SerializeField] private string title = "Settings";
-        [SerializeField] [TextArea] private string description = "Description area.";
+        [SerializeField]
+        private Sprite cover;
+        [SerializeField]
+        private string title = "Settings";
+        [SerializeField] [TextArea]
+        private string description = "Description area.";
 
         [Header("Localization")]
         public string tableID = "UI";
-        [SerializeField] private string titleKey;
-        [SerializeField] private string descriptionKey;
+        [SerializeField]
+        private string titleKey;
+        [SerializeField]
+        private string descriptionKey;
 
         [Header("Resources")]
-        [SerializeField] private Image coverImage;
-        [SerializeField] private TextMeshProUGUI titleObject;
-        [SerializeField] private TextMeshProUGUI descriptionObject;
+        [SerializeField]
+        private Image coverImage;
+        [SerializeField]
+        private TextMeshProUGUI titleObject;
+        [SerializeField]
+        private TextMeshProUGUI descriptionObject;
 
         [Header("Settings")]
         public bool useLocalization = true;
@@ -27,7 +35,7 @@ namespace Michsky.UI.Heat
         // Helpers
         [HideInInspector] public LocalizedObject localizedObject;
 
-        void Awake()
+        private void Awake()
         {
             if (useLocalization && !string.IsNullOrEmpty(titleKey) && !string.IsNullOrEmpty(descriptionKey))
             { 
@@ -35,12 +43,12 @@ namespace Michsky.UI.Heat
             }
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             SetDefault();
         }
 
-        void CheckForLocalization()
+        private void CheckForLocalization()
         {
             localizedObject = gameObject.GetComponent<LocalizedObject>();
 

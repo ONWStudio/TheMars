@@ -16,11 +16,16 @@ namespace Michsky.UI.Heat
         private int currentButtonIndex = 0;
         private int newPanelIndex;
         public bool cullPanels = true;
-        [SerializeField] private bool initializeButtons = true;
-        [SerializeField] private bool useCooldownForHotkeys = false;
-        [SerializeField] private bool bypassAnimationOnEnable = false;
-        [SerializeField] private UpdateMode updateMode = UpdateMode.UnscaledTime;
-        [SerializeField] private PanelMode panelMode = PanelMode.Custom;
+        [SerializeField]
+        private bool initializeButtons = true;
+        [SerializeField]
+        private bool useCooldownForHotkeys = false;
+        [SerializeField]
+        private bool bypassAnimationOnEnable = false;
+        [SerializeField]
+        private UpdateMode updateMode = UpdateMode.UnscaledTime;
+        [SerializeField]
+        private PanelMode panelMode = PanelMode.Custom;
         [Range(0.75f, 2)] public float animationSpeed = 1;
 
         // Events
@@ -28,17 +33,17 @@ namespace Michsky.UI.Heat
         public PanelChangeCallback onPanelChanged = new PanelChangeCallback();
 
         // Helpers
-        Animator currentPanel;
-        Animator nextPanel;
+        private Animator currentPanel;
+        private Animator nextPanel;
 
-        PanelButton currentButton;
-        PanelButton nextButton;
+        private PanelButton currentButton;
+        private PanelButton nextButton;
 
-        string panelFadeIn = "Panel In";
-        string panelFadeOut = "Panel Out";
-        string animSpeedKey = "AnimSpeed";
+        private string panelFadeIn = "Panel In";
+        private string panelFadeOut = "Panel Out";
+        private string animSpeedKey = "AnimSpeed";
 
-        bool isInitialized = false;
+        private bool isInitialized = false;
         public float cachedStateLength = 1;
         [HideInInspector] public int managerIndex;
 
@@ -68,7 +73,7 @@ namespace Michsky.UI.Heat
             [HideInInspector] public HotkeyEvent[] hotkeys;
         }
 
-        void Awake()
+        private void Awake()
         {
             if (panels.Count == 0)
                 return;
@@ -84,7 +89,7 @@ namespace Michsky.UI.Heat
             }
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (!isInitialized) { InitializePanels(); }
             if (ControllerManager.instance != null) { ControllerManager.instance.currentManagerIndex = managerIndex; }
@@ -389,7 +394,7 @@ namespace Michsky.UI.Heat
             panels.Add(panel);
         }
 
-        IEnumerator DisablePreviousPanel()
+        private IEnumerator DisablePreviousPanel()
         {
             if (updateMode == UpdateMode.UnscaledTime) { yield return new WaitForSecondsRealtime(cachedStateLength * animationSpeed); }
             else { yield return new WaitForSeconds(cachedStateLength * animationSpeed); }
@@ -403,7 +408,7 @@ namespace Michsky.UI.Heat
             }
         }
 
-        IEnumerator DisableAnimators()
+        private IEnumerator DisableAnimators()
         {
             if (updateMode == UpdateMode.UnscaledTime) { yield return new WaitForSecondsRealtime(cachedStateLength * animationSpeed); }
             else { yield return new WaitForSeconds(cachedStateLength * animationSpeed); }

@@ -26,7 +26,7 @@ namespace TcgEngine
         public bool upload_variants = true;
         public bool upload_rewards = true;
 
-        void Start()
+        private void Start()
         {
             username_txt.text = username;
             msg_text.text = "";

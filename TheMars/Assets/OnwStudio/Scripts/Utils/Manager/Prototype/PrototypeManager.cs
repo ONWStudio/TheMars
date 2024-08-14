@@ -255,6 +255,7 @@ namespace Onw.Manager.Prototype
         }
         #endregion
         #region 코루틴 비동기
+
         private IEnumerator iEClonePrototypeAsync<T>(string key, Action<T> callback, Transform parent) where T : MonoBehaviour
         {
             RefCountingOperationHandle<GameObject> resourceOperationHandle = _gameObjectHandles.GetHandle(key);

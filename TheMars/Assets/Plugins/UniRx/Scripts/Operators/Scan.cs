@@ -5,8 +5,8 @@ namespace UniRx.Operators
 {
     internal class ScanObservable<TSource> : OperatorObservableBase<TSource>
     {
-        readonly IObservable<TSource> source;
-        readonly Func<TSource, TSource, TSource> accumulator;
+        private readonly IObservable<TSource> source;
+        private readonly Func<TSource, TSource, TSource> accumulator;
 
         public ScanObservable(IObservable<TSource> source, Func<TSource, TSource, TSource> accumulator)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -20,11 +20,11 @@ namespace UniRx.Operators
             return source.Subscribe(new Scan(this, observer, cancel));
         }
 
-        class Scan : OperatorObserverBase<TSource, TSource>
+        private class Scan : OperatorObserverBase<TSource, TSource>
         {
-            readonly ScanObservable<TSource> parent;
-            TSource accumulation;
-            bool isFirst;
+            private readonly ScanObservable<TSource> parent;
+            private TSource accumulation;
+            private bool isFirst;
 
             public Scan(ScanObservable<TSource> parent, IObserver<TSource> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -72,9 +72,9 @@ namespace UniRx.Operators
 
     internal class ScanObservable<TSource, TAccumulate> : OperatorObservableBase<TAccumulate>
     {
-        readonly IObservable<TSource> source;
-        readonly TAccumulate seed;
-        readonly Func<TAccumulate, TSource, TAccumulate> accumulator;
+        private readonly IObservable<TSource> source;
+        private readonly TAccumulate seed;
+        private readonly Func<TAccumulate, TSource, TAccumulate> accumulator;
 
         public ScanObservable(IObservable<TSource> source, TAccumulate seed, Func<TAccumulate, TSource, TAccumulate> accumulator)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -89,11 +89,11 @@ namespace UniRx.Operators
             return source.Subscribe(new Scan(this, observer, cancel));
         }
 
-        class Scan : OperatorObserverBase<TSource, TAccumulate>
+        private class Scan : OperatorObserverBase<TSource, TAccumulate>
         {
-            readonly ScanObservable<TSource, TAccumulate> parent;
-            TAccumulate accumulation;
-            bool isFirst;
+            private readonly ScanObservable<TSource, TAccumulate> parent;
+            private TAccumulate accumulation;
+            private bool isFirst;
 
             public Scan(ScanObservable<TSource, TAccumulate> parent, IObserver<TAccumulate> observer, IDisposable cancel) : base(observer, cancel)
             {

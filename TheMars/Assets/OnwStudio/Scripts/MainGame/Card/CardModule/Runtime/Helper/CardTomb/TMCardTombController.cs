@@ -2,15 +2,18 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace TMCard.Runtime
 {
     [DisallowMultipleComponent]
-    public sealed class TMCardTombUIController : MonoBehaviour
+    public sealed class TMCardTombController : MonoBehaviour
     {
         public int CardCount => _deadCards.Count;
 
-        [SerializeField] private List<TMCardController> _deadCards = new();
+        [FormerlySerializedAs("deadCards")]
+        [SerializeField]
+        private List<TMCardController> _deadCards = new();
 
         public void EnqueueDeadCards(List<TMCardController> cards)
         {
@@ -26,8 +29,8 @@ namespace TMCard.Runtime
 
         public List<TMCardController> DequeueDeadCards()
         {
-            List<TMCardController> deadCards = _deadCards.ToList();
-            _deadCards.Clear();
+            List<TMCardController> deadCards = this._deadCards.ToList();
+            this._deadCards.Clear();
 
             return deadCards;
         }

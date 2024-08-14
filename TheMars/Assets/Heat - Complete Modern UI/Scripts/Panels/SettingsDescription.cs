@@ -10,15 +10,20 @@ namespace Michsky.UI.Heat
         public SettingsElement element;
 
         [Header("Content")]
-        [SerializeField] private Sprite cover;
-        [SerializeField] private string title = "Title";
-        [SerializeField][TextArea] private string description = "Description area.";
+        [SerializeField]
+        private Sprite cover;
+        [SerializeField]
+        private string title = "Title";
+        [SerializeField][TextArea]
+        private string description = "Description area.";
 
         [Header("Localization")]
-        [SerializeField] private string titleKey;
-        [SerializeField] private string descriptionKey;
+        [SerializeField]
+        private string titleKey;
+        [SerializeField]
+        private string descriptionKey;
 
-        void Start()
+        private void Start()
         {
 #if UNITY_2023_2_OR_NEWER
             if (manager == null && FindObjectsByType<SettingsDescriptionManager>(FindObjectsSortMode.None).Length > 0)

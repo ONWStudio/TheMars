@@ -10,7 +10,7 @@ namespace UniRx
     // merge, concat, zip...
     public static partial class Observable
     {
-        static IEnumerable<IObservable<T>> CombineSources<T>(IObservable<T> first, IObservable<T>[] seconds)
+        private static IEnumerable<IObservable<T>> CombineSources<T>(IObservable<T> first, IObservable<T>[] seconds)
         {
             yield return first;
             for (int i = 0; i < seconds.Length; i++)

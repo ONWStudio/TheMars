@@ -22,7 +22,7 @@ namespace TcgEngine.UI
             gameObject.SetActive(false);
         }
 
-        void Update()
+        private void Update()
         {
             timer += Time.deltaTime;
         }

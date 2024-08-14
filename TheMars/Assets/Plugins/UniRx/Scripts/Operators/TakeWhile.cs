@@ -4,9 +4,9 @@ namespace UniRx.Operators
 {
     internal class TakeWhileObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly Func<T, bool> predicate;
-        readonly Func<T, int, bool> predicateWithIndex;
+        private readonly IObservable<T> source;
+        private readonly Func<T, bool> predicate;
+        private readonly Func<T, int, bool> predicateWithIndex;
 
         public TakeWhileObservable(IObservable<T> source, Func<T, bool> predicate)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -34,9 +34,9 @@ namespace UniRx.Operators
             }
         }
 
-        class TakeWhile : OperatorObserverBase<T, T>
+        private class TakeWhile : OperatorObserverBase<T, T>
         {
-            readonly TakeWhileObservable<T> parent;
+            private readonly TakeWhileObservable<T> parent;
 
             public TakeWhile(TakeWhileObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -82,10 +82,10 @@ namespace UniRx.Operators
             }
         }
 
-        class TakeWhile_ : OperatorObserverBase<T, T>
+        private class TakeWhile_ : OperatorObserverBase<T, T>
         {
-            readonly TakeWhileObservable<T> parent;
-            int index = 0;
+            private readonly TakeWhileObservable<T> parent;
+            private int index = 0;
 
             public TakeWhile_(TakeWhileObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {

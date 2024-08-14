@@ -11,10 +11,10 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(BetterLayoutElement)), CanEditMultipleObjects]
     public class BetterLayoutElementEditor : UnityEditor.Editor
     {
-        InjectedSettingsInspector helper;
-        SerializedProperty layoutPriority;
+        private InjectedSettingsInspector helper;
+        private SerializedProperty layoutPriority;
 
-        void OnEnable()   
+        private void OnEnable()   
         {
             helper = new InjectedSettingsInspector("Settings", serializedObject, "customSettings", "settingsFallback");
             helper.RegisterSkipRest("Ignore Layout", "IgnoreLayout", true);

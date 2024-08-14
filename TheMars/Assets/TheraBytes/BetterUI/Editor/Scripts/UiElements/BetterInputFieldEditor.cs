@@ -13,10 +13,10 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(BetterInputField)), CanEditMultipleObjects]
     public class BetterInputFieldEditor : InputFieldEditor
     {
-        BetterElementHelper<InputField, BetterInputField> helper =
+        private BetterElementHelper<InputField, BetterInputField> helper =
             new BetterElementHelper<InputField, BetterInputField>();
 
-        SerializedProperty additionalPlaceholdersProp;
+        private SerializedProperty additionalPlaceholdersProp;
 
         protected override void OnEnable()
         {

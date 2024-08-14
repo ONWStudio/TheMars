@@ -14,11 +14,11 @@ namespace TheraBytes.BetterUi.Editor
         private const string CanvasScalerWarnText = 
             "The Canvas Scaler is not set to 'Constant Pixel Size'. The resizing done by Better UI may lead to unexpected results. You can either change the canvas scaler or remove all size modifications of this sizer.";
 
-        static readonly GUIContent removeSizeModsContent = new GUIContent("Remove Size Modifications", "Removes all size modifications of this sizer, so that the 'Current Value' will always be the same as the 'Optimized Size'.");
+        private static readonly GUIContent removeSizeModsContent = new GUIContent("Remove Size Modifications", "Removes all size modifications of this sizer, so that the 'Current Value' will always be the same as the 'Optimized Size'.");
 
-        static readonly GUIContent fixCanvasScalerContent = new GUIContent("Fix Canvas Scaler", "Changes the Canvas Scaler mode to 'Constant Pixel Size'. This will affect all elements beneath the root-canvas.");
-        static GUIContent warningContent;
-        static GUIContent WarningContent
+        private static readonly GUIContent fixCanvasScalerContent = new GUIContent("Fix Canvas Scaler", "Changes the Canvas Scaler mode to 'Constant Pixel Size'. This will affect all elements beneath the root-canvas.");
+        private static GUIContent warningContent;
+        private static GUIContent WarningContent
         {
             get
             {
@@ -32,8 +32,8 @@ namespace TheraBytes.BetterUi.Editor
             }
         }
 
-        Dictionary<string, ReorderableList> lists = new Dictionary<string, ReorderableList>();
-        bool foldout;
+        private Dictionary<string, ReorderableList> lists = new Dictionary<string, ReorderableList>();
+        private bool foldout;
 
         public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
         {
@@ -192,7 +192,7 @@ namespace TheraBytes.BetterUi.Editor
             property.serializedObject.ApplyModifiedProperties();
         }
 
-        ReorderableList GetList(SerializedProperty property, string title)
+        private ReorderableList GetList(SerializedProperty property, string title)
         {
             if (!(lists.ContainsKey(title)))
             {
@@ -233,7 +233,7 @@ namespace TheraBytes.BetterUi.Editor
             return lists[title];
         }
 
-        void ShowOptionalField(SerializedProperty parentProp, string propName, string boolPropName, string displayName, ref T value)
+        private void ShowOptionalField(SerializedProperty parentProp, string propName, string boolPropName, string displayName, ref T value)
         {
             var boolProp = parentProp.FindPropertyRelative(boolPropName);
 
@@ -275,9 +275,9 @@ namespace TheraBytes.BetterUi.Editor
         [CustomPropertyDrawer(typeof(SizeModifierCollection))]
         public class SizeModifierCollectionDrawer : PropertyDrawer
         {
-            ReorderableList list;
+            private ReorderableList list;
 
-            ReorderableList GetList(SerializedProperty property)
+            private ReorderableList GetList(SerializedProperty property)
             {
                 if (list == null)
                 {

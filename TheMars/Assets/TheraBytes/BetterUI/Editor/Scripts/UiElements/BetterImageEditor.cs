@@ -37,9 +37,9 @@ namespace TheraBytes.BetterUi.Editor
         private AnimBool m_ShowSliced;
         private AnimBool m_ShowFilled;
         private AnimBool m_ShowType;
-        
-        ImageAppearanceProviderEditorHelper materialDrawer;
-        BetterImage image;
+
+        private ImageAppearanceProviderEditorHelper materialDrawer;
+        private BetterImage image;
 
         public override bool HasPreviewGUI()
         {

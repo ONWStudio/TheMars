@@ -394,7 +394,7 @@ namespace Michsky.UI.Heat
             if (string.IsNullOrEmpty(lsTarget.defaultLanguageID) == true && languageList.Count != 0) { lsTarget.defaultLanguageID = languageList[0]; }
         }
 
-        void Docs() { Application.OpenURL("https://docs.michsky.com/docs/heat-ui/localization"); }
+        private void Docs() { Application.OpenURL("https://docs.michsky.com/docs/heat-ui/localization"); }
     }
 }
 #endif

@@ -10,9 +10,9 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(OverrideScreenProperties)), CanEditMultipleObjects]
     public class OverrideScreenPropertiesEditor : UnityEditor.Editor
     {
-        SerializedProperty settingsFallback, settingsList;
+        private SerializedProperty settingsFallback, settingsList;
 
-        void OnEnable()
+        private void OnEnable()
         {
             OverrideScreenProperties osp = target as OverrideScreenProperties;
 

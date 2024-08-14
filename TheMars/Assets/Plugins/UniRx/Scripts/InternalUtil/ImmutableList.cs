@@ -7,14 +7,14 @@ namespace UniRx.InternalUtil
     {
         public static readonly ImmutableList<T> Empty = new ImmutableList<T>();
 
-        T[] data;
+        private T[] data;
 
         public T[] Data
         {
             get { return data; }
         }
 
-        ImmutableList()
+        private ImmutableList()
         {
             data = new T[0];
         }

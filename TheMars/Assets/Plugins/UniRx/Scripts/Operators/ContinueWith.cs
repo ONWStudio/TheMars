@@ -4,8 +4,8 @@ namespace UniRx.Operators
 {
     internal class ContinueWithObservable<TSource, TResult> : OperatorObservableBase<TResult>
     {
-        readonly IObservable<TSource> source;
-        readonly Func<TSource, IObservable<TResult>> selector;
+        private readonly IObservable<TSource> source;
+        private readonly Func<TSource, IObservable<TResult>> selector;
 
         public ContinueWithObservable(IObservable<TSource> source, Func<TSource, IObservable<TResult>> selector)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -19,13 +19,13 @@ namespace UniRx.Operators
             return new ContinueWith(this, observer, cancel).Run();
         }
 
-        class ContinueWith : OperatorObserverBase<TSource, TResult>
+        private class ContinueWith : OperatorObserverBase<TSource, TResult>
         {
-            readonly ContinueWithObservable<TSource, TResult> parent;
-            readonly SerialDisposable serialDisposable = new SerialDisposable();
+            private readonly ContinueWithObservable<TSource, TResult> parent;
+            private readonly SerialDisposable serialDisposable = new SerialDisposable();
 
-            bool seenValue;
-            TSource lastValue;
+            private bool seenValue;
+            private TSource lastValue;
 
             public ContinueWith(ContinueWithObservable<TSource, TResult> parent, IObserver<TResult> observer, IDisposable cancel) : base(observer, cancel)
             {

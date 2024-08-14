@@ -6,9 +6,9 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableDestroyTrigger : MonoBehaviour
     {
-        bool calledDestroy = false;
-        Subject<Unit> onDestroy;
-        CompositeDisposable disposablesOnDestroy;
+        private bool calledDestroy = false;
+        private Subject<Unit> onDestroy;
+        private CompositeDisposable disposablesOnDestroy;
 
         [Obsolete("Internal Use.")]
         internal bool IsMonitoredActivate { get; set; }
@@ -22,13 +22,13 @@ namespace UniRx.Triggers
         /// </summary>
         public bool IsCalledOnDestroy { get { return calledDestroy; } }
 
-        void Awake()
+        private void Awake()
         {
             IsActivated = true;
         }
 
         /// <summary>This function is called when the MonoBehaviour will be destroyed.</summary>
-        void OnDestroy()
+        private void OnDestroy()
         {
             if (!calledDestroy)
             {

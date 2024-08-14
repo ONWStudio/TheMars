@@ -22,17 +22,17 @@ namespace TcgEngine.UI
 
         private static List<TurnHistoryLine> line_list = new List<TurnHistoryLine>();
 
-        void Awake()
+        private void Awake()
         {
             line_list.Add(this);
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             line_list.Add(this);
         }
 
-        void Start()
+        private void Start()
         {
             gameObject.SetActive(false);
         }
@@ -130,7 +130,7 @@ namespace TcgEngine.UI
             is_hover = false;
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             is_hover = false;
         }

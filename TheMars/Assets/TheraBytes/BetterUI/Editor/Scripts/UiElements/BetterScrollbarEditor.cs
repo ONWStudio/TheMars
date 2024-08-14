@@ -13,7 +13,7 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(BetterScrollbar)), CanEditMultipleObjects]
     public class BetterScrollbarEditor : ScrollbarEditor
     {
-        BetterElementHelper<Scrollbar, BetterScrollbar> helper =
+        private BetterElementHelper<Scrollbar, BetterScrollbar> helper =
             new BetterElementHelper<Scrollbar, BetterScrollbar>();
 
         public override void OnInspectorGUI()

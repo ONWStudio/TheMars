@@ -9,43 +9,57 @@ namespace Michsky.UI.Heat
     {
         // Resources
         public UIManager UIManagerAsset;
-        [SerializeField] private Transform allParent;
-        [SerializeField] private Transform commonParent;
-        [SerializeField] private Transform rareParent;
-        [SerializeField] private Transform legendaryParent;
-        [SerializeField] private GameObject achievementPreset;
-        [SerializeField] private TextMeshProUGUI totalUnlockedObj;
-        [SerializeField] private TextMeshProUGUI totalValueObj;
-        [SerializeField] private TextMeshProUGUI commonUnlockedObj;
-        [SerializeField] private TextMeshProUGUI commonlTotalObj;
-        [SerializeField] private TextMeshProUGUI rareUnlockedObj;
-        [SerializeField] private TextMeshProUGUI rareTotalObj;
-        [SerializeField] private TextMeshProUGUI legendaryUnlockedObj;
-        [SerializeField] private TextMeshProUGUI legendaryTotalObj;
+        [SerializeField]
+        private Transform allParent;
+        [SerializeField]
+        private Transform commonParent;
+        [SerializeField]
+        private Transform rareParent;
+        [SerializeField]
+        private Transform legendaryParent;
+        [SerializeField]
+        private GameObject achievementPreset;
+        [SerializeField]
+        private TextMeshProUGUI totalUnlockedObj;
+        [SerializeField]
+        private TextMeshProUGUI totalValueObj;
+        [SerializeField]
+        private TextMeshProUGUI commonUnlockedObj;
+        [SerializeField]
+        private TextMeshProUGUI commonlTotalObj;
+        [SerializeField]
+        private TextMeshProUGUI rareUnlockedObj;
+        [SerializeField]
+        private TextMeshProUGUI rareTotalObj;
+        [SerializeField]
+        private TextMeshProUGUI legendaryUnlockedObj;
+        [SerializeField]
+        private TextMeshProUGUI legendaryTotalObj;
 
         // Settings
         public bool useLocalization = true;
-        [SerializeField] private bool useAlphabeticalOrder = true;
+        [SerializeField]
+        private bool useAlphabeticalOrder = true;
 
         // Values
-        int totalCount;
-        int commonCount;
-        int rareCount;
-        int legendaryCount;
-        int totalUnlockedCount;
-        int commonUnlockedCount;
-        int rareUnlockedCount;
-        int legendaryUnlockedCount;
+        private int totalCount;
+        private int commonCount;
+        private int rareCount;
+        private int legendaryCount;
+        private int totalUnlockedCount;
+        private int commonUnlockedCount;
+        private int rareUnlockedCount;
+        private int legendaryUnlockedCount;
 
         // Helpers
-        LocalizedObject localizedObject;
+        private LocalizedObject localizedObject;
 
-        void Awake()
+        private void Awake()
         {
             InitializeItems();
         }
 
-        static int SortByName(AchievementLibrary.AchievementItem o1, AchievementLibrary.AchievementItem o2)
+        private static int SortByName(AchievementLibrary.AchievementItem o1, AchievementLibrary.AchievementItem o2)
         {
             // Compare the names and sort by A to Z
             return o1.title.CompareTo(o2.title);
@@ -172,7 +186,7 @@ namespace Michsky.UI.Heat
             ParseTotalText();
         }
 
-        void ParseTotalText()
+        private void ParseTotalText()
         {
             // Parsing data to text and changing colors
             if (totalValueObj != null) { totalValueObj.text = totalCount.ToString(); }

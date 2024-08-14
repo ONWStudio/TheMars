@@ -10,9 +10,9 @@ namespace UniRx.Operators
 {
     internal class ThrottleFirstFrameObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly int frameCount;
-        readonly FrameCountType frameCountType;
+        private readonly IObservable<T> source;
+        private readonly int frameCount;
+        private readonly FrameCountType frameCountType;
 
         public ThrottleFirstFrameObservable(IObservable<T> source, int frameCount, FrameCountType frameCountType) : base(source.IsRequiredSubscribeOnCurrentThread())
         {
@@ -26,14 +26,14 @@ namespace UniRx.Operators
             return new ThrottleFirstFrame(this, observer, cancel).Run();
         }
 
-        class ThrottleFirstFrame : OperatorObserverBase<T, T>
+        private class ThrottleFirstFrame : OperatorObserverBase<T, T>
         {
-            readonly ThrottleFirstFrameObservable<T> parent;
-            readonly object gate = new object();
-            bool open = true;
-            SerialDisposable cancelable;
+            private readonly ThrottleFirstFrameObservable<T> parent;
+            private readonly object gate = new object();
+            private bool open = true;
+            private SerialDisposable cancelable;
 
-            ThrottleFirstFrameTick tick;
+            private ThrottleFirstFrameTick tick;
 
             public ThrottleFirstFrame(ThrottleFirstFrameObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -49,7 +49,7 @@ namespace UniRx.Operators
                 return StableCompositeDisposable.Create(cancelable, subscription);
             }
 
-            void OnNext()
+            private void OnNext()
             {
                 lock (gate)
                 {
@@ -93,9 +93,9 @@ namespace UniRx.Operators
             }
 
             // immutable, can share.
-            class ThrottleFirstFrameTick : IObserver<long>
+            private class ThrottleFirstFrameTick : IObserver<long>
             {
-                readonly ThrottleFirstFrame parent;
+                private readonly ThrottleFirstFrame parent;
 
                 public ThrottleFirstFrameTick(ThrottleFirstFrame parent)
                 {

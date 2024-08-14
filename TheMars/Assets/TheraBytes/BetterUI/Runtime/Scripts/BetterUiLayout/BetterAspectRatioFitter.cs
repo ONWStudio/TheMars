@@ -23,7 +23,7 @@ namespace TheraBytes.BetterUi
             public float AspectRatio = 1;
 
             [SerializeField]
-            string screenConfigName;
+            private string screenConfigName;
             public string ScreenConfigName { get { return screenConfigName; } set { screenConfigName = value; } }
         }
 
@@ -52,10 +52,10 @@ namespace TheraBytes.BetterUi
 
 
         [SerializeField]
-        Settings settingsFallback = new Settings();
+        private Settings settingsFallback = new Settings();
 
         [SerializeField]
-        SettingsConfigCollection customSettings = new SettingsConfigCollection();
+        private SettingsConfigCollection customSettings = new SettingsConfigCollection();
         
         protected override void OnEnable()
         {
@@ -68,7 +68,7 @@ namespace TheraBytes.BetterUi
             Apply();
         }
 
-        void Apply()
+        private void Apply()
         {
             base.aspectMode = CurrentSettings.AspectMode;
             base.aspectRatio = CurrentSettings.AspectRatio;

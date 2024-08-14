@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Onw.Attribute;
+using UnityEngine.Serialization;
 
 namespace TMCard.Runtime
 {
@@ -11,8 +12,10 @@ namespace TMCard.Runtime
     {
         public IReadOnlyList<RectTransform> Descriptions => _descriptions;
 
+        [FormerlySerializedAs("descriptions")]
         [Header("Descriptions")]
-        [SerializeField, ReadOnly] private List<RectTransform> _descriptions = new();
+        [SerializeField, ReadOnly]
+        private List<RectTransform> _descriptions = new();
 
         public void AddDescriptions(params RectTransform[] descriptionElements)
         {

@@ -4,9 +4,9 @@ namespace UniRx.Operators
 {
     internal class ThrottleFirstObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly TimeSpan dueTime;
-        readonly IScheduler scheduler;
+        private readonly IObservable<T> source;
+        private readonly TimeSpan dueTime;
+        private readonly IScheduler scheduler;
 
         public ThrottleFirstObservable(IObservable<T> source, TimeSpan dueTime, IScheduler scheduler) 
             : base(scheduler == Scheduler.CurrentThread || source.IsRequiredSubscribeOnCurrentThread())
@@ -21,12 +21,12 @@ namespace UniRx.Operators
             return new ThrottleFirst(this, observer, cancel).Run();
         }
 
-        class ThrottleFirst : OperatorObserverBase<T, T>
+        private class ThrottleFirst : OperatorObserverBase<T, T>
         {
-            readonly ThrottleFirstObservable<T> parent;
-            readonly object gate = new object();
-            bool open = true;
-            SerialDisposable cancelable;
+            private readonly ThrottleFirstObservable<T> parent;
+            private readonly object gate = new object();
+            private bool open = true;
+            private SerialDisposable cancelable;
 
             public ThrottleFirst(ThrottleFirstObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -41,7 +41,7 @@ namespace UniRx.Operators
                 return StableCompositeDisposable.Create(cancelable, subscription);
             }
 
-            void OnNext()
+            private void OnNext()
             {
                 lock (gate)
                 {

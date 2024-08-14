@@ -26,7 +26,7 @@ namespace UniRx
             return ObservableUnity.FromCoroutine<T>((observer, cancellation) => AsObservableCore(asyncOperation, observer, progress, cancellation));
         }
 
-        static IEnumerator AsObservableCore<T>(T asyncOperation, IObserver<T> observer, IProgress<float> reportProgress, CancellationToken cancel)
+        private static IEnumerator AsObservableCore<T>(T asyncOperation, IObserver<T> observer, IProgress<float> reportProgress, CancellationToken cancel)
             where T : AsyncOperation
         {
             if (reportProgress != null)

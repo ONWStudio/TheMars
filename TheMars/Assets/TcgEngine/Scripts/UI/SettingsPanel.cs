@@ -163,7 +163,7 @@ namespace TcgEngine.UI
         {
             Hide();
         }
-        
+
         private int GetResolutionIndex()
         {
             int dist_min = 99999;

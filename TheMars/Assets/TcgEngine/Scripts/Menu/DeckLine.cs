@@ -34,12 +34,12 @@ namespace TcgEngine.UI
         private bool hidden = false;
         private bool hover = false;
 
-        void Awake()
+        private void Awake()
         {
 
         }
 
-        void Update()
+        private void Update()
         {
             if (delete_btn != null)
             {

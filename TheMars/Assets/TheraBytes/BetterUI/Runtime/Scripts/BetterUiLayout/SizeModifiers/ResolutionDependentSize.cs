@@ -14,7 +14,7 @@ namespace TheraBytes.BetterUi
     public abstract class ScreenDependentSize<T> : ScreenDependentSize, IScreenConfigConnection
     {
         [SerializeField]
-        string screenConfigName;
+        private string screenConfigName;
 
         public override string ScreenConfigName
         {

@@ -264,7 +264,7 @@ namespace MoreMountains.Tools
 
 			SceneManager.LoadScene(_loadingScreenSceneName, LoadSceneMode.Additive);
 		}
-        
+
 		private static Scene[] GetScenesToUnload(MMAdditiveSceneLoadingManagerSettings.UnloadMethods unloaded)
 		{
 	        

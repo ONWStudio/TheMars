@@ -16,7 +16,7 @@ namespace TheraBytes.BetterUi
         public List<Transitions> BetterTransitions { get { return betterTransitions; } }
 
         [SerializeField, DefaultTransitionStates]
-        List<Transitions> betterTransitions = new List<Transitions>();
+        private List<Transitions> betterTransitions = new List<Transitions>();
 
         protected override void DoStateTransition(SelectionState state, bool instant)
         {

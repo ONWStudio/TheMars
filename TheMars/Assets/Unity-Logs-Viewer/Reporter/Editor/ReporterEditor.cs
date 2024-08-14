@@ -73,8 +73,8 @@ public class ReporterModificationProcessor : UnityEditor.AssetModificationProces
 			EditorApplication.update += Update;
 		}
 
-		static bool isCompiling = true;
-		static void Update()
+		private static bool isCompiling = true;
+		private static void Update()
 		{
           
 			if (!EditorApplication.isCompiling && isCompiling) {

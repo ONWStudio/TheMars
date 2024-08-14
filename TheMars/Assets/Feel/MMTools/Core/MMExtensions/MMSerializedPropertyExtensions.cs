@@ -45,7 +45,7 @@ namespace MoreMountains.Tools
 			}
 			return targetObject;
 		}
-         
+
 		private static object GetPropertyValue(object source, string propertyName)
 		{
 			if (source == null)

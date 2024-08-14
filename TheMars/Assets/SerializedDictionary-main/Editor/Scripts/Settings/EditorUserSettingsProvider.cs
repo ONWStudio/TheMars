@@ -18,7 +18,7 @@ namespace AYellowpaper.SerializedCollections.Editor
         private SerializedProperty _elementsPerPage;
         private AnimBool _searchAnimBool;
 
-        class Styles
+        private class Styles
         {
         }
 

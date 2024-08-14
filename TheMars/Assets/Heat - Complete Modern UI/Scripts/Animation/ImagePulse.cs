@@ -8,7 +8,8 @@ namespace Michsky.UI.Heat
     public class ImagePulse : MonoBehaviour
     {
         [Header("Resources")]
-        [SerializeField] private Image targetImage;
+        [SerializeField]
+        private Image targetImage;
 
         [Header("Color")]
         [Range(0, 1)] public float minAlpha = 0.25f;
@@ -16,9 +17,10 @@ namespace Michsky.UI.Heat
 
         [Header("Animation")]
         [Range(0.5f, 10)] public float pulseSpeed = 1;
-        [SerializeField] private AnimationCurve pulseCurve = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
+        [SerializeField]
+        private AnimationCurve pulseCurve = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
 
-        void OnEnable()
+        private void OnEnable()
         {
             StartPulse();
         }
@@ -35,7 +37,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("PulseInAnimation");
         }
 
-        IEnumerator PulseInAnimation()
+        private IEnumerator PulseInAnimation()
         {
             float elapsedTime = 0;
             targetImage.color = new Color(targetImage.color.r, targetImage.color.g, targetImage.color.b, minAlpha);
@@ -51,7 +53,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("PulseOutAnimation");
         }
 
-        IEnumerator PulseOutAnimation()
+        private IEnumerator PulseOutAnimation()
         {
             float elapsedTime = 0;
             targetImage.color = new Color(targetImage.color.r, targetImage.color.g, targetImage.color.b, maxAlpha);

@@ -18,10 +18,14 @@ namespace Michsky.UI.Heat
 
         // Resources
         public Image barImage;
-        [SerializeField] private Image iconObject;
-        [SerializeField] private Image altIconObject;
-        [SerializeField] private TextMeshProUGUI textObject;
-        [SerializeField] private TextMeshProUGUI altTextObject;
+        [SerializeField]
+        private Image iconObject;
+        [SerializeField]
+        private Image altIconObject;
+        [SerializeField]
+        private TextMeshProUGUI textObject;
+        [SerializeField]
+        private TextMeshProUGUI altTextObject;
 
         // Settings
         public bool addPrefix;
@@ -41,14 +45,14 @@ namespace Michsky.UI.Heat
 
         public enum BarDirection { Left, Right, Top, Bottom, Custom }
 
-        void Start()
+        private void Start()
         {
             Initialize();
             UpdateUI();
         }
 
 #if UNITY_EDITOR
-        void Update()
+        private void Update()
         {
             if (Application.isPlaying)
                 return;
@@ -68,7 +72,7 @@ namespace Michsky.UI.Heat
             if (eventSource != null) { eventSource.value = currentValue; }
         }
 
-        void UpdateText(TextMeshProUGUI txt)
+        private void UpdateText(TextMeshProUGUI txt)
         {
             if (addSuffix == true) { txt.text = currentValue.ToString("F" + decimals) + suffix; }
             else { txt.text = currentValue.ToString("F" + decimals); }
@@ -90,7 +94,7 @@ namespace Michsky.UI.Heat
             SetBarDirection();
         }
 
-        void SetBarDirection()
+        private void SetBarDirection()
         {
             if (barImage != null)
             {

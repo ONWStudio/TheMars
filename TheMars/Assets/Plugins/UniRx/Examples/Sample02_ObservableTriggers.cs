@@ -6,7 +6,7 @@ namespace UniRx.Examples
 {
     public class Sample02_ObservableTriggers : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             // Get the plain object
             var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);

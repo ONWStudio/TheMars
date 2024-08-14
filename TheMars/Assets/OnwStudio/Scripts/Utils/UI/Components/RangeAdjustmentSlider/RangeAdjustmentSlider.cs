@@ -59,11 +59,15 @@ namespace Onw.UI.Components
 
         public float HandleSize => BackgroundBar ? BackgroundBar.rectTransform.rect.height * HandleSizeRatio : 0.0f;
 
-        [SerializeField] float _leftValue = 0f;
-        [SerializeField] float _rightValue = 1f;
+        [SerializeField]
+        private float _leftValue = 0f;
+        [SerializeField]
+        private float _rightValue = 1f;
 
-        [SerializeField] int _leftIntValue = 0;
-        [SerializeField] int _rightIntValue = 1;
+        [SerializeField]
+        private int _leftIntValue = 0;
+        [SerializeField]
+        private int _rightIntValue = 1;
 
         private Image _selectedHandle = null;
         private bool _isLeft = false;

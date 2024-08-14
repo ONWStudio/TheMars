@@ -9,7 +9,7 @@ namespace TheraBytes.BetterUi.Editor
     [CustomPropertyDrawer(typeof(RectTransformData)), CanEditMultipleObjects]
     public class RectTransformDataDrawer : PropertyDrawer
     {
-        static int floatFieldHash = "FloatFieldHash".GetHashCode();
+        private static int floatFieldHash = "FloatFieldHash".GetHashCode();
         private class Styles
         {
             public static readonly GUIStyle lockStyle = EditorStyles.miniButton;
@@ -30,7 +30,7 @@ namespace TheraBytes.BetterUi.Editor
         public static float HeightWithAnchorsExpanded { get { return 11.5f * EditorGUIUtility.singleLineHeight + 2; } }
         public static float HeightWithoutAnchorsExpanded { get { return 9.5f * EditorGUIUtility.singleLineHeight + 2; } }
 
-        static Action<RectTransform, RectTransformData> pushCallback, pullCallback;
+        private static Action<RectTransform, RectTransformData> pushCallback, pullCallback;
 
         public static void OverwritePushPullMethods(Action<RectTransform, RectTransformData> push, Action<RectTransform, RectTransformData> pull)
         {
@@ -39,7 +39,7 @@ namespace TheraBytes.BetterUi.Editor
         }
 
 
-        bool anchorExpand = true;
+        private bool anchorExpand = true;
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
@@ -122,7 +122,7 @@ namespace TheraBytes.BetterUi.Editor
             prop.serializedObject.ApplyModifiedProperties();
         }
 
-        static void Space(ref float yPos)
+        private static void Space(ref float yPos)
         {
             yPos += 0.5f * EditorGUIUtility.singleLineHeight;
         }

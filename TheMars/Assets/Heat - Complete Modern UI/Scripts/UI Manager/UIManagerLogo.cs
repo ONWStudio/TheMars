@@ -13,11 +13,12 @@ namespace Michsky.UI.Heat
         private Image objImage;
 
         // Settings
-        [SerializeField] private LogoType logoType = LogoType.GameLogo;
+        [SerializeField]
+        private LogoType logoType = LogoType.GameLogo;
 
         public enum LogoType { GameLogo, BrandLogo }
 
-        void Awake()
+        private void Awake()
         {
             this.enabled = true;
 
@@ -26,14 +27,14 @@ namespace Michsky.UI.Heat
             if (!UIManagerAsset.enableDynamicUpdate) { UpdateImage(); this.enabled = false; }
         }
 
-        void Update()
+        private void Update()
         {
             if (UIManagerAsset == null) { return; }
             if (UIManagerAsset.enableDynamicUpdate) { UpdateImage(); }
         }
 
 
-        void UpdateImage()
+        private void UpdateImage()
         {
             if (objImage == null)
                 return;

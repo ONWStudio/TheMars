@@ -49,7 +49,7 @@ namespace TcgEngine.Client
 
         private static List<HandPack> pack_list = new List<HandPack>();
 
-        void Awake()
+        private void Awake()
         {
             pack_list.Add(this);
             card_transform = transform.GetComponent<RectTransform>();
@@ -67,7 +67,7 @@ namespace TcgEngine.Client
             pack_list.Remove(this);
         }
 
-        void Update()
+        private void Update()
         {
             focus_timer += Time.deltaTime;
 

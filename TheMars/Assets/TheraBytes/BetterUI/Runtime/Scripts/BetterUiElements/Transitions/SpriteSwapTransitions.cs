@@ -24,10 +24,10 @@ namespace TheraBytes.BetterUi
         public override UnityEngine.Object Target { get { return target; } }
 
         [SerializeField]
-        Image target;
+        private Image target;
 
         [SerializeField]
-        List<SpriteSwapTransitionState> states = new List<SpriteSwapTransitionState>();
+        private List<SpriteSwapTransitionState> states = new List<SpriteSwapTransitionState>();
 
 
         public SpriteSwapTransitions(params string[] stateNames)

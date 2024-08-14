@@ -9,10 +9,10 @@ namespace UniRx.Operators
 
     internal class DoObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly Action<T> onNext;
-        readonly Action<Exception> onError;
-        readonly Action onCompleted;
+        private readonly IObservable<T> source;
+        private readonly Action<T> onNext;
+        private readonly Action<Exception> onError;
+        private readonly Action onCompleted;
 
         public DoObservable(IObservable<T> source, Action<T> onNext, Action<Exception> onError, Action onCompleted)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -28,9 +28,9 @@ namespace UniRx.Operators
             return new Do(this, observer, cancel).Run();
         }
 
-        class Do : OperatorObserverBase<T, T>
+        private class Do : OperatorObserverBase<T, T>
         {
-            readonly DoObservable<T> parent;
+            private readonly DoObservable<T> parent;
 
             public Do(DoObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -89,8 +89,8 @@ namespace UniRx.Operators
 
     internal class DoObserverObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly IObserver<T> observer;
+        private readonly IObservable<T> source;
+        private readonly IObserver<T> observer;
 
         public DoObserverObservable(IObservable<T> source, IObserver<T> observer)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -104,9 +104,9 @@ namespace UniRx.Operators
             return new Do(this, observer, cancel).Run();
         }
 
-        class Do : OperatorObserverBase<T, T>
+        private class Do : OperatorObserverBase<T, T>
         {
-            readonly DoObserverObservable<T> parent;
+            private readonly DoObserverObservable<T> parent;
 
             public Do(DoObserverObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -171,8 +171,8 @@ namespace UniRx.Operators
 
     internal class DoOnErrorObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly Action<Exception> onError;
+        private readonly IObservable<T> source;
+        private readonly Action<Exception> onError;
 
         public DoOnErrorObservable(IObservable<T> source, Action<Exception> onError)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -186,9 +186,9 @@ namespace UniRx.Operators
             return new DoOnError(this, observer, cancel).Run();
         }
 
-        class DoOnError : OperatorObserverBase<T, T>
+        private class DoOnError : OperatorObserverBase<T, T>
         {
-            readonly DoOnErrorObservable<T> parent;
+            private readonly DoOnErrorObservable<T> parent;
 
             public DoOnError(DoOnErrorObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -233,8 +233,8 @@ namespace UniRx.Operators
 
     internal class DoOnCompletedObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly Action onCompleted;
+        private readonly IObservable<T> source;
+        private readonly Action onCompleted;
 
         public DoOnCompletedObservable(IObservable<T> source, Action onCompleted)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -248,9 +248,9 @@ namespace UniRx.Operators
             return new DoOnCompleted(this, observer, cancel).Run();
         }
 
-        class DoOnCompleted : OperatorObserverBase<T, T>
+        private class DoOnCompleted : OperatorObserverBase<T, T>
         {
-            readonly DoOnCompletedObservable<T> parent;
+            private readonly DoOnCompletedObservable<T> parent;
 
             public DoOnCompleted(DoOnCompletedObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -292,8 +292,8 @@ namespace UniRx.Operators
 
     internal class DoOnTerminateObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly Action onTerminate;
+        private readonly IObservable<T> source;
+        private readonly Action onTerminate;
 
         public DoOnTerminateObservable(IObservable<T> source, Action onTerminate)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -307,9 +307,9 @@ namespace UniRx.Operators
             return new DoOnTerminate(this, observer, cancel).Run();
         }
 
-        class DoOnTerminate : OperatorObserverBase<T, T>
+        private class DoOnTerminate : OperatorObserverBase<T, T>
         {
-            readonly DoOnTerminateObservable<T> parent;
+            private readonly DoOnTerminateObservable<T> parent;
 
             public DoOnTerminate(DoOnTerminateObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -360,8 +360,8 @@ namespace UniRx.Operators
 
     internal class DoOnSubscribeObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly Action onSubscribe;
+        private readonly IObservable<T> source;
+        private readonly Action onSubscribe;
 
         public DoOnSubscribeObservable(IObservable<T> source, Action onSubscribe)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -375,9 +375,9 @@ namespace UniRx.Operators
             return new DoOnSubscribe(this, observer, cancel).Run();
         }
 
-        class DoOnSubscribe : OperatorObserverBase<T, T>
+        private class DoOnSubscribe : OperatorObserverBase<T, T>
         {
-            readonly DoOnSubscribeObservable<T> parent;
+            private readonly DoOnSubscribeObservable<T> parent;
 
             public DoOnSubscribe(DoOnSubscribeObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -419,8 +419,8 @@ namespace UniRx.Operators
 
     internal class DoOnCancelObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly Action onCancel;
+        private readonly IObservable<T> source;
+        private readonly Action onCancel;
 
         public DoOnCancelObservable(IObservable<T> source, Action onCancel)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -434,10 +434,10 @@ namespace UniRx.Operators
             return new DoOnCancel(this, observer, cancel).Run();
         }
 
-        class DoOnCancel : OperatorObserverBase<T, T>
+        private class DoOnCancel : OperatorObserverBase<T, T>
         {
-            readonly DoOnCancelObservable<T> parent;
-            bool isCompletedCall = false;
+            private readonly DoOnCancelObservable<T> parent;
+            private bool isCompletedCall = false;
 
             public DoOnCancel(DoOnCancelObservable<T> parent, IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)

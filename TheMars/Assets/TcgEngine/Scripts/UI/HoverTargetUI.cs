@@ -25,14 +25,14 @@ namespace TcgEngine.UI
         private float timer = 0f;
         private bool hover = false;
 
-        void Awake()
+        private void Awake()
         {
             canvas = GetComponentInParent<Canvas>();
             //ltable = GetComponent<LangTableText>();
             rect = canvas?.GetComponent<RectTransform>();
         }
 
-        void Start()
+        private void Start()
         {
             if (HoverTextBox.Get() == null)
             {
@@ -40,7 +40,7 @@ namespace TcgEngine.UI
             }
         }
 
-        void Update()
+        private void Update()
         {
             if (hover)
             {
@@ -71,7 +71,7 @@ namespace TcgEngine.UI
             hover = false;
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             hover = false;
         }

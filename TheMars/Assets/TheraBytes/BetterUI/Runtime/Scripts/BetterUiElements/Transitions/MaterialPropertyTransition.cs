@@ -13,8 +13,8 @@ namespace TheraBytes.BetterUi
     [Serializable]
     public class MaterialPropertyTransition : TransitionStateCollection<float>
     {
-        static Dictionary<MaterialPropertyTransition, Coroutine> activeCoroutines = new Dictionary<MaterialPropertyTransition, Coroutine>();
-        static List<MaterialPropertyTransition> keysToRemove = new List<MaterialPropertyTransition>();
+        private static Dictionary<MaterialPropertyTransition, Coroutine> activeCoroutines = new Dictionary<MaterialPropertyTransition, Coroutine>();
+        private static List<MaterialPropertyTransition> keysToRemove = new List<MaterialPropertyTransition>();
 
         [Serializable]
         public class MaterialPropertyTransitionState : TransitionState
@@ -30,16 +30,16 @@ namespace TheraBytes.BetterUi
         public int PropertyIndex { get { return propertyIndex; } set { propertyIndex = value; } }
 
         [SerializeField]
-        BetterImage target;
+        private BetterImage target;
 
         [SerializeField]
-        float fadeDuration = 0.1f;
+        private float fadeDuration = 0.1f;
 
         [SerializeField]
-        List<MaterialPropertyTransitionState> states = new List<MaterialPropertyTransitionState>();
+        private List<MaterialPropertyTransitionState> states = new List<MaterialPropertyTransitionState>();
 
         [SerializeField]
-        int propertyIndex;
+        private int propertyIndex;
 
 
         public MaterialPropertyTransition(params string[] stateNames)
@@ -73,7 +73,7 @@ namespace TheraBytes.BetterUi
                 yield return s;
         }
 
-        void CrossFadeProperty(float startValue, float targetValue, float duration)
+        private void CrossFadeProperty(float startValue, float targetValue, float duration)
         {
 
             // Stop clashing coroutines

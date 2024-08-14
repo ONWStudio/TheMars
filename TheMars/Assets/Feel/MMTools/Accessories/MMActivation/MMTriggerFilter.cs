@@ -19,7 +19,7 @@ namespace MoreMountains.Tools
 		// Trigger 2D ------------------------------------------------------------------------------------
 
 		protected abstract void OnTriggerEnter2D_(Collider2D collider);
-		void OnTriggerEnter2D (Collider2D collider)
+		private void OnTriggerEnter2D (Collider2D collider)
 		{
 			if (UseEvent(TriggerAndCollisionMask.OnTriggerEnter2D))
 			{
@@ -28,7 +28,7 @@ namespace MoreMountains.Tools
 		}
 
 		protected abstract void OnTriggerExit2D_(Collider2D collider);
-		void OnTriggerExit2D (Collider2D collider)
+		private void OnTriggerExit2D (Collider2D collider)
 		{
 			if (UseEvent(TriggerAndCollisionMask.OnTriggerExit2D))
 			{
@@ -37,7 +37,7 @@ namespace MoreMountains.Tools
 		}
 
 		protected abstract void OnTriggerStay2D_ (Collider2D collider);
-		void OnTriggerStay2D (Collider2D collider)
+		private void OnTriggerStay2D (Collider2D collider)
 		{
 			if (UseEvent(TriggerAndCollisionMask.OnTriggerStay2D))
 			{
@@ -49,7 +49,7 @@ namespace MoreMountains.Tools
 		// Trigger  ------------------------------------------------------------------------------------
 
 		protected abstract void OnTriggerEnter_(Collider collider);
-		void OnTriggerEnter (Collider collider)
+		private void OnTriggerEnter (Collider collider)
 		{
 			if (UseEvent(TriggerAndCollisionMask.OnTriggerEnter))
 			{
@@ -58,7 +58,7 @@ namespace MoreMountains.Tools
 		}
 
 		protected abstract void OnTriggerExit_(Collider collider);
-		void OnTriggerExit (Collider collider)
+		private void OnTriggerExit (Collider collider)
 		{
 			if (UseEvent(TriggerAndCollisionMask.OnTriggerExit))
 			{
@@ -67,7 +67,7 @@ namespace MoreMountains.Tools
 		}
 
 		protected abstract void OnTriggerStay_(Collider collider);
-		void OnTriggerStay (Collider collider)
+		private void OnTriggerStay (Collider collider)
 		{
 			if (UseEvent(TriggerAndCollisionMask.OnTriggerStay))
 			{

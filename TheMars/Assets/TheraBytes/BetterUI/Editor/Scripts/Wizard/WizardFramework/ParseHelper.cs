@@ -9,7 +9,7 @@ namespace TheraBytes.BetterUi.Editor
     public delegate bool TryParseDelegate<T>(string input, out T result);
     public static class ParseHelper
     {
-        const string NULL_STRING = "<null>";
+        private const string NULL_STRING = "<null>";
         public static bool TryParse<T>(string input, out T result)
         {
             Type type = typeof(T);
@@ -75,7 +75,7 @@ namespace TheraBytes.BetterUi.Editor
             throw new NotImplementedException();
         }
 
-        static bool TryParseVector2(string input, out Vector2 result)
+        private static bool TryParseVector2(string input, out Vector2 result)
         {
             string[] parts = input.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
             if (parts.Length != 2)

@@ -13,7 +13,7 @@ namespace Michsky.UI.Heat
         private GUISkin customSkin;
         private int latestTabIndex;
         private string searchString;
-        Vector2 scrollPosition = Vector2.zero;
+        private Vector2 scrollPosition = Vector2.zero;
 
         private void OnEnable()
         {

@@ -20,14 +20,14 @@ namespace TheraBytes.BetterUi
     [HelpURL("https://documentation.therabytes.de/better-ui/AboutMaterials.html")]
     public class Materials : SingletonScriptableObject<Materials>
     {
-        static string FilePath { get { return "TheraBytes/Resources/Materials"; } }
+        private static string FilePath { get { return "TheraBytes/Resources/Materials"; } }
 
         public static readonly StandardMaterial Standard = new StandardMaterial();
         public static readonly GrayscaleMaterial Grayscale = new GrayscaleMaterial();
         public static readonly ColorOverlayMaterial ColorOverlay = new ColorOverlayMaterial();
         public static readonly HueSaturationBrightnessMaterial HueSaturationBrightness = new HueSaturationBrightnessMaterial();
 
-        static readonly List<string> materialOrder = new List<string>() 
+        private static readonly List<string> materialOrder = new List<string>() 
         { 
             Standard, 
             Grayscale, 
@@ -50,14 +50,14 @@ namespace TheraBytes.BetterUi
         }
 
         [SerializeField]
-        List<MaterialInfo> materials = new List<MaterialInfo>();
+        private List<MaterialInfo> materials = new List<MaterialInfo>();
 
         private void OnEnable()
         {
             EnsurePredefinedMaterials();
         }
 
-        void EnsurePredefinedMaterials()
+        private void EnsurePredefinedMaterials()
         {
             if (materials.Count > 0)
                 return;
@@ -143,7 +143,7 @@ namespace TheraBytes.BetterUi
                 });
         }
 
-        void AddIfNotPresent(string name, Func<MaterialEffect, MaterialInfo> CreateMaterial, params MaterialEffect[] preservedLayerEffects)
+        private void AddIfNotPresent(string name, Func<MaterialEffect, MaterialInfo> CreateMaterial, params MaterialEffect[] preservedLayerEffects)
         {
             foreach (var e in Enum.GetValues(typeof(MaterialEffect)))
             {
@@ -229,7 +229,7 @@ namespace TheraBytes.BetterUi
             }
         }
 
-        IEnumerator SetTogglePropertyDelayed(Material material, string toggleName, bool toggle)
+        private IEnumerator SetTogglePropertyDelayed(Material material, string toggleName, bool toggle)
         {
             yield return null;
             material.SetInt(toggleName, (toggle) ? 1 : 0);

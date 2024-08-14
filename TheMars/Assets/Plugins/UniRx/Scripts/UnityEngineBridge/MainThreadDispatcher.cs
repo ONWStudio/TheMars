@@ -38,10 +38,10 @@ namespace UniRx
 
         // In UnityEditor's EditorMode can't instantiate and work MonoBehaviour.Update.
         // EditorThreadDispatcher use EditorApplication.update instead of MonoBehaviour.Update.
-        class EditorThreadDispatcher
+        private class EditorThreadDispatcher
         {
-            static object gate = new object();
-            static EditorThreadDispatcher instance;
+            private static object gate = new object();
+            private static EditorThreadDispatcher instance;
 
             public static EditorThreadDispatcher Instance
             {
@@ -60,9 +60,9 @@ namespace UniRx
                 }
             }
 
-            ThreadSafeQueueWorker editorQueueWorker = new ThreadSafeQueueWorker();
+            private ThreadSafeQueueWorker editorQueueWorker = new ThreadSafeQueueWorker();
 
-            EditorThreadDispatcher()
+            private EditorThreadDispatcher()
             {
                 UnityEditor.EditorApplication.update += Update;
             }
@@ -101,12 +101,12 @@ namespace UniRx
                 editorQueueWorker.Enqueue(_ => ConsumeEnumerator(routine), null);
             }
 
-            void Update()
+            private void Update()
             {
                 editorQueueWorker.ExecuteAll(x => Debug.LogException(x));
             }
 
-            void ConsumeEnumerator(IEnumerator routine)
+            private void ConsumeEnumerator(IEnumerator routine)
             {
                 if (routine.MoveNext())
                 {
@@ -165,7 +165,7 @@ namespace UniRx
 #if UNITY_2018_3_OR_NEWER
 #pragma warning disable CS0618
 #endif
-            IEnumerator UnwrapWaitWWW(WWW www, IEnumerator continuation)
+            private IEnumerator UnwrapWaitWWW(WWW www, IEnumerator continuation)
             {
                 while (!www.isDone)
                 {
@@ -177,7 +177,7 @@ namespace UniRx
 #pragma warning restore CS0618
 #endif
 
-            IEnumerator UnwrapWaitAsyncOperation(AsyncOperation asyncOperation, IEnumerator continuation)
+            private IEnumerator UnwrapWaitAsyncOperation(AsyncOperation asyncOperation, IEnumerator continuation)
             {
                 while (!asyncOperation.isDone)
                 {
@@ -186,7 +186,7 @@ namespace UniRx
                 ConsumeEnumerator(continuation);
             }
 
-            IEnumerator UnwrapWaitForSeconds(float second, IEnumerator continuation)
+            private IEnumerator UnwrapWaitForSeconds(float second, IEnumerator continuation)
             {
                 var startTime = DateTimeOffset.UtcNow;
                 while (true)
@@ -202,7 +202,7 @@ namespace UniRx
                 ConsumeEnumerator(continuation);
             }
 
-            IEnumerator UnwrapEnumerator(IEnumerator enumerator, IEnumerator continuation)
+            private IEnumerator UnwrapEnumerator(IEnumerator enumerator, IEnumerator continuation)
             {
                 while (enumerator.MoveNext())
                 {
@@ -397,16 +397,16 @@ namespace UniRx
             }
         }
 
-        ThreadSafeQueueWorker queueWorker = new ThreadSafeQueueWorker();
-        Action<Exception> unhandledExceptionCallback = ex => Debug.LogException(ex); // default
+        private ThreadSafeQueueWorker queueWorker = new ThreadSafeQueueWorker();
+        private Action<Exception> unhandledExceptionCallback = ex => Debug.LogException(ex); // default
 
-        MicroCoroutine updateMicroCoroutine = null;
-        MicroCoroutine fixedUpdateMicroCoroutine = null;
-        MicroCoroutine endOfFrameMicroCoroutine = null;
+        private MicroCoroutine updateMicroCoroutine = null;
+        private MicroCoroutine fixedUpdateMicroCoroutine = null;
+        private MicroCoroutine endOfFrameMicroCoroutine = null;
 
-        static MainThreadDispatcher instance;
-        static bool initialized;
-        static bool isQuitting = false;
+        private static MainThreadDispatcher instance;
+        private static bool initialized;
+        private static bool isQuitting = false;
 
         public static string InstanceName
         {
@@ -426,9 +426,9 @@ namespace UniRx
         }
 
         [ThreadStatic]
-        static object mainThreadToken;
+        private static object mainThreadToken;
 
-        static MainThreadDispatcher Instance
+        private static MainThreadDispatcher Instance
         {
             get
             {
@@ -486,7 +486,7 @@ namespace UniRx
             }
         }
 
-        void Awake()
+        private void Awake()
         {
             if (instance == null)
             {
@@ -527,7 +527,7 @@ namespace UniRx
             }
         }
 
-        IEnumerator RunUpdateMicroCoroutine()
+        private IEnumerator RunUpdateMicroCoroutine()
         {
             while (true)
             {
@@ -536,7 +536,7 @@ namespace UniRx
             }
         }
 
-        IEnumerator RunFixedUpdateMicroCoroutine()
+        private IEnumerator RunFixedUpdateMicroCoroutine()
         {
             while (true)
             {
@@ -545,7 +545,7 @@ namespace UniRx
             }
         }
 
-        IEnumerator RunEndOfFrameMicroCoroutine()
+        private IEnumerator RunEndOfFrameMicroCoroutine()
         {
             while (true)
             {
@@ -554,7 +554,7 @@ namespace UniRx
             }
         }
 
-        static void DestroyDispatcher(MainThreadDispatcher aDispatcher)
+        private static void DestroyDispatcher(MainThreadDispatcher aDispatcher)
         {
             if (aDispatcher != instance)
             {
@@ -584,7 +584,7 @@ namespace UniRx
             }
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             if (instance == this)
             {
@@ -606,7 +606,7 @@ namespace UniRx
             }
         }
 
-        void Update()
+        private void Update()
         {
             if (update != null)
             {
@@ -624,16 +624,16 @@ namespace UniRx
 
         // for Lifecycle Management
 
-        Subject<Unit> update;
+        private Subject<Unit> update;
 
         public static IObservable<Unit> UpdateAsObservable()
         {
             return Instance.update ?? (Instance.update = new Subject<Unit>());
         }
 
-        Subject<Unit> lateUpdate;
+        private Subject<Unit> lateUpdate;
 
-        void LateUpdate()
+        private void LateUpdate()
         {
             if (lateUpdate != null) lateUpdate.OnNext(Unit.Default);
         }
@@ -643,9 +643,9 @@ namespace UniRx
             return Instance.lateUpdate ?? (Instance.lateUpdate = new Subject<Unit>());
         }
 
-        Subject<bool> onApplicationFocus;
+        private Subject<bool> onApplicationFocus;
 
-        void OnApplicationFocus(bool focus)
+        private void OnApplicationFocus(bool focus)
         {
             if (onApplicationFocus != null) onApplicationFocus.OnNext(focus);
         }
@@ -655,9 +655,9 @@ namespace UniRx
             return Instance.onApplicationFocus ?? (Instance.onApplicationFocus = new Subject<bool>());
         }
 
-        Subject<bool> onApplicationPause;
+        private Subject<bool> onApplicationPause;
 
-        void OnApplicationPause(bool pause)
+        private void OnApplicationPause(bool pause)
         {
             if (onApplicationPause != null) onApplicationPause.OnNext(pause);
         }
@@ -667,9 +667,9 @@ namespace UniRx
             return Instance.onApplicationPause ?? (Instance.onApplicationPause = new Subject<bool>());
         }
 
-        Subject<Unit> onApplicationQuit;
+        private Subject<Unit> onApplicationQuit;
 
-        void OnApplicationQuit()
+        private void OnApplicationQuit()
         {
             isQuitting = true;
             if (onApplicationQuit != null) onApplicationQuit.OnNext(Unit.Default);

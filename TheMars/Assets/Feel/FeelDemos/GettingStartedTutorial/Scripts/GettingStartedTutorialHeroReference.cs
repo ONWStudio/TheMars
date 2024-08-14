@@ -31,7 +31,7 @@ namespace MoreMountains.Feel
 		public UnityEvent OnJump;
 		/// a UnityEvent to fire when landing
 		public UnityEvent OnLand;
-	
+
 		private const float _lowVelocity = 0.1f;
 		private Rigidbody _rigidbody;
 		private float _velocityLastFrame;

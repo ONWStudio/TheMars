@@ -10,7 +10,7 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableUpdateSelectedTrigger : ObservableTriggerBase, IEventSystemHandler, IUpdateSelectedHandler
     {
-        Subject<BaseEventData> onUpdateSelected;
+        private Subject<BaseEventData> onUpdateSelected;
 
         void IUpdateSelectedHandler.OnUpdateSelected(BaseEventData eventData)
         {

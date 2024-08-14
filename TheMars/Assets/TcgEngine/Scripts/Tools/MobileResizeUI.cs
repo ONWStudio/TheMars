@@ -13,7 +13,7 @@ namespace TcgEngine.UI
         public Vector2 position_offset;
         public float size = 1f;
 
-        void Start()
+        private void Start()
         {
             if (GameTool.IsMobile())
             {

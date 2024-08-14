@@ -7,7 +7,7 @@ namespace UniRx.Operators
 {
     internal class SwitchObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<IObservable<T>> sources;
+        private readonly IObservable<IObservable<T>> sources;
 
         public SwitchObservable(IObservable<IObservable<T>> sources)
             : base(true)
@@ -20,15 +20,15 @@ namespace UniRx.Operators
             return new SwitchObserver(this, observer, cancel).Run();
         }
 
-        class SwitchObserver : OperatorObserverBase<IObservable<T>, T>
+        private class SwitchObserver : OperatorObserverBase<IObservable<T>, T>
         {
-            readonly SwitchObservable<T> parent;
+            private readonly SwitchObservable<T> parent;
 
-            readonly object gate = new object();
-            readonly SerialDisposable innerSubscription = new SerialDisposable();
-            bool isStopped = false;
-            ulong latest = 0UL;
-            bool hasLatest = false;
+            private readonly object gate = new object();
+            private readonly SerialDisposable innerSubscription = new SerialDisposable();
+            private bool isStopped = false;
+            private ulong latest = 0UL;
+            private bool hasLatest = false;
 
             public SwitchObserver(SwitchObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -77,10 +77,10 @@ namespace UniRx.Operators
                 }
             }
 
-            class Switch : IObserver<T>
+            private class Switch : IObserver<T>
             {
-                readonly SwitchObserver parent;
-                readonly ulong id;
+                private readonly SwitchObserver parent;
+                private readonly ulong id;
 
                 public Switch(SwitchObserver observer, ulong id)
                 {

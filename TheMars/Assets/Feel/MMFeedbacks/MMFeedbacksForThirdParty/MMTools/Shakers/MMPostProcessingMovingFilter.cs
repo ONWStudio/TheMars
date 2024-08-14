@@ -8,7 +8,7 @@ namespace MoreMountains.Tools
 	/// </summary>
 	public struct MMPostProcessingMovingFilterEvent
 	{
-		static private event Delegate OnEvent;
+		private static event Delegate OnEvent;
 
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
 		private static void RuntimeInitialization()

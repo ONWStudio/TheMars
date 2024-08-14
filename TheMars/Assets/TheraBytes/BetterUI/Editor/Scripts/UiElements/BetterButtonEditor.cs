@@ -13,7 +13,7 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(BetterButton)), CanEditMultipleObjects]
     public class BetterButtonEditor : ButtonEditor
     {
-        BetterElementHelper<Button, BetterButton> helper =
+        private BetterElementHelper<Button, BetterButton> helper =
             new BetterElementHelper<Button, BetterButton>();
 
         public override void OnInspectorGUI()

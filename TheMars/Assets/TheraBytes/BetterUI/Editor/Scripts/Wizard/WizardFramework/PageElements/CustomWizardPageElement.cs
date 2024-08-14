@@ -8,7 +8,7 @@ namespace TheraBytes.BetterUi.Editor
 {
     public class CustomWizardPageElement : WizardPageElementBase
     {
-        Action<CustomWizardPageElement> drawGuiCallback;
+        private Action<CustomWizardPageElement> drawGuiCallback;
 
         public CustomWizardPageElement(Action<CustomWizardPageElement> drawGuiCallback)
         {

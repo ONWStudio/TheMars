@@ -20,12 +20,12 @@ namespace TcgEngine.Client
 
         private List<HandCardBack> cards = new List<HandCardBack>();
 
-        void Start()
+        private void Start()
         {
 
         }
 
-        void Update()
+        private void Update()
         {
             if (!GameClient.Get().IsReady())
                 return;

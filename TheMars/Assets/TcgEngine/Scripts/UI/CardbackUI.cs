@@ -21,7 +21,7 @@ namespace TcgEngine.UI
 
         private CardbackData cardback;
 
-        void Awake()
+        private void Awake()
         {
             cardback_img = GetComponent<Image>();
             cardback_button = GetComponent<Button>();

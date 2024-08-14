@@ -33,7 +33,7 @@ namespace TcgEngine.UI
 
         private static GameUI instance;
 
-        void Awake()
+        private void Awake()
         {
             instance = this;
 
@@ -57,7 +57,7 @@ namespace TcgEngine.UI
                 quit_btn.text = GameClient.game_settings.IsOnlinePlayer() ? "Resign" : "Quit";
         }
 
-        void Update()
+        private void Update()
         {
             Game data = GameClient.Get().GetGameData();
 			bool is_connecting = data == null || data.state == GameState.Connecting;

@@ -13,8 +13,10 @@ namespace Michsky.UI.Heat
     {
         // Resources
         public Slider mainSlider;
-        [SerializeField] private TextMeshProUGUI valueText;
-        [SerializeField] private CanvasGroup highlightCG;
+        [SerializeField]
+        private TextMeshProUGUI valueText;
+        [SerializeField]
+        private CanvasGroup highlightCG;
 
         // Saving
         public bool saveValue = false;
@@ -34,7 +36,7 @@ namespace Michsky.UI.Heat
         [System.Serializable] public class SliderEvent : UnityEvent<float> { }
         [SerializeField] public SliderEvent onValueChanged = new SliderEvent();
 
-        void Awake()
+        private void Awake()
         {
             if (highlightCG == null) { highlightCG = new GameObject().AddComponent<CanvasGroup>(); highlightCG.gameObject.AddComponent<RectTransform>(); highlightCG.transform.SetParent(transform); highlightCG.gameObject.name = "Highlight"; }
             if (mainSlider == null) { mainSlider = gameObject.GetComponent<Slider>(); }
@@ -68,7 +70,7 @@ namespace Michsky.UI.Heat
             UpdateUI();
         }
 
-        void Start()
+        private void Start()
         {
             if (UIManagerAudio.instance == null)
             {
@@ -139,7 +141,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("SetNormal");
         }
 
-        IEnumerator SetNormal()
+        private IEnumerator SetNormal()
         {
             StopCoroutine("SetHighlight");
 
@@ -153,7 +155,7 @@ namespace Michsky.UI.Heat
             highlightCG.gameObject.SetActive(false);
         }
 
-        IEnumerator SetHighlight()
+        private IEnumerator SetHighlight()
         {
             StopCoroutine("SetNormal");
             highlightCG.gameObject.SetActive(true);

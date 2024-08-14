@@ -19,11 +19,11 @@ namespace TheraBytes.BetterUi
         where T : class, IScreenConfigConnection
     {
         [SerializeField]
-        List<T> items = new List<T>();
+        private List<T> items = new List<T>();
         
         public IReadOnlyList<T> Items { get { return items; } }
 
-        bool isDirty = true;
+        private bool isDirty = true;
         public bool IsDirty { get { return isDirty; } }
 
         public void AddItem(T item)

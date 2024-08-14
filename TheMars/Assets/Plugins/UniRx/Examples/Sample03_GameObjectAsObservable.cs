@@ -7,7 +7,7 @@ namespace UniRx.Examples
 {
     public class Sample03_GameObjectAsObservable : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             // All events can subscribe by ***AsObservable if enables UniRx.Triggers
             this.OnMouseDownAsObservable()

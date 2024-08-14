@@ -17,7 +17,7 @@ namespace TcgEngine.Client
 
         private static List<HandCardBack> card_list = new List<HandCardBack>();
 
-        void Awake()
+        private void Awake()
         {
             card_list.Add(this);
             rect = GetComponent<RectTransform>();

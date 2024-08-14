@@ -15,10 +15,10 @@ namespace MoreMountains.Feedbacks
 	public static class MMFDependencyInstaller 
 	{
 		#if UNITY_EDITOR
-		static ListRequest _listRequest;
-		static AddRequest _addRequest;
-		static int _currentIndex;
-        
+		private static ListRequest _listRequest;
+		private static AddRequest _addRequest;
+		private static int _currentIndex;
+
 		private static string[] _packages = new string[] 
 		{"com.unity.cinemachine", 
 			"com.unity.postprocessing", 
@@ -79,7 +79,7 @@ namespace MoreMountains.Feedbacks
 		/// <summary>
 		/// Proceeds to install the next package in line
 		/// </summary>
-		static void InstallNext()
+		private static void InstallNext()
 		{
 			if (_currentIndex < _packages.Length)
 			{
@@ -113,7 +113,7 @@ namespace MoreMountains.Feedbacks
 		/// <summary>
 		/// Processes the list request
 		/// </summary>
-		static void ListProgress()
+		private static void ListProgress()
 		{
 			if (_listRequest.IsCompleted)
 			{
@@ -132,7 +132,7 @@ namespace MoreMountains.Feedbacks
 		/// <summary>
 		/// Processes add requests
 		/// </summary>
-		static void AddProgress()
+		private static void AddProgress()
 		{
 			if (_addRequest.IsCompleted)
 			{

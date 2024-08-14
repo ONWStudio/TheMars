@@ -10,11 +10,11 @@ namespace TheraBytes.BetterUi
     public class IsScreenTagPresent : IScreenTypeCheck
     {
         [SerializeField]
-        string screenTag;
+        private string screenTag;
         public string ScreenTag { get { return screenTag; } set { screenTag = value; } }
 
         [SerializeField]
-        bool isActive;
+        private bool isActive;
 
         public bool IsActive { get { return isActive; } set { isActive = value; } }
 

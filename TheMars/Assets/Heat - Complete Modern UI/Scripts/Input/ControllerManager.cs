@@ -36,9 +36,9 @@ namespace Michsky.UI.Heat
         public InputAction gamepadHotkey;
 
         // Helpers
-        Vector3 cursorPos;
-        Vector3 lastCursorPos;
-        Navigation customNav = new Navigation();
+        private Vector3 cursorPos;
+        private Vector3 lastCursorPos;
+        private Navigation customNav = new Navigation();
         [HideInInspector] public int currentManagerIndex;
 
         [HideInInspector] public bool gamepadConnected;
@@ -51,17 +51,17 @@ namespace Michsky.UI.Heat
         [HideInInspector] public string currentController;
         [HideInInspector] public ControllerPreset currentControllerPreset;
 
-        void Awake()
+        private void Awake()
         {
             instance = this;
         }
 
-        void Start()
+        private void Start()
         {
             InitInput();
         }
 
-        void Update()
+        private void Update()
         {
             if (!alwaysUpdate)
                 return;
@@ -70,7 +70,7 @@ namespace Michsky.UI.Heat
             CheckForEmptyObject();
         }
 
-        void InitInput()
+        private void InitInput()
         {
             gamepadHotkey.Enable();
 
@@ -78,7 +78,7 @@ namespace Michsky.UI.Heat
             else { gamepadConnected = true; SwitchToGamepad(); }
         }
 
-        void CheckForEmptyObject()
+        private void CheckForEmptyObject()
         {
             if (!gamepadEnabled) { return; }
             else if (EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.gameObject.activeInHierarchy) { return; }
@@ -106,7 +106,7 @@ namespace Michsky.UI.Heat
             else if (!gamepadConnected && !keyboardEnabled) { SwitchToKeyboard(); }
         }
 
-        void CheckForCurrentObject()
+        private void CheckForCurrentObject()
         {
             if ((EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy) && panels.Count != 0)
             {
@@ -150,7 +150,7 @@ namespace Michsky.UI.Heat
             CheckForCurrentObject();
         }
 
-        void CheckForGamepadType()
+        private void CheckForGamepadType()
         {
             currentController = Gamepad.current.displayName;
 

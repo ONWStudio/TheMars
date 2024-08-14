@@ -72,7 +72,7 @@ namespace TheraBytes.BetterUi
                 return result;
             }
 
-            float CalculateSize(float optimizedValue, float actualValue, float impact)
+            private float CalculateSize(float optimizedValue, float actualValue, float impact)
             {
                 if (impact == 0 || optimizedValue == actualValue)
                     return 0;

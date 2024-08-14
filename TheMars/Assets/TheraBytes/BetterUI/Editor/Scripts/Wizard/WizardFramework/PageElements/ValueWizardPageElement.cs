@@ -8,9 +8,9 @@ namespace TheraBytes.BetterUi.Editor
 {
     public class ValueWizardPageElement<T> : WizardPageElementBase, IWizardDataElement
     {
-        Func<ValueWizardPageElement<T>, T, T> drawGuiCallback;
-        Action<ValueWizardPageElement<T>> valueChangedCallback;
-        T value;
+        private Func<ValueWizardPageElement<T>, T, T> drawGuiCallback;
+        private Action<ValueWizardPageElement<T>> valueChangedCallback;
+        private T value;
 
         public T Value { get { return value; } }
         public string SerializationKey { get; }

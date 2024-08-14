@@ -14,10 +14,10 @@ namespace UniRx
             return new AnonymousSubject<T>((subject as IObserver<T>).Synchronize(gate), subject);
         }
 
-        class AnonymousSubject<T, U> : ISubject<T, U>
+        private class AnonymousSubject<T, U> : ISubject<T, U>
         {
-            readonly IObserver<T> observer;
-            readonly IObservable<U> observable;
+            private readonly IObserver<T> observer;
+            private readonly IObservable<U> observable;
 
             public AnonymousSubject(IObserver<T> observer, IObservable<U> observable)
             {
@@ -50,7 +50,7 @@ namespace UniRx
             }
         }
 
-        class AnonymousSubject<T> : AnonymousSubject<T, T>, ISubject<T>
+        private class AnonymousSubject<T> : AnonymousSubject<T, T>, ISubject<T>
         {
             public AnonymousSubject(IObserver<T> observer, IObservable<T> observable)
                 : base(observer, observable)

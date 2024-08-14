@@ -10,18 +10,21 @@ namespace Michsky.UI.Heat
     public class SliderInput : MonoBehaviour
     {
         [Header("Resources")]
-        [SerializeField] private SliderManager sliderManager;
-        [SerializeField] private TMP_InputField inputField;
+        [SerializeField]
+        private SliderManager sliderManager;
+        [SerializeField]
+        private TMP_InputField inputField;
 
         [Header("Settings")]
-        [SerializeField] private bool multiplyValue = false;
+        [SerializeField]
+        private bool multiplyValue = false;
         [Range(1, 10)] public int maxChar = 5;
         [Range(0, 4)] public int decimals = 1;
 
         [Header("Events")]
         public UnityEvent onSubmit;
 
-        void Awake()
+        private void Awake()
         {
             if (sliderManager == null) { Debug.LogWarning("'Slider Manager' is missing!"); return; }
             if (inputField == null) { inputField = GetComponent<TMP_InputField>(); }
@@ -38,13 +41,13 @@ namespace Michsky.UI.Heat
             sliderManager.mainSlider.onValueChanged.Invoke(sliderManager.mainSlider.value);
         }
 
-        void Update()
+        private void Update()
         {
             if (string.IsNullOrEmpty(inputField.text) == true || EventSystem.current.currentSelectedGameObject != inputField.gameObject) { return; }
             if (Keyboard.current.enterKey.wasPressedThisFrame) { onSubmit.Invoke(); }
         }
 
-        void SetText(float value)
+        private void SetText(float value)
         {
             if (multiplyValue == true) { value = value * 100; }
 
@@ -55,7 +58,7 @@ namespace Michsky.UI.Heat
             else if(decimals == 4) { inputField.text = value.ToString("F4"); }
         }
 
-        void SetValue()
+        private void SetValue()
         {
             if (sliderManager.mainSlider.wholeNumbers == true) { sliderManager.mainSlider.value = int.Parse(inputField.text); }
             else if (multiplyValue == true) { sliderManager.mainSlider.value = (float.Parse(inputField.text) / 100); }

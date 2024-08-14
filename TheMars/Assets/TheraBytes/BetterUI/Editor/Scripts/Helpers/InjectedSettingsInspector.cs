@@ -10,35 +10,35 @@ namespace TheraBytes.BetterUi.Editor
 {
     public class InjectedSettingsInspector
     {
-        class SettingsProperty
+        private class SettingsProperty
         {
             public GUIContent Label { get; set; }
             public string SettingsPropName { get; set; }
         }
 
-        class CheckToSkipRest : SettingsProperty 
+        private class CheckToSkipRest : SettingsProperty 
         {
             public bool ValueToSkip { get; set; }
         }
 
-        class CheckWithSizer : SettingsProperty
+        private class CheckWithSizer : SettingsProperty
         {
             public string SizerFallbackName { get; set; }
             public SerializedProperty SizerFallback { get; set; }
             public SerializedProperty CustomSizers { get; set; }
         }
 
-        class CheckWithProp : SettingsProperty
+        private class CheckWithProp : SettingsProperty
         {
             public string OtherSettingsPropertyName { get; set; }
         }
 
-        string settingsName;
-        SerializedObject serializedObject;
-        SerializedProperty settingsFallback, settingsList;
+        private string settingsName;
+        private SerializedObject serializedObject;
+        private SerializedProperty settingsFallback, settingsList;
 
         // key: fallback, value: customSizers
-        List<SettingsProperty> allControls = new List<SettingsProperty>();
+        private List<SettingsProperty> allControls = new List<SettingsProperty>();
 
         public InjectedSettingsInspector(string settingsName, SerializedObject serializedObject,
             string settingsListName, string settingsFallbackName)
@@ -194,7 +194,7 @@ namespace TheraBytes.BetterUi.Editor
             RestoreSizerFallbackReferences();
         }
 
-        void RestoreSizerFallbackReferences()
+        private void RestoreSizerFallbackReferences()
         {
             foreach(var p in allControls.OfType<CheckWithSizer>())
             {
@@ -203,7 +203,7 @@ namespace TheraBytes.BetterUi.Editor
         }
 
 
-        static void DrawSizer(string configName, SerializedProperty fallback, SerializedProperty customSizers)
+        private static void DrawSizer(string configName, SerializedProperty fallback, SerializedProperty customSizers)
         {
             EditorGUI.indentLevel++;
 
@@ -220,13 +220,13 @@ namespace TheraBytes.BetterUi.Editor
             EditorGUI.indentLevel--;
         }
 
-        static SerializedProperty FindSizer(string configName, SerializedProperty fallback, SerializedProperty customSizers)
+        private static SerializedProperty FindSizer(string configName, SerializedProperty fallback, SerializedProperty customSizers)
         {
             int idx;
             return FindSizer(configName, fallback, customSizers, out idx);
         }
 
-        static SerializedProperty FindSizer(string configName, SerializedProperty fallback, SerializedProperty customSizers, out int sizerIndex)
+        private static SerializedProperty FindSizer(string configName, SerializedProperty fallback, SerializedProperty customSizers, out int sizerIndex)
         {
             bool isFallback = !(ResolutionMonitor.Instance.OptimizedScreens.Any(o => o.Name == configName));
             sizerIndex = -1;

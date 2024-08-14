@@ -54,7 +54,7 @@ namespace TheraBytes.BetterUi.Editor
             return Convert<T, TBetter>(source, false, skipFields);
         }
 
-        static T Convert<T, TBetter>(T source, bool downgrade, params string[] skipFields)
+        private static T Convert<T, TBetter>(T source, bool downgrade, params string[] skipFields)
             where T : MonoBehaviour
             where TBetter : T
         {
@@ -113,7 +113,7 @@ namespace TheraBytes.BetterUi.Editor
         }
 
 
-        static int GetComponentOrder(Component comp)
+        private static int GetComponentOrder(Component comp)
         {
             int idx = 0;
             while (UnityEditorInternal.ComponentUtility.MoveComponentDown(comp))
@@ -124,7 +124,7 @@ namespace TheraBytes.BetterUi.Editor
         }
 
 
-        static IEnumerable<KeyValuePair<FieldInfo, object>> CollectAllFieldValues(Type type, object source,
+        private static IEnumerable<KeyValuePair<FieldInfo, object>> CollectAllFieldValues(Type type, object source,
             HashSet<string> skipFields)
         {
             foreach (var field in CollectFieldInfosRecursively(type))
@@ -156,7 +156,7 @@ namespace TheraBytes.BetterUi.Editor
             }
         }
 
-        static IEnumerable<FieldInfo> CollectFieldInfosRecursively(Type type)
+        private static IEnumerable<FieldInfo> CollectFieldInfosRecursively(Type type)
         {
             while (type != typeof(object))
             {
@@ -169,7 +169,7 @@ namespace TheraBytes.BetterUi.Editor
             }
         }
 
-        static IEnumerable<FieldInfo> CollectFieldInfos(Type type)
+        private static IEnumerable<FieldInfo> CollectFieldInfos(Type type)
         {
             FieldInfo[] myObjectFields = type.GetFields(
                 BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
@@ -180,7 +180,7 @@ namespace TheraBytes.BetterUi.Editor
             }
         }
 
-        static object CreateCopyIfNoUnityObject(object original)
+        private static object CreateCopyIfNoUnityObject(object original)
         {
             if (original is UnityEngine.Object || original == null)
             {
@@ -284,7 +284,7 @@ namespace TheraBytes.BetterUi.Editor
             so.ApplyModifiedProperties();
         }
 
-        static IEnumerable<Transform> IterateChildrenRecursively(Transform self)
+        private static IEnumerable<Transform> IterateChildrenRecursively(Transform self)
         {
             yield return self;
             

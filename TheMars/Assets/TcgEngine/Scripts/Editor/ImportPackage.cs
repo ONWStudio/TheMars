@@ -23,7 +23,7 @@ namespace TcgEngine.EditorTool
             AfterCompile();
         }
 
-        static void AfterCompile()
+        private static void AfterCompile()
         {
             if(!SessionState.GetBool(import_done, false))
             {

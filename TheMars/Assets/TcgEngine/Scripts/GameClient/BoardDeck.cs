@@ -20,8 +20,8 @@ namespace TcgEngine.Client
         public Text discard_value;
 
         private bool hover = false;
-        
-        void Start()
+
+        private void Start()
         {
             if (GameTool.IsMobile())
             {
@@ -29,7 +29,7 @@ namespace TcgEngine.Client
             }
         }
 
-        void Update()
+        private void Update()
         {
             Refresh();
         }

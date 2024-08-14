@@ -30,7 +30,7 @@ namespace TcgEngine.UI
 
         private static MainMenu instance;
 
-        void Awake()
+        private void Awake()
         {
             instance = this;
 
@@ -56,7 +56,7 @@ namespace TcgEngine.UI
                 RefreshLogin();
         }
 
-        void Update()
+        private void Update()
         {
             UserData udata = Authenticator.Get().UserData;
             if (udata != null)

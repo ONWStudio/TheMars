@@ -10,23 +10,29 @@ namespace Michsky.UI.Heat
     public class NavigationBar : MonoBehaviour
     {
         // Resources
-        [SerializeField] private Animator animator;
-        [SerializeField] private CanvasGroup canvasGroup;
+        [SerializeField]
+        private Animator animator;
+        [SerializeField]
+        private CanvasGroup canvasGroup;
 
         // Settings
-        [SerializeField] private UpdateMode updateMode = UpdateMode.DeltaTime;
-        [SerializeField] private BarDirection barDirection = BarDirection.Top;
-        [SerializeField] private bool fadeButtons = false;
-        [SerializeField] private Transform buttonParent;
+        [SerializeField]
+        private UpdateMode updateMode = UpdateMode.DeltaTime;
+        [SerializeField]
+        private BarDirection barDirection = BarDirection.Top;
+        [SerializeField]
+        private bool fadeButtons = false;
+        [SerializeField]
+        private Transform buttonParent;
 
         // Helpers
-        float cachedStateLength = 0.4f;
-        List<PanelButton> buttons = new List<PanelButton>();
+        private float cachedStateLength = 0.4f;
+        private List<PanelButton> buttons = new List<PanelButton>();
 
         public enum UpdateMode { DeltaTime, UnscaledTime }
         public enum BarDirection { Top, Bottom }
 
-        void Awake()
+        private void Awake()
         {
             if (animator == null) { GetComponent<Animator>(); }
             if (canvasGroup == null) { GetComponent<CanvasGroup>(); }
@@ -35,7 +41,7 @@ namespace Michsky.UI.Heat
             cachedStateLength = HeatUIInternalTools.GetAnimatorClipLength(animator, "NavigationBar_TopShow") + 0.02f;
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             Show();
         }
@@ -99,7 +105,7 @@ namespace Michsky.UI.Heat
             else if (barDirection == BarDirection.Bottom) { animator.Play("Bottom Hide"); }
         }
 
-        IEnumerator DisableAnimator()
+        private IEnumerator DisableAnimator()
         {
             if (updateMode == UpdateMode.DeltaTime) { yield return new WaitForSeconds(cachedStateLength); }
             else { yield return new WaitForSecondsRealtime(cachedStateLength); }

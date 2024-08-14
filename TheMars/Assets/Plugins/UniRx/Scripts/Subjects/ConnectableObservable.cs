@@ -9,12 +9,12 @@ namespace UniRx
 
     public static partial class Observable
     {
-        class ConnectableObservable<T> : IConnectableObservable<T>
+        private class ConnectableObservable<T> : IConnectableObservable<T>
         {
-            readonly IObservable<T> source;
-            readonly ISubject<T> subject;
-            readonly object gate = new object();
-            Connection connection;
+            private readonly IObservable<T> source;
+            private readonly ISubject<T> subject;
+            private readonly object gate = new object();
+            private Connection connection;
 
             public ConnectableObservable(IObservable<T> source, ISubject<T> subject)
             {
@@ -42,10 +42,10 @@ namespace UniRx
                 return subject.Subscribe(observer);
             }
 
-            class Connection : IDisposable
+            private class Connection : IDisposable
             {
-                readonly ConnectableObservable<T> parent;
-                IDisposable subscription;
+                private readonly ConnectableObservable<T> parent;
+                private IDisposable subscription;
 
                 public Connection(ConnectableObservable<T> parent, IDisposable subscription)
                 {

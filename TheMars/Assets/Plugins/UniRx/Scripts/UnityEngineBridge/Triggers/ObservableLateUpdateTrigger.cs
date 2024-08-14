@@ -6,10 +6,10 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableLateUpdateTrigger : ObservableTriggerBase
     {
-        Subject<Unit> lateUpdate;
+        private Subject<Unit> lateUpdate;
 
         /// <summary>LateUpdate is called every frame, if the Behaviour is enabled.</summary>
-        void LateUpdate()
+        private void LateUpdate()
         {
             if (lateUpdate != null) lateUpdate.OnNext(Unit.Default);
         }

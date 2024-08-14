@@ -27,12 +27,12 @@ namespace MoreMountains.Feedbacks
 		/// <summary>
 		/// A helper class to copy and paste feedback properties
 		/// </summary>
-		static class FeedbackCopy
+		private static class FeedbackCopy
 		{
 			// Single Copy --------------------------------------------------------------------
 
 			static public System.Type Type { get; private set; }
-			static List<SerializedProperty> Properties = new List<SerializedProperty>();
+			private static List<SerializedProperty> Properties = new List<SerializedProperty>();
             
 			public static string[] IgnoreList = new string[]
 			{
@@ -150,7 +150,7 @@ namespace MoreMountains.Feedbacks
 		/// <summary>
 		/// On Enable, grabs properties and initializes the add feedback dropdown's contents
 		/// </summary>
-		void OnEnable()
+		private void OnEnable()
 		{
 			// Get properties
 			_targetMMFeedbacks = target as MMFeedbacks;

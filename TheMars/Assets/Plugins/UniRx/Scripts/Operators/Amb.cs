@@ -5,8 +5,8 @@ namespace UniRx.Operators
 {
     internal class AmbObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly IObservable<T> second;
+        private readonly IObservable<T> source;
+        private readonly IObservable<T> second;
 
         public AmbObservable(IObservable<T> source, IObservable<T> second)
             : base(source.IsRequiredSubscribeOnCurrentThread() || second.IsRequiredSubscribeOnCurrentThread())
@@ -20,18 +20,18 @@ namespace UniRx.Operators
             return new AmbOuterObserver(this, observer, cancel).Run();
         }
 
-        class AmbOuterObserver : OperatorObserverBase<T, T>
+        private class AmbOuterObserver : OperatorObserverBase<T, T>
         {
-            enum AmbState
+            private enum AmbState
             {
                 Left, Right, Neither
             }
 
-            readonly AmbObservable<T> parent;
-            readonly object gate = new object();
-            SingleAssignmentDisposable leftSubscription;
-            SingleAssignmentDisposable rightSubscription;
-            AmbState choice = AmbState.Neither;
+            private readonly AmbObservable<T> parent;
+            private readonly object gate = new object();
+            private SingleAssignmentDisposable leftSubscription;
+            private SingleAssignmentDisposable rightSubscription;
+            private AmbState choice = AmbState.Neither;
 
             public AmbOuterObserver(AmbObservable<T> parent, IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)
@@ -74,7 +74,7 @@ namespace UniRx.Operators
                 // no use
             }
 
-            class Amb : IObserver<T>
+            private class Amb : IObserver<T>
             {
                 public IObserver<T> targetObserver;
                 public IDisposable targetDisposable;
@@ -111,12 +111,12 @@ namespace UniRx.Operators
                 }
             }
 
-            class AmbDecisionObserver : IObserver<T>
+            private class AmbDecisionObserver : IObserver<T>
             {
-                readonly AmbOuterObserver parent;
-                readonly AmbState me;
-                readonly IDisposable otherSubscription;
-                readonly Amb self;
+                private readonly AmbOuterObserver parent;
+                private readonly AmbState me;
+                private readonly IDisposable otherSubscription;
+                private readonly Amb self;
 
                 public AmbDecisionObserver(AmbOuterObserver parent, AmbState me, IDisposable otherSubscription, Amb self)
                 {

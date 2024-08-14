@@ -27,7 +27,7 @@ namespace TcgEngine.FX
         private float y = 0f;
         private float z = 0f;
 
-        void Start()
+        private void Start()
         {
             //Direction of each face
             dir = new Vector3[6];
@@ -41,7 +41,7 @@ namespace TcgEngine.FX
             AudioTool.Get().PlaySFX("dice", start_audio);
         }
 
-        void Update()
+        private void Update()
         {
             timer += Time.deltaTime;
 

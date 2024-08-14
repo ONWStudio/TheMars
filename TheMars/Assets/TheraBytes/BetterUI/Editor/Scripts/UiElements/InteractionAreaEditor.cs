@@ -9,13 +9,13 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(InteractionArea)), CanEditMultipleObjects]
     public class InteractionAreaEditor : UnityEditor.Editor
     {
-        SerializedProperty shapeProp, 
+        private SerializedProperty shapeProp, 
             radiusFallbackProp, radiusConfigsProp,
             raycastProp;
 
-        InteractionArea ia;
+        private InteractionArea ia;
 
-        void OnEnable()
+        private void OnEnable()
         {
             ia = target as InteractionArea;
             shapeProp = serializedObject.FindProperty("ClickableShape");

@@ -7,15 +7,17 @@ namespace Michsky.UI.Heat
     public class CreditsMentionItem : MonoBehaviour
     {
         [Header("Resources")]
-        [SerializeField] private Image iconImage;
-        [SerializeField] private TextMeshProUGUI descriptionText;
+        [SerializeField]
+        private Image iconImage;
+        [SerializeField]
+        private TextMeshProUGUI descriptionText;
         public VerticalLayoutGroup listLayout;
 
         // Helpers
         [HideInInspector] public CreditsPreset preset;
         [HideInInspector] public LocalizedObject localizedObject;
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (localizedObject != null && !string.IsNullOrEmpty(localizedObject.localizationKey))
             {

@@ -25,7 +25,7 @@ namespace Michsky.UI.Heat
         public LocalizationLanguage currentLanguageAsset;
         public List<LocalizedObject> localizedItems = new List<LocalizedObject>();
 
-        void Awake()
+        private void Awake()
         {
             instance = this;
 

@@ -20,11 +20,11 @@ namespace TheraBytes.BetterUi
         }
 
         [SerializeField]
-        DeviceInfo expectedDeviceInfo;
+        private DeviceInfo expectedDeviceInfo;
         public DeviceInfo ExpectedDeviceInfo { get { return expectedDeviceInfo; } set { expectedDeviceInfo = value; } }
 
         [SerializeField]
-        bool isActive;
+        private bool isActive;
         public bool IsActive { get { return isActive; } set { isActive = value; } }
 
         public bool IsScreenType()

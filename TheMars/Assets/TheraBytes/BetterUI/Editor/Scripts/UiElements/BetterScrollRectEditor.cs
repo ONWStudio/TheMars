@@ -13,9 +13,9 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(BetterScrollRect)), CanEditMultipleObjects]
     public class BetterScrollRectEditor : ScrollRectEditor
     {
-        SerializedProperty hProp, vProp;
-        SerializedProperty hSpacingFallback, hSpacingCollection;
-        SerializedProperty vSpacingFallback, vSpacingCollection;
+        private SerializedProperty hProp, vProp;
+        private SerializedProperty hSpacingFallback, hSpacingCollection;
+        private SerializedProperty vSpacingFallback, vSpacingCollection;
 
 
         protected override void OnEnable()

@@ -8,8 +8,8 @@ namespace TheraBytes.BetterUi.Editor
 {
     public class UnserializedButtonPageElement : WizardPageElementBase
     {
-        GUIContent buttonContent;
-        Action buttonCallback;
+        private GUIContent buttonContent;
+        private Action buttonCallback;
 
         public UnserializedButtonPageElement(string buttonContent, Action buttonCallback, bool completeImmediately = true)
             : this(new GUIContent(buttonContent), buttonCallback, completeImmediately)

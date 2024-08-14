@@ -9,13 +9,13 @@ namespace TheraBytes.BetterUi.Editor
 {
     public class SetNameOrDeleteOptimizedScreen : PopupWindowContent
     {
-        const float MARGIN = 10;
+        private const float MARGIN = 10;
 
-        bool deleteConfirm = false;
+        private bool deleteConfirm = false;
 
-        bool renameMode;
-        ScreenTypeConditions condition;
-        string cachedName;
+        private bool renameMode;
+        private ScreenTypeConditions condition;
+        private string cachedName;
 
         public event Action CloseCallback;
 
@@ -168,7 +168,7 @@ When it is in use in the project you should not change it anymore.");
             }
         }
 
-        bool CheckNameValidity()
+        private bool CheckNameValidity()
         {
             return !(string.IsNullOrEmpty(cachedName))
                 && (ResolutionMonitor.Instance.OptimizedScreens.FirstOrDefault(o => o != condition && o.Name == cachedName) == null);

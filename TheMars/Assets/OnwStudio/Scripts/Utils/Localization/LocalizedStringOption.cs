@@ -38,7 +38,8 @@ namespace Onw.Localization
         }
         
 
-        [SerializeField] private LocalizedString _localizedString;
+        [SerializeField]
+        private LocalizedString _localizedString;
 
         public bool TrySetOption(MonoBehaviour monoBehaviour, UnityAction<string> onChangedText, out LocalizeStringEvent localizeStringEvent)
         {

@@ -12,7 +12,8 @@ namespace TMCard.Effect
     [SerializeReferenceDropdownName("(특수) 드로우")]
     public sealed class DrawEffectCreator : ITMSpecialEffectCreator
     {
-        [SerializeReference, DisplayAs("드로우 효과"), FormerlySerializedAs("_drawEffectCreators"), SerializeReferenceDropdown] private List<ITMNormalEffectCreator> _drawEffectCreators = new();
+        [SerializeReference, DisplayAs("드로우 효과"), FormerlySerializedAs("_drawEffectCreators"), SerializeReferenceDropdown]
+        private List<ITMNormalEffectCreator> _drawEffectCreators = new();
 
         public IEnumerable<ITMNormalEffect> DrawEffects => _drawEffectCreators
             .Select(creator => creator.CreateEffect())

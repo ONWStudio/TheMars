@@ -10,7 +10,7 @@ namespace TheraBytes.BetterUi
 {
     public class AboutWindow : EditorWindow
     {
-        const string VERSION = "2.5";
+        private const string VERSION = "2.5";
 
         [MenuItem("Tools/Better UI/Help/Documentation", false, 300)]
         public static void OpenDocumentation()
@@ -45,15 +45,15 @@ namespace TheraBytes.BetterUi
         }
 
 
-        GUIContent image;
+        private GUIContent image;
 
 
-        void OnEnable()
+        private void OnEnable()
         {
             image = new GUIContent(Resources.Load<Texture2D>("wizard_banner"));
         }
 
-        void OnGUI()
+        private void OnGUI()
         {
             EditorGUILayout.Space();
             EditorGUILayout.LabelField(image, EditorStyles.wordWrappedLabel);

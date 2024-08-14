@@ -4,8 +4,8 @@ namespace UniRx.Operators
 {
     internal class ReturnObservable<T> : OperatorObservableBase<T>
     {
-        readonly T value;
-        readonly IScheduler scheduler;
+        private readonly T value;
+        private readonly IScheduler scheduler;
 
         public ReturnObservable(T value, IScheduler scheduler)
             : base(scheduler == Scheduler.CurrentThread)
@@ -34,7 +34,7 @@ namespace UniRx.Operators
             }
         }
 
-        class Return : OperatorObserverBase<T, T>
+        private class Return : OperatorObserverBase<T, T>
         {
             public Return(IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)
@@ -70,7 +70,7 @@ namespace UniRx.Operators
 
     internal class ImmediateReturnObservable<T> : IObservable<T>, IOptimizedObservable<T>
     {
-        readonly T value;
+        private readonly T value;
 
         public ImmediateReturnObservable(T value)
         {
@@ -94,7 +94,7 @@ namespace UniRx.Operators
     {
         internal static ImmutableReturnUnitObservable Instance = new ImmutableReturnUnitObservable();
 
-        ImmutableReturnUnitObservable()
+        private ImmutableReturnUnitObservable()
         {
 
         }
@@ -116,7 +116,7 @@ namespace UniRx.Operators
     {
         internal static ImmutableReturnTrueObservable Instance = new ImmutableReturnTrueObservable();
 
-        ImmutableReturnTrueObservable()
+        private ImmutableReturnTrueObservable()
         {
 
         }
@@ -138,7 +138,7 @@ namespace UniRx.Operators
     {
         internal static ImmutableReturnFalseObservable Instance = new ImmutableReturnFalseObservable();
 
-        ImmutableReturnFalseObservable()
+        private ImmutableReturnFalseObservable()
         {
 
         }
@@ -158,7 +158,7 @@ namespace UniRx.Operators
 
     internal class ImmutableReturnInt32Observable : IObservable<int>, IOptimizedObservable<int>
     {
-        static ImmutableReturnInt32Observable[] Caches = new ImmutableReturnInt32Observable[]
+        private static ImmutableReturnInt32Observable[] Caches = new ImmutableReturnInt32Observable[]
         {
             new ImmutableReturnInt32Observable(-1),
             new ImmutableReturnInt32Observable(0),
@@ -183,9 +183,9 @@ namespace UniRx.Operators
             return new ImmediateReturnObservable<int>(x);
         }
 
-        readonly int x;
+        private readonly int x;
 
-        ImmutableReturnInt32Observable(int x)
+        private ImmutableReturnInt32Observable(int x)
         {
             this.x = x;
         }

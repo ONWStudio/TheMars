@@ -26,16 +26,16 @@ namespace TheraBytes.BetterUi
         }
         
         [SerializeField]
-        ScreenMeasure measureType = ScreenMeasure.Height;
+        private ScreenMeasure measureType = ScreenMeasure.Height;
 
         [SerializeField]
-        UnitType unitType;
+        private UnitType unitType;
 
         [SerializeField]
-        float minSizeInInches = DEFAULT_SMALL_THRESHOLD;
+        private float minSizeInInches = DEFAULT_SMALL_THRESHOLD;
 
         [SerializeField]
-        float maxSizeInInches = DEFAULT_LARGE_THRESHOLD;
+        private float maxSizeInInches = DEFAULT_LARGE_THRESHOLD;
 
         public ScreenMeasure MeasureType { get { return measureType; } set { measureType = value; } }
 
@@ -54,7 +54,7 @@ namespace TheraBytes.BetterUi
         }
 
         [SerializeField]
-        bool isActive;
+        private bool isActive;
         public bool IsActive { get { return isActive; } set { isActive = value; } }
 
         public IsScreenOfCertainSize()

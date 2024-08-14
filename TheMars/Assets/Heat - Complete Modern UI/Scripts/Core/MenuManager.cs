@@ -10,14 +10,16 @@ namespace Michsky.UI.Heat
         // Resources
         public UIManager UIManagerAsset;
         public Animator splashScreen;
-        [SerializeField] private GameObject mainContent;
-        [SerializeField] private ImageFading initPanel;
+        [SerializeField]
+        private GameObject mainContent;
+        [SerializeField]
+        private ImageFading initPanel;
 
         // Helpers
-        float splashInTime;
-        float splashOutTime;
+        private float splashInTime;
+        private float splashOutTime;
 
-        void Awake()
+        private void Awake()
         {
             Time.timeScale = 1;
 
@@ -25,7 +27,7 @@ namespace Michsky.UI.Heat
             if (splashScreen != null) { splashScreen.gameObject.SetActive(false); }
         }
 
-        void Start()
+        private void Start()
         {
             StartCoroutine("StartInitialize");
         }
@@ -39,7 +41,7 @@ namespace Michsky.UI.Heat
             splashScreen.Play("Out");
         }
 
-        void Initialize()
+        private void Initialize()
         {
             if (UIManagerAsset == null || mainContent == null)
             {
@@ -100,20 +102,20 @@ namespace Michsky.UI.Heat
             }
         }
 
-        IEnumerator StartInitialize()
+        private IEnumerator StartInitialize()
         {
             yield return new WaitForSeconds(0.5f);
             if (initPanel != null) { initPanel.FadeOut(); }
             Initialize();
         }
 
-        IEnumerator DisableSplashScreenAnimator()
+        private IEnumerator DisableSplashScreenAnimator()
         {
             yield return new WaitForSeconds(splashInTime + 0.1f);
             splashScreen.enabled = false;
         }
 
-        IEnumerator FinalizeSplashScreen()
+        private IEnumerator FinalizeSplashScreen()
         {
             yield return new WaitForSeconds(splashOutTime + 0.1f);
            

@@ -15,7 +15,7 @@ namespace TcgEngine.UI
 
         private Slider slider;
 
-        void Awake()
+        private void Awake()
         {
             slider = GetComponent<Slider>();
             slider.onValueChanged.AddListener((float v) => { onValueChanged?.Invoke(); });

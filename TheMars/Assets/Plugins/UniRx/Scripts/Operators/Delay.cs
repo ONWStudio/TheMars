@@ -7,9 +7,9 @@ namespace UniRx.Operators
 {
     internal class DelayObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly TimeSpan dueTime;
-        readonly IScheduler scheduler;
+        private readonly IObservable<T> source;
+        private readonly TimeSpan dueTime;
+        private readonly IScheduler scheduler;
 
         public DelayObservable(IObservable<T> source, TimeSpan dueTime, IScheduler scheduler) 
             : base(scheduler == Scheduler.CurrentThread || source.IsRequiredSubscribeOnCurrentThread())
@@ -24,21 +24,21 @@ namespace UniRx.Operators
             return new Delay(this, observer, cancel).Run();
         }
 
-        class Delay : OperatorObserverBase<T, T>
+        private class Delay : OperatorObserverBase<T, T>
         {
-            readonly DelayObservable<T> parent;
-            readonly object gate = new object();
-            bool hasFailed;
-            bool running;
-            bool active;
-            Exception exception;
-            Queue<Timestamped<T>> queue;
-            bool onCompleted;
-            DateTimeOffset completeAt;
-            IDisposable sourceSubscription;
-            TimeSpan delay;
-            bool ready;
-            SerialDisposable cancelable;
+            private readonly DelayObservable<T> parent;
+            private readonly object gate = new object();
+            private bool hasFailed;
+            private bool running;
+            private bool active;
+            private Exception exception;
+            private Queue<Timestamped<T>> queue;
+            private bool onCompleted;
+            private DateTimeOffset completeAt;
+            private IDisposable sourceSubscription;
+            private TimeSpan delay;
+            private bool ready;
+            private SerialDisposable cancelable;
 
             public Delay(DelayObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -129,7 +129,7 @@ namespace UniRx.Operators
                 }
             }
 
-            void DrainQueue(Action<TimeSpan> recurse)
+            private void DrainQueue(Action<TimeSpan> recurse)
             {
                 lock (gate)
                 {

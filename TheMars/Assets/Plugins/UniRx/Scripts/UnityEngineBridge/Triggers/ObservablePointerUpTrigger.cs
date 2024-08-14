@@ -10,7 +10,7 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservablePointerUpTrigger : ObservableTriggerBase, IEventSystemHandler, IPointerUpHandler
     {
-        Subject<PointerEventData> onPointerUp;
+        private Subject<PointerEventData> onPointerUp;
 
         void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
         {

@@ -23,33 +23,25 @@ namespace Lofelt.NiceVibrations
     public class HapticImporter : ScriptedImporter
     {
 #if !NICE_VIBRATIONS_DISABLE_GAMEPAD_SUPPORT
-        [DllImport("nice_vibrations_editor_plugin")]
-        private static extern IntPtr nv_plugin_convert_haptic_to_gamepad_rumble([In] byte[] bytes, long size);
+        [DllImport("nice_vibrations_editor_plugin")] private static extern IntPtr nv_plugin_convert_haptic_to_gamepad_rumble([In] byte[] bytes, long size);
 
-        [DllImport("nice_vibrations_editor_plugin")]
-        private static extern void nv_plugin_destroy(IntPtr gamepadRumble);
+        [DllImport("nice_vibrations_editor_plugin")] private static extern void nv_plugin_destroy(IntPtr gamepadRumble);
 
-        [DllImport("nice_vibrations_editor_plugin")]
-        private static extern UIntPtr nv_plugin_get_length(IntPtr gamepadRumble);
+        [DllImport("nice_vibrations_editor_plugin")] private static extern UIntPtr nv_plugin_get_length(IntPtr gamepadRumble);
 
-        [DllImport("nice_vibrations_editor_plugin")]
-        private static extern void nv_plugin_get_durations(IntPtr gamepadRumble, [Out] int[] durations);
+        [DllImport("nice_vibrations_editor_plugin")] private static extern void nv_plugin_get_durations(IntPtr gamepadRumble, [Out] int[] durations);
 
-        [DllImport("nice_vibrations_editor_plugin")]
-        private static extern void nv_plugin_get_low_frequency_motor_speeds(IntPtr gamepadRumble, [Out] float[] lowFrequencies);
+        [DllImport("nice_vibrations_editor_plugin")] private static extern void nv_plugin_get_low_frequency_motor_speeds(IntPtr gamepadRumble, [Out] float[] lowFrequencies);
 
-        [DllImport("nice_vibrations_editor_plugin")]
-        private static extern void nv_plugin_get_high_frequency_motor_speeds(IntPtr gamepadRumble, [Out] float[] highFrequencies);
+        [DllImport("nice_vibrations_editor_plugin")] private static extern void nv_plugin_get_high_frequency_motor_speeds(IntPtr gamepadRumble, [Out] float[] highFrequencies);
 
         // We can not use "[return: MarshalAs(UnmanagedType.LPUTF8Str)]" here, and have to use
         // IntPtr for the return type instead. Otherwise the C# runtime tries to free the returned
         // string, which is invalid as the native plugin keeps ownership of the string.
         // We use PtrToStringUTF8() to manually convert the IntPtr to a string instead.
-        [DllImport("nice_vibrations_editor_plugin")]
-        private static extern IntPtr nv_plugin_get_last_error();
+        [DllImport("nice_vibrations_editor_plugin")] private static extern IntPtr nv_plugin_get_last_error();
 
-        [DllImport("nice_vibrations_editor_plugin")]
-        private static extern UIntPtr nv_plugin_get_last_error_length();
+        [DllImport("nice_vibrations_editor_plugin")] private static extern UIntPtr nv_plugin_get_last_error_length();
 
         // Alternative to Marshal.PtrToStringUTF8() which was introduced in .NET 5 and isn't yet
         // supported by Unity

@@ -6,8 +6,8 @@ namespace UniRx
     public sealed class DictionaryDisposable<TKey, TValue> : IDisposable, IDictionary<TKey, TValue>
         where TValue : IDisposable
     {
-        bool isDisposed = false;
-        readonly Dictionary<TKey, TValue> inner;
+        private bool isDisposed = false;
+        private readonly Dictionary<TKey, TValue> inner;
 
         public DictionaryDisposable()
         {

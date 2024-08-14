@@ -13,7 +13,7 @@ namespace TcgEngine.FX
 
     public class GameBoardFX : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             GameClient client = GameClient.Get();
             client.onNewTurn += OnNewTurn;
@@ -23,13 +23,13 @@ namespace TcgEngine.FX
             client.onValueRolled += OnRoll;
         }
 
-        void OnNewTurn(int player_id)
+        private void OnNewTurn(int player_id)
         {
             AudioTool.Get().PlaySFX("turn", AssetData.Get().new_turn_audio);
             FXTool.DoFX(AssetData.Get().new_turn_fx, Vector3.zero);
         }
 
-        void OnPlayCard(Card card, Slot slot)
+        private void OnPlayCard(Card card, Slot slot)
         {
             int player_id = GameClient.Get().GetPlayerID();
             if (card != null)

@@ -23,7 +23,8 @@ namespace Michsky.UI.Heat
         public BackgroundFilter backgroundFilter;
 
         // Resources
-        [SerializeField] private Animator animator;
+        [SerializeField]
+        private Animator animator;
         public Image backgroundObj;
         public Image iconObj;
         public TextMeshProUGUI titleObj;
@@ -61,10 +62,10 @@ namespace Michsky.UI.Heat
         public UnityEvent onDeselect = new UnityEvent();
 
         // Helpers
-        bool isInitialized = false;
-        float cachedStateLength = 0.5f;
-        bool waitingForDoubleClickInput;
-        Button targetButton;
+        private bool isInitialized = false;
+        private float cachedStateLength = 0.5f;
+        private bool waitingForDoubleClickInput;
+        private Button targetButton;
 #if UNITY_EDITOR
         public int latestTabIndex = 0;
 #endif
@@ -87,12 +88,12 @@ namespace Michsky.UI.Heat
             Random
         }
 
-        void Awake()
+        private void Awake()
         {
             cachedStateLength = HeatUIInternalTools.GetAnimatorClipLength(animator, "BoxButton_Highlighted") + 0.1f;
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (!isInitialized) { Initialize(); }
             if (!bypassUpdateOnEnable) { UpdateUI(); }
@@ -107,7 +108,7 @@ namespace Michsky.UI.Heat
             }
         }
 
-        void Initialize()
+        private void Initialize()
         {
 #if UNITY_EDITOR
             if (!Application.isPlaying)
@@ -224,7 +225,7 @@ namespace Michsky.UI.Heat
             onClick.Invoke(); 
         }
 
-        void TriggerAnimation(string triggername)
+        private void TriggerAnimation(string triggername)
         {
             animator.enabled = true;
 
@@ -309,13 +310,13 @@ namespace Michsky.UI.Heat
             onClick.Invoke();
         }
 
-        IEnumerator CheckForDoubleClick()
+        private IEnumerator CheckForDoubleClick()
         {
             yield return new WaitForSecondsRealtime(doubleClickPeriod);
             waitingForDoubleClickInput = false;
         }
 
-        IEnumerator InitUINavigation(Navigation nav)
+        private IEnumerator InitUINavigation(Navigation nav)
         {
             yield return new WaitForSecondsRealtime(0.1f);
 
@@ -327,7 +328,7 @@ namespace Michsky.UI.Heat
             targetButton.navigation = nav;
         }
 
-        IEnumerator DisableAnimator()
+        private IEnumerator DisableAnimator()
         {
             yield return new WaitForSecondsRealtime(cachedStateLength);
             animator.enabled = false;

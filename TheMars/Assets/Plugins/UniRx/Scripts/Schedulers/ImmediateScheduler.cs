@@ -10,7 +10,7 @@ namespace UniRx
     {
         public static readonly IScheduler Immediate = new ImmediateScheduler();
 
-        class ImmediateScheduler : IScheduler
+        private class ImmediateScheduler : IScheduler
         {
             public ImmediateScheduler()
             {

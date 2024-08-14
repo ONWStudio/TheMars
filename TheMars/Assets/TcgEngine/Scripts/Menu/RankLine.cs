@@ -22,7 +22,7 @@ namespace TcgEngine.UI
 
         private string username;
 
-        void Start()
+        private void Start()
         {
             highlight.enabled = false;
         }

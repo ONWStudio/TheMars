@@ -26,13 +26,13 @@ namespace TheraBytes.BetterUi
 
 
         [SerializeField]
-        Graphic target;
+        private Graphic target;
 
         [SerializeField]
-        float fadeDuration = 0.1f;
+        private float fadeDuration = 0.1f;
 
         [SerializeField]
-        List<Color32TransitionState> states = new List<Color32TransitionState>();
+        private List<Color32TransitionState> states = new List<Color32TransitionState>();
 
 
         public Color32Transitions(params string[] stateNames)

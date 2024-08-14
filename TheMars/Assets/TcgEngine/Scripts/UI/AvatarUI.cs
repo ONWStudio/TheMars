@@ -21,7 +21,7 @@ namespace TcgEngine.UI
 
         private AvatarData avatar;
 
-        void Awake()
+        private void Awake()
         {
             avatar_img = GetComponent<Image>();
             avatar_button = GetComponent<Button>();

@@ -6,9 +6,9 @@ namespace UniRx.Operators
 
     internal class SelectWhereObservable<T, TR> : OperatorObservableBase<TR>
     {
-        readonly IObservable<T> source;
-        readonly Func<T, TR> selector;
-        readonly Func<TR, bool> predicate;
+        private readonly IObservable<T> source;
+        private readonly Func<T, TR> selector;
+        private readonly Func<TR, bool> predicate;
 
         public SelectWhereObservable(IObservable<T> source, Func<T, TR> selector, Func<TR, bool> predicate)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -23,9 +23,9 @@ namespace UniRx.Operators
             return source.Subscribe(new SelectWhere(this, observer, cancel));
         }
 
-        class SelectWhere : OperatorObserverBase<T, TR>
+        private class SelectWhere : OperatorObserverBase<T, TR>
         {
-            readonly SelectWhereObservable<T, TR> parent;
+            private readonly SelectWhereObservable<T, TR> parent;
 
             public SelectWhere(SelectWhereObservable<T, TR> parent, IObserver<TR> observer, IDisposable cancel)
                 : base(observer, cancel)

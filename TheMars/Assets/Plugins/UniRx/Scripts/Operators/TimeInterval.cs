@@ -4,8 +4,8 @@ namespace UniRx.Operators
 {
     internal class TimeIntervalObservable<T> : OperatorObservableBase<UniRx.TimeInterval<T>>
     {
-        readonly IObservable<T> source;
-        readonly IScheduler scheduler;
+        private readonly IObservable<T> source;
+        private readonly IScheduler scheduler;
 
         public TimeIntervalObservable(IObservable<T> source, IScheduler scheduler)
             : base(scheduler == Scheduler.CurrentThread || source.IsRequiredSubscribeOnCurrentThread())
@@ -19,10 +19,10 @@ namespace UniRx.Operators
             return source.Subscribe(new TimeInterval(this, observer, cancel));
         }
 
-        class TimeInterval : OperatorObserverBase<T, UniRx.TimeInterval<T>>
+        private class TimeInterval : OperatorObserverBase<T, UniRx.TimeInterval<T>>
         {
-            readonly TimeIntervalObservable<T> parent;
-            DateTimeOffset lastTime;
+            private readonly TimeIntervalObservable<T> parent;
+            private DateTimeOffset lastTime;
 
             public TimeInterval(TimeIntervalObservable<T> parent, IObserver<UniRx.TimeInterval<T>> observer, IDisposable cancel)
                 : base(observer, cancel)

@@ -11,7 +11,7 @@ namespace UniRx.Examples
     // sample script, attach your object.
     public class Sample01_ObservableWWW : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             // Basic: Download from google.
             {

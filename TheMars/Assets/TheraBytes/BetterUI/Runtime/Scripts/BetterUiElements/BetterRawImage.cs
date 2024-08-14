@@ -22,7 +22,7 @@ namespace TheraBytes.BetterUi
             public Rect UvRect;
 
             [SerializeField]
-            string screenConfigName;
+            private string screenConfigName;
             public string ScreenConfigName { get { return screenConfigName; } set { screenConfigName = value; } }
 
 
@@ -101,29 +101,29 @@ namespace TheraBytes.BetterUi
         }
 
         [SerializeField]
-        ColorMode colorMode = ColorMode.Color;
+        private ColorMode colorMode = ColorMode.Color;
 
         [SerializeField]
-        Color secondColor = Color.white;
+        private Color secondColor = Color.white;
 
         [SerializeField]
-        VertexMaterialData materialProperties = new VertexMaterialData();
+        private VertexMaterialData materialProperties = new VertexMaterialData();
 
         [SerializeField]
-        string materialType;
+        private string materialType;
 
         [SerializeField]
-        MaterialEffect materialEffect;
+        private MaterialEffect materialEffect;
 
         [SerializeField]
-        float materialProperty1, materialProperty2, materialProperty3;
+        private float materialProperty1, materialProperty2, materialProperty3;
 
 
         [SerializeField]
-        TextureSettings fallbackTextureSettings;
+        private TextureSettings fallbackTextureSettings;
 
         [SerializeField]
-        TextureSettingsConfigCollection customTextureSettings = new TextureSettingsConfigCollection();
+        private TextureSettingsConfigCollection customTextureSettings = new TextureSettingsConfigCollection();
 
         public TextureSettings CurrentTextureSettings 
         { 
@@ -211,7 +211,7 @@ namespace TheraBytes.BetterUi
         }
 
 #endif
-        void DoValidation()
+        private void DoValidation()
         {
             bool isUnInitialized = fallbackTextureSettings == null
                 || (fallbackTextureSettings.Texture == null

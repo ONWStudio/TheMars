@@ -29,11 +29,11 @@ namespace TMCard.Effect
             }
         }
 
-        public readonly List<ResourcePair> _resourcePairs = new(); 
+        public readonly List<ResourcePair> ResourcePairs = new(); 
 
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-           _resourcePairs.AddRange(controller
+           ResourcePairs.AddRange(controller
                 .Effects
                 .OfType<ITMCardResourceEffect>()
                 .Select(effect => new ResourcePair(effect, effect.Amount)));
@@ -42,10 +42,10 @@ namespace TMCard.Effect
             {
                 trigger.OnEffectEvent.Invoke();
 
-                _resourcePairs
+                ResourcePairs
                     .ForEach(resourcePair => resourcePair.ResourceEffect.AddRewardResource(resourcePair.OriginalAmount));
 
-                TMCardGameManager.Instance.MoveToScreenCenterAfterToTomb(controller);
+                TMCardHelper.Instance.MoveToScreenCenterAfterToTomb(controller);
             });
         }
 

@@ -17,7 +17,7 @@ namespace TMCard.Effect
             controller.OnClickEvent.RemoveAllToAddListener(() =>
             {
                 trigger.OnEffectEvent.Invoke();
-                TMCardGameManager.Instance.RecycleToHand(controller);
+                TMCardHelper.Instance.RecycleToHand(controller);
             });
         }
 

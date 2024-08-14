@@ -47,7 +47,7 @@ namespace MoreMountains.Feedbacks
 		public bool InspectorGroupsExpandedByDefault = true;
 
 
-        
+
 		private void OnDestroy(){ _instantiated = false; }
 	}    
 }

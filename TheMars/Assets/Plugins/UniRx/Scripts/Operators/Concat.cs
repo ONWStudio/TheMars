@@ -7,7 +7,7 @@ namespace UniRx.Operators
 
     internal class ConcatObservable<T> : OperatorObservableBase<T>
     {
-        readonly IEnumerable<IObservable<T>> sources;
+        private readonly IEnumerable<IObservable<T>> sources;
 
         public ConcatObservable(IEnumerable<IObservable<T>> sources)
             : base(true)
@@ -20,7 +20,7 @@ namespace UniRx.Operators
             return new ConcatObservable<T>(CombineSources(this.sources, combineSources));
         }
 
-        static IEnumerable<IObservable<T>> CombineSources(IEnumerable<IObservable<T>> first, IEnumerable<IObservable<T>> second)
+        private static IEnumerable<IObservable<T>> CombineSources(IEnumerable<IObservable<T>> first, IEnumerable<IObservable<T>> second)
         {
             foreach (var item in first)
             {
@@ -37,15 +37,15 @@ namespace UniRx.Operators
             return new Concat(this, observer, cancel).Run();
         }
 
-        class Concat : OperatorObserverBase<T, T>
+        private class Concat : OperatorObserverBase<T, T>
         {
-            readonly ConcatObservable<T> parent;
-            readonly object gate = new object();
+            private readonly ConcatObservable<T> parent;
+            private readonly object gate = new object();
 
-            bool isDisposed;
-            IEnumerator<IObservable<T>> e;
-            SerialDisposable subscription;
-            Action nextSelf;
+            private bool isDisposed;
+            private IEnumerator<IObservable<T>> e;
+            private SerialDisposable subscription;
+            private Action nextSelf;
 
             public Concat(ConcatObservable<T> parent, IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)
@@ -71,7 +71,7 @@ namespace UniRx.Operators
                }));
             }
 
-            void RecursiveRun(Action self)
+            private void RecursiveRun(Action self)
             {
                 lock (gate)
                 {

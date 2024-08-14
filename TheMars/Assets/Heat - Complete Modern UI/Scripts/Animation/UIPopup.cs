@@ -11,18 +11,26 @@ namespace Michsky.UI.Heat
     public class UIPopup : MonoBehaviour
     {
         [Header("Settings")]
-        [SerializeField] private bool playOnEnable = true;
-        [SerializeField] private bool closeOnDisable = false;
+        [SerializeField]
+        private bool playOnEnable = true;
+        [SerializeField]
+        private bool closeOnDisable = false;
         [Tooltip("Skip out animation.")]
-        [SerializeField] private bool instantOut = false;
+        [SerializeField]
+        private bool instantOut = false;
         [Tooltip("Enables content size fitter mode.")]
-        [SerializeField] private bool fitterMode = false;
-        [SerializeField] private StartBehaviour startBehaviour;
-        [SerializeField] private UpdateMode updateMode = UpdateMode.UnscaledTime;
+        [SerializeField]
+        private bool fitterMode = false;
+        [SerializeField]
+        private StartBehaviour startBehaviour;
+        [SerializeField]
+        private UpdateMode updateMode = UpdateMode.UnscaledTime;
 
         [Header("Animation")]
-        [SerializeField] private AnimationMode animationMode;
-        [SerializeField] private AnimationCurve animationCurve = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
+        [SerializeField]
+        private AnimationMode animationMode;
+        [SerializeField]
+        private AnimationCurve animationCurve = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
         [Range(0.5f, 10)] public float curveSpeed = 4f;
 
         [Header("Events")]
@@ -31,18 +39,18 @@ namespace Michsky.UI.Heat
         public UnityEvent onDisable = new UnityEvent();
 
         // Helpers
-        RectTransform rect;
-        CanvasGroup cg;
-        Vector2 rectHelper;
-        bool isInitialized = false;
-        bool isFitterInitialized = false;
+        private RectTransform rect;
+        private CanvasGroup cg;
+        private Vector2 rectHelper;
+        private bool isInitialized = false;
+        private bool isFitterInitialized = false;
         [HideInInspector] public bool isOn = false;
 
         public enum AnimationMode { Scale, Horizontal, Vertical }
         public enum StartBehaviour { Default, Disabled, Static }
         public enum UpdateMode { DeltaTime, UnscaledTime }
 
-        void Start()
+        private void Start()
         {
             if (startBehaviour == StartBehaviour.Disabled)
             {
@@ -50,13 +58,13 @@ namespace Michsky.UI.Heat
             }
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (!isInitialized) { Initialize(); }
             if (playOnEnable) { isOn = false; PlayIn(); }
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             if (closeOnDisable)
             {
@@ -156,7 +164,7 @@ namespace Michsky.UI.Heat
             onDisable.Invoke();
         }
 
-        IEnumerator InitFitter()
+        private IEnumerator InitFitter()
         {
             if (updateMode == UpdateMode.UnscaledTime) { yield return new WaitForSecondsRealtime(0.04f); }
             else { yield return new WaitForSeconds(0.04f); }
@@ -170,7 +178,7 @@ namespace Michsky.UI.Heat
             PlayIn();
         }
 
-        IEnumerator ScaleIn()
+        private IEnumerator ScaleIn()
         {
             StopCoroutine("ScaleOut");
 
@@ -198,7 +206,7 @@ namespace Michsky.UI.Heat
             onVisible.Invoke();
         }
 
-        IEnumerator ScaleOut()
+        private IEnumerator ScaleOut()
         {
             StopCoroutine("ScaleIn");
 
@@ -226,7 +234,7 @@ namespace Michsky.UI.Heat
             gameObject.SetActive(false);
         }
 
-        IEnumerator HorizontalIn()
+        private IEnumerator HorizontalIn()
         {
             StopCoroutine("HorizontalOut");
 
@@ -263,7 +271,7 @@ namespace Michsky.UI.Heat
             onVisible.Invoke();
         }
 
-        IEnumerator HorizontalOut()
+        private IEnumerator HorizontalOut()
         {
             StopCoroutine("HorizontalIn");
 
@@ -295,7 +303,7 @@ namespace Michsky.UI.Heat
             rect.gameObject.SetActive(false);
         }
 
-        IEnumerator VerticalIn()
+        private IEnumerator VerticalIn()
         {
             StopCoroutine("VerticalOut");
 
@@ -332,7 +340,7 @@ namespace Michsky.UI.Heat
             onVisible.Invoke();
         }
 
-        IEnumerator VerticalOut()
+        private IEnumerator VerticalOut()
         {
             StopCoroutine("VerticalIn");
 

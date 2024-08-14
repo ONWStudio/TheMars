@@ -114,10 +114,10 @@ namespace UniRx
                 disposable.Dispose();
         }
 
-        sealed class InnerDisposable : IDisposable
+        private sealed class InnerDisposable : IDisposable
         {
             private RefCountDisposable _parent;
-            object parentLock = new object();
+            private object parentLock = new object();
 
             public InnerDisposable(RefCountDisposable parent)
             {
@@ -140,7 +140,7 @@ namespace UniRx
 
     public partial class Observable
     {
-        static IObservable<T> AddRef<T>(IObservable<T> xs, RefCountDisposable r)
+        private static IObservable<T> AddRef<T>(IObservable<T> xs, RefCountDisposable r)
         {
             return Observable.Create<T>((IObserver<T> observer) => new CompositeDisposable(new IDisposable[]
 	        {

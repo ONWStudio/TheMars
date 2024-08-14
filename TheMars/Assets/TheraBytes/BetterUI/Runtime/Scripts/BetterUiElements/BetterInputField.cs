@@ -17,10 +17,10 @@ namespace TheraBytes.BetterUi
         public List<Graphic> AdditionalPlaceholders { get { return additionalPlaceholders; } }
 
         [SerializeField, DefaultTransitionStates]
-        List<Transitions> betterTransitions = new List<Transitions>();
+        private List<Transitions> betterTransitions = new List<Transitions>();
 
         [SerializeField]
-        List<Graphic> additionalPlaceholders = new List<Graphic>();
+        private List<Graphic> additionalPlaceholders = new List<Graphic>();
         
         protected override void DoStateTransition(SelectionState state, bool instant)
         {
@@ -41,7 +41,7 @@ namespace TheraBytes.BetterUi
             DisplayPlaceholders(this.text);
         }
 
-        void DisplayPlaceholders(string input)
+        private void DisplayPlaceholders(string input)
         {
             bool show = string.IsNullOrEmpty(input);
 

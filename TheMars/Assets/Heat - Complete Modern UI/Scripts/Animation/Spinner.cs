@@ -6,22 +6,25 @@ namespace Michsky.UI.Heat
     public class Spinner : MonoBehaviour
     {
         [Header("Resources")]
-        [SerializeField] private RectTransform objectToSpin;
+        [SerializeField]
+        private RectTransform objectToSpin;
 
         [Header("Settings")]
-        [SerializeField] [Range(0.1f, 50)] private float speed = 10;
-        [SerializeField] private Direction direction;
-        float currentPos;
+        [SerializeField] [Range(0.1f, 50)]
+        private float speed = 10;
+        [SerializeField]
+        private Direction direction;
+        private float currentPos;
 
         public enum Direction { Clockwise, CounterClockwise }
 
-        void Awake()
+        private void Awake()
         {
             if (objectToSpin == null)
                 this.enabled = false;
         }
 
-        void Update()
+        private void Update()
         {
             if (direction == Direction.Clockwise)
             {

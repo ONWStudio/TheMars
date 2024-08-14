@@ -64,24 +64,24 @@ namespace TheraBytes.BetterUi
 
         [SerializeField]
         [Range(0, 1)]
-        float horizontalStartPosition = 0;
+        private float horizontalStartPosition = 0;
 
         [SerializeField]
         [Range(0, 1)]
-        float verticalStartPosition = 1;
+        private float verticalStartPosition = 1;
 
         [SerializeField]
-        FloatSizeModifier horizontalSpacingFallback = new FloatSizeModifier(-3, -500, 500);
+        private FloatSizeModifier horizontalSpacingFallback = new FloatSizeModifier(-3, -500, 500);
 
         [SerializeField]
-        FloatSizeConfigCollection customHorizontalSpacingSizers = new FloatSizeConfigCollection();
+        private FloatSizeConfigCollection customHorizontalSpacingSizers = new FloatSizeConfigCollection();
 
 
         [SerializeField]
-        FloatSizeModifier verticalSpacingFallback = new FloatSizeModifier(-3, -500, 500);
+        private FloatSizeModifier verticalSpacingFallback = new FloatSizeModifier(-3, -500, 500);
 
         [SerializeField]
-        FloatSizeConfigCollection customVerticalSpacingSizers = new FloatSizeConfigCollection();
+        private FloatSizeConfigCollection customVerticalSpacingSizers = new FloatSizeConfigCollection();
 
         protected override void OnEnable()
         {

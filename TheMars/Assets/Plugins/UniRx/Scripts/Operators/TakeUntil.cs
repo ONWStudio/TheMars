@@ -4,8 +4,8 @@ namespace UniRx.Operators
 {
     internal class TakeUntilObservable<T, TOther> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly IObservable<TOther> other;
+        private readonly IObservable<T> source;
+        private readonly IObservable<TOther> other;
 
         public TakeUntilObservable(IObservable<T> source, IObservable<TOther> other)
             : base(source.IsRequiredSubscribeOnCurrentThread() || other.IsRequiredSubscribeOnCurrentThread())
@@ -19,10 +19,10 @@ namespace UniRx.Operators
             return new TakeUntil(this, observer, cancel).Run();
         }
 
-        class TakeUntil : OperatorObserverBase<T, T>
+        private class TakeUntil : OperatorObserverBase<T, T>
         {
-            readonly TakeUntilObservable<T, TOther> parent;
-            object gate = new object();
+            private readonly TakeUntilObservable<T, TOther> parent;
+            private object gate = new object();
 
             public TakeUntil(TakeUntilObservable<T, TOther> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -64,10 +64,10 @@ namespace UniRx.Operators
                 }
             }
 
-            class TakeUntilOther : IObserver<TOther>
+            private class TakeUntilOther : IObserver<TOther>
             {
-                readonly TakeUntil sourceObserver;
-                readonly IDisposable subscription;
+                private readonly TakeUntil sourceObserver;
+                private readonly IDisposable subscription;
 
                 public TakeUntilOther(TakeUntil sourceObserver, IDisposable subscription)
                 {

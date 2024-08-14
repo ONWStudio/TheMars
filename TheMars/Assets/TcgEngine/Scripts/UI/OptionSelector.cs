@@ -28,12 +28,12 @@ namespace TcgEngine.UI
 
         private int position = 0;
 
-        void Start()
+        private void Start()
         {
             SetIndex(0);
         }
 
-        void Update()
+        private void Update()
         {
 
         }

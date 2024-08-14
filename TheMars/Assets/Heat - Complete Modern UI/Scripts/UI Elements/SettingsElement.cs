@@ -10,7 +10,8 @@ namespace Michsky.UI.Heat
     public class SettingsElement : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler, ISubmitHandler
     {
         // Resources
-        [SerializeField] private CanvasGroup highlightCG;
+        [SerializeField]
+        private CanvasGroup highlightCG;
 
         // Settings
         public bool isInteractable = true;
@@ -30,9 +31,9 @@ namespace Michsky.UI.Heat
         public UnityEvent onLeave = new UnityEvent();
 
         // Helpers
-        Button targetButton;
+        private Button targetButton;
 
-        void Start()
+        private void Start()
         {
             if (ControllerManager.instance != null) { ControllerManager.instance.settingsElements.Add(this); }
             if (UIManagerAudio.instance == null) { useSounds = false; }      
@@ -51,7 +52,7 @@ namespace Michsky.UI.Heat
             }
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (highlightCG != null) { highlightCG.alpha = 0; }
             if (Application.isPlaying && useUINavigation) { AddUINavigation(); }
@@ -156,7 +157,7 @@ namespace Michsky.UI.Heat
             onClick.Invoke();
         }
 
-        IEnumerator SetNormal()
+        private IEnumerator SetNormal()
         {
             StopCoroutine("SetHighlight");
 
@@ -169,7 +170,7 @@ namespace Michsky.UI.Heat
             highlightCG.alpha = 0;
         }
 
-        IEnumerator SetHighlight()
+        private IEnumerator SetHighlight()
         {
             StopCoroutine("SetNormal");
 
@@ -182,7 +183,7 @@ namespace Michsky.UI.Heat
             highlightCG.alpha = 1;
         }
 
-        IEnumerator InitUINavigation(Navigation nav)
+        private IEnumerator InitUINavigation(Navigation nav)
         {
             yield return new WaitForSecondsRealtime(0.1f);
             if (selectOnUp != null) { nav.selectOnUp = selectOnUp.GetComponent<Selectable>(); }

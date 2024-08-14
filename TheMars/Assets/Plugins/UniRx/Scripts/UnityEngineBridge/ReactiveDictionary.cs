@@ -117,12 +117,12 @@ namespace UniRx
 #endif
     {
         [NonSerialized]
-        bool isDisposed = false;
+        private bool isDisposed = false;
 
 #if !UniRxLibrary
         [UnityEngine.SerializeField]
 #endif
-        readonly Dictionary<TKey, TValue> inner;
+        private readonly Dictionary<TKey, TValue> inner;
 
         public ReactiveDictionary()
         {
@@ -241,7 +241,7 @@ namespace UniRx
             return inner.GetEnumerator();
         }
 
-        void DisposeSubject<TSubject>(ref Subject<TSubject> subject)
+        private void DisposeSubject<TSubject>(ref Subject<TSubject> subject)
         {
             if (subject != null)
             {
@@ -289,7 +289,7 @@ namespace UniRx
         #region Observe
 
         [NonSerialized]
-        Subject<int> countChanged = null;
+        private Subject<int> countChanged = null;
         public IObservable<int> ObserveCountChanged(bool notifyCurrentCount = false)
         {
             if (isDisposed) return Observable.Empty<int>();
@@ -306,7 +306,7 @@ namespace UniRx
         }
 
         [NonSerialized]
-        Subject<Unit> collectionReset = null;
+        private Subject<Unit> collectionReset = null;
         public IObservable<Unit> ObserveReset()
         {
             if (isDisposed) return Observable.Empty<Unit>();
@@ -314,7 +314,7 @@ namespace UniRx
         }
 
         [NonSerialized]
-        Subject<DictionaryAddEvent<TKey, TValue>> dictionaryAdd = null;
+        private Subject<DictionaryAddEvent<TKey, TValue>> dictionaryAdd = null;
         public IObservable<DictionaryAddEvent<TKey, TValue>> ObserveAdd()
         {
             if (isDisposed) return Observable.Empty<DictionaryAddEvent<TKey, TValue>>();
@@ -322,7 +322,7 @@ namespace UniRx
         }
 
         [NonSerialized]
-        Subject<DictionaryRemoveEvent<TKey, TValue>> dictionaryRemove = null;
+        private Subject<DictionaryRemoveEvent<TKey, TValue>> dictionaryRemove = null;
         public IObservable<DictionaryRemoveEvent<TKey, TValue>> ObserveRemove()
         {
             if (isDisposed) return Observable.Empty<DictionaryRemoveEvent<TKey, TValue>>();
@@ -330,7 +330,7 @@ namespace UniRx
         }
 
         [NonSerialized]
-        Subject<DictionaryReplaceEvent<TKey, TValue>> dictionaryReplace = null;
+        private Subject<DictionaryReplaceEvent<TKey, TValue>> dictionaryReplace = null;
         public IObservable<DictionaryReplaceEvent<TKey, TValue>> ObserveReplace()
         {
             if (isDisposed) return Observable.Empty<DictionaryReplaceEvent<TKey, TValue>>();

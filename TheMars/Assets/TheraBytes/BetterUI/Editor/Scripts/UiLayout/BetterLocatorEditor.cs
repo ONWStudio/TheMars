@@ -12,18 +12,18 @@ namespace TheraBytes.BetterUi.Editor
     public class BetterLocatorEditor : UnityEditor.Editor
     {
 
-        SerializedProperty transformFallback, transformConfigs;
-        BetterLocator locator;
+        private SerializedProperty transformFallback, transformConfigs;
+        private BetterLocator locator;
 
-        Dictionary<RectTransformData, bool> anchorExpands = new Dictionary<RectTransformData, bool>();
+        private Dictionary<RectTransformData, bool> anchorExpands = new Dictionary<RectTransformData, bool>();
 
-        static bool autoPullFromTransform = true;
-        static bool autoPushToTransform = false;
+        private static bool autoPullFromTransform = true;
+        private static bool autoPushToTransform = false;
 
-        bool autoPull, autoPush;
-        bool hasOffsetter;
+        private bool autoPull, autoPush;
+        private bool hasOffsetter;
 
-        bool pauseAutoPushOnce = false; // recursive infinite loop protection
+        private bool pauseAutoPushOnce = false; // recursive infinite loop protection
 
         protected virtual void OnEnable()
         {
@@ -94,7 +94,7 @@ namespace TheraBytes.BetterUi.Editor
             pauseAutoPushOnce = false;
         }
 
-        void DrawTransformData(string configName, SerializedProperty prop)
+        private void DrawTransformData(string configName, SerializedProperty prop)
         {
             RectTransformData data = prop.GetValue<RectTransformData>();
             bool isCurrent = locator.CurrentTransformData == data;

@@ -4,7 +4,7 @@ namespace UniRx.Operators
 {
     internal class EmptyObservable<T> : OperatorObservableBase<T>
     {
-        readonly IScheduler scheduler;
+        private readonly IScheduler scheduler;
 
         public EmptyObservable(IScheduler scheduler)
             : base(false)
@@ -27,7 +27,7 @@ namespace UniRx.Operators
             }
         }
 
-        class Empty : OperatorObserverBase<T, T>
+        private class Empty : OperatorObserverBase<T, T>
         {
             public Empty(IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -64,7 +64,7 @@ namespace UniRx.Operators
     {
         internal static ImmutableEmptyObservable<T> Instance = new ImmutableEmptyObservable<T>();
 
-        ImmutableEmptyObservable()
+        private ImmutableEmptyObservable()
         {
 
         }

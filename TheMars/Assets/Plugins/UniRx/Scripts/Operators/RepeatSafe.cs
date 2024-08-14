@@ -6,7 +6,7 @@ namespace UniRx.Operators
 {
     internal class RepeatSafeObservable<T> : OperatorObservableBase<T>
     {
-        readonly IEnumerable<IObservable<T>> sources;
+        private readonly IEnumerable<IObservable<T>> sources;
 
         public RepeatSafeObservable(IEnumerable<IObservable<T>> sources, bool isRequiredSubscribeOnCurrentThread)
             : base(isRequiredSubscribeOnCurrentThread)
@@ -19,16 +19,16 @@ namespace UniRx.Operators
             return new RepeatSafe(this, observer, cancel).Run();
         }
 
-        class RepeatSafe : OperatorObserverBase<T, T>
+        private class RepeatSafe : OperatorObserverBase<T, T>
         {
-            readonly RepeatSafeObservable<T> parent;
-            readonly object gate = new object();
+            private readonly RepeatSafeObservable<T> parent;
+            private readonly object gate = new object();
 
-            IEnumerator<IObservable<T>> e;
-            SerialDisposable subscription;
-            Action nextSelf;
-            bool isDisposed;
-            bool isRunNext;
+            private IEnumerator<IObservable<T>> e;
+            private SerialDisposable subscription;
+            private Action nextSelf;
+            private bool isDisposed;
+            private bool isRunNext;
 
             public RepeatSafe(RepeatSafeObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -54,7 +54,7 @@ namespace UniRx.Operators
                 }));
             }
 
-            void RecursiveRun(Action self)
+            private void RecursiveRun(Action self)
             {
                 lock (gate)
                 {

@@ -11,20 +11,20 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(BetterContentSizeFitter)), CanEditMultipleObjects]
     public class BetterContentSizeFitterEditor : UnityEditor.Editor
     {
-        SerializedProperty settingsFallback, settingsList;
-        SerializedProperty minWidthFallback, minWidthList;
-        SerializedProperty minHeightFallback, minHeightList;
-        SerializedProperty maxWidthFallback, maxWidthList;
-        SerializedProperty maxHeightFallback, maxHeightList;
-        SerializedProperty paddingFallback, paddingList;
-        SerializedProperty source;
-        SerializedProperty treatAsLayoutElement;
+        private SerializedProperty settingsFallback, settingsList;
+        private SerializedProperty minWidthFallback, minWidthList;
+        private SerializedProperty minHeightFallback, minHeightList;
+        private SerializedProperty maxWidthFallback, maxWidthList;
+        private SerializedProperty maxHeightFallback, maxHeightList;
+        private SerializedProperty paddingFallback, paddingList;
+        private SerializedProperty source;
+        private SerializedProperty treatAsLayoutElement;
 
-        bool showMinHeight, showMinWidth;
-        bool showMaxHeight, showMaxWidth;
-        bool experimentalExpanded;
+        private bool showMinHeight, showMinWidth;
+        private bool showMaxHeight, showMaxWidth;
+        private bool experimentalExpanded;
 
-        void OnEnable()
+        private void OnEnable()
         {
             this.settingsFallback = serializedObject.FindProperty("settingsFallback");
             this.settingsList = serializedObject.FindProperty("customSettings");

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MoreMountains.Feedbacks
 {
-	static class MMF_FeedbackInspectorStyle
+	internal static class MMF_FeedbackInspectorStyle
 	{
 		public static GUIStyle ContainerStyle;
 		public static GUIStyle BoxChildStyle;
@@ -58,7 +58,7 @@ namespace MoreMountains.Feedbacks
 
 		}
 
-		static Texture2D MakeTex(int width, int height, Color col)
+		private static Texture2D MakeTex(int width, int height, Color col)
 		{
 			Color[] pix = new Color[width * height];
 			for (int i = 0; i < pix.Length; ++i)

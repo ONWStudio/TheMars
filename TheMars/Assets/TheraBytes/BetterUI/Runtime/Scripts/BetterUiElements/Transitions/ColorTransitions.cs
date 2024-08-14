@@ -13,10 +13,10 @@ namespace TheraBytes.BetterUi
     [Serializable]
     public class ColorTransitions : TransitionStateCollection<Color>
     {
-        static Dictionary<ColorTransitions, Coroutine> activeCoroutines = 
+        private static Dictionary<ColorTransitions, Coroutine> activeCoroutines = 
             new Dictionary<ColorTransitions, Coroutine>();
 
-        static List<ColorTransitions> keysToRemove = new List<ColorTransitions>();
+        private static List<ColorTransitions> keysToRemove = new List<ColorTransitions>();
 
 
         public enum AffectedColor
@@ -41,19 +41,20 @@ namespace TheraBytes.BetterUi
 
 
         [SerializeField]
-        Graphic target;
+        private Graphic target;
 
         [Range(1, 5)]
         [SerializeField]
-        float colorMultiplier = 1;
+        private float colorMultiplier = 1;
 
         [SerializeField]
-        float fadeDuration = 0.1f;
-
-        [SerializeField] AffectedColor affectedColor;
+        private float fadeDuration = 0.1f;
 
         [SerializeField]
-        List<ColorTransitionState> states = new List<ColorTransitionState>();
+        private AffectedColor affectedColor;
+
+        [SerializeField]
+        private List<ColorTransitionState> states = new List<ColorTransitionState>();
 
 
         public ColorTransitions(params string[] stateNames)
@@ -127,7 +128,7 @@ namespace TheraBytes.BetterUi
             base.SortStatesLogic(states, sortedOrder);
         }
 
-        void CrossFadeColor(Color startValue, Color targetValue, float duration)
+        private void CrossFadeColor(Color startValue, Color targetValue, float duration)
         {
             // Stop clashing coroutines
             foreach (var key in activeCoroutines.Keys)
@@ -178,7 +179,7 @@ namespace TheraBytes.BetterUi
         }
 
 
-        void ApplyColor(Color color)
+        private void ApplyColor(Color color)
         {
             if (target is IImageAppearanceProvider img)
             {

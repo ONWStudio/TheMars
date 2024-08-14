@@ -6,7 +6,7 @@ namespace UniRx.Operators
 {
     internal class FromCoroutineObservable<T> : OperatorObservableBase<T>
     {
-        readonly Func<IObserver<T>, CancellationToken, IEnumerator> coroutine;
+        private readonly Func<IObserver<T>, CancellationToken, IEnumerator> coroutine;
 
         public FromCoroutineObservable(Func<IObserver<T>, CancellationToken, IEnumerator> coroutine)
             : base(false)
@@ -31,7 +31,7 @@ namespace UniRx.Operators
             return moreCancel;
         }
 
-        class FromCoroutine : OperatorObserverBase<T, T>
+        private class FromCoroutine : OperatorObserverBase<T, T>
         {
             public FromCoroutine(IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -66,8 +66,8 @@ namespace UniRx.Operators
 
     internal class FromMicroCoroutineObservable<T> : OperatorObservableBase<T>
     {
-        readonly Func<IObserver<T>, CancellationToken, IEnumerator> coroutine;
-        readonly FrameCountType frameCountType;
+        private readonly Func<IObserver<T>, CancellationToken, IEnumerator> coroutine;
+        private readonly FrameCountType frameCountType;
 
         public FromMicroCoroutineObservable(Func<IObserver<T>, CancellationToken, IEnumerator> coroutine, FrameCountType frameCountType)
             : base(false)
@@ -106,7 +106,7 @@ namespace UniRx.Operators
             return moreCancel;
         }
 
-        class FromMicroCoroutine : OperatorObserverBase<T, T>
+        private class FromMicroCoroutine : OperatorObserverBase<T, T>
         {
             public FromMicroCoroutine(IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {

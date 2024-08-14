@@ -13,12 +13,15 @@ namespace Michsky.UI.Heat
         public string localizationKey;
 
         // Resources
-        [SerializeField] private Animator questAnimator;
-        [SerializeField] private TextMeshProUGUI questTextObj;
+        [SerializeField]
+        private Animator questAnimator;
+        [SerializeField]
+        private TextMeshProUGUI questTextObj;
 
         // Settings
         public bool useLocalization = true;
-        [SerializeField] private bool updateOnAnimate = true;
+        [SerializeField]
+        private bool updateOnAnimate = true;
         [Range(0, 10)] public float minimizeAfter = 3;
         public DefaultState defaultState = DefaultState.Minimized;
         public AfterMinimize afterMinimize = AfterMinimize.Disable;
@@ -27,13 +30,13 @@ namespace Michsky.UI.Heat
         public UnityEvent onDestroy;
 
         // Helpers
-        bool isOn;
-        LocalizedObject localizedObject;
+        private bool isOn;
+        private LocalizedObject localizedObject;
 
         public enum DefaultState { Minimized, Expanded }
         public enum AfterMinimize { Disable, Destroy }
 
-        void Start()
+        private void Start()
         {
             if (questAnimator == null) { questAnimator = GetComponent<Animator>(); }
             if (useLocalization == true)
@@ -125,13 +128,13 @@ namespace Michsky.UI.Heat
             Destroy(gameObject);
         }
 
-        IEnumerator DisableAnimator()
+        private IEnumerator DisableAnimator()
         {
             yield return new WaitForSeconds(HeatUIInternalTools.GetAnimatorClipLength(questAnimator, "QuestItem_In"));
             questAnimator.enabled = false;
         }
 
-        IEnumerator DisableItem()
+        private IEnumerator DisableItem()
         {
             yield return new WaitForSeconds(HeatUIInternalTools.GetAnimatorClipLength(questAnimator, "QuestItem_Out"));
 
@@ -141,7 +144,7 @@ namespace Michsky.UI.Heat
             else if (afterMinimize == AfterMinimize.Destroy) { DestroyQuest(); }
         }
 
-        IEnumerator MinimizeItem()
+        private IEnumerator MinimizeItem()
         {
             yield return new WaitForSeconds(minimizeAfter);
             MinimizeQuest();

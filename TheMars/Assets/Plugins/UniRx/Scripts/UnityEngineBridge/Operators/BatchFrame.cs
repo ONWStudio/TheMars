@@ -5,9 +5,9 @@ namespace UniRx.Operators
 {
     internal class BatchFrameObservable<T> : OperatorObservableBase<IList<T>>
     {
-        readonly IObservable<T> source;
-        readonly int frameCount;
-        readonly FrameCountType frameCountType;
+        private readonly IObservable<T> source;
+        private readonly int frameCount;
+        private readonly FrameCountType frameCountType;
 
         public BatchFrameObservable(IObservable<T> source, int frameCount, FrameCountType frameCountType)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -22,15 +22,15 @@ namespace UniRx.Operators
             return new BatchFrame(this, observer, cancel).Run();
         }
 
-        class BatchFrame : OperatorObserverBase<T, IList<T>>
+        private class BatchFrame : OperatorObserverBase<T, IList<T>>
         {
-            readonly BatchFrameObservable<T> parent;
-            readonly object gate = new object();
-            readonly BooleanDisposable cancellationToken = new BooleanDisposable();
-            readonly System.Collections.IEnumerator timer;
-            bool isRunning;
-            bool isCompleted;
-            List<T> list;
+            private readonly BatchFrameObservable<T> parent;
+            private readonly object gate = new object();
+            private readonly BooleanDisposable cancellationToken = new BooleanDisposable();
+            private readonly System.Collections.IEnumerator timer;
+            private bool isRunning;
+            private bool isCompleted;
+            private List<T> list;
 
             public BatchFrame(BatchFrameObservable<T> parent, IObserver<IList<T>> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -95,10 +95,10 @@ namespace UniRx.Operators
             }
 
             // reuse, no gc allocate
-            class ReusableEnumerator : System.Collections.IEnumerator
+            private class ReusableEnumerator : System.Collections.IEnumerator
             {
-                readonly BatchFrame parent;
-                int currentFrame;
+                private readonly BatchFrame parent;
+                private int currentFrame;
 
                 public ReusableEnumerator(BatchFrame parent)
                 {
@@ -147,9 +147,9 @@ namespace UniRx.Operators
 
     internal class BatchFrameObservable : OperatorObservableBase<Unit>
     {
-        readonly IObservable<Unit> source;
-        readonly int frameCount;
-        readonly FrameCountType frameCountType;
+        private readonly IObservable<Unit> source;
+        private readonly int frameCount;
+        private readonly FrameCountType frameCountType;
 
         public BatchFrameObservable(IObservable<Unit> source, int frameCount, FrameCountType frameCountType)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -164,15 +164,15 @@ namespace UniRx.Operators
             return new BatchFrame(this, observer, cancel).Run();
         }
 
-        class BatchFrame : OperatorObserverBase<Unit, Unit>
+        private class BatchFrame : OperatorObserverBase<Unit, Unit>
         {
-            readonly BatchFrameObservable parent;
-            readonly object gate = new object();
-            readonly BooleanDisposable cancellationToken = new BooleanDisposable();
-            readonly System.Collections.IEnumerator timer;
+            private readonly BatchFrameObservable parent;
+            private readonly object gate = new object();
+            private readonly BooleanDisposable cancellationToken = new BooleanDisposable();
+            private readonly System.Collections.IEnumerator timer;
 
-            bool isRunning;
-            bool isCompleted;
+            private bool isRunning;
+            private bool isCompleted;
 
             public BatchFrame(BatchFrameObservable parent, IObserver<Unit> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -234,10 +234,10 @@ namespace UniRx.Operators
             }
 
             // reuse, no gc allocate
-            class ReusableEnumerator : System.Collections.IEnumerator
+            private class ReusableEnumerator : System.Collections.IEnumerator
             {
-                readonly BatchFrame parent;
-                int currentFrame;
+                private readonly BatchFrame parent;
+                private int currentFrame;
 
                 public ReusableEnumerator(BatchFrame parent)
                 {

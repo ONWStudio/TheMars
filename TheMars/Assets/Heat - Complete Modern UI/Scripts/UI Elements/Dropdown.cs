@@ -15,21 +15,27 @@ namespace Michsky.UI.Heat
         public TextMeshProUGUI headerText;
         public Image headerImage;
         public Transform itemParent;
-        [SerializeField] private GameObject itemPreset;
+        [SerializeField]
+        private GameObject itemPreset;
         public Scrollbar scrollbar;
         public VerticalLayoutGroup itemList;
-        [SerializeField] private CanvasGroup highlightCG;
+        [SerializeField]
+        private CanvasGroup highlightCG;
         public CanvasGroup contentCG;
-        [SerializeField] private CanvasGroup listCG;
-        [SerializeField] private RectTransform listRect;
+        [SerializeField]
+        private CanvasGroup listCG;
+        [SerializeField]
+        private RectTransform listRect;
 
         // Settings
         public bool isInteractable = true;
         public bool enableIcon = true;
         public bool enableTrigger = true;
         public bool enableScrollbar = true;
-        [SerializeField] private bool startAtBottom = false;
-        [SerializeField] private bool useGamepadInput = false;
+        [SerializeField]
+        private bool startAtBottom = false;
+        [SerializeField]
+        private bool useGamepadInput = false;
         public bool setHighPriority = true;
         public bool updateOnEnable = true;
         public bool outOnPointerExit = false;
@@ -75,8 +81,8 @@ namespace Michsky.UI.Heat
         [HideInInspector] public bool isOn;
         [HideInInspector] public int index = 0;
         [HideInInspector] public int siblingIndex = 0;
-        EventTrigger triggerEvent;
-        Button targetButton;
+        private EventTrigger triggerEvent;
+        private Button targetButton;
 
         public enum PanelDirection { Bottom, Top }
 
@@ -92,7 +98,7 @@ namespace Michsky.UI.Heat
             public UnityEvent onItemSelection = new UnityEvent();
         }
 
-        void Awake()
+        private void Awake()
         {
             if (initOnEnable) { Initialize(); }
             if (useUINavigation) { AddUINavigation(); }
@@ -134,7 +140,7 @@ namespace Michsky.UI.Heat
             }
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (listCG == null) { listCG = gameObject.GetComponentInChildren<CanvasGroup>(); }
             if (listRect == null) { listRect = listCG.GetComponent<RectTransform>(); }
@@ -149,7 +155,7 @@ namespace Michsky.UI.Heat
             isOn = false;
         }
 
-        void Update()
+        private void Update()
         {
             if (!useGamepadInput || !isOn)
                 return;
@@ -413,7 +419,7 @@ namespace Michsky.UI.Heat
             if (EventSystem.current.currentSelectedGameObject != gameObject) { StartCoroutine("SetNormal"); }
         }
 
-        IEnumerator StartExpand()
+        private IEnumerator StartExpand()
         {
             float elapsedTime = 0;
 
@@ -433,7 +439,7 @@ namespace Michsky.UI.Heat
             listRect.sizeDelta = endPos;
         }
 
-        IEnumerator StartMinimize()
+        private IEnumerator StartMinimize()
         {
             float elapsedTime = 0;
 
@@ -455,7 +461,7 @@ namespace Michsky.UI.Heat
             listCG.gameObject.SetActive(false);
         }
 
-        IEnumerator SetNormal()
+        private IEnumerator SetNormal()
         {
             StopCoroutine("SetHighlight");
 
@@ -468,7 +474,7 @@ namespace Michsky.UI.Heat
             highlightCG.alpha = 0;
         }
 
-        IEnumerator SetHighlight()
+        private IEnumerator SetHighlight()
         {
             StopCoroutine("SetNormal");
 

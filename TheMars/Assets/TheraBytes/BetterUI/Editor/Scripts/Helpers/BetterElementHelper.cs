@@ -11,8 +11,8 @@ namespace TheraBytes.BetterUi.Editor
         where TBase : MonoBehaviour
         where TBetter : TBase, IBetterTransitionUiElement
     {
-        TransitionCollectionDrawer drawer;
-        string fieldName;
+        private TransitionCollectionDrawer drawer;
+        private string fieldName;
 
         public BetterElementHelper(string fieldName = "betterTransitions")
         {

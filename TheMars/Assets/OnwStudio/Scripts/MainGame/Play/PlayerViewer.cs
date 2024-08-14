@@ -4,14 +4,19 @@ using UnityEngine;
 using TMPro;
 using Onw.Attribute;
 using Onw.Extensions;
+using UnityEngine.Serialization;
 
 namespace TM.UI
 {
     public sealed class PlayerViewer : MonoBehaviour
     {
-        [SerializeField, SelectableSerializeField] private TextMeshProUGUI _teraText;
-        [SerializeField, SelectableSerializeField] private TextMeshProUGUI _marsLithumText;
-        
+        [FormerlySerializedAs("teraText")]
+        [SerializeField, SelectableSerializeField]
+        private TextMeshProUGUI _teraText;
+        [FormerlySerializedAs("marsLithumText")]
+        [SerializeField, SelectableSerializeField]
+        private TextMeshProUGUI _marsLithumText;
+
         private void Start()
         {
             UniRxObserver.ObserveInfomation(

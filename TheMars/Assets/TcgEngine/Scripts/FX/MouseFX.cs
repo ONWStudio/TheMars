@@ -12,13 +12,13 @@ namespace TcgEngine.FX
     {
         public float speed = 20f;
 
-        void Start()
+        private void Start()
         {
 
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Plane plane = new Plane(Vector3.forward, 0f);

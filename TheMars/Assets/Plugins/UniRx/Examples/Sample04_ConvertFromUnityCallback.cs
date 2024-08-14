@@ -14,7 +14,7 @@ namespace UniRx.Examples
             public UnityEngine.LogType LogType;
         }
 
-        static class LogHelper
+        private static class LogHelper
         {
             // If static register callback, use Subject for event branching.
 
@@ -51,7 +51,7 @@ namespace UniRx.Examples
 #endif
         }
 
-        void Awake()
+        private void Awake()
         {
             // method is separatable and composable
             LogHelper.LogCallbackAsObservable()

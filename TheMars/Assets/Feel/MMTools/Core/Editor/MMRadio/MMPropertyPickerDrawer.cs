@@ -40,7 +40,7 @@ namespace MoreMountains.Tools
 			public Type[] _authorizedTypes;
 			public bool _targetIsScriptableObject;
 		}
-		
+
 		private Dictionary<string, PropertyPickerViewData> _propertyPickerViewData = new Dictionary<string, PropertyPickerViewData>();
 		
 		

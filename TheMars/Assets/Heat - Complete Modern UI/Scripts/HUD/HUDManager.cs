@@ -23,7 +23,7 @@ namespace Michsky.UI.Heat
 
         public enum DefaultBehaviour { Visible, Invisible }
 
-        void Awake()
+        private void Awake()
         {
             if (HUDPanel == null)
                 return;
@@ -66,7 +66,7 @@ namespace Michsky.UI.Heat
             }
         }
 
-        IEnumerator DoFadeIn()
+        private IEnumerator DoFadeIn()
         {
             while (cg.alpha < 0.99f)
             {
@@ -77,7 +77,7 @@ namespace Michsky.UI.Heat
             cg.alpha = 1;
         }
 
-        IEnumerator DoFadeOut()
+        private IEnumerator DoFadeOut()
         {
             while (cg.alpha > 0.01f)
             {

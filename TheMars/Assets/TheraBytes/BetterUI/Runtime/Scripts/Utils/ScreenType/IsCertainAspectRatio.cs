@@ -11,20 +11,20 @@ namespace TheraBytes.BetterUi
     {
 
         [SerializeField]
-        float minAspect = 0.66f;
+        private float minAspect = 0.66f;
 
         [SerializeField]
-        float maxAspect = 1.5f;
+        private float maxAspect = 1.5f;
 
         [SerializeField]
-        bool inverse;
+        private bool inverse;
 
         public float MinAspect { get { return minAspect; } set { minAspect = value; } }
         public float MaxAspect { get { return maxAspect; } set { maxAspect = value; } }
         public bool Inverse { get { return inverse; } set { inverse = value; } }
 
         [SerializeField]
-        bool isActive;
+        private bool isActive;
         public bool IsActive { get { return isActive; } set { isActive = value; } }
 
         public bool IsScreenType()

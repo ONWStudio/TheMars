@@ -33,8 +33,8 @@ namespace TcgEngine.AI
         public int ai_player_id;                    //AI player_id  (usually its 1)
         public int ai_level;                       //AI level
 
-        private GameLogic game_logic;           //Game logic used to calculate moves
-        private Game original_data;             //Original game data when start calculating possibilities
+        private GameLogic game_logic; //Game logic used to calculate moves
+        private Game original_data;   //Original game data when start calculating possibilities
         private AIHeuristic heuristic;
         private Thread ai_thread;
 

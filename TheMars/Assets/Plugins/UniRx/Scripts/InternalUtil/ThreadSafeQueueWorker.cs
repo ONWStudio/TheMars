@@ -4,19 +4,19 @@ namespace UniRx.InternalUtil
 {
     public class ThreadSafeQueueWorker
     {
-        const int MaxArrayLength = 0X7FEFFFFF;
-        const int InitialSize = 16;
+        private const int MaxArrayLength = 0X7FEFFFFF;
+        private const int InitialSize = 16;
 
-        object gate = new object();
-        bool dequing = false;
+        private object gate = new object();
+        private bool dequing = false;
 
-        int actionListCount = 0;
-        Action<object>[] actionList = new Action<object>[InitialSize];
-        object[] actionStates = new object[InitialSize];
+        private int actionListCount = 0;
+        private Action<object>[] actionList = new Action<object>[InitialSize];
+        private object[] actionStates = new object[InitialSize];
 
-        int waitingListCount = 0;
-        Action<object>[] waitingList = new Action<object>[InitialSize];
-        object[] waitingStates = new object[InitialSize];
+        private int waitingListCount = 0;
+        private Action<object>[] waitingList = new Action<object>[InitialSize];
+        private object[] waitingStates = new object[InitialSize];
 
         public void Enqueue(Action<object> action, object state)
         {

@@ -9,22 +9,22 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(LocationAnimations))]
     public class LocationAnimationsEditor : UnityEditor.Editor
     {
-        const string ANY = "[ Any Location ]";
-        const string NONE = "[ None ]";
+        private const string ANY = "[ Any Location ]";
+        private const string NONE = "[ None ]";
 
-        static readonly GUIContent pushContent = new GUIContent("↑", "Push current location data to Rect Transform.");
-        static readonly GUIContent pullContent = new GUIContent("↓", "Pull Rect Transform to current location data.");
+        private static readonly GUIContent pushContent = new GUIContent("↑", "Push current location data to Rect Transform.");
+        private static readonly GUIContent pullContent = new GUIContent("↓", "Pull Rect Transform to current location data.");
 
-        SerializedProperty useRelativeProp, locationListProp, transitionListProp, startLocProp, startupAniProp, initCallbackProp;
+        private SerializedProperty useRelativeProp, locationListProp, transitionListProp, startLocProp, startupAniProp, initCallbackProp;
 
-        bool locationListExpanded = true;
-        bool transitionListExpanded = true;
-        bool initialStateExpanded = true;
-        HashSet<string> expandedAnimations = new HashSet<string>();
-        HashSet<string> expandedLocations = new HashSet<string>();
-        LocationAnimations locAni;
+        private bool locationListExpanded = true;
+        private bool transitionListExpanded = true;
+        private bool initialStateExpanded = true;
+        private HashSet<string> expandedAnimations = new HashSet<string>();
+        private HashSet<string> expandedLocations = new HashSet<string>();
+        private LocationAnimations locAni;
 
-        float lastTime;
+        private float lastTime;
 
         protected virtual void OnEnable()
         {
@@ -400,7 +400,7 @@ namespace TheraBytes.BetterUi.Editor
             serializedObject.ApplyModifiedProperties();
         }
 
-        bool BoldFoldout(string text, ref bool expanded)
+        private bool BoldFoldout(string text, ref bool expanded)
         {
             string prefix = (expanded) ? "▼" : "►";
             if (GUILayout.Button(string.Format("{0} {1}", prefix, text), EditorStyles.boldLabel))
@@ -411,7 +411,7 @@ namespace TheraBytes.BetterUi.Editor
             return expanded;
         }
 
-        SerializedProperty DrawAddButton(string text, string namePrefix, SerializedProperty prop)
+        private SerializedProperty DrawAddButton(string text, string namePrefix, SerializedProperty prop)
         {
             SerializedProperty result = null;
             EditorGUILayout.BeginHorizontal();
@@ -434,7 +434,7 @@ namespace TheraBytes.BetterUi.Editor
             return result;
         }
 
-        bool DrawNameAndDelete(SerializedProperty nameProp, SerializedProperty listProp, Action<int, string, string> nameChanged, ref int idx, Action drawNextToText = null)
+        private bool DrawNameAndDelete(SerializedProperty nameProp, SerializedProperty listProp, Action<int, string, string> nameChanged, ref int idx, Action drawNextToText = null)
         {
             EditorGUILayout.BeginHorizontal();
 

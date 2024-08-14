@@ -8,11 +8,11 @@ namespace TMCard.Effect
     {
         protected static class EffectGenerator
         {
-            public static Effect CreateEffect<Effect, Creator>(Creator creator) where Effect : ITMCardEffect, new() where Creator : ITMEffectCreator
+            public static TEffect CreateEffect<TEffect, TCreator>(TCreator creator) where TEffect : ITMCardEffect, new() where TCreator : ITMEffectCreator
             {
-                Effect effect = new();
+                TEffect effect = new();
 
-                if (effect is ITMInitializableEffect<Creator> initializeableEffect)
+                if (effect is ITMInitializableEffect<TCreator> initializeableEffect)
                 {
                     initializeableEffect.Initialize(creator);
                 }

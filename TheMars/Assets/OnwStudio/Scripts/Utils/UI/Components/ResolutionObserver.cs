@@ -10,7 +10,8 @@ namespace Onw.UI
     public sealed class ResolutionObserver : Singleton<ResolutionObserver>
     {
         [Header("Resolution Changed Event")]
-        [SerializeField] private UnityEvent<Vector2> _onChangedResolution;
+        [SerializeField]
+        private UnityEvent<Vector2> _onChangedResolution;
 
         private Vector2Int _lastResolution = Vector2Int.zero;
 

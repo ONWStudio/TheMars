@@ -39,7 +39,7 @@ namespace TheraBytes.BetterUi
             public Axis Orientation;
 
             [SerializeField]
-            string screenConfigName;
+            private string screenConfigName;
             public string ScreenConfigName { get { return screenConfigName; } set { screenConfigName = value; } }
 
 
@@ -65,30 +65,30 @@ namespace TheraBytes.BetterUi
         public FloatSizeModifier SpacingSizer { get { return customSpacingSizers.GetCurrentItem(spacingSizerFallback); } }
         public Settings CurrentSettings { get { return customSettings.GetCurrentItem(settingsFallback); } }
         public Axis Orientation { get { return orientation; } set { orientation = value; } }
-        bool isVertical { get { return orientation == Axis.Vertical; } }
+        private bool isVertical { get { return orientation == Axis.Vertical; } }
         
         [SerializeField]
-        MarginSizeModifier paddingSizerFallback =
+        private MarginSizeModifier paddingSizerFallback =
             new MarginSizeModifier(new Margin(), new Margin(), new Margin(1000, 1000, 1000, 1000));
 
         [SerializeField]
-        MarginSizeConfigCollection customPaddingSizers = new MarginSizeConfigCollection();
+        private MarginSizeConfigCollection customPaddingSizers = new MarginSizeConfigCollection();
         
         [SerializeField]
-        FloatSizeModifier spacingSizerFallback =
+        private FloatSizeModifier spacingSizerFallback =
             new FloatSizeModifier(0, 0, 300);
 
         [SerializeField]
-        FloatSizeConfigCollection customSpacingSizers = new FloatSizeConfigCollection();
+        private FloatSizeConfigCollection customSpacingSizers = new FloatSizeConfigCollection();
 
         [SerializeField]
-        Settings settingsFallback;
+        private Settings settingsFallback;
 
         [SerializeField]
-        SettingsConfigCollection customSettings = new SettingsConfigCollection();
+        private SettingsConfigCollection customSettings = new SettingsConfigCollection();
 
         [SerializeField]
-        Axis orientation;
+        private Axis orientation;
 
         #region new base setters
         public new RectOffset padding
@@ -193,9 +193,9 @@ namespace TheraBytes.BetterUi
             base.OnRectTransformDimensionsChange();
             base.SetDirty();
         }
-        
 
-        IEnumerator InitDelayed()
+
+        private IEnumerator InitDelayed()
         {
             yield return null;
 
@@ -259,7 +259,7 @@ namespace TheraBytes.BetterUi
 
         }
 
-        void ApplySettings(Settings settings)
+        private void ApplySettings(Settings settings)
         {
             if (settingsFallback == null)
                 return;

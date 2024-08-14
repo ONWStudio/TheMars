@@ -9,13 +9,13 @@ namespace TheraBytes.BetterUi.Editor
 {
     public class ResolutionMonitorPage : WizardPage
     {
-        const int SMALL_SCREEN = 1 << 0;
-        const int BIG_SCREEN = 1 << 1;
+        private const int SMALL_SCREEN = 1 << 0;
+        private const int BIG_SCREEN = 1 << 1;
 
-        ValueWizardPageElement<Vector2> optimizedResolutionElement;
-        ValueWizardPageElement<bool> isFallbackLandscapeElement;
-        ValueWizardPageElement<bool> supportBothOrientationsElement;
-        ValueWizardPageElement<int> responsiveDesignElement;
+        private ValueWizardPageElement<Vector2> optimizedResolutionElement;
+        private ValueWizardPageElement<bool> isFallbackLandscapeElement;
+        private ValueWizardPageElement<bool> supportBothOrientationsElement;
+        private ValueWizardPageElement<int> responsiveDesignElement;
 
         public override string NameId { get { return "ResolutionMonitorPage"; } }
 

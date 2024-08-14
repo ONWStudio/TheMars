@@ -18,12 +18,12 @@ namespace TcgEngine.Client
 
         private static PlayerControls instance;
 
-        void Awake()
+        private void Awake()
         {
             instance = this;
         }
 
-        void Update()
+        private void Update()
         {
             if (!GameClient.Get().IsReady())
                 return;

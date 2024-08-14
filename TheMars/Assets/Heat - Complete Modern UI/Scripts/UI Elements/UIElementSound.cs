@@ -18,7 +18,7 @@ namespace Michsky.UI.Heat
         public bool enableHoverSound = true;
         public bool enableClickSound = true;
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (UIManagerAudio.instance != null && audioSource == null)
             {

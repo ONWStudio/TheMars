@@ -7,9 +7,9 @@ namespace UniRx.Operators
 {
     internal class RepeatUntilObservable<T> : OperatorObservableBase<T>
     {
-        readonly IEnumerable<IObservable<T>> sources;
-        readonly IObservable<Unit> trigger;
-        readonly GameObject lifeTimeChecker;
+        private readonly IEnumerable<IObservable<T>> sources;
+        private readonly IObservable<Unit> trigger;
+        private readonly GameObject lifeTimeChecker;
 
         public RepeatUntilObservable(IEnumerable<IObservable<T>> sources, IObservable<Unit> trigger, GameObject lifeTimeChecker)
             : base(true)
@@ -24,19 +24,19 @@ namespace UniRx.Operators
             return new RepeatUntil(this, observer, cancel).Run();
         }
 
-        class RepeatUntil : OperatorObserverBase<T, T>
+        private class RepeatUntil : OperatorObserverBase<T, T>
         {
-            readonly RepeatUntilObservable<T> parent;
-            readonly object gate = new object();
+            private readonly RepeatUntilObservable<T> parent;
+            private readonly object gate = new object();
 
-            IEnumerator<IObservable<T>> e;
-            SerialDisposable subscription;
-            SingleAssignmentDisposable schedule;
-            Action nextSelf;
-            bool isStopped;
-            bool isDisposed;
-            bool isFirstSubscribe;
-            IDisposable stopper;
+            private IEnumerator<IObservable<T>> e;
+            private SerialDisposable subscription;
+            private SingleAssignmentDisposable schedule;
+            private Action nextSelf;
+            private bool isStopped;
+            private bool isDisposed;
+            private bool isFirstSubscribe;
+            private IDisposable stopper;
 
             public RepeatUntil(RepeatUntilObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -76,7 +76,7 @@ namespace UniRx.Operators
                 }));
             }
 
-            void RecursiveRun(Action self)
+            private void RecursiveRun(Action self)
             {
                 lock (gate)
                 {
@@ -137,7 +137,7 @@ namespace UniRx.Operators
                 }
             }
 
-            static IEnumerator SubscribeAfterEndOfFrame(SingleAssignmentDisposable d, IObservable<T> source, IObserver<T> observer, GameObject lifeTimeChecker)
+            private static IEnumerator SubscribeAfterEndOfFrame(SingleAssignmentDisposable d, IObservable<T> source, IObserver<T> observer, GameObject lifeTimeChecker)
             {
                 yield return YieldInstructionCache.WaitForEndOfFrame;
                 if (!d.IsDisposed && lifeTimeChecker != null)

@@ -73,7 +73,7 @@ namespace MoreMountains.Tools
 		private SerializedProperty list;
 		private int controlID = -1;
 		private Rect[] elementRects;
-		private GUIContent elementLabel;		
+		private GUIContent elementLabel;
 		private ListSelection selection;
 		private SlideGroup slideGroup;
 		private int pressIndex;
@@ -89,7 +89,7 @@ namespace MoreMountains.Tools
 		private int dragDirection;
 		private DragElement[] dragList;
 		private ListSelection beforeDragSelection;
-		
+
 		private int dragDropControlID = -1;		
 
 		public MMReorderableList(SerializedProperty list)
@@ -1446,7 +1446,7 @@ namespace MoreMountains.Tools
 		// -- LIST STYLE --
 		//
 
-		static class Style {
+		private static class Style {
 			
 			public static GUIContent iconToolbarPlus;
 			public static GUIContent iconToolbarPlusMore;
@@ -1486,7 +1486,7 @@ namespace MoreMountains.Tools
 		// -- DRAG ELEMENT --
 		//
 
-		struct DragElement {
+		private struct DragElement {
 
 			internal SerializedProperty property;
 			internal int startIndex;
@@ -1549,7 +1549,7 @@ namespace MoreMountains.Tools
 		// -- SLIDE GROUP --
 		//
 
-		class SlideGroup {
+		private class SlideGroup {
 
 			private Dictionary<int, Rect> animIDs;
 
@@ -1617,7 +1617,7 @@ namespace MoreMountains.Tools
 		// -- SELECTION --
 		//
 
-		class ListSelection : IEnumerable<int> {
+		private class ListSelection : IEnumerable<int> {
 
 			private List<int> indexes;
 
@@ -1865,13 +1865,13 @@ namespace MoreMountains.Tools
 		// -- EXCEPTIONS --
 		//
 
-		class InvalidListException : System.InvalidOperationException {
+		private class InvalidListException : System.InvalidOperationException {
 
 			public InvalidListException() : base("ReorderableList serializedProperty must be an array") {
 			}
 		}
 
-		class MissingListExeption : System.ArgumentNullException {
+		private class MissingListExeption : System.ArgumentNullException {
 
 			public MissingListExeption() : base("ReorderableList serializedProperty is null") {
 			}
@@ -1881,7 +1881,7 @@ namespace MoreMountains.Tools
 		// -- INTERNAL --
 		//
 
-		static class Internals {
+		private static class Internals {
 
 			private static MethodInfo dragDropValidation;
 			private static object[] dragDropValidationParams;

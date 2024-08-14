@@ -52,7 +52,7 @@ namespace MoreMountains.Tools
 				return _requiresConstantRepaint;
 			}
 		}
-		
+
 		private string[] _mmHiddenPropertiesToHide;
 		private bool _hasMMHiddenProperties = false;
 

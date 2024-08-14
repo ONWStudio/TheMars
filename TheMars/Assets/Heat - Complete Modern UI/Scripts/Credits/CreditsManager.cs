@@ -10,52 +10,63 @@ namespace Michsky.UI.Heat
     public class CreditsManager : MonoBehaviour
     {
         // Content
-        [SerializeField] private CreditsPreset creditsPreset;
+        [SerializeField]
+        private CreditsPreset creditsPreset;
 
         // Resources
-        [SerializeField] private CanvasGroup canvasGroup;
-        [SerializeField] private Image backgroundImage;
-        [SerializeField] private VerticalLayoutGroup creditsListParent;
-        [SerializeField] private Scrollbar scrollHelper;
-        [SerializeField] private GameObject creditsSectionPreset;
-        [SerializeField] private GameObject creditsMentionPreset;
+        [SerializeField]
+        private CanvasGroup canvasGroup;
+        [SerializeField]
+        private Image backgroundImage;
+        [SerializeField]
+        private VerticalLayoutGroup creditsListParent;
+        [SerializeField]
+        private Scrollbar scrollHelper;
+        [SerializeField]
+        private GameObject creditsSectionPreset;
+        [SerializeField]
+        private GameObject creditsMentionPreset;
 
         // Settings
-        [SerializeField] private bool closeAutomatically = true;
-        [SerializeField] [Range(1, 15)] private float fadingMultiplier = 4;
-        [SerializeField] [Range(0, 10)] private float scrollDelay = 1.25f;
+        [SerializeField]
+        private bool closeAutomatically = true;
+        [SerializeField] [Range(1, 15)]
+        private float fadingMultiplier = 4;
+        [SerializeField] [Range(0, 10)]
+        private float scrollDelay = 1.25f;
         [Range(0, 0.5f)] public float scrollSpeed = 0.05f;
         [Range(1.1f, 15)] public float boostValue = 3f;
-        [SerializeField] private InputAction boostHotkey;
+        [SerializeField]
+        private InputAction boostHotkey;
 
         // Events
         public UnityEvent onOpen = new UnityEvent();
         public UnityEvent onClose = new UnityEvent();
         public UnityEvent onCreditsEnd = new UnityEvent();
 
-        bool isOpen = false;
-        bool enableScrolling;
-        bool invokedEndEvents;
+        private bool isOpen = false;
+        private bool enableScrolling;
+        private bool invokedEndEvents;
 
-        void Awake()
+        private void Awake()
         {
             InitCredits();
             boostHotkey.Enable();
             if (closeAutomatically == true) { onCreditsEnd.AddListener(() => ClosePanel()); }
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             StartScrolling();
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             invokedEndEvents = false;
             enableScrolling = false;
         }
 
-        void Update()
+        private void Update()
         {
             if (enableScrolling == false)
                 return;
@@ -67,7 +78,7 @@ namespace Michsky.UI.Heat
             if (scrollHelper.value <= 0) { enableScrolling = false; onCreditsEnd.Invoke(); }
         }
 
-        void InitCredits()
+        private void InitCredits()
         {
             if (creditsPreset == null)
             {
@@ -118,7 +129,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("FixListLayout");
         }
 
-        void StartScrolling()
+        private void StartScrolling()
         {
             if (enableScrolling == true)
                 return;
@@ -164,19 +175,19 @@ namespace Michsky.UI.Heat
             else { enableScrolling = true; }
         }
 
-        IEnumerator StartTimer()
+        private IEnumerator StartTimer()
         {
             yield return new WaitForSeconds(scrollDelay);
             enableScrolling = true;
         }
 
-        IEnumerator FixListLayout()
+        private IEnumerator FixListLayout()
         {
             yield return new WaitForSecondsRealtime(0.025f);
             LayoutRebuilder.ForceRebuildLayoutImmediate(creditsListParent.GetComponent<RectTransform>());
         }
 
-        IEnumerator SetVisible()
+        private IEnumerator SetVisible()
         {
             StopCoroutine("SetInvisible");
 
@@ -189,7 +200,7 @@ namespace Michsky.UI.Heat
             canvasGroup.alpha = 1;
         }
 
-        IEnumerator SetInvisible()
+        private IEnumerator SetInvisible()
         {
             StopCoroutine("SetVisible");
 

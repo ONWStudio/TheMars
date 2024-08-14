@@ -10,6 +10,7 @@ using Onw.UI;
 using TMCard.AddtionalCondition;
 using TMCard.Effect;
 using TMCard.Effect.Resource;
+using UnityEngine.Serialization;
 
 namespace TMCard.Runtime
 {
@@ -18,10 +19,16 @@ namespace TMCard.Runtime
     {
         public IReadOnlyList<RectTransform> Descriptors => _descriptors;
 
-        [SerializeField, ReadOnly] private List<RectTransform> _descriptors = new();
+        [FormerlySerializedAs("descriptors")]
+        [SerializeField, ReadOnly]
+        private List<RectTransform> _descriptors = new();
 
-        [SerializeField, InitializeRequireComponent] private RectTransform _descriptionArea = null;
-        [SerializeField, InitializeRequireComponent] private VerticalLayoutGroup _verticalLayoutGroup = null;
+        [FormerlySerializedAs("descriptionArea")]
+        [SerializeField, InitializeRequireComponent]
+        private RectTransform _descriptionArea = null;
+        [FormerlySerializedAs("verticalLayoutGroup")]
+        [SerializeField, InitializeRequireComponent]
+        private VerticalLayoutGroup _verticalLayoutGroup = null;
 
         public void SetDescription(TMCardData cardData)
         {

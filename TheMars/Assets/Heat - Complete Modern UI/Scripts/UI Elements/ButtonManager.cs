@@ -18,9 +18,12 @@ namespace Michsky.UI.Heat
         [Range(1, 200)] public float textSize = 24;
 
         // Resources
-        [SerializeField] private CanvasGroup normalCG;
-        [SerializeField] private CanvasGroup highlightCG;
-        [SerializeField] private CanvasGroup disabledCG;
+        [SerializeField]
+        private CanvasGroup normalCG;
+        [SerializeField]
+        private CanvasGroup highlightCG;
+        [SerializeField]
+        private CanvasGroup disabledCG;
         public TextMeshProUGUI normalTextObj;
         public TextMeshProUGUI highlightTextObj;
         public TextMeshProUGUI disabledTextObj;
@@ -32,20 +35,27 @@ namespace Michsky.UI.Heat
         public bool autoFitContent = true;
         public Padding padding;
         [Range(0, 100)] public int spacing = 12;
-        [SerializeField] private HorizontalLayoutGroup disabledLayout;
-        [SerializeField] private HorizontalLayoutGroup normalLayout;
-        [SerializeField] private HorizontalLayoutGroup highlightedLayout;
+        [SerializeField]
+        private HorizontalLayoutGroup disabledLayout;
+        [SerializeField]
+        private HorizontalLayoutGroup normalLayout;
+        [SerializeField]
+        private HorizontalLayoutGroup highlightedLayout;
         public HorizontalLayoutGroup mainLayout;
-        [SerializeField] private ContentSizeFitter mainFitter;
-        [SerializeField] private ContentSizeFitter targetFitter;
-        [SerializeField] private RectTransform targetRect;
+        [SerializeField]
+        private ContentSizeFitter mainFitter;
+        [SerializeField]
+        private ContentSizeFitter targetFitter;
+        [SerializeField]
+        private RectTransform targetRect;
 
         // Settings
         public bool isInteractable = true;
         public bool enableIcon = false;
         public bool enableText = true;
         public bool useCustomContent = false;
-        [SerializeField] private bool useCustomTextSize = false;
+        [SerializeField]
+        private bool useCustomTextSize = false;
         public bool checkForDoubleClick = true;
         public bool useLocalization = true;
         public bool bypassUpdateOnEnable = false;
@@ -69,17 +79,17 @@ namespace Michsky.UI.Heat
         public UnityEvent onDeselect = new UnityEvent();
 
         // Helpers
-        bool isInitialized = false;
-        Button targetButton;
-        LocalizedObject localizedObject;
-        bool waitingForDoubleClickInput;
+        private bool isInitialized = false;
+        private Button targetButton;
+        private LocalizedObject localizedObject;
+        private bool waitingForDoubleClickInput;
 #if UNITY_EDITOR
         public int latestTabIndex = 0;
 #endif
 
         [System.Serializable] public class Padding { public int left = 18; public int right = 18; public int top = 15; public int bottom = 15; }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (!isInitialized) { Initialize(); }
             if (!bypassUpdateOnEnable) { UpdateUI(); }
@@ -93,7 +103,7 @@ namespace Michsky.UI.Heat
             }
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             if (!isInteractable)
                 return;
@@ -103,7 +113,7 @@ namespace Michsky.UI.Heat
             if (highlightCG != null) { highlightCG.alpha = 0; }
         }
 
-        void Initialize()
+        private void Initialize()
         {
 #if UNITY_EDITOR
             if (!Application.isPlaying)
@@ -374,7 +384,7 @@ namespace Michsky.UI.Heat
             onClick.Invoke();
         }
 
-        IEnumerator LayoutFix()
+        private IEnumerator LayoutFix()
         {
             yield return new WaitForSecondsRealtime(0.025f);
             LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
@@ -384,7 +394,7 @@ namespace Michsky.UI.Heat
             if (highlightCG != null) { LayoutRebuilder.ForceRebuildLayoutImmediate(highlightCG.GetComponent<RectTransform>()); }
         }
 
-        IEnumerator SetNormal()
+        private IEnumerator SetNormal()
         {
             StopCoroutine("SetHighlight");
             StopCoroutine("SetDisabled");
@@ -402,7 +412,7 @@ namespace Michsky.UI.Heat
             disabledCG.alpha = 0;
         }
 
-        IEnumerator SetHighlight()
+        private IEnumerator SetHighlight()
         {
             StopCoroutine("SetNormal");
             StopCoroutine("SetDisabled");
@@ -420,7 +430,7 @@ namespace Michsky.UI.Heat
             disabledCG.alpha = 0;
         }
 
-        IEnumerator SetDisabled()
+        private IEnumerator SetDisabled()
         {
             StopCoroutine("SetNormal");
             StopCoroutine("SetHighlight");
@@ -438,13 +448,13 @@ namespace Michsky.UI.Heat
             disabledCG.alpha = 1;
         }
 
-        IEnumerator CheckForDoubleClick()
+        private IEnumerator CheckForDoubleClick()
         {
             yield return new WaitForSecondsRealtime(doubleClickPeriod);
             waitingForDoubleClickInput = false;
         }
 
-        IEnumerator InitUINavigation(Navigation nav)
+        private IEnumerator InitUINavigation(Navigation nav)
         {
             yield return new WaitForSecondsRealtime(0.1f);
             if (selectOnUp != null) { nav.selectOnUp = selectOnUp.GetComponent<Selectable>(); }

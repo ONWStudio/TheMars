@@ -25,7 +25,7 @@ namespace TcgEngine.UI
 
         private static List<AbilityButton> button_list = new List<AbilityButton>();
 
-        void Awake()
+        private void Awake()
         {
             button_list.Add(this);
             canvas_group = GetComponent<CanvasGroup>();
@@ -39,7 +39,7 @@ namespace TcgEngine.UI
             button_list.Remove(this);
         }
 
-        void Update()
+        private void Update()
         {
             canvas_group.alpha = Mathf.MoveTowards(canvas_group.alpha, target_alpha, 5f * Time.deltaTime);
             focus = nextfocus;

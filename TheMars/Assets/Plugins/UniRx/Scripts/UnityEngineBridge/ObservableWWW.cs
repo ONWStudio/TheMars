@@ -149,7 +149,7 @@ namespace UniRx
             return newHeaders;
         }
 #else
-        static Hash MergeHash(Hash wwwFormHeaders, Hash externalHeaders)
+        private static Hash MergeHash(Hash wwwFormHeaders, Hash externalHeaders)
         {
             foreach (HashEntry item in externalHeaders)
             {
@@ -159,7 +159,7 @@ namespace UniRx
         }
 #endif
 
-        static IEnumerator Fetch(WWW www, IObserver<WWW> observer, IProgress<float> reportProgress, CancellationToken cancel)
+        private static IEnumerator Fetch(WWW www, IObserver<WWW> observer, IProgress<float> reportProgress, CancellationToken cancel)
         {
             using (www)
             {
@@ -217,7 +217,7 @@ namespace UniRx
             }
         }
 
-        static IEnumerator FetchText(WWW www, IObserver<string> observer, IProgress<float> reportProgress, CancellationToken cancel)
+        private static IEnumerator FetchText(WWW www, IObserver<string> observer, IProgress<float> reportProgress, CancellationToken cancel)
         {
             using (www)
             {
@@ -275,7 +275,7 @@ namespace UniRx
             }
         }
 
-        static IEnumerator FetchBytes(WWW www, IObserver<byte[]> observer, IProgress<float> reportProgress, CancellationToken cancel)
+        private static IEnumerator FetchBytes(WWW www, IObserver<byte[]> observer, IProgress<float> reportProgress, CancellationToken cancel)
         {
             using (www)
             {
@@ -333,7 +333,7 @@ namespace UniRx
             }
         }
 
-        static IEnumerator FetchAssetBundle(WWW www, IObserver<AssetBundle> observer, IProgress<float> reportProgress, CancellationToken cancel)
+        private static IEnumerator FetchAssetBundle(WWW www, IObserver<AssetBundle> observer, IProgress<float> reportProgress, CancellationToken cancel)
         {
             using (www)
             {

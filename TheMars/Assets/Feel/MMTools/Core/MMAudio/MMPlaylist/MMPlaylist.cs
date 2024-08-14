@@ -10,7 +10,7 @@ namespace MoreMountains.Tools
 
 	public struct MMPlaylistPlayEvent
 	{
-		static private event Delegate OnEvent;
+		private static event Delegate OnEvent;
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] private static void RuntimeInitialization() { OnEvent = null; }
 		static public void Register(Delegate callback) { OnEvent += callback; }
 		static public void Unregister(Delegate callback) { OnEvent -= callback; }
@@ -24,7 +24,7 @@ namespace MoreMountains.Tools
 	
 	public struct MMPlaylistStopEvent
 	{
-		static private event Delegate OnEvent;
+		private static event Delegate OnEvent;
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] private static void RuntimeInitialization() { OnEvent = null; }
 		static public void Register(Delegate callback) { OnEvent += callback; }
 		static public void Unregister(Delegate callback) { OnEvent -= callback; }
@@ -38,7 +38,7 @@ namespace MoreMountains.Tools
 	
 	public struct MMPlaylistPauseEvent
 	{
-		static private event Delegate OnEvent;
+		private static event Delegate OnEvent;
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] private static void RuntimeInitialization() { OnEvent = null; }
 		static public void Register(Delegate callback) { OnEvent += callback; }
 		static public void Unregister(Delegate callback) { OnEvent -= callback; }
@@ -52,7 +52,7 @@ namespace MoreMountains.Tools
 	
 	public struct MMPlaylistPlayNextEvent
 	{
-		static private event Delegate OnEvent;
+		private static event Delegate OnEvent;
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] private static void RuntimeInitialization() { OnEvent = null; }
 		static public void Register(Delegate callback) { OnEvent += callback; }
 		static public void Unregister(Delegate callback) { OnEvent -= callback; }
@@ -66,7 +66,7 @@ namespace MoreMountains.Tools
 	
 	public struct MMPlaylistPlayPreviousEvent
 	{
-		static private event Delegate OnEvent;
+		private static event Delegate OnEvent;
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] private static void RuntimeInitialization() { OnEvent = null; }
 		static public void Register(Delegate callback) { OnEvent += callback; }
 		static public void Unregister(Delegate callback) { OnEvent -= callback; }
@@ -80,7 +80,7 @@ namespace MoreMountains.Tools
 
 	public struct MMPlaylistPlayIndexEvent
 	{
-		static private event Delegate OnEvent;
+		private static event Delegate OnEvent;
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] private static void RuntimeInitialization() { OnEvent = null; }
 		static public void Register(Delegate callback) { OnEvent += callback; }
 		static public void Unregister(Delegate callback) { OnEvent -= callback; }
@@ -94,7 +94,7 @@ namespace MoreMountains.Tools
 
 	public struct MMPlaylistVolumeMultiplierEvent
 	{
-		static private event Delegate OnEvent;
+		private static event Delegate OnEvent;
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] private static void RuntimeInitialization() { OnEvent = null; }
 		static public void Register(Delegate callback) { OnEvent += callback; }
 		static public void Unregister(Delegate callback) { OnEvent -= callback; }
@@ -108,7 +108,7 @@ namespace MoreMountains.Tools
 
 	public struct MMPlaylistPitchMultiplierEvent
 	{
-		static private event Delegate OnEvent;
+		private static event Delegate OnEvent;
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] private static void RuntimeInitialization() { OnEvent = null; }
 		static public void Register(Delegate callback) { OnEvent += callback; }
 		static public void Unregister(Delegate callback) { OnEvent -= callback; }
@@ -122,7 +122,7 @@ namespace MoreMountains.Tools
 	
 	public struct MMPlaylistChangeEvent
 	{
-		static private event Delegate OnEvent;
+		private static event Delegate OnEvent;
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] private static void RuntimeInitialization() { OnEvent = null; }
 		static public void Register(Delegate callback) { OnEvent += callback; }
 		static public void Unregister(Delegate callback) { OnEvent -= callback; }
@@ -136,7 +136,7 @@ namespace MoreMountains.Tools
 	
 	public struct MMPlaylistNewSongStartedEvent
 	{
-		static private event Delegate OnEvent;
+		private static event Delegate OnEvent;
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] private static void RuntimeInitialization() { OnEvent = null; }
 		static public void Register(Delegate callback) { OnEvent += callback; }
 		static public void Unregister(Delegate callback) { OnEvent -= callback; }

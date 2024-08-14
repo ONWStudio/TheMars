@@ -9,14 +9,14 @@ namespace Michsky.UI.Heat
         [HideInInspector] public BoxContainer container;
 
         // Helpers
-        CanvasGroup cg;
+        private CanvasGroup cg;
 
-        void Awake()
+        private void Awake()
         {
             cg = GetComponent<CanvasGroup>();
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             if (container.playOnce && container.isPlayedOnce)
             {
@@ -39,7 +39,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("ProcessBoxScale", time);
         }
 
-        IEnumerator ProcessBoxScale(float time)
+        private IEnumerator ProcessBoxScale(float time)
         {
             transform.localScale = new Vector3(0, 0, 0);
 
@@ -70,7 +70,7 @@ namespace Michsky.UI.Heat
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        IEnumerator ProcessBoxFade()
+        private IEnumerator ProcessBoxFade()
         {
             cg.alpha = 0;
 

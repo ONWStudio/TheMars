@@ -13,8 +13,8 @@ namespace UniRx.Toolkit
     public abstract class ObjectPool<T> : IDisposable
         where T : UnityEngine.Component
     {
-        bool isDisposed = false;
-        Queue<T> q;
+        private bool isDisposed = false;
+        private Queue<T> q;
 
         /// <summary>
         /// Limit of instace count.
@@ -180,7 +180,7 @@ namespace UniRx.Toolkit
             return Observable.FromMicroCoroutine<Unit>((observer, cancel) => PreloadCore(preloadCount, threshold, observer, cancel));
         }
 
-        IEnumerator PreloadCore(int preloadCount, int threshold, IObserver<Unit> observer, CancellationToken cancellationToken)
+        private IEnumerator PreloadCore(int preloadCount, int threshold, IObserver<Unit> observer, CancellationToken cancellationToken)
         {
             while (Count < preloadCount && !cancellationToken.IsCancellationRequested)
             {
@@ -238,8 +238,8 @@ namespace UniRx.Toolkit
     public abstract class AsyncObjectPool<T> : IDisposable
         where T : UnityEngine.Component
     {
-        bool isDisposed = false;
-        Queue<T> q;
+        private bool isDisposed = false;
+        private Queue<T> q;
 
         /// <summary>
         /// Limit of instace count.
@@ -410,7 +410,7 @@ namespace UniRx.Toolkit
             return Observable.FromMicroCoroutine<Unit>((observer, cancel) => PreloadCore(preloadCount, threshold, observer, cancel));
         }
 
-        IEnumerator PreloadCore(int preloadCount, int threshold, IObserver<Unit> observer, CancellationToken cancellationToken)
+        private IEnumerator PreloadCore(int preloadCount, int threshold, IObserver<Unit> observer, CancellationToken cancellationToken)
         {
             while (Count < preloadCount && !cancellationToken.IsCancellationRequested)
             {

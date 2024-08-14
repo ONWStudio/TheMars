@@ -15,8 +15,8 @@ namespace TcgEngine
 
         private SpriteRenderer render;
         private Image image;
-       
-        void Start()
+
+        private void Start()
         {
             render = GetComponent<SpriteRenderer>();
             image = GetComponent<Image>();

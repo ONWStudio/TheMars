@@ -67,13 +67,13 @@ namespace UniRx
             return new AutoDetachObserver<T>(observer, disposable);
         }
 
-        class AnonymousObserver<T> : IObserver<T>
+        private class AnonymousObserver<T> : IObserver<T>
         {
-            readonly Action<T> onNext;
-            readonly Action<Exception> onError;
-            readonly Action onCompleted;
+            private readonly Action<T> onNext;
+            private readonly Action<Exception> onError;
+            private readonly Action onCompleted;
 
-            int isStopped = 0;
+            private int isStopped = 0;
 
             public AnonymousObserver(Action<T> onNext, Action<Exception> onError, Action onCompleted)
             {
@@ -108,12 +108,12 @@ namespace UniRx
             }
         }
 
-        class EmptyOnNextAnonymousObserver<T> : IObserver<T>
+        private class EmptyOnNextAnonymousObserver<T> : IObserver<T>
         {
-            readonly Action<Exception> onError;
-            readonly Action onCompleted;
+            private readonly Action<Exception> onError;
+            private readonly Action onCompleted;
 
-            int isStopped = 0;
+            private int isStopped = 0;
 
             public EmptyOnNextAnonymousObserver(Action<Exception> onError, Action onCompleted)
             {
@@ -143,13 +143,13 @@ namespace UniRx
         }
 
         // same as AnonymousObserver...
-        class Subscribe<T> : IObserver<T>
+        private class Subscribe<T> : IObserver<T>
         {
-            readonly Action<T> onNext;
-            readonly Action<Exception> onError;
-            readonly Action onCompleted;
+            private readonly Action<T> onNext;
+            private readonly Action<Exception> onError;
+            private readonly Action onCompleted;
 
-            int isStopped = 0;
+            private int isStopped = 0;
 
             public Subscribe(Action<T> onNext, Action<Exception> onError, Action onCompleted)
             {
@@ -185,12 +185,12 @@ namespace UniRx
         }
 
         // same as EmptyOnNextAnonymousObserver...
-        class Subscribe_<T> : IObserver<T>
+        private class Subscribe_<T> : IObserver<T>
         {
-            readonly Action<Exception> onError;
-            readonly Action onCompleted;
+            private readonly Action<Exception> onError;
+            private readonly Action onCompleted;
 
-            int isStopped = 0;
+            private int isStopped = 0;
 
             public Subscribe_(Action<Exception> onError, Action onCompleted)
             {
@@ -220,14 +220,14 @@ namespace UniRx
         }
 
         // with state
-        class Subscribe<T, TState> : IObserver<T>
+        private class Subscribe<T, TState> : IObserver<T>
         {
-            readonly TState state;
-            readonly Action<T, TState> onNext;
-            readonly Action<Exception, TState> onError;
-            readonly Action<TState> onCompleted;
+            private readonly TState state;
+            private readonly Action<T, TState> onNext;
+            private readonly Action<Exception, TState> onError;
+            private readonly Action<TState> onCompleted;
 
-            int isStopped = 0;
+            private int isStopped = 0;
 
             public Subscribe(TState state, Action<T, TState> onNext, Action<Exception, TState> onError, Action<TState> onCompleted)
             {
@@ -263,15 +263,15 @@ namespace UniRx
             }
         }
 
-        class Subscribe<T, TState1, TState2> : IObserver<T>
+        private class Subscribe<T, TState1, TState2> : IObserver<T>
         {
-            readonly TState1 state1;
-            readonly TState2 state2;
-            readonly Action<T, TState1, TState2> onNext;
-            readonly Action<Exception, TState1, TState2> onError;
-            readonly Action<TState1, TState2> onCompleted;
+            private readonly TState1 state1;
+            private readonly TState2 state2;
+            private readonly Action<T, TState1, TState2> onNext;
+            private readonly Action<Exception, TState1, TState2> onError;
+            private readonly Action<TState1, TState2> onCompleted;
 
-            int isStopped = 0;
+            private int isStopped = 0;
 
             public Subscribe(TState1 state1, TState2 state2, Action<T, TState1, TState2> onNext, Action<Exception, TState1, TState2> onError, Action<TState1, TState2> onCompleted)
             {
@@ -307,16 +307,16 @@ namespace UniRx
             }
         }
 
-        class Subscribe<T, TState1, TState2, TState3> : IObserver<T>
+        private class Subscribe<T, TState1, TState2, TState3> : IObserver<T>
         {
-            readonly TState1 state1;
-            readonly TState2 state2;
-            readonly TState3 state3;
-            readonly Action<T, TState1, TState2, TState3> onNext;
-            readonly Action<Exception, TState1, TState2, TState3> onError;
-            readonly Action<TState1, TState2, TState3> onCompleted;
+            private readonly TState1 state1;
+            private readonly TState2 state2;
+            private readonly TState3 state3;
+            private readonly Action<T, TState1, TState2, TState3> onNext;
+            private readonly Action<Exception, TState1, TState2, TState3> onError;
+            private readonly Action<TState1, TState2, TState3> onCompleted;
 
-            int isStopped = 0;
+            private int isStopped = 0;
 
             public Subscribe(TState1 state1, TState2 state2, TState3 state3, Action<T, TState1, TState2, TState3> onNext, Action<Exception, TState1, TState2, TState3> onError, Action<TState1, TState2, TState3> onCompleted)
             {
@@ -354,7 +354,7 @@ namespace UniRx
             }
         }
 
-        class AutoDetachObserver<T> : UniRx.Operators.OperatorObserverBase<T, T>
+        private class AutoDetachObserver<T> : UniRx.Operators.OperatorObserverBase<T, T>
         {
             public AutoDetachObserver(IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)

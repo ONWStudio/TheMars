@@ -118,7 +118,7 @@ namespace TheraBytes.BetterUi
             vertexHelper.AddTriangle(cnt + 2, cnt + 3, cnt);
         }
 
-        static Color32 GetColor(ColorMode mode, Color a, Color b, Rect bounds, float x, float y)
+        private static Color32 GetColor(ColorMode mode, Color a, Color b, Rect bounds, float x, float y)
         {
             switch (mode)
             {

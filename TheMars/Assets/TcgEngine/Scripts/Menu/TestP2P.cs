@@ -24,7 +24,7 @@ namespace TcgEngine
 
         private bool starting = false;
 
-        void Start()
+        private void Start()
         {
             GameClient.game_settings = GameSettings.Default;
             GameClient.player_settings = PlayerSettings.Default;
@@ -34,7 +34,7 @@ namespace TcgEngine
             error.text = "";
         }
 
-        void Update()
+        private void Update()
         {
 
         }

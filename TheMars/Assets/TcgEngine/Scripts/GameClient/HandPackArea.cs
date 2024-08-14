@@ -29,7 +29,7 @@ namespace TcgEngine.Client
 
         private static HandPackArea _instance;
 
-        void Awake()
+        private void Awake()
         {
             _instance = this;
         }
@@ -87,7 +87,7 @@ namespace TcgEngine.Client
             }
         }
 
-        void Update()
+        private void Update()
         {
             last_destroyed_timer += Time.deltaTime;
 

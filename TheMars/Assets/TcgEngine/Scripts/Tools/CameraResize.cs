@@ -15,7 +15,7 @@ namespace TcgEngine
         private int sheight;
         private int swidth;
 
-        void Start()
+        private void Start()
         {
             cam = GetComponent<Camera>();
             sheight = Screen.height;

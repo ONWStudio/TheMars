@@ -10,7 +10,8 @@ namespace Onw.Manager
     public sealed class SpriteManager : Singleton<SpriteManager>
     {
         [Header("Sprite Atlases")]
-        [SerializeField] private SerializedDictionary<string, Sprite> _spriteDictionary = new();
+        [SerializeField]
+        private SerializedDictionary<string, Sprite> _spriteDictionary = new();
 
         protected override void Init() { }
 

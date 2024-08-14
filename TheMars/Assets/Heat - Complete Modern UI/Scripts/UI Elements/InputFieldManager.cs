@@ -22,9 +22,9 @@ namespace Michsky.UI.Heat
         public UnityEvent onSubmit;
 
         // Helpers
-        float cachedStateLength = 0.25f;
+        private float cachedStateLength = 0.25f;
 
-        void Awake()
+        private void Awake()
         {
             if (inputText == null) { inputText = gameObject.GetComponent<TMP_InputField>(); }
             if (clearOnSubmit) { onSubmit.AddListener(delegate { inputText.text = ""; }); }
@@ -34,7 +34,7 @@ namespace Michsky.UI.Heat
             inputText.onEndEdit.AddListener(delegate { AnimateOut(); });
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (inputText == null) { return; }
             if (inputFieldAnimator != null && gameObject.activeInHierarchy) { StartCoroutine("DisableAnimator"); }
@@ -43,7 +43,7 @@ namespace Michsky.UI.Heat
             UpdateState();
         }
 
-        void Update()
+        private void Update()
         {
             if (!processSubmit || string.IsNullOrEmpty(inputText.text) || EventSystem.current.currentSelectedGameObject != inputText.gameObject) { return; }
             if (Keyboard.current.enterKey.wasPressedThisFrame) { onSubmit.Invoke(); }
@@ -84,7 +84,7 @@ namespace Michsky.UI.Heat
             onSubmit.Invoke();
         }
 
-        IEnumerator DisableAnimator()
+        private IEnumerator DisableAnimator()
         {
             yield return new WaitForSeconds(cachedStateLength);
             inputFieldAnimator.enabled = false;

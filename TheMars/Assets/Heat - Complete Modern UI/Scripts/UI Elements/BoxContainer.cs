@@ -23,11 +23,11 @@ namespace Michsky.UI.Heat
 
         // Helpers
         [HideInInspector] public bool isPlayedOnce = false;
-        List<BoxContainerItem> cachedItems = new List<BoxContainerItem>();
+        private List<BoxContainerItem> cachedItems = new List<BoxContainerItem>();
 
         public enum UpdateMode { DeltaTime, UnscaledTime }
 
-        void Awake()
+        private void Awake()
         {
             foreach (Transform child in transform)
             {
@@ -37,7 +37,7 @@ namespace Michsky.UI.Heat
             }
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (animationDelay > 0) { Invoke(nameof(Animate), animationDelay); }
             else { Animate(); }

@@ -19,7 +19,8 @@ namespace Onw.UI.Components
         [field: SerializeField] public UnityEvent OtherFunctions { get; private set; }
 
         [Header("Targets")]
-        [SerializeField] private List<RectTransform> _rectTransforms;
+        [SerializeField]
+        private List<RectTransform> _rectTransforms;
 
         private bool _isClick = false;
 

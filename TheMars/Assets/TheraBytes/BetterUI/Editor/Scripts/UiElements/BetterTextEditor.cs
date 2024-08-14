@@ -12,10 +12,10 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(BetterText), true), CanEditMultipleObjects]
     public class BetterTextEditor : GraphicEditor
     {
-        SerializedProperty text;
-        SerializedProperty sizerFallback, sizerCollection, fitting;
-        SerializedProperty font, style, lineSpace, rich, align, geoAlign, overflowH, overflowV;
-        SerializedProperty maskable;
+        private SerializedProperty text;
+        private SerializedProperty sizerFallback, sizerCollection, fitting;
+        private SerializedProperty font, style, lineSpace, rich, align, geoAlign, overflowH, overflowV;
+        private SerializedProperty maskable;
 
         [MenuItem("CONTEXT/Text/♠ Make Better")]
         public static void MakeBetter(MenuCommand command)
@@ -111,8 +111,8 @@ namespace TheraBytes.BetterUi.Editor
 
             base.serializedObject.ApplyModifiedProperties();
         }
-        
-        void DrawAnchorIcons(SerializedProperty prop, TextAnchor anchor)
+
+        private void DrawAnchorIcons(SerializedProperty prop, TextAnchor anchor)
         {
             bool hLeft = anchor == TextAnchor.LowerLeft || anchor == TextAnchor.MiddleLeft || anchor == TextAnchor.UpperLeft;
             bool hCenter = anchor == TextAnchor.LowerCenter || anchor == TextAnchor.MiddleCenter|| anchor == TextAnchor.UpperCenter;
@@ -187,7 +187,7 @@ namespace TheraBytes.BetterUi.Editor
             }
         }
 
-        bool DrawAlignIcon(GUIContent contentActive, GUIContent contentInactive, TextAlignment align, bool value)
+        private bool DrawAlignIcon(GUIContent contentActive, GUIContent contentInactive, TextAlignment align, bool value)
         {
             GUIStyle style = null;
 

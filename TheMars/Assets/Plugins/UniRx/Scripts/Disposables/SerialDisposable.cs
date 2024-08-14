@@ -5,9 +5,9 @@ namespace UniRx
 {
     public sealed class SerialDisposable : IDisposable, ICancelable
     {
-        readonly object gate = new object();
-        IDisposable current;
-        bool disposed;
+        private readonly object gate = new object();
+        private IDisposable current;
+        private bool disposed;
 
         public bool IsDisposed { get { lock (gate) { return disposed; } } }
 

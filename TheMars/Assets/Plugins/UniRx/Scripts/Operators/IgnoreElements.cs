@@ -5,7 +5,7 @@ namespace UniRx.Operators
 {
     internal class IgnoreElementsObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
+        private readonly IObservable<T> source;
 
         public IgnoreElementsObservable(IObservable<T> source)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -18,7 +18,7 @@ namespace UniRx.Operators
             return source.Subscribe(new IgnoreElements(observer, cancel));
         }
 
-        class IgnoreElements : OperatorObserverBase<T, T>
+        private class IgnoreElements : OperatorObserverBase<T, T>
         {
             public IgnoreElements(IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {

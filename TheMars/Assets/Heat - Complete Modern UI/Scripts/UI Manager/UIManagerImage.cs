@@ -20,7 +20,7 @@ namespace Michsky.UI.Heat
 
         public enum ColorType { Accent, AccentMatch, Primary, Secondary, Negative, Background }
 
-        void Awake()
+        private void Awake()
         {
             this.enabled = true;
 
@@ -29,14 +29,14 @@ namespace Michsky.UI.Heat
             if (UIManagerAsset.enableDynamicUpdate == false) { UpdateImage(); this.enabled = false; }
         }
 
-        void Update()
+        private void Update()
         {
             if (UIManagerAsset == null) { return; }
             if (UIManagerAsset.enableDynamicUpdate == true) { UpdateImage(); }
         }
 
 
-        void UpdateImage()
+        private void UpdateImage()
         {
             if (objImage == null || useCustomColor == true)
                 return;

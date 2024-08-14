@@ -51,13 +51,13 @@ namespace TheraBytes.BetterUi
         public class LocationData
         {
             [SerializeField]
-            string name;
+            private string name;
 
             [SerializeField]
-            RectTransformData transformFallback = new RectTransformData();
+            private RectTransformData transformFallback = new RectTransformData();
 
             [SerializeField]
-            RectTransformDataConfigCollection transformConfigs = new RectTransformDataConfigCollection();
+            private RectTransformDataConfigCollection transformConfigs = new RectTransformDataConfigCollection();
 
             public string Name { get { return name; } internal set { name = value; } }
             public RectTransformData CurrentTransformData { get { return transformConfigs.GetCurrentItem(transformFallback); } }
@@ -67,31 +67,31 @@ namespace TheraBytes.BetterUi
         public class Animation
         {
             [SerializeField]
-            string name;
+            private string name;
 
             [SerializeField]
-            string from;
+            private string from;
 
             [SerializeField]
-            string to;
+            private string to;
 
             [SerializeField]
-            AnimationCurve curve;
+            private AnimationCurve curve;
 
             [SerializeField]
-            LocationAnimationEvent actionBeforeStart = new LocationAnimationEvent();
+            private LocationAnimationEvent actionBeforeStart = new LocationAnimationEvent();
 
             [SerializeField]
-            LocationAnimationEvent actionAfterFinish = new LocationAnimationEvent();
+            private LocationAnimationEvent actionAfterFinish = new LocationAnimationEvent();
 
             [SerializeField]
-            LocationAnimationUpdateEvent actionOnUpdating = new LocationAnimationUpdateEvent();
+            private LocationAnimationUpdateEvent actionOnUpdating = new LocationAnimationUpdateEvent();
 
             [SerializeField]
-            bool animateWithEulerRotation = true;
+            private bool animateWithEulerRotation = true;
 
             [SerializeField]
-            float timeScale = 1;
+            private float timeScale = 1;
 
             public string Name { get { return name; } internal set { name = value; } }
             public string From { get { return from; } set { from = value; } }
@@ -137,26 +137,26 @@ namespace TheraBytes.BetterUi
         }
 
         [SerializeField]
-        bool useRelativeLocations;
+        private bool useRelativeLocations;
 
         [SerializeField]
-        List<LocationData> locations = new List<LocationData>();
+        private List<LocationData> locations = new List<LocationData>();
 
         [SerializeField]
-        List<Animation> animations = new List<Animation>();
+        private List<Animation> animations = new List<Animation>();
 
 
         [SerializeField]
-        string startLocation;
+        private string startLocation;
 
         [SerializeField]
-        string startUpAnimation;
+        private string startUpAnimation;
 
         [SerializeField]
-        LocationAnimationEvent actionOnInit;
+        private LocationAnimationEvent actionOnInit;
 
-        RectTransformData referenceLocation;
-        AnimationState runningAnimation;
+        private RectTransformData referenceLocation;
+        private AnimationState runningAnimation;
 
         public AnimationState RunningAnimation { get { return runningAnimation; } }
         public RectTransformData ReferenceLocation { get { EnsureReferenceLocation(true); return referenceLocation; } }
@@ -271,7 +271,7 @@ namespace TheraBytes.BetterUi
         public void ResetReferenceLocation(RectTransform rectTransform) { ResetReferenceLocation(new RectTransformData(rectTransform)); }
         public void ResetReferenceLocation(RectTransformData reference) { referenceLocation = reference; }
 
-        void PushTransformData(LocationData loc)
+        private void PushTransformData(LocationData loc)
         {
             if (useRelativeLocations)
             {

@@ -143,7 +143,7 @@ namespace UniRx
             }
         }
 
-        object GetValueRecursive(object obj, int index, string[] paths)
+        private object GetValueRecursive(object obj, int index, string[] paths)
         {
             var path = paths[index];
 
@@ -287,14 +287,14 @@ namespace UniRx
             }
         }
 
-        MultilineReactivePropertyAttribute GetMultilineAttribute()
+        private MultilineReactivePropertyAttribute GetMultilineAttribute()
         {
             var fi = this.fieldInfo;
             if (fi == null) return null;
             return fi.GetCustomAttributes(false).OfType<MultilineReactivePropertyAttribute>().FirstOrDefault();
         }
 
-        RangeReactivePropertyAttribute GetRangeAttribute()
+        private RangeReactivePropertyAttribute GetRangeAttribute()
         {
             var fi = this.fieldInfo;
             if (fi == null) return null;

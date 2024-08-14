@@ -46,7 +46,8 @@ namespace Onw.UI.Components
             }
         }
 
-        [SerializeField] private int _selectedIndex = 0;
+        [SerializeField]
+        private int _selectedIndex = 0;
 
         private Vector2 _targetPosition = Vector2.zero;
 

@@ -6,19 +6,19 @@ namespace Michsky.UI.Heat
 {
     public class LocalizationTableWindow : EditorWindow
     {
-        static LocalizationTableWindow window;
-        static LocalizationSettings localizationSettings;
-        static LocalizationTable selectedTable;
-        static int tableIndex;
+        private static LocalizationTableWindow window;
+        private static LocalizationSettings localizationSettings;
+        private static LocalizationTable selectedTable;
+        private static int tableIndex;
 
         private GUISkin customSkin;
         protected GUIStyle panelStyle;
-        static GUIStyle langLabelStyle;
-        static float textFieldWidth = 180;
-        static float textFieldHeight = 80;
-        static float itemSpacing = 3;
+        private static GUIStyle langLabelStyle;
+        private static float textFieldWidth = 180;
+        private static float textFieldHeight = 80;
+        private static float itemSpacing = 3;
         private string searchString;
-        Vector2 scrollPosition = Vector2.zero;
+        private Vector2 scrollPosition = Vector2.zero;
 
         // Caching a table in case of compilation
         public LocalizationTable cachedTable;
@@ -41,13 +41,13 @@ namespace Michsky.UI.Heat
             window.titleContent = newTitle;
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (EditorGUIUtility.isProSkin == true) { customSkin = HeatUIEditorHandler.GetDarkEditor(customSkin); }
             else { customSkin = HeatUIEditorHandler.GetLightEditor(customSkin); }
         }
 
-        void OnGUI()
+        private void OnGUI()
         {
             // Initialize table and content
             if (cachedTable == null && selectedTable != null) { cachedTable = selectedTable; }

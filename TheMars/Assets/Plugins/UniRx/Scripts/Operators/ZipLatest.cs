@@ -14,9 +14,9 @@ namespace UniRx.Operators
     // binary
     internal class ZipLatestObservable<TLeft, TRight, TResult> : OperatorObservableBase<TResult>
     {
-        readonly IObservable<TLeft> left;
-        readonly IObservable<TRight> right;
-        readonly Func<TLeft, TRight, TResult> selector;
+        private readonly IObservable<TLeft> left;
+        private readonly IObservable<TRight> right;
+        private readonly Func<TLeft, TRight, TResult> selector;
 
         public ZipLatestObservable(IObservable<TLeft> left, IObservable<TRight> right, Func<TLeft, TRight, TResult> selector)
             : base(left.IsRequiredSubscribeOnCurrentThread() || right.IsRequiredSubscribeOnCurrentThread())
@@ -31,18 +31,18 @@ namespace UniRx.Operators
             return new ZipLatest(this, observer, cancel).Run();
         }
 
-        class ZipLatest : OperatorObserverBase<TResult, TResult>
+        private class ZipLatest : OperatorObserverBase<TResult, TResult>
         {
-            readonly ZipLatestObservable<TLeft, TRight, TResult> parent;
-            readonly object gate = new object();
+            private readonly ZipLatestObservable<TLeft, TRight, TResult> parent;
+            private readonly object gate = new object();
 
-            TLeft leftValue = default(TLeft);
-            bool leftStarted = false;
-            bool leftCompleted = false;
+            private TLeft leftValue = default(TLeft);
+            private bool leftStarted = false;
+            private bool leftCompleted = false;
 
-            TRight rightValue = default(TRight);
-            bool rightStarted = false;
-            bool rightCompleted = false;
+            private TRight rightValue = default(TRight);
+            private bool rightStarted = false;
+            private bool rightCompleted = false;
 
             public ZipLatest(ZipLatestObservable<TLeft, TRight, TResult> parent, IObserver<TResult> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -112,9 +112,9 @@ namespace UniRx.Operators
                 finally { Dispose(); }
             }
 
-            class LeftObserver : IObserver<TLeft>
+            private class LeftObserver : IObserver<TLeft>
             {
-                readonly ZipLatest parent;
+                private readonly ZipLatest parent;
 
                 public LeftObserver(ZipLatest parent)
                 {
@@ -149,9 +149,9 @@ namespace UniRx.Operators
                 }
             }
 
-            class RightObserver : IObserver<TRight>
+            private class RightObserver : IObserver<TRight>
             {
-                readonly ZipLatest parent;
+                private readonly ZipLatest parent;
 
                 public RightObserver(ZipLatest parent)
                 {
@@ -192,7 +192,7 @@ namespace UniRx.Operators
     // array
     internal class ZipLatestObservable<T> : OperatorObservableBase<IList<T>>
     {
-        readonly IObservable<T>[] sources;
+        private readonly IObservable<T>[] sources;
 
         public ZipLatestObservable(IObservable<T>[] sources)
             : base(true)
@@ -205,15 +205,15 @@ namespace UniRx.Operators
             return new ZipLatest(this, observer, cancel).Run();
         }
 
-        class ZipLatest : OperatorObserverBase<IList<T>, IList<T>>
+        private class ZipLatest : OperatorObserverBase<IList<T>, IList<T>>
         {
-            readonly ZipLatestObservable<T> parent;
-            readonly object gate = new object();
+            private readonly ZipLatestObservable<T> parent;
+            private readonly object gate = new object();
 
-            int length;
-            T[] values;
-            bool[] isStarted;
-            bool[] isCompleted;
+            private int length;
+            private T[] values;
+            private bool[] isStarted;
+            private bool[] isCompleted;
 
             public ZipLatest(ZipLatestObservable<T> parent, IObserver<IList<T>> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -238,7 +238,7 @@ namespace UniRx.Operators
             }
 
             // publish is in the lock
-            void Publish(int index)
+            private void Publish(int index)
             {
                 isStarted[index] = true;
 
@@ -302,10 +302,10 @@ namespace UniRx.Operators
                 finally { Dispose(); }
             }
 
-            class ZipLatestObserver : IObserver<T>
+            private class ZipLatestObserver : IObserver<T>
             {
-                readonly ZipLatest parent;
-                readonly int index;
+                private readonly ZipLatest parent;
+                private readonly int index;
 
                 public ZipLatestObserver(ZipLatest parent, int index)
                 {
@@ -361,10 +361,10 @@ namespace UniRx.Operators
 
     internal class ZipLatestObservable<T1, T2, T3, TR> : OperatorObservableBase<TR>
     {
-        IObservable<T1> source1;
-        IObservable<T2> source2;
-        IObservable<T3> source3;
-        ZipLatestFunc<T1, T2, T3, TR> resultSelector;
+        private IObservable<T1> source1;
+        private IObservable<T2> source2;
+        private IObservable<T3> source3;
+        private ZipLatestFunc<T1, T2, T3, TR> resultSelector;
 
         public ZipLatestObservable(
             IObservable<T1> source1,
@@ -388,13 +388,13 @@ namespace UniRx.Operators
             return new ZipLatest(3, this, observer, cancel).Run();
         }
 
-        class ZipLatest : NthZipLatestObserverBase<TR>
+        private class ZipLatest : NthZipLatestObserverBase<TR>
         {
-            readonly ZipLatestObservable<T1, T2, T3, TR> parent;
-            readonly object gate = new object();
-            ZipLatestObserver<T1> c1;
-            ZipLatestObserver<T2> c2;
-            ZipLatestObserver<T3> c3;
+            private readonly ZipLatestObservable<T1, T2, T3, TR> parent;
+            private readonly object gate = new object();
+            private ZipLatestObserver<T1> c1;
+            private ZipLatestObserver<T2> c2;
+            private ZipLatestObserver<T3> c3;
 
             public ZipLatest(int length, ZipLatestObservable<T1, T2, T3, TR> parent, IObserver<TR> observer, IDisposable cancel)
                 : base(length, observer, cancel)
@@ -442,11 +442,11 @@ namespace UniRx.Operators
 
     internal class ZipLatestObservable<T1, T2, T3, T4, TR> : OperatorObservableBase<TR>
     {
-        IObservable<T1> source1;
-        IObservable<T2> source2;
-        IObservable<T3> source3;
-        IObservable<T4> source4;
-        ZipLatestFunc<T1, T2, T3, T4, TR> resultSelector;
+        private IObservable<T1> source1;
+        private IObservable<T2> source2;
+        private IObservable<T3> source3;
+        private IObservable<T4> source4;
+        private ZipLatestFunc<T1, T2, T3, T4, TR> resultSelector;
 
         public ZipLatestObservable(
             IObservable<T1> source1,
@@ -473,14 +473,14 @@ namespace UniRx.Operators
             return new ZipLatest(4, this, observer, cancel).Run();
         }
 
-        class ZipLatest : NthZipLatestObserverBase<TR>
+        private class ZipLatest : NthZipLatestObserverBase<TR>
         {
-            readonly ZipLatestObservable<T1, T2, T3, T4, TR> parent;
-            readonly object gate = new object();
-            ZipLatestObserver<T1> c1;
-            ZipLatestObserver<T2> c2;
-            ZipLatestObserver<T3> c3;
-            ZipLatestObserver<T4> c4;
+            private readonly ZipLatestObservable<T1, T2, T3, T4, TR> parent;
+            private readonly object gate = new object();
+            private ZipLatestObserver<T1> c1;
+            private ZipLatestObserver<T2> c2;
+            private ZipLatestObserver<T3> c3;
+            private ZipLatestObserver<T4> c4;
 
             public ZipLatest(int length, ZipLatestObservable<T1, T2, T3, T4, TR> parent, IObserver<TR> observer, IDisposable cancel)
                 : base(length, observer, cancel)
@@ -530,12 +530,12 @@ namespace UniRx.Operators
 
     internal class ZipLatestObservable<T1, T2, T3, T4, T5, TR> : OperatorObservableBase<TR>
     {
-        IObservable<T1> source1;
-        IObservable<T2> source2;
-        IObservable<T3> source3;
-        IObservable<T4> source4;
-        IObservable<T5> source5;
-        ZipLatestFunc<T1, T2, T3, T4, T5, TR> resultSelector;
+        private IObservable<T1> source1;
+        private IObservable<T2> source2;
+        private IObservable<T3> source3;
+        private IObservable<T4> source4;
+        private IObservable<T5> source5;
+        private ZipLatestFunc<T1, T2, T3, T4, T5, TR> resultSelector;
 
         public ZipLatestObservable(
             IObservable<T1> source1,
@@ -565,15 +565,15 @@ namespace UniRx.Operators
             return new ZipLatest(5, this, observer, cancel).Run();
         }
 
-        class ZipLatest : NthZipLatestObserverBase<TR>
+        private class ZipLatest : NthZipLatestObserverBase<TR>
         {
-            readonly ZipLatestObservable<T1, T2, T3, T4, T5, TR> parent;
-            readonly object gate = new object();
-            ZipLatestObserver<T1> c1;
-            ZipLatestObserver<T2> c2;
-            ZipLatestObserver<T3> c3;
-            ZipLatestObserver<T4> c4;
-            ZipLatestObserver<T5> c5;
+            private readonly ZipLatestObservable<T1, T2, T3, T4, T5, TR> parent;
+            private readonly object gate = new object();
+            private ZipLatestObserver<T1> c1;
+            private ZipLatestObserver<T2> c2;
+            private ZipLatestObserver<T3> c3;
+            private ZipLatestObserver<T4> c4;
+            private ZipLatestObserver<T5> c5;
 
             public ZipLatest(int length, ZipLatestObservable<T1, T2, T3, T4, T5, TR> parent, IObserver<TR> observer, IDisposable cancel)
                 : base(length, observer, cancel)
@@ -625,13 +625,13 @@ namespace UniRx.Operators
 
     internal class ZipLatestObservable<T1, T2, T3, T4, T5, T6, TR> : OperatorObservableBase<TR>
     {
-        IObservable<T1> source1;
-        IObservable<T2> source2;
-        IObservable<T3> source3;
-        IObservable<T4> source4;
-        IObservable<T5> source5;
-        IObservable<T6> source6;
-        ZipLatestFunc<T1, T2, T3, T4, T5, T6, TR> resultSelector;
+        private IObservable<T1> source1;
+        private IObservable<T2> source2;
+        private IObservable<T3> source3;
+        private IObservable<T4> source4;
+        private IObservable<T5> source5;
+        private IObservable<T6> source6;
+        private ZipLatestFunc<T1, T2, T3, T4, T5, T6, TR> resultSelector;
 
         public ZipLatestObservable(
             IObservable<T1> source1,
@@ -664,16 +664,16 @@ namespace UniRx.Operators
             return new ZipLatest(6, this, observer, cancel).Run();
         }
 
-        class ZipLatest : NthZipLatestObserverBase<TR>
+        private class ZipLatest : NthZipLatestObserverBase<TR>
         {
-            readonly ZipLatestObservable<T1, T2, T3, T4, T5, T6, TR> parent;
-            readonly object gate = new object();
-            ZipLatestObserver<T1> c1;
-            ZipLatestObserver<T2> c2;
-            ZipLatestObserver<T3> c3;
-            ZipLatestObserver<T4> c4;
-            ZipLatestObserver<T5> c5;
-            ZipLatestObserver<T6> c6;
+            private readonly ZipLatestObservable<T1, T2, T3, T4, T5, T6, TR> parent;
+            private readonly object gate = new object();
+            private ZipLatestObserver<T1> c1;
+            private ZipLatestObserver<T2> c2;
+            private ZipLatestObserver<T3> c3;
+            private ZipLatestObserver<T4> c4;
+            private ZipLatestObserver<T5> c5;
+            private ZipLatestObserver<T6> c6;
 
             public ZipLatest(int length, ZipLatestObservable<T1, T2, T3, T4, T5, T6, TR> parent, IObserver<TR> observer, IDisposable cancel)
                 : base(length, observer, cancel)
@@ -727,14 +727,14 @@ namespace UniRx.Operators
 
     internal class ZipLatestObservable<T1, T2, T3, T4, T5, T6, T7, TR> : OperatorObservableBase<TR>
     {
-        IObservable<T1> source1;
-        IObservable<T2> source2;
-        IObservable<T3> source3;
-        IObservable<T4> source4;
-        IObservable<T5> source5;
-        IObservable<T6> source6;
-        IObservable<T7> source7;
-        ZipLatestFunc<T1, T2, T3, T4, T5, T6, T7, TR> resultSelector;
+        private IObservable<T1> source1;
+        private IObservable<T2> source2;
+        private IObservable<T3> source3;
+        private IObservable<T4> source4;
+        private IObservable<T5> source5;
+        private IObservable<T6> source6;
+        private IObservable<T7> source7;
+        private ZipLatestFunc<T1, T2, T3, T4, T5, T6, T7, TR> resultSelector;
 
         public ZipLatestObservable(
             IObservable<T1> source1,
@@ -770,17 +770,17 @@ namespace UniRx.Operators
             return new ZipLatest(7, this, observer, cancel).Run();
         }
 
-        class ZipLatest : NthZipLatestObserverBase<TR>
+        private class ZipLatest : NthZipLatestObserverBase<TR>
         {
-            readonly ZipLatestObservable<T1, T2, T3, T4, T5, T6, T7, TR> parent;
-            readonly object gate = new object();
-            ZipLatestObserver<T1> c1;
-            ZipLatestObserver<T2> c2;
-            ZipLatestObserver<T3> c3;
-            ZipLatestObserver<T4> c4;
-            ZipLatestObserver<T5> c5;
-            ZipLatestObserver<T6> c6;
-            ZipLatestObserver<T7> c7;
+            private readonly ZipLatestObservable<T1, T2, T3, T4, T5, T6, T7, TR> parent;
+            private readonly object gate = new object();
+            private ZipLatestObserver<T1> c1;
+            private ZipLatestObserver<T2> c2;
+            private ZipLatestObserver<T3> c3;
+            private ZipLatestObserver<T4> c4;
+            private ZipLatestObserver<T5> c5;
+            private ZipLatestObserver<T6> c6;
+            private ZipLatestObserver<T7> c7;
 
             public ZipLatest(int length, ZipLatestObservable<T1, T2, T3, T4, T5, T6, T7, TR> parent, IObserver<TR> observer, IDisposable cancel)
                 : base(length, observer, cancel)
@@ -846,9 +846,9 @@ namespace UniRx.Operators
 
     internal abstract class NthZipLatestObserverBase<T> : OperatorObserverBase<T, T>, IZipLatestObservable
     {
-        readonly int length;
-        readonly bool[] isStarted;
-        readonly bool[] isCompleted;
+        private readonly int length;
+        private readonly bool[] isStarted;
+        private readonly bool[] isCompleted;
 
         public NthZipLatestObserverBase(int length, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
         {
@@ -950,10 +950,10 @@ namespace UniRx.Operators
     // Nth
     internal class ZipLatestObserver<T> : IObserver<T>
     {
-        readonly object gate;
-        readonly IZipLatestObservable parent;
-        readonly int index;
-        T value;
+        private readonly object gate;
+        private readonly IZipLatestObservable parent;
+        private readonly int index;
+        private T value;
 
         public T Value { get { return value; } }
 

@@ -16,11 +16,11 @@ namespace TheraBytes.BetterUi
         }
 
         [SerializeField]
-        Orientation expectedOrientation;
+        private Orientation expectedOrientation;
         public Orientation ExpectedOrientation { get { return expectedOrientation; } set { expectedOrientation = value; } }
 
         [SerializeField]
-        bool isActive;
+        private bool isActive;
         public bool IsActive { get { return isActive; } set { isActive = value; } }
 
         public IsCertainScreenOrientation(Orientation expectedOrientation)

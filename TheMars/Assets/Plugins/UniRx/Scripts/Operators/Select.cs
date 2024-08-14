@@ -10,9 +10,9 @@ namespace UniRx.Operators
 
     internal class SelectObservable<T, TR> : OperatorObservableBase<TR>, ISelect<TR>
     {
-        readonly IObservable<T> source;
-        readonly Func<T, TR> selector;
-        readonly Func<T, int, TR> selectorWithIndex;
+        private readonly IObservable<T> source;
+        private readonly Func<T, TR> selector;
+        private readonly Func<T, int, TR> selectorWithIndex;
 
         public SelectObservable(IObservable<T> source, Func<T, TR> selector)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -66,9 +66,9 @@ namespace UniRx.Operators
             }
         }
 
-        class Select : OperatorObserverBase<T, TR>
+        private class Select : OperatorObserverBase<T, TR>
         {
-            readonly SelectObservable<T, TR> parent;
+            private readonly SelectObservable<T, TR> parent;
 
             public Select(SelectObservable<T, TR> parent, IObserver<TR> observer, IDisposable cancel)
                 : base(observer, cancel)
@@ -104,10 +104,10 @@ namespace UniRx.Operators
         }
 
         // with Index
-        class Select_ : OperatorObserverBase<T, TR>
+        private class Select_ : OperatorObserverBase<T, TR>
         {
-            readonly SelectObservable<T, TR> parent;
-            int index;
+            private readonly SelectObservable<T, TR> parent;
+            private int index;
 
             public Select_(SelectObservable<T, TR> parent, IObserver<TR> observer, IDisposable cancel)
                 : base(observer, cancel)

@@ -24,10 +24,10 @@ namespace TheraBytes.BetterUi
             public bool ApplyHeight { get { return applyHeight; } set { applyHeight = value; } }
 
             [SerializeField]
-            bool applyWidth, applyHeight;
+            private bool applyWidth, applyHeight;
             
             [SerializeField]
-            string screenConfigName;
+            private string screenConfigName;
             public string ScreenConfigName { get { return screenConfigName; } set { screenConfigName = value; } }
         }
 
@@ -36,10 +36,10 @@ namespace TheraBytes.BetterUi
         public Settings CurrentSettings { get { return customSettings.GetCurrentItem(settingsFallback); } }
 
         [SerializeField]
-        Settings settingsFallback = new Settings();
+        private Settings settingsFallback = new Settings();
 
         [SerializeField]
-        SettingsConfigCollection customSettings = new SettingsConfigCollection();
+        private SettingsConfigCollection customSettings = new SettingsConfigCollection();
 
 
         public Vector2SizeModifier DeltaSizer { get { return customDeltaSizers.GetCurrentItem(deltaSizerFallback); } }
@@ -48,12 +48,12 @@ namespace TheraBytes.BetterUi
         protected override ScreenDependentSize<Vector2> sizer { get { return customDeltaSizers.GetCurrentItem(deltaSizerFallback); } }
         
         [SerializeField]
-        Vector2SizeModifier deltaSizerFallback = new Vector2SizeModifier(100 * Vector2.one, Vector2.zero, 1000 * Vector2.one);
+        private Vector2SizeModifier deltaSizerFallback = new Vector2SizeModifier(100 * Vector2.one, Vector2.zero, 1000 * Vector2.one);
 
         [SerializeField]
-        Vector2SizeConfigCollection customDeltaSizers = new Vector2SizeConfigCollection();
+        private Vector2SizeConfigCollection customDeltaSizers = new Vector2SizeConfigCollection();
 
-        DrivenRectTransformTracker rectTransformTracker = new DrivenRectTransformTracker();
+        private DrivenRectTransformTracker rectTransformTracker = new DrivenRectTransformTracker();
 
         protected override void OnDisable()
         {

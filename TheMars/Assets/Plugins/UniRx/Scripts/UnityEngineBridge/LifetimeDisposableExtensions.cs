@@ -39,7 +39,7 @@ namespace UniRx
             return disposable;
         }
 
-        static IEnumerator MonitorTriggerHealth(ObservableDestroyTrigger trigger, GameObject targetGameObject)
+        private static IEnumerator MonitorTriggerHealth(ObservableDestroyTrigger trigger, GameObject targetGameObject)
         {
             while (true)
             {

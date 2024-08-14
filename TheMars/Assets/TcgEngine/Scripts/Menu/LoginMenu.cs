@@ -37,7 +37,7 @@ namespace TcgEngine.UI
 
         private static LoginMenu instance;
 
-        void Awake()
+        private void Awake()
         {
             instance = this;
         }
@@ -65,7 +65,7 @@ namespace TcgEngine.UI
             RefreshLogin();
         }
 
-        void Update()
+        private void Update()
         {
             login_button.interactable = !clicked && !string.IsNullOrWhiteSpace(login_user.text);
             register_button.interactable = !clicked && !string.IsNullOrWhiteSpace(register_username.text) && !string.IsNullOrWhiteSpace(register_email.text)

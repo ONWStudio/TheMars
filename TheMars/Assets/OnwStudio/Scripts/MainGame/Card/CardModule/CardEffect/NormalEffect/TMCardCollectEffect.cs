@@ -11,8 +11,10 @@ namespace TMCard.Effect
     /// </summary>
     public sealed class TMCardCollectEffect : ITMNormalEffect, ITMInitializableEffect<TMCardCollectEffectCreator>
     {
-        [SerializeField, ReadOnly] private int _collectCount = 0;
-        [SerializeField, ReadOnly] private TM_CARD_KIND _selectKind = TM_CARD_KIND.NONE;
+        [SerializeField, ReadOnly]
+        private int _collectCount = 0;
+        [SerializeField, ReadOnly]
+        private TMCardKind _selectKind = TMCardKind.NONE;
 
         public void Initialize(TMCardCollectEffectCreator effectCreator)
         {
@@ -23,7 +25,7 @@ namespace TMCard.Effect
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             trigger.OnEffectEvent.AddListener(() 
-                => TMCardGameManager.Instance.CollectCard(controller, _collectCount));
+                => TMCardHelper.Instance.CollectCard(controller, _collectCount));
         }
     }
 }

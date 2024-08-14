@@ -4,10 +4,10 @@ namespace UniRx.Operators
 {
     internal class StartObservable<T> : OperatorObservableBase<T>
     {
-        readonly Action action;
-        readonly Func<T> function;
-        readonly IScheduler scheduler;
-        readonly TimeSpan? startAfter;
+        private readonly Action action;
+        private readonly Func<T> function;
+        private readonly IScheduler scheduler;
+        private readonly TimeSpan? startAfter;
 
         public StartObservable(Func<T> function, TimeSpan? startAfter, IScheduler scheduler)
             : base(scheduler == Scheduler.CurrentThread)
@@ -37,9 +37,9 @@ namespace UniRx.Operators
             }
         }
 
-        class StartObserver : OperatorObserverBase<T, T>
+        private class StartObserver : OperatorObserverBase<T, T>
         {
-            readonly StartObservable<T> parent;
+            private readonly StartObservable<T> parent;
 
             public StartObserver(StartObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {

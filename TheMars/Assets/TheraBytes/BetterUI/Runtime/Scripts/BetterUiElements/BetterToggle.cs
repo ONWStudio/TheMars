@@ -17,16 +17,16 @@ namespace TheraBytes.BetterUi
         public List<Transitions> BetterToggleTransitions { get { return betterToggleTransitions; } }
 
         [SerializeField, DefaultTransitionStates]
-        List<Transitions> betterTransitions = new List<Transitions>();
+        private List<Transitions> betterTransitions = new List<Transitions>();
 
         [SerializeField, TransitionStates("On", "Off")]
-        List<Transitions> betterToggleTransitions = new List<Transitions>();
+        private List<Transitions> betterToggleTransitions = new List<Transitions>();
         [SerializeField, DefaultTransitionStates]
-        List<Transitions> betterTransitionsWhenOn = new List<Transitions>();
+        private List<Transitions> betterTransitionsWhenOn = new List<Transitions>();
         [SerializeField, DefaultTransitionStates]
-        List<Transitions> betterTransitionsWhenOff = new List<Transitions>();
+        private List<Transitions> betterTransitionsWhenOff = new List<Transitions>();
 
-        bool wasOn;
+        private bool wasOn;
 
         protected override void OnEnable()
         {
@@ -35,7 +35,7 @@ namespace TheraBytes.BetterUi
             DoStateTransition(SelectionState.Normal, true);
         }
 
-        void Update()
+        private void Update()
         {
             if (wasOn != isOn)
             {

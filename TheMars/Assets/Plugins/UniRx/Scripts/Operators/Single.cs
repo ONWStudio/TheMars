@@ -4,9 +4,9 @@ namespace UniRx.Operators
 {
     internal class SingleObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly bool useDefault;
-        readonly Func<T, bool> predicate;
+        private readonly IObservable<T> source;
+        private readonly bool useDefault;
+        private readonly Func<T, bool> predicate;
 
         public SingleObservable(IObservable<T> source, bool useDefault)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -35,11 +35,11 @@ namespace UniRx.Operators
             }
         }
 
-        class Single : OperatorObserverBase<T, T>
+        private class Single : OperatorObserverBase<T, T>
         {
-            readonly SingleObservable<T> parent;
-            bool seenValue;
-            T lastValue;
+            private readonly SingleObservable<T> parent;
+            private bool seenValue;
+            private T lastValue;
 
             public Single(SingleObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -99,11 +99,11 @@ namespace UniRx.Operators
             }
         }
 
-        class Single_ : OperatorObserverBase<T, T>
+        private class Single_ : OperatorObserverBase<T, T>
         {
-            readonly SingleObservable<T> parent;
-            bool seenValue;
-            T lastValue;
+            private readonly SingleObservable<T> parent;
+            private bool seenValue;
+            private T lastValue;
 
             public Single_(SingleObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {

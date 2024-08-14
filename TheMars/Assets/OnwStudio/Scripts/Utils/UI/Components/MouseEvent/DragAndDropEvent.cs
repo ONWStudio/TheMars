@@ -20,8 +20,10 @@ namespace Onw.UI.Components
         [field: SerializeField] public UnityEvent<RectTransform, Camera, Vector2> OnDropEvent { get; set; }
 
         [Header("Dragging Copy Object"), Tooltip("Images에 들어간 이미지들은 순서에 맞게 렌더됩니다")]
-        [SerializeField] private List<Image> _images;
-        [SerializeField] private Image _rootImage;
+        [SerializeField]
+        private List<Image> _images;
+        [SerializeField]
+        private Image _rootImage;
 
         private RectTransform _rectTransform = null;
 

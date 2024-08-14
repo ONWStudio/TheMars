@@ -25,7 +25,7 @@ namespace TheraBytes.BetterUi
 
         [FormerlySerializedAs("Rotation")]
         [SerializeField]
-        Quaternion rotation;
+        private Quaternion rotation;
 
         public Vector3 EulerAngles;
 
@@ -47,7 +47,7 @@ namespace TheraBytes.BetterUi
         }
 
         [SerializeField]
-        bool saveRotationAsEuler = false;
+        private bool saveRotationAsEuler = false;
         public bool SaveRotationAsEuler
         {
             get
@@ -98,7 +98,7 @@ namespace TheraBytes.BetterUi
         }
 
         [SerializeField]
-        string screenConfigName;
+        private string screenConfigName;
         public string ScreenConfigName { get { return screenConfigName; } set { screenConfigName = value; } }
 
         public RectTransformData()

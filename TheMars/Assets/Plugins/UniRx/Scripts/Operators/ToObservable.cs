@@ -5,8 +5,8 @@ namespace UniRx.Operators
 {
     internal class ToObservableObservable<T> : OperatorObservableBase<T>
     {
-        readonly IEnumerable<T> source;
-        readonly IScheduler scheduler;
+        private readonly IEnumerable<T> source;
+        private readonly IScheduler scheduler;
 
         public ToObservableObservable(IEnumerable<T> source, IScheduler scheduler)
             : base(scheduler == Scheduler.CurrentThread)
@@ -20,9 +20,9 @@ namespace UniRx.Operators
             return new ToObservable(this, observer, cancel).Run();
         }
 
-        class ToObservable : OperatorObserverBase<T, T>
+        private class ToObservable : OperatorObserverBase<T, T>
         {
-            readonly ToObservableObservable<T> parent;
+            private readonly ToObservableObservable<T> parent;
 
             public ToObservable(ToObservableObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {

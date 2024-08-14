@@ -9,10 +9,10 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableRectTransformTrigger : ObservableTriggerBase
     {
-        Subject<Unit> onRectTransformDimensionsChange;
+        private Subject<Unit> onRectTransformDimensionsChange;
 
         // Callback that is sent if an associated RectTransform has it's dimensions changed
-        void OnRectTransformDimensionsChange()
+        private void OnRectTransformDimensionsChange()
         {
             if (onRectTransformDimensionsChange != null) onRectTransformDimensionsChange.OnNext(Unit.Default);
         }
@@ -23,10 +23,10 @@ namespace UniRx.Triggers
             return onRectTransformDimensionsChange ?? (onRectTransformDimensionsChange = new Subject<Unit>());
         }
 
-        Subject<Unit> onRectTransformRemoved;
+        private Subject<Unit> onRectTransformRemoved;
 
         // Callback that is sent if an associated RectTransform is removed
-        void OnRectTransformRemoved()
+        private void OnRectTransformRemoved()
         {
             if (onRectTransformRemoved != null) onRectTransformRemoved.OnNext(Unit.Default);
         }

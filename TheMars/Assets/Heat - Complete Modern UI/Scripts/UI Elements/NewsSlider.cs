@@ -14,25 +14,30 @@ namespace Michsky.UI.Heat
         private List<Animator> timers = new List<Animator>();
 
         // Resources
-        [SerializeField] private GameObject itemPreset;
-        [SerializeField] private Transform itemParent;
-        [SerializeField] private GameObject timerPreset;
-        [SerializeField] private Transform timerParent;
+        [SerializeField]
+        private GameObject itemPreset;
+        [SerializeField]
+        private Transform itemParent;
+        [SerializeField]
+        private GameObject timerPreset;
+        [SerializeField]
+        private Transform timerParent;
 
         // Settings
         public bool allowUpdate = true;
         public bool useLocalization = true;
         [Range(1, 30)] public float sliderTimer = 4;
-        [SerializeField] private UpdateMode updateMode = UpdateMode.DeltaTime;
+        [SerializeField]
+        private UpdateMode updateMode = UpdateMode.DeltaTime;
 
         // Helpers
-        Animator currentItemObject;
-        Animator currentIndicatorObject;
-        Image currentIndicatorBar;
-        int currentSliderIndex;
-        float sliderTimerBar;
-        bool isInitialized;
-        LocalizedObject localizedObject;
+        private Animator currentItemObject;
+        private Animator currentIndicatorObject;
+        private Image currentIndicatorBar;
+        private int currentSliderIndex;
+        private float sliderTimerBar;
+        private bool isInitialized;
+        private LocalizedObject localizedObject;
 
         public enum UpdateMode { DeltaTime, UnscaledTime }
 
@@ -51,13 +56,13 @@ namespace Michsky.UI.Heat
             public string buttonTextKey = "ButtonTextKey";
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (!isInitialized) { Initialize(); }
             else { StartCoroutine(PrepareSlider()); }
         }
 
-        void Update()
+        private void Update()
         {
             if (!isInitialized || !allowUpdate)
                 return;
@@ -65,7 +70,7 @@ namespace Michsky.UI.Heat
             CheckForTimer();
         }
 
-        void CheckForTimer()
+        private void CheckForTimer()
         {
             if (sliderTimerBar <= sliderTimer && currentIndicatorBar != null)
             {
@@ -206,7 +211,7 @@ namespace Michsky.UI.Heat
             else { StartCoroutine("WaitForSliderTimer"); }
         }
 
-        IEnumerator PrepareSlider()
+        private IEnumerator PrepareSlider()
         {
             if (updateMode == UpdateMode.UnscaledTime) { yield return new WaitForSecondsRealtime(0.02f); }
             else { yield return new WaitForSeconds(0.02f); }
@@ -230,7 +235,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("DisableItemAnimators");
         }
 
-        IEnumerator WaitForSliderTimer()
+        private IEnumerator WaitForSliderTimer()
         {
             if (updateMode == UpdateMode.UnscaledTime) { yield return new WaitForSecondsRealtime(sliderTimer); }
             else { yield return new WaitForSeconds(sliderTimer); }
@@ -268,7 +273,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("WaitForSliderTimer");
         }
 
-        IEnumerator DisableItemAnimators()
+        private IEnumerator DisableItemAnimators()
         {
             if (updateMode == UpdateMode.UnscaledTime) { yield return new WaitForSecondsRealtime(0.6f); }
             else { yield return new WaitForSeconds(0.6f); }

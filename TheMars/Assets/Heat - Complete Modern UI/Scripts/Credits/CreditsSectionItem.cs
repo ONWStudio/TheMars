@@ -9,13 +9,14 @@ namespace Michsky.UI.Heat
         [Header("Resources")]
         public HorizontalLayoutGroup headerLayout;
         public VerticalLayoutGroup listLayout;
-        [SerializeField] private TextMeshProUGUI headerText;
+        [SerializeField]
+        private TextMeshProUGUI headerText;
         public GameObject namePreset;
 
         [HideInInspector] public CreditsPreset preset;
         [HideInInspector] public LocalizedObject localizedObject;
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (localizedObject != null && !string.IsNullOrEmpty(localizedObject.localizationKey)) 
             {

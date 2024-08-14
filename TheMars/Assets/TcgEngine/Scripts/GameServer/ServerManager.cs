@@ -19,7 +19,7 @@ namespace TcgEngine.Server
         public string api_username;
         public string api_password;
 
-        private Dictionary<ulong, ClientData> client_list = new Dictionary<ulong, ClientData>();  //List of clients
+        private Dictionary<ulong, ClientData> client_list = new Dictionary<ulong, ClientData>(); //List of clients
         private Dictionary<string, GameServer> game_list = new Dictionary<string, GameServer>(); //List of games
         private List<string> game_remove_list = new List<string>();
 

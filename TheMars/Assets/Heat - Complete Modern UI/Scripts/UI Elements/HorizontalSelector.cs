@@ -12,14 +12,19 @@ namespace Michsky.UI.Heat
     {
         // Resources
         public TextMeshProUGUI label;
-        [SerializeField] private TextMeshProUGUI labelHelper;
+        [SerializeField]
+        private TextMeshProUGUI labelHelper;
         public Image labelIcon;
-        [SerializeField] private Image labelIconHelper;
+        [SerializeField]
+        private Image labelIconHelper;
         public Transform indicatorParent;
         public GameObject indicatorObject;
-        [SerializeField] private Animator selectorAnimator;
-        [SerializeField] private HorizontalLayoutGroup contentLayout;
-        [SerializeField] private HorizontalLayoutGroup contentLayoutHelper;
+        [SerializeField]
+        private Animator selectorAnimator;
+        [SerializeField]
+        private HorizontalLayoutGroup contentLayout;
+        [SerializeField]
+        private HorizontalLayoutGroup contentLayoutHelper;
         private string newItemTitle;
 
         // Saving
@@ -45,8 +50,8 @@ namespace Michsky.UI.Heat
         public HorizontalSelectorEvent onValueChanged = new HorizontalSelectorEvent();
 
         // Helpers
-        LocalizedObject localizedObject;
-        float cachedStateLength;
+        private LocalizedObject localizedObject;
+        private float cachedStateLength;
 
         [System.Serializable]
         public class Item
@@ -60,7 +65,7 @@ namespace Michsky.UI.Heat
         [System.Serializable] 
         public class HorizontalSelectorEvent : UnityEvent<int> { }
 
-        void Awake()
+        private void Awake()
         {
             if (selectorAnimator == null) { selectorAnimator = gameObject.GetComponent<Animator>(); }
             if (label == null || labelHelper == null)
@@ -81,7 +86,7 @@ namespace Michsky.UI.Heat
             cachedStateLength = HeatUIInternalTools.GetAnimatorClipLength(selectorAnimator, "HorizontalSelector_Next");
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (gameObject.activeInHierarchy == true) { StartCoroutine("DisableAnimator"); }
             if (useLocalization == true && !string.IsNullOrEmpty(items[index].localizationKey) && localizedObject.CheckLocalizationStatus() == true) 
@@ -352,7 +357,7 @@ namespace Michsky.UI.Heat
             LayoutRebuilder.ForceRebuildLayoutImmediate(label.transform.parent.GetComponent<RectTransform>());
         }
 
-        IEnumerator DisableAnimator()
+        private IEnumerator DisableAnimator()
         {
             yield return new WaitForSeconds(cachedStateLength + 0.1f);
             selectorAnimator.enabled = false;

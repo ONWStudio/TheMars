@@ -40,7 +40,7 @@ namespace TcgEngine.Client
 
         private static List<PackCard> card_list = new List<PackCard>();
 
-        void Awake()
+        private void Awake()
         {
             card_list.Add(this);
         }
@@ -50,7 +50,7 @@ namespace TcgEngine.Client
             card_list.Remove(this);
         }
 
-        void Update()
+        private void Update()
         {
             transform.position = Vector3.MoveTowards(transform.position, target, move_speed * Time.deltaTime);
 

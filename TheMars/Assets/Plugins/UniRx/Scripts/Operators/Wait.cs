@@ -5,16 +5,16 @@ namespace UniRx.Operators
 {
     internal class Wait<T> : IObserver<T>
     {
-        static readonly TimeSpan InfiniteTimeSpan = new TimeSpan(0, 0, 0, 0, -1); // from .NET 4.5
+        private static readonly TimeSpan InfiniteTimeSpan = new TimeSpan(0, 0, 0, 0, -1); // from .NET 4.5
 
-        readonly IObservable<T> source;
-        readonly TimeSpan timeout;
+        private readonly IObservable<T> source;
+        private readonly TimeSpan timeout;
 
-        System.Threading.ManualResetEvent semaphore;
+        private System.Threading.ManualResetEvent semaphore;
 
-        bool seenValue = false;
-        T value = default(T);
-        Exception ex = default(Exception);
+        private bool seenValue = false;
+        private T value = default(T);
+        private Exception ex = default(Exception);
 
         public Wait(IObservable<T> source, TimeSpan timeout)
         {

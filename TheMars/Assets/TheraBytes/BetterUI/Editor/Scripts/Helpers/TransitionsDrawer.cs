@@ -11,11 +11,11 @@ namespace TheraBytes.BetterUi.Editor
     [CustomPropertyDrawer(typeof(Transitions))]
     public class TransitionsDrawer : PropertyDrawer
     {
-        const float LineHeight = 20;
-        const float SmallSpacing = 2;
+        private const float LineHeight = 20;
+        private const float SmallSpacing = 2;
 
-        const float BigSpacing = 5;
-        Transitions info;
+        private const float BigSpacing = 5;
+        private Transitions info;
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {

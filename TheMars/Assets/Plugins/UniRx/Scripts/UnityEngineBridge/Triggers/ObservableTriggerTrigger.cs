@@ -6,10 +6,10 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableTriggerTrigger : ObservableTriggerBase
     {
-        Subject<Collider> onTriggerEnter;
+        private Subject<Collider> onTriggerEnter;
 
         /// <summary>OnTriggerEnter is called when the Collider other enters the trigger.</summary>
-        void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             if (onTriggerEnter != null) onTriggerEnter.OnNext(other);
         }
@@ -20,10 +20,10 @@ namespace UniRx.Triggers
             return onTriggerEnter ?? (onTriggerEnter = new Subject<Collider>());
         }
 
-        Subject<Collider> onTriggerExit;
+        private Subject<Collider> onTriggerExit;
 
         /// <summary>OnTriggerExit is called when the Collider other has stopped touching the trigger.</summary>
-        void OnTriggerExit(Collider other)
+        private void OnTriggerExit(Collider other)
         {
             if (onTriggerExit != null) onTriggerExit.OnNext(other);
         }
@@ -34,10 +34,10 @@ namespace UniRx.Triggers
             return onTriggerExit ?? (onTriggerExit = new Subject<Collider>());
         }
 
-        Subject<Collider> onTriggerStay;
+        private Subject<Collider> onTriggerStay;
 
         /// <summary>OnTriggerStay is called once per frame for every Collider other that is touching the trigger.</summary>
-        void OnTriggerStay(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if (onTriggerStay != null) onTriggerStay.OnNext(other);
         }

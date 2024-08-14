@@ -27,9 +27,9 @@ namespace TcgEngine.AI
 
         //-----------
 
-        private int ai_player_id;           //ID of this AI, usually the human is 0 and AI is 1
-        private int ai_level;               //ai level (level 10 is the best, level 1 is the worst)
-        private int heuristic_modifier;     //Randomize heuristic for lower level ai
+        private int ai_player_id;       //ID of this AI, usually the human is 0 and AI is 1
+        private int ai_level;           //ai level (level 10 is the best, level 1 is the worst)
+        private int heuristic_modifier; //Randomize heuristic for lower level ai
         private System.Random random_gen;
 
         public AIHeuristic(int player_id, int level)

@@ -10,10 +10,14 @@ namespace Michsky.UI.Heat
     public class ImageFading : MonoBehaviour
     {
         [Header("Settings")]
-        [SerializeField] private bool doPingPong = false;
-        [SerializeField] [Range(0.5f, 12)] private float fadeSpeed = 2f;
-        [SerializeField] private AnimationCurve fadeCurve = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
-        [SerializeField] private EnableBehaviour enableBehaviour;
+        [SerializeField]
+        private bool doPingPong = false;
+        [SerializeField] [Range(0.5f, 12)]
+        private float fadeSpeed = 2f;
+        [SerializeField]
+        private AnimationCurve fadeCurve = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
+        [SerializeField]
+        private EnableBehaviour enableBehaviour;
 
         [Header("Events")]
         public UnityEvent onFadeIn;
@@ -22,11 +26,11 @@ namespace Michsky.UI.Heat
         public UnityEvent onFadeOutEnd;
 
         // Helpers
-        Image targetImg;
+        private Image targetImg;
 
         public enum EnableBehaviour { None, FadeIn, FadeOut }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (enableBehaviour == EnableBehaviour.FadeIn) { FadeIn(); }
             else if (enableBehaviour == EnableBehaviour.FadeOut) { FadeOut(); }
@@ -58,7 +62,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("DoFadeOut");
         }
 
-        IEnumerator DoFadeIn()
+        private IEnumerator DoFadeIn()
         {
             Color startingPoint = new Color(targetImg.color.r, targetImg.color.g, targetImg.color.b, 0);
             float elapsedTime = 0;
@@ -75,7 +79,7 @@ namespace Michsky.UI.Heat
             if (doPingPong == true) { StartCoroutine("DoFadeOut"); }
         }
 
-        IEnumerator DoFadeOut()
+        private IEnumerator DoFadeOut()
         {
             Color startingPoint = targetImg.color;
             float elapsedTime = 0;

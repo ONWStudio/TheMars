@@ -7,16 +7,16 @@ namespace Michsky.UI.Heat
 {
     public class ToolsMenu : Editor
     {
-        static string objectPath;
+        private static string objectPath;
 
-        static void GetObjectPath()
+        private static void GetObjectPath()
         {
             objectPath = AssetDatabase.GetAssetPath(Resources.Load("Heat UI Manager"));
             objectPath = objectPath.Replace("Resources/Heat UI Manager.asset", "").Trim();
             objectPath = objectPath + "Prefabs/";
         }
 
-        static void MakeSceneDirty(GameObject source, string sourceName)
+        private static void MakeSceneDirty(GameObject source, string sourceName)
         {
             if (Application.isPlaying == false)
             {
@@ -25,13 +25,13 @@ namespace Michsky.UI.Heat
             }
         }
 
-        static void ShowErrorDialog()
+        private static void ShowErrorDialog()
         {
             EditorUtility.DisplayDialog("Heat UI", "Cannot create the object due to missing manager file. " +
                     "Make sure you have 'Heat UI Manager' file in Heat UI > Resources folder.", "Dismiss");
         }
 
-        static void UpdateCustomEditorPath()
+        private static void UpdateCustomEditorPath()
         {
             string darkPath = AssetDatabase.GetAssetPath(Resources.Load("HeatUIEditor-Dark"));
             string lightPath = AssetDatabase.GetAssetPath(Resources.Load("HeatUIEditor-Light"));
@@ -41,7 +41,7 @@ namespace Michsky.UI.Heat
         }
 
         [MenuItem("Tools/Heat UI/Show UI Manager %#M")]
-        static void ShowManager()
+        private static void ShowManager()
         {
             Selection.activeObject = Resources.Load("Heat UI Manager");
 
@@ -49,7 +49,7 @@ namespace Michsky.UI.Heat
                 Debug.Log("<b>[Heat UI]</b>Can't find an asset called 'Heat UI Manager'. Make sure you have 'Heat UI Manager' in: Heat UI > Editor > Resources");
         }
 
-        static void CreateObject(string resourcePath)
+        private static void CreateObject(string resourcePath)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace Michsky.UI.Heat
         }
 
         [MenuItem("GameObject/Heat UI/Canvas", false, 8)]
-        static void CreateCanvas()
+        private static void CreateCanvas()
         {
             try
             {
@@ -110,98 +110,67 @@ namespace Michsky.UI.Heat
             catch { ShowErrorDialog(); }
         }
 
-        [MenuItem("GameObject/Heat UI/Button/Button", false, 8)]
-        static void CreateButtonMain() { CreateObject("UI Elements/Button/Button"); }
+        [MenuItem("GameObject/Heat UI/Button/Button", false, 8)] private static void CreateButtonMain() { CreateObject("UI Elements/Button/Button"); }
 
-        [MenuItem("GameObject/Heat UI/Button/Button (Box)", false, 8)]
-        static void CreateButtonBox() { CreateObject("UI Elements/Button/Button (Box)"); }
+        [MenuItem("GameObject/Heat UI/Button/Button (Box)", false, 8)] private static void CreateButtonBox() { CreateObject("UI Elements/Button/Button (Box)"); }
 
-        [MenuItem("GameObject/Heat UI/Button/Button (Box Icon Only)", false, 8)]
-        static void CreateButtonBoxIO() { CreateObject("UI Elements/Button/Button (Box Icon Only)"); }
+        [MenuItem("GameObject/Heat UI/Button/Button (Box Icon Only)", false, 8)] private static void CreateButtonBoxIO() { CreateObject("UI Elements/Button/Button (Box Icon Only)"); }
 
-        [MenuItem("GameObject/Heat UI/Button/Button (Panel)", false, 8)]
-        static void CreateButtonPanel() { CreateObject("UI Elements/Button/Button (Panel)"); }
+        [MenuItem("GameObject/Heat UI/Button/Button (Panel)", false, 8)] private static void CreateButtonPanel() { CreateObject("UI Elements/Button/Button (Panel)"); }
 
-        [MenuItem("GameObject/Heat UI/Button/Button (Panel Alt)", false, 8)]
-        static void CreateButtonPanelAlt() { CreateObject("UI Elements/Button/Button (Panel Alt)"); }
+        [MenuItem("GameObject/Heat UI/Button/Button (Panel Alt)", false, 8)] private static void CreateButtonPanelAlt() { CreateObject("UI Elements/Button/Button (Panel Alt)"); }
 
-        [MenuItem("GameObject/Heat UI/Button/Button (Radial Icon Only)", false, 8)]
-        static void CreateButtonRadialIO() { CreateObject("UI Elements/Button/Button (Radial Icon Only)"); }
+        [MenuItem("GameObject/Heat UI/Button/Button (Radial Icon Only)", false, 8)] private static void CreateButtonRadialIO() { CreateObject("UI Elements/Button/Button (Radial Icon Only)"); }
 
-        [MenuItem("GameObject/Heat UI/Button/Button (Shop)", false, 8)]
-        static void CreateButtonShop() { CreateObject("UI Elements/Button/Button (Shop)"); }
+        [MenuItem("GameObject/Heat UI/Button/Button (Shop)", false, 8)] private static void CreateButtonShop() { CreateObject("UI Elements/Button/Button (Shop)"); }
 
-        [MenuItem("GameObject/Heat UI/Dropdown/Standard", false, 8)]
-        static void CreateDropdown() { CreateObject("UI Elements/Dropdown/Dropdown"); }
+        [MenuItem("GameObject/Heat UI/Dropdown/Standard", false, 8)] private static void CreateDropdown() { CreateObject("UI Elements/Dropdown/Dropdown"); }
 
-        [MenuItem("GameObject/Heat UI/HUD/Health Bar", false, 8)]
-        static void CreateHudHealthBar() { CreateObject("HUD/Health Bar"); }
+        [MenuItem("GameObject/Heat UI/HUD/Health Bar", false, 8)] private static void CreateHudHealthBar() { CreateObject("HUD/Health Bar"); }
 
-        [MenuItem("GameObject/Heat UI/HUD/Minimap", false, 8)]
-        static void CreateHudMinimap() { CreateObject("HUD/Minimap"); }
+        [MenuItem("GameObject/Heat UI/HUD/Minimap", false, 8)] private static void CreateHudMinimap() { CreateObject("HUD/Minimap"); }
 
-        [MenuItem("GameObject/Heat UI/HUD/Quest Item", false, 8)]
-        static void CreateHudQuestItem() { CreateObject("HUD/Quest Item"); }
+        [MenuItem("GameObject/Heat UI/HUD/Quest Item", false, 8)] private static void CreateHudQuestItem() { CreateObject("HUD/Quest Item"); }
 
-        [MenuItem("GameObject/Heat UI/Input/Hotkey Indicator", false, 8)]
-        static void CreateHotkeyIndicator() { CreateObject("UI Elements/Input/Hotkey Indicator"); }
+        [MenuItem("GameObject/Heat UI/Input/Hotkey Indicator", false, 8)] private static void CreateHotkeyIndicator() { CreateObject("UI Elements/Input/Hotkey Indicator"); }
 
-        [MenuItem("GameObject/Heat UI/Input Field/Standard", false, 8)]
-        static void CreateInputField() { CreateObject("UI Elements/Input Field/Input Field"); }
+        [MenuItem("GameObject/Heat UI/Input Field/Standard", false, 8)] private static void CreateInputField() { CreateObject("UI Elements/Input Field/Input Field"); }
 
-        [MenuItem("GameObject/Heat UI/Modal Window/Standard", false, 8)]
-        static void CreateModalWindow() { CreateObject("UI Elements/Modal Window/Modal Window"); }
+        [MenuItem("GameObject/Heat UI/Modal Window/Standard", false, 8)] private static void CreateModalWindow() { CreateObject("UI Elements/Modal Window/Modal Window"); }
 
-        [MenuItem("GameObject/Heat UI/Modal Window/Custom Content", false, 8)]
-        static void CreateModalWindowCC() { CreateObject("UI Elements/Modal Window/Modal Window (Custom Content)"); }
+        [MenuItem("GameObject/Heat UI/Modal Window/Custom Content", false, 8)] private static void CreateModalWindowCC() { CreateObject("UI Elements/Modal Window/Modal Window (Custom Content)"); }
 
-        [MenuItem("GameObject/Heat UI/Notification/Standard Notification", false, 8)]
-        static void CreateNotification() { CreateObject("UI Elements/Notification/Notification"); }
+        [MenuItem("GameObject/Heat UI/Notification/Standard Notification", false, 8)] private static void CreateNotification() { CreateObject("UI Elements/Notification/Notification"); }
 
-        [MenuItem("GameObject/Heat UI/Panels/Credits", false, 8)]
-        static void CreateCredits() { CreateObject("Panels/Credits"); }
+        [MenuItem("GameObject/Heat UI/Panels/Credits", false, 8)] private static void CreateCredits() { CreateObject("Panels/Credits"); }
 
-        [MenuItem("GameObject/Heat UI/Panels/Panel Manager", false, 8)]
-        static void CreatePanelManager() { CreateObject("Panels/Panel Manager"); }
+        [MenuItem("GameObject/Heat UI/Panels/Panel Manager", false, 8)] private static void CreatePanelManager() { CreateObject("Panels/Panel Manager"); }
 
-        [MenuItem("GameObject/Heat UI/Progress Bar/Standard", false, 8)]
-        static void CreateProgressBar() { CreateObject("UI Elements/Progress Bar/Progress Bar"); }
+        [MenuItem("GameObject/Heat UI/Progress Bar/Standard", false, 8)] private static void CreateProgressBar() { CreateObject("UI Elements/Progress Bar/Progress Bar"); }
 
-        [MenuItem("GameObject/Heat UI/Scrollbar/Horizontal", false, 8)]
-        static void CreateScrollbarHorizontal() { CreateObject("UI Elements/Scrollbar/Scrollbar Horizontal"); }
+        [MenuItem("GameObject/Heat UI/Scrollbar/Horizontal", false, 8)] private static void CreateScrollbarHorizontal() { CreateObject("UI Elements/Scrollbar/Scrollbar Horizontal"); }
 
-        [MenuItem("GameObject/Heat UI/Scrollbar/Vertical", false, 8)]
-        static void CreateScrollbarVertical() { CreateObject("UI Elements/Scrollbar/Scrollbar Vertical"); }
+        [MenuItem("GameObject/Heat UI/Scrollbar/Vertical", false, 8)] private static void CreateScrollbarVertical() { CreateObject("UI Elements/Scrollbar/Scrollbar Vertical"); }
 
-        [MenuItem("GameObject/Heat UI/Selectors/Horizontal Selector", false, 8)]
-        static void CreateHorizontalSelector() { CreateObject("UI Elements/Selectors/Horizontal Selector"); }
+        [MenuItem("GameObject/Heat UI/Selectors/Horizontal Selector", false, 8)] private static void CreateHorizontalSelector() { CreateObject("UI Elements/Selectors/Horizontal Selector"); }
 
-        [MenuItem("GameObject/Heat UI/Settings/Settings Element (Dropdown)", false, 8)]
-        static void CreateSettingsDropdownt() { CreateObject("UI Elements/Settings/Settings Element (Dropdown Alt)"); }
+        [MenuItem("GameObject/Heat UI/Settings/Settings Element (Dropdown)", false, 8)] private static void CreateSettingsDropdownt() { CreateObject("UI Elements/Settings/Settings Element (Dropdown Alt)"); }
 
-        [MenuItem("GameObject/Heat UI/Settings/Settings Element (Horizontal Selector)", false, 8)]
-        static void CreateSettingsHS() { CreateObject("UI Elements/Settings/Settings Element (Horizontal Selector)"); }
+        [MenuItem("GameObject/Heat UI/Settings/Settings Element (Horizontal Selector)", false, 8)] private static void CreateSettingsHS() { CreateObject("UI Elements/Settings/Settings Element (Horizontal Selector)"); }
 
-        [MenuItem("GameObject/Heat UI/Settings/Settings Element (Slider)", false, 8)]
-        static void CreateSettingsSlider() { CreateObject("UI Elements/Settings/Settings Element (Slider)"); }
+        [MenuItem("GameObject/Heat UI/Settings/Settings Element (Slider)", false, 8)] private static void CreateSettingsSlider() { CreateObject("UI Elements/Settings/Settings Element (Slider)"); }
 
-        [MenuItem("GameObject/Heat UI/Settings/Settings Element (Switch)", false, 8)]
-        static void CreateSettingsSwitch() { CreateObject("UI Elements/Settings/Settings Element (Switch)"); }
+        [MenuItem("GameObject/Heat UI/Settings/Settings Element (Switch)", false, 8)] private static void CreateSettingsSwitch() { CreateObject("UI Elements/Settings/Settings Element (Switch)"); }
 
-        [MenuItem("GameObject/Heat UI/Slider/Standard", false, 8)]
-        static void CreateSlider() { CreateObject("UI Elements/Slider/Slider"); }
+        [MenuItem("GameObject/Heat UI/Slider/Standard", false, 8)] private static void CreateSlider() { CreateObject("UI Elements/Slider/Slider"); }
 
-        [MenuItem("GameObject/Heat UI/Switch/Standard", false, 8)]
-        static void CreateSwitch() { CreateObject("UI Elements/Switch/Switch"); }
+        [MenuItem("GameObject/Heat UI/Switch/Standard", false, 8)] private static void CreateSwitch() { CreateObject("UI Elements/Switch/Switch"); }
 
-        [MenuItem("GameObject/Heat UI/Text/Text (TMP)", false, 8)]
-        static void CreateText() { CreateObject("UI Elements/Text/Text (TMP)"); }
+        [MenuItem("GameObject/Heat UI/Text/Text (TMP)", false, 8)] private static void CreateText() { CreateObject("UI Elements/Text/Text (TMP)"); }
 
-        [MenuItem("GameObject/Heat UI/Widgets/News Slider", false, 8)]
-        static void CreateNewsSlider() { CreateObject("UI Elements/Widgets/News Slider/News Slider"); }
+        [MenuItem("GameObject/Heat UI/Widgets/News Slider", false, 8)] private static void CreateNewsSlider() { CreateObject("UI Elements/Widgets/News Slider/News Slider"); }
 
-        [MenuItem("GameObject/Heat UI/Widgets/Socials", false, 8)]
-        static void CreateSocialsWidget() { CreateObject("UI Elements/Widgets/Socials/Socials Widget"); }
+        [MenuItem("GameObject/Heat UI/Widgets/Socials", false, 8)] private static void CreateSocialsWidget() { CreateObject("UI Elements/Widgets/Socials/Socials Widget"); }
     }
 }
 #endif

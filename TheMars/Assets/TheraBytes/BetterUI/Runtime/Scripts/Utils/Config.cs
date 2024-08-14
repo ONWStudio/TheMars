@@ -8,7 +8,7 @@ namespace TheraBytes.BetterUi
 {
     public static class Config
     {
-        static bool applyAssignmentsToCurrentSettings = true;
+        private static bool applyAssignmentsToCurrentSettings = true;
 
         /// <summary>
         /// If true (default), setters of properties which exist in the unity-base-class 

@@ -7,6 +7,7 @@ using UniRx;
 using Onw.Attribute;
 using Onw.Extensions;
 using UnityEditor;
+using UnityEngine.Serialization;
 
 namespace TMCard.Runtime
 {
@@ -14,11 +15,15 @@ namespace TMCard.Runtime
     [DisallowMultipleComponent]
     public sealed class TMCardGeneralController : MonoBehaviour
     {
+        [FormerlySerializedAs("_cardController")]
         [Header("Model")]
-        [SerializeField, InitializeRequireComponent] private TMCardController _cardController;
+        [SerializeField, InitializeRequireComponent]
+        private TMCardController _cardController;
 
+        [FormerlySerializedAs("_cardViewer")]
         [Header("View")]
-        [SerializeField, InitializeRequireComponent] private TMCardViewer _cardViewer;
+        [SerializeField, InitializeRequireComponent]
+        private TMCardViewer _cardViewer;
 
         private TMCardData _cardData = null;
 

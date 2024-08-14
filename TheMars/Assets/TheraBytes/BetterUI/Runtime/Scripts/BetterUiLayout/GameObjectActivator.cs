@@ -24,7 +24,7 @@ namespace TheraBytes.BetterUi
             public List<GameObject> InactiveObjects = new List<GameObject>();
 
             [SerializeField]
-            string screenConfigName;
+            private string screenConfigName;
             public string ScreenConfigName { get { return screenConfigName; } set { screenConfigName = value; } }
         }
 
@@ -34,10 +34,10 @@ namespace TheraBytes.BetterUi
         public Settings CurrentSettings { get { return customSettings.GetCurrentItem(settingsFallback); } }
 
         [SerializeField]
-        Settings settingsFallback = new Settings();
+        private Settings settingsFallback = new Settings();
 
         [SerializeField]
-        SettingsConfigCollection customSettings = new SettingsConfigCollection();
+        private SettingsConfigCollection customSettings = new SettingsConfigCollection();
         
         protected override void OnEnable()
         {

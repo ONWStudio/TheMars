@@ -111,12 +111,12 @@ namespace UniRx
             }
         }
 
-        static IEnumerator EmptyEnumerator()
+        private static IEnumerator EmptyEnumerator()
         {
             yield break;
         }
 
-        static IEnumerator PublishPocoValueChanged<TSource, TProperty>(WeakReference sourceReference, TProperty firstValue, Func<TSource, TProperty> propertySelector, IEqualityComparer<TProperty> comparer, IObserver<TProperty> observer, CancellationToken cancellationToken)
+        private static IEnumerator PublishPocoValueChanged<TSource, TProperty>(WeakReference sourceReference, TProperty firstValue, Func<TSource, TProperty> propertySelector, IEqualityComparer<TProperty> comparer, IObserver<TProperty> observer, CancellationToken cancellationToken)
         {
             var currentValue = default(TProperty);
             var prevValue = firstValue;
@@ -156,7 +156,7 @@ namespace UniRx
             }
         }
 
-        static IEnumerator PublishUnityObjectValueChanged<TSource, TProperty>(UnityEngine.Object unityObject, TProperty firstValue, Func<TSource, TProperty> propertySelector, IEqualityComparer<TProperty> comparer, IObserver<TProperty> observer, CancellationToken cancellationToken, bool fastDestroyCheck)
+        private static IEnumerator PublishUnityObjectValueChanged<TSource, TProperty>(UnityEngine.Object unityObject, TProperty firstValue, Func<TSource, TProperty> propertySelector, IEqualityComparer<TProperty> comparer, IObserver<TProperty> observer, CancellationToken cancellationToken, bool fastDestroyCheck)
         {
             var currentValue = default(TProperty);
             var prevValue = firstValue;
@@ -251,7 +251,7 @@ namespace UniRx
             }
         }
 
-        static ObservableDestroyTrigger GetOrAddDestroyTrigger(UnityEngine.GameObject go)
+        private static ObservableDestroyTrigger GetOrAddDestroyTrigger(UnityEngine.GameObject go)
         {
             var dt = go.GetComponent<ObservableDestroyTrigger>();
             if (dt == null)

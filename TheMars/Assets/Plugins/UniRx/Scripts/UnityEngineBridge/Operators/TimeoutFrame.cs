@@ -10,9 +10,9 @@ namespace UniRx.Operators
 {
     internal class TimeoutFrameObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly int frameCount;
-        readonly FrameCountType frameCountType;
+        private readonly IObservable<T> source;
+        private readonly int frameCount;
+        private readonly FrameCountType frameCountType;
 
         public TimeoutFrameObservable(IObservable<T> source, int frameCount, FrameCountType frameCountType) : base(source.IsRequiredSubscribeOnCurrentThread())
         {
@@ -26,14 +26,14 @@ namespace UniRx.Operators
             return new TimeoutFrame(this, observer, cancel).Run();
         }
 
-        class TimeoutFrame : OperatorObserverBase<T, T>
+        private class TimeoutFrame : OperatorObserverBase<T, T>
         {
-            readonly TimeoutFrameObservable<T> parent;
-            readonly object gate = new object();
-            ulong objectId = 0ul;
-            bool isTimeout = false;
-            SingleAssignmentDisposable sourceSubscription;
-            SerialDisposable timerSubscription;
+            private readonly TimeoutFrameObservable<T> parent;
+            private readonly object gate = new object();
+            private ulong objectId = 0ul;
+            private bool isTimeout = false;
+            private SingleAssignmentDisposable sourceSubscription;
+            private SerialDisposable timerSubscription;
 
             public TimeoutFrame(TimeoutFrameObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -50,7 +50,7 @@ namespace UniRx.Operators
                 return StableCompositeDisposable.Create(timerSubscription, sourceSubscription);
             }
 
-            IDisposable RunTimer(ulong timerId)
+            private IDisposable RunTimer(ulong timerId)
             {
                 return UnityObservable.TimerFrame(parent.frameCount, parent.frameCountType)
                     .Subscribe(new TimeoutFrameTick(this, timerId));
@@ -101,10 +101,10 @@ namespace UniRx.Operators
                 try { observer.OnCompleted(); } finally { Dispose(); }
             }
 
-            class TimeoutFrameTick : IObserver<long>
+            private class TimeoutFrameTick : IObserver<long>
             {
-                readonly TimeoutFrame parent;
-                readonly ulong timerId;
+                private readonly TimeoutFrame parent;
+                private readonly ulong timerId;
 
                 public TimeoutFrameTick(TimeoutFrame parent, ulong timerId)
                 {

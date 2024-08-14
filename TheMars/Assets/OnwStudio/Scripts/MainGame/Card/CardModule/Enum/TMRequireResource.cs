@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TMCard
 {
-    public enum TM_REQUIRED_RESOURCE
+    public enum TMRequiredResource
     {
         [InspectorName("테라")] TERA = 0,
         [InspectorName("마르스 리튬")] MARS_LITHUM

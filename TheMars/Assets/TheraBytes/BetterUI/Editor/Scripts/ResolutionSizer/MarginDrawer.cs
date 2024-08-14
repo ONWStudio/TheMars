@@ -10,7 +10,7 @@ namespace TheraBytes.BetterUi
     [CustomPropertyDrawer(typeof(Margin))]
     public class MarginDrawer : PropertyDrawer
     {
-        bool foldout;
+        private bool foldout;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {

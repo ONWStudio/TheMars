@@ -10,9 +10,9 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(BetterAspectRatioFitter)), CanEditMultipleObjects]
     public class BetterAspectRatioFitterEditor : UnityEditor.Editor
     {
-        SerializedProperty settingsFallback, settingsList;
+        private SerializedProperty settingsFallback, settingsList;
 
-        void OnEnable()
+        private void OnEnable()
         {
             this.settingsFallback = serializedObject.FindProperty("settingsFallback");
             this.settingsList = serializedObject.FindProperty("customSettings");

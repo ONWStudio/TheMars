@@ -8,18 +8,21 @@ namespace Michsky.UI.Heat
     public class SelectorInputHandler : MonoBehaviour
     {
         [Header("Resources")]
-        [SerializeField] private HorizontalSelector selectorObject;
-        [SerializeField] private GameObject indicator;
+        [SerializeField]
+        private HorizontalSelector selectorObject;
+        [SerializeField]
+        private GameObject indicator;
 
         [Header("Settings")]
         public float selectorCooldown = 0.4f;
-        [SerializeField] private bool optimizeUpdates = true;
+        [SerializeField]
+        private bool optimizeUpdates = true;
         public bool requireSelecting = true;
 
         // Helpers
-        bool isInCooldown = false;
+        private bool isInCooldown = false;
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (ControllerManager.instance == null || selectorObject == null) { Destroy(this); }
             if (indicator == null)
@@ -32,7 +35,7 @@ namespace Michsky.UI.Heat
             indicator.SetActive(false);
         }
 
-        void Update()
+        private void Update()
         {
             if (Gamepad.current == null || ControllerManager.instance == null) { indicator.SetActive(false); return; }
             else if (requireSelecting && EventSystem.current.currentSelectedGameObject != gameObject) { indicator.SetActive(false); return; }
@@ -60,7 +63,7 @@ namespace Michsky.UI.Heat
             }
         }
 
-        IEnumerator CooldownTimer()
+        private IEnumerator CooldownTimer()
         {
             yield return new WaitForSecondsRealtime(selectorCooldown);
             isInCooldown = false;

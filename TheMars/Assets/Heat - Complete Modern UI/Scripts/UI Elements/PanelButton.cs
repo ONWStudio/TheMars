@@ -16,19 +16,32 @@ namespace Michsky.UI.Heat
         public string buttonText = "Button";
 
         // Resources
-        [SerializeField] private CanvasGroup disabledCG;
-        [SerializeField] private CanvasGroup normalCG;
-        [SerializeField] private CanvasGroup highlightCG;
-        [SerializeField] private CanvasGroup selectCG;
-        [SerializeField] private TextMeshProUGUI disabledTextObj;
-        [SerializeField] private TextMeshProUGUI normalTextObj;
-        [SerializeField] private TextMeshProUGUI highlightTextObj;
-        [SerializeField] private TextMeshProUGUI selectTextObj;
-        [SerializeField] private Image disabledImageObj;
-        [SerializeField] private Image normalImageObj;
-        [SerializeField] private Image highlightImageObj;
-        [SerializeField] private Image selectedImageObj;
-        [SerializeField] private GameObject seperator;
+        [SerializeField]
+        private CanvasGroup disabledCG;
+        [SerializeField]
+        private CanvasGroup normalCG;
+        [SerializeField]
+        private CanvasGroup highlightCG;
+        [SerializeField]
+        private CanvasGroup selectCG;
+        [SerializeField]
+        private TextMeshProUGUI disabledTextObj;
+        [SerializeField]
+        private TextMeshProUGUI normalTextObj;
+        [SerializeField]
+        private TextMeshProUGUI highlightTextObj;
+        [SerializeField]
+        private TextMeshProUGUI selectTextObj;
+        [SerializeField]
+        private Image disabledImageObj;
+        [SerializeField]
+        private Image normalImageObj;
+        [SerializeField]
+        private Image highlightImageObj;
+        [SerializeField]
+        private Image selectedImageObj;
+        [SerializeField]
+        private GameObject seperator;
 
         // Settings
         public bool isInteractable = true;
@@ -53,18 +66,18 @@ namespace Michsky.UI.Heat
         public UnityEvent onSelect = new UnityEvent();
 
         // Helpers
-        bool isInitialized = false;
-        Button targetButton;
-        LocalizedObject localizedObject;
+        private bool isInitialized = false;
+        private Button targetButton;
+        private LocalizedObject localizedObject;
         [HideInInspector] public NavigationBar navbar;
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (!isInitialized) { Initialize(); }
             UpdateUI();
         }
 
-        void Initialize()
+        private void Initialize()
         {
             if (!Application.isPlaying) { return; }
             if (UIManagerAudio.instance == null) { useSounds = false; }
@@ -245,7 +258,7 @@ namespace Michsky.UI.Heat
             else { StartCoroutine("SetNormal"); }
         }
 
-        IEnumerator SetDisabled()
+        private IEnumerator SetDisabled()
         {
             StopCoroutine("SetNormal");
             StopCoroutine("SetHighlight");
@@ -266,7 +279,7 @@ namespace Michsky.UI.Heat
             selectCG.alpha = 0;
         }
 
-        IEnumerator SetNormal()
+        private IEnumerator SetNormal()
         {
             StopCoroutine("SetDisabled");
             StopCoroutine("SetHighlight");
@@ -287,7 +300,7 @@ namespace Michsky.UI.Heat
             selectCG.alpha = 0;
         }
 
-        IEnumerator SetHighlight()
+        private IEnumerator SetHighlight()
         {
             StopCoroutine("SetDisabled");
             StopCoroutine("SetNormal");
@@ -308,7 +321,7 @@ namespace Michsky.UI.Heat
             selectCG.alpha = 0;
         }
 
-        IEnumerator SetSelect()
+        private IEnumerator SetSelect()
         {
             StopCoroutine("SetDisabled");
             StopCoroutine("SetNormal");

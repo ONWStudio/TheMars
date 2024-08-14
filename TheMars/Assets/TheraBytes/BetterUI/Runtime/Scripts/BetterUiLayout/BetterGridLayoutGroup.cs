@@ -29,7 +29,7 @@ namespace TheraBytes.BetterUi
             public bool Fit;
 
             [SerializeField]
-            string screenConfigName;
+            private string screenConfigName;
             public string ScreenConfigName { get { return screenConfigName; } set { screenConfigName = value; } }
 
             public Settings(BetterGridLayoutGroup grid)
@@ -101,36 +101,36 @@ namespace TheraBytes.BetterUi
 
         [FormerlySerializedAs("paddingSizer")]
         [SerializeField]
-        MarginSizeModifier paddingSizerFallback =
+        private MarginSizeModifier paddingSizerFallback =
             new MarginSizeModifier(new Margin(), new Margin(), new Margin(1000, 1000, 1000, 1000));
 
         [SerializeField]
-        MarginSizeConfigCollection customPaddingSizers = new MarginSizeConfigCollection();
+        private MarginSizeConfigCollection customPaddingSizers = new MarginSizeConfigCollection();
 
         [FormerlySerializedAs("cellSizer")]
         [SerializeField]
-        Vector2SizeModifier cellSizerFallback =
+        private Vector2SizeModifier cellSizerFallback =
             new Vector2SizeModifier(new Vector2(100, 100), new Vector2(10, 10), new Vector2(300, 300));
 
         [SerializeField]
-        Vector2SizeConfigCollection customCellSizers = new Vector2SizeConfigCollection();
+        private Vector2SizeConfigCollection customCellSizers = new Vector2SizeConfigCollection();
 
         [FormerlySerializedAs("spacingSizer")]
         [SerializeField]
-        Vector2SizeModifier spacingSizerFallback =
+        private Vector2SizeModifier spacingSizerFallback =
             new Vector2SizeModifier(Vector2.zero, Vector2.zero, new Vector2(300, 300));
 
         [SerializeField]
-        Vector2SizeConfigCollection customSpacingSizers = new Vector2SizeConfigCollection();
+        private Vector2SizeConfigCollection customSpacingSizers = new Vector2SizeConfigCollection();
 
         [SerializeField]
-        Settings settingsFallback;
+        private Settings settingsFallback;
 
         [SerializeField]
-        SettingsConfigCollection customSettings = new SettingsConfigCollection();
+        private SettingsConfigCollection customSettings = new SettingsConfigCollection();
 
         [SerializeField]
-        bool fit = false;
+        private bool fit = false;
 
         protected override void OnRectTransformDimensionsChange()
         {
@@ -152,7 +152,7 @@ namespace TheraBytes.BetterUi
             }
         }
 
-        IEnumerator InitDelayed()
+        private IEnumerator InitDelayed()
         {
             yield return null;
 
@@ -236,7 +236,7 @@ namespace TheraBytes.BetterUi
         }
 
 
-        void ApplySettings(Settings settings)
+        private void ApplySettings(Settings settings)
         {
             if (settingsFallback == null)
                 return;
@@ -249,7 +249,7 @@ namespace TheraBytes.BetterUi
             this.fit = settings.Fit;
         }
 
-        void Set<T>(T value, Action<T> setBase, Action<Settings, T> setSettings)
+        private void Set<T>(T value, Action<T> setBase, Action<Settings, T> setSettings)
         {
             Config.Set(value, setBase, (o) => setSettings(CurrentSettings, value));
             CalculateCellSize();

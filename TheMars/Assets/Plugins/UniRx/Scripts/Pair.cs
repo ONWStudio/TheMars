@@ -7,8 +7,8 @@ namespace UniRx
     [Serializable]
     public struct Pair<T> : IEquatable<Pair<T>>
     {
-        readonly T previous;
-        readonly T current;
+        private readonly T previous;
+        private readonly T current;
 
         public T Previous
         {

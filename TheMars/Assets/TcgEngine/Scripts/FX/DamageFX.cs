@@ -14,12 +14,12 @@ namespace TcgEngine.FX
     {
         public Text text_value;
 
-        void Start()
+        private void Start()
         {
 
         }
 
-        void Update()
+        private void Update()
         {
 
         }

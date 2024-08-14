@@ -15,7 +15,7 @@ namespace Michsky.UI.Heat
         private List<string> tableList = new List<string>();
         private string searchString;
         private string tempValue;
-        Vector2 scrollPosition = Vector2.zero;
+        private Vector2 scrollPosition = Vector2.zero;
 
         private void OnEnable()
         {

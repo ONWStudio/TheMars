@@ -33,8 +33,8 @@ namespace UniRx
 
     internal sealed class ObserverNode<T> : IObserver<T>, IDisposable
     {
-        readonly IObserver<T> observer;
-        IObserverLinkedList<T> list;
+        private readonly IObserver<T> observer;
+        private IObserverLinkedList<T> list;
 
         public ObserverNode<T> Previous { get; internal set; }
         public ObserverNode<T> Next { get; internal set; }
@@ -78,7 +78,7 @@ namespace UniRx
     public class ReactiveProperty<T> : IReactiveProperty<T>, IDisposable, IOptimizedObservable<T>, IObserverLinkedList<T>
     {
 #if !UniRxLibrary
-        static readonly IEqualityComparer<T> defaultEqualityComparer = UnityEqualityComparer.GetDefault<T>();
+        private static readonly IEqualityComparer<T> defaultEqualityComparer = UnityEqualityComparer.GetDefault<T>();
 #else
         static readonly IEqualityComparer<T> defaultEqualityComparer = EqualityComparer<T>.Default;
 #endif
@@ -86,16 +86,16 @@ namespace UniRx
 #if !UniRxLibrary
         [SerializeField]
 #endif
-        T value = default(T);
+        private T value = default(T);
 
         [NonSerialized]
-        ObserverNode<T> root;
+        private ObserverNode<T> root;
 
         [NonSerialized]
-        ObserverNode<T> last;
+        private ObserverNode<T> last;
 
         [NonSerialized]
-        bool isDisposed = false;
+        private bool isDisposed = false;
 
         protected virtual IEqualityComparer<T> EqualityComparer
         {
@@ -144,7 +144,7 @@ namespace UniRx
             SetValue(initialValue);
         }
 
-        void RaiseOnNext(ref T value)
+        private void RaiseOnNext(ref T value)
         {
             var node = root;
             while (node != null)
@@ -253,22 +253,22 @@ namespace UniRx
     public class ReadOnlyReactiveProperty<T> : IReadOnlyReactiveProperty<T>, IDisposable, IOptimizedObservable<T>, IObserverLinkedList<T>, IObserver<T>
     {
 #if !UniRxLibrary
-        static readonly IEqualityComparer<T> defaultEqualityComparer = UnityEqualityComparer.GetDefault<T>();
+        private static readonly IEqualityComparer<T> defaultEqualityComparer = UnityEqualityComparer.GetDefault<T>();
 #else
         static readonly IEqualityComparer<T> defaultEqualityComparer = EqualityComparer<T>.Default;
 #endif
 
-        readonly bool distinctUntilChanged = true;
-        bool canPublishValueOnSubscribe = false;
-        bool isDisposed = false;
-        bool isSourceCompleted = false;
+        private readonly bool distinctUntilChanged = true;
+        private bool canPublishValueOnSubscribe = false;
+        private bool isDisposed = false;
+        private bool isSourceCompleted = false;
 
-        T latestValue = default(T);
-        Exception lastException = null;
-        IDisposable sourceConnection = null;
+        private T latestValue = default(T);
+        private Exception lastException = null;
+        private IDisposable sourceConnection = null;
 
-        ObserverNode<T> root;
-        ObserverNode<T> last;
+        private ObserverNode<T> root;
+        private ObserverNode<T> last;
 
         public T Value
         {
@@ -493,9 +493,9 @@ namespace UniRx
 
 #if CSHARP_7_OR_LATER || (UNITY_2018_3_OR_NEWER && (NET_STANDARD_2_0 || NET_4_6))
 
-        static readonly Action<object> Callback = CancelCallback;
+        private static readonly Action<object> Callback = CancelCallback;
 
-        static void CancelCallback(object state)
+        private static void CancelCallback(object state)
         {
             var tuple = (Tuple<ICancellableTaskCompletionSource, IDisposable>)state;
             tuple.Item2.Dispose();

@@ -12,7 +12,7 @@ namespace TheraBytes.BetterUi.Editor
         public abstract string NameId { get; }
 
         protected List<WizardPageElementBase> elements = new List<WizardPageElementBase>();
-        Vector2 scrollPosition;
+        private Vector2 scrollPosition;
 
         protected virtual string NextButtonText { get { return "Next"; } }
         protected IWizard wizard;
@@ -100,7 +100,7 @@ namespace TheraBytes.BetterUi.Editor
             EditorGUILayout.LabelField(page);
         }
 
-        void ActivateIfPending(int index)
+        private void ActivateIfPending(int index)
         {
             if (index >= elements.Count)
                 return;
@@ -111,7 +111,7 @@ namespace TheraBytes.BetterUi.Editor
             elements[index].Activate();
         }
 
-        void Save()
+        private void Save()
         {
             foreach(var element in elements)
             {

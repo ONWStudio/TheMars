@@ -15,12 +15,12 @@ namespace TcgEngine.Server
         [Header("Matchmaker")]
         public string[] servers;
 
-        private Dictionary<ulong, ClientData> client_list = new Dictionary<ulong, ClientData>();  //List of clients
+        private Dictionary<ulong, ClientData> client_list = new Dictionary<ulong, ClientData>();                     //List of clients
         private Dictionary<string, MatchPlayerData> matchmaking_players = new Dictionary<string, MatchPlayerData>(); //Get deleted every 20 sec
-        private Dictionary<string, MatchData> matched_players = new Dictionary<string, MatchData>(); //user_id -> match
-        private List<MatchPlayerData> valid_users = new List<MatchPlayerData>(); //temporary array
+        private Dictionary<string, MatchData> matched_players = new Dictionary<string, MatchData>();                 //user_id -> match
+        private List<MatchPlayerData> valid_users = new List<MatchPlayerData>();                                     //temporary array
         private float matchmake_timer = 0f;
-        
+
         private static ServerMatchmaker _instance;
 
         protected virtual void Awake()

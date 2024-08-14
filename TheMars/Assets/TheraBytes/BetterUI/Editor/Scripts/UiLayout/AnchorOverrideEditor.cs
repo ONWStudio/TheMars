@@ -10,25 +10,25 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(AnchorOverride)), CanEditMultipleObjects]
     public class AnchorOverrideEditor : UnityEditor.Editor
     {
-        static readonly GUIContent IsAnimatedContent = new GUIContent("Animate",
+        private static readonly GUIContent IsAnimatedContent = new GUIContent("Animate",
             "If enabled the anchors are not applied instantly but with an animation.");
 
-        static readonly GUIContent AccelerationContent = new GUIContent("Acceleration",
+        private static readonly GUIContent AccelerationContent = new GUIContent("Acceleration",
             "Defines how fast the movement reaches maximum speed.");
 
-        static readonly GUIContent MaxMoveSpeedContent = new GUIContent("Max Move Speed",
+        private static readonly GUIContent MaxMoveSpeedContent = new GUIContent("Max Move Speed",
             "The maximum velocity when moving.");
 
-        static readonly GUIContent SnapThresholdContent = new GUIContent("Snap Threshold",
+        private static readonly GUIContent SnapThresholdContent = new GUIContent("Snap Threshold",
             "The distance of the farest anchor / axis, at which the animation stops and the target anchors are applied.");
 
-        static readonly string[] HorizontalOptions = { "Center", "Pivot", "Left", "Right" };
-        static readonly string[] VerticalOptions = { "Center", "Pivot", "Bottom", "Top" };
+        private static readonly string[] HorizontalOptions = { "Center", "Pivot", "Left", "Right" };
+        private static readonly string[] VerticalOptions = { "Center", "Pivot", "Bottom", "Top" };
 
-        SerializedProperty anchorsFallback, anchorsConfigs,
+        private SerializedProperty anchorsFallback, anchorsConfigs,
             mode, isAnimated, acceleration, maxMoveSpeed, snapThreshold;
 
-        Dictionary<string, UnityEditorInternal.ReorderableList> lists = new Dictionary<string, UnityEditorInternal.ReorderableList>();
+        private Dictionary<string, UnityEditorInternal.ReorderableList> lists = new Dictionary<string, UnityEditorInternal.ReorderableList>();
 
         private void OnEnable()
         {
@@ -101,7 +101,7 @@ namespace TheraBytes.BetterUi.Editor
             }
         }
 
-        void DrawAnchorSettings(string configName, SerializedProperty prop)
+        private void DrawAnchorSettings(string configName, SerializedProperty prop)
         {
             SerializedProperty elements = prop.FindPropertyRelative("elements");
             IntroduceList(configName, elements);
@@ -111,7 +111,7 @@ namespace TheraBytes.BetterUi.Editor
         }
 
 
-        void IntroduceList(string configName, SerializedProperty elements)
+        private void IntroduceList(string configName, SerializedProperty elements)
         {
             if (lists.ContainsKey(configName))
                 return;

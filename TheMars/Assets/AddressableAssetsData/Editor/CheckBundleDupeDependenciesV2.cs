@@ -16,7 +16,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.AddressableAssets.Build.AnalyzeRules;
 
-class CheckBundleDupeDependenciesV2 : BundleRuleBase
+internal class CheckBundleDupeDependenciesV2 : BundleRuleBase
 {
     private struct DuplicateResult
     {
@@ -44,7 +44,7 @@ class CheckBundleDupeDependenciesV2 : BundleRuleBase
         return CheckForDuplicateDependencies(settings);
     }
 
-    List<AnalyzeResult> CheckForDuplicateDependencies(AddressableAssetSettings settings)
+    private List<AnalyzeResult> CheckForDuplicateDependencies(AddressableAssetSettings settings)
     {
         // Create a container to store all our AnalyzeResults
         List<AnalyzeResult> retVal = new List<AnalyzeResult>();
@@ -101,7 +101,7 @@ class CheckBundleDupeDependenciesV2 : BundleRuleBase
         return retVal;
     }
 
-    IEnumerable<DuplicateResult> CalculateDuplicates(Dictionary<GUID, List<string>> implicitGuids, AddressableAssetsBuildContext aaContext)
+    private IEnumerable<DuplicateResult> CalculateDuplicates(Dictionary<GUID, List<string>> implicitGuids, AddressableAssetsBuildContext aaContext)
     {
         duplicateAssetsAndParents.Clear();
 
@@ -174,7 +174,7 @@ class CheckBundleDupeDependenciesV2 : BundleRuleBase
             };
     }
 
-    void BuildImplicitDuplicatedAssetsSet(IEnumerable<DuplicateResult> dupeResults)
+    private void BuildImplicitDuplicatedAssetsSet(IEnumerable<DuplicateResult> dupeResults)
     {
         foreach (var dupeResult in dupeResults)
         {
@@ -245,7 +245,7 @@ class CheckBundleDupeDependenciesV2 : BundleRuleBase
     }
 
     // Helper function for adding labels to Addressable assets
-    void SetLabelValueForEntries(AddressableAssetSettings settings, List<AddressableAssetEntry> entries, string label, bool value, bool postEvent = true)
+    private void SetLabelValueForEntries(AddressableAssetSettings settings, List<AddressableAssetEntry> entries, string label, bool value, bool postEvent = true)
     {
         if (value)
         {

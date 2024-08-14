@@ -23,13 +23,13 @@ namespace UniRx
         /// Represents an object that schedules units of work on the current thread.
         /// </summary>
         /// <seealso cref="Scheduler.CurrentThread">Singleton instance of this type exposed through this static property.</seealso>
-        class CurrentThreadScheduler : IScheduler
+        private class CurrentThreadScheduler : IScheduler
         {
             [ThreadStatic]
-            static SchedulerQueue s_threadLocalQueue;
+            private static SchedulerQueue s_threadLocalQueue;
 
             [ThreadStatic]
-            static Stopwatch s_clock;
+            private static Stopwatch s_clock;
 
             private static SchedulerQueue GetQueue()
             {
@@ -103,7 +103,7 @@ namespace UniRx
                 return si.Cancellation;
             }
 
-            static class Trampoline
+            private static class Trampoline
             {
                 public static void Run(SchedulerQueue queue)
                 {

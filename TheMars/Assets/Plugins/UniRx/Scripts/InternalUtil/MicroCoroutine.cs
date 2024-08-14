@@ -9,16 +9,16 @@ namespace UniRx.InternalUtil
     /// </summary>
     public class MicroCoroutine
     {
-        const int InitialSize = 16;
+        private const int InitialSize = 16;
 
-        readonly object runningAndQueueLock = new object();
-        readonly object arrayLock = new object();
-        readonly Action<Exception> unhandledExceptionCallback;
+        private readonly object runningAndQueueLock = new object();
+        private readonly object arrayLock = new object();
+        private readonly Action<Exception> unhandledExceptionCallback;
 
-        int tail = 0;
-        bool running = false;
-        IEnumerator[] coroutines = new IEnumerator[InitialSize];
-        Queue<IEnumerator> waitQueue = new Queue<IEnumerator>();
+        private int tail = 0;
+        private bool running = false;
+        private IEnumerator[] coroutines = new IEnumerator[InitialSize];
+        private Queue<IEnumerator> waitQueue = new Queue<IEnumerator>();
 
         public MicroCoroutine(Action<Exception> unhandledExceptionCallback)
         {

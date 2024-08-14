@@ -26,14 +26,14 @@ namespace TMCard.Effect
 
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            TMCardGameManager.Instance.OnUsedCard.AddListener(onHoldEffectByFriendlyCard);
+            TMCardHelper.Instance.OnUsedCard.AddListener(onHoldEffectByFriendlyCard);
             _holdEffects.ForEach(holdEffect => holdEffect?.ApplyEffect(controller, this));
 
             void onHoldEffectByFriendlyCard(TMCardController usedCard)
             {
                 if (!controller)
                 {
-                    TMCardGameManager
+                    TMCardHelper
                         .Instance
                         .OnUsedCard
                         .RemoveListener(onHoldEffectByFriendlyCard);

@@ -9,7 +9,7 @@ namespace UniRx.Examples
 {
     public class Sample08_DetectDoubleClick : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             // Global event handling is very useful.
             // UniRx can handle there events.

@@ -13,19 +13,24 @@ namespace Michsky.UI.Heat
 
         // Resources
         public UIManager UIManagerAsset;
-        [SerializeField] private AudioMixer audioMixer;
+        [SerializeField]
+        private AudioMixer audioMixer;
         public AudioSource audioSource;
-        [SerializeField] private SliderManager masterSlider;
-        [SerializeField] private SliderManager musicSlider;
-        [SerializeField] private SliderManager SFXSlider;
-        [SerializeField] private SliderManager UISlider;
+        [SerializeField]
+        private SliderManager masterSlider;
+        [SerializeField]
+        private SliderManager musicSlider;
+        [SerializeField]
+        private SliderManager SFXSlider;
+        [SerializeField]
+        private SliderManager UISlider;
 
-        void Awake()
+        private void Awake()
         {
             instance = this;
         }
 
-        void Start()
+        private void Start()
         {
             if (audioSource == null) { gameObject.GetComponent<AudioSource>(); }
             InitVolume();

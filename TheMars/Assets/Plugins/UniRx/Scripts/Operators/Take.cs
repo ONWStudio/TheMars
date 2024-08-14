@@ -5,9 +5,9 @@ namespace UniRx.Operators
 {
     internal class TakeObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly int count;
-        readonly TimeSpan duration;
+        private readonly IObservable<T> source;
+        private readonly int count;
+        private readonly TimeSpan duration;
         internal readonly IScheduler scheduler; // public for optimization check
 
         public TakeObservable(IObservable<T> source, int count)
@@ -63,9 +63,9 @@ namespace UniRx.Operators
             }
         }
 
-        class Take : OperatorObserverBase<T, T>
+        private class Take : OperatorObserverBase<T, T>
         {
-            int rest;
+            private int rest;
 
             public Take(TakeObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -96,10 +96,10 @@ namespace UniRx.Operators
             }
         }
 
-        class Take_ : OperatorObserverBase<T, T>
+        private class Take_ : OperatorObserverBase<T, T>
         {
-            readonly TakeObservable<T> parent;
-            readonly object gate = new object();
+            private readonly TakeObservable<T> parent;
+            private readonly object gate = new object();
 
             public Take_(TakeObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -114,7 +114,7 @@ namespace UniRx.Operators
                 return StableCompositeDisposable.Create(d1, d2);
             }
 
-            void Tick()
+            private void Tick()
             {
                 lock (gate)
                 {

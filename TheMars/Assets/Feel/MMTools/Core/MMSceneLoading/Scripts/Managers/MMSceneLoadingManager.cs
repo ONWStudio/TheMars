@@ -29,7 +29,7 @@ namespace MoreMountains.Tools
 				Status = status;
 				SceneName = sceneName;
 			}
-			static LoadingSceneEvent e;
+			private static LoadingSceneEvent e;
 			public static void Trigger(string sceneName, LoadingStatus status)
 			{
 				e.Status = status;

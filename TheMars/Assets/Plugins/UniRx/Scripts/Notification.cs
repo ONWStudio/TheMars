@@ -124,7 +124,7 @@ namespace UniRx
         [Serializable]
         internal sealed class OnNextNotification : Notification<T>
         {
-            T value;
+            private T value;
 
             /// <summary>
             /// Constructs a notification of a new value.
@@ -258,7 +258,7 @@ namespace UniRx
 #endif
         internal sealed class OnErrorNotification : Notification<T>
         {
-            Exception exception;
+            private Exception exception;
 
             /// <summary>
             /// Constructs a notification of an exception.

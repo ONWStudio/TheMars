@@ -18,7 +18,7 @@ namespace TMCard.Effect
 
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            controller.OnClickEvent.RemoveAllToAddListener(() => TMCardGameManager.Instance.OnContinuingSeconds(
+            controller.OnClickEvent.RemoveAllToAddListener(() => TMCardHelper.Instance.OnContinuingSeconds(
                 controller,
                 ContinuingTime,
                 trigger.OnEffectEvent.Invoke));

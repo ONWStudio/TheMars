@@ -13,7 +13,7 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(BetterSlider)), CanEditMultipleObjects]
     public class BetterSliderEditor : SliderEditor
     {
-        BetterElementHelper<Slider, BetterSlider> helper =
+        private BetterElementHelper<Slider, BetterSlider> helper =
             new BetterElementHelper<Slider, BetterSlider>();
 
         public override void OnInspectorGUI()

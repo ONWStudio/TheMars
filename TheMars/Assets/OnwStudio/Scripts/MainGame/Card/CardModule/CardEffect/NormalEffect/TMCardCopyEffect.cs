@@ -9,8 +9,10 @@ namespace TMCard.Effect
 {
     public sealed class TMCardCopyEffect : ITMNormalEffect, ITMInitializableEffect<TMCardCopyEffectCreator>
     {
-        [SerializeField, ReadOnly] private TMCardData _copyCardData = null;
-        [SerializeField, ReadOnly] private int _copyCount = 0;
+        [SerializeField, ReadOnly]
+        private TMCardData _copyCardData = null;
+        [SerializeField, ReadOnly]
+        private int _copyCount = 0;
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {

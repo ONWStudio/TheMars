@@ -18,12 +18,12 @@ namespace TcgEngine.FX
         private List<GameObject> dot_list = new List<GameObject>();
         private List<Vector3> points = new List<Vector3>();
 
-        void Start()
+        private void Start()
         {
             dot_template.SetActive(false);
         }
 
-        void Update()
+        private void Update()
         {
             if (!GameClient.Get().IsReady())
                 return;

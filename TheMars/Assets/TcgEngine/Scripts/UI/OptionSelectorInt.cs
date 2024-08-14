@@ -32,12 +32,12 @@ namespace TcgEngine.UI
         private int position = 0;
         private bool is_locked = false;
 
-        void Start()
+        private void Start()
         {
             SetIndex(0);
         }
 
-        void Update()
+        private void Update()
         {
 
         }

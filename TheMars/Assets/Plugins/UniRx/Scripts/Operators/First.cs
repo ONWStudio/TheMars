@@ -5,9 +5,9 @@ namespace UniRx.Operators
 {
     internal class FirstObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly bool useDefault;
-        readonly Func<T, bool> predicate;
+        private readonly IObservable<T> source;
+        private readonly bool useDefault;
+        private readonly Func<T, bool> predicate;
 
         public FirstObservable(IObservable<T> source, bool useDefault)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -36,10 +36,10 @@ namespace UniRx.Operators
             }
         }
 
-        class First : OperatorObserverBase<T, T>
+        private class First : OperatorObserverBase<T, T>
         {
-            readonly FirstObservable<T> parent;
-            bool notPublished;
+            private readonly FirstObservable<T> parent;
+            private bool notPublished;
 
             public First(FirstObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -93,10 +93,10 @@ namespace UniRx.Operators
         }
 
         // with predicate
-        class First_ : OperatorObserverBase<T, T>
+        private class First_ : OperatorObserverBase<T, T>
         {
-            readonly FirstObservable<T> parent;
-            bool notPublished;
+            private readonly FirstObservable<T> parent;
+            private bool notPublished;
 
             public First_(FirstObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {

@@ -10,7 +10,7 @@ namespace UniRx
 {
     public static class WebRequestExtensions
     {
-        static IObservable<TResult> AbortableDeferredAsyncRequest<TResult>(Func<AsyncCallback, object, IAsyncResult> begin, Func<IAsyncResult, TResult> end, WebRequest request)
+        private static IObservable<TResult> AbortableDeferredAsyncRequest<TResult>(Func<AsyncCallback, object, IAsyncResult> begin, Func<IAsyncResult, TResult> end, WebRequest request)
         {
             var result = Observable.Create<TResult>(observer =>
             {

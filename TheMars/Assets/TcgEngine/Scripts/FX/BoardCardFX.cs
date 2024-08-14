@@ -23,13 +23,13 @@ namespace TcgEngine.FX
 
         private Dictionary<StatusType, GameObject> status_fx_list = new Dictionary<StatusType, GameObject>();
 
-        void Awake()
+        private void Awake()
         {
             bcard = GetComponent<BoardCard>();
             bcard.onKill += OnKill;
         }
 
-        void Start()
+        private void Start()
         {
             GameClient client = GameClient.Get();
             client.onCardMoved += OnMove;
@@ -52,8 +52,8 @@ namespace TcgEngine.FX
             client.onAbilityTargetCard -= OnAbilityEffect;
             client.onAbilityEnd -= OnAbilityAfter;
         }
-        
-        void Update()
+
+        private void Update()
         {
             if (!GameClient.Get().IsReady())
                 return;
@@ -160,8 +160,8 @@ namespace TcgEngine.FX
                 FadeKill(bcard.card_sprite, 0f, 0.5f);
             }
         }
-		
-		private void FadeSetVal(SpriteRenderer render, float val)
+
+        private void FadeSetVal(SpriteRenderer render, float val)
         {
             render.material = kill_mat;
             render.material.SetFloat(kill_mat_fade, val);

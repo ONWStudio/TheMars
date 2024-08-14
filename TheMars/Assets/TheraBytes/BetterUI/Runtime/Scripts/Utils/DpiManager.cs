@@ -18,8 +18,10 @@ namespace TheraBytes.BetterUi
         [Serializable]
         public class DpiOverride
         {
-            [SerializeField] float dpi = 96;
-            [SerializeField] string deviceModel;
+            [SerializeField]
+            private float dpi = 96;
+            [SerializeField]
+            private string deviceModel;
 
             public float Dpi { get { return dpi; } }
             public string DeviceModel { get { return deviceModel; } }
@@ -32,7 +34,7 @@ namespace TheraBytes.BetterUi
         }
 
         [SerializeField]
-        List<DpiOverride> overrides = new List<DpiOverride>();
+        private List<DpiOverride> overrides = new List<DpiOverride>();
 
         public float GetDpi()
         {

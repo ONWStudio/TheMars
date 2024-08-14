@@ -9,12 +9,12 @@ namespace TheraBytes.BetterUi.Editor
 {
     public class PointSelectorPopupWindow : PopupWindowContent
     {
-        const float BUTTON_SIZE = 50;
+        private const float BUTTON_SIZE = 50;
 
         public event Action<Vector2> SelctedCallback;
 
-        Margin margin = new Margin(10, 5, 10, 5);
-        Vector2 spacing = new Vector2(5, 5);
+        private Margin margin = new Margin(10, 5, 10, 5);
+        private Vector2 spacing = new Vector2(5, 5);
 
         public override Vector2 GetWindowSize()
         {
@@ -56,12 +56,12 @@ namespace TheraBytes.BetterUi.Editor
             GetStyle(1, 1); // reset to centered text
         }
 
-        GUIContent GetContent(int x, int y)
+        private GUIContent GetContent(int x, int y)
         {
             return new GUIContent("♠");
         }
 
-        GUIStyle GetStyle(int x, int y)
+        private GUIStyle GetStyle(int x, int y)
         {
             var style = GUI.skin.button;
             

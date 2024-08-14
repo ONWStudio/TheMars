@@ -54,8 +54,8 @@ namespace UniRx
         /// </summary>
         public static readonly IMessageBroker Default = new MessageBroker();
 
-        bool isDisposed = false;
-        readonly Dictionary<Type, object> notifiers = new Dictionary<Type, object>();
+        private bool isDisposed = false;
+        private readonly Dictionary<Type, object> notifiers = new Dictionary<Type, object>();
 
         public void Publish<T>(T message)
         {
@@ -113,8 +113,8 @@ namespace UniRx
         /// </summary>
         public static readonly IAsyncMessageBroker Default = new AsyncMessageBroker();
 
-        bool isDisposed = false;
-        readonly Dictionary<Type, object> notifiers = new Dictionary<Type, object>();
+        private bool isDisposed = false;
+        private readonly Dictionary<Type, object> notifiers = new Dictionary<Type, object>();
 
         public IObservable<Unit> PublishAsync<T>(T message)
         {
@@ -179,10 +179,10 @@ namespace UniRx
             }
         }
 
-        class Subscription<T> : IDisposable
+        private class Subscription<T> : IDisposable
         {
-            readonly AsyncMessageBroker parent;
-            readonly Func<T, IObservable<Unit>> asyncMessageReceiver;
+            private readonly AsyncMessageBroker parent;
+            private readonly Func<T, IObservable<Unit>> asyncMessageReceiver;
 
             public Subscription(AsyncMessageBroker parent, Func<T, IObservable<Unit>> asyncMessageReceiver)
             {

@@ -18,7 +18,7 @@ namespace TcgEngine.UI
 
         private float timer = 0f;
 
-        void Start()
+        private void Start()
         {
 
         }

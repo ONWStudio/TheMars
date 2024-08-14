@@ -13,14 +13,14 @@ namespace TcgEngine.UI
     {
         public AudioClip click_audio;
 
-        void Start()
+        private void Start()
         {
             Button button = GetComponent<Button>();
             if (button != null)
                 button.onClick.AddListener(OnClick);
         }
 
-        void OnClick()
+        private void OnClick()
         {
             AudioTool.Get().PlaySFX("ui", click_audio);
         }

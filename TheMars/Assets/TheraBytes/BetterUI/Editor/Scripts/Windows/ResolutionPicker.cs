@@ -40,8 +40,8 @@ namespace TheraBytes.BetterUi.Editor
         }
 
 
-        static Assembly assembly;
-        static EditorWindow gameView;
+        private static Assembly assembly;
+        private static EditorWindow gameView;
 
         [MenuItem("Tools/Better UI/Pick Resolution", false, 90)]
         public static void ShowWindow()
@@ -54,33 +54,33 @@ namespace TheraBytes.BetterUi.Editor
         }
 
 
-        Type gameSizeType;
-        PropertyInfo selectedIndex;
+        private Type gameSizeType;
+        private PropertyInfo selectedIndex;
 
-        List<GameViewSize> sizes = new List<GameViewSize>();
-        StoredEditorBool
+        private List<GameViewSize> sizes = new List<GameViewSize>();
+        private StoredEditorBool
             displayPortrait = new StoredEditorBool("resolutionPicker.displayPortrait", true),
             displayLandscape = new StoredEditorBool("resolutionPicker.displayLandscape", true),
             displayFree = new StoredEditorBool("resolutionPicker.displayFree", true),
             displayBuiltin = new StoredEditorBool("resolutionPicker.displayBuiltin", true),
             displayCustom = new StoredEditorBool("resolutionPicker.displayCustom", true);
 
-        StoredEditorBool
+        private StoredEditorBool
             showOrientationHint = new StoredEditorBool("resolutionPicker.showOrientationHint", true),
             markCustom = new StoredEditorBool("resolutionPicker.markCustom", true);
 
-        StoredEditorBool useBigButtons = new StoredEditorBool("resolutionPicker.bigButtons", false);
-        StoredEditorBool useVerticalLayout = new StoredEditorBool("resolutionPicker.verticalLayout", true);
+        private StoredEditorBool useBigButtons = new StoredEditorBool("resolutionPicker.bigButtons", false);
+        private StoredEditorBool useVerticalLayout = new StoredEditorBool("resolutionPicker.verticalLayout", true);
 
-        StoredEditorInt textMode = new StoredEditorInt("reslutionPicker.textMode", (int)TextDisplayMode.Both);
+        private StoredEditorInt textMode = new StoredEditorInt("reslutionPicker.textMode", (int)TextDisplayMode.Both);
 
-        StoredEditorBool
+        private StoredEditorBool
             displayScreenConfigs = new StoredEditorBool("resolutionPicker.displayScreenConfigs", true),
             applyScreenConfigResolution = new StoredEditorBool("resolutionPicker.applyScreenConfigResolution", true);
 
-        int builtinCount;
+        private int builtinCount;
 
-        void RefreshSizes()
+        private void RefreshSizes()
         {
             assembly = typeof(EditorWindow).Assembly;
 
@@ -119,7 +119,7 @@ namespace TheraBytes.BetterUi.Editor
             selectedIndex = gameView.GetType().GetProperty("selectedSizeIndex", bindingFlags);
         }
 
-        void OnGUI()
+        private void OnGUI()
         {
             if (gameView == null || gameSizeType == null)
             {
@@ -294,7 +294,7 @@ namespace TheraBytes.BetterUi.Editor
             }
         }
 
-        void SetResolution(GameViewSize size)
+        private void SetResolution(GameViewSize size)
         {
             var type = gameView.GetType();
             selectedIndex.SetValue(gameView, size.index, null);
@@ -311,7 +311,7 @@ namespace TheraBytes.BetterUi.Editor
             SceneView.RepaintAll();
         }
 
-        void Begin(bool mainSection)
+        private void Begin(bool mainSection)
         {
             if (useVerticalLayout == mainSection)
                 EditorGUILayout.BeginVertical();
@@ -319,7 +319,7 @@ namespace TheraBytes.BetterUi.Editor
                 EditorGUILayout.BeginHorizontal();
         }
 
-        void End(bool mainSection)
+        private void End(bool mainSection)
         {
             if (useVerticalLayout == mainSection)
                 EditorGUILayout.EndVertical();
@@ -327,7 +327,7 @@ namespace TheraBytes.BetterUi.Editor
                 EditorGUILayout.EndHorizontal();
         }
 
-        bool AllowedToShow(GameViewSize size)
+        private bool AllowedToShow(GameViewSize size)
         {
             // special treatment for free aspect
             if (size.width == 0 && size.height == 0)
@@ -342,7 +342,7 @@ namespace TheraBytes.BetterUi.Editor
             return allow;
         }
 
-        string GetText(GameViewSize size)
+        private string GetText(GameViewSize size)
         {
             string result = "";
 
@@ -375,7 +375,7 @@ namespace TheraBytes.BetterUi.Editor
             return result;
         }
 
-        void DrawToolStrip()
+        private void DrawToolStrip()
         {
             string title = (useVerticalLayout) ? "♠ Settings" : "♠";
             if (GUILayout.Button(title, EditorStyles.toolbarDropDown, GUILayout.MinWidth(25)))
@@ -425,26 +425,26 @@ namespace TheraBytes.BetterUi.Editor
             }
         }
 
-        void DisplayPortrait() { this.displayPortrait.Value = !(this.displayPortrait); }
-        void DisplayLandscape() { this.displayLandscape.Value = !(this.displayLandscape); }
-        void DisplayFree() { this.displayFree.Value = !(this.displayFree); }
-        void DisplayBuiltin() { this.displayBuiltin.Value = !(this.displayBuiltin); }
-        void DisplayCustom() { this.displayCustom.Value = !(this.displayCustom); }
+        private void DisplayPortrait() { this.displayPortrait.Value = !(this.displayPortrait); }
+        private void DisplayLandscape() { this.displayLandscape.Value = !(this.displayLandscape); }
+        private void DisplayFree() { this.displayFree.Value = !(this.displayFree); }
+        private void DisplayBuiltin() { this.displayBuiltin.Value = !(this.displayBuiltin); }
+        private void DisplayCustom() { this.displayCustom.Value = !(this.displayCustom); }
 
-        void ShowOrientationHint() { showOrientationHint.Value = !(this.showOrientationHint); }
-        void MarkCustom() { markCustom.Value = !(this.markCustom); }
-        void TextModeBoth() { this.textMode.Value = (int)TextDisplayMode.Both; }
-        void TextModeSize() { this.textMode.Value = (int)TextDisplayMode.Size; }
-        void TextModeName() { this.textMode.Value = (int)TextDisplayMode.Name; }
-        void UseBigButtons() { this.useBigButtons.Value = true; }
-        void UseSmallButtons() { this.useBigButtons.Value = false; }
-        void UseVerticalLayout() { this.useVerticalLayout.Value = true; }
-        void UseHorizontalLayout() { this.useVerticalLayout.Value = false; }
-        void DisplayScreenConfigs() { this.displayScreenConfigs.Value = !(this.displayScreenConfigs); }
-        void ApplyScreenConfigResolution() { this.applyScreenConfigResolution.Value = !(this.applyScreenConfigResolution); }
+        private void ShowOrientationHint() { showOrientationHint.Value = !(this.showOrientationHint); }
+        private void MarkCustom() { markCustom.Value = !(this.markCustom); }
+        private void TextModeBoth() { this.textMode.Value = (int)TextDisplayMode.Both; }
+        private void TextModeSize() { this.textMode.Value = (int)TextDisplayMode.Size; }
+        private void TextModeName() { this.textMode.Value = (int)TextDisplayMode.Name; }
+        private void UseBigButtons() { this.useBigButtons.Value = true; }
+        private void UseSmallButtons() { this.useBigButtons.Value = false; }
+        private void UseVerticalLayout() { this.useVerticalLayout.Value = true; }
+        private void UseHorizontalLayout() { this.useVerticalLayout.Value = false; }
+        private void DisplayScreenConfigs() { this.displayScreenConfigs.Value = !(this.displayScreenConfigs); }
+        private void ApplyScreenConfigResolution() { this.applyScreenConfigResolution.Value = !(this.applyScreenConfigResolution); }
 
 
-        void AddSize(Type gameSizeType, object gameSize, int index, bool isCustom)
+        private void AddSize(Type gameSizeType, object gameSize, int index, bool isCustom)
         {
             GameViewSize item = new GameViewSize();
             item.index = index;

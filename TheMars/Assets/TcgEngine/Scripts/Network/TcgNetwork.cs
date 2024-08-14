@@ -48,7 +48,7 @@ namespace TcgEngine
         private bool offline_mode = false;
         private bool connected = false;
 
-        void Awake()
+        private void Awake()
         {
             if (instance != null && instance != this)
             {
@@ -80,7 +80,7 @@ namespace TcgEngine
             }
         }
 
-        void Update()
+        private void Update()
         {
 
         }

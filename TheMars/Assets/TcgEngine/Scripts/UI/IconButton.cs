@@ -25,7 +25,7 @@ namespace TcgEngine.UI
         private Button button;
         private static List<IconButton> toggle_list = new List<IconButton>();
 
-        void Awake()
+        private void Awake()
         {
             toggle_list.Add(this);
             button = GetComponent<Button>();
@@ -40,7 +40,7 @@ namespace TcgEngine.UI
             toggle_list.Remove(this);
         }
 
-        void Start()
+        private void Start()
         {
 
         }
@@ -56,7 +56,7 @@ namespace TcgEngine.UI
             }
         }
 
-        void OnClick()
+        private void OnClick()
         {
             bool was_active = active;
 

@@ -34,7 +34,7 @@ namespace TcgEngine.UI
             ui_list.Remove(this);
         }
 
-        void Start()
+        private void Start()
         {
             power_area.SetActive(false);
             if (power_button != null)

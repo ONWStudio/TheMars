@@ -34,8 +34,8 @@ namespace TheraBytes.BetterUi.Editor
             }
         }
 
-        string text;
-        ButtonInfo[] buttons;
+        private string text;
+        private ButtonInfo[] buttons;
 
         public InfoWithButtonWizardPageElement(string text, string buttonText, Action buttonClickCallback)
             : this(text, new ButtonInfo(buttonText, buttonClickCallback))

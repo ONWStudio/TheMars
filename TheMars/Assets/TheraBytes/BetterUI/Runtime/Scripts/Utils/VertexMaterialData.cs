@@ -106,7 +106,7 @@ namespace TheraBytes.BetterUi
             return result;
         }
 
-        static T[] CloneArray<T, TValue>(T[] array)
+        private static T[] CloneArray<T, TValue>(T[] array)
             where T : Property<TValue>
         {
             T[] result = new T[array.Length];

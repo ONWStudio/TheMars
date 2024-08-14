@@ -20,13 +20,20 @@ namespace Michsky.UI.Heat
         public string hotkeyLabel = "Exit";
 
         // Resources
-        [SerializeField] private GameObject iconParent;
-        [SerializeField] private GameObject textParent;
-        [SerializeField] private Image iconObj;
-        [SerializeField] private TextMeshProUGUI labelObj;
-        [SerializeField] private TextMeshProUGUI textObj;
-        [SerializeField] private CanvasGroup normalCG;
-        [SerializeField] private CanvasGroup highlightCG;
+        [SerializeField]
+        private GameObject iconParent;
+        [SerializeField]
+        private GameObject textParent;
+        [SerializeField]
+        private Image iconObj;
+        [SerializeField]
+        private TextMeshProUGUI labelObj;
+        [SerializeField]
+        private TextMeshProUGUI textObj;
+        [SerializeField]
+        private CanvasGroup normalCG;
+        [SerializeField]
+        private CanvasGroup highlightCG;
 
         // Settings
         public bool useSounds = false;
@@ -37,7 +44,7 @@ namespace Michsky.UI.Heat
         public UnityEvent onHotkeyPress = new UnityEvent();
 
         // Helpers
-        bool isInitialized = false;
+        private bool isInitialized = false;
         public bool useCooldown = false;
         public static bool isInCooldown = false;
 
@@ -47,7 +54,7 @@ namespace Michsky.UI.Heat
 
         public enum HotkeyType { Dynamic, Custom }
 
-        void OnEnable()
+        private void OnEnable()
         {
 #if UNITY_EDITOR
             if (!Application.isPlaying && controllerPreset != null && hotkeyType == HotkeyType.Dynamic) { UpdateVisual(); }
@@ -58,7 +65,7 @@ namespace Michsky.UI.Heat
             UpdateUI();
         }
 
-        void Update()
+        private void Update()
         {
             if (Application.isPlaying && hotkey.triggered && !useCooldown) { onHotkeyPress.Invoke(); }
             else if (Application.isPlaying && hotkey.triggered && useCooldown && !isInCooldown)
@@ -69,7 +76,7 @@ namespace Michsky.UI.Heat
             }
         }
 
-        void Initialize()
+        private void Initialize()
         {
 #if UNITY_EDITOR
             if (!Application.isPlaying) { return; }
@@ -245,7 +252,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("SetNormal");
         }
 
-        IEnumerator LayoutFix()
+        private IEnumerator LayoutFix()
         {
             yield return new WaitForSecondsRealtime(0.025f);
             if (normalCG != null) { LayoutRebuilder.ForceRebuildLayoutImmediate(normalCG.GetComponent<RectTransform>()); }
@@ -253,7 +260,7 @@ namespace Michsky.UI.Heat
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
         }
 
-        IEnumerator SetNormal()
+        private IEnumerator SetNormal()
         {
             while (highlightCG.alpha > 0.01f)
             {
@@ -264,7 +271,7 @@ namespace Michsky.UI.Heat
             highlightCG.alpha = 0;
         }
 
-        IEnumerator SetHighlight()
+        private IEnumerator SetHighlight()
         {
             while (highlightCG.alpha < 0.99f)
             {
@@ -275,7 +282,7 @@ namespace Michsky.UI.Heat
             highlightCG.alpha = 1;
         }
 
-        IEnumerator StartCooldown()
+        private IEnumerator StartCooldown()
         {
             isInCooldown = true;
             yield return new WaitForSecondsRealtime(0.05f);

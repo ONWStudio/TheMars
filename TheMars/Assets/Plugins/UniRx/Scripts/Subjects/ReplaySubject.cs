@@ -6,18 +6,18 @@ namespace UniRx
 {
     public sealed class ReplaySubject<T> : ISubject<T>, IOptimizedObservable<T>, IDisposable
     {
-        object observerLock = new object();
+        private object observerLock = new object();
 
-        bool isStopped;
-        bool isDisposed;
-        Exception lastError;
-        IObserver<T> outObserver = EmptyObserver<T>.Instance;
+        private bool isStopped;
+        private bool isDisposed;
+        private Exception lastError;
+        private IObserver<T> outObserver = EmptyObserver<T>.Instance;
 
-        readonly int bufferSize;
-        readonly TimeSpan window;
-        readonly DateTimeOffset startTime;
-        readonly IScheduler scheduler;
-        Queue<TimeInterval<T>> queue = new Queue<TimeInterval<T>>();
+        private readonly int bufferSize;
+        private readonly TimeSpan window;
+        private readonly DateTimeOffset startTime;
+        private readonly IScheduler scheduler;
+        private Queue<TimeInterval<T>> queue = new Queue<TimeInterval<T>>();
 
 
         public ReplaySubject()
@@ -63,7 +63,7 @@ namespace UniRx
             startTime = scheduler.Now;
         }
 
-        void Trim()
+        private void Trim()
         {
             var elapsedTime = Scheduler.Normalize(scheduler.Now - startTime);
 
@@ -200,7 +200,7 @@ namespace UniRx
             }
         }
 
-        void ThrowIfDisposed()
+        private void ThrowIfDisposed()
         {
             if (isDisposed) throw new ObjectDisposedException("");
         }
@@ -210,11 +210,11 @@ namespace UniRx
             return false;
         }
 
-        class Subscription : IDisposable
+        private class Subscription : IDisposable
         {
-            readonly object gate = new object();
-            ReplaySubject<T> parent;
-            IObserver<T> unsubscribeTarget;
+            private readonly object gate = new object();
+            private ReplaySubject<T> parent;
+            private IObserver<T> unsubscribeTarget;
 
             public Subscription(ReplaySubject<T> parent, IObserver<T> unsubscribeTarget)
             {

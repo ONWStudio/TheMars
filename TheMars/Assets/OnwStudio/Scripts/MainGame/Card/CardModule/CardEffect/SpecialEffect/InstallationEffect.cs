@@ -37,29 +37,29 @@ namespace TMCard.Effect
 
             static void onEffect(TMCardController controller)
             {
-                if (!_cardStack.TryGetValue(controller.CardData.GetInstanceID().ToString(), out EventValuePair eventValuePair))
+                if (!_cardStack.TryGetValue(controller.CardData.GetInstanceID().ToString(), out var eventValuePair))
                 {
                     eventValuePair = new();
                     _cardStack.Add(controller.CardData.GetInstanceID().ToString(), eventValuePair);
                 }
 
                 eventValuePair.Stack++;
-                TMCardGameManager.Instance.MoveToTomb(controller);
+                TMCardHelper.Instance.MoveToTomb(controller);
             }
 
             static void onDraw(TMCardController controller)
             {
-                if (!_cardStack.TryGetValue(controller.CardData.GetInstanceID().ToString(), out EventValuePair eventValuePair) || eventValuePair.Stack <= 0) return;
+                if (!_cardStack.TryGetValue(controller.CardData.GetInstanceID().ToString(), out var eventValuePair) || eventValuePair.Stack <= 0) return;
 
                 eventValuePair.Stack--;
                 controller.OnEffectEvent.Invoke();
-                TMCardGameManager.Instance.DrawUse(controller);
+                TMCardHelper.Instance.DrawUse(controller);
             }
         }
 
         public static void AddListenerOnUpdateStack(string cardName, Action<int> onUpdateStack)
         {
-            if (!_cardStack.TryGetValue(cardName, out EventValuePair eventValuePair)) return;
+            if (!_cardStack.TryGetValue(cardName, out var eventValuePair)) return;
 
             if (eventValuePair.OnUpdateStack is null)
             {
@@ -73,14 +73,14 @@ namespace TMCard.Effect
 
         public static void RemoveListenerOnUpdateStack(string cardName, Action<int> onUpdateStack)
         {
-            if (!_cardStack.TryGetValue(cardName, out EventValuePair eventValuePair) || eventValuePair.OnUpdateStack is null) return;
+            if (!_cardStack.TryGetValue(cardName, out var eventValuePair) || eventValuePair.OnUpdateStack is null) return;
 
             eventValuePair.OnUpdateStack -= onUpdateStack;
         }
 
         public static void RemoveAllListenerOnUpdataStack(string cardName)
         {
-            if (!_cardStack.TryGetValue(cardName, out EventValuePair eventValuePair) || eventValuePair.OnUpdateStack is null) return;
+            if (!_cardStack.TryGetValue(cardName, out var eventValuePair) || eventValuePair.OnUpdateStack is null) return;
 
             eventValuePair.OnUpdateStack = null;
         }

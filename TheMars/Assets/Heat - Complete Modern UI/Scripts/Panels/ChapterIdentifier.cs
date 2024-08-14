@@ -8,7 +8,8 @@ namespace Michsky.UI.Heat
     {
         [Header("Resources")]
         public Animator animator;
-        [SerializeField] private RectTransform backgroundRect;
+        [SerializeField]
+        private RectTransform backgroundRect;
         public Image backgroundImage;
         public TextMeshProUGUI titleObject;
         public TextMeshProUGUI descriptionObject;

@@ -19,7 +19,7 @@ namespace TcgEngine.UI
 
         private static WarningText instance;
 
-        void Awake()
+        private void Awake()
         {
             instance = this;
             canvas_group = GetComponent<CanvasGroup>();
@@ -27,7 +27,7 @@ namespace TcgEngine.UI
             canvas_group.alpha = 0f;
         }
 
-        void Update()
+        private void Update()
         {
 
         }

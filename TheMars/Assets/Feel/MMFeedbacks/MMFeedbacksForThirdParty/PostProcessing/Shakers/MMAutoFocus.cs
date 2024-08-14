@@ -48,7 +48,7 @@ namespace MoreMountains.FeedbacksForThirdParty
 		/// <summary>
 		/// On start we grab our volume and profile
 		/// </summary>
-		void Start()
+		private void Start()
 		{
 			_volume = GetComponent<PostProcessVolume>();
 			_profile = _volume.profile;
@@ -58,7 +58,7 @@ namespace MoreMountains.FeedbacksForThirdParty
 		/// <summary>
 		/// Adapts DoF to target
 		/// </summary>
-		void Update()
+		private void Update()
 		{
 			int focusTargetID = Mathf.FloorToInt(FocusTargetID);
 			if (focusTargetID < FocusTargets.Length)

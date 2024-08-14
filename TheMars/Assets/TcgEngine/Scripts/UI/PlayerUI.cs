@@ -42,7 +42,7 @@ namespace TcgEngine.UI
             ui_list.Remove(this);
         }
 
-        void Start()
+        private void Start()
         {
             pname.text = "";
             hp_txt.text = "";
@@ -55,7 +55,7 @@ namespace TcgEngine.UI
             GameClient.Get().onSecretTrigger += OnSecretTrigger;
         }
 
-        void Update()
+        private void Update()
         {
             if (!GameClient.Get().IsReady())
                 return;
@@ -83,7 +83,7 @@ namespace TcgEngine.UI
             }
         }
 
-        void SlowUpdate()
+        private void SlowUpdate()
         {
             Player player = GetPlayer();
             if (player == null)

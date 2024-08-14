@@ -28,21 +28,21 @@ namespace TheraBytes.BetterUi
 
     public static class AspectRatioExtensions
     {
-        const float LANDSCAPE5TO4 = 5f / 4f;
-        const float LANDSCAPE4TO3 = 4f / 3f;
-        const float LANDSCAPE3TO2 = 3f / 2f;
-        const float LANDSCAPE16TO10 = 8f / 5f;
-        const float LANDSCAPE5TO3 = 5f / 3f;
-        const float LANDSCAPE16TO9 = 16f / 9f;
-        const float LANDSCAPE21TO9 = 64f / 27f; //actual ratio
+        private const float LANDSCAPE5TO4 = 5f / 4f;
+        private const float LANDSCAPE4TO3 = 4f / 3f;
+        private const float LANDSCAPE3TO2 = 3f / 2f;
+        private const float LANDSCAPE16TO10 = 8f / 5f;
+        private const float LANDSCAPE5TO3 = 5f / 3f;
+        private const float LANDSCAPE16TO9 = 16f / 9f;
+        private const float LANDSCAPE21TO9 = 64f / 27f; //actual ratio
 
-        const float PORTRAIT21TO9 = 27 / 64f; //actual ratio
-        const float PORTRAIT16TO9 = 9f / 16f;
-        const float PORTRAIT5TO3 = 3f / 5f;
-        const float PORTRAIT16TO10 = 5f / 8f;
-        const float PORTRAIT3TO2 = 2f / 3f;
-        const float PORTRAIT4TO3 = 3f / 4f;
-        const float PORTRAIT5TO4 = 4f / 5f;
+        private const float PORTRAIT21TO9 = 27 / 64f; //actual ratio
+        private const float PORTRAIT16TO9 = 9f / 16f;
+        private const float PORTRAIT5TO3 = 3f / 5f;
+        private const float PORTRAIT16TO10 = 5f / 8f;
+        private const float PORTRAIT3TO2 = 2f / 3f;
+        private const float PORTRAIT4TO3 = 3f / 4f;
+        private const float PORTRAIT5TO4 = 4f / 5f;
 
         public static float GetRatioValue(this AspectRatio ratio)
         {

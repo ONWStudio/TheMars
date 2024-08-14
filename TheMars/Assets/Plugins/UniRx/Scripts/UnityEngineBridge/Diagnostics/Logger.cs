@@ -7,8 +7,8 @@ namespace UniRx.Diagnostics
 {
     public partial class Logger
     {
-        static bool isInitialized = false;
-        static bool isDebugBuild = false;
+        private static bool isInitialized = false;
+        private static bool isDebugBuild = false;
 
         public string Name { get; private set; }
         protected readonly Action<LogEntry> logPublisher;

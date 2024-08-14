@@ -27,7 +27,7 @@ namespace TheraBytes.BetterUi
             public float FlexibleHeight = 1;
 
             [SerializeField]
-            string screenConfigName;
+            private string screenConfigName;
             public string ScreenConfigName { get { return screenConfigName; } set { screenConfigName = value; } }
         }
 
@@ -37,10 +37,10 @@ namespace TheraBytes.BetterUi
         public Settings CurrentSettings { get { return customSettings.GetCurrentItem(settingsFallback); } }
 
         [SerializeField]
-        Settings settingsFallback = new Settings();
+        private Settings settingsFallback = new Settings();
 
         [SerializeField]
-        SettingsConfigCollection customSettings = new SettingsConfigCollection();
+        private SettingsConfigCollection customSettings = new SettingsConfigCollection();
 
         public FloatSizeModifier MinWidthSizer { get { return customMinWidthSizers.GetCurrentItem(minWidthSizerFallback); } }
         public FloatSizeModifier MinHeightSizer { get { return customMinHeightSizers.GetCurrentItem(minHeightSizerFallback); } }
@@ -84,24 +84,24 @@ namespace TheraBytes.BetterUi
         }
 
         [SerializeField]
-        FloatSizeModifier minWidthSizerFallback = new FloatSizeModifier(0, 0, 5000);
+        private FloatSizeModifier minWidthSizerFallback = new FloatSizeModifier(0, 0, 5000);
         [SerializeField]
-        FloatSizeConfigCollection customMinWidthSizers = new FloatSizeConfigCollection();
+        private FloatSizeConfigCollection customMinWidthSizers = new FloatSizeConfigCollection();
 
         [SerializeField]
-        FloatSizeModifier minHeightSizerFallback = new FloatSizeModifier(0, 0, 5000);
+        private FloatSizeModifier minHeightSizerFallback = new FloatSizeModifier(0, 0, 5000);
         [SerializeField]
-        FloatSizeConfigCollection customMinHeightSizers = new FloatSizeConfigCollection();
+        private FloatSizeConfigCollection customMinHeightSizers = new FloatSizeConfigCollection();
 
         [SerializeField]
-        FloatSizeModifier preferredWidthSizerFallback = new FloatSizeModifier(100, 0, 5000);
+        private FloatSizeModifier preferredWidthSizerFallback = new FloatSizeModifier(100, 0, 5000);
         [SerializeField]
-        FloatSizeConfigCollection customPreferredWidthSizers = new FloatSizeConfigCollection();
+        private FloatSizeConfigCollection customPreferredWidthSizers = new FloatSizeConfigCollection();
 
         [SerializeField]
-        FloatSizeModifier preferredHeightSizerFallback = new FloatSizeModifier(100, 0, 5000);
+        private FloatSizeModifier preferredHeightSizerFallback = new FloatSizeModifier(100, 0, 5000);
         [SerializeField]
-        FloatSizeConfigCollection customPreferredHeightSizers = new FloatSizeConfigCollection();
+        private FloatSizeConfigCollection customPreferredHeightSizers = new FloatSizeConfigCollection();
         
 
         protected override void OnEnable()
@@ -115,7 +115,7 @@ namespace TheraBytes.BetterUi
             Apply();
         }
 
-        void Apply()
+        private void Apply()
         {
             Settings s = CurrentSettings;
 

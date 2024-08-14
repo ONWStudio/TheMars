@@ -6,9 +6,9 @@ namespace UniRx.Operators
 {
     internal class DelayFrameObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly int frameCount;
-        readonly FrameCountType frameCountType;
+        private readonly IObservable<T> source;
+        private readonly int frameCount;
+        private readonly FrameCountType frameCountType;
 
         public DelayFrameObservable(IObservable<T> source, int frameCount, FrameCountType frameCountType)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -23,20 +23,20 @@ namespace UniRx.Operators
             return new DelayFrame(this, observer, cancel).Run();
         }
 
-        class DelayFrame : OperatorObserverBase<T, T>
+        private class DelayFrame : OperatorObserverBase<T, T>
         {
-            readonly DelayFrameObservable<T> parent;
-            readonly object gate = new object();
-            readonly QueuePool pool = new QueuePool();
-            int runningEnumeratorCount;
-            bool readyDrainEnumerator;
-            bool running;
-            IDisposable sourceSubscription;
-            Queue<T> currentQueueReference;
-            bool calledCompleted;
-            bool hasError;
-            Exception error;
-            BooleanDisposable cancelationToken;
+            private readonly DelayFrameObservable<T> parent;
+            private readonly object gate = new object();
+            private readonly QueuePool pool = new QueuePool();
+            private int runningEnumeratorCount;
+            private bool readyDrainEnumerator;
+            private bool running;
+            private IDisposable sourceSubscription;
+            private Queue<T> currentQueueReference;
+            private bool calledCompleted;
+            private bool hasError;
+            private Exception error;
+            private BooleanDisposable cancelationToken;
 
             public DelayFrame(DelayFrameObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -54,7 +54,7 @@ namespace UniRx.Operators
                 return StableCompositeDisposable.Create(cancelationToken, sourceSubscription);
             }
 
-            IEnumerator DrainQueue(Queue<T> q, int frameCount)
+            private IEnumerator DrainQueue(Queue<T> q, int frameCount)
             {
                 lock (gate)
                 {
@@ -228,10 +228,10 @@ namespace UniRx.Operators
             }
         }
 
-        class QueuePool
+        private class QueuePool
         {
-            readonly object gate = new object();
-            readonly Queue<Queue<T>> pool = new Queue<Queue<T>>(2);
+            private readonly object gate = new object();
+            private readonly Queue<Queue<T>> pool = new Queue<Queue<T>>(2);
 
             public Queue<T> Get()
             {

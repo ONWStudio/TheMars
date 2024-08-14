@@ -12,7 +12,7 @@ namespace UniRx
     {
         public static readonly IScheduler ThreadPool = new ThreadPoolScheduler();
 
-        class ThreadPoolScheduler : IScheduler, ISchedulerPeriodic
+        private class ThreadPoolScheduler : IScheduler, ISchedulerPeriodic
         {
             public ThreadPoolScheduler()
             {
@@ -66,9 +66,9 @@ namespace UniRx
 
             // timer was borrwed from Rx Official
 
-            sealed class Timer : IDisposable
+            private sealed class Timer : IDisposable
             {
-                static readonly HashSet<System.Threading.Timer> s_timers = new HashSet<System.Threading.Timer>();
+                private static readonly HashSet<System.Threading.Timer> s_timers = new HashSet<System.Threading.Timer>();
 
                 private readonly SingleAssignmentDisposable _disposable;
 
@@ -142,9 +142,9 @@ namespace UniRx
                 }
             }
 
-            sealed class PeriodicTimer : IDisposable
+            private sealed class PeriodicTimer : IDisposable
             {
-                static readonly HashSet<System.Threading.Timer> s_timers = new HashSet<System.Threading.Timer>();
+                private static readonly HashSet<System.Threading.Timer> s_timers = new HashSet<System.Threading.Timer>();
 
                 private Action _action;
                 private System.Threading.Timer _timer;

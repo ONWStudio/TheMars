@@ -10,7 +10,7 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableDeselectTrigger : ObservableTriggerBase, IEventSystemHandler, IDeselectHandler
     {
-        Subject<BaseEventData> onDeselect;
+        private Subject<BaseEventData> onDeselect;
 
         void IDeselectHandler.OnDeselect(BaseEventData eventData)
         {

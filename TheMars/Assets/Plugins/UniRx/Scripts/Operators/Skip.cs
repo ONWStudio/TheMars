@@ -5,9 +5,9 @@ namespace UniRx.Operators
 {
     internal class SkipObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly int count;
-        readonly TimeSpan duration;
+        private readonly IObservable<T> source;
+        private readonly int count;
+        private readonly TimeSpan duration;
         internal readonly IScheduler scheduler; // public for optimization check
 
         public SkipObservable(IObservable<T> source, int count)
@@ -61,9 +61,9 @@ namespace UniRx.Operators
             }
         }
 
-        class Skip : OperatorObserverBase<T, T>
+        private class Skip : OperatorObserverBase<T, T>
         {
-            int remaining;
+            private int remaining;
 
             public Skip(SkipObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -93,10 +93,10 @@ namespace UniRx.Operators
             }
         }
 
-        class Skip_ : OperatorObserverBase<T, T>
+        private class Skip_ : OperatorObserverBase<T, T>
         {
-            readonly SkipObservable<T> parent;
-            volatile bool open;
+            private readonly SkipObservable<T> parent;
+            private volatile bool open;
 
             public Skip_(SkipObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -111,7 +111,7 @@ namespace UniRx.Operators
                 return StableCompositeDisposable.Create(d1, d2);
             }
 
-            void Tick()
+            private void Tick()
             {
                 open = true;
             }

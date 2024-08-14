@@ -19,8 +19,8 @@ namespace MoreMountains.FeedbacksForThirdParty
 		public List<UIToolkitDemoAction> Actions;
 
 		private Button _button;
-	
-	
+
+
 		private void OnEnable()
 		{
 			VisualElement root = GetComponent<UIDocument>().rootVisualElement;

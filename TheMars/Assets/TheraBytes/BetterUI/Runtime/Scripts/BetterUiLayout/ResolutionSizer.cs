@@ -55,8 +55,8 @@ namespace TheraBytes.BetterUi
             base.OnRectTransformDimensionsChange();
             UpdateSize();
         }
-        
-        void UpdateSize()
+
+        private void UpdateSize()
         {
             if(!(isActiveAndEnabled))
             {

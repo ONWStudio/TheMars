@@ -18,7 +18,7 @@ namespace TcgEngine.UI
         public DeckDisplay deck;
         public GameObject completed;
 
-        void Start()
+        private void Start()
         {
             Button btn = GetComponent<Button>();
             btn.onClick.AddListener(OnClick);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TMCard
 {
-    public enum TM_CARD_GROUP : byte
+    public enum TMCardGroup : byte
     {
         [InspectorName("공통")] COMMON,
         [InspectorName("국가")] NATION,

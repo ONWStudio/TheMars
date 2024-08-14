@@ -15,7 +15,8 @@ namespace TMCard.Runtime
     {
         public int Stack => _cardQueue.Count;
 
-        [SerializeField] private Queue<TMCardController> _cardQueue = new(10);
+        [SerializeField]
+        private Queue<TMCardController> _cardQueue = new(10);
 
         public void PushCards(IEnumerable<TMCardController> cards)
             => cards.ForEach(_cardQueue.Enqueue);

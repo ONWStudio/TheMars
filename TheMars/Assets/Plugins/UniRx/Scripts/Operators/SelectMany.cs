@@ -5,11 +5,11 @@ namespace UniRx.Operators
 {
     internal class SelectManyObservable<TSource, TResult> : OperatorObservableBase<TResult>
     {
-        readonly IObservable<TSource> source;
-        readonly Func<TSource, IObservable<TResult>> selector;
-        readonly Func<TSource, int, IObservable<TResult>> selectorWithIndex;
-        readonly Func<TSource, IEnumerable<TResult>> selectorEnumerable;
-        readonly Func<TSource, int, IEnumerable<TResult>> selectorEnumerableWithIndex;
+        private readonly IObservable<TSource> source;
+        private readonly Func<TSource, IObservable<TResult>> selector;
+        private readonly Func<TSource, int, IObservable<TResult>> selectorWithIndex;
+        private readonly Func<TSource, IEnumerable<TResult>> selectorEnumerable;
+        private readonly Func<TSource, int, IEnumerable<TResult>> selectorEnumerableWithIndex;
 
         public SelectManyObservable(IObservable<TSource> source, Func<TSource, IObservable<TResult>> selector)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -63,14 +63,14 @@ namespace UniRx.Operators
             }
         }
 
-        class SelectManyOuterObserver : OperatorObserverBase<TSource, TResult>
+        private class SelectManyOuterObserver : OperatorObserverBase<TSource, TResult>
         {
-            readonly SelectManyObservable<TSource, TResult> parent;
+            private readonly SelectManyObservable<TSource, TResult> parent;
 
-            CompositeDisposable collectionDisposable;
-            SingleAssignmentDisposable sourceDisposable;
-            object gate = new object();
-            bool isStopped = false;
+            private CompositeDisposable collectionDisposable;
+            private SingleAssignmentDisposable sourceDisposable;
+            private object gate = new object();
+            private bool isStopped = false;
 
             public SelectManyOuterObserver(SelectManyObservable<TSource, TResult> parent, IObserver<TResult> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -130,10 +130,10 @@ namespace UniRx.Operators
                 }
             }
 
-            class SelectMany : OperatorObserverBase<TResult, TResult>
+            private class SelectMany : OperatorObserverBase<TResult, TResult>
             {
-                readonly SelectManyOuterObserver parent;
-                readonly IDisposable cancel;
+                private readonly SelectManyOuterObserver parent;
+                private readonly IDisposable cancel;
 
                 public SelectMany(SelectManyOuterObserver parent, IDisposable cancel)
                     : base(parent.observer, cancel)
@@ -172,15 +172,15 @@ namespace UniRx.Operators
             }
         }
 
-        class SelectManyObserverWithIndex : OperatorObserverBase<TSource, TResult>
+        private class SelectManyObserverWithIndex : OperatorObserverBase<TSource, TResult>
         {
-            readonly SelectManyObservable<TSource, TResult> parent;
+            private readonly SelectManyObservable<TSource, TResult> parent;
 
-            CompositeDisposable collectionDisposable;
-            int index = 0;
-            object gate = new object();
-            bool isStopped = false;
-            SingleAssignmentDisposable sourceDisposable;
+            private CompositeDisposable collectionDisposable;
+            private int index = 0;
+            private object gate = new object();
+            private bool isStopped = false;
+            private SingleAssignmentDisposable sourceDisposable;
 
             public SelectManyObserverWithIndex(SelectManyObservable<TSource, TResult> parent, IObserver<TResult> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -240,10 +240,10 @@ namespace UniRx.Operators
                 }
             }
 
-            class SelectMany : OperatorObserverBase<TResult, TResult>
+            private class SelectMany : OperatorObserverBase<TResult, TResult>
             {
-                readonly SelectManyObserverWithIndex parent;
-                readonly IDisposable cancel;
+                private readonly SelectManyObserverWithIndex parent;
+                private readonly IDisposable cancel;
 
                 public SelectMany(SelectManyObserverWithIndex parent, IDisposable cancel)
                     : base(parent.observer, cancel)
@@ -282,9 +282,9 @@ namespace UniRx.Operators
             }
         }
 
-        class SelectManyEnumerableObserver : OperatorObserverBase<TSource, TResult>
+        private class SelectManyEnumerableObserver : OperatorObserverBase<TSource, TResult>
         {
-            readonly SelectManyObservable<TSource, TResult> parent;
+            private readonly SelectManyObservable<TSource, TResult> parent;
 
             public SelectManyEnumerableObserver(SelectManyObservable<TSource, TResult> parent, IObserver<TResult> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -358,10 +358,10 @@ namespace UniRx.Operators
             }
         }
 
-        class SelectManyEnumerableObserverWithIndex : OperatorObserverBase<TSource, TResult>
+        private class SelectManyEnumerableObserverWithIndex : OperatorObserverBase<TSource, TResult>
         {
-            readonly SelectManyObservable<TSource, TResult> parent;
-            int index = 0;
+            private readonly SelectManyObservable<TSource, TResult> parent;
+            private int index = 0;
 
             public SelectManyEnumerableObserverWithIndex(SelectManyObservable<TSource, TResult> parent, IObserver<TResult> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -439,13 +439,13 @@ namespace UniRx.Operators
     // with resultSelector
     internal class SelectManyObservable<TSource, TCollection, TResult> : OperatorObservableBase<TResult>
     {
-        readonly IObservable<TSource> source;
-        readonly Func<TSource, IObservable<TCollection>> collectionSelector;
-        readonly Func<TSource, int, IObservable<TCollection>> collectionSelectorWithIndex;
-        readonly Func<TSource, IEnumerable<TCollection>> collectionSelectorEnumerable;
-        readonly Func<TSource, int, IEnumerable<TCollection>> collectionSelectorEnumerableWithIndex;
-        readonly Func<TSource, TCollection, TResult> resultSelector;
-        readonly Func<TSource, int, TCollection, int, TResult> resultSelectorWithIndex;
+        private readonly IObservable<TSource> source;
+        private readonly Func<TSource, IObservable<TCollection>> collectionSelector;
+        private readonly Func<TSource, int, IObservable<TCollection>> collectionSelectorWithIndex;
+        private readonly Func<TSource, IEnumerable<TCollection>> collectionSelectorEnumerable;
+        private readonly Func<TSource, int, IEnumerable<TCollection>> collectionSelectorEnumerableWithIndex;
+        private readonly Func<TSource, TCollection, TResult> resultSelector;
+        private readonly Func<TSource, int, TCollection, int, TResult> resultSelectorWithIndex;
 
         public SelectManyObservable(IObservable<TSource> source, Func<TSource, IObservable<TCollection>> collectionSelector, Func<TSource, TCollection, TResult> resultSelector)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -503,14 +503,14 @@ namespace UniRx.Operators
             }
         }
 
-        class SelectManyOuterObserver : OperatorObserverBase<TSource, TResult>
+        private class SelectManyOuterObserver : OperatorObserverBase<TSource, TResult>
         {
-            readonly SelectManyObservable<TSource, TCollection, TResult> parent;
+            private readonly SelectManyObservable<TSource, TCollection, TResult> parent;
 
-            CompositeDisposable collectionDisposable;
-            object gate = new object();
-            bool isStopped = false;
-            SingleAssignmentDisposable sourceDisposable;
+            private CompositeDisposable collectionDisposable;
+            private object gate = new object();
+            private bool isStopped = false;
+            private SingleAssignmentDisposable sourceDisposable;
 
             public SelectManyOuterObserver(SelectManyObservable<TSource, TCollection, TResult> parent, IObserver<TResult> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -570,11 +570,11 @@ namespace UniRx.Operators
                 }
             }
 
-            class SelectMany : OperatorObserverBase<TCollection, TResult>
+            private class SelectMany : OperatorObserverBase<TCollection, TResult>
             {
-                readonly SelectManyOuterObserver parent;
-                readonly TSource sourceValue;
-                readonly IDisposable cancel;
+                private readonly SelectManyOuterObserver parent;
+                private readonly TSource sourceValue;
+                private readonly IDisposable cancel;
 
                 public SelectMany(SelectManyOuterObserver parent, TSource value, IDisposable cancel)
                     : base(parent.observer, cancel)
@@ -625,15 +625,15 @@ namespace UniRx.Operators
             }
         }
 
-        class SelectManyObserverWithIndex : OperatorObserverBase<TSource, TResult>
+        private class SelectManyObserverWithIndex : OperatorObserverBase<TSource, TResult>
         {
-            readonly SelectManyObservable<TSource, TCollection, TResult> parent;
+            private readonly SelectManyObservable<TSource, TCollection, TResult> parent;
 
-            CompositeDisposable collectionDisposable;
-            object gate = new object();
-            bool isStopped = false;
-            SingleAssignmentDisposable sourceDisposable;
-            int index = 0;
+            private CompositeDisposable collectionDisposable;
+            private object gate = new object();
+            private bool isStopped = false;
+            private SingleAssignmentDisposable sourceDisposable;
+            private int index = 0;
 
             public SelectManyObserverWithIndex(SelectManyObservable<TSource, TCollection, TResult> parent, IObserver<TResult> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -694,13 +694,13 @@ namespace UniRx.Operators
                 }
             }
 
-            class SelectManyObserver : OperatorObserverBase<TCollection, TResult>
+            private class SelectManyObserver : OperatorObserverBase<TCollection, TResult>
             {
-                readonly SelectManyObserverWithIndex parent;
-                readonly TSource sourceValue;
-                readonly int sourceIndex;
-                readonly IDisposable cancel;
-                int index;
+                private readonly SelectManyObserverWithIndex parent;
+                private readonly TSource sourceValue;
+                private readonly int sourceIndex;
+                private readonly IDisposable cancel;
+                private int index;
 
                 public SelectManyObserver(SelectManyObserverWithIndex parent, TSource value, int index, IDisposable cancel)
                     : base(parent.observer, cancel)
@@ -752,9 +752,9 @@ namespace UniRx.Operators
             }
         }
 
-        class SelectManyEnumerableObserver : OperatorObserverBase<TSource, TResult>
+        private class SelectManyEnumerableObserver : OperatorObserverBase<TSource, TResult>
         {
-            readonly SelectManyObservable<TSource, TCollection, TResult> parent;
+            private readonly SelectManyObservable<TSource, TCollection, TResult> parent;
 
             public SelectManyEnumerableObserver(SelectManyObservable<TSource, TCollection, TResult> parent, IObserver<TResult> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -828,10 +828,10 @@ namespace UniRx.Operators
             }
         }
 
-        class SelectManyEnumerableObserverWithIndex : OperatorObserverBase<TSource, TResult>
+        private class SelectManyEnumerableObserverWithIndex : OperatorObserverBase<TSource, TResult>
         {
-            readonly SelectManyObservable<TSource, TCollection, TResult> parent;
-            int index = 0;
+            private readonly SelectManyObservable<TSource, TCollection, TResult> parent;
+            private int index = 0;
 
             public SelectManyEnumerableObserverWithIndex(SelectManyObservable<TSource, TCollection, TResult> parent, IObserver<TResult> observer, IDisposable cancel) : base(observer, cancel)
             {

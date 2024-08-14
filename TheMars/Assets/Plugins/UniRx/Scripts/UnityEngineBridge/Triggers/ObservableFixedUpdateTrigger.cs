@@ -6,10 +6,10 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableFixedUpdateTrigger : ObservableTriggerBase
     {
-        Subject<Unit> fixedUpdate;
+        private Subject<Unit> fixedUpdate;
 
         /// <summary>This function is called every fixed framerate frame, if the MonoBehaviour is enabled.</summary>
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             if (fixedUpdate != null) fixedUpdate.OnNext(Unit.Default);
         }

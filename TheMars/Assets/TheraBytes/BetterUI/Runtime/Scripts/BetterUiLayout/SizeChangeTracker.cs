@@ -33,10 +33,10 @@ namespace TheraBytes.BetterUi
         public Axis AffectedAxis = Axis.HorizontalAndVertical;
         public RectTransform[] AffectedObjects;
 
-        bool isInRecursion = false;
-        Vector2 previousSize;
+        private bool isInRecursion = false;
+        private Vector2 previousSize;
 
-        RectTransform rectTransform;
+        private RectTransform rectTransform;
         public RectTransform RectTransform
         {
             get

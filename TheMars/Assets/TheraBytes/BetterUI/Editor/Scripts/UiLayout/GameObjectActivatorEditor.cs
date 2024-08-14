@@ -11,10 +11,10 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(GameObjectActivator)), CanEditMultipleObjects]
     public class GameObjectActivatorrEditor : UnityEditor.Editor
     {
-        GameObjectActivator activator;
-        SerializedProperty settingsFallback, settingsList;
+        private GameObjectActivator activator;
+        private SerializedProperty settingsFallback, settingsList;
 
-        void OnEnable()
+        private void OnEnable()
         {
             activator = base.target as GameObjectActivator;
             this.settingsFallback = serializedObject.FindProperty("settingsFallback");
@@ -48,7 +48,7 @@ namespace TheraBytes.BetterUi.Editor
             serializedObject.ApplyModifiedProperties();
         }
 
-        void DrawList(string label, SerializedProperty list, SerializedProperty otherList)
+        private void DrawList(string label, SerializedProperty list, SerializedProperty otherList)
         {
             EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
 
@@ -93,7 +93,7 @@ namespace TheraBytes.BetterUi.Editor
             EditorGUI.indentLevel--;
         }
 
-        bool CheckObject(GameObject go, SerializedProperty list, SerializedProperty otherList)
+        private bool CheckObject(GameObject go, SerializedProperty list, SerializedProperty otherList)
         {
 #if UNITY_2018_2_OR_NEWER
             if(PrefabUtility.GetCorrespondingObjectFromSource(go) == null && PrefabUtility.GetCorrespondingObjectFromSource(go) != null)

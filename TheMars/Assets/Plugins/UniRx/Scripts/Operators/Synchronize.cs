@@ -5,8 +5,8 @@ namespace UniRx.Operators
 {
     internal class SynchronizeObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly object gate;
+        private readonly IObservable<T> source;
+        private readonly object gate;
 
         public SynchronizeObservable(IObservable<T> source, object gate)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -20,9 +20,9 @@ namespace UniRx.Operators
             return source.Subscribe(new Synchronize(this, observer, cancel));
         }
 
-        class Synchronize : OperatorObserverBase<T, T>
+        private class Synchronize : OperatorObserverBase<T, T>
         {
-            readonly SynchronizeObservable<T> parent;
+            private readonly SynchronizeObservable<T> parent;
 
             public Synchronize(SynchronizeObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {

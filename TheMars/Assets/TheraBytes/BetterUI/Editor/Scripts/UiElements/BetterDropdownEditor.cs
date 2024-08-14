@@ -13,7 +13,7 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(BetterDropdown)), CanEditMultipleObjects]
     public class BetterDropDownEditor : DropdownEditor
     {
-        BetterElementHelper<Dropdown, BetterDropdown> helper =
+        private BetterElementHelper<Dropdown, BetterDropdown> helper =
             new BetterElementHelper<Dropdown, BetterDropdown>();
 
         public override void OnInspectorGUI()

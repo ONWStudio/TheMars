@@ -33,14 +33,14 @@ namespace UniRx.Operators
             }
         }
 
-        class MergeOuterObserver : OperatorObserverBase<IObservable<T>, T>
+        private class MergeOuterObserver : OperatorObserverBase<IObservable<T>, T>
         {
-            readonly MergeObservable<T> parent;
+            private readonly MergeObservable<T> parent;
 
-            CompositeDisposable collectionDisposable;
-            SingleAssignmentDisposable sourceDisposable;
-            object gate = new object();
-            bool isStopped = false;
+            private CompositeDisposable collectionDisposable;
+            private SingleAssignmentDisposable sourceDisposable;
+            private object gate = new object();
+            private bool isStopped = false;
 
             public MergeOuterObserver(MergeObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -89,10 +89,10 @@ namespace UniRx.Operators
                 }
             }
 
-            class Merge : OperatorObserverBase<T, T>
+            private class Merge : OperatorObserverBase<T, T>
             {
-                readonly MergeOuterObserver parent;
-                readonly IDisposable cancel;
+                private readonly MergeOuterObserver parent;
+                private readonly IDisposable cancel;
 
                 public Merge(MergeOuterObserver parent, IDisposable cancel)
                     : base(parent.observer, cancel)
@@ -131,18 +131,18 @@ namespace UniRx.Operators
             }
         }
 
-        class MergeConcurrentObserver : OperatorObserverBase<IObservable<T>, T>
+        private class MergeConcurrentObserver : OperatorObserverBase<IObservable<T>, T>
         {
-            readonly MergeObservable<T> parent;
+            private readonly MergeObservable<T> parent;
 
-            CompositeDisposable collectionDisposable;
-            SingleAssignmentDisposable sourceDisposable;
-            object gate = new object();
-            bool isStopped = false;
+            private CompositeDisposable collectionDisposable;
+            private SingleAssignmentDisposable sourceDisposable;
+            private object gate = new object();
+            private bool isStopped = false;
 
             // concurrency
-            Queue<IObservable<T>> q;
-            int activeCount;
+            private Queue<IObservable<T>> q;
+            private int activeCount;
 
             public MergeConcurrentObserver(MergeObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -202,7 +202,7 @@ namespace UniRx.Operators
                 }
             }
 
-            void Subscribe(IObservable<T> innerSource)
+            private void Subscribe(IObservable<T> innerSource)
             {
                 var disposable = new SingleAssignmentDisposable();
                 collectionDisposable.Add(disposable);
@@ -210,10 +210,10 @@ namespace UniRx.Operators
                 disposable.Disposable = innerSource.Subscribe(collectionObserver);
             }
 
-            class Merge : OperatorObserverBase<T, T>
+            private class Merge : OperatorObserverBase<T, T>
             {
-                readonly MergeConcurrentObserver parent;
-                readonly IDisposable cancel;
+                private readonly MergeConcurrentObserver parent;
+                private readonly IDisposable cancel;
 
                 public Merge(MergeConcurrentObserver parent, IDisposable cancel)
                     : base(parent.observer, cancel)

@@ -42,10 +42,10 @@ namespace TheraBytes.BetterUi
             public class OverrideProperty
             {
                 [SerializeField]
-                OverrideMode mode;
+                private OverrideMode mode;
 
                 [SerializeField]
-                float value;
+                private float value;
 
                 public OverrideMode Mode { get { return mode; } }
                 public float Value { get { return value; } }
@@ -77,7 +77,7 @@ namespace TheraBytes.BetterUi
             }
 
             [SerializeField]
-            string screenConfigName;
+            private string screenConfigName;
             public string ScreenConfigName { get { return screenConfigName; } set { screenConfigName = value; } }
         }
 
@@ -86,10 +86,10 @@ namespace TheraBytes.BetterUi
 
         
         [SerializeField]
-        Settings settingsFallback = new Settings();
+        private Settings settingsFallback = new Settings();
 
         [SerializeField]
-        SettingsConfigCollection customSettings = new SettingsConfigCollection();
+        private SettingsConfigCollection customSettings = new SettingsConfigCollection();
 
         public Settings CurrentSettings { get { return customSettings.GetCurrentItem(settingsFallback); } }
 
@@ -98,8 +98,8 @@ namespace TheraBytes.BetterUi
         public Settings FallbackSettings { get { return settingsFallback; } }
 #endif
 
-        ScreenInfo optimizedOverride = new ScreenInfo();
-        ScreenInfo currentOverride = new ScreenInfo();
+        private ScreenInfo optimizedOverride = new ScreenInfo();
+        private ScreenInfo currentOverride = new ScreenInfo();
 
         public ScreenInfo OptimizedOverride { get { return optimizedOverride; } }
         public ScreenInfo CurrentSize { get { return currentOverride; } }
@@ -131,7 +131,7 @@ namespace TheraBytes.BetterUi
             StartCoroutine(RecalculateRoutine());
         }
 
-        IEnumerator RecalculateRoutine()
+        private IEnumerator RecalculateRoutine()
         {
             yield return null;
 

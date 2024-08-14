@@ -6,10 +6,10 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableCollisionTrigger : ObservableTriggerBase
     {
-        Subject<Collision> onCollisionEnter;
+        private Subject<Collision> onCollisionEnter;
 
         /// <summary>OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider.</summary>
-         void OnCollisionEnter(Collision collision)
+        private void OnCollisionEnter(Collision collision)
         {
             if (onCollisionEnter != null) onCollisionEnter.OnNext(collision);
         }
@@ -20,10 +20,10 @@ namespace UniRx.Triggers
             return onCollisionEnter ?? (onCollisionEnter = new Subject<Collision>());
         }
 
-        Subject<Collision> onCollisionExit;
+        private Subject<Collision> onCollisionExit;
 
         /// <summary>OnCollisionExit is called when this collider/rigidbody has stopped touching another rigidbody/collider.</summary>
-         void OnCollisionExit(Collision collisionInfo)
+        private void OnCollisionExit(Collision collisionInfo)
         {
             if (onCollisionExit != null) onCollisionExit.OnNext(collisionInfo);
         }
@@ -34,10 +34,10 @@ namespace UniRx.Triggers
             return onCollisionExit ?? (onCollisionExit = new Subject<Collision>());
         }
 
-        Subject<Collision> onCollisionStay;
+        private Subject<Collision> onCollisionStay;
 
         /// <summary>OnCollisionStay is called once per frame for every collider/rigidbody that is touching rigidbody/collider.</summary>
-         void OnCollisionStay(Collision collisionInfo)
+        private void OnCollisionStay(Collision collisionInfo)
         {
             if (onCollisionStay != null) onCollisionStay.OnNext(collisionInfo);
         }

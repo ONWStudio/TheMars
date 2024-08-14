@@ -24,7 +24,7 @@ namespace TcgEngine.Client
         private bool focus;
         private float target_alpha = 0f;
 
-        void Awake()
+        private void Awake()
         {
             canvas = GetComponentInParent<Canvas>();
             rect = GetComponent<RectTransform>();
@@ -97,7 +97,7 @@ namespace TcgEngine.Client
             focus = false;
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             focus = false;
         }

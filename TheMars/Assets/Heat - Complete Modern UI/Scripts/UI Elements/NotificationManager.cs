@@ -16,13 +16,17 @@ namespace Michsky.UI.Heat
         public AudioClip customSFX;
 
         // Resources
-        [SerializeField] private Animator itemAnimator;
-        [SerializeField] private Image iconObj;
-        [SerializeField] private TextMeshProUGUI textObj;
+        [SerializeField]
+        private Animator itemAnimator;
+        [SerializeField]
+        private Image iconObj;
+        [SerializeField]
+        private TextMeshProUGUI textObj;
 
         // Settings
         public bool useLocalization = true;
-        [SerializeField] private bool updateOnAnimate = true;
+        [SerializeField]
+        private bool updateOnAnimate = true;
         [Range(0, 10)] public float minimizeAfter = 3;
         public DefaultState defaultState = DefaultState.Minimized;
         public AfterMinimize afterMinimize = AfterMinimize.Disable;
@@ -31,13 +35,13 @@ namespace Michsky.UI.Heat
         public UnityEvent onDestroy = new UnityEvent();
 
         // Helpers
-        bool isOn;
-        LocalizedObject localizedObject;
+        private bool isOn;
+        private LocalizedObject localizedObject;
 
         public enum DefaultState { Minimized, Expanded }
         public enum AfterMinimize { Disable, Destroy }
 
-        void Start()
+        private void Start()
         {
             if (itemAnimator == null) { itemAnimator = GetComponent<Animator>(); }
             if (useLocalization)
@@ -129,13 +133,13 @@ namespace Michsky.UI.Heat
             Destroy(gameObject);
         }
 
-        IEnumerator DisableAnimator()
+        private IEnumerator DisableAnimator()
         {
             yield return new WaitForSeconds(HeatUIInternalTools.GetAnimatorClipLength(itemAnimator, "Notification_In"));
             itemAnimator.enabled = false;
         }
 
-        IEnumerator DisableItem()
+        private IEnumerator DisableItem()
         {
             yield return new WaitForSeconds(HeatUIInternalTools.GetAnimatorClipLength(itemAnimator, "Notification_Out"));
 
@@ -145,7 +149,7 @@ namespace Michsky.UI.Heat
             else if (afterMinimize == AfterMinimize.Destroy) { DestroyNotification(); }
         }
 
-        IEnumerator MinimizeItem()
+        private IEnumerator MinimizeItem()
         {
             yield return new WaitForSeconds(minimizeAfter);
             MinimizeNotification();

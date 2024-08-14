@@ -8,7 +8,8 @@ namespace Onw.UI.Components
     [DisallowMultipleComponent]
     public sealed class CloseUI : MonoBehaviour
     {
-        [SerializeField] private BaseUI closeUIObject;
+        [SerializeField]
+        private BaseUI closeUIObject;
 
         private Button _closeButton;
 

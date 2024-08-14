@@ -9,11 +9,14 @@ namespace Onw.UI.Components
     public sealed class MessagePopupUI : BaseUI
     {
         [Header("Button")]
-        [SerializeField] private Button _okButton;
+        [SerializeField]
+        private Button _okButton;
 
         [Header("Text")]
-        [SerializeField] private TMP_Text _warningText;
-        [SerializeField] private TMP_Text _titleText;
+        [SerializeField]
+        private TMP_Text _warningText;
+        [SerializeField]
+        private TMP_Text _titleText;
 
         public string WarningText
         {

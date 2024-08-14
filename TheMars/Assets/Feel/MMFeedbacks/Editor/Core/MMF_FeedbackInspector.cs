@@ -28,7 +28,7 @@ namespace MoreMountains.Feedbacks
 		public bool DrawerInitialized;
 		public List<SerializedProperty> PropertiesList = new List<SerializedProperty>();
 		public Dictionary<string, MMFInspectorGroupData> GroupData = new Dictionary<string, MMFInspectorGroupData>();
-        
+
 		private string[] _mmHiddenPropertiesToHide;
 		private bool _hasMMHiddenProperties = false;
 		protected bool _shouldDrawBase = true;

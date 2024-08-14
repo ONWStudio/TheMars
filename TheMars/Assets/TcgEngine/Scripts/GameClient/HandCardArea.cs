@@ -29,12 +29,12 @@ namespace TcgEngine.Client
 
         private static HandCardArea _instance;
 
-        void Awake()
+        private void Awake()
         {
             _instance = this;
         }
 
-        void Update()
+        private void Update()
         {
             if (!GameClient.Get().IsReady())
                 return;

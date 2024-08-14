@@ -13,10 +13,10 @@ namespace TheraBytes.BetterUi.Editor
     [CustomPropertyDrawer(typeof(List<Transitions>))]
     public class TransitionCollectionDrawer : PropertyDrawer
     {
-        string[] stateNames;
-        SerializedProperty listProperty;
-        ReorderableListControl listEditor;
-        IReorderableListAdaptor adaptor;
+        private string[] stateNames;
+        private SerializedProperty listProperty;
+        private ReorderableListControl listEditor;
+        private IReorderableListAdaptor adaptor;
 
         public TransitionCollectionDrawer() { }
         public TransitionCollectionDrawer(Type containerObjectType, 

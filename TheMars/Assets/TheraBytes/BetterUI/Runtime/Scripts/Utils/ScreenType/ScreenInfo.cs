@@ -10,10 +10,10 @@ namespace TheraBytes.BetterUi
     public class ScreenInfo
     {
         [SerializeField]
-        Vector2 resolution = new Vector2(1980, 1020);
+        private Vector2 resolution = new Vector2(1980, 1020);
 
         [SerializeField]
-        float dpi = 96;
+        private float dpi = 96;
 
         public Vector2 Resolution
         {

@@ -4,8 +4,8 @@ namespace UniRx.Operators
 {
     internal class SkipUntilObservable<T, TOther> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly IObservable<TOther> other;
+        private readonly IObservable<T> source;
+        private readonly IObservable<TOther> other;
 
         public SkipUntilObservable(IObservable<T> source, IObservable<TOther> other)
             : base(source.IsRequiredSubscribeOnCurrentThread() || other.IsRequiredSubscribeOnCurrentThread())
@@ -19,9 +19,9 @@ namespace UniRx.Operators
             return new SkipUntilOuterObserver(this, observer, cancel).Run();
         }
 
-        class SkipUntilOuterObserver : OperatorObserverBase<T, T>
+        private class SkipUntilOuterObserver : OperatorObserverBase<T, T>
         {
-            readonly SkipUntilObservable<T, TOther> parent;
+            private readonly SkipUntilObservable<T, TOther> parent;
 
             public SkipUntilOuterObserver(SkipUntilObservable<T, TOther> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -54,11 +54,11 @@ namespace UniRx.Operators
             {
             }
 
-            class SkipUntil : IObserver<T>
+            private class SkipUntil : IObserver<T>
             {
                 public volatile IObserver<T> observer;
-                readonly SkipUntilOuterObserver parent;
-                readonly IDisposable subscription;
+                private readonly SkipUntilOuterObserver parent;
+                private readonly IDisposable subscription;
 
                 public SkipUntil(SkipUntilOuterObserver parent, IDisposable subscription)
                 {
@@ -85,11 +85,11 @@ namespace UniRx.Operators
                 }
             }
 
-            class SkipUntilOther : IObserver<TOther>
+            private class SkipUntilOther : IObserver<TOther>
             {
-                readonly SkipUntilOuterObserver parent;
-                readonly SkipUntil sourceObserver;
-                readonly IDisposable subscription;
+                private readonly SkipUntilOuterObserver parent;
+                private readonly SkipUntil sourceObserver;
+                private readonly IDisposable subscription;
 
                 public SkipUntilOther(SkipUntilOuterObserver parent, SkipUntil sourceObserver, IDisposable subscription)
                 {

@@ -13,10 +13,10 @@ namespace UniRx
 {
     public class CoroutineAsyncBridge : INotifyCompletion
     {
-        Action continuation;
+        private Action continuation;
         public bool IsCompleted { get; private set; }
 
-        CoroutineAsyncBridge()
+        private CoroutineAsyncBridge()
         {
             IsCompleted = false;
         }
@@ -28,7 +28,7 @@ namespace UniRx
             return bridge;
         }
 
-        IEnumerator Run<T>(T target)
+        private IEnumerator Run<T>(T target)
         {
             yield return target;
             IsCompleted = true;
@@ -48,11 +48,11 @@ namespace UniRx
 
     public class CoroutineAsyncBridge<T> : INotifyCompletion
     {
-        readonly T result;
-        Action continuation;
+        private readonly T result;
+        private Action continuation;
         public bool IsCompleted { get; private set; }
 
-        CoroutineAsyncBridge(T result)
+        private CoroutineAsyncBridge(T result)
         {
             IsCompleted = false;
             this.result = result;
@@ -65,7 +65,7 @@ namespace UniRx
             return bridge;
         }
 
-        IEnumerator Run(T target)
+        private IEnumerator Run(T target)
         {
             yield return target;
             IsCompleted = true;

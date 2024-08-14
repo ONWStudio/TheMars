@@ -19,7 +19,7 @@ namespace TMCard.Effect
             controller.OnClickEvent.AddListener(() =>
             {
                 trigger.OnEffectEvent.Invoke();
-                TMCardGameManager.Instance.DisposeCard(controller);
+                TMCardHelper.Instance.DisposeCard(controller);
             });
         }
 

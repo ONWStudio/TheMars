@@ -16,7 +16,7 @@ namespace TMCard.Effect
         public int CollectCount { get; private set; } = 1;
 
         [field: SerializeField, FormerlySerializedAs("<SelectKind>k__BackingField"), DisplayAs("카드군")]
-        public TM_CARD_KIND SelectKind { get; private set; } = TM_CARD_KIND.NONE;
+        public TMCardKind SelectKind { get; private set; } = TMCardKind.NONE;
 
         public ITMCardEffect CreateEffect()
         {

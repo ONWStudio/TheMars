@@ -9,7 +9,7 @@ namespace Michsky.UI.Heat
     [System.Serializable]
     public class UIManagerEditor : Editor
     {
-        GUISkin customSkin;
+        private GUISkin customSkin;
         private UIManager uimTarget;
 
         protected static float foldoutItemSpace = 2;
@@ -332,12 +332,12 @@ namespace Michsky.UI.Heat
             if (Application.isPlaying == false) { Repaint(); }
         }
 
-        void Discord() { Application.OpenURL("https://discord.gg/VXpHyUt"); }
-        void Docs() { Application.OpenURL("https://docs.michsky.com/docs/heat-ui/"); }
-        void Email() { Application.OpenURL("https://www.michsky.com/contact/"); }
-        void Twitter() { Application.OpenURL("https://www.twitter.com/michskyHQ"); }
+        private void Discord() { Application.OpenURL("https://discord.gg/VXpHyUt"); }
+        private void Docs() { Application.OpenURL("https://docs.michsky.com/docs/heat-ui/"); }
+        private void Email() { Application.OpenURL("https://www.michsky.com/contact/"); }
+        private void Twitter() { Application.OpenURL("https://www.twitter.com/michskyHQ"); }
 
-        void ResetToDefaults()
+        private void ResetToDefaults()
         {
             if (EditorUtility.DisplayDialog("Reset to defaults", "Are you sure you want to reset UI Manager values to default?", "Yes", "Cancel"))
             {

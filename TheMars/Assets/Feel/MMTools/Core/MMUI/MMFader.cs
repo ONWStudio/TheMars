@@ -20,7 +20,7 @@ namespace MoreMountains.Tools
 			Restore = restore;
 			ID = id;
 		}
-		static MMFadeStopEvent e;
+		private static MMFadeStopEvent e;
 		public static void Trigger(int id = 0, bool restore = false)
 		{
 			e.ID = id;
@@ -63,7 +63,7 @@ namespace MoreMountains.Tools
 			IgnoreTimeScale = ignoreTimeScale;
 			WorldPosition = worldPosition;
 		}
-		static MMFadeEvent e;
+		private static MMFadeEvent e;
 		public static void Trigger(float duration, float targetAlpha)
 		{
 			Trigger(duration, targetAlpha, new MMTweenType(MMTween.MMTweenCurve.EaseInCubic));
@@ -107,7 +107,7 @@ namespace MoreMountains.Tools
 			IgnoreTimeScale = ignoreTimeScale;
 			WorldPosition = worldPosition;
 		}
-		static MMFadeInEvent e;
+		private static MMFadeInEvent e;
 		public static void Trigger(float duration, MMTweenType tween, int id = 0, 
 			bool ignoreTimeScale = true, Vector3 worldPosition = new Vector3())
 		{
@@ -147,7 +147,7 @@ namespace MoreMountains.Tools
 			WorldPosition = worldPosition;
 		}
 
-		static MMFadeOutEvent e;
+		private static MMFadeOutEvent e;
 		public static void Trigger(float duration, MMTweenType tween, int id = 0, 
 			bool ignoreTimeScale = true, Vector3 worldPosition = new Vector3())
 		{

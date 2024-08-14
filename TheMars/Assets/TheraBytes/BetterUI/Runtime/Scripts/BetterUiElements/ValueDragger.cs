@@ -30,7 +30,7 @@ namespace TheraBytes.BetterUi
             public bool Invert;
 
             [SerializeField]
-            string screenConfigName;
+            private string screenConfigName;
             public string ScreenConfigName { get { return screenConfigName; } set { screenConfigName = value; } }
         }
 
@@ -49,7 +49,7 @@ namespace TheraBytes.BetterUi
             public bool WholeNumbers;
 
             [SerializeField]
-            string screenConfigName;
+            private string screenConfigName;
             public string ScreenConfigName { get { return screenConfigName; } set { screenConfigName = value; } }
         }
 
@@ -58,27 +58,27 @@ namespace TheraBytes.BetterUi
         #endregion
 
         [SerializeField]
-        DragSettings fallbackDragSettings = new DragSettings();
+        private DragSettings fallbackDragSettings = new DragSettings();
         [SerializeField]
-        DragSettingsConfigCollection customDragSettings = new DragSettingsConfigCollection();
+        private DragSettingsConfigCollection customDragSettings = new DragSettingsConfigCollection();
 
         [SerializeField]
-        ValueSettings fallbackValueSettings = new ValueSettings();
+        private ValueSettings fallbackValueSettings = new ValueSettings();
         [SerializeField]
-        ValueSettingsConfigCollection customValueSettings = new ValueSettingsConfigCollection();
+        private ValueSettingsConfigCollection customValueSettings = new ValueSettingsConfigCollection();
 
         [SerializeField]
-        FloatSizeModifier fallbackDragDistance = new FloatSizeModifier(1, float.Epsilon, 10000);
+        private FloatSizeModifier fallbackDragDistance = new FloatSizeModifier(1, float.Epsilon, 10000);
         [SerializeField]
-        FloatSizeConfigCollection customDragDistance = new FloatSizeConfigCollection();
+        private FloatSizeConfigCollection customDragDistance = new FloatSizeConfigCollection();
 
         [SerializeField]
-        float value;
+        private float value;
 
         [SerializeField]
-        ValueDragEvent onValueChanged = new ValueDragEvent();
+        private ValueDragEvent onValueChanged = new ValueDragEvent();
 
-        float internalValue;
+        private float internalValue;
 
         public DragSettings CurrentDragSettings 
         {

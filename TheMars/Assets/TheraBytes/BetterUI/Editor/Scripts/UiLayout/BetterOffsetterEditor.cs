@@ -12,9 +12,9 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(BetterOffsetter)), CanEditMultipleObjects]
     public class BetterOffsetterEditor : UnityEditor.Editor
     {
-        InjectedSettingsInspector helper;
+        private InjectedSettingsInspector helper;
 
-        void OnEnable()
+        private void OnEnable()
         {
             helper = new InjectedSettingsInspector("Settings", serializedObject, "customSettings", "settingsFallback");
 

@@ -13,7 +13,7 @@ namespace TcgEngine.FX
     {
         public FaceType type;
 
-        void Start()
+        private void Start()
         {
             Vector3 up = GameBoard.Get().transform.up;
 

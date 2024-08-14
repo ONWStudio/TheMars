@@ -17,9 +17,10 @@ namespace Michsky.UI.Heat
         public Color background = new Color32(25, 35, 45, 255);
 
         [Header("Settings")]
-        [SerializeField] private bool applyOnStart;
+        [SerializeField]
+        private bool applyOnStart;
 
-        void Start()
+        private void Start()
         {
             if (applyOnStart == true)
             {
@@ -49,7 +50,7 @@ namespace Michsky.UI.Heat
             }
         }
 
-        void DisableDynamicUpdate()
+        private void DisableDynamicUpdate()
         {
             targetUIManager.enableDynamicUpdate = false;
         }

@@ -13,16 +13,16 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(BetterToggle)), CanEditMultipleObjects]
     public class BetterToggleEditor : ToggleEditor
     {
-        BetterElementHelper<Toggle, BetterToggle> transitions = 
+        private BetterElementHelper<Toggle, BetterToggle> transitions = 
             new BetterElementHelper<Toggle, BetterToggle>();
 
-        BetterElementHelper<Toggle, BetterToggle> transitionsWhenOn =
+        private BetterElementHelper<Toggle, BetterToggle> transitionsWhenOn =
             new BetterElementHelper<Toggle, BetterToggle>("betterTransitionsWhenOn");
 
-        BetterElementHelper<Toggle, BetterToggle> transitionsWhenOff =
+        private BetterElementHelper<Toggle, BetterToggle> transitionsWhenOff =
             new BetterElementHelper<Toggle, BetterToggle>("betterTransitionsWhenOff");
 
-        BetterElementHelper<Toggle, BetterToggle> OnOffTransitions =
+        private BetterElementHelper<Toggle, BetterToggle> OnOffTransitions =
             new BetterElementHelper<Toggle, BetterToggle>("betterToggleTransitions");
 
 

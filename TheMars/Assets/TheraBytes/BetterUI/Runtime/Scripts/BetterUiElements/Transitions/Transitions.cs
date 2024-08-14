@@ -36,30 +36,30 @@ namespace TheraBytes.BetterUi
         public ReadOnlyCollection<string> StateNames { get { return stateNames.ToList().AsReadOnly(); } }
 
         [SerializeField]
-        TransitionMode mode;
+        private TransitionMode mode;
 
 
         [SerializeField]
-        string[] stateNames;
+        private string[] stateNames;
 
         [SerializeField]
-        ColorTransitions colorTransitions;
+        private ColorTransitions colorTransitions;
         [SerializeField]
-        Color32Transitions color32Transitions;
+        private Color32Transitions color32Transitions;
         [SerializeField]
-        SpriteSwapTransitions spriteSwapTransitions;
+        private SpriteSwapTransitions spriteSwapTransitions;
         [SerializeField]
-        AnimationTransitions animationTransitions;
+        private AnimationTransitions animationTransitions;
         [SerializeField]
-        ObjectActivenessTransitions activenessTransitions;
+        private ObjectActivenessTransitions activenessTransitions;
         [SerializeField]
-        AlphaTransitions alphaTransitions;
+        private AlphaTransitions alphaTransitions;
         [SerializeField]
-        MaterialPropertyTransition materialPropertyTransitions;
+        private MaterialPropertyTransition materialPropertyTransitions;
         [SerializeField]
-        LocationAnimationTransitions locationAnimationTransitions;
+        private LocationAnimationTransitions locationAnimationTransitions;
         [SerializeField]
-        CustomTransitions customTransitions;
+        private CustomTransitions customTransitions;
 
 
         public TransitionStateCollection TransitionStates

@@ -7,9 +7,9 @@ namespace UniRx.Operators
 {
     internal class ThrottleObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly TimeSpan dueTime;
-        readonly IScheduler scheduler;
+        private readonly IObservable<T> source;
+        private readonly TimeSpan dueTime;
+        private readonly IScheduler scheduler;
 
         public ThrottleObservable(IObservable<T> source, TimeSpan dueTime, IScheduler scheduler) 
             : base(scheduler == Scheduler.CurrentThread || source.IsRequiredSubscribeOnCurrentThread())
@@ -24,14 +24,14 @@ namespace UniRx.Operators
             return new Throttle(this, observer, cancel).Run();
         }
 
-        class Throttle : OperatorObserverBase<T, T>
+        private class Throttle : OperatorObserverBase<T, T>
         {
-            readonly ThrottleObservable<T> parent;
-            readonly object gate = new object();
-            T latestValue = default(T);
-            bool hasValue = false;
-            SerialDisposable cancelable;
-            ulong id = 0;
+            private readonly ThrottleObservable<T> parent;
+            private readonly object gate = new object();
+            private T latestValue = default(T);
+            private bool hasValue = false;
+            private SerialDisposable cancelable;
+            private ulong id = 0;
 
             public Throttle(ThrottleObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -46,7 +46,7 @@ namespace UniRx.Operators
                 return StableCompositeDisposable.Create(cancelable, subscription);
             }
 
-            void OnNext(ulong currentid)
+            private void OnNext(ulong currentid)
             {
                 lock (gate)
                 {

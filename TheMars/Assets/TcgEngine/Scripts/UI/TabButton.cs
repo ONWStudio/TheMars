@@ -32,7 +32,7 @@ namespace TcgEngine.UI
             tab_list.Remove(this);
         }
 
-        void Start()
+        private void Start()
         {
             Button button = GetComponent<Button>();
             if (button != null)
@@ -42,7 +42,7 @@ namespace TcgEngine.UI
                 ui_panel.Show();
         }
 
-        void Update()
+        private void Update()
         {
             if (highlight != null)
                 highlight.SetActive(active);

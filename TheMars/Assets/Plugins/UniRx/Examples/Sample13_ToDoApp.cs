@@ -21,9 +21,9 @@ namespace UniRx.Examples
         // prefab:)
         public GameObject SampleItemPrefab;
 
-        ReactiveCollection<GameObject> toDos = new ReactiveCollection<GameObject>();
+        private ReactiveCollection<GameObject> toDos = new ReactiveCollection<GameObject>();
 
-        void Start()
+        private void Start()
         {
             // merge Button click and push enter key on input field.
             var submit = Observable.Merge(

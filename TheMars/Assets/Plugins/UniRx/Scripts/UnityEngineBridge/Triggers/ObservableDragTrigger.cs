@@ -10,7 +10,7 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableDragTrigger : ObservableTriggerBase, IEventSystemHandler, IDragHandler
     {
-        Subject<PointerEventData> onDrag;
+        private Subject<PointerEventData> onDrag;
 
         void IDragHandler.OnDrag(PointerEventData eventData)
         {

@@ -23,7 +23,7 @@ namespace Michsky.UI.Heat
         public enum FontType { Light, Regular, Medium, Semibold, Bold, Custom }
         public enum ColorType { Accent, AccentMatch, Primary, Secondary, Negative, Background }
 
-        void Awake()
+        private void Awake()
         {
             this.enabled = true;
 
@@ -32,14 +32,14 @@ namespace Michsky.UI.Heat
             if (UIManagerAsset.enableDynamicUpdate == false) { UpdateText(); this.enabled = false; }
         }
 
-        void Update()
+        private void Update()
         {
             if (UIManagerAsset == null) { return; }
             if (UIManagerAsset.enableDynamicUpdate == true) { UpdateText(); }
         }
 
-      
-        void UpdateText()
+
+        private void UpdateText()
         {
             if (objText == null)
                 return;

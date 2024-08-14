@@ -20,7 +20,7 @@ namespace TcgEngine.UI
 
         private bool previous = false;
 
-        void Awake()
+        private void Awake()
         {
             toggle = GetComponent<Toggle>();
             toggle_txt = GetComponentInChildren<Text>();
@@ -31,7 +31,7 @@ namespace TcgEngine.UI
             Refresh();
         }
 
-        void Update()
+        private void Update()
         {
             if (previous != toggle.isOn)
                 Refresh();

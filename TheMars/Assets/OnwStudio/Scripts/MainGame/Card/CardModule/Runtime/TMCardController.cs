@@ -7,6 +7,7 @@ using Onw.Components.Movement;
 using Onw.Attribute;
 using Onw.Event;
 using TMCard.Effect;
+using UnityEngine.Serialization;
 
 namespace TMCard.Runtime
 {
@@ -15,11 +16,6 @@ namespace TMCard.Runtime
     public class TMCardController : MonoBehaviour, ITMEffectTrigger
     {
         [field: SerializeField, ReadOnly] public TMCardData CardData { get; set; } = null;
-        /// <summary>
-        /// .. 이벤트 센더 클래스 입니다 외부에서 이벤트 연출 효과를 발생시킬때 사용할 수 있는 프로퍼티 입니다
-        /// </summary>
-        [field: Header("Event Sender")]
-        [field: SerializeField, InitializeRequireComponent] public EventSender EventSender { get; private set; } = null;
         /// <summary>
         /// .. 카드가 현재 손 패 위에 있는지 확인하는 값입니다
         /// </summary>
@@ -42,15 +38,19 @@ namespace TMCard.Runtime
         public CardEvent OnTurnEndedEvent { get; } = new();
         public CardEvent OnEffectEvent { get; } = new();
 
+        [FormerlySerializedAs("inputHandler")]
         [Header("Input Handler")]
-        [SerializeField, InitializeRequireComponent] private TMCardInputHandler _inputHandler = null;
+        [SerializeField, InitializeRequireComponent]
+        private TMCardInputHandler _inputHandler = null;
 
+        [FormerlySerializedAs("smoothMove")]
         [Space]
         /// <summary>
         /// .. 카드의 상세한 기본 데이터 입니다
         /// </summary>
         [Header("Require Option")]
-        [SerializeField, SelectableSerializeField] private Vector2SmoothMover _smoothMove = null;
+        [SerializeField, SelectableSerializeField]
+        private Vector2SmoothMover _smoothMove = null;
 
         private readonly List<ITMCardEffect> _cardEffects = new();
         private bool _isInit = false;
@@ -71,11 +71,11 @@ namespace TMCard.Runtime
 
             OnClickEvent.AddListener(() =>
             {
-                TMCardGameManager.Instance.MoveToScreenCenterAfterToTomb(this);
+                TMCardHelper.Instance.MoveToScreenCenterAfterToTomb(this);
                 OnEffectEvent.Invoke();
             });
 
-            OnTurnEndedEvent.AddListener(() => TMCardGameManager.Instance.MoveToTomb(this));
+            OnTurnEndedEvent.AddListener(() => TMCardHelper.Instance.MoveToTomb(this));
             CardData.ApplyEffect(this);
         }
 
@@ -144,7 +144,7 @@ namespace TMCard.Runtime
             _inputHandler.AddListenerPointerExitAction(pointerEventData
                 => _smoothMove.TargetPosition = Vector2.zero);
 
-            _inputHandler.AddListenerPointerClickAction(onClickCard);
+            _inputHandler.AddListenerPointerClickAction(OnClickCard);
         }
 
         /// <summary>
@@ -152,12 +152,12 @@ namespace TMCard.Runtime
         /// 카드 사용시 카드는 효과가 발동되며 카드 효과는 이벤트 기반입니다 
         /// </summary>
         /// <param name="pointerEventData"></param>
-        private void onClickCard(PointerEventData pointerEventData)
+        private void OnClickCard(PointerEventData pointerEventData)
         {
             if (!OnCard) return;
             // if (!CardData.IsAvailable(1)) return;
 
-            TMCardGameManager.Instance.OnClickCard(this);
+            TMCardHelper.Instance.OnClickCard(this);
         }
     }
 }

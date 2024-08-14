@@ -5,10 +5,10 @@ namespace UniRx.Operators
 {
     internal class RefCountObservable<T> : OperatorObservableBase<T>
     {
-        readonly IConnectableObservable<T> source;
-        readonly object gate = new object();
-        int refCount = 0;
-        IDisposable connection;
+        private readonly IConnectableObservable<T> source;
+        private readonly object gate = new object();
+        private int refCount = 0;
+        private IDisposable connection;
 
         public RefCountObservable(IConnectableObservable<T> source)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -21,9 +21,9 @@ namespace UniRx.Operators
             return new RefCount(this, observer, cancel).Run();
         }
 
-        class RefCount : OperatorObserverBase<T, T>
+        private class RefCount : OperatorObserverBase<T, T>
         {
-            readonly RefCountObservable<T> parent;
+            private readonly RefCountObservable<T> parent;
 
             public RefCount(RefCountObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {

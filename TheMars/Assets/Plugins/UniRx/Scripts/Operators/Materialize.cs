@@ -4,7 +4,7 @@ namespace UniRx.Operators
 {
     internal class MaterializeObservable<T> : OperatorObservableBase<Notification<T>>
     {
-        readonly IObservable<T> source;
+        private readonly IObservable<T> source;
 
         public MaterializeObservable(IObservable<T> source)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -17,9 +17,9 @@ namespace UniRx.Operators
             return new Materialize(this, observer, cancel).Run();
         }
 
-        class Materialize : OperatorObserverBase<T, Notification<T>>
+        private class Materialize : OperatorObserverBase<T, Notification<T>>
         {
-            readonly MaterializeObservable<T> parent;
+            private readonly MaterializeObservable<T> parent;
 
             public Materialize(MaterializeObservable<T> parent, IObserver<Notification<T>> observer, IDisposable cancel)
                 : base(observer, cancel)

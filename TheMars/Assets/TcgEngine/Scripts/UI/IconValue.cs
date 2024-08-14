@@ -18,12 +18,12 @@ namespace TcgEngine.UI
 
         private Image image;
 
-        void Awake()
+        private void Awake()
         {
             image = GetComponent<Image>();
         }
 
-        void Update()
+        private void Update()
         {
             if (auto_refresh)
                 Refresh();

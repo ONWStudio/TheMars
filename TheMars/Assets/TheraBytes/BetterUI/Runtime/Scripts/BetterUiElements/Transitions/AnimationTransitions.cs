@@ -23,10 +23,10 @@ namespace TheraBytes.BetterUi
         public override UnityEngine.Object Target { get { return target; } }
 
         [SerializeField]
-        Animator target;
+        private Animator target;
 
         [SerializeField]
-        List<AnimationTransitionState> states = new List<AnimationTransitionState>();
+        private List<AnimationTransitionState> states = new List<AnimationTransitionState>();
 
 
         public AnimationTransitions(params string[] stateNames)

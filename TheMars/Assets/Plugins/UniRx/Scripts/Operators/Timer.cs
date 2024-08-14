@@ -4,10 +4,10 @@ namespace UniRx.Operators
 {
     internal class TimerObservable : OperatorObservableBase<long>
     {
-        readonly DateTimeOffset? dueTimeA;
-        readonly TimeSpan? dueTimeB;
-        readonly TimeSpan? period;
-        readonly IScheduler scheduler;
+        private readonly DateTimeOffset? dueTimeA;
+        private readonly TimeSpan? dueTimeB;
+        private readonly TimeSpan? period;
+        private readonly IScheduler scheduler;
 
         public TimerObservable(DateTimeOffset dueTime, TimeSpan? period, IScheduler scheduler)
             : base(scheduler == Scheduler.CurrentThread)
@@ -81,9 +81,9 @@ namespace UniRx.Operators
             }
         }
 
-        class Timer : OperatorObserverBase<long, long>
+        private class Timer : OperatorObserverBase<long, long>
         {
-            long index = 0;
+            private long index = 0;
 
             public Timer(IObserver<long> observer, IDisposable cancel)
                 : base(observer, cancel)

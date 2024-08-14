@@ -20,12 +20,12 @@ namespace TcgEngine.FX
         private AnimMatAction current = null;
         private Queue<AnimMatAction> sequence = new Queue<AnimMatAction>();
 
-        void Start()
+        private void Start()
         {
 
         }
 
-        void Update()
+        private void Update()
         {
             if (target == null)
                 return;

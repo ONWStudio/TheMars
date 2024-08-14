@@ -10,31 +10,36 @@ namespace Michsky.UI.Heat
     {
         // Resources
         public GameObject pauseMenuCanvas;
-        [SerializeField] private ButtonManager continueButton;
-        [SerializeField] private PanelManager panelManager;
-        [SerializeField] private ImageFading background;
+        [SerializeField]
+        private ButtonManager continueButton;
+        [SerializeField]
+        private PanelManager panelManager;
+        [SerializeField]
+        private ImageFading background;
 
         // Settings
-        [SerializeField] private bool setTimeScale = true;
+        [SerializeField]
+        private bool setTimeScale = true;
         [Range(0, 1)] public float inputBlockDuration = 0.2f;
         public CursorLockMode menuCursorState = CursorLockMode.None;
         public CursorLockMode gameCursorState = CursorLockMode.Locked;
         public CursorVisibility menuCursorVisibility = CursorVisibility.Visible;
         public CursorVisibility gameCursorVisibility = CursorVisibility.Default;
-        [SerializeField] private InputAction hotkey;
+        [SerializeField]
+        private InputAction hotkey;
 
         // Events
         public UnityEvent onOpen = new UnityEvent();
         public UnityEvent onClose = new UnityEvent();
 
         // Helpers
-        bool isOn = false;
-        bool allowClosing = true;
-        float disableAfter = 0.6f;
+        private bool isOn = false;
+        private bool allowClosing = true;
+        private float disableAfter = 0.6f;
 
         public enum CursorVisibility { Default, Invisible, Visible }
 
-        void Awake()
+        private void Awake()
         {
             if (pauseMenuCanvas == null)
             {
@@ -46,7 +51,7 @@ namespace Michsky.UI.Heat
             pauseMenuCanvas.SetActive(true);
         }
 
-        void Start()
+        private void Start()
         {
             if (panelManager != null) { disableAfter = HeatUIInternalTools.GetAnimatorClipLength(panelManager.panels[panelManager.currentPanelIndex].panelObject, "MainPanel_Out"); }
             if (continueButton != null) { continueButton.onClick.AddListener(ClosePauseMenu); }
@@ -55,7 +60,7 @@ namespace Michsky.UI.Heat
             hotkey.Enable();
         }
 
-        void Update()
+        private void Update()
         {
             if (hotkey.triggered) { AnimatePauseMenu(); }
         }
@@ -140,13 +145,13 @@ namespace Michsky.UI.Heat
             allowClosing = value;
         }
 
-        IEnumerator DisablePauseCanvas()
+        private IEnumerator DisablePauseCanvas()
         {
             yield return new WaitForSecondsRealtime(disableAfter);
             pauseMenuCanvas.SetActive(false);
         }
 
-        IEnumerator InputBlockProcess()
+        private IEnumerator InputBlockProcess()
         {
             yield return new WaitForSecondsRealtime(inputBlockDuration);
             AllowClosing(true);

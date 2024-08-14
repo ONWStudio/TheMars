@@ -9,10 +9,10 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableTransformChangedTrigger : ObservableTriggerBase
     {
-        Subject<Unit> onBeforeTransformParentChanged;
+        private Subject<Unit> onBeforeTransformParentChanged;
 
         // Callback sent to the graphic before a Transform parent change occurs
-        void OnBeforeTransformParentChanged()
+        private void OnBeforeTransformParentChanged()
         {
             if (onBeforeTransformParentChanged != null) onBeforeTransformParentChanged.OnNext(Unit.Default);
         }
@@ -23,10 +23,10 @@ namespace UniRx.Triggers
             return onBeforeTransformParentChanged ?? (onBeforeTransformParentChanged = new Subject<Unit>());
         }
 
-        Subject<Unit> onTransformParentChanged;
+        private Subject<Unit> onTransformParentChanged;
 
         // This function is called when the parent property of the transform of the GameObject has changed
-        void OnTransformParentChanged()
+        private void OnTransformParentChanged()
         {
             if (onTransformParentChanged != null) onTransformParentChanged.OnNext(Unit.Default);
         }
@@ -37,10 +37,10 @@ namespace UniRx.Triggers
             return onTransformParentChanged ?? (onTransformParentChanged = new Subject<Unit>());
         }
 
-        Subject<Unit> onTransformChildrenChanged;
+        private Subject<Unit> onTransformChildrenChanged;
 
         // This function is called when the list of children of the transform of the GameObject has changed
-        void OnTransformChildrenChanged()
+        private void OnTransformChildrenChanged()
         {
             if (onTransformChildrenChanged != null) onTransformChildrenChanged.OnNext(Unit.Default);
         }

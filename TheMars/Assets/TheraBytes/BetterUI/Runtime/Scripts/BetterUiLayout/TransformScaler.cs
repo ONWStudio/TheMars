@@ -22,12 +22,12 @@ namespace TheraBytes.BetterUi
 
         [FormerlySerializedAs("scaleSizer")]
         [SerializeField]
-        Vector3SizeModifier scaleSizerFallback = new Vector3SizeModifier(Vector3.one, Vector3.zero, 4 * Vector3.one);
+        private Vector3SizeModifier scaleSizerFallback = new Vector3SizeModifier(Vector3.one, Vector3.zero, 4 * Vector3.one);
 
         [SerializeField]
-        Vector3SizeConfigCollection customScaleSizers = new Vector3SizeConfigCollection();
+        private Vector3SizeConfigCollection customScaleSizers = new Vector3SizeConfigCollection();
 
-        DrivenRectTransformTracker rectTransformTracker = new DrivenRectTransformTracker();
+        private DrivenRectTransformTracker rectTransformTracker = new DrivenRectTransformTracker();
 
         protected override void OnDisable()
         {

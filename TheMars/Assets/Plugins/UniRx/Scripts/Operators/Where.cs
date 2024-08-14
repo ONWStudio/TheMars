@@ -4,9 +4,9 @@ namespace UniRx.Operators
 {
     internal class WhereObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly Func<T, bool> predicate;
-        readonly Func<T, int, bool> predicateWithIndex;
+        private readonly IObservable<T> source;
+        private readonly Func<T, bool> predicate;
+        private readonly Func<T, int, bool> predicateWithIndex;
 
         public WhereObservable(IObservable<T> source, Func<T, bool> predicate)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -62,9 +62,9 @@ namespace UniRx.Operators
             }
         }
 
-        class Where : OperatorObserverBase<T, T>
+        private class Where : OperatorObserverBase<T, T>
         {
-            readonly WhereObservable<T> parent;
+            private readonly WhereObservable<T> parent;
 
             public Where(WhereObservable<T> parent, IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)
@@ -102,10 +102,10 @@ namespace UniRx.Operators
             }
         }
 
-        class Where_ : OperatorObserverBase<T, T>
+        private class Where_ : OperatorObserverBase<T, T>
         {
-            readonly WhereObservable<T> parent;
-            int index;
+            private readonly WhereObservable<T> parent;
+            private int index;
 
             public Where_(WhereObservable<T> parent, IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)

@@ -17,12 +17,12 @@ namespace TcgEngine.UI
 
         public Image fill;
 
-        void Start()
+        private void Start()
         {
 
         }
 
-        void Update()
+        private void Update()
         {
             float ratio = value / Mathf.Max(value_max, 0.01f);
             fill.fillAmount = ratio;

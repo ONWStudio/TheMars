@@ -43,7 +43,7 @@ namespace TcgEngine.Client
 
         private static List<HandCard> card_list = new List<HandCard>();
 
-        void Awake()
+        private void Awake()
         {
             card_list.Add(this);
             card_ui = GetComponent<CardUI>();
@@ -62,7 +62,7 @@ namespace TcgEngine.Client
             card_list.Remove(this);
         }
 
-        void Update()
+        private void Update()
         {
             if (!GameClient.Get().IsReady())
                 return;

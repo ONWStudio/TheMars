@@ -7,12 +7,12 @@ namespace UniRx.Examples
     public class Sample06_ConvertToCoroutine : MonoBehaviour
     {
         // convert IObservable to Coroutine
-        void Start()
+        private void Start()
         {
             StartCoroutine(ComplexCoroutineTest());
         }
 
-        IEnumerator ComplexCoroutineTest()
+        private IEnumerator ComplexCoroutineTest()
         {
             yield return new WaitForSeconds(1);
 
@@ -35,7 +35,7 @@ namespace UniRx.Examples
 #pragma warning disable CS0618
 #endif
 
-        IEnumerator TestNewCustomYieldInstruction()
+        private IEnumerator TestNewCustomYieldInstruction()
         {
             // wait Rx Observable.
             yield return Observable.Timer(TimeSpan.FromSeconds(1)).ToYieldInstruction();

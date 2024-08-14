@@ -7,16 +7,20 @@ namespace Michsky.UI.Heat
     public class ButtonFrame : MonoBehaviour
     {
         // Resources
-        [SerializeField] private Animator animator;
-        [SerializeField] private ButtonManager buttonManager;
-        [SerializeField] private PanelButton panelButton;
+        [SerializeField]
+        private Animator animator;
+        [SerializeField]
+        private ButtonManager buttonManager;
+        [SerializeField]
+        private PanelButton panelButton;
 
         // Settings
-        [SerializeField] private ButtonType buttonType = ButtonType.ButtonManager;
+        [SerializeField]
+        private ButtonType buttonType = ButtonType.ButtonManager;
 
         public enum ButtonType { ButtonManager, PanelButton }
 
-        void Start()
+        private void Start()
         {
             if ((buttonType == ButtonType.ButtonManager && buttonManager == null) || (buttonType == ButtonType.PanelButton && panelButton == null)) { return; }
             if (animator == null) { animator = GetComponent<Animator>(); }
@@ -57,7 +61,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("DisableAnimator");
         }
 
-        IEnumerator DisableAnimator()
+        private IEnumerator DisableAnimator()
         {
             yield return new WaitForSecondsRealtime(HeatUIInternalTools.GetAnimatorClipLength(animator, "ButtonFrame_In"));
             animator.enabled = false;

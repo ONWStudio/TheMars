@@ -9,14 +9,17 @@ namespace Michsky.UI.Heat
     [AddComponentMenu("Heat UI/Layout/Layout Group Fix")]
     public class LayoutGroupFix : MonoBehaviour
     {
-        [SerializeField] private bool fixOnEnable = true;
-        [SerializeField] private bool fixWithDelay = true;
-        [SerializeField] private RebuildMethod rebuildMethod;
-        float fixDelay = 0.025f;
+        [SerializeField]
+        private bool fixOnEnable = true;
+        [SerializeField]
+        private bool fixWithDelay = true;
+        [SerializeField]
+        private RebuildMethod rebuildMethod;
+        private float fixDelay = 0.025f;
 
         public enum RebuildMethod { ForceRebuild, MarkRebuild }
-         
-        void OnEnable()
+
+        private void OnEnable()
         {
 #if UNITY_EDITOR
             LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
@@ -34,17 +37,17 @@ namespace Michsky.UI.Heat
             else { StartCoroutine(FixDelay()); }
         }
 
-        void ForceRebuild()
+        private void ForceRebuild()
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
         }
 
-        void MarkRebuild()
+        private void MarkRebuild()
         {
             LayoutRebuilder.MarkLayoutForRebuild(GetComponent<RectTransform>());
         }
 
-        IEnumerator FixDelay()
+        private IEnumerator FixDelay()
         {
             yield return new WaitForSecondsRealtime(fixDelay);
 

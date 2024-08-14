@@ -20,8 +20,8 @@ namespace TheraBytes.BetterUi.Editor
         protected SerializedProperty settingsFallback;
         protected SerializedProperty settingsConfigs;
 
-        bool hasReverseOption;
-        bool hasChildScale;
+        private bool hasReverseOption;
+        private bool hasChildScale;
 
         protected static TBetter MakeBetterLogic(MenuCommand command)
         {

@@ -66,7 +66,7 @@ namespace UniRx.InternalUtil
     {
         public static readonly EmptyObserver<T> Instance = new EmptyObserver<T>();
 
-        EmptyObserver()
+        private EmptyObserver()
         {
 
         }
@@ -88,7 +88,7 @@ namespace UniRx.InternalUtil
     {
         public static readonly ThrowObserver<T> Instance = new ThrowObserver<T>();
 
-        ThrowObserver()
+        private ThrowObserver()
         {
 
         }
@@ -111,7 +111,7 @@ namespace UniRx.InternalUtil
     {
         public static readonly DisposedObserver<T> Instance = new DisposedObserver<T>();
 
-        DisposedObserver()
+        private DisposedObserver()
         {
 
         }

@@ -13,7 +13,7 @@ namespace TcgEngine.UI
         public bool desktop = true;
         public bool mobile = true;
 
-        void Start()
+        private void Start()
         {
             bool ismobile = GameTool.IsMobile();
             if (ismobile && !mobile)

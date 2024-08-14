@@ -13,12 +13,12 @@ namespace TcgEngine.FX
     {
         public GameObject fx;
 
-        void Start()
+        private void Start()
         {
 
         }
 
-        void Update()
+        private void Update()
         {
             bool visible = false;
             HandCard hcard = HandCard.GetDrag();

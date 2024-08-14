@@ -15,15 +15,15 @@ namespace UniRx.Examples
         public event EventHandler<MyEventArgs> FooBar;
         public event Action<int> FooFoo;
 
-        CompositeDisposable disposables = new CompositeDisposable();
+        private CompositeDisposable disposables = new CompositeDisposable();
 
         // Subject is Rx's native event expression and recommend way for use Rx as event.
         // Subject.OnNext as fire event,
         // expose IObserver is subscibable for external source, it's no need convert.
-        Subject<int> onBarBar = new Subject<int>();
+        private Subject<int> onBarBar = new Subject<int>();
         public IObservable<int> OnBarBar { get { return onBarBar; } }
 
-        void Start()
+        private void Start()
         {
             // convert to IO<EventPattern> as (sender, eventArgs)
             Observable.FromEventPattern<EventHandler<MyEventArgs>, MyEventArgs>(
@@ -58,7 +58,7 @@ namespace UniRx.Examples
             onBarBar.OnNext(1); // fire event
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             // manage subscription lifecycle
             disposables.Dispose();

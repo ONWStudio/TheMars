@@ -23,7 +23,7 @@ namespace TMCard.Effect
             controller.OnTurnEndedEvent.RemoveAllToAddListener(() =>
             {
                 OnEffectEvent.Invoke();
-                TMCardGameManager.Instance.DisposeCard(controller);
+                TMCardHelper.Instance.DisposeCard(controller);
             });
         }
 

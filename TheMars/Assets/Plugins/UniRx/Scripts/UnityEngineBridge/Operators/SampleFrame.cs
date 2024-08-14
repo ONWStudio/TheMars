@@ -10,9 +10,9 @@ namespace UniRx.Operators
 {
     internal class SampleFrameObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly int frameCount;
-        readonly FrameCountType frameCountType;
+        private readonly IObservable<T> source;
+        private readonly int frameCount;
+        private readonly FrameCountType frameCountType;
 
         public SampleFrameObservable(IObservable<T> source, int frameCount, FrameCountType frameCountType) : base(source.IsRequiredSubscribeOnCurrentThread())
         {
@@ -26,14 +26,14 @@ namespace UniRx.Operators
             return new SampleFrame(this, observer, cancel).Run();
         }
 
-        class SampleFrame : OperatorObserverBase<T, T>
+        private class SampleFrame : OperatorObserverBase<T, T>
         {
-            readonly SampleFrameObservable<T> parent;
-            readonly object gate = new object();
-            T latestValue = default(T);
-            bool isUpdated = false;
-            bool isCompleted = false;
-            SingleAssignmentDisposable sourceSubscription;
+            private readonly SampleFrameObservable<T> parent;
+            private readonly object gate = new object();
+            private T latestValue = default(T);
+            private bool isUpdated = false;
+            private bool isCompleted = false;
+            private SingleAssignmentDisposable sourceSubscription;
 
             public SampleFrame(SampleFrameObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -51,7 +51,7 @@ namespace UniRx.Operators
                 return StableCompositeDisposable.Create(sourceSubscription, scheduling);
             }
 
-            void OnNextTick(long _)
+            private void OnNextTick(long _)
             {
                 lock (gate)
                 {
@@ -93,9 +93,9 @@ namespace UniRx.Operators
                     sourceSubscription.Dispose();
                 }
             }
-            class SampleFrameTick : IObserver<long>
+            private class SampleFrameTick : IObserver<long>
             {
-                readonly SampleFrame parent;
+                private readonly SampleFrame parent;
 
                 public SampleFrameTick(SampleFrame parent)
                 {

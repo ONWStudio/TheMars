@@ -4,8 +4,8 @@ namespace UniRx.Operators
 {
     internal class ThrowObservable<T> : OperatorObservableBase<T>
     {
-        readonly Exception error;
-        readonly IScheduler scheduler;
+        private readonly Exception error;
+        private readonly IScheduler scheduler;
 
         public ThrowObservable(Exception error, IScheduler scheduler)
             : base(scheduler == Scheduler.CurrentThread)
@@ -33,7 +33,7 @@ namespace UniRx.Operators
             }
         }
 
-        class Throw : OperatorObserverBase<T, T>
+        private class Throw : OperatorObserverBase<T, T>
         {
             public Throw(IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)

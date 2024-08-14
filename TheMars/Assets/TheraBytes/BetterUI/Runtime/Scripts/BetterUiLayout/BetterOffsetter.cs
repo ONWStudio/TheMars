@@ -28,19 +28,19 @@ namespace TheraBytes.BetterUi
             public bool ApplySizeY { get { return applySizeY; } set { applySizeY = value; } }
 
             [SerializeField]
-            bool applyPosX = false;
+            private bool applyPosX = false;
 
             [SerializeField]
-            bool applyPosY = false;
+            private bool applyPosY = false;
 
             [SerializeField]
-            bool applySizeX = false;
+            private bool applySizeX = false;
 
             [SerializeField]
-            bool applySizeY = false;
+            private bool applySizeY = false;
 
             [SerializeField]
-            string screenConfigName;
+            private string screenConfigName;
             public string ScreenConfigName { get { return screenConfigName; } set { screenConfigName = value; } }
         }
 
@@ -49,10 +49,10 @@ namespace TheraBytes.BetterUi
         public Settings CurrentSettings { get { return customSettings.GetCurrentItem(settingsFallback); } }
 
         [SerializeField]
-        Settings settingsFallback = new Settings();
+        private Settings settingsFallback = new Settings();
 
         [SerializeField]
-        SettingsConfigCollection customSettings = new SettingsConfigCollection();
+        private SettingsConfigCollection customSettings = new SettingsConfigCollection();
 
 
         public FloatSizeModifier AnchoredPositionXSizer 
@@ -76,20 +76,28 @@ namespace TheraBytes.BetterUi
             get { return customSizeDeltaYSizers.GetCurrentItem(sizeDeltaYSizerFallback); }
         }
 
-        [SerializeField] FloatSizeModifier anchorPosXSizerFallback = new FloatSizeModifier(100, 0, 1000);
-        [SerializeField] FloatSizeConfigCollection customAnchorPosXSizers = new FloatSizeConfigCollection();
+        [SerializeField]
+        private FloatSizeModifier anchorPosXSizerFallback = new FloatSizeModifier(100, 0, 1000);
+        [SerializeField]
+        private FloatSizeConfigCollection customAnchorPosXSizers = new FloatSizeConfigCollection();
 
-        [SerializeField] FloatSizeModifier anchorPosYSizerFallback = new FloatSizeModifier(100, 0, 1000);
-        [SerializeField] FloatSizeConfigCollection customAnchorPosYSizers = new FloatSizeConfigCollection();
+        [SerializeField]
+        private FloatSizeModifier anchorPosYSizerFallback = new FloatSizeModifier(100, 0, 1000);
+        [SerializeField]
+        private FloatSizeConfigCollection customAnchorPosYSizers = new FloatSizeConfigCollection();
         
-        [SerializeField] FloatSizeModifier sizeDeltaXSizerFallback = new FloatSizeModifier(100, 0, 1000);
-        [SerializeField] FloatSizeConfigCollection customSizeDeltaXSizers = new FloatSizeConfigCollection();
+        [SerializeField]
+        private FloatSizeModifier sizeDeltaXSizerFallback = new FloatSizeModifier(100, 0, 1000);
+        [SerializeField]
+        private FloatSizeConfigCollection customSizeDeltaXSizers = new FloatSizeConfigCollection();
 
-        [SerializeField] FloatSizeModifier sizeDeltaYSizerFallback = new FloatSizeModifier(100, 0, 1000);
-        [SerializeField] FloatSizeConfigCollection customSizeDeltaYSizers = new FloatSizeConfigCollection();
+        [SerializeField]
+        private FloatSizeModifier sizeDeltaYSizerFallback = new FloatSizeModifier(100, 0, 1000);
+        [SerializeField]
+        private FloatSizeConfigCollection customSizeDeltaYSizers = new FloatSizeConfigCollection();
 
 
-        DrivenRectTransformTracker rectTransformTracker = new DrivenRectTransformTracker();
+        private DrivenRectTransformTracker rectTransformTracker = new DrivenRectTransformTracker();
 
         protected override void OnEnable()
         {
@@ -115,7 +123,7 @@ namespace TheraBytes.BetterUi
         }
 #endif
 
-        void ApplySize()
+        private void ApplySize()
         {
             if (!isActiveAndEnabled)
                 return;

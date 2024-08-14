@@ -7,15 +7,20 @@ namespace Michsky.UI.Heat
     public class ShinyImage : MonoBehaviour
     {
         [Header("Resources")]
-        [SerializeField] private RectTransform targetRect;
-        [SerializeField] private RectTransform parentRect;
+        [SerializeField]
+        private RectTransform targetRect;
+        [SerializeField]
+        private RectTransform parentRect;
 
         [Header("Animation")]
-        [SerializeField][Range(0, 4)] private float delay = 0.25f;
-        [SerializeField] [Range(0.25f, 4)] private float animationSpeed = 1;
-        [SerializeField] private AnimationCurve animationCurve = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
+        [SerializeField][Range(0, 4)]
+        private float delay = 0.25f;
+        [SerializeField] [Range(0.25f, 4)]
+        private float animationSpeed = 1;
+        [SerializeField]
+        private AnimationCurve animationCurve = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
 
-        void OnEnable()
+        private void OnEnable()
         {
             StartShiny();
         }
@@ -31,7 +36,7 @@ namespace Michsky.UI.Heat
             StartCoroutine("ShinyAnimation");
         }
 
-        IEnumerator ShinyAnimation()
+        private IEnumerator ShinyAnimation()
         {
             float elapsedTime = 0;
             Vector2 startPos = new Vector2(-parentRect.sizeDelta.x, targetRect.anchoredPosition.y);
@@ -50,7 +55,7 @@ namespace Michsky.UI.Heat
             else { StartCoroutine("ShinyAnimationDelay"); }
         }
 
-        IEnumerator ShinyAnimationDelay()
+        private IEnumerator ShinyAnimationDelay()
         {
             yield return new WaitForSecondsRealtime(delay);
             StartCoroutine("ShinyAnimation");

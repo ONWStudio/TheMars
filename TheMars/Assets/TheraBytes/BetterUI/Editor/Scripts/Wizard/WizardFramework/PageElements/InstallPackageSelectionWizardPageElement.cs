@@ -17,10 +17,10 @@ namespace TheraBytes.BetterUi.Editor
 
     public class InstallPackageSelectionWizardPageElement : WizardPageElementBase
     {
-        string title;
-        string pathToPackage;
-        string pathToFolder;
-        InstallSelectionState selectionState;
+        private string title;
+        private string pathToPackage;
+        private string pathToFolder;
+        private InstallSelectionState selectionState;
 
         public string PathToPackage { get { return pathToPackage; } }
         public string PathToFolder { get { return pathToFolder; } }

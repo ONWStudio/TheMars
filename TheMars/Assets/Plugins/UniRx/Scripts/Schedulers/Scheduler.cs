@@ -12,7 +12,7 @@ namespace UniRx
         // configurable defaults
         public static class DefaultSchedulers
         {
-            static IScheduler constantTime;
+            private static IScheduler constantTime;
             public static IScheduler ConstantTimeOperations
             {
                 get
@@ -25,7 +25,7 @@ namespace UniRx
                 }
             }
 
-            static IScheduler tailRecursion;
+            private static IScheduler tailRecursion;
             public static IScheduler TailRecursion
             {
                 get
@@ -38,7 +38,7 @@ namespace UniRx
                 }
             }
 
-            static IScheduler iteration;
+            private static IScheduler iteration;
             public static IScheduler Iteration
             {
                 get
@@ -51,7 +51,7 @@ namespace UniRx
                 }
             }
 
-            static IScheduler timeBasedOperations;
+            private static IScheduler timeBasedOperations;
             public static IScheduler TimeBasedOperations
             {
                 get
@@ -68,7 +68,7 @@ namespace UniRx
                 }
             }
 
-            static IScheduler asyncConversions;
+            private static IScheduler asyncConversions;
             public static IScheduler AsyncConversions
             {
                 get

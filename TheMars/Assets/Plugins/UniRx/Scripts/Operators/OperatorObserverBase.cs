@@ -6,7 +6,7 @@ namespace UniRx.Operators
     public abstract class OperatorObserverBase<TSource, TResult> : IDisposable, IObserver<TSource>
     {
         protected internal volatile IObserver<TResult> observer;
-        IDisposable cancel;
+        private IDisposable cancel;
 
         public OperatorObserverBase(IObserver<TResult> observer, IDisposable cancel)
         {

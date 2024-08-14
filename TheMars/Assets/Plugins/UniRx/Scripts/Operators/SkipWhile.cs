@@ -4,9 +4,9 @@ namespace UniRx.Operators
 {
     internal class SkipWhileObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly Func<T, bool> predicate;
-        readonly Func<T, int, bool> predicateWithIndex;
+        private readonly IObservable<T> source;
+        private readonly Func<T, bool> predicate;
+        private readonly Func<T, int, bool> predicateWithIndex;
 
         public SkipWhileObservable(IObservable<T> source, Func<T, bool> predicate)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -34,10 +34,10 @@ namespace UniRx.Operators
             }
         }
 
-        class SkipWhile : OperatorObserverBase<T, T>
+        private class SkipWhile : OperatorObserverBase<T, T>
         {
-            readonly SkipWhileObservable<T> parent;
-            bool endSkip = false;
+            private readonly SkipWhileObservable<T> parent;
+            private bool endSkip = false;
 
             public SkipWhile(SkipWhileObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -80,11 +80,11 @@ namespace UniRx.Operators
             }
         }
 
-        class SkipWhile_ : OperatorObserverBase<T, T>
+        private class SkipWhile_ : OperatorObserverBase<T, T>
         {
-            readonly SkipWhileObservable<T> parent;
-            bool endSkip = false;
-            int index = 0;
+            private readonly SkipWhileObservable<T> parent;
+            private bool endSkip = false;
+            private int index = 0;
 
             public SkipWhile_(SkipWhileObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {

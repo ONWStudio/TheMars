@@ -17,7 +17,8 @@ namespace Michsky.UI.Heat
         public TextMeshProUGUI windowDescription;
         public ButtonManager confirmButton;
         public ButtonManager cancelButton;
-        [SerializeField] private Animator mwAnimator;
+        [SerializeField]
+        private Animator mwAnimator;
 
         // Content
         public Sprite icon;
@@ -48,34 +49,34 @@ namespace Michsky.UI.Heat
         public UnityEvent onClose = new UnityEvent();
 
         // Helpers
-        string animIn = "In";
-        string animOut = "Out";
-        string animSpeedKey = "AnimSpeed";
+        private string animIn = "In";
+        private string animOut = "Out";
+        private string animSpeedKey = "AnimSpeed";
 
         // Event System
-        bool canProcessEventSystem;
-        float openStateLength;
-        float closeStateLength;
-        GameObject latestEventSystemObject;
+        private bool canProcessEventSystem;
+        private float openStateLength;
+        private float closeStateLength;
+        private GameObject latestEventSystemObject;
 
         public enum StartBehaviour { Enable, Disable }
         public enum CloseBehaviour { Disable, Destroy }
         public enum InputType { Focused, Free }
 
-        void Awake()
+        private void Awake()
         {
             InitModalWindow();
             InitEventSystem();
             UpdateUI();
         }
 
-        void Start()
+        private void Start()
         {
             if (startBehaviour == StartBehaviour.Disable) { isOn = false; gameObject.SetActive(false); }
             else if (startBehaviour == StartBehaviour.Enable) { isOn = false; OpenWindow(); }
         }
 
-        void Update()
+        private void Update()
         {
             if (inputType == InputType.Free || !isOn || !canProcessEventSystem || !ControllerManager.instance.gamepadEnabled)
                 return;
@@ -83,7 +84,7 @@ namespace Michsky.UI.Heat
             CheckForEventButtons();
         }
 
-        void InitModalWindow()
+        private void InitModalWindow()
         {
             if (mwAnimator == null) { mwAnimator = gameObject.GetComponent<Animator>(); }
             if (closeOnCancel) { onCancel.AddListener(CloseWindow); }
@@ -125,14 +126,14 @@ namespace Michsky.UI.Heat
             closeStateLength = HeatUIInternalTools.GetAnimatorClipLength(mwAnimator, "ModalWindow_Out");
         }
 
-        void InitEventSystem()
+        private void InitEventSystem()
         {
             if (ControllerManager.instance == null) { canProcessEventSystem = false; }
             else if (cancelButton == null && confirmButton == null) { canProcessEventSystem = false; }
             else { canProcessEventSystem = true; }
         }
 
-        void CheckForEventButtons()
+        private void CheckForEventButtons()
         {
             if (cancelButton != null && EventSystem.current.currentSelectedGameObject != cancelButton.gameObject && EventSystem.current.currentSelectedGameObject != confirmButton.gameObject) { ControllerManager.instance.SelectUIObject(cancelButton.gameObject); }
             else if (confirmButton != null && EventSystem.current.currentSelectedGameObject != cancelButton.gameObject && EventSystem.current.currentSelectedGameObject != confirmButton.gameObject) { ControllerManager.instance.SelectUIObject(confirmButton.gameObject); }
@@ -202,7 +203,7 @@ namespace Michsky.UI.Heat
             else { CloseWindow(); }
         }
 
-        IEnumerator DisableObject()
+        private IEnumerator DisableObject()
         {
             yield return new WaitForSecondsRealtime(closeStateLength);
 
@@ -212,7 +213,7 @@ namespace Michsky.UI.Heat
             mwAnimator.enabled = false;
         }
 
-        IEnumerator DisableAnimator()
+        private IEnumerator DisableAnimator()
         {
             yield return new WaitForSecondsRealtime(openStateLength + 0.1f);
             mwAnimator.enabled = false;

@@ -37,7 +37,7 @@ namespace TcgEngine.UI
         private CardData card;
         private VariantData variant;
 
-        void Awake()
+        private void Awake()
         {
 
         }

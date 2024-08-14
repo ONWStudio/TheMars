@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Onw.Components;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace TMCard.Runtime
 {
@@ -52,8 +53,12 @@ namespace TMCard.Runtime
             }
         }
 
-        [SerializeField] TransformData _targetTransform;
-        [SerializeField, Range(0f, 1f)] private float _normalizedValue = 0f;
+        [FormerlySerializedAs("targetTransform")]
+        [SerializeField]
+        private TransformData _targetTransform;
+        [FormerlySerializedAs("normalizedValue")]
+        [SerializeField, Range(0f, 1f)]
+        private float _normalizedValue = 0f;
 
         private MovementTracker _movementTracker = null;
 

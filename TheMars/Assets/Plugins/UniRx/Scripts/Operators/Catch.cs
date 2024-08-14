@@ -6,8 +6,8 @@ namespace UniRx.Operators
     internal class CatchObservable<T, TException> : OperatorObservableBase<T>
         where TException : Exception
     {
-        readonly IObservable<T> source;
-        readonly Func<TException, IObservable<T>> errorHandler;
+        private readonly IObservable<T> source;
+        private readonly Func<TException, IObservable<T>> errorHandler;
 
         public CatchObservable(IObservable<T> source, Func<TException, IObservable<T>> errorHandler)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -21,11 +21,11 @@ namespace UniRx.Operators
             return new Catch(this, observer, cancel).Run();
         }
 
-        class Catch : OperatorObserverBase<T, T>
+        private class Catch : OperatorObserverBase<T, T>
         {
-            readonly CatchObservable<T, TException> parent;
-            SingleAssignmentDisposable sourceSubscription;
-            SingleAssignmentDisposable exceptionSubscription;
+            private readonly CatchObservable<T, TException> parent;
+            private SingleAssignmentDisposable sourceSubscription;
+            private SingleAssignmentDisposable exceptionSubscription;
 
             public Catch(CatchObservable<T, TException> parent, IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)
@@ -89,7 +89,7 @@ namespace UniRx.Operators
 
     internal class CatchObservable<T> : OperatorObservableBase<T>
     {
-        readonly IEnumerable<IObservable<T>> sources;
+        private readonly IEnumerable<IObservable<T>> sources;
 
         public CatchObservable(IEnumerable<IObservable<T>> sources)
             : base(true)
@@ -102,15 +102,15 @@ namespace UniRx.Operators
             return new Catch(this, observer, cancel).Run();
         }
 
-        class Catch : OperatorObserverBase<T, T>
+        private class Catch : OperatorObserverBase<T, T>
         {
-            readonly CatchObservable<T> parent;
-            readonly object gate = new object();
-            bool isDisposed;
-            IEnumerator<IObservable<T>> e;
-            SerialDisposable subscription;
-            Exception lastException;
-            Action nextSelf;
+            private readonly CatchObservable<T> parent;
+            private readonly object gate = new object();
+            private bool isDisposed;
+            private IEnumerator<IObservable<T>> e;
+            private SerialDisposable subscription;
+            private Exception lastException;
+            private Action nextSelf;
 
             public Catch(CatchObservable<T> parent, IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)
@@ -136,7 +136,7 @@ namespace UniRx.Operators
                 }));
             }
 
-            void RecursiveRun(Action self)
+            private void RecursiveRun(Action self)
             {
                 lock (gate)
                 {

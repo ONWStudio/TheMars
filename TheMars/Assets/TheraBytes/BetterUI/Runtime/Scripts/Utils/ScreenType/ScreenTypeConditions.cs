@@ -11,7 +11,7 @@ namespace TheraBytes.BetterUi
     public class ScreenTypeConditions
     {
         [SerializeField]
-        string name = "Screen";
+        private string name = "Screen";
 
         public string Name
         {
@@ -20,25 +20,25 @@ namespace TheraBytes.BetterUi
         }
 
         [SerializeField]
-        IsCertainScreenOrientation checkOrientation;
+        private IsCertainScreenOrientation checkOrientation;
 
         [SerializeField]
-        IsScreenOfCertainSize checkScreenSize;
+        private IsScreenOfCertainSize checkScreenSize;
 
         [SerializeField]
-        IsCertainAspectRatio checkAspectRatio;
+        private IsCertainAspectRatio checkAspectRatio;
 
         [SerializeField]
-        IsScreenOfCertainDeviceInfo checkDeviceType;
+        private IsScreenOfCertainDeviceInfo checkDeviceType;
 
         [SerializeField]
-        IsScreenTagPresent checkScreenTag;
+        private IsScreenTagPresent checkScreenTag;
 
         [SerializeField]
-        ScreenInfo optimizedScreenInfo;
+        private ScreenInfo optimizedScreenInfo;
 
         [SerializeField]
-        List<string> fallbacks = new List<string>();
+        private List<string> fallbacks = new List<string>();
 
         public bool IsActive { get; private set; }
 

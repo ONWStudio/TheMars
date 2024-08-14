@@ -17,12 +17,12 @@ namespace TcgEngine.UI
 
         public UnityAction<string> onChange;
 
-        void Start()
+        private void Start()
         {
             deck_dropdown.onValueChanged += OnChange;
         }
 
-        void Update()
+        private void Update()
         {
 
         }

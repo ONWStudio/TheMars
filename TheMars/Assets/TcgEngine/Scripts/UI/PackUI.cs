@@ -24,7 +24,7 @@ namespace TcgEngine.UI
 
         private PackData pack;
 
-        void Awake()
+        private void Awake()
         {
 
         }

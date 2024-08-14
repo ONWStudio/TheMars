@@ -29,7 +29,7 @@ namespace TcgEngine
 
         private string logged_user;
 
-        void Start()
+        private void Start()
         {
             username_txt.text = username;
             error.text = "";

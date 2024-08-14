@@ -13,10 +13,10 @@ namespace TheraBytes.BetterUi.Editor
     public class SetupWizard : EditorWindow, IWizard
     {
         // static >
-        const string PageToLoadKey = "page_to_load_key";
-        
-        static PersistentWizardData spwd; // "static persistent wizard data" - don't access directly.
-        static PersistentWizardData StaticPersistentWizardData
+        private const string PageToLoadKey = "page_to_load_key";
+
+        private static PersistentWizardData spwd; // "static persistent wizard data" - don't access directly.
+        private static PersistentWizardData StaticPersistentWizardData
         {
             get
             {
@@ -41,7 +41,7 @@ namespace TheraBytes.BetterUi.Editor
         }
 
         [InitializeOnLoadMethod]
-        static void Init()
+        private static void Init()
         {
             if (StaticPersistentWizardData.FileExists())
                 return;
@@ -56,10 +56,10 @@ namespace TheraBytes.BetterUi.Editor
         public int CurrentPageNumber { get { return TotalPageCount - pages.Count; } }
         public int TotalPageCount { get; private set; }
 
-        Queue<WizardPage> pages;
+        private Queue<WizardPage> pages;
         public PersistentWizardData PersistentData { get { return StaticPersistentWizardData; } }
 
-        void OnEnable()
+        private void OnEnable()
         {
             pages = new Queue<WizardPage>();
             pages.Enqueue(new WelcomePage(this));
@@ -93,7 +93,7 @@ namespace TheraBytes.BetterUi.Editor
             Focus();
         }
 
-        void OnGUI()
+        private void OnGUI()
         {
             pages.Peek().DrawGui();
         }

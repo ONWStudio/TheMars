@@ -61,7 +61,7 @@ namespace UniRx
             return RunAsync(source, cancellationToken);
         }
 
-        static AsyncSubject<TSource> RunAsync<TSource>(IObservable<TSource> source, CancellationToken cancellationToken)
+        private static AsyncSubject<TSource> RunAsync<TSource>(IObservable<TSource> source, CancellationToken cancellationToken)
         {
             var s = new AsyncSubject<TSource>();
 
@@ -80,7 +80,7 @@ namespace UniRx
             return s;
         }
 
-        static AsyncSubject<TSource> RunAsync<TSource>(IConnectableObservable<TSource> source, CancellationToken cancellationToken)
+        private static AsyncSubject<TSource> RunAsync<TSource>(IConnectableObservable<TSource> source, CancellationToken cancellationToken)
         {
             var s = new AsyncSubject<TSource>();
 
@@ -100,13 +100,13 @@ namespace UniRx
             return s;
         }
 
-        static AsyncSubject<T> Cancel<T>(AsyncSubject<T> subject, CancellationToken cancellationToken)
+        private static AsyncSubject<T> Cancel<T>(AsyncSubject<T> subject, CancellationToken cancellationToken)
         {
             subject.OnError(new OperationCanceledException(cancellationToken));
             return subject;
         }
 
-        static void RegisterCancelation<T>(AsyncSubject<T> subject, IDisposable subscription, CancellationToken token)
+        private static void RegisterCancelation<T>(AsyncSubject<T> subject, IDisposable subscription, CancellationToken token)
         {
             //
             // Separate method used to avoid heap allocation of closure when no cancellation is needed,

@@ -22,7 +22,8 @@ namespace Michsky.UI.Heat
         public ObjectType objectType = ObjectType.TextMeshPro;
         public UpdateMode updateMode = UpdateMode.OnEnable;
         public bool rebuildLayoutOnUpdate;
-        [SerializeField] private bool forceAddToManager = false;
+        [SerializeField]
+        private bool forceAddToManager = false;
 #if UNITY_EDITOR
         public bool showOutputOnEditor = true;
 #endif
@@ -39,7 +40,7 @@ namespace Michsky.UI.Heat
         public enum UpdateMode { OnEnable, OnDemand }
         public enum ObjectType { TextMeshPro, Custom, ComponentDriven, Audio, Image }
 
-        void Awake()
+        private void Awake()
         {
             if (LocalizationManager.instance != null && !LocalizationManager.instance.UIManagerAsset.enableLocalization)
             {
@@ -50,7 +51,7 @@ namespace Michsky.UI.Heat
             InitializeItem();
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (LocalizationManager.instance == null) { Destroy(this); return; }
             if (!isInitialized || LocalizationManager.instance.currentLanguageAsset == null) { return; }
@@ -381,7 +382,7 @@ namespace Michsky.UI.Heat
             return keyValue;
         }
 
-        IEnumerator RebuildLayout()
+        private IEnumerator RebuildLayout()
         {
             yield return new WaitForSecondsRealtime(0.025f);
             LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());

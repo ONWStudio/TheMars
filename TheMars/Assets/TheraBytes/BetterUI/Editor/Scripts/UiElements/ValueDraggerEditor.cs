@@ -11,17 +11,17 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(ValueDragger)), CanEditMultipleObjects]
     public class ValueDraggerEditor : UnityEditor.Editor
     {
-        SerializedProperty
+        private SerializedProperty
             fallbackDragSettings, customDragSettings,
             fallbackValueSettings, customValueSettings,
             fallbackDragDistance, customDragDistance,
             value, onValueChanged;
 
         // as ValueDragger derives from BetterSelectable, we need to use this.
-        BetterElementHelper<Selectable, BetterSelectable> helper =
+        private BetterElementHelper<Selectable, BetterSelectable> helper =
             new BetterElementHelper<Selectable, BetterSelectable>();
 
-        void OnEnable()
+        private void OnEnable()
         {
             fallbackDragSettings = serializedObject.FindProperty("fallbackDragSettings");
             customDragSettings = serializedObject.FindProperty("customDragSettings");

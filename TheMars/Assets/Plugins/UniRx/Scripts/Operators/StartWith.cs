@@ -4,9 +4,9 @@ namespace UniRx.Operators
 {
     internal class StartWithObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly T value;
-        readonly Func<T> valueFactory;
+        private readonly IObservable<T> source;
+        private readonly T value;
+        private readonly Func<T> valueFactory;
 
         public StartWithObservable(IObservable<T> source, T value)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -27,9 +27,9 @@ namespace UniRx.Operators
             return new StartWith(this, observer, cancel).Run();
         }
 
-        class StartWith : OperatorObserverBase<T, T>
+        private class StartWith : OperatorObserverBase<T, T>
         {
-            readonly StartWithObservable<T> parent;
+            private readonly StartWithObservable<T> parent;
 
             public StartWith(StartWithObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {

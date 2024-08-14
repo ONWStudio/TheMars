@@ -10,7 +10,7 @@ namespace MoreMountains.Feedbacks
 {
 	public struct MMFlashEvent
 	{
-		static private event Delegate OnEvent;
+		private static event Delegate OnEvent;
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] private static void RuntimeInitialization() { OnEvent = null; }
 		static public void Register(Delegate callback) { OnEvent += callback; }
 		static public void Unregister(Delegate callback) { OnEvent -= callback; }

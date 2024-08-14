@@ -26,7 +26,7 @@ namespace TcgEngine.UI
 
         private Dropdown dropdown;
 
-        void Awake()
+        private void Awake()
         {
             dropdown = GetComponent<Dropdown>();
             dropdown.onValueChanged.AddListener(OnChangeValue);

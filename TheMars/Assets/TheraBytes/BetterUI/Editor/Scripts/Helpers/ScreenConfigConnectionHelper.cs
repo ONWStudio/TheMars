@@ -11,7 +11,7 @@ namespace TheraBytes.BetterUi.Editor
 
     public static class ScreenConfigConnectionHelper
     {
-        static HashSet<int> foldoutHashes = new HashSet<int>();
+        private static HashSet<int> foldoutHashes = new HashSet<int>();
 
         public static void DrawSizerGui(string title, SerializedProperty collection, ref SerializedProperty fallback)
         {

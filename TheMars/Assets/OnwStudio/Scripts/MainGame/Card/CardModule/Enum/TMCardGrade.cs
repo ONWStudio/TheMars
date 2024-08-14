@@ -7,7 +7,7 @@ namespace TMCard
     /// <summary>
     /// .. 발동 효과에 따른 카드 등급
     /// </summary>
-    public enum TM_CARD_GRADE : byte
+    public enum TMCardGrade : byte
     {
         /// <summary> .. 일반 </summary>>
         [InspectorName("일반")] NORMAL,

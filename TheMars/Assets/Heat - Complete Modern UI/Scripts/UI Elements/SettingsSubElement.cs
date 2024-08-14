@@ -8,16 +8,19 @@ namespace Michsky.UI.Heat
     public class SettingsSubElement : MonoBehaviour
     {
         [Header("Settings")]
-        [SerializeField][Range(0, 1)] private float disabledOpacity = 0.5f;
-        [SerializeField][Range(1, 10)] private float animSpeed = 4;
+        [SerializeField][Range(0, 1)]
+        private float disabledOpacity = 0.5f;
+        [SerializeField][Range(1, 10)]
+        private float animSpeed = 4;
         public DefaultState defaultState = DefaultState.Active;
 
         [Header("Resources")]
-        [SerializeField] private CanvasGroup targetCG;
+        [SerializeField]
+        private CanvasGroup targetCG;
 
         public enum DefaultState { None, Active, Disabled }
 
-        void Awake()
+        private void Awake()
         {
             if (targetCG == null)
             {
@@ -25,7 +28,7 @@ namespace Michsky.UI.Heat
             }
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (defaultState == DefaultState.Active) { SetState(true); }
             else if (defaultState == DefaultState.Disabled) { SetState(false); }
@@ -37,7 +40,7 @@ namespace Michsky.UI.Heat
             else { StartCoroutine("GroupOut"); defaultState = DefaultState.Disabled; }
         }
 
-        IEnumerator GroupIn()
+        private IEnumerator GroupIn()
         {
             StopCoroutine("GroupOut");
 
@@ -53,7 +56,7 @@ namespace Michsky.UI.Heat
             targetCG.alpha = 1;
         }
 
-        IEnumerator GroupOut()
+        private IEnumerator GroupOut()
         {
             StopCoroutine("GroupIn");
 

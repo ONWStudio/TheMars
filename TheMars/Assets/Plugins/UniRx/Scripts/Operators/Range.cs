@@ -4,9 +4,9 @@ namespace UniRx.Operators
 {
     internal class RangeObservable : OperatorObservableBase<int>
     {
-        readonly int start;
-        readonly int count;
-        readonly IScheduler scheduler;
+        private readonly int start;
+        private readonly int count;
+        private readonly IScheduler scheduler;
 
         public RangeObservable(int start, int count, IScheduler scheduler)
             : base(scheduler == Scheduler.CurrentThread)
@@ -53,7 +53,7 @@ namespace UniRx.Operators
             }
         }
 
-        class Range : OperatorObserverBase<int, int>
+        private class Range : OperatorObserverBase<int, int>
         {
             public Range(IObserver<int> observer, IDisposable cancel)
                 : base(observer, cancel)

@@ -8,6 +8,7 @@ using Onw.Extensions;
 using Onw.Localization;
 using TMPro;
 using TMCard.Effect;
+using UnityEngine.Serialization;
 
 namespace TMCard.Runtime
 {
@@ -15,12 +16,18 @@ namespace TMCard.Runtime
     [DisallowMultipleComponent]
     public sealed class TMCardViewer : MonoBehaviour
     {
+        [FormerlySerializedAs("cardImage")]
         [Header("Image")]
-        [SerializeField, SelectableSerializeField] private Image _cardImage = null;
-        [SerializeField, SelectableSerializeField] private Image _backgroundImage = null;
+        [SerializeField, SelectableSerializeField]
+        private Image _cardImage = null;
+        [FormerlySerializedAs("backgroundImage")]
+        [SerializeField, SelectableSerializeField]
+        private Image _backgroundImage = null;
 
+        [FormerlySerializedAs("effectField")]
         [Header("Effect Field")]
-        [SerializeField, SelectableSerializeField] private RectTransform _effectField = null;
+        [SerializeField, SelectableSerializeField]
+        private RectTransform _effectField = null;
 
         private bool _isInit = false;
 
@@ -43,7 +50,7 @@ namespace TMCard.Runtime
         {
             _cardImage.sprite = cardData.CardImage;
 
-            foreach (ITMCardEffect effect in effects)
+            foreach (var effect in effects)
             {
                 GameObject effectUIObject = new("Effect UI Field");
                 effectUIObject.AddComponent<RectTransform>();
@@ -55,14 +62,14 @@ namespace TMCard.Runtime
                     GameObject labelObject = new("Label Object");
                     labelObject.AddComponent<RectTransform>();
                     labelObject.transform.SetParent(effectUIObject.transform, false);
-                    TextMeshProUGUI labelText = labelObject.AddComponent<TextMeshProUGUI>();
+                    var labelText = labelObject.AddComponent<TextMeshProUGUI>();
                     labelText.alignment = TextAlignmentOptions.Center;
                     labelText.enableAutoSizing = true;
                     labelText.fontSizeMax = 22f;
                     labelText.fontSizeMin = labelText.fontSizeMax * 0.75f;
                     labelText.color = Color.red;
 
-                    if (!localizable.StringOption.TrySetOption(this, label => labelText.text = label, out LocalizeStringEvent localizeStringEvent)) // .. AddComponent
+                    if (!localizable.StringOption.TrySetOption(this, label => labelText.text = label, out var localizeStringEvent)) // .. AddComponent
                     {
                         Debug.LogWarning("모노비하이비어가 아닙니다");
                     }

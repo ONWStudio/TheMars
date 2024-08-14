@@ -4,7 +4,7 @@ namespace UniRx.Operators
 {
     internal class CastObservable<TSource, TResult> : OperatorObservableBase<TResult>
     {
-        readonly IObservable<TSource> source;
+        private readonly IObservable<TSource> source;
 
         public CastObservable(IObservable<TSource> source)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -17,7 +17,7 @@ namespace UniRx.Operators
             return source.Subscribe(new Cast(observer, cancel));
         }
 
-        class Cast : OperatorObserverBase<TSource, TResult>
+        private class Cast : OperatorObserverBase<TSource, TResult>
         {
             public Cast(IObserver<TResult> observer, IDisposable cancel)
                 : base(observer, cancel)

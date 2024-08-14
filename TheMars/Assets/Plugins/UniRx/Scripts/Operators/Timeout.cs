@@ -4,10 +4,10 @@ namespace UniRx.Operators
 {
     internal class TimeoutObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly TimeSpan? dueTime;
-        readonly DateTimeOffset? dueTimeDT;
-        readonly IScheduler scheduler;
+        private readonly IObservable<T> source;
+        private readonly TimeSpan? dueTime;
+        private readonly DateTimeOffset? dueTimeDT;
+        private readonly IScheduler scheduler;
 
         public TimeoutObservable(IObservable<T> source, TimeSpan dueTime, IScheduler scheduler) 
             : base(scheduler == Scheduler.CurrentThread || source.IsRequiredSubscribeOnCurrentThread())
@@ -37,14 +37,14 @@ namespace UniRx.Operators
             }
         }
 
-        class Timeout : OperatorObserverBase<T, T>
+        private class Timeout : OperatorObserverBase<T, T>
         {
-            readonly TimeoutObservable<T> parent;
-            readonly object gate = new object();
-            ulong objectId = 0ul;
-            bool isTimeout = false;
-            SingleAssignmentDisposable sourceSubscription;
-            SerialDisposable timerSubscription;
+            private readonly TimeoutObservable<T> parent;
+            private readonly object gate = new object();
+            private ulong objectId = 0ul;
+            private bool isTimeout = false;
+            private SingleAssignmentDisposable sourceSubscription;
+            private SerialDisposable timerSubscription;
 
             public Timeout(TimeoutObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -61,7 +61,7 @@ namespace UniRx.Operators
                 return StableCompositeDisposable.Create(timerSubscription, sourceSubscription);
             }
 
-            IDisposable RunTimer(ulong timerId)
+            private IDisposable RunTimer(ulong timerId)
             {
                 return parent.scheduler.Schedule(parent.dueTime.Value, () =>
                 {
@@ -125,13 +125,13 @@ namespace UniRx.Operators
             }
         }
 
-        class Timeout_ : OperatorObserverBase<T, T>
+        private class Timeout_ : OperatorObserverBase<T, T>
         {
-            readonly TimeoutObservable<T> parent;
-            readonly object gate = new object();
-            bool isFinished = false;
-            SingleAssignmentDisposable sourceSubscription;
-            IDisposable timerSubscription;
+            private readonly TimeoutObservable<T> parent;
+            private readonly object gate = new object();
+            private bool isFinished = false;
+            private SingleAssignmentDisposable sourceSubscription;
+            private IDisposable timerSubscription;
 
             public Timeout_(TimeoutObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -149,7 +149,7 @@ namespace UniRx.Operators
             }
 
             // in timer
-            void OnNext()
+            private void OnNext()
             {
                 lock (gate)
                 {

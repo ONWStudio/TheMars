@@ -50,7 +50,7 @@ namespace TcgEngine.Client
 
         private static List<BoardCard> card_list = new List<BoardCard>();
 
-        void Awake()
+        private void Awake()
         {
             card_list.Add(this);
             card_ui = GetComponent<CardUI>();
@@ -67,7 +67,7 @@ namespace TcgEngine.Client
                 status_group.alpha = 0f;
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             card_list.Remove(this);
         }
@@ -79,7 +79,7 @@ namespace TcgEngine.Client
             transform.rotation = Quaternion.Euler(board_rot.x, board_rot.y, board_rot.z + Random.Range(-1f, 1f));
         }
 
-        void Update()
+        private void Update()
         {
             if (!GameClient.Get().IsReady())
                 return;

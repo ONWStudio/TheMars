@@ -11,8 +11,8 @@ namespace TheraBytes.BetterUi.Editor
 {
     public class ThirdPartySupportPage : WizardPage
     {
-        const string PACKAGE_PATH_TMP_OLD = "TheraBytes/BetterUI/packages/BetterUI_TextMeshPro_UiEditorPanel.unitypackage";
-        const string PACKAGE_PATH_TMP_NEW = "TheraBytes/BetterUI/packages/BetterUI_TextMeshPro_EditorPanelUI.unitypackage";
+        private const string PACKAGE_PATH_TMP_OLD = "TheraBytes/BetterUI/packages/BetterUI_TextMeshPro_UiEditorPanel.unitypackage";
+        private const string PACKAGE_PATH_TMP_NEW = "TheraBytes/BetterUI/packages/BetterUI_TextMeshPro_EditorPanelUI.unitypackage";
         private const string TMP_KEY = "TextMeshPro";
         public override string NameId { get { return "ThirdPartySupportPage"; } }
 

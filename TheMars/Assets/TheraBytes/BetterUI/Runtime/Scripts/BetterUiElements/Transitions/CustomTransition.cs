@@ -22,7 +22,7 @@ namespace TheraBytes.BetterUi
         }
 
         [SerializeField]
-        List<CustomTransitionState> states = new List<CustomTransitionState>();
+        private List<CustomTransitionState> states = new List<CustomTransitionState>();
 
         public override UnityEngine.Object Target { get { return null; } }
 

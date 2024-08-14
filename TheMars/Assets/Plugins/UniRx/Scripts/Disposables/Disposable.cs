@@ -17,7 +17,7 @@ namespace UniRx
             return new AnonymousDisposable<TState>(state, disposeAction);
         }
 
-        class EmptyDisposable : IDisposable
+        private class EmptyDisposable : IDisposable
         {
             public static EmptyDisposable Singleton = new EmptyDisposable();
 
@@ -31,10 +31,10 @@ namespace UniRx
             }
         }
 
-        class AnonymousDisposable : IDisposable
+        private class AnonymousDisposable : IDisposable
         {
-            bool isDisposed = false;
-            readonly Action dispose;
+            private bool isDisposed = false;
+            private readonly Action dispose;
 
             public AnonymousDisposable(Action dispose)
             {
@@ -51,11 +51,11 @@ namespace UniRx
             }
         }
 
-        class AnonymousDisposable<T> : IDisposable
+        private class AnonymousDisposable<T> : IDisposable
         {
-            bool isDisposed = false;
-            readonly T state;
-            readonly Action<T> dispose;
+            private bool isDisposed = false;
+            private readonly T state;
+            private readonly Action<T> dispose;
 
             public AnonymousDisposable(T state, Action<T> dispose)
             {

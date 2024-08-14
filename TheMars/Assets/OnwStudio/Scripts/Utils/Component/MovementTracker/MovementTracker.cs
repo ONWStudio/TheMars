@@ -20,7 +20,8 @@ namespace Onw.Components
             set => _positionThreshold = Mathf.Clamp(value, THRESHOLD_LIMIT_MIN, THRESHOLD_LIMIT_MAX);
         }
 
-        [SerializeField, Range(THRESHOLD_LIMIT_MIN, THRESHOLD_LIMIT_MAX)] private float _positionThreshold = 0.01f;
+        [SerializeField, Range(THRESHOLD_LIMIT_MIN, THRESHOLD_LIMIT_MAX)]
+        private float _positionThreshold = 0.01f;
 
         private Vector3 _previousPosition = Vector3.zero;
         private bool _isMoving = false;

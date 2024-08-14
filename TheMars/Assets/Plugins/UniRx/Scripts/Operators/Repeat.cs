@@ -4,9 +4,9 @@ namespace UniRx.Operators
 {
     internal class RepeatObservable<T> : OperatorObservableBase<T>
     {
-        readonly T value;
-        readonly int? repeatCount;
-        readonly IScheduler scheduler;
+        private readonly T value;
+        private readonly int? repeatCount;
+        private readonly IScheduler scheduler;
 
         public RepeatObservable(T value, int? repeatCount, IScheduler scheduler)
             : base(scheduler == Scheduler.CurrentThread)
@@ -63,7 +63,7 @@ namespace UniRx.Operators
             }
         }
 
-        class Repeat : OperatorObserverBase<T, T>
+        private class Repeat : OperatorObserverBase<T, T>
         {
             public Repeat(IObserver<T> observer, IDisposable cancel)
                 : base(observer, cancel)

@@ -11,7 +11,7 @@ namespace TheraBytes.BetterUi.Editor
 {
     public class AssemblyDefinitionsPage : WizardPage
     {
-        static readonly string[] ASMDEF_FILES =
+        private static readonly string[] ASMDEF_FILES =
             { 
                 "TheraBytes/BetterUI/Runtime/TheraBytes.BetterUi.Runtime.asmdef",
                 "TheraBytes/BetterUI/Editor/TheraBytes.BetterUi.Editor.asmdef",
@@ -19,12 +19,12 @@ namespace TheraBytes.BetterUi.Editor
                 "TheraBytes/BetterUI_TextMeshPro/Editor/TheraBytes.BetterUi.Editor.asmref",
             };
 
-        const string TEXTMESH_PRO_PATH = "TheraBytes/BetterUI_TextMeshPro";
+        private const string TEXTMESH_PRO_PATH = "TheraBytes/BetterUI_TextMeshPro";
 
-        const string PACKAGE_PATH_INCL_TMP = "TheraBytes/BetterUI/packages/asmdef_incl_TextMeshPro.unitypackage";
-        const string PACKAGE_PATH_EXCL_TMP = "TheraBytes/BetterUI/packages/asmdef_excl_TextMeshPro.unitypackage";
+        private const string PACKAGE_PATH_INCL_TMP = "TheraBytes/BetterUI/packages/asmdef_incl_TextMeshPro.unitypackage";
+        private const string PACKAGE_PATH_EXCL_TMP = "TheraBytes/BetterUI/packages/asmdef_excl_TextMeshPro.unitypackage";
 
-        const string PERSISTENT_KEY = "asmdef";
+        private const string PERSISTENT_KEY = "asmdef";
 
         public override string NameId { get { return "AssemblyDefinitionsPage"; } }
 

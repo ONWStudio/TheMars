@@ -19,12 +19,12 @@ namespace TheraBytes.BetterUi
 
         [FormerlySerializedAs("paddingSizer")]
         [SerializeField]
-        MarginSizeModifier paddingSizerFallback =
+        private MarginSizeModifier paddingSizerFallback =
             new MarginSizeModifier(new Margin(), new Margin(), new Margin(1000, 1000, 1000, 1000));
         
         [FormerlySerializedAs("spacingSizer")]
         [SerializeField]
-        FloatSizeModifier spacingSizerFallback =
+        private FloatSizeModifier spacingSizerFallback =
             new FloatSizeModifier(0, 0, 300);
         
 

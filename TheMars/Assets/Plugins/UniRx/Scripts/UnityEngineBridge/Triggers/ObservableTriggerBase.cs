@@ -5,11 +5,11 @@ namespace UniRx.Triggers
 {
     public abstract class ObservableTriggerBase : MonoBehaviour
     {
-        bool calledAwake = false;
-        Subject<Unit> awake;
+        private bool calledAwake = false;
+        private Subject<Unit> awake;
 
         /// <summary>Awake is called when the script instance is being loaded.</summary>
-        void Awake()
+        private void Awake()
         {
             calledAwake = true;
             if (awake != null) { awake.OnNext(Unit.Default); awake.OnCompleted(); }
@@ -22,11 +22,11 @@ namespace UniRx.Triggers
             return awake ?? (awake = new Subject<Unit>());
         }
 
-        bool calledStart = false;
-        Subject<Unit> start;
+        private bool calledStart = false;
+        private Subject<Unit> start;
 
         /// <summary>Start is called on the frame when a script is enabled just before any of the Update methods is called the first time.</summary>
-        void Start()
+        private void Start()
         {
             calledStart = true;
             if (start != null) { start.OnNext(Unit.Default); start.OnCompleted(); }
@@ -40,11 +40,11 @@ namespace UniRx.Triggers
         }
 
 
-        bool calledDestroy = false;
-        Subject<Unit> onDestroy;
+        private bool calledDestroy = false;
+        private Subject<Unit> onDestroy;
 
         /// <summary>This function is called when the MonoBehaviour will be destroyed.</summary>
-        void OnDestroy()
+        private void OnDestroy()
         {
             calledDestroy = true;
             if (onDestroy != null) { onDestroy.OnNext(Unit.Default); onDestroy.OnCompleted(); }

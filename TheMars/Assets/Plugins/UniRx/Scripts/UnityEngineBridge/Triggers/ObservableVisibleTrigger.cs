@@ -6,10 +6,10 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableVisibleTrigger : ObservableTriggerBase
     {
-        Subject<Unit> onBecameInvisible;
+        private Subject<Unit> onBecameInvisible;
 
         /// <summary>OnBecameInvisible is called when the renderer is no longer visible by any camera.</summary>
-        void OnBecameInvisible()
+        private void OnBecameInvisible()
         {
             if (onBecameInvisible != null) onBecameInvisible.OnNext(Unit.Default);
         }
@@ -20,10 +20,10 @@ namespace UniRx.Triggers
             return onBecameInvisible ?? (onBecameInvisible = new Subject<Unit>());
         }
 
-        Subject<Unit> onBecameVisible;
+        private Subject<Unit> onBecameVisible;
 
         /// <summary>OnBecameVisible is called when the renderer became visible by any camera.</summary>
-        void OnBecameVisible()
+        private void OnBecameVisible()
         {
             if (onBecameVisible != null) onBecameVisible.OnNext(Unit.Default);
         }

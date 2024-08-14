@@ -24,16 +24,16 @@ namespace TheraBytes.BetterUi
         public class RectTransformDataConfigCollection : SizeConfigCollection<RectTransformData> { }
 
         [SerializeField]
-        RectTransformData transformFallback;
+        private RectTransformData transformFallback;
 
         [SerializeField]
-        RectTransformDataConfigCollection transformConfigs = new RectTransformDataConfigCollection();
+        private RectTransformDataConfigCollection transformConfigs = new RectTransformDataConfigCollection();
 
         public RectTransformData CurrentTransformData { get { return transformConfigs.GetCurrentItem(transformFallback); } }
 
-        RectTransform rectTransform { get { return this.transform as RectTransform; } }
+        private RectTransform rectTransform { get { return this.transform as RectTransform; } }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (transformFallback == null) // happens when added in editor during play mode
             {
@@ -69,7 +69,7 @@ namespace TheraBytes.BetterUi
         }
 #endif
 
-        void InitTransformFallback()
+        private void InitTransformFallback()
         {
             if (transformFallback == null)
             {

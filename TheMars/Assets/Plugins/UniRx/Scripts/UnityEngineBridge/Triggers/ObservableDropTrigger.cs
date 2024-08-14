@@ -10,7 +10,7 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableDropTrigger : ObservableTriggerBase, IEventSystemHandler, IDropHandler
     {
-        Subject<PointerEventData> onDrop;
+        private Subject<PointerEventData> onDrop;
 
         void IDropHandler.OnDrop(PointerEventData eventData)
         {

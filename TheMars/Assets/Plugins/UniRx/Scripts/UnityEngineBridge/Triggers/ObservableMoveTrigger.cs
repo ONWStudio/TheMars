@@ -10,7 +10,7 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableMoveTrigger : ObservableTriggerBase, IEventSystemHandler, IMoveHandler
     {
-        Subject<AxisEventData> onMove;
+        private Subject<AxisEventData> onMove;
 
         void IMoveHandler.OnMove(AxisEventData eventData)
         {

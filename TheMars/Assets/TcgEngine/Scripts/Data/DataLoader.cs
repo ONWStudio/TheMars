@@ -21,7 +21,7 @@ namespace TcgEngine
 
         private static DataLoader instance;
 
-        void Awake()
+        private void Awake()
         {
             instance = this;
             LoadData();

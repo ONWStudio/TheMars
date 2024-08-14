@@ -12,9 +12,9 @@ namespace UniRx.Operators
     // binary
     internal class ZipObservable<TLeft, TRight, TResult> : OperatorObservableBase<TResult>
     {
-        readonly IObservable<TLeft> left;
-        readonly IObservable<TRight> right;
-        readonly Func<TLeft, TRight, TResult> selector;
+        private readonly IObservable<TLeft> left;
+        private readonly IObservable<TRight> right;
+        private readonly Func<TLeft, TRight, TResult> selector;
 
         public ZipObservable(IObservable<TLeft> left, IObservable<TRight> right, Func<TLeft, TRight, TResult> selector)
             : base(left.IsRequiredSubscribeOnCurrentThread() || right.IsRequiredSubscribeOnCurrentThread())
@@ -29,15 +29,15 @@ namespace UniRx.Operators
             return new Zip(this, observer, cancel).Run();
         }
 
-        class Zip : OperatorObserverBase<TResult, TResult>
+        private class Zip : OperatorObserverBase<TResult, TResult>
         {
-            readonly ZipObservable<TLeft, TRight, TResult> parent;
+            private readonly ZipObservable<TLeft, TRight, TResult> parent;
 
-            readonly object gate = new object();
-            readonly Queue<TLeft> leftQ = new Queue<TLeft>();
-            bool leftCompleted = false;
-            readonly Queue<TRight> rightQ = new Queue<TRight>();
-            bool rightCompleted = false;
+            private readonly object gate = new object();
+            private readonly Queue<TLeft> leftQ = new Queue<TLeft>();
+            private bool leftCompleted = false;
+            private readonly Queue<TRight> rightQ = new Queue<TRight>();
+            private bool rightCompleted = false;
 
             public Zip(ZipObservable<TLeft, TRight, TResult> parent, IObserver<TResult> observer, IDisposable cancel)
                 : base(observer, cancel)
@@ -61,7 +61,7 @@ namespace UniRx.Operators
             }
 
             // dequeue is in the lock
-            void Dequeue()
+            private void Dequeue()
             {
                 TLeft lv;
                 TRight rv;
@@ -114,9 +114,9 @@ namespace UniRx.Operators
                 finally { Dispose(); }
             }
 
-            class LeftZipObserver : IObserver<TLeft>
+            private class LeftZipObserver : IObserver<TLeft>
             {
-                readonly Zip parent;
+                private readonly Zip parent;
 
                 public LeftZipObserver(Zip parent)
                 {
@@ -150,9 +150,9 @@ namespace UniRx.Operators
                 }
             }
 
-            class RightZipObserver : IObserver<TRight>
+            private class RightZipObserver : IObserver<TRight>
             {
-                readonly Zip parent;
+                private readonly Zip parent;
 
                 public RightZipObserver(Zip parent)
                 {
@@ -191,7 +191,7 @@ namespace UniRx.Operators
     // array
     internal class ZipObservable<T> : OperatorObservableBase<IList<T>>
     {
-        readonly IObservable<T>[] sources;
+        private readonly IObservable<T>[] sources;
 
         public ZipObservable(IObservable<T>[] sources)
             : base(true)
@@ -204,14 +204,14 @@ namespace UniRx.Operators
             return new Zip(this, observer, cancel).Run();
         }
 
-        class Zip : OperatorObserverBase<IList<T>, IList<T>>
+        private class Zip : OperatorObserverBase<IList<T>, IList<T>>
         {
-            readonly ZipObservable<T> parent;
-            readonly object gate = new object();
+            private readonly ZipObservable<T> parent;
+            private readonly object gate = new object();
 
-            Queue<T>[] queues;
-            bool[] isDone;
-            int length;
+            private Queue<T>[] queues;
+            private bool[] isDone;
+            private int length;
 
             public Zip(ZipObservable<T> parent, IObserver<IList<T>> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -252,7 +252,7 @@ namespace UniRx.Operators
             }
 
             // dequeue is in the lock
-            void Dequeue(int index)
+            private void Dequeue(int index)
             {
                 var allQueueHasValue = true;
                 for (int i = 0; i < length; i++)
@@ -315,10 +315,10 @@ namespace UniRx.Operators
                 finally { Dispose(); }
             }
 
-            class ZipObserver : IObserver<T>
+            private class ZipObserver : IObserver<T>
             {
-                readonly Zip parent;
-                readonly int index;
+                private readonly Zip parent;
+                private readonly int index;
 
                 public ZipObserver(Zip parent, int index)
                 {
@@ -373,10 +373,10 @@ namespace UniRx.Operators
 
     internal class ZipObservable<T1, T2, T3, TR> : OperatorObservableBase<TR>
     {
-        IObservable<T1> source1;
-        IObservable<T2> source2;
-        IObservable<T3> source3;
-        ZipFunc<T1, T2, T3, TR> resultSelector;
+        private IObservable<T1> source1;
+        private IObservable<T2> source2;
+        private IObservable<T3> source3;
+        private ZipFunc<T1, T2, T3, TR> resultSelector;
 
         public ZipObservable(
             IObservable<T1> source1,
@@ -400,13 +400,13 @@ namespace UniRx.Operators
             return new Zip(this, observer, cancel).Run();
         }
 
-        class Zip : NthZipObserverBase<TR>
+        private class Zip : NthZipObserverBase<TR>
         {
-            readonly ZipObservable<T1, T2, T3, TR> parent;
-            readonly object gate = new object();
-            readonly Queue<T1> q1 = new Queue<T1>();
-            readonly Queue<T2> q2 = new Queue<T2>();
-            readonly Queue<T3> q3 = new Queue<T3>();
+            private readonly ZipObservable<T1, T2, T3, TR> parent;
+            private readonly object gate = new object();
+            private readonly Queue<T1> q1 = new Queue<T1>();
+            private readonly Queue<T2> q2 = new Queue<T2>();
+            private readonly Queue<T3> q3 = new Queue<T3>();
 
             public Zip(ZipObservable<T1, T2, T3, TR> parent, IObserver<TR> observer, IDisposable cancel)
                 : base(observer, cancel)
@@ -457,11 +457,11 @@ namespace UniRx.Operators
 
     internal class ZipObservable<T1, T2, T3, T4, TR> : OperatorObservableBase<TR>
     {
-        IObservable<T1> source1;
-        IObservable<T2> source2;
-        IObservable<T3> source3;
-        IObservable<T4> source4;
-        ZipFunc<T1, T2, T3, T4, TR> resultSelector;
+        private IObservable<T1> source1;
+        private IObservable<T2> source2;
+        private IObservable<T3> source3;
+        private IObservable<T4> source4;
+        private ZipFunc<T1, T2, T3, T4, TR> resultSelector;
 
         public ZipObservable(
             IObservable<T1> source1,
@@ -488,14 +488,14 @@ namespace UniRx.Operators
             return new Zip(this, observer, cancel).Run();
         }
 
-        class Zip : NthZipObserverBase<TR>
+        private class Zip : NthZipObserverBase<TR>
         {
-            readonly ZipObservable<T1, T2, T3, T4, TR> parent;
-            readonly object gate = new object();
-            readonly Queue<T1> q1 = new Queue<T1>();
-            readonly Queue<T2> q2 = new Queue<T2>();
-            readonly Queue<T3> q3 = new Queue<T3>();
-            readonly Queue<T4> q4 = new Queue<T4>();
+            private readonly ZipObservable<T1, T2, T3, T4, TR> parent;
+            private readonly object gate = new object();
+            private readonly Queue<T1> q1 = new Queue<T1>();
+            private readonly Queue<T2> q2 = new Queue<T2>();
+            private readonly Queue<T3> q3 = new Queue<T3>();
+            private readonly Queue<T4> q4 = new Queue<T4>();
 
             public Zip(ZipObservable<T1, T2, T3, T4, TR> parent, IObserver<TR> observer, IDisposable cancel)
                 : base(observer, cancel)
@@ -547,12 +547,12 @@ namespace UniRx.Operators
 
     internal class ZipObservable<T1, T2, T3, T4, T5, TR> : OperatorObservableBase<TR>
     {
-        IObservable<T1> source1;
-        IObservable<T2> source2;
-        IObservable<T3> source3;
-        IObservable<T4> source4;
-        IObservable<T5> source5;
-        ZipFunc<T1, T2, T3, T4, T5, TR> resultSelector;
+        private IObservable<T1> source1;
+        private IObservable<T2> source2;
+        private IObservable<T3> source3;
+        private IObservable<T4> source4;
+        private IObservable<T5> source5;
+        private ZipFunc<T1, T2, T3, T4, T5, TR> resultSelector;
 
         public ZipObservable(
             IObservable<T1> source1,
@@ -582,15 +582,15 @@ namespace UniRx.Operators
             return new Zip(this, observer, cancel).Run();
         }
 
-        class Zip : NthZipObserverBase<TR>
+        private class Zip : NthZipObserverBase<TR>
         {
-            readonly ZipObservable<T1, T2, T3, T4, T5, TR> parent;
-            readonly object gate = new object();
-            readonly Queue<T1> q1 = new Queue<T1>();
-            readonly Queue<T2> q2 = new Queue<T2>();
-            readonly Queue<T3> q3 = new Queue<T3>();
-            readonly Queue<T4> q4 = new Queue<T4>();
-            readonly Queue<T5> q5 = new Queue<T5>();
+            private readonly ZipObservable<T1, T2, T3, T4, T5, TR> parent;
+            private readonly object gate = new object();
+            private readonly Queue<T1> q1 = new Queue<T1>();
+            private readonly Queue<T2> q2 = new Queue<T2>();
+            private readonly Queue<T3> q3 = new Queue<T3>();
+            private readonly Queue<T4> q4 = new Queue<T4>();
+            private readonly Queue<T5> q5 = new Queue<T5>();
 
             public Zip(ZipObservable<T1, T2, T3, T4, T5, TR> parent, IObserver<TR> observer, IDisposable cancel)
                 : base(observer, cancel)
@@ -643,13 +643,13 @@ namespace UniRx.Operators
 
     internal class ZipObservable<T1, T2, T3, T4, T5, T6, TR> : OperatorObservableBase<TR>
     {
-        IObservable<T1> source1;
-        IObservable<T2> source2;
-        IObservable<T3> source3;
-        IObservable<T4> source4;
-        IObservable<T5> source5;
-        IObservable<T6> source6;
-        ZipFunc<T1, T2, T3, T4, T5, T6, TR> resultSelector;
+        private IObservable<T1> source1;
+        private IObservable<T2> source2;
+        private IObservable<T3> source3;
+        private IObservable<T4> source4;
+        private IObservable<T5> source5;
+        private IObservable<T6> source6;
+        private ZipFunc<T1, T2, T3, T4, T5, T6, TR> resultSelector;
 
         public ZipObservable(
             IObservable<T1> source1,
@@ -682,16 +682,16 @@ namespace UniRx.Operators
             return new Zip(this, observer, cancel).Run();
         }
 
-        class Zip : NthZipObserverBase<TR>
+        private class Zip : NthZipObserverBase<TR>
         {
-            readonly ZipObservable<T1, T2, T3, T4, T5, T6, TR> parent;
-            readonly object gate = new object();
-            readonly Queue<T1> q1 = new Queue<T1>();
-            readonly Queue<T2> q2 = new Queue<T2>();
-            readonly Queue<T3> q3 = new Queue<T3>();
-            readonly Queue<T4> q4 = new Queue<T4>();
-            readonly Queue<T5> q5 = new Queue<T5>();
-            readonly Queue<T6> q6 = new Queue<T6>();
+            private readonly ZipObservable<T1, T2, T3, T4, T5, T6, TR> parent;
+            private readonly object gate = new object();
+            private readonly Queue<T1> q1 = new Queue<T1>();
+            private readonly Queue<T2> q2 = new Queue<T2>();
+            private readonly Queue<T3> q3 = new Queue<T3>();
+            private readonly Queue<T4> q4 = new Queue<T4>();
+            private readonly Queue<T5> q5 = new Queue<T5>();
+            private readonly Queue<T6> q6 = new Queue<T6>();
 
             public Zip(ZipObservable<T1, T2, T3, T4, T5, T6, TR> parent, IObserver<TR> observer, IDisposable cancel)
                 : base(observer, cancel)
@@ -745,14 +745,14 @@ namespace UniRx.Operators
 
     internal class ZipObservable<T1, T2, T3, T4, T5, T6, T7, TR> : OperatorObservableBase<TR>
     {
-        IObservable<T1> source1;
-        IObservable<T2> source2;
-        IObservable<T3> source3;
-        IObservable<T4> source4;
-        IObservable<T5> source5;
-        IObservable<T6> source6;
-        IObservable<T7> source7;
-        ZipFunc<T1, T2, T3, T4, T5, T6, T7, TR> resultSelector;
+        private IObservable<T1> source1;
+        private IObservable<T2> source2;
+        private IObservable<T3> source3;
+        private IObservable<T4> source4;
+        private IObservable<T5> source5;
+        private IObservable<T6> source6;
+        private IObservable<T7> source7;
+        private ZipFunc<T1, T2, T3, T4, T5, T6, T7, TR> resultSelector;
 
         public ZipObservable(
             IObservable<T1> source1,
@@ -788,17 +788,17 @@ namespace UniRx.Operators
             return new Zip(this, observer, cancel).Run();
         }
 
-        class Zip : NthZipObserverBase<TR>
+        private class Zip : NthZipObserverBase<TR>
         {
-            readonly ZipObservable<T1, T2, T3, T4, T5, T6, T7, TR> parent;
-            readonly object gate = new object();
-            readonly Queue<T1> q1 = new Queue<T1>();
-            readonly Queue<T2> q2 = new Queue<T2>();
-            readonly Queue<T3> q3 = new Queue<T3>();
-            readonly Queue<T4> q4 = new Queue<T4>();
-            readonly Queue<T5> q5 = new Queue<T5>();
-            readonly Queue<T6> q6 = new Queue<T6>();
-            readonly Queue<T7> q7 = new Queue<T7>();
+            private readonly ZipObservable<T1, T2, T3, T4, T5, T6, T7, TR> parent;
+            private readonly object gate = new object();
+            private readonly Queue<T1> q1 = new Queue<T1>();
+            private readonly Queue<T2> q2 = new Queue<T2>();
+            private readonly Queue<T3> q3 = new Queue<T3>();
+            private readonly Queue<T4> q4 = new Queue<T4>();
+            private readonly Queue<T5> q5 = new Queue<T5>();
+            private readonly Queue<T6> q6 = new Queue<T6>();
+            private readonly Queue<T7> q7 = new Queue<T7>();
 
             public Zip(ZipObservable<T1, T2, T3, T4, T5, T6, T7, TR> parent, IObserver<TR> observer, IDisposable cancel)
                 : base(observer, cancel)
@@ -863,9 +863,9 @@ namespace UniRx.Operators
 
     internal abstract class NthZipObserverBase<T> : OperatorObserverBase<T, T>, IZipObservable
     {
-        System.Collections.ICollection[] queues;
-        bool[] isDone;
-        int length;
+        private System.Collections.ICollection[] queues;
+        private bool[] isDone;
+        private int length;
 
         public NthZipObserverBase(IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
         {
@@ -963,10 +963,10 @@ namespace UniRx.Operators
     // nth
     internal class ZipObserver<T> : IObserver<T>
     {
-        readonly object gate;
-        readonly IZipObservable parent;
-        readonly int index;
-        readonly Queue<T> queue;
+        private readonly object gate;
+        private readonly IZipObservable parent;
+        private readonly int index;
+        private readonly Queue<T> queue;
 
         public ZipObserver(object gate, IZipObservable parent, int index, Queue<T> queue)
         {

@@ -11,9 +11,11 @@ namespace Onw.UI
     public sealed class UIManager : Singleton<UIManager>
     {
         [Header("UI Canvas")]
-        [SerializeField] private Canvas _canvas;
+        [SerializeField]
+        private Canvas _canvas;
 
-        [SerializeField] private List<BaseUI> _baseUIList = new();
+        [SerializeField]
+        private List<BaseUI> _baseUIList = new();
         private readonly Dictionary<string, BaseUI> _uiPool = new();
         private readonly List<BaseUI> _activeUIStack = new();
 

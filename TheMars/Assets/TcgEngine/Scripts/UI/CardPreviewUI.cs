@@ -35,7 +35,7 @@ namespace TcgEngine.UI
             }
         }
 
-        void Update()
+        private void Update()
         {
             if (!GameClient.Get().IsReady())
                 return;

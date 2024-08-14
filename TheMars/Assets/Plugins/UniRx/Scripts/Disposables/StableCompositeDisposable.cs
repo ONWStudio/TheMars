@@ -104,9 +104,9 @@ namespace UniRx
             get;
         }
 
-        class Binary : StableCompositeDisposable
+        private class Binary : StableCompositeDisposable
         {
-            int disposedCallCount = -1;
+            private int disposedCallCount = -1;
             private volatile IDisposable _disposable1;
             private volatile IDisposable _disposable2;
 
@@ -134,9 +134,9 @@ namespace UniRx
             }
         }
 
-        class Trinary : StableCompositeDisposable
+        private class Trinary : StableCompositeDisposable
         {
-            int disposedCallCount = -1;
+            private int disposedCallCount = -1;
             private volatile IDisposable _disposable1;
             private volatile IDisposable _disposable2;
             private volatile IDisposable _disposable3;
@@ -167,9 +167,9 @@ namespace UniRx
             }
         }
 
-        class Quaternary : StableCompositeDisposable
+        private class Quaternary : StableCompositeDisposable
         {
-            int disposedCallCount = -1;
+            private int disposedCallCount = -1;
             private volatile IDisposable _disposable1;
             private volatile IDisposable _disposable2;
             private volatile IDisposable _disposable3;
@@ -203,9 +203,9 @@ namespace UniRx
             }
         }
 
-        class NAry : StableCompositeDisposable
+        private class NAry : StableCompositeDisposable
         {
-            int disposedCallCount = -1;
+            private int disposedCallCount = -1;
             private volatile List<IDisposable> _disposables;
 
             public NAry(IDisposable[] disposables)
@@ -243,9 +243,9 @@ namespace UniRx
             }
         }
 
-        class NAryUnsafe : StableCompositeDisposable
+        private class NAryUnsafe : StableCompositeDisposable
         {
-            int disposedCallCount = -1;
+            private int disposedCallCount = -1;
             private volatile IDisposable[] _disposables;
 
             public NAryUnsafe(IDisposable[] disposables)

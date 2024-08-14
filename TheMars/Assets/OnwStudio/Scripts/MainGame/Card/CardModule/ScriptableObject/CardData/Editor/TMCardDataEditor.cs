@@ -12,7 +12,7 @@ namespace TMCard
     public sealed partial class TMCardData : ScriptableObject
     {
         [OnChangedValueByMethod(nameof(_effectCreators))]
-        private void onChangedSpecialEffect()
+        private void OnChangedSpecialEffect()
         {
             for (int i = 0; i < _effectCreators.Count; i++)
             {

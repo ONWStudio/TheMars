@@ -7,9 +7,9 @@ namespace UniRx.Operators
 {
     internal class SampleObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly TimeSpan interval;
-        readonly IScheduler scheduler;
+        private readonly IObservable<T> source;
+        private readonly TimeSpan interval;
+        private readonly IScheduler scheduler;
 
         public SampleObservable(IObservable<T> source, TimeSpan interval, IScheduler scheduler)
             : base(source.IsRequiredSubscribeOnCurrentThread() || scheduler == Scheduler.CurrentThread)
@@ -24,14 +24,14 @@ namespace UniRx.Operators
             return new Sample(this, observer, cancel).Run();
         }
 
-        class Sample : OperatorObserverBase<T, T>
+        private class Sample : OperatorObserverBase<T, T>
         {
-            readonly SampleObservable<T> parent;
-            readonly object gate = new object();
-            T latestValue = default(T);
-            bool isUpdated = false;
-            bool isCompleted = false;
-            SingleAssignmentDisposable sourceSubscription;
+            private readonly SampleObservable<T> parent;
+            private readonly object gate = new object();
+            private T latestValue = default(T);
+            private bool isUpdated = false;
+            private bool isCompleted = false;
+            private SingleAssignmentDisposable sourceSubscription;
 
             public Sample(SampleObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -58,7 +58,7 @@ namespace UniRx.Operators
                 return StableCompositeDisposable.Create(sourceSubscription, scheduling);
             }
 
-            void OnNextTick()
+            private void OnNextTick()
             {
                 lock (gate)
                 {
@@ -75,7 +75,7 @@ namespace UniRx.Operators
                 }
             }
 
-            void OnNextRecursive(Action<TimeSpan> self)
+            private void OnNextRecursive(Action<TimeSpan> self)
             {
                 lock (gate)
                 {
@@ -123,8 +123,8 @@ namespace UniRx.Operators
 
     internal class SampleObservable<T, T2> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly IObservable<T2> intervalSource;
+        private readonly IObservable<T> source;
+        private readonly IObservable<T2> intervalSource;
 
         public SampleObservable(IObservable<T> source, IObservable<T2> intervalSource)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -138,14 +138,14 @@ namespace UniRx.Operators
             return new Sample(this, observer, cancel).Run();
         }
 
-        class Sample : OperatorObserverBase<T, T>
+        private class Sample : OperatorObserverBase<T, T>
         {
-            readonly SampleObservable<T, T2> parent;
-            readonly object gate = new object();
-            T latestValue = default(T);
-            bool isUpdated = false;
-            bool isCompleted = false;
-            SingleAssignmentDisposable sourceSubscription;
+            private readonly SampleObservable<T, T2> parent;
+            private readonly object gate = new object();
+            private T latestValue = default(T);
+            private bool isUpdated = false;
+            private bool isCompleted = false;
+            private SingleAssignmentDisposable sourceSubscription;
 
             public Sample(
                 SampleObservable<T, T2> parent, IObserver<T> observer, IDisposable cancel)
@@ -190,9 +190,9 @@ namespace UniRx.Operators
                 }
             }
 
-            class SampleTick : IObserver<T2>
+            private class SampleTick : IObserver<T2>
             {
-                readonly Sample parent;
+                private readonly Sample parent;
 
                 public SampleTick(Sample parent)
                 {

@@ -7,7 +7,7 @@ namespace Michsky.UI.Heat
     [RequireComponent(typeof(CanvasScaler))]
     public class CanvasManager : MonoBehaviour
     {
-        CanvasScaler canvasScaler;
+        private CanvasScaler canvasScaler;
 
         public void SetScale(int scale = 1080)
         {

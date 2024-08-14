@@ -26,7 +26,7 @@ namespace TMCard
         /// .. 소모 재화 종류
         /// </summary>
         [field: SerializeField, FormerlySerializedAs("<RequiredResource>k__BackingField"), DisplayAs("소모 재화 종류"), Tooltip("소모 재화 종류")]
-        public TM_REQUIRED_RESOURCE RequiredResource { get; private set; } = TM_REQUIRED_RESOURCE.TERA;
+        public TMRequiredResource RequiredResource { get; private set; } = TMRequiredResource.TERA;
 
         /// <summary>
         /// .. 사용될 재화
@@ -39,19 +39,19 @@ namespace TMCard
         /// .. 카드의 종류
         /// </summary>
         [field: SerializeField, FormerlySerializedAs("<CardKind>k__BackingField"), DisplayAs("카드 종류"), Tooltip("카드의 종류")]
-        public TM_CARD_KIND CardKind { get; private set; } = TM_CARD_KIND.NONE;
+        public TMCardKind CardKind { get; private set; } = TMCardKind.NONE;
 
         /// <summary>
         /// .. 카드의 등급
         /// </summary>
         [field: SerializeField, FormerlySerializedAs("<CardGrade>k__BackingField"), DisplayAs("등급"), Tooltip("카드의 등급")]
-        public TM_CARD_GRADE CardGrade { get; private set; } = TM_CARD_GRADE.NORMAL;
+        public TMCardGrade CardGrade { get; private set; } = TMCardGrade.NORMAL;
 
         /// <summary>
         /// .. 카드의 그룹
         /// </summary>
         [field: SerializeField, FormerlySerializedAs("<CardGroup>k__BackingField"), DisplayAs("그룹"), Tooltip("카드의 그룹")]
-        public TM_CARD_GROUP CardGroup { get; private set; } = TM_CARD_GROUP.COMMON;
+        public TMCardGroup CardGroup { get; private set; } = TMCardGroup.COMMON;
 
         [field: SerializeField, SpritePreview(128f)] public Sprite CardImage { get; private set; } = null;
 
@@ -60,10 +60,12 @@ namespace TMCard
 
         [field: SerializeField] public LocalizedStringOption CardName { get; private set; }
 
-        [SerializeReference, FormerlySerializedAs("_effectCreators"), DisplayAs("카드 효과"), Tooltip("카드 효과 리스트"), SerializeReferenceDropdown]
+        [FormerlySerializedAs("effectCreators")]
+        [SerializeReference, DisplayAs("카드 효과"), Tooltip("카드 효과 리스트"), SerializeReferenceDropdown]
         private List<ITMEffectCreator> _effectCreators = new();
 
-        [SerializeReference, FormerlySerializedAs("_addtionalConditions"), DisplayAs("추가 조건"), Tooltip("카드 추가 조건 리스트"), SerializeReferenceDropdown]
+        [FormerlySerializedAs("addtionalConditions")]
+        [SerializeReference, DisplayAs("추가 조건"), Tooltip("카드 추가 조건 리스트"), SerializeReferenceDropdown]
         private List<ITMCardAddtionalCondition> _addtionalConditions = new();
 
         public void ApplyEffect(TMCardController controller)

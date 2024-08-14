@@ -26,10 +26,10 @@ namespace TheraBytes.BetterUi
         public Shape ClickableShape;
 
         [SerializeField]
-        FloatSizeModifier cornerRadiusFallback = new FloatSizeModifier(5, 0, 1000);
+        private FloatSizeModifier cornerRadiusFallback = new FloatSizeModifier(5, 0, 1000);
 
         [SerializeField]
-        FloatSizeConfigCollection cornerRadiusConfigs = new FloatSizeConfigCollection();
+        private FloatSizeConfigCollection cornerRadiusConfigs = new FloatSizeConfigCollection();
 
         public float CurrentCornerRadius { get { return cornerRadiusConfigs.GetCurrentItem(cornerRadiusFallback).LastCalculatedSize; } }
 
@@ -115,7 +115,7 @@ namespace TheraBytes.BetterUi
             }
         }
 
-        void OnDrawGizmosSelected()
+        private void OnDrawGizmosSelected()
         {
             Gizmos.color = (raycastTarget && this.isActiveAndEnabled)
                 ? Color.green 
@@ -123,7 +123,7 @@ namespace TheraBytes.BetterUi
 
             DrawGizmos();
         }
-        void OnDrawGizmos()
+        private void OnDrawGizmos()
         {
             if (!raycastTarget || !this.isActiveAndEnabled)
                 return;
@@ -132,7 +132,7 @@ namespace TheraBytes.BetterUi
             DrawGizmos();
         }
 
-        void DrawGizmos()
+        private void DrawGizmos()
         { 
             Vector3[] corners = new Vector3[4];
             rectTransform.GetWorldCorners(corners);
@@ -243,7 +243,7 @@ namespace TheraBytes.BetterUi
 
         }
 
-        Vector3 Transpose(Vector2 relativePosition, Vector3 zeroPoint, Vector3 upperPoint, Vector3 rightPoint)
+        private Vector3 Transpose(Vector2 relativePosition, Vector3 zeroPoint, Vector3 upperPoint, Vector3 rightPoint)
         {
             Vector3 x = relativePosition.x * (rightPoint - zeroPoint);
             Vector3 y = relativePosition.y * (upperPoint - zeroPoint);

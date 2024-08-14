@@ -15,7 +15,7 @@ namespace TcgEngine.UI
         private GridLayoutGroup grid;
         private RectTransform rect;
 
-        void Awake()
+        private void Awake()
         {
             grid = GetComponent<GridLayoutGroup>();
             rect = GetComponent<RectTransform>();

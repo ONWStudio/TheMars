@@ -14,14 +14,14 @@ namespace UniRx
         , INotifyCompletion
 #endif
     {
-        object observerLock = new object();
+        private object observerLock = new object();
 
-        T lastValue;
-        bool hasValue;
-        bool isStopped;
-        bool isDisposed;
-        Exception lastError;
-        IObserver<T> outObserver = EmptyObserver<T>.Instance;
+        private T lastValue;
+        private bool hasValue;
+        private bool isStopped;
+        private bool isDisposed;
+        private Exception lastError;
+        private IObserver<T> outObserver = EmptyObserver<T>.Instance;
 
         public T Value
         {
@@ -170,7 +170,7 @@ namespace UniRx
             }
         }
 
-        void ThrowIfDisposed()
+        private void ThrowIfDisposed()
         {
             if (isDisposed) throw new ObjectDisposedException("");
         }
@@ -180,11 +180,11 @@ namespace UniRx
             return false;
         }
 
-        class Subscription : IDisposable
+        private class Subscription : IDisposable
         {
-            readonly object gate = new object();
-            AsyncSubject<T> parent;
-            IObserver<T> unsubscribeTarget;
+            private readonly object gate = new object();
+            private AsyncSubject<T> parent;
+            private IObserver<T> unsubscribeTarget;
 
             public Subscription(AsyncSubject<T> parent, IObserver<T> unsubscribeTarget)
             {
@@ -243,7 +243,7 @@ namespace UniRx
             OnCompleted(continuation, true);
         }
 
-         void OnCompleted(Action continuation, bool originalContext)
+        private void OnCompleted(Action continuation, bool originalContext)
         {
             //
             // [OK] Use of unsafe Subscribe: this type's Subscribe implementation is safe.
@@ -251,7 +251,7 @@ namespace UniRx
             this.Subscribe/*Unsafe*/(new AwaitObserver(continuation, originalContext));
         }
 
-        class AwaitObserver : IObserver<T>
+        private class AwaitObserver : IObserver<T>
         {
             private readonly SynchronizationContext _context;
             private readonly Action _callback;

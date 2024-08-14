@@ -19,8 +19,8 @@ namespace TheraBytes.BetterUi.Editor
 
     public class InfoWizardPageElement : WizardPageElementBase
     {
-        GUIContent content;
-        InfoType infoType;
+        private GUIContent content;
+        private InfoType infoType;
 
         public InfoWizardPageElement(GUIContent content)
         {

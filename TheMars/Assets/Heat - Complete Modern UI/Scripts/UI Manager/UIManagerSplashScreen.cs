@@ -9,15 +9,20 @@ namespace Michsky.UI.Heat
     public class UIManagerSplashScreen : MonoBehaviour
     {
         [Header("Settings")]
-        [SerializeField] private UIManager UIManagerAsset;
-        [SerializeField] private bool mobileMode;
+        [SerializeField]
+        private UIManager UIManagerAsset;
+        [SerializeField]
+        private bool mobileMode;
 
         [Header("Resources")]
-        [SerializeField] private TextMeshProUGUI PAKStart;
-        [SerializeField] private TextMeshProUGUI PAKKey;
-        [SerializeField] private TextMeshProUGUI PAKEnd;
+        [SerializeField]
+        private TextMeshProUGUI PAKStart;
+        [SerializeField]
+        private TextMeshProUGUI PAKKey;
+        [SerializeField]
+        private TextMeshProUGUI PAKEnd;
 
-        void Awake()
+        private void Awake()
         {
             this.enabled = true;
 
@@ -25,14 +30,14 @@ namespace Michsky.UI.Heat
             if (UIManagerAsset.enableDynamicUpdate == false) { UpdatePAK(); this.enabled = false; }
         }
 
-        void Update()
+        private void Update()
         {
             if (UIManagerAsset == null) { return; }
             if (UIManagerAsset.enableDynamicUpdate == true) { UpdatePAK(); }
             if (Application.isPlaying == true) { this.enabled = false; }
         }
 
-        void AnalyzePAKText()
+        private void AnalyzePAKText()
         {
             if (mobileMode == true)
                 return;
@@ -73,7 +78,7 @@ namespace Michsky.UI.Heat
             else if (PAKEnd != null) { PAKEnd.gameObject.SetActive(false); }
         }
 
-        void AnalyzePAKLocalizationText()
+        private void AnalyzePAKLocalizationText()
         {
             if (Application.isPlaying == false || mobileMode == true)
                 return;
@@ -148,7 +153,7 @@ namespace Michsky.UI.Heat
             else if (PAKEnd != null) { PAKEnd.gameObject.SetActive(false); }
         }
 
-        void UpdatePAK()
+        private void UpdatePAK()
         {
             if (UIManagerAsset.pakType == UIManager.PressAnyKeyTextType.Custom)
                 return;

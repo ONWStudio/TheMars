@@ -15,8 +15,8 @@ namespace MoreMountains.Tools
 	{
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] private static void RuntimeInitialization() { OnEvent = null; }
 		
-		public delegate AudioSource Delegate(AudioClip clip, MMSoundManagerPlayOptions options); 
-		static private event Delegate OnEvent;
+		public delegate AudioSource Delegate(AudioClip clip, MMSoundManagerPlayOptions options);
+		private static event Delegate OnEvent;
 
 		static public void Register(Delegate callback)
 		{

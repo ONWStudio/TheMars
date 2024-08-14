@@ -23,7 +23,7 @@ namespace TcgEngine.Client
 
         private static GameBoard _instance;
 
-        void Awake()
+        private void Awake()
         {
             _instance = this;
         }
@@ -33,7 +33,7 @@ namespace TcgEngine.Client
             
         }
 
-        void Update()
+        private void Update()
         {
             if (!GameClient.Get().IsReady())
                 return;

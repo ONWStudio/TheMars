@@ -10,10 +10,10 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(SizeDeltaSizer)), CanEditMultipleObjects]
     public class SizeDeltaSizerEditor : UnityEditor.Editor
     {
-        SerializedProperty settingsFallback, settingsList;
-        SerializedProperty deltaSizerFallback, deltaSizerCollection;
+        private SerializedProperty settingsFallback, settingsList;
+        private SerializedProperty deltaSizerFallback, deltaSizerCollection;
 
-        void OnEnable()
+        private void OnEnable()
         {
             this.settingsFallback = serializedObject.FindProperty("settingsFallback");
             this.settingsList = serializedObject.FindProperty("customSettings");

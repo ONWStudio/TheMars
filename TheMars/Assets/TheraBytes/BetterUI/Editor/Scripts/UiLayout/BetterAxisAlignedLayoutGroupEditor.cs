@@ -31,7 +31,7 @@ namespace TheraBytes.BetterUi.Editor
             MakeBetter(command, BetterAxisAlignedLayoutGroup.Axis.Vertical);
         }
 
-        static void MakeBetter(MenuCommand command, BetterAxisAlignedLayoutGroup.Axis orientation)
+        private static void MakeBetter(MenuCommand command, BetterAxisAlignedLayoutGroup.Axis orientation)
         {
 #pragma warning disable 0618
             MarginSizeModifier exPadding = null;
@@ -78,7 +78,7 @@ namespace TheraBytes.BetterUi.Editor
             }
         }
 
-        static void CopySizerValues<T>(ScreenDependentSize<T> source, ScreenDependentSize<T> target)
+        private static void CopySizerValues<T>(ScreenDependentSize<T> source, ScreenDependentSize<T> target)
         {
             target.MinSize = source.MinSize;
             target.MaxSize = source.MaxSize;

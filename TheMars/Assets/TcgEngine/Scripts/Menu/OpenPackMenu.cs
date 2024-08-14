@@ -17,12 +17,12 @@ namespace TcgEngine.Client
 
         private static OpenPackMenu instance;
 
-        void Awake()
+        private void Awake()
         {
             instance = this;
         }
 
-        void Update()
+        private void Update()
         {
             if (revealing && Input.GetMouseButtonDown(0))
             {

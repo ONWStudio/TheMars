@@ -4,9 +4,9 @@ namespace UniRx.Operators
 {
     internal class LastObservable<T> : OperatorObservableBase<T>
     {
-        readonly IObservable<T> source;
-        readonly bool useDefault;
-        readonly Func<T, bool> predicate;
+        private readonly IObservable<T> source;
+        private readonly bool useDefault;
+        private readonly Func<T, bool> predicate;
 
         public LastObservable(IObservable<T> source, bool useDefault)
             : base(source.IsRequiredSubscribeOnCurrentThread())
@@ -35,11 +35,11 @@ namespace UniRx.Operators
             }
         }
 
-        class Last : OperatorObserverBase<T, T>
+        private class Last : OperatorObserverBase<T, T>
         {
-            readonly LastObservable<T> parent;
-            bool notPublished;
-            T lastValue;
+            private readonly LastObservable<T> parent;
+            private bool notPublished;
+            private T lastValue;
 
             public Last(LastObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -91,11 +91,11 @@ namespace UniRx.Operators
             }
         }
 
-        class Last_ : OperatorObserverBase<T, T>
+        private class Last_ : OperatorObserverBase<T, T>
         {
-            readonly LastObservable<T> parent;
-            bool notPublished;
-            T lastValue;
+            private readonly LastObservable<T> parent;
+            private bool notPublished;
+            private T lastValue;
 
             public Last_(LastObservable<T> parent, IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {

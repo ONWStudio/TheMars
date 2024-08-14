@@ -6,18 +6,20 @@ namespace Michsky.UI.Heat
     public class GraphicsManager : MonoBehaviour
     {
         // Resources
-        [SerializeField] private Dropdown resolutionDropdown;
+        [SerializeField]
+        private Dropdown resolutionDropdown;
 
         // Settings
-        [SerializeField] private bool initializeResolutions = true;
+        [SerializeField]
+        private bool initializeResolutions = true;
 
         // Helpers
-        Resolution[] resolutions;
+        private Resolution[] resolutions;
 
         public enum TextureOption { FullRes, HalfRes, QuarterRes, EighthResh }
         public enum AnisotropicOption { None, PerTexture, ForcedOn }
 
-        void Awake()
+        private void Awake()
         {
             if (initializeResolutions == true && resolutionDropdown != null)
             {

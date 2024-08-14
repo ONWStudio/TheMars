@@ -18,7 +18,7 @@ namespace TMCard.Effect
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             // .. TODO : 수정
-            controller.OnClickEvent.RemoveAllToAddListener(() => TMCardGameManager.Instance.DelaySeconds(controller, DelayTime));
+            controller.OnClickEvent.RemoveAllToAddListener(() => TMCardHelper.Instance.DelaySeconds(controller, DelayTime));
         }
 
         public void Initialize(TimeDelayEffectCreator effectCreator)

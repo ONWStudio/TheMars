@@ -4,7 +4,7 @@ namespace UniRx.Operators
 {
     internal class CreateObservable<T> : OperatorObservableBase<T>
     {
-        readonly Func<IObserver<T>, IDisposable> subscribe;
+        private readonly Func<IObserver<T>, IDisposable> subscribe;
 
         public CreateObservable(Func<IObserver<T>, IDisposable> subscribe)
             : base(true) // fail safe
@@ -24,7 +24,7 @@ namespace UniRx.Operators
             return subscribe(observer) ?? Disposable.Empty;
         }
 
-        class Create : OperatorObserverBase<T, T>
+        private class Create : OperatorObserverBase<T, T>
         {
             public Create(IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -51,8 +51,8 @@ namespace UniRx.Operators
 
     internal class CreateObservable<T, TState> : OperatorObservableBase<T>
     {
-        readonly TState state;
-        readonly Func<TState, IObserver<T>, IDisposable> subscribe;
+        private readonly TState state;
+        private readonly Func<TState, IObserver<T>, IDisposable> subscribe;
 
         public CreateObservable(TState state, Func<TState, IObserver<T>, IDisposable> subscribe)
             : base(true) // fail safe
@@ -74,7 +74,7 @@ namespace UniRx.Operators
             return subscribe(state, observer) ?? Disposable.Empty;
         }
 
-        class Create : OperatorObserverBase<T, T>
+        private class Create : OperatorObserverBase<T, T>
         {
             public Create(IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {
@@ -101,7 +101,7 @@ namespace UniRx.Operators
 
     internal class CreateSafeObservable<T> : OperatorObservableBase<T>
     {
-        readonly Func<IObserver<T>, IDisposable> subscribe;
+        private readonly Func<IObserver<T>, IDisposable> subscribe;
 
         public CreateSafeObservable(Func<IObserver<T>, IDisposable> subscribe)
             : base(true) // fail safe
@@ -121,7 +121,7 @@ namespace UniRx.Operators
             return subscribe(observer) ?? Disposable.Empty;
         }
 
-        class CreateSafe : OperatorObserverBase<T, T>
+        private class CreateSafe : OperatorObserverBase<T, T>
         {
             public CreateSafe(IObserver<T> observer, IDisposable cancel) : base(observer, cancel)
             {

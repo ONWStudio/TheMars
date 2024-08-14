@@ -23,7 +23,7 @@ namespace TMCard.Effect
 
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            controller.OnClickEvent.RemoveAllToAddListener(() => TMCardGameManager.Instance.DelayTurn(controller, DelayTurn));
+            controller.OnClickEvent.RemoveAllToAddListener(() => TMCardHelper.Instance.DelayTurn(controller, DelayTurn));
         }
 
         public TurnDelayEffect() : base("TurnDelay") {}

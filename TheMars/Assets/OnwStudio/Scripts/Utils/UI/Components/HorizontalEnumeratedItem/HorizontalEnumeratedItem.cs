@@ -116,12 +116,18 @@ namespace Onw.UI.Components
             }
         }
 
-        [SerializeField] private float _spacingRatio = 1f;
-        [SerializeField] private float _itemHeightRatioFromContentHeight = 1f;
-        [SerializeField] private float _itemWidthRatioFromHeight = 1f;
-        [SerializeField] private float _elasticity = 1f;
-        [SerializeField] private float _onPointerUpCorrection = 1f;
-        [SerializeField] private int _selectedIndex = 0;
+        [SerializeField]
+        private float _spacingRatio = 1f;
+        [SerializeField]
+        private float _itemHeightRatioFromContentHeight = 1f;
+        [SerializeField]
+        private float _itemWidthRatioFromHeight = 1f;
+        [SerializeField]
+        private float _elasticity = 1f;
+        [SerializeField]
+        private float _onPointerUpCorrection = 1f;
+        [SerializeField]
+        private int _selectedIndex = 0;
 
         private bool _onDragged = false;
         private Vector2 _targetPosition = Vector2.zero;

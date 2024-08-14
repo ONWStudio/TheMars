@@ -9,17 +9,17 @@ namespace TheraBytes.BetterUi.Editor
 {
     public class ImageAppearanceProviderEditorHelper
     {
-        static readonly string DEFAULT = "Default";
-        static readonly string CUSTOM = "Custom";
+        private static readonly string DEFAULT = "Default";
+        private static readonly string CUSTOM = "Custom";
 
-        SerializedObject serializedObject;
-        IImageAppearanceProvider img;
+        private SerializedObject serializedObject;
+        private IImageAppearanceProvider img;
 
         private SerializedProperty materialProperty1, materialProperty2, materialProperty3;
         private SerializedProperty propMatType, propEffType;
-        
-        string[] materials;
-        int materialIndex, materialEffectIndex;
+
+        private string[] materials;
+        private int materialIndex, materialEffectIndex;
 
         public ImageAppearanceProviderEditorHelper(SerializedObject serializedObject, IImageAppearanceProvider img)
         {

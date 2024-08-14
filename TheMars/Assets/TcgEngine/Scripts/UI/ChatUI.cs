@@ -39,13 +39,13 @@ namespace TcgEngine.UI
             ui_list.Remove(this);
         }
 
-        void Start()
+        private void Start()
         {
             GameClient.Get().onChatMsg += OnChat;
             RefreshChat();
         }
 
-        void Update()
+        private void Update()
         {
             if (!GameClient.Get().IsReady())
                 return;

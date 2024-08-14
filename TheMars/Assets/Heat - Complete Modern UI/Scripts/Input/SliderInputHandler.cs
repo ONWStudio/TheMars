@@ -8,21 +8,27 @@ namespace Michsky.UI.Heat
     public class SliderInputHandler : MonoBehaviour
     {
         [Header("Resources")]
-        [SerializeField] private Slider sliderObject;
-        [SerializeField] private GameObject indicator;
+        [SerializeField]
+        private Slider sliderObject;
+        [SerializeField]
+        private GameObject indicator;
 
         [Header("Settings")]
         [Range(0.1f, 50)] public float valueMultiplier = 1;
-        [SerializeField] [Range(0.01f, 1)] private float deadzone = 0.1f;
-        [SerializeField] private bool optimizeUpdates = true;
+        [SerializeField] [Range(0.01f, 1)]
+        private float deadzone = 0.1f;
+        [SerializeField]
+        private bool optimizeUpdates = true;
         public bool requireSelecting = true;
-        [SerializeField] private bool reversePosition;
-        [SerializeField] private bool divideByMaxValue;
+        [SerializeField]
+        private bool reversePosition;
+        [SerializeField]
+        private bool divideByMaxValue;
 
         // Helpers
-        float divideValue = 1000;
+        private float divideValue = 1000;
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (ControllerManager.instance == null || sliderObject == null) { Destroy(this); }
             if (indicator == null)
@@ -40,7 +46,7 @@ namespace Michsky.UI.Heat
             }
         }
 
-        void Update()
+        private void Update()
         {
             if (Gamepad.current == null || ControllerManager.instance == null) { indicator.SetActive(false); return; }
             else if (requireSelecting && EventSystem.current.currentSelectedGameObject != gameObject) { indicator.SetActive(false); return; }

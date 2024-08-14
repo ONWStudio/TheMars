@@ -6,10 +6,10 @@ namespace UniRx.Triggers
     [DisallowMultipleComponent]
     public class ObservableEnableTrigger : ObservableTriggerBase
     {
-        Subject<Unit> onEnable;
+        private Subject<Unit> onEnable;
 
         /// <summary>This function is called when the object becomes enabled and active.</summary>
-        void OnEnable()
+        private void OnEnable()
         {
             if (onEnable != null) onEnable.OnNext(Unit.Default);
         }
@@ -20,10 +20,10 @@ namespace UniRx.Triggers
             return onEnable ?? (onEnable = new Subject<Unit>());
         }
 
-        Subject<Unit> onDisable;
+        private Subject<Unit> onDisable;
 
         /// <summary>This function is called when the behaviour becomes disabled () or inactive.</summary>
-        void OnDisable()
+        private void OnDisable()
         {
             if (onDisable != null) onDisable.OnNext(Unit.Default);
         }

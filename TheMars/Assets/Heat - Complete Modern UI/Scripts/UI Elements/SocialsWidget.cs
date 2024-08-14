@@ -11,32 +11,39 @@ namespace Michsky.UI.Heat
     {
         // Content
         public List<Item> socials = new List<Item>();
-        List<ButtonManager> buttons = new List<ButtonManager>();
+        private List<ButtonManager> buttons = new List<ButtonManager>();
 
         // Resources
-        [SerializeField] private GameObject itemPreset;
-        [SerializeField] private Transform itemParent;
-        [SerializeField] private GameObject buttonPreset;
-        [SerializeField] private Transform buttonParent;
-        [SerializeField] private Image background;
+        [SerializeField]
+        private GameObject itemPreset;
+        [SerializeField]
+        private Transform itemParent;
+        [SerializeField]
+        private GameObject buttonPreset;
+        [SerializeField]
+        private Transform buttonParent;
+        [SerializeField]
+        private Image background;
 
         // Settings
         public bool allowTransition = true;
         public bool useLocalization = true;
         [Range(1, 30)] public float timer = 4;
         [Range(0.1f, 3)] public float tintSpeed = 0.5f;
-        [SerializeField] private AnimationCurve tintCurve = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
-        [SerializeField] private UpdateMode updateMode = UpdateMode.DeltaTime;
+        [SerializeField]
+        private AnimationCurve tintCurve = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
+        [SerializeField]
+        private UpdateMode updateMode = UpdateMode.DeltaTime;
 
         // Helpers
-        int currentSliderIndex;
-        float timerCount = 0;
-        bool isInitialized;
-        bool updateTimer;
-        bool isTransitionInProgress;
-        Animator currentItemObject;
-        LocalizedObject localizedObject;
-        Image raycastImg;
+        private int currentSliderIndex;
+        private float timerCount = 0;
+        private bool isInitialized;
+        private bool updateTimer;
+        private bool isTransitionInProgress;
+        private Animator currentItemObject;
+        private LocalizedObject localizedObject;
+        private Image raycastImg;
 
         public enum UpdateMode { DeltaTime, UnscaledTime }
 
@@ -54,13 +61,13 @@ namespace Michsky.UI.Heat
             public string descriptionKey = "DescriptionKey";
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (!isInitialized) { InitializeItems(); }
             else { StartCoroutine(InitCurrentItem()); }
         }
 
-        void Update()
+        private void Update()
         {
             if (!isInitialized || !updateTimer || !allowTransition)
                 return;
@@ -196,7 +203,7 @@ namespace Michsky.UI.Heat
             allowTransition = canSwitch;
         }
 
-        IEnumerator InitCurrentItem()
+        private IEnumerator InitCurrentItem()
         {
             if (updateMode == UpdateMode.UnscaledTime) { yield return new WaitForSecondsRealtime(0.02f); }
             else { yield return new WaitForSeconds(0.02f); }
@@ -220,7 +227,7 @@ namespace Michsky.UI.Heat
             updateTimer = true;
         }
 
-        IEnumerator SetSocialByHover(int index)
+        private IEnumerator SetSocialByHover(int index)
         {
             updateTimer = false;
             timerCount = 0;
@@ -256,7 +263,7 @@ namespace Michsky.UI.Heat
             }
         }
 
-        IEnumerator DoBackgroundColorLerp()
+        private IEnumerator DoBackgroundColorLerp()
         {
             float elapsedTime = 0;
 
@@ -272,7 +279,7 @@ namespace Michsky.UI.Heat
             background.color = socials[currentSliderIndex].backgroundTint;
         }
 
-        IEnumerator DisableItemAnimators()
+        private IEnumerator DisableItemAnimators()
         {
             if (updateMode == UpdateMode.UnscaledTime) { yield return new WaitForSecondsRealtime(0.6f); }
             else { yield return new WaitForSeconds(0.6f); }
