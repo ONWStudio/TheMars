@@ -1,16 +1,12 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Onw.Manager;
-using UnityEngine.Serialization;
-
 namespace TMCard.Runtime
 {
     public sealed class TMDelayEffectManager : MonoBehaviour
     {
         [SerializeField]
-        private bool _isWaitTurn = false;
+        private bool _isWaitTurn;
 
         public void OnNextTurn()
         {
@@ -37,15 +33,17 @@ namespace TMCard.Runtime
 
         private static IEnumerator iEWaitForSecondsEffect(float delayTime, Action onSuccessSeconds, Action<float> onNotifyRemainingTime)
         {
-            var prevTime = delayTime;
+            float prevTime = delayTime;
             while (delayTime > 0f)
             {
                 yield return null;
                 delayTime -= Time.deltaTime;
 
-                if (!(prevTime - delayTime >= 1.0f)) continue;
-                onNotifyRemainingTime?.Invoke(delayTime);
-                prevTime = delayTime;
+                if (prevTime - delayTime < 1.0f)
+                {
+                    onNotifyRemainingTime?.Invoke(delayTime);
+                    prevTime = delayTime;
+                }
             }
 
             onNotifyRemainingTime?.Invoke(-1f);

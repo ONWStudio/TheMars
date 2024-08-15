@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMCard.Runtime;
-
 namespace TMCard.Effect
 {
     /// <summary>
@@ -23,8 +20,8 @@ namespace TMCard.Effect
                 }
             }
 
-            public Action<int> OnUpdateStack { get; set; } = null;
-            private int _stack = 0;
+            public Action<int> OnUpdateStack { get; set; }
+            private int _stack;
         }
 
         // .. UI에 알려주기

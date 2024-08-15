@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMCard.Effect;
-using AYellowpaper.SerializedCollections;
 using Onw.Attribute;
-
 namespace TMCard.Effect
 {
     using static ITMEffectCreator;

@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
 namespace TMCard.Runtime
 {
     /// <summary>
@@ -11,9 +8,9 @@ namespace TMCard.Runtime
     /// </summary>
     public sealed class TMCardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
-        private Action<PointerEventData> _enterAction = null;
-        private Action<PointerEventData> _exitAction = null;
-        private Action<PointerEventData> _clickAction = null;
+        private Action<PointerEventData> _enterAction;
+        private Action<PointerEventData> _exitAction;
+        private Action<PointerEventData> _clickAction;
 
         public void AddListenerPointerEnterAction(Action<PointerEventData> action)
             => _enterAction += action;

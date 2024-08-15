@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Onw.Attribute;
+using Onw.ServiceLocator;
 using TMCard.Runtime;
-
+using UnityEngine;
 namespace TMCard.Effect
 {
     /// <summary>
@@ -14,18 +12,29 @@ namespace TMCard.Effect
         /// <summary>
         /// .. 소요시킬 턴
         /// </summary>
-        [field: SerializeField, DisplayAs("소요 턴"), ReadOnly] public int DelayTurn { get; private set; } = 5;
+        [field: SerializeField, DisplayAs("소요 턴"), ReadOnly] public int DelayTurnCount { get; private set; } = 5;
 
         public void Initialize(TurnDelayEffectCreator effectCreator)
         {
-            DelayTurn = effectCreator.DelayTurn;
+            DelayTurnCount = effectCreator.DelayTurn;
         }
 
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            controller.OnClickEvent.RemoveAllToAddListener(() => TMCardHelper.Instance.DelayTurn(controller, DelayTurn));
+            controller.OnClickEvent.RemoveAllToAddListener(() => delayTurn(controller, DelayTurnCount));
         }
 
+        private static void delayTurn(TMCardController card, int turnCount)
+        {
+            if (!ServiceLocator<TMDelayEffectManager>.TryGetService(out var service)) return;
+            
+            service.WaitForTurnCountEffect(
+                turnCount,
+                card.SetActiveDelayCard,
+                remainingTurn => { });
+
+            card.MoveToTombAndHide();
+        }
         public TurnDelayEffect() : base("TurnDelay") {}
     }
 }

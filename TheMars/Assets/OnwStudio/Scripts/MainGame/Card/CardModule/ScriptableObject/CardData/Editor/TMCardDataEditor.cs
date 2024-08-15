@@ -1,12 +1,7 @@
 #if UNITY_EDITOR
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
 using Onw.Attribute;
 using TMCard.Effect;
-
+using UnityEngine;
 namespace TMCard
 {
     public sealed partial class TMCardData : ScriptableObject

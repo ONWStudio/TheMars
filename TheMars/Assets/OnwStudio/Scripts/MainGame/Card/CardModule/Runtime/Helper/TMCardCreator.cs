@@ -1,19 +1,16 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Serialization;
-using Onw.ScriptableObjects;
 using Onw.ServiceLocator;
-using Onw.Attribute;
-using Onw.Manager;
-
+using UnityEngine;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 namespace TMCard.Runtime
 {
-    [System.Serializable]
+    [Serializable]
     public sealed class TMCardCreator
     {
         [SerializeField] private List<TMCardData> _cards = new();
-        [SerializeField] private TMCardController _templatePrefab = null;
+        [SerializeField] private TMCardController _templatePrefab;
 
         public List<TMCardController> CreateCards(int createCount)
         {

@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using Onw.Attribute;
+using UnityEngine;
 using UnityEngine.Serialization;
-
+using UnityEngine.UI;
 namespace TMCard.Runtime
 {
     [DisallowMultipleComponent, RequireComponent(typeof(VerticalLayoutGroup))]

@@ -1,11 +1,9 @@
 #if UNITY_EDITOR
-using Onw.Attribute;
-using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using Onw.Attribute;
 using UnityEditor;
 using UnityEngine;
-
 namespace TMCard.Effect
 {
     public sealed partial class HoldEffectCreator : ITMEffectCreator

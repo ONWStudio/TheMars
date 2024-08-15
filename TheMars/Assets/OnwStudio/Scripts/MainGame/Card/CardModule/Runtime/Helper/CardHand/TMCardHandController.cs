@@ -1,15 +1,11 @@
 using System;
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using MoreMountains.Feedbacks;
-using Onw.Extensions;
+using System.Linq;
 using Onw.Attribute;
-using Onw.Helper;
-using Onw.Event;
+using Onw.Feedback;
+using Onw.ServiceLocator;
+using UnityEngine;
 using UnityEngine.Serialization;
-
 namespace TMCard.Runtime
 {
     /// <summary>
@@ -43,19 +39,17 @@ namespace TMCard.Runtime
             set => _cardSorter ??= value;
         }
 
-        public int CardCount => _handOnCards.Count;
+        public int CardCount => _cardsOnHand.Count;
 
         [FormerlySerializedAs("cardSorter")]
         [Header("Sorter")]
         [SerializeReference, SerializeReferenceDropdown]
-        private ICardSorter _cardSorter = null;
+        private ICardSorter _cardSorter;
 
+        [FormerlySerializedAs("_handOnCards")]
         [FormerlySerializedAs("handOnCards")]
         [FormerlySerializedAs("cards")] [SerializeField, FormerlySerializedAs("_cards")]
-        private List<TMCardController> _handOnCards = new(5);
-
-        private readonly Queue<SortCardEventPair> _sortQueue = new();
-        private bool _hasSortingCard = false;
+        private List<TMCardController> _cardsOnHand = new(5);
 
         private void Awake()
         {
@@ -72,7 +66,7 @@ namespace TMCard.Runtime
         public void SetCards(List<TMCardController> cards)
         {
             cards.ForEach(setCard);
-            this._handOnCards.AddRange(cards);
+            _cardsOnHand.AddRange(cards);
         }
 
         public void SetCardsAndSort(List<TMCardController> cards)
@@ -88,13 +82,7 @@ namespace TMCard.Runtime
         public void AddCard(TMCardController card)
         {
             setCard(card);
-            _handOnCards.Add(card);
-        }
-
-        public void AddCardAndSort(TMCardController card)
-        {
-            AddCard(card);
-            SortCards();
+            _cardsOnHand.Add(card);
         }
 
         /// <summary>
@@ -104,13 +92,7 @@ namespace TMCard.Runtime
         public void AddCardToFirst(TMCardController card)
         {
             setCard(card);
-            _handOnCards.Insert(0, card);
-        }
-
-        public void AddCardToFirstAndSort(TMCardController card)
-        {
-            AddCardToFirst(card);
-            SortCards();
+            _cardsOnHand.Insert(0, card);
         }
 
         /// <summary>
@@ -119,22 +101,7 @@ namespace TMCard.Runtime
         /// <param name="card"> .. 제거 할 카드 객체 </param>
         public void RemoveCard(TMCardController card)
         {
-            _handOnCards.Remove(card);
-        }
-
-        public void RemoveCardAndSort(TMCardController card)
-        {
-            RemoveCard(card);
-            SortCards();
-        }
-
-        /// <summary>
-        /// .. 패에 존재하는 모든 카드의 상호작용 상태를 세팅하는 메서드입니다
-        /// </summary>
-        /// <param name="isOn"> .. 카드의 상호작용 상태를 결정하는 boolen 값 </param>
-        public void SetOn(bool isOn)
-        {
-            _handOnCards.ForEach(card => card.SetOn(isOn));
+            _cardsOnHand.Remove(card);
         }
 
         /// <summary>
@@ -143,90 +110,46 @@ namespace TMCard.Runtime
         /// <returns> .. 패에서 꺼내온 카드들 </returns>
         public List<TMCardController> DequeueCards()
         {
-            var cards = this._handOnCards.ToList();
+            List<TMCardController> cards = _cardsOnHand.ToList();
 
             cards.ForEach(cardUI => cardUI.SetOn(false));
 
-            this._handOnCards.Clear();
+            _cardsOnHand.Clear();
             return cards;
         }
 
         /// <summary>
         /// .. 카드를 정렬해야하는 경우 해당 메서드를 호출하면 리스트에 존재하는 카드들을 올바른 위치로 정렬 시킵니다 이벤트 기반입니다
         /// </summary>
-        public void SortCards(float duration = 1.0f, Action<TMCardController> onEachSuccess = null, Action onAllSuccess = null)
+        public void SortCards(float duration = 1.0f, Action onAllSuccess = null)
         {
-            var count = 0;
-            var targetCount = _handOnCards.Count;
-
-            for (var i = 0; i < _handOnCards.Count; i++)
+            if (!ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
+            
+            int count = 0;
+            int targetCount = _cardsOnHand.Count;
+            
+            for (int i = 0; i < _cardsOnHand.Count; i++)
             {
-                sortCard(_cardSorter.ArrangeCard(_handOnCards, i, HandTransform), duration, card =>
-                {
-                    onEachSuccess?.Invoke(card);
-                    count++;
+                var transformInfo = _cardSorter.ArrangeCard(_cardsOnHand, i, HandTransform);
+                
+                var card = transformInfo.Target;
 
-                    if (targetCount == count)
+                card.transform.SetAsLastSibling();
+                service.FeedbackPlayer.QueueEvent(
+                    FeedbackCreator.CreateSmoothPositionAndRotationEvent(
+                        card.gameObject,
+                        transformInfo.Position,
+                        transformInfo.Rotation,
+                        duration),
+                    FeedbackCreator.CreateUnityEvent(() =>
                     {
-                        onAllSuccess?.Invoke();
-                    }
-                });
-            }
-        }
+                        count++;
 
-        private static void sortCard(PositionRotationInfo transformInfo, float duration, Action<TMCardController> endedSortCall)
-        {
-            var card = transformInfo.Target;
-
-            card.transform.SetAsLastSibling();
-            card.EventSender.QueueEvent(
-                EventCreator.CreateSmoothPositionAndRotationEvent(
-                    card.gameObject,
-                    transformInfo.Position,
-                    transformInfo.Rotation,
-                    duration));
-            card.EventSender.OnCompleted.AddListener(onSuccessSort);
-            return;
-
-            void onSuccessSort()
-            {
-                card.EventSender.OnCompleted.RemoveListener(onSuccessSort);
-                endedSortCall?.Invoke(card);
-            }
-        }
-
-        public void PushCardsInSortQueue(List<TMCardController> controllers, Action<TMCardController> endedSortCall = null)
-        {
-            controllers.ForEach(controller => PushCardInSortQueue(controller, endedSortCall: endedSortCall));
-        }
-
-        // ReSharper disable Unity.PerformanceAnalysis
-        public void PushCardInSortQueue(TMCardController controller, Action<TMCardController> endedSortCall = null)
-        {
-            _sortQueue.Enqueue(new SortCardEventPair(controller, endedSortCall));
-            setCard(controller);
-
-            // .. 큐에 더 이상 정렬 대기중인 카드가 없을때
-            if (!_hasSortingCard)
-            {
-                sortCard(this);
-            }
-
-            return;
-
-            static void sortCard(TMCardHandController handController)
-            {
-                Debug.Log(handController._sortQueue.Count);
-
-                handController._hasSortingCard = handController._sortQueue.TryDequeue(out var selectedCard);
-
-                if (!handController._hasSortingCard) return;
-                handController._handOnCards.Add(selectedCard.Owner);
-                handController.SortCards(0.5f, selectedCard.EndedCallback, () =>
-                {
-                    selectedCard.EndedCallback?.Invoke(selectedCard.Owner);
-                    sortCard(handController);
-                });
+                        if (targetCount == count)
+                        {
+                            onAllSuccess?.Invoke();
+                        }
+                    }));
             }
         }
 

@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMCard.Runtime;
-
 namespace TMCard.Effect
 {
     public interface ITMCardEffect

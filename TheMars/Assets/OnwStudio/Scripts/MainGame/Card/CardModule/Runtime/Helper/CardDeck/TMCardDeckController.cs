@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
-
 namespace TMCard.Runtime
 {
     // .. TODO : 카드 생성자 새로 만들기
@@ -46,7 +44,7 @@ namespace TMCard.Runtime
         public void PushCards(List<TMCardController> cards)
         {
             cards.ForEach(card => card.transform.SetParent(transform, false));
-            this._cards.AddRange(cards);
+            _cards.AddRange(cards);
         }
     }
 }

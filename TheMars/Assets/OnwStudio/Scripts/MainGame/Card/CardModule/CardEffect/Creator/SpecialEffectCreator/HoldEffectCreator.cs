@@ -1,10 +1,8 @@
-using Onw.Attribute;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Onw.Attribute;
 using UnityEngine;
 using UnityEngine.Serialization;
-
 namespace TMCard.Effect
 {
     using static ITMEffectCreator;
@@ -17,7 +15,7 @@ namespace TMCard.Effect
             .OfType<ITMNormalEffect>();
 
         [field: SerializeField, FormerlySerializedAs("<FriendlyCard>k__BackingField"), DisplayAs("트리거 카드"), Tooltip("보유 효과의 트리거가 될 카드")]
-        public TMCardData FriendlyCard { get; private set; } = null;
+        public TMCardData FriendlyCard { get; private set; }
 
         [SerializeReference, FormerlySerializedAs("_holdEffects"), DisplayAs("보유 효과"), Tooltip("보유 효과"), SerializeReferenceDropdown]
         private List<ITMNormalEffectCreator> _holdEffects = new();

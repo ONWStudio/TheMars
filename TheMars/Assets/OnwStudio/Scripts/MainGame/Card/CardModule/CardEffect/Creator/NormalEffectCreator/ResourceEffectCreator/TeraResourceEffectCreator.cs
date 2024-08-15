@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMCard.Effect.Resource;
-using UnityEngine;
 using Onw.Attribute;
-
+using UnityEngine;
 namespace TMCard.Effect.Resource
 {
     using static ITMEffectCreator;

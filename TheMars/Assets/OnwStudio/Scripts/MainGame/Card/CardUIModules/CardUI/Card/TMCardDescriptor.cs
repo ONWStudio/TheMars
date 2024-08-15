@@ -1,17 +1,8 @@
-using System.Text;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using Onw.Attribute;
-using Onw.Extensions;
-using Onw.UI;
-using TMCard.AddtionalCondition;
-using TMCard.Effect;
-using TMCard.Effect.Resource;
+using UnityEngine;
 using UnityEngine.Serialization;
-
+using UnityEngine.UI;
 namespace TMCard.Runtime
 {
     [DisallowMultipleComponent]
@@ -25,10 +16,10 @@ namespace TMCard.Runtime
 
         [FormerlySerializedAs("descriptionArea")]
         [SerializeField, InitializeRequireComponent]
-        private RectTransform _descriptionArea = null;
+        private RectTransform _descriptionArea;
         [FormerlySerializedAs("verticalLayoutGroup")]
         [SerializeField, InitializeRequireComponent]
-        private VerticalLayoutGroup _verticalLayoutGroup = null;
+        private VerticalLayoutGroup _verticalLayoutGroup;
 
         public void SetDescription(TMCardData cardData)
         {

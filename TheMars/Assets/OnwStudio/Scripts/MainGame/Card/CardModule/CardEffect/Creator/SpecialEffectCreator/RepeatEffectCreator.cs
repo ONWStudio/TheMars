@@ -1,9 +1,4 @@
 using Onw.Attribute;
-using System.Collections;
-using System.Collections.Generic;
-using TMCard.Effect;
-using UnityEngine;
-
 namespace TMCard.Effect
 {
     using static ITMEffectCreator;

@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Onw.Attribute;
 using TMCard.Runtime;
-using TMCard;
-
 namespace TMCard.Effect
 {
     /// <summary>

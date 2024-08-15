@@ -1,11 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MoreMountains.Feedbacks;
-using Onw.Event;
-using Onw.Helper;
-using Onw.Extensions;
-
 namespace TMCard.Runtime
 {
     /// <summary>

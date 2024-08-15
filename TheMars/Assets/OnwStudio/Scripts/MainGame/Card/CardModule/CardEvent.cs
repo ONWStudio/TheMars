@@ -1,13 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace TMCard
 {
     public sealed class CardEvent
     {
-        private Action _cardAction = null;
+        private Action _cardAction;
 
         public void Invoke()
         {

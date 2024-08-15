@@ -1,11 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Onw.Attribute;
 using TMCard.Runtime;
-using UnityEngine.Localization;
-using Onw.Localization;
-
 namespace TMCard.Effect
 {
     /// <summary>

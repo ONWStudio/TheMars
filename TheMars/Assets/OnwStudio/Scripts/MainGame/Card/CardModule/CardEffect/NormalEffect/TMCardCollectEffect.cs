@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Onw.Attribute;
 using TMCard.Runtime;
-
+using UnityEngine;
 namespace TMCard.Effect
 {
     /// <summary>
@@ -12,7 +9,7 @@ namespace TMCard.Effect
     public sealed class TMCardCollectEffect : ITMNormalEffect, ITMInitializableEffect<TMCardCollectEffectCreator>
     {
         [SerializeField, ReadOnly]
-        private int _collectCount = 0;
+        private int _collectCount;
         [SerializeField, ReadOnly]
         private TMCardKind _selectKind = TMCardKind.NONE;
 

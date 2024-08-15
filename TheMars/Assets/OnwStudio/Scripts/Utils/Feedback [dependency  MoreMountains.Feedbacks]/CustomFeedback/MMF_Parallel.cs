@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Feedbacks;
 
-namespace Onw.Event
+namespace Onw.Feedback
 {
     using Coroutine;
     using Coroutine = UnityEngine.Coroutine;

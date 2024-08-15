@@ -1,9 +1,7 @@
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
-
 namespace TMCard.Runtime
 {
     [DisallowMultipleComponent]
@@ -29,8 +27,8 @@ namespace TMCard.Runtime
 
         public List<TMCardController> DequeueDeadCards()
         {
-            List<TMCardController> deadCards = this._deadCards.ToList();
-            this._deadCards.Clear();
+            List<TMCardController> deadCards = _deadCards.ToList();
+            _deadCards.Clear();
 
             return deadCards;
         }

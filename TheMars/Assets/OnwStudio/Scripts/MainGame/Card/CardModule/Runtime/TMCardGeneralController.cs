@@ -1,14 +1,7 @@
-using System;
-using System.Threading;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UniRx;
 using Onw.Attribute;
-using Onw.Extensions;
-using UnityEditor;
+using UniRx;
+using UnityEngine;
 using UnityEngine.Serialization;
-
 namespace TMCard.Runtime
 {
     // .. Controller
@@ -25,7 +18,7 @@ namespace TMCard.Runtime
         [SerializeField, InitializeRequireComponent]
         private TMCardViewer _cardViewer;
 
-        private TMCardData _cardData = null;
+        private TMCardData _cardData;
 
         private void Start()
         {

@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Onw.Attribute;
-using TMCard;
 using TMCard.Runtime;
-
+using UnityEngine;
 namespace TMCard.Effect
 {
     public sealed class TMCardCopyEffect : ITMNormalEffect, ITMInitializableEffect<TMCardCopyEffectCreator>
     {
         [SerializeField, ReadOnly]
-        private TMCardData _copyCardData = null;
+        private TMCardData _copyCardData;
         [SerializeField, ReadOnly]
-        private int _copyCount = 0;
+        private int _copyCount;
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {

@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Onw.Attribute;
 using TMCard.Runtime;
-
+using UnityEngine;
 namespace TMCard.Effect
 {
     /// <summary>
@@ -12,7 +10,7 @@ namespace TMCard.Effect
     public sealed class HoldEffect : TMCardSpecialEffect, ITMInitializableEffect<HoldEffectCreator>, ITMEffectTrigger
     {
         [SerializeField, DisplayAs("발동 트리거 카드"), Tooltip("보유 효과가 발동할때 참조할 카드 ID"), ReadOnly]
-        private TMCardData _friendlyCard = null;
+        private TMCardData _friendlyCard;
 
         private readonly List<ITMNormalEffect> _holdEffects = new();
 

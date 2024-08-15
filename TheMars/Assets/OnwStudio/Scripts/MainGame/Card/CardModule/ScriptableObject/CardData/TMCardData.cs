@@ -1,16 +1,12 @@
-using System.Linq;
-using System.Globalization;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.Localization.Tables;
+using System.Linq;
 using Onw.Attribute;
-using Onw.Interface;
 using Onw.Localization;
 using TMCard.AddtionalCondition;
 using TMCard.Effect;
 using TMCard.Runtime;
-
+using UnityEngine;
+using UnityEngine.Serialization;
 namespace TMCard
 {
     public sealed partial class TMCardData : ScriptableObject
@@ -19,7 +15,7 @@ namespace TMCard
         /// .. 카드 전체와 공유하는 스택 ID
         /// </summary>
         [field: SerializeField, FormerlySerializedAs("<StackID>k__BackingField"), Tooltip("Stack ID")]
-        public int StackID { get; private set; } = 0;
+        public int StackID { get; private set; }
 
         [field: Space]
         /// <summary>
@@ -32,7 +28,7 @@ namespace TMCard
         /// .. 사용될 재화
         /// </summary>
         [field: SerializeField, FormerlySerializedAs("<Resource>k__BackingField"), DisplayAs("소모 재화량"), Tooltip("소모 재화량")]
-        public int Resource { get; private set; } = 0;
+        public int Resource { get; private set; }
 
         [field: Space]
         /// <summary>
@@ -53,7 +49,7 @@ namespace TMCard
         [field: SerializeField, FormerlySerializedAs("<CardGroup>k__BackingField"), DisplayAs("그룹"), Tooltip("카드의 그룹")]
         public TMCardGroup CardGroup { get; private set; } = TMCardGroup.COMMON;
 
-        [field: SerializeField, SpritePreview(128f)] public Sprite CardImage { get; private set; } = null;
+        [field: SerializeField, SpritePreview(128f)] public Sprite CardImage { get; private set; }
 
         [field: SerializeField, FormerlySerializedAs("<IsCustomDescription>k__BackingField"), DisplayAs("커스텀 설명"), Tooltip("체크 시 기본 설명이 나오지 않습니다")]
         public string IsCustomDescription { get; private set; }

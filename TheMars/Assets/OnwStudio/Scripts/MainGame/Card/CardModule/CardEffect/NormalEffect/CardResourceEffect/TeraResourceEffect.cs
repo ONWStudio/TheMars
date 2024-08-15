@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Onw.Attribute;
 using TM;
 using TMCard.Runtime;
-
+using UnityEngine;
 namespace TMCard.Effect.Resource
 {
     public sealed class TeraResourceEffect : ITMCardResourceEffect, ITMInitializableEffect<TeraResourceEffectCreator>

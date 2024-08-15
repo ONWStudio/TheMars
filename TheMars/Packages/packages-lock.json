@@ -30,8 +30,8 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.burst": {
-      "version": "1.8.13",
-      "depth": 1,
+      "version": "1.8.17",
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
@@ -87,8 +87,8 @@
       }
     },
     "com.unity.ide.rider": {
-      "version": "3.0.28",
-      "depth": 1,
+      "version": "3.0.31",
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.ext.nunit": "1.0.6"
@@ -225,8 +225,8 @@
       }
     },
     "com.unity.scriptablebuildpipeline": {
-      "version": "1.21.23",
-      "depth": 1,
+      "version": "1.21.24",
+      "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -240,7 +240,7 @@
     },
     "com.unity.settings-manager": {
       "version": "2.0.1",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -276,8 +276,8 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.testtools.codecoverage": {
-      "version": "1.2.5",
-      "depth": 1,
+      "version": "1.2.6",
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.0.16",

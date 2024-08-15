@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using Onw.Attribute;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Onw.Attribute;
-
 namespace TMCard.Effect
 {
     using static ITMEffectCreator;

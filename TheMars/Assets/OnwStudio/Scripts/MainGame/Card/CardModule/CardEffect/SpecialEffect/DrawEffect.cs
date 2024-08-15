@@ -1,14 +1,5 @@
-using System.Text;
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Serialization;
-using Onw.Attribute;
-using Onw.Interface;
 using TMCard.Runtime;
-using Onw.Localization;
-
 namespace TMCard.Effect
 {
     /// <summary>

@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Onw.Attribute;
 using TM;
 using TMCard.Runtime;
-using Onw.Attribute;
-
+using UnityEngine;
 namespace TMCard.Effect.Resource
 {
     public sealed class MarsLithumEffect : ITMCardResourceEffect, ITMInitializableEffect<MarsLithumEffectCreator>

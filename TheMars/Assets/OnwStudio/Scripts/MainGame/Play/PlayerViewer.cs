@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
 using Onw.Attribute;
 using Onw.Extensions;
+using TMPro;
+using UnityEngine;
 using UnityEngine.Serialization;
-
 namespace TM.UI
 {
     public sealed class PlayerViewer : MonoBehaviour

@@ -1,15 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Localization.Components;
 using Onw.Attribute;
-using Onw.Extensions;
 using Onw.Localization;
-using TMPro;
 using TMCard.Effect;
+using TMPro;
+using UnityEngine;
 using UnityEngine.Serialization;
-
+using UnityEngine.UI;
 namespace TMCard.Runtime
 {
     // .. View
@@ -19,17 +15,17 @@ namespace TMCard.Runtime
         [FormerlySerializedAs("cardImage")]
         [Header("Image")]
         [SerializeField, SelectableSerializeField]
-        private Image _cardImage = null;
+        private Image _cardImage;
         [FormerlySerializedAs("backgroundImage")]
         [SerializeField, SelectableSerializeField]
-        private Image _backgroundImage = null;
+        private Image _backgroundImage;
 
         [FormerlySerializedAs("effectField")]
         [Header("Effect Field")]
         [SerializeField, SelectableSerializeField]
-        private RectTransform _effectField = null;
+        private RectTransform _effectField;
 
-        private bool _isInit = false;
+        private bool _isInit;
 
         private void initializeImages()
         {

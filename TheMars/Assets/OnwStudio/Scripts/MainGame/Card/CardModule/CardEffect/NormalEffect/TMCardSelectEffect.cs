@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMCard.Runtime;
-
+using UnityEngine;
 namespace TMCard.Effect
 {
     public sealed class TMCardSelectEffect : ITMNormalEffect

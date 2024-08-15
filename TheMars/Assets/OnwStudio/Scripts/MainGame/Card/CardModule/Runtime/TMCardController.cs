@@ -1,13 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
+using Onw.Attribute;
+using Onw.Components.Movement;
+using Onw.ServiceLocator;
+using TMCard.Effect;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using Onw.Components.Movement;
-using Onw.Attribute;
-using Onw.Event;
-using TMCard.Effect;
 using UnityEngine.Serialization;
+using Onw.Event;
 
 namespace TMCard.Runtime
 {
@@ -15,20 +15,20 @@ namespace TMCard.Runtime
     [DisallowMultipleComponent]
     public class TMCardController : MonoBehaviour, ITMEffectTrigger
     {
-        [field: SerializeField, ReadOnly] public TMCardData CardData { get; set; } = null;
+        [field: SerializeField, ReadOnly] public TMCardData CardData { get; set; }
         /// <summary>
         /// .. 카드가 현재 손 패 위에 있는지 확인하는 값입니다
         /// </summary>
         [field: Header("State")]
-        [field: SerializeField, ReadOnly] public bool OnField { get; set; } = false;
+        [field: SerializeField, ReadOnly] public bool OnField { get; set; }
         /// <summary>
         /// .. 카드가 상호작용 가능한 활성화인지 상태를 반환합니다
         /// </summary>
-        [field: SerializeField, ReadOnly] public bool OnCard { get; private set; } = false;
+        [field: SerializeField, ReadOnly] public bool OnCard { get; private set; }
 
         [field: Header("Event")]
-        [field: SerializeField] public UnityEvent<Transform> OnChangedParent { get; private set; } = new();
-        [field: SerializeField, InitializeRequireComponent] public RectTransform RectTransform { get; private set; } = null;
+        [field: SerializeField] public SafeUnityEvent<Transform> OnChangedParent { get; private set; } = new();
+        [field: SerializeField, InitializeRequireComponent] public RectTransform RectTransform { get; private set; }
 
         public IReadOnlyList<ITMCardEffect> Effects => _cardEffects;
 
@@ -41,19 +41,16 @@ namespace TMCard.Runtime
         [FormerlySerializedAs("inputHandler")]
         [Header("Input Handler")]
         [SerializeField, InitializeRequireComponent]
-        private TMCardInputHandler _inputHandler = null;
+        private TMCardInputHandler _inputHandler;
 
         [FormerlySerializedAs("smoothMove")]
         [Space]
-        /// <summary>
-        /// .. 카드의 상세한 기본 데이터 입니다
-        /// </summary>
         [Header("Require Option")]
         [SerializeField, SelectableSerializeField]
-        private Vector2SmoothMover _smoothMove = null;
+        private Vector2SmoothMover _smoothMove;
 
         private readonly List<ITMCardEffect> _cardEffects = new();
-        private bool _isInit = false;
+        private bool _isInit;
 
         private void OnTransformParentChanged()
         {
@@ -71,11 +68,11 @@ namespace TMCard.Runtime
 
             OnClickEvent.AddListener(() =>
             {
-                TMCardHelper.Instance.MoveToScreenCenterAfterToTomb(this);
+                this.MoveToScreenCenterAfterToTomb();
                 OnEffectEvent.Invoke();
             });
 
-            OnTurnEndedEvent.AddListener(() => TMCardHelper.Instance.MoveToTomb(this));
+            OnTurnEndedEvent.AddListener(this.MoveToTomb);
             CardData.ApplyEffect(this);
         }
 
@@ -83,11 +80,6 @@ namespace TMCard.Runtime
         {
             _cardEffects.AddRange(effects);
             _cardEffects.ForEach(effect => effect.ApplyEffect(this, this));
-        }
-
-        public void OnUsed()
-        {
-            OnClickEvent.Invoke();
         }
 
         /// <summary>
@@ -154,10 +146,11 @@ namespace TMCard.Runtime
         /// <param name="pointerEventData"></param>
         private void OnClickCard(PointerEventData pointerEventData)
         {
-            if (!OnCard) return;
+            if (!OnCard || !ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
             // if (!CardData.IsAvailable(1)) return;
 
-            TMCardHelper.Instance.OnClickCard(this);
+            OnClickEvent.Invoke();
+            service.OnClickCard(this);
         }
     }
 }
