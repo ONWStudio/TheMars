@@ -9,6 +9,6 @@ namespace Onw.Feedback
     /// </summary>
     public interface IFeedbackPlayer
     {
-        FeedbackPlayer FeedbackPlayer { get; }
+        IIgnorePlayFeedbackPlayer FeedbackPlayer { get; }
     }
 }

@@ -11,12 +11,47 @@ using Onw.Event;
 namespace Onw.Feedback
 {
     using Coroutine = UnityEngine.Coroutine;
+
+    public interface IQueueableFeedbackPlayer
+    {
+        void QueueEvents(List<MMF_Feedback> feedbacks);
+        void QueueEvent(params MMF_Feedback[] feedbacks);
+        void QueueEventsToHead(List<MMF_Feedback> feedbacks);
+        void QueueEventToHead(params MMF_Feedback[] feedbacks);
+    }
+
+    public interface IStopFeedbackPlayer
+    {
+        void StopNotifyDisable();
+        void StopToNotify();
+    }
+
+    public interface IPlayableFeedbackPlayer
+    {
+        void PlayEvents();
+    }
+    
+    public interface IEventFeedbackPlayer
+    {
+        SafeUnityEvent OnPlay { get; }
+        SafeUnityEvent OnCompleted { get; }
+        SafeUnityEvent<int> OnAddedFeedback { get; }
+    }
+
+    public interface IFeedbackPlayerOption
+    {
+        MMF_Player EventPlayer { get; }
+        bool IsPlaying { get; }
+    }
+    
+    public interface IIgnorePlayFeedbackPlayer : IQueueableFeedbackPlayer, IStopFeedbackPlayer, IEventFeedbackPlayer, IFeedbackPlayerOption {}
+
     /// <summary>
     /// .. MM 피드백을 사용하는 이벤트 센더 클래스 입니다. 파리미터로 들어온 이벤트 배열을 순차적으로 처리합니다
     /// 이벤트들을 하나로 묶으려면 MMF_Parallel 이벤트 클래스를 참고해주세요
     /// </summary>
     [DisallowMultipleComponent]
-    public sealed class FeedbackPlayer : MonoBehaviour
+    public sealed class FeedbackPlayer : MonoBehaviour, IIgnorePlayFeedbackPlayer, IPlayableFeedbackPlayer
     {
         /// <summary>
         /// .. 이벤트 메서드 호출 시 IsPlaying이 true가 되기전에 호출됩니다

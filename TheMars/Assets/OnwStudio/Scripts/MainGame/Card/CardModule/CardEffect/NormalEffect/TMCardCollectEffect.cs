@@ -1,4 +1,5 @@
 using Onw.Attribute;
+using Onw.ServiceLocator;
 using TMCard.Runtime;
 using UnityEngine;
 namespace TMCard.Effect
@@ -22,7 +23,16 @@ namespace TMCard.Effect
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             trigger.OnEffectEvent.AddListener(() 
-                => TMCardHelper.Instance.CollectCard(controller, _collectCount));
+                => collectCard(controller, _collectCount));
+        }
+        
+        private static void collectCard(TMCardController triggerCard, int collectCount)
+        {
+            if (!ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
+            
+            triggerCard.SetPositionNewCardToHand(
+                service.CardCreator.CreateCards(collectCount),
+                Vector3.zero);
         }
     }
 }

@@ -16,18 +16,6 @@ namespace TMCard.Runtime
     [DisallowMultipleComponent]
     public sealed class TMCardHandController : MonoBehaviour
     {
-        private readonly struct SortCardEventPair
-        {
-            public TMCardController Owner { get; }
-            public Action<TMCardController> EndedCallback { get; }
-
-            public SortCardEventPair(TMCardController owner, Action<TMCardController> endedCallback)
-            {
-                Owner = owner;
-                EndedCallback = endedCallback;
-            }
-        }
-
         [field: Header("Transform")]
         [field: SerializeField, SelectableSerializeField] public RectTransform DeckTransform { get; private set; }
         [field: SerializeField, SelectableSerializeField] public RectTransform HandTransform { get; private set; }
@@ -69,12 +57,6 @@ namespace TMCard.Runtime
             _cardsOnHand.AddRange(cards);
         }
 
-        public void SetCardsAndSort(List<TMCardController> cards)
-        {
-            SetCards(cards);
-            SortCards();
-        }
-
         /// <summary>
         /// .. 카드 하나를 패에 추가합니다 카드는 가장 끝 자리에 배치됩니다 자동으로 정렬됩니다 
         /// </summary>
@@ -103,6 +85,30 @@ namespace TMCard.Runtime
         {
             _cardsOnHand.Remove(card);
         }
+        
+        public void SetCardsAndSort(List<TMCardController> cards)
+        {
+            SetCards(cards);
+            SortCards();
+        }
+        
+        public void AddCardToSort(TMCardController card)
+        {
+            setCard(card);
+            SortCards();
+        }
+
+        public void AddCardFirstTMCardController(TMCardController card)
+        {
+            AddCardToFirst(card);
+            SortCards();
+        }
+
+        public void RemoveCardToSort(TMCardController card)
+        {
+            RemoveCard(card);
+            SortCards();
+        }
 
         /// <summary>
         /// ..카드들을 패에서 모두 꺼내오는 메서드
@@ -121,7 +127,7 @@ namespace TMCard.Runtime
         /// <summary>
         /// .. 카드를 정렬해야하는 경우 해당 메서드를 호출하면 리스트에 존재하는 카드들을 올바른 위치로 정렬 시킵니다 이벤트 기반입니다
         /// </summary>
-        public void SortCards(float duration = 1.0f, Action onAllSuccess = null)
+        public void SortCards(float duration = 1.0f, Action onSortBegin = null, Action onAllSuccess = null)
         {
             if (!ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
             
@@ -136,6 +142,7 @@ namespace TMCard.Runtime
 
                 card.transform.SetAsLastSibling();
                 service.FeedbackPlayer.QueueEvent(
+                    FeedbackCreator.CreateUnityEvent(() => onSortBegin?.Invoke()),
                     FeedbackCreator.CreateSmoothPositionAndRotationEvent(
                         card.gameObject,
                         transformInfo.Position,

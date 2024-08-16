@@ -26,14 +26,7 @@ namespace TMCard.Runtime
             service.FeedbackPlayer.QueueEvents(events);
         }
 
-        public static void CollectCard(this TMCardController triggerCard, int collectCount)
-        {
-            if (!ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
-            
-            triggerCard.SetPositionNewCardToHand(
-                service.CardCreator.CreateCards(collectCount),
-                Vector3.zero);
-        }
+
 
         public static void DrawCardFromDeck(this TMCardController triggerCard, int drawCount)
         {
@@ -76,11 +69,13 @@ namespace TMCard.Runtime
                 FeedbackCreator.CreateUnityEvent(() => service.CardHandController.AddCardToFirstAndSort(card))
             };
 
-            card.EventSender.PlayEvents(events);
+            service.FeedbackPlayer.QueueEvents(events);
         }
 
         public static void DrawUse(this TMCardController card)
         {
+            if (!ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
+            
             var keepPosition = card.transform.localPosition;
             var keepEulerAngle = card.transform.localRotation.eulerAngles;
             List<MMF_Feedback> events = new List<MMF_Feedback>
@@ -89,7 +84,7 @@ namespace TMCard.Runtime
                 FeedbackCreator.CreateSmoothPositionAndRotationEvent(card.gameObject, keepPosition, keepEulerAngle, 0.8f)
             };
 
-            card.EventSender.QueueEvents(events);
+            service.FeedbackPlayer.QueueEvents(events);
         }
 
         // ReSharper disable Unity.PerformanceAnalysis

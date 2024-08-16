@@ -1,9 +1,9 @@
 using System.Collections.Generic;
+using UnityEngine;
+using MoreMountains.Feedbacks;
+using Onw.ServiceLocator;
 using Onw.Attribute;
 using Onw.Feedback;
-using Onw.ServiceLocator;
-using UnityEngine;
-using UnityEngine.Events;
 using Onw.Event;
 
 namespace TMCard.Runtime
@@ -31,16 +31,19 @@ namespace TMCard.Runtime
         [field: Header("Manager Event")]
         [field: SerializeField] public SafeUnityEvent OnTurnEnd { get; private set; } = new();
         [field: SerializeField] public SafeUnityEvent<TMCardController> OnUsedCard { get; private set; } = new();
-        [field: SerializeField, InitializeRequireComponent] public FeedbackPlayer FeedbackPlayer { get; private set; }
 
         [field: SerializeField] public TMCardCreator CardCreator { get; private set; } = new();
 
         [field: Header("Camera")]
         [field: SerializeField, SelectableSerializeField] public Camera CardSystemCamera { get; private set; }
+        
+        public IIgnorePlayFeedbackPlayer FeedbackPlayer => _feedbackPlayer;
 
         [Header("Card Importer")]
         [SerializeField]  private TMCardHandImporter _cardHandImporter = new();
 
+        [SerializeField, InitializeRequireComponent] private FeedbackPlayer _feedbackPlayer;
+        
         private void Awake()
         {
             OnTurnEnd.AddListener(ServiceMonoBehaviourHelper.GetService<TMDelayEffectManager>().OnNextTurn);
@@ -50,13 +53,13 @@ namespace TMCard.Runtime
                 ServiceLocator<ITMCardService>.ChangeService(this);
             }
             
-            FeedbackPlayer.OnAddedFeedback.AddListener(feedbackCount =>
+            _feedbackPlayer.OnAddedFeedback.AddListener(feedbackCount =>
             {
                 Debug.Log(feedbackCount);
 
-                if (!FeedbackPlayer.IsPlaying)
+                if (!_feedbackPlayer.IsPlaying)
                 {
-                    FeedbackPlayer.PlayEvents();
+                    _feedbackPlayer.PlayEvents();
                 }
             });
         }
@@ -97,11 +100,24 @@ namespace TMCard.Runtime
             
             foreach (var controller in importerCards)
             {
-                controller.transform.localPosition = CardHandController.DeckTransform.localPosition;
-                controller.OnDrawBegin();
+                List<MMF_Feedback> feedbacks = new()
+                {
+                    FeedbackCreator.CreateUnityEvent(() =>
+                    {
+                        CardHandController.AddCard(controller);
+                        
+                        controller.transform.localPosition = CardHandController.DeckTransform.localPosition;
+                        controller.OnDrawBegin();
+                    }),
+                    
+                };
+
+
             }
+
+
             
-            CardHandController.PushCardsInSortQueue(
+            CardHandController.(
                 importerCards,
                 controller => controller.OnDrawEnded());
         }
