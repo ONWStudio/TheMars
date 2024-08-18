@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using MoreMountains.Feedbacks;
 using Onw.ServiceLocator;
 using Onw.Attribute;
 using Onw.Feedback;
 using Onw.Event;
+using UnityEngine.UI;
 
 namespace TMCard.Runtime
 {
@@ -42,8 +44,11 @@ namespace TMCard.Runtime
         [Header("Card Importer")]
         [SerializeField]  private TMCardHandImporter _cardHandImporter = new();
 
+        [Header("Option")]
+        [SerializeField, SelectableSerializeField] private GraphicRaycaster _graphicRaycaster;
         [SerializeField, InitializeRequireComponent] private FeedbackPlayer _feedbackPlayer;
         
+        // ReSharper disable Unity.PerformanceAnalysis
         private void Awake()
         {
             OnTurnEnd.AddListener(ServiceMonoBehaviourHelper.GetService<TMDelayEffectManager>().OnNextTurn);
@@ -52,11 +57,14 @@ namespace TMCard.Runtime
             {
                 ServiceLocator<ITMCardService>.ChangeService(this);
             }
-            
+
+            _feedbackPlayer.OnPlay.AddListener(() => 
+                _graphicRaycaster.enabled = false);
+
+            _feedbackPlayer.OnCompleted.AddListener(() => _graphicRaycaster.enabled = true);
+
             _feedbackPlayer.OnAddedFeedback.AddListener(feedbackCount =>
             {
-                Debug.Log(feedbackCount);
-
                 if (!_feedbackPlayer.IsPlaying)
                 {
                     _feedbackPlayer.PlayEvents();
@@ -68,7 +76,7 @@ namespace TMCard.Runtime
         {
             List<TMCardController> controllers = CardCreator.CreateCards(ALL_CARD_MAX);
             CardDeckController.PushCards(controllers);
-            _cardHandImporter.PushCards(CardDeckController.DequeueCards(DRAW_CARD_MAX));
+            // _cardHandImporter.PushCards(CardDeckController.DequeueCards(DRAW_CARD_MAX));
             TurnEndToDrawCardsFromDeck();
         }
 
@@ -98,28 +106,18 @@ namespace TMCard.Runtime
                 importerCards.AddRange(CardDeckController.DequeueCards(DRAW_CARD_MAX - importerCards.Count)); // .. 부족한 카드 수만 큼 다시 덱에서 뽑아오기 
             }
             
-            foreach (var controller in importerCards)
+            foreach (TMCardController card in importerCards)
             {
-                List<MMF_Feedback> feedbacks = new()
+                card.transform.localPosition = CardHandController.DeckTransform.localPosition;
+
+                FeedbackPlayer.EnqueueEvent(FeedbackCreator.CreateUnityEvent(() =>
                 {
-                    FeedbackCreator.CreateUnityEvent(() =>
-                    {
-                        CardHandController.AddCard(controller);
-                        
-                        controller.transform.localPosition = CardHandController.DeckTransform.localPosition;
-                        controller.OnDrawBegin();
-                    }),
-                    
-                };
-
-
+                    card.OnDrawBegin();
+                    FeedbackPlayer.EnqueueEventToHead(
+                        CardHandController.AddCardToGetSortFeedbacks(card, 0.5f),
+                        FeedbackCreator.CreateUnityEvent(card.OnDrawEnded));
+                }));
             }
-
-
-            
-            CardHandController.(
-                importerCards,
-                controller => controller.OnDrawEnded());
         }
 
         public void AddListenerToCard(TMCardController controller)

@@ -14,10 +14,10 @@ namespace Onw.Feedback
 
     public interface IQueueableFeedbackPlayer
     {
-        void QueueEvents(List<MMF_Feedback> feedbacks);
-        void QueueEvent(params MMF_Feedback[] feedbacks);
-        void QueueEventsToHead(List<MMF_Feedback> feedbacks);
-        void QueueEventToHead(params MMF_Feedback[] feedbacks);
+        void EnqueueEvents(List<MMF_Feedback> feedbacks);
+        void EnqueueEvent(params MMF_Feedback[] feedbacks);
+        void EnqueueEventsToHead(List<MMF_Feedback> feedbacks);
+        void EnqueueEventToHead(params MMF_Feedback[] feedbacks);
     }
 
     public interface IStopFeedbackPlayer
@@ -97,32 +97,32 @@ namespace Onw.Feedback
         {
             if (IsPlaying) return;
             
-            OnPlay.Invoke();
             IsPlaying = true;
-
+            
+            OnPlay.Invoke();
             _playCoroutine = StartCoroutine(iEPlayFeedbacks());
         }
 
-        public void QueueEvents(List<MMF_Feedback> feedbacks)
+        public void EnqueueEvents(List<MMF_Feedback> feedbacks)
         {
-            QueueEvent(feedbacks.ToArray());
+            EnqueueEvent(feedbacks.ToArray());
         }
 
-        public void QueueEvent(params MMF_Feedback[] feedbacks)
+        public void EnqueueEvent(params MMF_Feedback[] feedbacks)
         {
-            OnAddedFeedback.Invoke(feedbacks.Length);
             _eventQueue.AddLast(feedbacks);
-        }
-
-        public void QueueEventsToHead(List<MMF_Feedback> feedbacks)
-        {
-            QueueEventToHead(feedbacks.ToArray());
-        }
-
-        public void QueueEventToHead(params MMF_Feedback[] feedbacks)
-        {
             OnAddedFeedback.Invoke(feedbacks.Length);
+        }
+
+        public void EnqueueEventsToHead(List<MMF_Feedback> feedbacks)
+        {
+            EnqueueEventToHead(feedbacks.ToArray());
+        }
+
+        public void EnqueueEventToHead(params MMF_Feedback[] feedbacks)
+        {
             _eventQueue.AddFirst(feedbacks);
+            OnAddedFeedback.Invoke(feedbacks.Length);
         }
 
         private void onCompletedEvents()
@@ -131,6 +131,7 @@ namespace Onw.Feedback
 
             IsPlaying = false;
             OnCompleted.Invoke();
+            _eventQueue.Clear();
             _playCoroutine = null;
         }
 

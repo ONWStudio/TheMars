@@ -1,3 +1,5 @@
+using Onw.Feedback;
+using Onw.ServiceLocator;
 using System;
 using System.Collections.Generic;
 using TMCard.Runtime;
@@ -27,30 +29,38 @@ namespace TMCard.Effect
         // .. UI에 알려주기
         private static readonly Dictionary<string, EventValuePair> _cardStack = new();
 
-        public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
+        public override void ApplyEffect(TMCardController card, ITMEffectTrigger trigger)
         {
-            controller.OnClickEvent.RemoveAllToAddListener(() => onEffect(controller));
-            controller.OnDrawEndedEvent.RemoveAllToAddListener(() => onDraw(controller));
+            if (!ServiceLocator<ITMCardService>.TryGetService(out ITMCardService service)) return;
 
-            static void onEffect(TMCardController controller)
+            card.OnClickEvent.RemoveAllToAddListener(() => onEffect(card));
+            card.OnDrawEndedEvent.RemoveAllToAddListener(() => onDraw(service, card));
+
+            static void onEffect(TMCardController card)
             {
-                if (!_cardStack.TryGetValue(controller.CardData.GetInstanceID().ToString(), out var eventValuePair))
+                if (!_cardStack.TryGetValue(card.CardData.GetInstanceID().ToString(), out var eventValuePair))
                 {
                     eventValuePair = new();
-                    _cardStack.Add(controller.CardData.GetInstanceID().ToString(), eventValuePair);
+                    _cardStack.Add(card.CardData.GetInstanceID().ToString(), eventValuePair);
                 }
 
                 eventValuePair.Stack++;
-                TMCardHelper.Instance.MoveToTomb(controller);
+                card.MoveToTomb();
             }
 
-            static void onDraw(TMCardController controller)
+            static void onDraw(ITMCardService service, TMCardController card)
             {
-                if (!_cardStack.TryGetValue(controller.CardData.GetInstanceID().ToString(), out var eventValuePair) || eventValuePair.Stack <= 0) return;
+                if (!_cardStack.TryGetValue(card.CardData.GetInstanceID().ToString(), out var eventValuePair) || eventValuePair.Stack <= 0) return;
 
                 eventValuePair.Stack--;
-                controller.OnEffectEvent.Invoke();
-                TMCardHelper.Instance.DrawUse(controller);
+
+                service.FeedbackPlayer.EnqueueEvent(
+                    card.GetMoveToScreenCenterEvent(),
+                    FeedbackCreator.CreateUnityEvent(() =>
+                    {
+                        card.OnEffectEvent.Invoke();
+                        service.FeedbackPlayer.EnqueueEventToHead(service.CardHandController.GetSortCardsFeedbacks());
+                    }));
             }
         }
 

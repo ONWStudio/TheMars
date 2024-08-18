@@ -1,7 +1,9 @@
 using System.Collections.Generic;
-using Onw.Attribute;
-using TMCard.Runtime;
 using UnityEngine;
+using TMCard.Runtime;
+using Onw.Attribute;
+using Onw.ServiceLocator;
+
 namespace TMCard.Effect
 {
     /// <summary>
@@ -24,18 +26,16 @@ namespace TMCard.Effect
 
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            TMCardHelper.Instance.OnUsedCard.AddListener(onHoldEffectByFriendlyCard);
+            if (!ServiceLocator<ITMCardService>.TryGetService(out ITMCardService service)) return;
+
+            service.OnUsedCard.AddListener(onHoldEffectByFriendlyCard);
             _holdEffects.ForEach(holdEffect => holdEffect?.ApplyEffect(controller, this));
 
             void onHoldEffectByFriendlyCard(TMCardController usedCard)
             {
                 if (!controller)
                 {
-                    TMCardHelper
-                        .Instance
-                        .OnUsedCard
-                        .RemoveListener(onHoldEffectByFriendlyCard);
-
+                    service.OnUsedCard.RemoveListener(onHoldEffectByFriendlyCard);
                     return;
                 }
 

@@ -17,7 +17,7 @@ namespace Onw.Feedback
 
         public override float FeedbackDuration
         {
-            get => Feedbacks.Max(feedback => feedback.FeedbackDuration);
+            get => Feedbacks.Count > 0 ? Feedbacks.Max(feedback => feedback.FeedbackDuration) : 0;
             set { }
         }
 

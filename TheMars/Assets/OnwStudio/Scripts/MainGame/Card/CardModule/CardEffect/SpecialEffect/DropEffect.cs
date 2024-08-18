@@ -17,7 +17,7 @@ namespace TMCard.Effect
             controller.OnTurnEndedEvent.RemoveAllToAddListener(() =>
             {
                 OnEffectEvent.Invoke();
-                TMCardHelper.Instance.DisposeCard(controller);
+                controller.DisposeCard();
             });
         }
 

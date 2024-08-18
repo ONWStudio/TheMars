@@ -1,4 +1,5 @@
 using Onw.Attribute;
+using Onw.ServiceLocator;
 using TMCard.Runtime;
 using UnityEngine;
 namespace TMCard.Effect
@@ -16,7 +17,20 @@ namespace TMCard.Effect
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             // .. TODO : 수정
-            controller.OnClickEvent.RemoveAllToAddListener(() => TMCardHelper.Instance.DelaySeconds(controller, DelayTime));
+            controller.OnClickEvent.RemoveAllToAddListener(() => delaySeconds(controller, DelayTime));
+
+
+            static void delaySeconds(TMCardController card, float delayTime)
+            {
+                if (!ServiceLocator<TMDelayEffectManager>.TryGetService(out var service)) return;
+
+                service.WaitForSecondsEffect(
+                    delayTime,
+                    card.SetActiveDelayCard,
+                    remainingTime => { });
+
+                card.MoveToTombAndHide();
+            }
         }
 
         public void Initialize(TimeDelayEffectCreator effectCreator)

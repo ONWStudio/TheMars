@@ -6,6 +6,7 @@ using Onw.Feedback;
 using Onw.Extensions;
 using Onw.ServiceLocator;
 using Object = UnityEngine.Object;
+using System.Threading.Tasks;
 
 namespace TMCard.Runtime
 {
@@ -14,19 +15,21 @@ namespace TMCard.Runtime
         public static void MoveToScreenCenterAfterToTomb(this TMCardController card)
         {
             if (!ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
-            
-            service.CardHandController.RemoveCardAndSort(card);
 
-            List<MMF_Feedback> events = new()
+            MMF_Parallel parallel = new();
+            parallel.Feedbacks.Add(service.CardHandController.RemoveCardToGetSortFeedbacks(card));
+            parallel.Feedbacks.Add(card.GetMoveToScreenCenterEvent());
+
+            List<MMF_Feedback> feedbacks = new()
             {
-                card.GetMoveToScreenCenterEvent()
+                parallel,
+                card.GetMoveToTombEvent(1.0f),
+                FeedbackCreator.CreateUnityEvent(
+                        () => service.CardTombController.EnqueueDeadCard(card))
             };
 
-            events.AddRange(card.GetMoveToTombEvent(1.0f));
-            service.FeedbackPlayer.QueueEvents(events);
+            service.FeedbackPlayer.EnqueueEvents(feedbacks);
         }
-
-
 
         public static void DrawCardFromDeck(this TMCardController triggerCard, int drawCount)
         {
@@ -47,29 +50,36 @@ namespace TMCard.Runtime
         {
             if (!ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
             
-            service.FeedbackPlayer.QueueEvents(card.GetDestroyEvent());
+            service.FeedbackPlayer.EnqueueEvents(card.GetDestroyEvent());
         }
 
         public static void MoveToTomb(this TMCardController card)
         {
             if (!ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
             
-            service.FeedbackPlayer.QueueEvents(card.GetMoveToTombEvent());
-            service.CardHandController.RemoveCardAndSort(card);
+            MMF_Parallel parallel = service.CardHandController.RemoveCardToGetSortFeedbacks(card);
+            parallel.Feedbacks.Add(card.GetMoveToTombEvent());
+
+            service.FeedbackPlayer.EnqueueEvents(new() 
+            { 
+                parallel, 
+                FeedbackCreator.CreateUnityEvent(
+                        () => service.CardTombController.EnqueueDeadCard(card))
+            });
         }
 
         public static void RecycleToHand(this TMCardController card)
         {
             if (!ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
             
-            service.CardHandController.RemoveCardAndSort(card);
-            List<MMF_Feedback> events = new List<MMF_Feedback>
-            {
-                card.GetMoveToScreenCenterEvent(),
-                FeedbackCreator.CreateUnityEvent(() => service.CardHandController.AddCardToFirstAndSort(card))
-            };
+            MMF_Parallel parallel = service.CardHandController.RemoveCardToGetSortFeedbacks(card);
+            parallel.Feedbacks.Add(card.GetMoveToScreenCenterEvent());
 
-            service.FeedbackPlayer.QueueEvents(events);
+            service.FeedbackPlayer.EnqueueEvents(new() 
+            {
+                parallel,
+                service.CardHandController.AddCardFirstToGetSortFeedbacks(card)
+            });
         }
 
         public static void DrawUse(this TMCardController card)
@@ -78,70 +88,28 @@ namespace TMCard.Runtime
             
             var keepPosition = card.transform.localPosition;
             var keepEulerAngle = card.transform.localRotation.eulerAngles;
+
             List<MMF_Feedback> events = new List<MMF_Feedback>
             {
                 card.GetMoveToScreenCenterEvent(),
                 FeedbackCreator.CreateSmoothPositionAndRotationEvent(card.gameObject, keepPosition, keepEulerAngle, 0.8f)
             };
 
-            service.FeedbackPlayer.QueueEvents(events);
+            service.FeedbackPlayer.EnqueueEvents(events);
         }
-
-        // ReSharper disable Unity.PerformanceAnalysis
-        public static void OnContinuingSeconds(this TMCardController card, float continuingSeconds, Action onSuccess)
-        {
-            if (!ServiceLocator<ITMCardService>.TryGetService(out var service) || 
-                !ServiceLocator<TMDelayEffectManager>.TryGetService(out var delayEffectManager)) return;
-            
-            delayEffectManager.WaitForSecondsEffect(
-                continuingSeconds,
-                () =>
-                {
-                    Debug.Log("지속 시간 종료");
-                    onSuccess.Invoke();
-                },
-                remainingTime => { });
-
-            card.MoveToTombAndHide();
-        }
-
-        public static void OnContinuingTurns(TMCardController card, int turn)
-        {
-            //DelayEffectManager.Instance.WaitForTurnCountEffect(
-            //    turn,
-            //    () => { },
-            //    turnCount => cardUI.CardData.UseCard());
-
-            //MoveToTombAndHide(cardUI);
-        }
-
-        public static void DelaySeconds(TMCardController card, float delayTime)
-        {
-            if (!ServiceLocator<TMDelayEffectManager>.TryGetService(out var service)) return;
-            
-            service.WaitForSecondsEffect(
-                delayTime,
-                card.SetActiveDelayCard,
-                remainingTime => { });
-
-            card.MoveToTombAndHide();
-        }
-
 
 
         public static void MoveToTombAndHide(this TMCardController card)
         {
             if (!ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
             
-            var parallel = new MMF_Parallel();
-            parallel.Feedbacks.AddElements(
-                FeedbackCreator.CreateSmoothPositionAndRotationEvent(
+            var parallel = service.CardHandController.RemoveCardToGetSortFeedbacks(card);
+            parallel.Feedbacks.Add(FeedbackCreator.CreateSmoothPositionAndRotationEvent(
                     card.gameObject,
                     service.CardHandController.TombTransform.localPosition,
-                    Vector3.zero),
-                FeedbackCreator.CreateUnityEvent(() => service.CardHandController.RemoveCardAndSort(card)));
+                    Vector3.zero));
 
-            service.FeedbackPlayer.QueueEvents(new List<MMF_Feedback>
+            service.FeedbackPlayer.EnqueueEvents(new List<MMF_Feedback>
             {
                 parallel,
                 FeedbackCreator.CreateUnityEvent(() => card.gameObject.SetActive(false))
@@ -152,24 +120,34 @@ namespace TMCard.Runtime
         {
             if (!ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
             
-            service.CardHandController.RemoveCardAndSort(card);
-
-            List<MMF_Feedback> events = new()
-            {
-                card.GetMoveToScreenCenterEvent(),
-            };
+            MMF_Parallel parallel = service.CardHandController.RemoveCardToGetSortFeedbacks(card);
+            parallel.Feedbacks.Add(card.GetMoveToScreenCenterEvent());
             
-            events.AddRange(card.GetDestroyEvent());
-            service.FeedbackPlayer.QueueEvents(events);
+            service.FeedbackPlayer.EnqueueEvents(new() 
+            { 
+                parallel,
+                FeedbackCreator.CreateUnityEvent(() => 
+                {
+                    service.FeedbackPlayer.EnqueueEventToHead(
+                        card.GetMoveToUp(),
+                        FeedbackCreator.CreateUnityEvent(() => Object.Destroy(card.gameObject)));
+                })
+            });
         }
         
         public static void SetActiveDelayCard(this TMCardController card)
         {
             if (!ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
             
-            card.gameObject.SetActive(true);
-            List<MMF_Feedback> events = new(card.GetMoveToTombEvent());
-            service.FeedbackPlayer.QueueEvents(events);
+            MMF_Parallel parallel = new();
+            parallel.Feedbacks.Add(FeedbackCreator.CreateUnityEvent(() => card.gameObject.SetActive(true)));
+            parallel.Feedbacks.Add(card.GetMoveToTombEvent());
+
+            service.FeedbackPlayer.EnqueueEvents(new() 
+            {
+                parallel,
+                FeedbackCreator.CreateUnityEvent(() => service.CardTombController.EnqueueDeadCard(card))
+            });
         }
 
         public static void SetPositionNewCardToHand(this TMCardController triggerCard, List<TMCardController> newCards, Vector3 spawn, Action<TMCardController> endedSortCall = null)
@@ -185,17 +163,22 @@ namespace TMCard.Runtime
                     card.transform.localPosition = spawn));
 
                 parallelEvent.Feedbacks.Add(card.GetMoveToScreenCenterEvent());
-                service.FeedbackPlayer.QueueEventToHead(parallelEvent);
-                service.CardHandController.PushCardInSortQueue(card, endedSortCall);
+
+                service.FeedbackPlayer.EnqueueEventsToHead(new() 
+                {
+                    parallelEvent,
+                    service.CardHandController.AddCardToGetSortFeedbacks(card),
+                    FeedbackCreator.CreateUnityEvent(() => endedSortCall?.Invoke(card))
+                });
             }
         }
 
-        public static MMF_Feedback GetMoveToScreenCenterEvent(this TMCardController card)
+        public static MMF_Parallel GetMoveToScreenCenterEvent(this TMCardController card)
         {
             var targetRotation = card.transform.localRotation.eulerAngles;
             float duration = 0f;
             
-            if (!TMCardControllerHelper.TryGetScreenCenter(out var targetPosition))
+            if (!TMCardControllerHelper.TryGetScreenCenter(out Vector3 targetPosition))
             {
                 targetPosition = card.transform.localPosition;
             }
@@ -212,7 +195,7 @@ namespace TMCard.Runtime
                 duration);
         }
 
-        public static MMF_Feedback GetMoveToUp(this TMCardController card) => FeedbackCreator.CreateSmoothPositionAndRotationEvent(
+        public static MMF_Parallel GetMoveToUp(this TMCardController card) => FeedbackCreator.CreateSmoothPositionAndRotationEvent(
                 card.gameObject,
                 card.transform.localPosition + (Vector3)(card.transform.up * card.RectTransform.rect.size * 0.5f),
                 Vector3.zero);
@@ -223,22 +206,12 @@ namespace TMCard.Runtime
             FeedbackCreator.CreateUnityEvent(() => Object.Destroy(card.gameObject))
         };
 
-        public static List<MMF_Feedback> GetMoveToTombEvent(this TMCardController card, float duration = 0.5f)
+        public static MMF_Parallel GetMoveToTombEvent(this TMCardController card, float duration = 0.5f)
         {
-            List<MMF_Feedback> feedbacks = new();
-
-            if (ServiceLocator<ITMCardService>.TryGetService(out var service))
-            {
-                feedbacks.AddElements(FeedbackCreator.CreateSmoothPositionAndRotationEvent(
+            return ServiceLocator<ITMCardService>.TryGetService(out var service) ? FeedbackCreator.CreateSmoothPositionAndRotationEvent(
                         card.gameObject,
                         service.CardHandController.TombTransform.localPosition,
-                        Vector3.zero, duration),
-                    FeedbackCreator.CreateUnityEvent(
-                        () => service.CardTombController.EnqueueDeadCard(card)));
-                
-            }
-
-            return feedbacks;
+                        Vector3.zero, duration) : null;
         }
     }
 

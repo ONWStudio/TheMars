@@ -37,7 +37,7 @@ namespace TMCard.Effect
                 ResourcePairs
                     .ForEach(resourcePair => resourcePair.ResourceEffect.AddRewardResource(resourcePair.OriginalAmount));
 
-                TMCardHelper.Instance.MoveToScreenCenterAfterToTomb(controller);
+                controller.MoveToScreenCenterAfterToTomb();
             });
         }
 

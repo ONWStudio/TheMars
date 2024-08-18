@@ -11,10 +11,10 @@ namespace TMCard.Effect
             controller.OnClickEvent.RemoveAllToAddListener(() =>
             {
                 trigger.OnEffectEvent.Invoke();
-                TMCardHelper.Instance.DisposeCard(controller);
+                controller.DisposeCard();
             });
 
-            controller.OnTurnEndedEvent.RemoveAllToAddListener(() => TMCardHelper.Instance.DestroyCard(controller));
+            controller.OnTurnEndedEvent.RemoveAllToAddListener(() => controller.DestroyCard());
         }
 
         public MirageEffect() : base("Mirage") { }

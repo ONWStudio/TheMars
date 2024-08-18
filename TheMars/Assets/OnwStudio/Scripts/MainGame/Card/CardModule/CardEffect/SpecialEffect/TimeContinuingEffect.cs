@@ -1,4 +1,5 @@
 using Onw.Attribute;
+using Onw.ServiceLocator;
 using TMCard.Runtime;
 using UnityEngine;
 namespace TMCard.Effect
@@ -15,10 +16,27 @@ namespace TMCard.Effect
 
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            controller.OnClickEvent.RemoveAllToAddListener(() => TMCardHelper.Instance.OnContinuingSeconds(
+            controller.OnClickEvent.RemoveAllToAddListener(() => onContinuingSeconds(
                 controller,
                 ContinuingTime,
                 trigger.OnEffectEvent.Invoke));
+
+            static void onContinuingSeconds(TMCardController card, float continuingSeconds, System.Action onSuccess)
+            {
+                if (!ServiceLocator<ITMCardService>.TryGetService(out var service) ||
+                    !ServiceLocator<TMDelayEffectManager>.TryGetService(out var delayEffectManager)) return;
+
+                delayEffectManager.WaitForSecondsEffect(
+                    continuingSeconds,
+                    () =>
+                    {
+                        Debug.Log("지속 시간 종료");
+                        onSuccess.Invoke();
+                    },
+                    remainingTime => { });
+
+                card.MoveToTombAndHide();
+            }
         }
 
         public void Initialize(TimeContinuingEffectCreator effectCreator)

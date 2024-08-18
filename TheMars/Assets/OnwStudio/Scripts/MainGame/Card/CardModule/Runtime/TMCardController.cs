@@ -21,10 +21,6 @@ namespace TMCard.Runtime
         /// </summary>
         [field: Header("State")]
         [field: SerializeField, ReadOnly] public bool OnField { get; set; }
-        /// <summary>
-        /// .. 카드가 상호작용 가능한 활성화인지 상태를 반환합니다
-        /// </summary>
-        [field: SerializeField, ReadOnly] public bool OnCard { get; private set; }
 
         [field: Header("Event")]
         [field: SerializeField] public SafeUnityEvent<Transform> OnChangedParent { get; private set; } = new();
@@ -109,7 +105,6 @@ namespace TMCard.Runtime
         /// <param name="isOn"> .. 카드의 상호작용 상태를 전환시킬 boolen 값 </param>
         public void SetOn(bool isOn)
         {
-            OnCard = isOn;
             _smoothMove.enabled = isOn;
 
             if (!isOn)
@@ -121,11 +116,6 @@ namespace TMCard.Runtime
         private void initializeSmoothMove()
         {
             _smoothMove.IsLocal = true;
-
-            if (!OnCard)
-            {
-                _smoothMove.enabled = false;
-            }
         }
 
         private void initalizeInputHandle()
@@ -146,7 +136,7 @@ namespace TMCard.Runtime
         /// <param name="pointerEventData"></param>
         private void OnClickCard(PointerEventData pointerEventData)
         {
-            if (!OnCard || !ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
+            if (!ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
             // if (!CardData.IsAvailable(1)) return;
 
             OnClickEvent.Invoke();

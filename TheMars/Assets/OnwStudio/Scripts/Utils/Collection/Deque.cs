@@ -6,6 +6,7 @@ namespace Onw.Collections
 {
     public class Deque<T> : IEnumerable<T>
     {
+        public int Count => _buffer.Count;
         private readonly LinkedList<T> _buffer = new();
 
         public IEnumerator<T> GetEnumerator()

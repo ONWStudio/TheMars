@@ -11,7 +11,7 @@ namespace TMCard.Effect
             controller.OnClickEvent.RemoveAllToAddListener(() =>
             {
                 trigger.OnEffectEvent.Invoke();
-                TMCardHelper.Instance.RecycleToHand(controller);
+                controller.RecycleToHand();
             });
         }
 

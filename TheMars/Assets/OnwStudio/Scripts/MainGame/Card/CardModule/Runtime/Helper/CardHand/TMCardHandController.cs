@@ -1,11 +1,13 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Onw.Attribute;
-using Onw.Feedback;
-using Onw.ServiceLocator;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using MoreMountains.Feedbacks;
+using Onw.Feedback;
+using Onw.Attribute;
+using Onw.ServiceLocator;
+
 namespace TMCard.Runtime
 {
     /// <summary>
@@ -86,28 +88,28 @@ namespace TMCard.Runtime
             _cardsOnHand.Remove(card);
         }
         
-        public void SetCardsAndSort(List<TMCardController> cards)
+        public MMF_Parallel SetCardsAndGetSortFeedbacks(List<TMCardController> cards, float duration = 1.0f)
         {
             SetCards(cards);
-            SortCards();
+            return GetSortCardsFeedbacks(duration);
         }
         
-        public void AddCardToSort(TMCardController card)
+        public MMF_Parallel AddCardToGetSortFeedbacks(TMCardController card, float duration = 1.0f)
         {
-            setCard(card);
-            SortCards();
+            AddCard(card);
+            return GetSortCardsFeedbacks(duration);
         }
 
-        public void AddCardFirstTMCardController(TMCardController card)
+        public MMF_Parallel AddCardFirstToGetSortFeedbacks(TMCardController card, float duration = 1.0f)
         {
             AddCardToFirst(card);
-            SortCards();
+            return GetSortCardsFeedbacks(duration);
         }
 
-        public void RemoveCardToSort(TMCardController card)
+        public MMF_Parallel RemoveCardToGetSortFeedbacks(TMCardController card, float duration = 1.0f)
         {
             RemoveCard(card);
-            SortCards();
+            return GetSortCardsFeedbacks(duration);
         }
 
         /// <summary>
@@ -127,37 +129,27 @@ namespace TMCard.Runtime
         /// <summary>
         /// .. 카드를 정렬해야하는 경우 해당 메서드를 호출하면 리스트에 존재하는 카드들을 올바른 위치로 정렬 시킵니다 이벤트 기반입니다
         /// </summary>
-        public void SortCards(float duration = 1.0f, Action onSortBegin = null, Action onAllSuccess = null)
+        public MMF_Parallel GetSortCardsFeedbacks(float duration = 1.0f)
         {
-            if (!ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
-            
-            int count = 0;
-            int targetCount = _cardsOnHand.Count;
-            
+            if (!ServiceLocator<ITMCardService>.TryGetService(out ITMCardService service)) return null;
+
+            MMF_Parallel parallel = new();
+            parallel.Feedbacks.Capacity = _cardsOnHand.Count + 1;
+
             for (int i = 0; i < _cardsOnHand.Count; i++)
             {
-                var transformInfo = _cardSorter.ArrangeCard(_cardsOnHand, i, HandTransform);
-                
-                var card = transformInfo.Target;
+                PositionRotationInfo transformInfo = _cardSorter.ArrangeCard(_cardsOnHand, i, HandTransform);
+                TMCardController card = transformInfo.Target;
 
                 card.transform.SetAsLastSibling();
-                service.FeedbackPlayer.QueueEvent(
-                    FeedbackCreator.CreateUnityEvent(() => onSortBegin?.Invoke()),
-                    FeedbackCreator.CreateSmoothPositionAndRotationEvent(
+                parallel.Feedbacks.Add(FeedbackCreator.CreateSmoothPositionAndRotationEvent(
                         card.gameObject,
                         transformInfo.Position,
                         transformInfo.Rotation,
-                        duration),
-                    FeedbackCreator.CreateUnityEvent(() =>
-                    {
-                        count++;
-
-                        if (targetCount == count)
-                        {
-                            onAllSuccess?.Invoke();
-                        }
-                    }));
+                        duration));
             }
+
+            return parallel;
         }
 
         private void setCard(TMCardController card)
