@@ -31,7 +31,7 @@ namespace UniRx.Examples
         {
             // after completed AsyncA, run AsyncB as continuous routine.
             // UniRx expands SelectMany(IEnumerator) as SelectMany(IEnumerator.ToObservable())
-            var cancel = Observable.FromCoroutine(AsyncA)
+            IDisposable cancel = Observable.FromCoroutine(AsyncA)
                 .SelectMany(AsyncB)
                 .Subscribe();
 

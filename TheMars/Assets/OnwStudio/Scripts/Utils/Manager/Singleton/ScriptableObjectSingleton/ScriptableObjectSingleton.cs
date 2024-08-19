@@ -60,7 +60,7 @@ namespace Onw.Manager
         private static string GetFilePathWithExtention(bool fullPath)
         {
             Type t = typeof(T);
-            var prop = t.GetField("FILE_PATH", BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic) ?? throw new Exception($"No static Property 'FilePath' in {t}");
+            FieldInfo prop = t.GetField("FILE_PATH", BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic) ?? throw new Exception($"No static Property 'FilePath' in {t}");
 
             // .. 하위 클래스에 식별자가 'FILE_PATH'인 전역 string type 필드가 선언되지 않았을 경우
             if (prop.GetValue(null) is not string filePath) throw new Exception($"static property 'FILE_PATH' is not a string or null in {t}");

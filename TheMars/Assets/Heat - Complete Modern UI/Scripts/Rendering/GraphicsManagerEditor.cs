@@ -21,9 +21,9 @@ namespace Michsky.UI.Heat
 
         public override void OnInspectorGUI()
         {
-            var resolutionDropdown = serializedObject.FindProperty("resolutionDropdown");
+            SerializedProperty resolutionDropdown = serializedObject.FindProperty("resolutionDropdown");
 
-            var initializeResolutions = serializedObject.FindProperty("initializeResolutions");
+            SerializedProperty initializeResolutions = serializedObject.FindProperty("initializeResolutions");
 
             HeatUIEditorHandler.DrawHeader(customSkin, "Core Header", 6);
             HeatUIEditorHandler.DrawPropertyCW(resolutionDropdown, customSkin, "Resolution Dropdown", 132);

@@ -34,7 +34,7 @@ namespace UniRx.Operators
 
             public IDisposable Run()
             {
-                var sourceDisposable = new SingleAssignmentDisposable();
+                SingleAssignmentDisposable sourceDisposable = new SingleAssignmentDisposable();
                 serialDisposable.Disposable = sourceDisposable;
 
                 sourceDisposable.Disposable = parent.source.Subscribe(this);
@@ -58,7 +58,7 @@ namespace UniRx.Operators
                 {
                     try
 	                {
-		                var v = parent.selector(lastValue);
+		                IObservable<TResult> v = parent.selector(lastValue);
 		                // dispose source subscription
 		                serialDisposable.Disposable = v.Subscribe(observer);
 	                }

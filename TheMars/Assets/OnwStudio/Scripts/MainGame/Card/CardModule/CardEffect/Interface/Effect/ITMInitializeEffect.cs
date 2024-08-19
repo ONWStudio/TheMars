@@ -1,6 +1,6 @@
 namespace TMCard.Effect
 {
-    public interface ITMInitializableEffect<T> where T : ITMEffectCreator
+    public interface ITMInitializeEffect<in T> where T : ITMEffectCreator
     {
         void Initialize(T effectCreator);
     }

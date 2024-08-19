@@ -18,11 +18,11 @@ namespace Michsky.UI.Heat
 
         public override void OnInspectorGUI()
         {
-            var _effectGradient = serializedObject.FindProperty("_effectGradient");
-            var _gradientType = serializedObject.FindProperty("_gradientType");
-            var _offset = serializedObject.FindProperty("_offset");
-            var _zoom = serializedObject.FindProperty("_zoom");
-            var _modifyVertices = serializedObject.FindProperty("_modifyVertices");
+            SerializedProperty _effectGradient = serializedObject.FindProperty("_effectGradient");
+            SerializedProperty _gradientType = serializedObject.FindProperty("_gradientType");
+            SerializedProperty _offset = serializedObject.FindProperty("_offset");
+            SerializedProperty _zoom = serializedObject.FindProperty("_zoom");
+            SerializedProperty _modifyVertices = serializedObject.FindProperty("_modifyVertices");
 
             HeatUIEditorHandler.DrawHeader(customSkin, "Options Header", 6);
             HeatUIEditorHandler.DrawPropertyCW(_effectGradient, customSkin, "Gradient", 100);

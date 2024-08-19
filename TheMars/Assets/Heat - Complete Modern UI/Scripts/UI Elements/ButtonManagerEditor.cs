@@ -39,55 +39,55 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var normalCG = serializedObject.FindProperty("normalCG");
-            var highlightCG = serializedObject.FindProperty("highlightCG");
-            var disabledCG = serializedObject.FindProperty("disabledCG");
-            var normalTextObj = serializedObject.FindProperty("normalTextObj");
-            var highlightTextObj = serializedObject.FindProperty("highlightTextObj");
-            var disabledTextObj = serializedObject.FindProperty("disabledTextObj");
-            var normalImageObj = serializedObject.FindProperty("normalImageObj");
-            var highlightImageObj = serializedObject.FindProperty("highlightImageObj");
-            var disabledImageObj = serializedObject.FindProperty("disabledImageObj");
+            SerializedProperty normalCG = serializedObject.FindProperty("normalCG");
+            SerializedProperty highlightCG = serializedObject.FindProperty("highlightCG");
+            SerializedProperty disabledCG = serializedObject.FindProperty("disabledCG");
+            SerializedProperty normalTextObj = serializedObject.FindProperty("normalTextObj");
+            SerializedProperty highlightTextObj = serializedObject.FindProperty("highlightTextObj");
+            SerializedProperty disabledTextObj = serializedObject.FindProperty("disabledTextObj");
+            SerializedProperty normalImageObj = serializedObject.FindProperty("normalImageObj");
+            SerializedProperty highlightImageObj = serializedObject.FindProperty("highlightImageObj");
+            SerializedProperty disabledImageObj = serializedObject.FindProperty("disabledImageObj");
 
-            var buttonIcon = serializedObject.FindProperty("buttonIcon");
-            var buttonText = serializedObject.FindProperty("buttonText");
-            var iconScale = serializedObject.FindProperty("iconScale");
-            var textSize = serializedObject.FindProperty("textSize");
+            SerializedProperty buttonIcon = serializedObject.FindProperty("buttonIcon");
+            SerializedProperty buttonText = serializedObject.FindProperty("buttonText");
+            SerializedProperty iconScale = serializedObject.FindProperty("iconScale");
+            SerializedProperty textSize = serializedObject.FindProperty("textSize");
 
-            var autoFitContent = serializedObject.FindProperty("autoFitContent");
-            var padding = serializedObject.FindProperty("padding");
-            var spacing = serializedObject.FindProperty("spacing");
-            var disabledLayout = serializedObject.FindProperty("disabledLayout");
-            var normalLayout = serializedObject.FindProperty("normalLayout");
-            var highlightedLayout = serializedObject.FindProperty("highlightedLayout");
-            var mainLayout = serializedObject.FindProperty("mainLayout");
-            var mainFitter = serializedObject.FindProperty("mainFitter");
-            var targetFitter = serializedObject.FindProperty("targetFitter");
-            var targetRect = serializedObject.FindProperty("targetRect");
+            SerializedProperty autoFitContent = serializedObject.FindProperty("autoFitContent");
+            SerializedProperty padding = serializedObject.FindProperty("padding");
+            SerializedProperty spacing = serializedObject.FindProperty("spacing");
+            SerializedProperty disabledLayout = serializedObject.FindProperty("disabledLayout");
+            SerializedProperty normalLayout = serializedObject.FindProperty("normalLayout");
+            SerializedProperty highlightedLayout = serializedObject.FindProperty("highlightedLayout");
+            SerializedProperty mainLayout = serializedObject.FindProperty("mainLayout");
+            SerializedProperty mainFitter = serializedObject.FindProperty("mainFitter");
+            SerializedProperty targetFitter = serializedObject.FindProperty("targetFitter");
+            SerializedProperty targetRect = serializedObject.FindProperty("targetRect");
 
-            var isInteractable = serializedObject.FindProperty("isInteractable");
-            var enableIcon = serializedObject.FindProperty("enableIcon");
-            var enableText = serializedObject.FindProperty("enableText");
-            var useCustomTextSize = serializedObject.FindProperty("useCustomTextSize");
-            var useUINavigation = serializedObject.FindProperty("useUINavigation");
-            var navigationMode = serializedObject.FindProperty("navigationMode");
-            var wrapAround = serializedObject.FindProperty("wrapAround");
-            var selectOnUp = serializedObject.FindProperty("selectOnUp");
-            var selectOnDown = serializedObject.FindProperty("selectOnDown");
-            var selectOnLeft = serializedObject.FindProperty("selectOnLeft");
-            var selectOnRight = serializedObject.FindProperty("selectOnRight");
-            var checkForDoubleClick = serializedObject.FindProperty("checkForDoubleClick");
-            var useLocalization = serializedObject.FindProperty("useLocalization");
-            var useSounds = serializedObject.FindProperty("useSounds");
-            var doubleClickPeriod = serializedObject.FindProperty("doubleClickPeriod");
-            var fadingMultiplier = serializedObject.FindProperty("fadingMultiplier");
-            var useCustomContent = serializedObject.FindProperty("useCustomContent");
-            var bypassControllerManager = serializedObject.FindProperty("bypassControllerManager");
+            SerializedProperty isInteractable = serializedObject.FindProperty("isInteractable");
+            SerializedProperty enableIcon = serializedObject.FindProperty("enableIcon");
+            SerializedProperty enableText = serializedObject.FindProperty("enableText");
+            SerializedProperty useCustomTextSize = serializedObject.FindProperty("useCustomTextSize");
+            SerializedProperty useUINavigation = serializedObject.FindProperty("useUINavigation");
+            SerializedProperty navigationMode = serializedObject.FindProperty("navigationMode");
+            SerializedProperty wrapAround = serializedObject.FindProperty("wrapAround");
+            SerializedProperty selectOnUp = serializedObject.FindProperty("selectOnUp");
+            SerializedProperty selectOnDown = serializedObject.FindProperty("selectOnDown");
+            SerializedProperty selectOnLeft = serializedObject.FindProperty("selectOnLeft");
+            SerializedProperty selectOnRight = serializedObject.FindProperty("selectOnRight");
+            SerializedProperty checkForDoubleClick = serializedObject.FindProperty("checkForDoubleClick");
+            SerializedProperty useLocalization = serializedObject.FindProperty("useLocalization");
+            SerializedProperty useSounds = serializedObject.FindProperty("useSounds");
+            SerializedProperty doubleClickPeriod = serializedObject.FindProperty("doubleClickPeriod");
+            SerializedProperty fadingMultiplier = serializedObject.FindProperty("fadingMultiplier");
+            SerializedProperty useCustomContent = serializedObject.FindProperty("useCustomContent");
+            SerializedProperty bypassControllerManager = serializedObject.FindProperty("bypassControllerManager");
 
-            var onClick = serializedObject.FindProperty("onClick");
-            var onDoubleClick = serializedObject.FindProperty("onDoubleClick");
-            var onHover = serializedObject.FindProperty("onHover");
-            var onLeave = serializedObject.FindProperty("onLeave");
+            SerializedProperty onClick = serializedObject.FindProperty("onClick");
+            SerializedProperty onDoubleClick = serializedObject.FindProperty("onDoubleClick");
+            SerializedProperty onHover = serializedObject.FindProperty("onHover");
+            SerializedProperty onLeave = serializedObject.FindProperty("onLeave");
 
             switch (buttonTarget.latestTabIndex)
             {

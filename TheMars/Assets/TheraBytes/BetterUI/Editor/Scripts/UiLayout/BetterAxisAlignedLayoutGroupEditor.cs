@@ -54,7 +54,7 @@ namespace TheraBytes.BetterUi.Editor
 
 #pragma warning restore 0618
 
-            var lg = MakeBetterLogic(command);
+            BetterAxisAlignedLayoutGroup lg = MakeBetterLogic(command);
 
 
             if (lg != null)

@@ -3,7 +3,7 @@ using TMCard.Runtime;
 using UnityEngine;
 namespace TMCard.Effect
 {
-    public sealed class TMCardDropEffect : ITMNormalEffect, ITMInitializableEffect<TMCardDropEffectCreator>
+    public sealed class TMCardDropEffect : ITMNormalEffect, ITMInitializeEffect<TMCardDropEffectCreator>
     {
         [SerializeField, ReadOnly]
         private int _dropCount = 1;
@@ -15,7 +15,7 @@ namespace TMCard.Effect
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            trigger.OnEffectEvent.AddListener(() => { });
+            trigger.OnEffectEvent.AddListener(eventState => { });
         }
     }
 }

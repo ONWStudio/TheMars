@@ -4,7 +4,7 @@ using TMCard.Runtime;
 using UnityEngine;
 namespace TMCard.Effect.Resource
 {
-    public sealed class MarsLithumEffect : ITMCardResourceEffect, ITMInitializableEffect<MarsLithumEffectCreator>
+    public sealed class MarsLithumEffect : ITMCardResourceEffect, ITMInitializeEffect<MarsLithumEffectCreator>
     {
         [field: SerializeField, DisplayAs("소모 재화"), Tooltip("소모 재화"), ReadOnly] public int Amount { get; private set; }
 
@@ -15,7 +15,7 @@ namespace TMCard.Effect.Resource
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            trigger.OnEffectEvent.AddListener(() =>
+            trigger.OnEffectEvent.AddListener(eventState =>
             {
                 PlayerManager.Instance.MarsLithum += Amount;
                 Debug.Log(Amount);

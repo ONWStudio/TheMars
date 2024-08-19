@@ -21,19 +21,19 @@ namespace Michsky.UI.Heat
 
         public override void OnInspectorGUI()
         {
-            var questText = serializedObject.FindProperty("questText");
-            var localizationKey = serializedObject.FindProperty("localizationKey");
+            SerializedProperty questText = serializedObject.FindProperty("questText");
+            SerializedProperty localizationKey = serializedObject.FindProperty("localizationKey");
 
-            var questAnimator = serializedObject.FindProperty("questAnimator");
-            var questTextObj = serializedObject.FindProperty("questTextObj");
+            SerializedProperty questAnimator = serializedObject.FindProperty("questAnimator");
+            SerializedProperty questTextObj = serializedObject.FindProperty("questTextObj");
 
-            var useLocalization = serializedObject.FindProperty("useLocalization");
-            var updateOnAnimate = serializedObject.FindProperty("updateOnAnimate");
-            var minimizeAfter = serializedObject.FindProperty("minimizeAfter");
-            var defaultState = serializedObject.FindProperty("defaultState");
-            var afterMinimize = serializedObject.FindProperty("afterMinimize");
+            SerializedProperty useLocalization = serializedObject.FindProperty("useLocalization");
+            SerializedProperty updateOnAnimate = serializedObject.FindProperty("updateOnAnimate");
+            SerializedProperty minimizeAfter = serializedObject.FindProperty("minimizeAfter");
+            SerializedProperty defaultState = serializedObject.FindProperty("defaultState");
+            SerializedProperty afterMinimize = serializedObject.FindProperty("afterMinimize");
 
-            var onDestroy = serializedObject.FindProperty("onDestroy");
+            SerializedProperty onDestroy = serializedObject.FindProperty("onDestroy");
 
             HeatUIEditorHandler.DrawHeader(customSkin, "Content Header", 6);
             GUILayout.BeginHorizontal(EditorStyles.helpBox);

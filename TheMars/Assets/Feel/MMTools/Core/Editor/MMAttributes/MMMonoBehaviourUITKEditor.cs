@@ -198,8 +198,8 @@ namespace MoreMountains.Tools
 			foldout.viewDataKey = target.name + groupData.GroupAttribute.GroupName;
 			root.Add(foldout);
 			
-			var toggleField = typeof(Foldout).GetField("m_Toggle", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-			var toggleElement = (Toggle)toggleField.GetValue(foldout);
+			FieldInfo toggleField = typeof(Foldout).GetField("m_Toggle", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+			Toggle toggleElement = (Toggle)toggleField.GetValue(foldout);
 			toggleElement.AddToClassList("mm-foldout-toggle");
 			
 			for (int i = 0; i < groupData.PropertiesList.Count; i++)

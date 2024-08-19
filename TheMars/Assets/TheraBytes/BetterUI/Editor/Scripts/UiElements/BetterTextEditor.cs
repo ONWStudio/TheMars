@@ -26,9 +26,9 @@ namespace TheraBytes.BetterUi.Editor
             int min = txt.resizeTextMinSize;
             int max = txt.resizeTextMaxSize;
 
-            var newTxt = Betterizer.MakeBetter<Text, BetterText>(txt);
+            Text newTxt = Betterizer.MakeBetter<Text, BetterText>(txt);
 
-            var betterTxt = newTxt as BetterText;
+            BetterText betterTxt = newTxt as BetterText;
             if(betterTxt != null)
             {
                 if(bestFit)
@@ -52,7 +52,7 @@ namespace TheraBytes.BetterUi.Editor
             this.sizerCollection = base.serializedObject.FindProperty("customFontSizers");
             this.fitting = base.serializedObject.FindProperty("fitting");
 
-            var fontData = base.serializedObject.FindProperty("m_FontData");
+            SerializedProperty fontData = base.serializedObject.FindProperty("m_FontData");
             this.font = fontData.FindPropertyRelative("m_Font");
             this.style = fontData.FindPropertyRelative("m_FontStyle");
             this.lineSpace = fontData.FindPropertyRelative("m_LineSpacing");
@@ -66,7 +66,7 @@ namespace TheraBytes.BetterUi.Editor
         
         public override void OnInspectorGUI()
         {
-            var obj = base.target as BetterText;
+            BetterText obj = base.target as BetterText;
 
             base.serializedObject.Update();
             EditorGUILayout.PropertyField(this.text);

@@ -58,8 +58,8 @@ namespace TheraBytes.BetterUi.Editor
             where T : MonoBehaviour
             where TBetter : T
         {
-            var fields = CollectAllFieldValues(typeof(T), source, new HashSet<string>(skipFields)).ToArray();
-            var refs = new HashSet<KeyValuePair<SerializedObject, string>>(FindReferencesTo(source));
+            KeyValuePair<FieldInfo, object>[] fields = CollectAllFieldValues(typeof(T), source, new HashSet<string>(skipFields)).ToArray();
+            HashSet<KeyValuePair<SerializedObject, string>> refs = new HashSet<KeyValuePair<SerializedObject, string>>(FindReferencesTo(source));
 
             GameObject go = source.gameObject;
 
@@ -75,7 +75,7 @@ namespace TheraBytes.BetterUi.Editor
 
             Undo.CollapseUndoOperations(Undo.GetCurrentGroup());
 
-            foreach (var kv in fields)
+            foreach (KeyValuePair<FieldInfo, object> kv in fields)
             {
                 try
                 {
@@ -87,7 +87,7 @@ namespace TheraBytes.BetterUi.Editor
                 }
             }
 
-            foreach (var r in refs)
+            foreach (KeyValuePair<SerializedObject, string> r in refs)
             {
                 SetReference(r.Key, r.Value, better);
             }
@@ -106,7 +106,7 @@ namespace TheraBytes.BetterUi.Editor
             if (obj == null)
                 return;
 
-            var t = obj.GetType();
+            Type t = obj.GetType();
             t.InvokeMember("OnValidate",
                 BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.InvokeMethod,
                 null, obj, null);
@@ -127,7 +127,7 @@ namespace TheraBytes.BetterUi.Editor
         private static IEnumerable<KeyValuePair<FieldInfo, object>> CollectAllFieldValues(Type type, object source,
             HashSet<string> skipFields)
         {
-            foreach (var field in CollectFieldInfosRecursively(type))
+            foreach (FieldInfo field in CollectFieldInfosRecursively(type))
             {
                 // skip private fields which are not marked as SerializeField
                 if (!(field.IsPublic) && (field.GetCustomAttributes(typeof(SerializeField), true).Length == 0))
@@ -160,7 +160,7 @@ namespace TheraBytes.BetterUi.Editor
         {
             while (type != typeof(object))
             {
-                foreach (var field in CollectFieldInfos(type))
+                foreach (FieldInfo field in CollectFieldInfos(type))
                 {
                     yield return field;
                 }
@@ -174,7 +174,7 @@ namespace TheraBytes.BetterUi.Editor
             FieldInfo[] myObjectFields = type.GetFields(
                 BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
 
-            foreach (var field in myObjectFields)
+            foreach (FieldInfo field in myObjectFields)
             {
                 yield return field;
             }
@@ -224,7 +224,7 @@ namespace TheraBytes.BetterUi.Editor
         private static IEnumerable<KeyValuePair<SerializedObject, string>> FindReferencesTo(UnityEngine.Component obj)
         {
             // iterate objects in the scene
-            var allObjects =
+            GameObject[] allObjects =
 #if UNITY_2022_2_OR_NEWER
                 UnityEngine.Object.FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 #else
@@ -233,8 +233,8 @@ namespace TheraBytes.BetterUi.Editor
 
             for (int i = 0; i < allObjects.Length; i++)
             {
-                var go = allObjects[i];
-                foreach (var keyValuePair in FindReferencesTo(obj, go))
+                GameObject go = allObjects[i];
+                foreach (KeyValuePair<SerializedObject, string> keyValuePair in FindReferencesTo(obj, go))
                 {
                     yield return keyValuePair;
                 }
@@ -243,8 +243,8 @@ namespace TheraBytes.BetterUi.Editor
             // iterate object in this prefab
             foreach (Transform transform in IterateChildrenRecursively(obj.transform.root))
             {
-                var go = transform.gameObject;
-                foreach (var keyValuePair in FindReferencesTo(obj, go))
+                GameObject go = transform.gameObject;
+                foreach (KeyValuePair<SerializedObject, string> keyValuePair in FindReferencesTo(obj, go))
                 {
                     yield return keyValuePair;
                 }
@@ -253,15 +253,15 @@ namespace TheraBytes.BetterUi.Editor
 
         private static IEnumerable<KeyValuePair<SerializedObject, string>> FindReferencesTo(Component obj, GameObject go)
         {
-            var components = go.GetComponents<Component>();
+            Component[] components = go.GetComponents<Component>();
             for (int k = 0; k < components.Length; k++)
             {
-                var comp = components[k];
+                Component comp = components[k];
                 if (comp == null || comp == obj)
                     continue;
 
-                var so = new SerializedObject(comp);
-                var sp = so.GetIterator();
+                SerializedObject so = new SerializedObject(comp);
+                SerializedProperty sp = so.GetIterator();
                 while (sp.NextVisible(true))
                 {
                     if (sp.propertyType == SerializedPropertyType.ObjectReference
@@ -276,7 +276,7 @@ namespace TheraBytes.BetterUi.Editor
 
         private static void SetReference(SerializedObject so, string path, UnityEngine.Object obj)
         {
-            var prop = so.FindProperty(path);
+            SerializedProperty prop = so.FindProperty(path);
 
             //Debug.LogWarningFormat("{0} ({1})", path, prop.propertyType);
 

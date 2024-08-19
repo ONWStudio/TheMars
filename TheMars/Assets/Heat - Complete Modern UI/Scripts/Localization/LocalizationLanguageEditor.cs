@@ -35,11 +35,11 @@ namespace Michsky.UI.Heat
             // Info Header
             HeatUIEditorHandler.DrawHeader(customSkin, "Content Header", 8);
 
-            var localizationSettings = serializedObject.FindProperty("localizationSettings");
-            var languageID = serializedObject.FindProperty("languageID");
-            var languageName = serializedObject.FindProperty("languageName");
-            var localizedName = serializedObject.FindProperty("localizedName");
-            var tableList = serializedObject.FindProperty("tableList");
+            SerializedProperty localizationSettings = serializedObject.FindProperty("localizationSettings");
+            SerializedProperty languageID = serializedObject.FindProperty("languageID");
+            SerializedProperty languageName = serializedObject.FindProperty("languageName");
+            SerializedProperty localizedName = serializedObject.FindProperty("localizedName");
+            SerializedProperty tableList = serializedObject.FindProperty("tableList");
 
             GUI.enabled = false;
             HeatUIEditorHandler.DrawProperty(languageID, customSkin, "Language ID");

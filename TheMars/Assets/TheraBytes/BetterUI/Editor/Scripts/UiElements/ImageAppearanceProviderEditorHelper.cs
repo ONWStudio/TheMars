@@ -44,7 +44,7 @@ namespace TheraBytes.BetterUi.Editor
             if (materialIndex < 0)
                 materialIndex = 0;
 
-            var effectOptions = Materials.Instance.GetAllMaterialEffects(img.MaterialType).ToList();
+            List<MaterialEffect> effectOptions = Materials.Instance.GetAllMaterialEffects(img.MaterialType).ToList();
             materialEffectIndex = effectOptions.IndexOf(img.MaterialEffect);
             if (materialEffectIndex < 0)
                 materialEffectIndex = 0;
@@ -64,7 +64,7 @@ namespace TheraBytes.BetterUi.Editor
             }
             else
             {
-                var options = Materials.Instance.GetAllMaterialEffects(materialType).Select(o => o.ToString()).ToArray();
+                string[] options = Materials.Instance.GetAllMaterialEffects(materialType).Select(o => o.ToString()).ToArray();
                 materialEffectIndex = EditorGUILayout.Popup("Effect", materialEffectIndex, options);
                 if (materialEffectIndex >= options.Length)
                     materialEffectIndex = 0;
@@ -73,9 +73,9 @@ namespace TheraBytes.BetterUi.Editor
             }
 
 
-            var materialInfo = Materials.Instance.GetMaterialInfo(materialType, effect);
-            var material = (materialInfo != null) ? materialInfo.Material : null;
-            var propVars = serializedObject.FindProperty("materialProperties");
+            Materials.MaterialInfo materialInfo = Materials.Instance.GetMaterialInfo(materialType, effect);
+            Material material = (materialInfo != null) ? materialInfo.Material : null;
+            SerializedProperty propVars = serializedObject.FindProperty("materialProperties");
 
             // material type changed
             bool materialChanged = propMatType.stringValue != materialType;
@@ -91,7 +91,7 @@ namespace TheraBytes.BetterUi.Editor
                 if (infoIdx >= 0)
                 {
                     SerializedObject obj = new SerializedObject(Materials.Instance);
-                    var source = obj.FindProperty("materials")
+                    SerializedProperty source = obj.FindProperty("materials")
                         .GetArrayElementAtIndex(infoIdx)
                         .FindPropertyRelative("Properties");
 
@@ -100,12 +100,12 @@ namespace TheraBytes.BetterUi.Editor
                     serializedObject.ApplyModifiedPropertiesWithoutUndo();
 
                     // update material properties
-                    var floats = propVars.FindPropertyRelative("FloatProperties");
+                    SerializedProperty floats = propVars.FindPropertyRelative("FloatProperties");
                     if (floats != null)
                     {
                         for (int i = 0; i < floats.arraySize; i++)
                         {
-                            var p = floats.GetArrayElementAtIndex(i);
+                            SerializedProperty p = floats.GetArrayElementAtIndex(i);
                             SerializedProperty innerProp = p.FindPropertyRelative("Value");
                             if (innerProp == null)
                                 continue;
@@ -135,13 +135,13 @@ namespace TheraBytes.BetterUi.Editor
             }
             else if (materialType != DEFAULT)
             {
-                var floats = propVars.FindPropertyRelative("FloatProperties");
+                SerializedProperty floats = propVars.FindPropertyRelative("FloatProperties");
                 if (floats != null)
                 {
                     for (int i = 0; i < floats.arraySize; i++)
                     {
-                        var f = img.MaterialProperties.FloatProperties[i];
-                        var p = floats.GetArrayElementAtIndex(i);
+                        VertexMaterialData.FloatProperty f = img.MaterialProperties.FloatProperties[i];
+                        SerializedProperty p = floats.GetArrayElementAtIndex(i);
                         string displayName = p.FindPropertyRelative("Name").stringValue;
 
                         SerializedProperty valProp;
@@ -202,7 +202,7 @@ namespace TheraBytes.BetterUi.Editor
 
             EditorGUILayout.PropertyField(firstColor, new GUILayoutOption[0]);
 
-            var mode = (ColorMode)colorMode.intValue;
+            ColorMode mode = (ColorMode)colorMode.intValue;
             if (mode != ColorMode.Color)
             {
                 EditorGUILayout.PropertyField(secondColor);

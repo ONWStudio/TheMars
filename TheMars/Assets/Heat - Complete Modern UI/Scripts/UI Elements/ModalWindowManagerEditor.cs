@@ -40,34 +40,34 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var windowIcon = serializedObject.FindProperty("windowIcon");
-            var windowTitle = serializedObject.FindProperty("windowTitle");
-            var windowDescription = serializedObject.FindProperty("windowDescription");
+            SerializedProperty windowIcon = serializedObject.FindProperty("windowIcon");
+            SerializedProperty windowTitle = serializedObject.FindProperty("windowTitle");
+            SerializedProperty windowDescription = serializedObject.FindProperty("windowDescription");
 
-            var titleKey = serializedObject.FindProperty("titleKey");
-            var descriptionKey = serializedObject.FindProperty("descriptionKey");
+            SerializedProperty titleKey = serializedObject.FindProperty("titleKey");
+            SerializedProperty descriptionKey = serializedObject.FindProperty("descriptionKey");
 
-            var onConfirm = serializedObject.FindProperty("onConfirm");
-            var onCancel = serializedObject.FindProperty("onCancel");
-            var onOpen = serializedObject.FindProperty("onOpen");
-            var onClose = serializedObject.FindProperty("onClose");
+            SerializedProperty onConfirm = serializedObject.FindProperty("onConfirm");
+            SerializedProperty onCancel = serializedObject.FindProperty("onCancel");
+            SerializedProperty onOpen = serializedObject.FindProperty("onOpen");
+            SerializedProperty onClose = serializedObject.FindProperty("onClose");
 
-            var icon = serializedObject.FindProperty("icon");
-            var titleText = serializedObject.FindProperty("titleText");
-            var descriptionText = serializedObject.FindProperty("descriptionText");
-            var confirmButton = serializedObject.FindProperty("confirmButton");
-            var cancelButton = serializedObject.FindProperty("cancelButton");
-            var mwAnimator = serializedObject.FindProperty("mwAnimator");
+            SerializedProperty icon = serializedObject.FindProperty("icon");
+            SerializedProperty titleText = serializedObject.FindProperty("titleText");
+            SerializedProperty descriptionText = serializedObject.FindProperty("descriptionText");
+            SerializedProperty confirmButton = serializedObject.FindProperty("confirmButton");
+            SerializedProperty cancelButton = serializedObject.FindProperty("cancelButton");
+            SerializedProperty mwAnimator = serializedObject.FindProperty("mwAnimator");
 
-            var closeBehaviour = serializedObject.FindProperty("closeBehaviour");
-            var startBehaviour = serializedObject.FindProperty("startBehaviour");
-            var useCustomContent = serializedObject.FindProperty("useCustomContent");
-            var closeOnCancel = serializedObject.FindProperty("closeOnCancel");
-            var closeOnConfirm = serializedObject.FindProperty("closeOnConfirm");
-            var showCancelButton = serializedObject.FindProperty("showCancelButton");
-            var showConfirmButton = serializedObject.FindProperty("showConfirmButton");
-            var useLocalization = serializedObject.FindProperty("useLocalization");
-            var animationSpeed = serializedObject.FindProperty("animationSpeed");
+            SerializedProperty closeBehaviour = serializedObject.FindProperty("closeBehaviour");
+            SerializedProperty startBehaviour = serializedObject.FindProperty("startBehaviour");
+            SerializedProperty useCustomContent = serializedObject.FindProperty("useCustomContent");
+            SerializedProperty closeOnCancel = serializedObject.FindProperty("closeOnCancel");
+            SerializedProperty closeOnConfirm = serializedObject.FindProperty("closeOnConfirm");
+            SerializedProperty showCancelButton = serializedObject.FindProperty("showCancelButton");
+            SerializedProperty showConfirmButton = serializedObject.FindProperty("showConfirmButton");
+            SerializedProperty useLocalization = serializedObject.FindProperty("useLocalization");
+            SerializedProperty animationSpeed = serializedObject.FindProperty("animationSpeed");
 
             switch (currentTab)
             {

@@ -11,9 +11,9 @@ namespace UniRx.InternalUtil
     {
         internal static void TrySetResultAll<T>(IEnumerable<TaskCompletionSource<T>> source, T value)
         {
-            var rentArray = source.ToArray(); // better to use Arraypool.
-            var array = rentArray;
-            var len = rentArray.Length;
+            TaskCompletionSource<T>[] rentArray = source.ToArray(); // better to use Arraypool.
+            TaskCompletionSource<T>[] array = rentArray;
+            int len = rentArray.Length;
             for (int i = 0; i < len; i++)
             {
                 array[i].TrySetResult(value);

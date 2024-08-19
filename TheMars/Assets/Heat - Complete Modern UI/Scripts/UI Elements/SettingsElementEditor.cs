@@ -21,22 +21,22 @@ namespace Michsky.UI.Heat
 
         public override void OnInspectorGUI()
         {
-            var highlightCG = serializedObject.FindProperty("highlightCG");
+            SerializedProperty highlightCG = serializedObject.FindProperty("highlightCG");
 
-            var isInteractable = serializedObject.FindProperty("isInteractable");
-            var useSounds = serializedObject.FindProperty("useSounds");
-            var useUINavigation = serializedObject.FindProperty("useUINavigation");
-            var navigationMode = serializedObject.FindProperty("navigationMode");
-            var selectOnUp = serializedObject.FindProperty("selectOnUp");
-            var selectOnDown = serializedObject.FindProperty("selectOnDown");
-            var selectOnLeft = serializedObject.FindProperty("selectOnLeft");
-            var selectOnRight = serializedObject.FindProperty("selectOnRight");
-            var wrapAround = serializedObject.FindProperty("wrapAround");
-            var fadingMultiplier = serializedObject.FindProperty("fadingMultiplier");
+            SerializedProperty isInteractable = serializedObject.FindProperty("isInteractable");
+            SerializedProperty useSounds = serializedObject.FindProperty("useSounds");
+            SerializedProperty useUINavigation = serializedObject.FindProperty("useUINavigation");
+            SerializedProperty navigationMode = serializedObject.FindProperty("navigationMode");
+            SerializedProperty selectOnUp = serializedObject.FindProperty("selectOnUp");
+            SerializedProperty selectOnDown = serializedObject.FindProperty("selectOnDown");
+            SerializedProperty selectOnLeft = serializedObject.FindProperty("selectOnLeft");
+            SerializedProperty selectOnRight = serializedObject.FindProperty("selectOnRight");
+            SerializedProperty wrapAround = serializedObject.FindProperty("wrapAround");
+            SerializedProperty fadingMultiplier = serializedObject.FindProperty("fadingMultiplier");
 
-            var onClick = serializedObject.FindProperty("onClick");
-            var onHover = serializedObject.FindProperty("onHover");
-            var onLeave = serializedObject.FindProperty("onLeave");
+            SerializedProperty onClick = serializedObject.FindProperty("onClick");
+            SerializedProperty onHover = serializedObject.FindProperty("onHover");
+            SerializedProperty onLeave = serializedObject.FindProperty("onLeave");
 
             HeatUIEditorHandler.DrawHeader(customSkin, "Core Header", 6);
             HeatUIEditorHandler.DrawProperty(highlightCG, customSkin, "Highlight CG");

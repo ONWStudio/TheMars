@@ -32,7 +32,7 @@ namespace TheraBytes.BetterUi
 
         public IEnumerable<TransitionState> GetStates()
         {
-            foreach (var s in GetTransitionStates())
+            foreach (TransitionState s in GetTransitionStates())
             {
                 yield return s;
             }
@@ -40,7 +40,7 @@ namespace TheraBytes.BetterUi
 
         public override void Apply(string stateName, bool instant)
         {
-            var s = GetTransitionStates().FirstOrDefault((o) => o.Name == stateName);
+            TransitionState s = GetTransitionStates().FirstOrDefault((o) => o.Name == stateName);
             if (s != null)
             {
                 ApplyState(s, instant);

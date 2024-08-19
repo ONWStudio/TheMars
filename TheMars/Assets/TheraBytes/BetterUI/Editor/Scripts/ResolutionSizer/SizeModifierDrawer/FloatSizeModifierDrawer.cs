@@ -11,7 +11,7 @@ namespace TheraBytes.BetterUi.Editor
     {
         protected override void DrawModifiers(SerializedProperty property)
         {
-            var mod = property.FindPropertyRelative("Mod");
+            SerializedProperty mod = property.FindPropertyRelative("Mod");
             DrawModifierList(mod, "Size Modification");
         }
 

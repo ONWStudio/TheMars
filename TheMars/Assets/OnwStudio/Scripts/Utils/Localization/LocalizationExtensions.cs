@@ -11,9 +11,9 @@ namespace Onw.Localization
     {
         public static string GetLocalizedString(this StringTable table, string entryName)
         {
-            var entry = table.GetEntry(entryName);
+            StringTableEntry entry = table.GetEntry(entryName);
 
-            var comment = entry.GetMetadata<Comment>();
+            Comment comment = entry.GetMetadata<Comment>();
             if (comment is not null)
             {
                 Debug.Log($"Fount metadata comment for {entryName} - {comment.CommentText}");

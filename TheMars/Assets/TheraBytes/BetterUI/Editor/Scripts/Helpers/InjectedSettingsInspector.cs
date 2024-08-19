@@ -51,7 +51,7 @@ namespace TheraBytes.BetterUi.Editor
 
         public void Register(string displayName, string settingsPropName)
         {
-            var p = new SettingsProperty() 
+            SettingsProperty p = new SettingsProperty() 
             { 
                 Label = new GUIContent(displayName),
                 SettingsPropName = settingsPropName
@@ -62,7 +62,7 @@ namespace TheraBytes.BetterUi.Editor
 
         public void Register(string displayName, string settingsBoolName, string otherSettingsPropertyName)
         {
-            var p = new CheckWithProp()
+            CheckWithProp p = new CheckWithProp()
             {
                 Label = new GUIContent(displayName),
                 SettingsPropName = settingsBoolName,
@@ -74,7 +74,7 @@ namespace TheraBytes.BetterUi.Editor
 
         public void Register(string displayName, string settingsBoolName, string customSizersName, string sizerFallbackName)
         {
-            var p = new CheckWithSizer()
+            CheckWithSizer p = new CheckWithSizer()
             {
                 Label = new GUIContent(displayName),
                 SettingsPropName = settingsBoolName,
@@ -88,7 +88,7 @@ namespace TheraBytes.BetterUi.Editor
 
         public void RegisterSkipRest(string displayName, string settingsBoolName, bool valueToSkip)
         {
-            var p = new CheckToSkipRest()
+            CheckToSkipRest p = new CheckToSkipRest()
             {
                 Label = new GUIContent(displayName),
                 SettingsPropName = settingsBoolName, 
@@ -118,7 +118,7 @@ namespace TheraBytes.BetterUi.Editor
 
         public void DrawControls(string configName, SerializedProperty settings)
         {
-            foreach (var p in allControls)
+            foreach (SettingsProperty p in allControls)
             {
                 if(p == null)
                 {
@@ -162,7 +162,7 @@ namespace TheraBytes.BetterUi.Editor
 
         private void DeleteSettings(string configName, SerializedProperty property)
         {
-            foreach (var p in allControls.OfType<CheckWithSizer>())
+            foreach (CheckWithSizer p in allControls.OfType<CheckWithSizer>())
             {
                 int idx;
                 SerializedProperty sizersProp = FindSizer(configName, null, p.CustomSizers, out idx);
@@ -176,7 +176,7 @@ namespace TheraBytes.BetterUi.Editor
 
         private void AddSettings(string configName, SerializedProperty property)
         {
-            foreach (var p in allControls.OfType<CheckWithSizer>())
+            foreach (CheckWithSizer p in allControls.OfType<CheckWithSizer>())
             {
                 SerializedProperty sizersProp = FindSizer(configName, null, p.CustomSizers);
                 if (sizersProp == null)
@@ -185,7 +185,7 @@ namespace TheraBytes.BetterUi.Editor
                     SerializedProperty fallback = p.SizerFallback;
                     ScreenConfigConnectionHelper.AddSizerToList(configName, ref fallback, items);
 
-                    var configs = p.CustomSizers.GetValue<ISizeConfigCollection>();
+                    ISizeConfigCollection configs = p.CustomSizers.GetValue<ISizeConfigCollection>();
                     configs.MarkDirty();
                 }
             }
@@ -196,7 +196,7 @@ namespace TheraBytes.BetterUi.Editor
 
         private void RestoreSizerFallbackReferences()
         {
-            foreach(var p in allControls.OfType<CheckWithSizer>())
+            foreach(CheckWithSizer p in allControls.OfType<CheckWithSizer>())
             {
                 p.SizerFallback = serializedObject.FindProperty(p.SizerFallbackName);
             }

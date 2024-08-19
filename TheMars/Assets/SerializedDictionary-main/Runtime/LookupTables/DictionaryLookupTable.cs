@@ -20,7 +20,7 @@ namespace AYellowpaper.SerializedCollections
 
         public IReadOnlyList<int> GetOccurences(object key)
         {
-            if (key is TKey castKey && _occurences.TryGetValue(castKey, out var list))
+            if (key is TKey castKey && _occurences.TryGetValue(castKey, out List<int> list))
                 return list;
 
             return EmptyList;
@@ -33,7 +33,7 @@ namespace AYellowpaper.SerializedCollections
             int count = _dictionary._serializedList.Count;
             for (int i = 0; i < count; i++)
             {
-                var kvp = _dictionary._serializedList[i];
+                SerializedKeyValuePair<TKey, TValue> kvp = _dictionary._serializedList[i];
                 if (!SerializedCollectionsUtility.IsValidKey(kvp.Key))
                     continue;
 
@@ -48,7 +48,7 @@ namespace AYellowpaper.SerializedCollections
         {
             for (int i = _dictionary._serializedList.Count - 1; i >= 0; i--)
             {
-                var dictKey = _dictionary._serializedList[i].Key;
+                TKey dictKey = _dictionary._serializedList[i].Key;
                 if ((object)dictKey == key || dictKey.Equals(key))
                     _dictionary._serializedList.RemoveAt(i);
             }
@@ -74,7 +74,7 @@ namespace AYellowpaper.SerializedCollections
 
         public void AddKey(object key)
         {
-            var entry = new SerializedKeyValuePair<TKey, TValue>
+            SerializedKeyValuePair<TKey, TValue> entry = new SerializedKeyValuePair<TKey, TValue>
             {
                 Key = (TKey)key
             };

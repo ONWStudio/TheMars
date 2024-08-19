@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -40,8 +41,7 @@ namespace TMGUITool
                 {
                     if (!GUILayout.Button("새 카드 추가")) return;
 
-                    _cards.Add(ScriptableObjectHandler<TMCardData>.CreateScriptableObject(DATA_PATH, $"Card_No.{_cards.Count + 1}"));
-                    ScriptableObjectHandler<TMCardData>.SaveData(_cards[^1]);
+                    _cards.Add(ScriptableObjectHandler<TMCardData>.CreateScriptableObject(DATA_PATH, $"Card_No.{Guid.NewGuid().ToString()}"));
                 });
 
                 int page = Page - 1;

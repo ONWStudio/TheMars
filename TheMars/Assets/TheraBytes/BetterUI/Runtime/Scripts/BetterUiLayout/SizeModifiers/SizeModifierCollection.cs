@@ -123,7 +123,7 @@ namespace TheraBytes.BetterUi
             float max = (SizeModifiers.Count > 0) ? SizeModifiers.Max((o) => o.Impact) : 1;
             float scale = 0;
 
-            foreach (var entry in SizeModifiers)
+            foreach (SizeModifier entry in SizeModifiers)
             {
                 factor += entry.GetFactor(caller, optimizedRes, actualRes, optimizedDpi, actualDpi);
                 scale += entry.Impact / max;
@@ -162,7 +162,7 @@ namespace TheraBytes.BetterUi
 
             other.ExponentialScale = this.ExponentialScale;
 
-            foreach (var mod in this.SizeModifiers)
+            foreach (SizeModifier mod in this.SizeModifiers)
             {
                 other.SizeModifiers.Add(new SizeModifier(mod.Mode, mod.Impact));
             }

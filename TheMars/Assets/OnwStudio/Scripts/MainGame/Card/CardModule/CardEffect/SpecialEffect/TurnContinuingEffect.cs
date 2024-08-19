@@ -6,7 +6,7 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 지속 (턴)
     /// </summary>
-    public sealed class TurnContinuingEffect : TMCardSpecialEffect, ITMInitializableEffect<TurnContinuingEffectCreator>
+    public sealed class TurnContinuingEffect : TMCardSpecialEffect, ITMInitializeEffect<TurnContinuingEffectCreator>
     {
         /// <summary>
         /// .. 지속 할 턴
@@ -20,7 +20,7 @@ namespace TMCard.Effect
 
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            controller.OnClickEvent.RemoveAllToAddListener(() => onContinuingTurns(controller, ContinuingTurn));
+            controller.OnClickEvent.RemoveAllToAddListener(eventState => onContinuingTurns(controller, ContinuingTurn));
 
             static void onContinuingTurns(TMCardController card, int turn)
             {

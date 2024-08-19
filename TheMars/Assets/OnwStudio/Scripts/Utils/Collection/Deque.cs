@@ -32,14 +32,14 @@ namespace Onw.Collections
         public T PeekFirst()
         {
             if (_buffer.First == null) throw new InvalidOperationException("Deque empty");
-            var result = _buffer.First.Value;
+            T result = _buffer.First.Value;
             return result;
         }
 
         public T PeekLast()
         {
             if (_buffer.Last == null) throw new InvalidOperationException("Deque empty");
-            var result = _buffer.Last.Value;
+            T result = _buffer.Last.Value;
             return result;
 
         }
@@ -68,21 +68,21 @@ namespace Onw.Collections
 
         public T DequeueFirst()
         {
-            var result = PeekFirst();
+            T result = PeekFirst();
             _buffer.RemoveFirst();
             return result;
         }
 
         public T DequeueLast()
         {
-            var result = PeekLast();
+            T result = PeekLast();
             _buffer.RemoveLast();
             return result;
         }
 
         public bool TryDequeueFirst(out T result)
         {
-            var canDeque = TryPeekFirst(out result);
+            bool canDeque = TryPeekFirst(out result);
             if (canDeque)
             {
                 _buffer.RemoveFirst();
@@ -92,7 +92,7 @@ namespace Onw.Collections
 
         public bool TryDequeueLast(out T result)
         {
-            var canDeque = TryPeekLast(out result);
+            bool canDeque = TryPeekLast(out result);
             if (canDeque)
             {
                 _buffer.RemoveLast();

@@ -94,7 +94,7 @@ namespace Onw.Attribute.Editor
         {
             _itemsMap.Clear();
             _itemContentMap.Clear();
-            var root = new TreeViewItem(0, -1, "root");
+            TreeViewItem root = new TreeViewItem(0, -1, "root");
 
             if (_filterType == typeof(GameObject))
             {
@@ -102,7 +102,7 @@ namespace Onw.Attribute.Editor
             }
             else
             {
-                var rootItem = createItem(_rootObject, 0);
+                TreeViewItem rootItem = createItem(_rootObject, 0);
 
                 Dictionary<GameObject, TreeViewItem> visited = new() { { _rootObject, rootItem } };
                 foreach (Component component in _rootObject.GetComponentsInChildren(_filterType))
@@ -134,7 +134,7 @@ namespace Onw.Attribute.Editor
 
         protected override IList<TreeViewItem> BuildRows(TreeViewItem root)
         {
-            var rows = base.BuildRows(root);
+            IList<TreeViewItem> rows = base.BuildRows(root);
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -146,7 +146,7 @@ namespace Onw.Attribute.Editor
 
         protected override void RowGUI(RowGUIArgs args)
         {
-            var item = args.item;
+            TreeViewItem item = args.item;
 
             Rect labelRect = new(
                 args.rowRect.x + (string.IsNullOrEmpty(searchString) ? EditorGUIUtility.singleLineHeight + (args.item.depth * EditorGUIUtility.singleLineHeight) : 0),
@@ -190,7 +190,7 @@ namespace Onw.Attribute.Editor
             }
 
             return _filterType == _defaultType ||
-                   !_itemsMap.TryGetValue(item.id, out var gameObject) ||
+                   !_itemsMap.TryGetValue(item.id, out GameObject gameObject) ||
                    !gameObject.TryGetComponent(_filterType, out Component component) ?
                 _gameObjectImage :
                 getFilterTypeToTexture(component);
@@ -208,7 +208,7 @@ namespace Onw.Attribute.Editor
                 return;
             }
 
-            var gameObjectItem = createItem(selectedObject, 0);
+            TreeViewItem gameObjectItem = createItem(selectedObject, 0);
             visited.Add(selectedObject, gameObjectItem);
             if (prevItem is not null)
             {
@@ -220,7 +220,7 @@ namespace Onw.Attribute.Editor
 
         private void addGameObjectToDropdown(TreeViewItem parent, GameObject gameObject, int depth = 0)
         {
-            var gameObjectItem = createItem(gameObject, depth);
+            TreeViewItem gameObjectItem = createItem(gameObject, depth);
 
             parent.AddChild(gameObjectItem);
             _itemsMap.Add(gameObjectItem.id, gameObject);

@@ -26,6 +26,19 @@ namespace TMCard.Runtime
         [field: SerializeField] public SafeUnityEvent<Transform> OnChangedParent { get; private set; } = new();
         [field: SerializeField, InitializeRequireComponent] public RectTransform RectTransform { get; private set; }
 
+        [field: FormerlySerializedAs("_inputHandler")]
+        [field: FormerlySerializedAs("inputHandler")]
+        [field: Header("Input Handler")]
+        [field: SerializeField, InitializeRequireComponent]
+        public TMCardInputHandler InputHandler { get; private set; }
+        
+        [field: FormerlySerializedAs("_smoothMove")]
+        [field: FormerlySerializedAs("smoothMove")]
+        [field: Space]
+        [field: Header("Require Option")]
+        [field: SerializeField, SelectableSerializeField]
+        public Vector2SmoothMover SmoothMove { get; private set; }
+        
         public IReadOnlyList<ITMCardEffect> Effects => _cardEffects;
 
         public CardEvent OnClickEvent { get; } = new();
@@ -33,17 +46,6 @@ namespace TMCard.Runtime
         public CardEvent OnDrawEndedEvent { get; } = new();
         public CardEvent OnTurnEndedEvent { get; } = new();
         public CardEvent OnEffectEvent { get; } = new();
-
-        [FormerlySerializedAs("inputHandler")]
-        [Header("Input Handler")]
-        [SerializeField, InitializeRequireComponent]
-        private TMCardInputHandler _inputHandler;
-
-        [FormerlySerializedAs("smoothMove")]
-        [Space]
-        [Header("Require Option")]
-        [SerializeField, SelectableSerializeField]
-        private Vector2SmoothMover _smoothMove;
 
         private readonly List<ITMCardEffect> _cardEffects = new();
         private bool _isInit;
@@ -59,16 +61,16 @@ namespace TMCard.Runtime
 
             _isInit = true;
 
-            initalizeInputHandle();
+            initializeInputHandle();
             initializeSmoothMove();
 
-            OnClickEvent.AddListener(() =>
+            OnClickEvent.AddListener(eventState =>
             {
                 this.MoveToScreenCenterAfterToTomb();
-                OnEffectEvent.Invoke();
+                OnEffectEvent.Invoke(eventState);
             });
 
-            OnTurnEndedEvent.AddListener(this.MoveToTomb);
+            OnTurnEndedEvent.AddListener(eventState => this.MoveToTomb());
             CardData.ApplyEffect(this);
         }
 
@@ -83,12 +85,12 @@ namespace TMCard.Runtime
         /// </summary>
         public void OnDrawBegin()
         {
-            OnDrawBeginEvent.Invoke();
+            OnDrawBeginEvent.Invoke(CardEventState.DRAW);
         }
 
         public void OnDrawEnded()
         {
-            OnDrawEndedEvent.Invoke();
+            OnDrawEndedEvent.Invoke(CardEventState.DRAW);
         }
 
         /// <summary>
@@ -96,7 +98,7 @@ namespace TMCard.Runtime
         /// </summary>
         public void OnTurnEnd()
         {
-            OnTurnEndedEvent.Invoke();
+            OnTurnEndedEvent.Invoke(CardEventState.TURN_END);
         }
 
         /// <summary>
@@ -105,28 +107,28 @@ namespace TMCard.Runtime
         /// <param name="isOn"> .. 카드의 상호작용 상태를 전환시킬 boolen 값 </param>
         public void SetOn(bool isOn)
         {
-            _smoothMove.enabled = isOn;
+            SmoothMove.enabled = isOn;
 
             if (!isOn)
             {
-                _smoothMove.transform.localPosition = Vector3.zero;
+                SmoothMove.transform.localPosition = Vector3.zero;
             }
         }
 
         private void initializeSmoothMove()
         {
-            _smoothMove.IsLocal = true;
+            SmoothMove.IsLocal = true;
         }
 
-        private void initalizeInputHandle()
+        private void initializeInputHandle()
         {
-            _inputHandler.AddListenerPointerEnterAction(pointerEventData =>
-                _smoothMove.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f));
+            InputHandler.AddListenerPointerEnterAction(pointerEventData =>
+                SmoothMove.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f));
 
-            _inputHandler.AddListenerPointerExitAction(pointerEventData
-                => _smoothMove.TargetPosition = Vector2.zero);
+            InputHandler.AddListenerPointerExitAction(pointerEventData
+                => SmoothMove.TargetPosition = Vector2.zero);
 
-            _inputHandler.AddListenerPointerClickAction(OnClickCard);
+            InputHandler.AddListenerPointerClickAction(OnClickCard);
         }
 
         /// <summary>
@@ -136,10 +138,10 @@ namespace TMCard.Runtime
         /// <param name="pointerEventData"></param>
         private void OnClickCard(PointerEventData pointerEventData)
         {
-            if (!ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
+            if (!SmoothMove.enabled || !ServiceLocator<ITMCardService>.TryGetService(out ITMCardService service)) return;
             // if (!CardData.IsAvailable(1)) return;
 
-            OnClickEvent.Invoke();
+            OnClickEvent.Invoke(CardEventState.NORMAL);
             service.OnClickCard(this);
         }
     }

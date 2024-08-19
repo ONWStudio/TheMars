@@ -135,7 +135,7 @@ namespace TheraBytes.BetterUi
         {
             yield return null;
 
-            var settings = customSettings.GetCurrentItem(settingsFallback);
+            Settings settings = customSettings.GetCurrentItem(settingsFallback);
             Recalculate(settings);
 
             // let all children recalculate now
@@ -262,7 +262,7 @@ namespace TheraBytes.BetterUi
 
         public void InformChildren()
         {
-            var resDeps = this.GetComponentsInChildren<Component>().OfType<IResolutionDependency>();
+            IEnumerable<IResolutionDependency> resDeps = this.GetComponentsInChildren<Component>().OfType<IResolutionDependency>();
             foreach (IResolutionDependency comp in resDeps)
             {
                 if (comp.Equals(this))

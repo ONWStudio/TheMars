@@ -2,9 +2,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using Onw.Feedback;
 using Onw.Event;
+using TMCard.UI;
 
 namespace TMCard.Runtime
 {
+
+    
     public interface ITMCardService : IFeedbackPlayer
     {
         int HandCardCount { get; }
@@ -17,6 +20,8 @@ namespace TMCard.Runtime
          TMCardDeckController CardDeckController { get; }
         // .. 무덤
          TMCardTombController CardTombController { get; }
+         
+         TMCardCollectUI CollectUI { get; }
          SafeUnityEvent OnTurnEnd { get; }
          SafeUnityEvent<TMCardController> OnUsedCard { get; }
          Camera CardSystemCamera { get; }

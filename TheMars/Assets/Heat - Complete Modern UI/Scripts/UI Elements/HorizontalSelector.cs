@@ -373,7 +373,7 @@ namespace Michsky.UI.Heat
 
         public void RemoveItem(string itemTitle)
         {
-            var item = items.Find(x => x.itemTitle == itemTitle);
+            Item item = items.Find(x => x.itemTitle == itemTitle);
             items.Remove(item);
             InitializeSelector();
         }

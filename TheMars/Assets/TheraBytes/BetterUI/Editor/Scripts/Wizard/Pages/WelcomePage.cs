@@ -20,7 +20,7 @@ namespace TheraBytes.BetterUi.Editor
 
         protected override void OnInitialize()
         {
-            var data = wizard.PersistentData;
+            PersistentWizardData data = wizard.PersistentData;
 
             Add(new InfoWizardPageElement(new GUIContent(Resources.Load<Texture2D>("wizard_banner"))));
             Add(new InfoWizardPageElement("Welcome", InfoType.Header));

@@ -16,7 +16,7 @@ namespace UniRx.Examples
         {
             yield return new WaitForSeconds(1);
 
-            var v = default(int);
+            int v = default(int);
             yield return Observable.Range(1, 10).StartAsCoroutine(x => v = x);
 
             Debug.Log(v); // 10(callback is last value)
@@ -44,7 +44,7 @@ namespace UniRx.Examples
             yield return Observable.Timer(TimeSpan.FromSeconds(1), Scheduler.MainThreadIgnoreTimeScale).ToYieldInstruction();
 
             // get return value from ObservableYieldInstruction
-            var o = ObservableWWW.Get("http://unity3d.com/").ToYieldInstruction(throwOnError: false);
+            ObservableYieldInstruction<string> o = ObservableWWW.Get("http://unity3d.com/").ToYieldInstruction(throwOnError: false);
             yield return o;
 
             if (o.HasError) { Debug.Log(o.Error.ToString()); }

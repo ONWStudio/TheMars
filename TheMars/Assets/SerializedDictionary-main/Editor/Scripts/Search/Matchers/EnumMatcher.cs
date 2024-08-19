@@ -7,9 +7,9 @@ namespace AYellowpaper.SerializedCollections.Editor.Search
     {
         public override bool IsMatch(SerializedProperty property)
         {
-            if (property.propertyType == SerializedPropertyType.Enum && SCEditorUtility.TryGetTypeFromProperty(property, out var type))
+            if (property.propertyType == SerializedPropertyType.Enum && SCEditorUtility.TryGetTypeFromProperty(property, out Type type))
             {
-                foreach (var text in SCEnumUtility.GetEnumCache(type).GetNamesForValue(property.enumValueFlag))
+                foreach (string text in SCEnumUtility.GetEnumCache(type).GetNamesForValue(property.enumValueFlag))
                 {
                     if (text.Contains(SearchString, StringComparison.OrdinalIgnoreCase))
                         return true;

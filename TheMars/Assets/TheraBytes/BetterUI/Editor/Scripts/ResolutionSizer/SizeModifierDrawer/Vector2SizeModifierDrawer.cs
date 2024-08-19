@@ -12,10 +12,10 @@ namespace TheraBytes.BetterUi.Editor
     {
         protected override void DrawModifiers(SerializedProperty property)
         {
-            var modx = property.FindPropertyRelative("ModX");
+            SerializedProperty modx = property.FindPropertyRelative("ModX");
             DrawModifierList(modx, "X Modification");
 
-            var mody = property.FindPropertyRelative("ModY");
+            SerializedProperty mody = property.FindPropertyRelative("ModY");
             DrawModifierList(mody, "Y Modification");
         }
 

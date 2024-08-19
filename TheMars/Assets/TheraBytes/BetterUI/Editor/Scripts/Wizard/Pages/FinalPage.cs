@@ -20,7 +20,7 @@ namespace TheraBytes.BetterUi.Editor
 
         protected override void OnInitialize()
         {
-            var data = wizard.PersistentData;
+            PersistentWizardData data = wizard.PersistentData;
 
             Add(new InfoWizardPageElement("Setup Complete!", InfoType.Header));
             Add(new InfoWizardPageElement("Thank you for choosing Better UI."));

@@ -23,7 +23,7 @@ namespace TheraBytes.BetterUi.Editor
         {
             get
             {
-                var packages = base.elements.OfType<InstallPackageSelectionWizardPageElement>();
+                IEnumerable<InstallPackageSelectionWizardPageElement> packages = base.elements.OfType<InstallPackageSelectionWizardPageElement>();
                 bool installAny = packages.Any(o => o.SelectionState == InstallSelectionState.Install);
                 bool removeAny = packages.Any(o => o.SelectionState == InstallSelectionState.Remove);
 
@@ -113,7 +113,7 @@ namespace TheraBytes.BetterUi.Editor
 
         protected override void NextButtonClicked()
         {
-            var items = elements.OfType<InstallPackageSelectionWizardPageElement>();
+            IEnumerable<InstallPackageSelectionWizardPageElement> items = elements.OfType<InstallPackageSelectionWizardPageElement>();
 
             if (items.All(o => o.SelectionState == InstallSelectionState.None))
             {
@@ -127,7 +127,7 @@ namespace TheraBytes.BetterUi.Editor
                 if (customScreenTagExample.SelectionState == InstallSelectionState.Install
                     && !ResolutionMonitor.Instance.OptimizedScreens.Any(x => x.Name == "Accessibility Mode"))
                 {
-                    var screenCondition = new ScreenTypeConditions("Accessibility Mode");
+                    ScreenTypeConditions screenCondition = new ScreenTypeConditions("Accessibility Mode");
                     screenCondition.CheckScreenTag.IsActive = true;
                     screenCondition.CheckScreenTag.ScreenTag = "Accessibility_Mode";
 
@@ -136,7 +136,7 @@ namespace TheraBytes.BetterUi.Editor
                     AssetDatabase.SaveAssets();
                 }
 
-                foreach (var itm in items)
+                foreach (InstallPackageSelectionWizardPageElement itm in items)
                 {
                     switch (itm.SelectionState)
                     {
@@ -173,7 +173,7 @@ namespace TheraBytes.BetterUi.Editor
             string package = Path.Combine(Application.dataPath, string.Format("TheraBytes/BetterUI/packages/Example_{0}.unitypackage", exampleName));
             string folder = Path.Combine(Application.dataPath, string.Format("TheraBytes/BetterUI/Example/{0}", exampleName));
 
-            var result = new InstallPackageSelectionWizardPageElement(exampleName, package, folder);
+            InstallPackageSelectionWizardPageElement result = new InstallPackageSelectionWizardPageElement(exampleName, package, folder);
             result.MarkComplete();
 
             return result;
@@ -186,7 +186,7 @@ namespace TheraBytes.BetterUi.Editor
 
         private bool IsFallbackPortrait()
         {
-            var fallback = ResolutionMonitor.OptimizedResolutionFallback;
+            Vector2 fallback = ResolutionMonitor.OptimizedResolutionFallback;
             return fallback.x < fallback.y;
         }
     }

@@ -156,15 +156,15 @@ namespace TheraBytes.BetterUi.Editor
             if (image.type == UnityEngine.UI.Image.Type.Sliced)
             {
 
-                var prop = serializedObject.FindProperty("keepBorderAspectRatio");
+                SerializedProperty prop = serializedObject.FindProperty("keepBorderAspectRatio");
                 EditorGUILayout.PropertyField(prop);
                 serializedObject.ApplyModifiedProperties();
             }
 
             if(image.type == Image.Type.Sliced || image.type == Image.Type.Tiled)
             {
-                var prop = serializedObject.FindProperty("spriteBorderScaleFallback");
-                var collection = serializedObject.FindProperty("customBorderScales");
+                SerializedProperty prop = serializedObject.FindProperty("spriteBorderScaleFallback");
+                SerializedProperty collection = serializedObject.FindProperty("customBorderScales");
                 //EditorGUILayout.PropertyField(prop);
 
                 ScreenConfigConnectionHelper.DrawSizerGui("Border Scale", collection, ref prop);
@@ -345,9 +345,9 @@ namespace TheraBytes.BetterUi.Editor
         public static void MakeBetter(MenuCommand command)
         {
             Image img = command.context as Image;
-            var newImg = Betterizer.MakeBetter<Image, BetterImage>(img);
-            var sprite = img.sprite;
-            var col = img.color;
+            Image newImg = Betterizer.MakeBetter<Image, BetterImage>(img);
+            Sprite sprite = img.sprite;
+            Color col = img.color;
             
             if(newImg != null)
             {

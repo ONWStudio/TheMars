@@ -67,7 +67,7 @@ namespace TheraBytes.BetterUi.Editor
 
             EditorGUILayout.BeginVertical();
 
-            foreach (var btn in buttons)
+            foreach (ButtonInfo btn in buttons)
             {
                 btn.Draw(ButtonWidth);
             }

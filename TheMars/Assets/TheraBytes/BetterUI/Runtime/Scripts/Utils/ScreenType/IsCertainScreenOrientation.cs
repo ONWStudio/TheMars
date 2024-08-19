@@ -30,7 +30,7 @@ namespace TheraBytes.BetterUi
 
         public bool IsScreenType()
         {
-            var res = ResolutionMonitor.CurrentResolution;
+            Vector2 res = ResolutionMonitor.CurrentResolution;
 
             switch (expectedOrientation)
             {

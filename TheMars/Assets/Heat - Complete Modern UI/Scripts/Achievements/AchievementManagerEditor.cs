@@ -21,23 +21,23 @@ namespace Michsky.UI.Heat
 
         public override void OnInspectorGUI()
         {
-            var UIManagerAsset = serializedObject.FindProperty("UIManagerAsset");
-            var allParent = serializedObject.FindProperty("allParent");
-            var commonParent = serializedObject.FindProperty("commonParent");
-            var rareParent = serializedObject.FindProperty("rareParent");
-            var legendaryParent = serializedObject.FindProperty("legendaryParent");
-            var achievementPreset = serializedObject.FindProperty("achievementPreset");
-            var totalUnlockedObj = serializedObject.FindProperty("totalUnlockedObj");
-            var totalValueObj = serializedObject.FindProperty("totalValueObj");
-            var commonUnlockedObj = serializedObject.FindProperty("commonUnlockedObj");
-            var commonlTotalObj = serializedObject.FindProperty("commonlTotalObj");
-            var rareUnlockedObj = serializedObject.FindProperty("rareUnlockedObj");
-            var rareTotalObj = serializedObject.FindProperty("rareTotalObj");
-            var legendaryUnlockedObj = serializedObject.FindProperty("legendaryUnlockedObj");
-            var legendaryTotalObj = serializedObject.FindProperty("legendaryTotalObj");
+            SerializedProperty UIManagerAsset = serializedObject.FindProperty("UIManagerAsset");
+            SerializedProperty allParent = serializedObject.FindProperty("allParent");
+            SerializedProperty commonParent = serializedObject.FindProperty("commonParent");
+            SerializedProperty rareParent = serializedObject.FindProperty("rareParent");
+            SerializedProperty legendaryParent = serializedObject.FindProperty("legendaryParent");
+            SerializedProperty achievementPreset = serializedObject.FindProperty("achievementPreset");
+            SerializedProperty totalUnlockedObj = serializedObject.FindProperty("totalUnlockedObj");
+            SerializedProperty totalValueObj = serializedObject.FindProperty("totalValueObj");
+            SerializedProperty commonUnlockedObj = serializedObject.FindProperty("commonUnlockedObj");
+            SerializedProperty commonlTotalObj = serializedObject.FindProperty("commonlTotalObj");
+            SerializedProperty rareUnlockedObj = serializedObject.FindProperty("rareUnlockedObj");
+            SerializedProperty rareTotalObj = serializedObject.FindProperty("rareTotalObj");
+            SerializedProperty legendaryUnlockedObj = serializedObject.FindProperty("legendaryUnlockedObj");
+            SerializedProperty legendaryTotalObj = serializedObject.FindProperty("legendaryTotalObj");
 
-            var useLocalization = serializedObject.FindProperty("useLocalization");
-            var useAlphabeticalOrder = serializedObject.FindProperty("useAlphabeticalOrder");
+            SerializedProperty useLocalization = serializedObject.FindProperty("useLocalization");
+            SerializedProperty useAlphabeticalOrder = serializedObject.FindProperty("useAlphabeticalOrder");
 
             HeatUIEditorHandler.DrawHeader(customSkin, "Content Header", 6);
             HeatUIEditorHandler.DrawProperty(UIManagerAsset, customSkin, "UI Manager");

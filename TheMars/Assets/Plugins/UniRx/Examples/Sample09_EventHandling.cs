@@ -44,7 +44,7 @@ namespace UniRx.Examples
                 .AddTo(disposables);
 
             // AOT Safe EventHandling, use dummy capture, see:https://github.com/neuecc/UniRx/wiki/AOT-Exception-Patterns-and-Hacks
-            var capture = 0;
+            int capture = 0;
             Observable.FromEventPattern<EventHandler<MyEventArgs>, MyEventArgs>(h =>
                 {
                     capture.GetHashCode(); // dummy for AOT

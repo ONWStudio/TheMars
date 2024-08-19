@@ -67,7 +67,7 @@ namespace AddressableAssetBundleSpace
                 return;
             }
 
-            foreach (var entry in group.entries)
+            foreach (AddressableAssetEntry entry in group.entries)
             {
                 if (entry.address != address) continue;
 

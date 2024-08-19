@@ -23,27 +23,27 @@ namespace AYellowpaper.SerializedCollections.Editor.Search
             }
             else if (property.propertyType == SerializedPropertyType.Quaternion)
             {
-                var quat = property.quaternionValue;
+                Quaternion quat = property.quaternionValue;
                 return IsFloatMatch(quat.x) || IsFloatMatch(quat.y) || IsFloatMatch(quat.z) || IsFloatMatch(quat.w);
             }
             else if (property.propertyType == SerializedPropertyType.Bounds)
             {
-                var bounds = property.boundsValue;
+                Bounds bounds = property.boundsValue;
                 return IsVector3Match(bounds.center) || IsVector3Match(bounds.size);
             }
             else if (property.propertyType == SerializedPropertyType.BoundsInt)
             {
-                var bounds = property.boundsIntValue;
+                BoundsInt bounds = property.boundsIntValue;
                 return IsVector3Match(bounds.center) || IsVector3IntMatch(bounds.size);
             }
             else if (property.propertyType == SerializedPropertyType.Rect)
             {
-                var rect = property.rectValue;
+                Rect rect = property.rectValue;
                 return IsVector2Match(rect.size) || IsVector2Match(rect.position);
             }
             else if (property.propertyType == SerializedPropertyType.RectInt)
             {
-                var rect = property.rectIntValue;
+                RectInt rect = property.rectIntValue;
                 return IsVector2IntMatch(rect.size) || IsVector2IntMatch(rect.position);
             }
             else if (property.propertyType == SerializedPropertyType.Vector2)
@@ -71,13 +71,13 @@ namespace AYellowpaper.SerializedCollections.Editor.Search
 
         private bool IsFloatMatch(float val)
         {
-            var str = val.ToString(CultureInfo.InvariantCulture);
+            string str = val.ToString(CultureInfo.InvariantCulture);
             return str.Contains(SearchString, System.StringComparison.OrdinalIgnoreCase);
         }
 
         private bool IsIntMatch(int val)
         {
-            var str = val.ToString(CultureInfo.InvariantCulture);
+            string str = val.ToString(CultureInfo.InvariantCulture);
             return str.Contains(SearchString, System.StringComparison.OrdinalIgnoreCase);
         }
 

@@ -2,8 +2,9 @@
 
 using System;
 using System.Diagnostics;
-using System.Timers;
+using System.Threading;
 using UnityEngine;
+using Timer = System.Timers.Timer;
 
 // There are 3 conditions for working gamepad support in Nice Vibrations:
 //
@@ -158,7 +159,7 @@ namespace Lofelt.NiceVibrations
 #if ((!UNITY_ANDROID && !UNITY_IOS) || UNITY_EDITOR) && NICE_VIBRATIONS_INPUTSYSTEM_INSTALLED && ENABLE_INPUT_SYSTEM && !NICE_VIBRATIONS_DISABLE_GAMEPAD_SUPPORT
             // Initialize rumbleTimer, so that ProcessNextRumble() will be called on the main thread
             // when the timer is triggered.
-            var syncContext = System.Threading.SynchronizationContext.Current;
+            SynchronizationContext syncContext = System.Threading.SynchronizationContext.Current;
             rumbleTimer.Elapsed += (object obj, System.Timers.ElapsedEventArgs args) =>
             {
                 syncContext.Post(_ =>

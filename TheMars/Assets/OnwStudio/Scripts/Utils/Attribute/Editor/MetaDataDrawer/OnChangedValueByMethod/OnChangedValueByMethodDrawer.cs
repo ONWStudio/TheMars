@@ -94,7 +94,7 @@ namespace Onw.Editor
             {
                 StringBuilder builder = new();
                 string key = _prevProperties[i].Key;
-                var propertyMethodPair = _observerMethods[key];
+                PropertyMethodPair propertyMethodPair = _observerMethods[key];
                 object target = propertyMethodPair.TargetField.GetValue(propertyMethodPair.TargetInstance);
                 bool isCollection = false;
 
@@ -130,7 +130,7 @@ namespace Onw.Editor
 
             static string computeCollectionState(ICollection collection)
             {
-                var elementStates = collection.Cast<object>().Select(e => e?.GetHashCode().ToString() ?? "null");
+                IEnumerable<string> elementStates = collection.Cast<object>().Select(e => e?.GetHashCode().ToString() ?? "null");
                 return string.Join(",", elementStates);
             }
         }

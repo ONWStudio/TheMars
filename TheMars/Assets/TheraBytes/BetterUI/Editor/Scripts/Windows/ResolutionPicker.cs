@@ -34,7 +34,7 @@ namespace TheraBytes.BetterUi.Editor
                 Assembly ass = typeof(EditorApplication).Assembly;
                 Type t = ass.GetType("UnityEditor.GameViewSize");
                 Type sizeType = ass.GetType("UnityEditor.GameViewSizeType");
-                var constructor = t.GetConstructor(new Type[] { sizeType, typeof(int), typeof(int), typeof(string) });
+                ConstructorInfo constructor = t.GetConstructor(new Type[] { sizeType, typeof(int), typeof(int), typeof(string) });
                 return constructor.Invoke(new object[] { (isAspectRatio) ? 0 : 1, width, height, baseText });
             }
         }
@@ -48,7 +48,7 @@ namespace TheraBytes.BetterUi.Editor
         {
             assembly = typeof(EditorWindow).Assembly;
 
-            var win = EditorWindow.GetWindow<ResolutionPicker>("Pick Resolution") as ResolutionPicker;
+            ResolutionPicker win = EditorWindow.GetWindow<ResolutionPicker>("Pick Resolution") as ResolutionPicker;
             win.minSize = new Vector2(20, 40);
             win.RefreshSizes();
         }
@@ -146,8 +146,8 @@ namespace TheraBytes.BetterUi.Editor
             DrawToolStrip(); // settings
 
             EditorGUILayout.Separator();
-            var style = (useBigButtons) ? GUI.skin.button : EditorStyles.toolbarButton;
-            var prevAlign = style.alignment;
+            GUIStyle style = (useBigButtons) ? GUI.skin.button : EditorStyles.toolbarButton;
+            TextAnchor prevAlign = style.alignment;
             style.alignment = TextAnchor.MiddleLeft;
             style.fontSize = 10;
 
@@ -160,7 +160,7 @@ namespace TheraBytes.BetterUi.Editor
                     EditorGUILayout.Separator();
                 }
 
-                var size = sizes[i];
+                GameViewSize size = sizes[i];
 
                 if (!(AllowedToShow(size)))
                     continue;
@@ -231,13 +231,13 @@ namespace TheraBytes.BetterUi.Editor
 
                 if (GUILayout.Button(ResolutionMonitor.Instance.FallbackName + " (Fallback)", style))
                 {
-                    var resolution = ResolutionMonitor.OptimizedResolutionFallback;
+                    Vector2 resolution = ResolutionMonitor.OptimizedResolutionFallback;
                     applyScreenConfig(null, (int)resolution.x, (int)resolution.y);
                 }
 
                 EditorGUILayout.Space();
 
-                foreach (var config in ResolutionMonitor.Instance.OptimizedScreens)
+                foreach (ScreenTypeConditions config in ResolutionMonitor.Instance.OptimizedScreens)
                 {
                     if (GUILayout.Button(ResolutionMonitorEditor.GetButtonText(config), style))
                     {
@@ -272,7 +272,7 @@ namespace TheraBytes.BetterUi.Editor
 
                 Assembly ass = typeof(EditorApplication).Assembly;
                 Type gameViewSizesType = ass.GetType("UnityEditor.GameViewSizes");
-                var singleType = typeof(ScriptableSingleton<>).MakeGenericType(gameViewSizesType);
+                Type singleType = typeof(ScriptableSingleton<>).MakeGenericType(gameViewSizesType);
                 PropertyInfo gameViewSizesInfo = singleType.GetProperty("instance");
                 object gameViewSizes = gameViewSizesInfo.GetValue(null, new object[] { });
 
@@ -296,16 +296,16 @@ namespace TheraBytes.BetterUi.Editor
 
         private void SetResolution(GameViewSize size)
         {
-            var type = gameView.GetType();
+            Type type = gameView.GetType();
             selectedIndex.SetValue(gameView, size.index, null);
 
             if (ResolutionMonitor.IsZoomPossible())
             {
-                var method = type.GetMethod("UpdateZoomAreaAndParent", BindingFlags.Instance | BindingFlags.NonPublic);
+                MethodInfo method = type.GetMethod("UpdateZoomAreaAndParent", BindingFlags.Instance | BindingFlags.NonPublic);
                 method.Invoke(gameView, null);
             }
 
-            var resizedNotifyMethod = type.GetMethod("OnResized", BindingFlags.Instance | BindingFlags.NonPublic);
+            MethodInfo resizedNotifyMethod = type.GetMethod("OnResized", BindingFlags.Instance | BindingFlags.NonPublic);
             resizedNotifyMethod.Invoke(gameView, null);
 
             SceneView.RepaintAll();

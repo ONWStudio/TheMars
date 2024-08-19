@@ -54,5 +54,6 @@ MonoBehaviour:
     - rid: 4776280985179258918
       type: {class: TMCardCopyEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
       data:
-        <CopyCardData>k__BackingField: {fileID: 0}
+        <CopyCardData>k__BackingField: {fileID: 11400000, guid: 33ed742e206ab4f4082990d2aab36a80,
+          type: 2}
         <CopyCount>k__BackingField: 1

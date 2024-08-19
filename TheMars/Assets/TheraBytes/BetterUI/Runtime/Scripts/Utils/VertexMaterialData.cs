@@ -81,7 +81,7 @@ namespace TheraBytes.BetterUi
             if (prop == null)
                 return;
 
-            foreach (var item in prop)
+            foreach (Property<T> item in prop)
             {
                 item.SetValue(ref uvX, ref uvY, ref tangentW);
             }

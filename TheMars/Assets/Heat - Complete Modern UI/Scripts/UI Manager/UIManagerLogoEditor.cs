@@ -20,8 +20,8 @@ namespace Michsky.UI.Heat
 
         public override void OnInspectorGUI()
         {
-            var UIManagerAsset = serializedObject.FindProperty("UIManagerAsset");
-            var logoType = serializedObject.FindProperty("logoType");
+            SerializedProperty UIManagerAsset = serializedObject.FindProperty("UIManagerAsset");
+            SerializedProperty logoType = serializedObject.FindProperty("logoType");
 
             HeatUIEditorHandler.DrawHeader(customSkin, "Core Header", 6);
             HeatUIEditorHandler.DrawProperty(UIManagerAsset, customSkin, "UI Manager");

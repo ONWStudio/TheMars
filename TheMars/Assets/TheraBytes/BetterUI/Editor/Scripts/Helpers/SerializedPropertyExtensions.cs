@@ -95,7 +95,7 @@ namespace TheraBytes.BetterUi.Editor
             int idx;
             if (int.TryParse(fieldName, out idx))
             {
-                var method = obj.GetType().GetMethod("get_Item", bindings);
+                MethodInfo method = obj.GetType().GetMethod("get_Item", bindings);
                 if (method != null)
                     return (T)method.Invoke(obj, new object[] { idx });
             }

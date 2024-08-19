@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -26,7 +27,7 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
         private void OnEnable()
         {
             VisualTreeAsset document = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Plugins/SerializedCollections/Editor/Assets/KeysGeneratorSelectorWindow.uxml");
-            var element = document.CloneTree();
+            TemplateContainer element = document.CloneTree();
             element.style.height = new StyleLength(new Length(100, LengthUnit.Percent));
             rootVisualElement.Add(element);
         }
@@ -47,23 +48,23 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
             rootVisualElement.Q<RadioButton>(name = "remove-modification").userData = ModificationType.Remove;
             rootVisualElement.Q<RadioButton>(name = "confine-modification").userData = ModificationType.Confine;
 
-            var modificationToggles = rootVisualElement.Query<RadioButton>(className: "sc-modification-toggle");
+            UQueryBuilder<RadioButton> modificationToggles = rootVisualElement.Query<RadioButton>(className: "sc-modification-toggle");
             modificationToggles.ForEach(InitializeModificationToggle);
 
             rootVisualElement.Q<IMGUIContainer>(name = "imgui-inspector").onGUIHandler = EditorGUIHandler;
             rootVisualElement.Q<Button>(name = "apply-button").clicked += ApplyButtonClicked;
 
-            var generatorsContent = rootVisualElement.Q<ScrollView>(name = "generators-content");
-            var radioButtonGroup = new RadioButtonGroup();
+            ScrollView generatorsContent = rootVisualElement.Q<ScrollView>(name = "generators-content");
+            RadioButtonGroup radioButtonGroup = new RadioButtonGroup();
             radioButtonGroup.name = "generators-group";
             radioButtonGroup.AddToClassList("sc-radio-button-group");
             generatorsContent.Add(radioButtonGroup);
 
             for (int i = 0; i < _generatorsData.Count; i++)
             {
-                var generatorData = _generatorsData[i];
+                KeyListGeneratorData generatorData = _generatorsData[i];
 
-                var radioButton = new RadioButton(generatorData.Name);
+                RadioButton radioButton = new RadioButton(generatorData.Name);
                 radioButton.value = i == 0;
                 radioButton.AddToClassList("sc-text-toggle");
                 radioButton.AddToClassList("sc-generator-toggle");
@@ -102,15 +103,15 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
             if (!evt.newValue)
                 return;
 
-            var modificationType = (ModificationType)((VisualElement)evt.target).userData;
+            ModificationType modificationType = (ModificationType)((VisualElement)evt.target).userData;
             _modificationType = modificationType;
         }
 
         private void UpdateDetailsText()
         {
-            var enumerable = _generator.GetKeys(_targetType);
+            IEnumerable enumerable = _generator.GetKeys(_targetType);
             int count = 0;
-            var enumerator = enumerable.GetEnumerator();
+            IEnumerator enumerator = enumerable.GetEnumerator();
             while (enumerator.MoveNext())
             {
                 count++;
@@ -129,7 +130,7 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
         {
             Undo.undoRedoPerformed -= HandleUndoCallback;
             Undo.RevertAllDownToGroup(_undoStart);
-            foreach (var keyGenerator in _keysGenerators)
+            foreach (KeyValuePair<Type, KeyListGenerator> keyGenerator in _keysGenerators)
                 DestroyImmediate(keyGenerator.Value);
         }
 
@@ -156,7 +157,7 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
 
         private void UpdateGeneratorAndEditorIfNeeded()
         {
-            var targetType = _generatorsData[_selectedIndex].GeneratorType;
+            Type targetType = _generatorsData[_selectedIndex].GeneratorType;
             if (_generator != null && _generator.GetType() == targetType)
                 return;
 
@@ -172,7 +173,7 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
         {
             if (!_keysGenerators.ContainsKey(type))
             {
-                var so = (KeyListGenerator)CreateInstance(type);
+                KeyListGenerator so = (KeyListGenerator)CreateInstance(type);
                 so.hideFlags = HideFlags.DontSave;
                 _keysGenerators.Add(type, so);
             }

@@ -124,7 +124,7 @@ namespace TheraBytes.BetterUi.Editor
             Add(new SeparatorWizardPageElement());
             Add(new InfoWizardPageElement("Generate Resolution Monitor", InfoType.Header));
             Add(new InfoWizardPageElement("When you feel comfortable with the settings you made, go on and click the button below."));
-            var generateElement = new CustomWizardPageElement((o) =>
+            CustomWizardPageElement generateElement = new CustomWizardPageElement((o) =>
             {
                 string suffix = (ResolutionMonitor.ScriptableObjectFileExists) ? " (overwrite existing)" : "";
                 if (GUILayout.Button("Generate Resolution Monitor!" + suffix, GUILayout.Height(50)))
@@ -180,7 +180,7 @@ namespace TheraBytes.BetterUi.Editor
         private void GenerateResolutionMonitor()
         {
             ResolutionMonitor.EnsureInstance();
-            var rm = ResolutionMonitor.Instance;
+            ResolutionMonitor rm = ResolutionMonitor.Instance;
             Vector2 lRes = optimizedResolutionElement.Value;
             if(lRes.x < lRes.y)
             {
@@ -217,8 +217,8 @@ namespace TheraBytes.BetterUi.Editor
             bool containsSmall = (responsiveDesignElement.Value & SMALL_SCREEN) == SMALL_SCREEN;
             bool containsBig = (responsiveDesignElement.Value & BIG_SCREEN) == BIG_SCREEN;
 
-            var smallChecker = new IsScreenOfCertainSize(0, IsScreenOfCertainSize.DEFAULT_SMALL_THRESHOLD);
-            var bigChecker = new IsScreenOfCertainSize(IsScreenOfCertainSize.DEFAULT_LARGE_THRESHOLD, 9999999);
+            IsScreenOfCertainSize smallChecker = new IsScreenOfCertainSize(0, IsScreenOfCertainSize.DEFAULT_SMALL_THRESHOLD);
+            IsScreenOfCertainSize bigChecker = new IsScreenOfCertainSize(IsScreenOfCertainSize.DEFAULT_LARGE_THRESHOLD, 9999999);
 
 
             ScreenTypeConditions smallMain = null;
@@ -290,7 +290,7 @@ namespace TheraBytes.BetterUi.Editor
 
             name += nameSuffix;
 
-            var sct = new ScreenTypeConditions(name, typeof(IsCertainScreenOrientation));
+            ScreenTypeConditions sct = new ScreenTypeConditions(name, typeof(IsCertainScreenOrientation));
 
             sct.OptimizedScreenInfo.Resolution = (isLandscape)
                 ? lRes : pRes;

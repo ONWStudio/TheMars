@@ -36,7 +36,7 @@ namespace Michsky.UI.Heat
             tableIndex = index;
 
             // Set title
-            var icon = Resources.Load<Texture>("LocalizationWindowIcon");
+            Texture icon = Resources.Load<Texture>("LocalizationWindowIcon");
             GUIContent newTitle = new GUIContent("Localization Table (" + table.tableID + ")", icon);
             window.titleContent = newTitle;
         }

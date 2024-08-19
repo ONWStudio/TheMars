@@ -42,51 +42,51 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var items = serializedObject.FindProperty("items");
-            var onValueChanged = serializedObject.FindProperty("onValueChanged");
+            SerializedProperty items = serializedObject.FindProperty("items");
+            SerializedProperty onValueChanged = serializedObject.FindProperty("onValueChanged");
 
-            var triggerObject = serializedObject.FindProperty("triggerObject");
-            var headerText = serializedObject.FindProperty("headerText");
-            var headerImage = serializedObject.FindProperty("headerImage");
-            var itemParent = serializedObject.FindProperty("itemParent");
-            var itemPreset = serializedObject.FindProperty("itemPreset");
-            var scrollbar = serializedObject.FindProperty("scrollbar");
-            var listRect = serializedObject.FindProperty("listRect");
-            var listCG = serializedObject.FindProperty("listCG");
-            var contentCG = serializedObject.FindProperty("contentCG");
-            var highlightCG = serializedObject.FindProperty("highlightCG");
+            SerializedProperty triggerObject = serializedObject.FindProperty("triggerObject");
+            SerializedProperty headerText = serializedObject.FindProperty("headerText");
+            SerializedProperty headerImage = serializedObject.FindProperty("headerImage");
+            SerializedProperty itemParent = serializedObject.FindProperty("itemParent");
+            SerializedProperty itemPreset = serializedObject.FindProperty("itemPreset");
+            SerializedProperty scrollbar = serializedObject.FindProperty("scrollbar");
+            SerializedProperty listRect = serializedObject.FindProperty("listRect");
+            SerializedProperty listCG = serializedObject.FindProperty("listCG");
+            SerializedProperty contentCG = serializedObject.FindProperty("contentCG");
+            SerializedProperty highlightCG = serializedObject.FindProperty("highlightCG");
 
-            var panelDirection = serializedObject.FindProperty("panelDirection");
-            var panelSize = serializedObject.FindProperty("panelSize");
-            var curveSpeed = serializedObject.FindProperty("curveSpeed");
-            var animationCurve = serializedObject.FindProperty("animationCurve");
+            SerializedProperty panelDirection = serializedObject.FindProperty("panelDirection");
+            SerializedProperty panelSize = serializedObject.FindProperty("panelSize");
+            SerializedProperty curveSpeed = serializedObject.FindProperty("curveSpeed");
+            SerializedProperty animationCurve = serializedObject.FindProperty("animationCurve");
 
-            var saveSelected = serializedObject.FindProperty("saveSelected");
-            var saveKey = serializedObject.FindProperty("saveKey");
-            var enableIcon = serializedObject.FindProperty("enableIcon");
-            var enableTrigger = serializedObject.FindProperty("enableTrigger");
-            var enableScrollbar = serializedObject.FindProperty("enableScrollbar");
-            var startAtBottom = serializedObject.FindProperty("startAtBottom");
-            var useGamepadInput = serializedObject.FindProperty("useGamepadInput");
-            var setHighPriority = serializedObject.FindProperty("setHighPriority");
-            var outOnPointerExit = serializedObject.FindProperty("outOnPointerExit");
-            var invokeOnEnable = serializedObject.FindProperty("invokeOnEnable");
-            var initOnEnable = serializedObject.FindProperty("initOnEnable");
-            var selectedItemIndex = serializedObject.FindProperty("selectedItemIndex");
-            var useSounds = serializedObject.FindProperty("useSounds");
-            var itemSpacing = serializedObject.FindProperty("itemSpacing");
-            var itemPaddingLeft = serializedObject.FindProperty("itemPaddingLeft");
-            var itemPaddingRight = serializedObject.FindProperty("itemPaddingRight");
-            var itemPaddingTop = serializedObject.FindProperty("itemPaddingTop");
-            var itemPaddingBottom = serializedObject.FindProperty("itemPaddingBottom");
+            SerializedProperty saveSelected = serializedObject.FindProperty("saveSelected");
+            SerializedProperty saveKey = serializedObject.FindProperty("saveKey");
+            SerializedProperty enableIcon = serializedObject.FindProperty("enableIcon");
+            SerializedProperty enableTrigger = serializedObject.FindProperty("enableTrigger");
+            SerializedProperty enableScrollbar = serializedObject.FindProperty("enableScrollbar");
+            SerializedProperty startAtBottom = serializedObject.FindProperty("startAtBottom");
+            SerializedProperty useGamepadInput = serializedObject.FindProperty("useGamepadInput");
+            SerializedProperty setHighPriority = serializedObject.FindProperty("setHighPriority");
+            SerializedProperty outOnPointerExit = serializedObject.FindProperty("outOnPointerExit");
+            SerializedProperty invokeOnEnable = serializedObject.FindProperty("invokeOnEnable");
+            SerializedProperty initOnEnable = serializedObject.FindProperty("initOnEnable");
+            SerializedProperty selectedItemIndex = serializedObject.FindProperty("selectedItemIndex");
+            SerializedProperty useSounds = serializedObject.FindProperty("useSounds");
+            SerializedProperty itemSpacing = serializedObject.FindProperty("itemSpacing");
+            SerializedProperty itemPaddingLeft = serializedObject.FindProperty("itemPaddingLeft");
+            SerializedProperty itemPaddingRight = serializedObject.FindProperty("itemPaddingRight");
+            SerializedProperty itemPaddingTop = serializedObject.FindProperty("itemPaddingTop");
+            SerializedProperty itemPaddingBottom = serializedObject.FindProperty("itemPaddingBottom");
            
-            var useUINavigation = serializedObject.FindProperty("useUINavigation");
-            var navigationMode = serializedObject.FindProperty("navigationMode");
-            var selectOnUp = serializedObject.FindProperty("selectOnUp");
-            var selectOnDown = serializedObject.FindProperty("selectOnDown");
-            var selectOnLeft = serializedObject.FindProperty("selectOnLeft");
-            var selectOnRight = serializedObject.FindProperty("selectOnRight");
-            var wrapAround = serializedObject.FindProperty("wrapAround");
+            SerializedProperty useUINavigation = serializedObject.FindProperty("useUINavigation");
+            SerializedProperty navigationMode = serializedObject.FindProperty("navigationMode");
+            SerializedProperty selectOnUp = serializedObject.FindProperty("selectOnUp");
+            SerializedProperty selectOnDown = serializedObject.FindProperty("selectOnDown");
+            SerializedProperty selectOnLeft = serializedObject.FindProperty("selectOnLeft");
+            SerializedProperty selectOnRight = serializedObject.FindProperty("selectOnRight");
+            SerializedProperty wrapAround = serializedObject.FindProperty("wrapAround");
 
             switch (currentTab)
             {

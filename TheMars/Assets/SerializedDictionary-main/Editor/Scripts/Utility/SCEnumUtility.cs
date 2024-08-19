@@ -14,18 +14,18 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         internal static EnumCache GetEnumCache(Type enumType)
         {
-            if (_cache.TryGetValue(enumType, out var val))
+            if (_cache.TryGetValue(enumType, out EnumCache val))
                 return val;
 
             try
             {
-                var classType = typeof(EditorGUI).Assembly.GetType("UnityEditor.EnumDataUtility");
-                var methodInfo = classType.GetMethod("GetCachedEnumData", BindingFlags.Static | BindingFlags.NonPublic);
-                var parameters = new object[] { enumType, true };
-                var result = methodInfo.Invoke(null, parameters);
-                var flagValues = (int[])result.GetType().GetField("flagValues").GetValue(result);
-                var names = (string[])result.GetType().GetField("names").GetValue(result);
-                var cache = new EnumCache(enumType, flagValues, names);
+                Type classType = typeof(EditorGUI).Assembly.GetType("UnityEditor.EnumDataUtility");
+                MethodInfo methodInfo = classType.GetMethod("GetCachedEnumData", BindingFlags.Static | BindingFlags.NonPublic);
+                object[] parameters = new object[] { enumType, true };
+                object result = methodInfo.Invoke(null, parameters);
+                int[] flagValues = (int[])result.GetType().GetField("flagValues").GetValue(result);
+                string[] names = (string[])result.GetType().GetField("names").GetValue(result);
+                EnumCache cache = new EnumCache(enumType, flagValues, names);
                 _cache.Add(enumType, cache);
                 return cache;
             }
@@ -57,7 +57,7 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         internal string[] GetNamesForValue(int value)
         {
-            if (_namesByValue.TryGetValue(value, out var list))
+            if (_namesByValue.TryGetValue(value, out string[] list))
                 return list;
 
             string[] array = IsFlag ? GetFlagValues(value).ToArray() : new[] { GetEnumValue(value) };

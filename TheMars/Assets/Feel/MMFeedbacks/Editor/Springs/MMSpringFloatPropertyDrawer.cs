@@ -14,7 +14,7 @@ namespace MoreMountains.Feedbacks
 		
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var root = new VisualElement();
+			VisualElement root = new VisualElement();
 			
 			root.style.backgroundColor = new StyleColor(new Color(255,255,255,0.03f));
 			root.style.marginTop = 5;

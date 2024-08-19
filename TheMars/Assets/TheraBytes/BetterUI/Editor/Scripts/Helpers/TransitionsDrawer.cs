@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace TheraBytes.BetterUi.Editor
@@ -19,7 +20,7 @@ namespace TheraBytes.BetterUi.Editor
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            var cur = property.GetValue<Transitions>();
+            Transitions cur = property.GetValue<Transitions>();
             int lineCount = 1;
             int defaultCount = 1 + cur.StateNames.Count;
             float extraHeight = 2 * BigSpacing;
@@ -77,8 +78,8 @@ namespace TheraBytes.BetterUi.Editor
 
         public static void DrawGui(Rect position, Transitions sel, SerializedProperty property)
         {
-            var rect = new Rect(position.x, position.y + BigSpacing, position.width, EditorGUIUtility.singleLineHeight);
-            var mode = (Transitions.TransitionMode)EditorGUI.EnumPopup(rect, "Mode", sel.Mode);
+            Rect rect = new Rect(position.x, position.y + BigSpacing, position.width, EditorGUIUtility.singleLineHeight);
+            Transitions.TransitionMode mode = (Transitions.TransitionMode)EditorGUI.EnumPopup(rect, "Mode", sel.Mode);
             rect.y += rect.height + SmallSpacing;
 
             if (mode != sel.Mode)
@@ -147,7 +148,7 @@ namespace TheraBytes.BetterUi.Editor
                     break;
             }
 
-            var targetProp = transitionProp.FindPropertyRelative("target");
+            SerializedProperty targetProp = transitionProp.FindPropertyRelative("target");
             if (targetProp != null)
             {
                 EditorGUI.PropertyField(rect, targetProp);
@@ -166,17 +167,17 @@ namespace TheraBytes.BetterUi.Editor
 
                 EditorGUI.indentLevel += 1;
 
-                var statesProp = transitionProp.FindPropertyRelative("states");
+                SerializedProperty statesProp = transitionProp.FindPropertyRelative("states");
                 for (int i = 0; i < statesProp.arraySize; i++)
                 {
-                    var p = statesProp.GetArrayElementAtIndex(i);
-                    var pName = p.FindPropertyRelative("Name");
-                    var pVal = p.FindPropertyRelative("StateObject");
+                    SerializedProperty p = statesProp.GetArrayElementAtIndex(i);
+                    SerializedProperty pName = p.FindPropertyRelative("Name");
+                    SerializedProperty pVal = p.FindPropertyRelative("StateObject");
 
                     if (mode == Transitions.TransitionMode.LocationAnimationTransition)
                     {
                         // special drawer for location transitions
-                        var options = (sel.TransitionStates.Target as LocationAnimations).Animations.Select(o => o.Name).ToList();
+                        List<string> options = (sel.TransitionStates.Target as LocationAnimations).Animations.Select(o => o.Name).ToList();
                         options.Insert(0, "[ None ]");
                         int prevIdx = options.IndexOf(pVal.stringValue);
                         int newIdx = EditorGUI.Popup(rect, pName.stringValue, prevIdx, options.ToArray());
@@ -209,7 +210,7 @@ namespace TheraBytes.BetterUi.Editor
 
                     foreach (string pName in postProps)
                     {
-                        var p = transitionProp.FindPropertyRelative(pName);
+                        SerializedProperty p = transitionProp.FindPropertyRelative(pName);
                         EditorGUI.PropertyField(rect, p);
                         rect.y += rect.height + SmallSpacing;
                     }
@@ -232,8 +233,8 @@ namespace TheraBytes.BetterUi.Editor
 
         private static float GetCustomCallbackHeight(Transitions sel, int i)
         {
-            var custom = sel.TransitionStates as CustomTransitions;
-            var state = custom.GetStates().ToList()[i];
+            CustomTransitions custom = sel.TransitionStates as CustomTransitions;
+            TransitionStateCollection<UnityEvent>.TransitionState state = custom.GetStates().ToList()[i];
             int cnt = state.StateObject.GetPersistentEventCount();
 
             if(cnt == 0)
@@ -246,17 +247,17 @@ namespace TheraBytes.BetterUi.Editor
 
         private static void DrawMaterialPropertySelector(Rect rect, Transitions sel, SerializedProperty transitionProp)
         {
-            var matPropTrans = (sel.TransitionStates as MaterialPropertyTransition);
+            MaterialPropertyTransition matPropTrans = (sel.TransitionStates as MaterialPropertyTransition);
             if (matPropTrans == null)
                 return;
 
-            var img = (matPropTrans.Target as BetterImage);
+            BetterImage img = (matPropTrans.Target as BetterImage);
             if (img == null)
                 return;
 
-            var options = img.MaterialProperties.FloatProperties.Select(o => o.Name).ToArray();
+            string[] options = img.MaterialProperties.FloatProperties.Select(o => o.Name).ToArray();
 
-            var sp = transitionProp.FindPropertyRelative("propertyIndex");
+            SerializedProperty sp = transitionProp.FindPropertyRelative("propertyIndex");
             int cur = sp.intValue;
             int matPropIndex = EditorGUI.Popup(rect, "Affected Property", cur, options);
 

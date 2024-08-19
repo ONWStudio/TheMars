@@ -295,26 +295,26 @@ namespace MoreMountains.Feedbacks
 				case Methods.MaterialAlpha:
 					_currentColor.a = value;
 					ApplyCurrentColor(TargetRenderer);
-					for (var index = 0; index < ExtraRenderers.Count; index++)
+					for (int index = 0; index < ExtraRenderers.Count; index++)
 					{
-						var blinkRenderer = ExtraRenderers[index];
+						BlinkTargetRenderer blinkRenderer = ExtraRenderers[index];
 						ApplyCurrentColor(blinkRenderer.TargetRenderer);
 					}
 					break;
 				case Methods.MaterialEmissionIntensity:
 					_currentColor = _initialColor * value;
 					ApplyCurrentColor(TargetRenderer);
-					for (var index = 0; index < ExtraRenderers.Count; index++)
+					for (int index = 0; index < ExtraRenderers.Count; index++)
 					{
-						var blinkRenderer = ExtraRenderers[index];
+						BlinkTargetRenderer blinkRenderer = ExtraRenderers[index];
 						ApplyCurrentColor(blinkRenderer.TargetRenderer);
 					}
 					break;
 				case Methods.ShaderFloatValue:
 					ApplyFloatValue(TargetRenderer, value);
-					for (var index = 0; index < ExtraRenderers.Count; index++)
+					for (int index = 0; index < ExtraRenderers.Count; index++)
 					{
-						var blinkRenderer = ExtraRenderers[index];
+						BlinkTargetRenderer blinkRenderer = ExtraRenderers[index];
 						ApplyFloatValue(blinkRenderer.TargetRenderer, value);
 					}
 					break;

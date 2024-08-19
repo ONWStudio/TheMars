@@ -220,9 +220,9 @@ namespace TheraBytes.BetterUi.Editor
         public static void MakeBetter(MenuCommand command)
         {
             RawImage img = command.context as RawImage;
-            var texture = img.texture;
-            var col = img.color;
-            var uv = img.uvRect;
+            Texture texture = img.texture;
+            Color col = img.color;
+            Rect uv = img.uvRect;
 
             RawImage newImg = Betterizer.MakeBetter<RawImage, BetterRawImage>(img);
             BetterRawImage better = newImg as BetterRawImage;

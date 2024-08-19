@@ -178,7 +178,7 @@ namespace Onw.Editor
                 // .. 만약 열거된 데이터 자료구조라면?
                 if (value is IEnumerable enumerable)
                 {
-                    foreach (var item in enumerable)
+                    foreach (object item in enumerable)
                     {
                         if (item is null) continue;
 
@@ -216,7 +216,7 @@ namespace Onw.Editor
                 if (checkIgnoreInfo(field, obsoleteAttributeType) ||
                     checkIgnoreType(field.FieldType, monoType, componentType, scriptableObjectType)) continue;
 
-                foreach (var collection in getCollectionsFromValue(field.GetValue(target), visited))
+                foreach (ICollection collection in getCollectionsFromValue(field.GetValue(target), visited))
                 {
                     yield return collection;
                 }
@@ -230,7 +230,7 @@ namespace Onw.Editor
                     checkIgnoreInfo(property, obsoleteAttributeType) ||
                     checkIgnoreType(property.PropertyType, monoType, componentType, scriptableObjectType)) continue;
 
-                foreach (var collection in getCollectionsFromValue(property.GetValue(target), visited))
+                foreach (ICollection collection in getCollectionsFromValue(property.GetValue(target), visited))
                 {
                     yield return collection;
                 }
@@ -245,18 +245,18 @@ namespace Onw.Editor
                     yield return collection;
                 }
 
-                foreach (var subCollection in GetCollectionsFromSerializedField(value, visited))
+                foreach (ICollection subCollection in GetCollectionsFromSerializedField(value, visited))
                 {
                     yield return subCollection;
                 }
 
                 if (value is IEnumerable enumerable)
                 {
-                    foreach (var item in enumerable)
+                    foreach (object item in enumerable)
                     {
                         if (item is null) continue;
 
-                        foreach (var subCollection in GetCollectionsFromSerializedField(item, visited))
+                        foreach (ICollection subCollection in GetCollectionsFromSerializedField(item, visited))
                         {
                             yield return subCollection;
                         }
@@ -295,7 +295,7 @@ namespace Onw.Editor
 
             if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(UnityEngine.Object))
             {
-                var genericArgs = field.FieldType.GetGenericArguments();
+                Type[] genericArgs = field.FieldType.GetGenericArguments();
                 if (genericArgs.Length > 0)
                 {
                     return genericArgs[0];

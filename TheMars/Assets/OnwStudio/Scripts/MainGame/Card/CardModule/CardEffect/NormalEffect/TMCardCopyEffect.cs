@@ -1,9 +1,11 @@
 using Onw.Attribute;
+using Onw.Feedback;
+using Onw.ServiceLocator;
 using TMCard.Runtime;
 using UnityEngine;
 namespace TMCard.Effect
 {
-    public sealed class TMCardCopyEffect : ITMNormalEffect, ITMInitializableEffect<TMCardCopyEffectCreator>
+    public sealed class TMCardCopyEffect : ITMNormalEffect, ITMInitializeEffect<TMCardCopyEffectCreator>
     {
         [SerializeField, ReadOnly]
         private TMCardData _copyCardData;
@@ -12,9 +14,22 @@ namespace TMCard.Effect
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            trigger.OnEffectEvent.AddListener(() => 
+            if (!ServiceLocator<ITMCardService>.TryGetService(out ITMCardService service)) return;
+            
+            trigger.OnEffectEvent.AddListener(eventState => 
             {
-                Debug.Log("카드 카피");
+                for (int i = 0; i < _copyCount; i++)
+                {
+                    TMCardController card = service.CardCreator.CreateCardByCardData(_copyCardData);
+                    service.FeedbackPlayer.EnqueueEvent(
+                        FeedbackCreator.CreateUnityEvent(() =>
+                        {
+                            service.CardHandController.AddCard(card);
+                            card.transform.localPosition = new(0f, 0f, 0f);
+                            service.FeedbackPlayer.EnqueueEventToHead(service.CardHandController.GetSortCardsFeedbacks(0.5f));
+                        }),
+                        card.GetMoveToScreenCenterEvent(0.5f));
+                }
             });
         }
 

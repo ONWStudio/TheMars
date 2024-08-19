@@ -28,7 +28,7 @@ namespace Onw.Editor.GUI
                 {
                     GenericMenu menu = new();
 
-                    foreach (var optionKvp in _options)
+                    foreach (KeyValuePair<string, T> optionKvp in _options)
                     {
                         menu.AddItem(
                             new GUIContent(optionKvp.Key),

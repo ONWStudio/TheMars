@@ -21,14 +21,14 @@ namespace Michsky.UI.Heat
 
         public override void OnInspectorGUI()
         {
-            var presetManager = serializedObject.FindProperty("presetManager");
-            var firstSelected = serializedObject.FindProperty("firstSelected");
-            var gamepadObjects = serializedObject.FindProperty("gamepadObjects");
-            var keyboardObjects = serializedObject.FindProperty("keyboardObjects");
+            SerializedProperty presetManager = serializedObject.FindProperty("presetManager");
+            SerializedProperty firstSelected = serializedObject.FindProperty("firstSelected");
+            SerializedProperty gamepadObjects = serializedObject.FindProperty("gamepadObjects");
+            SerializedProperty keyboardObjects = serializedObject.FindProperty("keyboardObjects");
 
-            var alwaysUpdate = serializedObject.FindProperty("alwaysUpdate");
-            var affectCursor = serializedObject.FindProperty("affectCursor");
-            var gamepadHotkey = serializedObject.FindProperty("gamepadHotkey");
+            SerializedProperty alwaysUpdate = serializedObject.FindProperty("alwaysUpdate");
+            SerializedProperty affectCursor = serializedObject.FindProperty("affectCursor");
+            SerializedProperty gamepadHotkey = serializedObject.FindProperty("gamepadHotkey");
 
             HeatUIEditorHandler.DrawHeader(customSkin, "Core Header", 6);
             HeatUIEditorHandler.DrawProperty(presetManager, customSkin, "Preset Manager");

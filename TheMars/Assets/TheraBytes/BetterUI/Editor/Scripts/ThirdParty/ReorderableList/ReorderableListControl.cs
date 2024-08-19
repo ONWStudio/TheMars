@@ -180,7 +180,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		public static void DrawControlFromState(IReorderableListAdaptor adaptor, DrawEmpty drawEmpty, ReorderableListFlags flags) {
 			int controlID = GetReorderableListControlID();
 
-			var control = GUIUtility.GetStateObject(typeof(ReorderableListControl), controlID) as ReorderableListControl;
+			ReorderableListControl control = GUIUtility.GetStateObject(typeof(ReorderableListControl), controlID) as ReorderableListControl;
 			control.Flags = flags;
 			control.Draw(controlID, adaptor, drawEmpty);
 		}
@@ -195,7 +195,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		public static void DrawControlFromState(Rect position, IReorderableListAdaptor adaptor, DrawEmptyAbsolute drawEmpty, ReorderableListFlags flags) {
 			int controlID = GetReorderableListControlID();
 
-			var control = GUIUtility.GetStateObject(typeof(ReorderableListControl), controlID) as ReorderableListControl;
+			ReorderableListControl control = GUIUtility.GetStateObject(typeof(ReorderableListControl), controlID) as ReorderableListControl;
 			control.Flags = flags;
 			control.Draw(position, controlID, adaptor, drawEmpty);
 		}
@@ -633,8 +633,8 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// A value of <c>true</c> if clicked; otherwise <c>false</c>.
 		/// </returns>
 		private bool DoRemoveButton(Rect position, bool visible) {
-			var iconNormal = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_Remove_Normal);
-			var iconActive = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_Remove_Active);
+			Texture2D iconNormal = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_Remove_Normal);
+			Texture2D iconActive = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_Remove_Active);
 
 			return GUIHelper.IconButton(position, visible, iconNormal, iconActive, ItemButtonStyle);
 		}
@@ -732,19 +732,19 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 
 				if (isRepainting && isVisible) {
 					// Draw background of list item.
-					var backgroundPosition = new Rect(position.x, position.y, position.width, position.height - 1);
+					Rect backgroundPosition = new Rect(position.x, position.y, position.width, position.height - 1);
 					adaptor.DrawItemBackground(backgroundPosition, itemIndex);
 
 					// Draw grab handle?
 					if (isDraggable) {
-						var texturePosition = new Rect(position.x + 6, position.y + position.height / 2f - 3, 9, 5);
+						Rect texturePosition = new Rect(position.x + 6, position.y + position.height / 2f - 3, 9, 5);
 						GUIHelper.DrawTexture(texturePosition, ReorderableListResources.GetTexture(ReorderableListTexture.GrabHandle));
 					}
 
 					// Draw horizontal line between list items.
 					if (!_tracking || itemIndex != s_AnchorIndex) {
 						if (itemIndex != 0 || HorizontalLineAtStart) {
-							var horizontalLinePosition = new Rect(position.x, position.y - 1, position.width, 1);
+							Rect horizontalLinePosition = new Rect(position.x, position.y - 1, position.width, 1);
 							GUIHelper.Separator(horizontalLinePosition, HorizontalLineColor);
 						}
 					}
@@ -1027,7 +1027,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 			}
 
 			if (HorizontalLineAtEnd) {
-				var horizontalLinePosition = new Rect(itemPosition.x, position.yMax - ContainerStyle.padding.vertical, itemPosition.width, 1);
+				Rect horizontalLinePosition = new Rect(itemPosition.x, position.yMax - ContainerStyle.padding.vertical, itemPosition.width, 1);
 				GUIHelper.Separator(horizontalLinePosition, HorizontalLineColor);
 			}
 
@@ -1102,14 +1102,14 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 
 				s_SimulateMouseDragControlID = _controlID;
 
-				var focusedWindow = EditorWindow.focusedWindow;
+				EditorWindow focusedWindow = EditorWindow.focusedWindow;
 				if (focusedWindow != null)
 					focusedWindow.Repaint();
 			}
 		}
 
 		private void HandleDropInsertion(Rect position, IReorderableListAdaptor adaptor) {
-			var target = adaptor as IReorderableListDropTarget;
+			IReorderableListDropTarget target = adaptor as IReorderableListDropTarget;
 			if (target == null || !_allowDropInsertion)
 				return;
 
@@ -1178,8 +1178,8 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 				Rect buttonPosition = new Rect(position.xMax - 30, position.yMax - 1, 30, FooterButtonStyle.fixedHeight);
 
 				Rect menuButtonPosition = buttonPosition;
-				var menuIconNormal = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_AddMenu_Normal);
-				var menuIconActive = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_AddMenu_Active);
+				Texture2D menuIconNormal = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_AddMenu_Normal);
+				Texture2D menuIconActive = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_AddMenu_Active);
 
 				if (HasSizeField) {
 					// Draw size field.
@@ -1205,8 +1205,8 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 					}
 
 					// Draw add item button.
-					var iconNormal = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_Add_Normal);
-					var iconActive = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_Add_Active);
+					Texture2D iconNormal = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_Add_Normal);
+					Texture2D iconActive = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_Add_Active);
 
 					if (GUIHelper.IconButton(buttonPosition, true, iconNormal, iconActive, FooterButtonStyle)) {
 						// Append item to list.
@@ -1622,13 +1622,13 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		protected static readonly GenericMenu.MenuFunction2 DefaultContextHandler = DefaultContextMenuHandler;
 
 		private static void DefaultContextMenuHandler(object userData) {
-			var commandContent = userData as GUIContent;
+			GUIContent commandContent = userData as GUIContent;
 			if (commandContent == null || string.IsNullOrEmpty(commandContent.text))
 				return;
 
 			s_ContextCommandName = commandContent.text;
 
-			var e = EditorGUIUtility.CommandEvent("ReorderableListContextCommand");
+			Event e = EditorGUIUtility.CommandEvent("ReorderableListContextCommand");
 			EditorWindow.focusedWindow.SendEvent(e);
 		}
 
@@ -1845,7 +1845,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// <param name="destIndex">Zero-based index of destination index.</param>
 		protected void MoveItem(IReorderableListAdaptor adaptor, int sourceIndex, int destIndex) {
 			// Raise event before moving item so that the operation can be cancelled.
-			var movingEventArgs = new ItemMovingEventArgs(adaptor, sourceIndex, destIndex);
+			ItemMovingEventArgs movingEventArgs = new ItemMovingEventArgs(adaptor, sourceIndex, destIndex);
 			OnItemMoving(movingEventArgs);
 			if (!movingEventArgs.Cancel) {
 				adaptor.Move(sourceIndex, destIndex);
@@ -1872,7 +1872,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 			GUI.changed = true;
 			ReorderableListGUI.IndexOfChangedItem = -1;
 
-			var args = new ItemInsertedEventArgs(adaptor, adaptor.Count - 1, false);
+			ItemInsertedEventArgs args = new ItemInsertedEventArgs(adaptor, adaptor.Count - 1, false);
 			OnItemInserted(args);
 		}
 
@@ -1888,7 +1888,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 			GUI.changed = true;
 			ReorderableListGUI.IndexOfChangedItem = -1;
 
-			var args = new ItemInsertedEventArgs(adaptor, itemIndex, false);
+			ItemInsertedEventArgs args = new ItemInsertedEventArgs(adaptor, itemIndex, false);
 			OnItemInserted(args);
 		}
 
@@ -1904,7 +1904,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 			GUI.changed = true;
 			ReorderableListGUI.IndexOfChangedItem = -1;
 
-			var args = new ItemInsertedEventArgs(adaptor, itemIndex + 1, true);
+			ItemInsertedEventArgs args = new ItemInsertedEventArgs(adaptor, itemIndex + 1, true);
 			OnItemInserted(args);
 		}
 
@@ -1921,7 +1921,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// Returns a value of <c>false</c> if operation was cancelled.
 		/// </returns>
 		protected bool RemoveItem(IReorderableListAdaptor adaptor, int itemIndex) {
-			var args = new ItemRemovingEventArgs(adaptor, itemIndex);
+			ItemRemovingEventArgs args = new ItemRemovingEventArgs(adaptor, itemIndex);
 			OnItemRemoving(args);
 			if (args.Cancel)
 				return false;
@@ -1949,7 +1949,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 			if (adaptor.Count == 0)
 				return true;
 
-			var args = new ItemRemovingEventArgs(adaptor, 0);
+			ItemRemovingEventArgs args = new ItemRemovingEventArgs(adaptor, 0);
 			int count = adaptor.Count;
 			for (int i = 0; i < count; ++i) {
 				args.ItemIndex = i;

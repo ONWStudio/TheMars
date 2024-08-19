@@ -162,7 +162,7 @@ namespace TheraBytes.BetterUi
         {
             SetAnchorReferenceTarget(target, anchorsFallback, index, skipAnimation);
 
-            foreach (var config in anchorsConfigs.Items)
+            foreach (AnchorReferenceCollection config in anchorsConfigs.Items)
             {
                 SetAnchorReferenceTarget(target, config, index, skipAnimation);
             }
@@ -177,7 +177,7 @@ namespace TheraBytes.BetterUi
             }
             else
             {
-                var config = anchorsConfigs.Items.FirstOrDefault(o => o.ScreenConfigName == screenConfigName);
+                AnchorReferenceCollection config = anchorsConfigs.Items.FirstOrDefault(o => o.ScreenConfigName == screenConfigName);
                 if (config == null)
                 {
                     Debug.LogErrorFormat("AnchorOverride.SetAnchorReferenceTarget() - Could not find config with name \"{0}\"", screenConfigName);
@@ -206,7 +206,7 @@ namespace TheraBytes.BetterUi
                 throw new IndexOutOfRangeException(string.Format("Trying to set target for index {0} in {1} which only has {2} elements.", index, referenceCollection.ScreenConfigName, referenceCollection.Elements.Count));
             }
 
-            var config = referenceCollection.Elements[index];
+            AnchorReference config = referenceCollection.Elements[index];
             if (config == null)
             {
                 throw new NullReferenceException(string.Format("Config at index {0} is null.", index));

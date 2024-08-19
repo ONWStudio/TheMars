@@ -13,7 +13,7 @@ namespace Onw.Animation
     public static class AnimatorEventExtension
     {
         private static AnimatorEventReceiver AttachReceiever(Animator animator)
-            => animator.gameObject.TryGetComponent<AnimatorEventReceiver>(out var receiever) ? receiever : animator.gameObject.AddComponent<AnimatorEventReceiver>();
+            => animator.gameObject.TryGetComponent<AnimatorEventReceiver>(out AnimatorEventReceiver receiever) ? receiever : animator.gameObject.AddComponent<AnimatorEventReceiver>();
 
         public static void SetInteger(this Animator animator, string name, int value, Action onFinished)
         {
@@ -132,7 +132,7 @@ namespace Onw.Animation
         /// <param name="name"></param>
         private void AnimationStartHandler(string name)
         {
-            if (_startEvnets.TryGetValue(name, out var actions))
+            if (_startEvnets.TryGetValue(name, out List<Action> actions))
             {
                 for (int i = 0; i < actions.Count; i++)
                 {
@@ -149,7 +149,7 @@ namespace Onw.Animation
         /// <param name="name"></param>
         private void AnimationEndHandler(string name)
         {
-            if (_endEvents.TryGetValue(name, out var actions))
+            if (_endEvents.TryGetValue(name, out List<Action> actions))
             {
                 for (int i = 0; i < actions.Count; i++)
                 {

@@ -37,7 +37,7 @@ namespace TheraBytes.BetterUi.Editor
 
         public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
         {
-            var sizer = property.GetValue<ScreenDependentSize<T>>();
+            ScreenDependentSize<T> sizer = property.GetValue<ScreenDependentSize<T>>();
             
             GUILayout.Space(-20); // cheat to draw above allocated rect
 
@@ -48,7 +48,7 @@ namespace TheraBytes.BetterUi.Editor
             ShowField(property, "OptimizedSize", "Optimized Size", ref sizer.OptimizedSize);
 
             MonoBehaviour obj = (property.serializedObject.targetObject as MonoBehaviour);
-            var scaler = obj.GetComponentInParent<CanvasScaler>();
+            CanvasScaler scaler = obj.GetComponentInParent<CanvasScaler>();
 
             bool isConstantPixelSize = scaler == null || scaler.uiScaleMode == CanvasScaler.ScaleMode.ConstantPixelSize;
             bool isProblematic = !isConstantPixelSize && sizer.GetModifiers().Any(o => o.SizeModifiers.Any());
@@ -117,8 +117,8 @@ namespace TheraBytes.BetterUi.Editor
                     overrideProps = obj.GetComponentInParent<OverrideScreenProperties>();
                     if(overrideProps != null)
                     {
-                        var settings = overrideProps.SettingsList.Items.FirstOrDefault(o => o.ScreenConfigName == sizer.ScreenConfigName)
-                            ?? overrideProps.FallbackSettings;
+                        OverrideScreenProperties.Settings settings = overrideProps.SettingsList.Items.FirstOrDefault(o => o.ScreenConfigName == sizer.ScreenConfigName)
+                                                                     ?? overrideProps.FallbackSettings;
 
                         OverrideScreenProperties parent = (settings.PropertyIterator().Any(o => o.Mode == OverrideScreenProperties.OverrideMode.Inherit))
                            ? overrideProps.GetComponentInParent<OverrideScreenProperties>()
@@ -175,7 +175,7 @@ namespace TheraBytes.BetterUi.Editor
         private void RemoveSizeModifiers(Component container, ScreenDependentSize<T> sizer)
         {
             Undo.RecordObject(container, "Remove Size Modifiers");
-            foreach (var mod in sizer.GetModifiers())
+            foreach (SizeModifierCollection mod in sizer.GetModifiers())
             {
                 mod.SizeModifiers.Clear();
             }
@@ -184,8 +184,8 @@ namespace TheraBytes.BetterUi.Editor
 
         protected void DrawModifierList(SerializedProperty property, string title)
         {
-            var listProp = property.FindPropertyRelative("SizeModifiers");
-            var list = GetList(listProp, title);
+            SerializedProperty listProp = property.FindPropertyRelative("SizeModifiers");
+            ReorderableList list = GetList(listProp, title);
 
             property.serializedObject.Update();
             list.DoLayoutList();
@@ -211,7 +211,7 @@ namespace TheraBytes.BetterUi.Editor
                     int tmp = EditorGUI.indentLevel;
                     EditorGUI.indentLevel = 0;
 
-                    var element = list.serializedProperty.GetArrayElementAtIndex(index);
+                    SerializedProperty element = list.serializedProperty.GetArrayElementAtIndex(index);
 
                     float height = EditorGUIUtility.singleLineHeight;
                     rect.y += 2;
@@ -235,7 +235,7 @@ namespace TheraBytes.BetterUi.Editor
 
         private void ShowOptionalField(SerializedProperty parentProp, string propName, string boolPropName, string displayName, ref T value)
         {
-            var boolProp = parentProp.FindPropertyRelative(boolPropName);
+            SerializedProperty boolProp = parentProp.FindPropertyRelative(boolPropName);
 
             EditorGUILayout.BeginHorizontal();
 
@@ -244,7 +244,7 @@ namespace TheraBytes.BetterUi.Editor
             //       then the indent level for the other property is temporarily reduced to move the property closer
             //       to the desired position.
             //       However, the distance grows based on indent level but is okay for all Better UI controls.
-            var width = 16 * (1 + EditorGUI.indentLevel);
+            int width = 16 * (1 + EditorGUI.indentLevel);
             boolProp.boolValue = EditorGUILayout.Toggle( GUIContent.none, boolProp.boolValue, GUILayout.Width(width));
 
             EditorGUI.BeginDisabledGroup(!boolProp.boolValue);
@@ -262,7 +262,7 @@ namespace TheraBytes.BetterUi.Editor
 
         protected virtual void ShowField(SerializedProperty parentProp, string propName, string displayName, ref T value)
         {
-            var prop = parentProp.FindPropertyRelative(propName);
+            SerializedProperty prop = parentProp.FindPropertyRelative(propName);
             EditorGUILayout.PropertyField(prop, new GUIContent(displayName));
         }
 
@@ -289,7 +289,7 @@ namespace TheraBytes.BetterUi.Editor
                     };
                     list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
                     {
-                        var element = list.serializedProperty.GetArrayElementAtIndex(index);
+                        SerializedProperty element = list.serializedProperty.GetArrayElementAtIndex(index);
 
                         float height = EditorGUIUtility.singleLineHeight;
                         rect.y += 2;
@@ -315,8 +315,8 @@ namespace TheraBytes.BetterUi.Editor
 
             public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
             {
-                var listProp = property.FindPropertyRelative("SizeModifiers");
-                var list = GetList(listProp);
+                SerializedProperty listProp = property.FindPropertyRelative("SizeModifiers");
+                ReorderableList list = GetList(listProp);
 
                 property.serializedObject.Update();
                 list.DoLayoutList();

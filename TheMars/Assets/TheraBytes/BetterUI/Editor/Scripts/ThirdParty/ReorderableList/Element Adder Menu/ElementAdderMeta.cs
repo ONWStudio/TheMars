@@ -57,8 +57,8 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 
 			commandTypes = new List<Type>();
 
-			foreach (var commandType in GetMenuCommandTypes<TContext>()) {
-				var attributes = (ElementAdderMenuCommandAttribute[])Attribute.GetCustomAttributes(commandType, typeof(ElementAdderMenuCommandAttribute));
+			foreach (Type commandType in GetMenuCommandTypes<TContext>()) {
+				ElementAdderMenuCommandAttribute[] attributes = (ElementAdderMenuCommandAttribute[])Attribute.GetCustomAttributes(commandType, typeof(ElementAdderMenuCommandAttribute));
 				if (!attributes.Any(a => a.ContractType == contractType))
 					continue;
 
@@ -83,8 +83,8 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// </exception>
 		/// <seealso cref="GetMenuCommandTypes{TContext}(Type)"/>
 		public static IElementAdderMenuCommand<TContext>[] GetMenuCommands<TContext>(Type contractType) {
-			var commandTypes = GetMenuCommandTypes<TContext>(contractType);
-			var commands = new IElementAdderMenuCommand<TContext>[commandTypes.Length];
+			Type[] commandTypes = GetMenuCommandTypes<TContext>(contractType);
+			IElementAdderMenuCommand<TContext>[] commands = new IElementAdderMenuCommand<TContext>[commandTypes.Length];
 			for (int i = 0; i < commandTypes.Length; ++i)
 				commands[i] = (IElementAdderMenuCommand<TContext>)Activator.CreateInstance(commandTypes[i]);
 			return commands;
@@ -158,7 +158,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 
 		private static bool IsTypeIncluded(Type concreteType, Func<Type, bool>[] filters) {
 			if (filters != null)
-				foreach (var filter in filters)
+				foreach (Func<Type, bool> filter in filters)
 					if (!filter(concreteType))
 						return false;
 			return true;

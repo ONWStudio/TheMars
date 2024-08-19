@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
+  m_Name: Card_No.03ab1162-4f4b-4c74-9a5d-bcc0dbd3403b
+  m_EditorClassIdentifier: 
+  <StackID>k__BackingField: 0
+  <RequiredResource>k__BackingField: 0
+  <Resource>k__BackingField: 0
+  <CardKind>k__BackingField: 2
+  <CardGrade>k__BackingField: 1
+  <CardGroup>k__BackingField: 1
+  <CardImage>k__BackingField: {fileID: 0}
+  <IsCustomDescription>k__BackingField: 
+  <CardName>k__BackingField:
+    _localizedString:
+      m_TableReference:
+        m_TableCollectionName: GUID:d980be908d5ad4cfc8c5ca05a4f17d26
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  _effectCreators:
+  - rid: 3847364244551761924
+  _addtionalConditions:
+  - rid: 3847364244551761925
+  references:
+    version: 2
+    RefIds:
+    - rid: 3847364244551761924
+      type: {class: TMCardDrawEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+      data:
+        <DrawCount>k__BackingField: 5
+    - rid: 3847364244551761925
+      type: {class: ElectricCondition, ns: TMCard.AddtionalCondition, asm: AssemblyTheMars}
+      data:
+        <Electric>k__BackingField: 47

@@ -40,20 +40,20 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var socials = serializedObject.FindProperty("socials");
+            SerializedProperty socials = serializedObject.FindProperty("socials");
 
-            var itemPreset = serializedObject.FindProperty("itemPreset");
-            var itemParent = serializedObject.FindProperty("itemParent");
-            var buttonPreset = serializedObject.FindProperty("buttonPreset");
-            var buttonParent = serializedObject.FindProperty("buttonParent");
-            var background = serializedObject.FindProperty("background");
+            SerializedProperty itemPreset = serializedObject.FindProperty("itemPreset");
+            SerializedProperty itemParent = serializedObject.FindProperty("itemParent");
+            SerializedProperty buttonPreset = serializedObject.FindProperty("buttonPreset");
+            SerializedProperty buttonParent = serializedObject.FindProperty("buttonParent");
+            SerializedProperty background = serializedObject.FindProperty("background");
 
-            var allowTransition = serializedObject.FindProperty("allowTransition");
-            var useLocalization = serializedObject.FindProperty("useLocalization");
-            var timer = serializedObject.FindProperty("timer");
-            var tintSpeed = serializedObject.FindProperty("tintSpeed");
-            var tintCurve = serializedObject.FindProperty("tintCurve");
-            var updateMode = serializedObject.FindProperty("updateMode");
+            SerializedProperty allowTransition = serializedObject.FindProperty("allowTransition");
+            SerializedProperty useLocalization = serializedObject.FindProperty("useLocalization");
+            SerializedProperty timer = serializedObject.FindProperty("timer");
+            SerializedProperty tintSpeed = serializedObject.FindProperty("tintSpeed");
+            SerializedProperty tintCurve = serializedObject.FindProperty("tintCurve");
+            SerializedProperty updateMode = serializedObject.FindProperty("updateMode");
 
             switch (currentTab)
             {

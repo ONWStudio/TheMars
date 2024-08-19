@@ -122,7 +122,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty.Internal {
 		/// The new <c>Texture2D</c> instance.
 		/// </returns>
 		public static Texture2D CreatePixelTexture(string name, Color color) {
-			var tex = new Texture2D(1, 1, TextureFormat.ARGB32, false, true);
+			Texture2D tex = new Texture2D(1, 1, TextureFormat.ARGB32, false, true);
 			tex.name = name;
 			tex.hideFlags = HideFlags.HideAndDontSave;
 			tex.filterMode = FilterMode.Point;
@@ -142,7 +142,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty.Internal {
 		/// upon whether the light or dark (pro) skin is active.
 		/// </summary>
 		private static void LoadResourceAssets() {
-			var skin = EditorGUIUtility.isProSkin ? s_DarkSkin : s_LightSkin;
+			string[] skin = EditorGUIUtility.isProSkin ? s_DarkSkin : s_LightSkin;
 			s_Cached = new Texture2D[skin.Length];
 
 			for (int i = 0; i < s_Cached.Length; ++i) {
@@ -154,7 +154,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty.Internal {
 				GetImageSize(imageData, out texWidth, out texHeight);
 
 				// Generate texture asset.
-				var tex = new Texture2D(texWidth, texHeight, TextureFormat.ARGB32, false, false);
+				Texture2D tex = new Texture2D(texWidth, texHeight, TextureFormat.ARGB32, false, false);
 				tex.hideFlags = HideFlags.HideAndDontSave;
 				tex.name = "(Generated) ReorderableList:" + i;
 				tex.filterMode = FilterMode.Point;

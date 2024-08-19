@@ -40,45 +40,45 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var animator = serializedObject.FindProperty("animator");
-            var audioManager = serializedObject.FindProperty("audioManager");
-            var backgroundObj = serializedObject.FindProperty("backgroundObj");
-            var iconObj = serializedObject.FindProperty("iconObj");
-            var titleObj = serializedObject.FindProperty("titleObj");
-            var descriptionObj = serializedObject.FindProperty("descriptionObj");
-            var filterObj = serializedObject.FindProperty("filterObj");
+            SerializedProperty animator = serializedObject.FindProperty("animator");
+            SerializedProperty audioManager = serializedObject.FindProperty("audioManager");
+            SerializedProperty backgroundObj = serializedObject.FindProperty("backgroundObj");
+            SerializedProperty iconObj = serializedObject.FindProperty("iconObj");
+            SerializedProperty titleObj = serializedObject.FindProperty("titleObj");
+            SerializedProperty descriptionObj = serializedObject.FindProperty("descriptionObj");
+            SerializedProperty filterObj = serializedObject.FindProperty("filterObj");
 
-            var buttonBackground = serializedObject.FindProperty("buttonBackground");
-            var buttonIcon = serializedObject.FindProperty("buttonIcon");
-            var buttonTitle = serializedObject.FindProperty("buttonTitle");
-            var titleLocalizationKey = serializedObject.FindProperty("titleLocalizationKey");
-            var buttonDescription = serializedObject.FindProperty("buttonDescription");
-            var descriptionLocalizationKey = serializedObject.FindProperty("descriptionLocalizationKey");
-            var backgroundFilter = serializedObject.FindProperty("backgroundFilter");
+            SerializedProperty buttonBackground = serializedObject.FindProperty("buttonBackground");
+            SerializedProperty buttonIcon = serializedObject.FindProperty("buttonIcon");
+            SerializedProperty buttonTitle = serializedObject.FindProperty("buttonTitle");
+            SerializedProperty titleLocalizationKey = serializedObject.FindProperty("titleLocalizationKey");
+            SerializedProperty buttonDescription = serializedObject.FindProperty("buttonDescription");
+            SerializedProperty descriptionLocalizationKey = serializedObject.FindProperty("descriptionLocalizationKey");
+            SerializedProperty backgroundFilter = serializedObject.FindProperty("backgroundFilter");
 
-            var isInteractable = serializedObject.FindProperty("isInteractable");
-            var enableBackground = serializedObject.FindProperty("enableBackground");
-            var enableIcon = serializedObject.FindProperty("enableIcon");
-            var enableTitle = serializedObject.FindProperty("enableTitle");
-            var enableDescription = serializedObject.FindProperty("enableDescription");
-            var enableFilter = serializedObject.FindProperty("enableFilter");
-            var useUINavigation = serializedObject.FindProperty("useUINavigation");
-            var navigationMode = serializedObject.FindProperty("navigationMode");
-            var wrapAround = serializedObject.FindProperty("wrapAround");
-            var selectOnUp = serializedObject.FindProperty("selectOnUp");
-            var selectOnDown = serializedObject.FindProperty("selectOnDown");
-            var selectOnLeft = serializedObject.FindProperty("selectOnLeft");
-            var selectOnRight = serializedObject.FindProperty("selectOnRight");
-            var checkForDoubleClick = serializedObject.FindProperty("checkForDoubleClick");
-            var useLocalization = serializedObject.FindProperty("useLocalization");
-            var useSounds = serializedObject.FindProperty("useSounds");
-            var doubleClickPeriod = serializedObject.FindProperty("doubleClickPeriod");
-            var useCustomContent = serializedObject.FindProperty("useCustomContent");
+            SerializedProperty isInteractable = serializedObject.FindProperty("isInteractable");
+            SerializedProperty enableBackground = serializedObject.FindProperty("enableBackground");
+            SerializedProperty enableIcon = serializedObject.FindProperty("enableIcon");
+            SerializedProperty enableTitle = serializedObject.FindProperty("enableTitle");
+            SerializedProperty enableDescription = serializedObject.FindProperty("enableDescription");
+            SerializedProperty enableFilter = serializedObject.FindProperty("enableFilter");
+            SerializedProperty useUINavigation = serializedObject.FindProperty("useUINavigation");
+            SerializedProperty navigationMode = serializedObject.FindProperty("navigationMode");
+            SerializedProperty wrapAround = serializedObject.FindProperty("wrapAround");
+            SerializedProperty selectOnUp = serializedObject.FindProperty("selectOnUp");
+            SerializedProperty selectOnDown = serializedObject.FindProperty("selectOnDown");
+            SerializedProperty selectOnLeft = serializedObject.FindProperty("selectOnLeft");
+            SerializedProperty selectOnRight = serializedObject.FindProperty("selectOnRight");
+            SerializedProperty checkForDoubleClick = serializedObject.FindProperty("checkForDoubleClick");
+            SerializedProperty useLocalization = serializedObject.FindProperty("useLocalization");
+            SerializedProperty useSounds = serializedObject.FindProperty("useSounds");
+            SerializedProperty doubleClickPeriod = serializedObject.FindProperty("doubleClickPeriod");
+            SerializedProperty useCustomContent = serializedObject.FindProperty("useCustomContent");
 
-            var onClick = serializedObject.FindProperty("onClick");
-            var onDoubleClick = serializedObject.FindProperty("onDoubleClick");
-            var onHover = serializedObject.FindProperty("onHover");
-            var onLeave = serializedObject.FindProperty("onLeave");
+            SerializedProperty onClick = serializedObject.FindProperty("onClick");
+            SerializedProperty onDoubleClick = serializedObject.FindProperty("onDoubleClick");
+            SerializedProperty onHover = serializedObject.FindProperty("onHover");
+            SerializedProperty onLeave = serializedObject.FindProperty("onLeave");
 
             switch (buttonTarget.latestTabIndex)
             {

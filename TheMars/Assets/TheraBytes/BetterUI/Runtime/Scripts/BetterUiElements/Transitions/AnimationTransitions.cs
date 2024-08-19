@@ -44,7 +44,7 @@ namespace TheraBytes.BetterUi
                 return;
             }
 
-            foreach (var s in states)
+            foreach (AnimationTransitionState s in states)
             {
                 this.target.ResetTrigger(s.StateObject);
             }
@@ -54,13 +54,13 @@ namespace TheraBytes.BetterUi
 
         internal override void AddStateObject(string stateName)
         {
-            var obj = new AnimationTransitionState(stateName, null);
+            AnimationTransitionState obj = new AnimationTransitionState(stateName, null);
             this.states.Add(obj);
         }
 
         protected override IEnumerable<TransitionState> GetTransitionStates()
         {
-            foreach (var s in states)
+            foreach (AnimationTransitionState s in states)
                 yield return s;
         }
 

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Onw.Helper;
+using Object = UnityEngine.Object;
 
 namespace Onw.Editor.Extensions
 {
@@ -14,7 +15,7 @@ namespace Onw.Editor.Extensions
     {
         public static Type GetPropertyType(this SerializedProperty serializedProperty)
         {
-            var targetObject = serializedProperty.serializedObject.targetObject;
+            Object targetObject = serializedProperty.serializedObject.targetObject;
             return !targetObject ? null : EditorReflectionHelper.GetPropertyType(targetObject, serializedProperty.propertyPath);
         }
 

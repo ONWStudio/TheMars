@@ -45,25 +45,25 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var hotkeyType = serializedObject.FindProperty("hotkeyType");
-            var controllerPreset = serializedObject.FindProperty("controllerPreset");
-            var hotkey = serializedObject.FindProperty("hotkey");
-            var keyID = serializedObject.FindProperty("keyID");
-            var hotkeyLabel = serializedObject.FindProperty("hotkeyLabel");
+            SerializedProperty hotkeyType = serializedObject.FindProperty("hotkeyType");
+            SerializedProperty controllerPreset = serializedObject.FindProperty("controllerPreset");
+            SerializedProperty hotkey = serializedObject.FindProperty("hotkey");
+            SerializedProperty keyID = serializedObject.FindProperty("keyID");
+            SerializedProperty hotkeyLabel = serializedObject.FindProperty("hotkeyLabel");
 
-            var iconParent = serializedObject.FindProperty("iconParent");
-            var textParent = serializedObject.FindProperty("textParent");
-            var iconObj = serializedObject.FindProperty("iconObj");
-            var labelObj = serializedObject.FindProperty("labelObj");
-            var textObj = serializedObject.FindProperty("textObj");
-            var normalCG = serializedObject.FindProperty("normalCG");
-            var highlightCG = serializedObject.FindProperty("highlightCG");
+            SerializedProperty iconParent = serializedObject.FindProperty("iconParent");
+            SerializedProperty textParent = serializedObject.FindProperty("textParent");
+            SerializedProperty iconObj = serializedObject.FindProperty("iconObj");
+            SerializedProperty labelObj = serializedObject.FindProperty("labelObj");
+            SerializedProperty textObj = serializedObject.FindProperty("textObj");
+            SerializedProperty normalCG = serializedObject.FindProperty("normalCG");
+            SerializedProperty highlightCG = serializedObject.FindProperty("highlightCG");
 
-            var useSounds = serializedObject.FindProperty("useSounds");
-            var useLocalization = serializedObject.FindProperty("useLocalization");
-            var fadingMultiplier = serializedObject.FindProperty("fadingMultiplier");
+            SerializedProperty useSounds = serializedObject.FindProperty("useSounds");
+            SerializedProperty useLocalization = serializedObject.FindProperty("useLocalization");
+            SerializedProperty fadingMultiplier = serializedObject.FindProperty("fadingMultiplier");
 
-            var onHotkeyPress = serializedObject.FindProperty("onHotkeyPress");
+            SerializedProperty onHotkeyPress = serializedObject.FindProperty("onHotkeyPress");
 
             switch (latestTabIndex)
             {

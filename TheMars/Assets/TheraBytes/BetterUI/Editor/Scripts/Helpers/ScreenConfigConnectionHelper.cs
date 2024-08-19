@@ -19,7 +19,7 @@ namespace TheraBytes.BetterUi.Editor
             EditorGUI.indentLevel = 0;
             DrawGui(title, collection, ref fallback, null, (name, o) =>
             {
-                var obj = o.GetValue<ScreenDependentSize>();
+                ScreenDependentSize obj = o.GetValue<ScreenDependentSize>();
                 obj.DynamicInitialization();
             });
 
@@ -40,7 +40,7 @@ namespace TheraBytes.BetterUi.Editor
             
             EditorGUILayout.LabelField(title, EditorStyles.boldLabel);
 
-            var configs = collection.GetValue<ISizeConfigCollection>();
+            ISizeConfigCollection configs = collection.GetValue<ISizeConfigCollection>();
             if (configs.IsDirty)
             {
                 configs.Sort();
@@ -59,7 +59,7 @@ namespace TheraBytes.BetterUi.Editor
             for (int i = 0; i < items.arraySize; i++)
             {
                 SerializedProperty item = items.GetArrayElementAtIndex(i);
-                var nameProp = item.FindPropertyRelative("screenConfigName");
+                SerializedProperty nameProp = item.FindPropertyRelative("screenConfigName");
                 string name = "?";
 
                 if (nameProp != null)
@@ -122,10 +122,10 @@ namespace TheraBytes.BetterUi.Editor
                 if (currentConfig != currentScreen)
                 {
                     GUIStyle style = "minibutton";
-                    var content = EditorGUIUtility.IconContent("OL Plus");
+                    GUIContent content = EditorGUIUtility.IconContent("OL Plus");
                     content.text = $" {currentScreen}";
 
-                    var size = style.CalcSize(content);
+                    Vector2 size = style.CalcSize(content);
                     Rect rect = new Rect(bgRect.xMax - size.x - 20, bgRect.y + 3, size.x, 16);
 
                     if (GUI.Button(rect, content, "minibutton"))
@@ -169,7 +169,7 @@ namespace TheraBytes.BetterUi.Editor
         {
             string fallbackPath = fallback.propertyPath;
             items.arraySize += 1;
-            var newElement = items.GetArrayElementAtIndex(items.arraySize - 1);
+            SerializedProperty newElement = items.GetArrayElementAtIndex(items.arraySize - 1);
 
             SerializedPropertyUtil.Copy(fallback, newElement);
 
@@ -183,7 +183,7 @@ namespace TheraBytes.BetterUi.Editor
                 callback(configName, newElement);
             }
 
-            var prop = newElement.FindPropertyRelative("screenConfigName");
+            SerializedProperty prop = newElement.FindPropertyRelative("screenConfigName");
             if (prop != null)
                 prop.stringValue = configName;
             else

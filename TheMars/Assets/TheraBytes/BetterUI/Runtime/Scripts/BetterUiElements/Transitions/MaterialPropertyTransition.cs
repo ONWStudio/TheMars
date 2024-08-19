@@ -63,13 +63,13 @@ namespace TheraBytes.BetterUi
 
         internal override void AddStateObject(string stateName)
         {
-            var obj = new MaterialPropertyTransitionState(stateName, 1f);
+            MaterialPropertyTransitionState obj = new MaterialPropertyTransitionState(stateName, 1f);
             this.states.Add(obj);
         }
 
         protected override IEnumerable<TransitionState> GetTransitionStates()
         {
-            foreach (var s in states)
+            foreach (MaterialPropertyTransitionState s in states)
                 yield return s;
         }
 
@@ -77,7 +77,7 @@ namespace TheraBytes.BetterUi
         {
 
             // Stop clashing coroutines
-            foreach (var key in activeCoroutines.Keys)
+            foreach (MaterialPropertyTransition key in activeCoroutines.Keys)
             {
                 if (key.target == this.target && key.propertyIndex == this.propertyIndex)
                 {
@@ -88,7 +88,7 @@ namespace TheraBytes.BetterUi
                 }
             }
 
-            foreach (var key in keysToRemove)
+            foreach (MaterialPropertyTransition key in keysToRemove)
             {
                 activeCoroutines.Remove(key);
             }

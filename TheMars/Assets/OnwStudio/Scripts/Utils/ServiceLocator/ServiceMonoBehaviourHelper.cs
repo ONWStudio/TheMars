@@ -9,12 +9,12 @@ namespace Onw.ServiceLocator
     {
         public static T GetService<T>() where T : MonoBehaviour
         {
-            if (ServiceLocator<T>.TryGetService(out var service)) return service;
+            if (ServiceLocator<T>.TryGetService(out T service)) return service;
             
-            var scene = SceneManager.GetActiveScene();
-            var gameObjects = scene.GetRootGameObjects();
+            Scene scene = SceneManager.GetActiveScene();
+            GameObject[] gameObjects = scene.GetRootGameObjects();
 
-            foreach (var go in gameObjects)
+            foreach (GameObject go in gameObjects)
             {
                 service = go.GetComponentInChildren<T>();
 

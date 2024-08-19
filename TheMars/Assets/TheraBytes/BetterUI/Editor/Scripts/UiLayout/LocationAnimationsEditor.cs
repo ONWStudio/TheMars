@@ -95,14 +95,14 @@ namespace TheraBytes.BetterUi.Editor
                         if (GUILayout.Button(pullContent, GUILayout.Width(25)))
                         {
                             Undo.RecordObject(locAni, "pull from transform");
-                            var loc = locAni.GetLocation(name);
+                            LocationAnimations.LocationData loc = locAni.GetLocation(name);
                             PullFromTransform(loc);
                         }
 
                         if (GUILayout.Button(pushContent, GUILayout.Width(25)))
                         {
                             Undo.RecordObject(locAni.RectTransform, "push to transform");
-                            var loc = locAni.GetLocation(name);
+                            LocationAnimations.LocationData loc = locAni.GetLocation(name);
                             PushToTransform(loc);
                         }
                     }))
@@ -123,7 +123,7 @@ namespace TheraBytes.BetterUi.Editor
                             drawContent: null,
                             newElementInitCallback: (n, obj) =>
                             {
-                                var euler = obj.FindPropertyRelative("saveRotationAsEuler");
+                                SerializedProperty euler = obj.FindPropertyRelative("saveRotationAsEuler");
                                 euler.boolValue = true;
                             });
 
@@ -146,11 +146,11 @@ namespace TheraBytes.BetterUi.Editor
                 }
 
                 // "Add Location" button
-                var newObj = DrawAddButton("Add Location", "Location", locationListProp);
+                SerializedProperty newObj = DrawAddButton("Add Location", "Location", locationListProp);
                 if (newObj != null)
                 {
-                    var rtd = newObj.FindPropertyRelative("transformFallback");
-                    var euler = rtd.FindPropertyRelative("saveRotationAsEuler");
+                    SerializedProperty rtd = newObj.FindPropertyRelative("transformFallback");
+                    SerializedProperty euler = rtd.FindPropertyRelative("saveRotationAsEuler");
                     euler.boolValue = true;
                     serializedObject.ApplyModifiedPropertiesWithoutUndo();
                 }
@@ -265,10 +265,10 @@ namespace TheraBytes.BetterUi.Editor
                     EditorGUILayout.EndVertical();
                 }
 
-                var newAni = DrawAddButton("Add Animation", "Animation", transitionListProp);
+                SerializedProperty newAni = DrawAddButton("Add Animation", "Animation", transitionListProp);
                 if (newAni != null)
                 {
-                    var timeScaleProp = newAni.FindPropertyRelative("timeScale");
+                    SerializedProperty timeScaleProp = newAni.FindPropertyRelative("timeScale");
                     timeScaleProp.floatValue = 1;
                     serializedObject.ApplyModifiedPropertiesWithoutUndo();
                 }
@@ -320,9 +320,9 @@ namespace TheraBytes.BetterUi.Editor
 
         private void ConvertLocationSpace(bool toRelativeSpace)
         {
-            foreach (var loc in locAni.Locations)
+            foreach (LocationAnimations.LocationData loc in locAni.Locations)
             {
-                var rtd = (toRelativeSpace)
+                RectTransformData rtd = (toRelativeSpace)
                     ? RectTransformData.Separate(loc.CurrentTransformData, locAni.ReferenceLocation)
                     : RectTransformData.Combine(loc.CurrentTransformData, locAni.ReferenceLocation);
 
@@ -338,7 +338,7 @@ namespace TheraBytes.BetterUi.Editor
         {
             if (locAni.UseRelativeLocations)
             {
-                var rtd = RectTransformData.Combine(loc.CurrentTransformData, locAni.ReferenceLocation);
+                RectTransformData rtd = RectTransformData.Combine(loc.CurrentTransformData, locAni.ReferenceLocation);
                 rtd.PushToTransform(locAni.RectTransform);
             }
             else
@@ -351,7 +351,7 @@ namespace TheraBytes.BetterUi.Editor
         {
             if (locAni.UseRelativeLocations)
             {
-                var rtd = RectTransformData.Separate(new RectTransformData(locAni.RectTransform), locAni.ReferenceLocation);
+                RectTransformData rtd = RectTransformData.Separate(new RectTransformData(locAni.RectTransform), locAni.ReferenceLocation);
                 loc.CurrentTransformData.PullFromData(rtd);
             }
             else
@@ -368,7 +368,7 @@ namespace TheraBytes.BetterUi.Editor
                 return;
             }
 
-            foreach (var tr in locAni.Animations)
+            foreach (LocationAnimations.Animation tr in locAni.Animations)
             {
                 if (tr.From == before)
                 {

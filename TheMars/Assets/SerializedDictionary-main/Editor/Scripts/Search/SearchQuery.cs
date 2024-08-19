@@ -14,7 +14,7 @@ namespace AYellowpaper.SerializedCollections.Editor.Search
                     return;
 
                 _text = value;
-                foreach (var matcher in _matchers)
+                foreach (Matcher matcher in _matchers)
                     matcher.Prepare(_text);
             }
         }
@@ -29,7 +29,7 @@ namespace AYellowpaper.SerializedCollections.Editor.Search
 
         public List<PropertySearchResult> ApplyToProperty(SerializedProperty property)
         {
-            TryGetMatchingProperties(property.Copy(), out var properties);
+            TryGetMatchingProperties(property.Copy(), out List<PropertySearchResult> properties);
             return properties;
         }
 
@@ -38,8 +38,8 @@ namespace AYellowpaper.SerializedCollections.Editor.Search
             int arrayCount = property.arraySize;
             for (int i = 0; i < arrayCount; i++)
             {
-                var prop = property.GetArrayElementAtIndex(i);
-                if (TryGetMatchingProperties(prop.Copy(), out var properties))
+                SerializedProperty prop = property.GetArrayElementAtIndex(i);
+                if (TryGetMatchingProperties(prop.Copy(), out List<PropertySearchResult> properties))
                     yield return new SearchResultEntry(i, prop, properties);
             }
         }
@@ -47,9 +47,9 @@ namespace AYellowpaper.SerializedCollections.Editor.Search
         private bool TryGetMatchingProperties(SerializedProperty property, out List<PropertySearchResult> matchingProperties)
         {
             matchingProperties = null;
-            foreach (var child in SCEditorUtility.GetChildren(property, true))
+            foreach (SerializedProperty child in SCEditorUtility.GetChildren(property, true))
             {
-                foreach (var matcher in _matchers)
+                foreach (Matcher matcher in _matchers)
                 {
                     if (matcher.IsMatch(child))
                     {

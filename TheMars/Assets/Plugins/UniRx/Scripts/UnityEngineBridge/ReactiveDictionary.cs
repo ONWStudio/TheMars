@@ -197,7 +197,7 @@ namespace UniRx
 
         public void Clear()
         {
-            var beforeCount = Count;
+            int beforeCount = Count;
             inner.Clear();
 
             if (collectionReset != null) collectionReset.OnNext(Unit.Default);
@@ -212,7 +212,7 @@ namespace UniRx
             TValue oldValue;
             if (inner.TryGetValue(key, out oldValue))
             {
-                var isSuccessRemove = inner.Remove(key);
+                bool isSuccessRemove = inner.Remove(key);
                 if (isSuccessRemove)
                 {
                     if (dictionaryRemove != null) dictionaryRemove.OnNext(new DictionaryRemoveEvent<TKey, TValue>(key, oldValue));
@@ -294,7 +294,7 @@ namespace UniRx
         {
             if (isDisposed) return Observable.Empty<int>();
 
-            var subject = countChanged ?? (countChanged = new Subject<int>());
+            Subject<int> subject = countChanged ?? (countChanged = new Subject<int>());
             if (notifyCurrentCount)
             {
                 return subject.StartWith(() => this.Count);

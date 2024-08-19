@@ -230,7 +230,7 @@ namespace Michsky.UI.Heat
                             if (!originIndices.Contains(p) && positions[p] < stops[s])
                             {
                                 int p1 = (p + 1) % 3;
-                                var start = _vertexList[p + i];
+                                UIVertex start = _vertexList[p + i];
 
                                 if (positions[p1] > stops[s])
                                 {
@@ -252,7 +252,7 @@ namespace Michsky.UI.Heat
                         if (originIndices.Count == 3)
                             break;
 
-                        foreach (var start in starts)
+                        foreach (UIVertex start in starts)
                             helper.AddVert(start);
 
                         ends.Clear();
@@ -271,7 +271,7 @@ namespace Michsky.UI.Heat
                             ends.Add(CreateSplitVertex(_vertexList[originIndices[0] + i], _vertexList[oppositeIndex + i], stops[s]));
                         }
 
-                        foreach (var end in ends)
+                        foreach (UIVertex end in ends)
                             helper.AddVert(end);
 
                         if (hadEnds)
@@ -319,7 +319,7 @@ namespace Michsky.UI.Heat
                             }
                         }
 
-                        foreach (var start in starts)
+                        foreach (UIVertex start in starts)
                             helper.AddVert(start);
 
                         int vertexCount = helper.currentVertCount;
@@ -370,11 +370,11 @@ namespace Michsky.UI.Heat
         private List<float> FindStops(float zoomOffset, Rect bounds)
         {
             List<float> stops = new List<float>();
-            var offset = Offset * (1 - zoomOffset);
-            var startBoundary = zoomOffset - offset;
-            var endBoundary = (1 - zoomOffset) - offset;
+            float offset = Offset * (1 - zoomOffset);
+            float startBoundary = zoomOffset - offset;
+            float endBoundary = (1 - zoomOffset) - offset;
 
-            foreach (var color in EffectGradient.colorKeys)
+            foreach (GradientColorKey color in EffectGradient.colorKeys)
             {
                 if (color.time >= endBoundary)
                     break;
@@ -383,7 +383,7 @@ namespace Michsky.UI.Heat
                     stops.Add((color.time - startBoundary) * Zoom);
             }
 
-            foreach (var alpha in EffectGradient.alphaKeys)
+            foreach (GradientAlphaKey alpha in EffectGradient.alphaKeys)
             {
                 if (alpha.time >= endBoundary)
                     break;

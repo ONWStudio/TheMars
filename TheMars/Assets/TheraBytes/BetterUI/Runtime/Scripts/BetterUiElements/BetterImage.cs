@@ -279,7 +279,7 @@ namespace TheraBytes.BetterUi
                 PreserveSpriteAspectRatio(ref rect, spriteSize);
             }
 
-            var v = new Vector4(
+            Vector4 v = new Vector4(
                 rect.x + rect.width * paddingFraction.x,
                 rect.y + rect.height * paddingFraction.y,
                 rect.x + rect.width * paddingFraction.z,
@@ -630,7 +630,7 @@ namespace TheraBytes.BetterUi
 
         private void AssignSpriteSettings()
         {
-            var settings = CurrentSpriteSettings;
+            SpriteSettings settings = CurrentSpriteSettings;
             this.sprite = settings.Sprite;
             this.colorMode = settings.ColorMode;
             this.color = settings.PrimaryColor;

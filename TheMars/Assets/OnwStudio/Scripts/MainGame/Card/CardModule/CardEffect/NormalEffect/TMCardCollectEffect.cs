@@ -7,7 +7,7 @@ namespace TMCard.Effect
     /// <summary>
     /// .. TODO : 카드 획득 효과 수정 카드 선택해서 버리기 
     /// </summary>
-    public sealed class TMCardCollectEffect : ITMNormalEffect, ITMInitializableEffect<TMCardCollectEffectCreator>
+    public sealed class TMCardCollectEffect : ITMNormalEffect, ITMInitializeEffect<TMCardCollectEffectCreator>
     {
         [SerializeField, ReadOnly]
         private int _collectCount;
@@ -22,17 +22,15 @@ namespace TMCard.Effect
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            trigger.OnEffectEvent.AddListener(() 
+            trigger.OnEffectEvent.AddListener(eventState 
                 => collectCard(controller, _collectCount));
         }
         
         private static void collectCard(TMCardController triggerCard, int collectCount)
         {
-            if (!ServiceLocator<ITMCardService>.TryGetService(out var service)) return;
+            if (!ServiceLocator<ITMCardService>.TryGetService(out ITMCardService service)) return;
             
-            triggerCard.SetPositionNewCardToHand(
-                service.CardCreator.CreateCards(collectCount),
-                Vector3.zero);
+            service.CollectUI.ActiveUI();
         }
     }
 }

@@ -38,7 +38,7 @@ namespace MoreMountains.Tools
 			System.Type eventOwnerType = property.serializedObject.targetObject.GetType();
 
 			// add our root
-			var root = new VisualElement();
+			VisualElement root = new VisualElement();
 			
 			// add toolbar
 			Toolbar moveToControls = new Toolbar();
@@ -50,9 +50,9 @@ namespace MoreMountains.Tools
 			}
 			
 			// add each button
-			for (var i = 0; i < inspectorButtonBarAttribute.Labels.Length; i++)
+			for (int i = 0; i < inspectorButtonBarAttribute.Labels.Length; i++)
 			{
-				var newButton = new ToolbarButton();
+				ToolbarButton newButton = new ToolbarButton();
 				newButton.text = inspectorButtonBarAttribute.Labels[i];
 				newButton.style.flexGrow = 1;
 				
@@ -67,7 +67,7 @@ namespace MoreMountains.Tools
 				}
 				if (_eventMethodInfos[i] != null)
 				{
-					var i1 = i;
+					int i1 = i;
 					newButton.clicked += () => _eventMethodInfos[i1].Invoke(property.serializedObject.targetObject, null);
 				}
 				else

@@ -47,7 +47,7 @@ namespace TheraBytes.BetterUi.Editor
             bool disableNext = false;
             for (int i = 0; i < elements.Count; i++)
             {
-                var element = elements[i];
+                WizardPageElementBase element = elements[i];
 
                 switch (element.State)
                 {
@@ -113,9 +113,9 @@ namespace TheraBytes.BetterUi.Editor
 
         private void Save()
         {
-            foreach(var element in elements)
+            foreach(WizardPageElementBase element in elements)
             {
-                var dataElement = element as IWizardDataElement;
+                IWizardDataElement dataElement = element as IWizardDataElement;
                 if (dataElement != null)
                 {
                     string key = dataElement.SerializationKey;
@@ -134,7 +134,7 @@ namespace TheraBytes.BetterUi.Editor
             int lastCompleteIndex = -1;
             for(int i = 0; i < elements.Count; i++)
             {
-                var dataElement = elements[i] as IWizardDataElement;
+                IWizardDataElement dataElement = elements[i] as IWizardDataElement;
                 if (dataElement != null)
                 {
                     string stringValue;

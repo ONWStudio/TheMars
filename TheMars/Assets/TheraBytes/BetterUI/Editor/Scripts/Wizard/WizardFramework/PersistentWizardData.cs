@@ -94,7 +94,7 @@ namespace TheraBytes.BetterUi.Editor
         public void Save()
         {
             // ensure the directory exists
-            var dir = Path.GetDirectoryName(filePath);
+            string dir = Path.GetDirectoryName(filePath);
             if(!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
@@ -111,7 +111,7 @@ namespace TheraBytes.BetterUi.Editor
             {
                 using(StreamWriter sw = new StreamWriter(stream))
                 {
-                    foreach(var kv in data)
+                    foreach(KeyValuePair<string, string> kv in data)
                     {
                         sw.WriteLine(string.Format("{0}{2}{1}", kv.Key, kv.Value, SEPARATOR));
                     }

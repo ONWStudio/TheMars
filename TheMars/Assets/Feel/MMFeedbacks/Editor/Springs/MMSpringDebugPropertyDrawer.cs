@@ -25,7 +25,7 @@ namespace MoreMountains.Feedbacks
 			EditorGUI.BeginProperty(position, label, property);
 			EditorGUI.BeginDisabledGroup(true);
 			position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
-			var indent = EditorGUI.indentLevel;
+			int indent = EditorGUI.indentLevel;
 			EditorGUI.indentLevel = 0;
 
 			_rect.x = position.x;

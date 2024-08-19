@@ -39,27 +39,27 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var chapters = serializedObject.FindProperty("chapters");
-            var currentChapterIndex = serializedObject.FindProperty("currentChapterIndex");
-            var onChapterPanelChanged = serializedObject.FindProperty("onChapterPanelChanged");
+            SerializedProperty chapters = serializedObject.FindProperty("chapters");
+            SerializedProperty currentChapterIndex = serializedObject.FindProperty("currentChapterIndex");
+            SerializedProperty onChapterPanelChanged = serializedObject.FindProperty("onChapterPanelChanged");
 
-            var chapterPreset = serializedObject.FindProperty("chapterPreset");
-            var chapterParent = serializedObject.FindProperty("chapterParent");
-            var previousButton = serializedObject.FindProperty("previousButton");
-            var nextButton = serializedObject.FindProperty("nextButton");
-            var progressFill = serializedObject.FindProperty("progressFill");
+            SerializedProperty chapterPreset = serializedObject.FindProperty("chapterPreset");
+            SerializedProperty chapterParent = serializedObject.FindProperty("chapterParent");
+            SerializedProperty previousButton = serializedObject.FindProperty("previousButton");
+            SerializedProperty nextButton = serializedObject.FindProperty("nextButton");
+            SerializedProperty progressFill = serializedObject.FindProperty("progressFill");
 
-            var showLockedChapters = serializedObject.FindProperty("showLockedChapters");
-            var setPanelAuto = serializedObject.FindProperty("setPanelAuto");
-            var checkChapterData = serializedObject.FindProperty("checkChapterData");
-            var useLocalization = serializedObject.FindProperty("useLocalization");
-            var backgroundStretch = serializedObject.FindProperty("backgroundStretch");
-            var stretchCurveSpeed = serializedObject.FindProperty("stretchCurveSpeed");
-            var stretchCurve = serializedObject.FindProperty("stretchCurve");
-            var maxStretch = serializedObject.FindProperty("maxStretch");
-            var barCurveSpeed = serializedObject.FindProperty("barCurveSpeed");
-            var barCurve = serializedObject.FindProperty("barCurve");
-            var animationSpeed = serializedObject.FindProperty("animationSpeed");
+            SerializedProperty showLockedChapters = serializedObject.FindProperty("showLockedChapters");
+            SerializedProperty setPanelAuto = serializedObject.FindProperty("setPanelAuto");
+            SerializedProperty checkChapterData = serializedObject.FindProperty("checkChapterData");
+            SerializedProperty useLocalization = serializedObject.FindProperty("useLocalization");
+            SerializedProperty backgroundStretch = serializedObject.FindProperty("backgroundStretch");
+            SerializedProperty stretchCurveSpeed = serializedObject.FindProperty("stretchCurveSpeed");
+            SerializedProperty stretchCurve = serializedObject.FindProperty("stretchCurve");
+            SerializedProperty maxStretch = serializedObject.FindProperty("maxStretch");
+            SerializedProperty barCurveSpeed = serializedObject.FindProperty("barCurveSpeed");
+            SerializedProperty barCurve = serializedObject.FindProperty("barCurve");
+            SerializedProperty animationSpeed = serializedObject.FindProperty("animationSpeed");
 
             switch (currentTab)
             {

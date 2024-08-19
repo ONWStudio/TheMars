@@ -61,7 +61,7 @@ namespace Onw.Helper
         /// <returns></returns>
         public static IEnumerable<string> GetCustomLabelFromNestedClass<T>() where T : class
         {
-            var classTypes = GetChildClassesFromBaseType(typeof(T));
+            IEnumerable<Type> classTypes = GetChildClassesFromBaseType(typeof(T));
 
             foreach (Type type in classTypes)
             {
@@ -150,20 +150,20 @@ namespace Onw.Helper
         {
             Dictionary<string, int> enumValues = new();
 
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                var enumType = assembly
+                Type enumType = assembly
                     .GetTypes()
                     .FirstOrDefault(t => t.IsEnum && t.Name == enumTypeName);
 
                 if (enumType != null)
                 {
-                    var underlyingType = Enum.GetUnderlyingType(enumType);
+                    Type underlyingType = Enum.GetUnderlyingType(enumType);
 
-                    foreach (var name in Enum.GetNames(enumType))
+                    foreach (string name in Enum.GetNames(enumType))
                     {
-                        var enumValue = Enum.Parse(enumType, name);
-                        var value = Convert.ToInt32(Convert.ChangeType(enumValue, underlyingType));
+                        object enumValue = Enum.Parse(enumType, name);
+                        int value = Convert.ToInt32(Convert.ChangeType(enumValue, underlyingType));
                         enumValues.Add(name, value);
                     }
 

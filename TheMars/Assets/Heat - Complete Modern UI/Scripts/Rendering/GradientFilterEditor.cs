@@ -21,8 +21,8 @@ namespace Michsky.UI.Heat
 
         public override void OnInspectorGUI()
         {
-            var selectedFilter = serializedObject.FindProperty("selectedFilter");
-            var opacity = serializedObject.FindProperty("opacity");
+            SerializedProperty selectedFilter = serializedObject.FindProperty("selectedFilter");
+            SerializedProperty opacity = serializedObject.FindProperty("opacity");
 
             HeatUIEditorHandler.DrawHeader(customSkin, "Options Header", 6);
             HeatUIEditorHandler.DrawProperty(selectedFilter, customSkin, "Selected Filter");

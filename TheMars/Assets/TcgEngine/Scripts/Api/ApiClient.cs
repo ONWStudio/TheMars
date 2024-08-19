@@ -337,7 +337,7 @@ namespace TcgEngine
             request.timeout += 1; //Add offset to make sure it aborts first
             sending++;
 
-            var async_oper = request.SendWebRequest();
+            UnityWebRequestAsyncOperation async_oper = request.SendWebRequest();
             while (!async_oper.isDone)
             {
                 await TimeTool.Delay(200);

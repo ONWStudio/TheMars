@@ -9,7 +9,7 @@ namespace UniRx.Examples
         private void Start()
         {
             // Get the plain object
-            var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
             // Add ObservableXxxTrigger for handle MonoBehaviour's event as Observable
             cube.AddComponent<ObservableUpdateTrigger>()

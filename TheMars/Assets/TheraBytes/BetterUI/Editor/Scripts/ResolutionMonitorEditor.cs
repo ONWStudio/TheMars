@@ -41,7 +41,7 @@ namespace TheraBytes.BetterUi.Editor
         {
             this.staticSizerMethods = serializedObject.FindProperty("staticSizerMethods");
             this.dpiManager = serializedObject.FindProperty("dpiManager");
-            var dpiOverrides = dpiManager.FindPropertyRelative("overrides");
+            SerializedProperty dpiOverrides = dpiManager.FindPropertyRelative("overrides");
 
             this.curOptRes = serializedObject.FindProperty("optimizedResolutionFallback");
             this.curOptDpi = serializedObject.FindProperty("optimizedDpiFallback");
@@ -95,7 +95,7 @@ namespace TheraBytes.BetterUi.Editor
 
                 for (int i = 0; i < monitor.OptimizedScreens.Count; i++)
                 {
-                    var config = monitor.OptimizedScreens[i];
+                    ScreenTypeConditions config = monitor.OptimizedScreens[i];
 
 
                     EditorGUILayout.BeginVertical("box");

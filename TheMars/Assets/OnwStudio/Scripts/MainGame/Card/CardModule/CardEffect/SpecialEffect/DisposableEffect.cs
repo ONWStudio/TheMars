@@ -9,9 +9,9 @@ namespace TMCard.Effect
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             controller.OnClickEvent.RemoveAllListener();
-            controller.OnClickEvent.AddListener(() =>
+            controller.OnClickEvent.AddListener(eventState =>
             {
-                trigger.OnEffectEvent.Invoke();
+                trigger.OnEffectEvent.Invoke(eventState);
                 controller.DisposeCard();
             });
         }

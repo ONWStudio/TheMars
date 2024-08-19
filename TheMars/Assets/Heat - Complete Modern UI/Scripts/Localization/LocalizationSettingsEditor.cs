@@ -55,8 +55,8 @@ namespace Michsky.UI.Heat
 
             if (languageList.Count != 0)
             {
-                var defaultLanguageIndex = serializedObject.FindProperty("defaultLanguageIndex");
-                var defaultLanguageID = serializedObject.FindProperty("defaultLanguageID");
+                SerializedProperty defaultLanguageIndex = serializedObject.FindProperty("defaultLanguageIndex");
+                SerializedProperty defaultLanguageID = serializedObject.FindProperty("defaultLanguageID");
 
                 defaultLanguageIndex.intValue = EditorGUILayout.Popup(defaultLanguageIndex.intValue, languageList.ToArray());
                 defaultLanguageID.stringValue = languageList[defaultLanguageIndex.intValue];
@@ -363,7 +363,7 @@ namespace Michsky.UI.Heat
 
             #region Settings
             HeatUIEditorHandler.DrawHeader(customSkin, "Options Header", 14);
-            var enableExperimental = serializedObject.FindProperty("enableExperimental");
+            SerializedProperty enableExperimental = serializedObject.FindProperty("enableExperimental");
             enableExperimental.boolValue = HeatUIEditorHandler.DrawToggle(enableExperimental.boolValue, customSkin, "Enable Experimental Features");
             #endregion
 

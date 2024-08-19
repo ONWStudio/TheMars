@@ -181,7 +181,7 @@ namespace TheraBytes.BetterUi.Editor
                 return false;
 
             string json = File.ReadAllText(file);
-            var match = Regex.Match(json, @"""com.unity.textmeshpro"":\s?""(?<v1>\d *).(?<v2>\d *).(?<v3>\d *)""");
+            Match match = Regex.Match(json, @"""com.unity.textmeshpro"":\s?""(?<v1>\d *).(?<v2>\d *).(?<v3>\d *)""");
             if (!match.Success)
                 return false;
 

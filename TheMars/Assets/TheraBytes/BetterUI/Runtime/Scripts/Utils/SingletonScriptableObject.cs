@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TheraBytes.BetterUi
 {
@@ -50,7 +51,7 @@ namespace TheraBytes.BetterUi
                 string resourceFilePath = Path.GetFileNameWithoutExtension(
                         filePath.Split(new string[] { "Resources" }, StringSplitOptions.None).Last());
 
-                var obj = Resources.Load(resourceFilePath);
+                Object obj = Resources.Load(resourceFilePath);
                 instance = obj as T; // note: in the debugger it might be displayed as null (which is not the case)
 
                 if (obj == null)
@@ -85,7 +86,7 @@ namespace TheraBytes.BetterUi
         private static string GetFilePathWithExtention(bool fullPath)
         {
             Type t = typeof(T);
-            var prop = t.GetProperty("FilePath", BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic) ?? throw new Exception("No static Property 'FilePath' in " + t.ToString());
+            PropertyInfo prop = t.GetProperty("FilePath", BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic) ?? throw new Exception("No static Property 'FilePath' in " + t.ToString());
 
             if (prop.GetValue(null, null) is not string filePath) throw new Exception("static property 'FilePath' is not a string or null in " + t.ToString());
             if (!filePath.Contains("Resources")) throw new Exception("static property 'FilePath' must contain a Resources folder.");

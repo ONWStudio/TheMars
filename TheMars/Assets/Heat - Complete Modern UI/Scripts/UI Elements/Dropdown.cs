@@ -348,14 +348,14 @@ namespace Michsky.UI.Heat
 
         public void RemoveItem(string itemTitle, bool notify)
         {
-            var item = items.Find(x => x.itemName == itemTitle);
+            Item item = items.Find(x => x.itemName == itemTitle);
             items.Remove(item);
             if (notify == true) { Initialize(); }
         }
 
         public void RemoveItem(string itemTitle)
         {
-            var item = items.Find(x => x.itemName == itemTitle);
+            Item item = items.Find(x => x.itemName == itemTitle);
             items.Remove(item);
             Initialize();
         }

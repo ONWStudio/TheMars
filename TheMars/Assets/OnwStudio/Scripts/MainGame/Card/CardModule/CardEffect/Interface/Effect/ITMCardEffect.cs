@@ -1,6 +1,8 @@
 using TMCard.Runtime;
 namespace TMCard.Effect
 {
+
+    
     public interface ITMCardEffect
     {
         /// <summary>

@@ -223,12 +223,12 @@ namespace UniRx
             if (canExecute.Value)
             {
                 canExecuteSource.Value = false;
-                var a = asyncActions.Data;
+                Func<T, IObservable<Unit>>[] a = asyncActions.Data;
                 if (a.Length == 1)
                 {
                     try
                     {
-                        var asyncState = a[0].Invoke(parameter) ?? Observable.ReturnUnit();
+                        IObservable<Unit> asyncState = a[0].Invoke(parameter) ?? Observable.ReturnUnit();
                         return asyncState.Finally(() => canExecuteSource.Value = true).Subscribe();
                     }
                     catch
@@ -239,7 +239,7 @@ namespace UniRx
                 }
                 else
                 {
-                    var xs = new IObservable<Unit>[a.Length];
+                    IObservable<Unit>[] xs = new IObservable<Unit>[a.Length];
                     try
                     {
                         for (int i = 0; i < a.Length; i++)
@@ -328,16 +328,16 @@ namespace UniRx
 
         private static void CancelCallback(object state)
         {
-            var tuple = (Tuple<ICancellableTaskCompletionSource, IDisposable>)state;
+            Tuple<ICancellableTaskCompletionSource, IDisposable> tuple = (Tuple<ICancellableTaskCompletionSource, IDisposable>)state;
             tuple.Item2.Dispose();
             tuple.Item1.TrySetCanceled();
         }
 
         public static Task<T> WaitUntilExecuteAsync<T>(this IReactiveCommand<T> source, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var tcs = new CancellableTaskCompletionSource<T>();
+            CancellableTaskCompletionSource<T> tcs = new CancellableTaskCompletionSource<T>();
 
-            var disposable = new SingleAssignmentDisposable();
+            SingleAssignmentDisposable disposable = new SingleAssignmentDisposable();
             disposable.Disposable = source.Subscribe(x =>
             {
                 disposable.Dispose(); // finish subscription.
@@ -366,8 +366,8 @@ namespace UniRx
         /// </summary>
         public static IDisposable BindTo(this IReactiveCommand<Unit> command, UnityEngine.UI.Button button)
         {
-            var d1 = command.CanExecute.SubscribeToInteractable(button);
-            var d2 = button.OnClickAsObservable().SubscribeWithState(command, (x, c) => c.Execute(x));
+            IDisposable d1 = command.CanExecute.SubscribeToInteractable(button);
+            IDisposable d2 = button.OnClickAsObservable().SubscribeWithState(command, (x, c) => c.Execute(x));
             return StableCompositeDisposable.Create(d1, d2);
         }
 
@@ -376,9 +376,9 @@ namespace UniRx
         /// </summary>
         public static IDisposable BindToOnClick(this IReactiveCommand<Unit> command, UnityEngine.UI.Button button, Action<Unit> onClick)
         {
-            var d1 = command.CanExecute.SubscribeToInteractable(button);
-            var d2 = button.OnClickAsObservable().SubscribeWithState(command, (x, c) => c.Execute(x));
-            var d3 = command.Subscribe(onClick);
+            IDisposable d1 = command.CanExecute.SubscribeToInteractable(button);
+            IDisposable d2 = button.OnClickAsObservable().SubscribeWithState(command, (x, c) => c.Execute(x));
+            IDisposable d3 = command.Subscribe(onClick);
 
             return StableCompositeDisposable.Create(d1, d2, d3);
         }
@@ -414,16 +414,16 @@ namespace UniRx
 
         private static void CancelCallback(object state)
         {
-            var tuple = (Tuple<ICancellableTaskCompletionSource, IDisposable>)state;
+            Tuple<ICancellableTaskCompletionSource, IDisposable> tuple = (Tuple<ICancellableTaskCompletionSource, IDisposable>)state;
             tuple.Item2.Dispose();
             tuple.Item1.TrySetCanceled();
         }
 
         public static Task<T> WaitUntilExecuteAsync<T>(this IAsyncReactiveCommand<T> source, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var tcs = new CancellableTaskCompletionSource<T>();
+            CancellableTaskCompletionSource<T> tcs = new CancellableTaskCompletionSource<T>();
 
-            var subscription = source.Subscribe(x => { tcs.TrySetResult(x); return Observable.ReturnUnit(); });
+            IDisposable subscription = source.Subscribe(x => { tcs.TrySetResult(x); return Observable.ReturnUnit(); });
             cancellationToken.Register(Callback, Tuple.Create(tcs, subscription), false);
 
             return tcs.Task;
@@ -447,8 +447,8 @@ namespace UniRx
         /// </summary>
         public static IDisposable BindTo(this IAsyncReactiveCommand<Unit> command, UnityEngine.UI.Button button)
         {
-            var d1 = command.CanExecute.SubscribeToInteractable(button);
-            var d2 = button.OnClickAsObservable().SubscribeWithState(command, (x, c) => c.Execute(x));
+            IDisposable d1 = command.CanExecute.SubscribeToInteractable(button);
+            IDisposable d2 = button.OnClickAsObservable().SubscribeWithState(command, (x, c) => c.Execute(x));
 
             return StableCompositeDisposable.Create(d1, d2);
         }
@@ -458,9 +458,9 @@ namespace UniRx
         /// </summary>
         public static IDisposable BindToOnClick(this IAsyncReactiveCommand<Unit> command, UnityEngine.UI.Button button, Func<Unit, IObservable<Unit>> asyncOnClick)
         {
-            var d1 = command.CanExecute.SubscribeToInteractable(button);
-            var d2 = button.OnClickAsObservable().SubscribeWithState(command, (x, c) => c.Execute(x));
-            var d3 = command.Subscribe(asyncOnClick);
+            IDisposable d1 = command.CanExecute.SubscribeToInteractable(button);
+            IDisposable d2 = button.OnClickAsObservable().SubscribeWithState(command, (x, c) => c.Execute(x));
+            IDisposable d3 = command.Subscribe(asyncOnClick);
 
             return StableCompositeDisposable.Create(d1, d2, d3);
         }

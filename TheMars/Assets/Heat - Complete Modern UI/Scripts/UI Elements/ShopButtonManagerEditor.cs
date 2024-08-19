@@ -39,49 +39,49 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var animator = serializedObject.FindProperty("animator");
-            var purchaseButton = serializedObject.FindProperty("purchaseButton");
-            var purchasedButton = serializedObject.FindProperty("purchasedButton");
-            var purchasedIndicator = serializedObject.FindProperty("purchasedIndicator");
-            var purchaseModal = serializedObject.FindProperty("purchaseModal");
-            var iconObj = serializedObject.FindProperty("iconObj");
-            var titleObj = serializedObject.FindProperty("titleObj");
-            var descriptionObj = serializedObject.FindProperty("descriptionObj");
-            var priceIconObj = serializedObject.FindProperty("priceIconObj");
-            var priceObj = serializedObject.FindProperty("priceObj");
-            var filterObj = serializedObject.FindProperty("filterObj");
+            SerializedProperty animator = serializedObject.FindProperty("animator");
+            SerializedProperty purchaseButton = serializedObject.FindProperty("purchaseButton");
+            SerializedProperty purchasedButton = serializedObject.FindProperty("purchasedButton");
+            SerializedProperty purchasedIndicator = serializedObject.FindProperty("purchasedIndicator");
+            SerializedProperty purchaseModal = serializedObject.FindProperty("purchaseModal");
+            SerializedProperty iconObj = serializedObject.FindProperty("iconObj");
+            SerializedProperty titleObj = serializedObject.FindProperty("titleObj");
+            SerializedProperty descriptionObj = serializedObject.FindProperty("descriptionObj");
+            SerializedProperty priceIconObj = serializedObject.FindProperty("priceIconObj");
+            SerializedProperty priceObj = serializedObject.FindProperty("priceObj");
+            SerializedProperty filterObj = serializedObject.FindProperty("filterObj");
 
-            var state = serializedObject.FindProperty("state");
-            var buttonIcon = serializedObject.FindProperty("buttonIcon");
-            var buttonTitle = serializedObject.FindProperty("buttonTitle");
-            var titleLocalizationKey = serializedObject.FindProperty("titleLocalizationKey");
-            var buttonDescription = serializedObject.FindProperty("buttonDescription");
-            var descriptionLocalizationKey = serializedObject.FindProperty("descriptionLocalizationKey");
-            var priceIcon = serializedObject.FindProperty("priceIcon");
-            var priceText = serializedObject.FindProperty("priceText");
-            var backgroundFilter = serializedObject.FindProperty("backgroundFilter");
+            SerializedProperty state = serializedObject.FindProperty("state");
+            SerializedProperty buttonIcon = serializedObject.FindProperty("buttonIcon");
+            SerializedProperty buttonTitle = serializedObject.FindProperty("buttonTitle");
+            SerializedProperty titleLocalizationKey = serializedObject.FindProperty("titleLocalizationKey");
+            SerializedProperty buttonDescription = serializedObject.FindProperty("buttonDescription");
+            SerializedProperty descriptionLocalizationKey = serializedObject.FindProperty("descriptionLocalizationKey");
+            SerializedProperty priceIcon = serializedObject.FindProperty("priceIcon");
+            SerializedProperty priceText = serializedObject.FindProperty("priceText");
+            SerializedProperty backgroundFilter = serializedObject.FindProperty("backgroundFilter");
 
-            var isInteractable = serializedObject.FindProperty("isInteractable");
-            var enableIcon = serializedObject.FindProperty("enableIcon");
-            var enableTitle = serializedObject.FindProperty("enableTitle");
-            var enableDescription = serializedObject.FindProperty("enableDescription");
-            var enablePrice = serializedObject.FindProperty("enablePrice");
-            var enableFilter = serializedObject.FindProperty("enableFilter");
-            var useModalWindow = serializedObject.FindProperty("useModalWindow");
-            var useUINavigation = serializedObject.FindProperty("useUINavigation");
-            var navigationMode = serializedObject.FindProperty("navigationMode");
-            var wrapAround = serializedObject.FindProperty("wrapAround");
-            var selectOnUp = serializedObject.FindProperty("selectOnUp");
-            var selectOnDown = serializedObject.FindProperty("selectOnDown");
-            var selectOnLeft = serializedObject.FindProperty("selectOnLeft");
-            var selectOnRight = serializedObject.FindProperty("selectOnRight");
-            var useLocalization = serializedObject.FindProperty("useLocalization");
-            var useSounds = serializedObject.FindProperty("useSounds");
-            var useCustomContent = serializedObject.FindProperty("useCustomContent");
+            SerializedProperty isInteractable = serializedObject.FindProperty("isInteractable");
+            SerializedProperty enableIcon = serializedObject.FindProperty("enableIcon");
+            SerializedProperty enableTitle = serializedObject.FindProperty("enableTitle");
+            SerializedProperty enableDescription = serializedObject.FindProperty("enableDescription");
+            SerializedProperty enablePrice = serializedObject.FindProperty("enablePrice");
+            SerializedProperty enableFilter = serializedObject.FindProperty("enableFilter");
+            SerializedProperty useModalWindow = serializedObject.FindProperty("useModalWindow");
+            SerializedProperty useUINavigation = serializedObject.FindProperty("useUINavigation");
+            SerializedProperty navigationMode = serializedObject.FindProperty("navigationMode");
+            SerializedProperty wrapAround = serializedObject.FindProperty("wrapAround");
+            SerializedProperty selectOnUp = serializedObject.FindProperty("selectOnUp");
+            SerializedProperty selectOnDown = serializedObject.FindProperty("selectOnDown");
+            SerializedProperty selectOnLeft = serializedObject.FindProperty("selectOnLeft");
+            SerializedProperty selectOnRight = serializedObject.FindProperty("selectOnRight");
+            SerializedProperty useLocalization = serializedObject.FindProperty("useLocalization");
+            SerializedProperty useSounds = serializedObject.FindProperty("useSounds");
+            SerializedProperty useCustomContent = serializedObject.FindProperty("useCustomContent");
 
-            var onClick = serializedObject.FindProperty("onClick");
-            var onPurchaseClick = serializedObject.FindProperty("onPurchaseClick");
-            var onPurchase = serializedObject.FindProperty("onPurchase");
+            SerializedProperty onClick = serializedObject.FindProperty("onClick");
+            SerializedProperty onPurchaseClick = serializedObject.FindProperty("onPurchaseClick");
+            SerializedProperty onPurchase = serializedObject.FindProperty("onPurchase");
 
             switch (buttonTarget.latestTabIndex)
             {

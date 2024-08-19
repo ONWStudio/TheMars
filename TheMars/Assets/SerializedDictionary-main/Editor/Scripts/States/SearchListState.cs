@@ -74,7 +74,7 @@ namespace AYellowpaper.SerializedCollections.Editor.States
 
         public void PerformSearch(string searchString)
         {
-            var query = new SearchQuery(Matchers.RegisteredMatchers);
+            SearchQuery query = new SearchQuery(Matchers.RegisteredMatchers);
             query.SearchString = searchString;
             _searchResults.Clear();
             _searchResults.AddRange(query.ApplyToArrayProperty(Drawer.ListProperty));
@@ -94,14 +94,14 @@ namespace AYellowpaper.SerializedCollections.Editor.States
 
         public override void RemoveElementAt(int index)
         {
-            var indexToDelete = _searchResults[index].Index;
+            int indexToDelete = _searchResults[index].Index;
             Drawer.ListProperty.DeleteArrayElementAtIndex(indexToDelete);
             PerformSearch(_lastSearch);
         }
 
         public override void InserElementAt(int index)
         {
-            var indexToAdd = _searchResults[index].Index;
+            int indexToAdd = _searchResults[index].Index;
             Drawer.ListProperty.InsertArrayElementAtIndex(indexToAdd);
             PerformSearch(_lastSearch);
         }

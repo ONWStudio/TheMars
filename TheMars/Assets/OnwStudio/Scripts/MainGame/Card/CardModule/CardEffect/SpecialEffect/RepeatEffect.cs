@@ -30,9 +30,9 @@ namespace TMCard.Effect
                 .OfType<ITMCardResourceEffect>()
                 .Select(effect => new ResourcePair(effect, effect.Amount)));
 
-            controller.OnClickEvent.RemoveAllToAddListener(() =>
+            controller.OnClickEvent.RemoveAllToAddListener(eventState =>
             {
-                trigger.OnEffectEvent.Invoke();
+                trigger.OnEffectEvent.Invoke(eventState);
 
                 ResourcePairs
                     .ForEach(resourcePair => resourcePair.ResourceEffect.AddRewardResource(resourcePair.OriginalAmount));

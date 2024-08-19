@@ -155,8 +155,8 @@ namespace TheraBytes.BetterUi.Editor
         [MenuItem("CONTEXT/RectTransform/♠ Add Better Locator", false)]
         public static void AddBetterLocator(MenuCommand command)
         {
-            var ctx = command.context as RectTransform;
-            var locator = ctx.gameObject.AddComponent<BetterLocator>();
+            RectTransform ctx = command.context as RectTransform;
+            BetterLocator locator = ctx.gameObject.AddComponent<BetterLocator>();
 
             while(UnityEditorInternal.ComponentUtility.MoveComponentUp(locator))
             { }
@@ -165,7 +165,7 @@ namespace TheraBytes.BetterUi.Editor
         [MenuItem("CONTEXT/RectTransform/♠ Add Better Locator", true)]
         public static bool CheckBetterLocator(MenuCommand command)
         {
-            var ctx = command.context as RectTransform;
+            RectTransform ctx = command.context as RectTransform;
             return ctx.gameObject.GetComponent<BetterLocator>() == null;
         }
     }

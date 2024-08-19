@@ -36,17 +36,17 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var panels = serializedObject.FindProperty("panels");
-            var currentPanelIndex = serializedObject.FindProperty("currentPanelIndex");
+            SerializedProperty panels = serializedObject.FindProperty("panels");
+            SerializedProperty currentPanelIndex = serializedObject.FindProperty("currentPanelIndex");
             
-            var cullPanels = serializedObject.FindProperty("cullPanels");
-            var onPanelChanged = serializedObject.FindProperty("onPanelChanged");
-            var initializeButtons = serializedObject.FindProperty("initializeButtons");
-            var useCooldownForHotkeys = serializedObject.FindProperty("useCooldownForHotkeys");
-            var bypassAnimationOnEnable = serializedObject.FindProperty("bypassAnimationOnEnable");
-            var updateMode = serializedObject.FindProperty("updateMode");
-            var panelMode = serializedObject.FindProperty("panelMode");
-            var animationSpeed = serializedObject.FindProperty("animationSpeed");
+            SerializedProperty cullPanels = serializedObject.FindProperty("cullPanels");
+            SerializedProperty onPanelChanged = serializedObject.FindProperty("onPanelChanged");
+            SerializedProperty initializeButtons = serializedObject.FindProperty("initializeButtons");
+            SerializedProperty useCooldownForHotkeys = serializedObject.FindProperty("useCooldownForHotkeys");
+            SerializedProperty bypassAnimationOnEnable = serializedObject.FindProperty("bypassAnimationOnEnable");
+            SerializedProperty updateMode = serializedObject.FindProperty("updateMode");
+            SerializedProperty panelMode = serializedObject.FindProperty("panelMode");
+            SerializedProperty animationSpeed = serializedObject.FindProperty("animationSpeed");
 
             switch (currentTab)
             {
@@ -77,13 +77,13 @@ namespace Michsky.UI.Heat
                             {
                                 if (i == currentPanelIndex.intValue)
                                 {
-                                    var tempCG = pmTarget.panels[currentPanelIndex.intValue].panelObject.GetComponent<CanvasGroup>();
+                                    CanvasGroup tempCG = pmTarget.panels[currentPanelIndex.intValue].panelObject.GetComponent<CanvasGroup>();
                                     if (tempCG != null) { tempCG.alpha = 1; }
                                 }
 
                                 else if (pmTarget.panels[i].panelObject != null)
                                 {
-                                    var tempCG = pmTarget.panels[i].panelObject.GetComponent<CanvasGroup>();
+                                    CanvasGroup tempCG = pmTarget.panels[i].panelObject.GetComponent<CanvasGroup>();
                                     if (tempCG != null) { tempCG.alpha = 0; }
                                 }
                             }

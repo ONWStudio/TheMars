@@ -18,15 +18,15 @@ namespace SerializeReferenceDropdown.Editor
         {
             if (property.propertyType == SerializedPropertyType.ManagedReference)
             {
-                var copyProperty = property.Copy();
+                SerializedProperty copyProperty = property.Copy();
                 menu.AddItem(new GUIContent("Copy Serialize Reference"), false,
                     (_) => { CopyReferenceValue(copyProperty); }, null);
-                var pasteContent = new GUIContent("Paste Serialize Reference");
+                GUIContent pasteContent = new GUIContent("Paste Serialize Reference");
                 menu.AddItem(pasteContent, false, (_) => PasteReferenceValue(copyProperty),
                     null);
                 if (property.IsArrayElement())
                 {
-                    var duplicateContent = new GUIContent("Duplicate Serialize Reference Array Element");
+                    GUIContent duplicateContent = new GUIContent("Duplicate Serialize Reference Array Element");
                     menu.AddItem(duplicateContent, false, (_) => DuplicateSerializeReferenceArrayElement(copyProperty),
                         null);
                 }
@@ -35,7 +35,7 @@ namespace SerializeReferenceDropdown.Editor
 
         private static void CopyReferenceValue(SerializedProperty property)
         {
-            var refValue = GetReferenceToValueFromSerializerPropertyReference(property);
+            object refValue = GetReferenceToValueFromSerializerPropertyReference(property);
             lastObject.json = JsonUtility.ToJson(refValue);
             lastObject.type = refValue?.GetType();
         }
@@ -46,7 +46,7 @@ namespace SerializeReferenceDropdown.Editor
             {
                 if (lastObject.type != null)
                 {
-                    var pasteObj = JsonUtility.FromJson(lastObject.json, lastObject.type);
+                    object pasteObj = JsonUtility.FromJson(lastObject.json, lastObject.type);
                     property.managedReferenceValue = pasteObj;
                 }
                 else
@@ -66,9 +66,9 @@ namespace SerializeReferenceDropdown.Editor
 
         private static void DuplicateSerializeReferenceArrayElement(SerializedProperty property)
         {
-            var sourceElement = GetReferenceToValueFromSerializerPropertyReference(property);
-            var arrayProperty = TypeUtils.GetArrayPropertyFromArrayElement(property);
-            var newElementIndex = arrayProperty.arraySize;
+            object sourceElement = GetReferenceToValueFromSerializerPropertyReference(property);
+            SerializedProperty arrayProperty = TypeUtils.GetArrayPropertyFromArrayElement(property);
+            int newElementIndex = arrayProperty.arraySize;
             arrayProperty.arraySize = newElementIndex + 1;
 
             if (sourceElement != null)
@@ -76,9 +76,9 @@ namespace SerializeReferenceDropdown.Editor
                 property.serializedObject.ApplyModifiedProperties();
                 property.serializedObject.Update();
                 
-                var json = JsonUtility.ToJson(sourceElement);
-                var newObj = JsonUtility.FromJson(json, sourceElement.GetType());
-                var newElementProperty = arrayProperty.GetArrayElementAtIndex(newElementIndex);
+                string json = JsonUtility.ToJson(sourceElement);
+                object newObj = JsonUtility.FromJson(json, sourceElement.GetType());
+                SerializedProperty newElementProperty = arrayProperty.GetArrayElementAtIndex(newElementIndex);
                 newElementProperty.managedReferenceValue = newObj;
             }
 

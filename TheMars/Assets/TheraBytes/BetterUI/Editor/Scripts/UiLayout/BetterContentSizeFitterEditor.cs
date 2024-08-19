@@ -130,10 +130,10 @@ namespace TheraBytes.BetterUi.Editor
         public static void MakeBetter(MenuCommand command)
         {
             ContentSizeFitter fitter = command.context as ContentSizeFitter;
-            var h = fitter.horizontalFit;
-            var v = fitter.verticalFit;
+            ContentSizeFitter.FitMode h = fitter.horizontalFit;
+            ContentSizeFitter.FitMode v = fitter.verticalFit;
 
-            var newFitter = Betterizer.MakeBetter<ContentSizeFitter, BetterContentSizeFitter>(fitter) as BetterContentSizeFitter;
+            BetterContentSizeFitter newFitter = Betterizer.MakeBetter<ContentSizeFitter, BetterContentSizeFitter>(fitter) as BetterContentSizeFitter;
             if (newFitter != null)
             {
                 newFitter.CurrentSettings.HorizontalFit = h;

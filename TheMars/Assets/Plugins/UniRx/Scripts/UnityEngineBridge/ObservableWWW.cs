@@ -61,7 +61,7 @@ namespace UniRx
 
         public static IObservable<string> Post(string url, WWWForm content, Hash headers, IProgress<float> progress = null)
         {
-            var contentHeaders = content.headers;
+            Hash contentHeaders = content.headers;
             return ObservableUnity.FromCoroutine<string>((observer, cancellation) => FetchText(new WWW(url, content.data, MergeHash(contentHeaders, headers)), observer, progress, cancellation));
         }
 
@@ -82,7 +82,7 @@ namespace UniRx
 
         public static IObservable<byte[]> PostAndGetBytes(string url, WWWForm content, Hash headers, IProgress<float> progress = null)
         {
-            var contentHeaders = content.headers;
+            Hash contentHeaders = content.headers;
             return ObservableUnity.FromCoroutine<byte[]>((observer, cancellation) => FetchBytes(new WWW(url, content.data, MergeHash(contentHeaders, headers)), observer, progress, cancellation));
         }
 
@@ -103,7 +103,7 @@ namespace UniRx
 
         public static IObservable<WWW> PostWWW(string url, WWWForm content, Hash headers, IProgress<float> progress = null)
         {
-            var contentHeaders = content.headers;
+            Hash contentHeaders = content.headers;
             return ObservableUnity.FromCoroutine<WWW>((observer, cancellation) => Fetch(new WWW(url, content.data, MergeHash(contentHeaders, headers)), observer, progress, cancellation));
         }
 
@@ -410,7 +410,7 @@ namespace UniRx
             this.HasResponse = false;
             this.Text = text; 
 
-            var splitted = RawErrorMessage.Split(' ', ':');
+            string[] splitted = RawErrorMessage.Split(' ', ':');
             if (splitted.Length != 0)
             {
                 int statusCode;
@@ -424,7 +424,7 @@ namespace UniRx
 
         public override string ToString()
         {
-            var text = this.Text;
+            string text = this.Text;
             if (string.IsNullOrEmpty(text))
             {
                 return RawErrorMessage;

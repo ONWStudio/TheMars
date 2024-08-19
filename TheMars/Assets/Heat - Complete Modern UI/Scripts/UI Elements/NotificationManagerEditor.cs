@@ -21,22 +21,22 @@ namespace Michsky.UI.Heat
 
         public override void OnInspectorGUI()
         {
-            var icon = serializedObject.FindProperty("icon");
-            var notificationText = serializedObject.FindProperty("notificationText");
-            var localizationKey = serializedObject.FindProperty("localizationKey");
-            var customSFX = serializedObject.FindProperty("customSFX");
+            SerializedProperty icon = serializedObject.FindProperty("icon");
+            SerializedProperty notificationText = serializedObject.FindProperty("notificationText");
+            SerializedProperty localizationKey = serializedObject.FindProperty("localizationKey");
+            SerializedProperty customSFX = serializedObject.FindProperty("customSFX");
 
-            var itemAnimator = serializedObject.FindProperty("itemAnimator");
-            var iconObj = serializedObject.FindProperty("iconObj");
-            var textObj = serializedObject.FindProperty("textObj");
+            SerializedProperty itemAnimator = serializedObject.FindProperty("itemAnimator");
+            SerializedProperty iconObj = serializedObject.FindProperty("iconObj");
+            SerializedProperty textObj = serializedObject.FindProperty("textObj");
 
-            var useLocalization = serializedObject.FindProperty("useLocalization");
-            var updateOnAnimate = serializedObject.FindProperty("updateOnAnimate");
-            var minimizeAfter = serializedObject.FindProperty("minimizeAfter");
-            var defaultState = serializedObject.FindProperty("defaultState");
-            var afterMinimize = serializedObject.FindProperty("afterMinimize");
+            SerializedProperty useLocalization = serializedObject.FindProperty("useLocalization");
+            SerializedProperty updateOnAnimate = serializedObject.FindProperty("updateOnAnimate");
+            SerializedProperty minimizeAfter = serializedObject.FindProperty("minimizeAfter");
+            SerializedProperty defaultState = serializedObject.FindProperty("defaultState");
+            SerializedProperty afterMinimize = serializedObject.FindProperty("afterMinimize");
 
-            var onDestroy = serializedObject.FindProperty("onDestroy");
+            SerializedProperty onDestroy = serializedObject.FindProperty("onDestroy");
 
             HeatUIEditorHandler.DrawHeader(customSkin, "Content Header", 6);
             HeatUIEditorHandler.DrawProperty(icon, customSkin, "Icon");

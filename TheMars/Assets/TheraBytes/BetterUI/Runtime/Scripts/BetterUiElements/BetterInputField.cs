@@ -29,7 +29,7 @@ namespace TheraBytes.BetterUi
             if (!(base.gameObject.activeInHierarchy))
                 return;
 
-            foreach (var info in betterTransitions)
+            foreach (Transitions info in betterTransitions)
             {
                 info.SetState(state.ToString(), instant);
             }
@@ -47,7 +47,7 @@ namespace TheraBytes.BetterUi
 
             if (Application.isPlaying)
             {
-                foreach (var ph in additionalPlaceholders)
+                foreach (Graphic ph in additionalPlaceholders)
                 {
                     ph.enabled = show;
                 }

@@ -7,7 +7,7 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 지속 (시간)
     /// </summary>
-    public sealed class TimeContinuingEffect : TMCardSpecialEffect, ITMInitializableEffect<TimeContinuingEffectCreator>
+    public sealed class TimeContinuingEffect : TMCardSpecialEffect, ITMInitializeEffect<TimeContinuingEffectCreator>
     {
         /// <summary>
         /// .. 지속 시간
@@ -16,15 +16,15 @@ namespace TMCard.Effect
 
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            controller.OnClickEvent.RemoveAllToAddListener(() => onContinuingSeconds(
+            controller.OnClickEvent.RemoveAllToAddListener(eventState => onContinuingSeconds(
                 controller,
                 ContinuingTime,
-                trigger.OnEffectEvent.Invoke));
+                () => trigger.OnEffectEvent.Invoke(eventState)));
 
             static void onContinuingSeconds(TMCardController card, float continuingSeconds, System.Action onSuccess)
             {
-                if (!ServiceLocator<ITMCardService>.TryGetService(out var service) ||
-                    !ServiceLocator<TMDelayEffectManager>.TryGetService(out var delayEffectManager)) return;
+                if (!ServiceLocator<ITMCardService>.TryGetService(out ITMCardService service) ||
+                    !ServiceLocator<TMDelayEffectManager>.TryGetService(out TMDelayEffectManager delayEffectManager)) return;
 
                 delayEffectManager.WaitForSecondsEffect(
                     continuingSeconds,

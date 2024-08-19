@@ -17,7 +17,7 @@ namespace UniRx
             if (count == 0) return Empty<T>();
 
             // optimize .Take(count).Take(count)
-            var take = source as TakeObservable<T>;
+            TakeObservable<T> take = source as TakeObservable<T>;
             if (take != null && take.scheduler == null)
             {
                 return take.Combine(count);
@@ -37,7 +37,7 @@ namespace UniRx
             if (scheduler == null) throw new ArgumentNullException("scheduler");
 
             // optimize .Take(duration).Take(duration)
-            var take = source as TakeObservable<T>;
+            TakeObservable<T> take = source as TakeObservable<T>;
             if (take != null && take.scheduler == scheduler)
             {
                 return take.Combine(duration);
@@ -93,7 +93,7 @@ namespace UniRx
             if (count < 0) throw new ArgumentOutOfRangeException("count");
 
             // optimize .Skip(count).Skip(count)
-            var skip = source as SkipObservable<T>;
+            SkipObservable<T> skip = source as SkipObservable<T>;
             if (skip != null && skip.scheduler == null)
             {
                 return skip.Combine(count);
@@ -113,7 +113,7 @@ namespace UniRx
             if (scheduler == null) throw new ArgumentNullException("scheduler");
 
             // optimize .Skip(duration).Skip(duration)
-            var skip = source as SkipObservable<T>;
+            SkipObservable<T> skip = source as SkipObservable<T>;
             if (skip != null && skip.scheduler == scheduler)
             {
                 return skip.Combine(duration);
@@ -285,7 +285,7 @@ namespace UniRx
         public static IObservable<IGroupedObservable<TKey, TElement>> GroupBy<TSource, TKey, TElement>(this IObservable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector)
         {
 #if !UniRxLibrary
-            var comparer = UnityEqualityComparer.GetDefault<TKey>();
+            IEqualityComparer<TKey> comparer = UnityEqualityComparer.GetDefault<TKey>();
 #else
             var comparer = EqualityComparer<TKey>.Default;
 #endif
@@ -311,7 +311,7 @@ namespace UniRx
         public static IObservable<IGroupedObservable<TKey, TElement>> GroupBy<TSource, TKey, TElement>(this IObservable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, int capacity)
         {
 #if !UniRxLibrary
-            var comparer = UnityEqualityComparer.GetDefault<TKey>();
+            IEqualityComparer<TKey> comparer = UnityEqualityComparer.GetDefault<TKey>();
 #else
             var comparer = EqualityComparer<TKey>.Default;
 #endif

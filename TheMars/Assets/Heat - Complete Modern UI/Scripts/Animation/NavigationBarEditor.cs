@@ -21,13 +21,13 @@ namespace Michsky.UI.Heat
 
         public override void OnInspectorGUI()
         {
-            var animator = serializedObject.FindProperty("animator");
-            var canvasGroup = serializedObject.FindProperty("canvasGroup");
+            SerializedProperty animator = serializedObject.FindProperty("animator");
+            SerializedProperty canvasGroup = serializedObject.FindProperty("canvasGroup");
 
-            var updateMode = serializedObject.FindProperty("updateMode");
-            var barDirection = serializedObject.FindProperty("barDirection");
-            var fadeButtons = serializedObject.FindProperty("fadeButtons");
-            var buttonParent = serializedObject.FindProperty("buttonParent");
+            SerializedProperty updateMode = serializedObject.FindProperty("updateMode");
+            SerializedProperty barDirection = serializedObject.FindProperty("barDirection");
+            SerializedProperty fadeButtons = serializedObject.FindProperty("fadeButtons");
+            SerializedProperty buttonParent = serializedObject.FindProperty("buttonParent");
       
             HeatUIEditorHandler.DrawHeader(customSkin, "Core Header", 6);
             HeatUIEditorHandler.DrawProperty(animator, customSkin, "Animator");

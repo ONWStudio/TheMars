@@ -40,36 +40,36 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var buttonIcon = serializedObject.FindProperty("buttonIcon");
-            var buttonText = serializedObject.FindProperty("buttonText");
+            SerializedProperty buttonIcon = serializedObject.FindProperty("buttonIcon");
+            SerializedProperty buttonText = serializedObject.FindProperty("buttonText");
 
-            var disabledCG = serializedObject.FindProperty("disabledCG");
-            var normalCG = serializedObject.FindProperty("normalCG");
-            var highlightCG = serializedObject.FindProperty("highlightCG");
-            var selectCG = serializedObject.FindProperty("selectCG");
-            var disabledTextObj = serializedObject.FindProperty("disabledTextObj");
-            var normalTextObj = serializedObject.FindProperty("normalTextObj");
-            var highlightTextObj = serializedObject.FindProperty("highlightTextObj");
-            var selectTextObj = serializedObject.FindProperty("selectTextObj");
-            var disabledImageObj = serializedObject.FindProperty("disabledImageObj");
-            var normalImageObj = serializedObject.FindProperty("normalImageObj");
-            var highlightImageObj = serializedObject.FindProperty("highlightImageObj");
-            var selectedImageObj = serializedObject.FindProperty("selectedImageObj");
-            var seperator = serializedObject.FindProperty("seperator");
+            SerializedProperty disabledCG = serializedObject.FindProperty("disabledCG");
+            SerializedProperty normalCG = serializedObject.FindProperty("normalCG");
+            SerializedProperty highlightCG = serializedObject.FindProperty("highlightCG");
+            SerializedProperty selectCG = serializedObject.FindProperty("selectCG");
+            SerializedProperty disabledTextObj = serializedObject.FindProperty("disabledTextObj");
+            SerializedProperty normalTextObj = serializedObject.FindProperty("normalTextObj");
+            SerializedProperty highlightTextObj = serializedObject.FindProperty("highlightTextObj");
+            SerializedProperty selectTextObj = serializedObject.FindProperty("selectTextObj");
+            SerializedProperty disabledImageObj = serializedObject.FindProperty("disabledImageObj");
+            SerializedProperty normalImageObj = serializedObject.FindProperty("normalImageObj");
+            SerializedProperty highlightImageObj = serializedObject.FindProperty("highlightImageObj");
+            SerializedProperty selectedImageObj = serializedObject.FindProperty("selectedImageObj");
+            SerializedProperty seperator = serializedObject.FindProperty("seperator");
 
-            var isInteractable = serializedObject.FindProperty("isInteractable");
-            var isSelected = serializedObject.FindProperty("isSelected");
-            var useLocalization = serializedObject.FindProperty("useLocalization");
-            var useCustomText = serializedObject.FindProperty("useCustomText");
-            var useSeperator = serializedObject.FindProperty("useSeperator");
-            var useSounds = serializedObject.FindProperty("useSounds");
-            var useUINavigation = serializedObject.FindProperty("useUINavigation");
-            var fadingMultiplier = serializedObject.FindProperty("fadingMultiplier");
+            SerializedProperty isInteractable = serializedObject.FindProperty("isInteractable");
+            SerializedProperty isSelected = serializedObject.FindProperty("isSelected");
+            SerializedProperty useLocalization = serializedObject.FindProperty("useLocalization");
+            SerializedProperty useCustomText = serializedObject.FindProperty("useCustomText");
+            SerializedProperty useSeperator = serializedObject.FindProperty("useSeperator");
+            SerializedProperty useSounds = serializedObject.FindProperty("useSounds");
+            SerializedProperty useUINavigation = serializedObject.FindProperty("useUINavigation");
+            SerializedProperty fadingMultiplier = serializedObject.FindProperty("fadingMultiplier");
 
-            var onClick = serializedObject.FindProperty("onClick");
-            var onHover = serializedObject.FindProperty("onHover");
-            var onLeave = serializedObject.FindProperty("onLeave");
-            var onSelect = serializedObject.FindProperty("onSelect");
+            SerializedProperty onClick = serializedObject.FindProperty("onClick");
+            SerializedProperty onHover = serializedObject.FindProperty("onHover");
+            SerializedProperty onLeave = serializedObject.FindProperty("onLeave");
+            SerializedProperty onSelect = serializedObject.FindProperty("onSelect");
 
             switch (currentTab)
             {

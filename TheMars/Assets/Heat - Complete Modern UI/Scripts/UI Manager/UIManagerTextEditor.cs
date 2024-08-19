@@ -20,12 +20,12 @@ namespace Michsky.UI.Heat
 
         public override void OnInspectorGUI()
         {
-            var UIManagerAsset = serializedObject.FindProperty("UIManagerAsset");
-            var fontType = serializedObject.FindProperty("fontType");
-            var colorType = serializedObject.FindProperty("colorType");
-            var useCustomColor = serializedObject.FindProperty("useCustomColor");
-            var useCustomAlpha = serializedObject.FindProperty("useCustomAlpha");
-            var useCustomFont = serializedObject.FindProperty("useCustomFont");
+            SerializedProperty UIManagerAsset = serializedObject.FindProperty("UIManagerAsset");
+            SerializedProperty fontType = serializedObject.FindProperty("fontType");
+            SerializedProperty colorType = serializedObject.FindProperty("colorType");
+            SerializedProperty useCustomColor = serializedObject.FindProperty("useCustomColor");
+            SerializedProperty useCustomAlpha = serializedObject.FindProperty("useCustomAlpha");
+            SerializedProperty useCustomFont = serializedObject.FindProperty("useCustomFont");
 
             HeatUIEditorHandler.DrawHeader(customSkin, "Core Header", 6);
             HeatUIEditorHandler.DrawProperty(UIManagerAsset, customSkin, "UI Manager");

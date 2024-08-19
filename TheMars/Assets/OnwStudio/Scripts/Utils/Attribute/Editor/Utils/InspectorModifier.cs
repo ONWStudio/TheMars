@@ -51,18 +51,18 @@ namespace Onw.Editor
         private static void modifyInspector()
         {
             // InspectorWindow 타입을 얻어옴
-            var inspectorWindowType = typeof(Editor).Assembly.GetType("UnityEditor.InspectorWindow");
+            Type inspectorWindowType = typeof(Editor).Assembly.GetType("UnityEditor.InspectorWindow");
             if (inspectorWindowType == null) return;
 
             // 모든 InspectorWindow 인스턴스를 얻어옴
-            var inspectors = Resources
+            IEnumerable<EditorWindow> inspectors = Resources
                 .FindObjectsOfTypeAll(inspectorWindowType)
                 .OfType<EditorWindow>();
 
-            foreach (var inspector in inspectors)
+            foreach (EditorWindow inspector in inspectors)
             {
                 // rootVisualElement를 리플렉션으로 가져옴 (2022.3.29f1) 기준 인스펙터 에디터 VisualElement는 editorsElement 프로퍼티
-                var rootVisualElementProperty = inspectorWindowType.GetProperty("editorsElement", BindingFlags.NonPublic | BindingFlags.Instance);
+                PropertyInfo rootVisualElementProperty = inspectorWindowType.GetProperty("editorsElement", BindingFlags.NonPublic | BindingFlags.Instance);
 
                 if (rootVisualElementProperty?.GetValue(inspector) is VisualElement rootVisualElement)
                 {
@@ -110,14 +110,14 @@ namespace Onw.Editor
 
             _isDelay = true;
             EditorCoroutineUtility.StartCoroutineOwnerless(iEWaitSetIsDelayToFalse());
-            var editorElements = root.Query<VisualElement>(null, "unity-inspector-element").ToList(); // .. 인스펙터 엘리먼트 쿼리로 검색
+            List<VisualElement> editorElements = root.Query<VisualElement>(null, "unity-inspector-element").ToList(); // .. 인스펙터 엘리먼트 쿼리로 검색
 
-            foreach (var editorElement in editorElements)
+            foreach (VisualElement editorElement in editorElements)
             {
                 if (editorElement.Q<IMGUIContainer>("onw-custom-attribute-drawer") != null) continue; // .. 중첩 방지 안해두면 2번이상호출된후 무한 호출반복 
 
                 // .. (2022.3.29f1) 기준 editor 프로퍼티
-                var editorProperty = editorElement
+                PropertyInfo editorProperty = editorElement
                     .GetType()
                     .GetProperty("editor", BindingFlags.NonPublic | BindingFlags.Instance);
 

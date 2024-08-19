@@ -56,13 +56,13 @@ namespace TheraBytes.BetterUi
 
         internal override void AddStateObject(string stateName)
         {
-            var obj = new Color32TransitionState(stateName, new Color32(255, 255, 255, 255));
+            Color32TransitionState obj = new Color32TransitionState(stateName, new Color32(255, 255, 255, 255));
             this.states.Add(obj);
         }
 
         protected override IEnumerable<TransitionState> GetTransitionStates()
         {
-            foreach (var s in states)
+            foreach (Color32TransitionState s in states)
                 yield return s;
         }
 

@@ -71,8 +71,8 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         public static PropertyData GetPropertyData(SerializedProperty property)
         {
-            var data = new PropertyData();
-            var json = EditorPrefs.GetString(EditorPrefsPrefix + property.propertyPath, null);
+            PropertyData data = new PropertyData();
+            string json = EditorPrefs.GetString(EditorPrefsPrefix + property.propertyPath, null);
             if (json != null)
                 EditorJsonUtility.FromJsonOverwrite(json, data);
 
@@ -81,13 +81,13 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         public static void SavePropertyData(SerializedProperty property, PropertyData propertyData)
         {
-            var json = EditorJsonUtility.ToJson(propertyData);
+            string json = EditorJsonUtility.ToJson(propertyData);
             EditorPrefs.SetString(EditorPrefsPrefix + property.propertyPath, json);
         }
 
         public static bool ShouldShowSearch(int pages)
         {
-            var settings = EditorUserSettings.Get();
+            EditorUserSettings settings = EditorUserSettings.Get();
             return settings.AlwaysShowSearch || pages >= settings.PageCountForSearch;
         }
 
@@ -120,9 +120,9 @@ namespace AYellowpaper.SerializedCollections.Editor
         {
             try
             {
-                var classType = typeof(EditorGUI).Assembly.GetType("UnityEditor.ScriptAttributeUtility");
-                var methodInfo = classType.GetMethod("GetFieldInfoFromProperty", BindingFlags.Static | BindingFlags.NonPublic);
-                var parameters = new object[] { property, null };
+                Type classType = typeof(EditorGUI).Assembly.GetType("UnityEditor.ScriptAttributeUtility");
+                MethodInfo methodInfo = classType.GetMethod("GetFieldInfoFromProperty", BindingFlags.Static | BindingFlags.NonPublic);
+                object[] parameters = new object[] { property, null };
                 methodInfo.Invoke(null, parameters);
                 type = (Type) parameters[1];
                 return true;
@@ -136,14 +136,14 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         public static object GetPropertyValue(SerializedProperty prop, object target)
         {
-            var path = prop.propertyPath.Replace(".Array.data[", "[");
-            var elements = path.Split('.');
-            foreach (var element in elements.Take(elements.Length - 1))
+            string path = prop.propertyPath.Replace(".Array.data[", "[");
+            string[] elements = path.Split('.');
+            foreach (string element in elements.Take(elements.Length - 1))
             {
                 if (element.Contains("["))
                 {
-                    var elementName = element[..element.IndexOf("[")];
-                    var index = Convert.ToInt32(element[element.IndexOf("[")..].Replace("[", "").Replace("]", ""));
+                    string elementName = element[..element.IndexOf("[")];
+                    int index = Convert.ToInt32(element[element.IndexOf("[")..].Replace("[", "").Replace("]", ""));
                     target = GetValue(target, elementName, index);
                 }
                 else
@@ -158,11 +158,11 @@ namespace AYellowpaper.SerializedCollections.Editor
         {
             if (source == null) return null;
 
-            var type = source.GetType();
-            var f = type.GetField(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            Type type = source.GetType();
+            FieldInfo f = type.GetField(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
             if (f == null)
             {
-                var p = type.GetProperty(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+                PropertyInfo p = type.GetProperty(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
                 if (p == null)
                     return null;
                 return p.GetValue(source, null);
@@ -172,8 +172,8 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         public static object GetValue(object source, string name, int index)
         {
-            var enumerable = GetValue(source, name) as IEnumerable;
-            var enm = enumerable.GetEnumerator();
+            IEnumerable enumerable = GetValue(source, name) as IEnumerable;
+            IEnumerator enm = enumerable.GetEnumerator();
             while (index-- >= 0)
                 enm.MoveNext();
             return enm.Current;

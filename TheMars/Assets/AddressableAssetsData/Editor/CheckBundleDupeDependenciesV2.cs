@@ -66,7 +66,7 @@ internal class CheckBundleDupeDependenciesV2 : BundleRuleBase
             return retVal;
         }
 
-        var context = GetBuildContext(settings);
+        AddressableAssetsBuildContext context = GetBuildContext(settings);
         ReturnCode exitCode = RefreshBuild(context);
         if (exitCode < ReturnCode.Success)
         {
@@ -75,10 +75,10 @@ internal class CheckBundleDupeDependenciesV2 : BundleRuleBase
             return retVal;
         }
 
-        var implicitGuids = GetImplicitGuidToFilesMap();
+        Dictionary<GUID, List<string>> implicitGuids = GetImplicitGuidToFilesMap();
 
         // Actually calculate the duplicates
-        var dupeResults = CalculateDuplicates(implicitGuids, context);
+        IEnumerable<DuplicateResult> dupeResults = CalculateDuplicates(implicitGuids, context);
         BuildImplicitDuplicatedAssetsSet(dupeResults);
 
         retVal = (from issueGroup in m_AllIssues
@@ -116,7 +116,7 @@ internal class CheckBundleDupeDependenciesV2 : BundleRuleBase
         // Value = asset paths that share the same bundle parents
         // e.g. <{"bundle1", "bundle2"} , {"Assets/Sword_D.tif", "Assets/Sword_N.tif"}>
 
-        foreach (var entry in validGuids)
+        foreach (KeyValuePair<GUID, List<string>> entry in validGuids)
         {
             string assetPath = AssetDatabase.GUIDToAssetPath(entry.Key.ToString());
             // Grab the list of bundle parents
@@ -124,7 +124,7 @@ internal class CheckBundleDupeDependenciesV2 : BundleRuleBase
 
             // Purge duplicate parents (assets inside a Scene can show multiple copies of the Scene AssetBundle as a parent)
             List<string> nonDupeParents = new List<string>();
-            foreach (var parent in assetParents)
+            foreach (string parent in assetParents)
             {
                 if (nonDupeParents.Contains(parent)) continue;
 
@@ -134,7 +134,7 @@ internal class CheckBundleDupeDependenciesV2 : BundleRuleBase
 
             // Add this pair to the dictionary
             bool found = false;
-            foreach (var bundleParentSetup in duplicateAssetsAndParents.Keys)
+            foreach (List<string> bundleParentSetup in duplicateAssetsAndParents.Keys)
             {
                 // If this set of bundle parents equals our set of bundle parents, add this asset to this dictionary entry
                 if (Enumerable.SequenceEqual(bundleParentSetup, assetParents))
@@ -176,7 +176,7 @@ internal class CheckBundleDupeDependenciesV2 : BundleRuleBase
 
     private void BuildImplicitDuplicatedAssetsSet(IEnumerable<DuplicateResult> dupeResults)
     {
-        foreach (var dupeResult in dupeResults)
+        foreach (DuplicateResult dupeResult in dupeResults)
         {
             // Add the data to the AllIssues container which is shown in the Analyze window
             if (!m_AllIssues.TryGetValue(dupeResult.Group.Name, out Dictionary<string, List<string>> groupData))
@@ -215,7 +215,7 @@ internal class CheckBundleDupeDependenciesV2 : BundleRuleBase
         if (group == null)
         {
             group = settings.CreateGroup(desiredGroupName, false, false, false, null, typeof(BundledAssetGroupSchema), typeof(ContentUpdateGroupSchema));
-            var bundleSchema = group.GetSchema<BundledAssetGroupSchema>();
+            BundledAssetGroupSchema bundleSchema = group.GetSchema<BundledAssetGroupSchema>();
             // Set to pack by label so that assets with the same label are put in the same AssetBundle
             bundleSchema.BundleMode = BundledAssetGroupSchema.BundlePackingMode.PackTogetherByLabel;
         }
@@ -223,7 +223,7 @@ internal class CheckBundleDupeDependenciesV2 : BundleRuleBase
         EditorUtility.DisplayProgressBar("Setting up De-Duplication Group...", "", 0f / duplicateAssetsAndParents.Count);
         // Iterate through each duplicate asset
         int bundleNumber = 1;
-        foreach (var entry in duplicateAssetsAndParents)
+        foreach (KeyValuePair<List<string>, List<string>> entry in duplicateAssetsAndParents)
         {
             EditorUtility.DisplayProgressBar("Setting up De-Duplication Group...", "Creating Label Group", ((float)bundleNumber) / duplicateAssetsAndParents.Count);
             // Create a new Label
@@ -252,7 +252,7 @@ internal class CheckBundleDupeDependenciesV2 : BundleRuleBase
             settings.AddLabel(label);
         }
 
-        foreach (var e in entries)
+        foreach (AddressableAssetEntry e in entries)
         {
             e.SetLabel(label, value, false);
         }

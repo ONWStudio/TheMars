@@ -6,7 +6,7 @@ namespace TMCard.Effect
     {
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            trigger.OnEffectEvent.AddListener(() => Debug.Log("카드 발견"));
+            trigger.OnEffectEvent.AddListener(eventState => Debug.Log("카드 발견"));
         }
     }
 }

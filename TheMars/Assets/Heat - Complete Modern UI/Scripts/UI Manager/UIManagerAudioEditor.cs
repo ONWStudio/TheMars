@@ -21,13 +21,13 @@ namespace Michsky.UI.Heat
 
         public override void OnInspectorGUI()
         {
-            var UIManagerAsset = serializedObject.FindProperty("UIManagerAsset");
-            var audioMixer = serializedObject.FindProperty("audioMixer");
-            var audioSource = serializedObject.FindProperty("audioSource");
-            var masterSlider = serializedObject.FindProperty("masterSlider");
-            var musicSlider = serializedObject.FindProperty("musicSlider");
-            var SFXSlider = serializedObject.FindProperty("SFXSlider");
-            var UISlider = serializedObject.FindProperty("UISlider");
+            SerializedProperty UIManagerAsset = serializedObject.FindProperty("UIManagerAsset");
+            SerializedProperty audioMixer = serializedObject.FindProperty("audioMixer");
+            SerializedProperty audioSource = serializedObject.FindProperty("audioSource");
+            SerializedProperty masterSlider = serializedObject.FindProperty("masterSlider");
+            SerializedProperty musicSlider = serializedObject.FindProperty("musicSlider");
+            SerializedProperty SFXSlider = serializedObject.FindProperty("SFXSlider");
+            SerializedProperty UISlider = serializedObject.FindProperty("UISlider");
 
             HeatUIEditorHandler.DrawHeader(customSkin, "Core Header", 6);
             HeatUIEditorHandler.DrawProperty(UIManagerAsset, customSkin, "UI Manager");

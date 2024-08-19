@@ -35,7 +35,7 @@ namespace TheraBytes.BetterUi.Editor
             SerializedProperty height = settings.FindPropertyRelative("OptimizedHeightOverride");
             SerializedProperty dpi = settings.FindPropertyRelative("OptimizedDpiOverride");
 
-            var info = ResolutionMonitor.GetOpimizedScreenInfo(configName);
+            ScreenInfo info = ResolutionMonitor.GetOpimizedScreenInfo(configName);
 
             SetValue(width, OverrideScreenProperties.OverrideMode.Override, info.Resolution.x);
             SetValue(height, OverrideScreenProperties.OverrideMode.Override, info.Resolution.y);

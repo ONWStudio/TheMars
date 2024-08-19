@@ -8,13 +8,13 @@ namespace TMCard.Effect
     {
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            controller.OnClickEvent.RemoveAllToAddListener(() =>
+            controller.OnClickEvent.RemoveAllToAddListener(eventState =>
             {
-                trigger.OnEffectEvent.Invoke();
+                trigger.OnEffectEvent.Invoke(eventState);
                 controller.DisposeCard();
             });
 
-            controller.OnTurnEndedEvent.RemoveAllToAddListener(() => controller.DestroyCard());
+            controller.OnTurnEndedEvent.RemoveAllToAddListener(eventState => controller.DestroyCard());
         }
 
         public MirageEffect() : base("Mirage") { }

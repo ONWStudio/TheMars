@@ -126,6 +126,16 @@ namespace TMCard.Runtime
             return cards;
         }
 
+        public TMCardController DequeueCard()
+        {
+            if (_cardsOnHand.Count <= 0) return null;
+
+            TMCardController card = _cardsOnHand[0];
+            _cardsOnHand.RemoveAt(0);
+
+            return card;
+        }
+
         /// <summary>
         /// .. 카드를 정렬해야하는 경우 해당 메서드를 호출하면 리스트에 존재하는 카드들을 올바른 위치로 정렬 시킵니다 이벤트 기반입니다
         /// </summary>

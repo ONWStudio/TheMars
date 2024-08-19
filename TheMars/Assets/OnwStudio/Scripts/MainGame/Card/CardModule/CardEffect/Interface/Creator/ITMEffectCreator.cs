@@ -8,7 +8,7 @@ namespace TMCard.Effect
             {
                 TEffect effect = new();
 
-                if (effect is ITMInitializableEffect<TCreator> initializeableEffect)
+                if (effect is ITMInitializeEffect<TCreator> initializeableEffect)
                 {
                     initializeableEffect.Initialize(creator);
                 }

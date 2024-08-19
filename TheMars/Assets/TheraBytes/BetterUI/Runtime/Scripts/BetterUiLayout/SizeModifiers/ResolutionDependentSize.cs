@@ -52,7 +52,7 @@ namespace TheraBytes.BetterUi
 
         protected float GetSize(float factor, float opt, float min, float max)
         {
-            var result = factor * opt;
+            float result = factor * opt;
 
             if(UseMinSize && result < min)
                 return min;
@@ -72,7 +72,7 @@ namespace TheraBytes.BetterUi
         public void SetSize(Component caller, T size)
         {
             int i = 0;
-            foreach (var mod in GetModifiers())
+            foreach (SizeModifierCollection mod in GetModifiers())
             {
                 float invFac = 1 / mod.CalculateFactor(caller, screenConfigName);
                 CalculateOptimizedSize(size, invFac, mod, i);
@@ -106,7 +106,7 @@ namespace TheraBytes.BetterUi
         protected void UpdateSize(Component caller)
         {
             int i = 0;
-            foreach (var mod in GetModifiers())
+            foreach (SizeModifierCollection mod in GetModifiers())
             {
                 float factor = mod.CalculateFactor(caller, ScreenConfigName);
                 AdjustSize(factor, mod, i);

@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using Onw.Feedback;
+using Onw.ServiceLocator;
 using TMCard.Runtime;
 namespace TMCard.Effect
 {
     /// <summary>
     /// .. 버리기
     /// </summary>
-    public sealed class DropEffect : TMCardSpecialEffect, ITMInitializableEffect<DropEffectCreator>, ITMEffectTrigger
+    public sealed class DropEffect : TMCardSpecialEffect, ITMInitializeEffect<DropEffectCreator>, ITMEffectTrigger
     {
         public CardEvent OnEffectEvent { get; } = new();
 
@@ -13,11 +15,24 @@ namespace TMCard.Effect
 
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
+            if (!ServiceLocator<ITMCardService>.TryGetService(out ITMCardService service)) return;
+            
             _dropEffect.ForEach(effect => effect.ApplyEffect(controller, this));
-            controller.OnTurnEndedEvent.RemoveAllToAddListener(() =>
+            controller.OnTurnEndedEvent.RemoveAllToAddListener(eventState =>
             {
-                OnEffectEvent.Invoke();
-                controller.DisposeCard();
+                MMF_Parallel parallel = controller.GetMoveToUp();
+                parallel.Feedbacks.Add(service.CardHandController.RemoveCardToGetSortFeedbacks(controller));
+                
+                service.FeedbackPlayer.EnqueueEvent(
+                    parallel,
+                    FeedbackCreator.CreateUnityEvent(() =>
+                    {
+                        OnEffectEvent.Invoke(eventState);
+                        service.FeedbackPlayer.EnqueueEventToHead(
+                            controller.GetMoveToScreenCenterEvent(),
+                            controller.GetMoveToTombEvent(),
+                            FeedbackCreator.CreateUnityEvent(() => service.CardTombController.EnqueueDeadCard(controller)));
+                    }));
             });
         }
 

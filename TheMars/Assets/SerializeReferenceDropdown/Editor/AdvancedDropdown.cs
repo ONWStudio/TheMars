@@ -23,13 +23,13 @@ namespace SerializeReferenceDropdown.Editor
 
         protected override AdvancedDropdownItem BuildRoot()
         {
-            var root = new AdvancedDropdownItem("Types");
+            AdvancedDropdownItem root = new AdvancedDropdownItem("Types");
             itemAndIndexes.Clear();
 
-            var index = 0;
-            foreach (var typeName in typeNames)
+            int index = 0;
+            foreach (string typeName in typeNames)
             {
-                var item = new AdvancedDropdownItem(typeName);
+                AdvancedDropdownItem item = new AdvancedDropdownItem(typeName);
                 itemAndIndexes.Add(item, index);
                 root.AddChild(item);
                 index++;
@@ -41,7 +41,7 @@ namespace SerializeReferenceDropdown.Editor
         protected override void ItemSelected(AdvancedDropdownItem item)
         {
             base.ItemSelected(item);
-            if (itemAndIndexes.TryGetValue(item, out var index))
+            if (itemAndIndexes.TryGetValue(item, out int index))
             {
                 onSelectedTypeIndex.Invoke(index);
             }

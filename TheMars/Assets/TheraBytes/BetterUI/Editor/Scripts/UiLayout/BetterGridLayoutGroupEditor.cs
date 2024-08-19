@@ -35,13 +35,13 @@ namespace TheraBytes.BetterUi.Editor
         public static void MakeBetter(MenuCommand command)
         {
             GridLayoutGroup grid = command.context as GridLayoutGroup;
-            var pad = new Margin(grid.padding);
-            var space = grid.spacing;
-            var size = grid.cellSize;
+            Margin pad = new Margin(grid.padding);
+            Vector2 space = grid.spacing;
+            Vector2 size = grid.cellSize;
 
-            var newGrid = Betterizer.MakeBetter<GridLayoutGroup, BetterGridLayoutGroup>(grid, "m_Padding");
+            GridLayoutGroup newGrid = Betterizer.MakeBetter<GridLayoutGroup, BetterGridLayoutGroup>(grid, "m_Padding");
             
-            var betterGrid = newGrid as BetterGridLayoutGroup;
+            BetterGridLayoutGroup betterGrid = newGrid as BetterGridLayoutGroup;
             if (betterGrid != null)
             {
                 betterGrid.PaddingSizer.SetSize(newGrid, pad);

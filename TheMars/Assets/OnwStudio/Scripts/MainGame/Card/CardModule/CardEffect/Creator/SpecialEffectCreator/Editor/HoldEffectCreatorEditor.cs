@@ -15,13 +15,13 @@ namespace TMCard.Effect
 
             foreach (string guid in AssetDatabase.FindAssets($"t:{typeof(TMCardData).Name}"))
             {
-                var cardData = AssetDatabase
+                TMCardData cardData = AssetDatabase
                     .LoadAssetAtPath<TMCardData>(AssetDatabase.GUIDToAssetPath(guid));
 
-                var fieldInfo = cardData.GetType().GetField("_effectCreators", BindingFlags.Instance | BindingFlags.NonPublic);
+                FieldInfo fieldInfo = cardData.GetType().GetField("_effectCreators", BindingFlags.Instance | BindingFlags.NonPublic);
                 if (fieldInfo?.GetValue(cardData) is List<ITMEffectCreator> specialEffects)
                 {
-                    foreach (var cardSpecialEffect in specialEffects)
+                    foreach (ITMEffectCreator cardSpecialEffect in specialEffects)
                     {
                         if (cardSpecialEffect is not HoldEffectCreator holdCard || holdCard != this || FriendlyCard != cardData) continue;
 

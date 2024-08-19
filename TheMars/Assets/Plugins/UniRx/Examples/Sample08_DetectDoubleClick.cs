@@ -21,7 +21,7 @@ namespace UniRx.Examples
             // The introduction to Reactive Programming you've been missing
             // https://gist.github.com/staltz/868e7e9bc2a7b8c1f754
 
-            var clickStream = Observable.EveryUpdate()
+            IObservable<long> clickStream = Observable.EveryUpdate()
                 .Where(_ => Input.GetMouseButtonDown(0));
 
             clickStream.Buffer(clickStream.Throttle(TimeSpan.FromMilliseconds(250)))

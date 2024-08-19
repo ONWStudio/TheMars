@@ -27,8 +27,8 @@ namespace TheraBytes.BetterUi.Editor
             }
             else if (source.hasVisibleChildren)
             {
-                var endSource = source.GetEndProperty(true).propertyPath;
-                var endTarget = target.GetEndProperty(true).propertyPath;
+                string endSource = source.GetEndProperty(true).propertyPath;
+                string endTarget = target.GetEndProperty(true).propertyPath;
                 
                 source.NextVisible(true);
                 target.NextVisible(true);

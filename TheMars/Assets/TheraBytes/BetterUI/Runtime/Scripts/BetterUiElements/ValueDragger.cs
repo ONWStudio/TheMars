@@ -107,7 +107,7 @@ namespace TheraBytes.BetterUi
 
         void IDragHandler.OnDrag(PointerEventData eventData)
         {
-            var dragSettings = CurrentDragSettings;
+            DragSettings dragSettings = CurrentDragSettings;
 
             int axis = (int)dragSettings.Direction;
             float delta = eventData.delta[axis];
@@ -128,7 +128,7 @@ namespace TheraBytes.BetterUi
 
         private void ApplyValue(float val)
         {
-            var valueSettings = CurrentValueSettings;
+            ValueSettings valueSettings = CurrentValueSettings;
             if(valueSettings.HasMinValue && val < valueSettings.MinValue)
             {
                 val = valueSettings.MinValue;

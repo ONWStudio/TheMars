@@ -20,7 +20,7 @@ namespace TheraBytes.BetterUi
 
         public bool IsScreenType()
         {
-            var curentTags = ResolutionMonitor.CurrentScreenTags as HashSet<string>;
+            HashSet<string> curentTags = ResolutionMonitor.CurrentScreenTags as HashSet<string>;
             return curentTags.Contains(screenTag);
         }
     }

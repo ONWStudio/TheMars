@@ -41,13 +41,13 @@ namespace TheraBytes.BetterUi.Editor
         [MenuItem("CONTEXT/RectTransform/♠ Add Better Offsetter", false)]
         public static void AddBetterOffsetter(MenuCommand command)
         {
-            var ctx = command.context as RectTransform;
+            RectTransform ctx = command.context as RectTransform;
             AddBetterOffsetter(ctx);
         }
 
         private static BetterOffsetter AddBetterOffsetter(Transform transform)
         {
-            var offsetter = transform.gameObject.AddComponent<BetterOffsetter>();
+            BetterOffsetter offsetter = transform.gameObject.AddComponent<BetterOffsetter>();
 
             while (UnityEditorInternal.ComponentUtility.MoveComponentUp(offsetter))
             { }
@@ -63,19 +63,19 @@ namespace TheraBytes.BetterUi.Editor
         [MenuItem("CONTEXT/RectTransform/♠ Add Better Offsetter", true)]
         public static bool CheckBetterOffsetter(MenuCommand command)
         {
-            var ctx = command.context as RectTransform;
+            RectTransform ctx = command.context as RectTransform;
             return ctx.gameObject.GetComponent<BetterOffsetter>() == null;
         }
 
         [MenuItem("CONTEXT/SizeDeltaSizer/♠ Convert to Better Offsetter")]
         public static void ConvertToBetterOffsetter(MenuCommand command)
         {
-            var ctx = command.context as SizeDeltaSizer;
+            SizeDeltaSizer ctx = command.context as SizeDeltaSizer;
         }
 
         public static void ConvertToBetterOffsetter(SizeDeltaSizer sizer)
         { 
-            var offsetter = sizer.gameObject.GetComponent<BetterOffsetter>();
+            BetterOffsetter offsetter = sizer.gameObject.GetComponent<BetterOffsetter>();
 
             if (offsetter == null)
             {
@@ -83,51 +83,51 @@ namespace TheraBytes.BetterUi.Editor
             }
 
             // size delta sizer fields
-            var settingsCollectionField = sizer.GetType()
+            FieldInfo settingsCollectionField = sizer.GetType()
                 .GetField("customSettings", BindingFlags.NonPublic | BindingFlags.Instance);
-            var settingsCollection = settingsCollectionField.GetValue(sizer) as SizeDeltaSizer.SettingsConfigCollection;
+            SizeDeltaSizer.SettingsConfigCollection settingsCollection = settingsCollectionField.GetValue(sizer) as SizeDeltaSizer.SettingsConfigCollection;
 
-            var settingsFallbackField = sizer.GetType()
+            FieldInfo settingsFallbackField = sizer.GetType()
                 .GetField("settingsFallback", BindingFlags.NonPublic | BindingFlags.Instance);
-            var settingsFallback = settingsFallbackField.GetValue(sizer) as SizeDeltaSizer.Settings;
+            SizeDeltaSizer.Settings settingsFallback = settingsFallbackField.GetValue(sizer) as SizeDeltaSizer.Settings;
 
 
-            var sizeDeltaCollectionField = sizer.GetType()
+            FieldInfo sizeDeltaCollectionField = sizer.GetType()
                 .GetField("customDeltaSizers", BindingFlags.NonPublic | BindingFlags.Instance);
-            var sizeDeltaCollection = sizeDeltaCollectionField.GetValue(sizer) as Vector2SizeConfigCollection;
+            Vector2SizeConfigCollection sizeDeltaCollection = sizeDeltaCollectionField.GetValue(sizer) as Vector2SizeConfigCollection;
 
-            var sizeDeltaFallbackField = sizer.GetType()
+            FieldInfo sizeDeltaFallbackField = sizer.GetType()
                 .GetField("deltaSizerFallback", BindingFlags.NonPublic | BindingFlags.Instance);
-            var sizeDeltaFallback = sizeDeltaFallbackField.GetValue(sizer) as Vector2SizeModifier;
+            Vector2SizeModifier sizeDeltaFallback = sizeDeltaFallbackField.GetValue(sizer) as Vector2SizeModifier;
 
             //offsetter fields
-            var sizeXField = offsetter.GetType()
+            FieldInfo sizeXField = offsetter.GetType()
                 .GetField("customSizeDeltaXSizers", BindingFlags.NonPublic | BindingFlags.Instance);
-            var sizeXObj = sizeXField.GetValue(offsetter) as FloatSizeConfigCollection;
+            FloatSizeConfigCollection sizeXObj = sizeXField.GetValue(offsetter) as FloatSizeConfigCollection;
 
-            var sizeYField = offsetter.GetType()
+            FieldInfo sizeYField = offsetter.GetType()
                 .GetField("customSizeDeltaYSizers", BindingFlags.NonPublic | BindingFlags.Instance);
-            var sizeYObj = sizeYField.GetValue(offsetter) as FloatSizeConfigCollection;
+            FloatSizeConfigCollection sizeYObj = sizeYField.GetValue(offsetter) as FloatSizeConfigCollection;
 
-            var offsetterSettingsCollectionField = offsetter.GetType()
+            FieldInfo offsetterSettingsCollectionField = offsetter.GetType()
                 .GetField("customSettings", BindingFlags.NonPublic | BindingFlags.Instance);
-            var offsetterSettingsCollection = offsetterSettingsCollectionField.GetValue(offsetter) as BetterOffsetter.SettingsConfigCollection;
+            BetterOffsetter.SettingsConfigCollection offsetterSettingsCollection = offsetterSettingsCollectionField.GetValue(offsetter) as BetterOffsetter.SettingsConfigCollection;
 
-            var offsetterSettingsFallbackField = offsetter.GetType()
+            FieldInfo offsetterSettingsFallbackField = offsetter.GetType()
                 .GetField("settingsFallback", BindingFlags.NonPublic | BindingFlags.Instance);
 
-            var offsetterSizeXFallbackField = offsetter.GetType()
+            FieldInfo offsetterSizeXFallbackField = offsetter.GetType()
                 .GetField("sizeDeltaXSizerFallback", BindingFlags.NonPublic | BindingFlags.Instance);
 
-            var offsetterSizeYFallbackField = offsetter.GetType()
+            FieldInfo offsetterSizeYFallbackField = offsetter.GetType()
                 .GetField("sizeDeltaYSizerFallback", BindingFlags.NonPublic | BindingFlags.Instance);
 
-            foreach (var sizeDeltaSettings in settingsCollection.Items)
+            foreach (SizeDeltaSizer.Settings sizeDeltaSettings in settingsCollection.Items)
             {
-                var deltaSizer = sizeDeltaCollection.GetItemForConfig(sizeDeltaSettings.ScreenConfigName, sizeDeltaFallback);
+                Vector2SizeModifier deltaSizer = sizeDeltaCollection.GetItemForConfig(sizeDeltaSettings.ScreenConfigName, sizeDeltaFallback);
 
                 CopyOverSizeDeltaSizerModifiers(sizeDeltaSettings, deltaSizer,
-                    out var offsetterSettings, out var sizeModX, out var sizeModY);
+                    out BetterOffsetter.Settings offsetterSettings, out FloatSizeModifier sizeModX, out FloatSizeModifier sizeModY);
 
                 offsetterSettingsCollection.AddItem(offsetterSettings);
                 sizeXObj.AddItem(sizeModX);
@@ -137,7 +137,7 @@ namespace TheraBytes.BetterUi.Editor
             // fallback
             {
                 CopyOverSizeDeltaSizerModifiers(settingsFallback, sizeDeltaFallback,
-                    out var offsetterSettings, out var sizeModX, out var sizeModY);
+                    out BetterOffsetter.Settings offsetterSettings, out FloatSizeModifier sizeModX, out FloatSizeModifier sizeModY);
 
                 offsetterSettingsFallbackField.SetValue(offsetter, offsetterSettings);
                 offsetterSizeXFallbackField.SetValue(offsetter, sizeModX);

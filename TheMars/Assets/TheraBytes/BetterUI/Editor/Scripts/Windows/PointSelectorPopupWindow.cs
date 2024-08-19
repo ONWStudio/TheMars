@@ -63,7 +63,7 @@ namespace TheraBytes.BetterUi.Editor
 
         private GUIStyle GetStyle(int x, int y)
         {
-            var style = GUI.skin.button;
+            GUIStyle style = GUI.skin.button;
             
             if(y == 0)
             {

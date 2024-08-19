@@ -62,7 +62,7 @@ namespace UniRx
 
         public void Dispose()
         {
-            var sourceList = Interlocked.Exchange(ref list, null);
+            IObserverLinkedList<T> sourceList = Interlocked.Exchange(ref list, null);
             if (sourceList != null)
             {
                 sourceList.UnsubscribeNode(this);
@@ -146,7 +146,7 @@ namespace UniRx
 
         private void RaiseOnNext(ref T value)
         {
-            var node = root;
+            ObserverNode<T> node = root;
             while (node != null)
             {
                 node.OnNext(value);
@@ -180,7 +180,7 @@ namespace UniRx
             observer.OnNext(value);
 
             // subscribe node, node as subscription.
-            var next = new ObserverNode<T>(this, observer);
+            ObserverNode<T> next = new ObserverNode<T>(this, observer);
             if (root == null)
             {
                 root = last = next;
@@ -225,7 +225,7 @@ namespace UniRx
         {
             if (isDisposed) return;
 
-            var node = root;
+            ObserverNode<T> node = root;
             root = last = null;
             isDisposed = true;
 
@@ -355,7 +355,7 @@ namespace UniRx
             }
 
             // subscribe node, node as subscription.
-            var next = new ObserverNode<T>(this, observer);
+            ObserverNode<T> next = new ObserverNode<T>(this, observer);
             if (root == null)
             {
                 root = last = next;
@@ -381,7 +381,7 @@ namespace UniRx
             if (isDisposed) return;
             sourceConnection.Dispose();
 
-            var node = root;
+            ObserverNode<T> node = root;
             root = last = null;
             isDisposed = true;
 
@@ -431,7 +431,7 @@ namespace UniRx
             this.latestValue = value;
 
             // call source.OnNext
-            var node = root;
+            ObserverNode<T> node = root;
             while (node != null)
             {
                 node.OnNext(value);
@@ -444,7 +444,7 @@ namespace UniRx
             lastException = error;
 
             // call source.OnError
-            var node = root;
+            ObserverNode<T> node = root;
             while (node != null)
             {
                 node.OnError(error);
@@ -497,20 +497,20 @@ namespace UniRx
 
         private static void CancelCallback(object state)
         {
-            var tuple = (Tuple<ICancellableTaskCompletionSource, IDisposable>)state;
+            Tuple<ICancellableTaskCompletionSource, IDisposable> tuple = (Tuple<ICancellableTaskCompletionSource, IDisposable>)state;
             tuple.Item2.Dispose();
             tuple.Item1.TrySetCanceled();
         }
 
         public static Task<T> WaitUntilValueChangedAsync<T>(this IReadOnlyReactiveProperty<T> source, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var tcs = new CancellableTaskCompletionSource<T>();
+            CancellableTaskCompletionSource<T> tcs = new CancellableTaskCompletionSource<T>();
 
-            var disposable = new SingleAssignmentDisposable();
+            SingleAssignmentDisposable disposable = new SingleAssignmentDisposable();
             if (source.HasValue)
             {
                 // Skip first value
-                var isFirstValue = true;
+                bool isFirstValue = true;
                 disposable.Disposable = source.Subscribe(x =>
                 {
                     if (isFirstValue)
@@ -581,7 +581,7 @@ namespace UniRx
         {
             return sources.CombineLatest().Select(xs =>
             {
-                foreach (var item in xs)
+                foreach (bool item in xs)
                 {
                     if (item == false)
                         return false;
@@ -598,7 +598,7 @@ namespace UniRx
         {
             return sources.CombineLatest().Select(xs =>
             {
-                foreach (var item in xs)
+                foreach (bool item in xs)
                 {
                     if (item == true)
                         return false;

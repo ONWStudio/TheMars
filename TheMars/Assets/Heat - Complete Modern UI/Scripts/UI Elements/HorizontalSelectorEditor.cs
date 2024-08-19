@@ -39,30 +39,30 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var items = serializedObject.FindProperty("items");
-            var onValueChanged = serializedObject.FindProperty("onValueChanged");
-            var defaultIndex = serializedObject.FindProperty("defaultIndex");
+            SerializedProperty items = serializedObject.FindProperty("items");
+            SerializedProperty onValueChanged = serializedObject.FindProperty("onValueChanged");
+            SerializedProperty defaultIndex = serializedObject.FindProperty("defaultIndex");
 
-            var label = serializedObject.FindProperty("label");
-            var selectorAnimator = serializedObject.FindProperty("selectorAnimator");
-            var labelHelper = serializedObject.FindProperty("labelHelper");
-            var labelIcon = serializedObject.FindProperty("labelIcon");
-            var labelIconHelper = serializedObject.FindProperty("labelIconHelper");
-            var indicatorParent = serializedObject.FindProperty("indicatorParent");
-            var indicatorObject = serializedObject.FindProperty("indicatorObject");
-            var contentLayout = serializedObject.FindProperty("contentLayout");
-            var contentLayoutHelper = serializedObject.FindProperty("contentLayoutHelper");
+            SerializedProperty label = serializedObject.FindProperty("label");
+            SerializedProperty selectorAnimator = serializedObject.FindProperty("selectorAnimator");
+            SerializedProperty labelHelper = serializedObject.FindProperty("labelHelper");
+            SerializedProperty labelIcon = serializedObject.FindProperty("labelIcon");
+            SerializedProperty labelIconHelper = serializedObject.FindProperty("labelIconHelper");
+            SerializedProperty indicatorParent = serializedObject.FindProperty("indicatorParent");
+            SerializedProperty indicatorObject = serializedObject.FindProperty("indicatorObject");
+            SerializedProperty contentLayout = serializedObject.FindProperty("contentLayout");
+            SerializedProperty contentLayoutHelper = serializedObject.FindProperty("contentLayoutHelper");
 
-            var enableIcon = serializedObject.FindProperty("enableIcon");
-            var saveSelected = serializedObject.FindProperty("saveSelected");
-            var saveKey = serializedObject.FindProperty("saveKey");
-            var enableIndicator = serializedObject.FindProperty("enableIndicator");
-            var invokeOnAwake = serializedObject.FindProperty("invokeOnAwake");
-            var invertAnimation = serializedObject.FindProperty("invertAnimation");
-            var loopSelection = serializedObject.FindProperty("loopSelection");
-            var iconScale = serializedObject.FindProperty("iconScale");
-            var contentSpacing = serializedObject.FindProperty("contentSpacing");
-            var useLocalization = serializedObject.FindProperty("useLocalization");
+            SerializedProperty enableIcon = serializedObject.FindProperty("enableIcon");
+            SerializedProperty saveSelected = serializedObject.FindProperty("saveSelected");
+            SerializedProperty saveKey = serializedObject.FindProperty("saveKey");
+            SerializedProperty enableIndicator = serializedObject.FindProperty("enableIndicator");
+            SerializedProperty invokeOnAwake = serializedObject.FindProperty("invokeOnAwake");
+            SerializedProperty invertAnimation = serializedObject.FindProperty("invertAnimation");
+            SerializedProperty loopSelection = serializedObject.FindProperty("loopSelection");
+            SerializedProperty iconScale = serializedObject.FindProperty("iconScale");
+            SerializedProperty contentSpacing = serializedObject.FindProperty("contentSpacing");
+            SerializedProperty useLocalization = serializedObject.FindProperty("useLocalization");
 
             switch (currentTab)
             {

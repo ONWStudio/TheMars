@@ -210,7 +210,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// <param name="flags">Optional flags to pass into list field.</param>
 		/// <typeparam name="T">Type of list item.</typeparam>
 		private static void DoListField<T>(IList<T> list, ReorderableListControl.ItemDrawer<T> drawItem, ReorderableListControl.DrawEmpty drawEmpty, float itemHeight, ReorderableListFlags flags) {
-			var adaptor = new GenericListAdaptor<T>(list, drawItem, itemHeight);
+			GenericListAdaptor<T> adaptor = new GenericListAdaptor<T>(list, drawItem, itemHeight);
 			ReorderableListControl.DrawControlFromState(adaptor, drawEmpty, flags);
 		}
 		/// <summary>
@@ -224,7 +224,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// <param name="flags">Optional flags to pass into list field.</param>
 		/// <typeparam name="T">Type of list item.</typeparam>
 		private static void DoListFieldAbsolute<T>(Rect position, IList<T> list, ReorderableListControl.ItemDrawer<T> drawItem, ReorderableListControl.DrawEmptyAbsolute drawEmpty, float itemHeight, ReorderableListFlags flags) {
-			var adaptor = new GenericListAdaptor<T>(list, drawItem, itemHeight);
+			GenericListAdaptor<T> adaptor = new GenericListAdaptor<T>(list, drawItem, itemHeight);
 			ReorderableListControl.DrawControlFromState(position, adaptor, drawEmpty, flags);
 		}
 
@@ -320,7 +320,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// </returns>
 		public static float CalculateListFieldHeight(int itemCount, float itemHeight, ReorderableListFlags flags) {
 			// We need to push/pop flags so that nested controls are properly calculated.
-			var restoreFlags = DefaultListControl.Flags;
+			ReorderableListFlags restoreFlags = DefaultListControl.Flags;
 			try {
 				DefaultListControl.Flags = flags;
 				return DefaultListControl.CalculateListHeight(itemCount, itemHeight);
@@ -355,7 +355,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// <param name="drawEmpty">Callback to draw custom content for empty list (optional).</param>
 		/// <param name="flags">Optional flags to pass into list field.</param>
 		private static void DoListField(SerializedProperty arrayProperty, float fixedItemHeight, ReorderableListControl.DrawEmpty drawEmpty, ReorderableListFlags flags) {
-			var adaptor = new SerializedPropertyAdaptor(arrayProperty, fixedItemHeight);
+			SerializedPropertyAdaptor adaptor = new SerializedPropertyAdaptor(arrayProperty, fixedItemHeight);
 			ReorderableListControl.DrawControlFromState(adaptor, drawEmpty, flags);
 		}
 		/// <summary>
@@ -367,7 +367,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// <param name="drawEmpty">Callback to draw custom content for empty list (optional).</param>
 		/// <param name="flags">Optional flags to pass into list field.</param>
 		private static void DoListFieldAbsolute(Rect position, SerializedProperty arrayProperty, float fixedItemHeight, ReorderableListControl.DrawEmptyAbsolute drawEmpty, ReorderableListFlags flags) {
-			var adaptor = new SerializedPropertyAdaptor(arrayProperty, fixedItemHeight);
+			SerializedPropertyAdaptor adaptor = new SerializedPropertyAdaptor(arrayProperty, fixedItemHeight);
 			ReorderableListControl.DrawControlFromState(position, adaptor, drawEmpty, flags);
 		}
 
@@ -422,7 +422,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// </returns>
 		public static float CalculateListFieldHeight(SerializedProperty arrayProperty, ReorderableListFlags flags) {
 			// We need to push/pop flags so that nested controls are properly calculated.
-			var restoreFlags = DefaultListControl.Flags;
+			ReorderableListFlags restoreFlags = DefaultListControl.Flags;
 			try {
 				DefaultListControl.Flags = flags;
 				return DefaultListControl.CalculateListHeight(new SerializedPropertyAdaptor(arrayProperty));
@@ -555,7 +555,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// </returns>
 		public static float CalculateListFieldHeight(IReorderableListAdaptor adaptor, ReorderableListFlags flags) {
 			// We need to push/pop flags so that nested controls are properly calculated.
-			var restoreFlags = DefaultListControl.Flags;
+			ReorderableListFlags restoreFlags = DefaultListControl.Flags;
 			try {
 				DefaultListControl.Flags = flags;
 				return DefaultListControl.CalculateListHeight(adaptor);

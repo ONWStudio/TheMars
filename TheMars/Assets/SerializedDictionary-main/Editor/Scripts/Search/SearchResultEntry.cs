@@ -23,7 +23,7 @@ namespace AYellowpaper.SerializedCollections.Editor.Search
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"{Index}: {Property.propertyPath}");
-            foreach (var matchingResult in MatchingResults)
+            foreach (PropertySearchResult matchingResult in MatchingResults)
                 sb.AppendLine(matchingResult.ToString());
             return sb.ToString();
         }

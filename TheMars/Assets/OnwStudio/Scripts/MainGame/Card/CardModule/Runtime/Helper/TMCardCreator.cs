@@ -4,6 +4,7 @@ using Onw.ServiceLocator;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
+
 namespace TMCard.Runtime
 {
     [Serializable]
@@ -20,12 +21,9 @@ namespace TMCard.Runtime
 
             for (int i = 0; i < createCount; i++)
             {
-                var cardData = _cards[Random.Range(0, _cards.Count)];
-                cardList.Add(Object.Instantiate(_templatePrefab));
-                cardList[i].CardData = cardData;
-                cardList[i].Initialize();
+                cardList.Add(CreateCardByCardData(_cards[Random.Range(0, _cards.Count)]));
                 
-                if (ServiceLocator<ITMCardService>.TryGetService(out var service))
+                if (ServiceLocator<ITMCardService>.TryGetService(out ITMCardService service))
                 {
                     service.AddListenerToCard(cardList[i]);
                 }
@@ -34,16 +32,18 @@ namespace TMCard.Runtime
             return cardList;
         }
 
-        public TMCardController CreateCard()
+        public TMCardController CreateCardByCardData(TMCardData cardData)
         {
-            if (_cards.Count <= 0) return null;
-
-            var cardData = _cards[Random.Range(0, _cards.Count)];
-            var card = Object.Instantiate(_templatePrefab);
+            TMCardController card = Object.Instantiate(_templatePrefab);
             card.CardData = cardData;
             card.Initialize();
 
             return card;
+        }
+
+        public TMCardController CreateCard()
+        {
+            return _cards.Count > 0 ? CreateCardByCardData(_cards[Random.Range(0, _cards.Count)]) : null;
         }
     }
 }

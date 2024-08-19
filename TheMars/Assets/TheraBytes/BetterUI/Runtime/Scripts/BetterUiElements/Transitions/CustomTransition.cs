@@ -38,13 +38,13 @@ namespace TheraBytes.BetterUi
 
         internal override void AddStateObject(string stateName)
         {
-            var obj = new CustomTransitionState(stateName);
+            CustomTransitionState obj = new CustomTransitionState(stateName);
             this.states.Add(obj);
         }
 
         protected override IEnumerable<TransitionState> GetTransitionStates()
         {
-            foreach (var s in states)
+            foreach (CustomTransitionState s in states)
                 yield return s;
         }
 

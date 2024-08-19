@@ -7,7 +7,7 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 소요 (턴)
     /// </summary>
-    public sealed class TurnDelayEffect : TMCardSpecialEffect, ITMInitializableEffect<TurnDelayEffectCreator>
+    public sealed class TurnDelayEffect : TMCardSpecialEffect, ITMInitializeEffect<TurnDelayEffectCreator>
     {
         /// <summary>
         /// .. 소요시킬 턴
@@ -21,12 +21,12 @@ namespace TMCard.Effect
 
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            controller.OnClickEvent.RemoveAllToAddListener(() => delayTurn(controller, DelayTurnCount));
+            controller.OnClickEvent.RemoveAllToAddListener(eventState => delayTurn(controller, DelayTurnCount));
         }
 
         private static void delayTurn(TMCardController card, int turnCount)
         {
-            if (!ServiceLocator<TMDelayEffectManager>.TryGetService(out var service)) return;
+            if (!ServiceLocator<TMDelayEffectManager>.TryGetService(out TMDelayEffectManager service)) return;
             
             service.WaitForTurnCountEffect(
                 turnCount,

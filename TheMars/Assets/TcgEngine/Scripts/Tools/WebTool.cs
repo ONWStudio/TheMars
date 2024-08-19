@@ -175,7 +175,7 @@ namespace TcgEngine
         {
             try
             {
-                var asyncOp = request.SendWebRequest();
+                UnityWebRequestAsyncOperation asyncOp = request.SendWebRequest();
                 while (!asyncOp.isDone)
                     await TimeTool.Delay(200);
             }

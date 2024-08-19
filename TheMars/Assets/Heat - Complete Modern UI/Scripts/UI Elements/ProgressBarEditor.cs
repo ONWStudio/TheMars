@@ -39,27 +39,27 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var icon = serializedObject.FindProperty("icon");
-            var currentValue = serializedObject.FindProperty("currentValue");
-            var minValue = serializedObject.FindProperty("minValue");
-            var maxValue = serializedObject.FindProperty("maxValue");
-            var minValueLimit = serializedObject.FindProperty("minValueLimit");
-            var maxValueLimit = serializedObject.FindProperty("maxValueLimit");
+            SerializedProperty icon = serializedObject.FindProperty("icon");
+            SerializedProperty currentValue = serializedObject.FindProperty("currentValue");
+            SerializedProperty minValue = serializedObject.FindProperty("minValue");
+            SerializedProperty maxValue = serializedObject.FindProperty("maxValue");
+            SerializedProperty minValueLimit = serializedObject.FindProperty("minValueLimit");
+            SerializedProperty maxValueLimit = serializedObject.FindProperty("maxValueLimit");
 
-            var barImage = serializedObject.FindProperty("barImage");
-            var iconObject = serializedObject.FindProperty("iconObject");
-            var altIconObject = serializedObject.FindProperty("altIconObject");
-            var textObject = serializedObject.FindProperty("textObject");
-            var altTextObject = serializedObject.FindProperty("altTextObject");
+            SerializedProperty barImage = serializedObject.FindProperty("barImage");
+            SerializedProperty iconObject = serializedObject.FindProperty("iconObject");
+            SerializedProperty altIconObject = serializedObject.FindProperty("altIconObject");
+            SerializedProperty textObject = serializedObject.FindProperty("textObject");
+            SerializedProperty altTextObject = serializedObject.FindProperty("altTextObject");
 
-            var addPrefix = serializedObject.FindProperty("addPrefix");
-            var addSuffix = serializedObject.FindProperty("addSuffix");
-            var prefix = serializedObject.FindProperty("prefix");
-            var suffix = serializedObject.FindProperty("suffix");
-            var decimals = serializedObject.FindProperty("decimals");
-            var barDirection = serializedObject.FindProperty("barDirection");
+            SerializedProperty addPrefix = serializedObject.FindProperty("addPrefix");
+            SerializedProperty addSuffix = serializedObject.FindProperty("addSuffix");
+            SerializedProperty prefix = serializedObject.FindProperty("prefix");
+            SerializedProperty suffix = serializedObject.FindProperty("suffix");
+            SerializedProperty decimals = serializedObject.FindProperty("decimals");
+            SerializedProperty barDirection = serializedObject.FindProperty("barDirection");
 
-            var onValueChanged = serializedObject.FindProperty("onValueChanged");
+            SerializedProperty onValueChanged = serializedObject.FindProperty("onValueChanged");
 
             switch (currentTab)
             {

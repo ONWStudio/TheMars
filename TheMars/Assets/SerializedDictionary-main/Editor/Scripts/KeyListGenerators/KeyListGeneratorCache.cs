@@ -17,11 +17,11 @@ namespace AYellowpaper.SerializedCollections.KeysGenerators
         {
             _populators = new List<KeyListGeneratorData>();
             _populatorsByType = new Dictionary<Type, List<KeyListGeneratorData>>();
-            var populatorTypes = TypeCache.GetTypesDerivedFrom<KeyListGenerator>();
-            foreach (var populatorType in populatorTypes.Where(x => !x.IsAbstract))
+            TypeCache.TypeCollection populatorTypes = TypeCache.GetTypesDerivedFrom<KeyListGenerator>();
+            foreach (Type populatorType in populatorTypes.Where(x => !x.IsAbstract))
             {
-                var attributes = populatorType.GetCustomAttributes<KeyListGeneratorAttribute>();
-                foreach (var attribute in attributes)
+                IEnumerable<KeyListGeneratorAttribute> attributes = populatorType.GetCustomAttributes<KeyListGeneratorAttribute>();
+                foreach (KeyListGeneratorAttribute attribute in attributes)
                     _populators.Add(new KeyListGeneratorData(attribute.Name, attribute.TargetType, populatorType, attribute.NeedsWindow));
             }
         }

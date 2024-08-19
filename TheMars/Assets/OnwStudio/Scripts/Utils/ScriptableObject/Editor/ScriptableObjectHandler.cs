@@ -26,8 +26,7 @@ namespace Onw.ScriptableObjects.Editor
             }
 
             CreateAsset(asset, fullpath);
-            SaveAssets();
-            Refresh();
+            SaveData(asset);
 
             return asset;
         }

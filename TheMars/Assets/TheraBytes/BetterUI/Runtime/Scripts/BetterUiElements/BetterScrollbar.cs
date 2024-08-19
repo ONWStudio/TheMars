@@ -23,7 +23,7 @@ namespace TheraBytes.BetterUi
             if (!(base.gameObject.activeInHierarchy))
                 return;
 
-            foreach (var info in betterTransitions)
+            foreach (Transitions info in betterTransitions)
             {
                 info.SetState(state.ToString(), instant);
             }

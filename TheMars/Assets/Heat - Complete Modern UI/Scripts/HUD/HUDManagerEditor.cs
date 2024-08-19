@@ -21,13 +21,13 @@ namespace Michsky.UI.Heat
 
         public override void OnInspectorGUI()
         {
-            var HUDPanel = serializedObject.FindProperty("HUDPanel");
+            SerializedProperty HUDPanel = serializedObject.FindProperty("HUDPanel");
 
-            var fadeSpeed = serializedObject.FindProperty("fadeSpeed");
-            var defaultBehaviour = serializedObject.FindProperty("defaultBehaviour");
+            SerializedProperty fadeSpeed = serializedObject.FindProperty("fadeSpeed");
+            SerializedProperty defaultBehaviour = serializedObject.FindProperty("defaultBehaviour");
 
-            var onSetVisible = serializedObject.FindProperty("onSetVisible");
-            var onSetInvisible = serializedObject.FindProperty("onSetInvisible");
+            SerializedProperty onSetVisible = serializedObject.FindProperty("onSetVisible");
+            SerializedProperty onSetInvisible = serializedObject.FindProperty("onSetInvisible");
 
             HeatUIEditorHandler.DrawHeader(customSkin, "Core Header", 6);
             HeatUIEditorHandler.DrawProperty(HUDPanel, customSkin, "HUD Panel");

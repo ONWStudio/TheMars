@@ -10,6 +10,7 @@ using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEditorInternal;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace AYellowpaper.SerializedCollections.Editor
 {
@@ -92,13 +93,13 @@ namespace AYellowpaper.SerializedCollections.Editor
             _unexpandedList = MakeUnexpandedList();
             _searchField = new SearchField();
 
-            var listField = _fieldInfo.FieldType.GetField(SerializedDictionaryDrawer.SerializedListName, BindingFlags.Instance | BindingFlags.NonPublic);
-            var entryType = listField.FieldType.GetGenericArguments()[0];
+            FieldInfo listField = _fieldInfo.FieldType.GetField(SerializedDictionaryDrawer.SerializedListName, BindingFlags.Instance | BindingFlags.NonPublic);
+            Type entryType = listField.FieldType.GetGenericArguments()[0];
             _keyFieldInfo = entryType.GetField(SerializedDictionaryDrawer.KeyName);
 
             _singleEditingData = new SingleEditingData();
 
-            var keyGenerators = KeyListGeneratorCache.GetPopulatorsForType(_keyFieldInfo.FieldType);
+            IReadOnlyList<KeyListGeneratorData> keyGenerators = KeyListGeneratorCache.GetPopulatorsForType(_keyFieldInfo.FieldType);
             _keyGeneratorsWithWindow = keyGenerators.Where(x => x.NeedsWindow).ToList();
             _keyGeneratorsWithoutWindow = keyGenerators.Where(x => !x.NeedsWindow).ToList();
 
@@ -140,7 +141,7 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         private void ProcessState()
         {
-            var newState = _activeState.OnUpdate();
+            ListState newState = _activeState.OnUpdate();
             if (newState != null && newState != _activeState)
             {
                 _activeState.OnExit();
@@ -166,7 +167,7 @@ namespace AYellowpaper.SerializedCollections.Editor
             InitializeSettingsIfNeeded();
             ProcessState();
             CheckPaging();
-            var elementsPerPage = EditorUserSettings.Get().ElementsPerPage;
+            int elementsPerPage = EditorUserSettings.Get().ElementsPerPage;
             int pageCount = Mathf.Max(1, Mathf.CeilToInt((float)DefaultState.ListSize / elementsPerPage));
             ToggleSearchBar(_propertyData.AlwaysShowSearch || SCEditorUtility.ShouldShowSearch(pageCount));
         }
@@ -175,10 +176,10 @@ namespace AYellowpaper.SerializedCollections.Editor
         {
             void InitializeSettings(bool fieldFlag)
             {
-                var genericArgs = _fieldInfo.FieldType.GetGenericArguments();
-                var firstProperty = ListProperty.GetArrayElementAtIndex(0);
-                var (displayType, canToggleListDrawer) = CreateDisplaySettings(GetElementProperty(firstProperty, fieldFlag), genericArgs[fieldFlag == SCEditorUtility.KeyFlag ? 0 : 1]);
-                var settings = _propertyData.GetElementData(fieldFlag).Settings;
+                Type[] genericArgs = _fieldInfo.FieldType.GetGenericArguments();
+                SerializedProperty firstProperty = ListProperty.GetArrayElementAtIndex(0);
+                (DisplayType displayType, bool canToggleListDrawer) = CreateDisplaySettings(GetElementProperty(firstProperty, fieldFlag), genericArgs[fieldFlag == SCEditorUtility.KeyFlag ? 0 : 1]);
+                ElementSettings settings = _propertyData.GetElementData(fieldFlag).Settings;
                 settings.DisplayType = displayType;
                 settings.HasListDrawerToggle = canToggleListDrawer;
             }
@@ -214,20 +215,20 @@ namespace AYellowpaper.SerializedCollections.Editor
                 _singleEditingData.Invalidate();
             else if (!ListProperty.serializedObject.isEditingMultipleObjects && !_singleEditingData.IsValid)
             {
-                var dictionary = SCEditorUtility.GetPropertyValue(ListProperty, ListProperty.serializedObject.targetObject);
+                object dictionary = SCEditorUtility.GetPropertyValue(ListProperty, ListProperty.serializedObject.targetObject);
                 _singleEditingData.LookupTable = GetLookupTable(dictionary);
             }
         }
 
         private IKeyable GetLookupTable(object dictionary)
         {
-            var propInfo = dictionary.GetType().GetProperty(SerializedDictionaryDrawer.LookupTableName, BindingFlags.Instance | BindingFlags.NonPublic);
+            PropertyInfo propInfo = dictionary.GetType().GetProperty(SerializedDictionaryDrawer.LookupTableName, BindingFlags.Instance | BindingFlags.NonPublic);
             return (IKeyable)propInfo.GetValue(dictionary);
         }
 
         private void UpdatePaging()
         {
-            var elementsPerPage = EditorUserSettings.Get().ElementsPerPage;
+            int elementsPerPage = EditorUserSettings.Get().ElementsPerPage;
             _pagingElement.PageCount = Mathf.Max(1, Mathf.CeilToInt((float)_activeState.ListSize / elementsPerPage));
 
             _pagedIndices.Clear();
@@ -248,7 +249,7 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         private ReorderableList MakeList()
         {
-            var list = new ReorderableList(_pagedIndices, typeof(int), true, true, !_isLocked, !_isLocked);
+            ReorderableList list = new ReorderableList(_pagedIndices, typeof(int), true, true, !_isLocked, !_isLocked);
             list.onAddCallback += OnAdd;
             list.onRemoveCallback += OnRemove;
             list.onReorderCallbackWithDetails += OnReorder;
@@ -261,7 +262,7 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         private ReorderableList MakeUnexpandedList()
         {
-            var list = new ReorderableList(SerializedDictionaryDrawer.NoEntriesList, typeof(int))
+            ReorderableList list = new ReorderableList(SerializedDictionaryDrawer.NoEntriesList, typeof(int))
             {
                 drawHeaderCallback = DrawUnexpandedHeader
             };
@@ -305,8 +306,8 @@ namespace AYellowpaper.SerializedCollections.Editor
             EditorGUI.BeginProperty(rect, _label, ListProperty);
             ListProperty.isExpanded = EditorGUI.Foldout(rect.WithX(rect.x - 5), ListProperty.isExpanded, _label, true);
 
-            var detailsStyle = EditorStyles.miniLabel;
-            var detailsRect = rect.AppendRight(0).AppendLeft(detailsStyle.CalcSize(_shortDetailsContent).x);
+            GUIStyle detailsStyle = EditorStyles.miniLabel;
+            Rect detailsRect = rect.AppendRight(0).AppendLeft(detailsStyle.CalcSize(_shortDetailsContent).x);
             GUI.Label(detailsRect, _shortDetailsContent, detailsStyle);
 
             EditorGUI.EndProperty();
@@ -353,14 +354,14 @@ namespace AYellowpaper.SerializedCollections.Editor
                 DoPaging(lastTopRect);
             }
 
-            var detailsStyle = EditorStyles.miniLabel;
+            GUIStyle detailsStyle = EditorStyles.miniLabel;
             lastTopRect = lastTopRect.AppendLeft(detailsStyle.CalcSize(_detailsContent).x, 5);
             GUI.Label(lastTopRect, _detailsContent, detailsStyle);
 
             if (!_singleEditingData.IsValid)
             {
                 lastTopRect = lastTopRect.AppendLeft(lastTopRect.height + 5);
-                var guicontent = EditorGUIUtility.TrIconContent(EditorGUIUtility.Load("d_console.infoicon") as Texture, "Conflict checking, duplicate key removal and populators not supported in multi object editing mode.");
+                GUIContent guicontent = EditorGUIUtility.TrIconContent(EditorGUIUtility.Load("d_console.infoicon") as Texture, "Conflict checking, duplicate key removal and populators not supported in multi object editing mode.");
                 GUI.Label(lastTopRect, guicontent);
             }
 
@@ -371,17 +372,17 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         private void DoOptionsButton(Rect rect)
         {
-            var screenRect = GUIUtility.GUIToScreenRect(rect);
+            Rect screenRect = GUIUtility.GUIToScreenRect(rect);
             if (GUI.Button(rect, EditorGUIUtility.IconContent("pane options@2x"), EditorStyles.iconButton))
             {
-                var gm = new GenericMenu();
+                GenericMenu gm = new GenericMenu();
                 SCEditorUtility.AddGenericMenuItem(gm, false, !_isLocked && ListProperty.minArraySize > 0, new GUIContent("Clear"), () => QueueAction(ClearList));
                 SCEditorUtility.AddGenericMenuItem(gm, false, true, new GUIContent("Remove Conflicts"), () => QueueAction(RemoveConflicts));
                 SCEditorUtility.AddGenericMenuItem(gm, false, _keyGeneratorsWithWindow.Count > 0, new GUIContent("Bulk Edit..."), () => OpenKeysGeneratorSelectorWindow(screenRect));
                 if (_keyGeneratorsWithoutWindow.Count > 0)
                 {
                     gm.AddSeparator(string.Empty);
-                    foreach (var generatorData in _keyGeneratorsWithoutWindow)
+                    foreach (KeyListGeneratorData generatorData in _keyGeneratorsWithoutWindow)
                     {
                         SCEditorUtility.AddGenericMenuItem(gm, false, true, new GUIContent(generatorData.Name), OnPopulatorDataSelected, generatorData);
                     }
@@ -395,15 +396,15 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         private void OnPopulatorDataSelected(object userData)
         {
-            var data = (KeyListGeneratorData)userData;
-            var so = (KeyListGenerator)ScriptableObject.CreateInstance(data.GeneratorType);
+            KeyListGeneratorData data = (KeyListGeneratorData)userData;
+            KeyListGenerator so = (KeyListGenerator)ScriptableObject.CreateInstance(data.GeneratorType);
             so.hideFlags = HideFlags.DontSave;
             ApplyPopulatorQueued(so, ModificationType.Add);
         }
 
         private void OpenKeysGeneratorSelectorWindow(Rect rect)
         {
-            var window = ScriptableObject.CreateInstance<KeyListGeneratorSelectorWindow>();
+            KeyListGeneratorSelectorWindow window = ScriptableObject.CreateInstance<KeyListGeneratorSelectorWindow>();
             window.Initialize(_keyGeneratorsWithWindow, _keyFieldInfo.FieldType);
             window.ShowAsDropDown(rect, new Vector2(400, 200));
             window.OnApply += ApplyPopulatorQueued;
@@ -447,7 +448,7 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         private void ApplyPopulatorQueued(KeyListGenerator populator, ModificationType modificationType)
         {
-            var array = populator.GetKeys(_keyFieldInfo.FieldType).OfType<object>().ToArray();
+            object[] array = populator.GetKeys(_keyFieldInfo.FieldType).OfType<object>().ToArray();
             QueueAction(() => ApplyPopulator(array, modificationType));
         }
 
@@ -458,11 +459,11 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         private void ApplyPopulator(IEnumerable<object> elements, ModificationType modificationType)
         {
-            foreach (var targetObject in ListProperty.serializedObject.targetObjects)
+            foreach (Object targetObject in ListProperty.serializedObject.targetObjects)
             {
                 Undo.RecordObject(targetObject, "Populate");
-                var dictionary = SCEditorUtility.GetPropertyValue(ListProperty, targetObject);
-                var lookupTable = GetLookupTable(dictionary);
+                object dictionary = SCEditorUtility.GetPropertyValue(ListProperty, targetObject);
+                IKeyable lookupTable = GetLookupTable(dictionary);
 
                 if (modificationType == ModificationType.Add)
                     AddElements(lookupTable, elements);
@@ -481,9 +482,9 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         private static void AddElements(IKeyable lookupTable, IEnumerable<object> elements)
         {
-            foreach (var key in elements)
+            foreach (object key in elements)
             {
-                var occurences = lookupTable.GetOccurences(key);
+                IReadOnlyList<int> occurences = lookupTable.GetOccurences(key);
                 if (occurences.Count > 0)
                     continue;
                 lookupTable.AddKey(key);
@@ -492,8 +493,8 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         private static void ConfineElements(IKeyable lookupTable, IEnumerable<object> elements)
         {
-            var keysToRemove = lookupTable.Keys.OfType<object>().ToHashSet();
-            foreach (var key in elements)
+            HashSet<object> keysToRemove = lookupTable.Keys.OfType<object>().ToHashSet();
+            foreach (object key in elements)
                 keysToRemove.Remove(key);
 
             RemoveElements(lookupTable, keysToRemove);
@@ -501,8 +502,8 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         private static void RemoveElements(IKeyable lookupTable, IEnumerable<object> elements)
         {
-            var indicesToRemove = elements.SelectMany(x => lookupTable.GetOccurences(x)).OrderByDescending(index => index);
-            foreach (var index in indicesToRemove)
+            IOrderedEnumerable<int> indicesToRemove = elements.SelectMany(x => lookupTable.GetOccurences(x)).OrderByDescending(index => index);
+            foreach (int index in indicesToRemove)
             {
                 lookupTable.RemoveAt(index);
             }
@@ -516,22 +517,22 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         private void RemoveConflicts()
         {
-            foreach (var targetObject in ListProperty.serializedObject.targetObjects)
+            foreach (Object targetObject in ListProperty.serializedObject.targetObjects)
             {
                 Undo.RecordObject(targetObject, "Remove Conflicts");
-                var dictionary = SCEditorUtility.GetPropertyValue(ListProperty, targetObject);
-                var lookupTable = GetLookupTable(dictionary);
+                object dictionary = SCEditorUtility.GetPropertyValue(ListProperty, targetObject);
+                IKeyable lookupTable = GetLookupTable(dictionary);
 
                 List<int> duplicateIndices = new();
 
-                foreach (var key in lookupTable.Keys)
+                foreach (object key in lookupTable.Keys)
                 {
-                    var occurences = lookupTable.GetOccurences(key);
+                    IReadOnlyList<int> occurences = lookupTable.GetOccurences(key);
                     for (int i = 1; i < occurences.Count; i++)
                         duplicateIndices.Add(occurences[i]);
                 }
 
-                foreach (var indexToRemove in duplicateIndices.OrderByDescending(x => x))
+                foreach (int indexToRemove in duplicateIndices.OrderByDescending(x => x))
                 {
                     lookupTable.RemoveAt(indexToRemove);
                 }
@@ -546,7 +547,7 @@ namespace AYellowpaper.SerializedCollections.Editor
 
         private void DoDisplayTypeToggle(Rect contentRect, bool fieldFlag)
         {
-            var displayData = _propertyData.GetElementData(fieldFlag);
+            ElementData displayData = _propertyData.GetElementData(fieldFlag);
 
             if (displayData.Settings.HasListDrawerToggle)
             {
@@ -566,7 +567,7 @@ namespace AYellowpaper.SerializedCollections.Editor
         private float OnGetElementHeight(int index)
         {
             int actualIndex = _pagedIndices[index];
-            var element = _activeState.GetPropertyAtIndex(actualIndex);
+            SerializedProperty element = _activeState.GetPropertyAtIndex(actualIndex);
             return CalculateHeightOfElement(element, _propertyData.GetElementData(SerializedDictionaryDrawer.KeyFlag).EffectiveDisplayType == DisplayType.List, _propertyData.GetElementData(SerializedDictionaryDrawer.ValueFlag).EffectiveDisplayType == DisplayType.List ? true : false);
         }
 
@@ -584,14 +585,14 @@ namespace AYellowpaper.SerializedCollections.Editor
             Rect lineRect = keyRect.WithXAndWidth(keyRect.x + keyRect.width + lineLeftSpace, lineWidth).WithHeight(rect.height);
             Rect valueRect = keyRect.AppendRight(rect.width - keyRect.width - totalSpace, totalSpace);
 
-            var keyProperty = kvp.FindPropertyRelative(SerializedDictionaryDrawer.KeyName);
-            var valueProperty = kvp.FindPropertyRelative(SerializedDictionaryDrawer.ValueName);
+            SerializedProperty keyProperty = kvp.FindPropertyRelative(SerializedDictionaryDrawer.KeyName);
+            SerializedProperty valueProperty = kvp.FindPropertyRelative(SerializedDictionaryDrawer.ValueName);
 
             Color prevColor = GUI.color;
             if (_singleEditingData.IsValid)
             {
-                var keyObject = _keyFieldInfo.GetValue(_singleEditingData.LookupTable.GetKeyAt(actualIndex));
-                var occurences = _singleEditingData.LookupTable.GetOccurences(keyObject);
+                object keyObject = _keyFieldInfo.GetValue(_singleEditingData.LookupTable.GetKeyAt(actualIndex));
+                IReadOnlyList<int> occurences = _singleEditingData.LookupTable.GetOccurences(keyObject);
 
                 if (occurences.Count > 1)
                 {
@@ -602,7 +603,7 @@ namespace AYellowpaper.SerializedCollections.Editor
                 }
             }
 
-            var keyDisplayData = _propertyData.GetElementData(SerializedDictionaryDrawer.KeyFlag);
+            ElementData keyDisplayData = _propertyData.GetElementData(SerializedDictionaryDrawer.KeyFlag);
             if (_isReadOnlyKey)
             {
                 GUI.enabled = false;
@@ -613,7 +614,7 @@ namespace AYellowpaper.SerializedCollections.Editor
             EditorGUI.DrawRect(lineRect, new Color(36 / 255f, 36 / 255f, 36 / 255f));
             GUI.color = prevColor;
 
-            var valueDisplayData = _propertyData.GetElementData(SerializedDictionaryDrawer.ValueFlag);
+            ElementData valueDisplayData = _propertyData.GetElementData(SerializedDictionaryDrawer.ValueFlag);
             if (_isReadOnlyValue)
             {
                 GUI.enabled = false;

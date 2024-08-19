@@ -1,12 +1,13 @@
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using MoreMountains.Feedbacks;
 using Onw.ServiceLocator;
 using Onw.Attribute;
 using Onw.Feedback;
 using Onw.Event;
-using UnityEngine.UI;
+using TMCard.UI;
 
 namespace TMCard.Runtime
 {
@@ -30,24 +31,28 @@ namespace TMCard.Runtime
         // .. 무덤
         [field: SerializeField, SelectableSerializeField] public TMCardTombController CardTombController { get; private set; }
 
+        [field: Header("Collect UI")]
+        [field: SerializeField, SelectableSerializeField] public TMCardCollectUI CollectUI { get; private set; }
+
         [field: Header("Manager Event")]
         [field: SerializeField] public SafeUnityEvent OnTurnEnd { get; private set; } = new();
         [field: SerializeField] public SafeUnityEvent<TMCardController> OnUsedCard { get; private set; } = new();
 
+        [field: Header("Card Creator")]
         [field: SerializeField] public TMCardCreator CardCreator { get; private set; } = new();
 
         [field: Header("Camera")]
         [field: SerializeField, SelectableSerializeField] public Camera CardSystemCamera { get; private set; }
-        
+
         public IIgnorePlayFeedbackPlayer FeedbackPlayer => _feedbackPlayer;
 
         [Header("Card Importer")]
-        [SerializeField]  private TMCardHandImporter _cardHandImporter = new();
+        [SerializeField] private TMCardHandImporter _cardHandImporter = new();
 
         [Header("Option")]
         [SerializeField, SelectableSerializeField] private GraphicRaycaster _graphicRaycaster;
         [SerializeField, InitializeRequireComponent] private FeedbackPlayer _feedbackPlayer;
-        
+
         // ReSharper disable Unity.PerformanceAnalysis
         private void Awake()
         {
@@ -58,7 +63,7 @@ namespace TMCard.Runtime
                 ServiceLocator<ITMCardService>.ChangeService(this);
             }
 
-            _feedbackPlayer.OnPlay.AddListener(() => 
+            _feedbackPlayer.OnPlay.AddListener(() =>
                 _graphicRaycaster.enabled = false);
 
             _feedbackPlayer.OnCompleted.AddListener(() => _graphicRaycaster.enabled = true);
@@ -76,7 +81,6 @@ namespace TMCard.Runtime
         {
             List<TMCardController> controllers = CardCreator.CreateCards(ALL_CARD_MAX);
             CardDeckController.PushCards(controllers);
-            // _cardHandImporter.PushCards(CardDeckController.DequeueCards(DRAW_CARD_MAX));
             TurnEndToDrawCardsFromDeck();
         }
 
@@ -97,15 +101,15 @@ namespace TMCard.Runtime
             cards.ForEach(card => card.OnTurnEnd());
 
             List<TMCardController> importerCards = _cardHandImporter.GetCards(DRAW_CARD_MAX); // .. 다음 턴에 무조건 나와야 할 카드부터 드로우
-            
+
             importerCards.AddRange(CardDeckController.DequeueCards(DRAW_CARD_MAX - importerCards.Count)); // .. 무조건 나와야 할 카드 갯수만큼 제외해서 덱에서 드로우
-            
+
             if (importerCards.Count < DRAW_CARD_MAX) // .. 덱에 카드가 부족하다면?
             {
                 CardDeckController.PushCards(CardTombController.DequeueDeadCards());                          // .. 무덤에서 덱으로 카드 옮기기
                 importerCards.AddRange(CardDeckController.DequeueCards(DRAW_CARD_MAX - importerCards.Count)); // .. 부족한 카드 수만 큼 다시 덱에서 뽑아오기 
             }
-            
+
             foreach (TMCardController card in importerCards)
             {
                 card.transform.localPosition = CardHandController.DeckTransform.localPosition;

@@ -15,16 +15,16 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty.Internal {
 	public static class GUIHelper {
 
 		static GUIHelper() {
-			var tyGUIClip = Type.GetType("UnityEngine.GUIClip,UnityEngine");
+			Type tyGUIClip = Type.GetType("UnityEngine.GUIClip,UnityEngine");
 			if (tyGUIClip != null) {
-				var piVisibleRect = tyGUIClip.GetProperty("visibleRect", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+				PropertyInfo piVisibleRect = tyGUIClip.GetProperty("visibleRect", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
 				if (piVisibleRect != null) {
-					var getMethod = piVisibleRect.GetGetMethod(true) ?? piVisibleRect.GetGetMethod(false);
+					MethodInfo getMethod = piVisibleRect.GetGetMethod(true) ?? piVisibleRect.GetGetMethod(false);
 					VisibleRect = (Func<Rect>)Delegate.CreateDelegate(typeof(Func<Rect>), getMethod);
 				}
 			}
 
-			var miFocusTextInControl = typeof(EditorGUI).GetMethod("FocusTextInControl", BindingFlags.Static | BindingFlags.Public);
+			MethodInfo miFocusTextInControl = typeof(EditorGUI).GetMethod("FocusTextInControl", BindingFlags.Static | BindingFlags.Public);
 			if (miFocusTextInControl == null)
 				miFocusTextInControl = typeof(GUI).GetMethod("FocusControl", BindingFlags.Static | BindingFlags.Public);
 

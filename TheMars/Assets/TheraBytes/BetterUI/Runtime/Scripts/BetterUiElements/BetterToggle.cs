@@ -50,20 +50,20 @@ namespace TheraBytes.BetterUi
             if (!(base.gameObject.activeInHierarchy))
                 return;
 
-            var stateTransitions = (isOn)
+            List<Transitions> stateTransitions = (isOn)
                 ? betterTransitionsWhenOn
                 : betterTransitionsWhenOff;
 
-            foreach (var info in stateTransitions)
+            foreach (Transitions info in stateTransitions)
             {
                 info.SetState(state.ToString(), instant);
             }
 
-            foreach (var info in betterTransitions)
+            foreach (Transitions info in betterTransitions)
             {
                 if (state != SelectionState.Disabled && isOn)
                 {
-                    var tglTr = betterToggleTransitions.FirstOrDefault(
+                    Transitions tglTr = betterToggleTransitions.FirstOrDefault(
                         (o) => o.TransitionStates != null && info.TransitionStates != null
                             && o.TransitionStates.Target == info.TransitionStates.Target
                             && o.Mode == info.Mode);
@@ -86,16 +86,16 @@ namespace TheraBytes.BetterUi
         private void ValueChanged(bool on, bool immediate)
         {
             wasOn = on;
-            foreach (var state in betterToggleTransitions)
+            foreach (Transitions state in betterToggleTransitions)
             {
                 state.SetState((on) ? "On" : "Off", immediate);
             }
 
-            var stateTransitions = (on)
+            List<Transitions> stateTransitions = (on)
                 ? betterTransitionsWhenOn
                 : betterTransitionsWhenOff;
 
-            foreach (var state in stateTransitions)
+            foreach (Transitions state in stateTransitions)
             {
                 state.SetState(currentSelectionState.ToString(), immediate);
             }

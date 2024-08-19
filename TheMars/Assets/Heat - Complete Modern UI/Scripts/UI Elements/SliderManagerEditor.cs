@@ -41,20 +41,20 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var onValueChanged = serializedObject.FindProperty("onValueChanged");
+            SerializedProperty onValueChanged = serializedObject.FindProperty("onValueChanged");
 
-            var sliderObject = serializedObject.FindProperty("mainSlider");
-            var valueText = serializedObject.FindProperty("valueText");
-            var highlightCG = serializedObject.FindProperty("highlightCG");
+            SerializedProperty sliderObject = serializedObject.FindProperty("mainSlider");
+            SerializedProperty valueText = serializedObject.FindProperty("valueText");
+            SerializedProperty highlightCG = serializedObject.FindProperty("highlightCG");
 
-            var saveValue = serializedObject.FindProperty("saveValue");
-            var saveKey = serializedObject.FindProperty("saveKey");
-            var usePercent = serializedObject.FindProperty("usePercent");
-            var useRoundValue = serializedObject.FindProperty("useRoundValue");
-            var showValue = serializedObject.FindProperty("showValue");
-            var showPopupValue = serializedObject.FindProperty("showPopupValue");
-            var invokeOnAwake = serializedObject.FindProperty("invokeOnAwake");
-            var fadingMultiplier = serializedObject.FindProperty("fadingMultiplier");
+            SerializedProperty saveValue = serializedObject.FindProperty("saveValue");
+            SerializedProperty saveKey = serializedObject.FindProperty("saveKey");
+            SerializedProperty usePercent = serializedObject.FindProperty("usePercent");
+            SerializedProperty useRoundValue = serializedObject.FindProperty("useRoundValue");
+            SerializedProperty showValue = serializedObject.FindProperty("showValue");
+            SerializedProperty showPopupValue = serializedObject.FindProperty("showPopupValue");
+            SerializedProperty invokeOnAwake = serializedObject.FindProperty("invokeOnAwake");
+            SerializedProperty fadingMultiplier = serializedObject.FindProperty("fadingMultiplier");
 
             switch (currentTab)
             {

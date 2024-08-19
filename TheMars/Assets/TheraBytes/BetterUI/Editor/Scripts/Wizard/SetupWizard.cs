@@ -35,7 +35,7 @@ namespace TheraBytes.BetterUi.Editor
         {
             EditorApplication.delayCall -= ShowWindow;
 
-            var wnd = EditorWindow.GetWindow(typeof(SetupWizard), true, "Better UI - Setup Wizard");
+            EditorWindow wnd = EditorWindow.GetWindow(typeof(SetupWizard), true, "Better UI - Setup Wizard");
             wnd.minSize = new Vector2(524, 460);
             wnd.maxSize = new Vector2(524, 2000);
         }

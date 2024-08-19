@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TheraBytes.BetterUi.Editor
 {
@@ -60,7 +61,7 @@ namespace TheraBytes.BetterUi.Editor
         {
             EditorGUILayout.Space();
 
-            var go = Selection.activeObject as GameObject;
+            GameObject go = Selection.activeObject as GameObject;
             bool canSelectParent = Selection.objects.Length == 1
                 && go != null
                 && go.transform as RectTransform != null
@@ -130,7 +131,7 @@ namespace TheraBytes.BetterUi.Editor
             #region free parent mode
 
             bool prev = isFreeMovementEnabled;
-            var content = (prev) ? freeParentModeOnContent : freeParentModeOffContent;
+            GUIContent content = (prev) ? freeParentModeOnContent : freeParentModeOffContent;
             isFreeMovementEnabled = GUILayout.Toggle(isFreeMovementEnabled, content, "Button", GUILayout.Width(60), GUILayout.Height(60));
 
             bool turnedOn = !prev && isFreeMovementEnabled;
@@ -162,7 +163,7 @@ namespace TheraBytes.BetterUi.Editor
 
         private void SelectionChanged()
         {
-            var sel = Selection.GetFiltered(typeof(RectTransform), SelectionMode.TopLevel);
+            Object[] sel = Selection.GetFiltered(typeof(RectTransform), SelectionMode.TopLevel);
 
             if (sel.Length != 1)
             {
@@ -171,7 +172,7 @@ namespace TheraBytes.BetterUi.Editor
                 return;
             }
 
-            var rt = sel[0] as RectTransform;
+            RectTransform rt = sel[0] as RectTransform;
             if(rt.childCount == 0 || rt.parent == null)
             {
                 selection = null;
@@ -211,9 +212,9 @@ namespace TheraBytes.BetterUi.Editor
             float xMax = float.MinValue;
             float yMax = float.MinValue;
 
-            foreach (var child in selection)
+            foreach (object child in selection)
             {
-                var rt = child as RectTransform;
+                RectTransform rt = child as RectTransform;
                 if (rt == null || !rt.gameObject.activeSelf)
                     continue;
 
@@ -227,7 +228,7 @@ namespace TheraBytes.BetterUi.Editor
 
             Rect childBounds = Rect.MinMaxRect(xMin, yMin, xMax, yMax);
 
-            var parent = selection.parent as RectTransform;
+            RectTransform parent = selection.parent as RectTransform;
             Rect parentRect = (parent != null)
                 ? parent.ToScreenRect(startAtBottom: true)
                 : new Rect(0, 0, Screen.width, Screen.height);
@@ -301,7 +302,7 @@ namespace TheraBytes.BetterUi.Editor
             float scaleH = 1 / cur.width;
             float scaleV = 1 / cur.height;
 
-            foreach (var child in selection)
+            foreach (object child in selection)
             {
                 RectTransform rt = child as RectTransform;
                 if (rt == null)

@@ -1,16 +1,23 @@
 using System;
 namespace TMCard
 {
+    public enum CardEventState
+    {
+        DRAW,
+        NORMAL,
+        TURN_END
+    }
+    
     public sealed class CardEvent
     {
-        private Action _cardAction;
+        private Action<CardEventState> _cardAction;
 
-        public void Invoke()
+        public void Invoke(CardEventState eventState)
         {
-            _cardAction?.Invoke();
+            _cardAction?.Invoke(eventState);
         }
 
-        public void AddListener(Action action)
+        public void AddListener(Action<CardEventState> action)
         {
             if (_cardAction is null)
             {
@@ -21,12 +28,12 @@ namespace TMCard
             _cardAction += action;
         }
 
-        public void RemoveAllToAddListener(Action action)
+        public void RemoveAllToAddListener(Action<CardEventState> action)
         {
             _cardAction = action;
         }
 
-        public void RemoveListener(Action action)
+        public void RemoveListener(Action<CardEventState> action)
         {
             if (_cardAction is null) return;
 

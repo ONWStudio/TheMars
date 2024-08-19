@@ -21,12 +21,12 @@ namespace Michsky.UI.Heat
 
         public override void OnInspectorGUI()
         {
-            var UIManagerAsset = serializedObject.FindProperty("UIManagerAsset");
-            var languageSelector = serializedObject.FindProperty("languageSelector");
+            SerializedProperty UIManagerAsset = serializedObject.FindProperty("UIManagerAsset");
+            SerializedProperty languageSelector = serializedObject.FindProperty("languageSelector");
 
-            var setLanguageOnAwake = serializedObject.FindProperty("setLanguageOnAwake");
-            var updateItemsOnSet = serializedObject.FindProperty("updateItemsOnSet");
-            var saveLanguageChanges = serializedObject.FindProperty("saveLanguageChanges");
+            SerializedProperty setLanguageOnAwake = serializedObject.FindProperty("setLanguageOnAwake");
+            SerializedProperty updateItemsOnSet = serializedObject.FindProperty("updateItemsOnSet");
+            SerializedProperty saveLanguageChanges = serializedObject.FindProperty("saveLanguageChanges");
 
             HeatUIEditorHandler.DrawHeader(customSkin, "Core Header", 6);
             HeatUIEditorHandler.DrawProperty(UIManagerAsset, customSkin, "UI Manager");

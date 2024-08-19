@@ -39,25 +39,25 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var creditsPreset = serializedObject.FindProperty("creditsPreset");
+            SerializedProperty creditsPreset = serializedObject.FindProperty("creditsPreset");
 
-            var canvasGroup = serializedObject.FindProperty("canvasGroup");
-            var backgroundImage = serializedObject.FindProperty("backgroundImage");
-            var creditsListParent = serializedObject.FindProperty("creditsListParent");
-            var scrollHelper = serializedObject.FindProperty("scrollHelper");
-            var creditsSectionPreset = serializedObject.FindProperty("creditsSectionPreset");
-            var creditsMentionPreset = serializedObject.FindProperty("creditsMentionPreset");
+            SerializedProperty canvasGroup = serializedObject.FindProperty("canvasGroup");
+            SerializedProperty backgroundImage = serializedObject.FindProperty("backgroundImage");
+            SerializedProperty creditsListParent = serializedObject.FindProperty("creditsListParent");
+            SerializedProperty scrollHelper = serializedObject.FindProperty("scrollHelper");
+            SerializedProperty creditsSectionPreset = serializedObject.FindProperty("creditsSectionPreset");
+            SerializedProperty creditsMentionPreset = serializedObject.FindProperty("creditsMentionPreset");
 
-            var closeAutomatically = serializedObject.FindProperty("closeAutomatically");
-            var fadingMultiplier = serializedObject.FindProperty("fadingMultiplier");
-            var scrollDelay = serializedObject.FindProperty("scrollDelay");
-            var scrollSpeed = serializedObject.FindProperty("scrollSpeed");
-            var boostValue = serializedObject.FindProperty("boostValue");
-            var boostHotkey = serializedObject.FindProperty("boostHotkey");
+            SerializedProperty closeAutomatically = serializedObject.FindProperty("closeAutomatically");
+            SerializedProperty fadingMultiplier = serializedObject.FindProperty("fadingMultiplier");
+            SerializedProperty scrollDelay = serializedObject.FindProperty("scrollDelay");
+            SerializedProperty scrollSpeed = serializedObject.FindProperty("scrollSpeed");
+            SerializedProperty boostValue = serializedObject.FindProperty("boostValue");
+            SerializedProperty boostHotkey = serializedObject.FindProperty("boostHotkey");
 
-            var onOpen = serializedObject.FindProperty("onOpen");
-            var onClose = serializedObject.FindProperty("onClose");
-            var onCreditsEnd = serializedObject.FindProperty("onCreditsEnd");
+            SerializedProperty onOpen = serializedObject.FindProperty("onOpen");
+            SerializedProperty onClose = serializedObject.FindProperty("onClose");
+            SerializedProperty onCreditsEnd = serializedObject.FindProperty("onCreditsEnd");
 
             switch (latestTabIndex)
             {

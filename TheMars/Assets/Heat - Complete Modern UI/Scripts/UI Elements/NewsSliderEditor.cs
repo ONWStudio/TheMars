@@ -40,17 +40,17 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var items = serializedObject.FindProperty("items");
+            SerializedProperty items = serializedObject.FindProperty("items");
 
-            var itemPreset = serializedObject.FindProperty("itemPreset");
-            var itemParent = serializedObject.FindProperty("itemParent");
-            var timerPreset = serializedObject.FindProperty("timerPreset");
-            var timerParent = serializedObject.FindProperty("timerParent");
+            SerializedProperty itemPreset = serializedObject.FindProperty("itemPreset");
+            SerializedProperty itemParent = serializedObject.FindProperty("itemParent");
+            SerializedProperty timerPreset = serializedObject.FindProperty("timerPreset");
+            SerializedProperty timerParent = serializedObject.FindProperty("timerParent");
 
-            var allowUpdate = serializedObject.FindProperty("allowUpdate");
-            var useLocalization = serializedObject.FindProperty("useLocalization");
-            var sliderTimer = serializedObject.FindProperty("sliderTimer");
-            var updateMode = serializedObject.FindProperty("updateMode");
+            SerializedProperty allowUpdate = serializedObject.FindProperty("allowUpdate");
+            SerializedProperty useLocalization = serializedObject.FindProperty("useLocalization");
+            SerializedProperty sliderTimer = serializedObject.FindProperty("sliderTimer");
+            SerializedProperty updateMode = serializedObject.FindProperty("updateMode");
 
             switch (currentTab)
             {

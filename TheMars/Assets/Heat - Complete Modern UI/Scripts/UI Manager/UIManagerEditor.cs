@@ -61,10 +61,10 @@ namespace Michsky.UI.Heat
 
             if (showAch)
             {
-                var achievementLibrary = serializedObject.FindProperty("achievementLibrary");
-                var commonColor = serializedObject.FindProperty("commonColor");
-                var rareColor = serializedObject.FindProperty("rareColor");
-                var legendaryColor = serializedObject.FindProperty("legendaryColor");
+                SerializedProperty achievementLibrary = serializedObject.FindProperty("achievementLibrary");
+                SerializedProperty commonColor = serializedObject.FindProperty("commonColor");
+                SerializedProperty rareColor = serializedObject.FindProperty("rareColor");
+                SerializedProperty legendaryColor = serializedObject.FindProperty("legendaryColor");
 
                 HeatUIEditorHandler.DrawProperty(achievementLibrary, customSkin, "Achievement Library");
                 if (uimTarget.achievementLibrary != null && GUILayout.Button("Show Library", customSkin.button)) { Selection.activeObject = uimTarget.achievementLibrary; }
@@ -88,9 +88,9 @@ namespace Michsky.UI.Heat
 
             if (showAudio)
             {
-                var hoverSound = serializedObject.FindProperty("hoverSound");
-                var clickSound = serializedObject.FindProperty("clickSound");
-                var notificationSound = serializedObject.FindProperty("notificationSound");
+                SerializedProperty hoverSound = serializedObject.FindProperty("hoverSound");
+                SerializedProperty clickSound = serializedObject.FindProperty("clickSound");
+                SerializedProperty notificationSound = serializedObject.FindProperty("notificationSound");
 
                 HeatUIEditorHandler.DrawProperty(hoverSound, customSkin, "Hover Sound");
                 HeatUIEditorHandler.DrawProperty(clickSound, customSkin, "Click Sound");
@@ -112,13 +112,13 @@ namespace Michsky.UI.Heat
 
             if (showColors)
             {
-                var accentColor = serializedObject.FindProperty("accentColor");
-                var accentColorInvert = serializedObject.FindProperty("accentColorInvert");
-                var primaryColor = serializedObject.FindProperty("primaryColor");
-                var secondaryColor = serializedObject.FindProperty("secondaryColor");
-                var negativeColor = serializedObject.FindProperty("negativeColor");
-                var backgroundColor = serializedObject.FindProperty("backgroundColor");
-                var altBackgroundColor = serializedObject.FindProperty("altBackgroundColor");
+                SerializedProperty accentColor = serializedObject.FindProperty("accentColor");
+                SerializedProperty accentColorInvert = serializedObject.FindProperty("accentColorInvert");
+                SerializedProperty primaryColor = serializedObject.FindProperty("primaryColor");
+                SerializedProperty secondaryColor = serializedObject.FindProperty("secondaryColor");
+                SerializedProperty negativeColor = serializedObject.FindProperty("negativeColor");
+                SerializedProperty backgroundColor = serializedObject.FindProperty("backgroundColor");
+                SerializedProperty altBackgroundColor = serializedObject.FindProperty("altBackgroundColor");
 
                 HeatUIEditorHandler.DrawProperty(accentColor, customSkin, "Accent Color");
                 HeatUIEditorHandler.DrawProperty(accentColorInvert, customSkin, "Accent Match");
@@ -143,12 +143,12 @@ namespace Michsky.UI.Heat
 
             if (showFonts)
             {
-                var fontLight = serializedObject.FindProperty("fontLight");
-                var fontRegular = serializedObject.FindProperty("fontRegular");
-                var fontMedium = serializedObject.FindProperty("fontMedium");
-                var fontSemiBold = serializedObject.FindProperty("fontSemiBold");
-                var fontBold = serializedObject.FindProperty("fontBold");
-                var customFont = serializedObject.FindProperty("customFont");
+                SerializedProperty fontLight = serializedObject.FindProperty("fontLight");
+                SerializedProperty fontRegular = serializedObject.FindProperty("fontRegular");
+                SerializedProperty fontMedium = serializedObject.FindProperty("fontMedium");
+                SerializedProperty fontSemiBold = serializedObject.FindProperty("fontSemiBold");
+                SerializedProperty fontBold = serializedObject.FindProperty("fontBold");
+                SerializedProperty customFont = serializedObject.FindProperty("customFont");
 
                 HeatUIEditorHandler.DrawProperty(fontLight, customSkin, "Light Font");
                 HeatUIEditorHandler.DrawProperty(fontRegular, customSkin, "Regular Font");
@@ -173,8 +173,8 @@ namespace Michsky.UI.Heat
 
             if (showLocalization)
             {
-                var enableLocalization = serializedObject.FindProperty("enableLocalization");
-                var localizationSettings = serializedObject.FindProperty("localizationSettings");
+                SerializedProperty enableLocalization = serializedObject.FindProperty("enableLocalization");
+                SerializedProperty localizationSettings = serializedObject.FindProperty("localizationSettings");
 
                 enableLocalization.boolValue = HeatUIEditorHandler.DrawToggle(enableLocalization.boolValue, customSkin, "Enable Localization (Beta)");
 
@@ -206,8 +206,8 @@ namespace Michsky.UI.Heat
 
             if (showLogo)
             {
-                var brandLogo = serializedObject.FindProperty("brandLogo");
-                var gameLogo = serializedObject.FindProperty("gameLogo");
+                SerializedProperty brandLogo = serializedObject.FindProperty("brandLogo");
+                SerializedProperty gameLogo = serializedObject.FindProperty("gameLogo");
 
                 HeatUIEditorHandler.DrawProperty(brandLogo, customSkin, "Brand Logo");
                 HeatUIEditorHandler.DrawProperty(gameLogo, customSkin, "Game Logo");
@@ -228,11 +228,11 @@ namespace Michsky.UI.Heat
 
             if (showSplashScreen)
             {
-                var enableSplashScreen = serializedObject.FindProperty("enableSplashScreen");
-                var showSplashScreenOnce = serializedObject.FindProperty("showSplashScreenOnce");
-                var pakType = serializedObject.FindProperty("pakType");
-                var pakText = serializedObject.FindProperty("pakText");
-                var pakLocalizationText = serializedObject.FindProperty("pakLocalizationText");
+                SerializedProperty enableSplashScreen = serializedObject.FindProperty("enableSplashScreen");
+                SerializedProperty showSplashScreenOnce = serializedObject.FindProperty("showSplashScreenOnce");
+                SerializedProperty pakType = serializedObject.FindProperty("pakType");
+                SerializedProperty pakText = serializedObject.FindProperty("pakText");
+                SerializedProperty pakLocalizationText = serializedObject.FindProperty("pakLocalizationText");
 
                 enableSplashScreen.boolValue = HeatUIEditorHandler.DrawToggle(enableSplashScreen.boolValue, customSkin, "Enable Splash Screen");
                 if (enableSplashScreen.boolValue == false) { GUI.enabled = false; }
@@ -265,7 +265,7 @@ namespace Michsky.UI.Heat
             #region Settings
             HeatUIEditorHandler.DrawHeader(customSkin, "Options Header", 14);
 
-            var enableDynamicUpdate = serializedObject.FindProperty("enableDynamicUpdate");
+            SerializedProperty enableDynamicUpdate = serializedObject.FindProperty("enableDynamicUpdate");
             GUILayout.BeginVertical(EditorStyles.helpBox);
             GUILayout.Space(-2);
             GUILayout.BeginHorizontal();

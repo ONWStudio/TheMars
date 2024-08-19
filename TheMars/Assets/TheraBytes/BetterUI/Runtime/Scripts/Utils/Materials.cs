@@ -145,10 +145,10 @@ namespace TheraBytes.BetterUi
 
         private void AddIfNotPresent(string name, Func<MaterialEffect, MaterialInfo> CreateMaterial, params MaterialEffect[] preservedLayerEffects)
         {
-            foreach (var e in Enum.GetValues(typeof(MaterialEffect)))
+            foreach (object e in Enum.GetValues(typeof(MaterialEffect)))
             {
-                var effect = (MaterialEffect)e;
-                var info = GetMaterialInfo(name, effect);
+                MaterialEffect effect = (MaterialEffect)e;
+                MaterialInfo info = GetMaterialInfo(name, effect);
                 if (info == null)
                 {
                     info = CreateMaterial(effect);
@@ -243,7 +243,7 @@ namespace TheraBytes.BetterUi
 
         public Material GetMaterial(string name)
         {
-            var m = materials.FirstOrDefault((o) => o.Name == name);
+            MaterialInfo m = materials.FirstOrDefault((o) => o.Name == name);
 
             if(m != null)
             {
@@ -257,7 +257,7 @@ namespace TheraBytes.BetterUi
         {
             EnsurePredefinedMaterials();
 
-            var list = new HashSet<string>(materials
+            List<string> list = new HashSet<string>(materials
                 .Select(o => o.Name)).ToList();
 
             list.Sort((a, b) =>

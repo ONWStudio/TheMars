@@ -164,7 +164,7 @@ namespace TheraBytes.BetterUi.Editor
                     if (GUILayout.Button(btnText, setPivotStyle))
                     {
                         Undo.RecordObjects(objects.Select(o => o as UnityEngine.Object).ToArray(), "set pivots");
-                        foreach(var obj in objects)
+                        foreach(RectTransform obj in objects)
                         {
                             obj.pivot = point;
                         }
@@ -254,7 +254,7 @@ namespace TheraBytes.BetterUi.Editor
 
             EditorGUILayout.BeginVertical();
             // const string style = "Label";
-            var style = selectPointStyle;
+            GUIStyle style = selectPointStyle;
             EditorGUILayout.BeginHorizontal();
             DrawSelectionPoint("┌", style, 0f, 1f);
             DrawSelectionPoint("┬", style, 0.5f, 1f);
@@ -275,7 +275,7 @@ namespace TheraBytes.BetterUi.Editor
 
             if (this.objects.Count == 1)
             {
-                var p = this.objects[0].pivot;
+                Vector2 p = this.objects[0].pivot;
                 string content = "[ Pivot ]";
                 content = HighlightTextIfMatchCoordinate("[ Pivot ]", p.x, p.y);
                 if (GUILayout.Button(content, style, GUILayout.Width(60), GUILayout.Height(16)))
@@ -340,7 +340,7 @@ namespace TheraBytes.BetterUi.Editor
             Undo.SetCurrentGroupName("Border" + DateTime.Now.ToFileTime());
             int group = Undo.GetCurrentGroup();
 
-            foreach (var obj in objects)
+            foreach (RectTransform obj in objects)
             {
                 SnapBorder(obj, left, right, top, bottom);
 
@@ -399,7 +399,7 @@ namespace TheraBytes.BetterUi.Editor
             Undo.SetCurrentGroupName("Border" + DateTime.Now.ToFileTime());
             int group = Undo.GetCurrentGroup();
 
-            foreach (var obj in objects)
+            foreach (RectTransform obj in objects)
             {
                 Vector2 pivotOffset = GetPivotOffset(obj);
                 SnapPoint(obj, pivotOffset, horizontal, vertical);

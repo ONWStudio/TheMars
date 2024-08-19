@@ -20,16 +20,16 @@ namespace SerializeReferenceDropdown.Editor
                 return null;
             }
 
-            var splitFieldTypename = typeName.Split(' ');
-            var assemblyName = splitFieldTypename[0];
-            var subStringTypeName = splitFieldTypename[1];
+            string[] splitFieldTypename = typeName.Split(' ');
+            string assemblyName = splitFieldTypename[0];
+            string subStringTypeName = splitFieldTypename[1];
             if (splitFieldTypename.Length > 2)
             {
                 subStringTypeName = typeName.Substring(assemblyName.Length + 1);
             }
 
-            var assembly = Assembly.Load(assemblyName);
-            var targetType = assembly.GetType(subStringTypeName);
+            Assembly assembly = Assembly.Load(assemblyName);
+            Type targetType = assembly.GetType(subStringTypeName);
             return targetType;
         }
 
@@ -45,24 +45,24 @@ namespace SerializeReferenceDropdown.Editor
 
         public static SerializedProperty GetArrayPropertyFromArrayElement(SerializedProperty property)
         {
-            var path = property.propertyPath;
-            var startIndexArrayPropertyPath = path.IndexOf(ArrayPropertySubstring);
-            var propertyPath = path.Remove(startIndexArrayPropertyPath);
+            string path = property.propertyPath;
+            int startIndexArrayPropertyPath = path.IndexOf(ArrayPropertySubstring);
+            string propertyPath = path.Remove(startIndexArrayPropertyPath);
             return property.serializedObject.FindProperty(propertyPath);
         }
 
 
         public static IEnumerable<Type> GetAllTypesInCurrentDomain()
         {
-            var currentDomain = AppDomain.CurrentDomain;
-            if (CachedDomainTypes.TryGetValue(currentDomain, out var cachedTypes))
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            if (CachedDomainTypes.TryGetValue(currentDomain, out List<Type> cachedTypes))
             {
                 return cachedTypes;
             }
 
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            var types = new List<Type>();
-            foreach (var assembly in assemblies)
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            List<Type> types = new List<Type>();
+            foreach (Assembly assembly in assemblies)
             {
                 try
                 {
@@ -83,7 +83,7 @@ namespace SerializeReferenceDropdown.Editor
         {
             if (propertyType.IsGenericType && CanCreateDirectGenericType())
             {
-                var genericConcreteType = genericType.MakeGenericType(propertyType.GetGenericArguments());
+                Type genericConcreteType = genericType.MakeGenericType(propertyType.GetGenericArguments());
                 return genericConcreteType;
             }
 
@@ -91,14 +91,14 @@ namespace SerializeReferenceDropdown.Editor
 
             bool CanCreateDirectGenericType()
             {
-                var genericArguments = genericType.GetInterfaces();
-                var interfaceIndex = Array.FindIndex(genericArguments,
+                Type[] genericArguments = genericType.GetInterfaces();
+                int interfaceIndex = Array.FindIndex(genericArguments,
                     argType => argType.IsGenericType &&
                                argType.GetGenericTypeDefinition() == propertyType.GetGenericTypeDefinition());
-                var isHaveSameArgumentsCount =
+                bool isHaveSameArgumentsCount =
                     propertyType.GetGenericArguments().Length == genericType.GetGenericArguments().Length &&
                     interfaceIndex != -1;
-                var anyAbstract = propertyType.GetGenericArguments().Any(t => t.IsAbstract);
+                bool anyAbstract = propertyType.GetGenericArguments().Any(t => t.IsAbstract);
                 return isHaveSameArgumentsCount && anyAbstract == false;
             }
         }
@@ -127,26 +127,26 @@ namespace SerializeReferenceDropdown.Editor
         {
             if (SystemObjectTypes == null)
             {
-                var assemblies = CompilationPipeline.GetAssemblies();
-                var playerAssemblies = assemblies.Where(t => t.flags.HasFlag(AssemblyFlags.EditorAssembly) == false)
+                UnityEditor.Compilation.Assembly[] assemblies = CompilationPipeline.GetAssemblies();
+                string[] playerAssemblies = assemblies.Where(t => t.flags.HasFlag(AssemblyFlags.EditorAssembly) == false)
                     .Select(t => t.name).ToArray();
-                var baseType = typeof(object);
-                var typesCollection = TypeCache.GetTypesDerivedFrom(baseType);
-                var customTypes = typesCollection.Where(IsValidTypeForGenericParameter).OrderBy(t => t.FullName);
+                Type baseType = typeof(object);
+                TypeCache.TypeCollection typesCollection = TypeCache.GetTypesDerivedFrom(baseType);
+                IOrderedEnumerable<Type> customTypes = typesCollection.Where(IsValidTypeForGenericParameter).OrderBy(t => t.FullName);
 
-                var typesList = new List<Type>();
+                List<Type> typesList = new List<Type>();
                 typesList.AddRange(GetBuiltInUnitySerializeTypes());
                 typesList.AddRange(customTypes);
                 SystemObjectTypes = typesList.ToArray();
 
                 bool IsValidTypeForGenericParameter(Type t)
                 {
-                    var isUnityObjectType = t.IsSubclassOf(typeof(UnityEngine.Object));
+                    bool isUnityObjectType = t.IsSubclassOf(typeof(UnityEngine.Object));
 
-                    var isFinalSerializeType = !t.IsAbstract && !t.IsInterface && !t.IsGenericType && t.IsSerializable;
-                    var isEnum = t.IsEnum;
-                    var isTargetType = playerAssemblies.Any(asm => t.Assembly.FullName.StartsWith(asm)) ||
-                                       t.Assembly.FullName.StartsWith(nameof(UnityEngine));
+                    bool isFinalSerializeType = !t.IsAbstract && !t.IsInterface && !t.IsGenericType && t.IsSerializable;
+                    bool isEnum = t.IsEnum;
+                    bool isTargetType = playerAssemblies.Any(asm => t.Assembly.FullName.StartsWith(asm)) ||
+                                        t.Assembly.FullName.StartsWith(nameof(UnityEngine));
 
                     return isTargetType && (isFinalSerializeType || isEnum || isUnityObjectType);
                 }

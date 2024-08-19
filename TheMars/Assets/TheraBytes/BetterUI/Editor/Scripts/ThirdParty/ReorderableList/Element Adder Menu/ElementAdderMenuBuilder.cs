@@ -100,7 +100,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// </returns>
 		/// <seealso cref="IElementAdderMenuBuilder{TContext}.SetContractType(Type)"/>
 		public static IElementAdderMenuBuilder<TContext> For<TContext>(Type contractType) {
-			var builder = For<TContext>();
+			IElementAdderMenuBuilder<TContext> builder = For<TContext>();
 			builder.SetContractType(contractType);
 			return builder;
 		}

@@ -192,7 +192,7 @@ namespace TheraBytes.BetterUi
 
         private void AssignTextureSettings()
         {
-            var settings = CurrentTextureSettings;
+            TextureSettings settings = CurrentTextureSettings;
 
             this.texture = settings.Texture;
             this.colorMode = settings.ColorMode;

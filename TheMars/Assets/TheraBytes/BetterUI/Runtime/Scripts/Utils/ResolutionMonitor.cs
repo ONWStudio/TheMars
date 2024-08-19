@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -164,7 +166,7 @@ namespace TheraBytes.BetterUi
         {
             if (lookUpScreens.Count == 0)
             {
-                foreach (var config in ResolutionMonitor.Instance.optimizedScreens)
+                foreach (ScreenTypeConditions config in ResolutionMonitor.Instance.optimizedScreens)
                 {
                     lookUpScreens.Add(config.Name, config);
                 }
@@ -172,7 +174,7 @@ namespace TheraBytes.BetterUi
 
             if (!(lookUpScreens.ContainsKey(name)))
             {
-                var config = ResolutionMonitor.Instance.optimizedScreens.FirstOrDefault(o => o.Name == name);
+                ScreenTypeConditions config = ResolutionMonitor.Instance.optimizedScreens.FirstOrDefault(o => o.Name == name);
 
                 if (config != null)
                 {
@@ -330,7 +332,7 @@ namespace TheraBytes.BetterUi
             if (string.IsNullOrEmpty(screenName) || screenName == Instance.fallbackName)
                 return OptimizedDpiFallback;
 
-            var s = Instance.optimizedScreens.FirstOrDefault(o => o.Name == screenName);
+            ScreenTypeConditions s = Instance.optimizedScreens.FirstOrDefault(o => o.Name == screenName);
             if (s == null)
             {
                 Debug.LogError("Screen Config with name " + screenName + " could not be found.");
@@ -346,7 +348,7 @@ namespace TheraBytes.BetterUi
             if (string.IsNullOrEmpty(screenName) || screenName == Instance.fallbackName)
                 return OptimizedResolutionFallback;
 
-            var s = GetConfig(screenName);
+            ScreenTypeConditions s = GetConfig(screenName);
             if (s == null)
                 return OptimizedResolutionFallback;
 
@@ -358,7 +360,7 @@ namespace TheraBytes.BetterUi
             if ((int)OptimizedResolutionFallback.x == width && (int)OptimizedResolutionFallback.y == height)
                 return true;
 
-            foreach (var config in Instance.optimizedScreens)
+            foreach (ScreenTypeConditions config in Instance.optimizedScreens)
             {
                 ScreenInfo si = config.OptimizedScreenInfo;
                 if (si != null && (int)si.Resolution.x == width && (int)si.Resolution.y == height)
@@ -388,7 +390,7 @@ namespace TheraBytes.BetterUi
 #if UNITY_EDITOR && UNITY_2018_3_OR_NEWER
             if (!isDirty)
             {
-                var stage = UnityEditor.SceneManagement.StageUtility.GetCurrentStageHandle();
+                StageHandle stage = UnityEditor.SceneManagement.StageUtility.GetCurrentStageHandle();
                 if (stage != currentStage)
                 {
                     currentStage = stage;
@@ -417,7 +419,7 @@ namespace TheraBytes.BetterUi
             currentScreenConfig = null;
 
             bool foundConfig = false;
-            foreach (var config in optimizedScreens)
+            foreach (ScreenTypeConditions config in optimizedScreens)
             {
                 if (config.IsScreenType() && !(foundConfig))
                 {
@@ -443,7 +445,7 @@ namespace TheraBytes.BetterUi
                 FindAndStoreGameView();
                 if (gameViewWindow != null)
                 {
-                    var method = gameViewType.GetMethod("UpdateZoomAreaAndParent",
+                    MethodInfo method = gameViewType.GetMethod("UpdateZoomAreaAndParent",
                     System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
 
                     try
@@ -458,12 +460,12 @@ namespace TheraBytes.BetterUi
 
         private static IEnumerable<IResolutionDependency> AllResolutionDependencies()
         {
-            var allObjects = GetAllEditableObjects();
+            IEnumerable<GameObject> allObjects = GetAllEditableObjects();
 
             // first update the "override screen properties", because other objects rely on them
             foreach (GameObject go in allObjects)
             {
-                var resDeps = go.GetComponents<OverrideScreenProperties>();
+                OverrideScreenProperties[] resDeps = go.GetComponents<OverrideScreenProperties>();
                 foreach (IResolutionDependency comp in resDeps)
                 {
                     yield return comp;
@@ -473,7 +475,7 @@ namespace TheraBytes.BetterUi
             // then update all other objects
             foreach (GameObject go in allObjects)
             {
-                var resDeps = go.GetComponents<Behaviour>().OfType<IResolutionDependency>();
+                IEnumerable<IResolutionDependency> resDeps = go.GetComponents<Behaviour>().OfType<IResolutionDependency>();
                 foreach (IResolutionDependency comp in resDeps)
                 {
                     if (comp is OverrideScreenProperties)
@@ -486,7 +488,7 @@ namespace TheraBytes.BetterUi
 
         private static IEnumerable<GameObject> GetAllEditableObjects()
         {
-            var allObjects =
+            GameObject[] allObjects =
 #if UNITY_2022_2_OR_NEWER
                 UnityEngine.Object.FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 #else
@@ -497,7 +499,7 @@ namespace TheraBytes.BetterUi
                 yield return go;
 
 #if UNITY_EDITOR && UNITY_2018_3_OR_NEWER
-            var prefabStage =
+            PrefabStage prefabStage =
 #if UNITY_2021_2_OR_NEWER
                 UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
 #else
@@ -557,7 +559,7 @@ namespace TheraBytes.BetterUi
 
                 if (gameViewWindow != null)
                 {
-                    var zoomArea = gameViewType.GetField("m_ZoomArea",
+                    object zoomArea = gameViewType.GetField("m_ZoomArea",
                         System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
                         .GetValue(gameViewWindow);
 

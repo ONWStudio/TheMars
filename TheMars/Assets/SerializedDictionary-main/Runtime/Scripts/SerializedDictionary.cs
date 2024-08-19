@@ -27,7 +27,7 @@ namespace AYellowpaper.SerializedCollections
         {
             Clear();
 
-            foreach (var kvp in _serializedList)
+            foreach (SerializedKeyValuePair<TKey, TValue> kvp in _serializedList)
             {
 #if UNITY_EDITOR
                 if (!ContainsKey(kvp.Key))

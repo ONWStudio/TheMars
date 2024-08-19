@@ -9,7 +9,7 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 보유
     /// </summary>
-    public sealed class HoldEffect : TMCardSpecialEffect, ITMInitializableEffect<HoldEffectCreator>, ITMEffectTrigger
+    public sealed class HoldEffect : TMCardSpecialEffect, ITMInitializeEffect<HoldEffectCreator>, ITMEffectTrigger
     {
         [SerializeField, DisplayAs("발동 트리거 카드"), Tooltip("보유 효과가 발동할때 참조할 카드 ID"), ReadOnly]
         private TMCardData _friendlyCard;
@@ -41,7 +41,7 @@ namespace TMCard.Effect
 
                 if (controller.OnField && _friendlyCard.GetInstanceID() == usedCard.CardData.GetInstanceID())
                 {
-                    OnEffectEvent.Invoke();
+                    OnEffectEvent.Invoke(CardEventState.NORMAL);
                     Debug.Log("보유 효과 발동");
                 }
             }

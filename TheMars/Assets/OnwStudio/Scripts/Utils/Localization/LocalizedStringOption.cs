@@ -13,30 +13,14 @@ namespace Onw.Localization
     [System.Serializable]
     public sealed class LocalizedStringOption
     {
-        public string EntryKeyName
-        {
-            get
-            {
-                long keyId = _localizedString.TableEntryReference.KeyId;
-
-                if (!string.IsNullOrEmpty(_localizedString.TableReference))
-                {
-                    var stringTable = LocalizationSettings.StringDatabase.GetTable(_localizedString.TableReference);
-
-                    if (stringTable)
-                    {
-                        var entry = stringTable.GetEntry(keyId);
-                        if (entry is not null)
-                        {
-                            return entry.Key;
-                        }
-                    }
-                }
-
-                return "";
-            }
-        }
-        
+        public string EntryKeyName 
+            => !string.IsNullOrEmpty(_localizedString.TableReference) ? 
+                LocalizationSettings
+                    .StringDatabase
+                    .GetTable(_localizedString.TableReference)?
+                    .GetEntry(_localizedString.TableEntryReference.KeyId)?
+                    .Key ?? "" : 
+                "";
 
         [SerializeField]
         private LocalizedString _localizedString;
@@ -70,6 +54,8 @@ namespace Onw.Localization
             localizeStringEvent.OnUpdateString.SetPersistentListenerState(UnityEventCallState.EditorAndRuntime);
             localizeStringEvent.RefreshString();
 
+            return true;
+
             static LocalizeStringEvent getLocalizeStringEvent(GameObject go, LocalizedString localizedString)
             {
                 LocalizeStringEvent localizeStringEvent = go.AddComponent<LocalizeStringEvent>();
@@ -77,8 +63,6 @@ namespace Onw.Localization
 
                 return localizeStringEvent;
             }
-
-            return true;
         }
 
         public LocalizedStringOption(TableReference tableReference, TableEntryReference entryReference)

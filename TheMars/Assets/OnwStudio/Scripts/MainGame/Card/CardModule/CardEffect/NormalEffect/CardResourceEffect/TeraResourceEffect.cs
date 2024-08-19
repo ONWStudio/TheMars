@@ -2,9 +2,10 @@ using Onw.Attribute;
 using TM;
 using TMCard.Runtime;
 using UnityEngine;
+
 namespace TMCard.Effect.Resource
 {
-    public sealed class TeraResourceEffect : ITMCardResourceEffect, ITMInitializableEffect<TeraResourceEffectCreator>
+    public sealed class TeraResourceEffect : ITMCardResourceEffect, ITMInitializeEffect<TeraResourceEffectCreator>
     {
         [field: SerializeField, DisplayAs("소모 재화"), Tooltip("소모 재화"), ReadOnly] public int Amount { get; private set; }
 
@@ -15,7 +16,7 @@ namespace TMCard.Effect.Resource
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-            trigger.OnEffectEvent.AddListener(() =>
+            trigger.OnEffectEvent.AddListener(eventState =>
             {
                 PlayerManager.Instance.Tera += Amount;
                 Debug.Log(Amount);

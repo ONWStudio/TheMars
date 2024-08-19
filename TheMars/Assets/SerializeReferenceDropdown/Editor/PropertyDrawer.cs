@@ -30,7 +30,7 @@ namespace SerializeReferenceDropdown.Editor
             EditorGUI.BeginProperty(rect, label, property);
 
             propertyRect = rect;
-            var indent = EditorGUI.indentLevel;
+            int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
             if (property.propertyType == SerializedPropertyType.ManagedReference)
@@ -48,7 +48,7 @@ namespace SerializeReferenceDropdown.Editor
 
         public override VisualElement CreatePropertyGUI(SerializedProperty property)
         {
-            var root = new VisualElement();
+            VisualElement root = new VisualElement();
             if (property.propertyType == SerializedPropertyType.ManagedReference)
             {
                 DrawUIToolkitTypeDropdown(root, property);
@@ -63,12 +63,12 @@ namespace SerializeReferenceDropdown.Editor
 
         private void DrawUIToolkitTypeDropdown(VisualElement root, SerializedProperty property)
         {
-            var uiToolkitLayoutPath =
+            string uiToolkitLayoutPath =
                 "Packages/com.alexeytaranov.serializereferencedropdown/Editor/Layouts/SerializeReferenceDropdown.uxml";
-            var visualTreeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(uiToolkitLayoutPath);
+            VisualTreeAsset visualTreeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(uiToolkitLayoutPath);
             root.Add(visualTreeAsset.Instantiate());
-            var propertyField = root.Q<PropertyField>();
-            var selectTypeButton = root.Q<Button>();
+            PropertyField propertyField = root.Q<PropertyField>();
+            Button selectTypeButton = root.Q<Button>();
             selectTypeButton.clickable.clicked += ShowDropdown;
             assignableTypes ??= GetAssignableTypes(property);
             UpdateDropdown();
@@ -76,19 +76,19 @@ namespace SerializeReferenceDropdown.Editor
 
             void ShowDropdown()
             {
-                var dropdown = new AdvancedDropdown(new AdvancedDropdownState(),
+                AdvancedDropdown dropdown = new AdvancedDropdown(new AdvancedDropdownState(),
                     assignableTypes.Select(GetTypeName), index => { WriteNewInstanceByIndexType(index, property); });
-                var buttonMatrix = selectTypeButton.worldTransform;
-                var position = new Vector3(buttonMatrix.m03, buttonMatrix.m13, buttonMatrix.m23);
-                var buttonRect = new Rect(position, selectTypeButton.contentRect.size);
+                Matrix4x4 buttonMatrix = selectTypeButton.worldTransform;
+                Vector3 position = new Vector3(buttonMatrix.m03, buttonMatrix.m13, buttonMatrix.m23);
+                Rect buttonRect = new Rect(position, selectTypeButton.contentRect.size);
                 dropdown.Show(buttonRect);
             }
 
             void UpdateDropdown()
             {
                 propertyField.BindProperty(property);
-                var selectedType = TypeUtils.ExtractTypeFromString(property.managedReferenceFullTypename);
-                var selectedTypeName = GetTypeName(selectedType);
+                Type selectedType = TypeUtils.ExtractTypeFromString(property.managedReferenceFullTypename);
+                string selectedTypeName = GetTypeName(selectedType);
                 selectTypeButton.text = selectedTypeName;
             }
         }
@@ -96,18 +96,18 @@ namespace SerializeReferenceDropdown.Editor
         private void DrawIMGUITypeDropdown(Rect rect, SerializedProperty property, GUIContent label)
         {
             assignableTypes ??= GetAssignableTypes(property);
-            var referenceType = TypeUtils.ExtractTypeFromString(property.managedReferenceFullTypename);
+            Type referenceType = TypeUtils.ExtractTypeFromString(property.managedReferenceFullTypename);
 
-            var dropdownRect = GetDropdownIMGUIRect(rect);
+            Rect dropdownRect = GetDropdownIMGUIRect(rect);
 
             EditorGUI.EndDisabledGroup();
 
-            var dropdownTypeContent = new GUIContent(
+            GUIContent dropdownTypeContent = new GUIContent(
                 text: GetTypeName(referenceType),
                 tooltip: GetTypeTooltip(referenceType));
             if (EditorGUI.DropdownButton(dropdownRect, dropdownTypeContent, FocusType.Keyboard))
             {
-                var dropdown = new AdvancedDropdown(new AdvancedDropdownState(),
+                AdvancedDropdown dropdown = new AdvancedDropdown(new AdvancedDropdownState(),
                     assignableTypes.Select(GetTypeName),
                     index => WriteNewInstanceByIndexType(index, property));
                 dropdown.Show(dropdownRect);
@@ -117,7 +117,7 @@ namespace SerializeReferenceDropdown.Editor
 
             static Rect GetDropdownIMGUIRect(Rect mainRect)
             {
-                var dropdownOffset = EditorGUIUtility.labelWidth;
+                float dropdownOffset = EditorGUIUtility.labelWidth;
                 Rect rect = new(mainRect);
                 rect.width -= dropdownOffset;
                 rect.x += dropdownOffset;
@@ -134,18 +134,18 @@ namespace SerializeReferenceDropdown.Editor
                 return NullName;
             }
 
-            var typesWithNames = TypeCache.GetTypesWithAttribute(typeof(SerializeReferenceDropdownNameAttribute));
+            TypeCache.TypeCollection typesWithNames = TypeCache.GetTypesWithAttribute(typeof(SerializeReferenceDropdownNameAttribute));
             if (typesWithNames.Contains(type))
             {
-                var dropdownNameAttribute = type.GetCustomAttribute<SerializeReferenceDropdownNameAttribute>();
+                SerializeReferenceDropdownNameAttribute dropdownNameAttribute = type.GetCustomAttribute<SerializeReferenceDropdownNameAttribute>();
                 return dropdownNameAttribute.Name;
             }
 
             if (type.IsGenericType)
             {
-                var genericNames = type.GenericTypeArguments.Select(t => t.Name);
-                var genericParamNames = " [" + string.Join(",", genericNames) + "]";
-                var genericName = ObjectNames.NicifyVariableName(type.Name) + genericParamNames;
+                IEnumerable<string> genericNames = type.GenericTypeArguments.Select(t => t.Name);
+                string genericParamNames = " [" + string.Join(",", genericNames) + "]";
+                string genericName = ObjectNames.NicifyVariableName(type.Name) + genericParamNames;
                 return genericName;
             }
 
@@ -159,10 +159,10 @@ namespace SerializeReferenceDropdown.Editor
                 return string.Empty;
             }
 
-            var typesWithTooltip = TypeCache.GetTypesWithAttribute(typeof(TypeTooltipAttribute));
+            TypeCache.TypeCollection typesWithTooltip = TypeCache.GetTypesWithAttribute(typeof(TypeTooltipAttribute));
             if (typesWithTooltip.Contains(type))
             {
-                var tooltipAttribute = type.GetCustomAttribute<TypeTooltipAttribute>();
+                TypeTooltipAttribute tooltipAttribute = type.GetCustomAttribute<TypeTooltipAttribute>();
                 return tooltipAttribute.tooltip;
             }
 
@@ -171,9 +171,9 @@ namespace SerializeReferenceDropdown.Editor
 
         private List<Type> GetAssignableTypes(SerializedProperty property)
         {
-            var propertyType = TypeUtils.ExtractTypeFromString(property.managedReferenceFieldTypename);
-            var derivedTypes = TypeCache.GetTypesDerivedFrom(propertyType);
-            var nonUnityTypes = derivedTypes.Where(IsAssignableNonUnityType).ToList();
+            Type propertyType = TypeUtils.ExtractTypeFromString(property.managedReferenceFieldTypename);
+            TypeCache.TypeCollection derivedTypes = TypeCache.GetTypesDerivedFrom(propertyType);
+            List<Type> nonUnityTypes = derivedTypes.Where(IsAssignableNonUnityType).ToList();
             if (!propertyType.IsAbstract && !propertyType.IsInterface)
             {
                 nonUnityTypes.Add(propertyType);
@@ -181,10 +181,10 @@ namespace SerializeReferenceDropdown.Editor
             nonUnityTypes.Insert(0, null);
             if (propertyType.IsGenericType && propertyType.IsInterface)
             {
-                var allTypes = TypeUtils.GetAllTypesInCurrentDomain().Where(IsAssignableNonUnityType)
+                IEnumerable<Type> allTypes = TypeUtils.GetAllTypesInCurrentDomain().Where(IsAssignableNonUnityType)
                     .Where(t => t.IsGenericType);
 
-                var assignableGenericTypes = allTypes.Where(IsImplementedGenericInterfacesFromGenericProperty);
+                IEnumerable<Type> assignableGenericTypes = allTypes.Where(IsImplementedGenericInterfacesFromGenericProperty);
                 nonUnityTypes.AddRange(assignableGenericTypes);
             }
 
@@ -197,8 +197,8 @@ namespace SerializeReferenceDropdown.Editor
 
             bool IsImplementedGenericInterfacesFromGenericProperty(Type type)
             {
-                var interfaces = type.GetInterfaces().Where(t => t.IsGenericType);
-                var isImplementedInterface = interfaces.Any(t =>
+                IEnumerable<Type> interfaces = type.GetInterfaces().Where(t => t.IsGenericType);
+                bool isImplementedInterface = interfaces.Any(t =>
                     t.GetGenericTypeDefinition() == propertyType.GetGenericTypeDefinition());
                 return isImplementedInterface;
             }
@@ -206,12 +206,12 @@ namespace SerializeReferenceDropdown.Editor
 
         private void WriteNewInstanceByIndexType(int typeIndex, SerializedProperty property)
         {
-            var newType = assignableTypes[typeIndex];
-            var propertyType = TypeUtils.ExtractTypeFromString(property.managedReferenceFieldTypename);
+            Type newType = assignableTypes[typeIndex];
+            Type propertyType = TypeUtils.ExtractTypeFromString(property.managedReferenceFieldTypename);
 
             if (newType?.IsGenericType == true)
             {
-                var concreteGenericType = TypeUtils.GetConcreteGenericType(propertyType, newType);
+                Type concreteGenericType = TypeUtils.GetConcreteGenericType(propertyType, newType);
                 if (concreteGenericType != null)
                 {
                     CreateAndApplyNewInstanceFromType(concreteGenericType);

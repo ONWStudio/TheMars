@@ -22,10 +22,10 @@ namespace Michsky.UI.Heat
 
         public override void OnInspectorGUI()
         {
-            var UIManagerAsset = serializedObject.FindProperty("UIManagerAsset");
-            var splashScreen = serializedObject.FindProperty("splashScreen");
-            var mainContent = serializedObject.FindProperty("mainContent");
-            var initPanel = serializedObject.FindProperty("initPanel");
+            SerializedProperty UIManagerAsset = serializedObject.FindProperty("UIManagerAsset");
+            SerializedProperty splashScreen = serializedObject.FindProperty("splashScreen");
+            SerializedProperty mainContent = serializedObject.FindProperty("mainContent");
+            SerializedProperty initPanel = serializedObject.FindProperty("initPanel");
 
             HeatUIEditorHandler.DrawHeader(customSkin, "Core Header", 6);
             HeatUIEditorHandler.DrawProperty(UIManagerAsset, customSkin, "UI Manager");

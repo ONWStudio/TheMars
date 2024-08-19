@@ -40,10 +40,10 @@ namespace TheraBytes.BetterUi.Editor
         public static void MakeBetter(MenuCommand command)
         {
             AspectRatioFitter fitter = command.context as AspectRatioFitter;
-            var mode = fitter.aspectMode;
+            AspectRatioFitter.AspectMode mode = fitter.aspectMode;
             float ratio = fitter.aspectRatio;
 
-            var newFitter = Betterizer.MakeBetter<AspectRatioFitter, BetterAspectRatioFitter>(fitter) as BetterAspectRatioFitter;
+            BetterAspectRatioFitter newFitter = Betterizer.MakeBetter<AspectRatioFitter, BetterAspectRatioFitter>(fitter) as BetterAspectRatioFitter;
             if(newFitter != null)
             {
                 newFitter.CurrentSettings.AspectMode = mode;

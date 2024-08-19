@@ -51,15 +51,15 @@ namespace TheraBytes.BetterUi.Editor
         public static void MakeBetter(MenuCommand command)
         {
             LayoutElement layout = command.context as LayoutElement;
-            var ignore = layout.ignoreLayout;
-            var minWidth = layout.minWidth;
-            var minHeight = layout.minHeight;
-            var prefWidth = layout.preferredWidth;
-            var prefHeight = layout.preferredHeight;
-            var flexWidth = layout.flexibleWidth;
-            var flexHeight = layout.flexibleHeight;
+            bool ignore = layout.ignoreLayout;
+            float minWidth = layout.minWidth;
+            float minHeight = layout.minHeight;
+            float prefWidth = layout.preferredWidth;
+            float prefHeight = layout.preferredHeight;
+            float flexWidth = layout.flexibleWidth;
+            float flexHeight = layout.flexibleHeight;
 
-            var newLayout = Betterizer.MakeBetter<LayoutElement, BetterLayoutElement>(layout) as BetterLayoutElement;
+            BetterLayoutElement newLayout = Betterizer.MakeBetter<LayoutElement, BetterLayoutElement>(layout) as BetterLayoutElement;
             if(newLayout != null)
             {
                 newLayout.CurrentSettings.IgnoreLayout = ignore;

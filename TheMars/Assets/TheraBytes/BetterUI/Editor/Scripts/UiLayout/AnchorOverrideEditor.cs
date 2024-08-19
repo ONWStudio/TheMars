@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 
 namespace TheraBytes.BetterUi.Editor
@@ -118,30 +119,30 @@ namespace TheraBytes.BetterUi.Editor
 
             const float SPACE = 5;
 
-            var list = new UnityEditorInternal.ReorderableList(serializedObject, elements);
+            ReorderableList list = new UnityEditorInternal.ReorderableList(serializedObject, elements);
             list.elementHeight = 5 * EditorGUIUtility.singleLineHeight + 3 * SPACE;
 
             list.drawElementCallback += (Rect rect, int index, bool isActive, bool isFocused) =>
             {
                 Rect r = new Rect(rect.x, rect.y + SPACE, rect.width, EditorGUIUtility.singleLineHeight);
-                var prop = elements.GetArrayElementAtIndex(index);
-                var reference = prop.FindPropertyRelative("reference");
+                SerializedProperty prop = elements.GetArrayElementAtIndex(index);
+                SerializedProperty reference = prop.FindPropertyRelative("reference");
                 EditorGUI.PropertyField(r, reference);
 
                 r.y += EditorGUIUtility.singleLineHeight + SPACE;
-                var minX = prop.FindPropertyRelative("minX");
+                SerializedProperty minX = prop.FindPropertyRelative("minX");
                 DrawAnchorEdgeSetting("Min X", minX, r, AnchorOverride.AnchorReference.ReferenceLocation.LowerLeft, HorizontalOptions);
 
                 r.y += EditorGUIUtility.singleLineHeight;
-                var maxX = prop.FindPropertyRelative("maxX");
+                SerializedProperty maxX = prop.FindPropertyRelative("maxX");
                 DrawAnchorEdgeSetting("Max X", maxX, r, AnchorOverride.AnchorReference.ReferenceLocation.UpperRight, HorizontalOptions);
 
                 r.y += EditorGUIUtility.singleLineHeight;
-                var minY = prop.FindPropertyRelative("minY");
+                SerializedProperty minY = prop.FindPropertyRelative("minY");
                 DrawAnchorEdgeSetting("Min Y", minY, r, AnchorOverride.AnchorReference.ReferenceLocation.LowerLeft, VerticalOptions);
 
                 r.y += EditorGUIUtility.singleLineHeight;
-                var maxY = prop.FindPropertyRelative("maxY");
+                SerializedProperty maxY = prop.FindPropertyRelative("maxY");
                 DrawAnchorEdgeSetting("Max Y", maxY, r, AnchorOverride.AnchorReference.ReferenceLocation.UpperRight, VerticalOptions);
             };
 

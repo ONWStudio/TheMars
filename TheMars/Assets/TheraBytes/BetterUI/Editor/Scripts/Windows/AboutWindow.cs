@@ -39,7 +39,7 @@ namespace TheraBytes.BetterUi
         [MenuItem("Tools/Better UI/Help/About", false, 390)]
         public static void ShowWindow()
         {
-            var win = EditorWindow.GetWindow(typeof(AboutWindow), true, "About");
+            EditorWindow win = EditorWindow.GetWindow(typeof(AboutWindow), true, "About");
             win.minSize = new Vector2(524, 400);
             win.maxSize = win.minSize;
         }

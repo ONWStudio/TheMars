@@ -4,6 +4,7 @@ using Onw.Localization;
 using TMCard.Effect;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Components;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 namespace TMCard.Runtime
@@ -27,26 +28,11 @@ namespace TMCard.Runtime
 
         private bool _isInit;
 
-        private void initializeImages()
-        {
-            _cardImage.transform.SetParent(transform, false);
-            _cardImage.raycastTarget = false;
-            _cardImage.transform.localPosition = Vector3.zero;
-        }
-
-        public void Initialize()
-        {
-            if (_isInit) return;
-
-            _isInit = true;
-            initializeImages();
-        }
-
         public void SetUI(TMCardData cardData, IEnumerable<ITMCardEffect> effects)
         {
             _cardImage.sprite = cardData.CardImage;
 
-            foreach (var effect in effects)
+            foreach (ITMCardEffect effect in effects)
             {
                 GameObject effectUIObject = new("Effect UI Field");
                 effectUIObject.AddComponent<RectTransform>();
@@ -58,14 +44,14 @@ namespace TMCard.Runtime
                     GameObject labelObject = new("Label Object");
                     labelObject.AddComponent<RectTransform>();
                     labelObject.transform.SetParent(effectUIObject.transform, false);
-                    var labelText = labelObject.AddComponent<TextMeshProUGUI>();
+                    TextMeshProUGUI labelText = labelObject.AddComponent<TextMeshProUGUI>();
                     labelText.alignment = TextAlignmentOptions.Center;
                     labelText.enableAutoSizing = true;
                     labelText.fontSizeMax = 22f;
                     labelText.fontSizeMin = labelText.fontSizeMax * 0.75f;
                     labelText.color = Color.red;
 
-                    if (!localizable.StringOption.TrySetOption(this, label => labelText.text = label, out var localizeStringEvent)) // .. AddComponent
+                    if (!localizable.StringOption.TrySetOption(this, label => labelText.text = label, out LocalizeStringEvent localizeStringEvent)) // .. AddComponent
                     {
                         Debug.LogWarning("모노비하이비어가 아닙니다");
                     }

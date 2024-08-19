@@ -30,14 +30,14 @@ namespace SerializeReferenceDropdown.Editor
         public static void ShowCreateTypeMenu(SerializedProperty property, Rect propertyRect, Type genericType,
             Action<Type> onSelectedConcreteType)
         {
-            var window = GetWindow<GenericTypeCreateWindow>();
+            GenericTypeCreateWindow window = GetWindow<GenericTypeCreateWindow>();
             window.titleContent = new GUIContent("SRD Generic Type Create");
             window.Show();
             window.InitWindow(property, genericType, onSelectedConcreteType);
             window.CreateElements();
 
-            var currentRect = window.position;
-            var windowPos = GUIUtility.GUIToScreenPoint(propertyRect.position);
+            Rect currentRect = window.position;
+            Vector2 windowPos = GUIUtility.GUIToScreenPoint(propertyRect.position);
             currentRect.position = windowPos;
             window.position = currentRect;
         }
@@ -48,7 +48,7 @@ namespace SerializeReferenceDropdown.Editor
             onSelectNewGenericType = onSelectedConcreteType;
             serializedProperty = property;
 
-            var genericParams = inputGenericType.GetGenericArguments();
+            Type[] genericParams = inputGenericType.GetGenericArguments();
             selectedIndexes = new int[genericParams.Length];
             FillTypesAndNames();
             FillSpecifiedTypesFromProperty();
@@ -58,52 +58,52 @@ namespace SerializeReferenceDropdown.Editor
 
         private void FillTypesAndNames()
         {
-            var genericParams = inputGenericType.GetGenericArguments();
+            Type[] genericParams = inputGenericType.GetGenericArguments();
             typesForParameters = new List<IReadOnlyList<Type>>();
             typeNamesForParameters = new List<IReadOnlyList<string>>();
             for (int i = 0; i < selectedIndexes.Length; i++)
             {
                 selectedIndexes[i] = InvalidIndex;
-                var genericParam = genericParams[i];
+                Type genericParam = genericParams[i];
                 IReadOnlyList<Type> targetTypes;
-                var systemObjectTypes = TypeUtils.GetAllSystemObjectTypes();
+                IReadOnlyList<Type> systemObjectTypes = TypeUtils.GetAllSystemObjectTypes();
                 if (genericParam.GetInterfaces().Length == 0)
                 {
                     targetTypes = systemObjectTypes;
                 }
                 else
                 {
-                    var typesCollection = TypeCache.GetTypesDerivedFrom(genericParam);
+                    TypeCache.TypeCollection typesCollection = TypeCache.GetTypesDerivedFrom(genericParam);
                     targetTypes = typesCollection.Where(t => systemObjectTypes.Contains(t)).ToArray();
                 }
 
                 typesForParameters.Add(targetTypes);
-                var names = targetTypes.Select(GetTypeName).ToArray();
+                string[] names = targetTypes.Select(GetTypeName).ToArray();
                 typeNamesForParameters.Add(names);
             }
         }
 
         private void FillSpecifiedTypesFromProperty()
         {
-            var propertyType = TypeUtils.ExtractTypeFromString(serializedProperty.managedReferenceFieldTypename);
+            Type propertyType = TypeUtils.ExtractTypeFromString(serializedProperty.managedReferenceFieldTypename);
             if (propertyType.IsGenericType == false || propertyType.IsInterface == false)
             {
                 return;
             }
 
-            var genericInterfaces = inputGenericType.GetInterfaces();
-            var genericInterfaceIndex = Array.FindIndex(genericInterfaces, IsSameGenericInterface);
-            var genericInterface = genericInterfaces[genericInterfaceIndex];
-            var genericInterfaceArgs = genericInterface.GetGenericArguments();
+            Type[] genericInterfaces = inputGenericType.GetInterfaces();
+            int genericInterfaceIndex = Array.FindIndex(genericInterfaces, IsSameGenericInterface);
+            Type genericInterface = genericInterfaces[genericInterfaceIndex];
+            Type[] genericInterfaceArgs = genericInterface.GetGenericArguments();
 
-            var propertyGenericArgs = propertyType.GetGenericArguments();
-            var genericTypeArgs = inputGenericType.GetGenericArguments();
-            var specifiedTypes = new Type[genericTypeArgs.Length];
+            Type[] propertyGenericArgs = propertyType.GetGenericArguments();
+            Type[] genericTypeArgs = inputGenericType.GetGenericArguments();
+            Type[] specifiedTypes = new Type[genericTypeArgs.Length];
             for (int i = 0; i < genericInterfaceArgs.Length; i++)
             {
-                var genericArg = genericInterfaceArgs[i];
-                var specifiedType = propertyGenericArgs[i];
-                var genericArgIndex = Array.FindIndex(genericTypeArgs, Match);
+                Type genericArg = genericInterfaceArgs[i];
+                Type specifiedType = propertyGenericArgs[i];
+                int genericArgIndex = Array.FindIndex(genericTypeArgs, Match);
                 specifiedTypes[genericArgIndex] = specifiedType;
 
                 bool Match(Type type)
@@ -135,9 +135,9 @@ namespace SerializeReferenceDropdown.Editor
                     return true;
                 }
 
-                var propertyType = serializedProperty.GetType();
-                var isValidField = propertyType.GetProperty("isValid", BindingFlags.NonPublic | BindingFlags.Instance);
-                var isValidValue = isValidField?.GetValue(serializedProperty);
+                Type propertyType = serializedProperty.GetType();
+                PropertyInfo isValidField = propertyType.GetProperty("isValid", BindingFlags.NonPublic | BindingFlags.Instance);
+                object isValidValue = isValidField?.GetValue(serializedProperty);
                 return isValidValue != null && (bool)isValidValue == false;
             }
         }
@@ -152,27 +152,27 @@ namespace SerializeReferenceDropdown.Editor
 
         private void CreateParameterButtons()
         {
-            var parameterButtons = new List<Button>();
-            var arrayToggles = new List<Toggle>();
+            List<Button> parameterButtons = new List<Button>();
+            List<Toggle> arrayToggles = new List<Toggle>();
             parameterTypeButtons = parameterButtons;
             makeArrayTypeToggles = arrayToggles;
 
-            var genericParams = inputGenericType.GetGenericArguments();
+            Type[] genericParams = inputGenericType.GetGenericArguments();
             for (int i = 0; i < genericParams.Length; i++)
             {
-                var index = i;
-                var currentParam = genericParams[i];
-                var paramName = $"[{i}] {currentParam.Name}";
-                var button = new Button();
+                int index = i;
+                Type currentParam = genericParams[i];
+                string paramName = $"[{i}] {currentParam.Name}";
+                Button button = new Button();
 
                 button.clickable.clicked += () => ShowTypesForParamIndex(index, button);
 
-                var parameterTypeLabel = new TextElement();
+                TextElement parameterTypeLabel = new TextElement();
                 parameterTypeLabel.text = paramName;
 
-                var makeArrayToggle = new Toggle("Make Array Type");
+                Toggle makeArrayToggle = new Toggle("Make Array Type");
 
-                var group = new Box();
+                Box group = new Box();
                 group.style.flexDirection = FlexDirection.Row;
                 group.style.alignItems = Align.Center;
                 group.Add(parameterTypeLabel);
@@ -200,7 +200,7 @@ namespace SerializeReferenceDropdown.Editor
 
         private void GenerateGenericType()
         {
-            var parameterTypes = new Type[selectedIndexes.Length];
+            Type[] parameterTypes = new Type[selectedIndexes.Length];
             for (int i = 0; i < parameterTypes.Length; i++)
             {
                 Type type;
@@ -210,7 +210,7 @@ namespace SerializeReferenceDropdown.Editor
                 }
                 else
                 {
-                    var typeIndex = selectedIndexes[i];
+                    int typeIndex = selectedIndexes[i];
                     type = typesForParameters[i][typeIndex];
                     if (type.IsArray == false && makeArrayTypeToggles[i].value)
                     {
@@ -221,7 +221,7 @@ namespace SerializeReferenceDropdown.Editor
                 parameterTypes[i] = type;
             }
 
-            var newGenericType = inputGenericType.MakeGenericType(parameterTypes);
+            Type newGenericType = inputGenericType.MakeGenericType(parameterTypes);
             try
             {
                 onSelectNewGenericType.Invoke(newGenericType);
@@ -236,12 +236,12 @@ namespace SerializeReferenceDropdown.Editor
 
         private void ShowTypesForParamIndex(int genericParamIndex, Button selectedButton)
         {
-            var currentTypeNames = typeNamesForParameters[genericParamIndex];
+            IReadOnlyList<string> currentTypeNames = typeNamesForParameters[genericParamIndex];
 
-            var dropdown = new AdvancedDropdown(new AdvancedDropdownState(), currentTypeNames,
+            AdvancedDropdown dropdown = new AdvancedDropdown(new AdvancedDropdownState(), currentTypeNames,
                 ApplySelectedTypeIndex);
 
-            var buttonRect = new Rect(selectedButton.transform.position, selectedButton.transform.scale);
+            Rect buttonRect = new Rect(selectedButton.transform.position, selectedButton.transform.scale);
             dropdown.Show(buttonRect);
 
             void ApplySelectedTypeIndex(int selectedTypeIndex)
@@ -254,8 +254,8 @@ namespace SerializeReferenceDropdown.Editor
 
         private void RefreshGenericParameterButton(int parameterIndex)
         {
-            var button = parameterTypeButtons[parameterIndex];
-            var specifiedType = specifiedTypesFromProperty[parameterIndex];
+            Button button = parameterTypeButtons[parameterIndex];
+            Type specifiedType = specifiedTypesFromProperty[parameterIndex];
             if (specifiedType != null)
             {
                 button.text = GetTypeName(specifiedType);
@@ -264,8 +264,8 @@ namespace SerializeReferenceDropdown.Editor
                 return;
             }
 
-            var selectedIndex = selectedIndexes[parameterIndex];
-            var buttonText = selectedIndex == InvalidIndex
+            int selectedIndex = selectedIndexes[parameterIndex];
+            string buttonText = selectedIndex == InvalidIndex
                 ? "Select Type"
                 : typeNamesForParameters[parameterIndex][selectedIndex];
             button.text = buttonText;
@@ -274,9 +274,9 @@ namespace SerializeReferenceDropdown.Editor
 
         private void RefreshGenerateGenericButton()
         {
-            var specifiedTypesCount = specifiedTypesFromProperty.Count(t => t != null);
-            var selectedIndexesCount = selectedIndexes.Count(t => t != InvalidIndex);
-            var isSelectedAllTypes = (specifiedTypesCount + selectedIndexesCount) == selectedIndexes.Length;
+            int specifiedTypesCount = specifiedTypesFromProperty.Count(t => t != null);
+            int selectedIndexesCount = selectedIndexes.Count(t => t != InvalidIndex);
+            bool isSelectedAllTypes = (specifiedTypesCount + selectedIndexesCount) == selectedIndexes.Length;
             generateGenericTypeButton.SetEnabled(isSelectedAllTypes);
         }
     }

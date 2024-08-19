@@ -33,12 +33,12 @@ namespace TMCard.Effect
         {
             if (!ServiceLocator<ITMCardService>.TryGetService(out ITMCardService service)) return;
 
-            card.OnClickEvent.RemoveAllToAddListener(() => onEffect(card));
-            card.OnDrawEndedEvent.RemoveAllToAddListener(() => onDraw(service, card));
+            card.OnClickEvent.RemoveAllToAddListener(eventState => onEffect(card));
+            card.OnDrawEndedEvent.RemoveAllToAddListener(eventState => onDraw(service, eventState, card));
 
             static void onEffect(TMCardController card)
             {
-                if (!_cardStack.TryGetValue(card.CardData.GetInstanceID().ToString(), out var eventValuePair))
+                if (!_cardStack.TryGetValue(card.CardData.GetInstanceID().ToString(), out EventValuePair eventValuePair))
                 {
                     eventValuePair = new();
                     _cardStack.Add(card.CardData.GetInstanceID().ToString(), eventValuePair);
@@ -48,9 +48,9 @@ namespace TMCard.Effect
                 card.MoveToTomb();
             }
 
-            static void onDraw(ITMCardService service, TMCardController card)
+            static void onDraw(ITMCardService service, CardEventState eventState, TMCardController card)
             {
-                if (!_cardStack.TryGetValue(card.CardData.GetInstanceID().ToString(), out var eventValuePair) || eventValuePair.Stack <= 0) return;
+                if (!_cardStack.TryGetValue(card.CardData.GetInstanceID().ToString(), out EventValuePair eventValuePair) || eventValuePair.Stack <= 0) return;
 
                 eventValuePair.Stack--;
 
@@ -58,7 +58,7 @@ namespace TMCard.Effect
                     card.GetMoveToScreenCenterEvent(),
                     FeedbackCreator.CreateUnityEvent(() =>
                     {
-                        card.OnEffectEvent.Invoke();
+                        card.OnEffectEvent.Invoke(eventState);
                         service.FeedbackPlayer.EnqueueEventToHead(service.CardHandController.GetSortCardsFeedbacks());
                     }));
             }
@@ -66,7 +66,7 @@ namespace TMCard.Effect
 
         public static void AddListenerOnUpdateStack(string cardName, Action<int> onUpdateStack)
         {
-            if (!_cardStack.TryGetValue(cardName, out var eventValuePair)) return;
+            if (!_cardStack.TryGetValue(cardName, out EventValuePair eventValuePair)) return;
 
             if (eventValuePair.OnUpdateStack is null)
             {
@@ -80,14 +80,14 @@ namespace TMCard.Effect
 
         public static void RemoveListenerOnUpdateStack(string cardName, Action<int> onUpdateStack)
         {
-            if (!_cardStack.TryGetValue(cardName, out var eventValuePair) || eventValuePair.OnUpdateStack is null) return;
+            if (!_cardStack.TryGetValue(cardName, out EventValuePair eventValuePair) || eventValuePair.OnUpdateStack is null) return;
 
             eventValuePair.OnUpdateStack -= onUpdateStack;
         }
 
         public static void RemoveAllListenerOnUpdataStack(string cardName)
         {
-            if (!_cardStack.TryGetValue(cardName, out var eventValuePair) || eventValuePair.OnUpdateStack is null) return;
+            if (!_cardStack.TryGetValue(cardName, out EventValuePair eventValuePair) || eventValuePair.OnUpdateStack is null) return;
 
             eventValuePair.OnUpdateStack = null;
         }

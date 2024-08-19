@@ -22,21 +22,21 @@ namespace Michsky.UI.Heat
 
         public override void OnInspectorGUI()
         {
-            var pauseMenuCanvas = serializedObject.FindProperty("pauseMenuCanvas");
-            var continueButton = serializedObject.FindProperty("continueButton");
-            var panelManager = serializedObject.FindProperty("panelManager");
-            var background = serializedObject.FindProperty("background");
+            SerializedProperty pauseMenuCanvas = serializedObject.FindProperty("pauseMenuCanvas");
+            SerializedProperty continueButton = serializedObject.FindProperty("continueButton");
+            SerializedProperty panelManager = serializedObject.FindProperty("panelManager");
+            SerializedProperty background = serializedObject.FindProperty("background");
 
-            var setTimeScale = serializedObject.FindProperty("setTimeScale");
-            var inputBlockDuration = serializedObject.FindProperty("inputBlockDuration");
-            var menuCursorState = serializedObject.FindProperty("menuCursorState");
-            var gameCursorState = serializedObject.FindProperty("gameCursorState");
-            var menuCursorVisibility = serializedObject.FindProperty("menuCursorVisibility");
-            var gameCursorVisibility = serializedObject.FindProperty("gameCursorVisibility");
-            var hotkey = serializedObject.FindProperty("hotkey");
+            SerializedProperty setTimeScale = serializedObject.FindProperty("setTimeScale");
+            SerializedProperty inputBlockDuration = serializedObject.FindProperty("inputBlockDuration");
+            SerializedProperty menuCursorState = serializedObject.FindProperty("menuCursorState");
+            SerializedProperty gameCursorState = serializedObject.FindProperty("gameCursorState");
+            SerializedProperty menuCursorVisibility = serializedObject.FindProperty("menuCursorVisibility");
+            SerializedProperty gameCursorVisibility = serializedObject.FindProperty("gameCursorVisibility");
+            SerializedProperty hotkey = serializedObject.FindProperty("hotkey");
 
-            var onOpen = serializedObject.FindProperty("onOpen");
-            var onClose = serializedObject.FindProperty("onClose");
+            SerializedProperty onOpen = serializedObject.FindProperty("onOpen");
+            SerializedProperty onClose = serializedObject.FindProperty("onClose");
 
             if (pmmTarget.pauseMenuCanvas != null)
             {

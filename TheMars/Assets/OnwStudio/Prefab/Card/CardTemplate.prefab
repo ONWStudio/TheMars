@@ -181,7 +181,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CardData>k__BackingField: {fileID: 0}
   <OnField>k__BackingField: 0
-  <OnCard>k__BackingField: 0
   <OnChangedParent>k__BackingField:
     _unityEvent:
       m_PersistentCalls:
@@ -322,7 +321,6 @@ GameObject:
   - component: {fileID: 1255000191441709847}
   - component: {fileID: 9010741079963414924}
   - component: {fileID: 3950656696968265227}
-  - component: {fileID: 2928742289247591831}
   - component: {fileID: 951940298692808629}
   m_Layer: 5
   m_Name: DescriptionArea
@@ -388,21 +386,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2928742289247591831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8523627298364419437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65ccf6858ba524cddbde4b4dfafe1c11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _descriptors: []
-  _descriptionArea: {fileID: 1255000191441709847}
-  _verticalLayoutGroup: {fileID: 951940298692808629}
 --- !u!114 &951940298692808629
 MonoBehaviour:
   m_ObjectHideFlags: 0

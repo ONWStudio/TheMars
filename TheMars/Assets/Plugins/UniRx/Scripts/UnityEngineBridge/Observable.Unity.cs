@@ -329,8 +329,8 @@ namespace UniRx
 
         private static IEnumerator WrapEnumerator(IEnumerator enumerator, IObserver<Unit> observer, CancellationToken cancellationToken, bool publishEveryYield)
         {
-            var hasNext = default(bool);
-            var raisedError = false;
+            bool hasNext = default(bool);
+            bool raisedError = false;
             do
             {
                 try
@@ -346,7 +346,7 @@ namespace UniRx
                     }
                     finally
                     {
-                        var d = enumerator as IDisposable;
+                        IDisposable d = enumerator as IDisposable;
                         if (d != null)
                         {
                             d.Dispose();
@@ -362,7 +362,7 @@ namespace UniRx
                     }
                     catch
                     {
-                        var d = enumerator as IDisposable;
+                        IDisposable d = enumerator as IDisposable;
                         if (d != null)
                         {
                             d.Dispose();
@@ -373,8 +373,8 @@ namespace UniRx
                 if (hasNext)
                 {
 #if SupportCustomYieldInstruction
-                    var current = enumerator.Current;
-                    var customHandler = current as ICustomYieldInstructionErrorHandler;
+                    object current = enumerator.Current;
+                    ICustomYieldInstructionErrorHandler customHandler = current as ICustomYieldInstructionErrorHandler;
                     if (customHandler != null && customHandler.IsReThrowOnError)
                     {
                         // If throws exception in Custom YieldInsrtuction, can't handle parent coroutine.
@@ -393,7 +393,7 @@ namespace UniRx
                             }
                             finally
                             {
-                                var d = enumerator as IDisposable;
+                                IDisposable d = enumerator as IDisposable;
                                 if (d != null)
                                 {
                                     d.Dispose();
@@ -422,7 +422,7 @@ namespace UniRx
             }
             finally
             {
-                var d = enumerator as IDisposable;
+                IDisposable d = enumerator as IDisposable;
                 if (d != null)
                 {
                     d.Dispose();
@@ -444,9 +444,9 @@ namespace UniRx
 
         private static IEnumerator WrapEnumeratorYieldValue<T>(IEnumerator enumerator, IObserver<T> observer, CancellationToken cancellationToken, bool nullAsNextUpdate)
         {
-            var hasNext = default(bool);
-            var current = default(object);
-            var raisedError = false;
+            bool hasNext = default(bool);
+            object current = default(object);
+            bool raisedError = false;
             do
             {
                 try
@@ -463,7 +463,7 @@ namespace UniRx
                     }
                     finally
                     {
-                        var d = enumerator as IDisposable;
+                        IDisposable d = enumerator as IDisposable;
                         if (d != null)
                         {
                             d.Dispose();
@@ -481,7 +481,7 @@ namespace UniRx
 #if SupportCustomYieldInstruction
                     else if (current is IEnumerator)
                     {
-                        var customHandler = current as ICustomYieldInstructionErrorHandler;
+                        ICustomYieldInstructionErrorHandler customHandler = current as ICustomYieldInstructionErrorHandler;
                         if (customHandler != null && customHandler.IsReThrowOnError)
                         {
                             // If throws exception in Custom YieldInsrtuction, can't handle parent coroutine.
@@ -500,7 +500,7 @@ namespace UniRx
                                 }
                                 finally
                                 {
-                                    var d = enumerator as IDisposable;
+                                    IDisposable d = enumerator as IDisposable;
                                     if (d != null)
                                     {
                                         d.Dispose();
@@ -527,7 +527,7 @@ namespace UniRx
                         }
                         catch
                         {
-                            var d = enumerator as IDisposable;
+                            IDisposable d = enumerator as IDisposable;
                             if (d != null)
                             {
                                 d.Dispose();
@@ -547,7 +547,7 @@ namespace UniRx
             }
             finally
             {
-                var d = enumerator as IDisposable;
+                IDisposable d = enumerator as IDisposable;
                 if (d != null)
                 {
                     d.Dispose();
@@ -571,7 +571,7 @@ namespace UniRx
 
         private static IEnumerator WrapToCancellableEnumerator<T>(IEnumerator enumerator, IObserver<T> observer, CancellationToken cancellationToken)
         {
-            var hasNext = default(bool);
+            bool hasNext = default(bool);
             do
             {
                 try
@@ -586,7 +586,7 @@ namespace UniRx
                     }
                     finally
                     {
-                        var d = enumerator as IDisposable;
+                        IDisposable d = enumerator as IDisposable;
                         if (d != null)
                         {
                             d.Dispose();
@@ -599,7 +599,7 @@ namespace UniRx
             } while (hasNext && !cancellationToken.IsCancellationRequested);
 
             {
-                var d = enumerator as IDisposable;
+                IDisposable d = enumerator as IDisposable;
                 if (d != null)
                 {
                     d.Dispose();
@@ -691,7 +691,7 @@ namespace UniRx
         private static IEnumerator EveryCycleCore(IObserver<long> observer, CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested) yield break;
-            var count = 0L;
+            long count = 0L;
             while (true)
             {
                 yield return null;
@@ -770,7 +770,7 @@ namespace UniRx
             // normalize
             if (dueTimeFrameCount <= 0) dueTimeFrameCount = 0;
 
-            var currentFrame = 0;
+            int currentFrame = 0;
 
             // initial phase
             while (!cancel.IsCancellationRequested)
@@ -791,8 +791,8 @@ namespace UniRx
             if (dueTimeFrameCount <= 0) dueTimeFrameCount = 0;
             if (periodFrameCount <= 0) periodFrameCount = 1;
 
-            var sendCount = 0L;
-            var currentFrame = 0;
+            long sendCount = 0L;
+            int currentFrame = 0;
 
             // initial phase
             while (!cancel.IsCancellationRequested)
@@ -926,8 +926,8 @@ namespace UniRx
         /// <summary>Convert to awaitable IEnumerator.</summary>
         public static IEnumerator ToAwaitableEnumerator<T>(this IObservable<T> source, Action<T> onResult, Action<Exception> onError, CancellationToken cancel = default(CancellationToken))
         {
-            var enumerator = new ObservableYieldInstruction<T>(source, false, cancel);
-            var e = (IEnumerator<T>)enumerator;
+            ObservableYieldInstruction<T> enumerator = new ObservableYieldInstruction<T>(source, false, cancel);
+            IEnumerator<T> e = (IEnumerator<T>)enumerator;
             while (e.MoveNext() && !cancel.IsCancellationRequested)
             {
                 yield return null;

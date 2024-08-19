@@ -239,7 +239,7 @@ namespace TheraBytes.BetterUi
                 runningAnimation.Time = runningAnimation.Duration;
 
             float amount = runningAnimation.Animation.Curve.Evaluate(runningAnimation.Time);
-            var rtd = RectTransformData.LerpUnclamped(runningAnimation.From, runningAnimation.To, amount, runningAnimation.Animation.AnimateWithEulerRotation);
+            RectTransformData rtd = RectTransformData.LerpUnclamped(runningAnimation.From, runningAnimation.To, amount, runningAnimation.Animation.AnimateWithEulerRotation);
             rtd.PushToTransform(RectTransform);
 
             runningAnimation.Animation.ActionOnUpdating.Invoke(amount);
@@ -247,7 +247,7 @@ namespace TheraBytes.BetterUi
             runningAnimation.Time += deltaTime * runningAnimation.TimeScale;
             if (animationTimeIsOver)
             {
-                var cache = runningAnimation;
+                AnimationState cache = runningAnimation;
                 runningAnimation = null;
                 cache.ActionAfterFinish.Invoke();
             }
@@ -277,8 +277,8 @@ namespace TheraBytes.BetterUi
             {
                 EnsureReferenceLocation();
 
-                var cur = loc.CurrentTransformData;
-                var transformData = RectTransformData.Combine(cur, referenceLocation);
+                RectTransformData cur = loc.CurrentTransformData;
+                RectTransformData transformData = RectTransformData.Combine(cur, referenceLocation);
                 transformData.PushToTransform(RectTransform);
             }
             else
@@ -300,7 +300,7 @@ namespace TheraBytes.BetterUi
         {
             EnsureReferenceLocation();
 
-            var loc = locations.FirstOrDefault(o => o.Name == name);
+            LocationData loc = locations.FirstOrDefault(o => o.Name == name);
             RectTransformData cur = (loc == null)
                 ? new RectTransformData(RectTransform)
                 : loc.CurrentTransformData;
@@ -335,7 +335,7 @@ namespace TheraBytes.BetterUi
             for (int i = 0; i < locations.Count; i++)
             {
                 LocationData loc = locations[i];
-                var cur = loc.CurrentTransformData;
+                RectTransformData cur = loc.CurrentTransformData;
 
                 if (cur == RectTransformData.Invalid)
                 {

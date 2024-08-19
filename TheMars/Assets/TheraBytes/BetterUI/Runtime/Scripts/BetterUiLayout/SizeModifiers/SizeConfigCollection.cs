@@ -55,7 +55,7 @@ namespace TheraBytes.BetterUi
 
         public T GetItemForConfig(string configName, T fallback)
         {
-            foreach(var itm in items)
+            foreach(T itm in items)
             {
                 if (itm.ScreenConfigName == configName)
                     return itm;
@@ -74,7 +74,7 @@ namespace TheraBytes.BetterUi
 #if UNITY_EDITOR
             
             // simulation
-            var config = ResolutionMonitor.SimulatedScreenConfig;
+            ScreenTypeConditions config = ResolutionMonitor.SimulatedScreenConfig;
             if (config != null)
             {
                 if (Items.Any(o => o.ScreenConfigName == config.Name))
@@ -90,7 +90,7 @@ namespace TheraBytes.BetterUi
                 if (string.IsNullOrEmpty(item.ScreenConfigName))
                     return fallback;
 
-                var c = ResolutionMonitor.GetConfig(item.ScreenConfigName);
+                ScreenTypeConditions c = ResolutionMonitor.GetConfig(item.ScreenConfigName);
                 if(c != null && c.IsActive)
                 {
                     return item;
@@ -98,11 +98,11 @@ namespace TheraBytes.BetterUi
             }
             
             // fallback logic
-            foreach (var conf in ResolutionMonitor.GetCurrentScreenConfigurations())
+            foreach (ScreenTypeConditions conf in ResolutionMonitor.GetCurrentScreenConfigurations())
             {
-                foreach (var c in conf.Fallbacks)
+                foreach (string c in conf.Fallbacks)
                 {
-                    var matchingItem = items.FirstOrDefault(o => o.ScreenConfigName == c);
+                    T matchingItem = items.FirstOrDefault(o => o.ScreenConfigName == c);
                     if (matchingItem != null)
                         return matchingItem;
                 }

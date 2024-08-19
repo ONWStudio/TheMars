@@ -14,7 +14,7 @@ namespace TheraBytes.BetterUi
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            var margin = fieldInfo.GetValue(property.serializedObject.targetObject)
+            Margin margin = fieldInfo.GetValue(property.serializedObject.targetObject)
                        as Margin;
 
             foldout = EditorGUILayout.Foldout(foldout, "Margin");

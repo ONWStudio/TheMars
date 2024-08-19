@@ -4,6 +4,8 @@
 #pragma warning disable CS0618
 #endif
 
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace UniRx.Examples
@@ -28,7 +30,7 @@ namespace UniRx.Examples
                             from bing in ObservableWWW.Get("http://bing.com/")
                             select new { google, bing };
 
-                var cancel = query.Subscribe(x => Debug.Log(x.google.Substring(0, 100) + ":" + x.bing.Substring(0, 100)));
+                IDisposable cancel = query.Subscribe(x => Debug.Log(x.google.Substring(0, 100) + ":" + x.bing.Substring(0, 100)));
 
                 // Call Dispose is cancel downloading.
                 cancel.Dispose();
@@ -37,7 +39,7 @@ namespace UniRx.Examples
             // Observable.WhenAll is for parallel asynchronous operation
             // (It's like Observable.Zip but specialized for single async operations like Task.WhenAll of .NET 4)
             {
-                var parallel = Observable.WhenAll(
+                IObservable<string[]> parallel = Observable.WhenAll(
                     ObservableWWW.Get("http://google.com/"),
                     ObservableWWW.Get("http://bing.com/"),
                     ObservableWWW.Get("http://unity3d.com/"));
@@ -53,7 +55,7 @@ namespace UniRx.Examples
             // with Progress
             {
                 // notifier for progress
-                var progressNotifier = new ScheduledNotifier<float>();
+                ScheduledNotifier<float> progressNotifier = new ScheduledNotifier<float>();
                 progressNotifier.Subscribe(x => Debug.Log(x)); // write www.progress
 
                 // pass notifier to WWW.Get/Post
@@ -72,7 +74,7 @@ namespace UniRx.Examples
                         {
                             Debug.Log(ex.StatusCode);
                         }
-                        foreach (var item in ex.ResponseHeaders)
+                        foreach (KeyValuePair<string, string> item in ex.ResponseHeaders)
                         {
                             Debug.Log(item.Key + ":" + item.Value);
                         }

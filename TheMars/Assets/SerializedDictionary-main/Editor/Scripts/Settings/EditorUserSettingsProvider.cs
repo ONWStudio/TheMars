@@ -25,7 +25,7 @@ namespace AYellowpaper.SerializedCollections.Editor
         [SettingsProvider]
         public static SettingsProvider CreateProvider()
         {
-            var provider = new EditorUserSettingsProvider(PreferencesPath, SettingsScope.User);
+            EditorUserSettingsProvider provider = new EditorUserSettingsProvider(PreferencesPath, SettingsScope.User);
 
             provider.keywords = GetSearchKeywordsFromGUIContentProperties<Styles>();
             return provider;
@@ -63,7 +63,7 @@ namespace AYellowpaper.SerializedCollections.Editor
 
             EditorGUILayout.PropertyField(_alwaysShowSearch);
             _searchAnimBool.target = !_alwaysShowSearch.boolValue;
-            using (var group = new EditorGUILayout.FadeGroupScope(_searchAnimBool.faded))
+            using (EditorGUILayout.FadeGroupScope group = new EditorGUILayout.FadeGroupScope(_searchAnimBool.faded))
             {
                 if (group.visible)
                 {

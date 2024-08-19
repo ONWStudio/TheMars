@@ -113,13 +113,13 @@ namespace TheraBytes.BetterUi
 
         internal override void AddStateObject(string stateName)
         {
-            var obj = new ColorTransitionState(stateName, Color.white);
+            ColorTransitionState obj = new ColorTransitionState(stateName, Color.white);
             this.states.Add(obj);
         }
 
         protected override IEnumerable<TransitionState> GetTransitionStates()
         {
-            foreach (var s in states)
+            foreach (ColorTransitionState s in states)
                 yield return s;
         }
 
@@ -131,7 +131,7 @@ namespace TheraBytes.BetterUi
         private void CrossFadeColor(Color startValue, Color targetValue, float duration)
         {
             // Stop clashing coroutines
-            foreach (var key in activeCoroutines.Keys)
+            foreach (ColorTransitions key in activeCoroutines.Keys)
             {
                 if (key.target == this.target && key.affectedColor == this.affectedColor)
                 {
@@ -142,7 +142,7 @@ namespace TheraBytes.BetterUi
                 }
             }
 
-            foreach (var key in keysToRemove)
+            foreach (ColorTransitions key in keysToRemove)
             {
                 activeCoroutines.Remove(key);
             }

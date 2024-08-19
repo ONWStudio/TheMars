@@ -87,8 +87,8 @@ namespace TheraBytes.BetterUi.Editor
             float hSpace = obj.horizontalScrollbarSpacing;
             float vSpace = obj.verticalScrollbarSpacing;
 
-            var newScrollRect = Betterizer.MakeBetter<ScrollRect, BetterScrollRect>(obj);
-            var betterVersion = newScrollRect as BetterScrollRect;
+            ScrollRect newScrollRect = Betterizer.MakeBetter<ScrollRect, BetterScrollRect>(obj);
+            BetterScrollRect betterVersion = newScrollRect as BetterScrollRect;
             if(betterVersion != null)
             {
                 betterVersion.HorizontalSpacingSizer.SetSize(betterVersion, hSpace);

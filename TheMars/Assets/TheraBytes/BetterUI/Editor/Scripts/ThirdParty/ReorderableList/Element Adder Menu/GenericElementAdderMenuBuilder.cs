@@ -52,7 +52,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		}
 
 		public IElementAdderMenu GetMenu() {
-			var menu = new GenericElementAdderMenu();
+			GenericElementAdderMenu menu = new GenericElementAdderMenu();
 
 			AddCommandsToMenu(menu, _customCommands);
 
@@ -71,7 +71,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 			if (!menu.IsEmpty)
 				menu.AddSeparator();
 
-			foreach (var command in commands) {
+			foreach (IElementAdderMenuCommand<TContext> command in commands) {
 				if (_elementAdder != null && command.CanExecute(_elementAdder))
 					menu.AddItem(command.Content, () => command.Execute(_elementAdder));
 				else
@@ -86,8 +86,8 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 			if (!menu.IsEmpty)
 				menu.AddSeparator();
 
-			foreach (var concreteType in concreteTypes) {
-				var content = new GUIContent(_typeDisplayNameFormatter(concreteType));
+			foreach (Type concreteType in concreteTypes) {
+				GUIContent content = new GUIContent(_typeDisplayNameFormatter(concreteType));
 				if (_elementAdder != null && _elementAdder.CanAddElement(concreteType))
 					menu.AddItem(content, () => {
 						if (_elementAdder.CanAddElement(concreteType))

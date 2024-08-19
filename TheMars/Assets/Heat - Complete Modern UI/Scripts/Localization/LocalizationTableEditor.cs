@@ -32,10 +32,10 @@ namespace Michsky.UI.Heat
             HeatUIEditorHandler.DrawHeader(customSkin, "Options Header", 8);
             GUI.enabled = false;
 
-            var tableID = serializedObject.FindProperty("tableID");
+            SerializedProperty tableID = serializedObject.FindProperty("tableID");
             HeatUIEditorHandler.DrawProperty(tableID, customSkin, "Table ID");
 
-            var localizationSettings = serializedObject.FindProperty("localizationSettings");
+            SerializedProperty localizationSettings = serializedObject.FindProperty("localizationSettings");
             HeatUIEditorHandler.DrawProperty(localizationSettings, customSkin, "Localization Settings");
 
             GUI.enabled = true;

@@ -85,7 +85,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty.Internal {
 			if (!element.hasChildren)
 				return;
 
-			var childProperty = element.Copy();
+			SerializedProperty childProperty = element.Copy();
 			int elementPropertyDepth = element.depth;
 			bool enterChildren = true;
 

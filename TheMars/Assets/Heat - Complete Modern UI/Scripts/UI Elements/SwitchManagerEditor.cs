@@ -39,22 +39,22 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var onValueChanged = serializedObject.FindProperty("onValueChanged");
-            var onEvents = serializedObject.FindProperty("onEvents");
-            var offEvents = serializedObject.FindProperty("offEvents");
+            SerializedProperty onValueChanged = serializedObject.FindProperty("onValueChanged");
+            SerializedProperty onEvents = serializedObject.FindProperty("onEvents");
+            SerializedProperty offEvents = serializedObject.FindProperty("offEvents");
 
-            var switchAnimator = serializedObject.FindProperty("switchAnimator");
-            var highlightCG = serializedObject.FindProperty("highlightCG");
-            var audioManager = serializedObject.FindProperty("audioManager");
+            SerializedProperty switchAnimator = serializedObject.FindProperty("switchAnimator");
+            SerializedProperty highlightCG = serializedObject.FindProperty("highlightCG");
+            SerializedProperty audioManager = serializedObject.FindProperty("audioManager");
 
-            var fadingMultiplier = serializedObject.FindProperty("fadingMultiplier");
-            var isOn = serializedObject.FindProperty("isOn");
-            var isInteractable = serializedObject.FindProperty("isInteractable");
-            var invokeOnEnable = serializedObject.FindProperty("invokeOnEnable");
-            var useSounds = serializedObject.FindProperty("useSounds");
-            var useUINavigation = serializedObject.FindProperty("useUINavigation");
-            var saveValue = serializedObject.FindProperty("saveValue");
-            var saveKey = serializedObject.FindProperty("saveKey");
+            SerializedProperty fadingMultiplier = serializedObject.FindProperty("fadingMultiplier");
+            SerializedProperty isOn = serializedObject.FindProperty("isOn");
+            SerializedProperty isInteractable = serializedObject.FindProperty("isInteractable");
+            SerializedProperty invokeOnEnable = serializedObject.FindProperty("invokeOnEnable");
+            SerializedProperty useSounds = serializedObject.FindProperty("useSounds");
+            SerializedProperty useUINavigation = serializedObject.FindProperty("useUINavigation");
+            SerializedProperty saveValue = serializedObject.FindProperty("saveValue");
+            SerializedProperty saveKey = serializedObject.FindProperty("saveKey");
 
             switch (currentTab)
             {

@@ -67,17 +67,17 @@ namespace Michsky.UI.Heat
 
             GUILayout.EndHorizontal();
 
-            var localizationSettings = serializedObject.FindProperty("localizationSettings");
-            var tableIndex = serializedObject.FindProperty("tableIndex");
-            var objectType = serializedObject.FindProperty("objectType");
-            var onLanguageChanged = serializedObject.FindProperty("onLanguageChanged");
-            var rebuildLayoutOnUpdate = serializedObject.FindProperty("rebuildLayoutOnUpdate");
-            var forceAddToManager = serializedObject.FindProperty("forceAddToManager");
-            var updateMode = serializedObject.FindProperty("updateMode");
-            var textObj = serializedObject.FindProperty("textObj");
-            var audioObj = serializedObject.FindProperty("audioObj");
-            var imageObj = serializedObject.FindProperty("imageObj");
-            var localizationKey = serializedObject.FindProperty("localizationKey");
+            SerializedProperty localizationSettings = serializedObject.FindProperty("localizationSettings");
+            SerializedProperty tableIndex = serializedObject.FindProperty("tableIndex");
+            SerializedProperty objectType = serializedObject.FindProperty("objectType");
+            SerializedProperty onLanguageChanged = serializedObject.FindProperty("onLanguageChanged");
+            SerializedProperty rebuildLayoutOnUpdate = serializedObject.FindProperty("rebuildLayoutOnUpdate");
+            SerializedProperty forceAddToManager = serializedObject.FindProperty("forceAddToManager");
+            SerializedProperty updateMode = serializedObject.FindProperty("updateMode");
+            SerializedProperty textObj = serializedObject.FindProperty("textObj");
+            SerializedProperty audioObj = serializedObject.FindProperty("audioObj");
+            SerializedProperty imageObj = serializedObject.FindProperty("imageObj");
+            SerializedProperty localizationKey = serializedObject.FindProperty("localizationKey");
 
             if (LocalizationManager.instance != null && LocalizationManager.instance.UIManagerAsset != null && LocalizationManager.instance.UIManagerAsset.enableLocalization == false)
             {

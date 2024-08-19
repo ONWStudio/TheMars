@@ -86,8 +86,8 @@ namespace MoreMountains.FeedbacksForThirdParty
 
 		protected virtual void HandleApplyInitialColors()
 		{
-			var colorKeys = ColorOverTime.colorKeys;
-			var alphaKeys = ColorOverTime.alphaKeys;
+			GradientColorKey[] colorKeys = ColorOverTime.colorKeys;
+			GradientAlphaKey[] alphaKeys = ColorOverTime.alphaKeys;
 			
 			if (ApplyInitialColorToGradientStart)
 			{

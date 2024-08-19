@@ -26,12 +26,12 @@ namespace TheraBytes.BetterUi.Editor
         protected static TBetter MakeBetterLogic(MenuCommand command)
         {
             TSource lg = command.context as TSource;
-            var pad = new Margin(lg.padding);
-            var space = lg.spacing;
+            Margin pad = new Margin(lg.padding);
+            float space = lg.spacing;
 
-            var newLg = Betterizer.MakeBetter<TSource, TBetter>(lg, "m_Padding");
+            TSource newLg = Betterizer.MakeBetter<TSource, TBetter>(lg, "m_Padding");
 
-            var betterLg = newLg as TBetter;
+            TBetter betterLg = newLg as TBetter;
             if (betterLg != null)
             {
                 betterLg.PaddingSizer.SetSize(newLg, pad);
@@ -101,9 +101,9 @@ To do so, just right click on the component and select '♠ Make Better' as usua
                     : parent.FindPropertyRelative(nameSetting);
             };
 
-            var orientation = findProp("orientation", "Orientation");
+            SerializedProperty orientation = findProp("orientation", "Orientation");
 
-            var childAlignment = findProp("m_ChildAlignment", "ChildAlignment");
+            SerializedProperty childAlignment = findProp("m_ChildAlignment", "ChildAlignment");
 
 
             if (parent != null)
@@ -122,30 +122,30 @@ To do so, just right click on the component and select '♠ Make Better' as usua
             // Reverse Arrangement
             if (hasReverseOption)
             {
-                var reverseArrangement = findProp("m_ReverseArrangement", "ReverseArrangement");
+                SerializedProperty reverseArrangement = findProp("m_ReverseArrangement", "ReverseArrangement");
                 EditorGUILayout.PropertyField(reverseArrangement, true);
             }
 
             // Child Control Size
-            var version = UnityEditorInternal.InternalEditorUtility.GetUnityVersion();
+            Version version = UnityEditorInternal.InternalEditorUtility.GetUnityVersion();
             if (version >= new Version(5, 5))
             {
-                var childControlSizeWidth = findProp("m_ChildControlWidth", "ChildControlWidth");
-                var childControlSizeHeight = findProp("m_ChildControlHeight", "ChildControlHeight");
+                SerializedProperty childControlSizeWidth = findProp("m_ChildControlWidth", "ChildControlWidth");
+                SerializedProperty childControlSizeHeight = findProp("m_ChildControlHeight", "ChildControlHeight");
                 DrawWidthHeightProperty("Control Child Size", -1, childControlSizeWidth, childControlSizeHeight);
             }
 
             // Use Child Scale
             if (hasChildScale)
             {
-                var childScaleWidth = findProp("m_ChildScaleWidth", "ChildScaleWidth");
-                var childScaleHeight = findProp("m_ChildScaleHeight", "ChildScaleHeight");
+                SerializedProperty childScaleWidth = findProp("m_ChildScaleWidth", "ChildScaleWidth");
+                SerializedProperty childScaleHeight = findProp("m_ChildScaleHeight", "ChildScaleHeight");
                 DrawWidthHeightProperty("Use Child Scale", -3, childScaleWidth, childScaleHeight);
             }
 
             // Child Force Expand
-            var childForceExpandWidth = findProp("m_ChildForceExpandWidth", "ChildForceExpandWidth");
-            var childForceExpandHeight = findProp("m_ChildForceExpandHeight", "ChildForceExpandHeight");
+            SerializedProperty childForceExpandWidth = findProp("m_ChildForceExpandWidth", "ChildForceExpandWidth");
+            SerializedProperty childForceExpandHeight = findProp("m_ChildForceExpandHeight", "ChildForceExpandHeight");
             DrawWidthHeightProperty("Child Force Expand", -2, childForceExpandWidth, childForceExpandHeight);
 
             if (parent != null)

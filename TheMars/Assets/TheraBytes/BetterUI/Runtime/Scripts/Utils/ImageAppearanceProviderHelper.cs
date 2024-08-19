@@ -33,7 +33,7 @@ namespace TheraBytes.BetterUi
         private static void UpdateMaterial(
             Graphic graphic, VertexMaterialData materialProperties, ref MaterialEffect effect, ref string materialType)
         {
-            var info = Materials.Instance.GetMaterialInfo(materialType, effect);
+            Materials.MaterialInfo info = Materials.Instance.GetMaterialInfo(materialType, effect);
             materialProperties.Clear();
             if (info != null)
             {

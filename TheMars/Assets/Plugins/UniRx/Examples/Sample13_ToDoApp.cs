@@ -1,6 +1,7 @@
 ﻿// for uGUI(from 4.6)
 #if !(UNITY_4_0 || UNITY_4_1 || UNITY_4_2 || UNITY_4_3 || UNITY_4_4 || UNITY_4_5)
 
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,7 +27,7 @@ namespace UniRx.Examples
         private void Start()
         {
             // merge Button click and push enter key on input field.
-            var submit = Observable.Merge(
+            IObservable<string> submit = Observable.Merge(
                 AddButton.OnClickAsObservable().Select(_ => ToDoInput.text),
                 ToDoInput.OnEndEditAsObservable().Where(_ => Input.GetKeyDown(KeyCode.Return)));
 
@@ -35,7 +36,7 @@ namespace UniRx.Examples
                   .Subscribe(x =>
                   {
                       ToDoInput.text = ""; // clear input field
-                      var item = Instantiate(SampleItemPrefab) as GameObject;
+                      GameObject item = Instantiate(SampleItemPrefab) as GameObject;
                       (item.GetComponentInChildren(typeof(Text)) as Text).text = x;
                       toDos.Add(item);
                   });
@@ -55,8 +56,8 @@ namespace UniRx.Examples
             ClearButton.OnClickAsObservable()
                 .Subscribe(_ =>
                 {
-                    var removeTargets = toDos.Where(x => x.GetComponent<Toggle>().isOn).ToArray();
-                    foreach (var item in removeTargets)
+                    GameObject[] removeTargets = toDos.Where(x => x.GetComponent<Toggle>().isOn).ToArray();
+                    foreach (GameObject item in removeTargets)
                     {
                         toDos.Remove(item);
                     }

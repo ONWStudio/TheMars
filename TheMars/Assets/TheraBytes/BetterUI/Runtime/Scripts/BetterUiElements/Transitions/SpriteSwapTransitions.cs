@@ -45,13 +45,13 @@ namespace TheraBytes.BetterUi
 
         internal override void AddStateObject(string stateName)
         {
-            var obj = new SpriteSwapTransitionState(stateName, null);
+            SpriteSwapTransitionState obj = new SpriteSwapTransitionState(stateName, null);
             this.states.Add(obj);
         }
 
         protected override IEnumerable<TransitionState> GetTransitionStates()
         {
-            foreach (var s in states)
+            foreach (SpriteSwapTransitionState s in states)
                 yield return s;
         }
 

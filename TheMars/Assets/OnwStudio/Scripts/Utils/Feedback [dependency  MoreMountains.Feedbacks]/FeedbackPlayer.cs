@@ -139,7 +139,7 @@ namespace Onw.Feedback
         {
             while (_eventQueue.TryDequeueFirst(out MMF_Feedback[] feedbacks))
             {
-                foreach (var feedback in feedbacks)
+                foreach (MMF_Feedback feedback in feedbacks)
                 {
                     EventPlayer.AddFeedback(feedback);
                     EventPlayer.Initialization();
@@ -147,6 +147,8 @@ namespace Onw.Feedback
                     yield return EventPlayer.PlayFeedbacksCoroutine(transform.position);
                     EventPlayer.FeedbacksList.Clear();
                 }
+
+                yield return null; // .. 프레임 보간 이벤트가 바로 들어오는 경우
             }
 
             onCompletedEvents();

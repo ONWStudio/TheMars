@@ -24,7 +24,7 @@ namespace MoreMountains.Feedbacks
 		
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var root = new VisualElement();
+			VisualElement root = new VisualElement();
 			
 			SerializedProperty _separateAxis = property.FindPropertyRelative("SeparateAxis");
 			SerializedProperty _unifiedSpring = property.FindPropertyRelative("UnifiedSpring");
