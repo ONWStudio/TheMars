@@ -96,7 +96,7 @@ namespace Onw.Manager.ObjectPool
         {
             Stack<PoolingObject> objects = getObjects(key);
 
-            GameObject gameObject = (objects.Count > 0 ? objects.Pop() : createMethod?.Invoke()).gameObject;
+            GameObject gameObject = (objects.Count > 0 ? objects.Pop() : createMethod?.Invoke())?.gameObject;
             gameObject.transform.SetParent(parentTransform);
             gameObject.SetActive(true);
 

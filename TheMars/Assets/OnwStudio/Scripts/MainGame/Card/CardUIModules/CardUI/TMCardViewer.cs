@@ -26,12 +26,16 @@ namespace TMCard.Runtime
         [SerializeField, SelectableSerializeField]
         private RectTransform _effectField;
 
+        [SerializeField, SelectableSerializeField]
+        private TextMeshProUGUI _nameText;
+
         private bool _isInit;
 
         public void SetUI(TMCardData cardData, IEnumerable<ITMCardEffect> effects)
         {
             _cardImage.sprite = cardData.CardImage;
 
+            #region EffectSet
             foreach (ITMCardEffect effect in effects)
             {
                 GameObject effectUIObject = new("Effect UI Field");
@@ -51,12 +55,19 @@ namespace TMCard.Runtime
                     labelText.fontSizeMin = labelText.fontSizeMax * 0.75f;
                     labelText.color = Color.red;
 
-                    if (!localizable.StringOption.TrySetOption(this, label => labelText.text = label, out LocalizeStringEvent localizeStringEvent)) // .. AddComponent
+                    if (!localizable.StringOption.TrySetOption(this, label => labelText.text = label, out LocalizeStringEvent _)) // .. AddComponent
                     {
-                        Debug.LogWarning("모노비하이비어가 아닙니다");
+                        Debug.LogWarning("라벨이 없거나 모노비하이비어가 null입니다");
                     }
                 }
             }
+            #endregion
+            #region NameSet
+            if (!cardData.CardName.TrySetOption(this, cardName => _nameText.text = cardName, out LocalizeStringEvent _))
+            {
+                Debug.LogWarning("카드 이름이 존재하지 않습니다");
+            }
+            #endregion
         }
     }
 }

@@ -20,7 +20,7 @@ MonoBehaviour:
   <CardGroup>k__BackingField: 0
   <CardImage>k__BackingField: {fileID: 21300000, guid: 15029ce663337054bb0c0a31a5746af5,
     type: 3}
-  <IsCustomDescription>k__BackingField: 
+  <CustomDescription>k__BackingField: 
   <CardName>k__BackingField:
     _localizedString:
       m_TableReference:
@@ -35,7 +35,7 @@ MonoBehaviour:
   - rid: 4776280985179258921
   - rid: 4776280985179258922
   - rid: 4776280985179258923
-  _addtionalConditions: []
+  _additionalConditions: []
   references:
     version: 2
     RefIds:

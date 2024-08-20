@@ -75,7 +75,7 @@ namespace Onw.UI.Components
             float distance = Vector2.Distance(Content.localPosition, _targetPosition);
             Vector2 direction = (_targetPosition - (Vector2)Content.localPosition).normalized;
 
-            Content.localPosition += (Vector3)(direction * distance * 0.5f);
+            Content.localPosition += (Vector3)(direction * (distance * 0.5f));
         }
 
         private void OnRectTransformDimensionsChange()
@@ -107,7 +107,7 @@ namespace Onw.UI.Components
             Content.anchorMin = new(0.5f, 0.5f);
             Content.anchorMax = new(0.5f, 0.5f);
 
-            Viewport.sizeDelta = (transform as RectTransform).rect.size;
+            Viewport.sizeDelta = ((RectTransform)transform).rect.size;
             Content.sizeDelta = new(Viewport.sizeDelta.x * Content.childCount, Viewport.sizeDelta.y);
 
             for (int i = 0; i < Content.childCount; i++)

@@ -4,15 +4,21 @@ using UnityEngine;
 
 namespace Onw.ServiceLocator
 {
+    /// <summary>
+    /// .. 싱글톤을 대체가능한 서비스 중개자 입니다
+    /// 싱글톤의 전역접근 가능한 기능을 대체할 수 있습니다
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public static class ServiceLocator<T> where T : class
     {
         private static T _service = null;
-
+        
+        // .. 등록이 되어있지 않은 경우가 있기때문에 TryGet메서드만 제공합니다
         public static bool TryGetService(out T service)
         {
             service = _service;
 
-            return service is MonoBehaviour monoBehaviour ? monoBehaviour : service is not null;
+            return service as MonoBehaviour ?? service is not null;
         }
 
         public static bool RegisterService(T service)
@@ -28,7 +34,7 @@ namespace Onw.ServiceLocator
 
                 if (service as MonoBehaviour == null)
                 {
-                    Debug.LogWarning("regist service is null");
+                    Debug.LogWarning("register service is null");
                     return false;
                 }
             }
@@ -42,7 +48,7 @@ namespace Onw.ServiceLocator
 
                 if (service is null)
                 {
-                    Debug.LogWarning("regist service is null");
+                    Debug.LogWarning("register service is null");
                     return false;
                 }
             }

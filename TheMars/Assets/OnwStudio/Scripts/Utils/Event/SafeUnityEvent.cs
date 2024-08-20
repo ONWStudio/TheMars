@@ -7,7 +7,8 @@ using UnityEngine.Events;
 namespace Onw.Event
 {
     /// <summary>
-    /// .. RemoveAllListenr메서드를 제공하지 않는 유니티 이벤트입니다
+    /// .. RemoveAllListener메서드를 제공하지 않는 유니티 이벤트입니다
+    /// 딜리게이트에 대한 참조를 관리하지 않는 경우 메모리 누수와 예기치 못한 버그가 발생할 수 있습니다
     /// </summary>
     [Serializable]
     public sealed class SafeUnityEvent
@@ -19,6 +20,10 @@ namespace Onw.Event
         public void Invoke() => _unityEvent.Invoke();
     }
 
+    /// <summary>
+    /// .. RemoveAllListener메서드를 제공하지 않는 유니티 이벤트입니다
+    /// 딜리게이트에 대한 참조를 관리하지 않는 경우 메모리 누수와 예기치 못한 버그가 발생할 수 있습니다
+    /// </summary>
     [Serializable]
     public sealed class SafeUnityEvent<T0>
     {
@@ -29,6 +34,10 @@ namespace Onw.Event
         public void Invoke(T0 item) => _unityEvent.Invoke(item);
     }
 
+    /// <summary>
+    /// .. RemoveAllListener메서드를 제공하지 않는 유니티 이벤트입니다
+    /// 딜리게이트에 대한 참조를 관리하지 않는 경우 메모리 누수와 예기치 못한 버그가 발생할 수 있습니다
+    /// </summary>
     [Serializable]
     public sealed class SafeUnityEvent<T0, T1>
     {
@@ -39,6 +48,10 @@ namespace Onw.Event
         public void Invoke(T0 item1, T1 item2) => _unityEvent.Invoke(item1, item2);
     }
     
+    /// <summary>
+    /// .. RemoveAllListener메서드를 제공하지 않는 유니티 이벤트입니다
+    /// 딜리게이트에 대한 참조를 관리하지 않는 경우 메모리 누수와 예기치 못한 버그가 발생할 수 있습니다
+    /// </summary>
     [Serializable]
     public sealed class SafeUnityEvent<T0, T1, T2>
     {
@@ -49,6 +62,10 @@ namespace Onw.Event
         public void Invoke(T0 item1, T1 item2, T2 item3) => _unityEvent.Invoke(item1, item2, item3);
     }
 
+    /// <summary>
+    /// .. RemoveAllListener메서드를 제공하지 않는 유니티 이벤트입니다
+    /// 딜리게이트에 대한 참조를 관리하지 않는 경우 메모리 누수와 예기치 못한 버그가 발생할 수 있습니다
+    /// </summary>
     [Serializable]
     public sealed class SafeUnityEvent<T0, T1, T2, T3>
     {

@@ -19,7 +19,7 @@ MonoBehaviour:
   <CardGrade>k__BackingField: 1
   <CardGroup>k__BackingField: 1
   <CardImage>k__BackingField: {fileID: 0}
-  <IsCustomDescription>k__BackingField: 
+  <CustomDescription>k__BackingField: 
   <CardName>k__BackingField:
     _localizedString:
       m_TableReference:
@@ -32,8 +32,7 @@ MonoBehaviour:
       m_LocalVariables: []
   _effectCreators:
   - rid: 3847364244551761924
-  _addtionalConditions:
-  - rid: 3847364244551761925
+  _additionalConditions: []
   references:
     version: 2
     RefIds:
@@ -41,7 +40,3 @@ MonoBehaviour:
       type: {class: TMCardDrawEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
       data:
         <DrawCount>k__BackingField: 5
-    - rid: 3847364244551761925
-      type: {class: ElectricCondition, ns: TMCard.AddtionalCondition, asm: AssemblyTheMars}
-      data:
-        <Electric>k__BackingField: 47

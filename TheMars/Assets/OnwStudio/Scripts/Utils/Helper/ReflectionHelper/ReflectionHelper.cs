@@ -24,20 +24,14 @@ namespace Onw.Helper
 
         public static IEnumerable<string> GetClassNamesFromParent(string baseClass)
         {
-            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                Type baseType = assembly.GetType(baseClass);
-
-                if (baseType is not null)
-                {
-                    foreach (Type type in assembly.GetTypes())
-                    {
-                        if (!type.IsSubclassOf(baseType) || !type.GetInterfaces().Contains(type)) continue;
-
-                        yield return type.Name;
-                    }
-                }
-            }
+            return from assembly 
+                       in AppDomain.CurrentDomain.GetAssemblies() 
+                   let baseType = assembly.GetType(baseClass) 
+                   where baseType is not null 
+                   from type 
+                       in assembly.GetTypes() 
+                   where type.IsSubclassOf(baseType) && type.GetInterfaces().Contains(type) 
+                   select type.Name;
         }
 
         public static IEnumerable<string> GetClassNamesFromParent<BaseType>() where BaseType : class
@@ -48,7 +42,7 @@ namespace Onw.Helper
             {
                 if (someType.IsAbstract ||
                     someType.IsInterface ||
-                    (!someType.IsSubclassOf(type) && !someType.GetInterfaces().Contains(type))) continue;
+                    !someType.IsSubclassOf(type) && !someType.GetInterfaces().Contains(type)) continue;
 
                 yield return someType.Name;
             }
@@ -76,12 +70,11 @@ namespace Onw.Helper
 
         public static IEnumerable<Type> GetChildClassesFromBaseType(Type baseType)
         {
-            foreach (Type type in AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()))
-            {
-                if (type.IsInterface || type.IsAbstract || !baseType.IsAssignableFrom(type)) continue;
-
-                yield return type;
-            }
+            return AppDomain
+                .CurrentDomain
+                .GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(type => !type.IsInterface && !type.IsAbstract && baseType.IsAssignableFrom(type));
         }
 
         public static IEnumerable<Type> GetChildClassesFromFieldTypeName(string typeName)
@@ -135,18 +128,15 @@ namespace Onw.Helper
 
         public static IEnumerable<string> GetEnumValuesFromEnumName(string enumTypeName)
         {
-            foreach (Type type in AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()))
-            {
-                if (!type.IsEnum || type.Name != enumTypeName) continue;
-
-                foreach (string name in Enum.GetNames(type))
-                {
-                    yield return name;
-                }
-            }
+            return AppDomain
+                .CurrentDomain
+                .GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(type => type.IsEnum && type.Name == enumTypeName)
+                .SelectMany(Enum.GetNames);
         }
 
-        public static Dictionary<string, int> GetEnumKVPFromEnumName(string enumTypeName)
+        public static Dictionary<string, int> GetEnumKvpFromEnumName(string enumTypeName)
         {
             Dictionary<string, int> enumValues = new();
 

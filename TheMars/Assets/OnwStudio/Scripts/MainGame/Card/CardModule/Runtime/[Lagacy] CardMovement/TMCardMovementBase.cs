@@ -74,13 +74,13 @@ namespace TMCard.Runtime
                 Position = transform.position
             };
 
-            _movementTracker.AddListenerOnMoveBegined(()
+            _movementTracker.AddListenerOnMoveBegined(delta
                 => (this as ITMCardMoveBegin)?.OnMoveBegin());
 
-            _movementTracker.AddListenerOnMoveOnGoing(()
+            _movementTracker.AddListenerOnMoveOnGoing(delta
                 => (this as ITMCardMove)?.OnMove());
 
-            _movementTracker.AddListenerOnMoveEnded(()
+            _movementTracker.AddListenerOnMoveEnded(delta
                 => (this as ITMCardMoveEnd)?.OnMoveEnd());
         }
 

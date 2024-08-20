@@ -7,7 +7,7 @@ namespace TMCard.Effect
     {
         [field: SerializeField] public LocalizedStringOption StringOption { get; private set; }
 
-        public TMCardSpecialEffect(string entryReference)
+        protected TMCardSpecialEffect(string entryReference)
         {
             StringOption = new("CardSpecialEffectName", entryReference);
         }

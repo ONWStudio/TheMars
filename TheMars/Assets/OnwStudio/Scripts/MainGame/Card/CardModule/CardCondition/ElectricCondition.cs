@@ -1,7 +1,7 @@
 using UnityEngine;
-namespace TMCard.AddtionalCondition
+namespace TMCard.AdditionalCondition
 {
-    public sealed class ElectricCondition : ITMCardAddtionalCondition
+    public sealed class ElectricCondition : ITMCardAdditionalCondition
     {
         [field: SerializeField] public int Electric { get; internal set; } = 0;
         public bool AdditionalCondition => true;

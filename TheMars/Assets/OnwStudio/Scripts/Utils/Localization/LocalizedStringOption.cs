@@ -13,40 +13,40 @@ namespace Onw.Localization
     [System.Serializable]
     public sealed class LocalizedStringOption
     {
-        public string EntryKeyName 
-            => !string.IsNullOrEmpty(_localizedString.TableReference) ? 
-                LocalizationSettings
-                    .StringDatabase
-                    .GetTable(_localizedString.TableReference)?
-                    .GetEntry(_localizedString.TableEntryReference.KeyId)?
-                    .Key ?? "" : 
-                "";
+        public string EntryKeyName
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(_localizedString.TableReference))
+                {
+                    LocalizedDatabase<StringTable, StringTableEntry>.TableEntryResult t = LocalizationSettings.StringDatabase.GetTableEntry(_localizedString.TableReference, _localizedString.TableEntryReference);
+                    return t.Entry?.Key ?? "";
+                }
+
+                return "";
+            }
+        }
 
         [SerializeField]
         private LocalizedString _localizedString;
 
         public bool TrySetOption(MonoBehaviour monoBehaviour, UnityAction<string> onChangedText, out LocalizeStringEvent localizeStringEvent)
         {
-            if (!monoBehaviour)
+            if (string.IsNullOrEmpty(EntryKeyName) || !monoBehaviour) // .. 모노비하이비어가 없다면..
             {
                 localizeStringEvent = null;
                 return false;
             }
 
-            if (!monoBehaviour.TryGetComponent(out localizeStringEvent))
+            if (!monoBehaviour.TryGetComponent(out localizeStringEvent)) // .. 
             {
                 localizeStringEvent = getLocalizeStringEvent(monoBehaviour.gameObject, _localizedString);
             }
             else
             {
-                if (localizeStringEvent.StringReference is null || !ReferenceEquals(localizeStringEvent.StringReference, localizeStringEvent))
+                if (localizeStringEvent.StringReference != _localizedString)
                 {
                     localizeStringEvent = getLocalizeStringEvent(monoBehaviour.gameObject, _localizedString);
-                }
-                else
-                {
-                    localizeStringEvent.OnUpdateString.RemoveAllListeners();
-                    localizeStringEvent.StringReference = _localizedString;
                 }
             }
 

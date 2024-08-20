@@ -77,7 +77,7 @@ namespace TMCard.Runtime
         public void SetEffect(IEnumerable<ITMCardEffect> effects)
         {
             _cardEffects.AddRange(effects);
-            _cardEffects.ForEach(effect => effect.ApplyEffect(this, this));
+            _cardEffects.ForEach(effect => effect?.ApplyEffect(this, this));
         }
 
         /// <summary>

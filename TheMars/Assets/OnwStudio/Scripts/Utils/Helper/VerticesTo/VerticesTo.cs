@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Onw.Helper
@@ -21,10 +22,8 @@ namespace Onw.Helper
             float maxPivot = float.NegativeInfinity;
             float minPivot = float.PositiveInfinity;
 
-            foreach (Vector3 vertex in vertices)
+            foreach (Vector3 point in vertices.Select(vertex => obj.transform.TransformPoint(vertex)))
             {
-                Vector3 point = obj.transform.TransformPoint(vertex);
-
                 if (point.y > maxPivot)
                 {
                     maxPivot = point.y;
@@ -41,40 +40,20 @@ namespace Onw.Helper
 
         public static float GetMaxYFromVertices(GameObject obj)
         {
-            List<Vector3> vertices = GetVertices(obj);
-
-            float max = float.NegativeInfinity;
-
-            foreach (Vector3 vertex in vertices)
-            {
-                Vector3 point = obj.transform.TransformPoint(vertex);
-
-                if (point.y > max)
-                {
-                    max = point.y;
-                }
-            }
-
-            return max;
+            return GetVertices(obj)
+                .Select(vertex => obj.transform.TransformPoint(vertex))
+                .Select(point => point.y)
+                .Prepend(float.NegativeInfinity)
+                .Max();
         }
 
         public static float GetMinYFromVertices(GameObject obj)
         {
-            List<Vector3> vertices = GetVertices(obj);
-
-            float min = float.PositiveInfinity;
-
-            foreach (Vector3 vertex in vertices)
-            {
-                Vector3 point = obj.transform.TransformPoint(vertex);
-
-                if (point.y < min)
-                {
-                    min = point.y;
-                }
-            }
-
-            return min;
+            return GetVertices(obj)
+                .Select(vertex => obj.transform.TransformPoint(vertex))
+                .Select(point => point.y)
+                .Prepend(float.PositiveInfinity)
+                .Min();
         }
 
         public static List<Vector3> GetVertices(GameObject obj)

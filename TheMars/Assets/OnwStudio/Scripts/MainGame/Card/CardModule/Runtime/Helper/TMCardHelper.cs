@@ -68,7 +68,7 @@ namespace TMCard.Runtime
 
             _feedbackPlayer.OnCompleted.AddListener(() => _graphicRaycaster.enabled = true);
 
-            _feedbackPlayer.OnAddedFeedback.AddListener(feedbackCount =>
+            _feedbackPlayer.OnAddedFeedback.AddListener(_ =>
             {
                 if (!_feedbackPlayer.IsPlaying)
                 {

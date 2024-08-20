@@ -1,6 +1,7 @@
-namespace TMCard.AddtionalCondition
+
+namespace TMCard.AdditionalCondition
 {
-    public interface ITMCardAddtionalCondition
+    public interface ITMCardAdditionalCondition
     {
         bool AdditionalCondition { get; }
     }

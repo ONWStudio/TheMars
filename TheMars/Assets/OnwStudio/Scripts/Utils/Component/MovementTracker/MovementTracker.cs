@@ -8,6 +8,8 @@ namespace Onw.Components
     [DisallowMultipleComponent]
     public sealed class MovementTracker : MonoBehaviour
     {
+        public delegate void DeltaCallback(Vector3 delta);
+        
         private const float THRESHOLD_LIMIT_MIN = 0.01f;
         private const float THRESHOLD_LIMIT_MAX = 0.5f;
 
@@ -25,9 +27,9 @@ namespace Onw.Components
 
         private Vector3 _previousPosition = Vector3.zero;
         private bool _isMoving = false;
-        private Action _onMoveBegined = null;
-        private Action _onMoveOnGoing = null;
-        private Action _onMoveEnded = null;
+        private DeltaCallback _onMoveBegan = null;
+        private DeltaCallback _onMoveOnGoing = null;
+        private DeltaCallback _onMoveEnded = null;
 
         private void Start()
         {
@@ -36,7 +38,7 @@ namespace Onw.Components
 
         private void OnDisable()
         {
-            _onMoveBegined = null;
+            _onMoveBegan = null;
             _onMoveOnGoing = null;
             _onMoveEnded = null;
         }
@@ -47,53 +49,53 @@ namespace Onw.Components
 
             bool currentlyMoving = hasMoved(currentPosition, _previousPosition, _positionThreshold);
 
-            if (currentlyMoving && !_isMoving)
+            switch (currentlyMoving)
             {
+                case true when !_isMoving:
 #if DEBUG
-                Debug.Log("Move Begin");
+                    Debug.Log("Move Begin");
 #endif
-                _onMoveBegined?.Invoke();
-                _isMoving = true;
-            }
-            else if (!currentlyMoving && _isMoving)
-            {
+                    _onMoveBegan?.Invoke(currentPosition - _previousPosition);
+                    _isMoving = true;
+                    break;
+                case false when _isMoving:
 #if DEBUG
-                Debug.Log("Move Ended");
+                    Debug.Log("Move Ended");
 #endif
-                _onMoveEnded?.Invoke();
-                _isMoving = false;
-            }
-            else if (currentlyMoving && _isMoving)
-            {
+                    _onMoveEnded?.Invoke(currentPosition - _previousPosition);
+                    _isMoving = false;
+                    break;
+                case true when _isMoving:
 #if DEBUG
-                Debug.Log("Moving");
+                    Debug.Log("Moving");
 #endif
-                _onMoveOnGoing?.Invoke();
+                    _onMoveOnGoing?.Invoke(currentPosition - _previousPosition);
+                    break;
             }
 
             _previousPosition = currentPosition;
         }
 
-        public void AddListenerOnMoveBegined(Action action)
-            => _onMoveBegined += action;
+        public void AddListenerOnMoveBegined(DeltaCallback action)
+            => _onMoveBegan += action;
 
-        public void AddListenerOnMoveOnGoing(Action action)
+        public void AddListenerOnMoveOnGoing(DeltaCallback action)
             => _onMoveOnGoing += action;
 
-        public void AddListenerOnMoveEnded(Action action)
+        public void AddListenerOnMoveEnded(DeltaCallback action)
             => _onMoveEnded += action;
 
-        public void RemoveListenerOnMoveBegined(Action action)
-            => _onMoveBegined -= action;
+        public void RemoveListenerOnMoveBegined(DeltaCallback action)
+            => _onMoveBegan -= action;
 
-        public void RemoveListenerOnMoveOnGoing(Action action)
+        public void RemoveListenerOnMoveOnGoing(DeltaCallback action)
             => _onMoveOnGoing -= action;
 
-        public void RemoveListenerOnMoveEnded(Action action)
+        public void RemoveListenerOnMoveEnded(DeltaCallback action)
             => _onMoveEnded -= action;
 
-        public void RemoveAllListenerOnMoveBegined()
-            => _onMoveBegined = null;
+        public void RemoveAllListenerOnMoveBegan()
+            => _onMoveBegan = null;
 
         public void RemoveAllListenerOnMoveOnGoing()
             => _onMoveOnGoing = null;
@@ -101,7 +103,7 @@ namespace Onw.Components
         public void RemoveAllListenerOnMoveEnded()
             => _onMoveEnded = null;
 
-        private bool hasMoved(Vector3 currentPosition, Vector3 previousPosition, float threshold)
+        private static bool hasMoved(Vector3 currentPosition, Vector3 previousPosition, float threshold)
             => Vector3.Distance(currentPosition, previousPosition) > threshold;
     }
 }

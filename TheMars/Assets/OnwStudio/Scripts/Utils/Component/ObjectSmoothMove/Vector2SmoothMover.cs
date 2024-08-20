@@ -5,6 +5,9 @@ using System;
 
 namespace Onw.Components.Movement
 {
+    /// <summary>
+    /// .. 타겟을 Vector2로 삼는 스무스 무버입니다 값 타입이기 때문에 실시간으로 변하는 타겟의 움직임에 대응하기 힘듭니다
+    /// </summary>
     [DisallowMultipleComponent]
     public sealed class Vector2SmoothMover : MonoBehaviour, IObjectSmoothMover
     {

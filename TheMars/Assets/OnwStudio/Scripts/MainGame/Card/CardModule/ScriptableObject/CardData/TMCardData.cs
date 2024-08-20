@@ -1,12 +1,13 @@
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using Onw.Attribute;
 using Onw.Localization;
-using TMCard.AddtionalCondition;
+using TMCard.AdditionalCondition;
 using TMCard.Effect;
 using TMCard.Runtime;
 using UnityEngine;
 using UnityEngine.Serialization;
+
 namespace TMCard
 {
     public sealed partial class TMCardData : ScriptableObject
@@ -17,10 +18,10 @@ namespace TMCard
         [field: SerializeField, FormerlySerializedAs("<StackID>k__BackingField"), Tooltip("Stack ID")]
         public int StackID { get; private set; }
 
-        [field: Space]
         /// <summary>
         /// .. 소모 재화 종류
         /// </summary>
+        [field: Space]
         [field: SerializeField, FormerlySerializedAs("<RequiredResource>k__BackingField"), DisplayAs("소모 재화 종류"), Tooltip("소모 재화 종류")]
         public TMRequiredResource RequiredResource { get; private set; } = TMRequiredResource.TERA;
 
@@ -30,10 +31,10 @@ namespace TMCard
         [field: SerializeField, FormerlySerializedAs("<Resource>k__BackingField"), DisplayAs("소모 재화량"), Tooltip("소모 재화량")]
         public int Resource { get; private set; }
 
-        [field: Space]
         /// <summary>
         /// .. 카드의 종류
         /// </summary>
+        [field: Space]
         [field: SerializeField, FormerlySerializedAs("<CardKind>k__BackingField"), DisplayAs("카드 종류"), Tooltip("카드의 종류")]
         public TMCardKind CardKind { get; private set; } = TMCardKind.NONE;
 
@@ -50,9 +51,8 @@ namespace TMCard
         public TMCardGroup CardGroup { get; private set; } = TMCardGroup.COMMON;
 
         [field: SerializeField, SpritePreview(128f)] public Sprite CardImage { get; private set; }
-
         [field: SerializeField, FormerlySerializedAs("<IsCustomDescription>k__BackingField"), DisplayAs("커스텀 설명"), Tooltip("체크 시 기본 설명이 나오지 않습니다")]
-        public string IsCustomDescription { get; private set; }
+        public string CustomDescription { get; private set; }
 
         [field: SerializeField] public LocalizedStringOption CardName { get; private set; }
 
@@ -60,9 +60,9 @@ namespace TMCard
         [SerializeReference, DisplayAs("카드 효과"), Tooltip("카드 효과 리스트"), SerializeReferenceDropdown]
         private List<ITMEffectCreator> _effectCreators = new();
 
-        [FormerlySerializedAs("addtionalConditions")]
+        [FormerlySerializedAs("additionalConditions")]
         [SerializeReference, DisplayAs("추가 조건"), Tooltip("카드 추가 조건 리스트"), SerializeReferenceDropdown]
-        private List<ITMCardAddtionalCondition> _addtionalConditions = new();
+        private List<ITMCardAdditionalCondition> _additionalConditions = new();
 
         public void ApplyEffect(TMCardController controller)
         {
@@ -78,7 +78,7 @@ namespace TMCard
         public bool IsAvailable(int resource)
         {
             return Resource <= resource &&
-                _addtionalConditions.All(additionalCondition => additionalCondition?.AdditionalCondition ?? false);
+                _additionalConditions.All(additionalCondition => additionalCondition?.AdditionalCondition ?? false);
         }
     }
 }

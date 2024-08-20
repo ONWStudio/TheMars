@@ -47,7 +47,6 @@ namespace Onw.Editor
             }
         }
 
-
         private static void modifyInspector()
         {
             // InspectorWindow 타입을 얻어옴
@@ -80,9 +79,10 @@ namespace Onw.Editor
 
                 while (true)
                 {
-                    yield return new WaitUntil(() => selectedObject != Selection.activeObject &&
-                        Selection.activeObject != null &&
-                        Selection.activeObject.GetType().IsSubclassOf(scriptableObjectType));
+                    Object o = selectedObject;
+                    yield return new WaitUntil(() => o != Selection.activeObject &&
+                                                     Selection.activeObject != null &&
+                                                     Selection.activeObject.GetType().IsSubclassOf(scriptableObjectType));
 
                     selectedObject = Selection.activeObject;
                     float originalWidth = visualElement.resolvedStyle.width;
@@ -121,8 +121,8 @@ namespace Onw.Editor
                     .GetType()
                     .GetProperty("editor", BindingFlags.NonPublic | BindingFlags.Instance);
 
-                if (editorProperty.GetValue(editorElement) is Editor editor && // .. 에디터 찾아오기
-                    (editor.target is MonoBehaviour || editor.target is ScriptableObject)) // .. 타겟이 모노비하이비어거나 스크립터블 오브젝트 일 경우
+                if (editorProperty?.GetValue(editorElement) is Editor editor && // .. 에디터 찾아오기
+                    editor.target is MonoBehaviour or ScriptableObject)        // .. 타겟이 모노비하이비어거나 스크립터블 오브젝트 일 경우
                 {
                     IMGUIContainer iMGUIContainer = editorElement.Q<IMGUIContainer>("onw-custom-attribute-drawer");
 
@@ -147,7 +147,6 @@ namespace Onw.Editor
 
             static IEnumerator iEWaitSetIsDelayToFalse()
             {
-
                 yield return null;
                 _isDelay = false;
             }
