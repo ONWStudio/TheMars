@@ -47,8 +47,8 @@ namespace Onw.Feedback
     public interface IIgnorePlayFeedbackPlayer : IQueueableFeedbackPlayer, IStopFeedbackPlayer, IEventFeedbackPlayer, IFeedbackPlayerOption {}
 
     /// <summary>
-    /// .. MM 피드백을 사용하는 이벤트 센더 클래스 입니다. 파리미터로 들어온 이벤트 배열을 순차적으로 처리합니다
-    /// 이벤트들을 하나로 묶으려면 MMF_Parallel 이벤트 클래스를 참고해주세요
+    /// .. MM 피드백을 사용하는 피드백 플레이어 클래스 입니다. 파리미터로 들어온 이벤트 배열을 순차적으로 처리합니다
+    /// 피드백들을 하나로 묶으려면 MMF_Parallel 피드백 클래스를 참고해주세요
     /// </summary>
     [DisallowMultipleComponent]
     public sealed class FeedbackPlayer : MonoBehaviour, IIgnorePlayFeedbackPlayer, IPlayableFeedbackPlayer
@@ -143,7 +143,6 @@ namespace Onw.Feedback
                 {
                     EventPlayer.AddFeedback(feedback);
                     EventPlayer.Initialization();
-
                     yield return EventPlayer.PlayFeedbacksCoroutine(transform.position);
                     EventPlayer.FeedbacksList.Clear();
                 }

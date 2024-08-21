@@ -6,6 +6,7 @@ using TMCard.AdditionalCondition;
 using TMCard.Effect;
 using TMCard.Runtime;
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.Serialization;
 
 namespace TMCard
@@ -53,8 +54,8 @@ namespace TMCard
         [field: SerializeField, SpritePreview(128f)] public Sprite CardImage { get; private set; }
         [field: SerializeField, FormerlySerializedAs("<IsCustomDescription>k__BackingField"), DisplayAs("커스텀 설명"), Tooltip("체크 시 기본 설명이 나오지 않습니다")]
         public string CustomDescription { get; private set; }
-
-        [field: SerializeField] public LocalizedStringOption CardName { get; private set; }
+        
+        public string CardName => _localizedCardName.TryGetLocalizedString(out string cardName) ? cardName : "";
 
         [FormerlySerializedAs("effectCreators")]
         [SerializeReference, DisplayAs("카드 효과"), Tooltip("카드 효과 리스트"), SerializeReferenceDropdown]
@@ -64,6 +65,8 @@ namespace TMCard
         [SerializeReference, DisplayAs("추가 조건"), Tooltip("카드 추가 조건 리스트"), SerializeReferenceDropdown]
         private List<ITMCardAdditionalCondition> _additionalConditions = new();
 
+        [SerializeField] private LocalizedString _localizedCardName;
+        
         public void ApplyEffect(TMCardController controller)
         {
             controller.SetEffect(_effectCreators

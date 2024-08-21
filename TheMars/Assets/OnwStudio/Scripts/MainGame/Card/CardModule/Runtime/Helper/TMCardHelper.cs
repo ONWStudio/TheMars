@@ -113,7 +113,8 @@ namespace TMCard.Runtime
             foreach (TMCardController card in importerCards)
             {
                 card.transform.localPosition = CardHandController.DeckTransform.localPosition;
-
+                
+                // .. 
                 FeedbackPlayer.EnqueueEvent(FeedbackCreator.CreateUnityEvent(() =>
                 {
                     card.OnDrawBegin();

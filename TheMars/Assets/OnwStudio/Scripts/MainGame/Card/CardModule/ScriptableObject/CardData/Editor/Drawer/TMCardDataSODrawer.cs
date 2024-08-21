@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,10 @@ using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using Onw.Helper;
+using Onw.Localization;
 using Onw.ScriptableObjects.Editor;
 using TMCard.Runtime;
+using UnityEngine.Localization;
 
 namespace TMCard.Editor
 {
@@ -29,19 +32,22 @@ namespace TMCard.Editor
         {
             if (target is not TMCardData targetObject) return;
 
-            string entryKeyName = targetObject.CardName.EntryKeyName;
-
-            if (!string.IsNullOrEmpty(entryKeyName) && entryKeyName != target.name)
+            if (targetObject.GetType().GetField("_localizedCardName")?.GetValue(targetObject) is LocalizedString localizedString)
             {
-                string path = AssetDatabase.GetAssetPath(targetObject);
+                string entryKeyName = localizedString.GetEntryKeyName();
+                
+                if (!string.IsNullOrEmpty(entryKeyName) && entryKeyName != target.name)
+                {
+                    string path = AssetDatabase.GetAssetPath(targetObject);
 
-                if (ScriptableObjectHandler<TMCardData>.CheckDuplicatedName(path, entryKeyName))
-                {
-                    Debug.LogWarning("이미 해당 카드와 같은 이름을 가지고 있는 카드가 있으므로 카드의 이름을 설정 할 수 없습니다");
-                }
-                else
-                {
-                    ScriptableObjectHandler<TMCardData>.RenameScriptableObject(targetObject, entryKeyName);
+                    if (ScriptableObjectHandler<TMCardData>.CheckDuplicatedName(path, entryKeyName))
+                    {
+                        Debug.LogWarning("이미 해당 카드와 같은 이름을 가지고 있는 카드가 있으므로 카드의 이름을 설정 할 수 없습니다");
+                    }
+                    else
+                    {
+                        ScriptableObjectHandler<TMCardData>.RenameScriptableObject(targetObject, entryKeyName);
+                    }
                 }
             }
 

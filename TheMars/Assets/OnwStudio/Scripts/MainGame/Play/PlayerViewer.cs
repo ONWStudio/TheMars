@@ -1,5 +1,6 @@
 using Onw.Attribute;
 using Onw.Extensions;
+using TMCard;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -19,12 +20,12 @@ namespace TM.UI
             UniRxObserver.ObserveInfomation(
                 this,
                 selector => PlayerManager.Instance.Tera,
-                tera => _teraText.text = $"<sprite=1> {tera}");
+                tera => _teraText.text = $"<sprite={(int)TMRequiredResource.TERA}> {tera}");
 
             UniRxObserver.ObserveInfomation(
                 this,
                 selector => PlayerManager.Instance.MarsLithum,
-                marsLithum => _marsLithumText.text = $"<sprite=0> {marsLithum}");
+                marsLithum => _marsLithumText.text = $"<sprite={(int)TMRequiredResource.MARS_LITHUM}> {marsLithum}");
         }
     }
 }

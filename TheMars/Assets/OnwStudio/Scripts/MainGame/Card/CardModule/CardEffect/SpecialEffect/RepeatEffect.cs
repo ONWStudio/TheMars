@@ -21,11 +21,11 @@ namespace TMCard.Effect
             }
         }
 
-        public readonly List<ResourcePair> ResourcePairs = new(); 
+        public readonly List<ResourcePair> ResourcePairs = new();
 
         public override void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
-           ResourcePairs.AddRange(controller
+            ResourcePairs.AddRange(controller
                 .Effects
                 .OfType<ITMCardResourceEffect>()
                 .Select(effect => new ResourcePair(effect, effect.Amount)));
@@ -41,6 +41,6 @@ namespace TMCard.Effect
             });
         }
 
-        public RepeatEffect() : base("Repeat") {}
+        public RepeatEffect() : base("Repeat") { }
     }
 }

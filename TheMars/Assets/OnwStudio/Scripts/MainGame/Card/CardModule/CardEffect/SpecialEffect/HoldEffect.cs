@@ -9,12 +9,15 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 보유
     /// </summary>
-    public sealed class HoldEffect : TMCardSpecialEffect, ITMInitializeEffect<HoldEffectCreator>, ITMEffectTrigger
+    public sealed class HoldEffect : TMCardSpecialEffect, ITMInitializeEffect<HoldEffectCreator>, ITMEffectTrigger, ITMInnerEffector
     {
+        public IReadOnlyList<ITMNormalEffect> InnerEffect => _holdEffects;
+
         [SerializeField, DisplayAs("발동 트리거 카드"), Tooltip("보유 효과가 발동할때 참조할 카드 ID"), ReadOnly]
         private TMCardData _friendlyCard;
 
         private readonly List<ITMNormalEffect> _holdEffects = new();
+
 
         public CardEvent OnEffectEvent { get; } = new();
 
@@ -48,5 +51,6 @@ namespace TMCard.Effect
         }
 
         public HoldEffect() : base("Hold") {}
+
     }
 }

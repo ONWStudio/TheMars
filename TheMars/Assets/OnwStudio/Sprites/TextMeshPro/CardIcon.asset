@@ -120,14 +120,14 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 85.5
+      m_HorizontalBearingY: 106.14
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 0
       m_Y: 128
       m_Width: 128
       m_Height: 128
-    m_Scale: 2.3
+    m_Scale: 2
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
     sprite: {fileID: 1631287835, guid: 5f61cca34bec94a8ca02324f057bc587, type: 3}
@@ -136,14 +136,14 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 85.5
+      m_HorizontalBearingY: 106.14
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 128
       m_Y: 128
       m_Width: 128
       m_Height: 128
-    m_Scale: 2.3
+    m_Scale: 2
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
     sprite: {fileID: 792989835, guid: 5f61cca34bec94a8ca02324f057bc587, type: 3}

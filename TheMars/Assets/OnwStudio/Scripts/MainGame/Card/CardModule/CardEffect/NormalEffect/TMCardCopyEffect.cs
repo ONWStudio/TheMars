@@ -7,6 +7,8 @@ namespace TMCard.Effect
 {
     public sealed class TMCardCopyEffect : ITMNormalEffect, ITMInitializeEffect<TMCardCopyEffectCreator>
     {
+        public string Description => $"'{_copyCardData.CardName}'카드를 {_copyCount}개 획득";
+
         [SerializeField, ReadOnly]
         private TMCardData _copyCardData;
         [SerializeField, ReadOnly]
@@ -38,5 +40,6 @@ namespace TMCard.Effect
             _copyCardData = effectCreator.CopyCardData;
             _copyCount = effectCreator.CopyCount;
         }
+
     }
 }

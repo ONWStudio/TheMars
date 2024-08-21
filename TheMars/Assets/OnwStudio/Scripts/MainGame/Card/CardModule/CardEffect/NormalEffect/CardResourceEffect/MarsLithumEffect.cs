@@ -1,4 +1,5 @@
 using Onw.Attribute;
+using Onw.Event;
 using TM;
 using TMCard.Runtime;
 using UnityEngine;
@@ -6,6 +7,10 @@ namespace TMCard.Effect.Resource
 {
     public sealed class MarsLithumEffect : ITMCardResourceEffect, ITMInitializeEffect<MarsLithumEffectCreator>
     {
+        public string Description => $"<sprite={(int)TMRequiredResource.MARS_LITHUM}> {(Amount < 0 ? Amount.ToString() : $"+{Amount}")}";
+
+        public SafeAction<string> Event { get; } = new();
+
         [field: SerializeField, DisplayAs("소모 재화"), Tooltip("소모 재화"), ReadOnly] public int Amount { get; private set; }
 
         public void Initialize(MarsLithumEffectCreator effectCreator)
@@ -26,6 +31,7 @@ namespace TMCard.Effect.Resource
         public void AddRewardResource(int addtionalAmount)
         {
             Amount += addtionalAmount;
+            Event.Invoke("Description Update");
         }
     }
 }

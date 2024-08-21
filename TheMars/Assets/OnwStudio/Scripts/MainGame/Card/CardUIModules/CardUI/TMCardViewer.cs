@@ -1,15 +1,25 @@
+using System;
+using System.Linq;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Serialization;
+using UnityEngine.Localization.Components;
+using TMPro;
+using Onw.Helper;
 using Onw.Attribute;
+using Onw.Interface;
 using Onw.Localization;
 using TMCard.Effect;
-using TMPro;
-using UnityEngine;
-using UnityEngine.Localization.Components;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
+
 namespace TMCard.Runtime
 {
     // .. View
+    /// <summary>
+    /// .. 눈에 보이는 정보(카드 설명, 효과, 이름, 코스트, 종류) 등에 관해 관리하는 Viewer클래스 입니다 CardData의 정보대로 최종적으로 카드를 출력하게 됩니다
+    /// </summary>
     [DisallowMultipleComponent]
     public sealed class TMCardViewer : MonoBehaviour
     {
@@ -17,57 +27,62 @@ namespace TMCard.Runtime
         [Header("Image")]
         [SerializeField, SelectableSerializeField]
         private Image _cardImage;
+
         [FormerlySerializedAs("backgroundImage")]
         [SerializeField, SelectableSerializeField]
         private Image _backgroundImage;
 
-        [FormerlySerializedAs("effectField")]
-        [Header("Effect Field")]
+        [Header("Description Option")]
         [SerializeField, SelectableSerializeField]
-        private RectTransform _effectField;
+        private TextMeshProUGUI _descriptionText;
 
+        [Header("Name Option")]
         [SerializeField, SelectableSerializeField]
         private TextMeshProUGUI _nameText;
 
-        private bool _isInit;
+        [Header("Cost Option")]
+        [SerializeField, SelectableSerializeField]
+        private Image _costFieldImage;
 
-        public void SetUI(TMCardData cardData, IEnumerable<ITMCardEffect> effects)
+        [SerializeField, SelectableSerializeField]
+        private TextMeshProUGUI _costText;
+
+        private Action<Locale> _onLauguageChanged = null;
+        
+        private void buildDescriptionText(ITMCardEffect[] effects)
+        {
+            _descriptionText.text = 
+                string.Join("\n", effects.OfType<ITMNormalEffect>().Select(effect => effect.Description)) +
+                "\n" +
+                string.Join("\n", effects.OfType<TMCardSpecialEffect>().Select(effect => effect.Description));
+        }
+        
+        public void SetUI(TMCardData cardData, ITMCardEffect[] effects)
         {
             _cardImage.sprite = cardData.CardImage;
 
-            #region EffectSet
-            foreach (ITMCardEffect effect in effects)
-            {
-                GameObject effectUIObject = new("Effect UI Field");
-                effectUIObject.AddComponent<RectTransform>();
-                effectUIObject.AddComponent<VerticalLayoutGroup>();
-                effectUIObject.transform.SetParent(_effectField.transform, false);
+            _costText.text = $"<sprite={((int)cardData.RequiredResource).ToString()}> \n{cardData.Resource}";
+            _costFieldImage.color = cardData.RequiredResource == TMRequiredResource.TERA ?
+                ColorUtils.GetColorFrom255(150, 203, 255) :
+                ColorUtils.GetColorFrom255(255, 162, 255);
 
-                if (effect is ILocalizable localizable)
-                {
-                    GameObject labelObject = new("Label Object");
-                    labelObject.AddComponent<RectTransform>();
-                    labelObject.transform.SetParent(effectUIObject.transform, false);
-                    TextMeshProUGUI labelText = labelObject.AddComponent<TextMeshProUGUI>();
-                    labelText.alignment = TextAlignmentOptions.Center;
-                    labelText.enableAutoSizing = true;
-                    labelText.fontSizeMax = 22f;
-                    labelText.fontSizeMin = labelText.fontSizeMax * 0.75f;
-                    labelText.color = Color.red;
+            buildDescriptionText(effects);
+            _onLauguageChanged = locale => buildDescriptionText(effects);
 
-                    if (!localizable.StringOption.TrySetOption(this, label => labelText.text = label, out LocalizeStringEvent _)) // .. AddComponent
-                    {
-                        Debug.LogWarning("라벨이 없거나 모노비하이비어가 null입니다");
-                    }
-                }
-            }
-            #endregion
-            #region NameSet
-            if (!cardData.CardName.TrySetOption(this, cardName => _nameText.text = cardName, out LocalizeStringEvent _))
+            foreach (INotifier notifier in effects.OfType<INotifier>())
             {
-                Debug.LogWarning("카드 이름이 존재하지 않습니다");
+                notifier.Event.AddListener(eventType => buildDescriptionText(effects));
             }
-            #endregion
+            
+            _nameText.text = cardData.CardName;
+            _onLauguageChanged += locale => _nameText.text = cardData.CardName;
+            
+            LocalizationSettings.SelectedLocaleChanged += _onLauguageChanged;
+        }
+
+        private void OnDestroy()
+        {
+            LocalizationSettings.SelectedLocaleChanged -= _onLauguageChanged;
         }
     }
 }

@@ -1,9 +1,10 @@
+using Onw.Interface;
 using TMCard.Runtime;
 namespace TMCard.Effect
 {
 
     
-    public interface ITMCardEffect
+    public interface ITMCardEffect : IDescriptable
     {
         /// <summary>
         /// .. 카드 사용시

@@ -18,21 +18,21 @@ MonoBehaviour:
   <CardKind>k__BackingField: 2
   <CardGrade>k__BackingField: 1
   <CardGroup>k__BackingField: 1
-  <CardImage>k__BackingField: {fileID: 0}
+  <CardImage>k__BackingField: {fileID: 21300000, guid: 1ca0e8f96f4106a4a8404447828a385d,
+    type: 3}
   <CustomDescription>k__BackingField: 
-  <CardName>k__BackingField:
-    _localizedString:
-      m_TableReference:
-        m_TableCollectionName: GUID:d980be908d5ad4cfc8c5ca05a4f17d26
-      m_TableEntryReference:
-        m_KeyId: 0
-        m_Key: 
-      m_FallbackState: 0
-      m_WaitForCompletion: 0
-      m_LocalVariables: []
   _effectCreators:
   - rid: 3847364244551761924
   _additionalConditions: []
+  _localizedCardName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   references:
     version: 2
     RefIds:

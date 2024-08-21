@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Onw.Feedback;
 using Onw.ServiceLocator;
 using TMCard.Runtime;
@@ -7,9 +8,11 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 버리기
     /// </summary>
-    public sealed class DropEffect : TMCardSpecialEffect, ITMInitializeEffect<DropEffectCreator>, ITMEffectTrigger
+    public sealed class DropEffect : TMCardSpecialEffect, ITMInitializeEffect<DropEffectCreator>, ITMEffectTrigger, ITMInnerEffector
     {
         public CardEvent OnEffectEvent { get; } = new();
+
+        public IReadOnlyList<ITMNormalEffect> InnerEffect => _dropEffect;
 
         private readonly List<ITMNormalEffect> _dropEffect = new();
 
@@ -42,5 +45,6 @@ namespace TMCard.Effect
         }
 
         public DropEffect() : base("Drop") {}
+
     }
 }

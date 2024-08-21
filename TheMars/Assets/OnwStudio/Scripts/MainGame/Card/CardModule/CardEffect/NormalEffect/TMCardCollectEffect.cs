@@ -2,6 +2,7 @@ using Onw.Attribute;
 using Onw.ServiceLocator;
 using TMCard.Runtime;
 using UnityEngine;
+
 namespace TMCard.Effect
 {
     /// <summary>
@@ -9,6 +10,8 @@ namespace TMCard.Effect
     /// </summary>
     public sealed class TMCardCollectEffect : ITMNormalEffect, ITMInitializeEffect<TMCardCollectEffectCreator>
     {
+        public string Description => $"랜덤 카드를 선택해서 획득";
+        
         [SerializeField, ReadOnly]
         private int _collectCount;
         [SerializeField, ReadOnly]
@@ -32,5 +35,6 @@ namespace TMCard.Effect
             
             service.CollectUI.ActiveUI();
         }
+
     }
 }

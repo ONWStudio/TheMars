@@ -1,4 +1,6 @@
 using Onw.Attribute;
+using Onw.Event;
+using Onw.Interface;
 using TM;
 using TMCard.Runtime;
 using UnityEngine;
@@ -7,6 +9,9 @@ namespace TMCard.Effect.Resource
 {
     public sealed class TeraResourceEffect : ITMCardResourceEffect, ITMInitializeEffect<TeraResourceEffectCreator>
     {
+        public SafeAction<string> Event { get; } = new();
+
+        public string Description => $"<sprite={(int)TMRequiredResource.TERA}> {(Amount < 0 ? Amount.ToString() : $"+{Amount}")}";
         [field: SerializeField, DisplayAs("소모 재화"), Tooltip("소모 재화"), ReadOnly] public int Amount { get; private set; }
 
         public void Initialize(TeraResourceEffectCreator effectCreator)
@@ -27,6 +32,7 @@ namespace TMCard.Effect.Resource
         public void AddRewardResource(int addtionalAmount)
         {
             Amount += addtionalAmount;
+            Event.Invoke("Description Update");
         }
     }
 }

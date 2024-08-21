@@ -39,7 +39,7 @@ namespace TMCard.Runtime
         [field: SerializeField, SelectableSerializeField]
         public Vector2SmoothMover SmoothMove { get; private set; }
         
-        public IReadOnlyList<ITMCardEffect> Effects => _cardEffects;
+        public ITMCardEffect[] Effects => _cardEffects.ToArray();
 
         public CardEvent OnClickEvent { get; } = new();
         public CardEvent OnDrawBeginEvent { get; } = new();
@@ -85,7 +85,7 @@ namespace TMCard.Runtime
         /// </summary>
         public void OnDrawBegin()
         {
-            OnDrawBeginEvent.Invoke(CardEventState.DRAW);
+            OnDrawBeginEvent.Invoke(CardEventState.DRAW); 
         }
 
         public void OnDrawEnded()

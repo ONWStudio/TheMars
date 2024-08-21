@@ -10,22 +10,13 @@ using Onw.Extensions;
 
 namespace Onw.Localization
 {
+    /// <summary>
+    /// .. 현재 사용하지 않습니다
+    /// </summary>
     [System.Serializable]
     public sealed class LocalizedStringOption
     {
-        public string EntryKeyName
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(_localizedString.TableReference))
-                {
-                    LocalizedDatabase<StringTable, StringTableEntry>.TableEntryResult t = LocalizationSettings.StringDatabase.GetTableEntry(_localizedString.TableReference, _localizedString.TableEntryReference);
-                    return t.Entry?.Key ?? "";
-                }
-
-                return "";
-            }
-        }
+        public string EntryKeyName => _localizedString.GetEntryKeyName();
 
         [SerializeField]
         private LocalizedString _localizedString;
