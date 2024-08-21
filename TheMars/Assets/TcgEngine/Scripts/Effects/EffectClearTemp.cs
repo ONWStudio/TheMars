@@ -14,13 +14,13 @@ namespace TcgEngine
     {
         public override void DoEffect(GameLogic logic, AbilityData ability, Card caster)
         {
-            Player player = logic.GameData.GetPlayer(caster.player_id);
+            Player player = logic.GameData.GetPlayer(caster.PlayerID);
             player.cards_temp.Clear();
         }
 
         public override void DoEffect(GameLogic logic, AbilityData ability, Card caster, Card target)
         {
-            Player player = logic.GameData.GetPlayer(caster.player_id);
+            Player player = logic.GameData.GetPlayer(caster.PlayerID);
             player.cards_temp.Clear();
         }
     }

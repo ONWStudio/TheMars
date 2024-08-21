@@ -20,7 +20,7 @@ namespace TcgEngine
         
         public override bool IsTargetConditionMet(Game data, AbilityData ability, Card caster, Card target)
         {
-            return IsTargetConditionMet(data, ability, caster, target.slot);
+            return IsTargetConditionMet(data, ability, caster, target.Slot);
         }
 
         public override bool IsTargetConditionMet(Game data, AbilityData ability, Card caster, Slot target)

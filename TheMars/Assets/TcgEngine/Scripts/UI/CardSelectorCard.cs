@@ -41,7 +41,7 @@ namespace TcgEngine.UI
         public void SetCard(Card card)
         {
             this.card = card;
-            CardData icard = CardData.Get(card.card_id);
+            CardData icard = CardData.Get(card.CardID);
             card_ui.SetCard(icard, card.VariantData);
         }
 

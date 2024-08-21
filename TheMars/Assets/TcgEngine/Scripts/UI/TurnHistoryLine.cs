@@ -49,7 +49,7 @@ namespace TcgEngine.UI
             Card target = gdata.GetCard(history.target_uid);
             Player ptarget = gdata.GetPlayer(history.target_id);
             CardData icard = CardData.Get(history.card_id);
-            CardData itarget = CardData.Get(target?.card_id);
+            CardData itarget = CardData.Get(target?.CardID);
             VariantData variant = acard.VariantData;
             AbilityData iability = AbilityData.Get(history.ability_id);
             card = acard;
@@ -59,25 +59,25 @@ namespace TcgEngine.UI
 
             if (history.type == GameAction.PlayCard)
             {
-                string text = icard.title + " was played";
+                string text = icard.Title + " was played";
                 SetLine(icard, variant, text);
             }
 
             if (history.type == GameAction.Move)
             {
-                string text = icard.title + " moved";
+                string text = icard.Title + " moved";
                 SetLine(icard, variant, text);
             }
 
             if (history.type == GameAction.Attack && itarget != null)
             {
-                string text = icard.title + " attacked " + itarget.title;
+                string text = icard.Title + " attacked " + itarget.Title;
                 SetLine(icard, variant, text);
             }
 
             if (history.type == GameAction.AttackPlayer && ptarget != null)
             {
-                string text = icard.title + " attacked " + ptarget.username;
+                string text = icard.Title + " attacked " + ptarget.username;
                 SetLine(icard, variant, text);
             }
 
@@ -85,19 +85,19 @@ namespace TcgEngine.UI
             {
                 if (iability.target == AbilityTarget.SelectTarget && itarget != null)
                 {
-                    string text = icard.title + " casted " + iability.GetTitle() + " on " + itarget.title;
+                    string text = icard.Title + " casted " + iability.GetTitle() + " on " + itarget.Title;
                     SetLine(icard, variant, text);
                 }
                 else
                 {
-                    string text = icard.title + " casted " + iability.GetTitle();
+                    string text = icard.Title + " casted " + iability.GetTitle();
                     SetLine(icard, variant, text);
                 }
             }
 
             if (history.type == GameAction.SecretTriggered)
             {
-                string text = icard.title + " was triggered";
+                string text = icard.Title + " was triggered";
                 SetLine(icard, variant, text);
             }
 

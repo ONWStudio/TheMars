@@ -103,9 +103,9 @@ namespace TcgEngine.UI
                 AbilityData iability = icard?.GetAbility(AbilityTrigger.Activate);
                 if (icard != null && hover != null && iability != null)
                 {
-                    string color = ColorUtility.ToHtmlStringRGBA(icard.team.color);
+                    string color = ColorUtility.ToHtmlStringRGBA(icard.Team.color);
                     hover.text = "<b><color=#" + color + ">Hero Power: </color>";
-                    hover.text += icard.title + "</b>\n " + iability.GetDesc(icard);
+                    hover.text += icard.Title + "</b>\n " + iability.GetDesc(icard);
                     if (iability.mana_cost > 0)
                         hover.text += " <size=16>Mana: " + iability.mana_cost + "</size>";
                 }
@@ -248,24 +248,24 @@ namespace TcgEngine.UI
             }
 
             if (filter_dropdown == 0) //Name
-                all_cards.Sort((CardDataQ a, CardDataQ b) => { return a.card.title.CompareTo(b.card.title); });
+                all_cards.Sort((CardDataQ a, CardDataQ b) => { return a.card.Title.CompareTo(b.card.Title); });
             if (filter_dropdown == 1) //Attack
-                all_cards.Sort((CardDataQ a, CardDataQ b) => { return b.card.attack == a.card.attack ? b.card.hp.CompareTo(a.card.hp) : b.card.attack.CompareTo(a.card.attack); });
+                all_cards.Sort((CardDataQ a, CardDataQ b) => { return b.card.Attack == a.card.Attack ? b.card.Hp.CompareTo(a.card.Hp) : b.card.Attack.CompareTo(a.card.Attack); });
             if (filter_dropdown == 2) //hp
-                all_cards.Sort((CardDataQ a, CardDataQ b) => { return b.card.hp == a.card.hp ? b.card.attack.CompareTo(a.card.attack) : b.card.hp.CompareTo(a.card.hp); });
+                all_cards.Sort((CardDataQ a, CardDataQ b) => { return b.card.Hp == a.card.Hp ? b.card.Attack.CompareTo(a.card.Attack) : b.card.Hp.CompareTo(a.card.Hp); });
             if (filter_dropdown == 3) //Cost
-                all_cards.Sort((CardDataQ a, CardDataQ b) => { return b.card.mana == a.card.mana ? a.card.title.CompareTo(b.card.title) : a.card.mana.CompareTo(b.card.mana); });
+                all_cards.Sort((CardDataQ a, CardDataQ b) => { return b.card.Mana == a.card.Mana ? a.card.Title.CompareTo(b.card.Title) : a.card.Mana.CompareTo(b.card.Mana); });
 
             foreach (CardDataQ card in all_cards)
             {
-                if (card.card.deckbuilding)
+                if (card.card.Deckbuilding)
                 {
                     CardData icard = card.card;
-                    if (filter_team == null || filter_team == icard.team)
+                    if (filter_team == null || filter_team == icard.Team)
                     {
                         bool owned = card.quantity > 0;
-                        RarityData rarity = icard.rarity;
-                        CardType type = icard.type;
+                        RarityData rarity = icard.Rarity;
+                        CardType type = icard.Type;
 
                         bool owned_check = (owned && toggle_owned.isOn)
                             || (!owned && toggle_not_owned.isOn)
@@ -286,8 +286,8 @@ namespace TcgEngine.UI
 
                         string search = filter_search.ToLower();
                         bool search_check = string.IsNullOrWhiteSpace(search)
-                            || icard.id.Contains(search)
-                            || icard.title.ToLower().Contains(search)
+                            || icard.ID.Contains(search)
+                            || icard.Title.ToLower().Contains(search)
                             || icard.GetText().ToLower().Contains(search);
 
                         if (owned_check && type_check && rarity_check && search_check)
@@ -412,7 +412,7 @@ namespace TcgEngine.UI
                 acard.quantity = card.quantity;
                 list.Add(acard);
             }
-            list.Sort((CardDataQ a, CardDataQ b) => { return a.card.title.CompareTo(b.card.title); });
+            list.Sort((CardDataQ a, CardDataQ b) => { return a.card.Title.CompareTo(b.card.Title); });
 
             UserData udata = Authenticator.Get().UserData;
             int index = 0;
@@ -464,12 +464,12 @@ namespace TcgEngine.UI
 
         private void AddDeckCard(CardData card, VariantData variant, int quantity = 1)
         {
-            AddDeckCard(card.id, variant.id, quantity);
+            AddDeckCard(card.ID, variant.id, quantity);
         }
 
         private void RemoveDeckCard(CardData card, VariantData variant)
         {
-            RemoveDeckCard(card.id, variant.id);
+            RemoveDeckCard(card.ID, variant.id);
         }
 
         private void AddDeckCard(string tid, string variant, int quantity = 1)
@@ -712,7 +712,7 @@ namespace TcgEngine.UI
             int count = 0;
             foreach (UserCardData ucard in deck_cards)
             {
-                if (ucard.tid == card.id && ucard.variant == cvariant.id)
+                if (ucard.tid == card.ID && ucard.variant == cvariant.id)
                     count += ucard.quantity;
             }
             return count;
@@ -723,7 +723,7 @@ namespace TcgEngine.UI
             int count = 0;
             foreach (UserCardData ucard in deck_cards)
             {
-                if (ucard.tid == card.id)
+                if (ucard.tid == card.ID)
                     count += ucard.quantity;
             }
             return count;

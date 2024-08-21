@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TcgEngine.Client;
@@ -46,51 +47,50 @@ namespace TcgEngine.Client
             last_destroyed_timer += Time.deltaTime;
 
             //Add new cards
-            foreach (Card card in player.cards_hand)
+            foreach (Card card in player.cards_hand.Where(card => !HasCard(card.Uid)))
             {
-                if (!HasCard(card.uid))
-                    SpawnNewCard(card);
+                SpawnNewCard(card);
             }
 
             //Remove destroyed cards
             for (int i = cards.Count - 1; i >= 0; i--)
             {
                 HandCard card = cards[i];
-                if (card == null || player.GetHandCard(card.GetCard().uid) == null)
+                if (!card || player.GetHandCard(card.GetCard().Uid) == null)
                 {
                     cards.RemoveAt(i);
-                    if(card != null)
+                    if(card)
                         card.Kill();
                 }
             }
 
             //Set card index
             int index = 0;
-            float count_half = cards.Count / 2f;
+            float countHalf = cards.Count / 2f;
             foreach (HandCard card in cards)
             {
-                card.deck_position = new Vector2((index - count_half) * card_spacing, (index - count_half) * (index - count_half) * -card_offset_y);
-                card.deck_angle = (index - count_half) * -card_angle;
+                card.deck_position = new Vector2((index - countHalf) * card_spacing, (index - countHalf) * (index - countHalf) * -card_offset_y);
+                card.deck_angle = (index - countHalf) * -card_angle;
                 index++;
             }
 
             //Set target forcus
-            HandCard drag_card = HandCard.GetDrag();
-            is_dragging = drag_card != null;
+            HandCard dragCard = HandCard.GetDrag();
+            is_dragging = dragCard;
         }
 
         public void SpawnNewCard(Card card)
         {
-            GameObject card_obj = Instantiate(card_prefab, card_area.transform);
-            card_obj.GetComponent<HandCard>().SetCard(card);
-            card_obj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, -100f);
-            cards.Add(card_obj.GetComponent<HandCard>());
+            GameObject cardObj = Instantiate(card_prefab, card_area.transform);
+            cardObj.GetComponent<HandCard>().SetCard(card);
+            cardObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, -100f);
+            cards.Add(cardObj.GetComponent<HandCard>());
         }
 
         public void DelayRefresh(Card card)
         {
             last_destroyed_timer = 0f;
-            last_destroyed = card.uid;
+            last_destroyed = card.Uid;
         }
 
 		public void SortCards()
@@ -110,11 +110,11 @@ namespace TcgEngine.Client
             return a.transform.position.x.CompareTo(b.transform.position.x);
         }
 
-        public bool HasCard(string card_uid)
+        public bool HasCard(string cardUid)
         {
-            HandCard card = HandCard.Get(card_uid);
-            bool just_destroyed = card_uid == last_destroyed && last_destroyed_timer < 0.7f;
-            return card != null || just_destroyed;
+            HandCard card = HandCard.Get(cardUid);
+            bool justDestroyed = cardUid == last_destroyed && last_destroyed_timer < 0.7f;
+            return card || justDestroyed;
         }
 
         public bool IsDragging()

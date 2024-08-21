@@ -57,7 +57,7 @@ namespace TcgEngine.UI
             hidden = false;
 
             if (title != null)
-                title.text = card.title;
+                title.text = card.Title;
             if (title != null)
                 title.color = variant.color;
             if (value != null)
@@ -65,7 +65,7 @@ namespace TcgEngine.UI
             if (value != null)
                 value.enabled = quantity > 1;
             if (cost != null)
-                cost.value = card.mana;
+                cost.value = card.Mana;
             if (this.value != null)
                 this.value.color = invalid ? Color.red : Color.white;
             if(invalid)

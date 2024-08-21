@@ -17,7 +17,7 @@ namespace TcgEngine
         public override void DoEffect(GameLogic logic, AbilityData ability, Card caster, Card target)
         {
             Game data = logic.GetGameData();
-            Player player = data.GetPlayer(target.player_id);
+            Player player = data.GetPlayer(target.PlayerID);
 
             if (pile == PileType.Deck)
             {

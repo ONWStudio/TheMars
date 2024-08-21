@@ -110,7 +110,7 @@ namespace TcgEngine
 
         public int GetCardQuantity(CardData card, VariantData variant)
         {
-            return GetCardQuantity(card.id, variant.id, variant.is_default);
+            return GetCardQuantity(card.ID, variant.id, variant.is_default);
         }
 
         public int GetCardQuantity(string tid, string variant, bool default_variant = false)
@@ -396,7 +396,7 @@ namespace TcgEngine
         public UserCardData(string id, string v) { tid = id; variant = v; quantity = 1; }
         public UserCardData(CardData card, VariantData variant) 
         {
-            this.tid = card != null ? card.id : "";
+            this.tid = card != null ? card.ID : "";
             this.variant = variant != null ? variant.id : "";
             this.quantity = 1;
         }

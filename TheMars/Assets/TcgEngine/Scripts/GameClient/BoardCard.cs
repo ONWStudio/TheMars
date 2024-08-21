@@ -107,12 +107,12 @@ namespace TcgEngine.Client
             if (equipment != null && equipment.IsFocus())
                 target_alpha = 0f;
 
-            Color ccolor = player.player_id == card.player_id ? glow_ally : glow_enemy;
+            Color ccolor = player.player_id == card.PlayerID ? glow_ally : glow_enemy;
             float calpha = Mathf.MoveTowards(card_glow.color.a, target_alpha * ccolor.a, 4f * Time.deltaTime);
             card_glow.color = new Color(ccolor.r, ccolor.g, ccolor.b, calpha);
             card_shadow.enabled = !destroyed && timer > 0.4f;
             card_sprite.color = card.HasStatus(StatusType.Stealth) ? Color.gray : Color.white;
-            card_ui.hp.color = (destroyed || card.damage > 0) ? Color.yellow : Color.white;
+            card_ui.hp.color = (destroyed || card.Damage > 0) ? Color.yellow : Color.white;
 
             //armor
             int armor_val = card.GetStatusValue(StatusType.Armor);
@@ -141,7 +141,7 @@ namespace TcgEngine.Client
             foreach (AbilityButton button in buttons)
                 button.Hide();
 
-            if (selected && card.player_id == player.player_id)
+            if (selected && card.PlayerID == player.player_id)
             {
                 int index = 0;
                 List<AbilityData> abilities = card.GetAbilities();
@@ -175,10 +175,10 @@ namespace TcgEngine.Client
             if (destroyed && back_to_hand && timer > 0.5f)
                 return back_to_hand_target;
 
-            BSlot slot = BSlot.Get(card.slot);
+            BSlot slot = BSlot.Get(card.Slot);
             if (slot != null)
             {
-                Vector3 targ_pos = slot.GetPosition(card.slot);
+                Vector3 targ_pos = slot.GetPosition(card.Slot);
                 return targ_pos;
             }
 
@@ -187,11 +187,11 @@ namespace TcgEngine.Client
 
         public void SetCard(Card card)
         {
-            this.card_uid = card.uid;
+            this.card_uid = card.Uid;
 
             transform.position = GetTargetPos();
 
-            CardData icard = CardData.Get(card.card_id);
+            CardData icard = CardData.Get(card.CardID);
             if (icard)
             {
                 card_ui.SetCard(card);
@@ -214,7 +214,7 @@ namespace TcgEngine.Client
             {
                 Game data = GameClient.Get().GetGameData();
                 Card card = data.GetCard(card_uid);
-                Player player = data.GetPlayer(card.player_id);
+                Player player = data.GetPlayer(card.PlayerID);
 
                 destroyed = true;
                 timer = 0f;
@@ -398,13 +398,13 @@ namespace TcgEngine.Client
         {
             Card card = GetCard();
             if (card != null)
-                return CardData.Get(card.card_id);
+                return CardData.Get(card.CardID);
             return null;
         }
 
         public Slot GetSlot()
         {
-            return GetCard().slot;
+            return GetCard().Slot;
         }
 
         public BoardCardFX GetCardFX()
@@ -419,7 +419,7 @@ namespace TcgEngine.Client
             int nb = 0;
             foreach (BoardCard acard in card_list)
             {
-                if (acard != null && acard.GetCard().player_id == player_id)
+                if (acard != null && acard.GetCard().PlayerID == player_id)
                     nb++;
             }
             return nb;
@@ -432,7 +432,7 @@ namespace TcgEngine.Client
             foreach (BoardCard card in card_list)
             {
                 float dist = (card.transform.position - pos).magnitude;
-                if (dist < min_dist && card != skip && skip_player_id != card.GetCard().player_id)
+                if (dist < min_dist && card != skip && skip_player_id != card.GetCard().PlayerID)
                 {
                     min_dist = dist;
                     nearest = card;

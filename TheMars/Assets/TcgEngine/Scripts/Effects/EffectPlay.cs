@@ -15,7 +15,7 @@ namespace TcgEngine
         public override void DoEffect(GameLogic logic, AbilityData ability, Card caster, Card target)
         {
             Game game = logic.GetGameData();
-            Player player = game.GetPlayer(caster.player_id);
+            Player player = game.GetPlayer(caster.PlayerID);
             Slot slot = player.GetRandomEmptySlot(logic.GetRandom());
 
             player.RemoveCardFromAllGroups(target);

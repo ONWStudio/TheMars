@@ -18,7 +18,7 @@ namespace TcgEngine
 
         public override bool IsTargetConditionMet(Game data, AbilityData ability, Card caster, Card target)
         {
-            Player ptarget = data.GetPlayer(target.player_id);
+            Player ptarget = data.GetPlayer(target.PlayerID);
             return IsTargetConditionMet(data, ability, caster, ptarget);
         }
 

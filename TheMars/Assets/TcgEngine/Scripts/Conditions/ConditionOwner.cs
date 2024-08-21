@@ -16,19 +16,19 @@ namespace TcgEngine
 
         public override bool IsTargetConditionMet(Game data, AbilityData ability, Card caster, Card target)
         {
-            bool same_owner = caster.player_id == target.player_id;
+            bool same_owner = caster.PlayerID == target.PlayerID;
             return CompareBool(same_owner, oper);
         }
 
         public override bool IsTargetConditionMet(Game data, AbilityData ability, Card caster, Player target)
         {
-            bool same_owner = caster.player_id == target.player_id;
+            bool same_owner = caster.PlayerID == target.player_id;
             return CompareBool(same_owner, oper);
         }
 
         public override bool IsTargetConditionMet(Game data, AbilityData ability, Card caster, Slot target)
         {
-            bool same_owner = Slot.GetP(caster.player_id) == target.p;
+            bool same_owner = Slot.GetP(caster.PlayerID) == target.p;
             return CompareBool(same_owner, oper);
         }
     }

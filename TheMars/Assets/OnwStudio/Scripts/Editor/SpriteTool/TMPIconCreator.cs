@@ -39,7 +39,7 @@ public class TMPIconCreator : EditorWindow
                     new(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight),
                     _iconSources[index], typeof(Sprite), false);
             },
-            onAddCallback = list =>
+            onAddCallback = _ =>
             {
                 if (_iconSources.Count >= _divideCount * _divideCount) return;
                 _iconSources.Add(null);
@@ -172,6 +172,7 @@ public class TMPIconCreator : EditorWindow
                         currentX += _size;
                     }
                     
+                    // .. TODO : 수정 필요
                     SpriteDataProviderFactories factory = new();
                     factory.Init();
                     ISpriteEditorDataProvider dataProvider = factory.GetSpriteEditorDataProviderFromObject(importer);

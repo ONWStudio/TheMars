@@ -105,7 +105,7 @@ namespace TcgEngine.UI
             int index = 0;
             foreach (Card card in card_list)
             {
-                CardData icard = CardData.Get(card.card_id);
+                CardData icard = CardData.Get(card.CardID);
                 if (icard != null)
                 {
                     GameObject obj = Instantiate(card_prefab, content.transform);
@@ -145,7 +145,7 @@ namespace TcgEngine.UI
         {
             this.card_list.Clear();
             this.card_list.AddRange(card_list);
-            this.card_list.Sort((Card a, Card b) => { return a.CardData.title.CompareTo(b.CardData.title); }); //Reorder to not show the deck order
+            this.card_list.Sort((Card a, Card b) => { return a.CardData.Title.CompareTo(b.CardData.Title); }); //Reorder to not show the deck order
             this.iability = null;
             this.title.text = title;
             subtitle.text = "";

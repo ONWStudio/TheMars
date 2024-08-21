@@ -19,12 +19,12 @@ namespace TM.UI
             UniRxObserver.ObserveInfomation(
                 this,
                 selector => PlayerManager.Instance.Tera,
-                tera => _teraText.text = $"<Tera> {tera}");
+                tera => _teraText.text = $"<sprite=1> {tera}");
 
             UniRxObserver.ObserveInfomation(
                 this,
                 selector => PlayerManager.Instance.MarsLithum,
-                marsLithum => _marsLithumText.text = $"<Mars Lithum> {marsLithum}");
+                marsLithum => _marsLithumText.text = $"<sprite=0> {marsLithum}");
         }
     }
 }

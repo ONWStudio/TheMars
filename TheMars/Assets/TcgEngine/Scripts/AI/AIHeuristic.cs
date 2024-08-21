@@ -78,7 +78,7 @@ namespace TcgEngine.AI
             foreach (Card card in aiplayer.cards_board)
             {
                 score += card.GetAttack() * card_attack_value;
-                score += card.GetHP() * card_hp_value;
+                score += card.GetHp() * card_hp_value;
 
                 foreach (CardStatus status in card.status)
                     score += status.StatusData.hvalue * card_status_value;
@@ -88,7 +88,7 @@ namespace TcgEngine.AI
             foreach (Card card in oplayer.cards_board)
             {
                 score -= card.GetAttack() * card_attack_value;
-                score -= card.GetHP() * card_hp_value;
+                score -= card.GetHp() * card_hp_value;
 
                 foreach (CardStatus status in card.status)
                     score -= status.StatusData.hvalue * card_status_value;
@@ -122,8 +122,8 @@ namespace TcgEngine.AI
             {
                 Card card = data.GetCard(order.card_uid);
                 Card target = data.GetCard(order.target_uid);
-                int ascore = card.GetAttack() >= target.GetHP() ? 300 : 100; //Are you killing the card?
-                int oscore = target.GetAttack() >= card.GetHP() ? -200 : 0; //Are you getting killed?
+                int ascore = card.GetAttack() >= target.GetHp() ? 300 : 100; //Are you killing the card?
+                int oscore = target.GetAttack() >= card.GetHp() ? -200 : 0; //Are you getting killed?
                 return ascore + oscore + target.GetAttack() * 5;            //Always better to get rid of high-attack cards
             }
             if (order.type == GameAction.AttackPlayer)

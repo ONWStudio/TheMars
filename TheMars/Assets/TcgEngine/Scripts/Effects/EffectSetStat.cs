@@ -37,7 +37,7 @@ namespace TcgEngine
             if (type == EffectStatType.HP)
             {
                 target.hp = ability.value;
-                target.damage = 0;
+                target.Damage = 0;
             }
         }
 

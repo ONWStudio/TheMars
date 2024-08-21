@@ -160,7 +160,7 @@ namespace TcgEngine.Client
             List<CardData> cards = new List<CardData>();
             foreach (CardData acard in all_cards)
             {
-                if (acard.rarity == rarity)
+                if (acard.Rarity == rarity)
                     cards.Add(acard);
             }
             return cards;

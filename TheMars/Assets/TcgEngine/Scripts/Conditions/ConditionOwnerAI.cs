@@ -20,7 +20,7 @@ namespace TcgEngine
             if (!IsAIPlayer(data, caster))
                 return true; //Condition always true for human players
 
-            bool same_owner = caster.player_id == target.player_id;
+            bool same_owner = caster.PlayerID == target.PlayerID;
             return CompareBool(same_owner, oper);
         }
 
@@ -29,7 +29,7 @@ namespace TcgEngine
             if (!IsAIPlayer(data, caster))
                 return true; //Condition always true for human players
 
-            bool same_owner = caster.player_id == target.player_id;
+            bool same_owner = caster.PlayerID == target.player_id;
             return CompareBool(same_owner, oper);
         }
 
@@ -38,13 +38,13 @@ namespace TcgEngine
             if (!IsAIPlayer(data, caster))
                 return true; //Condition always true for human players
 
-            bool same_owner = Slot.GetP(caster.player_id) == target.p;
+            bool same_owner = Slot.GetP(caster.PlayerID) == target.p;
             return CompareBool(same_owner, oper);
         }
 
         private bool IsAIPlayer(Game data, Card caster)
         {
-            Player player = data.GetPlayer(caster.player_id);
+            Player player = data.GetPlayer(caster.PlayerID);
             return player.is_ai;
         }
     }

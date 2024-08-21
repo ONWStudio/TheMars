@@ -22,7 +22,7 @@ namespace TcgEngine.FX
         {
             bool visible = false;
             HandCard hcard = HandCard.GetDrag();
-            if (hcard != null)
+            if (hcard)
             {
                 Card caster = hcard.GetCard();
                 if (caster.CardData.IsRequireTarget())

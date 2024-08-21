@@ -49,7 +49,7 @@ namespace TcgEngine.Client
                 //Target selector, select this card
                 GameClient.Get().SelectCard(card);
             }
-            else if (gdata.IsPlayerActionTurn(player) && card.player_id == player.player_id)
+            else if (gdata.IsPlayerActionTurn(player) && card.PlayerID == player.player_id)
             {
                 //Start dragging card
                 selected_card = bcard;
@@ -82,14 +82,14 @@ namespace TcgEngine.Client
                 }
                 else if (tslot is BoardSlotPlayer)
                 {
-                    if (card.exhausted)
+                    if (card.Exhausted)
                         WarningText.ShowExhausted();
                     else
                         GameClient.Get().AttackPlayer(card, tslot.GetPlayer());
                 }
-                else if (target != null && target.uid != card.uid && target.player_id != card.player_id)
+                else if (target != null && target.Uid != card.Uid && target.PlayerID != card.PlayerID)
                 {
-                    if(card.exhausted)
+                    if(card.Exhausted)
                         WarningText.ShowExhausted();
                     else
                         GameClient.Get().AttackTarget(card, target);

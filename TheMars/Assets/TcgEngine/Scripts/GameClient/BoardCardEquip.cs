@@ -46,7 +46,7 @@ namespace TcgEngine.Client
             if (equip_glow != null)
             {
                 int player_id = GameClient.Get().GetPlayerID();
-                Color ccolor = player_id == equip.player_id ? glow_ally : glow_enemy;
+                Color ccolor = player_id == equip.PlayerID ? glow_ally : glow_enemy;
                 float calpha = Mathf.MoveTowards(equip_glow.color.a, target_alpha * ccolor.a, 4f * Time.deltaTime);
                 equip_glow.color = new Color(ccolor.r, ccolor.g, ccolor.b, calpha);
             }
@@ -58,7 +58,7 @@ namespace TcgEngine.Client
             {
                 this.equip = equip;
                 equip_sprite.sprite = equip.CardData.GetBoardArt(equip.VariantData);
-                equip_hp.text = equip.GetHP().ToString();
+                equip_hp.text = equip.GetHp().ToString();
 
                 if (!gameObject.activeSelf)
                     gameObject.SetActive(true);

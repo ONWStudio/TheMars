@@ -17,7 +17,7 @@ namespace TcgEngine
         public override void DoEffect(GameLogic logic, AbilityData ability, Card caster, Card target)
         {
             Game game = logic.GetGameData();
-            Player tplayer = owner_opponent ? game.GetOpponentPlayer(caster.player_id) : game.GetPlayer(caster.player_id);
+            Player tplayer = owner_opponent ? game.GetOpponentPlayer(caster.PlayerID) : game.GetPlayer(caster.PlayerID);
             logic.ChangeOwner(target, tplayer);
         }
     }

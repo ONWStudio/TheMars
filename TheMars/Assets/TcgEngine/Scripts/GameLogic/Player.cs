@@ -82,7 +82,7 @@ namespace TcgEngine
         {
             foreach (Card card in cards_board)
             {
-                if (card.equipped_uid == equip.uid)
+                if (card.equipped_uid == equip.Uid)
                     card.equipped_uid = null;
             }
         }
@@ -103,7 +103,7 @@ namespace TcgEngine
         {
             foreach (Card card in cards_hand)
             {
-                if (card.uid == uid)
+                if (card.Uid == uid)
                     return card;
             }
             return null;
@@ -113,7 +113,7 @@ namespace TcgEngine
         {
             foreach (Card card in cards_board)
             {
-                if (card.uid == uid)
+                if (card.Uid == uid)
                     return card;
             }
             return null;
@@ -123,7 +123,7 @@ namespace TcgEngine
         {
             foreach (Card card in cards_equip)
             {
-                if (card.uid == uid)
+                if (card.Uid == uid)
                     return card;
             }
             return null;
@@ -133,7 +133,7 @@ namespace TcgEngine
         {
             foreach (Card card in cards_deck)
             {
-                if (card.uid == uid)
+                if (card.Uid == uid)
                     return card;
             }
             return null;
@@ -143,7 +143,7 @@ namespace TcgEngine
         {
             foreach (Card card in cards_discard)
             {
-                if (card.uid == uid)
+                if (card.Uid == uid)
                     return card;
             }
             return null;
@@ -153,7 +153,7 @@ namespace TcgEngine
         {
             foreach (Card card in cards_board)
             {
-                if (card != null && card.equipped_uid == equipment.uid)
+                if (card != null && card.equipped_uid == equipment.Uid)
                     return card;
             }
             return null;
@@ -163,7 +163,7 @@ namespace TcgEngine
         {
             foreach (Card card in cards_board)
             {
-                if (card != null && card.slot == slot)
+                if (card != null && card.Slot == slot)
                     return card;
             }
             return null;
@@ -182,7 +182,7 @@ namespace TcgEngine
 
         public bool IsOnBoard(Card card)
         {
-            return card != null && GetBoardCard(card.uid) != null;
+            return card != null && GetBoardCard(card.Uid) != null;
         }
 
 
@@ -450,8 +450,8 @@ namespace TcgEngine
         {
             ActionHistory order = new ActionHistory();
             order.type = type;
-            order.card_id = card.card_id;
-            order.card_uid = card.uid;
+            order.card_id = card.CardID;
+            order.card_uid = card.Uid;
             history_list.Add(order);
         }
 
@@ -459,9 +459,9 @@ namespace TcgEngine
         {
             ActionHistory order = new ActionHistory();
             order.type = type;
-            order.card_id = card.card_id;
-            order.card_uid = card.uid;
-            order.target_uid = target.uid;
+            order.card_id = card.CardID;
+            order.card_uid = card.Uid;
+            order.target_uid = target.Uid;
             history_list.Add(order);
         }
 
@@ -469,8 +469,8 @@ namespace TcgEngine
         {
             ActionHistory order = new ActionHistory();
             order.type = type;
-            order.card_id = card.card_id;
-            order.card_uid = card.uid;
+            order.card_id = card.CardID;
+            order.card_uid = card.Uid;
             order.target_id = target.player_id;
             history_list.Add(order);
         }
@@ -479,8 +479,8 @@ namespace TcgEngine
         {
             ActionHistory order = new ActionHistory();
             order.type = type;
-            order.card_id = card.card_id;
-            order.card_uid = card.uid;
+            order.card_id = card.CardID;
+            order.card_uid = card.Uid;
             order.ability_id = ability.id;
             history_list.Add(order);
         }
@@ -489,10 +489,10 @@ namespace TcgEngine
         {
             ActionHistory order = new ActionHistory();
             order.type = type;
-            order.card_id = card.card_id;
-            order.card_uid = card.uid;
+            order.card_id = card.CardID;
+            order.card_uid = card.Uid;
             order.ability_id = ability.id;
-            order.target_uid = target.uid;
+            order.target_uid = target.Uid;
             history_list.Add(order);
         }
 
@@ -500,8 +500,8 @@ namespace TcgEngine
         {
             ActionHistory order = new ActionHistory();
             order.type = type;
-            order.card_id = card.card_id;
-            order.card_uid = card.uid;
+            order.card_id = card.CardID;
+            order.card_uid = card.Uid;
             order.ability_id = ability.id;
             order.target_id = target.player_id;
             history_list.Add(order);
@@ -511,8 +511,8 @@ namespace TcgEngine
         {
             ActionHistory order = new ActionHistory();
             order.type = type;
-            order.card_id = card.card_id;
-            order.card_uid = card.uid;
+            order.card_id = card.CardID;
+            order.card_uid = card.Uid;
             order.ability_id = ability.id;
             order.slot = target;
             history_list.Add(order);
@@ -533,7 +533,7 @@ namespace TcgEngine
 
         public virtual bool CanPayAbility(Card card, AbilityData ability)
         {
-            bool exhaust = !card.exhausted || !ability.exhaust;
+            bool exhaust = !card.Exhausted || !ability.exhaust;
             return exhaust && mana >= ability.mana_cost;
         }
 

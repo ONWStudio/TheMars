@@ -62,7 +62,7 @@ namespace TcgEngine
 
         private int GetCount(Game data, Card caster)
         {
-            Player player = data.GetPlayer(caster.player_id);
+            Player player = data.GetPlayer(caster.PlayerID);
             return CountPile(player, pile);
         }
 
@@ -106,8 +106,8 @@ namespace TcgEngine
 
         private bool IsTrait(Card card)
         {
-            bool is_type = card.CardData.type == has_type || has_type == CardType.None;
-            bool is_team = card.CardData.team == has_team || has_team == null;
+            bool is_type = card.CardData.Type == has_type || has_type == CardType.None;
+            bool is_team = card.CardData.Team == has_team || has_team == null;
             bool is_trait = card.HasTrait(has_trait) || has_trait == null;
             return (is_type && is_team && is_trait);
         }

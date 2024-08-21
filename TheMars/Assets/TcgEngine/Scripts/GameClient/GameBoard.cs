@@ -49,7 +49,7 @@ namespace TcgEngine.Client
             {
                 foreach (Card card in p.cards_board)
                 {
-                    BoardCard bcard = BoardCard.Get(card.uid);
+                    BoardCard bcard = BoardCard.Get(card.Uid);
                     if (card != null && bcard == null)
                     {
                         SpawnNewCard(card);

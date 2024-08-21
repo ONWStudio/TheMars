@@ -21,19 +21,19 @@ namespace TcgEngine
 
         public override void DoEffect(GameLogic logic, AbilityData ability, Card caster, Card target)
         {
-            Player player = logic.GameData.GetPlayer(caster.player_id);
-            logic.SummonCard(player, summon, caster.VariantData, target.slot); //Assumes the target has just been killed, so the slot is empty
+            Player player = logic.GameData.GetPlayer(caster.PlayerID);
+            logic.SummonCard(player, summon, caster.VariantData, target.Slot); //Assumes the target has just been killed, so the slot is empty
         }
 
         public override void DoEffect(GameLogic logic, AbilityData ability, Card caster, Slot target)
         {
-            Player player = logic.GameData.GetPlayer(caster.player_id);
+            Player player = logic.GameData.GetPlayer(caster.PlayerID);
             logic.SummonCard(player, summon, caster.VariantData, target);
         }
 
         public override void DoEffect(GameLogic logic, AbilityData ability, Card caster, CardData target)
         {
-            Player player = logic.GameData.GetPlayer(caster.player_id);
+            Player player = logic.GameData.GetPlayer(caster.PlayerID);
             logic.SummonCardHand(player, target, caster.VariantData);   //Summon in hand instead of board when target a carddata
         }
     }

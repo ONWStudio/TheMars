@@ -41,7 +41,7 @@ namespace TcgEngine
             }
             if (stat == ConditionStatType.HP)
             {
-                return card.GetHP();
+                return card.GetHp();
             }
             if (stat == ConditionStatType.Mana)
             {

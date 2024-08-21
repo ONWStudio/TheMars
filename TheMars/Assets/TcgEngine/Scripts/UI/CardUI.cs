@@ -54,7 +54,7 @@ namespace TcgEngine.UI
             if (attack != null)
                 attack.text = card.GetAttack().ToString();
             if (hp != null)
-                hp.text = card.GetHP().ToString();
+                hp.text = card.GetHp().ToString();
 
             foreach (TraitUI stat in stats)
                 stat.SetCard(card);
@@ -86,27 +86,27 @@ namespace TcgEngine.UI
             if (hp != null)
                 hp.enabled = card.IsBoardCard() || card.IsEquipment();
             if (cost_icon != null)
-                cost_icon.enabled = card.type != CardType.Hero;
+                cost_icon.enabled = card.Type != CardType.Hero;
             if (cost != null)
-                cost.enabled = card.type != CardType.Hero;
+                cost.enabled = card.Type != CardType.Hero;
 
             if (cost != null)
-                cost.text = card.mana.ToString();
+                cost.text = card.Mana.ToString();
             if (attack != null)
-                attack.text = card.attack.ToString();
+                attack.text = card.Attack.ToString();
             if (hp != null)
-                hp.text = card.hp.ToString();
+                hp.text = card.Hp.ToString();
 
             if (team_icon != null)
             {
-                team_icon.sprite = card.team.icon;
+                team_icon.sprite = card.Team.icon;
                 team_icon.enabled = team_icon.sprite != null;
             }
 
             if (rarity_icon != null)
             {
-                rarity_icon.sprite = card.rarity.icon;
-                rarity_icon.enabled = rarity_icon.sprite != null && card.type != CardType.Hero;
+                rarity_icon.sprite = card.Rarity.icon;
+                rarity_icon.enabled = rarity_icon.sprite != null && card.Type != CardType.Hero;
             }
 
             foreach (TraitUI stat in stats)

@@ -16,7 +16,7 @@ namespace TcgEngine
 
         public override bool IsTargetConditionMet(Game data, AbilityData ability, Card caster, Card target)
         {
-            return CompareBool(target.exhausted, oper);
+            return CompareBool(target.Exhausted, oper);
         }
 
         public override bool IsTargetConditionMet(Game data, AbilityData ability, Card caster, Player target)

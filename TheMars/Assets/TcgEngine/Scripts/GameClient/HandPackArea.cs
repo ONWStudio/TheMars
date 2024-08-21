@@ -122,7 +122,7 @@ namespace TcgEngine.Client
         public void DelayRefresh(Card card)
         {
             last_destroyed_timer = 0f;
-            last_destroyed = card.uid;
+            last_destroyed = card.Uid;
         }
 
         public void Lock(bool locked)

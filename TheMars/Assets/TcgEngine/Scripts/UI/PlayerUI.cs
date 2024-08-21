@@ -124,7 +124,7 @@ namespace TcgEngine.UI
         {
             Player player = GetPlayer();
             int index = player.cards_secret.Count - 1;
-            if (player.player_id == secret.player_id && index >= 0 && index < secrets.Length)
+            if (player.player_id == secret.PlayerID && index >= 0 && index < secrets.Length)
             {
                 secrets[index].SetTrigger("reveal");
             }

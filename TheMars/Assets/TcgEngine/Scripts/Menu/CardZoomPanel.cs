@@ -48,7 +48,7 @@ namespace TcgEngine.UI
             if (card != null)
             {
                 int quantity = GetBuyQuantity();
-                int cost = quantity * card.cost * variant.cost_factor;
+                int cost = quantity * card.Cost * variant.cost_factor;
                 buy_cost.text = cost.ToString();
                 sell_cost.text = Mathf.RoundToInt(cost * GameplayData.Get().sell_ratio).ToString();
             }
@@ -66,7 +66,7 @@ namespace TcgEngine.UI
             quantity_bar.enabled = quantity > 0;
             trade_quantity.text = "1";
             trade_error.text = "";
-            trade_area?.SetActive(card.deckbuilding && card.cost > 0);
+            trade_area?.SetActive(card.Deckbuilding && card.Cost > 0);
 
             card_ui.SetCard(card, variant);
             string desc = card.GetDesc();
@@ -87,7 +87,7 @@ namespace TcgEngine.UI
         private async void BuyCardTest()
         {
             int quantity = GetBuyQuantity();
-            int cost = (quantity * card.cost * variant.cost_factor);
+            int cost = (quantity * card.Cost * variant.cost_factor);
             if (quantity <= 0)
                 return;
 
@@ -95,7 +95,7 @@ namespace TcgEngine.UI
             if (udata.coins < cost)
                 return;
 
-            udata.AddCard(card.id, variant.id, quantity);
+            udata.AddCard(card.ID, variant.id, quantity);
             udata.coins -= cost;
             await Authenticator.Get().SaveUserData();
             CollectionPanel.Get().ReloadUser();
@@ -105,7 +105,7 @@ namespace TcgEngine.UI
         private async void BuyCardApi()
         {
             BuyCardRequest req = new BuyCardRequest();
-            req.card = card.id;
+            req.card = card.ID;
             req.variant = variant.id;
             req.quantity = GetBuyQuantity();
 
@@ -132,15 +132,15 @@ namespace TcgEngine.UI
         private async void SellCardTest()
         {
             int quantity = GetBuyQuantity();
-            int cost = Mathf.RoundToInt(quantity * card.cost * variant.cost_factor * GameplayData.Get().sell_ratio);
+            int cost = Mathf.RoundToInt(quantity * card.Cost * variant.cost_factor * GameplayData.Get().sell_ratio);
             if (quantity <= 0)
                 return;
 
             UserData udata = Authenticator.Get().UserData;
-            if (!udata.HasCard(card.id, variant.id, quantity))
+            if (!udata.HasCard(card.ID, variant.id, quantity))
                 return;
 
-            udata.AddCard(card.id, variant.id, -quantity);
+            udata.AddCard(card.ID, variant.id, -quantity);
             udata.coins += cost;
             await Authenticator.Get().SaveUserData();
             CollectionPanel.Get().ReloadUser();
@@ -151,7 +151,7 @@ namespace TcgEngine.UI
         private async void SellCardApi()
         {
             BuyCardRequest req = new BuyCardRequest();
-            req.card = card.id;
+            req.card = card.ID;
             req.variant = variant.id;
             req.quantity = GetBuyQuantity();
 
@@ -219,7 +219,7 @@ namespace TcgEngine.UI
 
         public string GetCardId()
         {
-            return card.id;
+            return card.ID;
         }
 
         public string GetCardVariant()

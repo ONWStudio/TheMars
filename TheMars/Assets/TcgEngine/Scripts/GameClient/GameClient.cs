@@ -281,7 +281,7 @@ namespace TcgEngine.Client
         public void PlayCard(Card card, Slot slot)
         {
             MsgPlayCard mdata = new MsgPlayCard();
-            mdata.card_uid = card.uid;
+            mdata.card_uid = card.Uid;
             mdata.slot = slot;
             SendAction(GameAction.PlayCard, mdata);
         }
@@ -289,15 +289,15 @@ namespace TcgEngine.Client
         public void AttackTarget(Card card, Card target)
         {
             MsgAttack mdata = new MsgAttack();
-            mdata.attacker_uid = card.uid;
-            mdata.target_uid = target.uid;
+            mdata.attacker_uid = card.Uid;
+            mdata.target_uid = target.Uid;
             SendAction(GameAction.Attack, mdata);
         }
 
         public void AttackPlayer(Card card, Player target)
         {
             MsgAttackPlayer mdata = new MsgAttackPlayer();
-            mdata.attacker_uid = card.uid;
+            mdata.attacker_uid = card.Uid;
             mdata.target_id = target.player_id;
             SendAction(GameAction.AttackPlayer, mdata);
         }
@@ -305,7 +305,7 @@ namespace TcgEngine.Client
         public void Move(Card card, Slot slot)
         {
             MsgPlayCard mdata = new MsgPlayCard();
-            mdata.card_uid = card.uid;
+            mdata.card_uid = card.Uid;
             mdata.slot = slot;
             SendAction(GameAction.Move, mdata);
         }
@@ -313,7 +313,7 @@ namespace TcgEngine.Client
         public void CastAbility(Card card, AbilityData ability)
         {
             MsgCastAbility mdata = new MsgCastAbility();
-            mdata.caster_uid = card.uid;
+            mdata.caster_uid = card.Uid;
             mdata.ability_id = ability.id;
             mdata.target_uid = "";
             SendAction(GameAction.CastAbility, mdata);
@@ -322,7 +322,7 @@ namespace TcgEngine.Client
         public void SelectCard(Card card)
         {
             MsgCard mdata = new MsgCard();
-            mdata.card_uid = card.uid;
+            mdata.card_uid = card.Uid;
             SendAction(GameAction.SelectCard, mdata);
         }
 

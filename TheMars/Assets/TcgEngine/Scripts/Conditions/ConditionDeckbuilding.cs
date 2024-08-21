@@ -16,12 +16,12 @@ namespace TcgEngine
 
         public override bool IsTargetConditionMet(Game data, AbilityData ability, Card caster, Card target)
         {
-            return CompareBool(target.CardData.deckbuilding, oper);
+            return CompareBool(target.CardData.Deckbuilding, oper);
         }
 
         public override bool IsTargetConditionMet(Game data, AbilityData ability, Card caster, CardData target)
         {
-            return CompareBool(target.deckbuilding, oper);
+            return CompareBool(target.Deckbuilding, oper);
         }
     }
 }

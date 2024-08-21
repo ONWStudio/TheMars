@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace TcgEngine
 {
@@ -21,291 +23,251 @@ namespace TcgEngine
     [CreateAssetMenu(fileName = "card", menuName = "TcgEngine/CardData", order = 5)]
     public class CardData : ScriptableObject
     {
-        public string id;
+        [FormerlySerializedAs("id")]
+        public string ID;
 
+        [FormerlySerializedAs("title")]
         [Header("Display")]
-        public string title;
-        public Sprite art_full;
-        public Sprite art_board;
+        public string Title;
+        [FormerlySerializedAs("art_full")]
+        public Sprite ArtFull;
+        [FormerlySerializedAs("art_board")]
+        public Sprite ArtBoard;
 
+        [FormerlySerializedAs("type")]
         [Header("Stats")]
-        public CardType type;
-        public TeamData team;
-        public RarityData rarity;
-        public int mana;
-        public int attack;
-        public int hp;
+        public CardType Type;
+        [FormerlySerializedAs("team")]
+        public TeamData Team;
+        [FormerlySerializedAs("rarity")]
+        public RarityData Rarity;
+        [FormerlySerializedAs("mana")]
+        public int Mana;
+        [FormerlySerializedAs("attack")]
+        public int Attack;
+        [FormerlySerializedAs("hp")]
+        public int Hp;
 
+        [FormerlySerializedAs("traits")]
         [Header("Traits")]
-        public TraitData[] traits;
-        public TraitStat[] stats;
+        public TraitData[] Traits;
+        [FormerlySerializedAs("stats")]
+        public TraitStat[] Stats;
 
+        [FormerlySerializedAs("abilities")]
         [Header("Abilities")]
-        public AbilityData[] abilities;
+        public AbilityData[] Abilities;
 
+        [FormerlySerializedAs("text")]
         [Header("Card Text")]
         [TextArea(3, 5)]
-        public string text;
+        public string Text;
 
+        [FormerlySerializedAs("desc")]
         [Header("Description")]
         [TextArea(5, 10)]
-        public string desc;
+        public string Desc;
 
+        [FormerlySerializedAs("spawn_fx")]
         [Header("FX")]
-        public GameObject spawn_fx;
-        public GameObject death_fx;
-        public GameObject attack_fx;
-        public GameObject damage_fx;
-        public GameObject idle_fx;
-        public AudioClip spawn_audio;
-        public AudioClip death_audio;
-        public AudioClip attack_audio;
-        public AudioClip damage_audio;
+        public GameObject SpawnFX;
+        [FormerlySerializedAs("death_fx")]
+        public GameObject DeathFX;
+        [FormerlySerializedAs("attack_fx")]
+        public GameObject AttackFX;
+        [FormerlySerializedAs("damage_fx")]
+        public GameObject DamageFX;
+        [FormerlySerializedAs("idle_fx")]
+        public GameObject IdleFX;
+        [FormerlySerializedAs("spawn_audio")]
+        public AudioClip SpawnAudio;
+        [FormerlySerializedAs("death_audio")]
+        public AudioClip DeathAudio;
+        [FormerlySerializedAs("attack_audio")]
+        public AudioClip AttackAudio;
+        [FormerlySerializedAs("damage_audio")]
+        public AudioClip DamageAudio;
 
+        [FormerlySerializedAs("deckbuilding")]
         [Header("Availability")]
-        public bool deckbuilding = false;
-        public int cost = 100;
-        public PackData[] packs;
+        public bool Deckbuilding = false;
+        [FormerlySerializedAs("cost")]
+        public int Cost = 100;
+        [FormerlySerializedAs("packs")]
+        public PackData[] Packs;
 
-        public static List<CardData> card_list = new List<CardData>();                              //Faster access in loops
-        public static Dictionary<string, CardData> card_dict = new Dictionary<string, CardData>();    //Faster access in Get(id)
+        public static readonly List<CardData> CardList = new List<CardData>();                              //Faster access in loops
+        public static readonly Dictionary<string, CardData> CardDict = new Dictionary<string, CardData>(); //Faster access in Get(id)
 
         public static void Load(string folder = "")
         {
-            if (card_list.Count == 0)
+            if (CardList.Count == 0)
             {
-                card_list.AddRange(Resources.LoadAll<CardData>(folder));
+                CardList.AddRange(Resources.LoadAll<CardData>(folder));
 
-                foreach (CardData card in card_list)
-                    card_dict.Add(card.id, card);
+                foreach (CardData card in CardList)
+                    CardDict.Add(card.ID, card);
             }
         }
 
         public Sprite GetBoardArt(VariantData variant)
         {
-            return art_board;
+            return ArtBoard;
         }
 
         public Sprite GetFullArt(VariantData variant)
         {
-            return art_full;
+            return ArtFull;
         }
 
         public string GetTitle()
         {
-            return title;
+            return Title;
         }
 
         public string GetText()
         {
-            return text;
+            return Text;
         }
 
         public string GetDesc()
         {
-            return desc;
+            return Desc;
         }
 
-        public string GetTypeId()
+        public string GetTypeId() => Type switch
         {
-            if (type == CardType.Hero)
-                return "hero";
-            if (type == CardType.Character)
-                return "character";
-            if (type == CardType.Artifact)
-                return "artifact";
-            if (type == CardType.Spell)
-                return "spell";
-            if (type == CardType.Secret)
-                return "secret";
-            if (type == CardType.Equipment)
-                return "equipment";
-            return "";
-        }
+            CardType.Hero => "hero",
+            CardType.Character => "character",
+            CardType.Artifact => "artifact",
+            CardType.Spell => "spell",
+            CardType.Secret => "secret",
+            CardType.Equipment => "equipment",
+            _ => ""
+        };
 
         public string GetAbilitiesDesc()
         {
-            string txt = "";
-            foreach (AbilityData ability in abilities)
-            {
-                if (!string.IsNullOrWhiteSpace(ability.desc))
-                    txt += "<b>" + ability.GetTitle() + ":</b> " + ability.GetDesc(this) + "\n";
-            }
-            return txt;
+            return Abilities
+                .Where(ability => !string.IsNullOrWhiteSpace(ability.desc))
+                .Aggregate("", (current, ability) => current + ("<b>" + ability.GetTitle() + ":</b> " + ability.GetDesc(this) + "\n"));
         }
 
         public bool IsCharacter()
         {
-            return type == CardType.Character;
+            return Type == CardType.Character;
         }
 
         public bool IsSecret()
         {
-            return type == CardType.Secret;
+            return Type == CardType.Secret;
         }
 
         public bool IsBoardCard()
         {
-            return type == CardType.Character || type == CardType.Artifact;
+            return Type is CardType.Character or CardType.Artifact;
         }
 
         public bool IsRequireTarget()
         {
-            return type == CardType.Equipment || IsRequireTargetSpell();
+            return Type == CardType.Equipment || IsRequireTargetSpell();
         }
 
         public bool IsRequireTargetSpell()
         {
-            return type == CardType.Spell && HasAbility(AbilityTrigger.OnPlay, AbilityTarget.PlayTarget);
+            return Type == CardType.Spell && HasAbility(AbilityTrigger.OnPlay, AbilityTarget.PlayTarget);
         }
 
         public bool IsEquipment()
         {
-            return type == CardType.Equipment;
+            return Type == CardType.Equipment;
         }
 
         public bool HasTrait(string trait)
         {
-            foreach (TraitData t in traits)
-            {
-                if (t.id == trait)
-                    return true;
-            }
-            return false;
+            return Traits.Any(t => t.id == trait);
         }
 
         public bool HasTrait(TraitData trait)
         {
-            if(trait != null)
-                return HasTrait(trait.id);
-            return false;
+            return trait && HasTrait(trait.id);
         }
 
         public bool HasStat(string trait)
         {
-            if (stats == null)
-                return false;
+            return Stats != null && Stats.Any(stat => stat.trait.id == trait);
 
-            foreach (TraitStat stat in stats)
-            {
-                if (stat.trait.id == trait)
-                    return true;
-            }
-            return false;
         }
 
         public bool HasStat(TraitData trait)
         {
-            if(trait != null)
-                return HasStat(trait.id);
-            return false;
+            return trait != null && HasStat(trait.id);
         }
 
-        public int GetStat(string trait_id)
+        public int GetStat(string traitID)
         {
-            if (stats == null)
-                return 0;
+            return null != Stats ? 
+                (from stat
+                     in Stats
+                 where stat.trait.id == traitID
+                 select stat.value)
+                    .FirstOrDefault() : 
+                0;
 
-            foreach (TraitStat stat in stats)
-            {
-                if (stat.trait.id == trait_id)
-                    return stat.value;
-            }
-            return 0;
         }
 
         public int GetStat(TraitData trait)
         {
-            if(trait != null)
-                return GetStat(trait.id);
-            return 0;
+            return trait != null ? GetStat(trait.id) : 0;
         }
 
         public bool HasAbility(AbilityData tability)
         {
-            foreach (AbilityData ability in abilities)
-            {
-                if (ability && ability.id == tability.id)
-                    return true;
-            }
-            return false;
+            return Abilities.Any(ability => ability && ability.id == tability.id);
         }
 
         public bool HasAbility(AbilityTrigger trigger)
         {
-            foreach (AbilityData ability in abilities)
-            {
-                if (ability && ability.trigger == trigger)
-                    return true;
-            }
-            return false;
+            return Abilities.Any(ability => ability && ability.trigger == trigger);
         }
 
         public bool HasAbility(AbilityTrigger trigger, AbilityTarget target)
         {
-            foreach (AbilityData ability in abilities)
-            {
-                if (ability && ability.trigger == trigger && ability.target == target)
-                    return true;
-            }
-            return false;
+            return Abilities.Any(ability => ability && ability.trigger == trigger && ability.target == target);
         }
 
         public AbilityData GetAbility(AbilityTrigger trigger)
         {
-            foreach (AbilityData ability in abilities)
-            {
-                if (ability && ability.trigger == trigger)
-                    return ability;
-            }
-            return null;
+            return Abilities.FirstOrDefault(ability => ability && ability.trigger == trigger);
         }
 
         public bool HasPack(PackData pack)
         {
-            foreach (PackData apack in packs)
-            {
-                if (apack == pack)
-                    return true;
-            }
-            return false;
+            return Packs.Any(apack => apack == pack);
         }
 
         public static CardData Get(string id)
         {
-            if (id == null)
-                return null;
-            bool success = card_dict.TryGetValue(id, out CardData card);
-            if (success)
-                return card;
-            return null;
+            return id == null ? null : CardDict.GetValueOrDefault(id);
         }
 
         public static List<CardData> GetAllDeckbuilding()
         {
-            List<CardData> multi_list = new List<CardData>();
-            foreach (CardData acard in GetAll())
-            {
-                if (acard.deckbuilding)
-                    multi_list.Add(acard);
-            }
-            return multi_list;
+            return GetAll()
+                .Where(acard => acard.Deckbuilding)
+                .ToList();
         }
 
         public static List<CardData> GetAll(PackData pack)
         {
-            List<CardData> multi_list = new List<CardData>();
-            foreach (CardData acard in GetAll())
-            {
-                if (acard.HasPack(pack))
-                    multi_list.Add(acard);
-            }
-            return multi_list;
+            return GetAll()
+                .Where(acard => acard.HasPack(pack))
+                .ToList();
         }
 
         public static List<CardData> GetAll()
         {
-            return card_list;
+            return CardList;
         }
     }
 }

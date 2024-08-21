@@ -66,13 +66,13 @@ namespace TcgEngine.UI
             if (ability != null)
             {
                 power_image.sprite = hero.CardData.GetBoardArt(hero.VariantData);
-                power_image.material = !hero.exhausted ? active_mat : inactive_mat;
-                power_mana_slot?.SetActive(gdata.IsPlayerTurn(player) && !hero.exhausted);
+                power_image.material = !hero.Exhausted ? active_mat : inactive_mat;
+                power_mana_slot?.SetActive(gdata.IsPlayerTurn(player) && !hero.Exhausted);
                 power_mana.text = ability.mana_cost.ToString();
             }
 
             if (power_button != null)
-                power_button.interactable = ability != null && !hero.exhausted && gdata.IsPlayerTurn(player);
+                power_button.interactable = ability != null && !hero.Exhausted && gdata.IsPlayerTurn(player);
 
             if (hero != null && !power_area.activeSelf)
                 power_area.SetActive(true);
@@ -86,7 +86,7 @@ namespace TcgEngine.UI
             AbilityData ability = hero?.GetAbility(AbilityTrigger.Activate);
             if (ability != null && !opponent)
             {
-                if (!hero.exhausted && !player.CanPayAbility(hero, ability))
+                if (!hero.Exhausted && !player.CanPayAbility(hero, ability))
                 {
                     WarningText.ShowNoMana();
                     return;

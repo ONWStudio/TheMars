@@ -15,7 +15,7 @@ namespace TcgEngine
 
         public override bool IsTriggerConditionMet(Game data, AbilityData ability, Card caster)
         {
-            bool yourturn = caster.player_id == data.current_player;
+            bool yourturn = caster.PlayerID == data.current_player;
             return CompareBool(yourturn, oper);
         }
     }

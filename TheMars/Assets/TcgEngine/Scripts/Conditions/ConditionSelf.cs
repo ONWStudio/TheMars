@@ -21,13 +21,13 @@ namespace TcgEngine
 
         public override bool IsTargetConditionMet(Game data, AbilityData ability, Card caster, Player target)
         {
-            bool same_owner = caster.player_id == target.player_id;
+            bool same_owner = caster.PlayerID == target.player_id;
             return CompareBool(same_owner, oper);
         }
 
         public override bool IsTargetConditionMet(Game data, AbilityData ability, Card caster, Slot target)
         {
-            return CompareBool(caster.slot == target, oper);
+            return CompareBool(caster.Slot == target, oper);
         }
     }
 }

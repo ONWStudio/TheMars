@@ -49,9 +49,9 @@ namespace TcgEngine
             for (int i = 0; i < cards.Count; i++)
             {
                 CardData card = cards[i];
-                if (card.deckbuilding)
+                if (card.Deckbuilding)
                 {
-                    ShowText("Exporting: " + card.id);
+                    ShowText("Exporting: " + card.ID);
                     GenerateCard(card);
                     await TimeTool.Delay(1);
                     ExportCard(card);
@@ -73,7 +73,7 @@ namespace TcgEngine
             RenderTexture.active = texture;
             export_texture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
             byte[] bytes = export_texture.EncodeToPNG();
-            string file = card.id + ".png";
+            string file = card.ID + ".png";
             File.WriteAllBytes(export_path + "/" + file, bytes);
             RenderTexture.active = null;
         }

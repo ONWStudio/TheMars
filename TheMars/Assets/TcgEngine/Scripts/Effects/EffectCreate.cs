@@ -19,12 +19,12 @@ namespace TcgEngine
 
         public override void DoEffect(GameLogic logic, AbilityData ability, Card caster, CardData target)
         {
-            Player player = logic.GameData.GetPlayer(caster.player_id);
+            Player player = logic.GameData.GetPlayer(caster.PlayerID);
             if (create_opponent)
-                player = logic.GameData.GetOpponentPlayer(caster.player_id);
+                player = logic.GameData.GetOpponentPlayer(caster.PlayerID);
 
             Card card = Card.Create(target, caster.VariantData, player);
-            logic.GameData.last_summoned = card.uid;
+            logic.GameData.last_summoned = card.Uid;
 
             if (create_pile == PileType.Deck)
                 player.cards_deck.Add(card);

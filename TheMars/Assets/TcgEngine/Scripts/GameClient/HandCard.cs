@@ -1,6 +1,7 @@
 ﻿using TcgEngine.Client;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TcgEngine.UI;
@@ -120,7 +121,7 @@ namespace TcgEngine.Client
 
         public void SetCard(Card card)
         {
-            this.card_uid = card.uid;
+            this.card_uid = card.Uid;
             card_ui.SetCard(card);
         }
 
@@ -154,9 +155,7 @@ namespace TcgEngine.Client
         public CardData GetCardData()
         {
             Card card = GetCard();
-            if (card != null)
-                return CardData.Get(card.card_id);
-            return null;
+            return card != null ? CardData.Get(card.CardID) : null;
         }
 
         public string GetCardUID()
@@ -193,15 +192,15 @@ namespace TcgEngine.Client
         public void OnMouseUpCard()
         {
             Vector2 mpos = GameCamera.Get().MouseToPercent(Input.mousePosition);
-            Vector3 board_pos = GameBoard.Get().RaycastMouseBoard();
+            Vector3 boardPos = GameBoard.Get().RaycastMouseBoard();
             if (drag && mpos.y > 0.25f)
-                TryPlayCard(board_pos);
+                TryPlayCard(boardPos);
             else
                 HandCardArea.Get().SortCards();
             drag = false;
         }
 
-        public void TryPlayCard(Vector3 board_pos)
+        public void TryPlayCard(Vector3 boardPos)
         {
             if (!GameClient.Get().IsYourTurn())
             {
@@ -209,7 +208,7 @@ namespace TcgEngine.Client
                 return;
             }
 
-            BSlot bslot = BSlot.GetNearest(board_pos);
+            BSlot bslot = BSlot.GetNearest(boardPos);
             int player_id = GameClient.Get().GetPlayerID();
             Game gdata = GameClient.Get().GetGameData();
             Player player = gdata.GetPlayer(player_id);
@@ -217,12 +216,12 @@ namespace TcgEngine.Client
 
             Slot slot = Slot.None;
             if (bslot != null)
-                slot = bslot.GetEmptySlot(board_pos);
+                slot = bslot.GetEmptySlot(boardPos);
             if(bslot != null && card.CardData.IsRequireTarget())
-                slot = bslot.GetSlot(board_pos);
+                slot = bslot.GetSlot(boardPos);
 
-            Card slot_card = bslot?.GetSlotCard(board_pos);
-            if (bslot != null && card.CardData.IsRequireTargetSpell() && slot_card != null && slot_card.HasStatus(StatusType.SpellImmunity))
+            Card slotCard = bslot?.GetSlotCard(boardPos);
+            if (bslot != null && card.CardData.IsRequireTargetSpell() && slotCard != null && slotCard.HasStatus(StatusType.SpellImmunity))
             {
                 WarningText.ShowSpellImmune();
                 return;
@@ -249,36 +248,21 @@ namespace TcgEngine.Client
                 BoardCard.UnfocusAll();
         }
 
-        public CardData CardData { get { return GetCardData(); } }
+        public CardData CardData => GetCardData();
 
         public static HandCard GetDrag()
         {
-            foreach (HandCard card in card_list)
-            {
-                if (card.IsDrag())
-                    return card;
-            }
-            return null;
+            return card_list.FirstOrDefault(card => card.IsDrag());
         }
 
         public static HandCard GetFocus()
         {
-            foreach (HandCard card in card_list)
-            {
-                if (card.IsFocus())
-                    return card;
-            }
-            return null;
+            return card_list.FirstOrDefault(card => card.IsFocus());
         }
 
         public static HandCard Get(string uid)
         {
-            foreach (HandCard card in card_list)
-            {
-                if (card && card.GetCardUID() == uid)
-                    return card;
-            }
-            return null;
+            return card_list.FirstOrDefault(card => card && card.GetCardUID() == uid);
         }
 
         public static void UnselectAll()

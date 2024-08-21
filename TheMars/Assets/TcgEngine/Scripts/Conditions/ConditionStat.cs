@@ -33,7 +33,7 @@ namespace TcgEngine
 
             if (type == ConditionStatType.HP)
             {
-                return CompareInt(target.GetHP(), oper, value);
+                return CompareInt(target.GetHp(), oper, value);
             }
 
             if (type == ConditionStatType.Mana)

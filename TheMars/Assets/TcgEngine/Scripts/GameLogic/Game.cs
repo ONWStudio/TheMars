@@ -99,7 +99,7 @@ namespace TcgEngine
             if (card == null)
                 return false;
 
-            Player player = GetPlayer(card.player_id);
+            Player player = GetPlayer(card.PlayerID);
             if (!skip_cost && !player.CanPayMana(card))
                 return false; //Cant pay mana
             if (!player.HasCard(player.cards_hand, card))
@@ -109,7 +109,7 @@ namespace TcgEngine
             {
                 if (!slot.IsValid() || IsCardOnSlot(slot))
                     return false;   //Slot already occupied
-                if (Slot.GetP(card.player_id) != slot.p)
+                if (Slot.GetP(card.PlayerID) != slot.p)
                     return false; //Cant play on opponent side
                 return true;
             }
@@ -119,7 +119,7 @@ namespace TcgEngine
                     return false;
 
                 Card target = GetSlotCard(slot);
-                if (target == null || target.CardData.type != CardType.Character || target.player_id != card.player_id)
+                if (target == null || target.CardData.Type != CardType.Character || target.PlayerID != card.PlayerID)
                     return false; //Target must be an allied character
 
                 return true;
@@ -143,10 +143,10 @@ namespace TcgEngine
             if (!card.CanMove(skip_cost))
                 return false; //Card cant move
 
-            if (Slot.GetP(card.player_id) != slot.p)
+            if (Slot.GetP(card.PlayerID) != slot.p)
                 return false; //Card played wrong side
 
-            if (card.slot == slot)
+            if (card.Slot == slot)
                 return false; //Cant move to same slot
 
             Card slot_card = GetSlotCard(slot);
@@ -165,7 +165,7 @@ namespace TcgEngine
             if (!attacker.CanAttack(skip_cost))
                 return false; //Card cant attack
 
-            if (attacker.player_id == target.player_id)
+            if (attacker.PlayerID == target.player_id)
                 return false; //Cant attack same player
 
             if (!IsOnBoard(attacker) || !attacker.CardData.IsCharacter())
@@ -186,7 +186,7 @@ namespace TcgEngine
             if (!attacker.CanAttack(skip_cost))
                 return false; //Card cant attack
 
-            if (attacker.player_id == target.player_id)
+            if (attacker.PlayerID == target.PlayerID)
                 return false; //Cant attack same player
 
             if (!IsOnBoard(attacker) || !IsOnBoard(target))
@@ -212,7 +212,7 @@ namespace TcgEngine
             if (ability.trigger != AbilityTrigger.Activate)
                 return false; //Not an activated ability
 
-            Player player = GetPlayer(card.player_id);
+            Player player = GetPlayer(card.PlayerID);
             if (!player.CanPayAbility(card, ability))
                 return false; //Cant pay for ability
 
@@ -228,7 +228,7 @@ namespace TcgEngine
             if (ability == null || card == null || !card.CanDoAbilities())
                 return false; //This card cant cast
 
-            Player player = GetPlayer(card.player_id);
+            Player player = GetPlayer(card.PlayerID);
             if (!player.CanPayAbility(card, ability))
                 return false; //Cant pay for ability
 
@@ -331,7 +331,7 @@ namespace TcgEngine
             {
                 foreach (Card card in player.cards_board)
                 {
-                    if (card != null && card.uid == card_uid)
+                    if (card != null && card.Uid == card_uid)
                         return card;
                 }
             }
@@ -344,7 +344,7 @@ namespace TcgEngine
             {
                 foreach (Card card in player.cards_equip)
                 {
-                    if (card != null && card.uid == card_uid)
+                    if (card != null && card.Uid == card_uid)
                         return card;
                 }
             }
@@ -357,7 +357,7 @@ namespace TcgEngine
             {
                 foreach (Card card in player.cards_hand)
                 {
-                    if (card != null && card.uid == card_uid)
+                    if (card != null && card.Uid == card_uid)
                         return card;
                 }
             }
@@ -370,7 +370,7 @@ namespace TcgEngine
             {
                 foreach (Card card in player.cards_deck)
                 {
-                    if (card != null && card.uid == card_uid)
+                    if (card != null && card.Uid == card_uid)
                         return card;
                 }
             }
@@ -383,7 +383,7 @@ namespace TcgEngine
             {
                 foreach (Card card in player.cards_discard)
                 {
-                    if (card != null && card.uid == card_uid)
+                    if (card != null && card.Uid == card_uid)
                         return card;
                 }
             }
@@ -396,7 +396,7 @@ namespace TcgEngine
             {
                 foreach (Card card in player.cards_secret)
                 {
-                    if (card != null && card.uid == card_uid)
+                    if (card != null && card.Uid == card_uid)
                         return card;
                 }
             }
@@ -409,7 +409,7 @@ namespace TcgEngine
             {
                 foreach (Card card in player.cards_temp)
                 {
-                    if (card != null && card.uid == card_uid)
+                    if (card != null && card.Uid == card_uid)
                         return card;
                 }
             }
@@ -422,7 +422,7 @@ namespace TcgEngine
             {
                 foreach (Card card in player.cards_board)
                 {
-                    if (card != null && card.slot == slot)
+                    if (card != null && card.Slot == slot)
                         return card;
                 }
             }
@@ -449,37 +449,37 @@ namespace TcgEngine
 
         public bool IsInHand(Card card)
         {
-            return card != null && GetHandCard(card.uid) != null;
+            return card != null && GetHandCard(card.Uid) != null;
         }
 
         public bool IsOnBoard(Card card)
         {
-            return card != null && GetBoardCard(card.uid) != null;
+            return card != null && GetBoardCard(card.Uid) != null;
         }
 
         public bool IsEquipped(Card card)
         {
-            return card != null && GetEquipCard(card.uid) != null;
+            return card != null && GetEquipCard(card.Uid) != null;
         }
 
         public bool IsInDeck(Card card)
         {
-            return card != null && GetDeckCard(card.uid) != null;
+            return card != null && GetDeckCard(card.Uid) != null;
         }
 
         public bool IsInDiscard(Card card)
         {
-            return card != null && GetDiscardCard(card.uid) != null;
+            return card != null && GetDiscardCard(card.Uid) != null;
         }
 
         public bool IsInSecret(Card card)
         {
-            return card != null && GetSecretCard(card.uid) != null;
+            return card != null && GetSecretCard(card.Uid) != null;
         }
 
         public bool IsInTemp(Card card)
         {
-            return card != null && GetTempCard(card.uid) != null;
+            return card != null && GetTempCard(card.Uid) != null;
         }
 
         public bool IsCardOnSlot(Slot slot)

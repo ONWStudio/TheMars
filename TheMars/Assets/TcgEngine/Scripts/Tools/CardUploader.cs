@@ -84,9 +84,9 @@ namespace TcgEngine
                 for (int i = 0; i < cards.Count; i++)
                 {
                     CardData card = cards[i];
-                    if (card.deckbuilding)
+                    if (card.Deckbuilding)
                     {
-                        ShowText("Uploading: " + card.id);
+                        ShowText("Uploading: " + card.ID);
                         UploadCard(card);
                         await TimeTool.Delay(100);
                     }
@@ -225,19 +225,19 @@ namespace TcgEngine
         private async void UploadCard(CardData card)
         {
             CardAddRequest req = new CardAddRequest();
-            req.tid = card.id;
+            req.tid = card.ID;
             req.type = card.GetTypeId();
-            req.team = card.team.id;
-            req.rarity = card.rarity.id;
-            req.mana = card.mana;
-            req.attack = card.attack;
-            req.hp = card.hp;
-            req.cost = card.cost;
-            req.packs = new string[card.packs.Length];
+            req.team = card.Team.id;
+            req.rarity = card.Rarity.id;
+            req.mana = card.Mana;
+            req.attack = card.Attack;
+            req.hp = card.Hp;
+            req.cost = card.Cost;
+            req.packs = new string[card.Packs.Length];
 
             for (int i = 0; i < req.packs.Length; i++)
             {
-                req.packs[i] = card.packs[i].id;
+                req.packs[i] = card.Packs[i].id;
             }
 
             string url = ApiClient.ServerURL + "/cards/add";
@@ -289,7 +289,7 @@ namespace TcgEngine
             req.cards = new string[reward.cards.Length];
             for (int i = 0; i < reward.cards.Length; i++)
             {
-                req.cards[i] = reward.cards[i].id;
+                req.cards[i] = reward.cards[i].ID;
             }
 
             req.cards = new string[reward.decks.Length];
@@ -320,7 +320,7 @@ namespace TcgEngine
             req.cards = new string[level.reward_cards.Length];
             for (int i = 0; i < level.reward_cards.Length; i++)
             {
-                req.cards[i] = level.reward_cards[i].id;
+                req.cards[i] = level.reward_cards[i].ID;
             }
 
             req.packs = new string[level.reward_packs.Length];

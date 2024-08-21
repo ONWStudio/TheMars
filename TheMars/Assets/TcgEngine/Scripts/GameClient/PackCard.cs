@@ -76,7 +76,7 @@ namespace TcgEngine.Client
             new_card?.SetActive(false);
 
             UserData udata = Authenticator.Get().GetUserData();
-            is_new = !udata.HasCard(icard.id, variant.id);
+            is_new = !udata.HasCard(icard.ID, variant.id);
         }
 
         public void SetTarget(Vector3 pos)
@@ -95,7 +95,7 @@ namespace TcgEngine.Client
             rtarget = Quaternion.Euler(0f, 0f, 0f);
             new_card?.SetActive(is_new);
 
-            if (icard != null && icard.rarity.rank >= 3)
+            if (icard != null && icard.Rarity.rank >= 3)
             {
                 FXTool.DoFX(card_rare_flip_fx, transform.position);
                 AudioTool.Get().PlaySFX("pack_open", card_rare_flip_audio);

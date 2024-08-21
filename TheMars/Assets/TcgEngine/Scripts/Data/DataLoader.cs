@@ -57,38 +57,38 @@ namespace TcgEngine
             card_ids.Clear();
             foreach (CardData card in CardData.GetAll())
             {
-                if (string.IsNullOrEmpty(card.id))
+                if (string.IsNullOrEmpty(card.ID))
                     Debug.LogError(card.name + " id is empty");
-                if (card_ids.Contains(card.id))
-                    Debug.LogError("Dupplicate Card ID: " + card.id);
+                if (card_ids.Contains(card.ID))
+                    Debug.LogError("Dupplicate Card ID: " + card.ID);
 
-                if (card.team == null)
-                    Debug.LogError(card.id + " team is null");
-                if (card.rarity == null)
-                    Debug.LogError(card.id + " rarity is null");
+                if (card.Team == null)
+                    Debug.LogError(card.ID + " team is null");
+                if (card.Rarity == null)
+                    Debug.LogError(card.ID + " rarity is null");
 
-                foreach (TraitData trait in card.traits)
+                foreach (TraitData trait in card.Traits)
                 {
                     if (trait == null)
-                        Debug.LogError(card.id + " has null trait");
+                        Debug.LogError(card.ID + " has null trait");
                 }
 
-                if (card.stats != null)
+                if (card.Stats != null)
                 {
-                    foreach (TraitStat stat in card.stats)
+                    foreach (TraitStat stat in card.Stats)
                     {
                         if (stat.trait == null)
-                            Debug.LogError(card.id + " has null stat trait");
+                            Debug.LogError(card.ID + " has null stat trait");
                     }
                 }
 
-                foreach (AbilityData ability in card.abilities)
+                foreach (AbilityData ability in card.Abilities)
                 {
                     if(ability == null)
-                        Debug.LogError(card.id + " has null ability");
+                        Debug.LogError(card.ID + " has null ability");
                 }
 
-                card_ids.Add(card.id);
+                card_ids.Add(card.ID);
             }
         }
 

@@ -293,7 +293,7 @@ namespace TcgEngine.Server
             if (player != null && msg != null && game_data.IsPlayerActionTurn(player) && !gameplay.IsResolving())
             {
                 Card card = player.GetCard(msg.card_uid);
-                if (card != null && card.player_id == player.player_id)
+                if (card != null && card.PlayerID == player.player_id)
                     gameplay.PlayCard(card, msg.slot);
             }
         }
@@ -306,7 +306,7 @@ namespace TcgEngine.Server
             {
                 Card attacker = player.GetCard(msg.attacker_uid);
                 Card target = game_data.GetCard(msg.target_uid);
-                if (attacker != null && target != null && attacker.player_id == player.player_id)
+                if (attacker != null && target != null && attacker.PlayerID == player.player_id)
                 {
                     gameplay.AttackTarget(attacker, target);
                 }
@@ -321,7 +321,7 @@ namespace TcgEngine.Server
             {
                 Card attacker = player.GetCard(msg.attacker_uid);
                 Player target = game_data.GetPlayer(msg.target_id);
-                if (attacker != null && target != null && attacker.player_id == player.player_id)
+                if (attacker != null && target != null && attacker.PlayerID == player.player_id)
                 {
                     gameplay.AttackPlayer(attacker, target);
                 }
@@ -335,7 +335,7 @@ namespace TcgEngine.Server
             if (player != null && msg != null && game_data.IsPlayerActionTurn(player) && !gameplay.IsResolving())
             {
                 Card card = player.GetCard(msg.card_uid);
-                if (card != null && card.player_id == player.player_id)
+                if (card != null && card.PlayerID == player.player_id)
                     gameplay.MoveCard(card, msg.slot);
             }
         }
@@ -348,7 +348,7 @@ namespace TcgEngine.Server
             {
                 Card card = player.GetCard(msg.caster_uid);
                 AbilityData iability = AbilityData.Get(msg.ability_id);
-                if (card != null && card.player_id == player.player_id)
+                if (card != null && card.PlayerID == player.player_id)
                     gameplay.CastAbility(card, iability);
             }
         }
@@ -688,7 +688,7 @@ namespace TcgEngine.Server
         protected virtual void OnCardPlayed(Card card, Slot slot)
         {
             MsgPlayCard mdata = new MsgPlayCard();
-            mdata.card_uid = card.uid;
+            mdata.card_uid = card.Uid;
             mdata.slot = slot;
             SendToAll(GameAction.CardPlayed, mdata, NetworkDelivery.Reliable);
         }
@@ -696,7 +696,7 @@ namespace TcgEngine.Server
         protected virtual void OnCardMoved(Card card, Slot slot)
         {
             MsgPlayCard mdata = new MsgPlayCard();
-            mdata.card_uid = card.uid;
+            mdata.card_uid = card.Uid;
             mdata.slot = slot;
             SendToAll(GameAction.CardMoved, mdata, NetworkDelivery.Reliable);
         }
@@ -704,7 +704,7 @@ namespace TcgEngine.Server
         protected virtual void OnCardSummoned(Card card, Slot slot)
         {
             MsgPlayCard mdata = new MsgPlayCard();
-            mdata.card_uid = card.uid;
+            mdata.card_uid = card.Uid;
             mdata.slot = slot;
             SendToAll(GameAction.CardSummoned, mdata, NetworkDelivery.Reliable);
         }
@@ -712,14 +712,14 @@ namespace TcgEngine.Server
         protected virtual void OnCardTransformed(Card card)
         {
             MsgCard mdata = new MsgCard();
-            mdata.card_uid = card.uid;
+            mdata.card_uid = card.Uid;
             SendToAll(GameAction.CardTransformed, mdata, NetworkDelivery.Reliable);
         }
 
         protected virtual void OnCardDiscarded(Card card)
         {
             MsgCard mdata = new MsgCard();
-            mdata.card_uid = card.uid;
+            mdata.card_uid = card.Uid;
             SendToAll(GameAction.CardDiscarded, mdata, NetworkDelivery.Reliable);
         }
 
@@ -740,8 +740,8 @@ namespace TcgEngine.Server
         protected virtual void OnAttackStart(Card attacker, Card target)
         {
             MsgAttack mdata = new MsgAttack();
-            mdata.attacker_uid = attacker.uid;
-            mdata.target_uid = target.uid;
+            mdata.attacker_uid = attacker.Uid;
+            mdata.target_uid = target.Uid;
             mdata.damage = 0;
             SendToAll(GameAction.AttackStart, mdata, NetworkDelivery.Reliable);
         }
@@ -749,8 +749,8 @@ namespace TcgEngine.Server
         protected virtual void OnAttackEnd(Card attacker, Card target)
         {
             MsgAttack mdata = new MsgAttack();
-            mdata.attacker_uid = attacker.uid;
-            mdata.target_uid = target.uid;
+            mdata.attacker_uid = attacker.Uid;
+            mdata.target_uid = target.Uid;
             mdata.damage = 0;
             SendToAll(GameAction.AttackEnd, mdata, NetworkDelivery.Reliable);
         }
@@ -758,7 +758,7 @@ namespace TcgEngine.Server
         protected virtual void OnAttackPlayerStart(Card attacker, Player target)
         {
             MsgAttackPlayer mdata = new MsgAttackPlayer();
-            mdata.attacker_uid = attacker.uid;
+            mdata.attacker_uid = attacker.Uid;
             mdata.target_id = target.player_id;
             mdata.damage = 0;
             SendToAll(GameAction.AttackPlayerStart, mdata, NetworkDelivery.Reliable);
@@ -767,7 +767,7 @@ namespace TcgEngine.Server
         protected virtual void OnAttackPlayerEnd(Card attacker, Player target)
         {
             MsgAttackPlayer mdata = new MsgAttackPlayer();
-            mdata.attacker_uid = attacker.uid;
+            mdata.attacker_uid = attacker.Uid;
             mdata.target_id = target.player_id;
             mdata.damage = 0;
             SendToAll(GameAction.AttackPlayerEnd, mdata, NetworkDelivery.Reliable);
@@ -777,7 +777,7 @@ namespace TcgEngine.Server
         {
             MsgCastAbility mdata = new MsgCastAbility();
             mdata.ability_id = ability.id;
-            mdata.caster_uid = caster.uid;
+            mdata.caster_uid = caster.Uid;
             mdata.target_uid = "";
             SendToAll(GameAction.AbilityTrigger, mdata, NetworkDelivery.Reliable);
         }
@@ -786,8 +786,8 @@ namespace TcgEngine.Server
         {
             MsgCastAbility mdata = new MsgCastAbility();
             mdata.ability_id = ability.id;
-            mdata.caster_uid = caster.uid;
-            mdata.target_uid = target != null ? target.uid : "";
+            mdata.caster_uid = caster.Uid;
+            mdata.target_uid = target != null ? target.Uid : "";
             SendToAll(GameAction.AbilityTargetCard, mdata, NetworkDelivery.Reliable);
         }
 
@@ -795,7 +795,7 @@ namespace TcgEngine.Server
         {
             MsgCastAbilityPlayer mdata = new MsgCastAbilityPlayer();
             mdata.ability_id = ability.id;
-            mdata.caster_uid = caster.uid;
+            mdata.caster_uid = caster.Uid;
             mdata.target_id = target != null ? target.player_id : -1;
             SendToAll(GameAction.AbilityTargetPlayer, mdata, NetworkDelivery.Reliable);
         }
@@ -804,7 +804,7 @@ namespace TcgEngine.Server
         {
             MsgCastAbilitySlot mdata = new MsgCastAbilitySlot();
             mdata.ability_id = ability.id;
-            mdata.caster_uid = caster.uid;
+            mdata.caster_uid = caster.Uid;
             mdata.slot = target;
             SendToAll(GameAction.AbilityTargetSlot, mdata, NetworkDelivery.Reliable);
         }
@@ -813,7 +813,7 @@ namespace TcgEngine.Server
         {
             MsgCastAbility mdata = new MsgCastAbility();
             mdata.ability_id = ability.id;
-            mdata.caster_uid = caster.uid;
+            mdata.caster_uid = caster.Uid;
             mdata.target_uid = "";
             SendToAll(GameAction.AbilityEnd, mdata, NetworkDelivery.Reliable);
         }
@@ -821,16 +821,16 @@ namespace TcgEngine.Server
         protected virtual void OnSecretTriggered(Card secret, Card trigger)
         {
             MsgSecret mdata = new MsgSecret();
-            mdata.secret_uid = secret.uid;
-            mdata.triggerer_uid = trigger != null ? trigger.uid : "";
+            mdata.secret_uid = secret.Uid;
+            mdata.triggerer_uid = trigger != null ? trigger.Uid : "";
             SendToAll(GameAction.SecretTriggered, mdata, NetworkDelivery.Reliable);
         }
 
         protected virtual void OnSecretResolved(Card secret, Card trigger)
         {
             MsgSecret mdata = new MsgSecret();
-            mdata.secret_uid = secret.uid;
-            mdata.triggerer_uid = trigger != null ? trigger.uid : "";
+            mdata.secret_uid = secret.Uid;
+            mdata.triggerer_uid = trigger != null ? trigger.Uid : "";
             SendToAll(GameAction.SecretResolved, mdata, NetworkDelivery.Reliable);
         }
 

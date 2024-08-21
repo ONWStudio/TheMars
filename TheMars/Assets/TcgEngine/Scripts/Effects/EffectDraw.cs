@@ -19,7 +19,7 @@ namespace TcgEngine
 
         public override void DoEffect(GameLogic logic, AbilityData ability, Card caster, Card target)
         {
-            Player player = logic.GameData.GetPlayer(target.player_id);
+            Player player = logic.GameData.GetPlayer(target.PlayerID);
             logic.DrawCard(player, ability.value);
         }
 

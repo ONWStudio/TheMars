@@ -88,9 +88,9 @@ namespace TcgEngine.FX
                 status_fx_list.Remove(status);
 
             //Exhausted add/remove
-            if (exhausted_fx != null && !exhausted_fx.isPlaying && card.exhausted)
+            if (exhausted_fx != null && !exhausted_fx.isPlaying && card.Exhausted)
                 exhausted_fx.Play();
-            if (exhausted_fx != null && exhausted_fx.isPlaying && !card.exhausted)
+            if (exhausted_fx != null && exhausted_fx.isPlaying && !card.Exhausted)
                 exhausted_fx.Stop();
         }
 
@@ -99,11 +99,11 @@ namespace TcgEngine.FX
             CardData icard = bcard.GetCardData();
 
             //Spawn Audio
-            AudioClip audio = icard?.spawn_audio != null ? icard.spawn_audio : AssetData.Get().card_spawn_audio;
+            AudioClip audio = icard?.SpawnAudio != null ? icard.SpawnAudio : AssetData.Get().card_spawn_audio;
             AudioTool.Get().PlaySFX("card_spawn", audio);
 
             //Spawn FX
-            GameObject spawn_fx = icard.spawn_fx != null ? icard.spawn_fx : AssetData.Get().card_spawn_fx;
+            GameObject spawn_fx = icard.SpawnFX != null ? icard.SpawnFX : AssetData.Get().card_spawn_fx;
             FXTool.DoFX(spawn_fx, transform.position);
 
             //Spawn dissolve fx
@@ -127,9 +127,9 @@ namespace TcgEngine.FX
             //Idle status
             TimeTool.WaitFor(1f, () =>
             {
-                if (icard.idle_fx != null)
+                if (icard.IdleFX != null)
                 {
-                    GameObject fx = Instantiate(icard.idle_fx, transform);
+                    GameObject fx = Instantiate(icard.IdleFX, transform);
                     fx.transform.localPosition = Vector3.zero;
                 }
             });
@@ -147,11 +147,11 @@ namespace TcgEngine.FX
             CardData icard = bcard.GetCardData();
 
             //Death FX
-            GameObject death_fx = icard.death_fx != null ? icard.death_fx : AssetData.Get().card_destroy_fx;
+            GameObject death_fx = icard.DeathFX != null ? icard.DeathFX : AssetData.Get().card_destroy_fx;
             FXTool.DoFX(death_fx, transform.position);
 
             //Death audio
-            AudioClip audio = icard?.death_audio != null ? icard.death_audio : AssetData.Get().card_destroy_audio;
+            AudioClip audio = icard?.DeathAudio != null ? icard.DeathAudio : AssetData.Get().card_destroy_audio;
             AudioTool.Get().PlaySFX("card_spawn", audio);
 
             //Death dissolve fx
@@ -185,9 +185,9 @@ namespace TcgEngine.FX
             if (attacker == null || target == null)
                 return;
 
-            if (card.uid == attacker.uid)
+            if (card.Uid == attacker.Uid)
             {
-                BoardCard btarget = BoardCard.Get(target.uid);
+                BoardCard btarget = BoardCard.Get(target.Uid);
                 if (btarget != null)
                 {
                     //Card charge into target
@@ -198,14 +198,14 @@ namespace TcgEngine.FX
                         DamageFX(target, attacker, transform);
 
                     //Attack FX and Audio
-                    GameObject fx = icard.attack_fx != null ? icard.attack_fx : AssetData.Get().card_attack_fx;
+                    GameObject fx = icard.AttackFX != null ? icard.AttackFX : AssetData.Get().card_attack_fx;
                     FXTool.DoSnapFX(fx, transform);
-                    AudioClip audio = icard?.attack_audio != null ? icard.attack_audio : AssetData.Get().card_attack_audio;
+                    AudioClip audio = icard?.AttackAudio != null ? icard.AttackAudio : AssetData.Get().card_attack_audio;
                     AudioTool.Get().PlaySFX("card_attack", audio);
                 }
             }
 
-            if (card.uid == target.uid)
+            if (card.Uid == target.Uid)
             {
                 if (target.CardData.IsCharacter() || card == target)
                 {
@@ -222,7 +222,7 @@ namespace TcgEngine.FX
                 return;
 
             Card card = bcard.GetCard();
-            if (card.uid == attacker.uid)
+            if (card.Uid == attacker.Uid)
             {
                 bool is_other = player.player_id != GameClient.Get().GetPlayerID();
                 CardData icard = bcard.GetCardData();
@@ -230,7 +230,7 @@ namespace TcgEngine.FX
 
                 ChargeIntoPlayer(zone);
 
-                AudioClip audio = icard?.attack_audio != null ? icard.attack_audio : AssetData.Get().card_attack_audio;
+                AudioClip audio = icard?.AttackAudio != null ? icard.AttackAudio : AssetData.Get().card_attack_audio;
                 AudioTool.Get().PlaySFX("card_attack", audio);
 
                 int value = bcard.GetCard().GetAttack();
@@ -267,8 +267,8 @@ namespace TcgEngine.FX
                 TimeTool.WaitFor(0.25f, () =>
                 {
                     //Damage fx and audio
-                    GameObject prefab = icard.damage_fx ? icard.damage_fx : AssetData.Get().card_damage_fx;
-                    AudioClip audio = icard.damage_audio ? icard.damage_audio : AssetData.Get().card_damage_audio;
+                    GameObject prefab = icard.DamageFX ? icard.DamageFX : AssetData.Get().card_damage_fx;
+                    AudioClip audio = icard.DamageAudio ? icard.DamageAudio : AssetData.Get().card_damage_audio;
                     FXTool.DoFX(prefab, target.transform.position);
                     AudioTool.Get().PlaySFX("card_hit", audio);
                 });
@@ -317,7 +317,7 @@ namespace TcgEngine.FX
         {
             if (iability != null && caster != null)
             {
-                if (caster.uid == bcard.GetCardUID())
+                if (caster.Uid == bcard.GetCardUID())
                 {
                     FXTool.DoSnapFX(iability.caster_fx, bcard.transform);
                     AudioTool.Get().PlaySFX("ability", iability.cast_audio);
@@ -329,7 +329,7 @@ namespace TcgEngine.FX
         {
             if (iability != null && caster != null)
             {
-                if (caster.uid == bcard.GetCardUID())
+                if (caster.Uid == bcard.GetCardUID())
                 {
 
                 }
@@ -340,17 +340,17 @@ namespace TcgEngine.FX
         {
             if (iability != null && caster != null && target != null)
             {
-                if (target.uid == bcard.GetCardUID())
+                if (target.Uid == bcard.GetCardUID())
                 {
                     FXTool.DoSnapFX(iability.target_fx, bcard.transform);
                     AudioTool.Get().PlaySFX("ability_effect", iability.target_audio);
                 }
 
-                if (caster.uid == bcard.GetCardUID())
+                if (caster.Uid == bcard.GetCardUID())
                 {
                     if (iability.charge_target && caster.CardData.IsBoardCard())
                     {
-                        BoardCard btarget = BoardCard.Get(target.uid);
+                        BoardCard btarget = BoardCard.Get(target.Uid);
                         ChargeInto(btarget);
                     }
                 }

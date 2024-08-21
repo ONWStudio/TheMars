@@ -297,7 +297,7 @@ namespace TcgEngine
 
         public static AudioTool Get()
         {
-            if (instance == null)
+            if (!instance)
             {
                 GameObject audio_system = new GameObject("AudioSystem");
                 instance = audio_system.AddComponent<AudioTool>();

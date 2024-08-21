@@ -50,7 +50,7 @@ namespace TcgEngine.Client
 
             foreach (CardData card in level.reward_cards)
             {
-                udata.AddCard(card.id, variant.id, 1);
+                udata.AddCard(card.ID, variant.id, 1);
             }
 
             foreach (PackData pack in level.reward_packs)

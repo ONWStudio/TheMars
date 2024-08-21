@@ -76,7 +76,7 @@ namespace TcgEngine
         public string GetDesc(CardData card)
         {
             string dsc = desc;
-            dsc = dsc.Replace("<name>", card.title);
+            dsc = dsc.Replace("<name>", card.Title);
             dsc = dsc.Replace("<value>", value.ToString());
             dsc = dsc.Replace("<duration>", duration.ToString());
             return dsc;
@@ -367,7 +367,7 @@ namespace TcgEngine
                 if (caster.CardData.IsEquipment())
                 {
                     //Get bearer of the equipment
-                    Player player = data.GetPlayer(caster.player_id);
+                    Player player = data.GetPlayer(caster.PlayerID);
                     Card target = player.GetBearerCard(caster);
                     if (target != null && AreTargetConditionsMet(data, caster, target))
                         targets.Add(target);
@@ -404,14 +404,14 @@ namespace TcgEngine
 
             if (target == AbilityTarget.PlayerSelf)
             {
-                Player player = data.GetPlayer(caster.player_id);
+                Player player = data.GetPlayer(caster.PlayerID);
                 targets.Add(player);
             }
             else if (target == AbilityTarget.PlayerOpponent)
             {
                 for (int tp = 0; tp < data.players.Length; tp++)
                 {
-                    if (tp != caster.player_id)
+                    if (tp != caster.PlayerID)
                     {
                         Player oplayer = data.players[tp];
                         targets.Add(oplayer);
