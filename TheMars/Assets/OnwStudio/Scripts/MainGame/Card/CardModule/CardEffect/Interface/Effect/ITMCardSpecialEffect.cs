@@ -17,7 +17,7 @@ namespace TMCard.Effect
                     "";
 
                 return this is ITMInnerEffector innerEffector && innerEffector.InnerEffect.Count > 0 ? 
-                    "<size=80%>" + string.Join("\n", innerEffector.InnerEffect.Select(effect => $"{description}:{effect.Description}")) + "</size>" : 
+                    $"<size=80%>{string.Join("\n", innerEffector.InnerEffect.Select(effect => $"{description}:{effect.Description}"))}</size>" : 
                     description;
             }
         }

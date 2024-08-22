@@ -1,11 +1,16 @@
 #if UNITY_EDITOR
+using System;
 using Onw.Attribute;
+using Onw.Event;
 using TMCard.Effect;
 using UnityEngine;
+
 namespace TMCard
 {
     public sealed partial class TMCardData : ScriptableObject
     {
+        private readonly SafeAction _onValueChanged = new();
+        
         [OnChangedValueByMethod(nameof(_effectCreators))]
         private void OnChangedSpecialEffect()
         {
@@ -20,6 +25,11 @@ namespace TMCard
                     Debug.LogWarning("특수 효과는 같은 효과가 중첩 될 수 없습니다");
                 }
             }
+        }
+
+        private void OnValidate()
+        {
+            _onValueChanged?.Invoke();
         }
     }
 }

@@ -7,19 +7,27 @@ namespace TMCard.Effect
 {
     public sealed class TMCardCopyEffect : ITMNormalEffect, ITMInitializeEffect<TMCardCopyEffectCreator>
     {
-        public string Description => $"'{_copyCardData.CardName}'카드를 {_copyCount}개 획득";
+        public string Description => $"'{(_copyCardData ? _copyCardData.CardName : "")}'카드를 {_copyCount}개 획득";
 
         [SerializeField, ReadOnly]
         private TMCardData _copyCardData;
         [SerializeField, ReadOnly]
         private int _copyCount;
 
+        public void Initialize(TMCardCopyEffectCreator effectCreator)
+        {
+            _copyCardData = effectCreator.CopyCardData;
+            _copyCount = effectCreator.CopyCount;
+        }
+        
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
         {
             if (!ServiceLocator<ITMCardService>.TryGetService(out ITMCardService service)) return;
             
-            trigger.OnEffectEvent.AddListener(eventState => 
+            trigger.OnEffectEvent.AddListener(eventState =>
             {
+                if (!_copyCardData) return;
+                
                 for (int i = 0; i < _copyCount; i++)
                 {
                     TMCardController card = service.CardCreator.CreateCardByCardData(_copyCardData);
@@ -34,12 +42,5 @@ namespace TMCard.Effect
                 }
             });
         }
-
-        public void Initialize(TMCardCopyEffectCreator effectCreator)
-        {
-            _copyCardData = effectCreator.CopyCardData;
-            _copyCount = effectCreator.CopyCount;
-        }
-
     }
 }

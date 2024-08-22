@@ -22,7 +22,7 @@ MonoBehaviour:
     type: 3}
   <CustomDescription>k__BackingField: 
   _effectCreators:
-  - rid: 3847364244551761924
+  - rid: 3847364313734447109
   _additionalConditions: []
   _localizedCardName:
     m_TableReference:
@@ -36,7 +36,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 3847364244551761924
-      type: {class: TMCardDrawEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+    - rid: 3847364313734447109
+      type: {class: DropEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
       data:
-        <DrawCount>k__BackingField: 5
+        _cardEffectCreators: []

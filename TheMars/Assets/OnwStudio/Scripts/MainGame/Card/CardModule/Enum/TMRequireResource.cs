@@ -3,7 +3,7 @@ namespace TMCard
 {
     public enum TMRequiredResource
     {
-        [InspectorName("테라")] TERA = 0,
-        [InspectorName("마르스 리튬")] MARS_LITHUM
+        [InspectorName("마르스 리튬")] MARS_LITHIUM = 0,
+        [InspectorName("테라")] TERA
     }
 }

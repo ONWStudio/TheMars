@@ -25,7 +25,7 @@ namespace TM.UI
             UniRxObserver.ObserveInfomation(
                 this,
                 selector => PlayerManager.Instance.MarsLithum,
-                marsLithum => _marsLithumText.text = $"<sprite={(int)TMRequiredResource.MARS_LITHUM}> {marsLithum}");
+                marsLithum => _marsLithumText.text = $"<sprite={(int)TMRequiredResource.MARS_LITHIUM}> {marsLithum}");
         }
     }
 }

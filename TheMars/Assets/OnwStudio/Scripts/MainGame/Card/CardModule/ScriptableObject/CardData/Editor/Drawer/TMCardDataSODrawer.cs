@@ -1,17 +1,21 @@
 #if UNITY_EDITOR
-using System.Reflection;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
+using Onw.Event;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Localization;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using Unity.EditorCoroutines;
 using Onw.Helper;
 using Onw.Localization;
 using Onw.ScriptableObjects.Editor;
 using TMCard.Runtime;
-using UnityEngine.Localization;
+using Unity.EditorCoroutines.Editor;
 
 namespace TMCard.Editor
 {
@@ -27,11 +31,12 @@ namespace TMCard.Editor
         private Camera _previewCamera = null;
         private Canvas _previewCanvas = null;
         private TMCardGeneralController _previewInstance = null;
+        private bool _isUpdate = false;
 
         private void OnEnable()
         {
             if (target is not TMCardData targetObject) return;
-
+            
             if (targetObject.GetType().GetField("_localizedCardName")?.GetValue(targetObject) is LocalizedString localizedString)
             {
                 string entryKeyName = localizedString.GetEntryKeyName();
@@ -50,14 +55,33 @@ namespace TMCard.Editor
                     }
                 }
             }
+            
+            createPreviewObject(); 
+            
+            if (targetObject.GetType().GetField("_onValueChanged", BindingFlags.NonPublic | BindingFlags.Instance)?.GetValue(targetObject) is SafeAction safeAction)
+            {
+                safeAction.AddListener(onChangedValue);
+            }
+        }
 
-            createPreviewObject();
+        private void onChangedValue()
+        {
+            _isUpdate = true;
+        }
+        
+        private void OnDisable()
+        {
+            TMCardData targetObject = target as TMCardData;
+            
+            if (targetObject.GetType().GetField("_onValueChanged", BindingFlags.NonPublic | BindingFlags.Instance)?.GetValue(targetObject) is SafeAction safeAction)
+            {
+                // ReSharper disable once RedundantAssignment
+                safeAction.RemoveListener(onChangedValue);
+            }
         }
 
         public override void OnInspectorGUI()
         {
-            using EditorGUI.ChangeCheckScope scope = new EditorGUI.ChangeCheckScope();
-            
             if (_previewInstance && _renderTexture)
             {
                 GUILayout.Label("Card Preview");
@@ -76,8 +100,9 @@ namespace TMCard.Editor
             EditorGUILayout.Space(10);
             DrawDefaultInspector();
 
-            if (scope.changed)
+            if (_isUpdate)
             {
+                _isUpdate = false;
                 destroyPreviewObject();
                 createPreviewObject();
             }

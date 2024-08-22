@@ -20,11 +20,11 @@ namespace Onw.Attribute.Editor
 
         protected override void OnEnable(Rect position, SerializedProperty property, GUIContent label)
         {
-            _isMonoBehaviour = property.serializedObject.targetObject is MonoBehaviour;
-
-            if (_isMonoBehaviour)
+            if (property.serializedObject.targetObject is MonoBehaviour monoBehaviour)
             {
-                _dropdown = new(_dropdownState, (property.serializedObject.targetObject as Component).gameObject, fieldInfo.FieldType, go =>
+                _isMonoBehaviour = true;
+                
+                _dropdown = new(_dropdownState, monoBehaviour.gameObject, fieldInfo.FieldType, go =>
                 {
                     if (fieldInfo.FieldType == typeof(GameObject))
                     {
@@ -60,7 +60,7 @@ namespace Onw.Attribute.Editor
                 Rect labelRect = new(position.x, position.y, EditorGUIUtility.labelWidth, position.height);
                 Rect buttonRect = new(labelRect.xMax, position.y, 18, position.height);
 
-                fieldRect = new Rect(
+                fieldRect = new(
                     buttonRect.xMax + 2,
                     position.y,
                     position.width - (buttonRect.xMax - position.x),

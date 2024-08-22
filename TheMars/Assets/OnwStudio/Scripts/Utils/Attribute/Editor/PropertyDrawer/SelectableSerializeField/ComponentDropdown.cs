@@ -3,6 +3,8 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
+using System.Reflection;
+using Onw.Editor.GUI;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
@@ -24,12 +26,12 @@ namespace Onw.Attribute.Editor
                 {
                     alignment = TextAnchor.MiddleCenter
                 };
-                _searchField = new SearchField();
+                _searchField = new();
             }
 
             public override Vector2 GetWindowSize()
             {
-                return new(250f, Mathf.Clamp(_dropdown.ItemCount * _dropdown.rowHeight, 200, 500));
+                return new(300f, Mathf.Clamp(_dropdown.ItemCount * _dropdown.rowHeight, 200, 800));
             }
 
             public override void OnGUI(Rect rect)
@@ -49,7 +51,7 @@ namespace Onw.Attribute.Editor
                     rect.x,
                     rect.y + EditorGUIUtility.singleLineHeight * 2.5f,
                     rect.width,
-                    rect.height - EditorGUIUtility.singleLineHeight);
+                    rect.height - EditorGUIUtility.singleLineHeight * 2.5f);
 
                 _dropdown.OnGUI(treeViewRect);
             }
@@ -87,6 +89,24 @@ namespace Onw.Attribute.Editor
             _defaultType = typeof(GameObject);
             _gameObjectImage = EditorGUIUtility.ObjectContent(null, _defaultType).image as Texture2D;
             _content = new(this);
+            setUseHorizontalScroll(true);
+            
+            void setUseHorizontalScroll(bool value)
+            {
+                FieldInfo guiFieldInfo = typeof(TreeView).GetField("m_GUI", BindingFlags.Instance | BindingFlags.NonPublic);
+                if (null == guiFieldInfo)
+                {
+                    throw new Exception("TreeView API has changed.");
+                }
+                object gui = guiFieldInfo.GetValue(this);
+
+                FieldInfo useHorizontalScrollFieldInfo = gui.GetType().GetField("m_UseHorizontalScroll", BindingFlags.Instance | BindingFlags.NonPublic);
+                if (null == useHorizontalScrollFieldInfo)
+                {
+                    throw new Exception("TreeView API has changed.");
+                }
+                useHorizontalScrollFieldInfo.SetValue(gui, value);
+            }
         }
 
         protected override TreeViewItem BuildRoot()
@@ -131,36 +151,36 @@ namespace Onw.Attribute.Editor
 
                 root.AddChild(rootItem);
             }
-
+            
             return root;
         }
 
         protected override IList<TreeViewItem> BuildRows(TreeViewItem root)
         {
             IList<TreeViewItem> rows = base.BuildRows(root);
-
+        
             if (!string.IsNullOrEmpty(searchString))
             {
                 rows = rows.Where(item => item.displayName.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
             }
-
+        
             return rows;
         }
 
         protected override void RowGUI(RowGUIArgs args)
         {
             TreeViewItem item = args.item;
-
+        
             Rect labelRect = new(
-                args.rowRect.x + (string.IsNullOrEmpty(searchString) ? 
-                    EditorGUIUtility.singleLineHeight + args.item.depth * EditorGUIUtility.singleLineHeight : 
+                args.rowRect.x + (string.IsNullOrEmpty(searchString) ?
+                    EditorGUIUtility.singleLineHeight + args.item.depth * EditorGUIUtility.singleLineHeight :
                     0),
                 args.rowRect.y + (args.rowRect.height - EditorGUIUtility.singleLineHeight) * 0.5f,
                 args.rowRect.width,
                 EditorGUIUtility.singleLineHeight);
-
+        
             GUIContent guiContent = new(item.displayName, getIconForItem(item));
-
+        
             EditorGUI.LabelField(labelRect, guiContent);
         }
 

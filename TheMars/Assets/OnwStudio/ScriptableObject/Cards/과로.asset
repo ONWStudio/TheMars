@@ -23,8 +23,8 @@ MonoBehaviour:
   <CustomDescription>k__BackingField: 
   _effectCreators:
   - rid: 3847364264155938824
-  - rid: 4776280985179258916
-  - rid: 4776280985179258918
+  - rid: 3847364316861562884
+  - rid: 3847364316861562885
   _additionalConditions: []
   _localizedCardName:
     m_TableReference:
@@ -41,18 +41,10 @@ MonoBehaviour:
     - rid: 3847364264155938824
       type: {class: DisposableEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
       data: 
-    - rid: 4776280985179258916
-      type: {class: DrawEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+    - rid: 3847364316861562884
+      type: {class: TMCardRemoveEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+      data: 
+    - rid: 3847364316861562885
+      type: {class: TeraResourceEffectCreator, ns: TMCard.Effect.Resource, asm: AssemblyTheMars}
       data:
-        _drawEffectCreators:
-        - rid: 4776280985179258917
-    - rid: 4776280985179258917
-      type: {class: TMCardDropEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
-      data:
-        <DropCount>k__BackingField: 1
-    - rid: 4776280985179258918
-      type: {class: TMCardCopyEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
-      data:
-        <CopyCardData>k__BackingField: {fileID: 11400000, guid: 33ed742e206ab4f4082990d2aab36a80,
-          type: 2}
-        <CopyCount>k__BackingField: 1
+        <Amount>k__BackingField: 0

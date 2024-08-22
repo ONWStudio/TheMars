@@ -14,7 +14,7 @@ namespace TMCard.Effect
         private List<ITMNormalEffectCreator> _cardEffectCreators = new();
 
         public IEnumerable<ITMNormalEffect> DropEffects => _cardEffectCreators
-            .Select(creator => creator.CreateEffect())
+            .Select(creator => creator?.CreateEffect())
             .OfType<ITMNormalEffect>();
 
         public ITMCardEffect CreateEffect()

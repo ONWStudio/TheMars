@@ -27,7 +27,7 @@ namespace Onw.Event
 
         public void Invoke()
         {
-            _action.Invoke();
+            _action?.Invoke();
         }
     }
     

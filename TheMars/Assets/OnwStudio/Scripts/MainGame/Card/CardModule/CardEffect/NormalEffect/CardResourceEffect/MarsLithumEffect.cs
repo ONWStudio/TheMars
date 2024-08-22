@@ -7,7 +7,7 @@ namespace TMCard.Effect.Resource
 {
     public sealed class MarsLithumEffect : ITMCardResourceEffect, ITMInitializeEffect<MarsLithumEffectCreator>
     {
-        public string Description => $"<sprite={(int)TMRequiredResource.MARS_LITHUM}> {(Amount < 0 ? Amount.ToString() : $"+{Amount}")}";
+        public string Description => $"<sprite={(int)TMRequiredResource.MARS_LITHIUM}> {(Amount < 0 ? Amount.ToString() : $"+{Amount}")}";
 
         public SafeAction<string> Event { get; } = new();
 
