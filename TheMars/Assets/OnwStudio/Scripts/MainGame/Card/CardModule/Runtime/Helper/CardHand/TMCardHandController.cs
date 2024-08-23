@@ -141,8 +141,6 @@ namespace TMCard.Runtime
         /// </summary>
         public MMF_Parallel GetSortCardsFeedbacks(float duration = 1.0f)
         {
-            if (!ServiceLocator<ITMCardService>.TryGetService(out ITMCardService service)) return null;
-
             MMF_Parallel parallel = new();
             parallel.Feedbacks.Capacity = _cardsOnHand.Count + 1;
 

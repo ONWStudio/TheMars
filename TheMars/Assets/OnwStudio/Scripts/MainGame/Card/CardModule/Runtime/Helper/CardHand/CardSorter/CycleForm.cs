@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Onw.Attribute;
 using UnityEngine;
 namespace TMCard.Runtime
@@ -48,15 +49,8 @@ namespace TMCard.Runtime
             float angleStep = MaxAngle / (cards.Count > 1 ? (cards.Count - 1) : 2);
             float startAngle = -MaxAngle * 0.5f;
 
-            for (int i = 0; i < cards.Count; i++)
-            {
-                result.Add(runTargetTransform(
-                    cards[i],
-                    cards.Count > 1 ? i : 1, 
-                    angleStep, 
-                    startAngle, 
-                    rectTransform));
-            }
+            result.AddRange(cards
+                .Select((t, i) => runTargetTransform(t, cards.Count > 1 ? i : 1, angleStep, startAngle, rectTransform)));
 
             return result;
         }
