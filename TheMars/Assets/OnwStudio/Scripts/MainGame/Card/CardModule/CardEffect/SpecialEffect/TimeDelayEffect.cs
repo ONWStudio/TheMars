@@ -7,7 +7,7 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 소요 (시간)
     /// </summary>
-    public sealed class TimeDelayEffect : TMCardSpecialEffect, ITMInitializeEffect<TimeDelayEffectCreator>
+    public sealed class TimeDelayEffect : TMCardSpecialEffect, ITMCardInitializeEffect<TimeDelayEffectCreator>
     {
         /// <summary>
         /// .. 딜레이 타임

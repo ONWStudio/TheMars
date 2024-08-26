@@ -6,7 +6,7 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 지속 (턴)
     /// </summary>
-    public sealed class TurnContinuingEffect : TMCardSpecialEffect, ITMInitializeEffect<TurnContinuingEffectCreator>
+    public sealed class TurnContinuingEffect : TMCardSpecialEffect, ITMCardInitializeEffect<TurnContinuingEffectCreator>
     {
         /// <summary>
         /// .. 지속 할 턴

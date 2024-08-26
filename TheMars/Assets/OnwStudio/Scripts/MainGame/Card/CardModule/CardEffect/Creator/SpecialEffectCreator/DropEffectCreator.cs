@@ -5,13 +5,13 @@ using UnityEngine;
 using UnityEngine.Serialization;
 namespace TMCard.Effect
 {
-    using static ITMEffectCreator;
+    using static ITMCardEffectCreator;
 
     [SerializeReferenceDropdownName("(특수) 버리기"), Substitution("버리기")]
-    public sealed class DropEffectCreator : ITMSpecialEffectCreator
+    public sealed class DropEffectCreator : ITMCardSpecialEffectCreator
     {
         [SerializeReference, DisplayAs("버리기"), FormerlySerializedAs("_cardEffectCreators"), SerializeReferenceDropdown]
-        private List<ITMNormalEffectCreator> _cardEffectCreators = new();
+        private List<ITMCardNormalEffectCreator> _cardEffectCreators = new();
 
         public IEnumerable<ITMNormalEffect> DropEffects => _cardEffectCreators
             .Select(creator => creator?.CreateEffect())
@@ -19,7 +19,7 @@ namespace TMCard.Effect
 
         public ITMCardEffect CreateEffect()
         {
-            return EffectGenerator.CreateEffect<DropEffect, DropEffectCreator>(this);
+            return CardEffectGenerator.CreateEffect<DropEffect, DropEffectCreator>(this);
         }
     }
 }

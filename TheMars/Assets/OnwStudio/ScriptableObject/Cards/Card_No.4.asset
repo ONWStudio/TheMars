@@ -20,19 +20,23 @@ MonoBehaviour:
   <CardGroup>k__BackingField: 0
   <CardImage>k__BackingField: {fileID: 21300000, guid: 0f3e3ddafd919e446984d312d2964a71,
     type: 3}
-  <IsCustomDescription>k__BackingField: 
-  <CardName>k__BackingField:
-    _localizedString:
-      m_TableReference:
-        m_TableCollectionName: 
-      m_TableEntryReference:
-        m_KeyId: 0
-        m_Key: 
-      m_FallbackState: 0
-      m_WaitForCompletion: 0
-      m_LocalVariables: []
-  _effectCreators: []
-  _addtionalConditions: []
+  <CustomDescription>k__BackingField: 
+  _effectCreators:
+  - rid: 3847364398992850946
+  _additionalConditions: []
+  _localizedCardName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3847364398992850946
+      type: {class: TMCardDropEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+      data:
+        <DropCount>k__BackingField: 1

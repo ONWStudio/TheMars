@@ -9,7 +9,7 @@ using Onw.Helper;
 using Onw.Editor.Extensions;
 using Unity.EditorCoroutines.Editor;
 
-namespace TMGUITool
+namespace TMGuiTool
 {
     internal sealed partial class GUIToolDrawer : EditorWindow
     {

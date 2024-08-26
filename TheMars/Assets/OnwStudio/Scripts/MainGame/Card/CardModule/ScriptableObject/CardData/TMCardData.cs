@@ -59,7 +59,7 @@ namespace TMCard
 
         [FormerlySerializedAs("effectCreators")]
         [SerializeReference, DisplayAs("카드 효과"), Tooltip("카드 효과 리스트"), SerializeReferenceDropdown]
-        private List<ITMEffectCreator> _effectCreators = new();
+        private List<ITMCardEffectCreator> _effectCreators = new();
 
         [FormerlySerializedAs("additionalConditions")]
         [SerializeReference, DisplayAs("추가 조건"), Tooltip("카드 추가 조건 리스트"), SerializeReferenceDropdown]

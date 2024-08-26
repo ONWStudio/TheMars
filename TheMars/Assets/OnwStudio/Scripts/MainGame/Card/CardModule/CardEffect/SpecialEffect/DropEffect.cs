@@ -8,7 +8,7 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 버리기
     /// </summary>
-    public sealed class DropEffect : TMCardSpecialEffect, ITMInitializeEffect<DropEffectCreator>, ITMEffectTrigger, ITMInnerEffector
+    public sealed class DropEffect : TMCardSpecialEffect, ITMCardInitializeEffect<DropEffectCreator>, ITMEffectTrigger, ITMInnerEffector
     {
         public CardEvent OnEffectEvent { get; } = new();
 

@@ -6,7 +6,7 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 드로우
     /// </summary>
-    public sealed class DrawEffect : TMCardSpecialEffect, ITMInitializeEffect<DrawEffectCreator>, ITMEffectTrigger, ITMInnerEffector
+    public sealed class DrawEffect : TMCardSpecialEffect, ITMCardInitializeEffect<DrawEffectCreator>, ITMEffectTrigger, ITMInnerEffector
     {
         public CardEvent OnEffectEvent { get; } = new();
         public IReadOnlyList<ITMNormalEffect> InnerEffect => _drawEffects;

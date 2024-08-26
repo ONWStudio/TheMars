@@ -1,14 +1,14 @@
 using Onw.Attribute;
 namespace TMCard.Effect
 {
-    using static ITMEffectCreator;
+    using static ITMCardEffectCreator;
 
     [SerializeReferenceDropdownName("(특수) 설치"), Substitution("설치")]
-    public sealed class InstallationEffectCreator : ITMSpecialEffectCreator
+    public sealed class InstallationEffectCreator : ITMCardSpecialEffectCreator
     {
         public ITMCardEffect CreateEffect()
         {
-            return EffectGenerator.CreateEffect<InstallationEffect, InstallationEffectCreator>(this);
+            return CardEffectGenerator.CreateEffect<InstallationEffect, InstallationEffectCreator>(this);
         }
     }
 }

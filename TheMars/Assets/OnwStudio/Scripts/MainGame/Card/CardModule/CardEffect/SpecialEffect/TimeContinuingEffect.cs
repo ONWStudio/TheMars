@@ -7,7 +7,7 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 지속 (시간)
     /// </summary>
-    public sealed class TimeContinuingEffect : TMCardSpecialEffect, ITMInitializeEffect<TimeContinuingEffectCreator>
+    public sealed class TimeContinuingEffect : TMCardSpecialEffect, ITMCardInitializeEffect<TimeContinuingEffectCreator>
     {
         /// <summary>
         /// .. 지속 시간

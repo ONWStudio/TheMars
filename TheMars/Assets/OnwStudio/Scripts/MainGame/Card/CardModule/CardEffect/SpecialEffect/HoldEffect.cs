@@ -9,7 +9,7 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 보유
     /// </summary>
-    public sealed class HoldEffect : TMCardSpecialEffect, ITMInitializeEffect<HoldEffectCreator>, ITMEffectTrigger, ITMInnerEffector
+    public sealed class HoldEffect : TMCardSpecialEffect, ITMCardInitializeEffect<HoldEffectCreator>, ITMEffectTrigger, ITMInnerEffector
     {
         public IReadOnlyList<ITMNormalEffect> InnerEffect => _holdEffects;
 

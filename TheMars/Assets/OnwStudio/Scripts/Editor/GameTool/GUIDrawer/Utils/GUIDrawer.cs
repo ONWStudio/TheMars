@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace TMGUITool
+namespace TMGuiTool
 {
     internal sealed partial class GUIToolDrawer : EditorWindow
     {

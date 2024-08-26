@@ -5,13 +5,13 @@ using UnityEngine;
 using UnityEngine.Serialization;
 namespace TMCard.Effect
 {
-    using static ITMEffectCreator;
+    using static ITMCardEffectCreator;
 
     [SerializeReferenceDropdownName("(특수) 드로우")]
-    public sealed class DrawEffectCreator : ITMSpecialEffectCreator
+    public sealed class DrawEffectCreator : ITMCardSpecialEffectCreator
     {
         [SerializeReference, DisplayAs("드로우 효과"), FormerlySerializedAs("_drawEffectCreators"), SerializeReferenceDropdown]
-        private List<ITMNormalEffectCreator> _drawEffectCreators = new();
+        private List<ITMCardNormalEffectCreator> _drawEffectCreators = new();
 
         public IEnumerable<ITMNormalEffect> DrawEffects => _drawEffectCreators
             .Select(creator => creator.CreateEffect())
@@ -19,7 +19,7 @@ namespace TMCard.Effect
 
         public ITMCardEffect CreateEffect()
         {
-            return EffectGenerator.CreateEffect<DrawEffect, DrawEffectCreator>(this);
+            return CardEffectGenerator.CreateEffect<DrawEffect, DrawEffectCreator>(this);
         }
     }
 }

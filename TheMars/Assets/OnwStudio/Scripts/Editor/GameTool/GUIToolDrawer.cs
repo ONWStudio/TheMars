@@ -8,7 +8,7 @@ using Onw.Helper;
 using Onw.Extensions;
 using static Onw.Editor.EditorGUIHelper;
 
-namespace TMGUITool
+namespace TMGuiTool
 {
     internal sealed partial class GUIToolDrawer : EditorWindow
     {

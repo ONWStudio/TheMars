@@ -6,12 +6,42 @@ using UnityEngine.Events;
 
 namespace Onw.Event
 {
+    public interface IUnityEventListenerModifier
+    {
+        void AddListener(UnityAction call);
+        void RemoveListener(UnityAction call);
+    }
+
+    public interface IUnityEventListenerModifier<T>
+    {
+        void AddListener(UnityAction<T> call);
+        void RemoveListener(UnityAction<T> call);
+    }
+
+    public interface IUnityEventListenerModifier<T0, T1>
+    {
+        void AddListener(UnityAction<T0, T1> call);
+        void RemoveListener(UnityAction<T0, T1> call);
+    }
+
+    public interface IUnityEventListenerModifier<T0, T1, T2>
+    {
+        void AddListener(UnityAction<T0, T1, T2> call);
+        void RemoveListener(UnityAction<T0, T1, T2> call);
+    }
+
+    public interface IUnityEventListenerModifier<T0, T1, T2, T3>
+    {
+        void AddListener(UnityAction<T0, T1, T2, T3> call);
+        void RemoveListener(UnityAction<T0, T1, T2, T3> call);
+    }
+    
     /// <summary>
     /// .. RemoveAllListener메서드를 제공하지 않는 유니티 이벤트입니다
     /// 딜리게이트에 대한 참조를 관리하지 않는 경우 메모리 누수와 예기치 못한 버그가 발생할 수 있습니다
     /// </summary>
     [Serializable]
-    public sealed class SafeUnityEvent
+    public sealed class SafeUnityEvent : IUnityEventListenerModifier
     {
         [SerializeField] private UnityEvent _unityEvent = new();
 
@@ -25,7 +55,7 @@ namespace Onw.Event
     /// 딜리게이트에 대한 참조를 관리하지 않는 경우 메모리 누수와 예기치 못한 버그가 발생할 수 있습니다
     /// </summary>
     [Serializable]
-    public sealed class SafeUnityEvent<T0>
+    public sealed class SafeUnityEvent<T0> : IUnityEventListenerModifier<T0>
     {
         [SerializeField] private UnityEvent<T0> _unityEvent = new();
 
@@ -39,7 +69,7 @@ namespace Onw.Event
     /// 딜리게이트에 대한 참조를 관리하지 않는 경우 메모리 누수와 예기치 못한 버그가 발생할 수 있습니다
     /// </summary>
     [Serializable]
-    public sealed class SafeUnityEvent<T0, T1>
+    public sealed class SafeUnityEvent<T0, T1> : IUnityEventListenerModifier<T0, T1>
     {
         [SerializeField] private UnityEvent<T0, T1> _unityEvent = new();
 
@@ -53,7 +83,7 @@ namespace Onw.Event
     /// 딜리게이트에 대한 참조를 관리하지 않는 경우 메모리 누수와 예기치 못한 버그가 발생할 수 있습니다
     /// </summary>
     [Serializable]
-    public sealed class SafeUnityEvent<T0, T1, T2>
+    public sealed class SafeUnityEvent<T0, T1, T2> : IUnityEventListenerModifier<T0, T1, T2>
     {
         [SerializeField] private UnityEvent<T0, T1, T2> _unityEvent = new();
 
@@ -67,7 +97,7 @@ namespace Onw.Event
     /// 딜리게이트에 대한 참조를 관리하지 않는 경우 메모리 누수와 예기치 못한 버그가 발생할 수 있습니다
     /// </summary>
     [Serializable]
-    public sealed class SafeUnityEvent<T0, T1, T2, T3>
+    public sealed class SafeUnityEvent<T0, T1, T2, T3> : IUnityEventListenerModifier<T0, T1, T2, T3>
     {
         [SerializeField] private UnityEvent<T0, T1, T2, T3> _unityEvent = new();
 

@@ -7,7 +7,7 @@ namespace TMCard.Effect
     /// <summary>
     /// .. 소요 (턴)
     /// </summary>
-    public sealed class TurnDelayEffect : TMCardSpecialEffect, ITMInitializeEffect<TurnDelayEffectCreator>
+    public sealed class TurnDelayEffect : TMCardSpecialEffect, ITMCardInitializeEffect<TurnDelayEffectCreator>
     {
         /// <summary>
         /// .. 소요시킬 턴

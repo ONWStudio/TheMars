@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 namespace TMCard.Effect
 {
-    public sealed partial class HoldEffectCreator : ITMEffectCreator
+    public sealed partial class HoldEffectCreator : ITMCardEffectCreator
     {
         [OnChangedValueByMethod(nameof(FriendlyCard))]
         private void OnChangedFriendlyCard()
@@ -19,9 +19,9 @@ namespace TMCard.Effect
                     .LoadAssetAtPath<TMCardData>(AssetDatabase.GUIDToAssetPath(guid));
 
                 FieldInfo fieldInfo = cardData.GetType().GetField("_effectCreators", BindingFlags.Instance | BindingFlags.NonPublic);
-                if (fieldInfo?.GetValue(cardData) is List<ITMEffectCreator> specialEffects)
+                if (fieldInfo?.GetValue(cardData) is List<ITMCardEffectCreator> specialEffects)
                 {
-                    foreach (ITMEffectCreator cardSpecialEffect in specialEffects)
+                    foreach (ITMCardEffectCreator cardSpecialEffect in specialEffects)
                     {
                         if (cardSpecialEffect is not HoldEffectCreator holdCard || holdCard != this || FriendlyCard != cardData) continue;
 

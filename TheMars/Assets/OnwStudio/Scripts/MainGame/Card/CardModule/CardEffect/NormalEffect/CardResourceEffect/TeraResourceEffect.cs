@@ -7,16 +7,16 @@ using UnityEngine;
 
 namespace TMCard.Effect.Resource
 {
-    public sealed class TeraResourceEffect : ITMCardResourceEffect, ITMInitializeEffect<TeraResourceEffectCreator>
+    public sealed class TeraResourceEffect : ITMCardResourceEffect, ITMCardInitializeEffect<TeraResourceCardEffectCreator>
     {
         public SafeAction<string> Event { get; } = new();
 
         public string Description => $"<sprite={(int)TMRequiredResource.TERA}> {(Amount < 0 ? Amount.ToString() : $"+{Amount}")}";
         [field: SerializeField, DisplayAs("소모 재화"), Tooltip("소모 재화"), ReadOnly] public int Amount { get; private set; }
 
-        public void Initialize(TeraResourceEffectCreator effectCreator)
+        public void Initialize(TeraResourceCardEffectCreator cardEffectCreator)
         {
-            Amount = effectCreator.Amount;
+            Amount = cardEffectCreator.Amount;
         }
 
         public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)

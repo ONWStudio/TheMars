@@ -1,9 +1,8 @@
 using Onw.Interface;
 using TMCard.Runtime;
+
 namespace TMCard.Effect
 {
-
-    
     public interface ITMCardEffect : IDescriptable
     {
         /// <summary>

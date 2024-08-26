@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.Serialization;
 namespace TMCard.Effect
 {
-    using static ITMEffectCreator;
+    using static ITMCardEffectCreator;
 
     [SerializeReferenceDropdownName("(특수) 보유"), Substitution("보유")]
-    public sealed partial class HoldEffectCreator : ITMSpecialEffectCreator
+    public sealed partial class HoldEffectCreator : ITMCardSpecialEffectCreator
     {
         public IEnumerable<ITMNormalEffect> NormalEffects => _holdEffects
             .Select(creator => creator.CreateEffect())
@@ -18,11 +18,11 @@ namespace TMCard.Effect
         public TMCardData FriendlyCard { get; private set; }
 
         [SerializeReference, FormerlySerializedAs("_holdEffects"), DisplayAs("보유 효과"), Tooltip("보유 효과"), SerializeReferenceDropdown]
-        private List<ITMNormalEffectCreator> _holdEffects = new();
+        private List<ITMCardNormalEffectCreator> _holdEffects = new();
 
         public ITMCardEffect CreateEffect()
         {
-            return EffectGenerator.CreateEffect<HoldEffect, HoldEffectCreator>(this);
+            return CardEffectGenerator.CreateEffect<HoldEffect, HoldEffectCreator>(this);
         }
     }
 }

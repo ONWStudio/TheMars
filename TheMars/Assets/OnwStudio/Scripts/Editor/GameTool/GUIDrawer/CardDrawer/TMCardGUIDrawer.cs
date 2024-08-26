@@ -6,10 +6,9 @@ using UnityEditor;
 using TMCard;
 using Onw.ScriptableObjects.Editor;
 using Onw.Editor.GUI;
-using AddressableAssetBundleSpace;
 using static Onw.Editor.EditorGUIHelper;
 
-namespace TMGUITool
+namespace TMGuiTool
 {
     internal sealed partial class GUIToolDrawer : EditorWindow
     {
@@ -30,7 +29,7 @@ namespace TMGUITool
 
             public void Awake()
             {
-                LoadDataFromLocal();
+                _cards.AddRange(ScriptableObjectHandler<TMCardData>.LoadAllScriptableObjects());
                 Page = 1;
             }
 
@@ -51,21 +50,6 @@ namespace TMGUITool
 
                     _scrollViewController
                         .ActionScrollSpace(() => OnInspectorGUI(cardData));
-                }
-            }
-
-            public void LoadDataFromLocal()
-            {
-                _cards.Clear();
-                _cards.AddRange(ScriptableObjectHandler<TMCardData>.LoadAllScriptableObjects());
-            }
-
-            public void SaveDataToLocal()
-            {
-                for (int i = 0; i < _cards.Count; i++)
-                {
-                    AddressableAssetBundleCreator
-                        .CreateAssetBundle($"TMCard_{i + 1}", "TMCardData", _cards[i], "TMCardData");
                 }
             }
         }
