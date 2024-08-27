@@ -10,6 +10,12 @@ namespace Onw.GridTile
 {
     public sealed class GridManager : MonoBehaviour
     {
+        [System.Serializable]
+        public class GridRows
+        {
+            [field: SerializeField] public List<GridTile> Row { get; set; } = new();
+        }
+        
         private const int GRID_SIZE_MIN = 5;
         private const int GRID_SIZE_MAX = 10;
 
@@ -21,23 +27,12 @@ namespace Onw.GridTile
         [field: SerializeField] public SafeUnityEvent<TileArgs> OnExitTile { get; private set; }= new();
         [field: SerializeField] public SafeUnityEvent<TileArgs> OnClickTile { get; private set; } = new();
 
-        public Material CommonMaterial { get; private set; } = null;
+        [SerializeField] private List<GridRows> _tileList = new();
 
-        private void Awake()
+        public void BakeTiles()
         {
-            CommonMaterial = new(Shader.Find("Universal Render Pipeline/Lit"))
-            {
-                color = Color.white
-            };
-        }
-        
-        private void Start()
-        {
-            generateTiles();
-        }
-
-        private void generateTiles()
-        {
+            Debug.Log("Bake");
+            
             // GridManager 오브젝트의 위치를 중심으로 격자 시작 위치 설정
             Vector3 startPosition = transform.position;
         
@@ -46,8 +41,24 @@ namespace Onw.GridTile
             float startX = startPosition.x - calcTileSize * 0.5f;
             float startZ = startPosition.z - calcTileSize * 0.5f;
 
+            foreach (GridRows rows in _tileList)
+            {
+                foreach (GridTile tile in rows.Row)
+                {
+                    DestroyImmediate(tile.gameObject);
+                }
+
+                rows.Row.Clear();
+                rows.Row = null;
+            }
+
+            _tileList.Clear();
+            
             for (int x = 0; x < GridSize; x++)
             {
+                GridRows gridRows = new();
+                _tileList.Add(gridRows);
+                
                 for (int y = 0; y < GridSize; y++)
                 {
                     // 타일 생성
@@ -56,8 +67,6 @@ namespace Onw.GridTile
                         startPosition.y, 
                         startZ + y * TileSize);
 
-                    Vector2Int tilePoint = new(x, y);
-                    
                     // 새 GameObject 생성
                     GameObject tileObject = new("Tile")
                     {
@@ -68,10 +77,15 @@ namespace Onw.GridTile
                         }
                     };
             
+                    Material material = new(Shader.Find("Universal Render Pipeline/Lit"))
+                    {
+                        color = Color.white
+                    };
+                    
                     tileObject.transform.SetParent(gameObject.transform);
                     GridTile gridTile = tileObject.AddComponent<GridTile>();
-                    gridTile.GridManager = this;
-                    gridTile.TilePoint = tilePoint;
+                    gridTile.CreateTile(this, material, new(x, y));
+                    gridRows.Row.Add(gridTile);
                 }
             }
         }

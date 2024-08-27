@@ -69,15 +69,16 @@ namespace TMCard.UI
                 {
                     if (_selectCard)
                     {
-                        if (_selectCard != card)
+                        _selectCard.transform.localScale = new(1f, 1f, 1f);
+                        
+                        if (_selectCard == card)
                         {
-                            _selectCard = card;
-                            _selectCard.transform.localScale = new Vector3(_selectCard.transform.localScale.x, _selectCard.transform.localScale.y, 0f) * 1.25f;
+                            _selectCard = null;
                         }
                         else
                         {
-                            _selectCard.transform.localScale = new(1f, 1f, 1f);
-                            _selectCard = null;
+                            _selectCard = card;
+                            _selectCard.transform.localScale = new Vector3(_selectCard.transform.localScale.x, _selectCard.transform.localScale.y, 0f) * 1.25f;
                         }
                     }
                     else

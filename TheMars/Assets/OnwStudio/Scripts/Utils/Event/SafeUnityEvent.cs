@@ -8,32 +8,32 @@ namespace Onw.Event
 {
     public interface IUnityEventListenerModifier
     {
-        void AddListener(UnityAction call);
-        void RemoveListener(UnityAction call);
+        void AddListener(in UnityAction call);
+        void RemoveListener(in UnityAction call);
     }
 
     public interface IUnityEventListenerModifier<T>
     {
-        void AddListener(UnityAction<T> call);
-        void RemoveListener(UnityAction<T> call);
+        void AddListener(in UnityAction<T> call);
+        void RemoveListener(in UnityAction<T> call);
     }
 
     public interface IUnityEventListenerModifier<T0, T1>
     {
-        void AddListener(UnityAction<T0, T1> call);
-        void RemoveListener(UnityAction<T0, T1> call);
+        void AddListener(in UnityAction<T0, T1> call);
+        void RemoveListener(in UnityAction<T0, T1> call);
     }
 
     public interface IUnityEventListenerModifier<T0, T1, T2>
     {
-        void AddListener(UnityAction<T0, T1, T2> call);
-        void RemoveListener(UnityAction<T0, T1, T2> call);
+        void AddListener(in UnityAction<T0, T1, T2> call);
+        void RemoveListener(in UnityAction<T0, T1, T2> call);
     }
 
     public interface IUnityEventListenerModifier<T0, T1, T2, T3>
     {
-        void AddListener(UnityAction<T0, T1, T2, T3> call);
-        void RemoveListener(UnityAction<T0, T1, T2, T3> call);
+        void AddListener(in UnityAction<T0, T1, T2, T3> call);
+        void RemoveListener(in UnityAction<T0, T1, T2, T3> call);
     }
     
     /// <summary>
@@ -45,8 +45,8 @@ namespace Onw.Event
     {
         [SerializeField] private UnityEvent _unityEvent = new();
 
-        public void AddListener(UnityAction call) => _unityEvent.AddListener(call);
-        public void RemoveListener(UnityAction call) => _unityEvent.RemoveListener(call);
+        public void AddListener(in UnityAction call) => _unityEvent.AddListener(call);
+        public void RemoveListener(in UnityAction call) => _unityEvent.RemoveListener(call);
         public void Invoke() => _unityEvent.Invoke();
     }
 
@@ -59,9 +59,9 @@ namespace Onw.Event
     {
         [SerializeField] private UnityEvent<T0> _unityEvent = new();
 
-        public void AddListener(UnityAction<T0> call) => _unityEvent.AddListener(call);
-        public void RemoveListener(UnityAction<T0> call) => _unityEvent.RemoveListener(call);
-        public void Invoke(T0 item) => _unityEvent.Invoke(item);
+        public void AddListener(in UnityAction<T0> call) => _unityEvent.AddListener(call);
+        public void RemoveListener(in UnityAction<T0> call) => _unityEvent.RemoveListener(call);
+        public void Invoke(in T0 item) => _unityEvent.Invoke(item);
     }
 
     /// <summary>
@@ -73,9 +73,9 @@ namespace Onw.Event
     {
         [SerializeField] private UnityEvent<T0, T1> _unityEvent = new();
 
-        public void AddListener(UnityAction<T0, T1> call) => _unityEvent.AddListener(call);
-        public void RemoveListener(UnityAction<T0, T1> call) => _unityEvent.RemoveListener(call);
-        public void Invoke(T0 item1, T1 item2) => _unityEvent.Invoke(item1, item2);
+        public void AddListener(in UnityAction<T0, T1> call) => _unityEvent.AddListener(call);
+        public void RemoveListener(in UnityAction<T0, T1> call) => _unityEvent.RemoveListener(call);
+        public void Invoke(in T0 item1, in T1 item2) => _unityEvent.Invoke(item1, item2);
     }
     
     /// <summary>
@@ -87,9 +87,9 @@ namespace Onw.Event
     {
         [SerializeField] private UnityEvent<T0, T1, T2> _unityEvent = new();
 
-        public void AddListener(UnityAction<T0, T1, T2> call) => _unityEvent.AddListener(call);
-        public void RemoveListener(UnityAction<T0, T1, T2> call) => _unityEvent.RemoveListener(call);
-        public void Invoke(T0 item1, T1 item2, T2 item3) => _unityEvent.Invoke(item1, item2, item3);
+        public void AddListener(in UnityAction<T0, T1, T2> call) => _unityEvent.AddListener(call);
+        public void RemoveListener(in UnityAction<T0, T1, T2> call) => _unityEvent.RemoveListener(call);
+        public void Invoke(in T0 item1, in T1 item2, in T2 item3) => _unityEvent.Invoke(item1, item2, item3);
     }
 
     /// <summary>
@@ -101,8 +101,8 @@ namespace Onw.Event
     {
         [SerializeField] private UnityEvent<T0, T1, T2, T3> _unityEvent = new();
 
-        public void AddListener(UnityAction<T0, T1, T2, T3> call) => _unityEvent.AddListener(call);
-        public void RemoveListener(UnityAction<T0, T1, T2, T3> call) => _unityEvent.RemoveListener(call);
-        public void Invoke(T0 item1, T1 item2, T2 item3, T3 item4) => _unityEvent.Invoke(item1, item2, item3, item4);
+        public void AddListener(in UnityAction<T0, T1, T2, T3> call) => _unityEvent.AddListener(call);
+        public void RemoveListener(in UnityAction<T0, T1, T2, T3> call) => _unityEvent.RemoveListener(call);
+        public void Invoke(in T0 item1, in T1 item2, in T2 item3, in T3 item4) => _unityEvent.Invoke(item1, item2, item3, item4);
     }
 }

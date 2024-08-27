@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -390,7 +389,7 @@ namespace TheraBytes.BetterUi
 #if UNITY_EDITOR && UNITY_2018_3_OR_NEWER
             if (!isDirty)
             {
-                StageHandle stage = UnityEditor.SceneManagement.StageUtility.GetCurrentStageHandle();
+                UnityEditor.SceneManagement.StageHandle stage = UnityEditor.SceneManagement.StageUtility.GetCurrentStageHandle();
                 if (stage != currentStage)
                 {
                     currentStage = stage;
@@ -499,7 +498,7 @@ namespace TheraBytes.BetterUi
                 yield return go;
 
 #if UNITY_EDITOR && UNITY_2018_3_OR_NEWER
-            PrefabStage prefabStage =
+            UnityEditor.SceneManagement.PrefabStage prefabStage =
 #if UNITY_2021_2_OR_NEWER
                 UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
 #else

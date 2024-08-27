@@ -8,6 +8,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using Onw.Event;
+using TM;
 
 namespace TMCard.Runtime
 {
@@ -139,8 +140,9 @@ namespace TMCard.Runtime
         private void OnClickCard(PointerEventData pointerEventData)
         {
             if (!SmoothMove.enabled || !ServiceLocator<ITMCardService>.TryGetService(out ITMCardService service)) return;
-            // if (!CardData.IsAvailable(1)) return;
+            if (!CardData.IsAvailable(PlayerManager.Instance.MarsLithium)) return;
 
+            PlayerManager.Instance.MarsLithium -= CardData.Resource;
             OnClickEvent.Invoke(CardEventState.NORMAL);
             service.OnClickCard(this);
         }

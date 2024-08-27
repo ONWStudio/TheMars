@@ -62,7 +62,7 @@ namespace TM.Building.Effect
             {
                 yield return CoroutineHelper.WaitForSeconds(repeatSeconds);
                 Debug.Log("마르스 리튬 획득!");
-                PlayerManager.Instance.MarsLithum += marsLithium;
+                PlayerManager.Instance.MarsLithium += marsLithium;
             }
         }
     }

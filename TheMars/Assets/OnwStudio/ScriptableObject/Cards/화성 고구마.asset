@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <StackID>k__BackingField: 12
   <RequiredResource>k__BackingField: 0
-  <Resource>k__BackingField: 25
+  <Resource>k__BackingField: 2
   <CardKind>k__BackingField: 1
   <CardGrade>k__BackingField: 0
   <CardGroup>k__BackingField: 0
@@ -22,8 +22,8 @@ MonoBehaviour:
     type: 3}
   <CustomDescription>k__BackingField: 
   _effectCreators:
-  - rid: 4776280985179258912
-  - rid: 4776280985179258913
+  - rid: 3847364421810651161
+  - rid: 3847364421810651162
   _additionalConditions: []
   _localizedCardName:
     m_TableReference:
@@ -37,11 +37,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 4776280985179258912
-      type: {class: TimeDelayEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+    - rid: 3847364421810651161
+      type: {class: RecyclingEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
+      data: 
+    - rid: 3847364421810651162
+      type: {class: TMCardCollectEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
       data:
-        <DelayTime>k__BackingField: 60
-    - rid: 4776280985179258913
-      type: {class: TeraResourceEffectCreator, ns: TMCard.Effect.Resource, asm: AssemblyTheMars}
-      data:
-        <Amount>k__BackingField: 60
+        <CollectCount>k__BackingField: 1
+        <SelectKind>k__BackingField: 1

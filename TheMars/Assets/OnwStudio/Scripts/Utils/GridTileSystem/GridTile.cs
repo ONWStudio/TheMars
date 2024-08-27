@@ -6,6 +6,7 @@ using UnityEngine;
 using Onw.Attribute;
 using TMPro;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Onw.GridTile
 {
@@ -16,7 +17,7 @@ namespace Onw.GridTile
         public MeshCollider Collider { get; }
         public Vector2Int TilePoint { get; }
 
-        public TileArgs(MeshRenderer meshRenderer, MeshFilter meshFilter, MeshCollider meshCollider, Vector2Int tilePoint)
+        public TileArgs(MeshRenderer meshRenderer, MeshFilter meshFilter, MeshCollider meshCollider, in Vector2Int tilePoint)
         {
             TileRenderer = meshRenderer;
             MeshFilter = meshFilter;
@@ -27,41 +28,29 @@ namespace Onw.GridTile
     
     public sealed class GridTile : MonoBehaviour
     {
-        public GridManager GridManager
-        {
-            get => _gridManager;
-            set
-            {
-                if (_gridManager) return;
+        [SerializeField, ReadOnly] private MeshRenderer _tileRenderer;
+        [SerializeField, ReadOnly] private MeshCollider _meshCollider;
+        [SerializeField, ReadOnly] private MeshFilter _meshFilter;
 
-                _gridManager = value;
-            }
-        }
-        
-        public Vector2Int TilePoint
-        {
-            get => _tilePoint ?? Vector2Int.zero;
-            set => _tilePoint ??= value;
-        }
+        [field: FormerlySerializedAs("_tilePoint")]
+        [field: SerializeField, ReadOnly] public Vector2Int TilePoint { get; private set; }
 
-        private MeshRenderer _tileRenderer;
-        private MeshCollider _meshCollider;
-        private MeshFilter _meshFilter;
-        private Vector2Int? _tilePoint = null;
-        
         [SerializeField, ReadOnly] private GridManager _gridManager;
         [SerializeField] private List<string> _properties = new(); // .. 각 타일에 속성을 넣을 수 있습니다
 
-        private void Awake()
+        public IReadOnlyList<string> Properties => _properties;
+        public Vector3 Size => _tileRenderer.bounds.size;
+
+        public void CreateTile(GridManager gridManager, Material material, Vector2Int tilePoint)
         {
+            _gridManager = gridManager;
+            TilePoint = tilePoint;
             _meshFilter = gameObject.AddComponent<MeshFilter>();
             _tileRenderer = gameObject.AddComponent<MeshRenderer>();
             _meshCollider = gameObject.AddComponent<MeshCollider>();
-        }
-        
-        private void Start()
-        {
-            _tileRenderer.material.color = Color.white;
+
+            _tileRenderer.sharedMaterial = material;
+            
             Mesh mesh = new();
             float tileSize = _gridManager.TileSize;
 
@@ -97,7 +86,7 @@ namespace Onw.GridTile
             _meshFilter.mesh = mesh;
             _meshCollider.sharedMesh = mesh;
         }
-
+        
         public bool ContainsProperty(string property)
         {
             return _properties.Any(someProperty => someProperty == property);

@@ -2,13 +2,13 @@
 using UnityEditor;
 using UnityEditor.PackageManager.Requests;
 using UnityEditor.PackageManager;
+using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 #endif
 using System;
 using System.Reflection;
 using UnityEngine;
 using System.Threading.Tasks;
 using MoreMountains.Tools;
-using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 namespace MoreMountains.Feedbacks
 {

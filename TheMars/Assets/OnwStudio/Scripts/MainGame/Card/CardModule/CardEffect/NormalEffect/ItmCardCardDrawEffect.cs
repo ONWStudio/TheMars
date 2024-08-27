@@ -8,14 +8,14 @@ using TMCard.Runtime;
 
 namespace TMCard.Effect
 {
-    public sealed class ItmCardCardDrawEffect : ITMNormalEffect, ITMCardInitializeEffect<ItmCardCardDrawEffectCreator>
+    public sealed class ItmCardCardDrawEffect : ITMNormalEffect, ITMCardInitializeEffect<TMCardDrawEffectCreator>
     {
         public string Description => $"덱에서 카드 {_drawCount}개 드로우";
         
         [SerializeField, ReadOnly]
         private int _drawCount;
 
-        public void Initialize(ItmCardCardDrawEffectCreator effectCreator)
+        public void Initialize(TMCardDrawEffectCreator effectCreator)
         {
             _drawCount = effectCreator.DrawCount;
         }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <StackID>k__BackingField: 0
   <RequiredResource>k__BackingField: 0
-  <Resource>k__BackingField: 30
+  <Resource>k__BackingField: 5
   <CardKind>k__BackingField: 1
   <CardGrade>k__BackingField: 0
   <CardGroup>k__BackingField: 0
@@ -22,9 +22,7 @@ MonoBehaviour:
     type: 3}
   <CustomDescription>k__BackingField: 
   _effectCreators:
-  - rid: 3847364264155938824
-  - rid: 3847364316861562884
-  - rid: 3847364316861562885
+  - rid: 3847364421810651154
   _additionalConditions: []
   _localizedCardName:
     m_TableReference:
@@ -38,13 +36,12 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 3847364264155938824
-      type: {class: DisposableEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
-      data: 
-    - rid: 3847364316861562884
-      type: {class: TMCardRemoveEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
-      data: 
-    - rid: 3847364316861562885
-      type: {class: TeraResourceEffectCreator, ns: TMCard.Effect.Resource, asm: AssemblyTheMars}
+    - rid: 3847364421810651154
+      type: {class: DropEffectCreator, ns: TMCard.Effect, asm: AssemblyTheMars}
       data:
-        <Amount>k__BackingField: 0
+        _cardEffectCreators:
+        - rid: 3847364421810651156
+    - rid: 3847364421810651156
+      type: {class: MarsLithumCardEffectCreator, ns: TMCard.Effect.Resource, asm: AssemblyTheMars}
+      data:
+        <Amount>k__BackingField: -1

@@ -22,7 +22,7 @@ namespace TMCard.Effect.Resource
         {
             trigger.OnEffectEvent.AddListener(eventState =>
             {
-                PlayerManager.Instance.MarsLithum += Amount;
+                PlayerManager.Instance.MarsLithium += Amount;
                 Debug.Log(Amount);
                 Debug.Log("마르스 리튬 획득");
             });

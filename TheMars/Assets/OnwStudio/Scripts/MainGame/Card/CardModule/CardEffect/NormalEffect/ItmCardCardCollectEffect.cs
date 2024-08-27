@@ -8,7 +8,7 @@ namespace TMCard.Effect
     /// <summary>
     /// .. TODO : 카드 획득 효과 수정 카드 선택해서 버리기 
     /// </summary>
-    public sealed class ItmCardCardCollectEffect : ITMNormalEffect, ITMCardInitializeEffect<ItmCardCardCollectEffectCreator>
+    public sealed class ItmCardCardCollectEffect : ITMNormalEffect, ITMCardInitializeEffect<TMCardCollectEffectCreator>
     {
         public string Description => $"랜덤 카드를 선택해서 획득";
         
@@ -17,7 +17,7 @@ namespace TMCard.Effect
         [SerializeField, ReadOnly]
         private TMCardKind _selectKind = TMCardKind.NONE;
 
-        public void Initialize(ItmCardCardCollectEffectCreator effectCreator)
+        public void Initialize(TMCardCollectEffectCreator effectCreator)
         {
             _collectCount = effectCreator.CollectCount;
             _selectKind = effectCreator.SelectKind;

@@ -5,7 +5,7 @@ using TMCard.Runtime;
 using UnityEngine;
 namespace TMCard.Effect
 {
-    public sealed class ItmCardCardCopyEffect : ITMNormalEffect, ITMCardInitializeEffect<ItmCardCardCopyEffectCreator>
+    public sealed class ItmCardCardCopyEffect : ITMNormalEffect, ITMCardInitializeEffect<TMCardCopyEffectCreator>
     {
         public string Description => $"'{(_copyCardData ? _copyCardData.CardName : "")}'카드를 {_copyCount}개 획득";
 
@@ -14,7 +14,7 @@ namespace TMCard.Effect
         [SerializeField, ReadOnly]
         private int _copyCount;
 
-        public void Initialize(ItmCardCardCopyEffectCreator effectCreator)
+        public void Initialize(TMCardCopyEffectCreator effectCreator)
         {
             _copyCardData = effectCreator.CopyCardData;
             _copyCount = effectCreator.CopyCount;
