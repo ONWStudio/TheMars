@@ -6,6 +6,8 @@ using System.Reflection;
 using Onw.Helper;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.WSA;
+using UnityEngine.UIElements;
 
 namespace Onw.GridTile.Editor
 {
@@ -17,14 +19,7 @@ namespace Onw.GridTile.Editor
     {
         private const string WINDOW_OPTION_KEY = "GridManagerInspector_WindowOption";
 
-        [System.Serializable]
-        private struct SerializedWindowOption
-        {
-            public SerializedRect Rect;
-            public Vector2 Offset;
-        }
-
-        private Rect _windowRect = new Rect(40, 30, 200, 400); // 창의 초기 위치와 크기
+        private Rect _windowRect = new(40, 30, 200, 400); // 창의 초기 위치와 크기
         private bool _isResizing = false;                      // 크기 조절 상태 확인
         private bool _isDragging = false;                      // 드래그 상태 확인
 
@@ -43,7 +38,7 @@ namespace Onw.GridTile.Editor
             if (EditorPrefs.HasKey(WINDOW_OPTION_KEY))
             {
                 SerializedRect windowOption = JsonUtility.FromJson<SerializedRect>(EditorPrefs.GetString(WINDOW_OPTION_KEY));
-                // _windowRect = windowOption.ToRect();
+                //_windowRect = windowOption.ToRect();
             }
         }
 
@@ -80,8 +75,8 @@ namespace Onw.GridTile.Editor
 
             _windowRect = GUI.Window(0, _windowRect, drawWindowContents, "Tile Option", _windowStyle);
 
-            Handles.EndGUI();
             handleWindowDragAndResize();
+            Handles.EndGUI();
         }
 
         private void drawWindowContents(int windowID)
@@ -94,7 +89,7 @@ namespace Onw.GridTile.Editor
                 Selection.activeGameObject = _gridManager.gameObject;
             }
 
-            GUI.DragWindow(new Rect(0, 0, _windowRect.width, 20)); // 상단 20px 영역을 드래그 가능하도록 설정
+            GUI.DragWindow(new(0, 0, _windowRect.width, 20)); // 상단 20px 영역을 드래그 가능하도록 설정
         }
 
         private void handleWindowDragAndResize()
@@ -120,8 +115,6 @@ namespace Onw.GridTile.Editor
             setCursor(topArea, MouseCursor.ResizeVertical);
             setCursor(rightTopArea, MouseCursor.ResizeUpRight);
 
-
-
             if (currentEvent.type == EventType.MouseDown)
             {
 
@@ -129,8 +122,9 @@ namespace Onw.GridTile.Editor
 
             void setCursor(Rect rect, MouseCursor cursor)
             {
-                EditorGUIUtility.AddCursorRect(rect, cursor);
+                EditorGUIUtility.AddCursorRect(SceneView.currentDrawingSceneView.rootVisualElement.parent.parent.contentRect, MouseCursor.ResizeUpRight);
             }
+
         }
     }
 }
