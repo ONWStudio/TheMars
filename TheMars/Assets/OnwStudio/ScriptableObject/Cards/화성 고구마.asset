@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: "\uD654\uC131 \uACE0\uAD6C\uB9C8"
   m_EditorClassIdentifier: 
   <StackID>k__BackingField: 12
-  <RequiredResource>k__BackingField: 0
-  <Resource>k__BackingField: 2
+  <RequiredResource>k__BackingField: 1
+  <Resource>k__BackingField: 10
   <CardKind>k__BackingField: 1
   <CardGrade>k__BackingField: 0
   <CardGroup>k__BackingField: 0
