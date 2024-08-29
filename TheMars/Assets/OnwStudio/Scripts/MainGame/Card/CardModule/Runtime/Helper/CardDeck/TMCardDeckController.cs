@@ -14,17 +14,17 @@ namespace TMCard.Runtime
 
         [FormerlySerializedAs("cards")]
         [SerializeField]
-        private List<TMCardController> _cards = new();
+        private List<TMCardModel> _cards = new();
 
         /// <summary>
         /// .. 카드를 List의 형태로 받아옵니다
         /// </summary>
         /// <param name="count"> .. 받아올 카드 개수 덱에 카드가 부족한 경우 가지고 있는 만큼만 반환합니다 </param>
         /// <returns> .. 덱에서 반환된 카드들 </returns>
-        public List<TMCardController> DequeueCards(int count)
+        public List<TMCardModel> DequeueCards(int count)
         {
             count = Mathf.Clamp(count, 0, 10);
-            List<TMCardController> someCards = new(count);
+            List<TMCardModel> someCards = new(count);
 
             while (someCards.Count < count && _cards.Count > 0)
             {
@@ -41,7 +41,7 @@ namespace TMCard.Runtime
         /// .. 덱에 카드들을 넘겨줍니다
         /// </summary>
         /// <param name="cards"> .. 넘겨줄 카드 리스트 </param>
-        public void PushCards(List<TMCardController> cards)
+        public void PushCards(List<TMCardModel> cards)
         {
             cards.ForEach(card => card.transform.SetParent(transform, false));
             _cards.AddRange(cards);

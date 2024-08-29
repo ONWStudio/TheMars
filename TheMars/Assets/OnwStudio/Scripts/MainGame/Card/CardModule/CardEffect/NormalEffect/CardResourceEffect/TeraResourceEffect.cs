@@ -19,7 +19,7 @@ namespace TMCard.Effect.Resource
             Amount = cardEffectCreator.Amount;
         }
 
-        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
+        public void ApplyEffect(TMCardModel model, ITMEffectTrigger trigger)
         {
             trigger.OnEffectEvent.AddListener(eventState =>
             {

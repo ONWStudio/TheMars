@@ -7,23 +7,23 @@ using Onw.UI;
 
 namespace TMCard.Runtime
 {
-    public sealed class LineSorter : ICardSorter
+    public sealed class LineSorter : ITMCardSorter
     {
-        public List<PositionRotationInfo> SortCards(List<TMCardController> cards, RectTransform rectTransform)
+        public List<PositionRotationInfo> SortCards(List<TMCardModel> cards, RectTransform rectTransform)
         {
             return cards.Select((t, i) => getPositionRotationInfo(cards, i, rectTransform)).ToList();
         }
         
-        public PositionRotationInfo ArrangeCard(List<TMCardController> cards, int index, RectTransform rectTransform)
+        public PositionRotationInfo ArrangeCard(List<TMCardModel> cards, int index, RectTransform rectTransform)
         {
             if (index < 0 || index >= cards.Count) return null;
 
             return getPositionRotationInfo(cards, index, rectTransform);
         }
 
-        private static PositionRotationInfo getPositionRotationInfo(List<TMCardController> cards, int index, RectTransform rectTransform)
+        private static PositionRotationInfo getPositionRotationInfo(List<TMCardModel> cards, int index, RectTransform rectTransform)
         {
-            TMCardController card = cards[index];
+            TMCardModel card = cards[index];
 
             float width = rectTransform.rect.width;
             float normalizedValue = (float)(index + 1) / (cards.Count + 1);

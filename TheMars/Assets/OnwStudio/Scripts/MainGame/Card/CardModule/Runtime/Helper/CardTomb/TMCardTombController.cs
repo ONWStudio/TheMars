@@ -11,23 +11,23 @@ namespace TMCard.Runtime
 
         [FormerlySerializedAs("deadCards")]
         [SerializeField]
-        private List<TMCardController> _deadCards = new();
+        private List<TMCardModel> _deadCards = new();
 
-        public void EnqueueDeadCards(List<TMCardController> cards)
+        public void EnqueueDeadCards(List<TMCardModel> cards)
         {
             cards.ForEach(card => card.transform.SetParent(transform, false));
             _deadCards.AddRange(cards);
         }
 
-        public void EnqueueDeadCard(TMCardController card)
+        public void EnqueueDeadCard(TMCardModel card)
         {
             card.transform.SetParent(transform, false);
             _deadCards.Add(card);
         }
 
-        public List<TMCardController> DequeueDeadCards()
+        public List<TMCardModel> DequeueDeadCards()
         {
-            List<TMCardController> deadCards = _deadCards.ToList();
+            List<TMCardModel> deadCards = _deadCards.ToList();
             _deadCards.Clear();
 
             return deadCards;

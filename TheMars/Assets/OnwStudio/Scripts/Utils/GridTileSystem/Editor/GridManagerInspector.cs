@@ -13,17 +13,14 @@ namespace Onw.GridTile.Editor
     [CustomEditor(typeof(GridManager))]
     internal sealed class GridManagerInspector : Editor
     {
-        private GridManager _gridManager = null;
         private readonly List<GridManager.GridRows> _tileList = new();
+        private GridManager _gridManager = null;
         private GUIStyle _style = null;
         
         private void OnEnable()
         {
             _gridManager = target as GridManager;
-            _tileList.AddRange(_gridManager!
-                .GetType()
-                .GetField("_tileList", BindingFlags.Instance | BindingFlags.NonPublic)!
-                .GetValue(_gridManager) as List<GridManager.GridRows> ?? throw new InvalidOperationException());
+            initializeTile();
         }
 
         public override void OnInspectorGUI()
@@ -33,7 +30,17 @@ namespace Onw.GridTile.Editor
             if (GUILayout.Button("Bake Tiles"))
             {
                 _gridManager.BakeTiles();
+                initializeTile();
             }
+        }
+
+        private void initializeTile()
+        {
+            _tileList.Clear();
+            _tileList.AddRange(_gridManager!
+                .GetType()
+                .GetField("_tileList", BindingFlags.Instance | BindingFlags.NonPublic)!
+                .GetValue(_gridManager) as List<GridManager.GridRows> ?? throw new InvalidOperationException());
         }
 
         private void OnSceneGUI()

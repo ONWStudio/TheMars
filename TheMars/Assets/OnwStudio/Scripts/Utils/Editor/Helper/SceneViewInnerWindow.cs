@@ -27,8 +27,7 @@ namespace Onw.Editor.GUI
         {
             if (EditorPrefs.HasKey(_windowOptionKey))
             {
-                SerializedRect windowOption = JsonUtility.FromJson<SerializedRect>(EditorPrefs.GetString(_windowOptionKey));
-                _windowRect = windowOption.ToRect();
+                _windowRect = JsonUtility.FromJson<SerializedRect>(EditorPrefs.GetString(_windowOptionKey));
             }
         }
 
@@ -109,7 +108,7 @@ namespace Onw.Editor.GUI
             setCursor(rightArea, MouseCursor.ResizeHorizontal);
             setCursor(topArea, MouseCursor.ResizeVertical);
             setCursor(rightTopArea, MouseCursor.ResizeUpRight);
-
+            
             switch (currentEvent.type)
             {
                 case EventType.MouseDown:
@@ -191,6 +190,8 @@ namespace Onw.Editor.GUI
                             {
                                 _windowRect.width = 100;
                             }
+                            
+                            currentEvent.Use();
                         }
 
                         if (_isResizingRight)
@@ -206,6 +207,8 @@ namespace Onw.Editor.GUI
                             {
                                 _windowRect.width = 100;
                             }
+                            
+                            currentEvent.Use();
                         }
 
                         if (_isResizingTop)
@@ -225,6 +228,8 @@ namespace Onw.Editor.GUI
                             {
                                 _windowRect.height = 200;
                             }
+                            
+                            currentEvent.Use();
                         }
 
                         if (_isResizingBottom)
@@ -240,9 +245,9 @@ namespace Onw.Editor.GUI
                             {
                                 _windowRect.height = 200;
                             }
-                        }
 
-                        currentEvent.Use();
+                            currentEvent.Use();
+                        }
                         break;
                     }
                 case EventType.MouseUp:
@@ -253,7 +258,7 @@ namespace Onw.Editor.GUI
                     break;
             }
 
-            void setCursor(Rect rect, MouseCursor cursor)
+            void setCursor(in Rect rect, in MouseCursor cursor)
             {
                 EditorGUIUtility.AddCursorRect(new(rect.x, rect.y + toolbarHeight, rect.width, rect.height), cursor);
             }

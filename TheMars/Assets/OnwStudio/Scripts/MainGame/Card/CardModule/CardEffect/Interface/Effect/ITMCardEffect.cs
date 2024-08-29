@@ -8,6 +8,6 @@ namespace TMCard.Effect
         /// <summary>
         /// .. 카드 사용시
         /// </summary>
-        void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger);
+        void ApplyEffect(TMCardModel model, ITMEffectTrigger trigger);
     }
 }

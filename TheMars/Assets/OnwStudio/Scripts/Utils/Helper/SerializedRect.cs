@@ -21,6 +21,16 @@ namespace Onw.Helper
             Height = rect.height;
         }
 
+        public static implicit operator SerializedRect(in Rect rect)
+        {
+            return new(rect);
+        }
+
+        public static implicit operator Rect(SerializedRect serializedRect)
+        {
+            return serializedRect.ToRect();
+        }
+
         public Rect ToRect()
         {
             return new(X, Y, Width, Height);

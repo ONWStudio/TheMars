@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
+using UnityEngine;
+using Onw.Extensions;
 using Onw.Attribute;
 using TM.Building.Effect;
-using UnityEngine;
 
 namespace TM.Building
 {
     public sealed class TMBuilding : MonoBehaviour
     {
-        [field: SerializeField] public int BuildingLevel { get; private set; } = 1;
-
-        [SerializeField] private List<ITMBuildingEffect> _buildingEffects = new();
-
+        [field: Header("Building State")]
+        [field: SerializeField, ReadOnly] public int BuildingLevel { get; private set; } = 1;
+        [field: SerializeField, ReadOnly] public bool OnTile { get; private set; } = false;
+        
+        [Header("Building Data")]
         [SerializeField, ReadOnly] private TMBuildingData _buildingData;
 
-
+        [SerializeField, ReadOnly] private List<ITMBuildingEffect> _buildingEffects;
+        
         public void Initialize(TMBuildingData buildingData)
         {
             if (_buildingData) return;
@@ -39,16 +41,13 @@ namespace TM.Building
                     case 3:
                         buildingEffect.ApplyEffectLevelThree(this);
                         break;
-                    default:
-                        buildingEffect.ApplyEffectLevelOne(this);
-                        break;
                 }
             }
         }
-
+        
         public void DisableBuilding()
         {
-            _buildingEffects.ForEach(effect => effect.DisableEffect(this));
+            _buildingData.BuildingEffects.ForEach(effect => effect.DisableEffect(this));
         }
     }
 }

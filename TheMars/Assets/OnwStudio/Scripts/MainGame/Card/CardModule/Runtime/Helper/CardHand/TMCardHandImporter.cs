@@ -14,17 +14,17 @@ namespace TMCard.Runtime
         public int Stack => _cardQueue.Count;
 
         [SerializeField]
-        private Queue<TMCardController> _cardQueue = new(10);
+        private Queue<TMCardModel> _cardQueue = new(10);
 
-        public void PushCards(IEnumerable<TMCardController> cards)
+        public void PushCards(IEnumerable<TMCardModel> cards)
             => cards.ForEach(_cardQueue.Enqueue);
 
-        public void PushCard(TMCardController card)
+        public void PushCard(TMCardModel card)
             => _cardQueue.Enqueue(card);
 
-        public List<TMCardController> GetCards(int count)
+        public List<TMCardModel> GetCards(int count)
         {
-            List<TMCardController> cards = new(count);
+            List<TMCardModel> cards = new(count);
             count = Mathf.Clamp(count, 0, 10);
 
             for (int i = 0; i < count; i++)

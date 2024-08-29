@@ -6,7 +6,7 @@ namespace TMCard.Runtime
     /// .. 카드를 부채꼴의 형태로 정렬시키는 클래스 입니다
     /// 높이는 너비 기준 비율로 정합니다
     /// </summary>
-    public sealed class SectorForm : ICardSorter
+    public sealed class SectorForm : ITMCardSorter
     {
         /// <summary>
         /// .. 최대 앵글 값
@@ -23,7 +23,7 @@ namespace TMCard.Runtime
         /// <param name="cards"> .. 카드의 움직임을 정하는 무브먼트 클래스를 받습니다 </param>
         /// <param name="index"> .. 배치시킬 카드의 인덱스 </param>
         /// <param name="rectTransform"> .. 비율로 배치시키기 때문에 기준이 되는 렉트 트랜스폼을 인자값으로 넣어줍니다 </param> 
-        public PositionRotationInfo ArrangeCard(List<TMCardController> cards, int index, RectTransform rectTransform)
+        public PositionRotationInfo ArrangeCard(List<TMCardModel> cards, int index, RectTransform rectTransform)
         {
             float angleStep = MaxAngle / (cards.Count > 1 ? (cards.Count - 1) : 2);
             float startAngle = -MaxAngle * 0.5f;
@@ -40,7 +40,7 @@ namespace TMCard.Runtime
         /// </summary>
         /// <param name="cards"> .. 카드의 움직임을 정하는 무브먼트 클래스를 받습니다 </param>
         /// <param name="rectTransform"> .. 비율로 배치시키기 때문에 기준이 되는 렉트 트랜스폼을 인자값으로 넣어줍니다 </param> 
-        public List<PositionRotationInfo> SortCards(List<TMCardController> cards, RectTransform rectTransform)
+        public List<PositionRotationInfo> SortCards(List<TMCardModel> cards, RectTransform rectTransform)
         {
             List<PositionRotationInfo> result = new(cards.Count);
 
@@ -60,7 +60,7 @@ namespace TMCard.Runtime
             return result;
         }
 
-        private PositionRotationInfo runTargetTransform(TMCardController card, int index, float angleStep, float startAngle, RectTransform rectTransform)
+        private PositionRotationInfo runTargetTransform(TMCardModel card, int index, float angleStep, float startAngle, RectTransform rectTransform)
         {
             float angle = startAngle + angleStep * index;
             float radian = angle * Mathf.Deg2Rad;

@@ -9,7 +9,7 @@ namespace TMCard.Effect
     {
         public string Description => "카드 발견";
 
-        public void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger)
+        public void ApplyEffect(TMCardModel model, ITMEffectTrigger trigger)
         {
             trigger.OnEffectEvent.AddListener(eventState => Debug.Log("카드 발견"));
         }

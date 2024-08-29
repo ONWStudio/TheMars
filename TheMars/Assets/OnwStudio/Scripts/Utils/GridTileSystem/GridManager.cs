@@ -28,7 +28,7 @@ namespace Onw.GridTile
         [field: SerializeField] public SafeUnityEvent<TileArgs> OnClickTile { get; private set; } = new();
 
         [SerializeField] private List<GridRows> _tileList = new();
-
+        
         public void BakeTiles()
         {
             Debug.Log("Bake");
@@ -54,6 +54,11 @@ namespace Onw.GridTile
 
             _tileList.Clear();
             
+            Material material = new(Shader.Find("Universal Render Pipeline/Lit"))
+            {
+                color = Color.white
+            };
+            
             for (int x = 0; x < GridSize; x++)
             {
                 GridRows gridRows = new();
@@ -75,11 +80,6 @@ namespace Onw.GridTile
                             // 타일 위치 설정
                             position = tilePosition
                         }
-                    };
-            
-                    Material material = new(Shader.Find("Universal Render Pipeline/Lit"))
-                    {
-                        color = Color.white
                     };
                     
                     tileObject.transform.SetParent(gameObject.transform);

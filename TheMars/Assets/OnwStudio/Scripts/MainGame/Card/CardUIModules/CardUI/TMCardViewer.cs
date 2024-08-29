@@ -4,12 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Serialization;
-using UnityEngine.Localization.Components;
 using TMPro;
-using Onw.Helper;
 using Onw.Attribute;
-using Onw.Interface;
-using Onw.Localization;
 using TMCard.Effect;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -47,7 +43,7 @@ namespace TMCard.Runtime
         [SerializeField, SelectableSerializeField]
         private TextMeshProUGUI _costText;
 
-        private Action<Locale> _onLauguageChanged = null;
+        private Action<Locale> _onLanguageChanged = null;
         
         private void buildDescriptionText(ITMCardEffect[] effects)
         {
@@ -57,32 +53,27 @@ namespace TMCard.Runtime
                 string.Join("\n", effects.OfType<TMCardSpecialEffect>().Select(effect => effect.Description));
         }
         
-        public void SetUI(TMCardData cardData, ITMCardEffect[] effects)
+        public void SetUI(TMCardData cardData)
         {
             _cardImage.sprite = cardData.CardImage;
 
-            _costText.text = $"<sprite={((int)cardData.RequiredResource).ToString()}> \n{cardData.Resource}";
-            _costFieldImage.color = cardData.RequiredResource == TMRequiredResource.TERA ?
-                ColorUtils.GetColorFrom255(150, 203, 255) :
-                ColorUtils.GetColorFrom255(255, 162, 255);
+            // buildDescriptionText(effects);
+            // _onLanguageChanged = locale => buildDescriptionText(effects);
 
-            buildDescriptionText(effects);
-            _onLauguageChanged = locale => buildDescriptionText(effects);
-
-            foreach (INotifier notifier in effects.OfType<INotifier>())
-            {
-                notifier.Event.AddListener(eventType => buildDescriptionText(effects));
-            }
+            // foreach (INotifier notifier in effects.OfType<INotifier>())
+            // {
+            //     notifier.Event.AddListener(eventType => buildDescriptionText(effects));
+            // }
             
             _nameText.text = cardData.CardName;
-            _onLauguageChanged += locale => _nameText.text = cardData.CardName;
+            _onLanguageChanged += locale => _nameText.text = cardData.CardName;
             
-            LocalizationSettings.SelectedLocaleChanged += _onLauguageChanged;
+            LocalizationSettings.SelectedLocaleChanged += _onLanguageChanged;
         }
 
         private void OnDestroy()
         {
-            LocalizationSettings.SelectedLocaleChanged -= _onLauguageChanged;
+            LocalizationSettings.SelectedLocaleChanged -= _onLanguageChanged;
         }
     }
 }

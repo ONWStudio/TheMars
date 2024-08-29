@@ -16,7 +16,7 @@ namespace TMCard.Effect
 
         public ITMCardEffect CreateEffect()
         {
-            return CardEffectGenerator.CreateEffect<ItmCardCardCollectEffect, TMCardCollectEffectCreator>(this);
+            return CardEffectGenerator.CreateEffect<TMCardCollectEffect, TMCardCollectEffectCreator>(this);
         }
     }
 }

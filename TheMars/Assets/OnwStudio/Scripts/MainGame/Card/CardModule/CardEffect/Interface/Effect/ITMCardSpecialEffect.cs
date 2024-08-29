@@ -30,7 +30,7 @@ namespace TMCard.Effect
             _labelOption = new("CardSpecialEffectName", entryReference);
         }
 
-        public abstract void ApplyEffect(TMCardController controller, ITMEffectTrigger trigger);
+        public abstract void ApplyEffect(TMCardModel model, ITMEffectTrigger trigger);
 
     }
 }

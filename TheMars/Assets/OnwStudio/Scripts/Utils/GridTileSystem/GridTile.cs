@@ -41,7 +41,7 @@ namespace Onw.GridTile
         public IReadOnlyList<string> Properties => _properties;
         public Vector3 Size => _tileRenderer.bounds.size;
 
-        public void CreateTile(GridManager gridManager, Material material, Vector2Int tilePoint)
+        public void CreateTile(GridManager gridManager, Material material, in Vector2Int tilePoint)
         {
             _gridManager = gridManager;
             TilePoint = tilePoint;
