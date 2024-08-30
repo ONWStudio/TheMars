@@ -1,25 +1,31 @@
-using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using Onw.Attribute;
-using Onw.Components.Movement;
-using Onw.ServiceLocator;
-using TMCard.Effect;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
+using Onw.Attribute;
+using Onw.Components.Movement;
+using Onw.Event;
+using Onw.Extensions;
+using Onw.GridTile;
+using Onw.ServiceLocator;
+using TM.Building;
+using TM.Grid;
+using TMCard.Effect;
 
 namespace TMCard.Runtime
 {
     // .. Model
     [DisallowMultipleComponent]
-    public class TMCardModel : MonoBehaviour, ITMEffectTrigger
+    public sealed class TMCardModel : MonoBehaviour, ITMEffectTrigger
     {
         [field: SerializeField, ReadOnly] public TMCardData CardData { get; set; }
+
         /// <summary>
         /// .. 카드가 현재 손 패 위에 있는지 확인하는 값입니다
         /// </summary>
         [field: Header("State")]
+        [field: SerializeField, ReadOnly] public bool IsDragging { get; private set; } = false;
         [field: SerializeField, ReadOnly] public bool OnField { get; set; }
 
         [field: SerializeField, InitializeRequireComponent] public RectTransform RectTransform { get; private set; }
@@ -37,6 +43,12 @@ namespace TMCard.Runtime
 
         public CardEvent OnEffectEvent { get; } = new();
 
+        public IUnityEventListenerModifier OnDragBeginCard => _onDragBeginCard;
+        public IUnityEventListenerModifier OnDragEndCard => _onDragEndCard;
+
+        [SerializeField] private SafeUnityEvent _onDragBeginCard = new();
+        [SerializeField] private SafeUnityEvent _onDragEndCard = new();
+        
         private bool _isInit;
 
         public void Initialize()
@@ -59,13 +71,23 @@ namespace TMCard.Runtime
             {
                 if (!CardViewMover.enabled) return;
 
+                if (ServiceLocator<TMGridManager>.TryGetService(out TMGridManager gridManager))
+                {
+                    gridManager.OnHighlightTile.AddListener(setTileHighlight);
+                    gridManager.OnExitTile.AddListener(setTileUnHighlight);
+                }
+                
                 Camera cardSystemCamera = eventData.enterEventCamera;
-            
+
+                TMBuilding building = Instantiate(CardData.BuildingData.BuildingPrefab.gameObject).GetComponent<TMBuilding>();
                 setOnMover(CardViewMover, false);
                 CardBodyMover.enabled = false;
             
                 InputHandler.AddListenerPointerDragAction(onDrag);
                 InputHandler.AddListenerPointerUpAction(onDragEnd);
+                IsDragging = true;
+
+                _onDragBeginCard.Invoke();
 
                 void onDrag(PointerEventData dragEventData)
                 {
@@ -78,9 +100,28 @@ namespace TMCard.Runtime
                 {
                     InputHandler.RemoveListenerPointerDragAction(onDrag);
                     InputHandler.RemoveListenerPointerUpAction(onDragEnd);
-                
+                    gridManager.OnHighlightTile.RemoveListener(setTileHighlight);
+                    gridManager.OnExitTile.RemoveListener(setTileUnHighlight);
+                    gridManager
+                        .ReadOnlyTileList
+                        .SelectMany(rows => rows.Rows)
+                        .ForEach(tile => tile.GetTileData().TileRenderer.material.color = Color.white);
+                    
                     setOnMover(CardViewMover, true);
                     CardBodyMover.enabled = true;
+                    IsDragging = false;
+
+                    _onDragEndCard.Invoke();
+                }
+
+                void setTileHighlight(TileData tileArgs)
+                {
+                    tileArgs.TileRenderer.material.color = Color.yellow;
+                }
+
+                static void setTileUnHighlight(TileData tileArgs)
+                {
+                    tileArgs.TileRenderer.material.color = Color.white;
                 }
                 
                 static void setOnMover(Vector2SmoothMover smoothMover, bool isOn)

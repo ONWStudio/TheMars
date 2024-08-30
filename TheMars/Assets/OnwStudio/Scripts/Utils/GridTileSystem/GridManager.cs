@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Onw.Attribute;
 using Onw.Event;
 using UnityEngine.Events;
@@ -8,27 +10,62 @@ using UnityEngine.Serialization;
 
 namespace Onw.GridTile
 {
+    public interface IReadOnlyGridRows
+    {
+        public IReadOnlyList<GridTile> Rows { get; }
+    }
+        
+    [System.Serializable]
+    public sealed class GridRows : IReadOnlyGridRows
+    {
+        public IReadOnlyList<GridTile> Rows => Row;
+
+        [field: FormerlySerializedAs("_row")]
+        [field: SerializeField, FormerlySerializedAs("<Row>k_BackingField")] public List<GridTile> Row { get; set; } = new();
+    }
+    
     public sealed class GridManager : MonoBehaviour
     {
         [System.Serializable]
-        public class GridRows
+        public sealed class BakeOption
         {
-            [field: SerializeField] public List<GridTile> Row { get; set; } = new();
+            [field: SerializeField] public bool MaintainingProperties { get; set; } = true;
         }
         
         private const int GRID_SIZE_MIN = 5;
         private const int GRID_SIZE_MAX = 10;
 
+        public int TileCount => GridSize * GridSize;
+        
+        public IUnityEventListenerModifier<TileData> OnHighlightTile => _onHighlightTile;
+        public IUnityEventListenerModifier<TileData> OnExitTile => _onExitTile;
+        public IUnityEventListenerModifier<TileData> OnClickTile => _onClickTile;
+
         [field: SerializeField, Range(5, 50)] public float TileSize { get; set; }
         [field: SerializeField, Range(GRID_SIZE_MIN, GRID_SIZE_MAX)] public int GridSize { get; set; } = 5;
 
-        [field: Header("Events")]
-        [field: SerializeField] public SafeUnityEvent<TileArgs> OnHighlightTile { get; private set; } = new();
-        [field: SerializeField] public SafeUnityEvent<TileArgs> OnExitTile { get; private set; }= new();
-        [field: SerializeField] public SafeUnityEvent<TileArgs> OnClickTile { get; private set; } = new();
+        [Header("Events")]
+        [SerializeField] private SafeUnityEvent<TileData> _onHighlightTile = new();
+        [SerializeField] private SafeUnityEvent<TileData> _onExitTile = new();
+        [SerializeField] private SafeUnityEvent<TileData> _onClickTile = new();
 
         [SerializeField] private List<GridRows> _tileList = new();
-        
+
+        [field: FormerlySerializedAs("_bakeOption")]
+        [field: SerializeField] public BakeOption BakeSettings { get; private set; } = new();
+
+        public IReadOnlyList<IReadOnlyGridRows> TileList => _tileList;
+
+        private void Start()
+        {
+            foreach (GridTile tile in _tileList.SelectMany(rows => rows.Row))
+            {
+                tile.OnHighlightTile.AddListener(_onHighlightTile.Invoke);
+                tile.OnClickTile.AddListener(_onClickTile.Invoke);
+                tile.OnExitTile.AddListener(_onExitTile.Invoke);
+            }
+        }
+
         public void BakeTiles()
         {
             Debug.Log("Bake");
@@ -41,13 +78,17 @@ namespace Onw.GridTile
             float startX = startPosition.x - calcTileSize * 0.5f;
             float startZ = startPosition.z - calcTileSize * 0.5f;
 
+            bool canMaintainingProperties = BakeSettings.MaintainingProperties && _tileList.Count == GridSize;
+            
+            List<List<List<string>>> properties = canMaintainingProperties ? 
+                _tileList
+                    .Select(rows => rows.Row.Select(tile => tile.Properties).ToList())
+                    .ToList() : 
+                null;
+            
             foreach (GridRows rows in _tileList)
             {
-                foreach (GridTile tile in rows.Row)
-                {
-                    DestroyImmediate(tile.gameObject);
-                }
-
+                rows.Row.ForEach(tile => DestroyImmediate(tile.gameObject));
                 rows.Row.Clear();
                 rows.Row = null;
             }
@@ -58,18 +99,18 @@ namespace Onw.GridTile
             {
                 color = Color.white
             };
-            
+
             for (int x = 0; x < GridSize; x++)
             {
                 GridRows gridRows = new();
                 _tileList.Add(gridRows);
-                
+
                 for (int y = 0; y < GridSize; y++)
                 {
                     // 타일 생성
                     Vector3 tilePosition = new(
-                        startX + x * TileSize, 
-                        startPosition.y, 
+                        startX + x * TileSize,
+                        startPosition.y,
                         startZ + y * TileSize);
 
                     // 새 GameObject 생성
@@ -81,10 +122,16 @@ namespace Onw.GridTile
                             position = tilePosition
                         }
                     };
-                    
+
                     tileObject.transform.SetParent(gameObject.transform);
                     GridTile gridTile = tileObject.AddComponent<GridTile>();
-                    gridTile.CreateTile(this, material, new(x, y));
+                    gridTile.CreateTile(this, material, TileSize, new(x, y));
+
+                    if (canMaintainingProperties)
+                    {
+                        gridTile.Properties.AddRange(properties[x][y]);
+                    }
+
                     gridRows.Row.Add(gridTile);
                 }
             }

@@ -21,6 +21,8 @@ namespace TM.Building
             .Select(effectCreator => effectCreator.CreateEffect())
             .ToList();
         
+        [field: SerializeField] public TMBuilding BuildingPrefab { get; private set; }
+        
         [SerializeField] private LocalizedString _localizedCardName;
         
         [FormerlySerializedAs("effectCreators")]

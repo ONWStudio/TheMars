@@ -33,6 +33,9 @@ namespace TMCard.Runtime
                     .Subscribe(SetCardData)
                     .AddTo(this);
             }
+            
+            _cardModel.OnDragBeginCard.AddListener(() => _cardViewer.SetView(false));
+            _cardModel.OnDragEndCard.AddListener(() => _cardViewer.SetView(true));
         }
 
         public void SetCardData(TMCardData cardData)

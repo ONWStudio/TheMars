@@ -52,6 +52,16 @@ namespace TMCard.Runtime
                 "\n" +
                 string.Join("\n", effects.OfType<TMCardSpecialEffect>().Select(effect => effect.Description));
         }
+
+        public void SetView(bool isOn)
+        {
+            _cardImage.enabled = isOn;
+            _backgroundImage.enabled = isOn;
+            _descriptionText.enabled = isOn;
+            _nameText.enabled = isOn;
+            _costFieldImage.enabled = isOn;
+            _costText.enabled = isOn;
+        }
         
         public void SetUI(TMCardData cardData)
         {

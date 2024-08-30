@@ -4,20 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Onw.Attribute;
+using Onw.Event;
 using TMPro;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 namespace Onw.GridTile
 {
-    public readonly struct TileArgs
+    public readonly struct TileData
     {
         public MeshRenderer TileRenderer { get; }
         public MeshFilter MeshFilter { get; }
         public MeshCollider Collider { get; }
         public Vector2Int TilePoint { get; }
 
-        public TileArgs(MeshRenderer meshRenderer, MeshFilter meshFilter, MeshCollider meshCollider, in Vector2Int tilePoint)
+        public TileData(MeshRenderer meshRenderer, MeshFilter meshFilter, MeshCollider meshCollider, in Vector2Int tilePoint)
         {
             TileRenderer = meshRenderer;
             MeshFilter = meshFilter;
@@ -28,6 +29,13 @@ namespace Onw.GridTile
     
     public sealed class GridTile : MonoBehaviour
     {
+        public IUnityEventListenerModifier<TileData> OnHighlightTile => _onHighlightTile;
+        public IUnityEventListenerModifier<TileData> OnClickTile => _onClickTile;
+        public IUnityEventListenerModifier<TileData> OnExitTile => _onExitTile;
+
+        [field: FormerlySerializedAs("_properties")]
+        [field: SerializeField] public List<string> Properties { get; private set; } = new(); // .. 각 타일에 속성을 넣을 수 있습니다
+
         [SerializeField, ReadOnly] private MeshRenderer _tileRenderer;
         [SerializeField, ReadOnly] private MeshCollider _meshCollider;
         [SerializeField, ReadOnly] private MeshFilter _meshFilter;
@@ -36,12 +44,19 @@ namespace Onw.GridTile
         [field: SerializeField, ReadOnly] public Vector2Int TilePoint { get; private set; }
 
         [SerializeField, ReadOnly] private GridManager _gridManager;
-        [SerializeField] private List<string> _properties = new(); // .. 각 타일에 속성을 넣을 수 있습니다
 
-        public IReadOnlyList<string> Properties => _properties;
+        [SerializeField] private SafeUnityEvent<TileData> _onHighlightTile = new();
+        [SerializeField] private SafeUnityEvent<TileData> _onClickTile = new();
+        [SerializeField] private SafeUnityEvent<TileData> _onExitTile = new();
+        
         public Vector3 Size => _tileRenderer.bounds.size;
 
-        public void CreateTile(GridManager gridManager, Material material, in Vector2Int tilePoint)
+        public TileData GetTileData()
+        {
+            return new(_tileRenderer, _meshFilter, _meshCollider, TilePoint);
+        }
+
+        public void CreateTile(GridManager gridManager, Material material, float tileSize, in Vector2Int tilePoint)
         {
             _gridManager = gridManager;
             TilePoint = tilePoint;
@@ -52,7 +67,6 @@ namespace Onw.GridTile
             _tileRenderer.sharedMaterial = material;
             
             Mesh mesh = new();
-            float tileSize = _gridManager.TileSize;
 
             // 정점 설정
             Vector3[] vertices =
@@ -89,32 +103,22 @@ namespace Onw.GridTile
         
         public bool ContainsProperty(string property)
         {
-            return _properties.Any(someProperty => someProperty == property);
-        }
-
-        public void PushProperty(string property)
-        {
-            _properties.Add(property);
-        }
-
-        public void RemoveProperty(string property)
-        {
-            _properties.Remove(property);
+            return Properties.Any(someProperty => someProperty == property);
         }
         
         private void OnMouseEnter()
         {
-            _gridManager.OnHighlightTile.Invoke(new(_tileRenderer, _meshFilter, _meshCollider, TilePoint));
+            _onHighlightTile.Invoke(GetTileData());
         }
 
         private void OnMouseExit()
         {
-            _gridManager.OnExitTile.Invoke(new(_tileRenderer, _meshFilter, _meshCollider, TilePoint));
+            _onExitTile.Invoke(GetTileData());
         }
 
         private void OnMouseUp()
         {
-            _gridManager.OnClickTile.Invoke(new(_tileRenderer, _meshFilter, _meshCollider, TilePoint));            
+            _onClickTile.Invoke(GetTileData());
         }
     }
 }

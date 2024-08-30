@@ -2,7 +2,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using Onw.Extensions;
 using UnityEngine;
 using UnityEditor;
 
@@ -13,10 +15,10 @@ namespace Onw.GridTile.Editor
     [CustomEditor(typeof(GridManager))]
     internal sealed class GridManagerInspector : Editor
     {
-        private readonly List<GridManager.GridRows> _tileList = new();
+        private readonly List<GridRows> _tileList = new();
         private GridManager _gridManager = null;
         private GUIStyle _style = null;
-        
+
         private void OnEnable()
         {
             _gridManager = target as GridManager;
@@ -32,6 +34,23 @@ namespace Onw.GridTile.Editor
                 _gridManager.BakeTiles();
                 initializeTile();
             }
+
+            if (GUILayout.Button("Find Tiles"))
+            {
+                List<GridRows> gridRows = _gridManager!
+                    .GetType()
+                    .GetField("_tileList", BindingFlags.Instance | BindingFlags.NonPublic)!
+                    .GetValue(_gridManager) as List<GridRows> ?? throw new InvalidOperationException();
+
+                gridRows.Clear();
+                gridRows.AddRange(_gridManager
+                    .GetComponentsInChildren<GridTile>()
+                    .GroupBy(tile => tile.TilePoint.x)
+                    .Select(group => new GridRows
+                    {
+                        Row = new(group)
+                    }));
+            }
         }
 
         private void initializeTile()
@@ -40,7 +59,7 @@ namespace Onw.GridTile.Editor
             _tileList.AddRange(_gridManager!
                 .GetType()
                 .GetField("_tileList", BindingFlags.Instance | BindingFlags.NonPublic)!
-                .GetValue(_gridManager) as List<GridManager.GridRows> ?? throw new InvalidOperationException());
+                .GetValue(_gridManager) as List<GridRows> ?? throw new InvalidOperationException());
         }
 
         private void OnSceneGUI()
@@ -54,7 +73,7 @@ namespace Onw.GridTile.Editor
                 alignment = TextAnchor.MiddleCenter
             };
 
-            foreach (GridManager.GridRows rows in _tileList)
+            foreach (GridRows rows in _tileList)
             {
                 foreach (GridTile tile in rows.Row)
                 {
