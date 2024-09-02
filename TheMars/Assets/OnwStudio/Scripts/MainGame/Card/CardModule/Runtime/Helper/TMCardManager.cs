@@ -15,8 +15,6 @@ namespace TMCard.Runtime
         [System.Serializable]
         public struct TMCardManagerUI
         {
-            [field: SerializeField, SelectableSerializeField] public Button DrawButton { get; private set; }
-            [field: SerializeField, SelectableSerializeField] public TextMeshProUGUI DrawButtonText { get; private set; }
             [field: SerializeField, SelectableSerializeField] public Image DeckImage { get; private set; }
             [field: SerializeField, SelectableSerializeField] public Image HandImage { get; private set; }
             
@@ -26,9 +24,6 @@ namespace TMCard.Runtime
             
             public void SetDragView(bool isOn)
             {
-                DrawButton.image.enabled = isOn;
-                DrawButton.enabled = isOn;
-                DrawButtonText.enabled = isOn;
                 DeckImage.sprite = isOn ? HandNormalSprite : HandTombSprite;
                 HandImage.enabled = isOn;
             }
@@ -72,10 +67,9 @@ namespace TMCard.Runtime
             card.OnDragBeginCard.AddListener(() => _uiComponents.SetDragView(false));
             card.OnDragEndCard.AddListener(() => _uiComponents.SetDragView(true));
             
-            foreach (PositionRotationInfo transformInfo in CardSorter.SortCards(_cards, HandTransform))
-            {
-                transformInfo.Target.CardBodyMover.TargetPosition = transformInfo.Position;
-            }
+            CardSorter
+                .SortCards(_cards, HandTransform)
+                .ForEach(transformInfo => transformInfo.Target.CardBodyMover.TargetPosition = transformInfo.Position);
         }
 
         private void OnDestroy()

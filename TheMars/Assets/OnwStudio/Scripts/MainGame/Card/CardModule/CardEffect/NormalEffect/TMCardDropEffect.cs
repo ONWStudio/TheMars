@@ -3,7 +3,7 @@ using TMCard.Runtime;
 using UnityEngine;
 namespace TMCard.Effect
 {
-    public sealed class ItmCardCardDropEffect : ITMNormalEffect, ITMCardInitializeEffect<TMCardDropEffectCreator>
+    public sealed class TMCardDropEffect : ITMNormalEffect, ITMCardInitializeEffect<TMCardDropEffectCreator>
     {
         public string Description => $"패에서 카드를 {_dropCount}개 버리기";
         

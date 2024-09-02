@@ -22,7 +22,7 @@ namespace Onw.Helper
             float maxPivot = float.NegativeInfinity;
             float minPivot = float.PositiveInfinity;
 
-            foreach (Vector3 point in vertices.Select(vertex => obj.transform.TransformPoint(vertex)))
+            foreach (Vector3 point in vertices.Select(obj.transform.TransformPoint))
             {
                 if (point.y > maxPivot)
                 {
@@ -38,11 +38,70 @@ namespace Onw.Helper
             return maxPivot - minPivot;
         }
 
+        public static float GetZWidthFromVertices(GameObject obj)
+        {
+            List<Vector3> vertices = GetVertices(obj);
+
+            if (vertices.Count == 0)
+            {
+                Debug.Log("vertices not found!");
+
+                return 0f;
+            }
+
+            float maxPivot = float.NegativeInfinity;
+            float minPivot = float.PositiveInfinity;
+
+            foreach (Vector3 point in vertices.Select(obj.transform.TransformPoint))
+            {
+                if (point.z > maxPivot)
+                {
+                    maxPivot = point.z;
+                }
+
+                if (point.z < minPivot)
+                {
+                    minPivot = point.z;
+                }
+            }
+
+            return maxPivot - minPivot;
+        }
+
+        public static float GetXWidthFromVertices(GameObject obj)
+        {
+            List<Vector3> vertices = GetVertices(obj);
+            
+            if (vertices.Count == 0)
+            {
+                Debug.Log("vertices not found!");
+
+                return 0f;
+            }
+
+            float maxPivot = float.NegativeInfinity;
+            float minPivot = float.PositiveInfinity;
+
+            foreach (Vector3 point in vertices.Select(obj.transform.TransformPoint))
+            {
+                if (point.x > maxPivot)
+                {
+                    maxPivot = point.x;
+                }
+
+                if (point.x < minPivot)
+                {
+                    minPivot = point.x;
+                }
+            }
+
+            return maxPivot - minPivot;
+        }
+
         public static float GetMaxYFromVertices(GameObject obj)
         {
             return GetVertices(obj)
-                .Select(vertex => obj.transform.TransformPoint(vertex))
-                .Select(point => point.y)
+                .Select(vertex => obj.transform.TransformPoint(vertex).y)
                 .Prepend(float.NegativeInfinity)
                 .Max();
         }
@@ -50,50 +109,37 @@ namespace Onw.Helper
         public static float GetMinYFromVertices(GameObject obj)
         {
             return GetVertices(obj)
-                .Select(vertex => obj.transform.TransformPoint(vertex))
-                .Select(point => point.y)
+                .Select(vertex => obj.transform.TransformPoint(vertex).y)
                 .Prepend(float.PositiveInfinity)
                 .Min();
         }
 
         public static List<Vector3> GetVertices(GameObject obj)
         {
-            List<Vector3> vertices = GetVerticesFromSkinndedMeshRenderer(obj);
+            List<Vector3> vertices = GetVerticesFromMeshFilter(obj);
 
             if (vertices.Count == 0)
             {
-                vertices.AddRange(GetVerticesFromMeshFilter(obj));
+                vertices.AddRange(GetVerticesFromSkinnedMeshRenderer(obj));
             }
 
             return vertices;
         }
 
-        public static List<Vector3> GetVerticesFromSkinndedMeshRenderer(GameObject obj)
+        public static List<Vector3> GetVerticesFromSkinnedMeshRenderer(GameObject obj)
         {
-            List<Vector3> vertices = new();
-
-            SkinnedMeshRenderer[] filters = obj.GetComponentsInChildren<SkinnedMeshRenderer>();
-
-            foreach (SkinnedMeshRenderer skinnedMeshRenderer in filters)
-            {
-                vertices.AddRange(skinnedMeshRenderer.sharedMesh.vertices);
-            }
-
-            return vertices;
+            return obj
+                .GetComponentsInChildren<SkinnedMeshRenderer>()
+                .SelectMany(skinnedMeshRenderer => skinnedMeshRenderer.sharedMesh.vertices)
+                .ToList();
         }
 
         public static List<Vector3> GetVerticesFromMeshFilter(GameObject obj)
         {
-            List<Vector3> vertices = new List<Vector3>();
-
-            MeshFilter[] filters = obj.GetComponentsInChildren<MeshFilter>();
-
-            foreach (MeshFilter meshFilter in filters)
-            {
-                vertices.AddRange(meshFilter.mesh.vertices);
-            }
-
-            return vertices;
+            return obj
+                .GetComponentsInChildren<MeshFilter>()
+                .SelectMany(meshFilter => meshFilter.mesh.vertices)
+                .ToList();
         }
     }
 }

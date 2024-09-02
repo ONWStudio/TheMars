@@ -13,7 +13,7 @@ namespace TMCard.Effect
 
         public ITMCardEffect CreateEffect()
         {
-            return CardEffectGenerator.CreateEffect<ItmCardCardDropEffect, TMCardDropEffectCreator>(this);
+            return CardEffectGenerator.CreateEffect<TMCardDropEffect, TMCardDropEffectCreator>(this);
         }
     }
 }

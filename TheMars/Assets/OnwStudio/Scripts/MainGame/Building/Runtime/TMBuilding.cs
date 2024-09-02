@@ -28,6 +28,11 @@ namespace TM.Building
 
         public void BatchOnTile()
         {
+            ApplyBuildingEffect();
+        }
+
+        public void ApplyBuildingEffect()
+        {
             foreach (ITMBuildingEffect buildingEffect in _buildingEffects)
             {
                 switch (BuildingLevel)

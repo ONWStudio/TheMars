@@ -11,6 +11,7 @@ namespace TM.Grid
 {
     public sealed class TMGridManager : MonoBehaviour
     {
+        public float TileSize => _gridManager.TileSize;
         public int TileCount => _gridManager.TileCount;
 
         public IReadOnlyList<IReadOnlyGridRows> ReadOnlyTileList => _gridManager.TileList;

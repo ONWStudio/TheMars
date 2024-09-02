@@ -55,6 +55,7 @@ namespace Onw.Event
         public void RemoveListener(UnityAction call) => _unityEvent.RemoveListener(call);
         public void Invoke() => _unityEvent.Invoke();
         public void SetPersistentListenerState(UnityEventCallState callState) => _unityEvent.SetPersistentListenerState(callState);
+        public static implicit operator SafeUnityEvent(UnityEvent unityEvent) => new() { _unityEvent = unityEvent };
     }
 
     /// <summary>
@@ -70,6 +71,7 @@ namespace Onw.Event
         public void RemoveListener(UnityAction<T0> call) => _unityEvent.RemoveListener(call);
         public void Invoke(T0 item) => _unityEvent.Invoke(item);
         public void SetPersistentListenerState(UnityEventCallState callState) => _unityEvent.SetPersistentListenerState(callState);
+        public static implicit operator SafeUnityEvent<T0>(UnityEvent<T0> unityEvent) => new() { _unityEvent = unityEvent };
     }
 
     /// <summary>
@@ -85,6 +87,7 @@ namespace Onw.Event
         public void RemoveListener(UnityAction<T0, T1> call) => _unityEvent.RemoveListener(call);
         public void Invoke(T0 item1, T1 item2) => _unityEvent.Invoke(item1, item2);
         public void SetPersistentListenerState(UnityEventCallState callState) => _unityEvent.SetPersistentListenerState(callState);
+        public static implicit operator SafeUnityEvent<T0, T1>(UnityEvent<T0, T1> unityEvent) => new() { _unityEvent = unityEvent };
     }
     
     /// <summary>
@@ -100,7 +103,7 @@ namespace Onw.Event
         public void RemoveListener(UnityAction<T0, T1, T2> call) => _unityEvent.RemoveListener(call);
         public void Invoke(T0 item1, T1 item2, T2 item3) => _unityEvent.Invoke(item1, item2, item3);
         public void SetPersistentListenerState(UnityEventCallState callState) => _unityEvent.SetPersistentListenerState(callState);
-
+        public static implicit operator SafeUnityEvent<T0, T1, T2>(UnityEvent<T0, T1, T2> unityEvent) => new() { _unityEvent = unityEvent };
     }
 
     /// <summary>
@@ -116,5 +119,6 @@ namespace Onw.Event
         public void RemoveListener(UnityAction<T0, T1, T2, T3> call) => _unityEvent.RemoveListener(call);
         public void Invoke(T0 item1, T1 item2, T2 item3, T3 item4) => _unityEvent.Invoke(item1, item2, item3, item4);
         public void SetPersistentListenerState(UnityEventCallState callState) => _unityEvent.SetPersistentListenerState(callState);
+        public static implicit operator SafeUnityEvent<T0, T1, T2, T3>(UnityEvent<T0, T1, T2, T3> unityEvent) => new() { _unityEvent = unityEvent };
     }
 }

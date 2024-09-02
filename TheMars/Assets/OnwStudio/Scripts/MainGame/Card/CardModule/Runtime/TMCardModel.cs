@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Onw.Attribute;
-using Onw.Components.Movement;
 using Onw.Event;
-using Onw.Extensions;
 using Onw.GridTile;
+using Onw.Attribute;
+using Onw.Extensions;
 using Onw.ServiceLocator;
-using TM.Building;
+using Onw.Components.Movement;
 using TM.Grid;
+using TM.Building;
 using TMCard.Effect;
 
 namespace TMCard.Runtime
@@ -28,7 +28,8 @@ namespace TMCard.Runtime
         [field: SerializeField, ReadOnly] public bool IsDragging { get; private set; } = false;
         [field: SerializeField, ReadOnly] public bool OnField { get; set; }
 
-        [field: SerializeField, InitializeRequireComponent] public RectTransform RectTransform { get; private set; }
+        [field: SerializeField, InitializeRequireComponent]
+        public RectTransform RectTransform { get; private set; }
 
         [field: SerializeField, InitializeRequireComponent]
         public TMCardInputHandler InputHandler { get; private set; }
@@ -41,6 +42,7 @@ namespace TMCard.Runtime
         [field: SerializeField, InitializeRequireComponent]
         public Vector2SmoothMover CardBodyMover { get; private set; }
 
+        [field: SerializeField] public bool IsHide { get; set; } = false;
         public CardEvent OnEffectEvent { get; } = new();
 
         public IUnityEventListenerModifier OnDragBeginCard => _onDragBeginCard;
@@ -48,8 +50,8 @@ namespace TMCard.Runtime
 
         [SerializeField] private SafeUnityEvent _onDragBeginCard = new();
         [SerializeField] private SafeUnityEvent _onDragEndCard = new();
-        
-        private bool _isInit;
+
+        [SerializeField, ReadOnly] private bool _isInit = false;
 
         public void Initialize()
         {
@@ -59,32 +61,23 @@ namespace TMCard.Runtime
             CardViewMover.IsLocal = true;
             CardBodyMover.IsLocal = true;
 
-            InputHandler.AddListenerPointerEnterAction(eventData
+            InputHandler.EnterAction.AddListener(eventData
                 => CardViewMover.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f));
 
-            InputHandler.AddListenerPointerExitAction(eventData
+            InputHandler.ExitAction.AddListener(eventData
                 => CardViewMover.TargetPosition = Vector2.zero);
-            
-            InputHandler.AddListenerPointerDownAction(onDownCard);
-            
+
+            InputHandler.DownAction.AddListener(onDownCard);
+
             void onDownCard(PointerEventData eventData)
             {
-                if (!CardViewMover.enabled) return;
-
-                if (ServiceLocator<TMGridManager>.TryGetService(out TMGridManager gridManager))
-                {
-                    gridManager.OnHighlightTile.AddListener(setTileHighlight);
-                    gridManager.OnExitTile.AddListener(setTileUnHighlight);
-                }
-                
                 Camera cardSystemCamera = eventData.enterEventCamera;
-
-                TMBuilding building = Instantiate(CardData.BuildingData.BuildingPrefab.gameObject).GetComponent<TMBuilding>();
+                
                 setOnMover(CardViewMover, false);
                 CardBodyMover.enabled = false;
-            
-                InputHandler.AddListenerPointerDragAction(onDrag);
-                InputHandler.AddListenerPointerUpAction(onDragEnd);
+
+                InputHandler.DragAction.AddListener(onDrag);
+                InputHandler.UpAction.AddListener(onDragEnd);
                 IsDragging = true;
 
                 _onDragBeginCard.Invoke();
@@ -98,15 +91,9 @@ namespace TMCard.Runtime
 
                 void onDragEnd(PointerEventData dragEndEventData)
                 {
-                    InputHandler.RemoveListenerPointerDragAction(onDrag);
-                    InputHandler.RemoveListenerPointerUpAction(onDragEnd);
-                    gridManager.OnHighlightTile.RemoveListener(setTileHighlight);
-                    gridManager.OnExitTile.RemoveListener(setTileUnHighlight);
-                    gridManager
-                        .ReadOnlyTileList
-                        .SelectMany(rows => rows.Rows)
-                        .ForEach(tile => tile.GetTileData().TileRenderer.material.color = Color.white);
-                    
+                    InputHandler.DragAction.RemoveListener(onDrag);
+                    InputHandler.UpAction.RemoveListener(onDragEnd);
+
                     setOnMover(CardViewMover, true);
                     CardBodyMover.enabled = true;
                     IsDragging = false;
@@ -114,16 +101,6 @@ namespace TMCard.Runtime
                     _onDragEndCard.Invoke();
                 }
 
-                void setTileHighlight(TileData tileArgs)
-                {
-                    tileArgs.TileRenderer.material.color = Color.yellow;
-                }
-
-                static void setTileUnHighlight(TileData tileArgs)
-                {
-                    tileArgs.TileRenderer.material.color = Color.white;
-                }
-                
                 static void setOnMover(Vector2SmoothMover smoothMover, bool isOn)
                 {
                     smoothMover.enabled = isOn;
@@ -135,6 +112,5 @@ namespace TMCard.Runtime
                 }
             }
         }
-
     }
 }

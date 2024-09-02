@@ -17,13 +17,15 @@ namespace Onw.GridTile
         public MeshFilter MeshFilter { get; }
         public MeshCollider Collider { get; }
         public Vector2Int TilePoint { get; }
+        public List<string> Properties { get; }
 
-        public TileData(MeshRenderer meshRenderer, MeshFilter meshFilter, MeshCollider meshCollider, in Vector2Int tilePoint)
+        public TileData(MeshRenderer meshRenderer, MeshFilter meshFilter, MeshCollider meshCollider, List<string> properties, in Vector2Int tilePoint)
         {
             TileRenderer = meshRenderer;
             MeshFilter = meshFilter;
             Collider = meshCollider;
             TilePoint = tilePoint;
+            Properties = properties;
         }
     }
     
@@ -53,7 +55,7 @@ namespace Onw.GridTile
 
         public TileData GetTileData()
         {
-            return new(_tileRenderer, _meshFilter, _meshCollider, TilePoint);
+            return new(_tileRenderer, _meshFilter, _meshCollider, Properties, TilePoint);
         }
 
         public void CreateTile(GridManager gridManager, Material material, float tileSize, in Vector2Int tilePoint)

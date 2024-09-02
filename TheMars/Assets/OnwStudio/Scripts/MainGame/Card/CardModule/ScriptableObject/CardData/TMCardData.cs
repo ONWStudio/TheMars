@@ -15,12 +15,6 @@ namespace TMCard
 {
     public sealed partial class TMCardData : ScriptableObject
     {
-        /// <summary>
-        /// .. 카드 전체와 공유하는 스택 ID
-        /// </summary>
-        [field: SerializeField, FormerlySerializedAs("<StackID>k__BackingField"), Tooltip("Stack ID")]
-        public int StackID { get; private set; }
-
         [field: SerializeField, DisplayAs("소모 재화 종류"), Tooltip("소모할 재화")] 
         public TMRequiredResource RequiredResource { get; private set; }
         
@@ -33,12 +27,6 @@ namespace TMCard
         [field: Space]
         [field: SerializeField, FormerlySerializedAs("<CardKind>k__BackingField"), DisplayAs("카드 종류"), Tooltip("카드의 종류")]
         public TMCardKind CardKind { get; private set; } = TMCardKind.NONE;
-
-        /// <summary>
-        /// .. 카드의 등급
-        /// </summary>
-        [field: SerializeField, FormerlySerializedAs("<CardGrade>k__BackingField"), DisplayAs("등급"), Tooltip("카드의 등급")]
-        public TMCardGrade CardGrade { get; private set; } = TMCardGrade.NORMAL;
 
         /// <summary>
         /// .. 카드의 그룹
