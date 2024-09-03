@@ -37,13 +37,18 @@ namespace TMCard
         [field: SerializeField, DisplayAs("카드 이미지"), Tooltip("카드의 대표 이미지"), SpritePreview]
         public Sprite CardImage { get; private set; } = null;
 
-        [field: SerializeField, DisplayAs("건물"), Tooltip("설치할 건물")]
-        public TMBuildingData BuildingData { get; private set; } = null;
-
         public string CardName => _localizedCardName.TryGetLocalizedString(out string cardName) ? cardName : "";
         
         [SerializeField] private LocalizedString _localizedCardName;
+        
+        [SerializeReference, SerializeReferenceDropdown, DisplayAs("카드 효과"), Tooltip("카드 효과")]
+        private ITMCardEffectCreator _cardEffectCreator = null;
 
+        public ITMCardEffect GetCardEffect()
+        {
+            return _cardEffectCreator?.CreateEffect();
+        }
+        
         public bool CanUse(int resource)
         {
             return resource >= Resource;

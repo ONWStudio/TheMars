@@ -5,9 +5,6 @@ using UnityEngine;
 
 namespace TMCard.Effect
 {
-    /// <summary>
-    /// .. TODO : 카드 획득 효과 수정 카드 선택해서 버리기 
-    /// </summary>
     public sealed class TMCardCollectEffect : ITMNormalEffect, ITMCardInitializeEffect<TMCardCollectEffectCreator>
     {
         public string Description => $"랜덤 카드를 선택해서 획득";
@@ -23,17 +20,19 @@ namespace TMCard.Effect
             _selectKind = effectCreator.SelectKind;
         }
 
-        public void ApplyEffect(TMCardModel model, ITMEffectTrigger trigger)
+        public void ApplyEffect(TMCardModel cardModel, ITMCardEffectTrigger trigger)
         {
-            trigger.OnEffectEvent.AddListener(eventState 
-                => collectCard(model, _collectCount));
+            trigger.OnEffectEvent.AddListener(() 
+                => collectCard(cardModel, _collectCount));
         }
         
         private static void collectCard(TMCardModel triggerCard, int collectCount)
         {
-            if (!ServiceLocator<ITMCardService>.TryGetService(out ITMCardService service)) return;
+            if (!ServiceLocator<TMCardManager>.TryGetService(out TMCardManager service)) return;
             
             // service.CollectUI.ActiveUI();
         }
+
+        public void Dispose() {}
     }
 }

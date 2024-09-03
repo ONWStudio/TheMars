@@ -36,7 +36,8 @@ namespace Onw.GridTile
         
         public IUnityEventListenerModifier<TileData> OnHighlightTile => _onHighlightTile;
         public IUnityEventListenerModifier<TileData> OnExitTile => _onExitTile;
-        public IUnityEventListenerModifier<TileData> OnClickTile => _onClickTile;
+        public IUnityEventListenerModifier<TileData> OnMouseDownTile => _onMouseDownTile;
+        public IUnityEventListenerModifier<TileData> OnMouseUpTile => _onMouseUpTile;
 
         [field: SerializeField, Range(5, 50)] public float TileSize { get; set; }
         [field: SerializeField, Range(GRID_SIZE_MIN, GRID_SIZE_MAX)] public int GridSize { get; set; } = 5;
@@ -44,7 +45,8 @@ namespace Onw.GridTile
         [Header("Events")]
         [SerializeField] private SafeUnityEvent<TileData> _onHighlightTile = new();
         [SerializeField] private SafeUnityEvent<TileData> _onExitTile = new();
-        [SerializeField] private SafeUnityEvent<TileData> _onClickTile = new();
+        [SerializeField] private SafeUnityEvent<TileData> _onMouseUpTile = new();
+        [SerializeField] private SafeUnityEvent<TileData> _onMouseDownTile = new();
 
         [SerializeField] private List<GridRows> _tileList = new();
 
@@ -53,12 +55,32 @@ namespace Onw.GridTile
 
         public IReadOnlyList<IReadOnlyGridRows> TileList => _tileList;
 
+        public bool TryGetTileDataByRay(Ray ray, out TileData tileData)
+        {
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                TileData? someTile = _tileList
+                    .SelectMany(row => row.Rows.Select(tile => (TileData?)tile.GetTileData()))
+                    .FirstOrDefault(tileData => tileData?.Collider == hit.collider);
+
+                if (someTile.HasValue)
+                {
+                    tileData = (TileData)someTile;
+                    return true;
+                }
+            }
+
+            tileData = default(TileData);
+            return false;
+        }
+        
         private void Start()
         {
             foreach (GridTile tile in _tileList.SelectMany(rows => rows.Row))
             {
                 tile.OnHighlightTile.AddListener(_onHighlightTile.Invoke);
-                tile.OnClickTile.AddListener(_onClickTile.Invoke);
+                tile.OnMouseDownTile.AddListener(_onMouseDownTile.Invoke);
+                tile.OnMouseUpTile.AddListener(_onMouseUpTile.Invoke);
                 tile.OnExitTile.AddListener(_onExitTile.Invoke);
             }
         }

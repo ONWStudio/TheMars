@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +18,8 @@ namespace TM.Grid
         public IReadOnlyList<IReadOnlyGridRows> ReadOnlyTileList => _gridManager.TileList;
         
         public IUnityEventListenerModifier<TileData> OnHighlightTile => _gridManager.OnHighlightTile;
-        public IUnityEventListenerModifier<TileData> OnClickTile => _gridManager.OnClickTile;
+        public IUnityEventListenerModifier<TileData> OnMouseDownTile => _gridManager.OnMouseDownTile;
+        public IUnityEventListenerModifier<TileData> OnMouseUpTile => _gridManager.OnMouseUpTile;
         public IUnityEventListenerModifier<TileData> OnExitTile => _gridManager.OnExitTile;
         
         [SerializeField, InitializeRequireComponent] private GridManager _gridManager;
@@ -29,5 +31,12 @@ namespace TM.Grid
                 ServiceLocator<TMGridManager>.ChangeService(this);
             }
         }
+
+        private void OnDestroy()
+        {
+            ServiceLocator<TMGridManager>.ClearService();
+        }
+
+        public bool TryGetTileDataByRay(Ray ray, out TileData tileData) => _gridManager.TryGetTileDataByRay(ray, out tileData);
     }
 }

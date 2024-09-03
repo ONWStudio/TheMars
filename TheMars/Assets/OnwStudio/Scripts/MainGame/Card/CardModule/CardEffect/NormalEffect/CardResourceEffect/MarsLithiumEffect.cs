@@ -5,7 +5,7 @@ using TMCard.Runtime;
 using UnityEngine;
 namespace TMCard.Effect.Resource
 {
-    public sealed class MarsLithumEffect : ITMCardResourceEffect, ITMCardInitializeEffect<MarsLithumCardEffectCreator>
+    public sealed class MarsLithiumEffect : ITMCardResourceEffect, ITMCardInitializeEffect<MarsLithumCardEffectCreator>
     {
         public string Description => $"<sprite={(int)TMRequiredResource.MARS_LITHIUM}> {(Amount < 0 ? Amount.ToString() : $"+{Amount}")}";
 
@@ -18,9 +18,9 @@ namespace TMCard.Effect.Resource
             Amount = cardEffectCreator.Amount;
         }
 
-        public void ApplyEffect(TMCardModel model, ITMEffectTrigger trigger)
+        public void ApplyEffect(TMCardModel cardModel, ITMCardEffectTrigger trigger)
         {
-            trigger.OnEffectEvent.AddListener(eventState =>
+            trigger.OnEffectEvent.AddListener(() =>
             {
                 PlayerManager.Instance.MarsLithium += Amount;
                 Debug.Log(Amount);
@@ -32,6 +32,10 @@ namespace TMCard.Effect.Resource
         {
             Amount += addtionalAmount;
             Event.Invoke("Description Update");
+        }
+        
+        public void Dispose()
+        {
         }
     }
 }

@@ -32,7 +32,8 @@ namespace Onw.GridTile
     public sealed class GridTile : MonoBehaviour
     {
         public IUnityEventListenerModifier<TileData> OnHighlightTile => _onHighlightTile;
-        public IUnityEventListenerModifier<TileData> OnClickTile => _onClickTile;
+        public IUnityEventListenerModifier<TileData> OnMouseDownTile => _onMouseDownTile;
+        public IUnityEventListenerModifier<TileData> OnMouseUpTile => _onMouseUpTile;
         public IUnityEventListenerModifier<TileData> OnExitTile => _onExitTile;
 
         [field: FormerlySerializedAs("_properties")]
@@ -48,7 +49,8 @@ namespace Onw.GridTile
         [SerializeField, ReadOnly] private GridManager _gridManager;
 
         [SerializeField] private SafeUnityEvent<TileData> _onHighlightTile = new();
-        [SerializeField] private SafeUnityEvent<TileData> _onClickTile = new();
+        [SerializeField] private SafeUnityEvent<TileData> _onMouseDownTile = new();
+        [SerializeField] private SafeUnityEvent<TileData> _onMouseUpTile = new();
         [SerializeField] private SafeUnityEvent<TileData> _onExitTile = new();
         
         public Vector3 Size => _tileRenderer.bounds.size;
@@ -118,9 +120,14 @@ namespace Onw.GridTile
             _onExitTile.Invoke(GetTileData());
         }
 
+        private void OnMouseDown()
+        {
+            _onMouseDownTile.Invoke(GetTileData());
+        }
+
         private void OnMouseUp()
         {
-            _onClickTile.Invoke(GetTileData());
+            _onMouseUpTile.Invoke(GetTileData());
         }
     }
 }

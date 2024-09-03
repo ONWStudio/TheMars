@@ -11,7 +11,7 @@ namespace TMCard.Effect.Resource
 
         public ITMCardEffect CreateEffect()
         {
-            return CardEffectGenerator.CreateEffect<MarsLithumEffect, MarsLithumCardEffectCreator>(this);
+            return CardEffectGenerator.CreateEffect<MarsLithiumEffect, MarsLithumCardEffectCreator>(this);
         }
     }
 }

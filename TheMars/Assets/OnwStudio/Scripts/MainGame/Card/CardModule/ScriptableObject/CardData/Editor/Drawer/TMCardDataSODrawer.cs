@@ -145,9 +145,9 @@ namespace TMCard.Editor
                     canvasGo.AddComponent<GraphicRaycaster>();
 
                     _previewInstance = Instantiate(previewInstance, _previewCanvas.transform, false);
-                    TMCardModel model = _previewInstance.GetComponent<TMCardModel>();
-                    model.CardData = targetObject;
-                    model.Initialize();
+                    TMCardModel cardModel = _previewInstance.GetComponent<TMCardModel>();
+                    cardModel.CardData = targetObject;
+                    cardModel.Initialize();
                     _previewInstance.SetCardData(targetObject);
 
                     _previewCamera.transform.position = _previewInstance.transform.position - Vector3.forward * 10;

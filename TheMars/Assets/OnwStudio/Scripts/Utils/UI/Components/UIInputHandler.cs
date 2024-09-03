@@ -3,12 +3,13 @@ using Onw.Event;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-namespace TMCard.Runtime
+
+namespace Onw.UI.Components
 {
     /// <summary>
-    /// .. Card UI의 입력 이벤트를 받아옵니다
+    /// .. UI의 입력 이벤트를 받아옵니다
     /// </summary>
-    public sealed class TMCardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler
+    public sealed class UIInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
         public IUnityEventListenerModifier<PointerEventData> EnterAction => _enterAction;
         public IUnityEventListenerModifier<PointerEventData> ExitAction => _exitAction;

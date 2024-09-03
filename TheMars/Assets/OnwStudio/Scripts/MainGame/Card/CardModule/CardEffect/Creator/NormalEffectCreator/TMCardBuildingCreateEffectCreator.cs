@@ -7,13 +7,17 @@ using UnityEngine;
 
 namespace TMCard.Effect
 {
+    using static ITMCardEffectCreator;
+    
+    [SerializeReferenceDropdownName("건물 설치")]
     public sealed class TMCardBuildingCreateEffectCreator : ITMCardNormalEffectCreator
     {
         [field: SerializeField, DisplayAs("설치 건물")] public TMBuildingData BuildingData { get; private set; } = null;
         
         public ITMCardEffect CreateEffect()
         {
-            ITMCardEffectCreator.CardEffectGenerator.CreateEffect<TMCardBuildingCreateEffect, TMCardBuildingCreateEffectCreator>(this);
+            return CardEffectGenerator
+                .CreateEffect<TMCardBuildingCreateEffect, TMCardBuildingCreateEffectCreator>(this);
         }
     }
 }

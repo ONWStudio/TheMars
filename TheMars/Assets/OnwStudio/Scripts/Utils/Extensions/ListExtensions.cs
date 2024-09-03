@@ -25,7 +25,7 @@ namespace Onw.Extensions
         {
             if (index < 0 || index >= source.Count)
             {
-                result = default;
+                result = default(T);
                 return false;
             }
 

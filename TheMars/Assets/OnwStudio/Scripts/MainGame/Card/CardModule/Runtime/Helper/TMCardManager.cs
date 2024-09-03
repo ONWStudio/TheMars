@@ -1,16 +1,15 @@
-using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Onw.ServiceLocator;
 using Onw.Attribute;
 using Onw.Event;
-using TMPro;
+using UnityEngine.Serialization;
 
 namespace TMCard.Runtime
 {
     [DisallowMultipleComponent]
-    public sealed class TMCardManager : MonoBehaviour, ITMCardService
+    public sealed class TMCardManager : MonoBehaviour
     {
         [System.Serializable]
         public struct TMCardManagerUI
@@ -45,13 +44,14 @@ namespace TMCard.Runtime
         
         [SerializeField, ReadOnly] private List<TMCardModel> _cards = new();
 
-        [SerializeField] private TMCardManagerUI _uiComponents;
-        
+        [field: FormerlySerializedAs("_uiComponents")]
+        [field: SerializeField] public TMCardManagerUI UIComponents { get; private set; }
+
         private void Awake()
         {
-            if (!ServiceLocator<ITMCardService>.RegisterService(this))
+            if (!ServiceLocator<TMCardManager>.RegisterService(this))
             {
-                ServiceLocator<ITMCardService>.ChangeService(this);
+                ServiceLocator<TMCardManager>.ChangeService(this);
             }
         }
 
@@ -64,17 +64,38 @@ namespace TMCard.Runtime
         {
             _cards.Add(card);
             card.transform.SetParent(HandTransform, false);
-            card.OnDragBeginCard.AddListener(() => _uiComponents.SetDragView(false));
-            card.OnDragEndCard.AddListener(() => _uiComponents.SetDragView(true));
+            card.OnDragBeginCard.AddListener(onDragBeginCard);
+            card.OnDragEndCard.AddListener(onDragEndCard);
             
             CardSorter
                 .SortCards(_cards, HandTransform)
                 .ForEach(transformInfo => transformInfo.Target.CardBodyMover.TargetPosition = transformInfo.Position);
         }
 
+        public void RemoveCard(TMCardModel card)
+        {
+            _cards.Remove(card);
+            card.OnDragBeginCard.RemoveListener(onDragBeginCard);
+            card.OnDragEndCard.RemoveListener(onDragEndCard);
+            
+            CardSorter
+                .SortCards(_cards, HandTransform)
+                .ForEach(transformInfo => transformInfo.Target.CardBodyMover.TargetPosition = transformInfo.Position);
+        }
+
+        private void onDragBeginCard()
+        {
+            UIComponents.SetDragView(false);
+        }
+
+        private void onDragEndCard()
+        {
+            UIComponents.SetDragView(true);
+        }
+
         private void OnDestroy()
         {
-            ServiceLocator<ITMCardService>.ClearService();
+            ServiceLocator<TMCardManager>.ClearService();
         }
     }
 }

@@ -41,15 +41,13 @@ namespace TMCard.Runtime
 
         [SerializeField, SelectableSerializeField]
         private TextMeshProUGUI _costText;
-
+        
         private Action<Locale> _onLanguageChanged = null;
         
         private void buildDescriptionText(ITMCardEffect[] effects)
         {
-            _descriptionText.text = 
-                string.Join("\n", effects.OfType<ITMNormalEffect>().Select(effect => effect.Description)) +
-                "\n" +
-                string.Join("\n", effects.OfType<TMCardSpecialEffect>().Select(effect => effect.Description));
+            _descriptionText.text =
+                string.Join("\n", effects.OfType<ITMNormalEffect>().Select(effect => effect.Description));
         }
 
         public void SetView(bool isOn)

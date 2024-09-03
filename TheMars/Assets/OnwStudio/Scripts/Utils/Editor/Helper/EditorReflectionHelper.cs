@@ -282,13 +282,36 @@ namespace Onw.Editor
 
         public static FieldInfo GetFieldInfo(object targetObject, string propertyPath)
         {
-            if (targetObject is null || string.IsNullOrEmpty(propertyPath)) return null;
+            if (targetObject == null || string.IsNullOrEmpty(propertyPath))
+                return null;
 
-            return targetObject
-                .GetType()
-                .GetField(propertyPath, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            Type currentType = targetObject.GetType();
+            FieldInfo fieldInfo = null;
+            string[] pathParts = propertyPath.Split('.');
+
+            // 경로를 순회하며 각 필드의 타입을 찾습니다.
+            foreach (string part in pathParts)
+            {
+                fieldInfo = currentType.GetField(part, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+                if (fieldInfo == null)
+                    return null; // 필드를 찾을 수 없으면 null 반환
+
+                // 현재 필드의 타입을 다음 경로의 타입으로 설정합니다.
+                currentType = fieldInfo.FieldType;
+
+                // 만약 currentType이 제네릭 타입이라면, 해당 타입의 인자를 탐색합니다.
+                if (currentType.IsArray)
+                {
+                    currentType = currentType.GetElementType(); // 배열의 요소 타입을 가져옴
+                }
+                else if (currentType.IsGenericType && currentType.GetGenericTypeDefinition() == typeof(List<>))
+                {
+                    currentType = currentType.GetGenericArguments()[0]; // 리스트의 요소 타입을 가져옴
+                }
+            }
+
+            return fieldInfo;
         }
-
         public static Type GetPropertyType(object targetObject, string propertyPath)
         {
             FieldInfo field = GetFieldInfo(targetObject, propertyPath);

@@ -1,6 +1,9 @@
+using System;
 using Onw.Attribute;
+using Onw.ServiceLocator;
 using UniRx;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 namespace TMCard.Runtime
 {
@@ -8,6 +11,7 @@ namespace TMCard.Runtime
     [DisallowMultipleComponent]
     public sealed class TMCardController : MonoBehaviour
     {
+        [FormerlySerializedAs("_cardCardModel")]
         [FormerlySerializedAs("_cardController")]
         [Header("Model")]
         [SerializeField, InitializeRequireComponent]
@@ -27,15 +31,17 @@ namespace TMCard.Runtime
             }
             else
             {
-                this
-                    .ObserveEveryValueChanged(controller => _cardModel.CardData)
+                _cardModel
+                    .ObserveEveryValueChanged(cardModel => cardModel.CardData)
                     .Take(1)
                     .Subscribe(SetCardData)
                     .AddTo(this);
             }
             
-            _cardModel.OnDragBeginCard.AddListener(() => _cardViewer.SetView(false));
-            _cardModel.OnDragEndCard.AddListener(() => _cardViewer.SetView(true));
+            _cardModel
+                .ObserveEveryValueChanged(cardModel => cardModel.IsHide)
+                .Subscribe(isHide => _cardViewer.SetView(!isHide))
+                .AddTo(this);
         }
 
         public void SetCardData(TMCardData cardData)

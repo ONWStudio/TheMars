@@ -1,19 +1,19 @@
-using Onw.Attribute;
-using UnityEngine;
-using UnityEngine.Serialization;
-namespace TMCard.Effect
-{
-    using static ITMCardEffectCreator;
-
-    [SerializeReferenceDropdownName("카드 버리기")]
-    public sealed class TMCardDropEffectCreator : ITMCardNormalEffectCreator
-    {
-        [field: SerializeField, Min(1), DisplayAs("개수"), FormerlySerializedAs("<DropCount>k__BackingField")]
-        public int DropCount { get; private set; } = 1;
-
-        public ITMCardEffect CreateEffect()
-        {
-            return CardEffectGenerator.CreateEffect<TMCardDropEffect, TMCardDropEffectCreator>(this);
-        }
-    }
-}
+// using Onw.Attribute;
+// using UnityEngine;
+// using UnityEngine.Serialization;
+// namespace TMCard.Effect
+// {
+//     using static ITMCardEffectCreator;
+//
+//     [SerializeReferenceDropdownName("카드 버리기")]
+//     public sealed class TMCardDropEffectCreator : ITMCardNormalEffectCreator
+//     {
+//         [field: SerializeField, Min(1), DisplayAs("개수"), FormerlySerializedAs("<DropCount>k__BackingField")]
+//         public int DropCount { get; private set; } = 1;
+//
+//         public ITMCardEffect CreateEffect()
+//         {
+//             return CardEffectGenerator.CreateEffect<TMCardDropEffect, TMCardDropEffectCreator>(this);
+//         }
+//     }
+// }

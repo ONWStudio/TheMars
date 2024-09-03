@@ -599,7 +599,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -736,7 +740,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -873,7 +881,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -1010,7 +1022,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -1234,7 +1250,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -1284,7 +1304,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -1934,7 +1958,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _cards: []
-  _uiComponents:
+  <UIComponents>k__BackingField:
     <DeckImage>k__BackingField: {fileID: 921509769}
     <HandImage>k__BackingField: {fileID: 880654031}
     <HandNormalSprite>k__BackingField: {fileID: 21300000, guid: 23ce0a1828f761845b5505cf96d99463,
@@ -1989,7 +2013,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -2126,7 +2154,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -2263,7 +2295,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -2358,6 +2394,114 @@ Transform:
   m_Children: []
   m_Father: {fileID: 315550185}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &129953368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 129953369}
+  - component: {fileID: 129953372}
+  - component: {fileID: 129953371}
+  - component: {fileID: 129953370}
+  m_Layer: 5
+  m_Name: CardCollectNotifyScrollView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &129953369
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129953368}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 657010463}
+  - {fileID: 192617304}
+  m_Father: {fileID: 1439010216}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.21017, y: -213.76}
+  m_SizeDelta: {x: 1371.3, y: 112.11}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &129953370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129953368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Content: {fileID: 2059693716}
+  m_Horizontal: 1
+  m_Vertical: 1
+  m_MovementType: 1
+  m_Elasticity: 0.1
+  m_Inertia: 1
+  m_DecelerationRate: 0.135
+  m_ScrollSensitivity: 1
+  m_Viewport: {fileID: 657010463}
+  m_HorizontalScrollbar: {fileID: 192617305}
+  m_VerticalScrollbar: {fileID: 0}
+  m_HorizontalScrollbarVisibility: 2
+  m_VerticalScrollbarVisibility: 2
+  m_HorizontalScrollbarSpacing: -3
+  m_VerticalScrollbarSpacing: -3
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &129953371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129953368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &129953372
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129953368}
+  m_CullTransparentMesh: 1
 --- !u!1001 &135282921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2489,7 +2633,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -2626,7 +2774,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -2763,7 +2915,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -3259,6 +3415,132 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &192617303
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 192617304}
+  - component: {fileID: 192617307}
+  - component: {fileID: 192617306}
+  - component: {fileID: 192617305}
+  m_Layer: 5
+  m_Name: Scrollbar Horizontal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &192617304
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192617303}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 258337346}
+  m_Father: {fileID: 129953369}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -17, y: 20}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &192617305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192617303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1409365565}
+  m_HandleRect: {fileID: 1409365564}
+  m_Direction: 0
+  m_Value: 1
+  m_Size: 0.99999905
+  m_NumberOfSteps: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &192617306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192617303}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &192617307
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192617303}
+  m_CullTransparentMesh: 1
 --- !u!43 &233053200
 Mesh:
   m_ObjectHideFlags: 0
@@ -3466,7 +3748,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -3768,7 +4054,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -4070,7 +4360,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -4496,6 +4790,42 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &258337345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 258337346}
+  m_Layer: 5
+  m_Name: Sliding Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &258337346
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258337345}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1409365564}
+  m_Father: {fileID: 192617304}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &258946666
 GameObject:
   m_ObjectHideFlags: 0
@@ -4538,7 +4868,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -4840,7 +5174,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -4977,7 +5315,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -5251,7 +5593,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseUpTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseDownTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -5662,7 +6008,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -6789,7 +7139,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -6926,7 +7280,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -8181,7 +8539,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -8318,7 +8680,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -9059,7 +9425,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -9196,7 +9566,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -9663,7 +10037,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -9803,6 +10181,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &657010462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 657010463}
+  - component: {fileID: 657010465}
+  - component: {fileID: 657010464}
+  m_Layer: 5
+  m_Name: Viewport
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &657010463
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657010462}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2059693716}
+  m_Father: {fileID: 129953369}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &657010464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657010462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
+--- !u!222 &657010465
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657010462}
+  m_CullTransparentMesh: 1
 --- !u!1 &661980345
 GameObject:
   m_ObjectHideFlags: 0
@@ -9845,7 +10283,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -10147,7 +10589,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -10732,7 +11178,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -11199,7 +11649,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -11336,7 +11790,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -11473,7 +11931,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -11940,7 +12402,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -12077,7 +12543,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -12544,7 +13014,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -12681,7 +13155,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -12973,10 +13451,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1439010216}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.1427917, y: 0}
-  m_AnchorMax: {x: 0.8572083, y: 1}
-  m_AnchoredPosition: {x: 0.0026245117, y: -403.97003}
-  m_SizeDelta: {x: -0.0048828, y: -807.86}
+  m_AnchorMin: {x: 0.143, y: 0}
+  m_AnchorMax: {x: 0.8572083, y: 0.24822223}
+  m_AnchoredPosition: {x: 0.0026245117, y: 1.0299683}
+  m_SizeDelta: {x: -0.0048828125, y: 2.1400146}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &880654031
 MonoBehaviour:
@@ -13058,7 +13536,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -13289,7 +13771,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -13851,9 +14337,9 @@ RectTransform:
   m_Father: {fileID: 1439010216}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.8572083, y: -0.0003796816}
-  m_AnchorMax: {x: 1, y: 0.9996203}
-  m_AnchoredPosition: {x: 0.000061035156, y: -403.55005}
-  m_SizeDelta: {x: 0.000091553, y: -807.9201}
+  m_AnchorMax: {x: 1, y: 0.25285184}
+  m_AnchoredPosition: {x: 0.000061035156, y: -0.050048828}
+  m_SizeDelta: {x: 0.000091553, y: -0.920105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &921509769
 MonoBehaviour:
@@ -14430,7 +14916,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -15062,7 +15552,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -15618,7 +16112,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -15755,7 +16253,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -16058,7 +16560,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -16490,7 +16996,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -17164,7 +17674,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -17301,7 +17815,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -17438,7 +17956,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -17575,7 +18097,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -17877,7 +18403,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -18344,7 +18874,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -18481,7 +19015,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -19113,7 +19651,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -19250,7 +19792,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -19345,6 +19891,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 315550185}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1409365563
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1409365564}
+  - component: {fileID: 1409365566}
+  - component: {fileID: 1409365565}
+  m_Layer: 5
+  m_Name: Handle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1409365564
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409365563}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 258337346}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1409365565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409365563}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1409365566
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409365563}
+  m_CullTransparentMesh: 1
 --- !u!1 &1412866203
 GameObject:
   m_ObjectHideFlags: 0
@@ -19387,7 +20008,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -19683,6 +20308,7 @@ RectTransform:
   - {fileID: 921509768}
   - {fileID: 880654030}
   - {fileID: 248756652}
+  - {fileID: 129953369}
   m_Father: {fileID: 1515806360}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -19795,7 +20421,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -20097,7 +20727,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -20373,7 +21007,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -20640,7 +21278,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -20778,7 +21420,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -20916,7 +21562,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -21054,7 +21704,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -21522,7 +22176,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -21659,7 +22317,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -21797,7 +22459,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -21935,7 +22601,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -22567,7 +23237,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -22704,7 +23378,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -22841,7 +23519,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -23473,7 +24155,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -24105,7 +24791,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -24991,7 +25681,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -25128,7 +25822,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -25551,7 +26249,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -25688,7 +26390,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -25990,7 +26696,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -26127,7 +26837,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -26254,10 +26968,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1439010216}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.015000001, y: 0.11400001}
-  m_AnchorMax: {x: 0.12952085, y: 0.88926846}
-  m_AnchoredPosition: {x: -1.5008545, y: -405.8004}
-  m_SizeDelta: {x: 4.1399994, y: -629.9059}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.143, y: 0.24822223}
+  m_AnchoredPosition: {x: -0.0008544922, y: 2.199585}
+  m_SizeDelta: {x: -50.86, y: -59.905884}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1912238805
 MonoBehaviour:
@@ -26339,7 +27053,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -26477,7 +27195,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -26945,7 +27667,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -27205,6 +27931,41 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &2059693715
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2059693716}
+  m_Layer: 5
+  m_Name: Content
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2059693716
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059693715}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 657010463}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.0038751194, y: 0}
+  m_SizeDelta: {x: 0, y: 300}
+  m_Pivot: {x: 0, y: 1}
 --- !u!1 &2064802127
 GameObject:
   m_ObjectHideFlags: 0
@@ -27322,7 +28083,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -27459,7 +28224,11 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onClickTile:
+  _onMouseDownTile:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onMouseUpTile:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []

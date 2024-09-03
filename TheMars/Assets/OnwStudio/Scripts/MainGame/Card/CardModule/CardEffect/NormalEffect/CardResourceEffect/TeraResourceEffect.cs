@@ -19,9 +19,9 @@ namespace TMCard.Effect.Resource
             Amount = cardEffectCreator.Amount;
         }
 
-        public void ApplyEffect(TMCardModel model, ITMEffectTrigger trigger)
+        public void ApplyEffect(TMCardModel cardModel, ITMCardEffectTrigger trigger)
         {
-            trigger.OnEffectEvent.AddListener(eventState =>
+            trigger.OnEffectEvent.AddListener(() =>
             {
                 PlayerManager.Instance.Tera += Amount;
                 Debug.Log(Amount);
@@ -33,6 +33,10 @@ namespace TMCard.Effect.Resource
         {
             Amount += addtionalAmount;
             Event.Invoke("Description Update");
+        }
+        
+        public void Dispose()
+        {
         }
     }
 }

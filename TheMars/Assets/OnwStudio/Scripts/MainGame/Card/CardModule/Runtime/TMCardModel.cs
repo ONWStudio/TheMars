@@ -1,23 +1,21 @@
-using System.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Onw.Event;
-using Onw.GridTile;
 using Onw.Attribute;
-using Onw.Extensions;
-using Onw.ServiceLocator;
 using Onw.Components.Movement;
-using TM.Grid;
-using TM.Building;
+using Onw.ServiceLocator;
+using Onw.UI.Components;
+using TM;
 using TMCard.Effect;
 
 namespace TMCard.Runtime
 {
     // .. Model
     [DisallowMultipleComponent]
-    public sealed class TMCardModel : MonoBehaviour, ITMEffectTrigger
+    public sealed class TMCardModel : MonoBehaviour, ITMCardEffectTrigger
     {
         [field: SerializeField, ReadOnly] public TMCardData CardData { get; set; }
 
@@ -32,7 +30,7 @@ namespace TMCard.Runtime
         public RectTransform RectTransform { get; private set; }
 
         [field: SerializeField, InitializeRequireComponent]
-        public TMCardInputHandler InputHandler { get; private set; }
+        public UIInputHandler InputHandler { get; private set; }
 
         [field: Space]
         [field: Header("Require Option")]
@@ -42,9 +40,11 @@ namespace TMCard.Runtime
         [field: SerializeField, InitializeRequireComponent]
         public Vector2SmoothMover CardBodyMover { get; private set; }
 
-        [field: SerializeField] public bool IsHide { get; set; } = false;
-        public CardEvent OnEffectEvent { get; } = new();
+        [field: SerializeField, ReadOnly] public bool IsOverDeckTransform { get; private set; } = false;
+        [field: SerializeField, ReadOnly] public bool IsHide { get; set; } = false;
+        [field: SerializeField] public SafeUnityEvent OnEffectEvent { get; private set; } = new();
 
+        public ITMCardEffect CardEffect { get; private set; } = null;
         public IUnityEventListenerModifier OnDragBeginCard => _onDragBeginCard;
         public IUnityEventListenerModifier OnDragEndCard => _onDragEndCard;
 
@@ -53,6 +53,91 @@ namespace TMCard.Runtime
 
         [SerializeField, ReadOnly] private bool _isInit = false;
 
+        public void OnMouseDownCard(PointerEventData eventData)
+        {
+            if (!ServiceLocator<TMCardManager>.TryGetService(out TMCardManager cardManager)) return;
+
+            Camera cardSystemCamera = eventData.enterEventCamera;
+            bool? keepIsHide = null;
+
+            setOnMover(CardViewMover, false);
+            CardBodyMover.enabled = false;
+
+            InputHandler.DragAction.AddListener(onDrag);
+            InputHandler.UpAction.AddListener(onDragEnd);
+            IsDragging = true;
+
+            _onDragBeginCard.Invoke();
+            
+            void onDrag(PointerEventData dragEventData)
+            {
+                if (RectTransformUtility.RectangleContainsScreenPoint(cardManager.DeckTransform, Input.mousePosition, cardSystemCamera))
+                {
+                    if (keepIsHide is null)
+                    {
+                        keepIsHide = IsHide;
+                        IsOverDeckTransform = true;
+                        IsHide = false;
+                    }
+                }
+                else
+                {
+                    if (keepIsHide is not null)
+                    {
+                        IsHide = (bool)keepIsHide;
+                        IsOverDeckTransform = false;
+                        keepIsHide = null;
+                    }
+                }
+                
+                Vector2 mouseWorldPosition = cardSystemCamera.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 mouseLocalPosition = transform.parent.InverseTransformPoint(mouseWorldPosition);
+                transform.localPosition = mouseLocalPosition;
+            }
+
+            void onDragEnd(PointerEventData dragEndEventData)
+            {
+                InputHandler.DragAction.RemoveListener(onDrag);
+                InputHandler.UpAction.RemoveListener(onDragEnd);
+                IsOverDeckTransform = false;
+                if (RectTransformUtility.RectangleContainsScreenPoint(cardManager.DeckTransform, Input.mousePosition, cardSystemCamera))
+                {
+                    sellCard();
+                }
+                else
+                {
+                    OnEffectEvent.Invoke();
+                    setOnMover(CardViewMover, true);
+                    CardBodyMover.enabled = true;
+                    IsDragging = false;
+                }
+
+                _onDragEndCard.Invoke();
+            }
+
+            static void setOnMover(Vector2SmoothMover smoothMover, bool isOn)
+            {
+                smoothMover.enabled = isOn;
+
+                if (!isOn)
+                {
+                    smoothMover.transform.localPosition = Vector3.zero;
+                }
+            }
+        }
+
+        private void sellCard()
+        {
+            if (CardEffect is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
+            
+            CardEffect = null;
+            PlayerManager.Instance.Tera += 10;
+            Destroy(gameObject);
+        }
+        
         public void Initialize()
         {
             if (_isInit) return;
@@ -67,50 +152,10 @@ namespace TMCard.Runtime
             InputHandler.ExitAction.AddListener(eventData
                 => CardViewMover.TargetPosition = Vector2.zero);
 
-            InputHandler.DownAction.AddListener(onDownCard);
-
-            void onDownCard(PointerEventData eventData)
-            {
-                Camera cardSystemCamera = eventData.enterEventCamera;
-                
-                setOnMover(CardViewMover, false);
-                CardBodyMover.enabled = false;
-
-                InputHandler.DragAction.AddListener(onDrag);
-                InputHandler.UpAction.AddListener(onDragEnd);
-                IsDragging = true;
-
-                _onDragBeginCard.Invoke();
-
-                void onDrag(PointerEventData dragEventData)
-                {
-                    Vector2 mouseWorldPosition = cardSystemCamera.ScreenToWorldPoint(Input.mousePosition);
-                    Vector2 mouseLocalPosition = transform.parent.InverseTransformPoint(mouseWorldPosition);
-                    transform.localPosition = mouseLocalPosition;
-                }
-
-                void onDragEnd(PointerEventData dragEndEventData)
-                {
-                    InputHandler.DragAction.RemoveListener(onDrag);
-                    InputHandler.UpAction.RemoveListener(onDragEnd);
-
-                    setOnMover(CardViewMover, true);
-                    CardBodyMover.enabled = true;
-                    IsDragging = false;
-
-                    _onDragEndCard.Invoke();
-                }
-
-                static void setOnMover(Vector2SmoothMover smoothMover, bool isOn)
-                {
-                    smoothMover.enabled = isOn;
-
-                    if (!isOn)
-                    {
-                        smoothMover.transform.localPosition = Vector3.zero;
-                    }
-                }
-            }
+            InputHandler.DownAction.AddListener(OnMouseDownCard);
+            
+            CardEffect = CardData.GetCardEffect();
+            CardEffect?.ApplyEffect(this, this);
         }
     }
 }
