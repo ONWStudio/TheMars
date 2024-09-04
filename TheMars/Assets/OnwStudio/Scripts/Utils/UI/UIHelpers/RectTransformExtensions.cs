@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Onw.UI
@@ -204,6 +205,69 @@ namespace Onw.UI
         {
             rectTransform.GetWorldCorners(_corners);
             return _corners;
+        }
+
+        public static float GetChildWidthSum(this RectTransform rectTransform)
+        {
+            return rectTransform.Cast<RectTransform>().Sum(child => child.rect.width);
+        }
+
+        public static float GetChildHeightSum(this RectTransform rectTransform)
+        {
+            return rectTransform.Cast<RectTransform>().Sum(child => child.rect.height);
+        }
+
+        public static Vector2 GetChildSizeSum(this RectTransform rectTransform)
+        {
+            return new(rectTransform.GetChildWidthSum(), rectTransform.GetChildHeightSum());
+        }
+        
+        /// <summary>
+        /// .. 어떤 UI 컨텐츠가 있을때 내부의 요소들을 가로로 일렬로 정렬 시킵니다 요소들이 
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="elements"></param>
+        /// <returns></returns>
+        public static Vector3[] GetHorizontalSortedPosition(this RectTransform parent)
+        {
+            Vector3[] positionArray = new Vector3[parent.childCount];
+            Vector2 parentPivotSize = new(parent.rect.width * parent.pivot.x, parent.rect.height * parent.pivot.y);
+            float nowXPosition = 0;
+
+            for (int i = 0; i < positionArray.Length; i++)
+            {
+                RectTransform child = parent.GetChild(i).transform as RectTransform;
+                
+                if (child)
+                {
+                    Vector2 childPivotSize = new(child.rect.width * child.pivot.x, child.rect.height * child.pivot.y);
+                    positionArray[i] = new(nowXPosition - parentPivotSize.x + childPivotSize.x, parentPivotSize.y + childPivotSize.y, 0f);
+                    nowXPosition += child.rect.width;
+                }
+            }
+
+            return positionArray;
+        }
+
+        public static Vector3[] GetVerticalSortedPosition(this RectTransform parent)
+        {
+            Vector3[] positionArray = new Vector3[parent.childCount];
+            Vector2 parentPivotSize = new(parent.rect.width * parent.pivot.x, parent.rect.height * parent.pivot.y);
+            float nowYPosition = 0;
+
+            for (int i = 0; i < positionArray.Length; i++)
+            {
+                RectTransform child = parent.GetChild(i).transform as RectTransform;
+                
+                if (child)
+                {
+                    Vector2 childPivotSize = new(child.rect.width * child.pivot.x, child.rect.height * child.pivot.y);
+                    positionArray[i] = new(parentPivotSize.x + childPivotSize.x, nowYPosition - parentPivotSize.y + childPivotSize.y, 0f);
+                    nowYPosition += child.rect.height;
+                }
+            }
+
+            return positionArray;
         }
     }
 }

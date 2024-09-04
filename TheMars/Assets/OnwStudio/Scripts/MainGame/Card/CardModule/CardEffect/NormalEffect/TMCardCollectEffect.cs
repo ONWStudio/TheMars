@@ -11,6 +11,7 @@ namespace TMCard.Effect
         
         [SerializeField, ReadOnly]
         private int _collectCount;
+        
         [SerializeField, ReadOnly]
         private TMCardKind _selectKind = TMCardKind.NONE;
 

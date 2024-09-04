@@ -19,6 +19,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: dd4c79ee9fda3204ca0149268275545a, type: 2}
+    - target: {fileID: 4786004868940077113, guid: baeffcb34e7ee4e9b8fdb369a1268a2a,
+        type: 3}
+      propertyPath: <MeshRenderer>k__BackingField
+      value: 
+      objectReference: {fileID: 8678509994818826885}
     - target: {fileID: 4999922940619862806, guid: baeffcb34e7ee4e9b8fdb369a1268a2a,
         type: 3}
       propertyPath: m_Name
@@ -99,3 +104,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baeffcb34e7ee4e9b8fdb369a1268a2a, type: 3}
+--- !u!23 &8678509994818826885 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2796803626622632679, guid: baeffcb34e7ee4e9b8fdb369a1268a2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6818587036480942178}
+  m_PrefabAsset: {fileID: 0}

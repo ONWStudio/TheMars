@@ -3,6 +3,6 @@ namespace TMCard.Effect
 {
     public interface ITMCardEffectTrigger
     {
-        SafeUnityEvent OnEffectEvent { get; }
+        IUnityEventListenerModifier OnEffectEvent { get; }
     }
 }

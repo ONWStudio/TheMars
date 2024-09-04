@@ -4,18 +4,20 @@ using UnityEngine;
 using Onw.Attribute;
 using Onw.Coroutine;
 using TM.Building.Effect.Creator;
+using TM.Manager;
+using UnityEngine.Tilemaps;
 
 namespace TM.Building.Effect
 {
     public sealed class GetMarsLithiumEffect : ITMBuildingEffect, ITMBuildingInitializeEffect<GetMarsLithiumEffectCreator>
     {
-        [SerializeField, ReadOnly] private int _levelOneRepeatSeconds = 0;
+        [SerializeField, ReadOnly] private float _levelOneRepeatSeconds = 0;
         [SerializeField, ReadOnly] private int _levelOneMarsLithium = 1;
 
-        [SerializeField, ReadOnly] private int _levelTwoRepeatSeconds = 0;
+        [SerializeField, ReadOnly] private float _levelTwoRepeatSeconds = 0;
         [SerializeField, ReadOnly] private int _levelTwoMarsLithium = 1;
 
-        [SerializeField, ReadOnly] private int _levelThreeRepeatSeconds = 0;
+        [SerializeField, ReadOnly] private float _levelThreeRepeatSeconds = 0;
         [SerializeField, ReadOnly] private int _levelThreeMarsLithium = 1;
 
         private Coroutine _coroutine = null;
@@ -50,19 +52,28 @@ namespace TM.Building.Effect
             owner.StopCoroutineIfNotNull(_coroutine);
         }
 
-        private void fireEffect(TMBuilding owner, int repeatSeconds, int marsLithium)
+        private void fireEffect(TMBuilding owner, float repeatSeconds, int marsLithium)
         {
             owner.StopCoroutineIfNotNull(_coroutine);
             _coroutine = owner.StartCoroutine(iEFireEffect(repeatSeconds, marsLithium));
         }
 
-        private static IEnumerator iEFireEffect(int repeatSeconds, int marsLithium)
+        private static IEnumerator iEFireEffect(float repeatSeconds, int marsLithium)
         {
+            float timeAccumulator = 0f;
+            
             while (true)
             {
-                yield return CoroutineHelper.WaitForSeconds(repeatSeconds);
-                Debug.Log("마르스 리튬 획득!");
-                PlayerManager.Instance.MarsLithium += marsLithium;
+                timeAccumulator += Time.deltaTime * TimeManager.GameSpeed;
+
+                if (timeAccumulator >= repeatSeconds)
+                {
+                    Debug.Log("마르스 리튬 획득!");
+                    PlayerManager.Instance.MarsLithium += marsLithium;
+                    timeAccumulator -= repeatSeconds;
+                }
+   
+                yield return null;
             }
         }
     }

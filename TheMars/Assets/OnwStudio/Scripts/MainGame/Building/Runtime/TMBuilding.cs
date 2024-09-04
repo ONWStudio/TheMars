@@ -9,6 +9,9 @@ namespace TM.Building
 {
     public sealed class TMBuilding : MonoBehaviour
     {
+        [field: Header("Components")]
+        [field: SerializeField, SelectableSerializeField] public Renderer MeshRenderer { get; private set; }
+        
         [field: Header("Building State")]
         [field: SerializeField, ReadOnly] public int BuildingLevel { get; private set; } = 1;
         [field: SerializeField, ReadOnly] public bool OnTile { get; private set; } = false;

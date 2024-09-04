@@ -148,7 +148,7 @@ namespace TMCard.Editor
                     TMCardModel cardModel = _previewInstance.GetComponent<TMCardModel>();
                     cardModel.CardData = targetObject;
                     cardModel.Initialize();
-                    _previewInstance.SetCardData(targetObject);
+                    _previewInstance.CardData = targetObject;
 
                     _previewCamera.transform.position = _previewInstance.transform.position - Vector3.forward * 10;
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.EventSystems;
 
 namespace Onw.UI
@@ -15,6 +16,5 @@ namespace Onw.UI
 
             return rectTransform;
         }
-
     }
 }

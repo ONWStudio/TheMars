@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 2641078392514413353}
   - component: {fileID: 1418838472063332517}
   - component: {fileID: 7537040243462683919}
+  - component: {fileID: 8719858599476742558}
+  - component: {fileID: 3516790314894566106}
   m_Layer: 5
   m_Name: CardCollectNotifyIcon
   m_TagString: Untagged
@@ -135,3 +137,32 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8719858599476742558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2273307613170612616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a554087022dd4257a5d036568967a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _smoothMover: {fileID: 3516790314894566106}
+  _collectCardButton: {fileID: 7537040243462683919}
+--- !u!114 &3516790314894566106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2273307613170612616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea98bc5ff45a4456a1f21f6b9705fde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <TargetPosition>k__BackingField: {x: Infinity, y: Infinity}
+  <Ratio>k__BackingField: 0.45
+  <IsLocal>k__BackingField: 0

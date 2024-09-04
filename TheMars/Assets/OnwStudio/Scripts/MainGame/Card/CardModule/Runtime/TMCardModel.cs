@@ -42,14 +42,15 @@ namespace TMCard.Runtime
 
         [field: SerializeField, ReadOnly] public bool IsOverDeckTransform { get; private set; } = false;
         [field: SerializeField, ReadOnly] public bool IsHide { get; set; } = false;
-        [field: SerializeField] public SafeUnityEvent OnEffectEvent { get; private set; } = new();
 
         public ITMCardEffect CardEffect { get; private set; } = null;
         public IUnityEventListenerModifier OnDragBeginCard => _onDragBeginCard;
         public IUnityEventListenerModifier OnDragEndCard => _onDragEndCard;
+        public IUnityEventListenerModifier OnEffectEvent => _onEffectEvent;
 
         [SerializeField] private SafeUnityEvent _onDragBeginCard = new();
         [SerializeField] private SafeUnityEvent _onDragEndCard = new();
+        [SerializeField] private SafeUnityEvent _onEffectEvent = new();
 
         [SerializeField, ReadOnly] private bool _isInit = false;
 
@@ -106,7 +107,7 @@ namespace TMCard.Runtime
                 }
                 else
                 {
-                    OnEffectEvent.Invoke();
+                    _onEffectEvent.Invoke();
                     setOnMover(CardViewMover, true);
                     CardBodyMover.enabled = true;
                     IsDragging = false;
