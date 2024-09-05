@@ -16,6 +16,9 @@ namespace TM.Manager
         }
 
         private static int _gameSpeed = 1;
+
+        public static float SecondsToMinutes(float seconds) => seconds / 60f;
+        public static float MinutesToSeconds(float minutes) => minutes * 60f;
     }
 }
 

@@ -44,13 +44,13 @@ namespace TMCard.Runtime
         [field: SerializeField, ReadOnly] public bool IsHide { get; set; } = false;
 
         public ITMCardEffect CardEffect { get; private set; } = null;
-        public IUnityEventListenerModifier OnDragBeginCard => _onDragBeginCard;
-        public IUnityEventListenerModifier OnDragEndCard => _onDragEndCard;
-        public IUnityEventListenerModifier OnEffectEvent => _onEffectEvent;
+        public IUnityEventListenerModifier<TMCardModel> OnDragBeginCard => _onDragBeginCard;
+        public IUnityEventListenerModifier<TMCardModel> OnDragEndCard => _onDragEndCard;
+        public IUnityEventListenerModifier<TMCardModel> OnEffectEvent => _onEffectEvent;
 
-        [SerializeField] private SafeUnityEvent _onDragBeginCard = new();
-        [SerializeField] private SafeUnityEvent _onDragEndCard = new();
-        [SerializeField] private SafeUnityEvent _onEffectEvent = new();
+        [SerializeField] private SafeUnityEvent<TMCardModel> _onDragBeginCard = new();
+        [SerializeField] private SafeUnityEvent<TMCardModel> _onDragEndCard = new();
+        [SerializeField] private SafeUnityEvent<TMCardModel> _onEffectEvent = new();
 
         [SerializeField, ReadOnly] private bool _isInit = false;
 
@@ -68,7 +68,7 @@ namespace TMCard.Runtime
             InputHandler.UpAction.AddListener(onDragEnd);
             IsDragging = true;
 
-            _onDragBeginCard.Invoke();
+            _onDragBeginCard.Invoke(this);
             
             void onDrag(PointerEventData dragEventData)
             {
@@ -101,19 +101,20 @@ namespace TMCard.Runtime
                 InputHandler.DragAction.RemoveListener(onDrag);
                 InputHandler.UpAction.RemoveListener(onDragEnd);
                 IsOverDeckTransform = false;
+                
                 if (RectTransformUtility.RectangleContainsScreenPoint(cardManager.DeckTransform, Input.mousePosition, cardSystemCamera))
                 {
                     sellCard();
                 }
                 else
                 {
-                    _onEffectEvent.Invoke();
+                    _onEffectEvent.Invoke(this);
                     setOnMover(CardViewMover, true);
                     CardBodyMover.enabled = true;
                     IsDragging = false;
                 }
-
-                _onDragEndCard.Invoke();
+                
+                _onDragEndCard.Invoke(this);
             }
 
             static void setOnMover(Vector2SmoothMover smoothMover, bool isOn)

@@ -13,7 +13,7 @@ namespace TMCard.Runtime
         [SerializeField] private List<TMCardData> _cards = new();
         [SerializeField] private TMCardModel _templatePrefab;
 
-        public List<TMCardModel> CreateCards(int createCount)
+        public List<TMCardModel> CreateCards(int createCount, bool shouldInitialize = true)
         {
             if (_cards.Count <= 0) return null;
 
@@ -21,24 +21,28 @@ namespace TMCard.Runtime
 
             for (int i = 0; i < createCount; i++)
             {
-                cardList.Add(CreateCardByCardData(_cards[Random.Range(0, _cards.Count)]));
+                cardList.Add(CreateCardByCardData(_cards[Random.Range(0, _cards.Count)], shouldInitialize));
             }
 
             return cardList;
         }
 
-        public TMCardModel CreateCardByCardData(TMCardData cardData)
+        public TMCardModel CreateCardByCardData(TMCardData cardData, bool shouldInitialize = true)
         {
             TMCardModel card = Object.Instantiate(_templatePrefab);
             card.CardData = cardData;
-            card.Initialize();
+
+            if (shouldInitialize)
+            {
+                card.Initialize();
+            }
 
             return card;
         }
 
-        public TMCardModel CreateCard()
+        public TMCardModel CreateCard(bool shouldInitialize = true)
         {
-            return _cards.Count > 0 ? CreateCardByCardData(_cards[Random.Range(0, _cards.Count)]) : null;
+            return _cards.Count > 0 ? CreateCardByCardData(_cards[Random.Range(0, _cards.Count)], shouldInitialize) : null;
         }
     }
 }

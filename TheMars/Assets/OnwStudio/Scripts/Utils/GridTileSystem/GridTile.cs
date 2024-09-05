@@ -11,64 +11,44 @@ using UnityEngine.Serialization;
 
 namespace Onw.GridTile
 {
-    public readonly struct TileData
-    {
-        public MeshRenderer TileRenderer { get; }
-        public MeshFilter MeshFilter { get; }
-        public MeshCollider Collider { get; }
-        public Vector2Int TilePoint { get; }
-        public List<string> Properties { get; }
-
-        public TileData(MeshRenderer meshRenderer, MeshFilter meshFilter, MeshCollider meshCollider, List<string> properties, in Vector2Int tilePoint)
-        {
-            TileRenderer = meshRenderer;
-            MeshFilter = meshFilter;
-            Collider = meshCollider;
-            TilePoint = tilePoint;
-            Properties = properties;
-        }
-    }
-    
     public sealed class GridTile : MonoBehaviour
     {
-        public IUnityEventListenerModifier<TileData> OnHighlightTile => _onHighlightTile;
-        public IUnityEventListenerModifier<TileData> OnMouseDownTile => _onMouseDownTile;
-        public IUnityEventListenerModifier<TileData> OnMouseUpTile => _onMouseUpTile;
-        public IUnityEventListenerModifier<TileData> OnExitTile => _onExitTile;
+        public IUnityEventListenerModifier<GridTile> OnHighlightTile => _onHighlightTile;
+        public IUnityEventListenerModifier<GridTile> OnMouseDownTile => _onMouseDownTile;
+        public IUnityEventListenerModifier<GridTile> OnMouseUpTile => _onMouseUpTile;
+        public IUnityEventListenerModifier<GridTile> OnExitTile => _onExitTile;
 
         [field: FormerlySerializedAs("_properties")]
         [field: SerializeField] public List<string> Properties { get; private set; } = new(); // .. 각 타일에 속성을 넣을 수 있습니다
 
-        [SerializeField, ReadOnly] private MeshRenderer _tileRenderer;
-        [SerializeField, ReadOnly] private MeshCollider _meshCollider;
-        [SerializeField, ReadOnly] private MeshFilter _meshFilter;
+        [field: FormerlySerializedAs("_tileRenderer")]
+        [field: SerializeField, ReadOnly] public MeshRenderer TileRenderer { get; private set; }
+        [field: FormerlySerializedAs("_meshCollider")]
+        [field: SerializeField, ReadOnly] public MeshCollider MeshCollider { get; private set; }
+        [field: FormerlySerializedAs("_meshFilter")]
+        [field: SerializeField, ReadOnly] public MeshFilter MeshFilter { get; private set; }
 
         [field: FormerlySerializedAs("_tilePoint")]
         [field: SerializeField, ReadOnly] public Vector2Int TilePoint { get; private set; }
 
         [SerializeField, ReadOnly] private GridManager _gridManager;
 
-        [SerializeField] private SafeUnityEvent<TileData> _onHighlightTile = new();
-        [SerializeField] private SafeUnityEvent<TileData> _onMouseDownTile = new();
-        [SerializeField] private SafeUnityEvent<TileData> _onMouseUpTile = new();
-        [SerializeField] private SafeUnityEvent<TileData> _onExitTile = new();
+        [SerializeField] private SafeUnityEvent<GridTile> _onHighlightTile = new();
+        [SerializeField] private SafeUnityEvent<GridTile> _onMouseDownTile = new();
+        [SerializeField] private SafeUnityEvent<GridTile> _onMouseUpTile = new();
+        [SerializeField] private SafeUnityEvent<GridTile> _onExitTile = new();
         
-        public Vector3 Size => _tileRenderer.bounds.size;
-
-        public TileData GetTileData()
-        {
-            return new(_tileRenderer, _meshFilter, _meshCollider, Properties, TilePoint);
-        }
+        public Vector3 Size => TileRenderer.bounds.size;
 
         public void CreateTile(GridManager gridManager, Material material, float tileSize, in Vector2Int tilePoint)
         {
             _gridManager = gridManager;
             TilePoint = tilePoint;
-            _meshFilter = gameObject.AddComponent<MeshFilter>();
-            _tileRenderer = gameObject.AddComponent<MeshRenderer>();
-            _meshCollider = gameObject.AddComponent<MeshCollider>();
+            MeshFilter = gameObject.AddComponent<MeshFilter>();
+            TileRenderer = gameObject.AddComponent<MeshRenderer>();
+            MeshCollider = gameObject.AddComponent<MeshCollider>();
 
-            _tileRenderer.sharedMaterial = material;
+            TileRenderer.sharedMaterial = material;
             
             Mesh mesh = new();
 
@@ -101,8 +81,8 @@ namespace Onw.GridTile
             // 노멀 계산 (빛 반사 처리)
             mesh.RecalculateNormals();
 
-            _meshFilter.mesh = mesh;
-            _meshCollider.sharedMesh = mesh;
+            MeshFilter.mesh = mesh;
+            MeshCollider.sharedMesh = mesh;
         }
         
         public bool ContainsProperty(string property)
@@ -112,22 +92,22 @@ namespace Onw.GridTile
         
         private void OnMouseEnter()
         {
-            _onHighlightTile.Invoke(GetTileData());
+            _onHighlightTile.Invoke(this);
         }
 
         private void OnMouseExit()
         {
-            _onExitTile.Invoke(GetTileData());
+            _onExitTile.Invoke(this);
         }
 
         private void OnMouseDown()
         {
-            _onMouseDownTile.Invoke(GetTileData());
+            _onMouseDownTile.Invoke(this);
         }
 
         private void OnMouseUp()
         {
-            _onMouseUpTile.Invoke(GetTileData());
+            _onMouseUpTile.Invoke(this);
         }
     }
 }

@@ -1,8 +1,9 @@
 using Onw.Event;
+using TMCard.Runtime;
 namespace TMCard.Effect
 {
     public interface ITMCardEffectTrigger
     {
-        IUnityEventListenerModifier OnEffectEvent { get; }
+        IUnityEventListenerModifier<TMCardModel> OnEffectEvent { get; }
     }
 }

@@ -241,7 +241,10 @@ namespace Onw.UI
                 if (child)
                 {
                     Vector2 childPivotSize = new(child.rect.width * child.pivot.x, child.rect.height * child.pivot.y);
-                    positionArray[i] = new(nowXPosition - parentPivotSize.x + childPivotSize.x, parentPivotSize.y + childPivotSize.y, 0f);
+                    positionArray[i] = new(
+                        nowXPosition - parentPivotSize.x + childPivotSize.x, 
+                        -parentPivotSize.y + parent.rect.height * 0.5f - child.rect.height * (child.pivot.y - 0.5f), 
+                        0f);
                     nowXPosition += child.rect.width;
                 }
             }
@@ -262,7 +265,10 @@ namespace Onw.UI
                 if (child)
                 {
                     Vector2 childPivotSize = new(child.rect.width * child.pivot.x, child.rect.height * child.pivot.y);
-                    positionArray[i] = new(parentPivotSize.x + childPivotSize.x, nowYPosition - parentPivotSize.y + childPivotSize.y, 0f);
+                    positionArray[i] = new(
+                        -parentPivotSize.x + parent.rect.width * 0.5f - child.rect.width * (child.pivot.x - 0.5f), 
+                        nowYPosition - parentPivotSize.y + childPivotSize.y, 
+                        0f);
                     nowYPosition += child.rect.height;
                 }
             }

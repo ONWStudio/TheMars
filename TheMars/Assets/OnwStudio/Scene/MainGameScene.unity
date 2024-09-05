@@ -590,9 +590,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 4446288}
-  _meshCollider: {fileID: 4446287}
-  _meshFilter: {fileID: 4446286}
+  <TileRenderer>k__BackingField: {fileID: 4446288}
+  <MeshCollider>k__BackingField: {fileID: 4446287}
+  <MeshFilter>k__BackingField: {fileID: 4446286}
   <TilePoint>k__BackingField: {x: 2, y: 5}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -731,9 +731,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 5506962}
-  _meshCollider: {fileID: 5506961}
-  _meshFilter: {fileID: 5506960}
+  <TileRenderer>k__BackingField: {fileID: 5506962}
+  <MeshCollider>k__BackingField: {fileID: 5506961}
+  <MeshFilter>k__BackingField: {fileID: 5506960}
   <TilePoint>k__BackingField: {x: 2, y: 7}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -872,9 +872,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 6987574}
-  _meshCollider: {fileID: 6987573}
-  _meshFilter: {fileID: 6987572}
+  <TileRenderer>k__BackingField: {fileID: 6987574}
+  <MeshCollider>k__BackingField: {fileID: 6987573}
+  <MeshFilter>k__BackingField: {fileID: 6987572}
   <TilePoint>k__BackingField: {x: 2, y: 1}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -1013,9 +1013,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 31687356}
-  _meshCollider: {fileID: 31687355}
-  _meshFilter: {fileID: 31687354}
+  <TileRenderer>k__BackingField: {fileID: 31687356}
+  <MeshCollider>k__BackingField: {fileID: 31687355}
+  <MeshFilter>k__BackingField: {fileID: 31687354}
   <TilePoint>k__BackingField: {x: 6, y: 3}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -1241,9 +1241,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 33659733}
-  _meshCollider: {fileID: 33659732}
-  _meshFilter: {fileID: 33659734}
+  <TileRenderer>k__BackingField: {fileID: 33659733}
+  <MeshCollider>k__BackingField: {fileID: 33659732}
+  <MeshFilter>k__BackingField: {fileID: 33659734}
   <TilePoint>k__BackingField: {x: 8, y: 8}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -1295,9 +1295,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 45172760}
-  _meshCollider: {fileID: 45172759}
-  _meshFilter: {fileID: 45172758}
+  <TileRenderer>k__BackingField: {fileID: 45172760}
+  <MeshCollider>k__BackingField: {fileID: 45172759}
+  <MeshFilter>k__BackingField: {fileID: 45172758}
   <TilePoint>k__BackingField: {x: 8, y: 1}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -1961,10 +1961,6 @@ MonoBehaviour:
   <CardSystemCamera>k__BackingField: {fileID: 1515806359}
   <CardSorter>k__BackingField:
     rid: 3847364467521224713
-  <OnUsedCard>k__BackingField:
-    _unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
   _cards: []
   references:
     version: 2
@@ -2005,9 +2001,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 102702412}
-  _meshCollider: {fileID: 102702411}
-  _meshFilter: {fileID: 102702410}
+  <TileRenderer>k__BackingField: {fileID: 102702412}
+  <MeshCollider>k__BackingField: {fileID: 102702411}
+  <MeshFilter>k__BackingField: {fileID: 102702410}
   <TilePoint>k__BackingField: {x: 7, y: 4}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -2146,9 +2142,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 107560005}
-  _meshCollider: {fileID: 107560004}
-  _meshFilter: {fileID: 107560003}
+  <TileRenderer>k__BackingField: {fileID: 107560005}
+  <MeshCollider>k__BackingField: {fileID: 107560004}
+  <MeshFilter>k__BackingField: {fileID: 107560003}
   <TilePoint>k__BackingField: {x: 0, y: 0}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -2287,9 +2283,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 115274490}
-  _meshCollider: {fileID: 115274489}
-  _meshFilter: {fileID: 115274488}
+  <TileRenderer>k__BackingField: {fileID: 115274490}
+  <MeshCollider>k__BackingField: {fileID: 115274489}
+  <MeshFilter>k__BackingField: {fileID: 115274488}
   <TilePoint>k__BackingField: {x: 5, y: 6}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -2449,8 +2445,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Content: {fileID: 2059693716}
   m_Horizontal: 1
-  m_Vertical: 1
-  m_MovementType: 1
+  m_Vertical: 0
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -2625,9 +2621,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 141908039}
-  _meshCollider: {fileID: 141908038}
-  _meshFilter: {fileID: 141908037}
+  <TileRenderer>k__BackingField: {fileID: 141908039}
+  <MeshCollider>k__BackingField: {fileID: 141908038}
+  <MeshFilter>k__BackingField: {fileID: 141908037}
   <TilePoint>k__BackingField: {x: 3, y: 5}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -2766,9 +2762,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 145123411}
-  _meshCollider: {fileID: 145123410}
-  _meshFilter: {fileID: 145123409}
+  <TileRenderer>k__BackingField: {fileID: 145123411}
+  <MeshCollider>k__BackingField: {fileID: 145123410}
+  <MeshFilter>k__BackingField: {fileID: 145123409}
   <TilePoint>k__BackingField: {x: 3, y: 3}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -2907,9 +2903,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 158042761}
-  _meshCollider: {fileID: 158042760}
-  _meshFilter: {fileID: 158042759}
+  <TileRenderer>k__BackingField: {fileID: 158042761}
+  <MeshCollider>k__BackingField: {fileID: 158042760}
+  <MeshFilter>k__BackingField: {fileID: 158042759}
   <TilePoint>k__BackingField: {x: 4, y: 7}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -3499,7 +3495,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1409365564}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.49999928
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3740,9 +3736,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 233886296}
-  _meshCollider: {fileID: 233886295}
-  _meshFilter: {fileID: 233886294}
+  <TileRenderer>k__BackingField: {fileID: 233886296}
+  <MeshCollider>k__BackingField: {fileID: 233886295}
+  <MeshFilter>k__BackingField: {fileID: 233886294}
   <TilePoint>k__BackingField: {x: 7, y: 6}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -4046,9 +4042,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 235496092}
-  _meshCollider: {fileID: 235496091}
-  _meshFilter: {fileID: 235496090}
+  <TileRenderer>k__BackingField: {fileID: 235496092}
+  <MeshCollider>k__BackingField: {fileID: 235496091}
+  <MeshFilter>k__BackingField: {fileID: 235496090}
   <TilePoint>k__BackingField: {x: 0, y: 6}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -4352,9 +4348,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 238883891}
-  _meshCollider: {fileID: 238883890}
-  _meshFilter: {fileID: 238883889}
+  <TileRenderer>k__BackingField: {fileID: 238883891}
+  <MeshCollider>k__BackingField: {fileID: 238883890}
+  <MeshFilter>k__BackingField: {fileID: 238883889}
   <TilePoint>k__BackingField: {x: 8, y: 6}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -4560,13 +4556,16 @@ GameObject:
   - component: {fileID: 248756652}
   - component: {fileID: 248756654}
   - component: {fileID: 248756653}
+  - component: {fileID: 248756655}
+  - component: {fileID: 248756656}
+  - component: {fileID: 248756657}
   m_Layer: 5
   m_Name: CardCollectUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &248756652
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4626,6 +4625,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 248756651}
   m_CullTransparentMesh: 1
+--- !u!114 &248756655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248756651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 851662b88b9194353b6376d3cc15414a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvas: {fileID: 248756656}
+  _cardSelectField: {fileID: 170634105}
+  _selectButton: {fileID: 1861453797}
+--- !u!223 &248756656
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248756651}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &248756657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248756651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!43 &252141057
 Mesh:
   m_ObjectHideFlags: 0
@@ -4860,9 +4914,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 258946670}
-  _meshCollider: {fileID: 258946669}
-  _meshFilter: {fileID: 258946668}
+  <TileRenderer>k__BackingField: {fileID: 258946670}
+  <MeshCollider>k__BackingField: {fileID: 258946669}
+  <MeshFilter>k__BackingField: {fileID: 258946668}
   <TilePoint>k__BackingField: {x: 3, y: 6}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -5166,9 +5220,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 296295827}
-  _meshCollider: {fileID: 296295826}
-  _meshFilter: {fileID: 296295825}
+  <TileRenderer>k__BackingField: {fileID: 296295827}
+  <MeshCollider>k__BackingField: {fileID: 296295826}
+  <MeshFilter>k__BackingField: {fileID: 296295825}
   <TilePoint>k__BackingField: {x: 7, y: 8}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -5307,9 +5361,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 308523778}
-  _meshCollider: {fileID: 308523777}
-  _meshFilter: {fileID: 308523776}
+  <TileRenderer>k__BackingField: {fileID: 308523778}
+  <MeshCollider>k__BackingField: {fileID: 308523777}
+  <MeshFilter>k__BackingField: {fileID: 308523776}
   <TilePoint>k__BackingField: {x: 2, y: 8}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -6000,9 +6054,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 347529081}
-  _meshCollider: {fileID: 347529080}
-  _meshFilter: {fileID: 347529079}
+  <TileRenderer>k__BackingField: {fileID: 347529081}
+  <MeshCollider>k__BackingField: {fileID: 347529080}
+  <MeshFilter>k__BackingField: {fileID: 347529079}
   <TilePoint>k__BackingField: {x: 7, y: 2}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -7131,9 +7185,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 428987278}
-  _meshCollider: {fileID: 428987277}
-  _meshFilter: {fileID: 428987276}
+  <TileRenderer>k__BackingField: {fileID: 428987278}
+  <MeshCollider>k__BackingField: {fileID: 428987277}
+  <MeshFilter>k__BackingField: {fileID: 428987276}
   <TilePoint>k__BackingField: {x: 1, y: 1}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -7272,9 +7326,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 478801693}
-  _meshCollider: {fileID: 478801692}
-  _meshFilter: {fileID: 478801691}
+  <TileRenderer>k__BackingField: {fileID: 478801693}
+  <MeshCollider>k__BackingField: {fileID: 478801692}
+  <MeshFilter>k__BackingField: {fileID: 478801691}
   <TilePoint>k__BackingField: {x: 5, y: 2}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -8531,9 +8585,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 571235764}
-  _meshCollider: {fileID: 571235763}
-  _meshFilter: {fileID: 571235762}
+  <TileRenderer>k__BackingField: {fileID: 571235764}
+  <MeshCollider>k__BackingField: {fileID: 571235763}
+  <MeshFilter>k__BackingField: {fileID: 571235762}
   <TilePoint>k__BackingField: {x: 8, y: 7}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -8672,9 +8726,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 574487220}
-  _meshCollider: {fileID: 574487219}
-  _meshFilter: {fileID: 574487218}
+  <TileRenderer>k__BackingField: {fileID: 574487220}
+  <MeshCollider>k__BackingField: {fileID: 574487219}
+  <MeshFilter>k__BackingField: {fileID: 574487218}
   <TilePoint>k__BackingField: {x: 6, y: 2}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -9464,9 +9518,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 613532777}
-  _meshCollider: {fileID: 613532776}
-  _meshFilter: {fileID: 613532775}
+  <TileRenderer>k__BackingField: {fileID: 613532777}
+  <MeshCollider>k__BackingField: {fileID: 613532776}
+  <MeshFilter>k__BackingField: {fileID: 613532775}
   <TilePoint>k__BackingField: {x: 4, y: 6}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -9605,9 +9659,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 615295074}
-  _meshCollider: {fileID: 615295073}
-  _meshFilter: {fileID: 615295072}
+  <TileRenderer>k__BackingField: {fileID: 615295074}
+  <MeshCollider>k__BackingField: {fileID: 615295073}
+  <MeshFilter>k__BackingField: {fileID: 615295072}
   <TilePoint>k__BackingField: {x: 0, y: 4}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -10076,9 +10130,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 641849178}
-  _meshCollider: {fileID: 641849177}
-  _meshFilter: {fileID: 641849176}
+  <TileRenderer>k__BackingField: {fileID: 641849178}
+  <MeshCollider>k__BackingField: {fileID: 641849177}
+  <MeshFilter>k__BackingField: {fileID: 641849176}
   <TilePoint>k__BackingField: {x: 3, y: 1}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -10322,9 +10376,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 661980349}
-  _meshCollider: {fileID: 661980348}
-  _meshFilter: {fileID: 661980347}
+  <TileRenderer>k__BackingField: {fileID: 661980349}
+  <MeshCollider>k__BackingField: {fileID: 661980348}
+  <MeshFilter>k__BackingField: {fileID: 661980347}
   <TilePoint>k__BackingField: {x: 8, y: 4}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -10628,9 +10682,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 711564808}
-  _meshCollider: {fileID: 711564807}
-  _meshFilter: {fileID: 711564806}
+  <TileRenderer>k__BackingField: {fileID: 711564808}
+  <MeshCollider>k__BackingField: {fileID: 711564807}
+  <MeshFilter>k__BackingField: {fileID: 711564806}
   <TilePoint>k__BackingField: {x: 6, y: 8}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -11217,9 +11271,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 734731399}
-  _meshCollider: {fileID: 734731398}
-  _meshFilter: {fileID: 734731397}
+  <TileRenderer>k__BackingField: {fileID: 734731399}
+  <MeshCollider>k__BackingField: {fileID: 734731398}
+  <MeshFilter>k__BackingField: {fileID: 734731397}
   <TilePoint>k__BackingField: {x: 3, y: 2}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -11688,9 +11742,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 760766863}
-  _meshCollider: {fileID: 760766862}
-  _meshFilter: {fileID: 760766861}
+  <TileRenderer>k__BackingField: {fileID: 760766863}
+  <MeshCollider>k__BackingField: {fileID: 760766862}
+  <MeshFilter>k__BackingField: {fileID: 760766861}
   <TilePoint>k__BackingField: {x: 5, y: 3}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -11829,9 +11883,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 778450491}
-  _meshCollider: {fileID: 778450490}
-  _meshFilter: {fileID: 778450489}
+  <TileRenderer>k__BackingField: {fileID: 778450491}
+  <MeshCollider>k__BackingField: {fileID: 778450490}
+  <MeshFilter>k__BackingField: {fileID: 778450489}
   <TilePoint>k__BackingField: {x: 8, y: 5}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -11970,9 +12024,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 783865021}
-  _meshCollider: {fileID: 783865020}
-  _meshFilter: {fileID: 783865019}
+  <TileRenderer>k__BackingField: {fileID: 783865021}
+  <MeshCollider>k__BackingField: {fileID: 783865020}
+  <MeshFilter>k__BackingField: {fileID: 783865019}
   <TilePoint>k__BackingField: {x: 1, y: 5}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -12441,9 +12495,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 812038192}
-  _meshCollider: {fileID: 812038191}
-  _meshFilter: {fileID: 812038190}
+  <TileRenderer>k__BackingField: {fileID: 812038192}
+  <MeshCollider>k__BackingField: {fileID: 812038191}
+  <MeshFilter>k__BackingField: {fileID: 812038190}
   <TilePoint>k__BackingField: {x: 5, y: 8}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -12582,9 +12636,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 832994366}
-  _meshCollider: {fileID: 832994365}
-  _meshFilter: {fileID: 832994364}
+  <TileRenderer>k__BackingField: {fileID: 832994366}
+  <MeshCollider>k__BackingField: {fileID: 832994365}
+  <MeshFilter>k__BackingField: {fileID: 832994364}
   <TilePoint>k__BackingField: {x: 5, y: 1}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -13053,9 +13107,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 848542549}
-  _meshCollider: {fileID: 848542548}
-  _meshFilter: {fileID: 848542547}
+  <TileRenderer>k__BackingField: {fileID: 848542549}
+  <MeshCollider>k__BackingField: {fileID: 848542548}
+  <MeshFilter>k__BackingField: {fileID: 848542547}
   <TilePoint>k__BackingField: {x: 2, y: 3}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -13194,9 +13248,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 879246134}
-  _meshCollider: {fileID: 879246133}
-  _meshFilter: {fileID: 879246132}
+  <TileRenderer>k__BackingField: {fileID: 879246134}
+  <MeshCollider>k__BackingField: {fileID: 879246133}
+  <MeshFilter>k__BackingField: {fileID: 879246132}
   <TilePoint>k__BackingField: {x: 2, y: 6}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -13575,9 +13629,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 881590277}
-  _meshCollider: {fileID: 881590276}
-  _meshFilter: {fileID: 881590275}
+  <TileRenderer>k__BackingField: {fileID: 881590277}
+  <MeshCollider>k__BackingField: {fileID: 881590276}
+  <MeshFilter>k__BackingField: {fileID: 881590275}
   <TilePoint>k__BackingField: {x: 1, y: 6}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -13810,9 +13864,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 892601519}
-  _meshCollider: {fileID: 892601518}
-  _meshFilter: {fileID: 892601517}
+  <TileRenderer>k__BackingField: {fileID: 892601519}
+  <MeshCollider>k__BackingField: {fileID: 892601518}
+  <MeshFilter>k__BackingField: {fileID: 892601517}
   <TilePoint>k__BackingField: {x: 4, y: 2}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -14955,9 +15009,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 986351542}
-  _meshCollider: {fileID: 986351541}
-  _meshFilter: {fileID: 986351540}
+  <TileRenderer>k__BackingField: {fileID: 986351542}
+  <MeshCollider>k__BackingField: {fileID: 986351541}
+  <MeshFilter>k__BackingField: {fileID: 986351540}
   <TilePoint>k__BackingField: {x: 0, y: 1}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -15591,9 +15645,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1047021154}
-  _meshCollider: {fileID: 1047021153}
-  _meshFilter: {fileID: 1047021152}
+  <TileRenderer>k__BackingField: {fileID: 1047021154}
+  <MeshCollider>k__BackingField: {fileID: 1047021153}
+  <MeshFilter>k__BackingField: {fileID: 1047021152}
   <TilePoint>k__BackingField: {x: 7, y: 5}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -16151,9 +16205,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1091958779}
-  _meshCollider: {fileID: 1091958778}
-  _meshFilter: {fileID: 1091958777}
+  <TileRenderer>k__BackingField: {fileID: 1091958779}
+  <MeshCollider>k__BackingField: {fileID: 1091958778}
+  <MeshFilter>k__BackingField: {fileID: 1091958777}
   <TilePoint>k__BackingField: {x: 0, y: 2}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -16292,9 +16346,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1096137953}
-  _meshCollider: {fileID: 1096137952}
-  _meshFilter: {fileID: 1096137951}
+  <TileRenderer>k__BackingField: {fileID: 1096137953}
+  <MeshCollider>k__BackingField: {fileID: 1096137952}
+  <MeshFilter>k__BackingField: {fileID: 1096137951}
   <TilePoint>k__BackingField: {x: 0, y: 3}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -16599,9 +16653,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Properties>k__BackingField:
   - DefaultBuilding
-  _tileRenderer: {fileID: 1113245259}
-  _meshCollider: {fileID: 1113245258}
-  _meshFilter: {fileID: 1113245257}
+  <TileRenderer>k__BackingField: {fileID: 1113245259}
+  <MeshCollider>k__BackingField: {fileID: 1113245258}
+  <MeshFilter>k__BackingField: {fileID: 1113245257}
   <TilePoint>k__BackingField: {x: 3, y: 4}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -17035,9 +17089,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1230924351}
-  _meshCollider: {fileID: 1230924350}
-  _meshFilter: {fileID: 1230924349}
+  <TileRenderer>k__BackingField: {fileID: 1230924351}
+  <MeshCollider>k__BackingField: {fileID: 1230924350}
+  <MeshFilter>k__BackingField: {fileID: 1230924349}
   <TilePoint>k__BackingField: {x: 1, y: 3}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -17713,9 +17767,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1285496247}
-  _meshCollider: {fileID: 1285496246}
-  _meshFilter: {fileID: 1285496245}
+  <TileRenderer>k__BackingField: {fileID: 1285496247}
+  <MeshCollider>k__BackingField: {fileID: 1285496246}
+  <MeshFilter>k__BackingField: {fileID: 1285496245}
   <TilePoint>k__BackingField: {x: 4, y: 8}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -17854,9 +17908,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1289222212}
-  _meshCollider: {fileID: 1289222211}
-  _meshFilter: {fileID: 1289222210}
+  <TileRenderer>k__BackingField: {fileID: 1289222212}
+  <MeshCollider>k__BackingField: {fileID: 1289222211}
+  <MeshFilter>k__BackingField: {fileID: 1289222210}
   <TilePoint>k__BackingField: {x: 1, y: 8}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -17995,9 +18049,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1302316042}
-  _meshCollider: {fileID: 1302316041}
-  _meshFilter: {fileID: 1302316040}
+  <TileRenderer>k__BackingField: {fileID: 1302316042}
+  <MeshCollider>k__BackingField: {fileID: 1302316041}
+  <MeshFilter>k__BackingField: {fileID: 1302316040}
   <TilePoint>k__BackingField: {x: 7, y: 7}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -18136,9 +18190,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1306095727}
-  _meshCollider: {fileID: 1306095726}
-  _meshFilter: {fileID: 1306095725}
+  <TileRenderer>k__BackingField: {fileID: 1306095727}
+  <MeshCollider>k__BackingField: {fileID: 1306095726}
+  <MeshFilter>k__BackingField: {fileID: 1306095725}
   <TilePoint>k__BackingField: {x: 0, y: 7}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -18442,9 +18496,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1333598874}
-  _meshCollider: {fileID: 1333598873}
-  _meshFilter: {fileID: 1333598872}
+  <TileRenderer>k__BackingField: {fileID: 1333598874}
+  <MeshCollider>k__BackingField: {fileID: 1333598873}
+  <MeshFilter>k__BackingField: {fileID: 1333598872}
   <TilePoint>k__BackingField: {x: 6, y: 1}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -18913,9 +18967,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1355910336}
-  _meshCollider: {fileID: 1355910335}
-  _meshFilter: {fileID: 1355910334}
+  <TileRenderer>k__BackingField: {fileID: 1355910336}
+  <MeshCollider>k__BackingField: {fileID: 1355910335}
+  <MeshFilter>k__BackingField: {fileID: 1355910334}
   <TilePoint>k__BackingField: {x: 2, y: 0}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -19054,9 +19108,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1359573364}
-  _meshCollider: {fileID: 1359573363}
-  _meshFilter: {fileID: 1359573362}
+  <TileRenderer>k__BackingField: {fileID: 1359573364}
+  <MeshCollider>k__BackingField: {fileID: 1359573363}
+  <MeshFilter>k__BackingField: {fileID: 1359573362}
   <TilePoint>k__BackingField: {x: 5, y: 7}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -19690,9 +19744,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1390704691}
-  _meshCollider: {fileID: 1390704690}
-  _meshFilter: {fileID: 1390704689}
+  <TileRenderer>k__BackingField: {fileID: 1390704691}
+  <MeshCollider>k__BackingField: {fileID: 1390704690}
+  <MeshFilter>k__BackingField: {fileID: 1390704689}
   <TilePoint>k__BackingField: {x: 2, y: 4}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -19831,9 +19885,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1392614306}
-  _meshCollider: {fileID: 1392614305}
-  _meshFilter: {fileID: 1392614304}
+  <TileRenderer>k__BackingField: {fileID: 1392614306}
+  <MeshCollider>k__BackingField: {fileID: 1392614305}
+  <MeshFilter>k__BackingField: {fileID: 1392614304}
   <TilePoint>k__BackingField: {x: 3, y: 8}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -20047,9 +20101,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1412866207}
-  _meshCollider: {fileID: 1412866206}
-  _meshFilter: {fileID: 1412866205}
+  <TileRenderer>k__BackingField: {fileID: 1412866207}
+  <MeshCollider>k__BackingField: {fileID: 1412866206}
+  <MeshFilter>k__BackingField: {fileID: 1412866205}
   <TilePoint>k__BackingField: {x: 0, y: 5}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -20331,7 +20385,7 @@ GameObject:
   - component: {fileID: 1439010216}
   - component: {fileID: 1439010219}
   - component: {fileID: 1439010218}
-  - component: {fileID: 1439010217}
+  - component: {fileID: 1439010220}
   m_Layer: 5
   m_Name: CardCanvas
   m_TagString: Untagged
@@ -20351,12 +20405,12 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 129953369}
   - {fileID: 2064802128}
   - {fileID: 1912238804}
   - {fileID: 921509768}
   - {fileID: 880654030}
   - {fileID: 248756652}
-  - {fileID: 129953369}
   m_Father: {fileID: 1515806360}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -20364,23 +20418,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1439010217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1439010215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &1439010218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20427,6 +20464,23 @@ Canvas:
   m_SortingLayerID: -1167717967
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1439010220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439010215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 1
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1447549083
 GameObject:
   m_ObjectHideFlags: 0
@@ -20460,9 +20514,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1447549087}
-  _meshCollider: {fileID: 1447549086}
-  _meshFilter: {fileID: 1447549085}
+  <TileRenderer>k__BackingField: {fileID: 1447549087}
+  <MeshCollider>k__BackingField: {fileID: 1447549086}
+  <MeshFilter>k__BackingField: {fileID: 1447549085}
   <TilePoint>k__BackingField: {x: 3, y: 0}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -20766,9 +20820,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1460698269}
-  _meshCollider: {fileID: 1460698268}
-  _meshFilter: {fileID: 1460698267}
+  <TileRenderer>k__BackingField: {fileID: 1460698269}
+  <MeshCollider>k__BackingField: {fileID: 1460698268}
+  <MeshFilter>k__BackingField: {fileID: 1460698267}
   <TilePoint>k__BackingField: {x: 7, y: 3}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -21046,9 +21100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1493729358}
-  _meshCollider: {fileID: 1493729357}
-  _meshFilter: {fileID: 1493729356}
+  <TileRenderer>k__BackingField: {fileID: 1493729358}
+  <MeshCollider>k__BackingField: {fileID: 1493729357}
+  <MeshFilter>k__BackingField: {fileID: 1493729356}
   <TilePoint>k__BackingField: {x: 1, y: 2}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -21317,9 +21371,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1549454019}
-  _meshCollider: {fileID: 1549454018}
-  _meshFilter: {fileID: 1549454017}
+  <TileRenderer>k__BackingField: {fileID: 1549454019}
+  <MeshCollider>k__BackingField: {fileID: 1549454018}
+  <MeshFilter>k__BackingField: {fileID: 1549454017}
   <TilePoint>k__BackingField: {x: 1, y: 7}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -21459,9 +21513,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Properties>k__BackingField:
   - DefaultBuilding
-  _tileRenderer: {fileID: 1557013127}
-  _meshCollider: {fileID: 1557013126}
-  _meshFilter: {fileID: 1557013125}
+  <TileRenderer>k__BackingField: {fileID: 1557013127}
+  <MeshCollider>k__BackingField: {fileID: 1557013126}
+  <MeshFilter>k__BackingField: {fileID: 1557013125}
   <TilePoint>k__BackingField: {x: 4, y: 4}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -21601,9 +21655,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1564195818}
-  _meshCollider: {fileID: 1564195817}
-  _meshFilter: {fileID: 1564195816}
+  <TileRenderer>k__BackingField: {fileID: 1564195818}
+  <MeshCollider>k__BackingField: {fileID: 1564195817}
+  <MeshFilter>k__BackingField: {fileID: 1564195816}
   <TilePoint>k__BackingField: {x: 6, y: 6}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -21743,9 +21797,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Properties>k__BackingField:
   - DefaultBuilding
-  _tileRenderer: {fileID: 1573277188}
-  _meshCollider: {fileID: 1573277187}
-  _meshFilter: {fileID: 1573277186}
+  <TileRenderer>k__BackingField: {fileID: 1573277188}
+  <MeshCollider>k__BackingField: {fileID: 1573277187}
+  <MeshFilter>k__BackingField: {fileID: 1573277186}
   <TilePoint>k__BackingField: {x: 4, y: 3}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -22215,9 +22269,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1603747590}
-  _meshCollider: {fileID: 1603747589}
-  _meshFilter: {fileID: 1603747588}
+  <TileRenderer>k__BackingField: {fileID: 1603747590}
+  <MeshCollider>k__BackingField: {fileID: 1603747589}
+  <MeshFilter>k__BackingField: {fileID: 1603747588}
   <TilePoint>k__BackingField: {x: 7, y: 1}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -22356,9 +22410,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1603857684}
-  _meshCollider: {fileID: 1603857683}
-  _meshFilter: {fileID: 1603857682}
+  <TileRenderer>k__BackingField: {fileID: 1603857684}
+  <MeshCollider>k__BackingField: {fileID: 1603857683}
+  <MeshFilter>k__BackingField: {fileID: 1603857682}
   <TilePoint>k__BackingField: {x: 8, y: 2}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -22498,9 +22552,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Properties>k__BackingField:
   - DefaultBuilding
-  _tileRenderer: {fileID: 1604504856}
-  _meshCollider: {fileID: 1604504855}
-  _meshFilter: {fileID: 1604504854}
+  <TileRenderer>k__BackingField: {fileID: 1604504856}
+  <MeshCollider>k__BackingField: {fileID: 1604504855}
+  <MeshFilter>k__BackingField: {fileID: 1604504854}
   <TilePoint>k__BackingField: {x: 4, y: 5}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -22640,9 +22694,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1632371207}
-  _meshCollider: {fileID: 1632371206}
-  _meshFilter: {fileID: 1632371205}
+  <TileRenderer>k__BackingField: {fileID: 1632371207}
+  <MeshCollider>k__BackingField: {fileID: 1632371206}
+  <MeshFilter>k__BackingField: {fileID: 1632371205}
   <TilePoint>k__BackingField: {x: 4, y: 1}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -23276,9 +23330,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1647683296}
-  _meshCollider: {fileID: 1647683295}
-  _meshFilter: {fileID: 1647683294}
+  <TileRenderer>k__BackingField: {fileID: 1647683296}
+  <MeshCollider>k__BackingField: {fileID: 1647683295}
+  <MeshFilter>k__BackingField: {fileID: 1647683294}
   <TilePoint>k__BackingField: {x: 5, y: 5}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -23417,9 +23471,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1650852669}
-  _meshCollider: {fileID: 1650852668}
-  _meshFilter: {fileID: 1650852667}
+  <TileRenderer>k__BackingField: {fileID: 1650852669}
+  <MeshCollider>k__BackingField: {fileID: 1650852668}
+  <MeshFilter>k__BackingField: {fileID: 1650852667}
   <TilePoint>k__BackingField: {x: 6, y: 4}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -23558,9 +23612,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1681605506}
-  _meshCollider: {fileID: 1681605505}
-  _meshFilter: {fileID: 1681605504}
+  <TileRenderer>k__BackingField: {fileID: 1681605506}
+  <MeshCollider>k__BackingField: {fileID: 1681605505}
+  <MeshFilter>k__BackingField: {fileID: 1681605504}
   <TilePoint>k__BackingField: {x: 3, y: 7}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -24194,9 +24248,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1735524048}
-  _meshCollider: {fileID: 1735524047}
-  _meshFilter: {fileID: 1735524046}
+  <TileRenderer>k__BackingField: {fileID: 1735524048}
+  <MeshCollider>k__BackingField: {fileID: 1735524047}
+  <MeshFilter>k__BackingField: {fileID: 1735524046}
   <TilePoint>k__BackingField: {x: 2, y: 2}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -24830,9 +24884,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1781585855}
-  _meshCollider: {fileID: 1781585854}
-  _meshFilter: {fileID: 1781585853}
+  <TileRenderer>k__BackingField: {fileID: 1781585855}
+  <MeshCollider>k__BackingField: {fileID: 1781585854}
+  <MeshFilter>k__BackingField: {fileID: 1781585853}
   <TilePoint>k__BackingField: {x: 1, y: 4}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -25720,9 +25774,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1854946260}
-  _meshCollider: {fileID: 1854946259}
-  _meshFilter: {fileID: 1854946258}
+  <TileRenderer>k__BackingField: {fileID: 1854946260}
+  <MeshCollider>k__BackingField: {fileID: 1854946259}
+  <MeshFilter>k__BackingField: {fileID: 1854946258}
   <TilePoint>k__BackingField: {x: 8, y: 3}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -25861,9 +25915,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1860041311}
-  _meshCollider: {fileID: 1860041310}
-  _meshFilter: {fileID: 1860041309}
+  <TileRenderer>k__BackingField: {fileID: 1860041311}
+  <MeshCollider>k__BackingField: {fileID: 1860041310}
+  <MeshFilter>k__BackingField: {fileID: 1860041309}
   <TilePoint>k__BackingField: {x: 0, y: 8}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -26288,9 +26342,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1891157124}
-  _meshCollider: {fileID: 1891157123}
-  _meshFilter: {fileID: 1891157122}
+  <TileRenderer>k__BackingField: {fileID: 1891157124}
+  <MeshCollider>k__BackingField: {fileID: 1891157123}
+  <MeshFilter>k__BackingField: {fileID: 1891157122}
   <TilePoint>k__BackingField: {x: 6, y: 0}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -26429,9 +26483,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1898895357}
-  _meshCollider: {fileID: 1898895356}
-  _meshFilter: {fileID: 1898895355}
+  <TileRenderer>k__BackingField: {fileID: 1898895357}
+  <MeshCollider>k__BackingField: {fileID: 1898895356}
+  <MeshFilter>k__BackingField: {fileID: 1898895355}
   <TilePoint>k__BackingField: {x: 8, y: 0}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -26735,9 +26789,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1907027190}
-  _meshCollider: {fileID: 1907027189}
-  _meshFilter: {fileID: 1907027188}
+  <TileRenderer>k__BackingField: {fileID: 1907027190}
+  <MeshCollider>k__BackingField: {fileID: 1907027189}
+  <MeshFilter>k__BackingField: {fileID: 1907027188}
   <TilePoint>k__BackingField: {x: 5, y: 0}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -26876,9 +26930,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1909667656}
-  _meshCollider: {fileID: 1909667655}
-  _meshFilter: {fileID: 1909667654}
+  <TileRenderer>k__BackingField: {fileID: 1909667656}
+  <MeshCollider>k__BackingField: {fileID: 1909667655}
+  <MeshFilter>k__BackingField: {fileID: 1909667654}
   <TilePoint>k__BackingField: {x: 6, y: 7}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -27092,9 +27146,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 1932788666}
-  _meshCollider: {fileID: 1932788665}
-  _meshFilter: {fileID: 1932788664}
+  <TileRenderer>k__BackingField: {fileID: 1932788666}
+  <MeshCollider>k__BackingField: {fileID: 1932788665}
+  <MeshFilter>k__BackingField: {fileID: 1932788664}
   <TilePoint>k__BackingField: {x: 4, y: 0}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -27234,9 +27288,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Properties>k__BackingField:
   - DefaultBuilding
-  _tileRenderer: {fileID: 1954366242}
-  _meshCollider: {fileID: 1954366241}
-  _meshFilter: {fileID: 1954366240}
+  <TileRenderer>k__BackingField: {fileID: 1954366242}
+  <MeshCollider>k__BackingField: {fileID: 1954366241}
+  <MeshFilter>k__BackingField: {fileID: 1954366240}
   <TilePoint>k__BackingField: {x: 5, y: 4}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -27706,9 +27760,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 2033242493}
-  _meshCollider: {fileID: 2033242492}
-  _meshFilter: {fileID: 2033242491}
+  <TileRenderer>k__BackingField: {fileID: 2033242493}
+  <MeshCollider>k__BackingField: {fileID: 2033242492}
+  <MeshFilter>k__BackingField: {fileID: 2033242491}
   <TilePoint>k__BackingField: {x: 1, y: 0}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -28011,8 +28065,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -685.7885, y: 47.53503}
-  m_SizeDelta: {x: 0.41992188, y: 0}
+  m_AnchoredPosition: {x: -685.7896, y: 47.535618}
+  m_SizeDelta: {x: 0, y: 95.07}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2064802127
 GameObject:
@@ -28122,9 +28176,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 2081798988}
-  _meshCollider: {fileID: 2081798987}
-  _meshFilter: {fileID: 2081798986}
+  <TileRenderer>k__BackingField: {fileID: 2081798988}
+  <MeshCollider>k__BackingField: {fileID: 2081798987}
+  <MeshFilter>k__BackingField: {fileID: 2081798986}
   <TilePoint>k__BackingField: {x: 7, y: 0}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:
@@ -28263,9 +28317,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Properties>k__BackingField: []
-  _tileRenderer: {fileID: 2105559487}
-  _meshCollider: {fileID: 2105559486}
-  _meshFilter: {fileID: 2105559485}
+  <TileRenderer>k__BackingField: {fileID: 2105559487}
+  <MeshCollider>k__BackingField: {fileID: 2105559486}
+  <MeshFilter>k__BackingField: {fileID: 2105559485}
   <TilePoint>k__BackingField: {x: 6, y: 5}
   _gridManager: {fileID: 315550189}
   _onHighlightTile:

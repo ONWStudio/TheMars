@@ -91,7 +91,6 @@ GameObject:
   - component: {fileID: 2209908774391452699}
   - component: {fileID: -4764531829553090222}
   - component: {fileID: -9218174935462156935}
-  - component: {fileID: 1854527161356700371}
   m_Layer: 5
   m_Name: CardTemplate
   m_TagString: Untagged
@@ -176,16 +175,17 @@ MonoBehaviour:
   <InputHandler>k__BackingField: {fileID: -9218174935462156935}
   <CardViewMover>k__BackingField: {fileID: 2790600352443847834}
   <CardBodyMover>k__BackingField: {fileID: -4764531829553090222}
+  <IsOverDeckTransform>k__BackingField: 0
   <IsHide>k__BackingField: 0
-  <OnEffectEvent>k__BackingField:
-    _unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
   _onDragBeginCard:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
   _onDragEndCard:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _onEffectEvent:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <TargetPosition>k__BackingField: {x: Infinity, y: Infinity}
   <Ratio>k__BackingField: 0.45
-  <IsLocal>k__BackingField: 0
+  <IsLocal>k__BackingField: 1
 --- !u!114 &-9218174935462156935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,21 +269,6 @@ MonoBehaviour:
     _unityEvent:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &1854527161356700371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1453917086621522708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
 --- !u!1 &2298580042782835436
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,4 +852,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <TargetPosition>k__BackingField: {x: Infinity, y: Infinity}
   <Ratio>k__BackingField: 0.45
-  <IsLocal>k__BackingField: 0
+  <IsLocal>k__BackingField: 1

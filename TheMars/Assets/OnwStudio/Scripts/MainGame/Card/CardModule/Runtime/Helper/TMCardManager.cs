@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Onw.ServiceLocator;
 using Onw.Attribute;
 using Onw.Event;
+using Onw.Extensions;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
@@ -25,6 +27,7 @@ namespace TMCard.Runtime
 
             public void SetDragView(bool isOn)
             {
+                CardCollectIconScrollView.gameObject.SetActive(isOn);
                 DeckImage.sprite = isOn ? HandNormalSprite : HandTombSprite;
                 HandImage.enabled = isOn;
             }
@@ -43,7 +46,6 @@ namespace TMCard.Runtime
         [field: SerializeField, SelectableSerializeField] public Camera CardSystemCamera { get; private set; }
 
         [field: SerializeReference, SerializeReferenceDropdown] public ITMCardSorter CardSorter { get; private set; }
-        [field: SerializeField] public SafeUnityEvent<TMCardModel> OnUsedCard { get; private set; } = new();
 
         public IReadOnlyList<TMCardModel> Cards => _cards;
 
@@ -75,9 +77,6 @@ namespace TMCard.Runtime
         public void RemoveCard(TMCardModel card)
         {
             _cards.Remove(card);
-            card.OnDragBeginCard.RemoveListener(onDragBeginCard);
-            card.OnDragEndCard.RemoveListener(onDragEndCard);
-
             SortCards();
         }
 
@@ -88,14 +87,22 @@ namespace TMCard.Runtime
                 .ForEach(transformInfo => transformInfo.Target.CardBodyMover.TargetPosition = transformInfo.Position);
         }
 
-        private void onDragBeginCard()
+        private void onDragBeginCard(TMCardModel card)
         {
+            Debug.Log("Drag Begin");
+            
             UIComponents.SetDragView(false);
+            _cards
+                .Where(someCard => someCard != card)
+                .ForEach(someCard => someCard.gameObject.SetActive(false));
         }
 
-        private void onDragEndCard()
+        private void onDragEndCard(TMCardModel card)
         {
             UIComponents.SetDragView(true);
+            _cards
+                .Where(someCard => someCard != card)
+                .ForEach(someCard => someCard.gameObject.SetActive(true));
         }
 
         private void OnDestroy()

@@ -26,7 +26,7 @@ namespace TMCard.Effect
 
         private TMCardModel _cardModel = null;
         private Camera _mainCamera = null;
-        private TileData? _currentTile = null;
+        private GridTile _currentTile = null;
 
         public void Initialize(TMCardBuildingCreateEffectCreator effectCreator)
         {
@@ -70,15 +70,14 @@ namespace TMCard.Effect
 
             _cardModel.InputHandler.DragAction.AddListener(onDrag);
             _cardModel.IsHide = true;
-
-            setCurrentTile(gridManager);
-            onDrag(null);
+            
+            ExecuteEvents.Execute(_cardModel.InputHandler.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.dragHandler);             
         }
 
         private void setCurrentTile(TMGridManager gridManager)
         {
-            if (!gridManager.TryGetTileDataByRay(_mainCamera.ScreenPointToRay(Input.mousePosition), out TileData tileData)) return;
-            
+            if (!gridManager.TryGetTileDataByRay(_mainCamera.ScreenPointToRay(Input.mousePosition), out GridTile tileData)) return;
+        
             _currentTile = tileData;
             setTileHighlight(tileData);
         }
@@ -101,9 +100,10 @@ namespace TMCard.Effect
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
                     Vector3 hitPoint = hit.point;
-                    if (_currentTile is not null && hit.collider.gameObject.name == "Tile")
+
+                    if (hit.collider.gameObject.name == "Tile" && _currentTile)
                     {
-                        Vector3 tilePosition = ((TileData)_currentTile).TileRenderer.transform.position;
+                        Vector3 tilePosition = _currentTile.TileRenderer.transform.position;
                         float tileHalfSize = gridManager.TileSize * 0.5f;
                         tilePosition.x += tileHalfSize;
                         tilePosition.z += tileHalfSize;
@@ -120,16 +120,16 @@ namespace TMCard.Effect
                     _building.gameObject.SetActive(false);
                     gridManager.OnHighlightTile.RemoveListener(setTileHighlight);
 
-                    if (_currentTile is not null)
+                    if (_currentTile)
                     {
-                        setTileUnHighlight((TileData)_currentTile);
+                        setTileUnHighlight(_currentTile);
                         _currentTile = null;
                     }
                 }
             }
         }
 
-        private void onEffect()
+        private void onEffect(TMCardModel card)
         {
             if (!ServiceLocator<TMGridManager>.TryGetService(out TMGridManager gridManager)) return;
 
@@ -139,9 +139,8 @@ namespace TMCard.Effect
                 hit.collider.gameObject.name == "Tile" &&
                 (_currentTile?.Properties.All(property => property is not "DefaultBuilding" and not "TileOff") ?? false))
             {
-                TileData buildingTile = (TileData)_currentTile;
-                buildingTile.Properties.Add("TileOff");
-                _building.transform.SetParent(buildingTile.TileRenderer.transform);
+                _currentTile.Properties.Add("TileOff");
+                _building.transform.SetParent(_currentTile.TileRenderer.transform);
                 _building.Initialize(BuildingData);
                 _building.BatchOnTile();
 
@@ -153,22 +152,26 @@ namespace TMCard.Effect
                 }
 
                 _cardModel.gameObject.SetActive(false);
-                gridManager.OnMouseDownTile.AddListener(onMouseDownTile);
-
-                void onMouseDownTile(TileData tileData)
+                
+                GridTile tile = _currentTile;
+                tile.OnMouseDownTile.AddListener(onMouseDownTile);
+                
+                void onMouseDownTile(GridTile tileData)
                 {
-                    if (tileData.TilePoint != buildingTile.TilePoint || !hasCardManager) return;
+                    if (!hasCardManager) return;
 
+                    tile.OnMouseDownTile.RemoveListener(onMouseDownTile);
+                    tile.Properties.Remove("TileOff");
+                    
                     _cardModel.gameObject.SetActive(true);
                     _cardModel.IsHide = true;
 
-                    buildingTile.Properties.Remove("TileOff");
-                    _currentTile = buildingTile;
-                    setTileHighlight(buildingTile);
                     cardManager.AddCard(_cardModel);
-                    gridManager.OnMouseDownTile.RemoveListener(onMouseDownTile);
-                    _cardModel.InputHandler.DragAction.AddListener(onDrag);
-                    onDrag(null);
+                    
+                    ExecuteEvents.Execute(
+                        _cardModel.InputHandler.gameObject, 
+                        new PointerEventData(EventSystem.current), 
+                        ExecuteEvents.pointerDownHandler);             
                 }
             }
             else
@@ -184,23 +187,23 @@ namespace TMCard.Effect
             gridManager.OnExitTile.RemoveListener(setTileUnHighlight);
             gridManager
                 .ReadOnlyTileList
-                .SelectMany(rows => rows.Rows.Select(tile => tile.GetTileData()))
+                .SelectMany(rows => rows.Rows)
                 .ForEach(setTileUnHighlight);
         }
 
-        private void setTileHighlight(TileData tileArgs)
+        private void setTileHighlight(GridTile tile)
         {
-            _currentTile = tileArgs;
+            _currentTile = tile;
 
-            tileArgs.TileRenderer.material.color =
-                tileArgs.Properties.All(property => property is not "DefaultBuilding" and not "TileOff") ?
+            tile.TileRenderer.material.color =
+                tile.Properties.All(property => property is not "DefaultBuilding" and not "TileOff") ?
                     Color.yellow :
                     Color.red;
         }
 
-        private static void setTileUnHighlight(TileData tileArgs)
+        private static void setTileUnHighlight(GridTile tile)
         {
-            tileArgs.TileRenderer.material.color = Color.white;
+            tile.TileRenderer.material.color = Color.white;
         }
 
         public void Dispose()

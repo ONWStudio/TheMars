@@ -20,7 +20,7 @@ namespace TMCard.Effect.Resource
 
         public void ApplyEffect(TMCardModel cardModel, ITMCardEffectTrigger trigger)
         {
-            trigger.OnEffectEvent.AddListener(() =>
+            trigger.OnEffectEvent.AddListener(card =>
             {
                 PlayerManager.Instance.MarsLithium += Amount;
                 Debug.Log(Amount);

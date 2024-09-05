@@ -1,149 +1,239 @@
-using System;
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Onw.Manager.ObjectPool
 {
     using Extensions;
 
-    public sealed class ObjectPool
+    public interface IPooledObject
     {
-        public static ObjectPool Instance { get; } = new();
+        void OnPopFromPool();
+        void OnReturnToPool();
+    }
 
-        private readonly Dictionary<string, Stack<PoolingObject>> _pool = new Dictionary<string, Stack<PoolingObject>>();
-        private GameObject _poolParent;
+    public static class GenericObjectPool<T> where T : Component
+    {
+        private static readonly Stack<T> _pool = new();
+        private static readonly GameObject _poolParent;
 
-        public T Pop<T>(string key = null) where T : PoolingObject
+        public static bool TryPop(out T genericComponent)
         {
-            key ??= typeof(T).Name;
-            Stack<PoolingObject> objects = getObjects(key);
-
-            T poolingObject = objects.Count > 0 ? objects.Pop() as T : null;
-
-            if (poolingObject)
+            genericComponent = null;
+            if (_pool.TryPop(out genericComponent) && genericComponent)
             {
-                poolingObject.gameObject.SetActive(true);
+                genericComponent.transform.SetParent(null, false);
+                genericComponent.gameObject.SetActive(true);
+                
+                if (genericComponent is IPooledObject pooledObject)
+                {
+                    pooledObject.OnPopFromPool();
+                }
+                
+                return true;
+            }
+            return false;
+        }
+
+        public static T Pop()
+        {
+            if (!_pool.TryPop(out T genericComponent) || !genericComponent) return null;
+
+            genericComponent.transform.SetParent(null, false);
+            genericComponent.gameObject.SetActive(true);
+            
+            if (genericComponent is IPooledObject pooledObject)
+            {
+                pooledObject.OnPopFromPool();
+            }
+            
+            return genericComponent;
+        }
+
+        public static void Return(T genericComponent)
+        {
+            if (!genericComponent) return;
+            
+            if (genericComponent is IPooledObject pooledObject)
+            {
+                pooledObject.OnReturnToPool();
+            }
+            
+            genericComponent.gameObject.SetActive(false);
+            genericComponent.transform.SetParent(_poolParent.transform, false);
+            
+            _pool.Push(genericComponent);
+        }
+
+        public static void ReleaseAllObject()
+        {
+            _pool.ForEach(component => UnityEngine.Object.Destroy(component.gameObject));
+            _pool.Clear();
+        }
+        
+        static GenericObjectPool()
+        {
+            _poolParent = new(nameof(GenericObjectPool<T>));
+        }
+    }
+    
+    public static class KeyedObjectPool
+    {
+        private static readonly Dictionary<string, Stack<GameObject>> _pool = new();
+        private static readonly GameObject _poolParent;
+
+        public static bool TryPop(string key, out GameObject pooledObject)
+        {
+            pooledObject = null;
+            
+            if (_pool.TryGetValue(key, out Stack<GameObject> stack))
+            {
+                while (stack.TryPop(out pooledObject))
+                {
+                    if (!pooledObject) continue;
+                    
+                    pooledObject.transform.SetParent(null, false);
+                    pooledObject.SetActive(true);
+                    return true;
+                }
             }
 
-            return poolingObject;
+            return false;
         }
-
-        public T PopSetParent<T>(Transform parent, string key = null) where T : PoolingObject
+        
+        public static GameObject Pop(string key)
         {
-            T poolingObject = Pop<T>(key);
+            if (!_pool.TryGetValue(key, out Stack<GameObject> stack) || stack.Count <= 0) return null;
 
-            if (poolingObject)
+            while (stack.TryPop(out GameObject pooledObject))
             {
-                poolingObject.transform.SetParent(parent);
+                if (!pooledObject) continue;
+
+                pooledObject.transform.SetParent(null, false);
+                pooledObject.SetActive(true);
+
+                return pooledObject;
             }
 
-            return poolingObject;
+            return null;
         }
-
-        public GameObject PopToObject(string key)
+        
+        public static void Return(string key, GameObject objectToReturn)
         {
-            Stack<PoolingObject> objects = getObjects(key);
-
-            PoolingObject poolingObject = objects.Count > 0 ? objects.Pop() : null;
-
-            if (poolingObject)
+            if (string.IsNullOrEmpty(key) || !objectToReturn) return;
+            
+            if (!_pool.TryGetValue(key, out Stack<GameObject> stack))
             {
-                poolingObject.gameObject.SetActive(true);
+                stack = new();
+                _pool.Add(key, stack);
             }
 
-            return poolingObject.gameObject;
+            objectToReturn.SetActive(false);
+            objectToReturn.transform.SetParent(_poolParent.transform, false);
+            stack.Push(objectToReturn);
         }
-
-        public GameObject PopSetParentToObject(string key, Transform parent)
+        
+        public static void ReleaseAllObject()
         {
-            GameObject poolingObject = PopToObject(key);
-
-            if (poolingObject)
+            foreach (GameObject o in _pool.Values.SelectMany(stack => stack).Where(obj => obj))
             {
-                poolingObject.transform.SetParent(parent);
+                UnityEngine.Object.Destroy(o);
             }
 
-            return poolingObject;
+            _pool.Clear();
         }
-
-        public T PopOrCreate<T>(Func<PoolingObject> createMethod, string key = null) where T : PoolingObject
+        
+        static KeyedObjectPool()
         {
-            key ??= typeof(T).Name;
-            Stack<PoolingObject> objects = getObjects(key);
-
-            T poolingObject = (objects.Count > 0 ? objects.Pop() : createMethod?.Invoke()) as T;
-            poolingObject.gameObject.SetActive(true);
-
-            return poolingObject;
+            _poolParent = new(nameof(KeyedObjectPool));
         }
+    }
+    
+    public static class GenericKeyedObjectPool<T> where T : Component
+    {
+        private static readonly Dictionary<string, Stack<T>> _pool = new();
+        private static readonly GameObject _poolParent;
 
-        public T PopOrCreateSetParent<T>(Func<PoolingObject> createMethod, Transform parentTransform, string key = null) where T : PoolingObject
+        public static bool TryPop(string key, out T genericComponent)
         {
-            key ??= typeof(T).Name;
-            Stack<PoolingObject> objects = getObjects(key);
-
-            T poolingObject = (objects.Count > 0 ? objects.Pop() : createMethod?.Invoke()) as T;
-
-            poolingObject.transform.SetParent(parentTransform);
-            poolingObject.gameObject.SetActive(true);
-
-            return poolingObject;
-        }
-
-        public GameObject PopOrCreateSetParentToObject(Func<PoolingObject> createMethod, Transform parentTransform, string key)
-        {
-            Stack<PoolingObject> objects = getObjects(key);
-
-            GameObject gameObject = (objects.Count > 0 ? objects.Pop() : createMethod?.Invoke())?.gameObject;
-            gameObject.transform.SetParent(parentTransform);
-            gameObject.SetActive(true);
-
-            return gameObject;
-        }
-
-        public GameObject PopOrCreateToObject(Func<PoolingObject> createMethod, string key)
-        {
-            Stack<PoolingObject> objects = getObjects(key);
-
-            GameObject gameObject = (objects.Count > 0 ? objects.Pop() : createMethod?.Invoke()).gameObject;
-            gameObject.SetActive(true);
-
-            return gameObject;
-        }
-
-        public void PushObjectInPool<T>(T poolingObject) where T : PoolingObject
-        {
-            if (poolingObject.IsChangeParent) poolingObject.transform.SetParent(_poolParent.transform);
-
-            Stack<PoolingObject> objects = getObjects(poolingObject.Key ?? poolingObject.GetType().Name);
-            objects.Push(poolingObject);
-        }
-
-        private Stack<PoolingObject> getObjects(string key)
-        {
-            if (!_pool.TryGetValue(key, out Stack<PoolingObject> objects))
+            genericComponent = null;
+            if (_pool.TryGetValue(key, out Stack<T> stack))
             {
-                objects = new Stack<PoolingObject>();
-                _pool.Add(key, objects);
+                while (stack.TryPop(out genericComponent))
+                {
+                    if (!genericComponent) continue;
+                    
+                    genericComponent.transform.SetParent(null, false);
+                    genericComponent.gameObject.SetActive(true);
+
+                    if (genericComponent is IPooledObject pooledObject)
+                    {
+                        pooledObject.OnPopFromPool();
+                    }
+                    
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+        
+        public static T Pop(string key)
+        {
+            if (!_pool.TryGetValue(key, out Stack<T> stack) || stack.Count <= 0) return null;
+
+            while (stack.TryPop(out T genericComponent))
+            {
+                if (!genericComponent) continue;
+
+                genericComponent.transform.SetParent(null, false);
+                genericComponent.gameObject.SetActive(true);
+
+                if (genericComponent is IPooledObject pooledObject)
+                {
+                    pooledObject.OnPopFromPool();
+                }
+                
+                return genericComponent;
             }
 
-            return objects;
+            return null;
         }
-
-        private ObjectPool()
+        
+        public static void Return(string key, T objectToReturn)
         {
-            SceneManager.sceneLoaded += (scene, mode) =>
+            if (string.IsNullOrEmpty(key) || !objectToReturn) return;
+            
+            if (!_pool.TryGetValue(key, out Stack<T> stack))
             {
-                UnityEngine.Object.Destroy(_poolParent);
-                _pool.ForEach(objects => objects.Value.ForEach(obj => UnityEngine.Object.Destroy(obj)));
+                stack = new();
+                _pool.Add(key, stack);
+            }
 
-                _pool.Clear();
-                _poolParent = new GameObject("Pool");
-            };
+            // ReSharper disable once ConvertIfStatementToSwitchStatement
+            if (objectToReturn is IPooledObject pooledObject)
+            {
+                pooledObject.OnReturnToPool();
+            }
+            
+            objectToReturn.gameObject.SetActive(false);
+            objectToReturn.transform.SetParent(_poolParent.transform, false);
+            stack.Push(objectToReturn);
+        }
+        
+        public static void ReleaseAllObject()
+        {
+            foreach (T o in _pool.Values.SelectMany(stack => stack).Where(obj => obj))
+            {
+                UnityEngine.Object.Destroy(o);
+            }
 
-            _poolParent = new GameObject("Pool");
+            _pool.Clear();
+        }
+        
+        static GenericKeyedObjectPool()
+        {
+            _poolParent = new(nameof(GenericObjectPool<T>));
         }
     }
 }

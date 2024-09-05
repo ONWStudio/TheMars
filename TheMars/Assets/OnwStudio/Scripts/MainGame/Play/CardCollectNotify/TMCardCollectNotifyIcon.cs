@@ -11,8 +11,11 @@ namespace TM
 {
     public sealed class TMCardCollectNotifyIcon : MonoBehaviour
     {
-        [SerializeField, InitializeRequireComponent] private Vector2SmoothMover _smoothMover;
+        [Header("Button")]
         [SerializeField, InitializeRequireComponent] private Button _collectCardButton;
+        
+        [Header("Option")]
+        [SerializeField, InitializeRequireComponent] private Vector2SmoothMover _smoothMover;
         
         private void Start()
         {

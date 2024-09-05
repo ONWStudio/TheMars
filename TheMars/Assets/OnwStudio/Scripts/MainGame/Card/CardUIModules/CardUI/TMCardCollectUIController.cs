@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +7,13 @@ using Onw.ServiceLocator;
 using TMCard.Runtime;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using Object = UnityEngine.Object;
 
 namespace TMCard.UI
 {
     [DisallowMultipleComponent]
     public sealed class TMCardCollectUIController : MonoBehaviour
     {
+        [SerializeField, InitializeRequireComponent] private Canvas _canvas;
         [SerializeField, SelectableSerializeField] private RectTransform _cardSelectField;
         [SerializeField, SelectableSerializeField] private Button _selectButton;
 
@@ -36,7 +35,7 @@ namespace TMCard.UI
 
                 foreach (KeyValuePair<TMCardModel, UnityAction<PointerEventData>> callbackPair in _cardCallbacks)
                 {
-                    callbackPair.Key.InputHandler.DownAction.AddListener(callbackPair.Value);
+                    callbackPair.Key.InputHandler.UpAction.RemoveListener(callbackPair.Value);
 
                     if (callbackPair.Key != _selectCard)
                     {
@@ -50,9 +49,9 @@ namespace TMCard.UI
                 _selectCard.CardViewMover.enabled = true;
                 _selectCard.transform.localScale = new(1f, 1f, 1f);
                 service.AddCard(_selectCard);
+                _selectCard.Initialize();
                 _selectCard = null;
-                
-                gameObject.SetActive(false);
+                _canvas.enabled = false;
             });
         }
 
@@ -60,20 +59,21 @@ namespace TMCard.UI
         {
             if (!ServiceLocator<TMCardManager>.TryGetService(out TMCardManager service)) return;
             
-            gameObject.SetActive(true);
+            _canvas.enabled = true;
             
-            foreach (TMCardModel card in service.CardCreator.CreateCards(3))
+            foreach (TMCardModel card in service.CardCreator.CreateCards(3, false))
             {
                 card.transform.SetParent(_cardSelectField, false);
+                card.CardViewMover.enabled = false;
+                card.CardBodyMover.enabled = false;
                 
                 UnityAction<PointerEventData> action = selectCard;
                 _cardCallbacks.Add(new(card, action));
-                card.InputHandler.DownAction.AddListener(action);
-                card.CardBodyMover.enabled = false;
-                card.CardViewMover.enabled = false;
+                card.InputHandler.UpAction.AddListener(action);
                 
                 void selectCard(PointerEventData data)
                 {
+                    Debug.Log("Select");
                     if (_selectCard)
                     {
                         _selectCard.transform.localScale = new(1f, 1f, 1f);

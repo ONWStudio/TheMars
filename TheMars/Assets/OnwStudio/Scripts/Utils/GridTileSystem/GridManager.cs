@@ -34,19 +34,19 @@ namespace Onw.GridTile
 
         public int TileCount => GridSize * GridSize;
         
-        public IUnityEventListenerModifier<TileData> OnHighlightTile => _onHighlightTile;
-        public IUnityEventListenerModifier<TileData> OnExitTile => _onExitTile;
-        public IUnityEventListenerModifier<TileData> OnMouseDownTile => _onMouseDownTile;
-        public IUnityEventListenerModifier<TileData> OnMouseUpTile => _onMouseUpTile;
+        public IUnityEventListenerModifier<GridTile> OnHighlightTile => _onHighlightTile;
+        public IUnityEventListenerModifier<GridTile> OnExitTile => _onExitTile;
+        public IUnityEventListenerModifier<GridTile> OnMouseDownTile => _onMouseDownTile;
+        public IUnityEventListenerModifier<GridTile> OnMouseUpTile => _onMouseUpTile;
 
         [field: SerializeField, Range(5, 50)] public float TileSize { get; set; }
         [field: SerializeField, Range(GRID_SIZE_MIN, GRID_SIZE_MAX)] public int GridSize { get; set; } = 5;
 
         [Header("Events")]
-        [SerializeField] private SafeUnityEvent<TileData> _onHighlightTile = new();
-        [SerializeField] private SafeUnityEvent<TileData> _onExitTile = new();
-        [SerializeField] private SafeUnityEvent<TileData> _onMouseUpTile = new();
-        [SerializeField] private SafeUnityEvent<TileData> _onMouseDownTile = new();
+        [SerializeField] private SafeUnityEvent<GridTile> _onHighlightTile = new();
+        [SerializeField] private SafeUnityEvent<GridTile> _onExitTile = new();
+        [SerializeField] private SafeUnityEvent<GridTile> _onMouseUpTile = new();
+        [SerializeField] private SafeUnityEvent<GridTile> _onMouseDownTile = new();
 
         [SerializeField] private List<GridRows> _tileList = new();
 
@@ -55,22 +55,18 @@ namespace Onw.GridTile
 
         public IReadOnlyList<IReadOnlyGridRows> TileList => _tileList;
 
-        public bool TryGetTileDataByRay(Ray ray, out TileData tileData)
+        public bool TryGetTileDataByRay(Ray ray, out GridTile tileData)
         {
+            tileData = null;
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                TileData? someTile = _tileList
-                    .SelectMany(row => row.Rows.Select(tile => (TileData?)tile.GetTileData()))
-                    .FirstOrDefault(tileData => tileData?.Collider == hit.collider);
-
-                if (someTile.HasValue)
-                {
-                    tileData = (TileData)someTile;
-                    return true;
-                }
+                tileData = _tileList
+                    .SelectMany(row => row.Rows)
+                    .FirstOrDefault(tileData => tileData?.MeshCollider == hit.collider);
+                
+                return tileData;
             }
 
-            tileData = default(TileData);
             return false;
         }
         
