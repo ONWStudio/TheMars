@@ -44,7 +44,7 @@ namespace TMCard
         [SerializeReference, SerializeReferenceDropdown, DisplayAs("카드 효과"), Tooltip("카드 효과")]
         private ITMCardEffectCreator _cardEffectCreator = null;
 
-        public ITMCardEffect GetCardEffect()
+        public ITMCardEffect CreateCardEffect()
         {
             return _cardEffectCreator?.CreateEffect();
         }

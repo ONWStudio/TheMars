@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Onw.Event;
 using Onw.ServiceLocator;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -10,9 +11,14 @@ namespace TMCard.Runtime
     [Serializable]
     public sealed class TMCardCreator
     {
+        public IUnityEventListenerModifier<TMCardModel> OnCreateCard => _onCreateCard;
+        
         [SerializeField] private List<TMCardData> _cards = new();
         [SerializeField] private TMCardModel _templatePrefab;
 
+        [Header("Event")]
+        [SerializeField] private SafeUnityEvent<TMCardModel> _onCreateCard = new();
+        
         public List<TMCardModel> CreateCards(int createCount, bool shouldInitialize = true)
         {
             if (_cards.Count <= 0) return null;
@@ -31,7 +37,7 @@ namespace TMCard.Runtime
         {
             TMCardModel card = Object.Instantiate(_templatePrefab);
             card.CardData = cardData;
-
+            _onCreateCard.Invoke(card);
             if (shouldInitialize)
             {
                 card.Initialize();

@@ -31,7 +31,7 @@ namespace TMCard.UI
         {
             _selectButton.onClick.AddListener(() =>
             {
-                if (!_selectCard || !ServiceLocator<TMCardManager>.TryGetService(out TMCardManager service)) return;
+                if (!_selectCard || !ServiceLocator<TMCardManager>.TryGetService(out TMCardManager cardManager)) return;
 
                 foreach (KeyValuePair<TMCardModel, UnityAction<PointerEventData>> callbackPair in _cardCallbacks)
                 {
@@ -48,8 +48,8 @@ namespace TMCard.UI
                 _selectCard.CardBodyMover.enabled = true;
                 _selectCard.CardViewMover.enabled = true;
                 _selectCard.transform.localScale = new(1f, 1f, 1f);
-                service.AddCard(_selectCard);
                 _selectCard.Initialize();
+                cardManager.AddCard(_selectCard);
                 _selectCard = null;
                 _canvas.enabled = false;
             });

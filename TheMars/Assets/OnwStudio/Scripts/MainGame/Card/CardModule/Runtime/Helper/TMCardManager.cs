@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using Onw.ServiceLocator;
 using Onw.Attribute;
+using Onw.Coroutine;
 using Onw.Event;
 using Onw.Extensions;
 using UnityEngine.Serialization;
@@ -60,16 +61,20 @@ namespace TMCard.Runtime
 
         private void Start()
         {
+            CardCreator.OnCreateCard.AddListener(addListenerForCard);
             AddCard(CardCreator.CreateCard());
+        }
+
+        private void addListenerForCard(TMCardModel card)
+        {
+            card.OnDragBeginCard.AddListener(onDragBeginCard);
+            card.OnDragEndCard.AddListener(onDragEndCard);
         }
 
         public void AddCard(TMCardModel card)
         {
             _cards.Add(card);
-
             card.transform.SetParent(HandTransform, false);
-            card.OnDragBeginCard.AddListener(onDragBeginCard);
-            card.OnDragEndCard.AddListener(onDragEndCard);
 
             SortCards();
         }
@@ -77,6 +82,7 @@ namespace TMCard.Runtime
         public void RemoveCard(TMCardModel card)
         {
             _cards.Remove(card);
+
             SortCards();
         }
 
@@ -89,8 +95,6 @@ namespace TMCard.Runtime
 
         private void onDragBeginCard(TMCardModel card)
         {
-            Debug.Log("Drag Begin");
-            
             UIComponents.SetDragView(false);
             _cards
                 .Where(someCard => someCard != card)
