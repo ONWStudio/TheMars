@@ -1956,6 +1956,10 @@ MonoBehaviour:
     - {fileID: 11400000, guid: d28af664dcafa4c1d869167ca383ed12, type: 2}
     _templatePrefab: {fileID: 38075375519361866, guid: d7803182f172a42c699b32751eb7fade,
       type: 3}
+    _onCreateCard:
+      _unityEvent:
+        m_PersistentCalls:
+          m_Calls: []
   <HandTransform>k__BackingField: {fileID: 880654030}
   <DeckTransform>k__BackingField: {fileID: 921509768}
   <CardSystemCamera>k__BackingField: {fileID: 1515806359}
@@ -28065,7 +28069,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -685.7906, y: 47.535618}
+  m_AnchoredPosition: {x: -685.7907, y: 47.535618}
   m_SizeDelta: {x: 0, y: 95.07}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2064802127
