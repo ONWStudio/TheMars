@@ -7,19 +7,22 @@ namespace TM.Building.Effect.Creator
 {
     using static ITMBuildingEffectCreator;
     
-    public class GetMarsLithiumEffectCreator : ITMBuildingEffectCreator
+    public abstract class GetResourceEffectCreator : ITMBuildingEffectCreator
     {
-        // .. TODO : 구조 수정
         [field: SerializeField, Min(1), DisplayAs("Level 1 반복 시간")] public float LevelOneRepeatSeconds { get; private set; }
-        [field: SerializeField, Min(1), DisplayAs(("Level 1 마르스 리튬"))] public int LevelOneMarsLithium { get; private set; }
+        [field: SerializeField, Min(1), DisplayAs(("Level 1 재화"))] public int LevelOneResource { get; private set; }
         
         [field: SerializeField, Min(1), DisplayAs("Level 2 반복 시간")] public float LevelTwoRepeatSeconds { get; private set; }
-        [field: SerializeField, Min(1), DisplayAs(("Level 2 마르스 리튬"))] public int LevelTwoMarsLithium { get; private set; }     
+        [field: SerializeField, Min(1), DisplayAs(("Level 2 재화"))] public int LevelTwoResource { get; private set; }     
         
         [field: SerializeField, Min(1), DisplayAs("Level 3 반복 시간")] public float LevelThreeRepeatSeconds { get; private set; }
-        [field: SerializeField, Min(1), DisplayAs(("Level 3 마르스 리튬"))] public int LevelThreeMarsLithium { get; private set; }
-        
-        public ITMBuildingEffect CreateEffect()
+        [field: SerializeField, Min(1), DisplayAs(("Level 3 재화"))] public int LevelThreeResource { get; private set; }
+        public abstract ITMBuildingEffect CreateEffect();
+    }
+    
+    public class GetMarsLithiumEffectCreator : GetResourceEffectCreator
+    {
+        public override ITMBuildingEffect CreateEffect()
         {
             return BuildingEffectGenerator.CreateEffect<GetMarsLithiumEffect, GetMarsLithiumEffectCreator>(this);
         }

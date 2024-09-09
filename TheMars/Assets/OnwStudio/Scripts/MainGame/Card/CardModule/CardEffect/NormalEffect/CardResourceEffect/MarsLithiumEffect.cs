@@ -1,5 +1,6 @@
 using Onw.Attribute;
 using Onw.Event;
+using Onw.ServiceLocator;
 using TM;
 using TMCard.Runtime;
 using UnityEngine;
@@ -22,15 +23,15 @@ namespace TMCard.Effect.Resource
         {
             trigger.OnEffectEvent.AddListener(card =>
             {
-                PlayerManager.Instance.MarsLithium += Amount;
+                ServiceLocator<PlayerManager>.InvokeService(player => player.MarsLithium += Amount);
                 Debug.Log(Amount);
                 Debug.Log("마르스 리튬 획득");
             });
         }
 
-        public void AddRewardResource(int addtionalAmount)
+        public void AddRewardResource(int additionalAmount)
         {
-            Amount += addtionalAmount;
+            Amount += additionalAmount;
             Event.Invoke("Description Update");
         }
         

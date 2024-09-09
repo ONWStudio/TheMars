@@ -32,6 +32,7 @@ namespace TM.Building
         public void BatchOnTile()
         {
             ApplyBuildingEffect();
+            MeshRenderer.enabled = true;
         }
 
         public void ApplyBuildingEffect()

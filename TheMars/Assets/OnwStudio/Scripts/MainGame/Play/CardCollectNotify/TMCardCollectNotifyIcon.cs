@@ -21,12 +21,9 @@ namespace TM
         {
             _smoothMover.IsLocal = true;
             
-            _collectCardButton.onClick.AddListener(() =>
-            {
-                if (!ServiceLocator<TMCardCollectUIController>.TryGetService(out TMCardCollectUIController collectUIController)) return;
-                
-                collectUIController.ActiveUI();
-            });
+            _collectCardButton.onClick.AddListener(() 
+                => ServiceLocator<TMCardCollectUIController>
+                    .InvokeService(collectUIController => collectUIController.ActiveUI()));
         }
 
         public void SetTargetLocalPosition(Vector3 targetPosition)

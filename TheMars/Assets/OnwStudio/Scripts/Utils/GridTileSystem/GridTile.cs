@@ -7,6 +7,7 @@ using Onw.Attribute;
 using Onw.Event;
 using TMPro;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
 namespace Onw.GridTile
@@ -87,7 +88,7 @@ namespace Onw.GridTile
         
         public bool ContainsProperty(string property)
         {
-            return Properties.Any(someProperty => someProperty == property);
+            return Properties?.Any(someProperty => someProperty == property) ?? false;
         }
         
         private void OnMouseEnter()

@@ -104,7 +104,7 @@ namespace TMCard.Runtime
             transform.localPosition = mouseLocalPosition;
         }
         
-        public void DragCard()
+        private void dragCard()
         {
             if (!ServiceLocator<TMCardManager>.TryGetService(out TMCardManager cardManager)) return;
             
@@ -137,21 +137,18 @@ namespace TMCard.Runtime
             IsDragging = true;
 
             _onDragBeginCard.Invoke(this);
-            DragCard();
+            dragCard();
         }
 
         private void onDrag(PointerEventData _)
         {
-            DragCard();
+            dragCard();
         }
         
         private void onDragEnd(PointerEventData _)
         {
             if (!ServiceLocator<TMCardManager>.TryGetService(out TMCardManager cardManager)) return;
-                
-            Debug.Log("Drag End");
-            InputHandler.DragAction.RemoveListener(onDrag);
-            InputHandler.UpAction.RemoveListener(onDragEnd);
+
             IsOverDeckTransform = false;
             
             if (RectTransformUtility.RectangleContainsScreenPoint(cardManager.DeckTransform, Input.mousePosition, CardCamera))
@@ -187,13 +184,8 @@ namespace TMCard.Runtime
             }
             
             CardEffect = null;
-            PlayerManager.Instance.Tera += 10;
-
-            if (ServiceLocator<TMCardManager>.TryGetService(out TMCardManager cardManager))
-            {
-                cardManager.RemoveCard(this);
-            }
-            
+            ServiceLocator<PlayerManager>.InvokeService(player => player.Credit += 10);
+            ServiceLocator<TMCardManager>.InvokeService(cardManager => cardManager.RemoveCard(this));
             Destroy(gameObject);
         }
     }

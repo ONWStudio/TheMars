@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,13 @@ namespace Onw.ServiceLocator
             return service as MonoBehaviour ?? service is not null;
         }
 
+        public static void InvokeService(Action<T> onResultService)
+        {
+            if (!TryGetService(out T service)) return;
+            
+            onResultService?.Invoke(service);
+        }
+        
         public static bool RegisterService(T service)
         {
             if (_service is MonoBehaviour monoService)

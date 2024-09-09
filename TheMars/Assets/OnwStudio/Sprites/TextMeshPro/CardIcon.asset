@@ -127,7 +127,7 @@ MonoBehaviour:
       m_Y: 128
       m_Width: 128
       m_Height: 128
-    m_Scale: 2
+    m_Scale: 1.2
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
     sprite: {fileID: 1631287835, guid: 5f61cca34bec94a8ca02324f057bc587, type: 3}
@@ -143,7 +143,7 @@ MonoBehaviour:
       m_Y: 128
       m_Width: 128
       m_Height: 128
-    m_Scale: 2
+    m_Scale: 1.2
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
     sprite: {fileID: 792989835, guid: 5f61cca34bec94a8ca02324f057bc587, type: 3}
@@ -159,7 +159,7 @@ MonoBehaviour:
       m_Y: 128
       m_Width: 128
       m_Height: 128
-    m_Scale: 1
+    m_Scale: 1.2
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
     sprite: {fileID: 797216400, guid: 5f61cca34bec94a8ca02324f057bc587, type: 3}

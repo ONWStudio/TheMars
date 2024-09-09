@@ -169,14 +169,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CardData>k__BackingField: {fileID: 0}
+  <CardCamera>k__BackingField: {fileID: 0}
+  <CardRaycaster>k__BackingField: {fileID: 0}
   <IsDragging>k__BackingField: 0
   <OnField>k__BackingField: 0
-  <RectTransform>k__BackingField: {fileID: 6485339371614455860}
+  <IsOverDeckTransform>k__BackingField: 0
+  <IsHide>k__BackingField: 0
   <InputHandler>k__BackingField: {fileID: -9218174935462156935}
   <CardViewMover>k__BackingField: {fileID: 2790600352443847834}
   <CardBodyMover>k__BackingField: {fileID: -4764531829553090222}
-  <IsOverDeckTransform>k__BackingField: 0
-  <IsHide>k__BackingField: 0
+  <RectTransform>k__BackingField: {fileID: 6485339371614455860}
   _onDragBeginCard:
     _unityEvent:
       m_PersistentCalls:

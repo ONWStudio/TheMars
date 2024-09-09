@@ -10,9 +10,7 @@ using Onw.ServiceLocator;
 using TM.Grid;
 using TM.Building;
 using TMCard.Runtime;
-using UnityEngine.Tilemaps;
 using Object = UnityEngine.Object;
-
 
 namespace TMCard.Effect
 {
@@ -39,15 +37,28 @@ namespace TMCard.Effect
             _mainCamera = Camera.main;
 
             _cardModel = cardModel;
+            
             _cardModel.OnEffectEvent.AddListener(onEffect);
             _cardModel.InputHandler.DownAction.AddListener(onDownCard);
-
+            _cardModel.InputHandler.DragAction.AddListener(onDrag);
+            
             _building = Object
                 .Instantiate(BuildingData.BuildingPrefab.gameObject)
                 .GetComponent<TMBuilding>();
+            
+            if (ServiceLocator<TMGridManager>.TryGetService(out TMGridManager gridManager))
+            {
+                float xWidth = _building.MeshRenderer.bounds.size.x;
+                float zWidth = _building.MeshRenderer.bounds.size.z;
+                float tileSize = gridManager.TileSize;
+                float ratio = tileSize / Mathf.Max(xWidth, zWidth);
+                _building.transform.localScale *= ratio * 0.55f; // .. 어떤 건물이든 항상 동일한 폭으로 생성
+            }
+            
+            _building.gameObject.SetActive(false);
         }
 
-        private void onDownCard(PointerEventData _)
+        private void onDownCard(PointerEventData eventData)
         {
             if (!ServiceLocator<TMGridManager>.TryGetService(out TMGridManager gridManager)) return;
 
@@ -55,15 +66,6 @@ namespace TMCard.Effect
             gridManager.OnExitTile.AddListener(setTileUnHighlight);
 
             _building.gameObject.SetActive(true);
-            MeshRenderer meshRenderer = _building.GetComponent<MeshRenderer>();
-
-            float xWidth = meshRenderer.bounds.size.x;
-            float zWidth = meshRenderer.bounds.size.z;
-            float tileSize = gridManager.TileSize;
-            float ratio = tileSize / Mathf.Max(xWidth, zWidth);
-            _building.transform.localScale *= ratio * 0.55f; // .. 어떤 건물이든 항상 동일한 폭으로 생성
-
-            _cardModel.InputHandler.DragAction.AddListener(onDrag);
             _cardModel.IsHide = true;
 
             setCurrentTile(gridManager);
@@ -86,9 +88,9 @@ namespace TMCard.Effect
 
             if (!_cardModel.IsOverDeckTransform)
             {
-                if (!_building.gameObject.activeSelf)
+                if (!_building.MeshRenderer.enabled)
                 {
-                    _building.gameObject.SetActive(true);
+                    _building.MeshRenderer.enabled = true;
                     gridManager.OnHighlightTile.AddListener(setTileHighlight);
                     setCurrentTile(gridManager);
                 }
@@ -110,9 +112,9 @@ namespace TMCard.Effect
             }
             else
             {
-                if (_building.gameObject.activeSelf)
+                if (_building.MeshRenderer.enabled)
                 {
-                    _building.gameObject.SetActive(false);
+                    _building.MeshRenderer.enabled = false;
                     gridManager.OnHighlightTile.RemoveListener(setTileHighlight);
 
                     if (_currentTile is not null)
@@ -132,7 +134,8 @@ namespace TMCard.Effect
 
             if (Physics.Raycast(ray, out RaycastHit hit) &&
                 hit.collider.gameObject.name == "Tile" &&
-                (_currentTile?.Properties.All(property => property is not "DefaultBuilding" and not "TileOff") ?? false))
+                _currentTile &&
+                _currentTile.Properties.All(property => property is not "DefaultBuilding" and not "TileOff"))
             {
                 GridTile buildingTile = _currentTile;
                 buildingTile.Properties.Add("TileOff");
@@ -147,18 +150,21 @@ namespace TMCard.Effect
                     cardManager.RemoveCard(_cardModel);
                 }
 
-                _cardModel.gameObject.SetActive(false);
+                Vector3 keepPosition = _cardModel.transform.localPosition;
+                
+                _cardModel.transform.localPosition = new(1000, 1000, 100000);
+                _cardModel.CardBodyMover.TargetPosition = _cardModel.transform.localPosition;
                 buildingTile.OnMouseDownTile.AddListener(onMouseDownTile);
 
                 void onMouseDownTile(GridTile tileData)
                 {
-                    if (!hasCardManager) return;
+                    if (EventSystem.current.IsPointerOverGameObject() || !hasCardManager) return;
 
+                    Debug.Log("OnMouseDownTile");
                     _currentTile = buildingTile;
                     _currentTile.Properties.Remove("TileOff");
                     _currentTile.OnMouseDownTile.RemoveListener(onMouseDownTile);
-                    _cardModel.gameObject.SetActive(true);
-
+                    _cardModel.transform.localPosition = keepPosition;
                     cardManager.AddCard(_cardModel);
                     _cardModel.TriggerSelectCard();
                     onDownCard(null);
@@ -171,7 +177,6 @@ namespace TMCard.Effect
 
             _currentTile = null;
             _cardModel.IsHide = false;
-            _cardModel.InputHandler.DragAction.RemoveListener(onDrag);
 
             gridManager.OnHighlightTile.RemoveListener(setTileHighlight);
             gridManager.OnExitTile.RemoveListener(setTileUnHighlight);
