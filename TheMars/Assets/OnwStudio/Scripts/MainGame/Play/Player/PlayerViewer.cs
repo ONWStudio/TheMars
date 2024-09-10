@@ -30,11 +30,11 @@ namespace TM.UI
                 {
                     playerManager.ObserveInformation(
                         player => player.Credit,
-                        credit => _creditText.text = $"<sprite={(int)TMRequiredResource.CREDIT}> {credit}");
+                        credit => _creditText.text = $"<sprite={(int)TMCostKind.CREDIT}> {credit}");
 
                     playerManager.ObserveInformation(
                         player => player.MarsLithium,
-                        marsLithium => _marsLithiumText.text = $"<sprite={(int)TMRequiredResource.MARS_LITHIUM}> {marsLithium}");
+                        marsLithium => _marsLithiumText.text = $"<sprite={(int)TMCostKind.MARS_LITHIUM}> {marsLithium}");
                 });
         }
     }

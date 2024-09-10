@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Onw.Attribute;
-using Onw.Event;
 using Onw.ServiceLocator;
+using UnityEngine.Events;
 
 namespace TM.Manager
 {
@@ -15,7 +15,11 @@ namespace TM.Manager
         [field: SerializeField, ReadOnly] public float AccumulatedTime { get; private set; } = 0f;
         [field: SerializeField, ReadOnly] public int NowDay { get; private set; } = 1;
 
-        public IUnityEventListenerModifier<int> OnChangedDay => _onChangedDay;
+        public event UnityAction<int> OnChangedDay
+        {
+            add => _onChangedDay.AddListener(value);
+            remove => _onChangedDay.RemoveListener(value);
+        }
         
         public int IntervalInMinutes
         {
@@ -26,7 +30,7 @@ namespace TM.Manager
         [SerializeField, Range(INTERVAL_MIN, INTERVAL_MAX)] private int _intervalInMinutes = 10;
 
         [Header("Event")]
-        [SerializeField] private SafeUnityEvent<int> _onChangedDay = new();
+        [SerializeField] private UnityEvent<int> _onChangedDay = new();
         
         private int _prevDay = 1;
         private float _intervalInSeconds;

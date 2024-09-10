@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Onw.Event;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Onw.Interface
 {
@@ -10,6 +11,6 @@ namespace Onw.Interface
     /// </summary>
     public interface INotifier
     {
-        SafeAction<string> Event { get; }
+        event UnityAction<string> OnNotifyEvent;
     }
 }

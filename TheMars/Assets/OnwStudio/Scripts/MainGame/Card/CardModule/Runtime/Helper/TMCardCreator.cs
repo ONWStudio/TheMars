@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Onw.Event;
 using Onw.ServiceLocator;
 using UnityEngine;
+using UnityEngine.Events;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
@@ -11,13 +12,17 @@ namespace TMCard.Runtime
     [Serializable]
     public sealed class TMCardCreator
     {
-        public IUnityEventListenerModifier<TMCardModel> OnCreateCard => _onCreateCard;
+        public event UnityAction<TMCardModel> OnCreateCard
+        {
+            add => _onCreateCard.AddListener(value);
+            remove => _onCreateCard.RemoveListener(value);
+        }
         
         [SerializeField] private List<TMCardData> _cards = new();
         [SerializeField] private TMCardModel _templatePrefab;
 
         [Header("Event")]
-        [SerializeField] private SafeUnityEvent<TMCardModel> _onCreateCard = new();
+        [SerializeField] private UnityEvent<TMCardModel> _onCreateCard = new();
         
         public List<TMCardModel> CreateCards(int createCount, bool shouldInitialize = true)
         {

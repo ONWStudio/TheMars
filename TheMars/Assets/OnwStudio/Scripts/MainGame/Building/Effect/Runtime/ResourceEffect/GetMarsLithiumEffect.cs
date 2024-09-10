@@ -9,72 +9,11 @@ using TM.Manager;
 
 namespace TM.Building.Effect
 {
-    public sealed class GetMarsLithiumEffect : ITMBuildingResourceEffect, ITMBuildingInitializeEffect<GetMarsLithiumEffectCreator>
+    public sealed class GetMarsLithiumEffect : TMBuildingResourceEffect
     {
-        [SerializeField, ReadOnly] private float _levelOneRepeatSeconds = 0;
-        [SerializeField, ReadOnly] private int _levelOneMarsLithium = 1;
-
-        [SerializeField, ReadOnly] private float _levelTwoRepeatSeconds = 0;
-        [SerializeField, ReadOnly] private int _levelTwoMarsLithium = 1;
-
-        [SerializeField, ReadOnly] private float _levelThreeRepeatSeconds = 0;
-        [SerializeField, ReadOnly] private int _levelThreeMarsLithium = 1;
-
-        private Coroutine _coroutine = null;
-
-        public void Initialize(GetMarsLithiumEffectCreator effectCreator)
+        protected override void AddResource(PlayerManager player, int resource)
         {
-            _levelOneRepeatSeconds = effectCreator.LevelOneRepeatSeconds;
-            _levelOneMarsLithium = effectCreator.LevelOneMarsLithium;
-            _levelTwoRepeatSeconds = effectCreator.LevelTwoRepeatSeconds;
-            _levelTwoMarsLithium = effectCreator.LevelTwoMarsLithium;
-            _levelThreeRepeatSeconds = effectCreator.LevelThreeRepeatSeconds;
-            _levelThreeMarsLithium = effectCreator.LevelThreeMarsLithium;
-        }
-
-        public void ApplyEffectLevelOne(TMBuilding owner)
-        {
-            fireEffect(owner, _levelOneRepeatSeconds, _levelOneMarsLithium);
-        }
-
-        public void ApplyEffectLevelTwo(TMBuilding owner)
-        {
-            fireEffect(owner, _levelTwoRepeatSeconds, _levelTwoMarsLithium);
-        }
-
-        public void ApplyEffectLevelThree(TMBuilding owner)
-        {
-            fireEffect(owner, _levelThreeRepeatSeconds, _levelThreeMarsLithium);
-        }
-
-        public void DisableEffect(TMBuilding owner)
-        {
-            owner.StopCoroutineIfNotNull(_coroutine);
-        }
-
-        private void fireEffect(TMBuilding owner, float repeatSeconds, int marsLithium)
-        {
-            owner.StopCoroutineIfNotNull(_coroutine);
-            _coroutine = owner.StartCoroutine(iEFireEffect(repeatSeconds, marsLithium));
-        }
-
-        private static IEnumerator iEFireEffect(float repeatSeconds, int marsLithium)
-        {
-            float timeAccumulator = 0f;
-
-            while (true)
-            {
-                timeAccumulator += Time.deltaTime * TimeManager.GameSpeed;
-
-                if (timeAccumulator >= repeatSeconds)
-                {
-                    Debug.Log("마르스 리튬 획득!");
-                    ServiceLocator<PlayerManager>.InvokeService(player => player.MarsLithium += marsLithium);
-                    timeAccumulator -= repeatSeconds;
-                }
-
-                yield return null;
-            }
+            player.MarsLithium += resource;
         }
     }
 }

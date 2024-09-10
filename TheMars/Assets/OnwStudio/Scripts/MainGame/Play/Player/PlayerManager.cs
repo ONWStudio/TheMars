@@ -1,10 +1,7 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
-using Onw.Manager;
 using Onw.Attribute;
-using Onw.Extensions;
 using Onw.Helper;
 using Onw.ServiceLocator;
 

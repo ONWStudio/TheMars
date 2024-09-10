@@ -25,7 +25,7 @@ namespace TM
 
             this.WaitCompletedConditions(
                 () => ServiceLocator<TMSimulator>.TryGetService(out simulator),
-                () => simulator.OnChangedDay.AddListener(onChangedDay));
+                () => simulator.OnChangedDay += onChangedDay);
 
             onChangedDay(1);
 

@@ -120,12 +120,12 @@ namespace Onw.Attribute.Editor
             }
             else
             {
-                TreeViewItem rootItem = createItem(_rootObject, 0);
+                TreeViewItem treeRootItem = createItem(_rootObject, 0);
 
                 Dictionary<GameObject, TreeViewItem> visited = new()
                 {
                     {
-                        _rootObject, rootItem
+                        _rootObject, treeRootItem
                     }
                 };
                 foreach (Component component in _rootObject.GetComponentsInChildren(_filterType, true))
@@ -134,7 +134,7 @@ namespace Onw.Attribute.Editor
                     addComponentToDropdown(component.gameObject, visited);
                 }
 
-                setDepth(rootItem);
+                setDepth(treeRootItem);
 
                 static void setDepth(TreeViewItem item, int depth = 0)
                 {
@@ -149,7 +149,7 @@ namespace Onw.Attribute.Editor
                     }
                 }
 
-                root.AddChild(rootItem);
+                root.AddChild(treeRootItem);
             }
             
             return root;
@@ -161,7 +161,9 @@ namespace Onw.Attribute.Editor
         
             if (!string.IsNullOrEmpty(searchString))
             {
-                rows = rows.Where(item => item.displayName.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+                rows = rows
+                    .Where(item => item.displayName.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0)
+                    .ToList();
             }
         
             return rows;
@@ -172,9 +174,9 @@ namespace Onw.Attribute.Editor
             TreeViewItem item = args.item;
         
             Rect labelRect = new(
-                args.rowRect.x + (string.IsNullOrEmpty(searchString) ?
-                    EditorGUIUtility.singleLineHeight + args.item.depth * EditorGUIUtility.singleLineHeight :
-                    0),
+                string.IsNullOrEmpty(searchString) ?
+                    depthIndentWidth + args.item.depth * depthIndentWidth :
+                    0,
                 args.rowRect.y + (args.rowRect.height - EditorGUIUtility.singleLineHeight) * 0.5f,
                 args.rowRect.width,
                 EditorGUIUtility.singleLineHeight);
@@ -183,7 +185,7 @@ namespace Onw.Attribute.Editor
         
             EditorGUI.LabelField(labelRect, guiContent);
         }
-
+        
         protected override void DoubleClickedItem(int id)
         {
             if (!_itemsMap.TryGetValue(id, out GameObject @object)) return;

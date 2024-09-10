@@ -7,6 +7,7 @@ using Onw.Attribute;
 using Onw.Event;
 using Onw.GridTile;
 using Onw.ServiceLocator;
+using UnityEngine.Events;
 
 namespace TM.Grid
 {
@@ -17,11 +18,30 @@ namespace TM.Grid
 
         public IReadOnlyList<IReadOnlyGridRows> ReadOnlyTileList => _gridManager.TileList;
 
-        public IUnityEventListenerModifier<GridTile> OnHighlightTile => _gridManager.OnHighlightTile;
-        public IUnityEventListenerModifier<GridTile> OnMouseDownTile => _gridManager.OnMouseDownTile;
-        public IUnityEventListenerModifier<GridTile> OnMouseUpTile => _gridManager.OnMouseUpTile;
-        public IUnityEventListenerModifier<GridTile> OnExitTile => _gridManager.OnExitTile;
-
+        public event UnityAction<GridTile> OnHighlightTile
+        {
+            add => _gridManager.OnHighlightTile += value;
+            remove => _gridManager.OnHighlightTile -= value;
+        }
+        
+        public event UnityAction<GridTile> OnMouseDownTile
+        {
+            add => _gridManager.OnMouseDownTile += value;
+            remove => _gridManager.OnMouseDownTile -= value;
+        }
+        
+        public event UnityAction<GridTile> OnMouseUpTile
+        {
+            add => _gridManager.OnMouseUpTile += value;
+            remove => _gridManager.OnMouseUpTile -= value;
+        }
+        
+        public event UnityAction<GridTile> OnExitTile
+        {
+            add => _gridManager.OnExitTile += value;
+            remove => _gridManager.OnExitTile -= value;
+        }
+        
         [SerializeField, InitializeRequireComponent] private GridManager _gridManager;
 
         private void Awake()

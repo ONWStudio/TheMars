@@ -14,10 +14,29 @@ namespace Onw.GridTile
 {
     public sealed class GridTile : MonoBehaviour
     {
-        public IUnityEventListenerModifier<GridTile> OnHighlightTile => _onHighlightTile;
-        public IUnityEventListenerModifier<GridTile> OnMouseDownTile => _onMouseDownTile;
-        public IUnityEventListenerModifier<GridTile> OnMouseUpTile => _onMouseUpTile;
-        public IUnityEventListenerModifier<GridTile> OnExitTile => _onExitTile;
+        public event UnityAction<GridTile> OnHighlightTile
+        {
+            add => _onHighlightTile.AddListener(value);
+            remove => _onHighlightTile.RemoveListener(value);
+        }
+        
+        public event UnityAction<GridTile> OnMouseDownTile
+        {
+            add => _onMouseDownTile.AddListener(value);
+            remove => _onMouseDownTile.RemoveListener(value);
+        }
+        
+        public event UnityAction<GridTile> OnMouseUpTile
+        {
+            add => _onMouseUpTile.AddListener(value);
+            remove => _onMouseUpTile.RemoveListener(value);
+        }
+        
+        public event UnityAction<GridTile> OnExitTile
+        {
+            add => _onExitTile.AddListener(value);
+            remove => _onExitTile.RemoveListener(value);
+        }
 
         [field: FormerlySerializedAs("_properties")]
         [field: SerializeField] public List<string> Properties { get; private set; } = new(); // .. 각 타일에 속성을 넣을 수 있습니다
@@ -34,10 +53,10 @@ namespace Onw.GridTile
 
         [SerializeField, ReadOnly] private GridManager _gridManager;
 
-        [SerializeField] private SafeUnityEvent<GridTile> _onHighlightTile = new();
-        [SerializeField] private SafeUnityEvent<GridTile> _onMouseDownTile = new();
-        [SerializeField] private SafeUnityEvent<GridTile> _onMouseUpTile = new();
-        [SerializeField] private SafeUnityEvent<GridTile> _onExitTile = new();
+        [SerializeField] private UnityEvent<GridTile> _onHighlightTile = new();
+        [SerializeField] private UnityEvent<GridTile> _onMouseDownTile = new();
+        [SerializeField] private UnityEvent<GridTile> _onMouseUpTile = new();
+        [SerializeField] private UnityEvent<GridTile> _onExitTile = new();
         
         public Vector3 Size => TileRenderer.bounds.size;
 

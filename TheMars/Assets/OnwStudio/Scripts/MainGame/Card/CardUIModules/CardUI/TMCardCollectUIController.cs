@@ -35,7 +35,7 @@ namespace TMCard.UI
 
                 foreach (KeyValuePair<TMCardModel, UnityAction<PointerEventData>> callbackPair in _cardCallbacks)
                 {
-                    callbackPair.Key.InputHandler.UpAction.RemoveListener(callbackPair.Value);
+                    callbackPair.Key.InputHandler.UpAction -= callbackPair.Value;
 
                     if (callbackPair.Key != _selectCard)
                     {
@@ -69,7 +69,7 @@ namespace TMCard.UI
                 
                 UnityAction<PointerEventData> action = selectCard;
                 _cardCallbacks.Add(new(card, action));
-                card.InputHandler.UpAction.AddListener(action);
+                card.InputHandler.UpAction += action;
                 
                 void selectCard(PointerEventData data)
                 {

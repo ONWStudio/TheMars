@@ -23,8 +23,8 @@ namespace TMCard.Effect
 
         public void ApplyEffect(TMCardModel cardModel, ITMCardEffectTrigger trigger)
         {
-            trigger.OnEffectEvent.AddListener(card 
-                => collectCard(cardModel, _collectCount));
+            trigger.OnEffectEvent += _ 
+                => collectCard(cardModel, _collectCount);
         }
         
         private static void collectCard(TMCardModel triggerCard, int collectCount)

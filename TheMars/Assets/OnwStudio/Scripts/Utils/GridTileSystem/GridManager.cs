@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Onw.Event;
+using UnityEngine.Events;
 
 namespace Onw.GridTile
 {
@@ -34,19 +35,38 @@ namespace Onw.GridTile
 
         public int TileCount => GridSize * GridSize;
         
-        public IUnityEventListenerModifier<GridTile> OnHighlightTile => _onHighlightTile;
-        public IUnityEventListenerModifier<GridTile> OnExitTile => _onExitTile;
-        public IUnityEventListenerModifier<GridTile> OnMouseDownTile => _onMouseDownTile;
-        public IUnityEventListenerModifier<GridTile> OnMouseUpTile => _onMouseUpTile;
+        public event UnityAction<GridTile> OnHighlightTile
+        {
+            add => _onHighlightTile.AddListener(value);
+            remove => _onHighlightTile.RemoveListener(value);
+        }
+        
+        public event UnityAction<GridTile> OnExitTile
+        {
+            add => _onExitTile.AddListener(value);
+            remove => _onExitTile.RemoveListener(value);
+        }
+        
+        public event UnityAction<GridTile> OnMouseDownTile
+        {
+            add => _onMouseDownTile.AddListener(value);
+            remove => _onMouseDownTile.RemoveListener(value);
+        }
+        
+        public event UnityAction<GridTile> OnMouseUpTile
+        {
+            add => _onMouseUpTile.AddListener(value);
+            remove => _onMouseUpTile.RemoveListener(value);
+        }
 
         [field: SerializeField, Range(5, 50)] public float TileSize { get; set; }
         [field: SerializeField, Range(GRID_SIZE_MIN, GRID_SIZE_MAX)] public int GridSize { get; set; } = 5;
 
         [Header("Events")]
-        [SerializeField] private SafeUnityEvent<GridTile> _onHighlightTile = new();
-        [SerializeField] private SafeUnityEvent<GridTile> _onExitTile = new();
-        [SerializeField] private SafeUnityEvent<GridTile> _onMouseUpTile = new();
-        [SerializeField] private SafeUnityEvent<GridTile> _onMouseDownTile = new();
+        [SerializeField] private UnityEvent<GridTile> _onHighlightTile = new();
+        [SerializeField] private UnityEvent<GridTile> _onExitTile = new();
+        [SerializeField] private UnityEvent<GridTile> _onMouseUpTile = new();
+        [SerializeField] private UnityEvent<GridTile> _onMouseDownTile = new();
 
         [SerializeField] private List<GridRows> _tileList = new();
 
@@ -74,10 +94,10 @@ namespace Onw.GridTile
         {
             foreach (GridTile tile in _tileList.SelectMany(rows => rows.Row))
             {
-                tile.OnHighlightTile.AddListener(_onHighlightTile.Invoke);
-                tile.OnMouseDownTile.AddListener(_onMouseDownTile.Invoke);
-                tile.OnMouseUpTile.AddListener(_onMouseUpTile.Invoke);
-                tile.OnExitTile.AddListener(_onExitTile.Invoke);
+                tile.OnHighlightTile += _onHighlightTile.Invoke;
+                tile.OnMouseDownTile += _onMouseDownTile.Invoke;
+                tile.OnMouseUpTile += _onMouseUpTile.Invoke;
+                tile.OnExitTile += _onExitTile.Invoke;
             }
         }
 

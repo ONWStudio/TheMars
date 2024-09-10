@@ -1,14 +1,11 @@
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
-using Onw.ServiceLocator;
-using Onw.Attribute;
-using Onw.Coroutine;
-using Onw.Event;
-using Onw.Extensions;
-using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UnityEngine.Serialization;
+using Onw.Attribute;
+using Onw.Extensions;
+using Onw.ServiceLocator;
 using Image = UnityEngine.UI.Image;
 
 namespace TMCard.Runtime
@@ -62,14 +59,14 @@ namespace TMCard.Runtime
 
         private void Start()
         {
-            CardCreator.OnCreateCard.AddListener(addListenerForCard);
+            CardCreator.OnCreateCard += addListenerForCard;
             AddCard(CardCreator.CreateCard());
         }
 
         private void addListenerForCard(TMCardModel card)
         {
-            card.OnDragBeginCard.AddListener(onDragBeginCard);
-            card.OnDragEndCard.AddListener(onDragEndCard);
+            card.OnDragBeginCard += onDragBeginCard;
+            card.OnDragEndCard += onDragEndCard;
         }
 
         public void AddCard(TMCardModel card)

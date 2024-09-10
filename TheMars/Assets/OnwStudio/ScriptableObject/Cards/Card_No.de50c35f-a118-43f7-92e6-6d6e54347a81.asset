@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
   m_Name: Card_No.de50c35f-a118-43f7-92e6-6d6e54347a81
   m_EditorClassIdentifier: 
-  <RequiredResource>k__BackingField: 0
-  <Resource>k__BackingField: 0
   <CardKind>k__BackingField: 2
   <CardGroup>k__BackingField: 0
   <CardImage>k__BackingField: {fileID: 21300000, guid: 7f85ee0ad8b42e242b2d12985449c0e3,
@@ -29,6 +27,9 @@ MonoBehaviour:
     m_LocalVariables: []
   _cardEffectCreator:
     rid: 8523893595087306754
+  _cardCosts:
+  - <CostKind>k__BackingField: 0
+    <Cost>k__BackingField: 0
   references:
     version: 2
     RefIds:
