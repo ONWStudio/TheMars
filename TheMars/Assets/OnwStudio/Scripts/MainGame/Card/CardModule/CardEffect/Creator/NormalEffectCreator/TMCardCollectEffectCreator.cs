@@ -1,7 +1,8 @@
-using Onw.Attribute;
 using UnityEngine;
 using UnityEngine.Serialization;
-namespace TMCard.Effect
+using Onw.Attribute;
+
+namespace TM.Card.Effect.Creator
 {
     using static ITMCardEffectCreator;
 

@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using Onw.Attribute;
 using TM.Building;
-using TMCard.Runtime;
-using UnityEngine;
 
-namespace TMCard.Effect
+namespace TM.Card.Effect.Creator
 {
     using static ITMCardEffectCreator;
     

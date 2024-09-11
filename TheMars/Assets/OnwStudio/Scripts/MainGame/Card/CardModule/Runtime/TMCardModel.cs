@@ -1,7 +1,5 @@
 using System;
 using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -9,10 +7,9 @@ using Onw.Attribute;
 using Onw.UI.Components;
 using Onw.ServiceLocator;
 using Onw.Components.Movement;
-using TMCard.Effect;
-using TM;
+using TM.Card.Effect;
 
-namespace TMCard.Runtime
+namespace TM.Card.Runtime
 {
     // .. Model
     [DisallowMultipleComponent]
@@ -114,7 +111,7 @@ namespace TMCard.Runtime
         /// </summary>
         public bool CanPayCost => CardData
             .CardCosts
-            .All(cardCost => cardCost.Cost <= getResourceFromPlayerByCost(cardCost.CostKind));
+            .All(cardCost => cardCost.Cost <= getResourceFromPlayerByCost(cardCost.ResourceKind));
 
         [SerializeField] private UnityEvent<TMCardModel> _onDragBeginCard = new();
         [SerializeField] private UnityEvent<TMCardModel> _onDragEndCard = new();
@@ -123,7 +120,6 @@ namespace TMCard.Runtime
         [SerializeField, ReadOnly] private bool _isInit = false;
 
         private bool? _keepIsHide = null;
-
 
         private UnityEvent _unityEvent = new();
 
@@ -219,27 +215,27 @@ namespace TMCard.Runtime
             
             foreach (TMCardCost cost in CardData.CardCosts)
             {
-                switch (cost.CostKind)
+                switch (cost.ResourceKind)
                 {
-                    case TMCostKind.MARS_LITHIUM:
+                    case TMResourceKind.MARS_LITHIUM:
                         player.MarsLithium -= cost.Cost;
                         break;
-                    case TMCostKind.CREDIT:
+                    case TMResourceKind.CREDIT:
                         player.Credit -= cost.Cost;
                         break;
-                    case TMCostKind.STEEL:
+                    case TMResourceKind.STEEL:
                         player.Steel -= cost.Cost;
                         break;
-                    case TMCostKind.PLANTS:
+                    case TMResourceKind.PLANTS:
                         player.Plants -= cost.Cost;
                         break;
-                    case TMCostKind.CLAY:
+                    case TMResourceKind.CLAY:
                         player.Clay -= cost.Cost;
                         break;
-                    case TMCostKind.ELECTRICITY:
+                    case TMResourceKind.ELECTRICITY:
                         player.Electricity -= cost.Cost;
                         break;
-                    case TMCostKind.POPULATION:
+                    case TMResourceKind.POPULATION:
                         player.Population -= cost.Cost;
                         break;
                 }
@@ -249,21 +245,21 @@ namespace TMCard.Runtime
         /// <summary>
         /// .. 코스트 종류에 따른 현재 플레이어의 자원을 리턴합니다
         /// </summary>
-        /// <param name="costKind"></param>
+        /// <param name="resourceKind"></param>
         /// <returns></returns>
-        private static int getResourceFromPlayerByCost(TMCostKind costKind)
+        private static int getResourceFromPlayerByCost(TMResourceKind resourceKind)
         {
             if (!ServiceLocator<PlayerManager>.TryGetService(out PlayerManager player)) return 0;
 
-            return costKind switch
+            return resourceKind switch
             {
-                TMCostKind.MARS_LITHIUM => player.MarsLithium,
-                TMCostKind.CREDIT => player.Credit,
-                TMCostKind.STEEL => player.Steel,
-                TMCostKind.PLANTS => player.Plants,
-                TMCostKind.CLAY => player.Clay,
-                TMCostKind.POPULATION => player.Population,
-                TMCostKind.ELECTRICITY => player.Electricity,
+                TMResourceKind.MARS_LITHIUM => player.MarsLithium,
+                TMResourceKind.CREDIT => player.Credit,
+                TMResourceKind.STEEL => player.Steel,
+                TMResourceKind.PLANTS => player.Plants,
+                TMResourceKind.CLAY => player.Clay,
+                TMResourceKind.POPULATION => player.Population,
+                TMResourceKind.ELECTRICITY => player.Electricity,
                 _ => 0
             };
         }

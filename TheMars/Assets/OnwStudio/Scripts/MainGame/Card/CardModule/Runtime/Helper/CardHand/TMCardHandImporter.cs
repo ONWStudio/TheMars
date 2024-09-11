@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Onw.Extensions;
 using UnityEngine;
-namespace TMCard.Runtime
+using Onw.Extensions;
+
+namespace TM.Card.Runtime
 {
     /// <summary>
     /// .. 다음턴에 꺼낼 카드들을 패에 보내기전에 임포터 클래스를 거쳐갑니다.

@@ -4,7 +4,9 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using Onw.Editor;
 
 namespace Onw.Editor
@@ -35,6 +37,19 @@ namespace Onw.Editor
             IEnumerable enumerable => enumerable.OfType<object>().Count(),
             _ => null,
         };
+
+        public static void ClosePreviewSceneByReference(Scene? scene)
+        {
+            if (scene is null) return;
+
+            EditorSceneManager.ClosePreviewScene((Scene)scene);
+        }
+
+        public static void ClosePreviewSceneByReference(ref Scene? scene)
+        {
+            ClosePreviewSceneByReference(scene);
+            scene = null;
+        }
     }
 }
 #endif

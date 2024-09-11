@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace TMCard
+namespace TM
 {
     /// <summary>
     /// .. 발동 효과에 따른 카드 등급

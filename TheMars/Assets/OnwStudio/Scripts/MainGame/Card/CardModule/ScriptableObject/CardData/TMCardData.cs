@@ -1,24 +1,14 @@
 using System.Collections.Generic;
-using Onw.Attribute;
-using Onw.Localization;
-using TMCard.AdditionalCondition;
-using TMCard.Effect;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Serialization;
+using Onw.Attribute;
+using Onw.Localization;
+using TM.Card.Effect;
+using TM.Card.Effect.Creator;
 
-namespace TMCard
+namespace TM.Card
 {
-    [System.Serializable]
-    public sealed class TMCardCost
-    {
-        [field: SerializeField, DisplayAs("소모 재화 종류"), Tooltip("소모할 재화")] 
-        public TMCostKind CostKind { get; private set; }
-        
-        [field: SerializeField, DisplayAs("소모 재화"), Tooltip("소모 재화량")]
-        public int Cost { get; private set; }
-    }
-    
     public sealed partial class TMCardData : ScriptableObject
     {
         /// <summary>

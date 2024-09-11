@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TMCard.Runtime
+namespace TM.Card.Runtime
 {
     public sealed class PositionRotationInfo
     {

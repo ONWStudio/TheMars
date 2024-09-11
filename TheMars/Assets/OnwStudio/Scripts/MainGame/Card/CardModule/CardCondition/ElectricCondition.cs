@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace TMCard.AdditionalCondition
+namespace TM.AdditionalCondition
 {
     public sealed class ElectricCondition : ITMCardAdditionalCondition
     {

@@ -1,8 +1,9 @@
-using System.Collections.Generic;
 using System.Linq;
-using Onw.Attribute;
+using System.Collections.Generic;
 using UnityEngine;
-namespace TMCard.Runtime
+using Onw.Attribute;
+
+namespace TM.Card.Runtime
 {
     /// <summary>
     /// .. 카드를 원 형태로 정렬시키는 클래스

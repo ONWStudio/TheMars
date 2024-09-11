@@ -6,7 +6,7 @@ using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
-namespace TMCard.Runtime
+namespace TM.Card.Runtime
 {
     // .. Controller
     [DisallowMultipleComponent]

@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Onw.Attribute;
-using Onw.ServiceLocator;
-using TMCard.Runtime;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using Onw.Attribute;
+using Onw.ServiceLocator;
+using TM.Card.Runtime;
 
-namespace TMCard.UI
+namespace TM.Card.UI
 {
     [DisallowMultipleComponent]
     public sealed class TMCardCollectUIController : MonoBehaviour

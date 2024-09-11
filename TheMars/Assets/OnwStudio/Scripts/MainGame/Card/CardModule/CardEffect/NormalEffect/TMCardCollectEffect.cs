@@ -1,9 +1,10 @@
+using UnityEngine;
 using Onw.Attribute;
 using Onw.ServiceLocator;
-using TMCard.Runtime;
-using UnityEngine;
+using TM.Card.Runtime;
+using TM.Card.Effect.Creator;
 
-namespace TMCard.Effect
+namespace TM.Card.Effect
 {
     public sealed class TMCardCollectEffect : ITMNormalEffect, ITMCardInitializeEffect<TMCardCollectEffectCreator>
     {

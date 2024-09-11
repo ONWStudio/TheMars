@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace TMCard
+namespace TM
 {
     /// <summary>
     /// .. 발동 효과와 필요 자원에 따른 분류

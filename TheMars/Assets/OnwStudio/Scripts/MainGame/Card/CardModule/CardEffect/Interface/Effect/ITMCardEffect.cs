@@ -1,8 +1,7 @@
-using System;
 using Onw.Interface;
-using TMCard.Runtime;
+using TM.Card.Runtime;
 
-namespace TMCard.Effect
+namespace TM.Card.Effect
 {
     public interface ITMCardEffect : IDescriptable
     {

@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Onw.Event;
-using Onw.ServiceLocator;
 using UnityEngine;
 using UnityEngine.Events;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
-namespace TMCard.Runtime
+namespace TM.Card.Runtime
 {
     [Serializable]
     public sealed class TMCardCreator

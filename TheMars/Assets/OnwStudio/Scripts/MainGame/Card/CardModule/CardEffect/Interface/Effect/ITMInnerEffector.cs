@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-namespace TMCard.Effect
+
+namespace TM.Card.Effect
 {
     public interface ITMInnerEffector
     {

@@ -11,7 +11,7 @@ namespace TM.Building.Effect
 {
     public interface ITMBuildingResourceEffect : ITMBuildingEffect {}
     
-    public abstract class TMBuildingResourceEffect : ITMBuildingResourceEffect, ITMBuildingInitializeEffect<GetResourceEffectCreator>
+    public abstract class TMBuildingResourceEffect : ITMBuildingResourceEffect, ITMBuildingInitializeEffect<TMBuildingGetResourceEffectCreator>
     {
         [SerializeField, ReadOnly] private float _levelOneRepeatSeconds = 0;
         [SerializeField, ReadOnly] private int _levelOneResource = 1;
@@ -24,7 +24,7 @@ namespace TM.Building.Effect
         
         private Coroutine _coroutine = null;
         
-        public void Initialize(GetResourceEffectCreator effectCreator)
+        public void Initialize(TMBuildingGetResourceEffectCreator effectCreator)
         {
             _levelOneRepeatSeconds = effectCreator.LevelOneRepeatSeconds;
             _levelOneResource = effectCreator.LevelOneResource;

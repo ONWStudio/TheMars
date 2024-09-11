@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-namespace TMCard.Runtime
+
+namespace TM.Card.Runtime
 {
     /// <summary>
     /// .. 카드를 부채꼴의 형태로 정렬시키는 클래스 입니다

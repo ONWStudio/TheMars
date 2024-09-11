@@ -8,7 +8,7 @@ using Onw.Extensions;
 using Onw.ServiceLocator;
 using Image = UnityEngine.UI.Image;
 
-namespace TMCard.Runtime
+namespace TM.Card.Runtime
 {
     [DisallowMultipleComponent]
     public sealed class TMCardManager : MonoBehaviour

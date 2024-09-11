@@ -1,7 +1,7 @@
-using Onw.Event;
-using TMCard.Runtime;
 using UnityEngine.Events;
-namespace TMCard.Effect
+using TM.Card.Runtime;
+
+namespace TM.Card.Effect
 {
     public interface ITMCardEffectTrigger
     {

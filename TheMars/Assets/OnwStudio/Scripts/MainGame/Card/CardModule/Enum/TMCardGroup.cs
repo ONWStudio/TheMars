@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace TMCard
+namespace TM
 {
     public enum TMCardGroup : byte
     {

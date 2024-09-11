@@ -1,5 +1,5 @@
 
-namespace TMCard.AdditionalCondition
+namespace TM.AdditionalCondition
 {
     public interface ITMCardAdditionalCondition
     {

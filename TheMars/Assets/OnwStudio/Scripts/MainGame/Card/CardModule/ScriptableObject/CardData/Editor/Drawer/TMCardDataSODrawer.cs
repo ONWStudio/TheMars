@@ -1,5 +1,4 @@
 #if UNITY_EDITOR
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -10,14 +9,13 @@ using UnityEngine.Localization;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using Unity.EditorCoroutines;
 using Onw.Helper;
+using Onw.Editor;
 using Onw.Localization;
 using Onw.ScriptableObjects.Editor;
-using TMCard.Runtime;
-using Unity.EditorCoroutines.Editor;
+using TM.Card.Runtime;
 
-namespace TMCard.Editor
+namespace TM.Card.Editor
 {
     using Editor = UnityEditor.Editor;
 
@@ -73,6 +71,7 @@ namespace TMCard.Editor
         {
             TMCardData targetObject = target as TMCardData;
             
+            // ReSharper disable once PossibleNullReferenceException
             if (targetObject.GetType().GetField("_onValueChanged", BindingFlags.NonPublic | BindingFlags.Instance)?.GetValue(targetObject) is SafeAction safeAction)
             {
                 // ReSharper disable once RedundantAssignment
@@ -170,11 +169,7 @@ namespace TMCard.Editor
             OnwUnityHelper.DestroyImmediateObjectByComponent(ref _previewCamera);
             OnwUnityHelper.DestroyImmediateObjectByComponent(ref _previewCanvas);
             OnwUnityHelper.ReleaseRenderTexture(ref _renderTexture);
-            if (_previewScene != null)
-            {
-                EditorSceneManager.ClosePreviewScene((Scene)_previewScene);
-            }
-            _previewScene = null;
+            EditorHelper.ClosePreviewSceneByReference(ref _previewScene);
         }
 
         private void OnDestroy()

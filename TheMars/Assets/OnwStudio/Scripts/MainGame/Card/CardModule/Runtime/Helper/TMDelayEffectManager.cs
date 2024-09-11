@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
-namespace TMCard.Runtime
+namespace TM.Card.Runtime
 {
     public sealed class TMDelayEffectManager : MonoBehaviour
     {

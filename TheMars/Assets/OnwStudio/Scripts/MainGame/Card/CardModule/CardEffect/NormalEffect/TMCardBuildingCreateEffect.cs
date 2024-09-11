@@ -9,10 +9,11 @@ using Onw.Extensions;
 using Onw.ServiceLocator;
 using TM.Grid;
 using TM.Building;
-using TMCard.Runtime;
+using TM.Card.Runtime;
+using TM.Card.Effect.Creator;
 using Object = UnityEngine.Object;
 
-namespace TMCard.Effect
+namespace TM.Card.Effect
 {
     /// <summary>
     /// .. 건물 설치 효과입니다 건물을 배치하고 배치시 코스트 사용, 조건 검사, 재배치시의 관한 로직, 회수등의 관한 로직을 해당 효과가 모두 담당합니다
