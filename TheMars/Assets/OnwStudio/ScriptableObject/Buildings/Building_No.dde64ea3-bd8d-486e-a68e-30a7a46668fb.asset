@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29023a97855ba47afb2e17979280c141, type: 3}
   m_Name: Building_No.dde64ea3-bd8d-486e-a68e-30a7a46668fb
   m_EditorClassIdentifier: 
+  <TMCorporation>k__BackingField: 0
   <BuildingPrefab>k__BackingField: {fileID: 4797982682177862849, guid: 5f392c5154ae64a33be8118dba335450,
     type: 3}
   _localizedCardName:
@@ -24,16 +25,15 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   _effectCreators:
-  - rid: 3847364467521224707
+  - rid: 8523893798696386564
   references:
     version: 2
     RefIds:
-    - rid: 3847364467521224707
-      type: {class: GetMarsLithiumEffectCreator, ns: TM.Building.Effect.Creator, asm: AssemblyTheMars}
+    - rid: 8523893798696386564
+      type: {class: TMBuildingGetResourceEffectCreator, ns: TM.Building.Effect.Creator,
+        asm: AssemblyTheMars}
       data:
-        <LevelOneRepeatSeconds>k__BackingField: 10
-        <LevelOneMarsLithium>k__BackingField: 1
-        <LevelTwoRepeatSeconds>k__BackingField: 7
-        <LevelTwoMarsLithium>k__BackingField: 3
-        <LevelThreeRepeatSeconds>k__BackingField: 5
-        <LevelThreeMarsLithium>k__BackingField: 5
+        <RepeatSeconds>k__BackingField: 10
+        _resources:
+        - <ResourceKind>k__BackingField: 5
+          <Resource>k__BackingField: 0

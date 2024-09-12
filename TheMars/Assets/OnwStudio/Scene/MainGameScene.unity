@@ -6382,6 +6382,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gridManager: {fileID: 315550189}
+  _buildings: []
+  _onAddedBuilding:
+    m_PersistentCalls:
+      m_Calls: []
+  _onRemovedBuilding:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &316005522
 GameObject:
   m_ObjectHideFlags: 0
@@ -29620,7 +29627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -685.7893, y: 47.535618}
+  m_AnchoredPosition: {x: -685.7898, y: 47.535618}
   m_SizeDelta: {x: 0, y: 95.07}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2064802127

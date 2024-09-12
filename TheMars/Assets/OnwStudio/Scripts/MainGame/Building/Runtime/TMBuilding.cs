@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Onw.Extensions;
 using Onw.Attribute;
@@ -18,15 +19,16 @@ namespace TM.Building
         
         [Header("Building Data")]
         [SerializeField, ReadOnly] private TMBuildingData _buildingData;
-
-        [SerializeField, ReadOnly] private List<ITMBuildingEffect> _buildingEffects;
+        [SerializeField, ReadOnly] private List<ITMBuildingEffect> _buildingEffects = new();
         
         public void Initialize(TMBuildingData buildingData)
         {
             if (_buildingData) return;
 
             _buildingData = buildingData;
-            _buildingEffects = _buildingData.BuildingEffects;
+            _buildingEffects = _buildingData
+                .CreateBuildingEffects()
+                .ToList();
         }
 
         public void BatchOnTile()
@@ -37,26 +39,14 @@ namespace TM.Building
 
         public void ApplyBuildingEffect()
         {
-            foreach (ITMBuildingEffect buildingEffect in _buildingEffects)
-            {
-                switch (BuildingLevel)
-                {
-                    case 1:
-                        buildingEffect.ApplyEffectLevelOne(this);
-                        break;
-                    case 2:
-                        buildingEffect.ApplyEffectLevelTwo(this);
-                        break;
-                    case 3:
-                        buildingEffect.ApplyEffectLevelThree(this);
-                        break;
-                }
-            }
+            _buildingEffects
+                .ForEach(buildingEffect => buildingEffect.ApplyEffect(this));
         }
         
         public void DisableBuilding()
         {
-            _buildingData.BuildingEffects.ForEach(effect => effect.DisableEffect(this));
+            _buildingEffects
+                .ForEach(effect => effect.DisableEffect(this));
         }
     }
 }

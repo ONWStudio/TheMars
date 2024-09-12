@@ -19,7 +19,7 @@ namespace TM
                 _onChangedLevel.Invoke(_level);
             }
         }
-        
+
         public int MarsLithium
         {
             get => _marsLithium;
@@ -29,7 +29,7 @@ namespace TM
                 _onChangedMarsLithium.Invoke(_marsLithium);
             }
         }
-        
+
         public int Credit
         {
             get => _credit;
@@ -102,55 +102,55 @@ namespace TM
 
         public event UnityAction<int> OnChangedLevel
         {
-            add => _onChangedLevel.AddListener(value); 
+            add => _onChangedLevel.AddListener(value);
             remove => _onChangedLevel.RemoveListener(value);
         }
-        
+
         public event UnityAction<int> OnChangedMarsLithium
         {
             add => _onChangedMarsLithium.AddListener(value);
             remove => _onChangedMarsLithium.RemoveListener(value);
         }
-        
+
         public event UnityAction<int> OnChangedCredit
         {
             add => _onChangedCredit.AddListener(value);
             remove => _onChangedCredit.RemoveListener(value);
         }
-        
+
         public event UnityAction<int> OnChangedPopulation
         {
-            add => _onChangedPopulation.AddListener(value); 
+            add => _onChangedPopulation.AddListener(value);
             remove => _onChangedPopulation.RemoveListener(value);
         }
-        
+
         public event UnityAction<int> OnChangedTotalPopulation
         {
-            add => _onChangedTotalPopulation.AddListener(value); 
+            add => _onChangedTotalPopulation.AddListener(value);
             remove => _onChangedTotalPopulation.RemoveListener(value);
         }
-        
+
         public event UnityAction<int> OnChangedSteel
         {
-            add => _onChangedSteel.AddListener(value); 
+            add => _onChangedSteel.AddListener(value);
             remove => _onChangedSteel.RemoveListener(value);
         }
-        
+
         public event UnityAction<int> OnChangedPlants
         {
-            add => _onChangedPlants.AddListener(value); 
+            add => _onChangedPlants.AddListener(value);
             remove => _onChangedPlants.RemoveListener(value);
         }
-        
+
         public event UnityAction<int> OnChangedClay
         {
-            add => _onChangedClay.AddListener(value); 
+            add => _onChangedClay.AddListener(value);
             remove => _onChangedClay.RemoveListener(value);
         }
-        
+
         public event UnityAction<int> OnChangedElectricity
         {
-            add => _onChangedElectricity.AddListener(value); 
+            add => _onChangedElectricity.AddListener(value);
             remove => _onChangedElectricity.RemoveListener(value);
         }
 
@@ -179,6 +179,34 @@ namespace TM
             if (ServiceLocator<PlayerManager>.RegisterService(this)) return;
 
             ServiceLocator<PlayerManager>.ChangeService(this);
+        }
+
+        public void AddResource(TMResourceKind kind, int resource)
+        {
+            switch (kind)
+            {
+                case TMResourceKind.MARS_LITHIUM:
+                    MarsLithium += resource;
+                    break;
+                case TMResourceKind.CREDIT:
+                    Credit += resource;
+                    break;
+                case TMResourceKind.STEEL:
+                    Steel += resource;
+                    break;
+                case TMResourceKind.PLANTS:
+                    Plants += resource;
+                    break;
+                case TMResourceKind.CLAY:
+                    Clay += resource;
+                    break;
+                case TMResourceKind.ELECTRICITY:
+                    Electricity += resource;
+                    break;
+                case TMResourceKind.POPULATION:
+                    Population += resource;
+                    break;
+            }
         }
 
         private void Start()

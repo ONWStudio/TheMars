@@ -67,6 +67,8 @@ namespace TM.Card.Effect
                 _building = Object
                     .Instantiate(BuildingData.BuildingPrefab.gameObject)
                     .GetComponent<TMBuilding>();
+                
+                _building.Initialize(BuildingData);
             }
 
             if (ServiceLocator<TMGridManager>.TryGetService(out TMGridManager gridManager))
@@ -163,8 +165,8 @@ namespace TM.Card.Effect
                 _currentTile.Properties.All(property => property is not "DefaultBuilding" and not "TileOff"))
             {
                 _building.transform.SetParent(_currentTile.TileRenderer.transform);
-                _building.Initialize(BuildingData);
                 _building.BatchOnTile();
+                gridManager.AddBuilding(_building);
                 
                 // .. 카드가 코스트를 지불하지 않았고 코스트를 지불 가능한 상태라면?
                 if (!_cardModel.WasCostPaid && _cardModel.CanPayCost)
@@ -251,6 +253,7 @@ namespace TM.Card.Effect
 
             gridManager.OnHighlightTile -= setTileHighlight;
             gridManager.OnExitTile -= setTileUnHighlight;
+            gridManager.RemoveBuilding(_building);
             OnwUnityHelper.DestroyObjectByComponent(ref _building);
         }
     }

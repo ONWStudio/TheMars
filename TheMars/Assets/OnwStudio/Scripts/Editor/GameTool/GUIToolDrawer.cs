@@ -31,7 +31,12 @@ namespace TMGuiTool
                 .Select(drawer => drawer.GetType().Name)
                 .ToArray();
 
-            (_guiDrawers[_selectedTab] as IDataHandler)?.LoadDataFromLocal();
+            // ReSharper disable once SuspiciousTypeConversion.Global
+            if (_guiDrawers[_selectedTab] is IDataHandler dataHandler)
+            {
+                dataHandler.LoadDataFromLocal();
+            }
+            
             _guiDrawers[_selectedTab].OnEnable();
         }
 
@@ -47,6 +52,7 @@ namespace TMGuiTool
                 _guiDrawers[_selectedTab].OnEnable();
             }
 
+            // ReSharper disable once SuspiciousTypeConversion.Global
             if (_guiDrawers[_selectedTab] is IDataHandler loader &&
                 GUILayout.Button("데이터 저장 (로컬)"))
             {
@@ -64,6 +70,7 @@ namespace TMGuiTool
                     pager.Page);
 
                 System.Action pagingCallback = null;
+                // ReSharper disable once SuspiciousTypeConversion.Global
                 IGUIPagingHandler<IPagable> handler = pager as IGUIPagingHandler<IPagable>;
 
                 if (GUILayout.Button("<<"))
@@ -97,6 +104,7 @@ namespace TMGuiTool
 
                 pagingCallback?.Invoke();
 
+                // ReSharper disable once SuspiciousTypeConversion.Global
                 if (pager is IMovedPage<IPagable> pageMoveHandler && pager.PrevPage != pager.Page)
                 {
                     pageMoveHandler.OnMove();

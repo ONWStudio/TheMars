@@ -8,6 +8,7 @@ using Onw.UI.Components;
 using Onw.ServiceLocator;
 using Onw.Components.Movement;
 using TM.Card.Effect;
+using UnityEngine.Serialization;
 
 namespace TM.Card.Runtime
 {
@@ -97,6 +98,7 @@ namespace TM.Card.Runtime
             add => _onDragEndCard.AddListener(value);
             remove => _onDragEndCard.RemoveListener(value);
         }
+        
         /// <summary>
         /// .. 카드가 효과를 발동할때 트리거 됩니다
         /// </summary>
@@ -105,6 +107,12 @@ namespace TM.Card.Runtime
             add => _onEffectEvent.AddListener(value);
             remove => _onEffectEvent.RemoveListener(value);
         }
+        
+        public event UnityAction<TMCardModel> OnPayCost
+        {
+            add => _onPayCost.AddListener(value);
+            remove => _onPayCost.RemoveListener(value);
+        }
 
         /// <summary>
         /// .. 카드의 코스트를 지불 가능한 상태를 반환합니다
@@ -112,16 +120,15 @@ namespace TM.Card.Runtime
         public bool CanPayCost => CardData
             .CardCosts
             .All(cardCost => cardCost.Cost <= getResourceFromPlayerByCost(cardCost.ResourceKind));
-
+        
         [SerializeField] private UnityEvent<TMCardModel> _onDragBeginCard = new();
         [SerializeField] private UnityEvent<TMCardModel> _onDragEndCard = new();
         [SerializeField] private UnityEvent<TMCardModel> _onEffectEvent = new();
+        [SerializeField] private UnityEvent<TMCardModel> _onPayCost = new();
 
         [SerializeField, ReadOnly] private bool _isInit = false;
 
         private bool? _keepIsHide = null;
-
-        private UnityEvent _unityEvent = new();
 
         private void Awake()
         {
@@ -240,6 +247,8 @@ namespace TM.Card.Runtime
                         break;
                 }
             }
+            
+            _onPayCost.Invoke(this);
         }
 
         /// <summary>

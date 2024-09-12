@@ -26,12 +26,16 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   _cardEffectCreator:
-    rid: -2
+    rid: 8523893798696386562
   _cardCosts:
   - <ResourceKind>k__BackingField: 0
     <Cost>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 8523893798696386562
+      type: {class: TMCardGetResourceEffectCreator, ns: TM.Card.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        _resources:
+        - <ResourceKind>k__BackingField: 0
+          <Resource>k__BackingField: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Onw.Attribute;
+using Onw.Extensions;
 using Onw.Helper;
 using Onw.ServiceLocator;
 using TM.Card.Runtime;
@@ -43,6 +44,16 @@ namespace TM.Card.Effect
 
         public IReadOnlyDictionary<TMResourceKind, TMResourceDataForRuntime> Resources => _resources;
 
+        public event UnityAction<string> OnNotifyEvent
+        {
+            add => _onNotifyEvent.AddListener(value);
+            remove => _onNotifyEvent.RemoveListener(value);
+        }
+
+        private Dictionary<TMResourceKind, TMResourceDataForRuntime> _resources = new();
+        
+        [SerializeField, ReadOnly] private UnityEvent<string> _onNotifyEvent = new();
+
         public void AddResource(TMResourceKind resourceKind, int additionalAmount)
         {
             if (!_resources.TryGetValue(resourceKind, out TMResourceDataForRuntime runtimeResource))
@@ -54,22 +65,10 @@ namespace TM.Card.Effect
             runtimeResource.AdditionalResources.Add(additionalAmount);            
             _onNotifyEvent.Invoke(Description);
         }
-
-        public event UnityAction<string> OnNotifyEvent
+        
+        public void Initialize(TMCardGetResourceEffectCreator effectCreator)
         {
-            add => _onNotifyEvent.AddListener(value);
-            remove => _onNotifyEvent.RemoveListener(value);
-        }
-
-        [SerializeField, DisplayAs("획득 재화"), Tooltip("획득 재화"), ReadOnly]
-        private Dictionary<TMResourceKind, TMResourceDataForRuntime> _resources = new();
-
-        [SerializeField, ReadOnly] private UnityEvent<string> _onNotifyEvent = new();
-        [SerializeField, ReadOnly] private int _additionalAmount = 0;
-
-        public void Initialize(TMCardGetResourceEffectCreator cardGetResourceEffectCreator)
-        {
-            _resources = cardGetResourceEffectCreator
+            _resources = effectCreator
                 .Resources
                 .ToDictionary(
                     resource => resource.ResourceKind,
@@ -80,35 +79,9 @@ namespace TM.Card.Effect
         {
             trigger.OnEffectEvent += _ =>
             {
-                if (!ServiceLocator<PlayerManager>.TryGetService(out PlayerManager player)) return;
-
-                foreach (TMResourceDataForRuntime runtimeResource in _resources.Values)
-                {
-                    switch (runtimeResource.ResourceKind)
-                    {
-                        case TMResourceKind.MARS_LITHIUM:
-                            player.MarsLithium += runtimeResource.FinalResource;
-                            break;
-                        case TMResourceKind.CREDIT:
-                            player.Credit += runtimeResource.FinalResource;
-                            break;
-                        case TMResourceKind.STEEL:
-                            player.Steel += runtimeResource.FinalResource;
-                            break;
-                        case TMResourceKind.PLANTS:
-                            player.Plants += runtimeResource.FinalResource;
-                            break;
-                        case TMResourceKind.CLAY:
-                            player.Clay += runtimeResource.FinalResource;
-                            break;
-                        case TMResourceKind.ELECTRICITY:
-                            player.Electricity += runtimeResource.FinalResource;
-                            break;
-                        case TMResourceKind.POPULATION:
-                            player.Population += runtimeResource.FinalResource;
-                            break;
-                    }
-                }
+                ServiceLocator<PlayerManager>
+                    .InvokeService(player => _resources.Values.ForEach(resource 
+                        => player.AddResource(resource.ResourceKind, resource.FinalResource)));
             };
         }
 

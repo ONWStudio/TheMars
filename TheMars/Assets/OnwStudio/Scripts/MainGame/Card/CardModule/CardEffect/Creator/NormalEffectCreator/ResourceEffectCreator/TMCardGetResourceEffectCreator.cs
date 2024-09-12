@@ -8,7 +8,7 @@ namespace TM.Card.Effect.Creator
     using static ITMCardEffectCreator;
 
     [SerializeReferenceDropdownName("자원 획득")]
-    public sealed class TMCardGetResourceEffectCreator : IResourceCardEffectCreator
+    public sealed class TMCardGetResourceEffectCreator : ITMCardGetResourceEffectCreator
     {
         public IReadOnlyList<TMResourceData> Resources => _resources;
 
@@ -20,6 +20,5 @@ namespace TM.Card.Effect.Creator
         {
             return CardEffectGenerator.CreateEffect<TMCardGetResourceEffect, TMCardGetResourceEffectCreator>(this);
         }
-
     }
 }

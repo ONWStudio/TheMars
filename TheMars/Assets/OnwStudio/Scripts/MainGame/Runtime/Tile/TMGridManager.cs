@@ -7,6 +7,7 @@ using Onw.Attribute;
 using Onw.Event;
 using Onw.GridTile;
 using Onw.ServiceLocator;
+using TM.Building;
 using UnityEngine.Events;
 
 namespace TM.Grid
@@ -41,9 +42,37 @@ namespace TM.Grid
             add => _gridManager.OnExitTile += value;
             remove => _gridManager.OnExitTile -= value;
         }
+
+        public event UnityAction<TMBuilding> OnAddedBuilding
+        {
+            add => _onAddedBuilding.AddListener(value);
+            remove => _onAddedBuilding.RemoveListener(value);
+        }
+        
+        public event UnityAction<TMBuilding> OnRemovedBuilding
+        {
+            add => _onRemovedBuilding.AddListener(value);
+            remove => _onRemovedBuilding.RemoveListener(value);
+        }
         
         [SerializeField, InitializeRequireComponent] private GridManager _gridManager;
+        [SerializeField, ReadOnly] private List<TMBuilding> _buildings = new(); 
+        
+        [SerializeField, ReadOnly] private UnityEvent<TMBuilding> _onAddedBuilding;
+        [SerializeField, ReadOnly] private UnityEvent<TMBuilding> _onRemovedBuilding;
 
+        public void AddBuilding(TMBuilding building)
+        {
+            _buildings.Add(building);
+            _onAddedBuilding.Invoke(building);
+        }
+
+        public void RemoveBuilding(TMBuilding building)
+        {
+            _buildings.Remove(building);
+            _onRemovedBuilding.Invoke(building);
+        }
+        
         private void Awake()
         {
             if (ServiceLocator<TMGridManager>.RegisterService(this)) return;

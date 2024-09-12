@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using Onw.Attribute;
+using TM.Class;
 using UnityEngine;
 
 namespace TM.Building.Effect.Creator
 {
-    public abstract class TMBuildingGetResourceEffectCreator : ITMBuildingEffectCreator
+    using static ITMBuildingEffectCreator;
+    
+    public sealed class TMBuildingGetResourceEffectCreator : ITMBuildingGetResourceEffectCreator
     {
-        [field: SerializeField, Min(1), DisplayAs("Level 1 반복 시간")] public float LevelOneRepeatSeconds { get; private set; }
-        [field: SerializeField, Min(1), DisplayAs(("Level 1 재화"))] public int LevelOneResource { get; private set; }
+        public IReadOnlyList<TMResourceData> Resources => _resources;
+
+        [field: SerializeField] public float RepeatSeconds { get; private set; } = 0f;
         
-        [field: SerializeField, Min(1), DisplayAs("Level 2 반복 시간")] public float LevelTwoRepeatSeconds { get; private set; }
-        [field: SerializeField, Min(1), DisplayAs(("Level 2 재화"))] public int LevelTwoResource { get; private set; }     
+        [SerializeField, DisplayAs("자원 획득")] private List<TMResourceData> _resources = new();
         
-        [field: SerializeField, Min(1), DisplayAs("Level 3 반복 시간")] public float LevelThreeRepeatSeconds { get; private set; }
-        [field: SerializeField, Min(1), DisplayAs(("Level 3 재화"))] public int LevelThreeResource { get; private set; }
+        public ITMBuildingEffect CreateEffect()
+        {
+            return BuildingEffectGenerator.CreateEffect<TMBuildingGetResourceEffect, TMBuildingGetResourceEffectCreator>(this);
+        }
  
-        public abstract ITMBuildingEffect CreateEffect();
     }
 }
