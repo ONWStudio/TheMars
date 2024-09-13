@@ -10,6 +10,9 @@ namespace TM.Building
 {
     public sealed class TMBuilding : MonoBehaviour
     {
+        [field: Header("Building Data")]
+        [field: SerializeField, ReadOnly] public TMBuildingData BuildingData { get; private set; }
+        
         [field: Header("Components")]
         [field: SerializeField, SelectableSerializeField] public Renderer MeshRenderer { get; private set; }
         
@@ -17,16 +20,14 @@ namespace TM.Building
         [field: SerializeField, ReadOnly] public int BuildingLevel { get; private set; } = 1;
         [field: SerializeField, ReadOnly] public bool OnTile { get; private set; } = false;
         
-        [Header("Building Data")]
-        [SerializeField, ReadOnly] private TMBuildingData _buildingData;
         [SerializeField, ReadOnly] private List<ITMBuildingEffect> _buildingEffects = new();
         
         public void Initialize(TMBuildingData buildingData)
         {
-            if (_buildingData) return;
+            if (BuildingData) return;
 
-            _buildingData = buildingData;
-            _buildingEffects = _buildingData
+            BuildingData = buildingData;
+            _buildingEffects = BuildingData
                 .CreateBuildingEffects()
                 .ToList();
         }

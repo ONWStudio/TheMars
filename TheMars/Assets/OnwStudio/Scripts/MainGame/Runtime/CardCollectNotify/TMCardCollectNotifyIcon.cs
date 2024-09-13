@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Onw.Attribute;
-using Onw.Components.Movement;
 using Onw.ServiceLocator;
+using Onw.Manager.ObjectPool;
+using Onw.Components.Movement;
 using TM.Card.UI;
+using UnityEngine.Pool;
 
 namespace TM
 {
@@ -21,11 +23,15 @@ namespace TM
         {
             _smoothMover.IsLocal = true;
             
-            _collectCardButton.onClick.AddListener(() 
-                => ServiceLocator<TMCardCollectUIController>
-                    .InvokeService(collectUIController => collectUIController.ActiveUI()));
+            _collectCardButton.onClick.AddListener(() =>
+            {
+                ServiceLocator<TMCardCollectUIController>
+                    .InvokeService(collectUIController => collectUIController.ActiveUI());
+                
+                GenericObjectPool<TMCardCollectNotifyIcon>.Return(this);
+            });
         }
-
+        
         public void SetTargetLocalPosition(Vector3 targetPosition)
         {
             _smoothMover.TargetPosition = targetPosition;

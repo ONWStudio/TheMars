@@ -1,15 +1,13 @@
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using Onw.Attribute;
-using Onw.Event;
-using Onw.Interface;
 using Onw.Localization;
 using TM.Building.Effect;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Serialization;
 using TM.Building.Effect.Creator;
+using TM.Synergy;
 
 namespace TM.Building
 {
@@ -23,6 +21,8 @@ namespace TM.Building
     
     public sealed class TMBuildingData : ScriptableObject
     {
+        public IReadOnlyList<TMSynergyData> Synergies => _synergies;
+        
         public string CardName => _localizedCardName.TryGetLocalizedString(out string buildingName) ? buildingName : "";
         
         [field: SerializeField] public TMCorporation TMCorporation { get; private set; }
@@ -34,6 +34,9 @@ namespace TM.Building
         [FormerlySerializedAs("effectCreators")]
         [SerializeReference, DisplayAs("건물 효과"), Tooltip("건물 효과 리스트"), SerializeReferenceDropdown]
         private List<ITMBuildingEffectCreator> _effectCreators = new();
+
+        [SerializeField, DisplayAs("건물 시너지")]
+        private List<TMSynergyData> _synergies = new();
 
         public IEnumerable<ITMBuildingEffect> CreateBuildingEffects()
         {

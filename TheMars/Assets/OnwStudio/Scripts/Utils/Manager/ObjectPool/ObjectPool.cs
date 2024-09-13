@@ -25,6 +25,7 @@ namespace Onw.Manager.ObjectPool
                 genericComponent.transform.SetParent(null, false);
                 genericComponent.gameObject.SetActive(true);
                 
+                // ReSharper disable once SuspiciousTypeConversion.Global
                 if (genericComponent is IPooledObject pooledObject)
                 {
                     pooledObject.OnPopFromPool();

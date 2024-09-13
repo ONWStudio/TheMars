@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Onw.Attribute;
-using Onw.Interface;
 using Onw.ServiceLocator;
 using TM.Grid;
 using TM.Building;
@@ -12,17 +11,21 @@ namespace TM.Synergy
 {
     public sealed class SynergyManager : MonoBehaviour
     {
-        public event UnityAction<IReadOnlyList<TMSynergy>> OnUpdateSynergies
+        public readonly struct SynergyArgs
+        {
+            
+        }
+        
+        public event UnityAction<IReadOnlyCollection<TMSynergyData>> OnUpdateSynergies
         {
             add => _onUpdateSynergies.AddListener(value);
             remove => _onUpdateSynergies.RemoveListener(value);
         }
 
-        public IReadOnlyDictionary<TMCorporation, TMSynergy> Synergies => _synergies;
-        
-        private readonly Dictionary<TMCorporation, TMSynergy> _synergies = new();
+        private IReadOnlyCollection<TMSynergyData> Synergies => _synergies;
+        private readonly HashSet<TMSynergyData> _synergies = new();
 
-        [SerializeField, ReadOnly] private UnityEvent<IReadOnlyList<TMSynergy>> _onUpdateSynergies = new();
+        [SerializeField, ReadOnly] private UnityEvent<IReadOnlyCollection<TMSynergyData>> _onUpdateSynergies = new();
         
         private void Awake()
         {
@@ -50,12 +53,36 @@ namespace TM.Synergy
 
         private void onAddedBuilding(TMBuilding building)
         {
-            _onUpdateSynergies.Invoke();
+            foreach (TMSynergyData synergy in building.BuildingData.Synergies)
+            {
+                if (!_synergies.Contains(synergy))
+                {
+                    synergy.ResetCount();
+                    _synergies.Add(synergy);
+                }
+                
+                synergy.RuntimeBuildingCount++;
+                synergy.ApplySynergy();
+            }
+            
+            _onUpdateSynergies.Invoke(_synergies);
         }
 
         private void onRemovedBuilding(TMBuilding building)
         {
-            
+            foreach (TMSynergyData synergy in building.BuildingData.Synergies)
+            {
+                synergy.RuntimeBuildingCount--;
+
+                if (synergy.RuntimeBuildingCount <= 0)
+                {
+                    synergy.ResetCount();
+                    _synergies.Remove(synergy);
+                }
+                
+                synergy.ApplySynergy();
+                _onUpdateSynergies.Invoke(_synergies);
+            }
         }
     }
 }

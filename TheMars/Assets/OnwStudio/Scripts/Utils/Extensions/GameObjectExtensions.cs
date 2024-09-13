@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,42 @@ namespace Onw.Extensions
         public static void SetPositionZ(this GameObject gameObject, float z)
         {
             gameObject.transform.SetPositionZ(z);
+        }
+
+        public static GameObject[] GetChildGameObjectsAll(this GameObject gameObject)
+        {
+            List<GameObject> result = new List<GameObject>();
+
+            // Stack을 사용해 반복적으로 자식 오브젝트를 탐색
+            Stack<Transform> stack = new Stack<Transform>();
+            stack.Push(gameObject.transform);  // 부모 오브젝트부터 시작
+
+            while (stack.Count > 0)
+            {
+                Transform current = stack.Pop();
+                result.Add(current.gameObject);
+
+                // 모든 자식 오브젝트를 스택에 추가
+                foreach (Transform child in current)
+                {
+                    stack.Push(child);
+                }
+            }
+
+            return result.ToArray();
+        }
+
+        public static GameObject[] GetChildGameObjects(this GameObject gameObject)
+        {
+            GameObject[] gameObjects = new GameObject[gameObject.transform.childCount + 1];
+            gameObjects[0] = gameObject;
+            
+            for (int i = 0; i < gameObject.transform.childCount; i++)
+            {
+                gameObjects[i + 1] = gameObject.transform.GetChild(i).gameObject;
+            }
+
+            return gameObjects;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Onw.Extensions
 
         public static void ForEach<T>(this IList<T> source, Action<T> action)
         {
+            // ReSharper disable once ForCanBeConvertedToForeach
             for (int i = 0; i < source.Count; i++) action.Invoke(source[i]);
         }
 

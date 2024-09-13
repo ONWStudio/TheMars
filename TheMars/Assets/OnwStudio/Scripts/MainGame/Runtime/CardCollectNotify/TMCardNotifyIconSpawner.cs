@@ -1,6 +1,7 @@
+using Onw.UI;
 using Onw.Coroutine;
 using Onw.ServiceLocator;
-using Onw.UI;
+using Onw.Manager.ObjectPool;
 using TM.Manager;
 using UnityEngine;
 
@@ -31,8 +32,11 @@ namespace TM.Card.Runtime
                     () => ServiceLocator<TMCardManager>.TryGetService(out cardManager),
                     () =>
                     {
-                        TMCardCollectNotifyIcon iconInstance = Instantiate(_iconPrefab.gameObject)
-                            .GetComponent<TMCardCollectNotifyIcon>();
+                        if (!GenericObjectPool<TMCardCollectNotifyIcon>.TryPop(out TMCardCollectNotifyIcon iconInstance))
+                        {
+                            iconInstance = Instantiate(_iconPrefab.gameObject)
+                                .GetComponent<TMCardCollectNotifyIcon>();
+                        }
                         
                         iconInstance.transform.SetParent(cardManager.UIComponents.CardCollectIconScrollView.content, false);
                         RectTransform content = cardManager
