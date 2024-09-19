@@ -2009,7 +2009,10 @@ MonoBehaviour:
     - {fileID: 11400000, guid: d28af664dcafa4c1d869167ca383ed12, type: 2}
     _templatePrefab: {fileID: 38075375519361866, guid: d7803182f172a42c699b32751eb7fade,
       type: 3}
-    _onCreateCard:
+    _onPreCreateCard:
+      m_PersistentCalls:
+        m_Calls: []
+    _onPostCreateCard:
       m_PersistentCalls:
         m_Calls: []
   <HandTransform>k__BackingField: {fileID: 880654030}
@@ -3703,7 +3706,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1409365564}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.9999978
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10033,6 +10036,9 @@ MonoBehaviour:
   _repeatTime: 10
   _simulator: {fileID: 0}
   _cardManager: {fileID: 0}
+  _onCreateIcon:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &600847660
 Transform:
   m_ObjectHideFlags: 0
@@ -25223,6 +25229,7 @@ MonoBehaviour:
   _synergyManager: {fileID: 678815845}
   _simulator: {fileID: 1474399652}
   _player: {fileID: 146915403}
+  _iconSpawner: {fileID: 600847659}
 --- !u!4 &1671499845
 Transform:
   m_ObjectHideFlags: 0
@@ -29788,7 +29795,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -685.7887, y: 47.535618}
+  m_AnchoredPosition: {x: -685.7892, y: 47.535618}
   m_SizeDelta: {x: 0, y: 95.07}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2064802127
