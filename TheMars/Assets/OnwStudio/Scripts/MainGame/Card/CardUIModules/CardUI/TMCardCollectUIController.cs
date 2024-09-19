@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Onw.Attribute;
-using Onw.ServiceLocator;
 using TM.Card.Runtime;
+using VContainer;
 
 namespace TM.Card.UI
 {
@@ -16,22 +16,16 @@ namespace TM.Card.UI
         [SerializeField, InitializeRequireComponent] private Canvas _canvas;
         [SerializeField, SelectableSerializeField] private RectTransform _cardSelectField;
         [SerializeField, SelectableSerializeField] private Button _selectButton;
-
+        [SerializeField, Inject] private TMCardManager _cardManager;
+        
         private readonly List<KeyValuePair<TMCardModel, UnityAction<PointerEventData>>> _cardCallbacks = new();
         private TMCardModel _selectCard = null;
 
-        private void Awake()
-        {
-            if (ServiceLocator<TMCardCollectUIController>.RegisterService(this)) return;
-
-            ServiceLocator<TMCardCollectUIController>.ChangeService(this);
-        }
-        
         private void Start()
         {
             _selectButton.onClick.AddListener(() =>
             {
-                if (!_selectCard || !ServiceLocator<TMCardManager>.TryGetService(out TMCardManager cardManager)) return;
+                if (!_selectCard) return;
 
                 foreach (KeyValuePair<TMCardModel, UnityAction<PointerEventData>> callbackPair in _cardCallbacks)
                 {
@@ -49,7 +43,7 @@ namespace TM.Card.UI
                 _selectCard.CardViewMover.enabled = true;
                 _selectCard.transform.localScale = new(1f, 1f, 1f);
                 _selectCard.Initialize();
-                cardManager.AddCard(_selectCard);
+                _cardManager.AddCard(_selectCard);
                 _selectCard = null;
                 _canvas.enabled = false;
             });
@@ -57,11 +51,9 @@ namespace TM.Card.UI
 
         public void ActiveUI()
         {
-            if (!ServiceLocator<TMCardManager>.TryGetService(out TMCardManager service)) return;
-            
             _canvas.enabled = true;
             
-            foreach (TMCardModel card in service.CardCreator.CreateCards(3, false))
+            foreach (TMCardModel card in _cardManager.CardCreator.CreateCards(3, false))
             {
                 card.transform.SetParent(_cardSelectField, false);
                 card.CardViewMover.enabled = false;

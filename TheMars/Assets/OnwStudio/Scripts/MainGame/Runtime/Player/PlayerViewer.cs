@@ -1,12 +1,8 @@
 using System.Collections;
 using Onw.Attribute;
-using Onw.Extensions;
-using Onw.Helper;
-using Onw.ServiceLocator;
 using UnityEngine;
-using UnityEngine.Serialization;
 using TMPro;
-using UniRx;
+using VContainer;
 
 namespace TM.UI
 {
@@ -21,21 +17,19 @@ namespace TM.UI
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _clayText;
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _electricityText;
 
-        private IEnumerator Start()
+        [SerializeField, ReadOnly, Inject] private PlayerManager _playerManager;
+        
+        private void Start()
         {
-            PlayerManager player = null;
-            
-            yield return new WaitUntil(() => ServiceLocator<PlayerManager>.TryGetService(out player));
-
-            player.OnChangedLevel += level => _levelText.text = $"Lv. {level}";
-            player.OnChangedMarsLithium += marsLithium => _marsLithiumText.text = marsLithium.ToString();
-            player.OnChangedCredit += credit => _creditText.text = credit.ToString();
-            player.OnChangedPopulation += population => _populationText.text = $"{population} / {player.TotalPopulation}";
-            player.OnChangedTotalPopulation += totalPopulation => _populationText.text = $"{player.Population} / {totalPopulation}";
-            player.OnChangedSteel += steel => _steelText.text = steel.ToString();
-            player.OnChangedPlants += plants => _plantsText.text = plants.ToString();
-            player.OnChangedClay += clay => _clayText.text = clay.ToString();
-            player.OnChangedElectricity += electricity => _electricityText.text = electricity.ToString();
+            _playerManager.OnChangedLevel += level => _levelText.text = $"Lv. {level}";
+            _playerManager.OnChangedMarsLithium += marsLithium => _marsLithiumText.text = marsLithium.ToString();
+            _playerManager.OnChangedCredit += credit => _creditText.text = credit.ToString();
+            _playerManager.OnChangedPopulation += population => _populationText.text = $"{population} / {_playerManager.TotalPopulation}";
+            _playerManager.OnChangedTotalPopulation += totalPopulation => _populationText.text = $"{_playerManager.Population} / {totalPopulation}";
+            _playerManager.OnChangedSteel += steel => _steelText.text = steel.ToString();
+            _playerManager.OnChangedPlants += plants => _plantsText.text = plants.ToString();
+            _playerManager.OnChangedClay += clay => _clayText.text = clay.ToString();
+            _playerManager.OnChangedElectricity += electricity => _electricityText.text = electricity.ToString();
         }
     }
 }

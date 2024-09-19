@@ -3,7 +3,6 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using Onw.Attribute;
 using Onw.Helper;
-using Onw.ServiceLocator;
 using UnityEngine.Events;
 
 namespace TM
@@ -173,13 +172,6 @@ namespace TM
         [SerializeField, ReadOnly] private UnityEvent<int> _onChangedPlants = new();
         [SerializeField, ReadOnly] private UnityEvent<int> _onChangedClay = new();
         [SerializeField, ReadOnly] private UnityEvent<int> _onChangedElectricity = new();
-
-        private void Awake()
-        {
-            if (ServiceLocator<PlayerManager>.RegisterService(this)) return;
-
-            ServiceLocator<PlayerManager>.ChangeService(this);
-        }
 
         public void AddResource(TMResourceKind kind, int resource)
         {

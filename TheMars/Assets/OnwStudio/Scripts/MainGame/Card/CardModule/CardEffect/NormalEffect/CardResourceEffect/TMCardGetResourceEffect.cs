@@ -5,11 +5,10 @@ using UnityEngine.Events;
 using Onw.Attribute;
 using Onw.Extensions;
 using Onw.Helper;
-using Onw.ServiceLocator;
 using TM.Card.Runtime;
 using TM.Card.Effect.Creator;
 using TM.Class;
-using TMPro;
+using VContainer;
 
 namespace TM.Card.Effect
 {
@@ -24,11 +23,11 @@ namespace TM.Card.Effect
                     .Join("\n", _resources
                         .Values
                         .Select(selector));
-                
+
                 string selector(TMResourceDataForRuntime resource)
                 {
                     string description = $"{RichTextFormatter.SpriteIcon((int)resource.ResourceKind)}{(resource.FinalResource < 0 ? resource.FinalResource.ToString() : $"+{resource.FinalResource}")}";
-                    
+
                     if (resource.AdditionalResource != 0)
                     {
                         description +=
@@ -36,13 +35,15 @@ namespace TM.Card.Effect
                                 RichTextFormatter.Colorize($"+{resource.AdditionalResource}", Color.green) :
                                 RichTextFormatter.Colorize(resource.AdditionalResource.ToString(), Color.red);
                     }
-                    
+
                     return description;
                 }
             }
         }
 
         public IReadOnlyDictionary<TMResourceKind, TMResourceDataForRuntime> Resources => _resources;
+
+        [Inject] private PlayerManager _player;
 
         public event UnityAction<string> OnNotifyEvent
         {
@@ -51,7 +52,7 @@ namespace TM.Card.Effect
         }
 
         private Dictionary<TMResourceKind, TMResourceDataForRuntime> _resources = new();
-        
+
         [SerializeField, ReadOnly] private UnityEvent<string> _onNotifyEvent = new();
 
         public void AddResource(TMResourceKind resourceKind, int additionalAmount)
@@ -62,10 +63,10 @@ namespace TM.Card.Effect
                 return;
             }
 
-            runtimeResource.AdditionalResources.Add(additionalAmount);            
+            runtimeResource.AdditionalResources.Add(additionalAmount);
             _onNotifyEvent.Invoke(Description);
         }
-        
+
         public void Initialize(TMCardGetResourceEffectCreator effectCreator)
         {
             _resources = effectCreator
@@ -78,11 +79,8 @@ namespace TM.Card.Effect
         public void ApplyEffect(TMCardModel cardModel, ITMCardEffectTrigger trigger)
         {
             trigger.OnEffectEvent += _ =>
-            {
-                ServiceLocator<PlayerManager>
-                    .InvokeService(player => _resources.Values.ForEach(resource 
-                        => player.AddResource(resource.ResourceKind, resource.FinalResource)));
-            };
+                _resources.Values.ForEach(resource
+                    => _player.AddResource(resource.ResourceKind, resource.FinalResource));
         }
 
         public void Dispose() { }

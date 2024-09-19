@@ -1,15 +1,15 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using Onw.Attribute;
 using Onw.Coroutine;
 using Onw.Extensions;
-using Onw.ServiceLocator;
 using TM.Building.Effect.Creator;
 using TM.Class;
 using TM.Manager;
-using UnityEngine.Events;
+using VContainer;
 
 namespace TM.Building.Effect
 {
@@ -26,10 +26,11 @@ namespace TM.Building.Effect
         [field: SerializeField, ReadOnly] public float RepeatSeconds { get; set; } = 0f;
 
         [SerializeField, ReadOnly] private UnityEvent<string> _onNotifyEvent = new();
+        [SerializeField, Inject] private PlayerManager _playerManager; 
         
         private Dictionary<TMResourceKind, TMResourceDataForRuntime> _resources = new(); 
         private Coroutine _coroutine = null;
-        
+
         public void Initialize(TMBuildingGetResourceEffectCreator effectCreator)
         {
             _resources = effectCreator
@@ -78,10 +79,7 @@ namespace TM.Building.Effect
 
                     if (timeAccumulator >= RepeatSeconds)
                     {
-                        ServiceLocator<PlayerManager>
-                            .InvokeService(player => _resources.Values.ForEach(resource 
-                                => player.AddResource(resource.ResourceKind, resource.FinalResource)));
-                        
+                        _resources.Values.ForEach(resource => _playerManager.AddResource(resource.ResourceKind, resource.FinalResource));
                         timeAccumulator -= RepeatSeconds;
                     }
 

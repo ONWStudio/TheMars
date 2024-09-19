@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Onw.Attribute;
-using Onw.ServiceLocator;
 using UnityEngine.Events;
+using Onw.Attribute;
 
 namespace TM.Manager
 {
@@ -35,13 +34,6 @@ namespace TM.Manager
         private int _prevDay = 1;
         private float _intervalInSeconds;
         
-        private void Awake()
-        {
-            if (ServiceLocator<TMSimulator>.RegisterService(this)) return;
-            
-            ServiceLocator<TMSimulator>.ChangeService(this);
-        }
-
         private void Start()
         {
             _intervalInSeconds = _intervalInMinutes * 60f;

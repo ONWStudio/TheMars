@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using Onw.Attribute;
-using Onw.ServiceLocator;
 using TM.Grid;
 using TM.Building;
 using UnityEngine;
 using UnityEngine.Events;
+using VContainer;
 
 namespace TM.Synergy
 {
-    public sealed class SynergyManager : MonoBehaviour
+    public sealed class TMSynergyManager : MonoBehaviour
     {
         public readonly struct SynergyArgs
         {
@@ -24,31 +24,20 @@ namespace TM.Synergy
 
         private IReadOnlyCollection<TMSynergyData> Synergies => _synergies;
         private readonly HashSet<TMSynergyData> _synergies = new();
+        [SerializeField, ReadOnly, Inject] private TMGridManager _gridManager; 
 
         [SerializeField, ReadOnly] private UnityEvent<IReadOnlyCollection<TMSynergyData>> _onUpdateSynergies = new();
         
-        private void Awake()
+        private void Start()
         {
-            if (ServiceLocator<SynergyManager>.RegisterService(this)) return;
-            
-            ServiceLocator<SynergyManager>.ChangeService(this);
-        }
-
-        private IEnumerator Start()
-        {
-            TMGridManager gridManager = null;
-            yield return new WaitUntil(() => ServiceLocator<TMGridManager>.TryGetService(out gridManager));
-
-            gridManager.OnAddedBuilding += onAddedBuilding;
-            gridManager.OnRemovedBuilding += onRemovedBuilding;
+            _gridManager.OnAddedBuilding += onAddedBuilding;
+            _gridManager.OnRemovedBuilding += onRemovedBuilding;
         }
 
         private void OnDestroy()
         {
-            if (!ServiceLocator<TMGridManager>.TryGetService(out TMGridManager gridManager)) return;
-
-            gridManager.OnAddedBuilding -= onAddedBuilding;
-            gridManager.OnRemovedBuilding -= onRemovedBuilding;
+            _gridManager.OnAddedBuilding -= onAddedBuilding;
+            _gridManager.OnRemovedBuilding -= onRemovedBuilding;
         }
 
         private void onAddedBuilding(TMBuilding building)

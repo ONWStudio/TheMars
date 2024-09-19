@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Onw.Attribute;
 using Onw.Interface;
-using Onw.ServiceLocator;
 using TM.Manager;
 using UnityEngine;
+using VContainer;
 
 namespace TM.Synergy.Effect
 {
@@ -25,33 +25,34 @@ namespace TM.Synergy.Effect
         public override string Description => $"({TargetBuildingCount}) : 하루가 지날 때 마다 건설 자원(강철, 식물, 점토)을 무작위로 +{Resource}개 획득한다";
 
         [field: SerializeField, DisplayAs("획득할 건설 자원 개수")] public int Resource { get; private set; } = 10;
+
+        [SerializeField, ReadOnly, Inject] private TMSimulator _simulator;
+        [SerializeField, ReadOnly, Inject] private PlayerManager _player;
         
         public override void ApplyEffect()
         {
-            ServiceLocator<TMSimulator>.InvokeService(simulator => simulator.OnChangedDay += onChangedDay);
+            _simulator.OnChangedDay += onChangedDay;
         }
         
         public override void UnapplyEffect()
         {
-            ServiceLocator<TMSimulator>.InvokeService(simulator => simulator.OnChangedDay -= onChangedDay);
+            _simulator.OnChangedDay -= onChangedDay;
         }
 
         private void onChangedDay(int day)
         {
-            if (!ServiceLocator<PlayerManager>.TryGetService(out PlayerManager player)) return;
-
             int rand = Random.Range(0, 3);
 
             switch (rand)
             {
                 case 0:
-                    player.Steel += Resource;
+                    _player.Steel += Resource;
                     break;
                 case 1:
-                    player.Plants += Resource;
+                    _player.Plants += Resource;
                     break;
                 case 2:
-                    player.Clay += Resource;
+                    _player.Clay += Resource;
                     break;
             }
         }

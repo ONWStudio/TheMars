@@ -1,11 +1,11 @@
 using System;
-using Onw.Attribute;
-using Onw.ServiceLocator;
-using UniRx;
-using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
+using UniRx;
+using UniRx.Triggers;
+using Onw.Attribute;
+
 namespace TM.Card.Runtime
 {
     // .. Controller

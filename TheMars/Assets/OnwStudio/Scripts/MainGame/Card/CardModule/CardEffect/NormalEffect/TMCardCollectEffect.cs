@@ -1,6 +1,5 @@
 using UnityEngine;
 using Onw.Attribute;
-using Onw.ServiceLocator;
 using TM.Card.Runtime;
 using TM.Card.Effect.Creator;
 
@@ -15,7 +14,7 @@ namespace TM.Card.Effect
         
         [SerializeField, ReadOnly]
         private TMCardKind _selectKind = TMCardKind.NONE;
-
+        
         public void Initialize(TMCardCollectEffectCreator effectCreator)
         {
             _collectCount = effectCreator.CollectCount;
@@ -30,8 +29,6 @@ namespace TM.Card.Effect
         
         private static void collectCard(TMCardModel triggerCard, int collectCount)
         {
-            if (!ServiceLocator<TMCardManager>.TryGetService(out TMCardManager service)) return;
-            
             // service.CollectUI.ActiveUI();
         }
 

@@ -1,13 +1,9 @@
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Onw.Extensions
 {
-    using Manager.ObjectPool;
-    using Object = UnityEngine.Object;
-
     public static class GameObjectExtensions
     {
         public static void SetPositionX(this GameObject gameObject, float x)
@@ -27,15 +23,14 @@ namespace Onw.Extensions
 
         public static GameObject[] GetChildGameObjectsAll(this GameObject gameObject)
         {
-            List<GameObject> result = new List<GameObject>();
+            List<GameObject> result = new();
 
             // Stack을 사용해 반복적으로 자식 오브젝트를 탐색
-            Stack<Transform> stack = new Stack<Transform>();
+            Stack<Transform> stack = new();
             stack.Push(gameObject.transform);  // 부모 오브젝트부터 시작
 
-            while (stack.Count > 0)
+            while (stack.TryPop(out Transform current))
             {
-                Transform current = stack.Pop();
                 result.Add(current.gameObject);
 
                 // 모든 자식 오브젝트를 스택에 추가

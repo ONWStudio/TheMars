@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Onw.Attribute;
 using Onw.Coroutine;
-using Onw.ServiceLocator;
 using TM.Building.Effect.Creator;
 using TM.Manager;
 

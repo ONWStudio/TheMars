@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Serialization;
 using Onw.Attribute;
 using Onw.Extensions;
-using Onw.ServiceLocator;
+using VContainer;
 using Image = UnityEngine.UI.Image;
 
 namespace TM.Card.Runtime
@@ -49,17 +49,10 @@ namespace TM.Card.Runtime
         public IReadOnlyList<TMCardModel> Cards => _cards;
 
         [SerializeField, ReadOnly] private List<TMCardModel> _cards = new();
-
-        private void Awake()
-        {
-            if (ServiceLocator<TMCardManager>.RegisterService(this)) return;
-
-            ServiceLocator<TMCardManager>.ChangeService(this);
-        }
-
+        
         private void Start()
         {
-            CardCreator.OnCreateCard += addListenerForCard;
+            CardCreator.OnPostCreateCard += addListenerForCard;
             AddCard(CardCreator.CreateCard());
         }
 
@@ -105,11 +98,6 @@ namespace TM.Card.Runtime
             _cards
                 .Where(someCard => someCard != card)
                 .ForEach(someCard => someCard.gameObject.SetActive(true));
-        }
-
-        private void OnDestroy()
-        {
-            ServiceLocator<TMCardManager>.ClearService();
         }
     }
 }

@@ -5,10 +5,10 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Onw.Attribute;
 using Onw.UI.Components;
-using Onw.ServiceLocator;
 using Onw.Components.Movement;
 using TM.Card.Effect;
 using UnityEngine.Serialization;
+using VContainer;
 
 namespace TM.Card.Runtime
 {
@@ -26,7 +26,7 @@ namespace TM.Card.Runtime
         /// </summary>
         [field: Header("Runtime Option")]
         [field: SerializeField, ReadOnly] public Camera CardCamera { get; private set; } = null;
-        
+
         /// <summary>
         /// .. 현재가 카드가 드래그를 수행중인지에 대한 여부를 반환합니다
         /// </summary>
@@ -43,7 +43,7 @@ namespace TM.Card.Runtime
         /// .. 카드의 View상태를 반환합니다 해당 값이 true일 경우 카드가 보이지 않게 됩니다 외부에서 수정될 수 있습니다
         /// </summary>
         [field: SerializeField, ReadOnly] public bool IsHide { get; set; } = false;
-        
+
         /// <summary>
         /// .. 현재 카드가 코스트를 이미 지불하였는지에 대한 여부를 반환합니다 외부에서 수정될 수 있습니다
         /// </summary>
@@ -63,18 +63,20 @@ namespace TM.Card.Runtime
         [field: Header("Require Option")]
         [field: SerializeField, SelectableSerializeField]
         public Vector2SmoothMover CardViewMover { get; private set; }
- 
+
         /// <summary>
         /// .. 카드의 움직임을 담당하는 무버 컴포넌트입니다
         /// </summary>
         [field: SerializeField, InitializeRequireComponent]
         public Vector2SmoothMover CardBodyMover { get; private set; }
-        
+
         /// <summary>
         /// .. 카드의 렉트 트랜스폼입니다
         /// </summary>
         [field: SerializeField, InitializeRequireComponent]
         public RectTransform RectTransform { get; private set; }
+
+
 
         /// <summary>
         /// .. 카드의 효과 인터페이스를 제공합니다 CardData에서 정보를 받아와 런타임에 이펙트를 동적으로 생성합니다
@@ -89,7 +91,7 @@ namespace TM.Card.Runtime
             add => _onDragBeginCard.AddListener(value);
             remove => _onDragBeginCard.RemoveListener(value);
         }
-        
+
         /// <summary>
         /// .. 드래그가 끝날때 호출됩니다 
         /// </summary>
@@ -98,7 +100,7 @@ namespace TM.Card.Runtime
             add => _onDragEndCard.AddListener(value);
             remove => _onDragEndCard.RemoveListener(value);
         }
-        
+
         /// <summary>
         /// .. 카드가 효과를 발동할때 트리거 됩니다
         /// </summary>
@@ -107,7 +109,7 @@ namespace TM.Card.Runtime
             add => _onEffectEvent.AddListener(value);
             remove => _onEffectEvent.RemoveListener(value);
         }
-        
+
         public event UnityAction<TMCardModel> OnPayCost
         {
             add => _onPayCost.AddListener(value);
@@ -120,7 +122,7 @@ namespace TM.Card.Runtime
         public bool CanPayCost => CardData
             .CardCosts
             .All(cardCost => cardCost.Cost <= getResourceFromPlayerByCost(cardCost.ResourceKind));
-        
+
         [SerializeField] private UnityEvent<TMCardModel> _onDragBeginCard = new();
         [SerializeField] private UnityEvent<TMCardModel> _onDragEndCard = new();
         [SerializeField] private UnityEvent<TMCardModel> _onEffectEvent = new();
@@ -128,7 +130,13 @@ namespace TM.Card.Runtime
 
         [SerializeField, ReadOnly] private bool _isInit = false;
 
+        [SerializeField, Inject] private TMCardManager _cardManager;
+        [SerializeField, Inject] private PlayerManager _playerManager;
+
         private bool? _keepIsHide = null;
+
+        [Inject] private void constructForCardManager(TMCardManager cardManager) => _cardManager = cardManager;
+        [Inject] private void constructForPlayerManager(PlayerManager playerManager) => _playerManager = playerManager;
 
         private void Awake()
         {
@@ -136,7 +144,7 @@ namespace TM.Card.Runtime
                 .FindWithTag("CardCamera")
                 .GetComponent<Camera>();
         }
-        
+
         /// <summary>
         /// .. 카드의 초기화 메서드 입니다 한번 초기화를 수행한 후 이후 다시 초기화를 시도할 경우 초기화가 되지 않습니다 최초의 호출 한번만 수행합니다
         /// </summary>
@@ -153,10 +161,10 @@ namespace TM.Card.Runtime
             InputHandler.DownAction += onMouseDownCard;
             InputHandler.DragAction += onDrag;
             InputHandler.UpAction += onDragEnd;
-            
+
             CardEffect = CardData.CreateCardEffect();
             CardEffect?.ApplyEffect(this, this);
-            
+
             void onMouseDownCard(PointerEventData eventData)
             {
                 TriggerSelectCard();
@@ -172,12 +180,10 @@ namespace TM.Card.Runtime
             Vector2 mouseLocalPosition = transform.parent.InverseTransformPoint(mouseWorldPosition);
             transform.localPosition = mouseLocalPosition;
         }
-        
+
         private void dragCard()
         {
-            if (!ServiceLocator<TMCardManager>.TryGetService(out TMCardManager cardManager)) return;
-            
-            if (RectTransformUtility.RectangleContainsScreenPoint(cardManager.DeckTransform, Input.mousePosition, CardCamera))
+            if (RectTransformUtility.RectangleContainsScreenPoint(_cardManager.DeckTransform, Input.mousePosition, CardCamera))
             {
                 if (_keepIsHide is null)
                 {
@@ -218,36 +224,34 @@ namespace TM.Card.Runtime
         /// </summary>
         public void PayCost()
         {
-            if (!ServiceLocator<PlayerManager>.TryGetService(out PlayerManager player)) return;
-            
             foreach (TMCardCost cost in CardData.CardCosts)
             {
                 switch (cost.ResourceKind)
                 {
                     case TMResourceKind.MARS_LITHIUM:
-                        player.MarsLithium -= cost.Cost;
+                        _playerManager.MarsLithium -= cost.Cost;
                         break;
                     case TMResourceKind.CREDIT:
-                        player.Credit -= cost.Cost;
+                        _playerManager.Credit -= cost.Cost;
                         break;
                     case TMResourceKind.STEEL:
-                        player.Steel -= cost.Cost;
+                        _playerManager.Steel -= cost.Cost;
                         break;
                     case TMResourceKind.PLANTS:
-                        player.Plants -= cost.Cost;
+                        _playerManager.Plants -= cost.Cost;
                         break;
                     case TMResourceKind.CLAY:
-                        player.Clay -= cost.Cost;
+                        _playerManager.Clay -= cost.Cost;
                         break;
                     case TMResourceKind.ELECTRICITY:
-                        player.Electricity -= cost.Cost;
+                        _playerManager.Electricity -= cost.Cost;
                         break;
                     case TMResourceKind.POPULATION:
-                        player.Population -= cost.Cost;
+                        _playerManager.Population -= cost.Cost;
                         break;
                 }
             }
-            
+
             _onPayCost.Invoke(this);
         }
 
@@ -256,19 +260,17 @@ namespace TM.Card.Runtime
         /// </summary>
         /// <param name="resourceKind"></param>
         /// <returns></returns>
-        private static int getResourceFromPlayerByCost(TMResourceKind resourceKind)
+        private int getResourceFromPlayerByCost(TMResourceKind resourceKind)
         {
-            if (!ServiceLocator<PlayerManager>.TryGetService(out PlayerManager player)) return 0;
-
             return resourceKind switch
             {
-                TMResourceKind.MARS_LITHIUM => player.MarsLithium,
-                TMResourceKind.CREDIT => player.Credit,
-                TMResourceKind.STEEL => player.Steel,
-                TMResourceKind.PLANTS => player.Plants,
-                TMResourceKind.CLAY => player.Clay,
-                TMResourceKind.POPULATION => player.Population,
-                TMResourceKind.ELECTRICITY => player.Electricity,
+                TMResourceKind.MARS_LITHIUM => _playerManager.MarsLithium,
+                TMResourceKind.CREDIT => _playerManager.Credit,
+                TMResourceKind.STEEL => _playerManager.Steel,
+                TMResourceKind.PLANTS => _playerManager.Plants,
+                TMResourceKind.CLAY => _playerManager.Clay,
+                TMResourceKind.POPULATION => _playerManager.Population,
+                TMResourceKind.ELECTRICITY => _playerManager.Electricity,
                 _ => 0
             };
         }
@@ -277,14 +279,12 @@ namespace TM.Card.Runtime
         {
             dragCard();
         }
-        
+
         private void onDragEnd(PointerEventData _)
         {
-            if (!ServiceLocator<TMCardManager>.TryGetService(out TMCardManager cardManager)) return;
-
             IsOverTombTransform = false;
-            
-            if (RectTransformUtility.RectangleContainsScreenPoint(cardManager.DeckTransform, Input.mousePosition, CardCamera))
+
+            if (RectTransformUtility.RectangleContainsScreenPoint(_cardManager.DeckTransform, Input.mousePosition, CardCamera))
             {
                 sellCard();
             }
@@ -295,10 +295,10 @@ namespace TM.Card.Runtime
                 CardBodyMover.enabled = true;
                 IsDragging = false;
             }
-            
+
             _onDragEndCard.Invoke(this);
         }
-        
+
         private static void setOnMover(Vector2SmoothMover smoothMover, bool isOn)
         {
             smoothMover.enabled = isOn;
@@ -308,17 +308,17 @@ namespace TM.Card.Runtime
                 smoothMover.transform.localPosition = Vector3.zero;
             }
         }
-        
+
         private void sellCard()
         {
             if (CardEffect is IDisposable disposable)
             {
                 disposable.Dispose();
             }
-            
+
             CardEffect = null;
-            ServiceLocator<PlayerManager>.InvokeService(player => player.Credit += 10);
-            ServiceLocator<TMCardManager>.InvokeService(cardManager => cardManager.RemoveCard(this));
+            _playerManager.Credit += 10;
+            _cardManager.RemoveCard(this);
             Destroy(gameObject);
         }
     }

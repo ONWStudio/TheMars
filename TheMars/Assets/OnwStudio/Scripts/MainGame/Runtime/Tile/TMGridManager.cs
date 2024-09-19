@@ -1,14 +1,10 @@
-using System;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Onw.Attribute;
-using Onw.Event;
-using Onw.GridTile;
-using Onw.ServiceLocator;
-using TM.Building;
 using UnityEngine.Events;
+using Onw.Attribute;
+using Onw.GridTile;
+using TM.Building;
 
 namespace TM.Grid
 {
@@ -73,18 +69,6 @@ namespace TM.Grid
             _onRemovedBuilding.Invoke(building);
         }
         
-        private void Awake()
-        {
-            if (ServiceLocator<TMGridManager>.RegisterService(this)) return;
-            
-            ServiceLocator<TMGridManager>.ChangeService(this);
-        }
-
-        private void OnDestroy()
-        {
-            ServiceLocator<TMGridManager>.ClearService();
-        }
-
         public bool TryGetTileDataByRay(Ray ray, out GridTile tileData) => _gridManager.TryGetTileDataByRay(ray, out tileData);
     }
 }
