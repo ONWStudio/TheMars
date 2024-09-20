@@ -6,12 +6,12 @@ using Onw.Helper;
 using Onw.GridTile;
 using Onw.Attribute;
 using Onw.Extensions;
+using Onw.VContainerUtils;
 using TM.Grid;
 using TM.Building;
 using TM.Card.Runtime;
 using TM.Card.Effect.Creator;
 using VContainer;
-using VContainer.Unity;
 using Object = UnityEngine.Object;
 
 namespace TM.Card.Effect
@@ -19,7 +19,7 @@ namespace TM.Card.Effect
     /// <summary>
     /// .. 건물 설치 효과입니다 건물을 배치하고 배치시 코스트 사용, 조건 검사, 재배치시의 관한 로직, 회수등의 관한 로직을 해당 효과가 모두 담당합니다
     /// </summary>
-    public sealed class TMCardBuildingCreateEffect : ITMNormalEffect, ITMCardInitializeEffect<TMCardBuildingCreateEffectCreator>, IDisposable, IPostStartable
+    public sealed class TMCardBuildingCreateEffect : ITMNormalEffect, ITMCardInitializeEffect<TMCardBuildingCreateEffectCreator>, IDisposable, IPostInject
     {
         public readonly struct PrevTileData
         {
@@ -40,7 +40,6 @@ namespace TM.Card.Effect
 
         public string Description => "";
         public TMBuilding Building => _building;
-
 
         [SerializeField, ReadOnly] private TMBuilding _building = null;
 
@@ -71,6 +70,8 @@ namespace TM.Card.Effect
 
         private void onDownCard(PointerEventData eventData)
         {
+            if (!_cardModel.CanInteract) return;
+            
             _gridManager.OnHighlightTile += setTileHighlight;
             _gridManager.OnExitTile += setTileUnHighlight;
 
@@ -91,6 +92,8 @@ namespace TM.Card.Effect
 
         private void onDrag(PointerEventData _)
         {
+            if (!_cardModel.CanInteract) return;
+            
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
 
             if (!_cardModel.IsOverTombTransform)
@@ -135,6 +138,8 @@ namespace TM.Card.Effect
 
         private void onEffect(TMCardModel card)
         {
+            if (!_cardModel.CanInteract) return;
+            
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
             Vector3 keepPosition = _cardModel.transform.localPosition;
 
@@ -230,16 +235,16 @@ namespace TM.Card.Effect
             OnwUnityHelper.DestroyObjectByComponent(ref _building);
         }
         
-        void IPostStartable.PostStart()
+        void IPostInject.PostInject(IObjectResolver container)
         {
             if (!BuildingData.BuildingPrefab) return;
             
-            Debug.Log("Post Initialize");
             _building = Object
                 .Instantiate(BuildingData.BuildingPrefab.gameObject)
                 .GetComponent<TMBuilding>();
 
             _building.Initialize(BuildingData);
+            container.InjectOnPost(_building);
 
             float xWidth = _building.MeshRenderer.bounds.size.x;
             float zWidth = _building.MeshRenderer.bounds.size.z;

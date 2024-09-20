@@ -38,11 +38,9 @@ namespace TM.Card.UI
                 }
 
                 _cardCallbacks.Clear();
-
-                _selectCard.CardBodyMover.enabled = true;
-                _selectCard.CardViewMover.enabled = true;
-                _selectCard.transform.localScale = new(1f, 1f, 1f);
                 _selectCard.Initialize();
+                _selectCard.transform.localScale = new(1f, 1f, 1f);
+                _selectCard.CanInteract = true;
                 _cardManager.AddCard(_selectCard);
                 _selectCard = null;
                 _canvas.enabled = false;
@@ -53,12 +51,10 @@ namespace TM.Card.UI
         {
             _canvas.enabled = true;
             
-            foreach (TMCardModel card in _cardManager.CardCreator.CreateCards(3, false))
+            foreach (TMCardModel card in _cardManager.CardCreator.CreateCards(3))
             {
                 card.transform.SetParent(_cardSelectField, false);
-                card.CardViewMover.enabled = false;
-                card.CardBodyMover.enabled = false;
-                
+                card.CanInteract = false;
                 UnityAction<PointerEventData> action = selectCard;
                 _cardCallbacks.Add(new(card, action));
                 card.InputHandler.UpAction += action;

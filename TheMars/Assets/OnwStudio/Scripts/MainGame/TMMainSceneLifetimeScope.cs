@@ -1,9 +1,9 @@
-using System;
-using TM.Card.Effect;
 using UnityEngine;
-using TM.Card.Runtime;
-using TM.Card.UI;
+using Onw.Extensions;
+using Onw.VContainerUtils;
 using TM.Grid;
+using TM.Card.UI;
+using TM.Card.Runtime;
 using VContainer;
 using VContainer.Unity;
 using TM.Manager;
@@ -39,20 +39,10 @@ namespace TM
             {
                 if (cardModel.CardEffect is null) return;
                 
-                Container.Inject(cardModel.CardEffect);
-                if (cardModel.CardEffect is IPostStartable stable) // .. 별도의 커스텀 인터페이스 제공
-                {
-                    stable.PostStart();
-                }
+                Container.InjectOnPost(cardModel.CardEffect);
             };
-            _iconSpawner.OnCreateIcon += collectIcon =>
-            {
-                Container.Inject(collectIcon);
-                if (collectIcon is IPostStartable stable)
-                {
-                    stable.PostStart();
-                }
-            };
+            
+            _iconSpawner.OnCreateIcon += Container.InjectOnPost;
         }
     }
 }

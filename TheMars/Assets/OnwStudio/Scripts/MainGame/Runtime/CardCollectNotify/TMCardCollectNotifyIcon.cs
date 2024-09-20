@@ -7,11 +7,12 @@ using VContainer.Unity;
 using Onw.Attribute;
 using Onw.Manager.ObjectPool;
 using Onw.Components.Movement;
+using Onw.VContainerUtils;
 using TM.Card.UI;
 
 namespace TM
 {
-    public sealed class TMCardCollectNotifyIcon : MonoBehaviour, IPostStartable
+    public sealed class TMCardCollectNotifyIcon : MonoBehaviour, IPostInject
     {
         [Header("Button")]
         [SerializeField, InitializeRequireComponent] private Button _collectCardButton;
@@ -30,12 +31,8 @@ namespace TM
         {
             _smoothMover.TargetPosition = targetPosition;
         }
-        public void PostInitialize()
-        {
-            throw new System.NotImplementedException();
-        }
         
-        void IPostStartable.PostStart()
+        void IPostInject.PostInject(IObjectResolver container)
         {
             _collectCardButton.onClick.AddListener(() =>
             {

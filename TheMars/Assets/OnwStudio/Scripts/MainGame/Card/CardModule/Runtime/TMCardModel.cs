@@ -3,9 +3,11 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UniRx;
 using Onw.Attribute;
 using Onw.UI.Components;
 using Onw.Components.Movement;
+using Onw.Extensions;
 using TM.Card.Effect;
 using UnityEngine.Serialization;
 using VContainer;
@@ -76,8 +78,6 @@ namespace TM.Card.Runtime
         [field: SerializeField, InitializeRequireComponent]
         public RectTransform RectTransform { get; private set; }
 
-
-
         /// <summary>
         /// .. 카드의 효과 인터페이스를 제공합니다 CardData에서 정보를 받아와 런타임에 이펙트를 동적으로 생성합니다
         /// </summary>
@@ -123,12 +123,24 @@ namespace TM.Card.Runtime
             .CardCosts
             .All(cardCost => cardCost.Cost <= getResourceFromPlayerByCost(cardCost.ResourceKind));
 
+        public bool CanInteract
+        {
+            get => _canInteract;
+            set
+            {
+                CardBodyMover.enabled = value;
+                CardViewMover.enabled = value;
+                _canInteract = value;
+            }
+        }
+
         [SerializeField] private UnityEvent<TMCardModel> _onDragBeginCard = new();
         [SerializeField] private UnityEvent<TMCardModel> _onDragEndCard = new();
         [SerializeField] private UnityEvent<TMCardModel> _onEffectEvent = new();
         [SerializeField] private UnityEvent<TMCardModel> _onPayCost = new();
-
+        
         [SerializeField, ReadOnly] private bool _isInit = false;
+        [SerializeField, ReadOnly] private bool _canInteract = true;
 
         [SerializeField, Inject] private TMCardManager _cardManager;
         [SerializeField, Inject] private PlayerManager _playerManager;
@@ -167,6 +179,8 @@ namespace TM.Card.Runtime
 
             void onMouseDownCard(PointerEventData eventData)
             {
+                if (!_canInteract) return;
+                
                 TriggerSelectCard();
             }
         }
@@ -277,11 +291,15 @@ namespace TM.Card.Runtime
 
         private void onDrag(PointerEventData _)
         {
+            if (!_canInteract) return;
+            
             dragCard();
         }
 
         private void onDragEnd(PointerEventData _)
         {
+            if (!_canInteract) return;
+            
             IsOverTombTransform = false;
 
             if (RectTransformUtility.RectangleContainsScreenPoint(_cardManager.DeckTransform, Input.mousePosition, CardCamera))
@@ -311,11 +329,7 @@ namespace TM.Card.Runtime
 
         private void sellCard()
         {
-            if (CardEffect is IDisposable disposable)
-            {
-                disposable.Dispose();
-            }
-
+            CardEffect.Is<IDisposable>(disposable => disposable.Dispose());
             CardEffect = null;
             _playerManager.Credit += 10;
             _cardManager.RemoveCard(this);

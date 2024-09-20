@@ -13,11 +13,25 @@ namespace TM.Manager
 
         [field: SerializeField, ReadOnly] public float AccumulatedTime { get; private set; } = 0f;
         [field: SerializeField, ReadOnly] public int NowDay { get; private set; } = 1;
+        [field: SerializeField, ReadOnly] public int NowMinutes { get; private set; } = 0;
+        [field: SerializeField, ReadOnly] public int NowSeconds { get; private set; } = 0;
 
         public event UnityAction<int> OnChangedDay
         {
             add => _onChangedDay.AddListener(value);
             remove => _onChangedDay.RemoveListener(value);
+        }
+        
+        public event UnityAction<int> OnChangedMinutes
+        {
+            add => _onChangedMinutes.AddListener(value);
+            remove => _onChangedMinutes.RemoveListener(value);
+        }
+        
+        public event UnityAction<int> OnChangedSeconds
+        {
+            add => _onChangedSeconds.AddListener(value);
+            remove => _onChangedSeconds.RemoveListener(value);
         }
         
         public int IntervalInMinutes
@@ -30,8 +44,12 @@ namespace TM.Manager
 
         [Header("Event")]
         [SerializeField] private UnityEvent<int> _onChangedDay = new();
+        [SerializeField] private UnityEvent<int> _onChangedMinutes = new();
+        [SerializeField] private UnityEvent<int> _onChangedSeconds = new();
         
         private int _prevDay = 1;
+        private int _prevMinutes = 0;
+        private int _prevSeconds = 0;
         private float _intervalInSeconds;
         
         private void Start()
@@ -43,9 +61,24 @@ namespace TM.Manager
         {
             AccumulatedTime += Time.deltaTime * TimeManager.GameSpeed;
 
+            _prevSeconds = NowSeconds;
+            _prevMinutes = NowMinutes;
             _prevDay = NowDay;
+
+            NowSeconds = (int)(AccumulatedTime / 1);
+            NowMinutes = (int)(AccumulatedTime / 60);
             NowDay = (int)(AccumulatedTime / _intervalInSeconds + 1);
 
+            if (NowSeconds > _prevSeconds)
+            {
+                _onChangedSeconds.Invoke(NowSeconds);
+            }
+
+            if (NowMinutes > _prevMinutes)
+            {
+                _onChangedMinutes.Invoke(NowMinutes);
+            }
+            
             if (NowDay > _prevDay)
             {
                 _onChangedDay.Invoke(NowDay);

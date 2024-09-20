@@ -8,7 +8,7 @@ using VContainer;
 
 namespace TM.Synergy.Effect
 {
-    public abstract class TMSynergyEffect : IDescriptable
+    public abstract class TMSynergyEffectData : IDescriptable
     {
         [field: SerializeField, DisplayAs("시너지 건물 개수")] public int TargetBuildingCount { get; private set; }
         public abstract string Description { get; }
@@ -20,7 +20,7 @@ namespace TM.Synergy.Effect
         public abstract void UnapplyEffect();
     }
     
-    public class TMSynergyGetRandConstructionResourceEffect : TMSynergyEffect
+    public class TMSynergyGetRandConstructionResourceEffectData : TMSynergyEffectData
     {
         public override string Description => $"({TargetBuildingCount}) : 하루가 지날 때 마다 건설 자원(강철, 식물, 점토)을 무작위로 +{Resource}개 획득한다";
 

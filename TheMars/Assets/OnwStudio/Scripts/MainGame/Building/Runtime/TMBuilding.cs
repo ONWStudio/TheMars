@@ -4,11 +4,13 @@ using System.Linq;
 using UnityEngine;
 using Onw.Extensions;
 using Onw.Attribute;
+using Onw.VContainerUtils;
 using TM.Building.Effect;
+using VContainer;
 
 namespace TM.Building
 {
-    public sealed class TMBuilding : MonoBehaviour
+    public sealed class TMBuilding : MonoBehaviour, IPostInject
     {
         [field: Header("Building Data")]
         [field: SerializeField, ReadOnly] public TMBuildingData BuildingData { get; private set; }
@@ -48,6 +50,11 @@ namespace TM.Building
         {
             _buildingEffects
                 .ForEach(effect => effect.DisableEffect(this));
+        }
+        
+        void IPostInject.PostInject(IObjectResolver container)
+        {
+            _buildingEffects.ForEach(container.InjectOnPost);
         }
     }
 }

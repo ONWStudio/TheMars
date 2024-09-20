@@ -19,22 +19,16 @@ namespace TM.Synergy
             .Select(synergyEffect => synergyEffect.Description)
             .ToArray();
         
-        public IReadOnlyList<TMSynergyEffect> SynergyEffects => _synergyEffects;
+        public IReadOnlyList<TMSynergyEffectData> SynergyEffects => _synergyEffects;
         
         [field: SerializeField] public int BuildingCount { get; private set; }
+        [field: SerializeField, SpritePreview] public Sprite Icon { get; private set; } 
 
-        [SerializeReference, SerializeReferenceDropdown] private List<TMSynergyEffect> _synergyEffects = new();
+        [SerializeReference, SerializeReferenceDropdown] private List<TMSynergyEffectData> _synergyEffects = new();
 
         [SerializeField] private LocalizedString _localizedSynergyName;        
         
-        private readonly List<TMSynergyEffect> _applicationEffects = new();
-        public int RuntimeBuildingCount { get; set; }
-
-        public void ResetCount()
-        {
-            RuntimeBuildingCount = BuildingCount;
-            _applicationEffects.Clear();
-        }
+        private readonly List<TMSynergyEffectData> _applicationEffects = new();
 
         public void ApplySynergy()
         {
@@ -49,7 +43,7 @@ namespace TM.Synergy
                 return false;
             });
             
-            TMSynergyEffect[] shallEffects = _synergyEffects
+            TMSynergyEffectData[] shallEffects = _synergyEffects
                 .Where(synergyEffect => !_applicationEffects.Contains(synergyEffect) && synergyEffect.TargetBuildingCount <= RuntimeBuildingCount)
                 .ToArray();
 
