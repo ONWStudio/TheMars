@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88efa2807f14b4c50b6687e145d4a238, type: 3}
   m_Name: Synergy_No.590feed0-4ee3-4098-8451-8cb4b91190e6
   m_EditorClassIdentifier: 
-  <BuildingCount>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 21300000, guid: d7591b4d6f56a5149b10753e2a8f4265,
+    type: 3}
+  _synergyEffects:
+  - rid: 8523894050543370254
+  - rid: 8523894050543370250
+  - rid: 8523894050543370252
   _localizedSynergyName:
     m_TableReference:
       m_TableCollectionName: 
@@ -24,4 +29,22 @@ MonoBehaviour:
     m_LocalVariables: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 8523894050543370250
+      type: {class: TMSynergyGetRandConstructionResourceEffectCreator, ns: TM.Synergy.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <TargetBuildingCount>k__BackingField: 4
+        <Resource>k__BackingField: 20
+    - rid: 8523894050543370252
+      type: {class: TMSynergyGetRandConstructionResourceEffectCreator, ns: TM.Synergy.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <TargetBuildingCount>k__BackingField: 6
+        <Resource>k__BackingField: 40
+    - rid: 8523894050543370254
+      type: {class: TMSynergyGetRandConstructionResourceEffectCreator, ns: TM.Synergy.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <TargetBuildingCount>k__BackingField: 0
+        <Resource>k__BackingField: 10

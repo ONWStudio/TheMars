@@ -5,10 +5,10 @@ using TM.Class;
 
 namespace TM.Card.Effect.Creator
 {
-    using static ITMCardEffectCreator;
+    using static TMCardEffectCreator;
 
     [SerializeReferenceDropdownName("자원 획득")]
-    public sealed class TMCardGetResourceEffectCreator : ITMCardGetResourceEffectCreator
+    public sealed class TMCardGetResourceEffectCreator : TMCardNormalEffectCreator
     {
         public IReadOnlyList<TMResourceData> Resources => _resources;
 
@@ -16,9 +16,9 @@ namespace TM.Card.Effect.Creator
         // ReSharper disable once CollectionNeverUpdated.Local
         [SerializeField, DisplayAs("자원 획득")] private List<TMResourceData> _resources = new();
         
-        public ITMCardEffect CreateEffect()
+        public override ITMCardEffect CreateEffect()
         {
-            return CardEffectGenerator.CreateEffect<TMCardGetResourceEffect, TMCardGetResourceEffectCreator>(this);
+            return CreateEffect<TMCardGetResourceEffect, TMCardGetResourceEffectCreator>(this);
         }
     }
 }

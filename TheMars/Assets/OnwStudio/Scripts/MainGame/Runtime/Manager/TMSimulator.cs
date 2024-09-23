@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Onw.Manager;
 using Onw.Attribute;
 
 namespace TM.Manager
 {
-    public sealed class TMSimulator : MonoBehaviour
+    public sealed class TMSimulator : SceneSingleton<TMSimulator>
     {
+        public override string SceneName => "MainGameScene";
+        
         private const int INTERVAL_MIN = 5;
         private const int INTERVAL_MAX = 15;
 
@@ -51,7 +54,9 @@ namespace TM.Manager
         private int _prevMinutes = 0;
         private int _prevSeconds = 0;
         private float _intervalInSeconds;
-        
+
+        protected override void Init() {}
+
         private void Start()
         {
             _intervalInSeconds = _intervalInMinutes * 60f;

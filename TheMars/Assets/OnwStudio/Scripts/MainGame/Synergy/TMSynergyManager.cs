@@ -1,56 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Onw.Attribute;
+using Onw.Manager;
 using TM.Grid;
 using TM.Building;
 using UnityEngine;
 using UnityEngine.Events;
-using VContainer;
 
 namespace TM.Synergy
 {
-    public sealed class TMSynergyManager : MonoBehaviour
+    public sealed class TMSynergyManager : SceneSingleton<TMSynergyManager>
     {
-        public readonly struct SynergyArgs
-        {
-            
-        }
+        public override string SceneName => "MainGameScene";
         
-        public event UnityAction<IReadOnlyCollection<TMSynergyData>> OnUpdateSynergies
+        public event UnityAction<IReadOnlyDictionary<string, TMSynergy>> OnUpdateSynergies
         {
             add => _onUpdateSynergies.AddListener(value);
             remove => _onUpdateSynergies.RemoveListener(value);
         }
 
-        private IReadOnlyCollection<TMSynergyData> Synergies => _synergies;
-        private readonly HashSet<TMSynergyData> _synergies = new();
-        [SerializeField, ReadOnly, Inject] private TMGridManager _gridManager; 
+        private IReadOnlyDictionary<string, TMSynergy> Synergies => _synergies;
+        private readonly Dictionary<string, TMSynergy> _synergies = new();
 
-        [SerializeField, ReadOnly] private UnityEvent<IReadOnlyCollection<TMSynergyData>> _onUpdateSynergies = new();
+        [SerializeField, ReadOnly] private UnityEvent<IReadOnlyDictionary<string, TMSynergy>> _onUpdateSynergies = new();
         
         private void Start()
         {
-            _gridManager.OnAddedBuilding += onAddedBuilding;
-            _gridManager.OnRemovedBuilding += onRemovedBuilding;
+            TMGridManager.Instance.OnAddedBuilding += onAddedBuilding;
+            TMGridManager.Instance.OnRemovedBuilding += onRemovedBuilding;
         }
+
+        protected override void Init() {}
 
         private void OnDestroy()
         {
-            _gridManager.OnAddedBuilding -= onAddedBuilding;
-            _gridManager.OnRemovedBuilding -= onRemovedBuilding;
+            TMGridManager.Instance.OnAddedBuilding -= onAddedBuilding;
+            TMGridManager.Instance.OnRemovedBuilding -= onRemovedBuilding;
         }
 
         private void onAddedBuilding(TMBuilding building)
         {
-            foreach (TMSynergyData synergy in building.BuildingData.Synergies)
+            Debug.Log("AddedBuilding");
+            
+            foreach (TMSynergyData synergyData in building.BuildingData.Synergies)
             {
-                if (!_synergies.Contains(synergy))
+                if (!_synergies.TryGetValue(synergyData.SynergyName, out TMSynergy synergy))
                 {
-                    synergy.ResetCount();
-                    _synergies.Add(synergy);
+                    synergy = synergyData.CreateSynergy();
+                    _synergies.Add(synergyData.SynergyName, synergy);
                 }
                 
-                synergy.RuntimeBuildingCount++;
+                synergy.BuildingCount++;
                 synergy.ApplySynergy();
             }
             
@@ -59,17 +60,20 @@ namespace TM.Synergy
 
         private void onRemovedBuilding(TMBuilding building)
         {
-            foreach (TMSynergyData synergy in building.BuildingData.Synergies)
+            Debug.Log("RemovedBuilding");
+            
+            foreach (TMSynergyData synergyData in building.BuildingData.Synergies)
             {
-                synergy.RuntimeBuildingCount--;
+                if (!_synergies.TryGetValue(synergyData.SynergyName, out TMSynergy synergy)) return;
+                
+                synergy.BuildingCount--;
+                synergy.ApplySynergy();
 
-                if (synergy.RuntimeBuildingCount <= 0)
+                if (synergy.BuildingCount <= 0)
                 {
-                    synergy.ResetCount();
-                    _synergies.Remove(synergy);
+                    _synergies.Remove(synergy.SynergyName);
                 }
                 
-                synergy.ApplySynergy();
                 _onUpdateSynergies.Invoke(_synergies);
             }
         }

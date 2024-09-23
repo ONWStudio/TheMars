@@ -34,7 +34,7 @@ namespace TM.Card
         [SerializeField] private LocalizedString _localizedCardName;
         
         [SerializeReference, SerializeReferenceDropdown, DisplayAs("카드 효과"), Tooltip("카드 효과")]
-        private ITMCardEffectCreator _cardEffectCreator = null;
+        private TMCardEffectCreator _cardEffectCreator = null;
 
         [field: SerializeField, DisplayAs("코스트"), Tooltip("소모할 재화들 입니다")]
         private List<TMCardCost> _cardCosts;

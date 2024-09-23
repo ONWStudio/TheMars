@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.Events;
 using Onw.Attribute;
 using Onw.GridTile;
+using Onw.Manager;
 using TM.Building;
 
 namespace TM.Grid
 {
-    public sealed class TMGridManager : MonoBehaviour
+    public sealed class TMGridManager : SceneSingleton<TMGridManager>
     {
+        public override string SceneName => "MainGameScene";
+        
         public float TileSize => _gridManager.TileSize;
         public int TileCount => _gridManager.TileCount;
 
@@ -57,16 +60,27 @@ namespace TM.Grid
         [SerializeField, ReadOnly] private UnityEvent<TMBuilding> _onAddedBuilding;
         [SerializeField, ReadOnly] private UnityEvent<TMBuilding> _onRemovedBuilding;
 
+        protected override void Init()
+        {
+        }
+        
         public void AddBuilding(TMBuilding building)
         {
             _buildings.Add(building);
             _onAddedBuilding.Invoke(building);
         }
 
+        public void AddBuildingWithoutNotify(TMBuilding building)
+        {
+            _buildings.Add(building);
+        }
+
         public void RemoveBuilding(TMBuilding building)
         {
-            _buildings.Remove(building);
-            _onRemovedBuilding.Invoke(building);
+            if (_buildings.Remove(building))
+            {
+                _onRemovedBuilding.Invoke(building);
+            }
         }
         
         public bool TryGetTileDataByRay(Ray ray, out GridTile tileData) => _gridManager.TryGetTileDataByRay(ray, out tileData);

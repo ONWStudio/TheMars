@@ -8,7 +8,6 @@ using Onw.Helper;
 using TM.Card.Runtime;
 using TM.Card.Effect.Creator;
 using TM.Class;
-using VContainer;
 
 namespace TM.Card.Effect
 {
@@ -42,8 +41,6 @@ namespace TM.Card.Effect
         }
 
         public IReadOnlyDictionary<TMResourceKind, TMResourceDataForRuntime> Resources => _resources;
-
-        [Inject] private PlayerManager _player;
 
         public event UnityAction<string> OnNotifyEvent
         {
@@ -80,7 +77,7 @@ namespace TM.Card.Effect
         {
             trigger.OnEffectEvent += _ =>
                 _resources.Values.ForEach(resource
-                    => _player.AddResource(resource.ResourceKind, resource.FinalResource));
+                    => TMPlayerManager.Instance.AddResource(resource.ResourceKind, resource.FinalResource));
         }
 
         public void Dispose() { }

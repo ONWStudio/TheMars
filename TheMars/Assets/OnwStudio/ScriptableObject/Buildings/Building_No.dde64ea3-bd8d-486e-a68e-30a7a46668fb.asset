@@ -26,6 +26,8 @@ MonoBehaviour:
     m_LocalVariables: []
   _effectCreators:
   - rid: 8523893798696386564
+  _synergies:
+  - {fileID: 11400000, guid: fb639bd6a0f52490ab55b77056a5cd11, type: 2}
   references:
     version: 2
     RefIds:
@@ -35,5 +37,5 @@ MonoBehaviour:
       data:
         <RepeatSeconds>k__BackingField: 10
         _resources:
-        - <ResourceKind>k__BackingField: 5
-          <Resource>k__BackingField: 0
+        - <ResourceKind>k__BackingField: 3
+          <Resource>k__BackingField: 5

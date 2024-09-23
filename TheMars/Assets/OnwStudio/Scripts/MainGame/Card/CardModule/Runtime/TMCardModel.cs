@@ -10,7 +10,6 @@ using Onw.Components.Movement;
 using Onw.Extensions;
 using TM.Card.Effect;
 using UnityEngine.Serialization;
-using VContainer;
 
 namespace TM.Card.Runtime
 {
@@ -142,13 +141,7 @@ namespace TM.Card.Runtime
         [SerializeField, ReadOnly] private bool _isInit = false;
         [SerializeField, ReadOnly] private bool _canInteract = true;
 
-        [SerializeField, Inject] private TMCardManager _cardManager;
-        [SerializeField, Inject] private PlayerManager _playerManager;
-
         private bool? _keepIsHide = null;
-
-        [Inject] private void constructForCardManager(TMCardManager cardManager) => _cardManager = cardManager;
-        [Inject] private void constructForPlayerManager(PlayerManager playerManager) => _playerManager = playerManager;
 
         private void Awake()
         {
@@ -197,7 +190,7 @@ namespace TM.Card.Runtime
 
         private void dragCard()
         {
-            if (RectTransformUtility.RectangleContainsScreenPoint(_cardManager.DeckTransform, Input.mousePosition, CardCamera))
+            if (RectTransformUtility.RectangleContainsScreenPoint(TMCardManager.Instance.DeckTransform, Input.mousePosition, CardCamera))
             {
                 if (_keepIsHide is null)
                 {
@@ -243,25 +236,25 @@ namespace TM.Card.Runtime
                 switch (cost.ResourceKind)
                 {
                     case TMResourceKind.MARS_LITHIUM:
-                        _playerManager.MarsLithium -= cost.Cost;
+                        TMPlayerManager.Instance.MarsLithium -= cost.Cost;
                         break;
                     case TMResourceKind.CREDIT:
-                        _playerManager.Credit -= cost.Cost;
+                        TMPlayerManager.Instance.Credit -= cost.Cost;
                         break;
                     case TMResourceKind.STEEL:
-                        _playerManager.Steel -= cost.Cost;
+                        TMPlayerManager.Instance.Steel -= cost.Cost;
                         break;
                     case TMResourceKind.PLANTS:
-                        _playerManager.Plants -= cost.Cost;
+                        TMPlayerManager.Instance.Plants -= cost.Cost;
                         break;
                     case TMResourceKind.CLAY:
-                        _playerManager.Clay -= cost.Cost;
+                        TMPlayerManager.Instance.Clay -= cost.Cost;
                         break;
                     case TMResourceKind.ELECTRICITY:
-                        _playerManager.Electricity -= cost.Cost;
+                        TMPlayerManager.Instance.Electricity -= cost.Cost;
                         break;
                     case TMResourceKind.POPULATION:
-                        _playerManager.Population -= cost.Cost;
+                        TMPlayerManager.Instance.Population -= cost.Cost;
                         break;
                 }
             }
@@ -278,13 +271,13 @@ namespace TM.Card.Runtime
         {
             return resourceKind switch
             {
-                TMResourceKind.MARS_LITHIUM => _playerManager.MarsLithium,
-                TMResourceKind.CREDIT => _playerManager.Credit,
-                TMResourceKind.STEEL => _playerManager.Steel,
-                TMResourceKind.PLANTS => _playerManager.Plants,
-                TMResourceKind.CLAY => _playerManager.Clay,
-                TMResourceKind.POPULATION => _playerManager.Population,
-                TMResourceKind.ELECTRICITY => _playerManager.Electricity,
+                TMResourceKind.MARS_LITHIUM => TMPlayerManager.Instance.MarsLithium,
+                TMResourceKind.CREDIT => TMPlayerManager.Instance.Credit,
+                TMResourceKind.STEEL => TMPlayerManager.Instance.Steel,
+                TMResourceKind.PLANTS => TMPlayerManager.Instance.Plants,
+                TMResourceKind.CLAY => TMPlayerManager.Instance.Clay,
+                TMResourceKind.POPULATION => TMPlayerManager.Instance.Population,
+                TMResourceKind.ELECTRICITY => TMPlayerManager.Instance.Electricity,
                 _ => 0
             };
         }
@@ -302,7 +295,7 @@ namespace TM.Card.Runtime
             
             IsOverTombTransform = false;
 
-            if (RectTransformUtility.RectangleContainsScreenPoint(_cardManager.DeckTransform, Input.mousePosition, CardCamera))
+            if (RectTransformUtility.RectangleContainsScreenPoint(TMCardManager.Instance.DeckTransform, Input.mousePosition, CardCamera))
             {
                 sellCard();
             }
@@ -331,8 +324,8 @@ namespace TM.Card.Runtime
         {
             CardEffect.Is<IDisposable>(disposable => disposable.Dispose());
             CardEffect = null;
-            _playerManager.Credit += 10;
-            _cardManager.RemoveCard(this);
+            TMPlayerManager.Instance.Credit += 10;
+            TMCardManager.Instance.RemoveCard(this);
             Destroy(gameObject);
         }
     }

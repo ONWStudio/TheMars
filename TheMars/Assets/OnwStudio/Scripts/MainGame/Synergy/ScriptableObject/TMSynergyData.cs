@@ -7,6 +7,7 @@ using Onw.Attribute;
 using Onw.Interface;
 using Onw.Localization;
 using TM.Synergy.Effect;
+using TM.Synergy.Effect.Creator;
 using UnityEngine.Localization;
 
 namespace TM.Synergy
@@ -15,40 +16,15 @@ namespace TM.Synergy
     {
         public string SynergyName => _localizedSynergyName.TryGetLocalizedString(out string synergyName) ? synergyName : "";
         
-        public string[] DescriptionArray => _synergyEffects
-            .Select(synergyEffect => synergyEffect.Description)
-            .ToArray();
-        
-        public IReadOnlyList<TMSynergyEffectData> SynergyEffects => _synergyEffects;
-        
-        [field: SerializeField] public int BuildingCount { get; private set; }
         [field: SerializeField, SpritePreview] public Sprite Icon { get; private set; } 
 
-        [SerializeReference, SerializeReferenceDropdown] private List<TMSynergyEffectData> _synergyEffects = new();
+        [SerializeReference, SerializeReferenceDropdown] private List<TMSynergyEffectCreator> _synergyEffects = new();
 
-        [SerializeField] private LocalizedString _localizedSynergyName;        
-        
-        private readonly List<TMSynergyEffectData> _applicationEffects = new();
+        [SerializeField] private LocalizedString _localizedSynergyName;
 
-        public void ApplySynergy()
+        public TMSynergy CreateSynergy()
         {
-            _applicationEffects.RemoveAll(applicationEffect =>
-            {
-                if (applicationEffect.TargetBuildingCount > RuntimeBuildingCount)
-                {
-                    applicationEffect.UnapplyEffect();
-                    return true;
-                }
-                
-                return false;
-            });
-            
-            TMSynergyEffectData[] shallEffects = _synergyEffects
-                .Where(synergyEffect => !_applicationEffects.Contains(synergyEffect) && synergyEffect.TargetBuildingCount <= RuntimeBuildingCount)
-                .ToArray();
-
-            shallEffects.ForEach(shallEffect => shallEffect.ApplyEffect());
-            _applicationEffects.AddRange(shallEffects);
+            return new(this, _synergyEffects.Select(effectCreator => effectCreator.CreateEffect()).ToArray());
         }
     }
 }

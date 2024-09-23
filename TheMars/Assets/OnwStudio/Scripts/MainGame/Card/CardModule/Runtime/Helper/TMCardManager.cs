@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Serialization;
+using Onw.Manager;
 using Onw.Attribute;
 using Onw.Extensions;
-using VContainer;
 using Image = UnityEngine.UI.Image;
 
 namespace TM.Card.Runtime
 {
     [DisallowMultipleComponent]
-    public sealed class TMCardManager : MonoBehaviour
+    public sealed class TMCardManager : SceneSingleton<TMCardManager>
     {
+        public override string SceneName => "MainGameScene";
+        
         [System.Serializable]
         public struct TMCardManagerUI
         {
@@ -49,6 +51,8 @@ namespace TM.Card.Runtime
         public IReadOnlyList<TMCardModel> Cards => _cards;
 
         [SerializeField, ReadOnly] private List<TMCardModel> _cards = new();
+
+        protected override void Init() {}
         
         private void Start()
         {

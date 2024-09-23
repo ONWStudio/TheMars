@@ -9,7 +9,6 @@ using Onw.Extensions;
 using TM.Building.Effect.Creator;
 using TM.Class;
 using TM.Manager;
-using VContainer;
 
 namespace TM.Building.Effect
 {
@@ -26,7 +25,6 @@ namespace TM.Building.Effect
         [field: SerializeField, ReadOnly] public float RepeatSeconds { get; set; } = 0f;
 
         [SerializeField, ReadOnly] private UnityEvent<string> _onNotifyEvent = new();
-        [SerializeField, Inject] private PlayerManager _playerManager; 
         
         private Dictionary<TMResourceKind, TMResourceDataForRuntime> _resources = new(); 
         private Coroutine _coroutine = null;
@@ -79,7 +77,7 @@ namespace TM.Building.Effect
 
                     if (timeAccumulator >= RepeatSeconds)
                     {
-                        _resources.Values.ForEach(resource => _playerManager.AddResource(resource.ResourceKind, resource.FinalResource));
+                        _resources.Values.ForEach(resource => TMPlayerManager.Instance.AddResource(resource.ResourceKind, resource.FinalResource));
                         timeAccumulator -= RepeatSeconds;
                     }
 

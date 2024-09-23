@@ -14,7 +14,7 @@ namespace Onw.Manager
     [DisallowMultipleComponent]
     public abstract class SceneSingleton<T> : MonoBehaviour where T : SceneSingleton<T>
     {
-        public static T _instance = null;
+        private static T _instance = null;
         public static T Instance
         {
             get
