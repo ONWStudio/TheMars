@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Onw.Attribute;
 using Onw.Interface;
-using TM.Manager;
 using TM.Synergy.Effect.Creator;
 
 namespace TM.Synergy.Effect
@@ -18,7 +16,7 @@ namespace TM.Synergy.Effect
         /// <summary>
         /// .. TargetCount가 충족되었을때 효과 적용
         /// </summary>
-        public abstract void ApplyEffect();
-        public abstract void UnapplyEffect();
+        public abstract void ApplyEffect(TMSynergy synergy);
+        public abstract void UnapplyEffect(TMSynergy synergy);
     }
 }

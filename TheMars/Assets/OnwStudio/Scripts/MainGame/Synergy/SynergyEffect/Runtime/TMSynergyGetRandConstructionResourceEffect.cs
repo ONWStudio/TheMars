@@ -13,12 +13,12 @@ namespace TM.Synergy.Effect
 
         [field: SerializeField, ReadOnly] public int Resource { get; private set; } = 10;
 
-        public override void ApplyEffect()
+        public override void ApplyEffect(TMSynergy synergy)
         {
             TMSimulator.Instance.OnChangedDay += onChangedDay;
         }
         
-        public override void UnapplyEffect()
+        public override void UnapplyEffect(TMSynergy synergy)
         {
             TMSimulator.Instance.OnChangedDay -= onChangedDay;
         }

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Onw.Attribute;
+using Onw.Helper;
 using TM.Synergy;
 using TM.Synergy.Effect;
 
@@ -25,10 +26,19 @@ namespace TM.Runtime.UI
             _synergyIcon.sprite = synergy.SynergyData.Icon;
             _buildingCountText.text = synergy.BuildingCount.ToString();
             _synergyNameText.text = synergy.SynergyName;
-            _synergyNameText.text = string.Join(">", synergy
+
+            TMSynergyEffect selectLastEffect = synergy
                 .SynergyEffects
-                .Select(synergyEffect => synergyEffect.TargetBuildingCount)
-                .OrderBy(targetCount => targetCount));
+                .Where(synergyEffect => synergyEffect.TargetBuildingCount <= synergy.BuildingCount)
+                .OrderBy(targetCount => targetCount)
+                .LastOrDefault();
+
+            _synergyLevelText.text = string.Join(RichTextFormatter.Colorize(" > ", Color.gray), synergy
+                .SynergyEffects
+                .OrderBy(effect => effect.TargetBuildingCount)
+                .Select(synergyEffect => synergyEffect != selectLastEffect ?
+                    RichTextFormatter.Colorize(synergyEffect.TargetBuildingCount.ToString(), Color.gray) :
+                    synergyEffect.TargetBuildingCount.ToString()));
         }
     }
 }

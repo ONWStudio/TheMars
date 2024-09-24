@@ -21,6 +21,31 @@ namespace Onw.Extensions
             gameObject.transform.SetPositionZ(z);
         }
 
+        public static void SetLocalPositionX(this GameObject gameObject, float x)
+        {
+            gameObject.transform.SetLocalPositionX(x);
+        }
+
+        public static void SetLocalPositionY(this GameObject gameObject, float y)
+        {
+            gameObject.transform.SetLocalPositionX(y);
+        }
+
+        public static void SetLocalPositionZ(this GameObject gameObject, float z)
+        {
+            gameObject.transform.SetLocalPositionZ(z);
+        }
+
+        public static void SetParent(this GameObject gameObject, GameObject parentObject, bool worldPositionStays = true)
+        {
+            gameObject.transform.SetParent(parentObject.transform, worldPositionStays);
+        }
+
+        public static void SetParent(this GameObject gameObject, Transform parentTransform, bool worldPositionStays = true)
+        {
+            gameObject.transform.SetParent(parentTransform, worldPositionStays);
+        }
+
         public static GameObject[] GetChildGameObjectsAll(this GameObject gameObject)
         {
             List<GameObject> result = new();
@@ -54,6 +79,16 @@ namespace Onw.Extensions
             }
 
             return gameObjects;
+        }
+
+        public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
+        {
+            if (!gameObject.TryGetComponent(out T component))
+            {
+                component = gameObject.AddComponent<T>();
+            }
+
+            return component;
         }
     }
 }

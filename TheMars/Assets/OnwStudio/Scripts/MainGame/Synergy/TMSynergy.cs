@@ -30,7 +30,7 @@ namespace TM.Synergy
             {
                 if (applicationEffect.TargetBuildingCount > BuildingCount)
                 {
-                    applicationEffect.UnapplyEffect();
+                    applicationEffect.UnapplyEffect(this);
                     return true;
                 }
                 
@@ -41,7 +41,7 @@ namespace TM.Synergy
                 .Where(synergyEffect => !_applicationEffects.Contains(synergyEffect) && synergyEffect.TargetBuildingCount <= BuildingCount)
                 .ToArray();
 
-            shallEffects.ForEach(shallEffect => shallEffect.ApplyEffect());
+            shallEffects.ForEach(shallEffect => shallEffect.ApplyEffect(this));
             _applicationEffects.AddRange(shallEffects);
         }
         

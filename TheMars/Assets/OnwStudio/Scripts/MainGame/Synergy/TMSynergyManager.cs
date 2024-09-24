@@ -41,8 +41,6 @@ namespace TM.Synergy
 
         private void onAddedBuilding(TMBuilding building)
         {
-            Debug.Log("AddedBuilding");
-            
             foreach (TMSynergyData synergyData in building.BuildingData.Synergies)
             {
                 if (!_synergies.TryGetValue(synergyData.SynergyName, out TMSynergy synergy))
@@ -60,8 +58,6 @@ namespace TM.Synergy
 
         private void onRemovedBuilding(TMBuilding building)
         {
-            Debug.Log("RemovedBuilding");
-            
             foreach (TMSynergyData synergyData in building.BuildingData.Synergies)
             {
                 if (!_synergies.TryGetValue(synergyData.SynergyName, out TMSynergy synergy)) return;

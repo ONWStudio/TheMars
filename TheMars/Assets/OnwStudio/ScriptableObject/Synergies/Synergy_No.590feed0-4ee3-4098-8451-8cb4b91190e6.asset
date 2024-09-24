@@ -46,5 +46,5 @@ MonoBehaviour:
       type: {class: TMSynergyGetRandConstructionResourceEffectCreator, ns: TM.Synergy.Effect.Creator,
         asm: AssemblyTheMars}
       data:
-        <TargetBuildingCount>k__BackingField: 0
+        <TargetBuildingCount>k__BackingField: 2
         <Resource>k__BackingField: 10
