@@ -77,7 +77,7 @@ Shader "BetterUI/ColorOverlay"
 
 	};
 
-	struct v2f
+	struct v2_f
 	{
 		float4 vertex   : SV_POSITION;
 		fixed4 color : COLOR;
@@ -101,9 +101,9 @@ Shader "BetterUI/ColorOverlay"
 #endif
 
 	// VERTEX SHADER
-	v2f vert(appdata_t IN)
+	v2_f vert(appdata_t IN)
 	{
-		v2f OUT;
+		v2_f OUT;
 #if UNITY_VERSION >= 550
 		UNITY_SETUP_INSTANCE_ID(IN);
 		UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
@@ -132,7 +132,7 @@ Shader "BetterUI/ColorOverlay"
 
 
 	// FRAGMENT SHADER
-	fixed4 frag(v2f IN) : SV_Target
+	fixed4 frag(v2_f IN) : SV_Target
 	{
         half4 origCol = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd);
         half4 color = lerp(origCol, IN.color, IN.amount.x);

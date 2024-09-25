@@ -172,7 +172,7 @@ QualitySettings:
     globalTextureMipmapLimit: 0
     textureMipmapLimitSettings: []
     anisotropicTextures: 0
-    antiAliasing: 8
+    antiAliasing: 0
     softParticles: 0
     softVegetation: 1
     realtimeReflectionProbes: 0
@@ -194,7 +194,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 5f8ee937ff327464c9a694cc60473aa7,
+    customRenderPipeline: {fileID: 11400000, guid: 79cb7d215327b4e13ba1cc8c650cbcb1,
       type: 2}
     terrainQualityOverrides: 0
     terrainPixelError: 1

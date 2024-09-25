@@ -56,7 +56,7 @@
 				float2 texcoord : TEXCOORD0;
 			};
 
-			struct v2f
+			struct v2_f
 			{
 				float4 vertex   : SV_POSITION;
 				fixed4 color    : COLOR;
@@ -65,9 +65,9 @@
 			
 			fixed4 _Color;
 
-			v2f vert(appdata_t IN)
+			v2_f vert(appdata_t IN)
 			{
-				v2f OUT;
+				v2_f OUT;
 				OUT.vertex = UnityObjectToClipPos(IN.vertex);
 				OUT.texcoord = IN.texcoord;
 #ifdef UNITY_HALF_TEXEL_OFFSET
@@ -79,7 +79,7 @@
 
 			sampler2D _MainTex;
 
-			fixed4 frag(v2f IN) : SV_Target
+			fixed4 frag(v2_f IN) : SV_Target
 			{
 				half4 color = tex2D(_MainTex, IN.texcoord) * IN.color;
 				clip (color.a - 0.01);

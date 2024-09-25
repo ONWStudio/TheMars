@@ -65,7 +65,7 @@ Shader "MoreMountains/MaskedUI"
 		float2 texcoord : TEXCOORD0;
 	};
 
-	struct v2f
+	struct v2_f
 	{
 		float4 vertex   : SV_POSITION;
 		fixed4 color : COLOR;
@@ -77,9 +77,9 @@ Shader "MoreMountains/MaskedUI"
 	fixed4 _TextureSampleAdd;
 	float4 _ClipRect;
 
-	v2f vert(appdata_t IN)
+	v2_f vert(appdata_t IN)
 	{
-		v2f OUT;
+		v2_f OUT;
 		OUT.worldPosition = IN.vertex;
 		OUT.vertex = UnityObjectToClipPos(OUT.worldPosition);
 
@@ -96,7 +96,7 @@ Shader "MoreMountains/MaskedUI"
 	sampler2D _MainTex;
 	sampler2D _MaskTex;
 
-	fixed4 frag(v2f IN) : SV_Target
+	fixed4 frag(v2_f IN) : SV_Target
 	{
 		half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * IN.color;
 
