@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Onw.Attribute;
+using UnityEngine.Pool;
 
 namespace Onw.GridTile
 {
@@ -18,15 +19,15 @@ namespace Onw.GridTile
         {
             float tileWidth = TileRadius * Mathf.Sqrt(3);
             float tileHeight = TileRadius * 1.5f;
-
+            
             for (int row = 0; row < MapHeight; row++)
             {
                 for (int col = 0; col < MapWidth; col++)
                 {
                     float x = col * tileWidth + (row % 2 == 0 ? 0 : tileWidth / 2);
                     float z = row * tileHeight;
-                    Vector3 tilePosition = new Vector3(x, 0, z);
-                    GameObject hexTileObj = new GameObject($"HexTile_{row}_{col}");
+                    Vector3 tilePosition = new(x, 0, z);
+                    GameObject hexTileObj = new($"HexTile_{row}_{col}");
                     HexTile hexTile = hexTileObj.AddComponent<HexTile>();
                     hexTile.InitializeTile(tilePosition, TileRadius, Layer, LineMaterial);
                 }

@@ -1,12 +1,11 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using Onw.Extensions;
 // ReSharper disable SuspiciousTypeConversion.Global
 
 namespace Onw.Manager.ObjectPool
 {
-    using Extensions;
-
     public interface IPooledObject
     {
         void OnPopFromPool();
@@ -23,14 +22,7 @@ namespace Onw.Manager.ObjectPool
             genericComponent = null;
             if (_pool.TryPop(out genericComponent) && genericComponent)
             {
-                genericComponent.transform.SetParent(null, false);
-                genericComponent.gameObject.SetActive(true);
-                
-                if (genericComponent is IPooledObject pooledObject)
-                {
-                    pooledObject.OnPopFromPool();
-                }
-                
+                onPop(genericComponent);
                 return true;
             }
             return false;
@@ -40,14 +32,7 @@ namespace Onw.Manager.ObjectPool
         {
             if (!_pool.TryPop(out T genericComponent) || !genericComponent) return null;
 
-            genericComponent.transform.SetParent(null, false);
-            genericComponent.gameObject.SetActive(true);
-            
-            if (genericComponent is IPooledObject pooledObject)
-            {
-                pooledObject.OnPopFromPool();
-            }
-            
+            onPop(genericComponent);
             return genericComponent;
         }
 
@@ -71,6 +56,16 @@ namespace Onw.Manager.ObjectPool
             _pool.ForEach(component => UnityEngine.Object.Destroy(component.gameObject));
             _pool.Clear();
         }
+
+        private static void onPop(T genericComponent)
+        {
+            genericComponent.transform.SetParent(null, false);
+            genericComponent.gameObject.SetActive(true);
+            if (genericComponent is IPooledObject pooledObject)
+            {
+                pooledObject.OnPopFromPool();
+            }
+        }
         
         static GenericObjectPool()
         {
@@ -92,16 +87,15 @@ namespace Onw.Manager.ObjectPool
                 while (stack.TryPop(out pooledObject))
                 {
                     if (!pooledObject) continue;
-                    
-                    pooledObject.transform.SetParent(null, false);
-                    pooledObject.SetActive(true);
+
+                    onPop(pooledObject);
                     return true;
                 }
             }
 
             return false;
         }
-        
+
         public static GameObject Pop(string key)
         {
             if (!_pool.TryGetValue(key, out Stack<GameObject> stack) || stack.Count <= 0) return null;
@@ -110,9 +104,7 @@ namespace Onw.Manager.ObjectPool
             {
                 if (!pooledObject) continue;
 
-                pooledObject.transform.SetParent(null, false);
-                pooledObject.SetActive(true);
-
+                onPop(pooledObject);
                 return pooledObject;
             }
 
@@ -129,19 +121,34 @@ namespace Onw.Manager.ObjectPool
                 _pool.Add(key, stack);
             }
 
+            objectToReturn
+                .GetComponents<IPooledObject>()
+                .ForEach(pooledComponent => pooledComponent.OnReturnToPool());
+            
             objectToReturn.SetActive(false);
             objectToReturn.transform.SetParent(_poolParent.transform, false);
+            
             stack.Push(objectToReturn);
         }
         
         public static void ReleaseAllObject()
         {
-            foreach (GameObject o in _pool.Values.SelectMany(stack => stack).Where(obj => obj))
-            {
-                UnityEngine.Object.Destroy(o);
-            }
+            _pool
+                .Values
+                .SelectMany(stack => stack)
+                .Where(obj => obj)
+                .ForEach(UnityEngine.Object.Destroy);
 
             _pool.Clear();
+        }
+        
+        private static void onPop(GameObject pooledObject)
+        {
+            pooledObject.transform.SetParent(null, false);
+            pooledObject.SetActive(true);
+            pooledObject
+                .GetComponents<IPooledObject>()
+                .ForEach(pooledComponent => pooledComponent.OnPopFromPool());
         }
         
         static KeyedObjectPool()
@@ -163,22 +170,15 @@ namespace Onw.Manager.ObjectPool
                 while (stack.TryPop(out genericComponent))
                 {
                     if (!genericComponent) continue;
-                    
-                    genericComponent.transform.SetParent(null, false);
-                    genericComponent.gameObject.SetActive(true);
 
-                    if (genericComponent is IPooledObject pooledObject)
-                    {
-                        pooledObject.OnPopFromPool();
-                    }
-                    
+                    onPop(genericComponent);
                     return true;
                 }
             }
             
             return false;
         }
-        
+
         public static T Pop(string key)
         {
             if (!_pool.TryGetValue(key, out Stack<T> stack) || stack.Count <= 0) return null;
@@ -187,14 +187,7 @@ namespace Onw.Manager.ObjectPool
             {
                 if (!genericComponent) continue;
 
-                genericComponent.transform.SetParent(null, false);
-                genericComponent.gameObject.SetActive(true);
-
-                if (genericComponent is IPooledObject pooledObject)
-                {
-                    pooledObject.OnPopFromPool();
-                }
-                
+                onPop(genericComponent);
                 return genericComponent;
             }
 
@@ -224,12 +217,24 @@ namespace Onw.Manager.ObjectPool
         
         public static void ReleaseAllObject()
         {
-            foreach (T o in _pool.Values.SelectMany(stack => stack).Where(obj => obj))
-            {
-                UnityEngine.Object.Destroy(o);
-            }
+            _pool
+                .Values
+                .SelectMany(stack => stack)
+                .Where(obj => obj)
+                .ForEach(UnityEngine.Object.Destroy);
 
             _pool.Clear();
+        }
+        
+        private static void onPop(T genericComponent)
+        {
+            genericComponent.transform.SetParent(null, false);
+            genericComponent.gameObject.SetActive(true);
+
+            if (genericComponent is IPooledObject pooledObject)
+            {
+                pooledObject.OnPopFromPool();
+            }
         }
         
         static GenericKeyedObjectPool()

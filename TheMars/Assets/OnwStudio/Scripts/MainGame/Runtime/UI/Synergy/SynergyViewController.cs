@@ -34,6 +34,8 @@ namespace TM.Runtime.UI
                     GenericObjectPool<TMSynergyScrollItem>.Return(synergyScrollItemKvp.Value);
                 }
                 
+                ListPool<KeyValuePair<string, TMSynergyScrollItem>>.Release(removeKeys);
+                
                 foreach (KeyValuePair<string, TMSynergy> synergyKvp in dictionary)
                 {
                     if (!_scrollItems.TryGetValue(synergyKvp.Key, out TMSynergyScrollItem scrollItem))
