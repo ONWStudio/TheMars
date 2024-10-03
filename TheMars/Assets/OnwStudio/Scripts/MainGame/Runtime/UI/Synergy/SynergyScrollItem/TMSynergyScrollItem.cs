@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Buffers;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,7 +29,7 @@ namespace TM.Runtime.UI
             TMSynergyEffect selectLastEffect = synergy
                 .SynergyEffects
                 .Where(synergyEffect => synergyEffect.TargetBuildingCount <= synergy.BuildingCount)
-                .OrderBy(targetCount => targetCount)
+                .OrderBy(targetCount => targetCount) // .. GC 발생
                 .LastOrDefault();
 
             _synergyLevelText.text = string.Join(RichTextFormatter.Colorize(" > ", Color.gray), synergy
