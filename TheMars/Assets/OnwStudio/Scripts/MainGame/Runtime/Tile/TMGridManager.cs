@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Onw.Attribute;
-using Onw.GridTile;
+using Onw.HexGrid;
 using Onw.Manager;
 using TM.Building;
 
@@ -13,30 +13,30 @@ namespace TM.Grid
     {
         public override string SceneName => "MainGameScene";
         
-        public float TileSize => _gridManager.TileSize;
+        public float TileSize => _gridManager.HexagonWidth;
         public int TileCount => _gridManager.TileCount;
 
-        public IReadOnlyList<IReadOnlyGridRows> ReadOnlyTileList => _gridManager.TileList;
+        public IReadOnlyList<IReadOnlyGrids> ReadOnlyTileList => _gridManager.TileList;
 
-        public event UnityAction<GridTile> OnHighlightTile
+        public event UnityAction<IHexGrid> OnHighlightTile
         {
             add => _gridManager.OnHighlightTile += value;
             remove => _gridManager.OnHighlightTile -= value;
         }
         
-        public event UnityAction<GridTile> OnMouseDownTile
+        public event UnityAction<IHexGrid> OnMouseDownTile
         {
             add => _gridManager.OnMouseDownTile += value;
             remove => _gridManager.OnMouseDownTile -= value;
         }
         
-        public event UnityAction<GridTile> OnMouseUpTile
+        public event UnityAction<IHexGrid> OnMouseUpTile
         {
             add => _gridManager.OnMouseUpTile += value;
             remove => _gridManager.OnMouseUpTile -= value;
         }
         
-        public event UnityAction<GridTile> OnExitTile
+        public event UnityAction<IHexGrid> OnExitTile
         {
             add => _gridManager.OnExitTile += value;
             remove => _gridManager.OnExitTile -= value;
@@ -83,6 +83,6 @@ namespace TM.Grid
             }
         }
         
-        public bool TryGetTileDataByRay(Ray ray, out GridTile tileData) => _gridManager.TryGetTileDataByRay(ray, out tileData);
+        public bool TryGetTileDataByRay(Ray ray, out HexGrid tileData) => _gridManager.TryGetTileDataByRay(ray, out tileData);
     }
 }

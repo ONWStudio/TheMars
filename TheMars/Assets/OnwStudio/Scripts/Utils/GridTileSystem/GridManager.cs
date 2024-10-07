@@ -2,174 +2,193 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Onw.Event;
 using UnityEngine.Events;
+using UnityEngine.Rendering.Universal;
+using AYellowpaper.SerializedCollections;
+using Onw.Attribute;
+using Onw.Extensions;
+using UnityEngine.Serialization;
 
-namespace Onw.GridTile
+namespace Onw.HexGrid
 {
-    public interface IReadOnlyGridRows
-    {
-        public IReadOnlyList<GridTile> Rows { get; }
-    }
-        
     [System.Serializable]
-    public sealed class GridRows : IReadOnlyGridRows
+    public struct IgnoreHexCoordinates : IHexCoordinates
     {
-        public IReadOnlyList<GridTile> Rows => Row;
+        [field: SerializeField] public int Q { get; set; }
+        [field: SerializeField] public int R { get; set; }
+        [field: SerializeField] public int S { get; set; }
 
-        [field: FormerlySerializedAs("_row")]
-        [field: SerializeField, FormerlySerializedAs("<Row>k_BackingField")] public List<GridTile> Row { get; set; } = new();
+        public static implicit operator Vector3(in IgnoreHexCoordinates hexCoordinates) => new(hexCoordinates.Q, hexCoordinates.R, hexCoordinates.S);
+        public static implicit operator Vector3Int(in IgnoreHexCoordinates hexCoordinates) => new(hexCoordinates.Q, hexCoordinates.R, hexCoordinates.S);
+        public static implicit operator IgnoreHexCoordinates(in Vector3 vec) => new() { Q = (int)vec.x, R = (int)vec.y, S = (int)vec.z };
+        public static implicit operator IgnoreHexCoordinates(in Vector3Int vec) => new() { Q = vec.x, R = vec.y, S = vec.z };
+        public static implicit operator IgnoreHexCoordinates(in Vector2 vec) => new() { Q = (int)vec.x, R = (int)vec.y };
+        public static implicit operator IgnoreHexCoordinates(in Vector2Int vec) => new() { Q = vec.x, R = vec.y };
     }
-    
+
     public sealed class GridManager : MonoBehaviour
     {
-        [System.Serializable]
-        public sealed class BakeOption
-        {
-            [field: SerializeField] public bool MaintainingProperties { get; set; } = true;
-        }
+        private const float HEXAGON_RADIUS_MIN = 0.025f;
+        private const float HEXAGON_RADIUS_MAX = 0.5f;
         
-        private const int GRID_SIZE_MIN = 5;
-        private const int GRID_SIZE_MAX = 10;
-
-        public int TileCount => GridSize * GridSize;
-        
-        public event UnityAction<GridTile> OnHighlightTile
+        public event UnityAction<IHexGrid> OnHighlightTile
         {
             add => _onHighlightTile.AddListener(value);
             remove => _onHighlightTile.RemoveListener(value);
         }
         
-        public event UnityAction<GridTile> OnExitTile
+        public event UnityAction<IHexGrid> OnExitTile
         {
             add => _onExitTile.AddListener(value);
             remove => _onExitTile.RemoveListener(value);
         }
         
-        public event UnityAction<GridTile> OnMouseDownTile
+        public event UnityAction<IHexGrid> OnMouseDownTile
         {
             add => _onMouseDownTile.AddListener(value);
             remove => _onMouseDownTile.RemoveListener(value);
         }
         
-        public event UnityAction<GridTile> OnMouseUpTile
+        public event UnityAction<IHexGrid> OnMouseUpTile
         {
             add => _onMouseUpTile.AddListener(value);
             remove => _onMouseUpTile.RemoveListener(value);
         }
 
-        [field: SerializeField, Range(5, 50)] public float TileSize { get; set; }
-        [field: SerializeField, Range(GRID_SIZE_MIN, GRID_SIZE_MAX)] public int GridSize { get; set; } = 5;
+        [field: SerializeField, Range(HEXAGON_RADIUS_MIN, HEXAGON_RADIUS_MAX)] public float HexagonRadius { get; set; } = 0.025f;
 
+        public float HexagonWidth => HexagonRadius * _decalProjector.size.x * 2 * _decalProjector.transform.localScale.x;
+
+        public int TileCount
+        {
+            get
+            {
+                int qMin = -_qLimit;
+                int qMax = _qLimit;
+                int rMin = -_rLimit;
+                int rMax = _rLimit;
+                int sMin = -_sLimit;
+                int sMax = _sLimit;
+                
+                int kMin = -sMax;
+                int kMax = -sMin;
+
+                int total = 0;
+                
+                for (int k = kMin; k <= kMax; k++)
+                {
+                    int minQ = Mathf.Max(qMin, k - rMax);
+                    int maxQ = Mathf.Min(qMax, k - rMin);
+                    int numQ = maxQ - minQ + 1;
+                    numQ = Mathf.Max(0, numQ);
+                    total += numQ;
+                }
+
+                return total;
+            }
+        }
+        
+        public int QLimit
+        {
+            get => _qLimit;
+            set
+            {
+                _qLimit = value;
+                _decalProjector.material.SetVector("_AbsoluteQRS", new(_qLimit, _rLimit, _sLimit));
+            }
+        }
+        
+        public int RLimit
+        {
+            get => _rLimit;
+            set
+            {
+                _rLimit = value;
+                _decalProjector.material.SetVector("_AbsoluteQRS", new(_qLimit, _rLimit, _sLimit));
+            }
+        }
+        
+        public int SLimit
+        {
+            get => _sLimit;
+            set
+            {
+                _sLimit = value;
+                _decalProjector.material.SetVector("_AbsoluteQRS", new(_qLimit, _rLimit, _sLimit));
+            }
+        }
+        
         [Header("Events")]
-        [SerializeField] private UnityEvent<GridTile> _onHighlightTile = new();
-        [SerializeField] private UnityEvent<GridTile> _onExitTile = new();
-        [SerializeField] private UnityEvent<GridTile> _onMouseUpTile = new();
-        [SerializeField] private UnityEvent<GridTile> _onMouseDownTile = new();
+        [SerializeField] private UnityEvent<IHexGrid> _onHighlightTile = new();
+        [SerializeField] private UnityEvent<IHexGrid> _onExitTile = new();
+        [SerializeField] private UnityEvent<IHexGrid> _onMouseUpTile = new();
+        [SerializeField] private UnityEvent<IHexGrid> _onMouseDownTile = new();
 
-        [SerializeField] private List<GridRows> _tileList = new();
+        [FormerlySerializedAs("_tileList")]
+        [SerializeField, ReadOnly] private SerializedDictionary<string, HexGrid> _hexGrids = new();
 
-        [field: FormerlySerializedAs("_bakeOption")]
-        [field: SerializeField] public BakeOption BakeSettings { get; private set; } = new();
+        [SerializeField, InitializeRequireComponent] private DecalProjector _decalProjector;
 
-        public IReadOnlyList<IReadOnlyGridRows> TileList => _tileList;
+        [SerializeField, Min(0)] private int _qLimit = 3;
+        [SerializeField, Min(0)] private int _rLimit = 3;
+        [SerializeField, Min(0)] private int _sLimit = 3;
 
-        public bool TryGetTileDataByRay(Ray ray, out GridTile tileData)
+        [FormerlySerializedAs("_ignoreGridTiles")]
+        [SerializeField] private List<IgnoreHexCoordinates> _ignoreHexGrids = new();
+
+        public void GetHexGrid()
+        
+        public void AddIgnoreGridTile(int q, int r, int s)
+        {
+            if (_ignoreHexGrids.Any(ignoreGridTile => ignoreGridTile.Q == q && ignoreGridTile.R == r && ignoreGridTile.S == s)) return;
+            
+            _ignoreHexGrids.Add(new() { Q = q, R = r, S = s });
+        }
+
+        public void RemoveIgnoreGridTile(int q, int r, int s)
+        {
+            _ignoreHexGrids.RemoveByConditionOne(tile => tile.Q == q && tile.R == r && tile.S == s);
+        }
+        
+        public bool TryGetTileDataByRay(Ray ray, out HexGrid tileData)
         {
             tileData = null;
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                tileData = _tileList
-                    .SelectMany(row => row.Rows)
-                    .FirstOrDefault(tileData => tileData?.MeshCollider == hit.collider);
-                
-                return tileData;
-            }
+            // if (Physics.Raycast(ray, out RaycastHit hit))
+            // {
+            //     tileData = _tileList
+            //         .SelectMany(row => row.Rows)
+            //         .FirstOrDefault(tileData => tileData?.MeshCollider == hit.collider);
+            //     
+            //     return tileData;
+            // }
 
             return false;
         }
-        
-        private void Start()
+
+        public void CalculateTile()
         {
-            foreach (GridTile tile in _tileList.SelectMany(rows => rows.Row))
+            for (int q = -_qLimit; q <= _qLimit; q++)
             {
-                tile.OnHighlightTile += _onHighlightTile.Invoke;
-                tile.OnMouseDownTile += _onMouseDownTile.Invoke;
-                tile.OnMouseUpTile += _onMouseUpTile.Invoke;
-                tile.OnExitTile += _onExitTile.Invoke;
-            }
-        }
-
-        public void BakeTiles()
-        {
-            Debug.Log("Bake");
-            
-            // GridManager 오브젝트의 위치를 중심으로 격자 시작 위치 설정
-            Vector3 startPosition = transform.position;
-        
-            // 왼쪽 아래에서 시작하도록 오프셋 계산
-            float calcTileSize = GridSize * TileSize;
-            float startX = startPosition.x - calcTileSize * 0.5f;
-            float startZ = startPosition.z - calcTileSize * 0.5f;
-
-            bool canMaintainingProperties = BakeSettings.MaintainingProperties && _tileList.Count == GridSize;
-            
-            List<List<List<string>>> properties = canMaintainingProperties ? 
-                _tileList
-                    .Select(rows => rows.Row.Select(tile => tile.Properties).ToList())
-                    .ToList() : 
-                null;
-            
-            foreach (GridRows rows in _tileList)
-            {
-                rows.Row.ForEach(tile => DestroyImmediate(tile.gameObject));
-                rows.Row.Clear();
-                rows.Row = null;
-            }
-
-            _tileList.Clear();
-            
-            Material material = new(Shader.Find("Universal Render Pipeline/Lit"))
-            {
-                color = Color.white
-            };
-
-            for (int x = 0; x < GridSize; x++)
-            {
-                GridRows gridRows = new();
-                _tileList.Add(gridRows);
-
-                for (int y = 0; y < GridSize; y++)
+                if (_hexGrids.)
+                for (int r = -_rLimit; r <= _rLimit; r++)
                 {
-                    // 타일 생성
-                    Vector3 tilePosition = new(
-                        startX + x * TileSize,
-                        startPosition.y,
-                        startZ + y * TileSize);
-
-                    // 새 GameObject 생성
-                    GameObject tileObject = new("Tile")
-                    {
-                        transform =
-                        {
-                            // 타일 위치 설정
-                            position = tilePosition
-                        }
-                    };
-
-                    tileObject.transform.SetParent(gameObject.transform);
-                    GridTile gridTile = tileObject.AddComponent<GridTile>();
-                    gridTile.CreateTile(this, material, TileSize, new(x, y));
-
-                    if (canMaintainingProperties)
-                    {
-                        gridTile.Properties.AddRange(properties[x][y]);
-                    }
-
-                    gridRows.Row.Add(gridTile);
+                    HexGrid hex = new HexGrid()
                 }
             }
         }
+        
+        #if UNITY_EDITOR
+        [OnChangedValueByMethod(nameof(_qLimit), nameof(_rLimit), nameof(_sLimit))]
+        private void onChangedLimit()
+        {
+            _decalProjector.material.SetVector("_AbsoluteQRS", new(_qLimit, _rLimit, _sLimit));
+        }
+
+        [OnChangedValueByMethod(nameof(HexagonRadius))]
+        private void onChangedRadius()
+        {
+            _decalProjector.material.SetFloat("_Radius", HexagonRadius);
+        }
+        #endif
     }
 }

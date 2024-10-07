@@ -36,10 +36,10 @@ namespace Onw.Editor
 
         public void OnEnable(Editor editor)
         {
-            Initialize(editor);
+            initialize(editor);
         }
 
-        private void Initialize(Editor editor)
+        private void initialize(Editor editor)
         {
             if (Application.isPlaying) return;
 
@@ -62,7 +62,7 @@ namespace Onw.Editor
                             continue;
                         }
 
-                        methods = new PropertyMethodPair(new List<Action>(), targetField, action.Target);
+                        methods = new(new(), targetField, action.Target);
                         _observerMethods.Add(fieldName, methods);
                     }
 
@@ -119,7 +119,7 @@ namespace Onw.Editor
 
             if (isUpdate)
             {
-                Initialize(editor);
+                initialize(editor);
             }
 
             static IEnumerator iEInvokeMethod(PropertyMethodPair propertyMethodPair)

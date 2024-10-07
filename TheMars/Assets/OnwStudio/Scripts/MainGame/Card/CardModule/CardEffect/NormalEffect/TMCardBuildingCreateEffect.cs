@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Onw.Helper;
-using Onw.GridTile;
+using Onw.HexGrid;
 using Onw.Attribute;
 using Onw.Extensions;
 using TM.Grid;
@@ -21,12 +21,12 @@ namespace TM.Card.Effect
     {
         public readonly struct PrevTileData
         {
-            public GridTile PrevTile { get; }
+            public IHexGrid Prev { get; }
             public Vector3 PrevPosition { get; }
 
-            public PrevTileData(GridTile prevTile, in Vector3 prevPosition)
+            public PrevTileData(IHexGrid prev, in Vector3 prevPosition)
             {
-                PrevTile = prevTile;
+                Prev = prev;
                 PrevPosition = prevPosition;
             }
         }
@@ -42,7 +42,7 @@ namespace TM.Card.Effect
         [SerializeField, ReadOnly] private TMBuilding _building = null;
 
         private TMCardModel _cardModel = null;
-        private GridTile _currentTile = null;
+        private IHexGrid _current = null;
         private Camera _mainCamera = null;
         private PrevTileData? _prevTileData = null;
 
@@ -95,9 +95,9 @@ namespace TM.Card.Effect
 
         private void setCurrentTile()
         {
-            if (!TMGridManager.Instance.TryGetTileDataByRay(_mainCamera.ScreenPointToRay(Input.mousePosition), out GridTile tileData)) return;// .. 레이캐스트로 타일 검사
+            if (!TMGridManager.Instance.TryGetTileDataByRay(_mainCamera.ScreenPointToRay(Input.mousePosition), out HexGrid tileData)) return;// .. 레이캐스트로 타일 검사
 
-            _currentTile = tileData; // .. 타일 설정
+            _current = tileData; // .. 타일 설정
             setTileHighlight(tileData); // .. 타일 하이라이트 설정
         }
 
@@ -119,9 +119,9 @@ namespace TM.Card.Effect
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, TILE_FIND_LAYER_MASK)) // .. 레이캐스트로 타일 검사
                 {
                     Vector3 hitPoint = hit.point; // .. 충돌 포인트
-                    if (_currentTile is not null && hit.collider.gameObject.name == "Tile") // .. 타일이 선택되어 있고 충돌 지점이 타일이라면?
+                    if (_current is not null && hit.collider.gameObject.name == "Tile") // .. 타일이 선택되어 있고 충돌 지점이 타일이라면?
                     {
-                        Vector3 tilePosition = _currentTile.TileRenderer.transform.position;
+                        Vector3 tilePosition = Vector3.zero;
                         float tileHalfSize = TMGridManager.Instance.TileSize * 0.5f;
                         tilePosition.x += tileHalfSize;
                         tilePosition.z += tileHalfSize;
@@ -138,10 +138,10 @@ namespace TM.Card.Effect
                     _building.MeshRenderer.enabled = false; // .. 건물 비활성화
                     TMGridManager.Instance.OnHighlightTile -= setTileHighlight; // .. 이벤트에서 딜리게이트 제거
 
-                    if (_currentTile is not null) // .. 선택된 타일이 있을경우
+                    if (_current is not null) // .. 선택된 타일이 있을경우
                     {
-                        setTileUnHighlight(_currentTile); // .. 타일 하이라이트 비활성화
-                        _currentTile = null; // .. 선택된 타일 해제
+                        setTileUnHighlight(_current); // .. 타일 하이라이트 비활성화
+                        _current = null; // .. 선택된 타일 해제
                     }
                 }
             }
@@ -156,11 +156,10 @@ namespace TM.Card.Effect
             Vector3 keepPosition = _cardModel.transform.localPosition; // .. 카드의 현재 포지션을 캐싱
 
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, TILE_BATCH_LAYER_MASK) && // .. 레이캐스팅
-                _prevTileData?.PrevTile != _currentTile && // .. 이전에 선택된 타일과 현재 선택된 타일이 같지 않고
-                _currentTile && // .. 현재 선택된 타일이 존재하고
-                _currentTile.Properties.All(property => property is not "DefaultBuilding" and not "TileOff")) // .. 현재 선택된 타일이 건물 설치 가능한 타일일때
+                _prevTileData?.Prev != _current && // .. 이전에 선택된 타일과 현재 선택된 타일이 같지 않고
+                (_current?.Properties.All(property => property is not "DefaultBuilding" and not "TileOff") ?? false)) // .. 현재 선택된 타일이 건물 설치 가능한 타일일때
             {
-                _building.transform.SetParent(_currentTile.TileRenderer.transform); // .. 타일위에 건물 배치
+                // _building.transform.SetParent(_currentTile.TileRenderer.transform); // .. 타일위에 건물 배치
 
                 if (_prevTileData is not null)
                 {
@@ -180,7 +179,7 @@ namespace TM.Card.Effect
                     _cardModel.PayCost(); // .. 실제 코스트 지불 계산
                 }
 
-                batchBuildingOnTile(_currentTile); // .. 건물이 배치된 타일 설정하기
+                batchBuildingOnTile(_current); // .. 건물이 배치된 타일 설정하기
             }
             else // .. 만약 타일이 아니라면
             {
@@ -188,7 +187,7 @@ namespace TM.Card.Effect
                 {
                     PrevTileData prevTileData = (PrevTileData)_prevTileData; // .. Nullable이므로 타입 캐스팅
                     _building.transform.position = prevTileData.PrevPosition; // .. 건물의 포지션 이전 타일의 위치로
-                    batchBuildingOnTile(prevTileData.PrevTile); // .. 건물이 배치된 타일 설정하기
+                    batchBuildingOnTile(prevTileData.Prev); // .. 건물이 배치된 타일 설정하기
                 }
                 else
                 {
@@ -196,7 +195,7 @@ namespace TM.Card.Effect
                 }
             }
 
-            _currentTile = null; // .. 설치 효과에 대한 사이클이 종료되었으므로 선택된 타일 null
+            _current = null; // .. 설치 효과에 대한 사이클이 종료되었으므로 선택된 타일 null
             _cardModel.IsHide = false; // .. 카드 렌더링 비활성화
 
             TMGridManager.Instance.OnHighlightTile -= setTileHighlight; // .. 딜리게이트 제거
@@ -204,26 +203,26 @@ namespace TM.Card.Effect
             TMGridManager
                 .Instance
                 .ReadOnlyTileList
-                .SelectMany(rows => rows.Rows)
+                .SelectMany(rows => rows.ReadOnlyGrids)
                 .ForEach(setTileUnHighlight); // .. 하이라이트 된 타일이 있었을 경우 다시 언하이라이트
 
-            void onMouseDownTile(GridTile tileData) // .. 건물이 배치된 타일에 클릭 이벤트 추가
+            void onMouseDownTile(IHexGrid tileData) // .. 건물이 배치된 타일에 클릭 이벤트 추가
             {
                 if (EventSystem.current.IsPointerOverGameObject()) return; // .. UI가 겹쳐진 상태일때 UI가 먼저 상호작용 되어야 하므로 겹친 상태일때는 트리거x
 
                 _prevTileData = new(tileData, _building.transform.position); // .. 설치되었던 타일의 데이터 미리 캐싱
-                _currentTile = tileData; // .. 현재 커서가 클릭한 위치가 이미 타일이므로 타일 선택
-                _currentTile.OnMouseDownTile -= onMouseDownTile; // .. 해당 타일은 이제 건물이 있지 않은 상태이므로 이벤트에서 딜리게이트 제거
-                _currentTile.Properties.Remove("TileOff"); // .. 타일은 더 이상 설치 불가능한 상태가 아니므로 TileOff속성 제거
+                _current = tileData; // .. 현재 커서가 클릭한 위치가 이미 타일이므로 타일 선택
+                _current.OnMouseDownTile -= onMouseDownTile; // .. 해당 타일은 이제 건물이 있지 않은 상태이므로 이벤트에서 딜리게이트 제거
+                _current.RemoveProperty("TileOff"); // .. 타일은 더 이상 설치 불가능한 상태가 아니므로 TileOff속성 제거
                 _cardModel.transform.localPosition = keepPosition; // .. 카드를 설치 이전 상태의 포지션으로 재위치
                 TMCardManager.Instance.AddCard(_cardModel); // .. 카드는 다시 패에 돌아올 수 있으므로 Add
                 _cardModel.TriggerSelectCard(); // .. 현재 카드가 선택되었다고 카드에게 알려주기
                 onDownCard(null); // .. 이벤트 메서드 직접 호출
             }
 
-            void batchBuildingOnTile(GridTile currentTile) // .. 건물이 타일위에 배치되었을경우 해주어야할 처리를 하는 메서드
+            void batchBuildingOnTile(IHexGrid currentTile) // .. 건물이 타일위에 배치되었을경우 해주어야할 처리를 하는 메서드
             {
-                currentTile.Properties.Add("TileOff"); // .. 타일에 건물이 설치되었으므로 다른 건물을 배치할 수 없게 속성 추가
+                currentTile.AddProperty("TileOff"); // .. 타일에 건물이 설치되었으므로 다른 건물을 배치할 수 없게 속성 추가
 
                 _cardModel.transform.localPosition = new(1000, 1000, 100000); // .. 카드는 화면에 보이지 않는 포지션으로 위치 변경
                 _cardModel.CardBodyMover.TargetPosition = _cardModel.transform.localPosition; // .. 무버 타겟 포지션 설정
@@ -234,19 +233,19 @@ namespace TM.Card.Effect
             }
         }
 
-        private void setTileHighlight(GridTile tile)
+        private void setTileHighlight(IHexGrid tile)
         {
-            _currentTile = tile; // .. 현재 마우스위치에 있는 타일이 선택된 타일
+            _current = tile; // .. 현재 마우스위치에 있는 타일이 선택된 타일
 
-            tile.TileRenderer.material.color =
-                tile.Properties.All(property => property is not "DefaultBuilding" and not "TileOff") ? // .. 타일이 설치 가능한 타일인지 검사
-                    Color.yellow : // .. 설치 가능한 타일일경우
-                    Color.red; // .. 설치 불가능한 타일일경우
+            // tile.TileRenderer.material.color =
+            //     tile.Properties.All(property => property is not "DefaultBuilding" and not "TileOff") ? // .. 타일이 설치 가능한 타일인지 검사
+            //         Color.yellow : // .. 설치 가능한 타일일경우
+            //         Color.red; // .. 설치 불가능한 타일일경우
         }
 
-        private static void setTileUnHighlight(GridTile tileArgs)
+        private static void setTileUnHighlight(IHexGrid args)
         {
-            tileArgs.TileRenderer.material.color = Color.white; // .. 더 이상 선택된 타일이 아닐 경우 원래 색상으로 변경
+            //tileArgs.TileRenderer.material.color = Color.white; // .. 더 이상 선택된 타일이 아닐 경우 원래 색상으로 변경
         }
 
         public void Dispose()

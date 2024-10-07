@@ -43,11 +43,25 @@ void calculate_alpha_float(
 	alpha = saturate(1.0 - min_distance / line_width);
 }
 
+void calculate_alpha_float(const float2 center, const float2 p, const float2 vertices[6], const float line_width_ratio, out float alpha)
+{
+	float distances[6];
+	distance_to_segment_float(p, vertices[0], vertices[1], distances[0]);
+	float min_distance = distances[0];
+	for (int i = 1; i < 6; i++)
+	{
+		distance_to_segment_float(p, vertices[i], vertices[(i + 1) % 6u], distances[i]);
+		min_distance = min(min_distance, distances[i]);
+	}
+
+	alpha = saturate(1.0 - min_distance / line_width_ratio);
+}
+
 void get_hex_corner_float2(const float2 center, const float radius, const int index, out float2 corner)
 {
-	const float pi = 3.14159265359;
+	const float pi = 3.14159265359f;
 	const float angle_deg = 60 * index;
-	const float angle_rad = pi / 180 * angle_deg;
+	const float angle_rad = pi / 180.0f * angle_deg;
 
 	corner = float2(
 		center.x + radius * cos(angle_rad),
@@ -56,19 +70,12 @@ void get_hex_corner_float2(const float2 center, const float radius, const int in
 
 void calculate_hex_outline_float(const float2 hex_pixel, const float2 now_pixel, const float radius, const float line_width, out float alpha)
 {
-	float2 v0;
-	float2 v1;
-	float2 v2;
-	float2 v3;
-	float2 v4;
-	float2 v5;
-	
-	get_hex_corner_float2(hex_pixel, radius, 0, v0);
-	get_hex_corner_float2(hex_pixel, radius, 1, v1);
-	get_hex_corner_float2(hex_pixel, radius, 2, v2);
-	get_hex_corner_float2(hex_pixel, radius, 3, v3);
-	get_hex_corner_float2(hex_pixel, radius, 4, v4);
-	get_hex_corner_float2(hex_pixel, radius, 5, v5);
+	float2 vertices[6];
 
-	calculate_alpha_float(now_pixel, v0, v1, v2, v3, v4, v5, line_width, alpha);
+	for (int i = 0; i < 6; i++)
+	{
+		get_hex_corner_float2(hex_pixel, radius, i, vertices[i]);
+	}
+	
+	calculate_alpha_float(hex_pixel, now_pixel, vertices, line_width, alpha);
 }

@@ -8,16 +8,17 @@ using Onw.Extensions;
 using UnityEngine;
 using UnityEditor;
 
-namespace Onw.GridTile.Editor
+namespace Onw.HexGrid.Editor
 {
     using Editor = UnityEditor.Editor;
 
     [CustomEditor(typeof(GridManager))]
     internal sealed class GridManagerInspector : Editor
     {
-        private readonly List<GridRows> _tileList = new();
+        private readonly List<HexGrid> _tileList = new();
         private GridManager _gridManager = null;
         private GUIStyle _style = null;
+        private int _tileCount = 0;
 
         private void OnEnable()
         {
@@ -25,41 +26,27 @@ namespace Onw.GridTile.Editor
             initializeTile();
         }
 
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
-
-            if (GUILayout.Button("Bake Tiles"))
-            {
-                _gridManager.BakeTiles();
-                initializeTile();
-            }
-
-            if (GUILayout.Button("Find Tiles"))
-            {
-                List<GridRows> gridRows = _gridManager!
-                    .GetType()
-                    .GetField("_tileList", BindingFlags.Instance | BindingFlags.NonPublic)!
-                    .GetValue(_gridManager) as List<GridRows> ?? throw new InvalidOperationException();
-
-                gridRows.Clear();
-                gridRows.AddRange(_gridManager
-                    .GetComponentsInChildren<GridTile>()
-                    .GroupBy(tile => tile.TilePoint.x)
-                    .Select(group => new GridRows
-                    {
-                        Row = new(group)
-                    }));
-            }
-        }
-
         private void initializeTile()
         {
-            _tileList.Clear();
-            _tileList.AddRange(_gridManager!
-                .GetType()
-                .GetField("_tileList", BindingFlags.Instance | BindingFlags.NonPublic)!
-                .GetValue(_gridManager) as List<GridRows> ?? throw new InvalidOperationException());
+            _gridManager = target as GridManager;
+            _tileCount = _gridManager.TileCount;
+            _tileList.AddRange((_gridManager!
+                    .GetType()
+                    .GetField("_tileList", BindingFlags.Instance | BindingFlags.NonPublic)!
+                .GetValue(_gridManager) as List<HexGrids>)!
+                .SelectMany(grids => grids.Grids));
+        }
+
+        public override void OnInspectorGUI()
+        {
+            EditorGUILayout.LabelField($"TileCount : {_tileCount}");
+            
+            DrawDefaultInspector();
+
+            if (GUILayout.Button("Calculate Grids"))
+            {
+                
+            }
         }
 
         private void OnSceneGUI()
@@ -73,30 +60,30 @@ namespace Onw.GridTile.Editor
                 alignment = TextAnchor.MiddleCenter
             };
 
-            foreach (GridRows rows in _tileList)
-            {
-                foreach (GridTile tile in rows.Row)
-                {
-                    Vector3 tilePosition = tile.transform.position;
-
-                    // Scene 뷰에서 3D 공간의 위치를 GUI 좌표로 변환
-                    Vector2 guiPosition = HandleUtility.WorldToGUIPoint(new(
-                        tilePosition.x + tile.Size.x * 0.5f,
-                        tilePosition.y,
-                        tilePosition.z + tile.Size.z * 0.5f));
-
-                    // Scene 뷰의 GUI 영역 그리기 시작
-                    Handles.BeginGUI();
-                    // GUI 영역을 설정 (오브젝트 위치에 따라 GUI 좌표를 정확히 설정)
-
-                    string properties = string.Join(", \n   ", tile.Properties);
-
-                    GUI.Label(new(guiPosition.x - 50, guiPosition.y - 25, 50, 30), $"TilePoint : {tile.TilePoint} \n [{properties}]", _style);
-
-                    // GUI 그리기 종료
-                    Handles.EndGUI();
-                }
-            }
+            // foreach (GridRows rows in _tileList)
+            // {
+            //     foreach (HexGrid tile in rows.Row)
+            //     {
+            //         Vector3 tilePosition = tile.transform.position;
+            //
+            //         // Scene 뷰에서 3D 공간의 위치를 GUI 좌표로 변환
+            //         Vector2 guiPosition = HandleUtility.WorldToGUIPoint(new(
+            //             tilePosition.x + tile.Size.x * 0.5f,
+            //             tilePosition.y,
+            //             tilePosition.z + tile.Size.z * 0.5f));
+            //
+            //         // Scene 뷰의 GUI 영역 그리기 시작
+            //         Handles.BeginGUI();
+            //         // GUI 영역을 설정 (오브젝트 위치에 따라 GUI 좌표를 정확히 설정)
+            //
+            //         string properties = string.Join(", \n   ", tile.Properties);
+            //
+            //         GUI.Label(new(guiPosition.x - 50, guiPosition.y - 25, 50, 30), $"TilePoint : {tile.TilePoint} \n [{properties}]", _style);
+            //
+            //         // GUI 그리기 종료
+            //         Handles.EndGUI();
+            //     }
+            // }
         }
     }
 }

@@ -18,8 +18,8 @@ namespace Onw.Editor
     /// <summary>
     /// .. 리플렉션을 통해 정상적으로는 접근할 수 없는 InspectorWindow에 접근합니다
     /// 타사 라이브러리와의 충돌을 고려하여 InspectorWindow 인스펙터에 추가 기능을 담당하는 VisualElement를 Add합니다
-    /// CustomEditor(typeof(MonoBehaviour)), CustomEditor(typeof(ScritableObject)) 와 같은 경우들은 MonoBehaviour, ScritableObject를 상속받는 더 구체적인 클래스의 커스텀 에디터가
-    /// 구현되어있으면 target으로  MonoBehaviour, ScritableObject를 불러오지 못하는 경우가 발생합니다
+    /// CustomEditor(typeof(MonoBehaviour)), CustomEditor(typeof(ScriptableObject)) 와 같은 경우들은 MonoBehaviour, ScriptableObject를 상속받는 더 구체적인 클래스의 커스텀 에디터가
+    /// 구현되어있으면 target으로  MonoBehaviour, ScriptableObject를 불러오지 못하는 경우가 발생합니다
     /// 커스텀 모노비하이비어, 커스텀 스크립터블 오브젝트를 구현해서 해당 클래스를 상속시키고 CustomEditor의 타겟으로 삼으면 충돌문제가 발생하지 않지만
     /// 추가 기능을 사용하려면 커스텀 클래스들을 상속받아야 한다는 약속되지 않은 규칙이 생기므로 해당 스크립트를 통해 기능들을 구현합니다
     /// 리플렉션을 통해 정상적으로는 접근할 수 없는 클래스에 접근하기 때문에 버전에 따라 동작하지 않는 경우가 발생할 수 있습니다
@@ -38,6 +38,8 @@ namespace Onw.Editor
 
         private static void initialize() 
         {
+            Debug.Log("Modify Inspector!");
+            
             EditorCoroutineUtility.StartCoroutineOwnerless(runModifier());
 
             static IEnumerator runModifier()
@@ -68,7 +70,7 @@ namespace Onw.Editor
                     rootVisualElement.RegisterCallback<GeometryChangedEvent>(_ =>
                        callCustomDrawerMethods(rootVisualElement));
 
-                    // EditorCoroutineUtility.StartCoroutineOwnerless(iETrackSelectionChanged(rootVisualElement));
+                    callCustomDrawerMethods(rootVisualElement);
                 }
             }
 

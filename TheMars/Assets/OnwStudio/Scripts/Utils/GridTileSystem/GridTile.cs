@@ -1,133 +1,123 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using Onw.Attribute;
-using Onw.Event;
-using TMPro;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 
-namespace Onw.GridTile
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+using Onw.Extensions;
+using Onw.Attribute;
+
+namespace Onw.HexGrid
 {
-    public sealed class GridTile : MonoBehaviour
+    public interface IHexCoordinates
     {
-        public event UnityAction<GridTile> OnHighlightTile
+        int Q { get; }
+        int R { get; }
+        int S { get; }
+
+    }
+    
+    public interface IHexGrid : IHexCoordinates
+    {
+        IReadOnlyList<string> Properties { get; }
+
+        Vector3 TilePosition { get; }
+        
+        event UnityAction<IHexGrid> OnHighlightTile;
+        event UnityAction<IHexGrid> OnExitTile;
+        event UnityAction<IHexGrid> OnMouseDownTile;
+        event UnityAction<IHexGrid> OnMouseUpTile;
+        
+        void AddProperty(string property);
+        bool RemoveProperty(string property);
+    }
+    
+    [System.Serializable]
+    public class HexGrid : IHexGrid
+    {
+        [field: SerializeField, ReadOnly] public int Q { get; private set; }
+        [field: SerializeField, ReadOnly] public int R { get; private set; }
+        [field: SerializeField, ReadOnly] public int S { get; private set; }
+        [field: SerializeField, ReadOnly] public Vector3 TilePosition { get; private set; } = Vector3.zero;
+        public IReadOnlyList<string> Properties => _properties;
+
+        [SerializeField] private List<string> _properties = new();
+
+        public event UnityAction<IHexGrid> OnHighlightTile
         {
             add => _onHighlightTile.AddListener(value);
             remove => _onHighlightTile.RemoveListener(value);
         }
-        
-        public event UnityAction<GridTile> OnMouseDownTile
-        {
-            add => _onMouseDownTile.AddListener(value);
-            remove => _onMouseDownTile.RemoveListener(value);
-        }
-        
-        public event UnityAction<GridTile> OnMouseUpTile
-        {
-            add => _onMouseUpTile.AddListener(value);
-            remove => _onMouseUpTile.RemoveListener(value);
-        }
-        
-        public event UnityAction<GridTile> OnExitTile
+
+        public event UnityAction<IHexGrid> OnExitTile
         {
             add => _onExitTile.AddListener(value);
             remove => _onExitTile.RemoveListener(value);
         }
 
-        [field: FormerlySerializedAs("_properties")]
-        [field: SerializeField] public List<string> Properties { get; private set; } = new(); // .. 각 타일에 속성을 넣을 수 있습니다
-
-        [field: FormerlySerializedAs("_tileRenderer")]
-        [field: SerializeField, ReadOnly] public MeshRenderer TileRenderer { get; private set; }
-        [field: FormerlySerializedAs("_meshCollider")]
-        [field: SerializeField, ReadOnly] public MeshCollider MeshCollider { get; private set; }
-        [field: FormerlySerializedAs("_meshFilter")]
-        [field: SerializeField, ReadOnly] public MeshFilter MeshFilter { get; private set; }
-
-        [field: FormerlySerializedAs("_tilePoint")]
-        [field: SerializeField, ReadOnly] public Vector2Int TilePoint { get; private set; }
-
-        [SerializeField, ReadOnly] private GridManager _gridManager;
-
-        [SerializeField] private UnityEvent<GridTile> _onHighlightTile = new();
-        [SerializeField] private UnityEvent<GridTile> _onMouseDownTile = new();
-        [SerializeField] private UnityEvent<GridTile> _onMouseUpTile = new();
-        [SerializeField] private UnityEvent<GridTile> _onExitTile = new();
-        
-        public Vector3 Size => TileRenderer.bounds.size;
-
-        public void CreateTile(GridManager gridManager, Material material, float tileSize, in Vector2Int tilePoint)
+        public event UnityAction<IHexGrid> OnMouseDownTile
         {
-            _gridManager = gridManager;
-            TilePoint = tilePoint;
-            MeshFilter = gameObject.AddComponent<MeshFilter>();
-            TileRenderer = gameObject.AddComponent<MeshRenderer>();
-            MeshCollider = gameObject.AddComponent<MeshCollider>();
-
-            TileRenderer.sharedMaterial = material;
-            
-            Mesh mesh = new();
-
-            // 정점 설정
-            Vector3[] vertices =
-            {
-                new(0, 0, 0), new(tileSize, 0, 0),
-                new(0, 0, tileSize), new(tileSize, 0, tileSize)
-            };
-
-            int[] triangles =
-            {
-                0, 2,
-                1, // 첫 번째 삼각형
-                2, 3,
-                1 // 두 번째 삼각형
-            };
-
-            Vector2[] uv =
-            {
-                new(0, 0), new(1, 0),
-                new(0, 1), new(1, 1)
-            };
-
-            // 메쉬에 데이터 할당
-            mesh.vertices = vertices;
-            mesh.triangles = triangles;
-            mesh.uv = uv;
-
-            // 노멀 계산 (빛 반사 처리)
-            mesh.RecalculateNormals();
-
-            MeshFilter.mesh = mesh;
-            MeshCollider.sharedMesh = mesh;
+            add => _onMouseDownTile.AddListener(value);
+            remove => _onMouseDownTile.RemoveListener(value);
         }
-        
-        public bool ContainsProperty(string property)
+
+        public event UnityAction<IHexGrid> OnMouseUpTile
         {
-            return Properties?.Any(someProperty => someProperty == property) ?? false;
+            add => _onMouseUpTile.AddListener(value);
+            remove => _onMouseUpTile.RemoveListener(value);
         }
-        
-        private void OnMouseEnter()
+
+        [Header("Events")]
+        [SerializeField] private UnityEvent<IHexGrid> _onHighlightTile = new();
+        [SerializeField] private UnityEvent<IHexGrid> _onExitTile = new();
+        [SerializeField] private UnityEvent<IHexGrid> _onMouseUpTile = new();
+        [SerializeField] private UnityEvent<IHexGrid> _onMouseDownTile = new();
+
+        public void AddProperty(string property)
+        {
+            _properties.Add(property);
+        }
+
+        public bool RemoveProperty(string property)
+        {
+            return _properties.RemoveByConditionAll(p => property == p);
+        }
+
+        public void InvokeOnHighlightTile()
         {
             _onHighlightTile.Invoke(this);
         }
 
-        private void OnMouseExit()
+        public void InvokeOnExitTile()
         {
             _onExitTile.Invoke(this);
         }
 
-        private void OnMouseDown()
+        public void InvokeOnMouseUpTile()
+        {
+            _onMouseUpTile.Invoke(this);
+        }
+
+        public void InvokeOnMouseDownTile()
         {
             _onMouseDownTile.Invoke(this);
         }
 
-        private void OnMouseUp()
+        public void SetTilePosition(in Vector3 tilePosition)
         {
-            _onMouseUpTile.Invoke(this);
+            TilePosition = tilePosition;
         }
+
+        public HexGrid(int q, int r, in Vector3 tilePosition) : this(q, r)
+        {
+            TilePosition = tilePosition;
+        }
+
+        public HexGrid(int q, int r)
+        {
+            Q = q;
+            R = r;
+            S = -q - r;
+        }
+        
+        public static implicit operator Vector3(HexGrid hexGrid) => new(hexGrid.Q, hexGrid.R, hexGrid.S);
     }
 }

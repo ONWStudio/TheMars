@@ -18,17 +18,6 @@ namespace Onw.Extensions
             return source.Any() ? source : defaultCorrection;
         }
 
-        public static IEnumerable<T> RemoveElements<T>(this List<T> source, Func<T> predicate)
-        {
-            if (source == null)
-                throw new ArgumentNullException(nameof(source));
-            if (predicate == null)
-                throw new ArgumentNullException(nameof(predicate));
-
-            _ = source.Remove(predicate.Invoke());
-            return source;
-        }
-
         public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
             foreach (T element in source) action.Invoke(element);
