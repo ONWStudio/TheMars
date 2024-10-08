@@ -95,7 +95,7 @@ namespace TM.Card.Effect
 
         private void setCurrentTile()
         {
-            if (!TMGridManager.Instance.TryGetTileDataByRay(_mainCamera.ScreenPointToRay(Input.mousePosition), out HexGrid tileData)) return;// .. 레이캐스트로 타일 검사
+            if (!TMGridManager.Instance.TryGetTileDataByRay(_mainCamera.ScreenPointToRay(Input.mousePosition), out IHexGrid tileData)) return;// .. 레이캐스트로 타일 검사
 
             _current = tileData; // .. 타일 설정
             setTileHighlight(tileData); // .. 타일 하이라이트 설정
@@ -202,8 +202,7 @@ namespace TM.Card.Effect
             TMGridManager.Instance.OnExitTile -= setTileUnHighlight; // .. 딜리게이트 제거
             TMGridManager
                 .Instance
-                .ReadOnlyTileList
-                .SelectMany(rows => rows.ReadOnlyGrids)
+                .GetGrids()
                 .ForEach(setTileUnHighlight); // .. 하이라이트 된 타일이 있었을 경우 다시 언하이라이트
 
             void onMouseDownTile(IHexGrid tileData) // .. 건물이 배치된 타일에 클릭 이벤트 추가

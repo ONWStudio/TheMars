@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting.YamlDotNet.Serialization;
 using UnityEngine;
 
 namespace AYellowpaper.SerializedCollections
@@ -25,16 +26,16 @@ namespace AYellowpaper.SerializedCollections
 
         public void OnAfterDeserialize()
         {
+            serialize();
+        }
+
+        private void serialize()
+        {
             Clear();
 
-            foreach (SerializedKeyValuePair<TKey, TValue> kvp in _serializedList)
+            foreach (SerializedKeyValuePair<TKey, TValue> kvp in _serializedList.Where(kvp => !ContainsKey(kvp.Key)))
             {
-#if UNITY_EDITOR
-                if (!ContainsKey(kvp.Key))
-                    Add(kvp.Key, kvp.Value);
-#else
-                    Add(kvp.Key, kvp.Value);
-#endif
+                Add(kvp.Key, kvp.Value);
             }
 
 #if UNITY_EDITOR
@@ -52,11 +53,18 @@ namespace AYellowpaper.SerializedCollections
         public void NewAdd(TKey key, TValue value)
         {
             _serializedList.Add(new(key, value));
+            serialize();
         }
 
         public void NewRemove(TKey key, TValue value)
         {
             _serializedList.Remove(new SerializedKeyValuePair<TKey, TValue>(key, value));
+        }
+
+        public void NewClear()
+        {
+            Clear();
+            _serializedList.Clear();
         }
 
         public void OnBeforeSerialize()

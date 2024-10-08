@@ -16,8 +16,6 @@ namespace TM.Grid
         public float TileSize => _gridManager.HexagonWidth;
         public int TileCount => _gridManager.TileCount;
 
-        public IReadOnlyList<IReadOnlyGrids> ReadOnlyTileList => _gridManager.TileList;
-
         public event UnityAction<IHexGrid> OnHighlightTile
         {
             add => _gridManager.OnHighlightTile += value;
@@ -82,7 +80,8 @@ namespace TM.Grid
                 _onRemovedBuilding.Invoke(building);
             }
         }
-        
-        public bool TryGetTileDataByRay(Ray ray, out HexGrid tileData) => _gridManager.TryGetTileDataByRay(ray, out tileData);
+
+        public List<IHexGrid> GetGrids() => _gridManager.GetGrids();
+        public bool TryGetTileDataByRay(Ray ray, out IHexGrid hex) => _gridManager.TryGetTileDataByRay(ray, out hex);
     }
 }

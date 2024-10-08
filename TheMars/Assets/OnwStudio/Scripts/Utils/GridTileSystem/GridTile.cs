@@ -20,6 +20,7 @@ namespace Onw.HexGrid
         IReadOnlyList<string> Properties { get; }
 
         Vector3 TilePosition { get; }
+        Vector2 NormalizedPosition { get; }
         
         event UnityAction<IHexGrid> OnHighlightTile;
         event UnityAction<IHexGrid> OnExitTile;
@@ -37,6 +38,8 @@ namespace Onw.HexGrid
         [field: SerializeField, ReadOnly] public int R { get; private set; }
         [field: SerializeField, ReadOnly] public int S { get; private set; }
         [field: SerializeField, ReadOnly] public Vector3 TilePosition { get; private set; } = Vector3.zero;
+        [field: SerializeField, ReadOnly] public Vector2 NormalizedPosition { get; private set; } = Vector2.zero;
+        
         public IReadOnlyList<string> Properties => _properties;
 
         [SerializeField] private List<string> _properties = new();
@@ -106,6 +109,11 @@ namespace Onw.HexGrid
             TilePosition = tilePosition;
         }
 
+        public HexGrid(int q, int r, in Vector3 tilePosition, in Vector2 normalizedPosition) : this(q, r, tilePosition)
+        {
+            NormalizedPosition = normalizedPosition;
+        }
+        
         public HexGrid(int q, int r, in Vector3 tilePosition) : this(q, r)
         {
             TilePosition = tilePosition;

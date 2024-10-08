@@ -1,56 +1,123 @@
 #if UNITY_EDITOR
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Onw.Extensions;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using AYellowpaper.SerializedCollections;
+using Onw.Editor.Extensions;
+using Onw.Editor.GUI;
+using Onw.Extensions;
 
 namespace Onw.HexGrid.Editor
 {
     using Editor = UnityEditor.Editor;
-
+    using Event = UnityEngine.Event;
+    
     [CustomEditor(typeof(GridManager))]
     internal sealed class GridManagerInspector : Editor
     {
-        private readonly List<HexGrid> _tileList = new();
+        public readonly struct HexGUIData
+        {
+            public Vector3 TilePosition { get; }
+            public string Description { get; }
+
+            public HexGUIData(in Vector3 tilePosition, string description)
+            {
+                TilePosition = tilePosition;
+                Description = description;
+            }
+        }
+
+        private SerializedDictionary<string, HexGrid> _hexGrids = null;
+        private readonly List<HexGUIData> _hexGridDescriptions = new();
+
         private GridManager _gridManager = null;
         private GUIStyle _style = null;
+        private SerializedProperty _currentHexProperty = null;
         private int _tileCount = 0;
+
+        private readonly SceneViewInnerWindow<GridManagerInspector> _currentHexWindow = new();
+
 
         private void OnEnable()
         {
-            _gridManager = target as GridManager;
+            _gridManager = (target as GridManager)!;
             initializeTile();
+            
+            _currentHexWindow.OnEnable();
+        }
+
+        private void OnDisable()
+        {
+            _currentHexWindow.OnDisable();
         }
 
         private void initializeTile()
         {
-            _gridManager = target as GridManager;
             _tileCount = _gridManager.TileCount;
-            _tileList.AddRange((_gridManager!
-                    .GetType()
-                    .GetField("_tileList", BindingFlags.Instance | BindingFlags.NonPublic)!
-                .GetValue(_gridManager) as List<HexGrids>)!
-                .SelectMany(grids => grids.Grids));
-        }
+            _hexGrids = (_gridManager
+                .GetType()
+                .GetField("_hexGrids", BindingFlags.Instance | BindingFlags.NonPublic)!
+                .GetValue(_gridManager) as SerializedDictionary<string, HexGrid>)!;
 
+            _hexGridDescriptions.Clear();
+            _hexGridDescriptions.Capacity = _hexGrids.Count;
+            _hexGridDescriptions.AddRange(_hexGrids
+                .Select(kvp => new HexGUIData(
+                    kvp.Value.TilePosition,
+                    $"Q : {kvp.Value.Q} R : {kvp.Value.R} S : {kvp.Value.S} \n [{string.Join(", \n   ", kvp.Value.Properties)}]")));
+        }
+        
         public override void OnInspectorGUI()
         {
             EditorGUILayout.LabelField($"TileCount : {_tileCount}");
-            
+
             DrawDefaultInspector();
 
             if (GUILayout.Button("Calculate Grids"))
             {
-                
+                _gridManager.CalculateTile();
+                initializeTile();
+            }
+
+            if (GUILayout.Button("Clear Tiles"))
+            {
+                _hexGrids.NewClear();
+                initializeTile();
             }
         }
 
         private void OnSceneGUI()
         {
+            Event currentEvent = Event.current;
+
+            if (_currentHexProperty is not null)
+            {
+                _currentHexWindow.OnSceneGUI(windowId =>
+                {
+                    if (EditorGUILayout.PropertyField(_currentHexProperty))
+                    {
+                        serializedObject.ApplyModifiedProperties();
+                    }
+                });
+            }
+            
+            if (currentEvent.type == EventType.MouseUp && _gridManager.TryGetTileDataByRay(HandleUtility.GUIPointToWorldRay(currentEvent.mousePosition), out IHexGrid hexGrid))
+            {
+                int index = _hexGrids.Values.ToList().IndexOf((HexGrid)hexGrid);
+                
+                _currentHexProperty = serializedObject
+                    .FindProperty("_hexGrids")
+                    .FindPropertyRelative("_serializedList")
+                    .GetArrayElementAtIndex(index)
+                    .FindPropertyRelative("Value");
+                    
+                currentEvent.Use();
+            }
+            
             _style ??= new()
             {
                 normal =
@@ -60,30 +127,14 @@ namespace Onw.HexGrid.Editor
                 alignment = TextAnchor.MiddleCenter
             };
 
-            // foreach (GridRows rows in _tileList)
-            // {
-            //     foreach (HexGrid tile in rows.Row)
-            //     {
-            //         Vector3 tilePosition = tile.transform.position;
-            //
-            //         // Scene 뷰에서 3D 공간의 위치를 GUI 좌표로 변환
-            //         Vector2 guiPosition = HandleUtility.WorldToGUIPoint(new(
-            //             tilePosition.x + tile.Size.x * 0.5f,
-            //             tilePosition.y,
-            //             tilePosition.z + tile.Size.z * 0.5f));
-            //
-            //         // Scene 뷰의 GUI 영역 그리기 시작
-            //         Handles.BeginGUI();
-            //         // GUI 영역을 설정 (오브젝트 위치에 따라 GUI 좌표를 정확히 설정)
-            //
-            //         string properties = string.Join(", \n   ", tile.Properties);
-            //
-            //         GUI.Label(new(guiPosition.x - 50, guiPosition.y - 25, 50, 30), $"TilePoint : {tile.TilePoint} \n [{properties}]", _style);
-            //
-            //         // GUI 그리기 종료
-            //         Handles.EndGUI();
-            //     }
-            // }
+            foreach (HexGUIData hexMeta in _hexGridDescriptions)
+            {
+                Handles.BeginGUI();
+                Vector3 guiPosition = HandleUtility.WorldToGUIPoint(hexMeta.TilePosition);
+                GUI.Label(new(guiPosition.x - 25, guiPosition.y - 15, 50, 30), hexMeta.Description, _style);
+                // GUI 그리기 종료
+                Handles.EndGUI();
+            }
         }
     }
 }
