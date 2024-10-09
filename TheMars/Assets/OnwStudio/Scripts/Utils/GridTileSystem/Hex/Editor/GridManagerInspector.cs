@@ -15,7 +15,7 @@ namespace Onw.HexGrid.Editor
 {
     using Editor = UnityEditor.Editor;
     using Event = UnityEngine.Event;
-    
+
     [CustomEditor(typeof(GridManager))]
     internal sealed class GridManagerInspector : Editor
     {
@@ -37,22 +37,20 @@ namespace Onw.HexGrid.Editor
         private GridManager _gridManager = null;
         private GUIStyle _style = null;
         private SerializedProperty _currentHexProperty = null;
+        private SceneViewInnerWindow<GridManagerInspector> _hexOptionWindow = new();
+        private Vector2 _scrollPosition = Vector2.zero;
         private int _tileCount = 0;
-
-        private readonly SceneViewInnerWindow<GridManagerInspector> _currentHexWindow = new();
-
 
         private void OnEnable()
         {
             _gridManager = (target as GridManager)!;
             initializeTile();
-            
-            _currentHexWindow.OnEnable();
+            _hexOptionWindow.OnEnable();
         }
 
         private void OnDisable()
         {
-            _currentHexWindow.OnDisable();
+            _hexOptionWindow.OnDisable();
         }
 
         private void initializeTile()
@@ -68,9 +66,9 @@ namespace Onw.HexGrid.Editor
             _hexGridDescriptions.AddRange(_hexGrids
                 .Select(kvp => new HexGUIData(
                     kvp.Value.TilePosition,
-                    $"Q : {kvp.Value.Q} R : {kvp.Value.R} S : {kvp.Value.S} \n [{string.Join(", \n   ", kvp.Value.Properties)}]")));
+                    $"Q : {kvp.Value.HexPoint.Q} R : {kvp.Value.HexPoint.R} S : {kvp.Value.HexPoint.S} \n [{string.Join(", \n   ", kvp.Value.Properties)}]")));
         }
-        
+
         public override void OnInspectorGUI()
         {
             EditorGUILayout.LabelField($"TileCount : {_tileCount}");
@@ -92,32 +90,6 @@ namespace Onw.HexGrid.Editor
 
         private void OnSceneGUI()
         {
-            Event currentEvent = Event.current;
-
-            if (_currentHexProperty is not null)
-            {
-                _currentHexWindow.OnSceneGUI(windowId =>
-                {
-                    if (EditorGUILayout.PropertyField(_currentHexProperty))
-                    {
-                        serializedObject.ApplyModifiedProperties();
-                    }
-                });
-            }
-            
-            if (currentEvent.type == EventType.MouseUp && _gridManager.TryGetTileDataByRay(HandleUtility.GUIPointToWorldRay(currentEvent.mousePosition), out IHexGrid hexGrid))
-            {
-                int index = _hexGrids.Values.ToList().IndexOf((HexGrid)hexGrid);
-                
-                _currentHexProperty = serializedObject
-                    .FindProperty("_hexGrids")
-                    .FindPropertyRelative("_serializedList")
-                    .GetArrayElementAtIndex(index)
-                    .FindPropertyRelative("Value");
-                    
-                currentEvent.Use();
-            }
-            
             _style ??= new()
             {
                 normal =
@@ -126,6 +98,34 @@ namespace Onw.HexGrid.Editor
                 },
                 alignment = TextAnchor.MiddleCenter
             };
+            
+            Event currentEvent = Event.current;
+            if (_currentHexProperty is not null)
+            {
+                _hexOptionWindow.OnSceneGUI(id =>
+                {
+                    using EditorGUILayout.ScrollViewScope scrollViewScope = new(_scrollPosition);
+                    _scrollPosition = scrollViewScope.scrollPosition;
+
+                    if (EditorGUILayout.PropertyField(_currentHexProperty))
+                    {
+                        serializedObject.ApplyModifiedProperties();
+                    }
+                });
+            }
+
+            if (!_hexOptionWindow.IsUse && currentEvent.type == EventType.MouseUp && _gridManager.TryGetTileDataByRay(HandleUtility.GUIPointToWorldRay(currentEvent.mousePosition), out IHexGrid hexGrid))
+            {
+                int index = _hexGrids.Values.ToList().IndexOf((HexGrid)hexGrid);
+
+                _currentHexProperty = serializedObject
+                    .FindProperty("_hexGrids")
+                    .FindPropertyRelative("_serializedList")
+                    .GetArrayElementAtIndex(index)
+                    .FindPropertyRelative("Value");
+
+                currentEvent.Use();
+            }
 
             foreach (HexGUIData hexMeta in _hexGridDescriptions)
             {

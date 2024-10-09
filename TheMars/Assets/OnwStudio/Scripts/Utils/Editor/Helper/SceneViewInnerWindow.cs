@@ -15,6 +15,11 @@ namespace Onw.Editor.GUI
 
     public sealed class SceneViewInnerWindow<T> where T : Editor
     {
+        private const float WIDTH_MIN = 100f;
+        private const float HEIGHT_MIN = 200f;
+
+        public bool IsUse { get; private set; } = false;
+
         private static readonly string _windowOptionKey = typeof(T).Name + "WindowOption";
         private Rect _windowRect = new(40, 30, 200, 400);
         private bool _isResizingLeft = false;
@@ -29,6 +34,8 @@ namespace Onw.Editor.GUI
             {
                 _windowRect = JsonUtility.FromJson<SerializedRect>(EditorPrefs.GetString(_windowOptionKey));
             }
+
+            IsUse = false;
         }
 
         public void OnDisable()
@@ -38,6 +45,8 @@ namespace Onw.Editor.GUI
 
         public void OnSceneGUI(Action<int> call)
         {
+            IsUse = false;
+
             Handles.BeginGUI();
 
             if (_windowStyle is null)
@@ -52,7 +61,7 @@ namespace Onw.Editor.GUI
                 _windowStyle.stretchHeight = true;
             }
 
-            _windowRect = GUI.Window(0, _windowRect, id => drawWindowContents(id, call), "Tile Option", _windowStyle);
+            _windowRect = GUILayout.Window(0, _windowRect, id => drawWindowContents(id, call), "Tile Option", _windowStyle);
 
             handleWindowDragAndResize();
 
@@ -108,66 +117,63 @@ namespace Onw.Editor.GUI
             setCursor(rightArea, MouseCursor.ResizeHorizontal);
             setCursor(topArea, MouseCursor.ResizeVertical);
             setCursor(rightTopArea, MouseCursor.ResizeUpRight);
-            
+
             switch (currentEvent.type)
             {
                 case EventType.MouseDown:
                     {
-                        if (_windowRect.Contains(mousePosition))
-                        {
-                            currentEvent.Use();
-                        }
-                        
+                        setUseByRectContains();
+
                         if (leftTopArea.Contains(mousePosition))
                         {
                             _isResizingLeft = true;
                             _isResizingTop = true;
-                            currentEvent.Use();
+                            setUse();
                         }
 
                         if (leftArea.Contains(mousePosition))
                         {
                             _isResizingLeft = true;
-                            currentEvent.Use();
+                            setUse();
                         }
 
                         if (leftBottomArea.Contains(mousePosition))
                         {
                             _isResizingLeft = true;
                             _isResizingBottom = true;
-                            currentEvent.Use();
+                            setUse();
                         }
 
                         if (bottomArea.Contains(mousePosition))
                         {
                             _isResizingBottom = true;
-                            currentEvent.Use();
+                            setUse();
                         }
 
                         if (rightBottomArea.Contains(mousePosition))
                         {
                             _isResizingBottom = true;
                             _isResizingRight = true;
-                            currentEvent.Use();
+                            setUse();
                         }
 
                         if (rightArea.Contains(mousePosition))
                         {
                             _isResizingRight = true;
-                            currentEvent.Use();
+                            setUse();
                         }
 
                         if (topArea.Contains(mousePosition))
                         {
                             _isResizingTop = true;
-                            currentEvent.Use();
+                            setUse();
                         }
 
                         if (rightTopArea.Contains(mousePosition))
                         {
                             _isResizingRight = true;
                             _isResizingTop = true;
-                            currentEvent.Use();
+                            setUse();
                         }
                         break;
                     }
@@ -186,12 +192,12 @@ namespace Onw.Editor.GUI
                                 _windowRect.x = SceneView.currentDrawingSceneView.cameraViewport.xMin;
                             }
 
-                            if (_windowRect.width < 100)
+                            if (_windowRect.width < WIDTH_MIN)
                             {
-                                _windowRect.width = 100;
+                                _windowRect.width = WIDTH_MIN;
                             }
-                            
-                            currentEvent.Use();
+
+                            setUse();
                         }
 
                         if (_isResizingRight)
@@ -203,12 +209,12 @@ namespace Onw.Editor.GUI
                                 _windowRect.width = SceneView.currentDrawingSceneView.cameraViewport.xMax - _windowRect.x;
                             }
 
-                            if (_windowRect.width < 100)
+                            if (_windowRect.width < WIDTH_MIN)
                             {
-                                _windowRect.width = 100;
+                                _windowRect.width = WIDTH_MIN;
                             }
-                            
-                            currentEvent.Use();
+
+                            setUse();
                         }
 
                         if (_isResizingTop)
@@ -224,12 +230,12 @@ namespace Onw.Editor.GUI
                                 _windowRect.y = SceneView.currentDrawingSceneView.cameraViewport.yMin;
                             }
 
-                            if (_windowRect.height < 200)
+                            if (_windowRect.height < HEIGHT_MIN)
                             {
-                                _windowRect.height = 200;
+                                _windowRect.height = HEIGHT_MIN;
                             }
-                            
-                            currentEvent.Use();
+
+                            setUse();
                         }
 
                         if (_isResizingBottom)
@@ -241,21 +247,43 @@ namespace Onw.Editor.GUI
                                 _windowRect.height = SceneView.currentDrawingSceneView.cameraViewport.yMax - _windowRect.y;
                             }
 
-                            if (_windowRect.height < 200)
+                            if (_windowRect.height < HEIGHT_MIN)
                             {
-                                _windowRect.height = 200;
+                                _windowRect.height = HEIGHT_MIN;
                             }
 
-                            currentEvent.Use();
+                            setUse();
                         }
                         break;
                     }
                 case EventType.MouseUp:
+                    setUseByRectContains();
                     _isResizingLeft = false;
                     _isResizingRight = false;
                     _isResizingTop = false;
                     _isResizingBottom = false;
                     break;
+                
+                    void setUseByRectContains()
+                    {
+                        if (!_windowRect.Contains(mousePosition) && 
+                            !leftTopArea.Contains(mousePosition) &&
+                            !leftArea.Contains(mousePosition) &&
+                            !leftBottomArea.Contains(mousePosition) && 
+                            !bottomArea.Contains(mousePosition) &&
+                            !rightBottomArea.Contains(mousePosition) && 
+                            !rightArea.Contains(mousePosition) && 
+                            !topArea.Contains(mousePosition) && 
+                            !rightTopArea.Contains(mousePosition)) return;
+                        
+                        setUse();
+                    }
+            }
+
+            void setUse()
+            {
+                currentEvent.Use();
+                IsUse = true;
             }
 
             void setCursor(in Rect rect, in MouseCursor cursor)

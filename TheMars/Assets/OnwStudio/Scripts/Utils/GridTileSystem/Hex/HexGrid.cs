@@ -7,42 +7,22 @@ using Onw.Attribute;
 
 namespace Onw.HexGrid
 {
-    public interface IHexCoordinates
-    {
-        int Q { get; }
-        int R { get; }
-        int S { get; }
 
-    }
-    
-    public interface IHexGrid : IHexCoordinates
-    {
-        IReadOnlyList<string> Properties { get; }
-
-        Vector3 TilePosition { get; }
-        Vector2 NormalizedPosition { get; }
-        
-        event UnityAction<IHexGrid> OnHighlightTile;
-        event UnityAction<IHexGrid> OnExitTile;
-        event UnityAction<IHexGrid> OnMouseDownTile;
-        event UnityAction<IHexGrid> OnMouseUpTile;
-        
-        void AddProperty(string property);
-        bool RemoveProperty(string property);
-    }
-    
     [System.Serializable]
     public class HexGrid : IHexGrid
     {
-        [field: SerializeField, ReadOnly] public int Q { get; private set; }
-        [field: SerializeField, ReadOnly] public int R { get; private set; }
-        [field: SerializeField, ReadOnly] public int S { get; private set; }
         [field: SerializeField, ReadOnly] public Vector3 TilePosition { get; private set; } = Vector3.zero;
         [field: SerializeField, ReadOnly] public Vector2 NormalizedPosition { get; private set; } = Vector2.zero;
         
         public IReadOnlyList<string> Properties => _properties;
 
+        /// <summary>
+        /// .. 호출 시 박싱이 발생합니다
+        /// </summary>
+        public HexCoordinates HexPoint => _hexPoint; 
+        
         [SerializeField] private List<string> _properties = new();
+        [SerializeField, ReadOnly] private HexCoordinates _hexPoint = new();
 
         public event UnityAction<IHexGrid> OnHighlightTile
         {
@@ -119,13 +99,14 @@ namespace Onw.HexGrid
             TilePosition = tilePosition;
         }
 
-        public HexGrid(int q, int r)
+        public HexGrid(AxialCoordinates axialCoordinates)
         {
-            Q = q;
-            R = r;
-            S = -q - r;
+            _hexPoint = axialCoordinates;
         }
         
-        public static implicit operator Vector3(HexGrid hexGrid) => new(hexGrid.Q, hexGrid.R, hexGrid.S);
+        public HexGrid(int q, int r)
+        {
+            _hexPoint = new(q, r);
+        }
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 using Onw.Helper;
 using Onw.HexGrid;
 using Onw.Attribute;
-using Onw.Extensions;
 using TM.Grid;
 using TM.Building;
 using TM.Card.Runtime;

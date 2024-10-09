@@ -13,43 +13,12 @@ using TreeEditor;
 
 namespace Onw.HexGrid
 {
-    [System.Serializable]
-    public struct IgnoreHexCoordinates : IHexCoordinates
-    {
-        [field: SerializeField] public int Q { get; set; }
-        [field: SerializeField] public int R { get; set; }
-        [field: SerializeField] public int S { get; set; }
-
-        public static implicit operator Vector3(in IgnoreHexCoordinates hexCoordinates) => new(hexCoordinates.Q, hexCoordinates.R, hexCoordinates.S);
-        public static implicit operator Vector3Int(in IgnoreHexCoordinates hexCoordinates) => new(hexCoordinates.Q, hexCoordinates.R, hexCoordinates.S);
-        public static implicit operator IgnoreHexCoordinates(in Vector3 vec) => new()
-        {
-            Q = (int)vec.x,
-            R = (int)vec.y,
-            S = (int)vec.z
-        };
-        public static implicit operator IgnoreHexCoordinates(in Vector3Int vec) => new()
-        {
-            Q = vec.x,
-            R = vec.y,
-            S = vec.z
-        };
-        public static implicit operator IgnoreHexCoordinates(in Vector2 vec) => new()
-        {
-            Q = (int)vec.x,
-            R = (int)vec.y
-        };
-        public static implicit operator IgnoreHexCoordinates(in Vector2Int vec) => new()
-        {
-            Q = vec.x,
-            R = vec.y
-        };
-    }
-
     public sealed class GridManager : MonoBehaviour
     {
         private const float HEXAGON_RADIUS_MIN = 0.025f;
         private const float HEXAGON_RADIUS_MAX = 0.5f;
+
+        private const float SQUARE_ROOT_THREE = 1.732051f;
 
         public event UnityAction<IHexGrid> OnHighlightTile
         {
@@ -153,23 +122,22 @@ namespace Onw.HexGrid
         [SerializeField, Min(0)] private int _sLimit = 3;
 
         [FormerlySerializedAs("_ignoreGridTiles")]
-        [SerializeField] private List<IgnoreHexCoordinates> _ignoreHexGrids = new();
+        [SerializeField] private List<AxialCoordinates> _ignoreHexGrids = new();
         
-        public void AddIgnoreGridTile(int q, int r, int s)
+        public void AddIgnoreAxialCoordinates(int q, int r)
         {
-            if (_ignoreHexGrids.Any(ignoreGridTile => ignoreGridTile.Q == q && ignoreGridTile.R == r && ignoreGridTile.S == s)) return;
+            if (_ignoreHexGrids.Any(ignoreGridTile => ignoreGridTile.Q == q && ignoreGridTile.R == r)) return;
 
             _ignoreHexGrids.Add(new()
             {
                 Q = q,
                 R = r,
-                S = s
             });
         }
 
         public void RemoveIgnoreGridTile(int q, int r, int s)
         {
-            _ignoreHexGrids.RemoveByConditionOne(tile => tile.Q == q && tile.R == r && tile.S == s);
+            _ignoreHexGrids.RemoveByConditionOne(tile => tile.Q == q && tile.R == r);
         }
 
         public bool TryGetTileDataByRay(in Ray ray, out IHexGrid hexGrid)
@@ -180,11 +148,9 @@ namespace Onw.HexGrid
                 Vector2 convertedPosition = new(hit.point.x - _decalProjector.transform.position.x, hit.point.z - _decalProjector.transform.position.z);
                 convertedPosition /= _decalProjector.size.x * _decalProjector.GetLocalScaleX();
 
-                Debug.Log(convertedPosition);
-
                 Vector2 axialCoordinates = new(
                     2f / 3 * convertedPosition.x / HexagonRadius,
-                    (-1f / 3 * convertedPosition.x + 1.732051f / 3 * convertedPosition.y) / HexagonRadius);
+                    (-1f / 3 * convertedPosition.x + SQUARE_ROOT_THREE / 3 * convertedPosition.y) / HexagonRadius);
 
                 float sFloat = -axialCoordinates.x - axialCoordinates.y;
 
@@ -212,8 +178,6 @@ namespace Onw.HexGrid
                 {
                     hexCoordinates.z = -roundHex.x - roundHex.y;
                 }
-
-                Debug.Log(hexCoordinates);
 
                 if (_hexGrids.TryGetValue($"{hexCoordinates.x}{hexCoordinates.y}{hexCoordinates.z}", out HexGrid hex))
                 {
@@ -243,7 +207,7 @@ namespace Onw.HexGrid
                         {
                             Vector2 hexNormalizedPosition = new(
                                 HexagonRadius * (1.5f * q),
-                                HexagonRadius * (1.732051f / 2 * q + 1.732051f * r));
+                                HexagonRadius * (SQUARE_ROOT_THREE / 2 * q + SQUARE_ROOT_THREE * r));
 
                             Vector3 hexPosition = projectorSize.x * hexNormalizedPosition;
 

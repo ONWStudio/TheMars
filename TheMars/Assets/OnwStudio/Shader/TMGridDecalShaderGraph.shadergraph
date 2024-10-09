@@ -1429,7 +1429,7 @@
     "m_Group": {
         "m_Id": ""
     },
-    "m_Name": "calculate_hex_outline (Custom Function)",
+    "m_Name": "CalculateHexOutline (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -1469,7 +1469,7 @@
         "m_SerializableColors": []
     },
     "m_SourceType": 0,
-    "m_FunctionName": "calculate_hex_outline",
+    "m_FunctionName": "CalculateHexOutline",
     "m_FunctionSource": "526f103f4f9d048c097e2dfb29baef58",
     "m_FunctionBody": "Enter function body here..."
 }
