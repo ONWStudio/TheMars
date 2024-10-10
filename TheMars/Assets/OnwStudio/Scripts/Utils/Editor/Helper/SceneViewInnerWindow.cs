@@ -263,19 +263,19 @@ namespace Onw.Editor.GUI
                     _isResizingTop = false;
                     _isResizingBottom = false;
                     break;
-                
+
                     void setUseByRectContains()
                     {
-                        if (!_windowRect.Contains(mousePosition) && 
+                        if (!_windowRect.Contains(mousePosition) &&
                             !leftTopArea.Contains(mousePosition) &&
                             !leftArea.Contains(mousePosition) &&
-                            !leftBottomArea.Contains(mousePosition) && 
+                            !leftBottomArea.Contains(mousePosition) &&
                             !bottomArea.Contains(mousePosition) &&
-                            !rightBottomArea.Contains(mousePosition) && 
-                            !rightArea.Contains(mousePosition) && 
-                            !topArea.Contains(mousePosition) && 
+                            !rightBottomArea.Contains(mousePosition) &&
+                            !rightArea.Contains(mousePosition) &&
+                            !topArea.Contains(mousePosition) &&
                             !rightTopArea.Contains(mousePosition)) return;
-                        
+
                         setUse();
                     }
             }

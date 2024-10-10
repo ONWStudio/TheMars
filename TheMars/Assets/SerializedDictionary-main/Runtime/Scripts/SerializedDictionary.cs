@@ -58,7 +58,7 @@ namespace AYellowpaper.SerializedCollections
 
         public void NewRemove(TKey key, TValue value)
         {
-            _serializedList.Remove(new SerializedKeyValuePair<TKey, TValue>(key, value));
+            _serializedList.Remove(new(key, value));
         }
 
         public void NewClear()

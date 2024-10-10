@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -9,7 +8,6 @@ using UnityEngine.Rendering.Universal;
 using AYellowpaper.SerializedCollections;
 using Onw.Attribute;
 using Onw.Extensions;
-using TreeEditor;
 
 namespace Onw.HexGrid
 {
@@ -113,26 +111,22 @@ namespace Onw.HexGrid
         [SerializeField] private UnityEvent<IHexGrid> _onMouseUpTile = new();
         [SerializeField] private UnityEvent<IHexGrid> _onMouseDownTile = new();
 
-        [FormerlySerializedAs("_tileList")]
-        [SerializeField, ReadOnly] private SerializedDictionary<string, HexGrid> _hexGrids = new();
+        [SerializeField, SerializedDictionary(isReadOnlyKey: true, isReadOnlyValue: true)] 
+        private SerializedDictionary<AxialCoordinates, HexGrid> _hexGrids;
+        
         [SerializeField, InitializeRequireComponent] private DecalProjector _decalProjector;
 
         [SerializeField, Min(0)] private int _qLimit = 3;
         [SerializeField, Min(0)] private int _rLimit = 3;
         [SerializeField, Min(0)] private int _sLimit = 3;
 
-        [FormerlySerializedAs("_ignoreGridTiles")]
-        [SerializeField] private List<AxialCoordinates> _ignoreHexGrids = new();
+        [SerializeField] private List<AxialCoordinates> _ignoreHexGrids;
         
         public void AddIgnoreAxialCoordinates(int q, int r)
         {
             if (_ignoreHexGrids.Any(ignoreGridTile => ignoreGridTile.Q == q && ignoreGridTile.R == r)) return;
 
-            _ignoreHexGrids.Add(new()
-            {
-                Q = q,
-                R = r,
-            });
+            _ignoreHexGrids.Add(new(q, r));
         }
 
         public void RemoveIgnoreGridTile(int q, int r, int s)
@@ -179,7 +173,7 @@ namespace Onw.HexGrid
                     hexCoordinates.z = -roundHex.x - roundHex.y;
                 }
 
-                if (_hexGrids.TryGetValue($"{hexCoordinates.x}{hexCoordinates.y}{hexCoordinates.z}", out HexGrid hex))
+                if (_hexGrids.TryGetValue(new(hexCoordinates.x, hexCoordinates.y), out HexGrid hex))
                 {
                     hexGrid = hex;
                     return true;
@@ -201,13 +195,11 @@ namespace Onw.HexGrid
                     int s = -(q + r);
                     if (s >= -_sLimit && s <= _sLimit)
                     {
-                        string key = $"{q}{r}{s}";
-
-                        if (!_hexGrids.TryGetValue(key, out HexGrid hex))
+                        if (!_hexGrids.TryGetValue(new(q, r), out HexGrid hex))
                         {
                             Vector2 hexNormalizedPosition = new(
                                 HexagonRadius * (1.5f * q),
-                                HexagonRadius * (SQUARE_ROOT_THREE / 2 * q + SQUARE_ROOT_THREE * r));
+                                HexagonRadius * (SQUARE_ROOT_THREE * 0.5f * q + SQUARE_ROOT_THREE * r));
 
                             Vector3 hexPosition = projectorSize.x * hexNormalizedPosition;
 
@@ -228,8 +220,8 @@ namespace Onw.HexGrid
                                 hexPosition = hit.point;
                             }
 
-                            hex = new(q, r, hexPosition, hexNormalizedPosition);
-                            _hexGrids.NewAdd(key, hex);
+                            hex = new(q, r, hexPosition, hexNormalizedPosition + new Vector2(0.5f, 0.5f));
+                            _hexGrids.NewAdd(hex.HexPoint, hex);
                         }
                     }
                 }

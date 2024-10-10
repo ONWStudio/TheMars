@@ -10,28 +10,45 @@ namespace Onw.HexGrid.Editor
     [CustomPropertyDrawer(typeof(HexCoordinates))]
     internal sealed class HexCoordinatesPropertyDrawer : InitializablePropertyDrawer
     {
-        private SerializedProperty _qSerializedProperty = null;
-        private SerializedProperty _rSerializedProperty = null;
-        private SerializedProperty _sSerializedProperty = null;
+        private SerializedProperty _qProp = null;
+        private SerializedProperty _rProp = null;
+        private SerializedProperty _sProp = null;
+        private GUIStyle _labelStyle = null;
 
         protected override void OnEnable(Rect position, SerializedProperty property, GUIContent label)
         {
-            _qSerializedProperty = property.FindPropertyRelative(EditorReflectionHelper.GetBackingFieldName("Q"));
-            _rSerializedProperty = property.FindPropertyRelative(EditorReflectionHelper.GetBackingFieldName("R"));
-            _sSerializedProperty = property.FindPropertyRelative(EditorReflectionHelper.GetBackingFieldName("S"));
+            _qProp = property.FindPropertyRelative("_q");
+            _rProp = property.FindPropertyRelative("_r");
+            _sProp = property.FindPropertyRelative("_s");
+            _labelStyle = new(GUI.skin.label)
+            {
+                alignment = TextAnchor.MiddleCenter
+            };
         }
         protected override void OnPropertyGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            float labelSizeX = position.size.x * 0.15f;
-            
-            Rect labelRect = new(position.x, position.y, labelSizeX, EditorGUIUtility.singleLineHeight);
-            EditorGUI.LabelField(labelRect, "HexPoint : ");
-            Rect qRect = new(position.x + labelSizeX, position.y, 20, EditorGUIUtility.singleLineHeight);
-            _qSerializedProperty.intValue = EditorGUI.IntField(qRect, "Q ", _qSerializedProperty.intValue);
-            Rect rRect = new(position.x + labelSizeX + 20, position.y, 20, EditorGUIUtility.singleLineHeight);
-            _rSerializedProperty.intValue = EditorGUI.IntField(rRect, "R ", _rSerializedProperty.intValue);
-            Rect sRect = new(position.x + labelSizeX + 20 * 2, position.y, 20, EditorGUIUtility.singleLineHeight);
-            _sSerializedProperty.intValue = EditorGUI.IntField(sRect, "S ", _sSerializedProperty.intValue);
+            using EditorGUI.PropertyScope propScope = new(position, label, property);
+            position = EditorGUI.PrefixLabel(position, label);
+            float labelWidth = EditorGUIUtility.singleLineHeight;  // 각 라벨의 너비
+            float fieldWidth = (position.width - labelWidth * 3) / 3f;
+
+            // Q 필드
+            Rect qRect = new(position.x, position.y, labelWidth, position.height);
+            EditorGUI.LabelField(qRect, "Q", _labelStyle);
+            Rect qFieldRect = new(position.x + labelWidth, position.y, fieldWidth, position.height);
+            _qProp.intValue = EditorGUI.IntField(qFieldRect, _qProp.intValue);
+
+            // R 필드
+            Rect rRect = new(position.x + labelWidth + fieldWidth, position.y, labelWidth, position.height);
+            EditorGUI.LabelField(rRect, "R", _labelStyle);
+            Rect rFieldRect = new(position.x + (labelWidth + fieldWidth) + labelWidth, position.y, fieldWidth, position.height);
+            _rProp.intValue = EditorGUI.IntField(rFieldRect, _rProp.intValue);
+
+            // S 필드
+            Rect sRect = new(position.x + (labelWidth + fieldWidth) * 2, position.y, labelWidth, position.height);
+            EditorGUI.LabelField(sRect, "S", _labelStyle);
+            Rect sFieldRect = new(position.x + (labelWidth + fieldWidth) * 2 + labelWidth, position.y, fieldWidth, position.height);
+            _sProp.intValue = EditorGUI.IntField(sFieldRect, _sProp.intValue);
         }
     }
 }
