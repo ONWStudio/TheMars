@@ -9,26 +9,22 @@ using Onw.Editor;
 namespace Onw.Attribute.Editor
 {
     [CustomPropertyDrawer(typeof(InfoBoxAttribute))]
-    internal sealed class InfoBoxDrawer : InitializablePropertyDrawer
+    internal sealed class InfoBoxDrawer : PropertyDrawer
     {
         private readonly float _helpBoxHeight = EditorGUIUtility.singleLineHeight * 2f;
-        private InfoBoxAttribute _attribute;
-        private MessageType _messageType;
 
-        protected override void OnEnable(Rect position, SerializedProperty property, GUIContent label)
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            _attribute = attribute as InfoBoxAttribute;
-            _messageType = _attribute.InfoType switch
+            InfoBoxAttribute infoBoxAttribute = (attribute as InfoBoxAttribute)!;
+            
+            MessageType messageType = infoBoxAttribute.InfoType switch
             {
                 INFO_TYPE.INFO => MessageType.Info,
                 INFO_TYPE.WARNING => MessageType.Warning,
                 INFO_TYPE.ERROR => MessageType.Error,
                 _ => MessageType.None,
             };
-        }
-
-        protected override void OnPropertyGUI(Rect position, SerializedProperty property, GUIContent label)
-        {
+            
             Rect helpBoxRect = new(
                 position.x,
                 position.y,
@@ -41,7 +37,7 @@ namespace Onw.Attribute.Editor
                 position.width,
                 EditorGUI.GetPropertyHeight(property, label, true));
 
-            EditorGUI.HelpBox(helpBoxRect, _attribute.Message, _messageType);
+            EditorGUI.HelpBox(helpBoxRect, infoBoxAttribute.Message, messageType);
             EditorGUI.PropertyField(propertyRect, property, label, true);
         }
 

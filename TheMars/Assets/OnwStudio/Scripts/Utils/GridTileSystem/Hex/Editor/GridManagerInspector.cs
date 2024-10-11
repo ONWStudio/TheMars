@@ -1,13 +1,10 @@
 #if UNITY_EDITOR
-using System;
 using System.Linq;
 using System.Reflection;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using AYellowpaper.SerializedCollections;
-using Onw.Editor.Extensions;
 using Onw.Editor.GUI;
 using Onw.Extensions;
 
@@ -72,7 +69,6 @@ namespace Onw.HexGrid.Editor
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
             EditorGUILayout.LabelField($"TileCount : {_tileCount}");
 
             DrawDefaultInspector();
@@ -81,18 +77,17 @@ namespace Onw.HexGrid.Editor
             {
                 _gridManager.CalculateTile();
                 initializeTile();
-                EditorUtility.SetDirty(target);
-
+                serializedObject.ApplyModifiedProperties();
             }
+            
+            _hexGrids.Values.ForEach(hex => Debug.Log(hex.GetHexIndex(_gridManager.TileLimit)));
 
             if (GUILayout.Button("Clear Tiles"))
             {
                 _hexGrids.NewClear();
                 initializeTile();
-                EditorUtility.SetDirty(target);
+                serializedObject.ApplyModifiedProperties();
             }
-            
-            serializedObject.ApplyModifiedProperties();
         }
 
         private void OnSceneGUI()
@@ -119,30 +114,30 @@ namespace Onw.HexGrid.Editor
                         serializedObject.ApplyModifiedProperties();
                     }
                 });
-
-                if (!_hexOptionWindow.IsUse && currentEvent.type == EventType.MouseUp && _gridManager.TryGetTileDataByRay(HandleUtility.GUIPointToWorldRay(currentEvent.mousePosition), out IHexGrid hexGrid))
-                {
-                    int index = _hexGrids.Values.ToList().IndexOf((HexGrid)hexGrid);
-
-                    _currentHexProperty = serializedObject
-                        .FindProperty("_hexGrids")
-                        .FindPropertyRelative("_serializedList")
-                        .GetArrayElementAtIndex(index)
-                        .FindPropertyRelative("Value");
-
-                    _currentHexProperty.isExpanded = true;
-                    currentEvent.Use();
-                }
-
-                Handles.BeginGUI();
-                foreach (HexGUIData hexMeta in _hexGridDescriptions)
-                {
-                    Vector3 guiPosition = HandleUtility.WorldToGUIPoint(hexMeta.TilePosition);
-                    GUI.Label(new(guiPosition.x - 25, guiPosition.y - 15, 50, 30), hexMeta.Description, _style);
-                    // GUI 그리기 종료
-                }
-                Handles.EndGUI();
             }
+            
+            if (!_hexOptionWindow.IsUse && currentEvent.type == EventType.MouseUp && _gridManager.TryGetTileDataByRay(HandleUtility.GUIPointToWorldRay(currentEvent.mousePosition), out IHexGrid hexGrid))
+            {
+                int index = _hexGrids.Values.ToList().IndexOf((HexGrid)hexGrid);
+
+                _currentHexProperty = serializedObject
+                    .FindProperty("_hexGrids")
+                    .FindPropertyRelative("_serializedList")
+                    .GetArrayElementAtIndex(index)
+                    .FindPropertyRelative("Value");
+
+                _currentHexProperty.isExpanded = true;
+                currentEvent.Use();
+            }
+            
+            Handles.BeginGUI();
+            foreach (HexGUIData hexMeta in _hexGridDescriptions)
+            {
+                Vector3 guiPosition = HandleUtility.WorldToGUIPoint(hexMeta.TilePosition);
+                GUI.Label(new(guiPosition.x - 25, guiPosition.y - 15, 50, 30), hexMeta.Description, _style);
+                // GUI 그리기 종료
+            }
+            Handles.EndGUI();
         }
     }
 }

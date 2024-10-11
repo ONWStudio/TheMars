@@ -1,5 +1,19 @@
 
-StructuredBuffer<float3> _IgnoreHexGrids;
+struct HexColorOption
+{
+	float3 Color;
+	int2 Qr;
+};
+
+StructuredBuffer<int2> _IgnoreHexGrids;
+StructuredBuffer<HexColorOption> _HexColorOption;
+int _IgnoreHexGridsBufferSize;
+int _HexColorOptionBufferSize;
+
+void IgnoreGrids_bool(const float2 p, out bool isActive)
+{
+	isActive = _HexColorOptionBufferSize > 0;
+}
 
 void DistanceToSegment_float(const float2 p, const float2 a, const float2 b, out float distance)
 {

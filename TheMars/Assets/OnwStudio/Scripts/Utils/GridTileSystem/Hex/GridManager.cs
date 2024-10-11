@@ -1,13 +1,13 @@
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using UnityEngine.Rendering.Universal;
 using AYellowpaper.SerializedCollections;
 using Onw.Attribute;
 using Onw.Extensions;
+using UnityEngine.Serialization;
 
 namespace Onw.HexGrid
 {
@@ -50,12 +50,12 @@ namespace Onw.HexGrid
         {
             get
             {
-                int qMin = -_qLimit;
-                int qMax = _qLimit;
-                int rMin = -_rLimit;
-                int rMax = _rLimit;
-                int sMin = -_sLimit;
-                int sMax = _sLimit;
+                int qMin = -_tileLimit;
+                int qMax = _tileLimit;
+                int rMin = -_tileLimit;
+                int rMax = _tileLimit;
+                int sMin = -_tileLimit;
+                int sMax = _tileLimit;
 
                 int kMin = -sMax;
                 int kMax = -sMin;
@@ -75,33 +75,13 @@ namespace Onw.HexGrid
             }
         }
 
-        public int QLimit
+        public int TileLimit
         {
-            get => _qLimit;
+            get => _tileLimit;
             set
             {
-                _qLimit = value;
-                _decalProjector.material.SetVector("_AbsoluteQRS", new(_qLimit, _rLimit, _sLimit));
-            }
-        }
-
-        public int RLimit
-        {
-            get => _rLimit;
-            set
-            {
-                _rLimit = value;
-                _decalProjector.material.SetVector("_AbsoluteQRS", new(_qLimit, _rLimit, _sLimit));
-            }
-        }
-
-        public int SLimit
-        {
-            get => _sLimit;
-            set
-            {
-                _sLimit = value;
-                _decalProjector.material.SetVector("_AbsoluteQRS", new(_qLimit, _rLimit, _sLimit));
+                _tileLimit = value;
+                _decalProjector.material.SetFloat("_AbsoluteLimit", _tileLimit);
             }
         }
 
@@ -116,22 +96,23 @@ namespace Onw.HexGrid
         
         [SerializeField, InitializeRequireComponent] private DecalProjector _decalProjector;
 
-        [SerializeField, Min(0)] private int _qLimit = 3;
-        [SerializeField, Min(0)] private int _rLimit = 3;
-        [SerializeField, Min(0)] private int _sLimit = 3;
-
-        [SerializeField] private List<AxialCoordinates> _ignoreHexGrids;
+        [FormerlySerializedAs("_qLimit")]
+        [SerializeField, Min(0)] private int _tileLimit = 3;
         
-        public void AddIgnoreAxialCoordinates(int q, int r)
-        {
-            if (_ignoreHexGrids.Any(ignoreGridTile => ignoreGridTile.Q == q && ignoreGridTile.R == r)) return;
+        private ComputeBuffer _ignoreHexBuffer;
+        private ComputeBuffer _hexColorOptionBuffer;
 
-            _ignoreHexGrids.Add(new(q, r));
+        private void OnDestroy()
+        {
+            _ignoreHexBuffer?.Release();
+            _hexColorOptionBuffer?.Release();
         }
 
-        public void RemoveIgnoreGridTile(int q, int r, int s)
+        public void SetActiveAxialCoordinates(int q, int r, bool isActive)
         {
-            _ignoreHexGrids.RemoveByConditionOne(tile => tile.Q == q && tile.R == r);
+            if (!_hexGrids.TryGetValue(new(q, r), out HexGrid hex)) return;
+
+            hex.IsActive = isActive;
         }
 
         public bool TryGetTileDataByRay(in Ray ray, out IHexGrid hexGrid)
@@ -183,17 +164,16 @@ namespace Onw.HexGrid
             return false;
         }
 
-
         public void CalculateTile()
         {
             Vector3 projectorSize = _decalProjector.size * _decalProjector.GetLocalScaleX();
             
-            for (int q = -_qLimit; q <= _qLimit; q++)
+            for (int q = -_tileLimit; q <= _tileLimit; q++)
             {
-                for (int r = -_rLimit; r <= _rLimit; r++)
+                for (int r = -_tileLimit; r <= _tileLimit; r++)
                 {
                     int s = -(q + r);
-                    if (s >= -_sLimit && s <= _sLimit)
+                    if (s >= -_tileLimit && s <= _tileLimit)
                     {
                         if (!_hexGrids.TryGetValue(new(q, r), out HexGrid hex))
                         {
@@ -221,11 +201,39 @@ namespace Onw.HexGrid
                             }
 
                             hex = new(q, r, hexPosition, hexNormalizedPosition + new Vector2(0.5f, 0.5f));
+                            hex.OnChangedActive += onChangedActiveTile;
+                            hex.OnChangedColor += onChangedColorTile;
                             _hexGrids.NewAdd(hex.HexPoint, hex);
                         }
                     }
                 }
             }
+        }
+
+        private void onChangedActiveTile(IHexGrid iHex, bool isActive)
+        {
+            Vector2Int[] ignoreHexes = _hexGrids.Values.Select(hex => (Vector2Int)hex.HexPoint).ToArray();
+
+            const int STRIDE = sizeof(int) * 2;
+            _ignoreHexBuffer = new(ignoreHexes.Length, STRIDE);
+            _ignoreHexBuffer.SetData(ignoreHexes);
+            
+            _decalProjector.material.SetBuffer("_IgnoreHexGrids", _ignoreHexBuffer);
+        }
+
+        private void onChangedColorTile(IHexGrid iHex, Color color)
+        {
+            HexColorOption[] hexColorOptions = _hexGrids.Values.Select(hex => new HexColorOption()
+            {
+                Color = hex.Color.ToVec3(),
+                Qr = hex.HexPoint
+            }).ToArray();
+
+            int stride = Marshal.SizeOf<HexColorOption>();
+            _hexColorOptionBuffer = new(hexColorOptions.Length, stride);
+            _hexColorOptionBuffer.SetData(hexColorOptions);
+            
+            _decalProjector.material.SetBuffer("_HexColorOption", _hexColorOptionBuffer);
         }
 
         public List<IHexGrid> GetGrids() => _hexGrids
@@ -234,10 +242,10 @@ namespace Onw.HexGrid
             .ToList();
 
         #if UNITY_EDITOR
-        [OnChangedValueByMethod(nameof(_qLimit), nameof(_rLimit), nameof(_sLimit))]
+        [OnChangedValueByMethod(nameof(_tileLimit))]
         private void onChangedLimit()
         {
-            _decalProjector.material.SetVector("_AbsoluteQRS", new(_qLimit, _rLimit, _sLimit));
+            _decalProjector.material.SetFloat("_AbsoluteLimit", _tileLimit);
         }
 
         [OnChangedValueByMethod(nameof(HexagonRadius))]

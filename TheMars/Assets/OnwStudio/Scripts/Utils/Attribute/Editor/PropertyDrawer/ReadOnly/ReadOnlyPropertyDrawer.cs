@@ -11,20 +11,22 @@ namespace Onw.Attribute.Editor
     using GUI = UnityEngine.GUI;
 
     [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
-    internal sealed class ReadOnlyPropertyDrawer : InitializablePropertyDrawer
+    internal sealed class ReadOnlyPropertyDrawer : PropertyDrawer
     {
-        private int? _arraySize = null;
+        private readonly Dictionary<int, int?> _cachedArraySizeDictionary = new();
 
-        protected override void OnEnable(Rect position, SerializedProperty property, GUIContent label)
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (property.propertyType != SerializedPropertyType.Generic || !property.isArray) return;
+            int hash = property.GetHashCode();
+            
+            if (!_cachedArraySizeDictionary.TryGetValue(hash, out int? arraySize))
+            {
+                arraySize = property.propertyType != SerializedPropertyType.Generic || !property.isArray ? null : property.FindPropertyRelative("Array.size").intValue;
 
-            _arraySize = property.FindPropertyRelative("Array.size").intValue;
-        }
-
-        protected override void OnPropertyGUI(Rect position, SerializedProperty property, GUIContent label)
-        {
-            if (_arraySize is null)
+                _cachedArraySizeDictionary.Add(hash, arraySize);
+            }
+            
+            if (arraySize is null)
             {
                 GUI.enabled = false;
                 EditorGUI.PropertyField(position, property, label, true);
@@ -38,7 +40,7 @@ namespace Onw.Attribute.Editor
 
             if (property.isExpanded)
             {
-                for (int i = 0; i < _arraySize; i++)
+                for (int i = 0; i < (int)arraySize; i++)
                 {
                     SerializedProperty element = property.GetArrayElementAtIndex(i);
                     EditorGUI.PropertyField(position, element, GUIContent.none, true);
@@ -52,7 +54,7 @@ namespace Onw.Attribute.Editor
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            if (_arraySize is null)
+            if (!_cachedArraySizeDictionary.TryGetValue(property.GetHashCode(), out int? arraySize) || arraySize is null)
             {
                 return EditorGUI.GetPropertyHeight(property, label, true);
             }
@@ -61,7 +63,7 @@ namespace Onw.Attribute.Editor
 
             if (property.isExpanded)
             {
-                for (int i = 0; i < _arraySize; i++)
+                for (int i = 0; i < (int)arraySize; i++)
                 {
                     SerializedProperty element = property.GetArrayElementAtIndex(i);
                     height += EditorGUI.GetPropertyHeight(element, true) + EditorGUIUtility.standardVerticalSpacing;
