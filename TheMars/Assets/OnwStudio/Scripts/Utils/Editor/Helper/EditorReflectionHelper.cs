@@ -312,6 +312,7 @@ namespace Onw.Editor
 
             return fieldInfo;
         }
+        
         public static Type GetPropertyType(object targetObject, string propertyPath)
         {
             FieldInfo field = GetFieldInfo(targetObject, propertyPath);

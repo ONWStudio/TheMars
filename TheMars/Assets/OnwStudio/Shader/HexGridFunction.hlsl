@@ -1,18 +1,37 @@
 
-struct HexColorOption
+struct HexOption
 {
 	float3 Color;
-	int2 Qr;
+	int IsActive;
 };
 
-StructuredBuffer<int2> _IgnoreHexGrids;
-StructuredBuffer<HexColorOption> _HexColorOption;
-int _IgnoreHexGridsBufferSize;
-int _HexColorOptionBufferSize;
 
-void IgnoreGrids_bool(const float2 p, out bool isActive)
+
+StructuredBuffer<HexOption> _HexOptions;
+int _BufferOn = 0;
+
+void CheckHexOptionBuffer_float(out bool bufferOn)
 {
-	isActive = _HexColorOptionBufferSize > 0;
+	bufferOn = _BufferOn;
+}
+
+void GetHexOption_float(const float2 p, const float limit, out float4 option)
+{
+	const int q = p.x;
+	const int r = p.y;
+
+	const int limitInt = limit;
+	const int rMin = max(-limitInt, -q - limitInt);
+	
+	int index = (2 * limitInt + 1) * (q + limit);
+	for (int i = -limitInt; i < q; i++)
+	{
+		index -= abs(i);
+	}
+
+	index += r - rMin;
+	HexOption hexOption = _HexOptions[index];
+	option = float4(hexOption.Color.x, hexOption.Color.y, hexOption.Color.z, hexOption.IsActive);
 }
 
 void DistanceToSegment_float(const float2 p, const float2 a, const float2 b, out float distance)
@@ -74,7 +93,7 @@ void CalculateAlpha_float(const float2 center, const float2 p, const float2 vert
 	alpha = saturate(1.0f - minDistance / lineWidthRatio);
 }
 
-void GetHexCorner_float2(const float2 center, const float radius, const int index, out float2 corner)
+void GetHexCorner_float(const float2 center, const float radius, const int index, out float2 corner)
 {
 	const float pi = 3.14159265359f;
 	const float angleDeg = 60.0f * index;
@@ -91,7 +110,7 @@ void CalculateHexOutline_float(const float2 hexPixel, const float2 nowPixel, con
 
 	for (int i = 0; i < 6; i++)
 	{
-		GetHexCorner_float2(hexPixel, radius, i, vertices[i]);
+		GetHexCorner_float(hexPixel, radius, i, vertices[i]);
 	}
 	
 	CalculateAlpha_float(hexPixel, nowPixel, vertices, lineWidth, alpha);

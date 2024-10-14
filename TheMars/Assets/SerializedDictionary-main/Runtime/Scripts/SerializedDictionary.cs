@@ -52,8 +52,9 @@ namespace AYellowpaper.SerializedCollections
         /// <param name="value"></param>
         public void NewAdd(TKey key, TValue value)
         {
-            _serializedList.Add(new(key, value));
-            serialize();
+            SerializedKeyValuePair<TKey, TValue> kvp = new(key, value);
+            _serializedList.Add(kvp);
+            Add(kvp.Key, kvp.Value);
         }
 
         public void NewRemove(TKey key, TValue value)

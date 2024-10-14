@@ -75,13 +75,18 @@ namespace Onw.HexGrid.Editor
 
             if (GUILayout.Button("Calculate Grids"))
             {
+                Undo.RecordObject(_gridManager, "Calculate Grids");
                 _gridManager.CalculateTile();
                 initializeTile();
                 serializedObject.ApplyModifiedProperties();
             }
-            
-            _hexGrids.Values.ForEach(hex => Debug.Log(hex.GetHexIndex(_gridManager.TileLimit)));
 
+            if (GUILayout.Button("Update Option"))
+            {
+                _gridManager.SendToShaderHexOption();
+                serializedObject.ApplyModifiedProperties();
+            }
+            
             if (GUILayout.Button("Clear Tiles"))
             {
                 _hexGrids.NewClear();
@@ -109,7 +114,10 @@ namespace Onw.HexGrid.Editor
                     using EditorGUILayout.ScrollViewScope scrollScope = new(_scrollPosition);
                     _scrollPosition = scrollScope.scrollPosition;
 
-                    if (EditorGUILayout.PropertyField(_currentHexProperty))
+                    using EditorGUI.ChangeCheckScope changeCheckScope = new();
+                    EditorGUILayout.PropertyField(_currentHexProperty, true);
+                    
+                    if (changeCheckScope.changed)
                     {
                         serializedObject.ApplyModifiedProperties();
                     }
