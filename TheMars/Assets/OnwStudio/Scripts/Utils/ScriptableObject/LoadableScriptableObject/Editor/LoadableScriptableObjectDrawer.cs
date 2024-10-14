@@ -12,13 +12,13 @@ using Onw.Editor;
 namespace Onw.ScriptableObjects.Editor
 {
     [CustomPropertyDrawer(typeof(LoadableScriptableObject<>), true)]
-    internal sealed class LoadableScriptableObjectDrawer : InitializablePropertyDrawer
+    internal sealed class LoadableScriptableObjectDrawer : PropertyDrawer
     {
         private ReorderableList _reorderableList = null;
 
-        protected override void OnEnable(Rect position, SerializedProperty property, GUIContent label)
+        private void onEnable(Rect position, SerializedProperty property, GUIContent label)
         {
-            SerializedProperty listProperty = property.FindPropertyRelative("_scriptableObjects");
+            SerializedProperty listProperty = property.FindPropertyRelative("_scriptableObjects")!;
 
             _reorderableList = new(property.serializedObject, listProperty, true, true, false, false)
             {
@@ -49,10 +49,15 @@ namespace Onw.ScriptableObjects.Editor
 
             property.serializedObject.ApplyModifiedProperties();
         }
-
-        protected override void OnPropertyGUI(Rect position, SerializedProperty property, GUIContent label)
+        
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            _reorderableList.DoList(position);
+            if (_reorderableList is null)
+            {
+                onEnable(position, property, label);
+            }
+            
+            _reorderableList!.DoList(position);
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)

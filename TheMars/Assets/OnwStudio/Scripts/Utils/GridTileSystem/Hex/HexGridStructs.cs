@@ -3,93 +3,83 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Onw.Attribute;
+using UnityEngine.Serialization;
 
 namespace Onw.HexGrid
 {
     [System.Serializable]
     public struct AxialCoordinates
     {
-        [SerializeField, ReadOnly] private int _q;
-        [SerializeField, ReadOnly] private int _r;
+        [field: SerializeField, ReadOnly] public int Q { get; private set; }
+        [field: SerializeField, ReadOnly] public int R { get; private set; }
 
-        public int Q => _q;
-        public int R => _r;
-        
-        public static implicit operator Vector2(in AxialCoordinates axialCoordinates) => new(axialCoordinates._q, axialCoordinates._r);
-        public static implicit operator Vector2Int(in AxialCoordinates axialCoordinates) => new(axialCoordinates._q, axialCoordinates._r);
+        public static implicit operator Vector2(in AxialCoordinates axialCoordinates) => new(axialCoordinates.Q, axialCoordinates.R);
+        public static implicit operator Vector2Int(in AxialCoordinates axialCoordinates) => new(axialCoordinates.Q, axialCoordinates.R);
         public static implicit operator AxialCoordinates(in Vector2 vec) => new(vec);
         public static implicit operator AxialCoordinates(in Vector2Int vec) => new(vec);
         public static implicit operator HexCoordinates(in AxialCoordinates axialCoordinates) => new(axialCoordinates);
 
         public AxialCoordinates(int q, int r)
         {
-            _q = q;
-            _r = r;
+            Q = q;
+            R = r;
         }
 
-        public AxialCoordinates(in HexCoordinates hexCoordinates) : this(hexCoordinates.Q, hexCoordinates.R) {}
-        public AxialCoordinates(in Vector2Int vec) : this(vec.x, vec.y) {}
-        public AxialCoordinates(in Vector2 vec) : this((int)vec.x, (int)vec.y) {}
-        
+        public AxialCoordinates(in HexCoordinates hexCoordinates) : this(hexCoordinates.Q, hexCoordinates.R) { }
+        public AxialCoordinates(in Vector2Int vec) : this(vec.x, vec.y) { }
+        public AxialCoordinates(in Vector2 vec) : this((int)vec.x, (int)vec.y) { }
+
         public override bool Equals(object obj)
         {
-            return obj is AxialCoordinates other && _q == other._q && R == other._r;
+            return obj is AxialCoordinates other && Q == other.Q && R == other.R;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(_q, _r);
+            return HashCode.Combine(Q, R);
         }
-        
+
         public override string ToString()
-            => $"Q : {_q} R : {_r}";
+            => $"Q : {Q} R : {R}";
     }
 
     [System.Serializable]
     public struct HexCoordinates
     {
-        [SerializeField, ReadOnly] private int _q;
-        [SerializeField, ReadOnly] private int _r;
-        [SerializeField, ReadOnly] private int _s;
+        [field: SerializeField, ReadOnly] public int Q { get; private set; }
+        [field: SerializeField, ReadOnly] public int R { get; private set; }
+        [field: SerializeField, ReadOnly] public int S { get; private set; }
 
-        public int Q => _q;
-        public int R => _r;    
-        public int S => _s;
-        
         public static implicit operator Vector2(in HexCoordinates hexCoordinates) => new(hexCoordinates.Q, hexCoordinates.R);
         public static implicit operator Vector2Int(in HexCoordinates hexCoordinates) => new(hexCoordinates.Q, hexCoordinates.R);
+        public static implicit operator Vector3(in HexCoordinates hexCoordinates) => new(hexCoordinates.Q, hexCoordinates.R, hexCoordinates.R);
         public static implicit operator Vector3Int(in HexCoordinates hexCoordinates) => new(hexCoordinates.Q, hexCoordinates.R, hexCoordinates.S);
         public static implicit operator HexCoordinates(in Vector2 vec) => new(vec);
         public static implicit operator HexCoordinates(in Vector2Int vec) => new(vec);
-        public static implicit operator HexCoordinates(in Vector3Int vec) => new(vec);
         public static implicit operator AxialCoordinates(in HexCoordinates hexCoordinates) => new(hexCoordinates);
-        
+
         public HexCoordinates(int q, int r)
         {
-            _q = q;
-            _r = r;
-            _s = -q - r;
+            Q = q;
+            R = r;
+            S = -q - r;
         }
 
-        public HexCoordinates(in AxialCoordinates axialCoordinates) : this(axialCoordinates.Q, axialCoordinates.R) {}
-        public HexCoordinates(in Vector2Int vec) : this(vec.x, vec.y) {}
-        public HexCoordinates(in Vector2 vec) : this((int)vec.x, (int)vec.y) {}
-        public HexCoordinates(in Vector3Int vec) : this(vec.x, vec.y)
-        {
-            _s = vec.z;
-        }
+        public HexCoordinates(in AxialCoordinates axialCoordinates) : this(axialCoordinates.Q, axialCoordinates.R) { }
+        public HexCoordinates(in Vector2Int vec) : this(vec.x, vec.y) { }
+        public HexCoordinates(in Vector2 vec) : this((int)vec.x, (int)vec.y) { }
 
         public override bool Equals(object obj)
         {
-            return obj is HexCoordinates other && _q == other._q && _r == other._r && _s == other._s;
+            return obj is HexCoordinates other && Q == other.Q && R == other.R && S == other.S;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(_q, _r, _s);
+            return HashCode.Combine(Q, R, S);
         }
-        
+
         public override string ToString()
-            => $"Q : {_q} R : {_r} S : {_s}";
+            => $"Q : {Q} R : {R} S : {S}";
     }
 }

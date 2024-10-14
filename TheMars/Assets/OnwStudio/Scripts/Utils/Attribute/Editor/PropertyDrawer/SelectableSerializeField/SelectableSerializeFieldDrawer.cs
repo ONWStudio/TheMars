@@ -11,40 +11,59 @@ namespace Onw.Attribute.Editor
     using GUI = UnityEngine.GUI;
 
     [CustomPropertyDrawer(typeof(SelectableSerializeFieldAttribute), true)]
-    internal sealed class SelectableSerializeFieldDrawer : InitializablePropertyDrawer
+    internal sealed class SelectableSerializeFieldDrawer : PropertyDrawer
     {
-        private readonly TreeViewState _dropdownState = new();
-        private ComponentDropdown _dropdown = null;
-        private GUIContent _buttonContent = null;
-        private bool _isMonoBehaviour = false;
-
-        protected override void OnEnable(Rect position, SerializedProperty property, GUIContent label)
+        public readonly struct SelectableFieldPropState
         {
-            if (property.serializedObject.targetObject is MonoBehaviour monoBehaviour)
+            public ComponentDropdown Dropdown { get; }
+            public bool IsMonoBehaviour { get; }
+
+            public SelectableFieldPropState(ComponentDropdown dropdown, bool isMonoBehaviour)
             {
-                _isMonoBehaviour = true;
-                
-                _dropdown = new(_dropdownState, monoBehaviour.gameObject, fieldInfo.FieldType, go =>
-                {
-                    if (fieldInfo.FieldType == typeof(GameObject))
-                    {
-                        property.objectReferenceValue = go;
-                    }
-                    else
-                    {
-                        property.objectReferenceValue = go.GetComponent(fieldInfo.FieldType);
-                    }
-
-                    property.serializedObject.ApplyModifiedProperties();
-                });
-
-                _buttonContent = new(EditorGUIUtility.IconContent("icon dropdown").image);
+                Dropdown = dropdown;
+                IsMonoBehaviour = isMonoBehaviour;
             }
         }
+        
+        private readonly TreeViewState _dropdownState = new();
+        private GUIContent _buttonContent = null;
 
-        protected override void OnPropertyGUI(Rect position, SerializedProperty property, GUIContent label)
+        private readonly Dictionary<int, SelectableFieldPropState> _cachedSelectableFieldPropStates = new();
+
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (!_isMonoBehaviour)
+            _buttonContent ??= new(EditorGUIUtility.IconContent("icon dropdown").image);
+
+            int hash = property.GetHashCode();
+            if (!_cachedSelectableFieldPropStates.TryGetValue(hash, out SelectableFieldPropState state))
+            {
+                if (property.serializedObject.targetObject is MonoBehaviour monoBehaviour)
+                {
+                    ComponentDropdown dropdown = new(_dropdownState, monoBehaviour.gameObject, fieldInfo.FieldType, go =>
+                    {
+                        if (fieldInfo.FieldType == typeof(GameObject))
+                        {
+                            property.objectReferenceValue = go;
+                        }
+                        else
+                        {
+                            property.objectReferenceValue = go.GetComponent(fieldInfo.FieldType);
+                        }
+
+                        property.serializedObject.ApplyModifiedProperties();
+                    });
+
+                    state = new(dropdown, true);
+                }
+                else
+                {
+                    state = new(null, false);
+                }
+                
+                _cachedSelectableFieldPropStates.Add(hash, state);
+            }
+            
+            if (!state.IsMonoBehaviour)
             {
                 EditorGUI.HelpBox(position, "this object is not MonoBehaviour!", MessageType.Error);
                 return;
@@ -71,7 +90,7 @@ namespace Onw.Attribute.Editor
 
                 if (GUI.Button(buttonRect, _buttonContent))
                 {
-                    _dropdown.Show(buttonRect);
+                    state.Dropdown.Show(buttonRect);
                 }
             }
             else

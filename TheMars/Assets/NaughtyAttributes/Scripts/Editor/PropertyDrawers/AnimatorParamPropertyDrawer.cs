@@ -15,8 +15,8 @@ namespace NaughtyAttributes.Editor
         protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
         {
             AnimatorParamAttribute animatorParamAttribute = PropertyUtility.GetAttribute<AnimatorParamAttribute>(property);
-            bool validAnimatorController = GetAnimatorController(property, animatorParamAttribute.AnimatorName) != null;
-            bool validPropertyType = property.propertyType == SerializedPropertyType.Integer || property.propertyType == SerializedPropertyType.String;
+            bool validAnimatorController = GetAnimatorController(property, animatorParamAttribute.AnimatorName);
+            bool validPropertyType = property.propertyType is SerializedPropertyType.Integer or SerializedPropertyType.String;
 
             return (validAnimatorController && validPropertyType)
                 ? GetPropertyHeight(property)

@@ -9,36 +9,37 @@ using Onw.Editor;
 namespace Onw.Attribute.Editor
 {
     [CustomPropertyDrawer(typeof(OnChangedValueByValueAttribute))]
-    internal sealed class OnChangedValueByValueDrawer : InitializablePropertyDrawer
+    internal sealed class OnChangedValueByValueDrawer : PropertyDrawer
     {
         private const BindingFlags FLAGS = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
-        private OnChangedValueByValueAttribute _attribute;
-        private MethodInfo _methodInfo;
-        private object _target;
 
-        protected override void OnEnable(Rect position, SerializedProperty property, GUIContent label)
-        {
-            _attribute = attribute as OnChangedValueByValueAttribute;
-            _target = property.serializedObject.targetObject;
-            _methodInfo = _target.GetType().GetMethod(_attribute.MethodName, FLAGS);
-        }
-
-        protected override void OnPropertyGUI(Rect position, SerializedProperty property, GUIContent label)
+        private readonly Dictionary<object, MethodInfo> _cachedMethodInfos = new();
+        
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             if (Application.isPlaying) return;
 
-            using EditorGUI.ChangeCheckScope scope = new EditorGUI.ChangeCheckScope();
+            OnChangedValueByValueAttribute castedAttribute = (attribute as OnChangedValueByValueAttribute)!;
+            object target = property.serializedObject.targetObject;
+            
+            if (!_cachedMethodInfos.TryGetValue(target, out MethodInfo methodInfo))
+            {
+                methodInfo = target.GetType().GetMethod(castedAttribute.MethodName, FLAGS);
+                _cachedMethodInfos.Add(target, methodInfo);
+            }
+            
+            using EditorGUI.ChangeCheckScope scope = new();
             EditorGUI.PropertyField(position, property, label, true);
 
             if (scope.changed)
             {
-                if (_methodInfo is not null)
+                if (methodInfo is not null)
                 {
-                    _methodInfo.Invoke(_target, null);
+                    methodInfo.Invoke(target, null);
                 }
                 else
                 {
-                    Debug.LogWarning($"Method {_attribute.MethodName} not found on {_target.GetType().Name}");
+                    Debug.LogWarning($"Method {castedAttribute.MethodName} not found on {target.GetType().Name}");
                 }
             }
         }

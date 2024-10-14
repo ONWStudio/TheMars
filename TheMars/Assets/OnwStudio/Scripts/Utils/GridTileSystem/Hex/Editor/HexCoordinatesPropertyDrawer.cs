@@ -8,25 +8,44 @@ using Onw.Editor;
 namespace Onw.HexGrid.Editor
 {
     [CustomPropertyDrawer(typeof(HexCoordinates))]
-    internal sealed class HexCoordinatesPropertyDrawer : InitializablePropertyDrawer
+    internal sealed class HexCoordinatesPropertyDrawer : PropertyDrawer
     {
-        private SerializedProperty _qProp = null;
-        private SerializedProperty _rProp = null;
-        private SerializedProperty _sProp = null;
+        public readonly struct HexCoordinatesProp
+        {
+            public SerializedProperty QProp { get; }
+            public SerializedProperty RProp { get; }
+            public SerializedProperty SProp { get; }
+
+            public HexCoordinatesProp(SerializedProperty qProp, SerializedProperty rProp, SerializedProperty sProp)
+            {
+                QProp = qProp;
+                RProp = rProp;
+                SProp = sProp;
+            }
+        }
+
+        private readonly Dictionary<int, HexCoordinatesProp> _cachedHexCoordinatesProps = new();
         private GUIStyle _labelStyle = null;
 
-        protected override void OnEnable(Rect position, SerializedProperty property, GUIContent label)
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            _qProp = property.FindPropertyRelative("_q");
-            _rProp = property.FindPropertyRelative("_r");
-            _sProp = property.FindPropertyRelative("_s");
-            _labelStyle = new(GUI.skin.label)
+            int hash = property.GetHashCode();
+            
+            if (!_cachedHexCoordinatesProps.TryGetValue(hash, out HexCoordinatesProp props))
+            {
+                props = new(
+                    property.FindPropertyRelative(EditorReflectionHelper.GetBackingFieldName("Q")), 
+                    property.FindPropertyRelative(EditorReflectionHelper.GetBackingFieldName("R")), 
+                    property.FindPropertyRelative(EditorReflectionHelper.GetBackingFieldName("S")));
+
+                _cachedHexCoordinatesProps.Add(hash, props);
+            }
+            
+            _labelStyle ??= new(GUI.skin.label)
             {
                 alignment = TextAnchor.MiddleCenter
             };
-        }
-        protected override void OnPropertyGUI(Rect position, SerializedProperty property, GUIContent label)
-        {
+            
             using EditorGUI.PropertyScope propScope = new(position, label, property);
             position = EditorGUI.PrefixLabel(position, label);
             float labelWidth = EditorGUIUtility.singleLineHeight;  // 각 라벨의 너비
@@ -36,19 +55,19 @@ namespace Onw.HexGrid.Editor
             Rect qRect = new(position.x, position.y, labelWidth, position.height);
             EditorGUI.LabelField(qRect, "Q", _labelStyle);
             Rect qFieldRect = new(position.x + labelWidth, position.y, fieldWidth, position.height);
-            _qProp.intValue = EditorGUI.IntField(qFieldRect, _qProp.intValue);
+            props.QProp.intValue = EditorGUI.IntField(qFieldRect, props.QProp.intValue);
 
             // R 필드
             Rect rRect = new(position.x + labelWidth + fieldWidth, position.y, labelWidth, position.height);
             EditorGUI.LabelField(rRect, "R", _labelStyle);
             Rect rFieldRect = new(position.x + (labelWidth + fieldWidth) + labelWidth, position.y, fieldWidth, position.height);
-            _rProp.intValue = EditorGUI.IntField(rFieldRect, _rProp.intValue);
+            props.RProp.intValue = EditorGUI.IntField(rFieldRect, props.RProp.intValue);
 
             // S 필드
             Rect sRect = new(position.x + (labelWidth + fieldWidth) * 2, position.y, labelWidth, position.height);
             EditorGUI.LabelField(sRect, "S", _labelStyle);
             Rect sFieldRect = new(position.x + (labelWidth + fieldWidth) * 2 + labelWidth, position.y, fieldWidth, position.height);
-            _sProp.intValue = EditorGUI.IntField(sFieldRect, _sProp.intValue);
+            props.SProp.intValue = EditorGUI.IntField(sFieldRect, props.SProp.intValue);
         }
     }
 }

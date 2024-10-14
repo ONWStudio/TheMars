@@ -9,32 +9,21 @@ using Onw.Editor;
 namespace Onw.Attribute.Editor
 {
     [CustomPropertyDrawer(typeof(InitializeRequireComponentAttribute), false)]
-    internal sealed class InitializeRequireComponentDrawer : InitializablePropertyDrawer
+    internal sealed class InitializeRequireComponentDrawer : PropertyDrawer
     {
-        private bool _isVaildate = false;
+        private bool? _isVaildate = null;
 
-        protected override void OnEnable(Rect position, SerializedProperty property, GUIContent label)
-        {
-            Type requireComponentType = property.GetPropertyType();
-
-            _isVaildate = (typeof(MonoBehaviour).IsSubclassOf(requireComponentType) && typeof(Component).IsSubclassOf(requireComponentType)) ||
-                !property.IsNestedAttribute<SerializeField>();
-        }
-
-        protected override void OnPropertyGUI(Rect position, SerializedProperty property, GUIContent label)
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             GUI.enabled = false;
             EditorGUI.PropertyField(position, property, label);
             GUI.enabled = true;
 
-            if (attribute is not InitializeRequireComponentAttribute)
-            {
-                return;
-            }
-
             Type requireComponentType = property.GetPropertyType();
-
-            if (_isVaildate)
+            _isVaildate ??= typeof(MonoBehaviour).IsSubclassOf(requireComponentType) && 
+                            typeof(Component).IsSubclassOf(requireComponentType);
+            
+            if (!(bool)_isVaildate && !property.IsNestedAttribute<SerializeField>())
             {
                 Debug.LogWarning("Not MonoBehaviour or Component! and check in Contain SerializeField Attirbute");
                 return;

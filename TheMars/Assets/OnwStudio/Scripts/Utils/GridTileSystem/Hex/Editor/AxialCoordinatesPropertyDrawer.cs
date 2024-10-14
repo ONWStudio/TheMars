@@ -8,41 +8,57 @@ using Onw.Editor;
 namespace Onw.HexGrid.Editor
 {
     [CustomPropertyDrawer(typeof(AxialCoordinates))]
-    internal sealed class AxialCoordinatesPropertyDrawer : InitializablePropertyDrawer
+    internal sealed class AxialCoordinatesPropertyDrawer : PropertyDrawer
     {
-        private SerializedProperty _qProp = null;
-        private SerializedProperty _rProp = null;
-        private GUIStyle _labelStyle = null;
-        
-        protected override void OnEnable(Rect position, SerializedProperty property, GUIContent label)
+        public readonly struct AxialCoordinatesProp
         {
-            _qProp = property.FindPropertyRelative("_q");
-            _rProp = property.FindPropertyRelative("_r");
-            _labelStyle = new(GUI.skin.label)
+            public SerializedProperty QProp { get; }
+            public SerializedProperty RProp { get; }
+
+            public AxialCoordinatesProp(SerializedProperty qProp, SerializedProperty rProp)
+            {
+                QProp = qProp;
+                RProp = rProp;
+            }
+        }
+        
+        private GUIStyle _labelStyle = null;
+        private readonly Dictionary<int, AxialCoordinatesProp> _cachedAxialCoordinatesProps = new();
+
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            _labelStyle ??= new(GUI.skin.label)
             {
                 alignment = TextAnchor.MiddleCenter
             };
-        }
-        
-        protected override void OnPropertyGUI(Rect position, SerializedProperty property, GUIContent label)
-        {
+
+            int hash = property.GetHashCode();
+            if (!_cachedAxialCoordinatesProps.TryGetValue(hash, out AxialCoordinatesProp props))
+            {
+                props = new(
+                    property.FindPropertyRelative(EditorReflectionHelper.GetBackingFieldName("Q")),
+                    property.FindPropertyRelative(EditorReflectionHelper.GetBackingFieldName("R")));
+
+                _cachedAxialCoordinatesProps.Add(hash, props);
+            }
+            
             using EditorGUI.PropertyScope propScope = new(position, label, property);
             position = EditorGUI.PrefixLabel(position, label);
 
-            float labelWidth = EditorGUIUtility.singleLineHeight;  // 각 라벨의 너비
+            float labelWidth = EditorGUIUtility.singleLineHeight; // 각 라벨의 너비
             float fieldWidth = (position.width - labelWidth * 3) / 3f;
 
             // Q 필드
             Rect qRect = new(position.x, position.y, labelWidth, position.height);
             EditorGUI.LabelField(qRect, "Q", _labelStyle);
             Rect qFieldRect = new(position.x + labelWidth, position.y, fieldWidth, position.height);
-            _qProp.intValue = EditorGUI.IntField(qFieldRect, _qProp.intValue);
+            props.QProp.intValue = EditorGUI.IntField(qFieldRect, props.QProp.intValue);
 
             // R 필드
             Rect rRect = new(position.x + labelWidth + fieldWidth, position.y, labelWidth, position.height);
             EditorGUI.LabelField(rRect, "R", _labelStyle);
             Rect rFieldRect = new(position.x + (labelWidth + fieldWidth) + labelWidth, position.y, fieldWidth, position.height);
-            _rProp.intValue = EditorGUI.IntField(rFieldRect, _rProp.intValue);
+            props.RProp.intValue = EditorGUI.IntField(rFieldRect, props.RProp.intValue);
         }
     }
 }
