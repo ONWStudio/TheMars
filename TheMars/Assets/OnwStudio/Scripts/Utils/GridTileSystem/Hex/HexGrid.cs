@@ -56,7 +56,7 @@ namespace Onw.HexGrid
 
         [SerializeField] private bool _isActive = true;
         [SerializeField] private Color _color = Color.cyan;
-        
+
         public event UnityAction<IHexGrid> OnHighlightTile
         {
             add => _onHighlightTile.AddListener(value);
@@ -133,6 +133,12 @@ namespace Onw.HexGrid
             _onMouseDownTile.Invoke(this);
         }
 
+        public HexOption GetShaderOption() => new()
+        {
+            Color = _color.ToVec3(),
+            IsActive = _isActive ? 1 : 0
+        };
+
         public void SetTilePosition(in Vector3 tilePosition)
         {
             TilePosition = tilePosition;
@@ -142,7 +148,7 @@ namespace Onw.HexGrid
         {
             Index = GetHexIndex(limit);
         }
-        
+
         public HexGrid(int q, int r, in Vector3 tilePosition, in Vector2 normalizedPosition) : this(q, r, tilePosition)
         {
             NormalizedPosition = normalizedPosition;
@@ -153,7 +159,7 @@ namespace Onw.HexGrid
             TilePosition = tilePosition;
         }
 
-        public HexGrid(AxialCoordinates axialCoordinates)
+        public HexGrid(in AxialCoordinates axialCoordinates)
         {
             _hexPoint = axialCoordinates;
         }

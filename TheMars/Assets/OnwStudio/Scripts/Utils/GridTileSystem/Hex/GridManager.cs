@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -49,7 +50,7 @@ namespace Onw.HexGrid
         [field: SerializeField, Range(HEXAGON_RADIUS_MIN, HEXAGON_RADIUS_MAX)] public float HexagonRadius { get; set; } = 0.025f;
 
         public float HexagonWidth => HexagonRadius * _decalProjector.size.x * 2 * _decalProjector.transform.localScale.x;
-        
+
         public bool IsRender
         {
             get => _decalProjector.enabled;
@@ -81,23 +82,25 @@ namespace Onw.HexGrid
         [SerializeField] private UnityEvent<IHexGrid> _onMouseUpTile = new();
         [SerializeField] private UnityEvent<IHexGrid> _onMouseDownTile = new();
 
-        [SerializeField, SerializedDictionary(isReadOnlyKey: true, isReadOnlyValue: true, isLocked: true)] 
+        [SerializeField, SerializedDictionary(isReadOnlyKey: true, isReadOnlyValue: true, isLocked: true)]
         private SerializedDictionary<AxialCoordinates, HexGrid> _hexGrids;
-        
+
         [SerializeField, InitializeRequireComponent] private DecalProjector _decalProjector;
         [SerializeField, InitializeRequireComponent] private MouseMovementTracker _mouseMovementTracker;
+        [SerializeField, InitializeRequireComponent] private MouseInputEvent _mouseInputEvent;
 
         [FormerlySerializedAs("_qLimit")]
         [SerializeField, Min(0)] private int _tileLimit = 3;
-        
+
         [SerializeField] private Camera _mainCamera = null;
         private ComputeBuffer _hexOptionBuffer;
 
         private HexGrid _currentHex = null;
-        
+
         private void Awake()
         {
             SendToShaderHexOption();
+            _mouseInputEvent.AddListenerDownEvent<OnwMouseLeftInputEvent>(onMouseDownEvent);
         }
 
         private void Start()
@@ -110,17 +113,37 @@ namespace Onw.HexGrid
                 _mainCamera = Camera.main;
             }
         }
-        
+
         private void OnDestroy()
         {
             _hexOptionBuffer?.Release();
         }
 
+        private void onMouseDownEvent(Vector2 mousePosition)
+        {
+            Ray ray = _mainCamera.ScreenPointToRay(mousePosition);
+
+            if (TryGetTileDataByRay(ray, out (bool, RaycastHit) _, out IHexGrid iHex))
+            {
+                ((HexGrid)iHex).InvokeOnMouseDownTile();
+            }
+        }
+
+        private void onMouseUpEvent(Vector2 mousePosition)
+        {
+            Ray ray = _mainCamera.ScreenPointToRay(mousePosition);
+
+            if (TryGetTileDataByRay(ray, out (bool, RaycastHit) _, out IHexGrid iHex))
+            {
+                ((HexGrid)iHex).InvokeOnMouseUpTile();
+            }
+        }
+
         private void onHoverMouse(Vector2 mousePosition)
         {
             Ray ray = _mainCamera.ScreenPointToRay(mousePosition);
-            
-            if (TryGetTileDataByRay(ray, out IHexGrid iHex))
+
+            if (TryGetTileDataByRay(ray, out (bool, RaycastHit) _, out IHexGrid iHex))
             {
                 HexGrid hex = (HexGrid)iHex;
 
@@ -141,12 +164,24 @@ namespace Onw.HexGrid
             hex.IsActive = isActive;
         }
 
-        public bool TryGetTileDataByRay(in Ray ray, out IHexGrid hexGrid)
+        /// <summary>
+        /// .. 레이캐스트를 한후 타일에 충돌했는지 검사합니다
+        /// 타일에 충돌한 경우 true를 반환하고 hexGrid를 전달합니다
+        /// 타일이 아니지만 레이캐스트 충돌이 일어난 경우 TUPLE의 첫번째 아이템이 true를 전달합니다
+        /// </summary>
+        /// <param name="ray"> .. 검사할 레이 </param>
+        /// <param name="hitTuple"> .. 히트 정보를 담는 튜플 </param>
+        /// <param name="hexGrid"> .. 충돌한 타일 </param>
+        /// <returns></returns>
+        public bool TryGetTileDataByRay(in Ray ray, out (bool, RaycastHit) hitTuple, out IHexGrid hexGrid)
         {
             hexGrid = null;
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            hitTuple.Item1 = false;
+            
+            if (Physics.Raycast(ray, out hitTuple.Item2))
             {
-                Vector2 convertedPosition = new(hit.point.x - _decalProjector.transform.position.x, hit.point.z - _decalProjector.transform.position.z);
+                hitTuple.Item1 = true;
+                Vector2 convertedPosition = new(hitTuple.Item2.point.x - _decalProjector.transform.position.x, hitTuple.Item2.point.z - _decalProjector.transform.position.z);
                 convertedPosition /= _decalProjector.size.x * _decalProjector.GetLocalScaleX();
 
                 Vector2 axialCoordinates = new(
@@ -166,18 +201,18 @@ namespace Onw.HexGrid
                     Mathf.Abs(roundHex.z - sFloat));
 
                 Vector3Int hexCoordinates = roundHex;
-                
-                if (hexDifferent.x > hexDifferent.y && hexDifferent.x > hexDifferent.z)
+
+                switch (hexDifferent)
                 {
-                    hexCoordinates.x = -roundHex.y - roundHex.z;
-                }
-                else if (hexDifferent.y > hexDifferent.z)
-                {
-                    hexCoordinates.y = -roundHex.x - roundHex.z;
-                }
-                else
-                {
-                    hexCoordinates.z = -roundHex.x - roundHex.y;
+                    case var _ when hexDifferent.x > hexDifferent.y && hexDifferent.x > hexDifferent.z:
+                        hexCoordinates.x = -roundHex.y - roundHex.z;
+                        break;
+                    case var _ when hexDifferent.y > hexDifferent.z:
+                        hexCoordinates.y = -roundHex.x - roundHex.z;
+                        break;
+                    default:
+                        hexCoordinates.z = -roundHex.z - roundHex.y;
+                        break;
                 }
 
                 if (_hexGrids.TryGetValue(new(hexCoordinates.x, hexCoordinates.y), out HexGrid hex))
@@ -193,10 +228,7 @@ namespace Onw.HexGrid
         public void CalculateTile()
         {
             Vector3 projectorSize = _decalProjector.size * _decalProjector.GetLocalScaleX();
-            Dictionary<AxialCoordinates, HexGrid> hexGrids = _hexGrids.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            List<HexGrid> hexList = new(_hexGrids.Count);
-            _hexGrids.NewClear();
-            
+
             for (int q = -_tileLimit; q <= _tileLimit; q++)
             {
                 for (int r = -_tileLimit; r <= _tileLimit; r++)
@@ -222,7 +254,7 @@ namespace Onw.HexGrid
                                 hexPosition.z),
                             Vector3.down);
 
-                        if (Physics.Raycast(ray, out RaycastHit hit, projectorSize.y, 1 << 0))
+                        if (Physics.Raycast(ray, out RaycastHit hit, projectorSize.y, 1 << 3))
                         {
                             hexPosition = hit.point;
                         }
@@ -230,15 +262,17 @@ namespace Onw.HexGrid
                         AxialCoordinates key = new(q, r);
                         HexGrid newHex = createTile();
 
-                        if (hexGrids.TryGetValue(key, out HexGrid hex))
+                        if (_hexGrids.TryGetValue(key, out HexGrid hex))
                         {
                             hex.Properties.ForEach(newHex.AddProperty);
                             newHex.IsActive = hex.IsActive;
                             newHex.Color = hex.Color;
+                            _hexGrids[key] = newHex;
                         }
-                        
-                        _hexGrids.NewAdd(key, newHex);
-                        hexList.Add(newHex);
+                        else
+                        {
+                            _hexGrids.Add(key, newHex);
+                        }
 
                         HexGrid createTile()
                         {
@@ -249,15 +283,13 @@ namespace Onw.HexGrid
                             createdHex.OnMouseDownTile += _onMouseDownTile.Invoke;
                             createdHex.OnMouseUpTile += _onMouseUpTile.Invoke;
                             createdHex.OnExitTile += _onExitTile.Invoke;
-
                             return createdHex;
                         }
                     }
                 }
             }
 
-            Debug.Log(hexList.Count);
-            sendToShaderHexOption(hexList.Select(toOption).ToArray());
+            SendToShaderHexOption();
         }
 
         private void onChangedActiveTile(IHexGrid iHex, bool isActive)
@@ -270,40 +302,34 @@ namespace Onw.HexGrid
             SendToShaderHexOption();
         }
 
-        private HexOption toOption(HexGrid hex)
-        {
-            return new()
-            {
-                Color = hex.Color.ToVec3(),
-                IsActive = hex.IsActive ? 1 : 0
-            };
-        }
-
         public void SendToShaderHexOption()
         {
-            sendToShaderHexOption(_hexGrids.Values.Select(toOption).ToArray());
-        }
-
-        private void sendToShaderHexOption(HexOption[] hexOptions)
-        {
+            HexOption[] hexOptions = _hexGrids.Values.Select(hex => hex.GetShaderOption()).ToArray();
             int stride = Marshal.SizeOf<HexOption>();
-            _hexOptionBuffer = new(hexOptions.Length, stride);
-            _hexOptionBuffer.SetData(hexOptions);
+            bool isZero = hexOptions.Length > 0;
             
-            _decalProjector.material.SetInt("_BufferOn", 1);
-            _decalProjector.material.SetBuffer("_HexOptions", _hexOptionBuffer);
+            _decalProjector.material.SetInt("_BufferOn", isZero ? 1 : 0);
+
+            if (isZero)
+            {
+                _hexOptionBuffer?.Release();
+                _hexOptionBuffer = new(hexOptions.Length, stride);
+                _hexOptionBuffer.SetData(hexOptions);
+
+                _decalProjector.material.SetBuffer("_HexOptions", _hexOptionBuffer);
+            }
         }
 
         public List<IHexGrid> GetGrids() => _hexGrids
             .Values
             .OfType<IHexGrid>()
             .ToList();
-        
+
         public void OnBeforeSerialize()
         {
             SendToShaderHexOption();
         }
-        
+
         public void OnAfterDeserialize()
         {
         }

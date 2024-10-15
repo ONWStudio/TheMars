@@ -37,10 +37,10 @@ namespace AYellowpaper.SerializedCollections
                 if (!SerializedCollectionsUtility.IsValidKey(kvp.Key))
                     continue;
 
-                if (!_occurences.ContainsKey(kvp.Key))
-                    _occurences.Add(kvp.Key, new List<int>() { i });
+                if (!_occurences.TryGetValue(kvp.Key, out List<int> occurence))
+                    _occurences.Add(kvp.Key, new() { i });
                 else
-                    _occurences[kvp.Key].Add(i);
+                    occurence.Add(i);
             }
         }
 
@@ -74,7 +74,7 @@ namespace AYellowpaper.SerializedCollections
 
         public void AddKey(object key)
         {
-            SerializedKeyValuePair<TKey, TValue> entry = new SerializedKeyValuePair<TKey, TValue>
+            SerializedKeyValuePair<TKey, TValue> entry = new()
             {
                 Key = (TKey)key
             };

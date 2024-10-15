@@ -256,8 +256,6 @@ MonoBehaviour:
   <CardCreator>k__BackingField:
     _cards:
     - {fileID: 11400000, guid: d28af664dcafa4c1d869167ca383ed12, type: 2}
-    - {fileID: 11400000, guid: d28af664dcafa4c1d869167ca383ed12, type: 2}
-    - {fileID: 11400000, guid: d28af664dcafa4c1d869167ca383ed12, type: 2}
     _templatePrefab: {fileID: 38075375519361866, guid: d7803182f172a42c699b32751eb7fade,
       type: 3}
     _onPreCreateCard:
@@ -934,7 +932,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1409365565}
   m_HandleRect: {fileID: 1409365564}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1231,7 +1229,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.75
+  m_fontSize: 14.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1601,7 +1599,7 @@ GameObject:
   - component: {fileID: 316005526}
   - component: {fileID: 316005525}
   - component: {fileID: 316005524}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3793,7 +3791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -167.33485, y: 296.08978}
+  m_AnchoredPosition: {x: -167.33513, y: 296.08978}
   m_SizeDelta: {x: 313.65, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1016409478
@@ -5483,6 +5481,8 @@ GameObject:
   - component: {fileID: 1944097345}
   - component: {fileID: 1944097344}
   - component: {fileID: 1944097346}
+  - component: {fileID: 1944097347}
+  - component: {fileID: 1944097348}
   m_Layer: 3
   m_Name: TMGridManager
   m_TagString: Untagged
@@ -5560,8 +5560,8 @@ MonoBehaviour:
         <Q>k__BackingField: -6
         <R>k__BackingField: 0
       Value:
-        <TilePosition>k__BackingField: {x: 227.8545, y: 115.1377, z: 390.03226}
-        <NormalizedPosition>k__BackingField: {x: 0.14000002, y: 0.2921539}
+        <TilePosition>k__BackingField: {x: 217.19359, y: 115.1377, z: 383.8772}
+        <NormalizedPosition>k__BackingField: {x: 0.112999976, y: 0.27656543}
         <Index>k__BackingField: 0
         _properties: []
         _hexPoint:
@@ -5569,7 +5569,7 @@ MonoBehaviour:
           <R>k__BackingField: 0
           <S>k__BackingField: 6
         _isActive: 0
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 0, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -5592,16 +5592,16 @@ MonoBehaviour:
         <Q>k__BackingField: -6
         <R>k__BackingField: 1
       Value:
-        <TilePosition>k__BackingField: {x: 227.8545, y: 115.1377, z: 417.38818}
-        <NormalizedPosition>k__BackingField: {x: 0.14000002, y: 0.36143592}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 217.19359, y: 115.1377, z: 413.28482}
+        <NormalizedPosition>k__BackingField: {x: 0.112999976, y: 0.3510436}
+        <Index>k__BackingField: 1
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -6
           <R>k__BackingField: 1
           <S>k__BackingField: 5
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -5624,16 +5624,16 @@ MonoBehaviour:
         <Q>k__BackingField: -6
         <R>k__BackingField: 2
       Value:
-        <TilePosition>k__BackingField: {x: 227.8545, y: 115.1377, z: 444.74408}
-        <NormalizedPosition>k__BackingField: {x: 0.14000002, y: 0.43071795}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 217.19359, y: 115.1377, z: 442.6924}
+        <NormalizedPosition>k__BackingField: {x: 0.112999976, y: 0.4255218}
+        <Index>k__BackingField: 2
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -6
           <R>k__BackingField: 2
           <S>k__BackingField: 4
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -5656,16 +5656,16 @@ MonoBehaviour:
         <Q>k__BackingField: -6
         <R>k__BackingField: 3
       Value:
-        <TilePosition>k__BackingField: {x: 227.8545, y: 115.1377, z: 472.1}
-        <NormalizedPosition>k__BackingField: {x: 0.14000002, y: 0.5}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 217.19359, y: 115.1377, z: 472.1}
+        <NormalizedPosition>k__BackingField: {x: 0.112999976, y: 0.5}
+        <Index>k__BackingField: 3
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -6
           <R>k__BackingField: 3
           <S>k__BackingField: 3
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -5688,16 +5688,16 @@ MonoBehaviour:
         <Q>k__BackingField: -6
         <R>k__BackingField: 4
       Value:
-        <TilePosition>k__BackingField: {x: 227.8545, y: 115.1377, z: 499.45593}
-        <NormalizedPosition>k__BackingField: {x: 0.14000002, y: 0.56928205}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 217.19359, y: 115.1377, z: 501.50766}
+        <NormalizedPosition>k__BackingField: {x: 0.112999976, y: 0.5744782}
+        <Index>k__BackingField: 4
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -6
           <R>k__BackingField: 4
           <S>k__BackingField: 2
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -5720,9 +5720,9 @@ MonoBehaviour:
         <Q>k__BackingField: -6
         <R>k__BackingField: 5
       Value:
-        <TilePosition>k__BackingField: {x: 227.8545, y: 115.1377, z: 526.8118}
-        <NormalizedPosition>k__BackingField: {x: 0.14000002, y: 0.6385641}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 217.19359, y: 115.1377, z: 530.9152}
+        <NormalizedPosition>k__BackingField: {x: 0.112999976, y: 0.6489564}
+        <Index>k__BackingField: 5
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -6
@@ -5752,9 +5752,9 @@ MonoBehaviour:
         <Q>k__BackingField: -6
         <R>k__BackingField: 6
       Value:
-        <TilePosition>k__BackingField: {x: 227.8545, y: 115.1377, z: 554.1677}
-        <NormalizedPosition>k__BackingField: {x: 0.14000002, y: 0.7078461}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 217.19359, y: 115.1377, z: 560.3228}
+        <NormalizedPosition>k__BackingField: {x: 0.112999976, y: 0.72343457}
+        <Index>k__BackingField: 6
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -6
@@ -5784,16 +5784,16 @@ MonoBehaviour:
         <Q>k__BackingField: -5
         <R>k__BackingField: -1
       Value:
-        <TilePosition>k__BackingField: {x: 251.54543, y: 115.1377, z: 376.3543}
-        <NormalizedPosition>k__BackingField: {x: 0.20000002, y: 0.25751287}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 242.66133, y: 115.1377, z: 369.17337}
+        <NormalizedPosition>k__BackingField: {x: 0.17749998, y: 0.23932633}
+        <Index>k__BackingField: 7
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -5
           <R>k__BackingField: -1
           <S>k__BackingField: 6
         _isActive: 0
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 0, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -5816,16 +5816,16 @@ MonoBehaviour:
         <Q>k__BackingField: -5
         <R>k__BackingField: 0
       Value:
-        <TilePosition>k__BackingField: {x: 251.54543, y: 115.1377, z: 403.7102}
-        <NormalizedPosition>k__BackingField: {x: 0.20000002, y: 0.32679492}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 242.66133, y: 115.1377, z: 398.58102}
+        <NormalizedPosition>k__BackingField: {x: 0.17749998, y: 0.3138045}
+        <Index>k__BackingField: 8
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -5
           <R>k__BackingField: 0
           <S>k__BackingField: 5
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -5848,16 +5848,16 @@ MonoBehaviour:
         <Q>k__BackingField: -5
         <R>k__BackingField: 1
       Value:
-        <TilePosition>k__BackingField: {x: 251.54543, y: 115.1377, z: 431.06613}
-        <NormalizedPosition>k__BackingField: {x: 0.20000002, y: 0.39607695}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 242.66133, y: 115.1377, z: 427.98862}
+        <NormalizedPosition>k__BackingField: {x: 0.17749998, y: 0.38828272}
+        <Index>k__BackingField: 9
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -5
           <R>k__BackingField: 1
           <S>k__BackingField: 4
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -5880,16 +5880,16 @@ MonoBehaviour:
         <Q>k__BackingField: -5
         <R>k__BackingField: 2
       Value:
-        <TilePosition>k__BackingField: {x: 251.54543, y: 115.1377, z: 458.42206}
-        <NormalizedPosition>k__BackingField: {x: 0.20000002, y: 0.46535897}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 242.66133, y: 115.1377, z: 457.3962}
+        <NormalizedPosition>k__BackingField: {x: 0.17749998, y: 0.4627609}
+        <Index>k__BackingField: 10
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -5
           <R>k__BackingField: 2
           <S>k__BackingField: 3
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -5912,16 +5912,16 @@ MonoBehaviour:
         <Q>k__BackingField: -5
         <R>k__BackingField: 3
       Value:
-        <TilePosition>k__BackingField: {x: 251.54543, y: 115.1377, z: 485.77795}
-        <NormalizedPosition>k__BackingField: {x: 0.20000002, y: 0.534641}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 242.66133, y: 115.1377, z: 486.8038}
+        <NormalizedPosition>k__BackingField: {x: 0.17749998, y: 0.5372391}
+        <Index>k__BackingField: 11
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -5
           <R>k__BackingField: 3
           <S>k__BackingField: 2
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -5944,16 +5944,16 @@ MonoBehaviour:
         <Q>k__BackingField: -5
         <R>k__BackingField: 4
       Value:
-        <TilePosition>k__BackingField: {x: 251.54543, y: 115.1377, z: 513.1339}
-        <NormalizedPosition>k__BackingField: {x: 0.20000002, y: 0.6039231}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 242.66133, y: 115.1377, z: 516.2114}
+        <NormalizedPosition>k__BackingField: {x: 0.17749998, y: 0.6117173}
+        <Index>k__BackingField: 12
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -5
           <R>k__BackingField: 4
           <S>k__BackingField: 1
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -5976,9 +5976,9 @@ MonoBehaviour:
         <Q>k__BackingField: -5
         <R>k__BackingField: 5
       Value:
-        <TilePosition>k__BackingField: {x: 251.54543, y: 115.1377, z: 540.4898}
-        <NormalizedPosition>k__BackingField: {x: 0.20000002, y: 0.6732051}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 242.66133, y: 115.1377, z: 545.619}
+        <NormalizedPosition>k__BackingField: {x: 0.17749998, y: 0.6861955}
+        <Index>k__BackingField: 13
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -5
@@ -6008,9 +6008,9 @@ MonoBehaviour:
         <Q>k__BackingField: -5
         <R>k__BackingField: 6
       Value:
-        <TilePosition>k__BackingField: {x: 251.54543, y: 115.1377, z: 567.8457}
-        <NormalizedPosition>k__BackingField: {x: 0.20000002, y: 0.74248713}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 242.66133, y: 115.1377, z: 575.0266}
+        <NormalizedPosition>k__BackingField: {x: 0.17749998, y: 0.76067364}
+        <Index>k__BackingField: 14
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -5
@@ -6040,16 +6040,16 @@ MonoBehaviour:
         <Q>k__BackingField: -4
         <R>k__BackingField: -2
       Value:
-        <TilePosition>k__BackingField: {x: 275.23633, y: 115.1377, z: 362.67636}
-        <NormalizedPosition>k__BackingField: {x: 0.26, y: 0.22287184}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 354.46957}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.20208722}
+        <Index>k__BackingField: 15
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -4
           <R>k__BackingField: -2
           <S>k__BackingField: 6
         _isActive: 0
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 0, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6072,16 +6072,16 @@ MonoBehaviour:
         <Q>k__BackingField: -4
         <R>k__BackingField: -1
       Value:
-        <TilePosition>k__BackingField: {x: 275.23633, y: 115.1377, z: 390.03226}
-        <NormalizedPosition>k__BackingField: {x: 0.26, y: 0.2921539}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 383.8772}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.27656543}
+        <Index>k__BackingField: 16
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -4
           <R>k__BackingField: -1
           <S>k__BackingField: 5
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6104,16 +6104,16 @@ MonoBehaviour:
         <Q>k__BackingField: -4
         <R>k__BackingField: 0
       Value:
-        <TilePosition>k__BackingField: {x: 275.23633, y: 115.1377, z: 417.38818}
-        <NormalizedPosition>k__BackingField: {x: 0.26, y: 0.36143592}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 413.28482}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.3510436}
+        <Index>k__BackingField: 17
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -4
           <R>k__BackingField: 0
           <S>k__BackingField: 4
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6136,16 +6136,16 @@ MonoBehaviour:
         <Q>k__BackingField: -4
         <R>k__BackingField: 1
       Value:
-        <TilePosition>k__BackingField: {x: 275.23633, y: 115.1377, z: 444.74408}
-        <NormalizedPosition>k__BackingField: {x: 0.26, y: 0.43071795}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 442.6924}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.4255218}
+        <Index>k__BackingField: 18
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -4
           <R>k__BackingField: 1
           <S>k__BackingField: 3
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6168,16 +6168,16 @@ MonoBehaviour:
         <Q>k__BackingField: -4
         <R>k__BackingField: 2
       Value:
-        <TilePosition>k__BackingField: {x: 275.23633, y: 115.1377, z: 472.1}
-        <NormalizedPosition>k__BackingField: {x: 0.26, y: 0.5}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 472.1}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.5}
+        <Index>k__BackingField: 19
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -4
           <R>k__BackingField: 2
           <S>k__BackingField: 2
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6200,16 +6200,16 @@ MonoBehaviour:
         <Q>k__BackingField: -4
         <R>k__BackingField: 3
       Value:
-        <TilePosition>k__BackingField: {x: 275.23633, y: 115.1377, z: 499.45593}
-        <NormalizedPosition>k__BackingField: {x: 0.26, y: 0.56928205}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 501.50766}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.5744782}
+        <Index>k__BackingField: 20
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -4
           <R>k__BackingField: 3
           <S>k__BackingField: 1
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6232,16 +6232,16 @@ MonoBehaviour:
         <Q>k__BackingField: -4
         <R>k__BackingField: 4
       Value:
-        <TilePosition>k__BackingField: {x: 275.23633, y: 115.1377, z: 526.8118}
-        <NormalizedPosition>k__BackingField: {x: 0.26, y: 0.6385641}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 530.9152}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.6489564}
+        <Index>k__BackingField: 21
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -4
           <R>k__BackingField: 4
           <S>k__BackingField: 0
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6264,9 +6264,9 @@ MonoBehaviour:
         <Q>k__BackingField: -4
         <R>k__BackingField: 5
       Value:
-        <TilePosition>k__BackingField: {x: 275.23633, y: 115.1377, z: 554.1677}
-        <NormalizedPosition>k__BackingField: {x: 0.26, y: 0.7078461}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 560.3228}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.72343457}
+        <Index>k__BackingField: 22
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -4
@@ -6296,9 +6296,9 @@ MonoBehaviour:
         <Q>k__BackingField: -4
         <R>k__BackingField: 6
       Value:
-        <TilePosition>k__BackingField: {x: 275.23633, y: 115.1377, z: 581.5237}
-        <NormalizedPosition>k__BackingField: {x: 0.26, y: 0.77712816}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 589.73047}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.7979128}
+        <Index>k__BackingField: 23
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -4
@@ -6328,16 +6328,16 @@ MonoBehaviour:
         <Q>k__BackingField: -3
         <R>k__BackingField: -3
       Value:
-        <TilePosition>k__BackingField: {x: 298.92725, y: 115.1377, z: 348.99838}
-        <NormalizedPosition>k__BackingField: {x: 0.32, y: 0.18823081}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 339.76578}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.16484812}
+        <Index>k__BackingField: 24
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -3
           <R>k__BackingField: -3
           <S>k__BackingField: 6
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6360,16 +6360,16 @@ MonoBehaviour:
         <Q>k__BackingField: -3
         <R>k__BackingField: -2
       Value:
-        <TilePosition>k__BackingField: {x: 298.92725, y: 115.1377, z: 376.3543}
-        <NormalizedPosition>k__BackingField: {x: 0.32, y: 0.25751287}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 369.17337}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.23932633}
+        <Index>k__BackingField: 25
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -3
           <R>k__BackingField: -2
           <S>k__BackingField: 5
         _isActive: 1
-        _color: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6392,16 +6392,16 @@ MonoBehaviour:
         <Q>k__BackingField: -3
         <R>k__BackingField: -1
       Value:
-        <TilePosition>k__BackingField: {x: 298.92725, y: 115.1377, z: 403.7102}
-        <NormalizedPosition>k__BackingField: {x: 0.32, y: 0.32679492}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 398.58102}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.3138045}
+        <Index>k__BackingField: 26
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -3
           <R>k__BackingField: -1
           <S>k__BackingField: 4
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6424,16 +6424,16 @@ MonoBehaviour:
         <Q>k__BackingField: -3
         <R>k__BackingField: 0
       Value:
-        <TilePosition>k__BackingField: {x: 298.92725, y: 115.1377, z: 431.06613}
-        <NormalizedPosition>k__BackingField: {x: 0.32, y: 0.39607695}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 427.98862}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.38828272}
+        <Index>k__BackingField: 27
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -3
           <R>k__BackingField: 0
           <S>k__BackingField: 3
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6456,16 +6456,16 @@ MonoBehaviour:
         <Q>k__BackingField: -3
         <R>k__BackingField: 1
       Value:
-        <TilePosition>k__BackingField: {x: 298.92725, y: 115.1377, z: 458.42206}
-        <NormalizedPosition>k__BackingField: {x: 0.32, y: 0.46535897}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 457.3962}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.4627609}
+        <Index>k__BackingField: 28
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -3
           <R>k__BackingField: 1
           <S>k__BackingField: 2
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6488,16 +6488,16 @@ MonoBehaviour:
         <Q>k__BackingField: -3
         <R>k__BackingField: 2
       Value:
-        <TilePosition>k__BackingField: {x: 298.92725, y: 115.1377, z: 485.77795}
-        <NormalizedPosition>k__BackingField: {x: 0.32, y: 0.534641}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 486.8038}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.5372391}
+        <Index>k__BackingField: 29
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -3
           <R>k__BackingField: 2
           <S>k__BackingField: 1
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6520,16 +6520,16 @@ MonoBehaviour:
         <Q>k__BackingField: -3
         <R>k__BackingField: 3
       Value:
-        <TilePosition>k__BackingField: {x: 298.92725, y: 115.1377, z: 513.1339}
-        <NormalizedPosition>k__BackingField: {x: 0.32, y: 0.6039231}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 516.2114}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.6117173}
+        <Index>k__BackingField: 30
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -3
           <R>k__BackingField: 3
           <S>k__BackingField: 0
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6552,16 +6552,16 @@ MonoBehaviour:
         <Q>k__BackingField: -3
         <R>k__BackingField: 4
       Value:
-        <TilePosition>k__BackingField: {x: 298.92725, y: 115.1377, z: 540.4898}
-        <NormalizedPosition>k__BackingField: {x: 0.32, y: 0.6732051}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 545.619}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.6861955}
+        <Index>k__BackingField: 31
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -3
           <R>k__BackingField: 4
           <S>k__BackingField: -1
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6584,9 +6584,9 @@ MonoBehaviour:
         <Q>k__BackingField: -3
         <R>k__BackingField: 5
       Value:
-        <TilePosition>k__BackingField: {x: 298.92725, y: 115.1377, z: 567.8457}
-        <NormalizedPosition>k__BackingField: {x: 0.32, y: 0.74248713}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 575.0266}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.76067364}
+        <Index>k__BackingField: 32
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -3
@@ -6616,9 +6616,9 @@ MonoBehaviour:
         <Q>k__BackingField: -3
         <R>k__BackingField: 6
       Value:
-        <TilePosition>k__BackingField: {x: 298.92725, y: 115.1377, z: 595.20166}
-        <NormalizedPosition>k__BackingField: {x: 0.32, y: 0.8117692}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 604.43427}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.8351519}
+        <Index>k__BackingField: 33
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -3
@@ -6648,16 +6648,16 @@ MonoBehaviour:
         <Q>k__BackingField: -2
         <R>k__BackingField: -4
       Value:
-        <TilePosition>k__BackingField: {x: 322.61816, y: 115.1377, z: 335.32043}
-        <NormalizedPosition>k__BackingField: {x: 0.38, y: 0.15358981}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 325.06198}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.12760901}
+        <Index>k__BackingField: 34
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -2
           <R>k__BackingField: -4
           <S>k__BackingField: 6
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6680,16 +6680,16 @@ MonoBehaviour:
         <Q>k__BackingField: -2
         <R>k__BackingField: -3
       Value:
-        <TilePosition>k__BackingField: {x: 322.61816, y: 115.1377, z: 362.67636}
-        <NormalizedPosition>k__BackingField: {x: 0.38, y: 0.22287184}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 354.46957}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.20208722}
+        <Index>k__BackingField: 35
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -2
           <R>k__BackingField: -3
           <S>k__BackingField: 5
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6712,16 +6712,16 @@ MonoBehaviour:
         <Q>k__BackingField: -2
         <R>k__BackingField: -2
       Value:
-        <TilePosition>k__BackingField: {x: 322.61816, y: 115.1377, z: 390.03226}
-        <NormalizedPosition>k__BackingField: {x: 0.38, y: 0.2921539}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 383.8772}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.27656543}
+        <Index>k__BackingField: 36
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -2
           <R>k__BackingField: -2
           <S>k__BackingField: 4
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6744,16 +6744,16 @@ MonoBehaviour:
         <Q>k__BackingField: -2
         <R>k__BackingField: -1
       Value:
-        <TilePosition>k__BackingField: {x: 322.61816, y: 115.1377, z: 417.38818}
-        <NormalizedPosition>k__BackingField: {x: 0.38, y: 0.36143592}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 413.28482}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.3510436}
+        <Index>k__BackingField: 37
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -2
           <R>k__BackingField: -1
           <S>k__BackingField: 3
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6776,16 +6776,16 @@ MonoBehaviour:
         <Q>k__BackingField: -2
         <R>k__BackingField: 0
       Value:
-        <TilePosition>k__BackingField: {x: 322.61816, y: 115.1377, z: 444.74408}
-        <NormalizedPosition>k__BackingField: {x: 0.38, y: 0.43071795}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 442.6924}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.4255218}
+        <Index>k__BackingField: 38
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -2
           <R>k__BackingField: 0
           <S>k__BackingField: 2
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6808,16 +6808,16 @@ MonoBehaviour:
         <Q>k__BackingField: -2
         <R>k__BackingField: 1
       Value:
-        <TilePosition>k__BackingField: {x: 322.61816, y: 115.1377, z: 472.1}
-        <NormalizedPosition>k__BackingField: {x: 0.38, y: 0.5}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 472.1}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.5}
+        <Index>k__BackingField: 39
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -2
           <R>k__BackingField: 1
           <S>k__BackingField: 1
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -6840,9 +6840,9 @@ MonoBehaviour:
         <Q>k__BackingField: -2
         <R>k__BackingField: 2
       Value:
-        <TilePosition>k__BackingField: {x: 322.61816, y: 115.1377, z: 499.45593}
-        <NormalizedPosition>k__BackingField: {x: 0.38, y: 0.56928205}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 501.50766}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.5744782}
+        <Index>k__BackingField: 40
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -2
@@ -6872,9 +6872,9 @@ MonoBehaviour:
         <Q>k__BackingField: -2
         <R>k__BackingField: 3
       Value:
-        <TilePosition>k__BackingField: {x: 322.61816, y: 115.1377, z: 526.8118}
-        <NormalizedPosition>k__BackingField: {x: 0.38, y: 0.6385641}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 530.9152}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.6489564}
+        <Index>k__BackingField: 41
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -2
@@ -6904,9 +6904,9 @@ MonoBehaviour:
         <Q>k__BackingField: -2
         <R>k__BackingField: 4
       Value:
-        <TilePosition>k__BackingField: {x: 322.61816, y: 115.1377, z: 554.1677}
-        <NormalizedPosition>k__BackingField: {x: 0.38, y: 0.7078461}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 560.3228}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.72343457}
+        <Index>k__BackingField: 42
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -2
@@ -6936,9 +6936,9 @@ MonoBehaviour:
         <Q>k__BackingField: -2
         <R>k__BackingField: 5
       Value:
-        <TilePosition>k__BackingField: {x: 322.61816, y: 115.1377, z: 581.5237}
-        <NormalizedPosition>k__BackingField: {x: 0.38, y: 0.77712816}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 589.73047}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.7979128}
+        <Index>k__BackingField: 43
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -2
@@ -6968,9 +6968,9 @@ MonoBehaviour:
         <Q>k__BackingField: -2
         <R>k__BackingField: 6
       Value:
-        <TilePosition>k__BackingField: {x: 322.61816, y: 115.1377, z: 608.8796}
-        <NormalizedPosition>k__BackingField: {x: 0.38, y: 0.84641016}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 619.13806}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.872391}
+        <Index>k__BackingField: 44
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -2
@@ -7000,16 +7000,16 @@ MonoBehaviour:
         <Q>k__BackingField: -1
         <R>k__BackingField: -5
       Value:
-        <TilePosition>k__BackingField: {x: 346.30908, y: 115.1377, z: 321.6425}
-        <NormalizedPosition>k__BackingField: {x: 0.44, y: 0.11894879}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 310.3582}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.09036991}
+        <Index>k__BackingField: 45
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -1
           <R>k__BackingField: -5
           <S>k__BackingField: 6
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7032,16 +7032,16 @@ MonoBehaviour:
         <Q>k__BackingField: -1
         <R>k__BackingField: -4
       Value:
-        <TilePosition>k__BackingField: {x: 346.30908, y: 115.1377, z: 348.99838}
-        <NormalizedPosition>k__BackingField: {x: 0.44, y: 0.18823081}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 339.76578}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.16484812}
+        <Index>k__BackingField: 46
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -1
           <R>k__BackingField: -4
           <S>k__BackingField: 5
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7064,16 +7064,16 @@ MonoBehaviour:
         <Q>k__BackingField: -1
         <R>k__BackingField: -3
       Value:
-        <TilePosition>k__BackingField: {x: 346.30908, y: 115.1377, z: 376.3543}
-        <NormalizedPosition>k__BackingField: {x: 0.44, y: 0.25751287}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 369.17337}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.23932633}
+        <Index>k__BackingField: 47
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -1
           <R>k__BackingField: -3
           <S>k__BackingField: 4
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7096,16 +7096,16 @@ MonoBehaviour:
         <Q>k__BackingField: -1
         <R>k__BackingField: -2
       Value:
-        <TilePosition>k__BackingField: {x: 346.30908, y: 115.1377, z: 403.7102}
-        <NormalizedPosition>k__BackingField: {x: 0.44, y: 0.32679492}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 398.58102}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.3138045}
+        <Index>k__BackingField: 48
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -1
           <R>k__BackingField: -2
           <S>k__BackingField: 3
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7128,16 +7128,16 @@ MonoBehaviour:
         <Q>k__BackingField: -1
         <R>k__BackingField: -1
       Value:
-        <TilePosition>k__BackingField: {x: 346.30908, y: 115.1377, z: 431.06613}
-        <NormalizedPosition>k__BackingField: {x: 0.44, y: 0.39607695}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 427.98862}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.38828272}
+        <Index>k__BackingField: 49
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -1
           <R>k__BackingField: -1
           <S>k__BackingField: 2
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7160,16 +7160,16 @@ MonoBehaviour:
         <Q>k__BackingField: -1
         <R>k__BackingField: 0
       Value:
-        <TilePosition>k__BackingField: {x: 346.30908, y: 115.1377, z: 458.42206}
-        <NormalizedPosition>k__BackingField: {x: 0.44, y: 0.46535897}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 457.3962}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.4627609}
+        <Index>k__BackingField: 50
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -1
           <R>k__BackingField: 0
           <S>k__BackingField: 1
         _isActive: 1
-        _color: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
+        _color: {r: 1, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7192,9 +7192,9 @@ MonoBehaviour:
         <Q>k__BackingField: -1
         <R>k__BackingField: 1
       Value:
-        <TilePosition>k__BackingField: {x: 346.30908, y: 115.1377, z: 485.77795}
-        <NormalizedPosition>k__BackingField: {x: 0.44, y: 0.534641}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 486.8038}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.5372391}
+        <Index>k__BackingField: 51
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -1
@@ -7224,9 +7224,9 @@ MonoBehaviour:
         <Q>k__BackingField: -1
         <R>k__BackingField: 2
       Value:
-        <TilePosition>k__BackingField: {x: 346.30908, y: 115.1377, z: 513.1339}
-        <NormalizedPosition>k__BackingField: {x: 0.44, y: 0.6039231}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 516.2114}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.6117173}
+        <Index>k__BackingField: 52
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -1
@@ -7256,9 +7256,9 @@ MonoBehaviour:
         <Q>k__BackingField: -1
         <R>k__BackingField: 3
       Value:
-        <TilePosition>k__BackingField: {x: 346.30908, y: 115.1377, z: 540.4898}
-        <NormalizedPosition>k__BackingField: {x: 0.44, y: 0.6732051}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 545.619}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.6861955}
+        <Index>k__BackingField: 53
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -1
@@ -7288,9 +7288,9 @@ MonoBehaviour:
         <Q>k__BackingField: -1
         <R>k__BackingField: 4
       Value:
-        <TilePosition>k__BackingField: {x: 346.30908, y: 115.1377, z: 567.8457}
-        <NormalizedPosition>k__BackingField: {x: 0.44, y: 0.74248713}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 575.0266}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.76067364}
+        <Index>k__BackingField: 54
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -1
@@ -7320,9 +7320,9 @@ MonoBehaviour:
         <Q>k__BackingField: -1
         <R>k__BackingField: 5
       Value:
-        <TilePosition>k__BackingField: {x: 346.30908, y: 115.1377, z: 595.20166}
-        <NormalizedPosition>k__BackingField: {x: 0.44, y: 0.8117692}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 604.43427}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.8351519}
+        <Index>k__BackingField: 55
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -1
@@ -7352,9 +7352,9 @@ MonoBehaviour:
         <Q>k__BackingField: -1
         <R>k__BackingField: 6
       Value:
-        <TilePosition>k__BackingField: {x: 346.30908, y: 115.1377, z: 622.55756}
-        <NormalizedPosition>k__BackingField: {x: 0.44, y: 0.8810512}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 633.84186}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.90963006}
+        <Index>k__BackingField: 56
         _properties: []
         _hexPoint:
           <Q>k__BackingField: -1
@@ -7384,16 +7384,16 @@ MonoBehaviour:
         <Q>k__BackingField: 0
         <R>k__BackingField: -6
       Value:
-        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 307.9645}
-        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.08430776}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 295.6544}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.053130835}
+        <Index>k__BackingField: 57
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 0
           <R>k__BackingField: -6
           <S>k__BackingField: 6
         _isActive: 0
-        _color: {r: 0, g: 1, b: 1, a: 1}
+        _color: {r: 1, g: 0.9091709, b: 0.0990566, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7416,16 +7416,16 @@ MonoBehaviour:
         <Q>k__BackingField: 0
         <R>k__BackingField: -5
       Value:
-        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 335.32043}
-        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.15358981}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 325.06198}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.12760901}
+        <Index>k__BackingField: 58
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 0
           <R>k__BackingField: -5
           <S>k__BackingField: 5
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7448,16 +7448,16 @@ MonoBehaviour:
         <Q>k__BackingField: 0
         <R>k__BackingField: -4
       Value:
-        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 362.67636}
-        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.22287184}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 354.46957}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.20208722}
+        <Index>k__BackingField: 59
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 0
           <R>k__BackingField: -4
           <S>k__BackingField: 4
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7480,16 +7480,16 @@ MonoBehaviour:
         <Q>k__BackingField: 0
         <R>k__BackingField: -3
       Value:
-        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 390.03226}
-        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.2921539}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 383.8772}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.27656543}
+        <Index>k__BackingField: 60
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 0
           <R>k__BackingField: -3
           <S>k__BackingField: 3
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7512,16 +7512,16 @@ MonoBehaviour:
         <Q>k__BackingField: 0
         <R>k__BackingField: -2
       Value:
-        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 417.38818}
-        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.36143592}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 413.28482}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.3510436}
+        <Index>k__BackingField: 61
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 0
           <R>k__BackingField: -2
           <S>k__BackingField: 2
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7544,16 +7544,16 @@ MonoBehaviour:
         <Q>k__BackingField: 0
         <R>k__BackingField: -1
       Value:
-        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 444.74408}
-        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.43071795}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 442.6924}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.4255218}
+        <Index>k__BackingField: 62
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 0
           <R>k__BackingField: -1
           <S>k__BackingField: 1
         _isActive: 1
-        _color: {r: 1, g: 0.91389275, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7578,7 +7578,7 @@ MonoBehaviour:
       Value:
         <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 472.1}
         <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.5}
-        <Index>k__BackingField: 0
+        <Index>k__BackingField: 63
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 0
@@ -7608,9 +7608,9 @@ MonoBehaviour:
         <Q>k__BackingField: 0
         <R>k__BackingField: 1
       Value:
-        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 499.45593}
-        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.56928205}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 501.50766}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.5744782}
+        <Index>k__BackingField: 64
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 0
@@ -7640,9 +7640,9 @@ MonoBehaviour:
         <Q>k__BackingField: 0
         <R>k__BackingField: 2
       Value:
-        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 526.8118}
-        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.6385641}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 530.9152}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.6489564}
+        <Index>k__BackingField: 65
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 0
@@ -7672,9 +7672,9 @@ MonoBehaviour:
         <Q>k__BackingField: 0
         <R>k__BackingField: 3
       Value:
-        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 554.1677}
-        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.7078461}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 560.3228}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.72343457}
+        <Index>k__BackingField: 66
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 0
@@ -7704,9 +7704,9 @@ MonoBehaviour:
         <Q>k__BackingField: 0
         <R>k__BackingField: 4
       Value:
-        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 581.5237}
-        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.77712816}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 589.73047}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.7979128}
+        <Index>k__BackingField: 67
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 0
@@ -7736,9 +7736,9 @@ MonoBehaviour:
         <Q>k__BackingField: 0
         <R>k__BackingField: 5
       Value:
-        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 608.8796}
-        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.84641016}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 619.13806}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.872391}
+        <Index>k__BackingField: 68
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 0
@@ -7768,9 +7768,9 @@ MonoBehaviour:
         <Q>k__BackingField: 0
         <R>k__BackingField: 6
       Value:
-        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 636.2355}
-        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.9156922}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 648.54565}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.94686913}
+        <Index>k__BackingField: 69
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 0
@@ -7800,16 +7800,16 @@ MonoBehaviour:
         <Q>k__BackingField: 1
         <R>k__BackingField: -6
       Value:
-        <TilePosition>k__BackingField: {x: 393.69092, y: 115.1377, z: 321.6425}
-        <NormalizedPosition>k__BackingField: {x: 0.56, y: 0.11894879}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 310.3582}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.09036991}
+        <Index>k__BackingField: 70
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 1
           <R>k__BackingField: -6
           <S>k__BackingField: 5
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7832,16 +7832,16 @@ MonoBehaviour:
         <Q>k__BackingField: 1
         <R>k__BackingField: -5
       Value:
-        <TilePosition>k__BackingField: {x: 393.69092, y: 115.1377, z: 348.99838}
-        <NormalizedPosition>k__BackingField: {x: 0.56, y: 0.18823081}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 339.76578}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.16484812}
+        <Index>k__BackingField: 71
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 1
           <R>k__BackingField: -5
           <S>k__BackingField: 4
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7864,16 +7864,16 @@ MonoBehaviour:
         <Q>k__BackingField: 1
         <R>k__BackingField: -4
       Value:
-        <TilePosition>k__BackingField: {x: 393.69092, y: 115.1377, z: 376.3543}
-        <NormalizedPosition>k__BackingField: {x: 0.56, y: 0.25751287}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 369.17337}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.23932633}
+        <Index>k__BackingField: 72
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 1
           <R>k__BackingField: -4
           <S>k__BackingField: 3
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7896,16 +7896,16 @@ MonoBehaviour:
         <Q>k__BackingField: 1
         <R>k__BackingField: -3
       Value:
-        <TilePosition>k__BackingField: {x: 393.69092, y: 115.1377, z: 403.7102}
-        <NormalizedPosition>k__BackingField: {x: 0.56, y: 0.32679492}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 398.58102}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.3138045}
+        <Index>k__BackingField: 73
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 1
           <R>k__BackingField: -3
           <S>k__BackingField: 2
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7928,16 +7928,16 @@ MonoBehaviour:
         <Q>k__BackingField: 1
         <R>k__BackingField: -2
       Value:
-        <TilePosition>k__BackingField: {x: 393.69092, y: 115.1377, z: 431.06613}
-        <NormalizedPosition>k__BackingField: {x: 0.56, y: 0.39607695}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 427.98862}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.38828272}
+        <Index>k__BackingField: 74
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 1
           <R>k__BackingField: -2
           <S>k__BackingField: 1
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7960,16 +7960,16 @@ MonoBehaviour:
         <Q>k__BackingField: 1
         <R>k__BackingField: -1
       Value:
-        <TilePosition>k__BackingField: {x: 393.69092, y: 115.1377, z: 458.42206}
-        <NormalizedPosition>k__BackingField: {x: 0.56, y: 0.46535897}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 457.3962}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.4627609}
+        <Index>k__BackingField: 75
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 1
           <R>k__BackingField: -1
           <S>k__BackingField: 0
         _isActive: 1
-        _color: {r: 0.6603774, g: 0.15943687, b: 0.003114995, a: 1}
+        _color: {r: 1, g: 0.059979167, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -7992,9 +7992,9 @@ MonoBehaviour:
         <Q>k__BackingField: 1
         <R>k__BackingField: 0
       Value:
-        <TilePosition>k__BackingField: {x: 393.69092, y: 115.1377, z: 485.77795}
-        <NormalizedPosition>k__BackingField: {x: 0.56, y: 0.534641}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 486.8038}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.5372391}
+        <Index>k__BackingField: 76
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 1
@@ -8024,9 +8024,9 @@ MonoBehaviour:
         <Q>k__BackingField: 1
         <R>k__BackingField: 1
       Value:
-        <TilePosition>k__BackingField: {x: 393.69092, y: 115.1377, z: 513.1339}
-        <NormalizedPosition>k__BackingField: {x: 0.56, y: 0.6039231}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 516.2114}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.6117173}
+        <Index>k__BackingField: 77
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 1
@@ -8056,9 +8056,9 @@ MonoBehaviour:
         <Q>k__BackingField: 1
         <R>k__BackingField: 2
       Value:
-        <TilePosition>k__BackingField: {x: 393.69092, y: 115.1377, z: 540.4898}
-        <NormalizedPosition>k__BackingField: {x: 0.56, y: 0.6732051}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 545.619}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.6861955}
+        <Index>k__BackingField: 78
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 1
@@ -8088,9 +8088,9 @@ MonoBehaviour:
         <Q>k__BackingField: 1
         <R>k__BackingField: 3
       Value:
-        <TilePosition>k__BackingField: {x: 393.69092, y: 115.1377, z: 567.8457}
-        <NormalizedPosition>k__BackingField: {x: 0.56, y: 0.74248713}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 575.0266}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.76067364}
+        <Index>k__BackingField: 79
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 1
@@ -8120,9 +8120,9 @@ MonoBehaviour:
         <Q>k__BackingField: 1
         <R>k__BackingField: 4
       Value:
-        <TilePosition>k__BackingField: {x: 393.69092, y: 115.1377, z: 595.20166}
-        <NormalizedPosition>k__BackingField: {x: 0.56, y: 0.8117692}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 604.43427}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.8351519}
+        <Index>k__BackingField: 80
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 1
@@ -8152,9 +8152,9 @@ MonoBehaviour:
         <Q>k__BackingField: 1
         <R>k__BackingField: 5
       Value:
-        <TilePosition>k__BackingField: {x: 393.69092, y: 115.1377, z: 622.55756}
-        <NormalizedPosition>k__BackingField: {x: 0.56, y: 0.8810512}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 633.84186}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.90963006}
+        <Index>k__BackingField: 81
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 1
@@ -8184,16 +8184,16 @@ MonoBehaviour:
         <Q>k__BackingField: 2
         <R>k__BackingField: -6
       Value:
-        <TilePosition>k__BackingField: {x: 417.38187, y: 115.1377, z: 335.32043}
-        <NormalizedPosition>k__BackingField: {x: 0.62, y: 0.15358981}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 325.06198}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.12760901}
+        <Index>k__BackingField: 82
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 2
           <R>k__BackingField: -6
           <S>k__BackingField: 4
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8216,16 +8216,16 @@ MonoBehaviour:
         <Q>k__BackingField: 2
         <R>k__BackingField: -5
       Value:
-        <TilePosition>k__BackingField: {x: 417.38187, y: 115.1377, z: 362.67636}
-        <NormalizedPosition>k__BackingField: {x: 0.62, y: 0.22287184}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 354.46957}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.20208722}
+        <Index>k__BackingField: 83
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 2
           <R>k__BackingField: -5
           <S>k__BackingField: 3
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8248,16 +8248,16 @@ MonoBehaviour:
         <Q>k__BackingField: 2
         <R>k__BackingField: -4
       Value:
-        <TilePosition>k__BackingField: {x: 417.38187, y: 115.1377, z: 390.03226}
-        <NormalizedPosition>k__BackingField: {x: 0.62, y: 0.2921539}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 383.8772}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.27656543}
+        <Index>k__BackingField: 84
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 2
           <R>k__BackingField: -4
           <S>k__BackingField: 2
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8280,16 +8280,16 @@ MonoBehaviour:
         <Q>k__BackingField: 2
         <R>k__BackingField: -3
       Value:
-        <TilePosition>k__BackingField: {x: 417.38187, y: 115.1377, z: 417.38818}
-        <NormalizedPosition>k__BackingField: {x: 0.62, y: 0.36143592}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 413.28482}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.3510436}
+        <Index>k__BackingField: 85
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 2
           <R>k__BackingField: -3
           <S>k__BackingField: 1
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8312,16 +8312,16 @@ MonoBehaviour:
         <Q>k__BackingField: 2
         <R>k__BackingField: -2
       Value:
-        <TilePosition>k__BackingField: {x: 417.38187, y: 115.1377, z: 444.74408}
-        <NormalizedPosition>k__BackingField: {x: 0.62, y: 0.43071795}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 442.6924}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.4255218}
+        <Index>k__BackingField: 86
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 2
           <R>k__BackingField: -2
           <S>k__BackingField: 0
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8344,16 +8344,16 @@ MonoBehaviour:
         <Q>k__BackingField: 2
         <R>k__BackingField: -1
       Value:
-        <TilePosition>k__BackingField: {x: 417.38187, y: 115.1377, z: 472.1}
-        <NormalizedPosition>k__BackingField: {x: 0.62, y: 0.5}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 472.1}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.5}
+        <Index>k__BackingField: 87
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 2
           <R>k__BackingField: -1
           <S>k__BackingField: -1
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8376,9 +8376,9 @@ MonoBehaviour:
         <Q>k__BackingField: 2
         <R>k__BackingField: 0
       Value:
-        <TilePosition>k__BackingField: {x: 417.38187, y: 115.1377, z: 499.45593}
-        <NormalizedPosition>k__BackingField: {x: 0.62, y: 0.56928205}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 501.50766}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.5744782}
+        <Index>k__BackingField: 88
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 2
@@ -8408,9 +8408,9 @@ MonoBehaviour:
         <Q>k__BackingField: 2
         <R>k__BackingField: 1
       Value:
-        <TilePosition>k__BackingField: {x: 417.38187, y: 115.1377, z: 526.8118}
-        <NormalizedPosition>k__BackingField: {x: 0.62, y: 0.6385641}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 530.9152}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.6489564}
+        <Index>k__BackingField: 89
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 2
@@ -8440,9 +8440,9 @@ MonoBehaviour:
         <Q>k__BackingField: 2
         <R>k__BackingField: 2
       Value:
-        <TilePosition>k__BackingField: {x: 417.38187, y: 115.1377, z: 554.1677}
-        <NormalizedPosition>k__BackingField: {x: 0.62, y: 0.7078461}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 560.3228}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.72343457}
+        <Index>k__BackingField: 90
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 2
@@ -8472,9 +8472,9 @@ MonoBehaviour:
         <Q>k__BackingField: 2
         <R>k__BackingField: 3
       Value:
-        <TilePosition>k__BackingField: {x: 417.38187, y: 115.1377, z: 581.5237}
-        <NormalizedPosition>k__BackingField: {x: 0.62, y: 0.77712816}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 589.73047}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.7979128}
+        <Index>k__BackingField: 91
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 2
@@ -8504,9 +8504,9 @@ MonoBehaviour:
         <Q>k__BackingField: 2
         <R>k__BackingField: 4
       Value:
-        <TilePosition>k__BackingField: {x: 417.38187, y: 115.1377, z: 608.8796}
-        <NormalizedPosition>k__BackingField: {x: 0.62, y: 0.84641016}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 619.13806}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.872391}
+        <Index>k__BackingField: 92
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 2
@@ -8536,16 +8536,16 @@ MonoBehaviour:
         <Q>k__BackingField: 3
         <R>k__BackingField: -6
       Value:
-        <TilePosition>k__BackingField: {x: 441.07275, y: 115.1377, z: 348.99838}
-        <NormalizedPosition>k__BackingField: {x: 0.68, y: 0.18823081}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 339.76578}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.16484812}
+        <Index>k__BackingField: 93
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 3
           <R>k__BackingField: -6
           <S>k__BackingField: 3
         _isActive: 1
-        _color: {r: 1, g: 0.9137255, b: 0, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8568,16 +8568,16 @@ MonoBehaviour:
         <Q>k__BackingField: 3
         <R>k__BackingField: -5
       Value:
-        <TilePosition>k__BackingField: {x: 441.07275, y: 115.1377, z: 376.3543}
-        <NormalizedPosition>k__BackingField: {x: 0.68, y: 0.25751287}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 369.17337}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.23932633}
+        <Index>k__BackingField: 94
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 3
           <R>k__BackingField: -5
           <S>k__BackingField: 2
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8600,16 +8600,16 @@ MonoBehaviour:
         <Q>k__BackingField: 3
         <R>k__BackingField: -4
       Value:
-        <TilePosition>k__BackingField: {x: 441.07275, y: 115.1377, z: 403.7102}
-        <NormalizedPosition>k__BackingField: {x: 0.68, y: 0.32679492}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 398.58102}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.3138045}
+        <Index>k__BackingField: 95
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 3
           <R>k__BackingField: -4
           <S>k__BackingField: 1
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8632,16 +8632,16 @@ MonoBehaviour:
         <Q>k__BackingField: 3
         <R>k__BackingField: -3
       Value:
-        <TilePosition>k__BackingField: {x: 441.07275, y: 115.1377, z: 431.06613}
-        <NormalizedPosition>k__BackingField: {x: 0.68, y: 0.39607695}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 427.98862}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.38828272}
+        <Index>k__BackingField: 96
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 3
           <R>k__BackingField: -3
           <S>k__BackingField: 0
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8664,16 +8664,16 @@ MonoBehaviour:
         <Q>k__BackingField: 3
         <R>k__BackingField: -2
       Value:
-        <TilePosition>k__BackingField: {x: 441.07275, y: 115.1377, z: 458.42206}
-        <NormalizedPosition>k__BackingField: {x: 0.68, y: 0.46535897}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 457.3962}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.4627609}
+        <Index>k__BackingField: 97
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 3
           <R>k__BackingField: -2
           <S>k__BackingField: -1
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8696,16 +8696,16 @@ MonoBehaviour:
         <Q>k__BackingField: 3
         <R>k__BackingField: -1
       Value:
-        <TilePosition>k__BackingField: {x: 441.07275, y: 115.1377, z: 485.77795}
-        <NormalizedPosition>k__BackingField: {x: 0.68, y: 0.534641}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 486.8038}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.5372391}
+        <Index>k__BackingField: 98
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 3
           <R>k__BackingField: -1
           <S>k__BackingField: -2
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8728,16 +8728,16 @@ MonoBehaviour:
         <Q>k__BackingField: 3
         <R>k__BackingField: 0
       Value:
-        <TilePosition>k__BackingField: {x: 441.07275, y: 115.1377, z: 513.1339}
-        <NormalizedPosition>k__BackingField: {x: 0.68, y: 0.6039231}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 516.2114}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.6117173}
+        <Index>k__BackingField: 99
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 3
           <R>k__BackingField: 0
           <S>k__BackingField: -3
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8760,16 +8760,16 @@ MonoBehaviour:
         <Q>k__BackingField: 3
         <R>k__BackingField: 1
       Value:
-        <TilePosition>k__BackingField: {x: 441.07275, y: 115.1377, z: 540.4898}
-        <NormalizedPosition>k__BackingField: {x: 0.68, y: 0.6732051}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 545.619}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.6861955}
+        <Index>k__BackingField: 100
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 3
           <R>k__BackingField: 1
           <S>k__BackingField: -4
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8792,9 +8792,9 @@ MonoBehaviour:
         <Q>k__BackingField: 3
         <R>k__BackingField: 2
       Value:
-        <TilePosition>k__BackingField: {x: 441.07275, y: 115.1377, z: 567.8457}
-        <NormalizedPosition>k__BackingField: {x: 0.68, y: 0.74248713}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 575.0266}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.76067364}
+        <Index>k__BackingField: 101
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 3
@@ -8824,9 +8824,9 @@ MonoBehaviour:
         <Q>k__BackingField: 3
         <R>k__BackingField: 3
       Value:
-        <TilePosition>k__BackingField: {x: 441.07275, y: 115.1377, z: 595.20166}
-        <NormalizedPosition>k__BackingField: {x: 0.68, y: 0.8117692}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 604.43427}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.8351519}
+        <Index>k__BackingField: 102
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 3
@@ -8856,9 +8856,9 @@ MonoBehaviour:
         <Q>k__BackingField: 4
         <R>k__BackingField: -6
       Value:
-        <TilePosition>k__BackingField: {x: 464.76367, y: 115.1377, z: 362.67636}
-        <NormalizedPosition>k__BackingField: {x: 0.74, y: 0.22287184}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 354.46957}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.20208722}
+        <Index>k__BackingField: 103
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 4
@@ -8888,16 +8888,16 @@ MonoBehaviour:
         <Q>k__BackingField: 4
         <R>k__BackingField: -5
       Value:
-        <TilePosition>k__BackingField: {x: 464.76367, y: 115.1377, z: 390.03226}
-        <NormalizedPosition>k__BackingField: {x: 0.74, y: 0.2921539}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 383.8772}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.27656543}
+        <Index>k__BackingField: 104
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 4
           <R>k__BackingField: -5
           <S>k__BackingField: 1
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8920,16 +8920,16 @@ MonoBehaviour:
         <Q>k__BackingField: 4
         <R>k__BackingField: -4
       Value:
-        <TilePosition>k__BackingField: {x: 464.76367, y: 115.1377, z: 417.38818}
-        <NormalizedPosition>k__BackingField: {x: 0.74, y: 0.36143592}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 413.28482}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.3510436}
+        <Index>k__BackingField: 105
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 4
           <R>k__BackingField: -4
           <S>k__BackingField: 0
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8952,16 +8952,16 @@ MonoBehaviour:
         <Q>k__BackingField: 4
         <R>k__BackingField: -3
       Value:
-        <TilePosition>k__BackingField: {x: 464.76367, y: 115.1377, z: 444.74408}
-        <NormalizedPosition>k__BackingField: {x: 0.74, y: 0.43071795}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 442.6924}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.4255218}
+        <Index>k__BackingField: 106
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 4
           <R>k__BackingField: -3
           <S>k__BackingField: -1
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -8984,16 +8984,16 @@ MonoBehaviour:
         <Q>k__BackingField: 4
         <R>k__BackingField: -2
       Value:
-        <TilePosition>k__BackingField: {x: 464.76367, y: 115.1377, z: 472.1}
-        <NormalizedPosition>k__BackingField: {x: 0.74, y: 0.5}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 472.1}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.5}
+        <Index>k__BackingField: 107
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 4
           <R>k__BackingField: -2
           <S>k__BackingField: -2
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -9016,16 +9016,16 @@ MonoBehaviour:
         <Q>k__BackingField: 4
         <R>k__BackingField: -1
       Value:
-        <TilePosition>k__BackingField: {x: 464.76367, y: 115.1377, z: 499.45593}
-        <NormalizedPosition>k__BackingField: {x: 0.74, y: 0.56928205}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 501.50766}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.5744782}
+        <Index>k__BackingField: 108
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 4
           <R>k__BackingField: -1
           <S>k__BackingField: -3
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -9048,16 +9048,16 @@ MonoBehaviour:
         <Q>k__BackingField: 4
         <R>k__BackingField: 0
       Value:
-        <TilePosition>k__BackingField: {x: 464.76367, y: 115.1377, z: 526.8118}
-        <NormalizedPosition>k__BackingField: {x: 0.74, y: 0.6385641}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 530.9152}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.6489564}
+        <Index>k__BackingField: 109
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 4
           <R>k__BackingField: 0
           <S>k__BackingField: -4
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -9080,16 +9080,16 @@ MonoBehaviour:
         <Q>k__BackingField: 4
         <R>k__BackingField: 1
       Value:
-        <TilePosition>k__BackingField: {x: 464.76367, y: 115.1377, z: 554.1677}
-        <NormalizedPosition>k__BackingField: {x: 0.74, y: 0.7078461}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 560.3228}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.72343457}
+        <Index>k__BackingField: 110
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 4
           <R>k__BackingField: 1
           <S>k__BackingField: -5
         _isActive: 0
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 0, g: 1, b: 1, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -9112,9 +9112,9 @@ MonoBehaviour:
         <Q>k__BackingField: 4
         <R>k__BackingField: 2
       Value:
-        <TilePosition>k__BackingField: {x: 464.76367, y: 115.1377, z: 581.5237}
-        <NormalizedPosition>k__BackingField: {x: 0.74, y: 0.77712816}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 589.73047}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.7979128}
+        <Index>k__BackingField: 111
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 4
@@ -9144,9 +9144,9 @@ MonoBehaviour:
         <Q>k__BackingField: 5
         <R>k__BackingField: -6
       Value:
-        <TilePosition>k__BackingField: {x: 488.45462, y: 115.1377, z: 376.3543}
-        <NormalizedPosition>k__BackingField: {x: 0.79999995, y: 0.25751287}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 497.3387, y: 115.1377, z: 369.17337}
+        <NormalizedPosition>k__BackingField: {x: 0.8225, y: 0.23932633}
+        <Index>k__BackingField: 112
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 5
@@ -9176,16 +9176,16 @@ MonoBehaviour:
         <Q>k__BackingField: 5
         <R>k__BackingField: -5
       Value:
-        <TilePosition>k__BackingField: {x: 488.45462, y: 115.1377, z: 403.7102}
-        <NormalizedPosition>k__BackingField: {x: 0.79999995, y: 0.32679492}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 497.3387, y: 115.1377, z: 398.58102}
+        <NormalizedPosition>k__BackingField: {x: 0.8225, y: 0.3138045}
+        <Index>k__BackingField: 113
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 5
           <R>k__BackingField: -5
           <S>k__BackingField: 0
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -9208,16 +9208,16 @@ MonoBehaviour:
         <Q>k__BackingField: 5
         <R>k__BackingField: -4
       Value:
-        <TilePosition>k__BackingField: {x: 488.45462, y: 115.1377, z: 431.06613}
-        <NormalizedPosition>k__BackingField: {x: 0.79999995, y: 0.39607695}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 497.3387, y: 115.1377, z: 427.98862}
+        <NormalizedPosition>k__BackingField: {x: 0.8225, y: 0.38828272}
+        <Index>k__BackingField: 114
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 5
           <R>k__BackingField: -4
           <S>k__BackingField: -1
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -9240,16 +9240,16 @@ MonoBehaviour:
         <Q>k__BackingField: 5
         <R>k__BackingField: -3
       Value:
-        <TilePosition>k__BackingField: {x: 488.45462, y: 115.1377, z: 458.42206}
-        <NormalizedPosition>k__BackingField: {x: 0.79999995, y: 0.46535897}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 497.3387, y: 115.1377, z: 457.3962}
+        <NormalizedPosition>k__BackingField: {x: 0.8225, y: 0.4627609}
+        <Index>k__BackingField: 115
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 5
           <R>k__BackingField: -3
           <S>k__BackingField: -2
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -9272,16 +9272,16 @@ MonoBehaviour:
         <Q>k__BackingField: 5
         <R>k__BackingField: -2
       Value:
-        <TilePosition>k__BackingField: {x: 488.45462, y: 115.1377, z: 485.77795}
-        <NormalizedPosition>k__BackingField: {x: 0.79999995, y: 0.534641}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 497.3387, y: 115.1377, z: 486.8038}
+        <NormalizedPosition>k__BackingField: {x: 0.8225, y: 0.5372391}
+        <Index>k__BackingField: 116
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 5
           <R>k__BackingField: -2
           <S>k__BackingField: -3
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -9304,16 +9304,16 @@ MonoBehaviour:
         <Q>k__BackingField: 5
         <R>k__BackingField: -1
       Value:
-        <TilePosition>k__BackingField: {x: 488.45462, y: 115.1377, z: 513.1339}
-        <NormalizedPosition>k__BackingField: {x: 0.79999995, y: 0.6039231}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 497.3387, y: 115.1377, z: 516.2114}
+        <NormalizedPosition>k__BackingField: {x: 0.8225, y: 0.6117173}
+        <Index>k__BackingField: 117
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 5
           <R>k__BackingField: -1
           <S>k__BackingField: -4
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -9336,9 +9336,9 @@ MonoBehaviour:
         <Q>k__BackingField: 5
         <R>k__BackingField: 0
       Value:
-        <TilePosition>k__BackingField: {x: 488.45462, y: 115.1377, z: 540.4898}
-        <NormalizedPosition>k__BackingField: {x: 0.79999995, y: 0.6732051}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 497.3387, y: 115.1377, z: 545.619}
+        <NormalizedPosition>k__BackingField: {x: 0.8225, y: 0.6861955}
+        <Index>k__BackingField: 118
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 5
@@ -9368,9 +9368,9 @@ MonoBehaviour:
         <Q>k__BackingField: 5
         <R>k__BackingField: 1
       Value:
-        <TilePosition>k__BackingField: {x: 488.45462, y: 115.1377, z: 567.8457}
-        <NormalizedPosition>k__BackingField: {x: 0.79999995, y: 0.74248713}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 497.3387, y: 115.1377, z: 575.0266}
+        <NormalizedPosition>k__BackingField: {x: 0.8225, y: 0.76067364}
+        <Index>k__BackingField: 119
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 5
@@ -9400,9 +9400,9 @@ MonoBehaviour:
         <Q>k__BackingField: 6
         <R>k__BackingField: -6
       Value:
-        <TilePosition>k__BackingField: {x: 512.1455, y: 115.1377, z: 390.03226}
-        <NormalizedPosition>k__BackingField: {x: 0.86, y: 0.2921539}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 522.8064, y: 115.1377, z: 383.8772}
+        <NormalizedPosition>k__BackingField: {x: 0.887, y: 0.27656543}
+        <Index>k__BackingField: 120
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 6
@@ -9432,16 +9432,16 @@ MonoBehaviour:
         <Q>k__BackingField: 6
         <R>k__BackingField: -5
       Value:
-        <TilePosition>k__BackingField: {x: 512.1455, y: 115.1377, z: 417.38818}
-        <NormalizedPosition>k__BackingField: {x: 0.86, y: 0.36143592}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 522.8064, y: 115.1377, z: 413.28482}
+        <NormalizedPosition>k__BackingField: {x: 0.887, y: 0.3510436}
+        <Index>k__BackingField: 121
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 6
           <R>k__BackingField: -5
           <S>k__BackingField: -1
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -9464,16 +9464,16 @@ MonoBehaviour:
         <Q>k__BackingField: 6
         <R>k__BackingField: -4
       Value:
-        <TilePosition>k__BackingField: {x: 512.1455, y: 115.1377, z: 444.74408}
-        <NormalizedPosition>k__BackingField: {x: 0.86, y: 0.43071795}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 522.8064, y: 115.1377, z: 442.6924}
+        <NormalizedPosition>k__BackingField: {x: 0.887, y: 0.4255218}
+        <Index>k__BackingField: 122
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 6
           <R>k__BackingField: -4
           <S>k__BackingField: -2
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -9496,16 +9496,16 @@ MonoBehaviour:
         <Q>k__BackingField: 6
         <R>k__BackingField: -3
       Value:
-        <TilePosition>k__BackingField: {x: 512.1455, y: 115.1377, z: 472.1}
-        <NormalizedPosition>k__BackingField: {x: 0.86, y: 0.5}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 522.8064, y: 115.1377, z: 472.1}
+        <NormalizedPosition>k__BackingField: {x: 0.887, y: 0.5}
+        <Index>k__BackingField: 123
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 6
           <R>k__BackingField: -3
           <S>k__BackingField: -3
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -9528,16 +9528,16 @@ MonoBehaviour:
         <Q>k__BackingField: 6
         <R>k__BackingField: -2
       Value:
-        <TilePosition>k__BackingField: {x: 512.1455, y: 115.1377, z: 499.45593}
-        <NormalizedPosition>k__BackingField: {x: 0.86, y: 0.56928205}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 522.8064, y: 115.1377, z: 501.50766}
+        <NormalizedPosition>k__BackingField: {x: 0.887, y: 0.5744782}
+        <Index>k__BackingField: 124
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 6
           <R>k__BackingField: -2
           <S>k__BackingField: -4
         _isActive: 1
-        _color: {r: 0.65882355, g: 0.16078432, b: 0.003921569, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -9560,9 +9560,9 @@ MonoBehaviour:
         <Q>k__BackingField: 6
         <R>k__BackingField: -1
       Value:
-        <TilePosition>k__BackingField: {x: 512.1455, y: 115.1377, z: 526.8118}
-        <NormalizedPosition>k__BackingField: {x: 0.86, y: 0.6385641}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 522.8064, y: 115.1377, z: 530.9152}
+        <NormalizedPosition>k__BackingField: {x: 0.887, y: 0.6489564}
+        <Index>k__BackingField: 125
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 6
@@ -9592,9 +9592,9 @@ MonoBehaviour:
         <Q>k__BackingField: 6
         <R>k__BackingField: 0
       Value:
-        <TilePosition>k__BackingField: {x: 512.1455, y: 115.1377, z: 554.1677}
-        <NormalizedPosition>k__BackingField: {x: 0.86, y: 0.7078461}
-        <Index>k__BackingField: 0
+        <TilePosition>k__BackingField: {x: 522.8064, y: 115.1377, z: 560.3228}
+        <NormalizedPosition>k__BackingField: {x: 0.887, y: 0.72343457}
+        <Index>k__BackingField: 126
         _properties: []
         _hexPoint:
           <Q>k__BackingField: 6
@@ -9622,6 +9622,7 @@ MonoBehaviour:
             m_Calls: []
   _decalProjector: {fileID: 1944097344}
   _mouseMovementTracker: {fileID: 1944097346}
+  _mouseInputEvent: {fileID: 1944097348}
   _tileLimit: 6
   _mainCamera: {fileID: 1486505849}
 --- !u!114 &1944097346
@@ -9636,7 +9637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab1f4ea7cf75d4fb3aa00cd5e81403f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementThreshold: 0.05
+  MovementThreshold: 0
   _onMoveBeginMouse:
     m_PersistentCalls:
       m_Calls: []
@@ -9646,6 +9647,52 @@ MonoBehaviour:
   _onHoverMouse:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1944097347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944097342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d568dc56b87a94b2690f730d0ad61564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gridManager: {fileID: 1944097345}
+  _buildings: []
+  _onAddedBuilding:
+    m_PersistentCalls:
+      m_Calls: []
+  _onRemovedBuilding:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1944097348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944097342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca6b92d749fb544a98d25a31024ed2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+  - rid: 1062196746842537986
+  references:
+    version: 2
+    RefIds:
+    - rid: 1062196746842537986
+      type: {class: OnwMouseLeftInputEvent, ns: Onw.Components, asm: AssemblyOnw}
+      data:
+        _onUpEvent:
+          m_PersistentCalls:
+            m_Calls: []
+        _onDownEvent:
+          m_PersistentCalls:
+            m_Calls: []
 --- !u!1 &1951481715
 GameObject:
   m_ObjectHideFlags: 0
@@ -9784,7 +9831,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -277.2624, y: 47.535618}
+  m_AnchoredPosition: {x: -111.92332, y: 47.535618}
   m_SizeDelta: {x: 0, y: 95.07}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2064802127

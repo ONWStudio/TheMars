@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEditor;
 using AYellowpaper.SerializedCollections;
 using Onw.Editor.GUI;
-using Onw.Extensions;
 
 namespace Onw.HexGrid.Editor
 {
@@ -75,9 +74,9 @@ namespace Onw.HexGrid.Editor
 
             if (GUILayout.Button("Calculate Grids"))
             {
-                Undo.RecordObject(_gridManager, "Calculate Grids");
                 _gridManager.CalculateTile();
                 initializeTile();
+                EditorUtility.SetDirty(_gridManager);
                 serializedObject.ApplyModifiedProperties();
             }
 
@@ -89,8 +88,9 @@ namespace Onw.HexGrid.Editor
             
             if (GUILayout.Button("Clear Tiles"))
             {
-                _hexGrids.NewClear();
+                _hexGrids.Clear();
                 initializeTile();
+                EditorUtility.SetDirty(_gridManager);
                 serializedObject.ApplyModifiedProperties();
             }
         }
@@ -124,7 +124,10 @@ namespace Onw.HexGrid.Editor
                 });
             }
             
-            if (!_hexOptionWindow.IsUse && currentEvent.type == EventType.MouseUp && _gridManager.TryGetTileDataByRay(HandleUtility.GUIPointToWorldRay(currentEvent.mousePosition), out IHexGrid hexGrid))
+            if (!_hexOptionWindow.IsUse && 
+                currentEvent.type == EventType.MouseUp && 
+                currentEvent.button == 0 && 
+                _gridManager.TryGetTileDataByRay(HandleUtility.GUIPointToWorldRay(currentEvent.mousePosition), out (bool, RaycastHit) _, out IHexGrid hexGrid))
             {
                 int index = _hexGrids.Values.ToList().IndexOf((HexGrid)hexGrid);
 

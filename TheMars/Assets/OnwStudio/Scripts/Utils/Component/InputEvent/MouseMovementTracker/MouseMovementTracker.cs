@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Onw.Attribute;
+using Onw.Extensions;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 namespace Onw.Components
@@ -33,36 +35,27 @@ namespace Onw.Components
             remove => _onHoverMouse.RemoveListener(value);
         }
 
-        private Vector3 _prevCursorPoint = Vector3.zero;
-        private bool _isMove = false;
-
         [FormerlySerializedAs("_onMoveMouse")]
         [field: SerializeField] private UnityEvent<Vector2> _onMoveBeginMouse = new();
         [field: SerializeField] private UnityEvent<Vector2> _onMoveEndMouse = new();
         [field: SerializeField] private UnityEvent<Vector2> _onHoverMouse = new();
 
-        private void Start()
-        {
-            _prevCursorPoint = Input.mousePosition;
-        }
+        private bool _isMove = false;
 
         private void Update()
         {
-            Vector2 mousePosition = Input.mousePosition;
-            Vector2 delta = new(
-                Mathf.Abs(_prevCursorPoint.x - mousePosition.x),
-                Mathf.Abs(_prevCursorPoint.y - mousePosition.y));
+            Vector2 mousePosition = Mouse.current.position.ReadValue();
+            Vector2 delta = Mouse.current.delta.ReadValue();
+            bool isMoving = delta.sqrMagnitude > MovementThreshold * MovementThreshold;
 
-            bool isHover = delta.sqrMagnitude > MovementThreshold * MovementThreshold;
-
-            if (isHover)
+            if (isMoving)
             {
                 _onHoverMouse.Invoke(mousePosition);
-                _prevCursorPoint = mousePosition;
-                
+
                 if (!_isMove)
                 {
                     _isMove = true;
+                    Debug.Log("Invoke onMoveBeginMouse");
                     _onMoveBeginMouse.Invoke(mousePosition);
                 }
             }
@@ -70,7 +63,9 @@ namespace Onw.Components
             {
                 if (_isMove)
                 {
+                    // Only invoke MoveEnd if it was previously moving
                     _isMove = false;
+                    Debug.Log("Invoke onMoveEndMouse");
                     _onMoveEndMouse.Invoke(mousePosition);
                 }
             }

@@ -84,6 +84,8 @@ namespace TM.Grid
         }
 
         public List<IHexGrid> GetGrids() => _gridManager.GetGrids();
-        public bool TryGetTileDataByRay(Ray ray, out IHexGrid hex) => _gridManager.TryGetTileDataByRay(ray, out hex);
+        
+        public bool TryGetTileDataByRay(Ray ray, out (bool, RaycastHit) hitTuple, out IHexGrid hex) 
+            => _gridManager.TryGetTileDataByRay(ray, out hitTuple, out hex);
     }
 }
