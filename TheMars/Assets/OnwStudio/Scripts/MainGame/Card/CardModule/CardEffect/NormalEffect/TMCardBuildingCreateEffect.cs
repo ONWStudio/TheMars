@@ -10,7 +10,6 @@ using TM.Building;
 using TM.Card.Runtime;
 using TM.Card.Effect.Creator;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
 namespace TM.Card.Effect
@@ -31,9 +30,6 @@ namespace TM.Card.Effect
                 PrevPosition = prevPosition;
             }
         }
-
-        private const int TILE_FIND_LAYER_MASK = 1 << 3 | 1 << 0;
-        private const int TILE_BATCH_LAYER_MASK = 1 << 3;
 
         [field: SerializeField, ReadOnly] public TMBuildingData BuildingData { get; private set; } = null;
 
@@ -102,7 +98,7 @@ namespace TM.Card.Effect
 
                 Ray ray = _mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()); // .. 레이 생성
 
-                if (TMGridManager.Instance.TryGetTileDataByRay(ray, out (bool, RaycastHit) hitTuple, out IHexGrid hex))
+                if (TMGridManager.Instance.TryGetTileDataByRay(ray, out (bool, RaycastHit) hitTuple, out IHexGrid hex) && hex.IsActive)
                 {
                     _building.transform.position = hex.TilePosition; // .. 건물 포지션 세팅
                 }
@@ -132,6 +128,7 @@ namespace TM.Card.Effect
             Vector3 keepPosition = _cardModel.transform.localPosition;                  // .. 카드의 현재 포지션을 캐싱
 
             if (TMGridManager.Instance.TryGetTileDataByRay(ray, out (bool, RaycastHit) hit, out IHexGrid hex) && // .. 레이캐스팅
+                hex.IsActive && // .. 활성화 된 타일인지 확인
                 _prevTileData?.Prev != hex &&                                                                    // .. 이전에 선택된 타일과 현재 선택된 타일이 같지 않고
                 (hex?.Properties.All(property => property is not "DefaultBuilding" and not "TileOff") ?? false)) // .. 현재 선택된 타일이 건물 설치 가능한 타일일때
             {
@@ -175,6 +172,7 @@ namespace TM.Card.Effect
             {
                 if (EventSystem.current.IsPointerOverGameObject()) return; // .. UI가 겹쳐진 상태일때 UI가 먼저 상호작용 되어야 하므로 겹친 상태일때는 트리거x
 
+                Debug.Log("onMouseDownTile!");
                 _prevTileData = new(tileData, _building.transform.position); // .. 설치되었던 타일의 데이터 미리 캐싱
                 tileData.OnMouseDownTile -= onMouseDownTile;                 // .. 해당 타일은 이제 건물이 있지 않은 상태이므로 이벤트에서 딜리게이트 제거
                 tileData.RemoveProperty("TileOff");                          // .. 타일은 더 이상 설치 불가능한 상태가 아니므로 TileOff속성 제거
@@ -196,7 +194,6 @@ namespace TM.Card.Effect
                 _prevTileData = null;                           // .. 이전에 건물이 설치되었던 타일이 있을경우 해당 타일은 더 이상 사용할 수 없으므로 null 초기화
             }
         }
-
 
         public void Dispose()
         {
