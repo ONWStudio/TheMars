@@ -256,8 +256,6 @@ MonoBehaviour:
   <CardCreator>k__BackingField:
     _cards:
     - {fileID: 11400000, guid: d28af664dcafa4c1d869167ca383ed12, type: 2}
-    - {fileID: 11400000, guid: d28af664dcafa4c1d869167ca383ed12, type: 2}
-    - {fileID: 11400000, guid: d28af664dcafa4c1d869167ca383ed12, type: 2}
     _templatePrefab: {fileID: 38075375519361866, guid: d7803182f172a42c699b32751eb7fade,
       type: 3}
     _onPreCreateCard:
@@ -555,7 +553,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.143, y: 0.25285184}
   m_AnchorMax: {x: 0.8572083, y: 0.35466665}
-  m_AnchoredPosition: {x: -0.28979492, y: -1.759964}
+  m_AnchoredPosition: {x: -0.28979492, y: -1.7599792}
   m_SizeDelta: {x: 0.30004883, y: 2.1100006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &129953370
@@ -815,7 +813,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.20578372, y: 0.30710876}
   m_AnchorMax: {x: 0.79448926, y: 0.697788}
-  m_AnchoredPosition: {x: -0.30516052, y: -0.009017944}
+  m_AnchoredPosition: {x: -0.30517578, y: -0.009017944}
   m_SizeDelta: {x: -0.07559213, y: -0.09389496}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &170634106
@@ -1231,7 +1229,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15.5
+  m_fontSize: 27.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1488,7 +1486,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.28903866, y: -0.00006484985}
+  m_AnchoredPosition: {x: -0.2890396, y: -0.00006484985}
   m_SizeDelta: {x: -0.6059208, y: 0.000083923}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &293175314
@@ -1538,7 +1536,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.85
+  m_fontSize: 26.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1601,7 +1599,7 @@ GameObject:
   - component: {fileID: 316005526}
   - component: {fileID: 316005525}
   - component: {fileID: 316005524}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2208,7 +2206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.28903866, y: -0.00006484985}
+  m_AnchoredPosition: {x: -0.2890396, y: -0.00006484985}
   m_SizeDelta: {x: -0.6059208, y: 0.000083923}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &604416484
@@ -2258,7 +2256,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.85
+  m_fontSize: 26.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2718,7 +2716,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.8235294, g: 0.7529412, b: 0.6862745, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.75
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2974,7 +2972,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.28903866, y: -0.00006484985}
+  m_AnchoredPosition: {x: -0.2890396, y: -0.00006484985}
   m_SizeDelta: {x: -0.6059208, y: 0.000083923}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &878764341
@@ -3024,7 +3022,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.85
+  m_fontSize: 26.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3445,7 +3443,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.28903866, y: -0.00006484985}
+  m_AnchoredPosition: {x: -0.2890396, y: -0.00006484985}
   m_SizeDelta: {x: -0.6059208, y: 0.000083923}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &940774576
@@ -3495,7 +3493,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.85
+  m_fontSize: 26.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3581,7 +3579,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.28903866, y: -0.00006484985}
+  m_AnchoredPosition: {x: -0.2890396, y: -0.00006484985}
   m_SizeDelta: {x: -0.6059208, y: 0.000083923}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &943128034
@@ -3631,7 +3629,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.85
+  m_fontSize: 26.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3793,7 +3791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -167.33295, y: 296.08978}
+  m_AnchoredPosition: {x: -167.33568, y: 296.08978}
   m_SizeDelta: {x: 313.65, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1016409478
@@ -5218,7 +5216,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.28903866, y: -0.00006484985}
+  m_AnchoredPosition: {x: -0.2890396, y: -0.00006484985}
   m_SizeDelta: {x: -0.6059208, y: 0.000083923}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1883486044
@@ -5268,7 +5266,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.85
+  m_fontSize: 26.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5482,7 +5480,10 @@ GameObject:
   - component: {fileID: 1944097343}
   - component: {fileID: 1944097345}
   - component: {fileID: 1944097344}
-  m_Layer: 0
+  - component: {fileID: 1944097346}
+  - component: {fileID: 1944097347}
+  - component: {fileID: 1944097348}
+  m_Layer: 3
   m_Name: TMGridManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5540,7 +5541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821b6133d6692406aa9c22b093e53344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HexagonRadius>k__BackingField: 0.04
+  <HexagonRadius>k__BackingField: 0.043
   _onHighlightTile:
     m_PersistentCalls:
       m_Calls: []
@@ -5554,9 +5555,4144 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _hexGrids:
-    _serializedList: []
+    _serializedList:
+    - Key:
+        <Q>k__BackingField: -6
+        <R>k__BackingField: 0
+      Value:
+        <TilePosition>k__BackingField: {x: 217.19359, y: 115.1377, z: 383.8772}
+        <NormalizedPosition>k__BackingField: {x: 0.112999976, y: 0.27656543}
+        <Index>k__BackingField: 0
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -6
+          <R>k__BackingField: 0
+          <S>k__BackingField: 6
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -6
+        <R>k__BackingField: 1
+      Value:
+        <TilePosition>k__BackingField: {x: 217.19359, y: 115.1377, z: 413.28482}
+        <NormalizedPosition>k__BackingField: {x: 0.112999976, y: 0.3510436}
+        <Index>k__BackingField: 1
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -6
+          <R>k__BackingField: 1
+          <S>k__BackingField: 5
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -6
+        <R>k__BackingField: 2
+      Value:
+        <TilePosition>k__BackingField: {x: 217.19359, y: 115.1377, z: 442.6924}
+        <NormalizedPosition>k__BackingField: {x: 0.112999976, y: 0.4255218}
+        <Index>k__BackingField: 2
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -6
+          <R>k__BackingField: 2
+          <S>k__BackingField: 4
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -6
+        <R>k__BackingField: 3
+      Value:
+        <TilePosition>k__BackingField: {x: 217.19359, y: 115.1377, z: 472.1}
+        <NormalizedPosition>k__BackingField: {x: 0.112999976, y: 0.5}
+        <Index>k__BackingField: 3
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -6
+          <R>k__BackingField: 3
+          <S>k__BackingField: 3
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -6
+        <R>k__BackingField: 4
+      Value:
+        <TilePosition>k__BackingField: {x: 217.19359, y: 115.1377, z: 501.50766}
+        <NormalizedPosition>k__BackingField: {x: 0.112999976, y: 0.5744782}
+        <Index>k__BackingField: 4
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -6
+          <R>k__BackingField: 4
+          <S>k__BackingField: 2
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -6
+        <R>k__BackingField: 5
+      Value:
+        <TilePosition>k__BackingField: {x: 217.19359, y: 115.1377, z: 530.9152}
+        <NormalizedPosition>k__BackingField: {x: 0.112999976, y: 0.6489564}
+        <Index>k__BackingField: 5
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -6
+          <R>k__BackingField: 5
+          <S>k__BackingField: 1
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -6
+        <R>k__BackingField: 6
+      Value:
+        <TilePosition>k__BackingField: {x: 217.19359, y: 115.1377, z: 560.3228}
+        <NormalizedPosition>k__BackingField: {x: 0.112999976, y: 0.72343457}
+        <Index>k__BackingField: 6
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -6
+          <R>k__BackingField: 6
+          <S>k__BackingField: 0
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -5
+        <R>k__BackingField: -1
+      Value:
+        <TilePosition>k__BackingField: {x: 242.66133, y: 115.1377, z: 369.17337}
+        <NormalizedPosition>k__BackingField: {x: 0.17749998, y: 0.23932633}
+        <Index>k__BackingField: 7
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -5
+          <R>k__BackingField: -1
+          <S>k__BackingField: 6
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -5
+        <R>k__BackingField: 0
+      Value:
+        <TilePosition>k__BackingField: {x: 242.66133, y: 115.1377, z: 398.58102}
+        <NormalizedPosition>k__BackingField: {x: 0.17749998, y: 0.3138045}
+        <Index>k__BackingField: 8
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -5
+          <R>k__BackingField: 0
+          <S>k__BackingField: 5
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -5
+        <R>k__BackingField: 1
+      Value:
+        <TilePosition>k__BackingField: {x: 242.66133, y: 115.1377, z: 427.98862}
+        <NormalizedPosition>k__BackingField: {x: 0.17749998, y: 0.38828272}
+        <Index>k__BackingField: 9
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -5
+          <R>k__BackingField: 1
+          <S>k__BackingField: 4
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -5
+        <R>k__BackingField: 2
+      Value:
+        <TilePosition>k__BackingField: {x: 242.66133, y: 115.1377, z: 457.3962}
+        <NormalizedPosition>k__BackingField: {x: 0.17749998, y: 0.4627609}
+        <Index>k__BackingField: 10
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -5
+          <R>k__BackingField: 2
+          <S>k__BackingField: 3
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -5
+        <R>k__BackingField: 3
+      Value:
+        <TilePosition>k__BackingField: {x: 242.66133, y: 115.1377, z: 486.8038}
+        <NormalizedPosition>k__BackingField: {x: 0.17749998, y: 0.5372391}
+        <Index>k__BackingField: 11
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -5
+          <R>k__BackingField: 3
+          <S>k__BackingField: 2
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -5
+        <R>k__BackingField: 4
+      Value:
+        <TilePosition>k__BackingField: {x: 242.66133, y: 115.1377, z: 516.2114}
+        <NormalizedPosition>k__BackingField: {x: 0.17749998, y: 0.6117173}
+        <Index>k__BackingField: 12
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -5
+          <R>k__BackingField: 4
+          <S>k__BackingField: 1
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -5
+        <R>k__BackingField: 5
+      Value:
+        <TilePosition>k__BackingField: {x: 242.66133, y: 115.1377, z: 545.619}
+        <NormalizedPosition>k__BackingField: {x: 0.17749998, y: 0.6861955}
+        <Index>k__BackingField: 13
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -5
+          <R>k__BackingField: 5
+          <S>k__BackingField: 0
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -5
+        <R>k__BackingField: 6
+      Value:
+        <TilePosition>k__BackingField: {x: 242.66133, y: 115.1377, z: 575.0266}
+        <NormalizedPosition>k__BackingField: {x: 0.17749998, y: 0.76067364}
+        <Index>k__BackingField: 14
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -5
+          <R>k__BackingField: 6
+          <S>k__BackingField: -1
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -4
+        <R>k__BackingField: -2
+      Value:
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 354.46957}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.20208722}
+        <Index>k__BackingField: 15
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -4
+          <R>k__BackingField: -2
+          <S>k__BackingField: 6
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -4
+        <R>k__BackingField: -1
+      Value:
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 383.8772}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.27656543}
+        <Index>k__BackingField: 16
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -4
+          <R>k__BackingField: -1
+          <S>k__BackingField: 5
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -4
+        <R>k__BackingField: 0
+      Value:
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 413.28482}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.3510436}
+        <Index>k__BackingField: 17
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -4
+          <R>k__BackingField: 0
+          <S>k__BackingField: 4
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -4
+        <R>k__BackingField: 1
+      Value:
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 442.6924}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.4255218}
+        <Index>k__BackingField: 18
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -4
+          <R>k__BackingField: 1
+          <S>k__BackingField: 3
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -4
+        <R>k__BackingField: 2
+      Value:
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 472.1}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.5}
+        <Index>k__BackingField: 19
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -4
+          <R>k__BackingField: 2
+          <S>k__BackingField: 2
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -4
+        <R>k__BackingField: 3
+      Value:
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 501.50766}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.5744782}
+        <Index>k__BackingField: 20
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -4
+          <R>k__BackingField: 3
+          <S>k__BackingField: 1
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -4
+        <R>k__BackingField: 4
+      Value:
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 530.9152}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.6489564}
+        <Index>k__BackingField: 21
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -4
+          <R>k__BackingField: 4
+          <S>k__BackingField: 0
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -4
+        <R>k__BackingField: 5
+      Value:
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 560.3228}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.72343457}
+        <Index>k__BackingField: 22
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -4
+          <R>k__BackingField: 5
+          <S>k__BackingField: -1
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -4
+        <R>k__BackingField: 6
+      Value:
+        <TilePosition>k__BackingField: {x: 268.12906, y: 115.1377, z: 589.73047}
+        <NormalizedPosition>k__BackingField: {x: 0.24199998, y: 0.7979128}
+        <Index>k__BackingField: 23
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -4
+          <R>k__BackingField: 6
+          <S>k__BackingField: -2
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -3
+        <R>k__BackingField: -3
+      Value:
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 339.76578}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.16484812}
+        <Index>k__BackingField: 24
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -3
+          <R>k__BackingField: -3
+          <S>k__BackingField: 6
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -3
+        <R>k__BackingField: -2
+      Value:
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 369.17337}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.23932633}
+        <Index>k__BackingField: 25
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -3
+          <R>k__BackingField: -2
+          <S>k__BackingField: 5
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -3
+        <R>k__BackingField: -1
+      Value:
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 398.58102}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.3138045}
+        <Index>k__BackingField: 26
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -3
+          <R>k__BackingField: -1
+          <S>k__BackingField: 4
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -3
+        <R>k__BackingField: 0
+      Value:
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 427.98862}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.38828272}
+        <Index>k__BackingField: 27
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -3
+          <R>k__BackingField: 0
+          <S>k__BackingField: 3
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -3
+        <R>k__BackingField: 1
+      Value:
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 457.3962}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.4627609}
+        <Index>k__BackingField: 28
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -3
+          <R>k__BackingField: 1
+          <S>k__BackingField: 2
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -3
+        <R>k__BackingField: 2
+      Value:
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 486.8038}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.5372391}
+        <Index>k__BackingField: 29
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -3
+          <R>k__BackingField: 2
+          <S>k__BackingField: 1
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -3
+        <R>k__BackingField: 3
+      Value:
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 516.2114}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.6117173}
+        <Index>k__BackingField: 30
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -3
+          <R>k__BackingField: 3
+          <S>k__BackingField: 0
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -3
+        <R>k__BackingField: 4
+      Value:
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 545.619}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.6861955}
+        <Index>k__BackingField: 31
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -3
+          <R>k__BackingField: 4
+          <S>k__BackingField: -1
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -3
+        <R>k__BackingField: 5
+      Value:
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 575.0266}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.76067364}
+        <Index>k__BackingField: 32
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -3
+          <R>k__BackingField: 5
+          <S>k__BackingField: -2
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -3
+        <R>k__BackingField: 6
+      Value:
+        <TilePosition>k__BackingField: {x: 293.5968, y: 115.1377, z: 604.43427}
+        <NormalizedPosition>k__BackingField: {x: 0.3065, y: 0.8351519}
+        <Index>k__BackingField: 33
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -3
+          <R>k__BackingField: 6
+          <S>k__BackingField: -3
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -2
+        <R>k__BackingField: -4
+      Value:
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 325.06198}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.12760901}
+        <Index>k__BackingField: 34
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -2
+          <R>k__BackingField: -4
+          <S>k__BackingField: 6
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -2
+        <R>k__BackingField: -3
+      Value:
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 354.46957}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.20208722}
+        <Index>k__BackingField: 35
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -2
+          <R>k__BackingField: -3
+          <S>k__BackingField: 5
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -2
+        <R>k__BackingField: -2
+      Value:
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 383.8772}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.27656543}
+        <Index>k__BackingField: 36
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -2
+          <R>k__BackingField: -2
+          <S>k__BackingField: 4
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -2
+        <R>k__BackingField: -1
+      Value:
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 413.28482}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.3510436}
+        <Index>k__BackingField: 37
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -2
+          <R>k__BackingField: -1
+          <S>k__BackingField: 3
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -2
+        <R>k__BackingField: 0
+      Value:
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 442.6924}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.4255218}
+        <Index>k__BackingField: 38
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -2
+          <R>k__BackingField: 0
+          <S>k__BackingField: 2
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -2
+        <R>k__BackingField: 1
+      Value:
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 472.1}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.5}
+        <Index>k__BackingField: 39
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -2
+          <R>k__BackingField: 1
+          <S>k__BackingField: 1
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -2
+        <R>k__BackingField: 2
+      Value:
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 501.50766}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.5744782}
+        <Index>k__BackingField: 40
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -2
+          <R>k__BackingField: 2
+          <S>k__BackingField: 0
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -2
+        <R>k__BackingField: 3
+      Value:
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 530.9152}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.6489564}
+        <Index>k__BackingField: 41
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -2
+          <R>k__BackingField: 3
+          <S>k__BackingField: -1
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -2
+        <R>k__BackingField: 4
+      Value:
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 560.3228}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.72343457}
+        <Index>k__BackingField: 42
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -2
+          <R>k__BackingField: 4
+          <S>k__BackingField: -2
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -2
+        <R>k__BackingField: 5
+      Value:
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 589.73047}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.7979128}
+        <Index>k__BackingField: 43
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -2
+          <R>k__BackingField: 5
+          <S>k__BackingField: -3
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -2
+        <R>k__BackingField: 6
+      Value:
+        <TilePosition>k__BackingField: {x: 319.0645, y: 115.1377, z: 619.13806}
+        <NormalizedPosition>k__BackingField: {x: 0.371, y: 0.872391}
+        <Index>k__BackingField: 44
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -2
+          <R>k__BackingField: 6
+          <S>k__BackingField: -4
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -1
+        <R>k__BackingField: -5
+      Value:
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 310.3582}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.09036991}
+        <Index>k__BackingField: 45
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -1
+          <R>k__BackingField: -5
+          <S>k__BackingField: 6
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -1
+        <R>k__BackingField: -4
+      Value:
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 339.76578}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.16484812}
+        <Index>k__BackingField: 46
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -1
+          <R>k__BackingField: -4
+          <S>k__BackingField: 5
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -1
+        <R>k__BackingField: -3
+      Value:
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 369.17337}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.23932633}
+        <Index>k__BackingField: 47
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -1
+          <R>k__BackingField: -3
+          <S>k__BackingField: 4
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -1
+        <R>k__BackingField: -2
+      Value:
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 398.58102}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.3138045}
+        <Index>k__BackingField: 48
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -1
+          <R>k__BackingField: -2
+          <S>k__BackingField: 3
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -1
+        <R>k__BackingField: -1
+      Value:
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 427.98862}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.38828272}
+        <Index>k__BackingField: 49
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -1
+          <R>k__BackingField: -1
+          <S>k__BackingField: 2
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -1
+        <R>k__BackingField: 0
+      Value:
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 457.3962}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.4627609}
+        <Index>k__BackingField: 50
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -1
+          <R>k__BackingField: 0
+          <S>k__BackingField: 1
+        _isActive: 1
+        _color: {r: 1, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -1
+        <R>k__BackingField: 1
+      Value:
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 486.8038}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.5372391}
+        <Index>k__BackingField: 51
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -1
+          <R>k__BackingField: 1
+          <S>k__BackingField: 0
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -1
+        <R>k__BackingField: 2
+      Value:
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 516.2114}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.6117173}
+        <Index>k__BackingField: 52
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -1
+          <R>k__BackingField: 2
+          <S>k__BackingField: -1
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -1
+        <R>k__BackingField: 3
+      Value:
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 545.619}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.6861955}
+        <Index>k__BackingField: 53
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -1
+          <R>k__BackingField: 3
+          <S>k__BackingField: -2
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -1
+        <R>k__BackingField: 4
+      Value:
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 575.0266}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.76067364}
+        <Index>k__BackingField: 54
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -1
+          <R>k__BackingField: 4
+          <S>k__BackingField: -3
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -1
+        <R>k__BackingField: 5
+      Value:
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 604.43427}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.8351519}
+        <Index>k__BackingField: 55
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -1
+          <R>k__BackingField: 5
+          <S>k__BackingField: -4
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: -1
+        <R>k__BackingField: 6
+      Value:
+        <TilePosition>k__BackingField: {x: 344.53226, y: 115.1377, z: 633.84186}
+        <NormalizedPosition>k__BackingField: {x: 0.4355, y: 0.90963006}
+        <Index>k__BackingField: 56
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: -1
+          <R>k__BackingField: 6
+          <S>k__BackingField: -5
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 0
+        <R>k__BackingField: -6
+      Value:
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 295.6544}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.053130835}
+        <Index>k__BackingField: 57
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 0
+          <R>k__BackingField: -6
+          <S>k__BackingField: 6
+        _isActive: 0
+        _color: {r: 1, g: 0.9091709, b: 0.0990566, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 0
+        <R>k__BackingField: -5
+      Value:
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 325.06198}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.12760901}
+        <Index>k__BackingField: 58
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 0
+          <R>k__BackingField: -5
+          <S>k__BackingField: 5
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 0
+        <R>k__BackingField: -4
+      Value:
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 354.46957}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.20208722}
+        <Index>k__BackingField: 59
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 0
+          <R>k__BackingField: -4
+          <S>k__BackingField: 4
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 0
+        <R>k__BackingField: -3
+      Value:
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 383.8772}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.27656543}
+        <Index>k__BackingField: 60
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 0
+          <R>k__BackingField: -3
+          <S>k__BackingField: 3
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 0
+        <R>k__BackingField: -2
+      Value:
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 413.28482}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.3510436}
+        <Index>k__BackingField: 61
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 0
+          <R>k__BackingField: -2
+          <S>k__BackingField: 2
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 0
+        <R>k__BackingField: -1
+      Value:
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 442.6924}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.4255218}
+        <Index>k__BackingField: 62
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 0
+          <R>k__BackingField: -1
+          <S>k__BackingField: 1
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 0
+        <R>k__BackingField: 0
+      Value:
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 472.1}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.5}
+        <Index>k__BackingField: 63
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 0
+          <R>k__BackingField: 0
+          <S>k__BackingField: 0
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 0
+        <R>k__BackingField: 1
+      Value:
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 501.50766}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.5744782}
+        <Index>k__BackingField: 64
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 0
+          <R>k__BackingField: 1
+          <S>k__BackingField: -1
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 0
+        <R>k__BackingField: 2
+      Value:
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 530.9152}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.6489564}
+        <Index>k__BackingField: 65
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 0
+          <R>k__BackingField: 2
+          <S>k__BackingField: -2
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 0
+        <R>k__BackingField: 3
+      Value:
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 560.3228}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.72343457}
+        <Index>k__BackingField: 66
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 0
+          <R>k__BackingField: 3
+          <S>k__BackingField: -3
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 0
+        <R>k__BackingField: 4
+      Value:
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 589.73047}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.7979128}
+        <Index>k__BackingField: 67
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 0
+          <R>k__BackingField: 4
+          <S>k__BackingField: -4
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 0
+        <R>k__BackingField: 5
+      Value:
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 619.13806}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.872391}
+        <Index>k__BackingField: 68
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 0
+          <R>k__BackingField: 5
+          <S>k__BackingField: -5
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 0
+        <R>k__BackingField: 6
+      Value:
+        <TilePosition>k__BackingField: {x: 370, y: 115.1377, z: 648.54565}
+        <NormalizedPosition>k__BackingField: {x: 0.5, y: 0.94686913}
+        <Index>k__BackingField: 69
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 0
+          <R>k__BackingField: 6
+          <S>k__BackingField: -6
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 1
+        <R>k__BackingField: -6
+      Value:
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 310.3582}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.09036991}
+        <Index>k__BackingField: 70
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 1
+          <R>k__BackingField: -6
+          <S>k__BackingField: 5
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 1
+        <R>k__BackingField: -5
+      Value:
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 339.76578}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.16484812}
+        <Index>k__BackingField: 71
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 1
+          <R>k__BackingField: -5
+          <S>k__BackingField: 4
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 1
+        <R>k__BackingField: -4
+      Value:
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 369.17337}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.23932633}
+        <Index>k__BackingField: 72
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 1
+          <R>k__BackingField: -4
+          <S>k__BackingField: 3
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 1
+        <R>k__BackingField: -3
+      Value:
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 398.58102}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.3138045}
+        <Index>k__BackingField: 73
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 1
+          <R>k__BackingField: -3
+          <S>k__BackingField: 2
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 1
+        <R>k__BackingField: -2
+      Value:
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 427.98862}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.38828272}
+        <Index>k__BackingField: 74
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 1
+          <R>k__BackingField: -2
+          <S>k__BackingField: 1
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 1
+        <R>k__BackingField: -1
+      Value:
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 457.3962}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.4627609}
+        <Index>k__BackingField: 75
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 1
+          <R>k__BackingField: -1
+          <S>k__BackingField: 0
+        _isActive: 1
+        _color: {r: 1, g: 0.059979167, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 1
+        <R>k__BackingField: 0
+      Value:
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 486.8038}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.5372391}
+        <Index>k__BackingField: 76
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 1
+          <R>k__BackingField: 0
+          <S>k__BackingField: -1
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 1
+        <R>k__BackingField: 1
+      Value:
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 516.2114}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.6117173}
+        <Index>k__BackingField: 77
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 1
+          <R>k__BackingField: 1
+          <S>k__BackingField: -2
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 1
+        <R>k__BackingField: 2
+      Value:
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 545.619}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.6861955}
+        <Index>k__BackingField: 78
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 1
+          <R>k__BackingField: 2
+          <S>k__BackingField: -3
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 1
+        <R>k__BackingField: 3
+      Value:
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 575.0266}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.76067364}
+        <Index>k__BackingField: 79
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 1
+          <R>k__BackingField: 3
+          <S>k__BackingField: -4
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 1
+        <R>k__BackingField: 4
+      Value:
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 604.43427}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.8351519}
+        <Index>k__BackingField: 80
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 1
+          <R>k__BackingField: 4
+          <S>k__BackingField: -5
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 1
+        <R>k__BackingField: 5
+      Value:
+        <TilePosition>k__BackingField: {x: 395.46777, y: 115.1377, z: 633.84186}
+        <NormalizedPosition>k__BackingField: {x: 0.5645, y: 0.90963006}
+        <Index>k__BackingField: 81
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 1
+          <R>k__BackingField: 5
+          <S>k__BackingField: -6
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 2
+        <R>k__BackingField: -6
+      Value:
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 325.06198}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.12760901}
+        <Index>k__BackingField: 82
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 2
+          <R>k__BackingField: -6
+          <S>k__BackingField: 4
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 2
+        <R>k__BackingField: -5
+      Value:
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 354.46957}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.20208722}
+        <Index>k__BackingField: 83
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 2
+          <R>k__BackingField: -5
+          <S>k__BackingField: 3
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 2
+        <R>k__BackingField: -4
+      Value:
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 383.8772}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.27656543}
+        <Index>k__BackingField: 84
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 2
+          <R>k__BackingField: -4
+          <S>k__BackingField: 2
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 2
+        <R>k__BackingField: -3
+      Value:
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 413.28482}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.3510436}
+        <Index>k__BackingField: 85
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 2
+          <R>k__BackingField: -3
+          <S>k__BackingField: 1
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 2
+        <R>k__BackingField: -2
+      Value:
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 442.6924}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.4255218}
+        <Index>k__BackingField: 86
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 2
+          <R>k__BackingField: -2
+          <S>k__BackingField: 0
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 2
+        <R>k__BackingField: -1
+      Value:
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 472.1}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.5}
+        <Index>k__BackingField: 87
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 2
+          <R>k__BackingField: -1
+          <S>k__BackingField: -1
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 2
+        <R>k__BackingField: 0
+      Value:
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 501.50766}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.5744782}
+        <Index>k__BackingField: 88
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 2
+          <R>k__BackingField: 0
+          <S>k__BackingField: -2
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 2
+        <R>k__BackingField: 1
+      Value:
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 530.9152}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.6489564}
+        <Index>k__BackingField: 89
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 2
+          <R>k__BackingField: 1
+          <S>k__BackingField: -3
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 2
+        <R>k__BackingField: 2
+      Value:
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 560.3228}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.72343457}
+        <Index>k__BackingField: 90
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 2
+          <R>k__BackingField: 2
+          <S>k__BackingField: -4
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 2
+        <R>k__BackingField: 3
+      Value:
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 589.73047}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.7979128}
+        <Index>k__BackingField: 91
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 2
+          <R>k__BackingField: 3
+          <S>k__BackingField: -5
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 2
+        <R>k__BackingField: 4
+      Value:
+        <TilePosition>k__BackingField: {x: 420.9355, y: 115.1377, z: 619.13806}
+        <NormalizedPosition>k__BackingField: {x: 0.629, y: 0.872391}
+        <Index>k__BackingField: 92
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 2
+          <R>k__BackingField: 4
+          <S>k__BackingField: -6
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 3
+        <R>k__BackingField: -6
+      Value:
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 339.76578}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.16484812}
+        <Index>k__BackingField: 93
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 3
+          <R>k__BackingField: -6
+          <S>k__BackingField: 3
+        _isActive: 1
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 3
+        <R>k__BackingField: -5
+      Value:
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 369.17337}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.23932633}
+        <Index>k__BackingField: 94
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 3
+          <R>k__BackingField: -5
+          <S>k__BackingField: 2
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 3
+        <R>k__BackingField: -4
+      Value:
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 398.58102}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.3138045}
+        <Index>k__BackingField: 95
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 3
+          <R>k__BackingField: -4
+          <S>k__BackingField: 1
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 3
+        <R>k__BackingField: -3
+      Value:
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 427.98862}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.38828272}
+        <Index>k__BackingField: 96
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 3
+          <R>k__BackingField: -3
+          <S>k__BackingField: 0
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 3
+        <R>k__BackingField: -2
+      Value:
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 457.3962}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.4627609}
+        <Index>k__BackingField: 97
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 3
+          <R>k__BackingField: -2
+          <S>k__BackingField: -1
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 3
+        <R>k__BackingField: -1
+      Value:
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 486.8038}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.5372391}
+        <Index>k__BackingField: 98
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 3
+          <R>k__BackingField: -1
+          <S>k__BackingField: -2
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 3
+        <R>k__BackingField: 0
+      Value:
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 516.2114}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.6117173}
+        <Index>k__BackingField: 99
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 3
+          <R>k__BackingField: 0
+          <S>k__BackingField: -3
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 3
+        <R>k__BackingField: 1
+      Value:
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 545.619}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.6861955}
+        <Index>k__BackingField: 100
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 3
+          <R>k__BackingField: 1
+          <S>k__BackingField: -4
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 3
+        <R>k__BackingField: 2
+      Value:
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 575.0266}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.76067364}
+        <Index>k__BackingField: 101
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 3
+          <R>k__BackingField: 2
+          <S>k__BackingField: -5
+        _isActive: 1
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 3
+        <R>k__BackingField: 3
+      Value:
+        <TilePosition>k__BackingField: {x: 446.4032, y: 115.1377, z: 604.43427}
+        <NormalizedPosition>k__BackingField: {x: 0.69350004, y: 0.8351519}
+        <Index>k__BackingField: 102
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 3
+          <R>k__BackingField: 3
+          <S>k__BackingField: -6
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 4
+        <R>k__BackingField: -6
+      Value:
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 354.46957}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.20208722}
+        <Index>k__BackingField: 103
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 4
+          <R>k__BackingField: -6
+          <S>k__BackingField: 2
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 4
+        <R>k__BackingField: -5
+      Value:
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 383.8772}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.27656543}
+        <Index>k__BackingField: 104
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 4
+          <R>k__BackingField: -5
+          <S>k__BackingField: 1
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 4
+        <R>k__BackingField: -4
+      Value:
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 413.28482}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.3510436}
+        <Index>k__BackingField: 105
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 4
+          <R>k__BackingField: -4
+          <S>k__BackingField: 0
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 4
+        <R>k__BackingField: -3
+      Value:
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 442.6924}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.4255218}
+        <Index>k__BackingField: 106
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 4
+          <R>k__BackingField: -3
+          <S>k__BackingField: -1
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 4
+        <R>k__BackingField: -2
+      Value:
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 472.1}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.5}
+        <Index>k__BackingField: 107
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 4
+          <R>k__BackingField: -2
+          <S>k__BackingField: -2
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 4
+        <R>k__BackingField: -1
+      Value:
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 501.50766}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.5744782}
+        <Index>k__BackingField: 108
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 4
+          <R>k__BackingField: -1
+          <S>k__BackingField: -3
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 4
+        <R>k__BackingField: 0
+      Value:
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 530.9152}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.6489564}
+        <Index>k__BackingField: 109
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 4
+          <R>k__BackingField: 0
+          <S>k__BackingField: -4
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 4
+        <R>k__BackingField: 1
+      Value:
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 560.3228}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.72343457}
+        <Index>k__BackingField: 110
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 4
+          <R>k__BackingField: 1
+          <S>k__BackingField: -5
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 4
+        <R>k__BackingField: 2
+      Value:
+        <TilePosition>k__BackingField: {x: 471.87097, y: 115.1377, z: 589.73047}
+        <NormalizedPosition>k__BackingField: {x: 0.758, y: 0.7979128}
+        <Index>k__BackingField: 111
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 4
+          <R>k__BackingField: 2
+          <S>k__BackingField: -6
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 5
+        <R>k__BackingField: -6
+      Value:
+        <TilePosition>k__BackingField: {x: 497.3387, y: 115.1377, z: 369.17337}
+        <NormalizedPosition>k__BackingField: {x: 0.8225, y: 0.23932633}
+        <Index>k__BackingField: 112
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 5
+          <R>k__BackingField: -6
+          <S>k__BackingField: 1
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 5
+        <R>k__BackingField: -5
+      Value:
+        <TilePosition>k__BackingField: {x: 497.3387, y: 115.1377, z: 398.58102}
+        <NormalizedPosition>k__BackingField: {x: 0.8225, y: 0.3138045}
+        <Index>k__BackingField: 113
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 5
+          <R>k__BackingField: -5
+          <S>k__BackingField: 0
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 5
+        <R>k__BackingField: -4
+      Value:
+        <TilePosition>k__BackingField: {x: 497.3387, y: 115.1377, z: 427.98862}
+        <NormalizedPosition>k__BackingField: {x: 0.8225, y: 0.38828272}
+        <Index>k__BackingField: 114
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 5
+          <R>k__BackingField: -4
+          <S>k__BackingField: -1
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 5
+        <R>k__BackingField: -3
+      Value:
+        <TilePosition>k__BackingField: {x: 497.3387, y: 115.1377, z: 457.3962}
+        <NormalizedPosition>k__BackingField: {x: 0.8225, y: 0.4627609}
+        <Index>k__BackingField: 115
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 5
+          <R>k__BackingField: -3
+          <S>k__BackingField: -2
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 5
+        <R>k__BackingField: -2
+      Value:
+        <TilePosition>k__BackingField: {x: 497.3387, y: 115.1377, z: 486.8038}
+        <NormalizedPosition>k__BackingField: {x: 0.8225, y: 0.5372391}
+        <Index>k__BackingField: 116
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 5
+          <R>k__BackingField: -2
+          <S>k__BackingField: -3
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 5
+        <R>k__BackingField: -1
+      Value:
+        <TilePosition>k__BackingField: {x: 497.3387, y: 115.1377, z: 516.2114}
+        <NormalizedPosition>k__BackingField: {x: 0.8225, y: 0.6117173}
+        <Index>k__BackingField: 117
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 5
+          <R>k__BackingField: -1
+          <S>k__BackingField: -4
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 5
+        <R>k__BackingField: 0
+      Value:
+        <TilePosition>k__BackingField: {x: 497.3387, y: 115.1377, z: 545.619}
+        <NormalizedPosition>k__BackingField: {x: 0.8225, y: 0.6861955}
+        <Index>k__BackingField: 118
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 5
+          <R>k__BackingField: 0
+          <S>k__BackingField: -5
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 5
+        <R>k__BackingField: 1
+      Value:
+        <TilePosition>k__BackingField: {x: 497.3387, y: 115.1377, z: 575.0266}
+        <NormalizedPosition>k__BackingField: {x: 0.8225, y: 0.76067364}
+        <Index>k__BackingField: 119
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 5
+          <R>k__BackingField: 1
+          <S>k__BackingField: -6
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 6
+        <R>k__BackingField: -6
+      Value:
+        <TilePosition>k__BackingField: {x: 522.8064, y: 115.1377, z: 383.8772}
+        <NormalizedPosition>k__BackingField: {x: 0.887, y: 0.27656543}
+        <Index>k__BackingField: 120
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 6
+          <R>k__BackingField: -6
+          <S>k__BackingField: 0
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 6
+        <R>k__BackingField: -5
+      Value:
+        <TilePosition>k__BackingField: {x: 522.8064, y: 115.1377, z: 413.28482}
+        <NormalizedPosition>k__BackingField: {x: 0.887, y: 0.3510436}
+        <Index>k__BackingField: 121
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 6
+          <R>k__BackingField: -5
+          <S>k__BackingField: -1
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 6
+        <R>k__BackingField: -4
+      Value:
+        <TilePosition>k__BackingField: {x: 522.8064, y: 115.1377, z: 442.6924}
+        <NormalizedPosition>k__BackingField: {x: 0.887, y: 0.4255218}
+        <Index>k__BackingField: 122
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 6
+          <R>k__BackingField: -4
+          <S>k__BackingField: -2
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 6
+        <R>k__BackingField: -3
+      Value:
+        <TilePosition>k__BackingField: {x: 522.8064, y: 115.1377, z: 472.1}
+        <NormalizedPosition>k__BackingField: {x: 0.887, y: 0.5}
+        <Index>k__BackingField: 123
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 6
+          <R>k__BackingField: -3
+          <S>k__BackingField: -3
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 6
+        <R>k__BackingField: -2
+      Value:
+        <TilePosition>k__BackingField: {x: 522.8064, y: 115.1377, z: 501.50766}
+        <NormalizedPosition>k__BackingField: {x: 0.887, y: 0.5744782}
+        <Index>k__BackingField: 124
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 6
+          <R>k__BackingField: -2
+          <S>k__BackingField: -4
+        _isActive: 1
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 6
+        <R>k__BackingField: -1
+      Value:
+        <TilePosition>k__BackingField: {x: 522.8064, y: 115.1377, z: 530.9152}
+        <NormalizedPosition>k__BackingField: {x: 0.887, y: 0.6489564}
+        <Index>k__BackingField: 125
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 6
+          <R>k__BackingField: -1
+          <S>k__BackingField: -5
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
+    - Key:
+        <Q>k__BackingField: 6
+        <R>k__BackingField: 0
+      Value:
+        <TilePosition>k__BackingField: {x: 522.8064, y: 115.1377, z: 560.3228}
+        <NormalizedPosition>k__BackingField: {x: 0.887, y: 0.72343457}
+        <Index>k__BackingField: 126
+        _properties: []
+        _hexPoint:
+          <Q>k__BackingField: 6
+          <R>k__BackingField: 0
+          <S>k__BackingField: -6
+        _isActive: 0
+        _color: {r: 0, g: 1, b: 1, a: 1}
+        _onHighlightTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onExitTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseUpTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onMouseDownTile:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedActive:
+          m_PersistentCalls:
+            m_Calls: []
+        _onChangedColor:
+          m_PersistentCalls:
+            m_Calls: []
   _decalProjector: {fileID: 1944097344}
+  _mouseMovementTracker: {fileID: 1944097346}
+  _mouseInputEvent: {fileID: 1944097348}
   _tileLimit: 6
+  _mainCamera: {fileID: 1486505849}
+--- !u!114 &1944097346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944097342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1f4ea7cf75d4fb3aa00cd5e81403f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementThreshold: 0
+  _onMoveBeginMouse:
+    m_PersistentCalls:
+      m_Calls: []
+  _onMoveEndMouse:
+    m_PersistentCalls:
+      m_Calls: []
+  _onHoverMouse:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1944097347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944097342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d568dc56b87a94b2690f730d0ad61564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gridManager: {fileID: 1944097345}
+  _buildings: []
+  _onAddedBuilding:
+    m_PersistentCalls:
+      m_Calls: []
+  _onRemovedBuilding:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1944097348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944097342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca6b92d749fb544a98d25a31024ed2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+  - rid: 5306937262519091213
+  references:
+    version: 2
+    RefIds:
+    - rid: 5306937262519091213
+      type: {class: OnwMouseLeftInputEvent, ns: Onw.Components, asm: AssemblyOnw}
+      data:
+        _onUpEvent:
+          m_PersistentCalls:
+            m_Calls: []
+        _onDownEvent:
+          m_PersistentCalls:
+            m_Calls: []
 --- !u!1 &1951481715
 GameObject:
   m_ObjectHideFlags: 0
@@ -5695,7 +9831,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -140.49298, y: 47.535618}
+  m_AnchoredPosition: {x: -685.7882, y: 47.535618}
   m_SizeDelta: {x: 0, y: 95.07}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2064802127
@@ -5807,7 +9943,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.28903866, y: -0.00006484985}
+  m_AnchoredPosition: {x: -0.2890396, y: -0.00006484985}
   m_SizeDelta: {x: -0.6059208, y: 0.000083923}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2098347096
@@ -5857,7 +9993,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.85
+  m_fontSize: 26.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
