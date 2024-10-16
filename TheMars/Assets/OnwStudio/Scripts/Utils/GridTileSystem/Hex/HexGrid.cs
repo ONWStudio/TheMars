@@ -1,4 +1,4 @@
-
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -6,21 +6,23 @@ using UnityEngine;
 using UnityEngine.Events;
 using Onw.Extensions;
 using Onw.Attribute;
+using Onw.Helper;
 
 namespace Onw.HexGrid
 {
     [StructLayout(LayoutKind.Sequential)]
-    public struct HexColorOption
+    public struct HexOption
     {
-        public Vector3Int Qr;
         public Vector3 Color;
+        public int IsActive;
     }
-    
+
     [System.Serializable]
     public class HexGrid : IHexGrid
     {
         [field: SerializeField, ReadOnly] public Vector3 TilePosition { get; private set; } = Vector3.zero;
         [field: SerializeField, ReadOnly] public Vector2 NormalizedPosition { get; private set; } = Vector2.zero;
+        [field: SerializeField, ReadOnly] public int Index { get; private set; } = 0;
 
         public bool IsActive
         {
@@ -47,14 +49,14 @@ namespace Onw.HexGrid
         /// <summary>
         /// .. 호출 시 박싱이 발생합니다
         /// </summary>
-        public HexCoordinates HexPoint => _hexPoint; 
-        
+        public HexCoordinates HexPoint => _hexPoint;
+
         [SerializeField] private List<string> _properties = new();
         [SerializeField, ReadOnly] private HexCoordinates _hexPoint = new();
-        
+
         [SerializeField] private bool _isActive = true;
         [SerializeField] private Color _color = Color.cyan;
-        
+
         public event UnityAction<IHexGrid> OnHighlightTile
         {
             add => _onHighlightTile.AddListener(value);
@@ -78,16 +80,16 @@ namespace Onw.HexGrid
             add => _onMouseUpTile.AddListener(value);
             remove => _onMouseUpTile.RemoveListener(value);
         }
-        
+
         public event UnityAction<IHexGrid, bool> OnChangedActive
         {
-            add => _onChangedActive.AddListener(value); 
+            add => _onChangedActive.AddListener(value);
             remove => _onChangedActive.RemoveListener(value);
         }
-        
+
         public event UnityAction<IHexGrid, Color> OnChangedColor
         {
-            add => _onChangedColor.AddListener(value); 
+            add => _onChangedColor.AddListener(value);
             remove => _onChangedColor.RemoveListener(value);
         }
 
@@ -96,7 +98,7 @@ namespace Onw.HexGrid
         [SerializeField] private UnityEvent<IHexGrid> _onExitTile = new();
         [SerializeField] private UnityEvent<IHexGrid> _onMouseUpTile = new();
         [SerializeField] private UnityEvent<IHexGrid> _onMouseDownTile = new();
-        
+
         [Header("Value Changed Events")]
         [SerializeField] private UnityEvent<IHexGrid, bool> _onChangedActive = new();
         [SerializeField] private UnityEvent<IHexGrid, Color> _onChangedColor = new();
@@ -131,26 +133,37 @@ namespace Onw.HexGrid
             _onMouseDownTile.Invoke(this);
         }
 
+        public HexOption GetShaderOption() => new()
+        {
+            Color = _color.ToVec3(),
+            IsActive = _isActive ? 1 : 0
+        };
+
         public void SetTilePosition(in Vector3 tilePosition)
         {
             TilePosition = tilePosition;
         }
-        
+
+        public HexGrid(int q, int r, in Vector3 tilePosition, in Vector2 normalizedPosition, int limit) : this(q, r, tilePosition, normalizedPosition)
+        {
+            Index = GetHexIndex(limit);
+        }
+
         public HexGrid(int q, int r, in Vector3 tilePosition, in Vector2 normalizedPosition) : this(q, r, tilePosition)
         {
             NormalizedPosition = normalizedPosition;
         }
-        
+
         public HexGrid(int q, int r, in Vector3 tilePosition) : this(q, r)
         {
             TilePosition = tilePosition;
         }
 
-        public HexGrid(AxialCoordinates axialCoordinates)
+        public HexGrid(in AxialCoordinates axialCoordinates)
         {
             _hexPoint = axialCoordinates;
         }
-        
+
         public HexGrid(int q, int r)
         {
             _hexPoint = new(q, r);
@@ -164,26 +177,25 @@ namespace Onw.HexGrid
             int r = _hexPoint.R;
 
             int rMin = Mathf.Max(-limit, -q - limit);
-            int indexInRow = r - rMin;
-            int totalTilesBeforeQ = getTotalTilesBeforeQ(q, limit);
+            int index = (2 * limit + 1) * (q + limit);
 
-            return totalTilesBeforeQ + indexInRow;
-            static int getTotalTilesBeforeQ(int q, int limit)
+            // .. TODO : 보류
+            for (int i = -limit; i < q; i++)
             {
-                int adjustedQ = q + limit;
-                int totalTilesBeforeQ = adjustedQ * (2 * limit + 1) - adjustedQ * (adjustedQ + 1) / 2;
-                return totalTilesBeforeQ;
+                index -= Mathf.Abs(i);
             }
+
+            index += r - rMin;
+
+            return index;
         }
-        
+
         #if UNITY_EDITOR
-        [OnChangedValueByMethod(nameof(_isActive))]
         private void onChangedActive()
         {
             _onChangedActive.Invoke(this, _isActive);
         }
 
-        [OnChangedValueByMethod(nameof(_color))]
         private void onChangedColor()
         {
             _onChangedColor.Invoke(this, _color);

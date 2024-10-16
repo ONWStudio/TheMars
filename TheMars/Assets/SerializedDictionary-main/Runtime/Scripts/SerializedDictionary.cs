@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting.YamlDotNet.Serialization;
+using UnityEditor;
 using UnityEngine;
 
 namespace AYellowpaper.SerializedCollections
@@ -13,12 +14,13 @@ namespace AYellowpaper.SerializedCollections
         {
             get
             {
-                _lookupTable ??= new DictionaryLookupTable<TKey, TValue>(this);
+                _lookupTable ??= new(this);
                 return _lookupTable;
             }
         }
 
         private DictionaryLookupTable<TKey, TValue> _lookupTable;
+        private bool _isCallSave = false;
 #endif
 
         [SerializeField]
@@ -31,11 +33,13 @@ namespace AYellowpaper.SerializedCollections
 
         private void serialize()
         {
-            Clear();
+            base.Clear();
+
+            Debug.Log("Serialization Dictionary");
 
             foreach (SerializedKeyValuePair<TKey, TValue> kvp in _serializedList.Where(kvp => !ContainsKey(kvp.Key)))
             {
-                Add(kvp.Key, kvp.Value);
+                base.Add(kvp.Key, kvp.Value);
             }
 
 #if UNITY_EDITOR
@@ -45,26 +49,83 @@ namespace AYellowpaper.SerializedCollections
 #endif
         }
 
-        /// <summary>
-        /// .. Script Only Add
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        public void NewAdd(TKey key, TValue value)
+        public new void Clear()
         {
-            _serializedList.Add(new(key, value));
-            serialize();
+            #if UNITY_EDITOR
+            // ReSharper disable once ConvertIfStatementToSwitchStatement
+            if (!Application.isPlaying)
+            {
+                _serializedList.Clear();
+                callSave();
+            }
+            #endif
+
+            base.Clear();
         }
 
-        public void NewRemove(TKey key, TValue value)
+        public new void Add(TKey key, TValue value)
         {
-            _serializedList.Remove(new(key, value));
+            SerializedKeyValuePair<TKey, TValue> kvp = new(key, value);
+            #if UNITY_EDITOR
+            // ReSharper disable once ConvertIfStatementToSwitchStatement
+            if (!Application.isPlaying)
+            {
+                _serializedList.Add(kvp);
+                callSave();
+            }
+            #endif
+
+            base.Add(key, value);
         }
 
-        public void NewClear()
+        public new bool Remove(TKey key)
         {
-            Clear();
-            _serializedList.Clear();
+            #if UNITY_EDITOR
+            // ReSharper disable once ConvertIfStatementToSwitchStatement
+            if (!Application.isPlaying && 0 < _serializedList.RemoveAll(kvp => kvp.Key.Equals(key)))
+            {
+                callSave();
+                return true;
+            }
+            #endif
+
+            return base.Remove(key);
+        }
+
+        #if UNITY_EDITOR
+        private void callSave()
+        {
+            if (_isCallSave) return;
+            EditorApplication.delayCall += () =>
+            {
+                serialize();
+                _isCallSave = false;
+            };
+
+            _isCallSave = true;
+        }
+        #endif
+
+        public new TValue this[TKey key]
+        {
+            get => base[key];
+            set
+            {
+                #if UNITY_EDITOR
+                // ReSharper disable once ConvertIfStatementToSwitchStatement
+                if (!Application.isPlaying)
+                {
+                    int index = _serializedList.FindIndex(kvp => kvp.Key.Equals(key));
+                    if (index > -1)
+                    {
+                        _serializedList[index] = new(key, value);
+                        callSave();
+                    }
+                }
+                #endif
+
+                base[key] = value;
+            }
         }
 
         public void OnBeforeSerialize()

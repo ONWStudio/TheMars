@@ -52,15 +52,19 @@ namespace TM.Grid
             remove => _onRemovedBuilding.RemoveListener(value);
         }
 
+        public bool IsRender
+        {
+            get => _gridManager.IsRender;
+            set => _gridManager.IsRender = value;
+        }
+
         [SerializeField, InitializeRequireComponent] private GridManager _gridManager;
         [SerializeField, ReadOnly] private List<TMBuilding> _buildings = new();
 
         [SerializeField, ReadOnly] private UnityEvent<TMBuilding> _onAddedBuilding;
         [SerializeField, ReadOnly] private UnityEvent<TMBuilding> _onRemovedBuilding;
 
-        protected override void Init()
-        {
-        }
+        protected override void Init() {}
 
         public void AddBuilding(TMBuilding building)
         {
@@ -80,6 +84,8 @@ namespace TM.Grid
         }
 
         public List<IHexGrid> GetGrids() => _gridManager.GetGrids();
-        public bool TryGetTileDataByRay(Ray ray, out IHexGrid hex) => _gridManager.TryGetTileDataByRay(ray, out hex);
+        
+        public bool TryGetTileDataByRay(Ray ray, out (bool, RaycastHit) hitTuple, out IHexGrid hex) 
+            => _gridManager.TryGetTileDataByRay(ray, out hitTuple, out hex);
     }
 }

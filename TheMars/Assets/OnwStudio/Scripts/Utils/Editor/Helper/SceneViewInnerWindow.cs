@@ -118,166 +118,169 @@ namespace Onw.Editor.GUI
             setCursor(topArea, MouseCursor.ResizeVertical);
             setCursor(rightTopArea, MouseCursor.ResizeUpRight);
 
-            switch (currentEvent.type)
+            if (currentEvent.button == 0)
             {
-                case EventType.MouseDown:
-                    {
+                switch (currentEvent.type)
+                {
+                    case EventType.MouseDown:
+                        {
+                            setUseByRectContains();
+
+                            if (leftTopArea.Contains(mousePosition))
+                            {
+                                _isResizingLeft = true;
+                                _isResizingTop = true;
+                                setUse();
+                            }
+
+                            if (leftArea.Contains(mousePosition))
+                            {
+                                _isResizingLeft = true;
+                                setUse();
+                            }
+
+                            if (leftBottomArea.Contains(mousePosition))
+                            {
+                                _isResizingLeft = true;
+                                _isResizingBottom = true;
+                                setUse();
+                            }
+
+                            if (bottomArea.Contains(mousePosition))
+                            {
+                                _isResizingBottom = true;
+                                setUse();
+                            }
+
+                            if (rightBottomArea.Contains(mousePosition))
+                            {
+                                _isResizingBottom = true;
+                                _isResizingRight = true;
+                                setUse();
+                            }
+
+                            if (rightArea.Contains(mousePosition))
+                            {
+                                _isResizingRight = true;
+                                setUse();
+                            }
+
+                            if (topArea.Contains(mousePosition))
+                            {
+                                _isResizingTop = true;
+                                setUse();
+                            }
+
+                            if (rightTopArea.Contains(mousePosition))
+                            {
+                                _isResizingRight = true;
+                                _isResizingTop = true;
+                                setUse();
+                            }
+                            break;
+                        }
+                    case EventType.MouseDrag:
+                        {
+                            if (_isResizingLeft)
+                            {
+                                float deltaX = mousePosition.x - _windowRect.x;
+                                _windowRect.x = mousePosition.x;
+                                _windowRect.width -= deltaX;
+
+                                // 왼쪽 경계와 최소 너비 확인
+                                if (_windowRect.x < SceneView.currentDrawingSceneView.cameraViewport.xMin)
+                                {
+                                    _windowRect.width -= SceneView.currentDrawingSceneView.cameraViewport.xMin - _windowRect.x;
+                                    _windowRect.x = SceneView.currentDrawingSceneView.cameraViewport.xMin;
+                                }
+
+                                if (_windowRect.width < WIDTH_MIN)
+                                {
+                                    _windowRect.width = WIDTH_MIN;
+                                }
+
+                                setUse();
+                            }
+
+                            if (_isResizingRight)
+                            {
+                                _windowRect.width = mousePosition.x - _windowRect.x;
+
+                                if (_windowRect.xMax > SceneView.currentDrawingSceneView.cameraViewport.xMax)
+                                {
+                                    _windowRect.width = SceneView.currentDrawingSceneView.cameraViewport.xMax - _windowRect.x;
+                                }
+
+                                if (_windowRect.width < WIDTH_MIN)
+                                {
+                                    _windowRect.width = WIDTH_MIN;
+                                }
+
+                                setUse();
+                            }
+
+                            if (_isResizingTop)
+                            {
+                                float deltaY = mousePosition.y - _windowRect.y;
+                                _windowRect.y = mousePosition.y;
+                                _windowRect.height -= deltaY;
+
+                                // 위쪽 경계와 최소 높이 확인
+                                if (_windowRect.y < SceneView.currentDrawingSceneView.cameraViewport.yMin)
+                                {
+                                    _windowRect.height -= SceneView.currentDrawingSceneView.cameraViewport.yMin - _windowRect.y;
+                                    _windowRect.y = SceneView.currentDrawingSceneView.cameraViewport.yMin;
+                                }
+
+                                if (_windowRect.height < HEIGHT_MIN)
+                                {
+                                    _windowRect.height = HEIGHT_MIN;
+                                }
+
+                                setUse();
+                            }
+
+                            if (_isResizingBottom)
+                            {
+                                _windowRect.height = mousePosition.y - _windowRect.y;
+
+                                if (_windowRect.yMax > SceneView.currentDrawingSceneView.cameraViewport.yMax)
+                                {
+                                    _windowRect.height = SceneView.currentDrawingSceneView.cameraViewport.yMax - _windowRect.y;
+                                }
+
+                                if (_windowRect.height < HEIGHT_MIN)
+                                {
+                                    _windowRect.height = HEIGHT_MIN;
+                                }
+
+                                setUse();
+                            }
+                            break;
+                        }
+                    case EventType.MouseUp:
                         setUseByRectContains();
-
-                        if (leftTopArea.Contains(mousePosition))
-                        {
-                            _isResizingLeft = true;
-                            _isResizingTop = true;
-                            setUse();
-                        }
-
-                        if (leftArea.Contains(mousePosition))
-                        {
-                            _isResizingLeft = true;
-                            setUse();
-                        }
-
-                        if (leftBottomArea.Contains(mousePosition))
-                        {
-                            _isResizingLeft = true;
-                            _isResizingBottom = true;
-                            setUse();
-                        }
-
-                        if (bottomArea.Contains(mousePosition))
-                        {
-                            _isResizingBottom = true;
-                            setUse();
-                        }
-
-                        if (rightBottomArea.Contains(mousePosition))
-                        {
-                            _isResizingBottom = true;
-                            _isResizingRight = true;
-                            setUse();
-                        }
-
-                        if (rightArea.Contains(mousePosition))
-                        {
-                            _isResizingRight = true;
-                            setUse();
-                        }
-
-                        if (topArea.Contains(mousePosition))
-                        {
-                            _isResizingTop = true;
-                            setUse();
-                        }
-
-                        if (rightTopArea.Contains(mousePosition))
-                        {
-                            _isResizingRight = true;
-                            _isResizingTop = true;
-                            setUse();
-                        }
+                        _isResizingLeft = false;
+                        _isResizingRight = false;
+                        _isResizingTop = false;
+                        _isResizingBottom = false;
                         break;
-                    }
-                case EventType.MouseDrag:
-                    {
-                        if (_isResizingLeft)
+
+                        void setUseByRectContains()
                         {
-                            float deltaX = mousePosition.x - _windowRect.x;
-                            _windowRect.x = mousePosition.x;
-                            _windowRect.width -= deltaX;
-
-                            // 왼쪽 경계와 최소 너비 확인
-                            if (_windowRect.x < SceneView.currentDrawingSceneView.cameraViewport.xMin)
-                            {
-                                _windowRect.width -= SceneView.currentDrawingSceneView.cameraViewport.xMin - _windowRect.x;
-                                _windowRect.x = SceneView.currentDrawingSceneView.cameraViewport.xMin;
-                            }
-
-                            if (_windowRect.width < WIDTH_MIN)
-                            {
-                                _windowRect.width = WIDTH_MIN;
-                            }
+                            if (!_windowRect.Contains(mousePosition) &&
+                                !leftTopArea.Contains(mousePosition) &&
+                                !leftArea.Contains(mousePosition) &&
+                                !leftBottomArea.Contains(mousePosition) &&
+                                !bottomArea.Contains(mousePosition) &&
+                                !rightBottomArea.Contains(mousePosition) &&
+                                !rightArea.Contains(mousePosition) &&
+                                !topArea.Contains(mousePosition) &&
+                                !rightTopArea.Contains(mousePosition)) return;
 
                             setUse();
                         }
-
-                        if (_isResizingRight)
-                        {
-                            _windowRect.width = mousePosition.x - _windowRect.x;
-
-                            if (_windowRect.xMax > SceneView.currentDrawingSceneView.cameraViewport.xMax)
-                            {
-                                _windowRect.width = SceneView.currentDrawingSceneView.cameraViewport.xMax - _windowRect.x;
-                            }
-
-                            if (_windowRect.width < WIDTH_MIN)
-                            {
-                                _windowRect.width = WIDTH_MIN;
-                            }
-
-                            setUse();
-                        }
-
-                        if (_isResizingTop)
-                        {
-                            float deltaY = mousePosition.y - _windowRect.y;
-                            _windowRect.y = mousePosition.y;
-                            _windowRect.height -= deltaY;
-
-                            // 위쪽 경계와 최소 높이 확인
-                            if (_windowRect.y < SceneView.currentDrawingSceneView.cameraViewport.yMin)
-                            {
-                                _windowRect.height -= SceneView.currentDrawingSceneView.cameraViewport.yMin - _windowRect.y;
-                                _windowRect.y = SceneView.currentDrawingSceneView.cameraViewport.yMin;
-                            }
-
-                            if (_windowRect.height < HEIGHT_MIN)
-                            {
-                                _windowRect.height = HEIGHT_MIN;
-                            }
-
-                            setUse();
-                        }
-
-                        if (_isResizingBottom)
-                        {
-                            _windowRect.height = mousePosition.y - _windowRect.y;
-
-                            if (_windowRect.yMax > SceneView.currentDrawingSceneView.cameraViewport.yMax)
-                            {
-                                _windowRect.height = SceneView.currentDrawingSceneView.cameraViewport.yMax - _windowRect.y;
-                            }
-
-                            if (_windowRect.height < HEIGHT_MIN)
-                            {
-                                _windowRect.height = HEIGHT_MIN;
-                            }
-
-                            setUse();
-                        }
-                        break;
-                    }
-                case EventType.MouseUp:
-                    setUseByRectContains();
-                    _isResizingLeft = false;
-                    _isResizingRight = false;
-                    _isResizingTop = false;
-                    _isResizingBottom = false;
-                    break;
-
-                    void setUseByRectContains()
-                    {
-                        if (!_windowRect.Contains(mousePosition) &&
-                            !leftTopArea.Contains(mousePosition) &&
-                            !leftArea.Contains(mousePosition) &&
-                            !leftBottomArea.Contains(mousePosition) &&
-                            !bottomArea.Contains(mousePosition) &&
-                            !rightBottomArea.Contains(mousePosition) &&
-                            !rightArea.Contains(mousePosition) &&
-                            !topArea.Contains(mousePosition) &&
-                            !rightTopArea.Contains(mousePosition)) return;
-
-                        setUse();
-                    }
+                }
             }
 
             void setUse()

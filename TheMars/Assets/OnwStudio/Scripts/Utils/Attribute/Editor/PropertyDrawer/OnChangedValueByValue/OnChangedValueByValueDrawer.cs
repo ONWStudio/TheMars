@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Onw.Editor;
+using Onw.Editor.Extensions;
+using Onw.Helper;
 
 namespace Onw.Attribute.Editor
 {
@@ -20,7 +22,10 @@ namespace Onw.Attribute.Editor
             if (Application.isPlaying) return;
 
             OnChangedValueByValueAttribute castedAttribute = (attribute as OnChangedValueByValueAttribute)!;
-            object target = property.serializedObject.targetObject;
+            
+            string path = property.GetParentPropertyPath();
+            SerializedProperty parentProp = property.serializedObject.FindProperty(path);
+            object target = parentProp.objectReferenceValue;
             
             if (!_cachedMethodInfos.TryGetValue(target, out MethodInfo methodInfo))
             {
