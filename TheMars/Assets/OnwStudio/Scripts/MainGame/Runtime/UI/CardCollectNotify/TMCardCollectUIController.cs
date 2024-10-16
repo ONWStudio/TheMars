@@ -13,7 +13,7 @@ namespace TM.Runtime.UI
     [DisallowMultipleComponent]
     public sealed class TMCardCollectUIController : SceneSingleton<TMCardCollectUIController>
     {
-        public override string SceneName => "MainGameScene";
+        protected override string SceneName => "MainGameScene";
         
         [SerializeField, InitializeRequireComponent] private Canvas _canvas;
         [SerializeField, SelectableSerializeField] private RectTransform _cardSelectField;

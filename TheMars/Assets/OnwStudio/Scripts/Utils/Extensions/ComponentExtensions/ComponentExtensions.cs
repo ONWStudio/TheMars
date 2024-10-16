@@ -6,6 +6,8 @@ namespace Onw.Extensions
 {
     public static class ComponentExtensions
     {
+        public static void SetActiveGameObject(this Component component, bool isActive) => component.gameObject.SetActive(isActive); 
+        
         public static Vector3 GetPosition(this Component component) => component.transform.position;
         public static Vector3 GetLocalPosition(this Component component) => component.transform.localPosition;
 

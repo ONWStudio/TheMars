@@ -11,7 +11,7 @@ namespace TM.Grid
 {
     public sealed class TMGridManager : SceneSingleton<TMGridManager>
     {
-        public override string SceneName => "MainGameScene";
+        protected override string SceneName => "MainGameScene";
 
         public float TileSize => _gridManager.HexagonWidth;
         public int TileCount => _gridManager.TileCount;

@@ -35,7 +35,6 @@ namespace Onw.Components
             remove => _onHoverMouse.RemoveListener(value);
         }
 
-        [FormerlySerializedAs("_onMoveMouse")]
         [field: SerializeField] private UnityEvent<Vector2> _onMoveBeginMouse = new();
         [field: SerializeField] private UnityEvent<Vector2> _onMoveEndMouse = new();
         [field: SerializeField] private UnityEvent<Vector2> _onHoverMouse = new();
@@ -55,7 +54,6 @@ namespace Onw.Components
                 if (!_isMove)
                 {
                     _isMove = true;
-                    Debug.Log("Invoke onMoveBeginMouse");
                     _onMoveBeginMouse.Invoke(mousePosition);
                 }
             }
@@ -63,9 +61,7 @@ namespace Onw.Components
             {
                 if (_isMove)
                 {
-                    // Only invoke MoveEnd if it was previously moving
                     _isMove = false;
-                    Debug.Log("Invoke onMoveEndMouse");
                     _onMoveEndMouse.Invoke(mousePosition);
                 }
             }

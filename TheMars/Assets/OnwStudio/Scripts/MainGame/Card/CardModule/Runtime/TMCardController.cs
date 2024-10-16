@@ -21,9 +21,7 @@ namespace TM.Card.Runtime
                 _cardViewer.SetUI(_cardData);
             }
         }
-        
-        [FormerlySerializedAs("_cardCardModel")]
-        [FormerlySerializedAs("_cardController")]
+
         [Header("Model")]
         [SerializeField, InitializeRequireComponent]
         private TMCardModel _cardModel;

@@ -51,13 +51,6 @@ namespace TM.Card.Runtime
         [field: SerializeField, ReadOnly] public bool WasCostPaid { get; set; } = false;
 
         /// <summary>
-        /// .. 카드의 클릭, 마우스 다운, 마우스 업, 드래그 등에 관한 이벤트 메서드를 제공하는 핸들러 컴포넌트입니다
-        /// </summary>
-        [field: Header("Input Handler")]
-        [field: SerializeField, InitializeRequireComponent]
-        public UIInputHandler InputHandler { get; private set; }
-
-        /// <summary>
         /// .. 카드 위에 마우스 포인터 등이 올라올때등의 하이라이트 효과를 위한 컴포넌트입니다
         /// </summary>
         [field: Space]
@@ -76,6 +69,13 @@ namespace TM.Card.Runtime
         /// </summary>
         [field: SerializeField, InitializeRequireComponent]
         public RectTransform RectTransform { get; private set; }
+
+        /// <summary>
+        /// .. 카드의 클릭, 마우스 다운, 마우스 업, 드래그 등에 관한 이벤트 메서드를 제공하는 핸들러 컴포넌트입니다
+        /// </summary>
+        [field: Header("Input Handler")]
+        [field: SerializeField, InitializeRequireComponent]
+        public UIInputHandler InputHandler { get; private set; }
 
         /// <summary>
         /// .. 카드의 효과 인터페이스를 제공합니다 CardData에서 정보를 받아와 런타임에 이펙트를 동적으로 생성합니다
@@ -115,6 +115,36 @@ namespace TM.Card.Runtime
             remove => _onPayCost.RemoveListener(value);
         }
 
+        public event UnityAction<PointerEventData> OnPointerDownEvent
+        {
+            add => _onPointerDownEvent.AddListener(value);
+            remove => _onPointerDownEvent.RemoveListener(value);
+        }
+
+        public event UnityAction<PointerEventData> OnPointerUpEvent
+        {
+            add => _onPointerUpEvent.AddListener(value);
+            remove => _onPointerUpEvent.RemoveListener(value);
+        }
+
+        public event UnityAction<PointerEventData> OnPointerEnterEvent
+        {
+            add => _onPointerEnterEvent.AddListener(value);
+            remove => _onPointerEnterEvent.RemoveListener(value);
+        }
+
+        public event UnityAction<PointerEventData> OnPointerExitEvent
+        {
+            add => _onPointerExitEvent.AddListener(value);
+            remove => _onPointerExitEvent.RemoveListener(value);
+        }
+
+        public event UnityAction<Vector2> OnDragEvent
+        {
+            add => _onDragEvent.AddListener(value);
+            remove => _onDragEvent.RemoveListener(value);
+        }
+
         /// <summary>
         /// .. 카드의 코스트를 지불 가능한 상태를 반환합니다
         /// </summary>
@@ -133,13 +163,21 @@ namespace TM.Card.Runtime
             }
         }
 
+        [Header("Card Events")]
         [SerializeField] private UnityEvent<TMCardModel> _onDragBeginCard = new();
         [SerializeField] private UnityEvent<TMCardModel> _onDragEndCard = new();
         [SerializeField] private UnityEvent<TMCardModel> _onEffectEvent = new();
         [SerializeField] private UnityEvent<TMCardModel> _onPayCost = new();
-        
+
         [SerializeField, ReadOnly] private bool _isInit = false;
         [SerializeField, ReadOnly] private bool _canInteract = true;
+
+        [Header("Input Events")]
+        [SerializeField] private UnityEvent<PointerEventData> _onPointerDownEvent = new();
+        [SerializeField] private UnityEvent<PointerEventData> _onPointerUpEvent = new();
+        [SerializeField] private UnityEvent<PointerEventData> _onPointerEnterEvent = new();
+        [SerializeField] private UnityEvent<PointerEventData> _onPointerExitEvent = new();
+        [SerializeField] private UnityEvent<Vector2> _onDragEvent = new();
 
         private bool? _keepIsHide = null;
 
@@ -148,6 +186,52 @@ namespace TM.Card.Runtime
             CardCamera = GameObject
                 .FindWithTag("CardCamera")
                 .GetComponent<Camera>();
+        }
+        
+        private void Start()
+        {
+            InputHandler.DownAction += onPointerDown;
+            InputHandler.UpAction += onPointerUp;
+            InputHandler.EnterAction += onPointerEnter;
+            InputHandler.ExitAction += onPointerExit;
+            
+            // .. TODO : 드래그만 코루틴 변경
+            _onPointerDownEvent.AddListener();
+        }
+
+        private void onPointerDown(PointerEventData pointerEventData)
+        {
+            if (!_canInteract) return;
+            
+            _onPointerDownEvent.Invoke(pointerEventData);
+        }
+        
+        private void onPointerUp(PointerEventData pointerEventData)
+        {
+            if (!_canInteract) return;
+            
+            _onPointerUpEvent.Invoke(pointerEventData);
+        }
+
+        private void onPointerEnter(PointerEventData pointerEventData)
+        {
+            if (!_canInteract) return;
+            
+            _onPointerEnterEvent.Invoke(pointerEventData);
+        }
+
+        private void onPointerExit(PointerEventData pointerEventData)
+        {
+            if (!_canInteract) return;
+            
+            _onPointerExitEvent.Invoke(pointerEventData);
+        }
+
+        private void onDrag(Vector2 mousePosition)
+        {
+            if (!_canInteract) return;
+
+            _onDragEvent.Invoke(mousePosition);
         }
 
         /// <summary>
@@ -161,11 +245,11 @@ namespace TM.Card.Runtime
             CardViewMover.IsLocal = true;
             CardBodyMover.IsLocal = true;
 
-            InputHandler.EnterAction += _ => CardViewMover.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f);
-            InputHandler.ExitAction += _ => CardViewMover.TargetPosition = Vector2.zero;
-            InputHandler.DownAction += onMouseDownCard;
-            InputHandler.DragAction += onDrag;
-            InputHandler.UpAction += onDragEnd;
+            _onPointerEnterEvent.AddListener(_ => CardViewMover.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f));
+            _onPointerExitEvent.AddListener(_ => CardViewMover.TargetPosition = Vector2.zero);
+            _onPointerDownEvent.AddListener(onMouseDownCard);
+            _onPointerUpEvent.AddListener(onDragEnd);
+            _onDragEvent.AddListener(onDragCard);
 
             CardEffect = CardData.CreateCardEffect();
             CardEffect?.ApplyEffect(this, this);
@@ -173,7 +257,8 @@ namespace TM.Card.Runtime
             void onMouseDownCard(PointerEventData eventData)
             {
                 if (!_canInteract) return;
-                
+
+                Debug.Log("Trigger card");
                 TriggerSelectCard();
             }
         }
@@ -267,35 +352,27 @@ namespace TM.Card.Runtime
         /// </summary>
         /// <param name="resourceKind"></param>
         /// <returns></returns>
-        private int getResourceFromPlayerByCost(TMResourceKind resourceKind)
+        private static int getResourceFromPlayerByCost(TMResourceKind resourceKind) => resourceKind switch
         {
-            return resourceKind switch
-            {
-                TMResourceKind.MARS_LITHIUM => TMPlayerManager.Instance.MarsLithium,
-                TMResourceKind.CREDIT => TMPlayerManager.Instance.Credit,
-                TMResourceKind.STEEL => TMPlayerManager.Instance.Steel,
-                TMResourceKind.PLANTS => TMPlayerManager.Instance.Plants,
-                TMResourceKind.CLAY => TMPlayerManager.Instance.Clay,
-                TMResourceKind.POPULATION => TMPlayerManager.Instance.Population,
-                TMResourceKind.ELECTRICITY => TMPlayerManager.Instance.Electricity,
-                _ => 0
-            };
-        }
+            TMResourceKind.MARS_LITHIUM => TMPlayerManager.Instance.MarsLithium,
+            TMResourceKind.CREDIT => TMPlayerManager.Instance.Credit,
+            TMResourceKind.STEEL => TMPlayerManager.Instance.Steel,
+            TMResourceKind.PLANTS => TMPlayerManager.Instance.Plants,
+            TMResourceKind.CLAY => TMPlayerManager.Instance.Clay,
+            TMResourceKind.POPULATION => TMPlayerManager.Instance.Population,
+            TMResourceKind.ELECTRICITY => TMPlayerManager.Instance.Electricity,
+            _ => 0
+        };
 
-        private void onDrag(PointerEventData _)
+        private void onDragCard(Vector2 mousePosition) => dragCard();
+
+        private void onDragEnd(PointerEventData pointerEvent)
         {
             if (!_canInteract) return;
-            
-            dragCard();
-        }
 
-        private void onDragEnd(PointerEventData _)
-        {
-            if (!_canInteract) return;
-            
             IsOverTombTransform = false;
 
-            if (RectTransformUtility.RectangleContainsScreenPoint(TMCardManager.Instance.DeckTransform, Input.mousePosition, CardCamera))
+            if (RectTransformUtility.RectangleContainsScreenPoint(TMCardManager.Instance.DeckTransform, pointerEvent.position, CardCamera))
             {
                 sellCard();
             }

@@ -170,28 +170,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CardData>k__BackingField: {fileID: 0}
   <CardCamera>k__BackingField: {fileID: 0}
-  <CardRaycaster>k__BackingField: {fileID: 0}
   <IsDragging>k__BackingField: 0
   <OnField>k__BackingField: 0
-  <IsOverDeckTransform>k__BackingField: 0
+  <IsOverTombTransform>k__BackingField: 0
   <IsHide>k__BackingField: 0
-  <InputHandler>k__BackingField: {fileID: -9218174935462156935}
+  <WasCostPaid>k__BackingField: 0
   <CardViewMover>k__BackingField: {fileID: 2790600352443847834}
   <CardBodyMover>k__BackingField: {fileID: -4764531829553090222}
   <RectTransform>k__BackingField: {fileID: 6485339371614455860}
+  <InputHandler>k__BackingField: {fileID: -9218174935462156935}
   _onDragBeginCard:
-    _unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
   _onDragEndCard:
-    _unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
   _onEffectEvent:
-    _unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
+  _onPayCost:
+    m_PersistentCalls:
+      m_Calls: []
   _isInit: 0
+  _canInteract: 1
+  _onPointerDownEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _onPointerUpEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _onPointerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _onPointerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _onDragEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3845239031405876139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardImage: {fileID: 3251446557581205986}
   _backgroundImage: {fileID: 1242621844710434452}
+  _raycastImage: {fileID: 6760737446521074974}
   _descriptionText: {fileID: 6591190900603037062}
   _nameText: {fileID: 7651248644293903378}
   _costFieldImage: {fileID: 6179382308245379143}
@@ -252,25 +269,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enterAction:
-    _unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
   _exitAction:
-    _unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
   _downAction:
-    _unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
   _upAction:
-    _unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
   _dragAction:
-    _unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2298580042782835436
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,10 +453,10 @@ RectTransform:
   - {fileID: 4453947786510180535}
   m_Father: {fileID: 5303476956876019993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -89.5, y: 132.66}
-  m_SizeDelta: {x: 83.09, y: 70.73}
+  m_AnchorMin: {x: -0.123512045, y: 0.8228979}
+  m_AnchorMax: {x: 0.271732, y: 1.0600001}
+  m_AnchoredPosition: {x: 0, y: 0.16000366}
+  m_SizeDelta: {x: 0.08999634, y: -0.26999664}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &877428229435810508
 CanvasRenderer:
@@ -518,7 +530,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.053000003, y: 0.053333335}
   m_AnchorMax: {x: 0.9423631, y: 0.48666668}
-  m_AnchoredPosition: {x: 0.4656906, y: 0.15272522}
+  m_AnchoredPosition: {x: 0.4656906, y: 0.15274048}
   m_SizeDelta: {x: -0.036786556, y: 0.41617918}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1966994681066060706
@@ -720,7 +732,7 @@ MonoBehaviour:
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 9.4
+  m_fontSizeMin: 0.6
   m_fontSizeMax: 20.2
   m_fontStyle: 0
   m_HorizontalAlignment: 2

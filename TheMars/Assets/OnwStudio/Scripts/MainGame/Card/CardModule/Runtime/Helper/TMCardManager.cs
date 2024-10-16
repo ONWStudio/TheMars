@@ -13,7 +13,7 @@ namespace TM.Card.Runtime
     [DisallowMultipleComponent]
     public sealed class TMCardManager : SceneSingleton<TMCardManager>
     {
-        public override string SceneName => "MainGameScene";
+        protected override string SceneName => "MainGameScene";
         
         [System.Serializable]
         public struct TMCardManagerUI

@@ -9,7 +9,7 @@ namespace TM.Manager
 {
     public sealed class TMSimulator : SceneSingleton<TMSimulator>
     {
-        public override string SceneName => "MainGameScene";
+        protected override string SceneName => "MainGameScene";
         
         private const int INTERVAL_MIN = 5;
         private const int INTERVAL_MAX = 15;

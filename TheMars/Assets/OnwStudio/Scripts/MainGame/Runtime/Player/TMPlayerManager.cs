@@ -10,7 +10,7 @@ namespace TM
 {
     public sealed class TMPlayerManager : SceneSingleton<TMPlayerManager>
     {
-        public override string SceneName => "MainGameScene";
+        protected override string SceneName => "MainGameScene";
         
         public int Level
         {

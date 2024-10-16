@@ -27,6 +27,9 @@ namespace TM.Card.Runtime
         [SerializeField, SelectableSerializeField]
         private Image _backgroundImage;
 
+        [SerializeField, InitializeRequireComponent]
+        private Image _raycastImage;
+        
         [Header("Description Option")]
         [SerializeField, SelectableSerializeField]
         private TextMeshProUGUI _descriptionText;
@@ -38,7 +41,7 @@ namespace TM.Card.Runtime
         [Header("Cost Option")]
         [SerializeField, SelectableSerializeField]
         private Image _costFieldImage;
-
+        
         [SerializeField, SelectableSerializeField]
         private TextMeshProUGUI _costText;
         

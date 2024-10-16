@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace TM.Synergy
 {
     public sealed class TMSynergyManager : SceneSingleton<TMSynergyManager>
     {
-        public override string SceneName => "MainGameScene";
-        
+        protected override string SceneName => "MainGameScene";
+
         public event UnityAction<IReadOnlyDictionary<string, TMSynergy>> OnUpdateSynergies
         {
             add => _onUpdateSynergies.AddListener(value);
@@ -23,20 +24,29 @@ namespace TM.Synergy
         private IReadOnlyDictionary<string, TMSynergy> Synergies => _synergies;
         private readonly Dictionary<string, TMSynergy> _synergies = new();
 
+        private bool _isApplicationQuit = false;
+
         [SerializeField, ReadOnly] private UnityEvent<IReadOnlyDictionary<string, TMSynergy>> _onUpdateSynergies = new();
-        
+
         private void Start()
         {
             TMGridManager.Instance.OnAddedBuilding += onAddedBuilding;
             TMGridManager.Instance.OnRemovedBuilding += onRemovedBuilding;
         }
 
-        protected override void Init() {}
+        protected override void Init() { }
 
         private void OnDestroy()
         {
+            if (!_isApplicationQuit) return;
+            
             TMGridManager.Instance.OnAddedBuilding -= onAddedBuilding;
             TMGridManager.Instance.OnRemovedBuilding -= onRemovedBuilding;
+        }
+
+        private void OnApplicationQuit()
+        {
+            _isApplicationQuit = true;
         }
 
         private void onAddedBuilding(TMBuilding building)
@@ -48,11 +58,11 @@ namespace TM.Synergy
                     synergy = synergyData.CreateSynergy();
                     _synergies.Add(synergyData.SynergyName, synergy);
                 }
-                
+
                 synergy.BuildingCount++;
                 synergy.ApplySynergy();
             }
-            
+
             _onUpdateSynergies.Invoke(_synergies);
         }
 
@@ -61,7 +71,7 @@ namespace TM.Synergy
             foreach (TMSynergyData synergyData in building.BuildingData.Synergies)
             {
                 if (!_synergies.TryGetValue(synergyData.SynergyName, out TMSynergy synergy)) return;
-                
+
                 synergy.BuildingCount--;
                 synergy.ApplySynergy();
 
@@ -69,7 +79,7 @@ namespace TM.Synergy
                 {
                     _synergies.Remove(synergy.SynergyName);
                 }
-                
+
                 _onUpdateSynergies.Invoke(_synergies);
             }
         }

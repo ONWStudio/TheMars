@@ -100,18 +100,24 @@ namespace Onw.HexGrid
         private void Awake()
         {
             SendToShaderHexOption();
-            _mouseInputEvent.AddListenerDownEvent<OnwMouseLeftInputEvent>(onMouseDownEvent);
         }
 
         private void Start()
         {
             _mouseMovementTracker.OnHoverMouse += onHoverMouse;
+            _mouseInputEvent.AddListenerDownEvent<OnwMouseLeftInputEvent>(onMouseDownEvent);
+            _mouseInputEvent.AddListenerUpEvent<OnwMouseLeftInputEvent>(onMouseUpEvent);
 
             if (!_mainCamera)
             {
                 Debug.LogWarning("카메라가 초기화되지 않았으므로 자동으로 메인카메라를 찾습니다");
                 _mainCamera = Camera.main;
             }
+        }
+
+        private void OnApplicationQuit()
+        {
+            _hexOptionBuffer?.Release();
         }
 
         private void OnDestroy()
@@ -218,7 +224,7 @@ namespace Onw.HexGrid
                 if (_hexGrids.TryGetValue(new(hexCoordinates.x, hexCoordinates.y), out HexGrid hex))
                 {
                     hexGrid = hex;
-                    return true;
+                    return hex.IsActive;
                 }
             }
 
