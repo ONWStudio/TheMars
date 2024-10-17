@@ -44,9 +44,9 @@ namespace Onw.Coroutine
             => CoroutineExtensions.ProgressFromEnumerable(this, objects, callback);
 
         public Coroutine GetWaitComponent<T>(MonoBehaviour monoBehaviour, Action<T> callback) where T : Component
-            => CoroutineExtensions.GetWaitComponent(monoBehaviour, callback);
+            => monoBehaviour.GetWaitComponent(callback);
 
         public Coroutine GetWaitComponent<T>(MonoBehaviour monoBehaviour, float delayTime, Action<T> callback) where T : Component
-            => CoroutineExtensions.GetWaitComponent(monoBehaviour, delayTime, callback);
+            => monoBehaviour.GetWaitComponent(delayTime, callback);
     }
 }

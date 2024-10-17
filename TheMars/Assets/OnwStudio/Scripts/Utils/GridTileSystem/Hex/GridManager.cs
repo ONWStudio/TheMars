@@ -86,7 +86,6 @@ namespace Onw.HexGrid
         private SerializedDictionary<AxialCoordinates, HexGrid> _hexGrids;
 
         [SerializeField, InitializeRequireComponent] private DecalProjector _decalProjector;
-        [SerializeField, InitializeRequireComponent] private MouseMovementTracker _mouseMovementTracker;
         [SerializeField, InitializeRequireComponent] private MouseInputEvent _mouseInputEvent;
 
         [FormerlySerializedAs("_qLimit")]
@@ -104,7 +103,7 @@ namespace Onw.HexGrid
 
         private void Start()
         {
-            _mouseMovementTracker.OnHoverMouse += onHoverMouse;
+            MouseMovementTracker.Instance.OnHoverMouseRuntime += onHoverMouseRuntime;
             _mouseInputEvent.AddListenerDownEvent<OnwMouseLeftInputEvent>(onMouseDownEvent);
             _mouseInputEvent.AddListenerUpEvent<OnwMouseLeftInputEvent>(onMouseUpEvent);
 
@@ -145,7 +144,7 @@ namespace Onw.HexGrid
             }
         }
 
-        private void onHoverMouse(Vector2 mousePosition)
+        private void onHoverMouseRuntime(Vector2 mousePosition)
         {
             Ray ray = _mainCamera.ScreenPointToRay(mousePosition);
 

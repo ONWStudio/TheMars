@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Onw.Attribute;
+using Onw.Components;
 using Onw.Manager;
 using TM.Card.Runtime;
 
@@ -62,7 +63,7 @@ namespace TM.Runtime.UI
                 _cardCallbacks.Add(new(card, action));
                 card.InputHandler.UpAction += action;
                 
-                void selectCard(PointerEventData data)
+                void selectCard(PointerEventData _)
                 {
                     Debug.Log("Select");
                     if (_selectCard)

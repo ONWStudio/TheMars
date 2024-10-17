@@ -35,8 +35,6 @@ namespace AYellowpaper.SerializedCollections
         {
             base.Clear();
 
-            Debug.Log("Serialization Dictionary");
-
             foreach (SerializedKeyValuePair<TKey, TValue> kvp in _serializedList.Where(kvp => !ContainsKey(kvp.Key)))
             {
                 base.Add(kvp.Key, kvp.Value);
