@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace TM
 {
-    public enum TMResourceKind
+    public enum TMResourceKind : byte
     {
         [InspectorName("마르스 리튬")] MARS_LITHIUM = 0,
         [InspectorName("크레딧")] CREDIT = 1,

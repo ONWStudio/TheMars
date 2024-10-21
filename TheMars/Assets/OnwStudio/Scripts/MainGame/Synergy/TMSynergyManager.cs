@@ -38,7 +38,7 @@ namespace TM.Synergy
 
         private void OnDestroy()
         {
-            if (!_isApplicationQuit) return;
+            if (_isApplicationQuit) return;
             
             TMGridManager.Instance.OnAddedBuilding -= onAddedBuilding;
             TMGridManager.Instance.OnRemovedBuilding -= onRemovedBuilding;

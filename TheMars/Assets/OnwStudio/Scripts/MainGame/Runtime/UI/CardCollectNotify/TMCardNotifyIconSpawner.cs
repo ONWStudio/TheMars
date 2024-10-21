@@ -23,7 +23,6 @@ namespace TM.Runtime
         [SerializeField] private TMCardCollectNotifyIcon _iconPrefab = null;
         [SerializeField, Range(REPEAT_TIME_MIN, REPEAT_TIME_MAX)] private float _repeatTime = 5f;
 
-        [FormerlySerializedAs("_onCreatePreIcon")]
         [SerializeField] private UnityEvent<TMCardCollectNotifyIcon> _onCreateIcon = new();
         
         private void Start()

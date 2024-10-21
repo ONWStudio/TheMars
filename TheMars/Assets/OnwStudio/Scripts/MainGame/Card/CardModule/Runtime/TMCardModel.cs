@@ -1,20 +1,17 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using Onw.Attribute;
-using Onw.Components;
-using Onw.UI.Components;
-using Onw.Components.Movement;
 using Onw.Coroutine;
 using Onw.Extensions;
+using Onw.UI.Components;
+using Onw.Components.Movement;
 using TM.Card.Effect;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 namespace TM.Card.Runtime
 {
@@ -242,7 +239,6 @@ namespace TM.Card.Runtime
             _onSafePointerEnterEvent.AddListener(_ => CardViewMover.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f));
             _onSafePointerExitEvent.AddListener(_ => CardViewMover.TargetPosition = Vector2.zero);
             _onSafePointerDownEvent.AddListener(onMouseDownCard);
-            _onSafePointerUpEvent.AddListener(onDragEnd);
             _onSafeDragEvent.AddListener(onDragCard);
 
             _isInit = true;
@@ -291,11 +287,13 @@ namespace TM.Card.Runtime
 
         private IEnumerator iEOnDrag()
         {
-            while (true)
+            while (Mouse.current.leftButton.isPressed)
             {
                 onDrag(Mouse.current.position.ReadValue());
                 yield return null;
             }
+            
+            onDragEnd(Mouse.current.position.ReadValue());
         }
 
         /// <summary>

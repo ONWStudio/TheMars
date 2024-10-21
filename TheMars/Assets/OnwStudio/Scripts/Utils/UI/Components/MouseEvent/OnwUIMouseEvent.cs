@@ -4,10 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Onw.Attribute;
 using Onw.Components;
-using UniRx.Triggers;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.UI;
 
 namespace Onw.UI.Components
 {

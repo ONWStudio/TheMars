@@ -5,8 +5,6 @@ struct HexOption
 	int IsActive;
 };
 
-
-
 StructuredBuffer<HexOption> _HexOptions;
 int _BufferOn = 0;
 

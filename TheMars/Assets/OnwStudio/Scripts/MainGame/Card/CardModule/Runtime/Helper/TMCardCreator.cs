@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using Object = UnityEngine.Object;
@@ -63,6 +64,20 @@ namespace TM.Card.Runtime
         public TMCardModel CreateCard(bool shouldInitialize = true)
         {
             return _cards.Count > 0 ? CreateCardByCardData(_cards[Random.Range(0, _cards.Count)], shouldInitialize) : null;
+        }
+
+        public TMCardModel CreateCardByCondition(Func<TMCardData, bool> predicate, bool shouldInitialize = true)
+        {
+            TMCardData[] filterCards = _cards.Where(predicate).ToArray();
+            TMCardModel currentCard = null;
+            
+            if (filterCards.Length > 0)
+            {
+                TMCardData current = filterCards[Random.Range(0, filterCards.Length)];
+                currentCard = CreateCardByCardData(current, shouldInitialize);
+            }
+
+            return currentCard;
         }
     }
 }
