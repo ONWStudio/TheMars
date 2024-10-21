@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 3845239031405876139}
   - component: {fileID: 2209908774391452699}
   - component: {fileID: -4764531829553090222}
-  - component: {fileID: -9218174935462156935}
+  - component: {fileID: 6471143285136272434}
   m_Layer: 5
   m_Name: CardTemplate
   m_TagString: Untagged
@@ -178,7 +178,7 @@ MonoBehaviour:
   <CardViewMover>k__BackingField: {fileID: 2790600352443847834}
   <CardBodyMover>k__BackingField: {fileID: -4764531829553090222}
   <RectTransform>k__BackingField: {fileID: 6485339371614455860}
-  <InputHandler>k__BackingField: {fileID: -9218174935462156935}
+  <InputHandler>k__BackingField: {fileID: 6471143285136272434}
   _onDragBeginCard:
     m_PersistentCalls:
       m_Calls: []
@@ -193,19 +193,22 @@ MonoBehaviour:
       m_Calls: []
   _isInit: 0
   _canInteract: 1
-  _onPointerDownEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  _onPointerUpEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  _onPointerEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  _onPointerExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
   _onDragEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _onSafePointerDownEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _onSafePointerUpEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _onSafePointerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _onSafePointerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _onSafeDragEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &3845239031405876139
@@ -256,7 +259,7 @@ MonoBehaviour:
   <TargetPosition>k__BackingField: {x: Infinity, y: Infinity}
   <Ratio>k__BackingField: 0.45
   <IsLocal>k__BackingField: 1
---- !u!114 &-9218174935462156935
+--- !u!114 &6471143285136272434
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

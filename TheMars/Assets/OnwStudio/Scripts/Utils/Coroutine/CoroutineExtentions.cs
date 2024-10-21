@@ -18,6 +18,13 @@ namespace Onw.Coroutine
             monoBehaviour.StopCoroutine(coroutine);
         }
 
+        public static void StopCoroutineIfNotNull(this MonoBehaviour monoBehaviour, IEnumerator enumerator)
+        {
+            if (!monoBehaviour || enumerator is null) return;
+            
+            monoBehaviour.StopCoroutine(enumerator);
+        }
+
         public static Coroutine DoCallWaitForOneFrame(this MonoBehaviour monoBehaviour, Action action)
          => monoBehaviour.StartCoroutine(iEDoCallWaitForOneFrame(action));
 
@@ -81,7 +88,7 @@ namespace Onw.Coroutine
 
         private static IEnumerator iEWaitCompletedAsyncTask<T>(Func<T> asyncAction, Action<T> callback)
         {
-            T someObject = default;
+            T someObject = default(T);
 
             yield return Task.Run(() => someObject = asyncAction.Invoke());
             callback.Invoke(someObject);
@@ -166,8 +173,8 @@ namespace Onw.Coroutine
 
         private static T getYieldInstruction<T>() where T : YieldInstruction => typeof(T) switch
         {
-            Type type when type == typeof(WaitForEndOfFrame) => CoroutineHelper.WaitForEndOfFrame as T,
-            Type type when type == typeof(WaitForFixedUpdate) => CoroutineHelper.WaitForFixedUpdate as T,
+            { } type when type == typeof(WaitForEndOfFrame) => CoroutineHelper.WaitForEndOfFrame as T,
+            { } type when type == typeof(WaitForFixedUpdate) => CoroutineHelper.WaitForFixedUpdate as T,
             _ => null
         };
     }

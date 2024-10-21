@@ -41,7 +41,7 @@ namespace Onw.Helper
             Color[] fullSizePixels = new Color[targetWidth * targetHeight];
             for (int i = 0; i < fullSizePixels.Length; i++)
             {
-                fullSizePixels[i] = new Color(0, 0, 0, 0);
+                fullSizePixels[i] = new(0, 0, 0, 0);
             }
 
             int xOffset = (targetWidth - resizeWidth) / 2;

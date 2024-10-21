@@ -8,23 +8,23 @@ namespace Onw.Helper
     {
         public static bool TryParse<T>(string value, out T result) where T : IComparable, IEquatable<T>
         {
-            T defaultValue = default;
+            T defaultValue = default(T);
             bool isOk = false;
 
             result = (T)(object)(defaultValue switch
             {
-                byte => (isOk = byte.TryParse(value, out byte byteValue)) ? byteValue : default,
-                sbyte => (isOk = sbyte.TryParse(value, out sbyte sbyteValue)) ? sbyteValue : default,
-                char => (isOk = char.TryParse(value, out char charValue)) ? charValue : default,
-                short => (isOk = short.TryParse(value, out short shortValue)) ? shortValue : default,
-                ushort => (isOk = ushort.TryParse(value, out ushort ushortValue)) ? ushortValue : default,
-                int => (isOk = int.TryParse(value, out int intValue)) ? intValue : default,
-                uint => (isOk = uint.TryParse(value, out uint uintValue)) ? uintValue : default,
-                float => (isOk = float.TryParse(value, out float floatValue)) ? floatValue : default,
-                long => (isOk = long.TryParse(value, out long longValue)) ? longValue : default,
-                ulong => (isOk = ulong.TryParse(value, out ulong ulongValue)) ? ulongValue : default,
-                double => (isOk = double.TryParse(value, out double doubleValue)) ? doubleValue : default,
-                decimal => (isOk = decimal.TryParse(value, out decimal decimalValue)) ? decimalValue : default,
+                byte => (isOk = byte.TryParse(value, out byte byteValue)) ? byteValue : default(byte),
+                sbyte => (isOk = sbyte.TryParse(value, out sbyte sbyteValue)) ? sbyteValue : default(sbyte),
+                char => (isOk = char.TryParse(value, out char charValue)) ? charValue : default(char),
+                short => (isOk = short.TryParse(value, out short shortValue)) ? shortValue : default(short),
+                ushort => (isOk = ushort.TryParse(value, out ushort ushortValue)) ? ushortValue : default(ushort),
+                int => (isOk = int.TryParse(value, out int intValue)) ? intValue : default(int),
+                uint => (isOk = uint.TryParse(value, out uint uintValue)) ? uintValue : default(uint),
+                float => (isOk = float.TryParse(value, out float floatValue)) ? floatValue : default(float),
+                long => (isOk = long.TryParse(value, out long longValue)) ? longValue : default(long),
+                ulong => (isOk = ulong.TryParse(value, out ulong ulongValue)) ? ulongValue : default(ulong),
+                double => (isOk = double.TryParse(value, out double doubleValue)) ? doubleValue : default(double),
+                decimal => (isOk = decimal.TryParse(value, out decimal decimalValue)) ? decimalValue : default(decimal),
                 _ => defaultValue
             });
 
@@ -45,7 +45,7 @@ namespace Onw.Helper
             ulong => ulong.MaxValue,
             double => double.MaxValue,
             decimal => decimal.MaxValue,
-            _ => default
+            _ => default(object)
         });
 
         public static T GetTypeToMinValue<T>(T value) where T : IComparable, IEquatable<T> => (T)(object)(value switch
@@ -62,7 +62,7 @@ namespace Onw.Helper
             ulong => ulong.MinValue,
             double => double.MinValue,
             decimal => decimal.MinValue,
-            _ => default
+            _ => default(object)
         });
     }
 }

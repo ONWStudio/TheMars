@@ -11,7 +11,7 @@ namespace TM.Manager
     {
         protected override string SceneName => "MainGameScene";
         
-        private const int INTERVAL_MIN = 5;
+        private const int INTERVAL_MIN = 1;
         private const int INTERVAL_MAX = 15;
 
         [field: SerializeField, ReadOnly] public float AccumulatedTime { get; private set; } = 0f;

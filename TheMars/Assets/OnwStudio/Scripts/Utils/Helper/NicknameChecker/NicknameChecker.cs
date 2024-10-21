@@ -16,7 +16,7 @@ namespace Onw.Helper
         /// <returns></returns>
         public static bool CheckNickname(string nickname, Action<string> warningCall)
             => checkNormalizedNickname(nickname.Contains(" "), "닉네임에는 공백을 포함할 수 없습니다", warningCall) &&
-               checkNormalizedNickname(nickname.Length < 2 || nickname.Length > 20, "닉네임의 길이는 2자 보다 크고 20자보다 작아야합니다", warningCall) &&
+               checkNormalizedNickname(nickname.Length is < 2 or > 20, "닉네임의 길이는 2자 보다 크고 20자보다 작아야합니다", warningCall) &&
                checkNormalizedNickname(new Regex(@"[~!@\#$%^&*\()\=+|\\/:;?""<>']").IsMatch(nickname),
                 "닉네임에 ~!@\\#$%^&*\\()\\=+|\\\\/:;?\"\"<> 등의 특수문자는 포함 할 수 없습니다", warningCall);
 

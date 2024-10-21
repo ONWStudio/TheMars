@@ -58,8 +58,8 @@ namespace TM.Card.Effect
 
             _cardModel = cardModel;                           // .. 효과를 가지고 있는 카드 캐시
             _cardModel.OnEffectEvent += onEffect;             // .. 효과 발동 이벤트 메서드 추가
-            _cardModel.OnPointerDownEvent += onDownCard; // .. 카드 클릭 이벤트에 메서드 추가
-            _cardModel.OnDragEvent += onDrag;     // .. 드래그 이벤트에 메서드 추가
+            _cardModel.OnSafePointerDownEvent += onSafeDownCard; // .. 카드 클릭 이벤트에 메서드 추가
+            _cardModel.OnSafeDragEvent += onSafeDrag;     // .. 드래그 이벤트에 메서드 추가
 
             if (BuildingData.BuildingPrefab) // .. 빌딩 프리팹이 존재할때
             {
@@ -78,15 +78,15 @@ namespace TM.Card.Effect
             }
         }
 
-        private void onDownCard(PointerEventData eventData)
+        private void onSafeDownCard(Vector2 mousePosition)
         {
             _building.gameObject.SetActive(true); // .. 드래그 활성화 타이밍이므로 건물 활성화
             _cardModel.IsHide = true;             // .. 카드에 가려보이면 안되므로 카드 렌더링 x
 
-            onDrag(eventData.position); // .. 드래그 이벤트
+            onSafeDrag(mousePosition); // .. 드래그 이벤트
         }
 
-        private void onDrag(Vector2 mousePosition)
+        private void onSafeDrag(Vector2 mousePosition)
         {
             if (!_cardModel.IsOverTombTransform) // .. 카드가 버리기(쓰레기통)칸 위에 있지 않을 경우
             {
@@ -157,6 +157,7 @@ namespace TM.Card.Effect
                 else
                 {
                     _building.gameObject.SetActive(false); // .. 이전에 건물이 설치되었던 타일이 없다면 건물 비활성화
+                    _cardModel.IsHide = false;
                 }
             }
 
@@ -170,16 +171,7 @@ namespace TM.Card.Effect
                 tileData.RemoveProperty("TileOff");                          // .. 타일은 더 이상 설치 불가능한 상태가 아니므로 TileOff속성 제거
                 _cardModel.SetActiveGameObject(true);
                 TMCardManager.Instance.AddCard(_cardModel);                  // .. 카드는 다시 패에 돌아올 수 있으므로 Add
-                
-                PointerEventData downEventData = new(EventSystem.current)
-                {
-                    position = Mouse.current.position.ReadValue(),
-                    pointerId = -1, // 왼쪽 마우스 버튼
-                    button = PointerEventData.InputButton.Left,
-                    pointerCurrentRaycast = new() { gameObject = _cardModel.gameObject },
-                };
-
-                ExecuteEvents.Execute(_cardModel.gameObject, downEventData, ExecuteEvents.pointerDownHandler);
+                _cardModel.TriggerSelectCard();
             }
 
             void batchBuildingOnTile(IHexGrid currentTile) // .. 건물이 타일위에 배치되었을경우 해주어야할 처리를 하는 메서드

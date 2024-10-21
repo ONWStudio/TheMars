@@ -4,42 +4,83 @@ using System.Collections.Generic;
 using UnityEngine;
 using Onw.Attribute;
 using Onw.Extensions;
+using Onw.Manager;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace Onw.Components
 {
-    public sealed class MouseMovementTracker : MonoBehaviour
+    public sealed class MouseMovementTracker : Singleton<MouseMovementTracker>
     {
         private const float MOVEMENT_THRESHOLD_MIN = 0f;
         private const float MOVEMENT_THRESHOLD_MAX = 0.25f;
 
-        [field: SerializeField, Range(MOVEMENT_THRESHOLD_MIN, MOVEMENT_THRESHOLD_MAX)] public float MovementThreshold = 0.05f;
+        [field: SerializeField, Range(MOVEMENT_THRESHOLD_MIN, MOVEMENT_THRESHOLD_MAX)] public float MovementThreshold = 0f;
 
-        public event UnityAction<Vector2> OnMoveBeginMouse
+        public event UnityAction<Vector2> OnMoveBeginMouseForNowScene
         {
-            add => _onMoveBeginMouse.AddListener(value);
-            remove => _onMoveBeginMouse.RemoveListener(value);
+            add => _onMoveBeginMouseForNowScene.AddListener(value); 
+            remove => _onMoveBeginMouseForNowScene.AddListener(value);
+        } 
+        
+        public event UnityAction<Vector2> OnMoveEndMouseForNowScene
+        {
+            add => _onMoveEndMouseForNowScene.AddListener(value); 
+            remove => _onMoveEndMouseForNowScene.AddListener(value);
+        } 
+        
+        public event UnityAction<Vector2> OnHoverMouseForNowScene
+        {
+            add => _onHoverMouseForNowScene.AddListener(value); 
+            remove => _onHoverMouseForNowScene.AddListener(value);
+        } 
+        
+        public event UnityAction<Vector2> OnMoveBeginMouseForRuntime
+        {
+            add => _onMoveBeginMouseForRuntime.AddListener(value);
+            remove => _onMoveBeginMouseForRuntime.RemoveListener(value);
         }
 
-        public event UnityAction<Vector2> OnMoveEndMouse
+        public event UnityAction<Vector2> OnMoveEndMouseRuntime
         {
-            add => _onMoveEndMouse.AddListener(value);
-            remove => _onMoveEndMouse.RemoveListener(value);
+            add => _onMoveEndMouseRuntime.AddListener(value);
+            remove => _onMoveEndMouseRuntime.RemoveListener(value);
         }
 
-        public event UnityAction<Vector2> OnHoverMouse
+        public event UnityAction<Vector2> OnHoverMouseRuntime
         {
-            add => _onHoverMouse.AddListener(value);
-            remove => _onHoverMouse.RemoveListener(value);
+            add => _onHoverMouseRuntime.AddListener(value);
+            remove => _onHoverMouseRuntime.RemoveListener(value);
         }
 
-        [field: SerializeField] private UnityEvent<Vector2> _onMoveBeginMouse = new();
-        [field: SerializeField] private UnityEvent<Vector2> _onMoveEndMouse = new();
-        [field: SerializeField] private UnityEvent<Vector2> _onHoverMouse = new();
+        [field: SerializeField] private UnityEvent<Vector2> _onMoveBeginMouseForNowScene = new();
+        [field: SerializeField] private UnityEvent<Vector2> _onMoveEndMouseForNowScene = new();
+        [field: SerializeField] private UnityEvent<Vector2> _onHoverMouseForNowScene = new();
+        
+        [field: SerializeField] private UnityEvent<Vector2> _onMoveBeginMouseForRuntime = new();
+        [field: SerializeField] private UnityEvent<Vector2> _onMoveEndMouseRuntime = new();
+        [field: SerializeField] private UnityEvent<Vector2> _onHoverMouseRuntime = new();
 
         private bool _isMove = false;
+        
+        protected override void Init()
+        {
+            SceneManager.sceneLoaded += onSceneLoaded;
+        }
+
+        private void OnDestroy()
+        {
+            SceneManager.sceneLoaded -= onSceneLoaded;
+        }
+
+        private void onSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            _onMoveBeginMouseForNowScene.RemoveAllListeners();
+            _onMoveEndMouseForNowScene.RemoveAllListeners();
+            _onHoverMouseForNowScene.RemoveAllListeners();
+        }
 
         private void Update()
         {
@@ -49,12 +90,14 @@ namespace Onw.Components
 
             if (isMoving)
             {
-                _onHoverMouse.Invoke(mousePosition);
+                _onHoverMouseForNowScene.Invoke(mousePosition);
+                _onHoverMouseRuntime.Invoke(mousePosition);
 
                 if (!_isMove)
                 {
                     _isMove = true;
-                    _onMoveBeginMouse.Invoke(mousePosition);
+                    _onMoveBeginMouseForNowScene.Invoke(mousePosition);
+                    _onMoveBeginMouseForRuntime.Invoke(mousePosition);
                 }
             }
             else
@@ -62,7 +105,8 @@ namespace Onw.Components
                 if (_isMove)
                 {
                     _isMove = false;
-                    _onMoveEndMouse.Invoke(mousePosition);
+                    _onMoveEndMouseForNowScene.Invoke(mousePosition);
+                    _onMoveEndMouseRuntime.Invoke(mousePosition);
                 }
             }
         }

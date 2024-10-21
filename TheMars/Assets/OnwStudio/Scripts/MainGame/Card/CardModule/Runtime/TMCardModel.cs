@@ -1,15 +1,20 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UniRx;
 using Onw.Attribute;
+using Onw.Components;
 using Onw.UI.Components;
 using Onw.Components.Movement;
+using Onw.Coroutine;
 using Onw.Extensions;
 using TM.Card.Effect;
-using UnityEngine.Serialization;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 namespace TM.Card.Runtime
 {
@@ -69,14 +74,9 @@ namespace TM.Card.Runtime
         /// </summary>
         [field: SerializeField, InitializeRequireComponent]
         public RectTransform RectTransform { get; private set; }
-
-        /// <summary>
-        /// .. 카드의 클릭, 마우스 다운, 마우스 업, 드래그 등에 관한 이벤트 메서드를 제공하는 핸들러 컴포넌트입니다
-        /// </summary>
-        [field: Header("Input Handler")]
+        
         [field: SerializeField, InitializeRequireComponent]
         public UIInputHandler InputHandler { get; private set; }
-
         /// <summary>
         /// .. 카드의 효과 인터페이스를 제공합니다 CardData에서 정보를 받아와 런타임에 이펙트를 동적으로 생성합니다
         /// </summary>
@@ -99,7 +99,7 @@ namespace TM.Card.Runtime
             add => _onDragEndCard.AddListener(value);
             remove => _onDragEndCard.RemoveListener(value);
         }
-
+        
         /// <summary>
         /// .. 카드가 효과를 발동할때 트리거 됩니다
         /// </summary>
@@ -114,35 +114,35 @@ namespace TM.Card.Runtime
             add => _onPayCost.AddListener(value);
             remove => _onPayCost.RemoveListener(value);
         }
-
-        public event UnityAction<PointerEventData> OnPointerDownEvent
+        
+        public event UnityAction<Vector2> OnSafePointerDownEvent
         {
-            add => _onPointerDownEvent.AddListener(value);
-            remove => _onPointerDownEvent.RemoveListener(value);
+            add => _onSafePointerDownEvent.AddListener(value);
+            remove => _onSafePointerDownEvent.RemoveListener(value);
         }
 
-        public event UnityAction<PointerEventData> OnPointerUpEvent
+        public event UnityAction<Vector2> OnSafePointerUpEvent
         {
-            add => _onPointerUpEvent.AddListener(value);
-            remove => _onPointerUpEvent.RemoveListener(value);
+            add => _onSafePointerUpEvent.AddListener(value);
+            remove => _onSafePointerUpEvent.RemoveListener(value);
         }
 
-        public event UnityAction<PointerEventData> OnPointerEnterEvent
+        public event UnityAction<Vector2> OnSafePointerEnterEvent
         {
-            add => _onPointerEnterEvent.AddListener(value);
-            remove => _onPointerEnterEvent.RemoveListener(value);
+            add => _onSafePointerEnterEvent.AddListener(value);
+            remove => _onSafePointerEnterEvent.RemoveListener(value);
         }
 
-        public event UnityAction<PointerEventData> OnPointerExitEvent
+        public event UnityAction<Vector2> OnSafePointerExitEvent
         {
-            add => _onPointerExitEvent.AddListener(value);
-            remove => _onPointerExitEvent.RemoveListener(value);
+            add => _onSafePointerExitEvent.AddListener(value);
+            remove => _onSafePointerExitEvent.RemoveListener(value);
         }
 
-        public event UnityAction<Vector2> OnDragEvent
+        public event UnityAction<Vector2> OnSafeDragEvent
         {
-            add => _onDragEvent.AddListener(value);
-            remove => _onDragEvent.RemoveListener(value);
+            add => _onSafeDragEvent.AddListener(value);
+            remove => _onSafeDragEvent.RemoveListener(value);
         }
 
         /// <summary>
@@ -172,14 +172,18 @@ namespace TM.Card.Runtime
         [SerializeField, ReadOnly] private bool _isInit = false;
         [SerializeField, ReadOnly] private bool _canInteract = true;
 
-        [Header("Input Events")]
-        [SerializeField] private UnityEvent<PointerEventData> _onPointerDownEvent = new();
-        [SerializeField] private UnityEvent<PointerEventData> _onPointerUpEvent = new();
-        [SerializeField] private UnityEvent<PointerEventData> _onPointerEnterEvent = new();
-        [SerializeField] private UnityEvent<PointerEventData> _onPointerExitEvent = new();
+        [Header("Unsafe Input Events")]
         [SerializeField] private UnityEvent<Vector2> _onDragEvent = new();
 
+        [Header("Safe Input Events")]
+        [SerializeField] private UnityEvent<Vector2> _onSafePointerDownEvent = new();
+        [SerializeField] private UnityEvent<Vector2> _onSafePointerUpEvent = new();
+        [SerializeField] private UnityEvent<Vector2> _onSafePointerEnterEvent = new();
+        [SerializeField] private UnityEvent<Vector2> _onSafePointerExitEvent = new();
+        [SerializeField] private UnityEvent<Vector2> _onSafeDragEvent = new();
+
         private bool? _keepIsHide = null;
+        private IEnumerator _dragEnumerator = null;
 
         private void Awake()
         {
@@ -188,50 +192,39 @@ namespace TM.Card.Runtime
                 .GetComponent<Camera>();
         }
         
-        private void Start()
-        {
-            InputHandler.DownAction += onPointerDown;
-            InputHandler.UpAction += onPointerUp;
-            InputHandler.EnterAction += onPointerEnter;
-            InputHandler.ExitAction += onPointerExit;
-            
-            // .. TODO : 드래그만 코루틴 변경
-            _onPointerDownEvent.AddListener();
-        }
-
         private void onPointerDown(PointerEventData pointerEventData)
         {
             if (!_canInteract) return;
-            
-            _onPointerDownEvent.Invoke(pointerEventData);
+
+            _onSafePointerDownEvent.Invoke(pointerEventData.position);
         }
         
         private void onPointerUp(PointerEventData pointerEventData)
         {
             if (!_canInteract) return;
-            
-            _onPointerUpEvent.Invoke(pointerEventData);
+
+            _onSafePointerUpEvent.Invoke(pointerEventData.position);
         }
 
         private void onPointerEnter(PointerEventData pointerEventData)
         {
             if (!_canInteract) return;
-            
-            _onPointerEnterEvent.Invoke(pointerEventData);
+
+            _onSafePointerEnterEvent.Invoke(pointerEventData.position);
         }
 
         private void onPointerExit(PointerEventData pointerEventData)
         {
             if (!_canInteract) return;
-            
-            _onPointerExitEvent.Invoke(pointerEventData);
+
+            _onSafePointerExitEvent.Invoke(pointerEventData.position);
         }
 
         private void onDrag(Vector2 mousePosition)
         {
             if (!_canInteract) return;
 
-            _onDragEvent.Invoke(mousePosition);
+            _onSafeDragEvent.Invoke(mousePosition);
         }
 
         /// <summary>
@@ -241,26 +234,25 @@ namespace TM.Card.Runtime
         {
             if (_isInit) return;
 
+            InputHandler.DownAction += onPointerDown;
+            InputHandler.UpAction += onPointerUp;
+            InputHandler.EnterAction += onPointerEnter;
+            InputHandler.ExitAction += onPointerExit;
+
+            _onSafePointerEnterEvent.AddListener(_ => CardViewMover.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f));
+            _onSafePointerExitEvent.AddListener(_ => CardViewMover.TargetPosition = Vector2.zero);
+            _onSafePointerDownEvent.AddListener(onMouseDownCard);
+            _onSafePointerUpEvent.AddListener(onDragEnd);
+            _onSafeDragEvent.AddListener(onDragCard);
+
             _isInit = true;
             CardViewMover.IsLocal = true;
             CardBodyMover.IsLocal = true;
 
-            _onPointerEnterEvent.AddListener(_ => CardViewMover.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f));
-            _onPointerExitEvent.AddListener(_ => CardViewMover.TargetPosition = Vector2.zero);
-            _onPointerDownEvent.AddListener(onMouseDownCard);
-            _onPointerUpEvent.AddListener(onDragEnd);
-            _onDragEvent.AddListener(onDragCard);
-
             CardEffect = CardData.CreateCardEffect();
             CardEffect?.ApplyEffect(this, this);
 
-            void onMouseDownCard(PointerEventData eventData)
-            {
-                if (!_canInteract) return;
-
-                Debug.Log("Trigger card");
-                TriggerSelectCard();
-            }
+            void onMouseDownCard(Vector2 mousePosition) => TriggerSelectCard();
         }
 
         /// <summary>
@@ -268,7 +260,7 @@ namespace TM.Card.Runtime
         /// </summary>
         public void SetMousePosition()
         {
-            Vector2 mouseWorldPosition = CardCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mouseWorldPosition = CardCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             Vector2 mouseLocalPosition = transform.parent.InverseTransformPoint(mouseWorldPosition);
             transform.localPosition = mouseLocalPosition;
         }
@@ -297,6 +289,15 @@ namespace TM.Card.Runtime
             SetMousePosition();
         }
 
+        private IEnumerator iEOnDrag()
+        {
+            while (true)
+            {
+                onDrag(Mouse.current.position.ReadValue());
+                yield return null;
+            }
+        }
+
         /// <summary>
         /// .. 카드가 드래그 상태로 전환될때 설정되어야할 변수나 메서드를 호출합니다
         /// </summary>
@@ -305,6 +306,8 @@ namespace TM.Card.Runtime
             setOnMover(CardViewMover, false);
             CardBodyMover.enabled = false;
             IsDragging = true;
+            _dragEnumerator = iEOnDrag();
+            StartCoroutine(_dragEnumerator);
 
             _onDragBeginCard.Invoke(this);
             dragCard();
@@ -366,13 +369,13 @@ namespace TM.Card.Runtime
 
         private void onDragCard(Vector2 mousePosition) => dragCard();
 
-        private void onDragEnd(PointerEventData pointerEvent)
+        private void onDragEnd(Vector2 mousePosition)
         {
             if (!_canInteract) return;
 
             IsOverTombTransform = false;
 
-            if (RectTransformUtility.RectangleContainsScreenPoint(TMCardManager.Instance.DeckTransform, pointerEvent.position, CardCamera))
+            if (RectTransformUtility.RectangleContainsScreenPoint(TMCardManager.Instance.DeckTransform, mousePosition, CardCamera))
             {
                 sellCard();
             }
@@ -384,6 +387,7 @@ namespace TM.Card.Runtime
                 IsDragging = false;
             }
 
+            this.StopCoroutineIfNotNull(_dragEnumerator);
             _onDragEndCard.Invoke(this);
         }
 
