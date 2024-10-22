@@ -8,6 +8,7 @@ using Onw.Attribute;
 using Onw.Components;
 using Onw.Manager;
 using TM.Card.Runtime;
+using TM.Manager;
 
 namespace TM.Runtime.UI
 {
@@ -41,6 +42,7 @@ namespace TM.Runtime.UI
                     }
                 }
 
+                TimeManager.IsFreeze = false;
                 _cardCallbacks.Clear();
                 _selectCard.Initialize();
                 _selectCard.transform.localScale = new(1f, 1f, 1f);
@@ -54,6 +56,7 @@ namespace TM.Runtime.UI
         public void ActiveUI()
         {
             _canvas.enabled = true;
+            TimeManager.IsFreeze = true;
             
             foreach (TMCardModel card in TMCardManager.Instance.CardCreator.CreateCards(3))
             {

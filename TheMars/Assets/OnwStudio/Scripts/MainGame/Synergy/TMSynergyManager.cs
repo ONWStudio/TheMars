@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Onw.Attribute;
+using Onw.Components;
 using Onw.Manager;
 using TM.Grid;
 using TM.Building;
@@ -38,7 +39,7 @@ namespace TM.Synergy
 
         private void OnDestroy()
         {
-            if (!_isApplicationQuit) return;
+            if (_isApplicationQuit) return;
             
             TMGridManager.Instance.OnAddedBuilding -= onAddedBuilding;
             TMGridManager.Instance.OnRemovedBuilding -= onRemovedBuilding;

@@ -102,6 +102,16 @@ namespace TM
             }
         }
 
+        public int Satisfaction
+        {
+            get => _satisfaction;
+            set
+            {
+                _satisfaction = Mathf.Clamp(value, 0, 100);
+                _onChangedSatisfaction.Invoke(_satisfaction);
+            }
+        }
+
         public event UnityAction<int> OnChangedLevel
         {
             add => _onChangedLevel.AddListener(value);
@@ -155,6 +165,12 @@ namespace TM
             add => _onChangedElectricity.AddListener(value);
             remove => _onChangedElectricity.RemoveListener(value);
         }
+        
+        public event UnityAction<int> OnChangedSatisfaction
+        {
+            add => _onChangedSatisfaction.AddListener(value);
+            remove => _onChangedSatisfaction.RemoveListener(value);
+        }
 
         [SerializeField, ReadOnly] private int _marsLithium = 0;
         [SerializeField, ReadOnly] private int _credit = 0;
@@ -165,6 +181,7 @@ namespace TM
         [SerializeField, ReadOnly] private int _plants = 0;
         [SerializeField, ReadOnly] private int _clay = 0;
         [SerializeField, ReadOnly] private int _electricity = 0;
+        [SerializeField, ReadOnly] private int _satisfaction = 0;
 
         [SerializeField, ReadOnly] private UnityEvent<int> _onChangedMarsLithium = new();
         [SerializeField, ReadOnly] private UnityEvent<int> _onChangedCredit = new();
@@ -175,6 +192,7 @@ namespace TM
         [SerializeField, ReadOnly] private UnityEvent<int> _onChangedPlants = new();
         [SerializeField, ReadOnly] private UnityEvent<int> _onChangedClay = new();
         [SerializeField, ReadOnly] private UnityEvent<int> _onChangedElectricity = new();
+        [SerializeField, ReadOnly] private UnityEvent<int> _onChangedSatisfaction = new();
 
         public void AddResource(TMResourceKind kind, int resource)
         {

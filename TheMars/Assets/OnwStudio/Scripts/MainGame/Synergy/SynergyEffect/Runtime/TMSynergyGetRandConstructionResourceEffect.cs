@@ -7,6 +7,7 @@ using TM.Synergy.Effect.Creator;
 
 namespace TM.Synergy.Effect
 {
+    [System.Serializable]
     public sealed class TMSynergyGetRandConstructionResourceEffect : TMSynergyEffect, ITMSynergyInitializeEffect<TMSynergyGetRandConstructionResourceEffectCreator>
     {
         public override string Description => $"({TargetBuildingCount}) : 하루가 지날 때 마다 건설 자원(강철, 식물, 점토)을 무작위로 +{Resource}개 획득한다";

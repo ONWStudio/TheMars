@@ -43,5 +43,7 @@ namespace TM.Card
         {
             return _cardEffectCreator?.CreateEffect();
         }
+
+        public bool CheckTypeEffectCreator<TEffectCreator>() where TEffectCreator : TMCardEffectCreator => _cardEffectCreator is TEffectCreator;
     }
 }

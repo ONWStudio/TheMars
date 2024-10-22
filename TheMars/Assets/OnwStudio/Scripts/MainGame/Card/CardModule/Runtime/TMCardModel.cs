@@ -1,20 +1,17 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using Onw.Attribute;
-using Onw.Components;
-using Onw.UI.Components;
-using Onw.Components.Movement;
 using Onw.Coroutine;
 using Onw.Extensions;
+using Onw.UI.Components;
+using Onw.Components.Movement;
 using TM.Card.Effect;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 namespace TM.Card.Runtime
 {
@@ -74,7 +71,7 @@ namespace TM.Card.Runtime
         /// </summary>
         [field: SerializeField, InitializeRequireComponent]
         public RectTransform RectTransform { get; private set; }
-        
+
         [field: SerializeField, InitializeRequireComponent]
         public UIInputHandler InputHandler { get; private set; }
         /// <summary>
@@ -99,7 +96,7 @@ namespace TM.Card.Runtime
             add => _onDragEndCard.AddListener(value);
             remove => _onDragEndCard.RemoveListener(value);
         }
-        
+
         /// <summary>
         /// .. 카드가 효과를 발동할때 트리거 됩니다
         /// </summary>
@@ -109,12 +106,18 @@ namespace TM.Card.Runtime
             remove => _onEffectEvent.RemoveListener(value);
         }
 
+        public event UnityAction<TMCardModel> OnRequestEffectEvent
+        {
+            add => _onRequestEffectEvent.AddListener(value);
+            remove => _onRequestEffectEvent.RemoveListener(value);
+        }
+
         public event UnityAction<TMCardModel> OnPayCost
         {
             add => _onPayCost.AddListener(value);
             remove => _onPayCost.RemoveListener(value);
         }
-        
+
         public event UnityAction<Vector2> OnSafePointerDownEvent
         {
             add => _onSafePointerDownEvent.AddListener(value);
@@ -167,6 +170,7 @@ namespace TM.Card.Runtime
         [SerializeField] private UnityEvent<TMCardModel> _onDragBeginCard = new();
         [SerializeField] private UnityEvent<TMCardModel> _onDragEndCard = new();
         [SerializeField] private UnityEvent<TMCardModel> _onEffectEvent = new();
+        [SerializeField] private UnityEvent<TMCardModel> _onRequestEffectEvent = new();
         [SerializeField] private UnityEvent<TMCardModel> _onPayCost = new();
 
         [SerializeField, ReadOnly] private bool _isInit = false;
@@ -191,14 +195,14 @@ namespace TM.Card.Runtime
                 .FindWithTag("CardCamera")
                 .GetComponent<Camera>();
         }
-        
+
         private void onPointerDown(PointerEventData pointerEventData)
         {
             if (!_canInteract) return;
 
             _onSafePointerDownEvent.Invoke(pointerEventData.position);
         }
-        
+
         private void onPointerUp(PointerEventData pointerEventData)
         {
             if (!_canInteract) return;
@@ -242,7 +246,6 @@ namespace TM.Card.Runtime
             _onSafePointerEnterEvent.AddListener(_ => CardViewMover.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f));
             _onSafePointerExitEvent.AddListener(_ => CardViewMover.TargetPosition = Vector2.zero);
             _onSafePointerDownEvent.AddListener(onMouseDownCard);
-            _onSafePointerUpEvent.AddListener(onDragEnd);
             _onSafeDragEvent.AddListener(onDragCard);
 
             _isInit = true;
@@ -291,11 +294,13 @@ namespace TM.Card.Runtime
 
         private IEnumerator iEOnDrag()
         {
-            while (true)
+            while (Mouse.current.leftButton.isPressed)
             {
                 onDrag(Mouse.current.position.ReadValue());
                 yield return null;
             }
+
+            onDragEnd(Mouse.current.position.ReadValue());
         }
 
         /// <summary>
@@ -381,11 +386,21 @@ namespace TM.Card.Runtime
             }
             else
             {
-                _onEffectEvent.Invoke(this);
                 setOnMover(CardViewMover, true);
                 CardBodyMover.enabled = true;
                 IsDragging = false;
+                
+                // .. 코스트와 관련한 이벤트
+                if (WasCostPaid)
+                {
+                    _onEffectEvent.Invoke(this);
+                }
+                else
+                {
+                    
+                }
             }
+
 
             this.StopCoroutineIfNotNull(_dragEnumerator);
             _onDragEndCard.Invoke(this);
