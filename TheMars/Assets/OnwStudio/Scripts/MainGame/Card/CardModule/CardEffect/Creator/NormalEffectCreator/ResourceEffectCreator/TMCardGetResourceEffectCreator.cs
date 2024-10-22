@@ -10,7 +10,9 @@ namespace TM.Card.Effect.Creator
     [SerializeReferenceDropdownName("자원 획득")]
     public sealed class TMCardGetResourceEffectCreator : TMCardNormalEffectCreator
     {
+        [field: SerializeField]
         public IReadOnlyList<TMResourceData> Resources => _resources;
+
 
         // ReSharper disable once FieldCanBeMadeReadOnly.Local
         // ReSharper disable once CollectionNeverUpdated.Local

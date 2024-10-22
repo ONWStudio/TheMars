@@ -9,6 +9,7 @@ using UnityEngine.Serialization;
 using TMPro;
 using Onw.Attribute;
 using TM.Card.Effect;
+using UnityEngine.Localization.Components;
 
 namespace TM.Card.Runtime
 {
@@ -34,6 +35,9 @@ namespace TM.Card.Runtime
         [SerializeField, SelectableSerializeField]
         private TextMeshProUGUI _descriptionText;
 
+        [SerializeField, SelectableSerializeField]
+        private LocalizeStringEvent _descriptionStringEvent;
+
         [Header("Name Option")]
         [SerializeField, SelectableSerializeField]
         private TextMeshProUGUI _nameText;
@@ -49,8 +53,8 @@ namespace TM.Card.Runtime
         
         private void buildDescriptionText(ITMCardEffect[] effects)
         {
-            _descriptionText.text =
-                string.Join("\n", effects.OfType<ITMNormalEffect>().Select(effect => effect.Description));
+            //_descriptionText.text =
+            //    string.Join("\n", effects.OfType<ITMNormalEffect>().Select(effect => effect.Description));
         }
 
         public void SetView(bool isOn)

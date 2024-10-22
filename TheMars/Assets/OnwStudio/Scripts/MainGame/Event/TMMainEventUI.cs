@@ -30,8 +30,8 @@ namespace TM.Runtime.UI
         
         private void onTriggerMainEvent(TMEventData eventData)
         {
-            _descriptionTextEvent.
-            _descriptionTextEvent.OnUpdateString.AddListener(str => { });
+            //_descriptionTextEvent.
+            //_descriptionTextEvent.OnUpdateString.AddListener(str => { });
         }
     }
 }

@@ -14,6 +14,7 @@ using TM.Card.Effect.Creator;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using Object = UnityEngine.Object;
+using UnityEngine.Localization;
 
 namespace TM.Card.Effect
 {
@@ -38,6 +39,8 @@ namespace TM.Card.Effect
 
         public string Description => "";
         public TMBuilding Building => _building;
+
+        [field: SerializeField] public LocalizedString LocalizedDescription { get; private set; }
 
         [SerializeField, ReadOnly] private TMBuilding _building = null;
 

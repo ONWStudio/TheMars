@@ -2,13 +2,14 @@ using UnityEngine;
 using Onw.Attribute;
 using TM.Card.Runtime;
 using TM.Card.Effect.Creator;
+using UnityEngine.Localization;
 
 namespace TM.Card.Effect
 {
     public sealed class TMCardCollectEffect : ITMNormalEffect, ITMCardInitializeEffect<TMCardCollectEffectCreator>
     {
-        public string Description => $"랜덤 카드를 선택해서 획득";
-        
+        [field: SerializeField] public LocalizedString LocalizedDescription { get; private set; }
+
         [SerializeField, ReadOnly]
         private int _collectCount;
         
