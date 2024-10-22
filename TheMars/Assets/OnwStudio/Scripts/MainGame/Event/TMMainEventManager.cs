@@ -29,6 +29,7 @@ namespace TM.Event
         {
             if (day % CheckDayCount != 0) return;
             
+            
         }
 
         private void OnApplicationQuit()
@@ -40,7 +41,7 @@ namespace TM.Event
         {
             if (_isApplicationQuit) return;
 
-            TMSimulator.Instance.OnChangedDay -= onChangedDay();
+            TMSimulator.Instance.OnChangedDay -= onChangedDay;
         }
     }
 }

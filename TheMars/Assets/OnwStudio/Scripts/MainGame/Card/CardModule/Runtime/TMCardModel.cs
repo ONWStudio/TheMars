@@ -71,7 +71,7 @@ namespace TM.Card.Runtime
         /// </summary>
         [field: SerializeField, InitializeRequireComponent]
         public RectTransform RectTransform { get; private set; }
-        
+
         [field: SerializeField, InitializeRequireComponent]
         public UIInputHandler InputHandler { get; private set; }
         /// <summary>
@@ -96,7 +96,7 @@ namespace TM.Card.Runtime
             add => _onDragEndCard.AddListener(value);
             remove => _onDragEndCard.RemoveListener(value);
         }
-        
+
         /// <summary>
         /// .. 카드가 효과를 발동할때 트리거 됩니다
         /// </summary>
@@ -106,12 +106,18 @@ namespace TM.Card.Runtime
             remove => _onEffectEvent.RemoveListener(value);
         }
 
+        public event UnityAction<TMCardModel> OnRequestEffectEvent
+        {
+            add => _onRequestEffectEvent.AddListener(value);
+            remove => _onRequestEffectEvent.RemoveListener(value);
+        }
+
         public event UnityAction<TMCardModel> OnPayCost
         {
             add => _onPayCost.AddListener(value);
             remove => _onPayCost.RemoveListener(value);
         }
-        
+
         public event UnityAction<Vector2> OnSafePointerDownEvent
         {
             add => _onSafePointerDownEvent.AddListener(value);
@@ -164,6 +170,7 @@ namespace TM.Card.Runtime
         [SerializeField] private UnityEvent<TMCardModel> _onDragBeginCard = new();
         [SerializeField] private UnityEvent<TMCardModel> _onDragEndCard = new();
         [SerializeField] private UnityEvent<TMCardModel> _onEffectEvent = new();
+        [SerializeField] private UnityEvent<TMCardModel> _onRequestEffectEvent = new();
         [SerializeField] private UnityEvent<TMCardModel> _onPayCost = new();
 
         [SerializeField, ReadOnly] private bool _isInit = false;
@@ -188,14 +195,14 @@ namespace TM.Card.Runtime
                 .FindWithTag("CardCamera")
                 .GetComponent<Camera>();
         }
-        
+
         private void onPointerDown(PointerEventData pointerEventData)
         {
             if (!_canInteract) return;
 
             _onSafePointerDownEvent.Invoke(pointerEventData.position);
         }
-        
+
         private void onPointerUp(PointerEventData pointerEventData)
         {
             if (!_canInteract) return;
@@ -292,7 +299,7 @@ namespace TM.Card.Runtime
                 onDrag(Mouse.current.position.ReadValue());
                 yield return null;
             }
-            
+
             onDragEnd(Mouse.current.position.ReadValue());
         }
 
@@ -379,11 +386,21 @@ namespace TM.Card.Runtime
             }
             else
             {
-                _onEffectEvent.Invoke(this);
                 setOnMover(CardViewMover, true);
                 CardBodyMover.enabled = true;
                 IsDragging = false;
+                
+                // .. 코스트와 관련한 이벤트
+                if (WasCostPaid)
+                {
+                    _onEffectEvent.Invoke(this);
+                }
+                else
+                {
+                    
+                }
             }
+
 
             this.StopCoroutineIfNotNull(_dragEnumerator);
             _onDragEndCard.Invoke(this);
