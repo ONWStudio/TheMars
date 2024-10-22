@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Onw.Manager;
 using TM.Manager;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace TM.Event
 {
@@ -13,11 +14,19 @@ namespace TM.Event
 
         public ITMEvent CurrentEvent => _currentEventData;
         
+        public event UnityAction<TMEventData> OnTriggerMainEvent
+        {
+            add => _onTriggerMainEvent.AddListener(value);
+            remove => _onTriggerMainEvent.RemoveListener(value);
+        }
+        
         [field: SerializeField] public int CheckDayCount { get; private set; } = 5;
         
-        [SerializeField]
-        private TMEventData _currentEventData = null;
-
+        [SerializeField] private TMEventData _currentEventData = null;
+        
+        [Header("Event")]
+        [SerializeField] private UnityEvent<TMEventData> _onTriggerMainEvent = new();
+        
         private bool _isApplicationQuit = false;
         
         protected override void Init()
@@ -29,7 +38,18 @@ namespace TM.Event
         {
             if (day % CheckDayCount != 0) return;
             
+            _onTriggerMainEvent.Invoke(_currentEventData);
             
+            TMEventData eventData = _currentEventData;
+            eventData.OnFireEvent += onFireEvent;
+
+            void onFireEvent(TMEventChoice eventChoice)
+            {
+                if (!eventData) return;
+                
+                eventData.OnFireEvent -= onFireEvent;
+                _currentEventData = eventChoice == TMEventChoice.LEFT ? eventData.LeftEvent : eventData.RightEvent;
+            }
         }
 
         private void OnApplicationQuit()

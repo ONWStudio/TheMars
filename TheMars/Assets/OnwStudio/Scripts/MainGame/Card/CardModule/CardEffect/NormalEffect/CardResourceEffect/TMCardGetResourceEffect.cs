@@ -73,6 +73,7 @@ namespace TM.Card.Effect
                     resource => (TMResourceDataForRuntime)resource);
         }
 
+
         public void ApplyEffect(TMCardModel cardModel, ITMCardEffectTrigger trigger)
         {
             trigger.OnEffectEvent += _ =>

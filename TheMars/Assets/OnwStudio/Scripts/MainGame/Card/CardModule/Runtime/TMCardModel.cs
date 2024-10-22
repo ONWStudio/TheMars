@@ -48,11 +48,6 @@ namespace TM.Card.Runtime
         [field: SerializeField, ReadOnly] public bool IsHide { get; set; } = false;
 
         /// <summary>
-        /// .. 현재 카드가 코스트를 이미 지불하였는지에 대한 여부를 반환합니다 외부에서 수정될 수 있습니다
-        /// </summary>
-        [field: SerializeField, ReadOnly] public bool WasCostPaid { get; set; } = false;
-
-        /// <summary>
         /// .. 카드 위에 마우스 포인터 등이 올라올때등의 하이라이트 효과를 위한 컴포넌트입니다
         /// </summary>
         [field: Space]
@@ -389,16 +384,7 @@ namespace TM.Card.Runtime
                 setOnMover(CardViewMover, true);
                 CardBodyMover.enabled = true;
                 IsDragging = false;
-                
-                // .. 코스트와 관련한 이벤트
-                if (WasCostPaid)
-                {
-                    _onEffectEvent.Invoke(this);
-                }
-                else
-                {
-                    
-                }
+                _onEffectEvent.Invoke(this);
             }
 
 

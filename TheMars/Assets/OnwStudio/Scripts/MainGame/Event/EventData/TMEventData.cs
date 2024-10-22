@@ -11,7 +11,7 @@ namespace TM.Event
     public interface ITMEvent
     {
         event UnityAction<TMEventChoice> OnFireEvent;
-
+        
         ITMEvent Left { get; }
         ITMEvent Right { get; }
     }
@@ -25,12 +25,6 @@ namespace TM.Event
 
     public abstract class TMEventData : ScriptableObject, ITMEvent
     {
-        public event UnityAction<TMEventChoice> OnFireEvent
-        {
-            add => _onFireEvent.AddListener(value);
-            remove => _onFireEvent.RemoveListener(value);
-        }
-
         public ITMEvent Left => LeftEvent;
         public ITMEvent Right => RightEvent;
 
@@ -38,14 +32,14 @@ namespace TM.Event
         [field: SerializeField] public TMEventData LeftEvent  { get; private set; }
         [field: SerializeField] public TMEventData RightEvent { get; private set; }
         
-        [SerializeField] private UnityEvent<TMEventChoice> _onFireEvent = new();
-
         [field: SerializeField, SpritePreview] public Sprite EventImage { get; private set; }
-        
+
         public abstract string Description { get; }
         public abstract string LeftDescription { get; }
         public abstract string RightDescription { get; }
         public abstract string HeaderDescription { get; }
+
+        public event UnityAction<TMEventChoice> OnFireEvent;
         
         public void InvokeEvent(TMEventChoice eventChoice)
         {
@@ -58,7 +52,7 @@ namespace TM.Event
                 TriggerRightEvent();                
             }
             
-            _onFireEvent.Invoke(eventChoice);
+            OnFireEvent?.Invoke(eventChoice);
         }
         
         protected abstract void TriggerLeftEvent();

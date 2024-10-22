@@ -122,41 +122,47 @@ namespace TM.Card.Effect
         private void onEffect(TMCardModel card)
         {
             Ray ray = _mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()); // .. 레이 생성
+
+            if (!_cardModel.CanPayCost)
+            {
+                undoBatchTile();
+                return;
+            }
+
             if (TMGridManager.Instance.TryGetTileDataByRay(ray, out (bool, RaycastHit) _, out IHexGrid hex) && // .. 레이캐스팅
-                _prevTileData?.Prev != hex &&                                                                    // .. 이전에 선택된 타일과 현재 선택된 타일이 같지 않고
                 (hex?.Properties.All(property => property is not "DefaultBuilding" and not "TileOff") ?? false)) // .. 현재 선택된 타일이 건물 설치 가능한 타일일때
             {
-                if (_prevTileData is not null)
+                _building.MeshRenderer.enabled = true;               
+                
+                if (_prevTileData is {} prevTileData && prevTileData.Prev == hex) // .. 타일이 이전에 설치된 타일일때
                 {
-                    _building.MeshRenderer.enabled = true;                      // .. 건물에 배치되었다 알려주기
-                    TMGridManager.Instance.AddBuildingWithoutNotify(_building); // .. 타일에 해당 건물이 배치되었다 알려주기
+                    _building.transform.position = prevTileData.PrevPosition; // .. 이전 타일의 위치로
                 }
                 else
                 {
                     _building.BatchOnTile();
-                    TMGridManager.Instance.AddBuilding(_building);
-                }
-
-                // .. 카드가 코스트를 지불하지 않았고 코스트를 지불 가능한 상태라면?
-                if (!_cardModel.WasCostPaid && _cardModel.CanPayCost) // .. 건물의 경우는 첫설치에만 코스트를 지불하기 때문에 코스트 지불 검사
-                {
-                    _cardModel.WasCostPaid = true; // .. 코스트 지불
-                    _cardModel.PayCost();          // .. 실제 코스트 지불 계산
+                    _cardModel.PayCost();                          // .. 실제 코스트 지불 계산
+                    TMGridManager.Instance.AddBuilding(_building); // .. 타일에 해당 건물이 배치되었다 알려주기
                 }
 
                 batchBuildingOnTile(hex); // .. 건물이 배치된 타일 설정하기
             }
-            else // .. 만약 타일이 아니라면
+            else
             {
-                if (_prevTileData is not null) // .. 이전에 건물이 설치되었던 타일이 있다면
+                undoBatchTile();
+            }
+
+            void undoBatchTile()
+            {
+                if (_prevTileData is {} prevTileData) // .. 이전에 건물이 설치되었던 타일이 있다면
                 {
-                    PrevTileData prevTileData = (PrevTileData)_prevTileData;  // .. Nullable이므로 타입 캐스팅
+                    _building.MeshRenderer.enabled = true;
                     _building.transform.position = prevTileData.PrevPosition; // .. 건물의 포지션 이전 타일의 위치로
                     batchBuildingOnTile(prevTileData.Prev);                   // .. 건물이 배치된 타일 설정하기
                 }
                 else
                 {
-                    _building.gameObject.SetActive(false); // .. 이전에 건물이 설치되었던 타일이 없다면 건물 비활성화
+                    _building.SetActiveGameObject(false); // .. 이전에 건물이 설치되었던 타일이 없다면 건물 비활성화
                     _cardModel.IsHide = false;
                 }
             }
