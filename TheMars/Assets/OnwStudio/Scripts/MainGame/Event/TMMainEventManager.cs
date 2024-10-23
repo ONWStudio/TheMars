@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Onw.Manager;
-using TM.Manager;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
+using Onw.Manager;
+using Onw.Attribute;
+using TM.Manager;
 
 namespace TM.Event
 {
@@ -12,9 +14,7 @@ namespace TM.Event
     {
         protected override string SceneName => "MainGameScene";
 
-        public ITMEvent CurrentEvent => _currentEventData;
-        
-        public event UnityAction<TMEventData> OnTriggerMainEvent
+        public event UnityAction<TMMainEvent> OnTriggerMainEvent
         {
             add => _onTriggerMainEvent.AddListener(value);
             remove => _onTriggerMainEvent.RemoveListener(value);
@@ -22,10 +22,10 @@ namespace TM.Event
         
         [field: SerializeField] public int CheckDayCount { get; private set; } = 5;
         
-        [SerializeField] private TMEventData _currentEventData = null;
+        [SerializeField] private TMMainEvent _mainEvent = null;
         
         [Header("Event")]
-        [SerializeField] private UnityEvent<TMEventData> _onTriggerMainEvent = new();
+        [SerializeField] private UnityEvent<TMMainEvent> _onTriggerMainEvent = new();
         
         private bool _isApplicationQuit = false;
         
@@ -34,21 +34,30 @@ namespace TM.Event
             TMSimulator.Instance.OnChangedDay += onChangedDay;
         }
 
+        private void Start()
+        {
+            onChangedDay(0);
+        }
+
         private void onChangedDay(int day)
         {
             if (day % CheckDayCount != 0) return;
             
-            _onTriggerMainEvent.Invoke(_currentEventData);
-            
-            TMEventData eventData = _currentEventData;
-            eventData.OnFireEvent += onFireEvent;
+            _onTriggerMainEvent.Invoke(_mainEvent);
+
+            TimeManager.IsFreeze = true;
+            TMMainEvent mainEvent = _mainEvent;
+            mainEvent.OnFireEvent += onFireEvent;
 
             void onFireEvent(TMEventChoice eventChoice)
             {
-                if (!eventData) return;
+                if (mainEvent is null) return;
                 
-                eventData.OnFireEvent -= onFireEvent;
-                _currentEventData = eventChoice == TMEventChoice.LEFT ? eventData.LeftEvent : eventData.RightEvent;
+                TimeManager.IsFreeze = false;
+                mainEvent.OnFireEvent -= onFireEvent;
+                _mainEvent = new(eventChoice == TMEventChoice.TOP ? 
+                    mainEvent.EventData.TopEventData : 
+                    mainEvent.EventData.BottomEventData);
             }
         }
 

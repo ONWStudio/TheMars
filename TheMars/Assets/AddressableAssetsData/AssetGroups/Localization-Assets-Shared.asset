@@ -17,11 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 294dfdb54590f4773ad766d11bc0d73d
   m_SerializeEntries:
-  - m_GUID: f9544d03681cc42339e5f4ce22e52167
-    m_Address: Assets/CardSpecialName Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d980be908d5ad4cfc8c5ca05a4f17d26
     m_Address: Assets/OnwStudio/ScriptableObject/Localization/CardName Shared Data.asset
     m_ReadOnly: 1
@@ -30,6 +25,12 @@ MonoBehaviour:
   - m_GUID: a3fba4155beff4ce684b2afe10973d87
     m_Address: Assets/OnwStudio/ScriptableObject/Localization/BuildingName Shared
       Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27ac0bce3ff4c48f18bd82463bbf9576
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMGovernanceSystemChangeEventTable/TMGovernanceSystemChangeEventData
+      Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

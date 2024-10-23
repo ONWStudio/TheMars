@@ -11,10 +11,10 @@ namespace Onw.Editor.GUI
     public sealed class EditorDropdownController<T>
     {
         public IReadOnlyDictionary<string, T> Options => _options;
-        public KeyValuePair<string, T> SelectedItem { get; private set; } = default;
+        public KeyValuePair<string, T> SelectedItem { get; private set; } = default(KeyValuePair<string, T>);
 
         private readonly string _label = string.Empty;
-        private readonly T _default = default;
+        private readonly T _default = default(T);
         private readonly Dictionary<string, T> _options;
 
         public void Dropdown(Action<T> onChangeValue)
@@ -23,7 +23,7 @@ namespace Onw.Editor.GUI
             {
                 EditorGUILayout.LabelField(_label, GUILayout.ExpandWidth(true));
                 if (EditorGUILayout.DropdownButton(
-                    new GUIContent(string.IsNullOrEmpty(SelectedItem.Key) ? _label : SelectedItem.Key),
+                    new(string.IsNullOrEmpty(SelectedItem.Key) ? _label : SelectedItem.Key),
                     FocusType.Keyboard))
                 {
                     GenericMenu menu = new();
@@ -40,14 +40,14 @@ namespace Onw.Editor.GUI
                             });
                     }
 
-                    if (_default is not null && !_default.Equals(default))
+                    if (_default is not null && !_default.Equals(default(object)))
                     {
                         menu.AddItem(
                             new GUIContent("NONE"),
                             false,
                             () =>
                             {
-                                SelectedItem = default;
+                                SelectedItem = default(KeyValuePair<string, T>);
                                 onChangeValue.Invoke(_default);
                             });
                     }
@@ -63,7 +63,7 @@ namespace Onw.Editor.GUI
         }
 
         private EditorDropdownController() { }
-        public EditorDropdownController(string label, Dictionary<string, T> options, T defaultValue = default)
+        public EditorDropdownController(string label, Dictionary<string, T> options, T defaultValue = default(T))
         {
             _label = label;
             _default = defaultValue;

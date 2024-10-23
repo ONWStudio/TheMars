@@ -29,7 +29,7 @@ namespace TMGuiTool
 
             public void Awake()
             {
-                _cards.AddRange(ScriptableObjectHandler<TMCardData>.LoadAllScriptableObjects());
+                _cards.AddRange(ScriptableObjectHandler.LoadAllScriptableObjects<TMCardData>());
                 Page = 1;
             }
 
@@ -40,7 +40,7 @@ namespace TMGuiTool
                 {
                     if (!GUILayout.Button("새 카드 추가")) return;
 
-                    _cards.Add(ScriptableObjectHandler<TMCardData>.CreateScriptableObject(DATA_PATH, $"Card_No.{Guid.NewGuid().ToString()}"));
+                    _cards.Add(ScriptableObjectHandler.CreateScriptableObject<TMCardData>(DATA_PATH, $"Card_No.{Guid.NewGuid().ToString()}"));
                 });
 
                 int page = Page - 1;

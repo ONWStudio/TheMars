@@ -1,60 +1,71 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Onw.Attribute;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.TextCore.Text;
+using UnityEngine.Localization;
+using Onw.Attribute;
 
 namespace TM.Event
 {
-    public interface ITMEvent
+    public interface ITMEventData
     {
-        event UnityAction<TMEventChoice> OnFireEvent;
+        Sprite EventImage { get; }
+
+        LocalizedString DescriptionTextEvent { get; }
+        LocalizedString TopButtonTextEvent { get; }
+        LocalizedString BottomButtonTextEvent { get; }
+        LocalizedString TitleTextEvent { get; }
+        LocalizedString TopEffectTextEvent { get; }
+        LocalizedString BottomEffectTextEvent { get; }
+
+        ITMEventData TopReadData { get; }
+        ITMEventData BottomReadData { get; }
         
-        ITMEvent Left { get; }
-        ITMEvent Right { get; }
+        bool CanFireTop { get; }
+        bool CanFireBottom { get; }
     }
 
     public enum TMEventChoice : byte
     {
-        LEFT = 0,
-        RIGHT = 1
+        TOP = 0,
+        BOTTOM = 1
     }
-    
 
-    public abstract class TMEventData : ScriptableObject, ITMEvent
+    public abstract class TMEventData : ScriptableObject, ITMEventData
     {
-        public ITMEvent Left => LeftEvent;
-        public ITMEvent Right => RightEvent;
+        public ITMEventData TopReadData => TopEventData;
+        public ITMEventData BottomReadData => BottomEventData;
 
         // .. 추후 이벤트 매니저에서 다음 이벤트를 정할 수 있게끔..
-        [field: SerializeField] public TMEventData LeftEvent  { get; private set; }
-        [field: SerializeField] public TMEventData RightEvent { get; private set; }
-        
+        [field: SerializeField] public TMEventData TopEventData { get; private set; }
+        [field: SerializeField] public TMEventData BottomEventData { get; private set; }
+
         [field: SerializeField, SpritePreview] public Sprite EventImage { get; private set; }
 
-        public abstract string Description { get; }
-        public abstract string LeftDescription { get; }
-        public abstract string RightDescription { get; }
-        public abstract string HeaderDescription { get; }
-
-        public event UnityAction<TMEventChoice> OnFireEvent;
+        [field: SerializeField] public LocalizedString DescriptionTextEvent { get; private set; }
+        [field: SerializeField] public LocalizedString TopButtonTextEvent { get; private set; }
+        [field: SerializeField] public LocalizedString BottomButtonTextEvent { get; private set; }
+        [field: SerializeField] public LocalizedString TitleTextEvent { get; private set; }
+        [field: SerializeField] public LocalizedString TopEffectTextEvent { get; private set; }
+        [field: SerializeField] public LocalizedString BottomEffectTextEvent { get; private set; }
+        
+        public abstract bool CanFireTop { get; }
+        public abstract bool CanFireBottom { get; }
+        
+        public abstract List<object> TopEffectLocalizedArguments { get; }
+        public abstract List<object> BottomEffectLocalizedArguments { get; }
         
         public void InvokeEvent(TMEventChoice eventChoice)
         {
-            if (eventChoice == TMEventChoice.LEFT)
+            if (eventChoice == TMEventChoice.TOP)
             {
                 TriggerLeftEvent();
             }
             else
             {
-                TriggerRightEvent();                
+                TriggerRightEvent();
             }
-            
-            OnFireEvent?.Invoke(eventChoice);
         }
-        
+
         protected abstract void TriggerLeftEvent();
         protected abstract void TriggerRightEvent();
     }
