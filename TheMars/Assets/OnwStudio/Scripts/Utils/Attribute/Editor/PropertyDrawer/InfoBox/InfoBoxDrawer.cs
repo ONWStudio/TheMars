@@ -11,8 +11,6 @@ namespace Onw.Attribute.Editor
     [CustomPropertyDrawer(typeof(InfoBoxAttribute))]
     internal sealed class InfoBoxDrawer : PropertyDrawer
     {
-        private readonly float _helpBoxHeight = EditorGUIUtility.singleLineHeight * 2f;
-
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             InfoBoxAttribute infoBoxAttribute = (attribute as InfoBoxAttribute)!;
@@ -24,16 +22,19 @@ namespace Onw.Attribute.Editor
                 INFO_TYPE.ERROR => MessageType.Error,
                 _ => MessageType.None,
             };
-            
+
+            // 텍스트의 높이를 계산
+            float textHeight = EditorStyles.helpBox.CalcHeight(new GUIContent(infoBoxAttribute.Message), position.width);
+
             Rect helpBoxRect = new(
                 position.x,
                 position.y,
                 position.width,
-                _helpBoxHeight);
+                textHeight);
 
             Rect propertyRect = new(
                 position.x,
-                position.y + _helpBoxHeight + EditorGUIUtility.standardVerticalSpacing,
+                position.y + textHeight + EditorGUIUtility.standardVerticalSpacing,
                 position.width,
                 EditorGUI.GetPropertyHeight(property, label, true));
 
@@ -43,7 +44,11 @@ namespace Onw.Attribute.Editor
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            return _helpBoxHeight + EditorGUI.GetPropertyHeight(property, label, true) + EditorGUIUtility.standardVerticalSpacing;
+            // 텍스트의 높이를 계산
+            InfoBoxAttribute infoBoxAttribute = (attribute as InfoBoxAttribute)!;
+            float textHeight = EditorStyles.helpBox.CalcHeight(new GUIContent(infoBoxAttribute.Message), EditorGUIUtility.currentViewWidth);
+            
+            return textHeight + EditorGUI.GetPropertyHeight(property, label, true) + EditorGUIUtility.standardVerticalSpacing;
         }
     }
 }

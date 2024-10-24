@@ -123,8 +123,8 @@ GameObject:
   - component: {fileID: 8799182459174953397}
   - component: {fileID: 3239367273891740843}
   - component: {fileID: 8365438728754225164}
-  - component: {fileID: 2401690785420366529}
-  - component: {fileID: 5349367215267367491}
+  - component: {fileID: 332154927273975201}
+  - component: {fileID: 5159738580355617165}
   m_Layer: 5
   m_Name: BottomOptionButton
   m_TagString: Untagged
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2401690785420366529
+--- !u!114 &332154927273975201
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,10 +243,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1803691489928016244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3468b3db8d419c745b12124f6432696b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fd03d12df618444cba28dd503a0b63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5349367215267367491
+  _onPointerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5159738580355617165
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,9 +258,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1803691489928016244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9643e74593988274bbed9adf40384e48, type: 3}
+  m_Script: {fileID: 11500000, guid: 03e390610bd604c1583281473ccfdda6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onPointerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1812364544742986201
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,8 +862,8 @@ GameObject:
   - component: {fileID: 2806839961235449311}
   - component: {fileID: 3657210408171455729}
   - component: {fileID: 8543742357307464440}
-  - component: {fileID: 463746632391107684}
-  - component: {fileID: 352518846189000249}
+  - component: {fileID: 2849970695444469010}
+  - component: {fileID: 6459162800434862473}
   m_Layer: 5
   m_Name: TopOptionButton
   m_TagString: Untagged
@@ -967,7 +973,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &463746632391107684
+--- !u!114 &2849970695444469010
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -976,10 +982,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5059262913664930624}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3468b3db8d419c745b12124f6432696b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fd03d12df618444cba28dd503a0b63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &352518846189000249
+  _onPointerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6459162800434862473
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -988,9 +997,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5059262913664930624}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9643e74593988274bbed9adf40384e48, type: 3}
+  m_Script: {fileID: 11500000, guid: 03e390610bd604c1583281473ccfdda6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onPointerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5180665023124787103
 GameObject:
   m_ObjectHideFlags: 0
@@ -1848,7 +1860,7 @@ MonoBehaviour:
   _titleTextEvent: {fileID: 8141922444686569691}
   _topEffectTextEvent: {fileID: 445832847758308514}
   _bottomEffectTextEvent: {fileID: 7444718972574822557}
-  _topEnterButtonTrigger: {fileID: 463746632391107684}
-  _bottomEnterButtonTrigger: {fileID: 2401690785420366529}
-  _topExitButtonTrigger: {fileID: 352518846189000249}
-  _bottomExitButtonTrigger: {fileID: 5349367215267367491}
+  _topButtonEnterTrigger: {fileID: 2849970695444469010}
+  _bottomButtonEnterTrigger: {fileID: 332154927273975201}
+  _topButtonExitTrigger: {fileID: 6459162800434862473}
+  _bottomButtonExitTrigger: {fileID: 5159738580355617165}

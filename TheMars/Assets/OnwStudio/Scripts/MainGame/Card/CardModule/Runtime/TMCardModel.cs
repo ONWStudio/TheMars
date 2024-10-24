@@ -68,7 +68,17 @@ namespace TM.Card.Runtime
         public RectTransform RectTransform { get; private set; }
 
         [field: SerializeField, InitializeRequireComponent]
-        public UIInputHandler InputHandler { get; private set; }
+        public PointerEnterTrigger PointerEnterTrigger { get; private set; }
+        
+        [field: SerializeField, InitializeRequireComponent]
+        public PointerExitTrigger PointerExitTrigger { get; private set; }
+        
+        [field: SerializeField, InitializeRequireComponent]
+        public PointerDownTrigger PointerDownTrigger { get; private set; }
+        
+        [field: SerializeField, InitializeRequireComponent]
+        public PointerUpTrigger PointerUpTrigger { get; private set; }
+        
         /// <summary>
         /// .. 카드의 효과 인터페이스를 제공합니다 CardData에서 정보를 받아와 런타임에 이펙트를 동적으로 생성합니다
         /// </summary>
@@ -233,10 +243,10 @@ namespace TM.Card.Runtime
         {
             if (_isInit) return;
 
-            InputHandler.DownAction += onPointerDown;
-            InputHandler.UpAction += onPointerUp;
-            InputHandler.EnterAction += onPointerEnter;
-            InputHandler.ExitAction += onPointerExit;
+            PointerDownTrigger.OnPointerDownEvent += onPointerDown;
+            PointerUpTrigger.OnPointerUpEvent += onPointerUp;
+            PointerEnterTrigger.OnPointerEnterEvent += onPointerEnter;
+            PointerExitTrigger.OnPointerExitEvent += onPointerExit;
 
             _onSafePointerEnterEvent.AddListener(_ => CardViewMover.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f));
             _onSafePointerExitEvent.AddListener(_ => CardViewMover.TargetPosition = Vector2.zero);

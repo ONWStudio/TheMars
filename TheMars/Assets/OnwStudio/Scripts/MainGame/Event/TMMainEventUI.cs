@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.Localization.Components;
 using TMPro;
 using Onw.Attribute;
 using Onw.Extensions;
+using Onw.UI.Components;
 using TM.Event;
-using UniRx;
-using UniRx.Triggers;
-using UnityEngine.EventSystems;
 
 namespace TM.Runtime.UI
 {
@@ -35,14 +34,13 @@ namespace TM.Runtime.UI
         [SerializeField, SelectableSerializeField] private LocalizeStringEvent _titleTextEvent;
         [SerializeField, SelectableSerializeField] private LocalizeStringEvent _topEffectTextEvent;
         [SerializeField, SelectableSerializeField] private LocalizeStringEvent _bottomEffectTextEvent;
-        
+
         [Header("Triggers")]
-        [SerializeField, SelectableSerializeField] private ObservablePointerEnterTrigger _topEnterButtonTrigger;
-        [SerializeField, SelectableSerializeField] private ObservablePointerEnterTrigger _bottomEnterButtonTrigger;
-
-        [SerializeField, SelectableSerializeField] private ObservablePointerExitTrigger _topExitButtonTrigger;
-        [SerializeField, SelectableSerializeField] private ObservablePointerExitTrigger _bottomExitButtonTrigger;
-
+        [SerializeField, SelectableSerializeField] private PointerEnterTrigger _topButtonEnterTrigger;
+        [SerializeField, SelectableSerializeField] private PointerEnterTrigger _bottomButtonEnterTrigger;
+        [SerializeField, SelectableSerializeField] private PointerExitTrigger _topButtonExitTrigger;
+        [SerializeField, SelectableSerializeField] private PointerExitTrigger _bottomButtonExitTrigger;
+        
         private string _description = string.Empty;
         private string _topEffectDescription = string.Empty;
         private string _bottomEffectDescription = string.Empty;
@@ -53,26 +51,11 @@ namespace TM.Runtime.UI
             _topButton.onClick.AddListener(onClickTopButton);
             _bottomButton.onClick.AddListener(onClickBottomButton);
             
-            _topEnterButtonTrigger
-                .OnPointerEnterAsObservable()
-                .Subscribe(onPointerEnterByTop)
-                .AddTo(this);
+            _topButtonEnterTrigger.OnPointerEnterEvent += onPointerEnterByTop;
+            _bottomButtonEnterTrigger.OnPointerEnterEvent += onPointerEnterByBottom;
+            _topButtonExitTrigger.OnPointerExitEvent += onPointerExitByTop;
+            _bottomButtonExitTrigger.OnPointerExitEvent += onPointerExitByBottom;
 
-            _bottomEnterButtonTrigger
-                .OnPointerEnterAsObservable()
-                .Subscribe(onPointerEnterByBottom)
-                .AddTo(this);
-
-            _topExitButtonTrigger
-                .OnPointerExitAsObservable()
-                .Subscribe(onPointerExitByTop)
-                .AddTo(this);
-
-            _bottomExitButtonTrigger
-                .OnPointerExitAsObservable()
-                .Subscribe(onPointerExitByBottom)
-                .AddTo(this);
-            
             _descriptionTextEvent.OnUpdateString.AddListener(description => _descriptionText.text = _description =  description);
             _topButtonTextEvent.OnUpdateString.AddListener(topText => _topButtonText.text = topText);
             _bottomButtonTextEvent.OnUpdateString.AddListener(bottomText => _bottomButtonText.text = bottomText);
@@ -135,7 +118,7 @@ namespace TM.Runtime.UI
             _bottomEffectTextEvent.StringReference = null;
         }
         
-        public void OnTriggerMainEvent(TMMainEvent mainEvent)
+        private void onTriggerMainEvent(TMMainEvent mainEvent)
         {
             this.SetActiveGameObject(true);
 
@@ -147,9 +130,16 @@ namespace TM.Runtime.UI
             _bottomButtonTextEvent.StringReference = _mainEvent.EventData.BottomButtonTextEvent;
             _topEffectTextEvent.StringReference = _mainEvent.EventData.TopEffectTextEvent;
             _bottomEffectTextEvent.StringReference = _mainEvent.EventData.BottomEffectTextEvent;
-            
-            _topEffectTextEvent.StringReference.Arguments = _mainEvent.EventData.TopEffectLocalizedArguments;
-            _bottomEffectTextEvent.StringReference.Arguments = _mainEvent.EventData.BottomEffectLocalizedArguments;
+
+            if (_mainEvent.EventData.TopEffectLocalizedArguments is not null)
+            {
+                _topEffectTextEvent.StringReference.Arguments = _mainEvent.EventData.TopEffectLocalizedArguments;
+            }
+
+            if (_mainEvent.EventData.BottomEffectLocalizedArguments is not null)
+            {
+                _bottomEffectTextEvent.StringReference.Arguments = _mainEvent.EventData.BottomEffectLocalizedArguments;
+            }
         }
     }
 }

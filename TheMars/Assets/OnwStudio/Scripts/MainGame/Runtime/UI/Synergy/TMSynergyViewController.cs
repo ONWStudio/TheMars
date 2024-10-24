@@ -10,7 +10,7 @@ using TM.Synergy;
 
 namespace TM.Runtime.UI
 {
-    public sealed class SynergyViewController : MonoBehaviour
+    public sealed class TMSynergyViewController : MonoBehaviour
     {
         [SerializeField] private TMSynergyScrollItem _scrollItemPrefab;
         [SerializeField, InitializeRequireComponent] private ScrollRect _scrollView;
