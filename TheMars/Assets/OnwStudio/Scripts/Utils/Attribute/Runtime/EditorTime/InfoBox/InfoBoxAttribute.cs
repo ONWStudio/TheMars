@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 namespace Onw.Attribute
 {
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Field, Inherited = true), Conditional("UNITY_EDITOR")]
     public sealed class InfoBoxAttribute : PropertyAttribute
     {
         public string Message { get; }

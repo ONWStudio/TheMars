@@ -7,7 +7,7 @@ using Onw.Attribute;
 
 namespace Onw.Attribute.Editor
 {
-    [CustomPropertyDrawer(typeof(DisplayAsAttribute))]
+    [CustomPropertyDrawer(typeof(DisplayAsAttribute), true)]
     internal sealed class DisplayAsDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)

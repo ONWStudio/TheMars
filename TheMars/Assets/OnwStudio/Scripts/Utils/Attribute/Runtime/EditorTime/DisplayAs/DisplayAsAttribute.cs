@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Onw.Attribute
 {
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Class, Inherited = true, AllowMultiple = false), Conditional("UNITY_EDITOR")]
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Class), Conditional("UNITY_EDITOR")]
     public sealed class DisplayAsAttribute : PropertyAttribute
     {
         public string DisplayName { get; }

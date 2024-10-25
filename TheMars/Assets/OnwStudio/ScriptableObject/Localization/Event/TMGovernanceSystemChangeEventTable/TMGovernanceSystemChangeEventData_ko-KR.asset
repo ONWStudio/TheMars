@@ -20,17 +20,18 @@ MonoBehaviour:
     - rid: 1062196924505128966
   m_TableData:
   - m_Id: 2741068881920
-    m_Localized: "* {0} \uD06C\uB808\uB527 \uC99D\uAC00\n* \uB9CC\uC871\uB3C4 {1}%
-      \uC99D\uAC00\n* [\uD6A8\uACFC\uD615]\uCE74\uB4DC \uBB34\uC791\uC704 \uD55C
-      \uC7A5 \uD68D\uB4DD\n* \uAE30\uC5C5 \uC8FC\uB3C4 \uCCB4\uC81C \uC5F0\uACC4"
+    m_Localized: "* {CreditAdd} \uD06C\uB808\uB527 \uC99D\uAC00\n* \uB9CC\uC871\uB3C4
+      {SatisfactionAdd}% \uC99D\uAC00\n* [\uD6A8\uACFC\uD615]\uCE74\uB4DC \uBB34\uC791\uC704
+      \uD55C \uC7A5 \uD68D\uB4DD\n* \uAE30\uC5C5 \uC8FC\uB3C4 \uCCB4\uC81C \uC5F0\uACC4"
     m_Metadata:
       m_Items:
       - rid: 1062196924505128966
   - m_Id: 2732344729600
-    m_Localized: "* {0} \uAC15\uCCA0, {1} \uD06C\uB808\uB527 \uC18C\uBAA8\n* \uB9CC\uC871\uB3C4
-      {2}% \uC99D\uAC00\n* \uD328\uC5D0 \uC788\uB294 [\uAC74\uC124]\uD615 \uCE74\uB4DC
-      \uBB34\uC791\uC704 \uD55C \uC7A5 \uBC84\uB9BC(\uC7AC\uB09C \uC218\uCE58 \uC99D\uAC00X)\n*
-      \uC2DC\uBBFC \uC790\uCE58 \uAC15\uD654 \uC5F0\uACC4"
+    m_Localized: "* {SteelSubtract} \uAC15\uCCA0, {CreditSubtract} \uD06C\uB808\uB527
+      \uC18C\uBAA8\n* \uB9CC\uC871\uB3C4 {SatisfactionAdd}% \uC99D\uAC00\n* \uD328\uC5D0
+      \uC788\uB294 [\uAC74\uC124]\uD615 \uCE74\uB4DC \uBB34\uC791\uC704 \uD55C \uC7A5
+      \uBC84\uB9BC(\uC7AC\uB09C \uC218\uCE58 \uC99D\uAC00X)\n* \uC2DC\uBBFC \uC790\uCE58
+      \uAC15\uD654 \uC5F0\uACC4"
     m_Metadata:
       m_Items:
       - rid: 1062196924505128966
