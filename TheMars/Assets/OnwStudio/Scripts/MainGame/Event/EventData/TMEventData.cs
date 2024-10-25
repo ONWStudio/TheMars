@@ -44,6 +44,10 @@ namespace TM.Event
                         "\t 식물 : Plants \n" +
                         "\t 점토 : Clay \n" +
                         "\t 전기 : Electricity \n \n" +
+                        "여기에 해당 값이 더할거냐 뺄거냐에 따라 접미사를 부여합니다 \n \n" +
+                        "\t 더하기 : Add \n" +
+                        "\t 빼기 : Subtract \n \n" +
+                        "최종적으로 마르스 리튬 소모량일 경우는 : {MarsLithiumSubtract} 가 됩니다 \n" +
                         "그 외 효과별 고유한 값이 있는경우 해당 효과에 부연 설명으로 작성해둡니다")]
         [field: SerializeField, DisplayAs("위쪽 선택지")] public TMEventData TopEventData { get; private set; }
         [field: SerializeField, DisplayAs("아래쪽 선택지")] public TMEventData BottomEventData { get; private set; }
@@ -60,22 +64,22 @@ namespace TM.Event
         public abstract bool CanFireTop { get; }
         public abstract bool CanFireBottom { get; }
         
-        public abstract List<object> TopEffectLocalizedArguments { get; }
-        public abstract List<object> BottomEffectLocalizedArguments { get; }
+        public abstract Dictionary<string, object> TopEffectLocalizedArguments { get; }
+        public abstract Dictionary<string, object> BottomEffectLocalizedArguments { get; }
         
         public void InvokeEvent(TMEventChoice eventChoice)
         {
             if (eventChoice == TMEventChoice.TOP)
             {
-                TriggerLeftEvent();
+                TriggerTopEvent();
             }
             else
             {
-                TriggerRightEvent();
+                TriggerBottomEvent();
             }
         }
 
-        protected abstract void TriggerLeftEvent();
-        protected abstract void TriggerRightEvent();
+        protected abstract void TriggerTopEvent();
+        protected abstract void TriggerBottomEvent();
     }
 }

@@ -133,12 +133,12 @@ namespace TM.Runtime.UI
 
             if (_mainEvent.EventData.TopEffectLocalizedArguments is not null)
             {
-                _topEffectTextEvent.StringReference.Arguments = _mainEvent.EventData.TopEffectLocalizedArguments;
+                _topEffectTextEvent.StringReference.Arguments = new object[] { _mainEvent.EventData.TopEffectLocalizedArguments };
             }
 
             if (_mainEvent.EventData.BottomEffectLocalizedArguments is not null)
             {
-                _bottomEffectTextEvent.StringReference.Arguments = _mainEvent.EventData.BottomEffectLocalizedArguments;
+                _bottomEffectTextEvent.StringReference.Arguments = new object[] { _mainEvent.EventData.BottomEffectLocalizedArguments };
             }
         }
     }
