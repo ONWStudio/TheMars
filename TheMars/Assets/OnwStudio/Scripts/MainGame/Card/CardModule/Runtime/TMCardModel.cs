@@ -48,11 +48,6 @@ namespace TM.Card.Runtime
         [field: SerializeField, ReadOnly] public bool IsHide { get; set; } = false;
 
         /// <summary>
-        /// .. 현재 카드가 코스트를 이미 지불하였는지에 대한 여부를 반환합니다 외부에서 수정될 수 있습니다
-        /// </summary>
-        [field: SerializeField, ReadOnly] public bool WasCostPaid { get; set; } = false;
-
-        /// <summary>
         /// .. 카드 위에 마우스 포인터 등이 올라올때등의 하이라이트 효과를 위한 컴포넌트입니다
         /// </summary>
         [field: Space]
@@ -73,7 +68,17 @@ namespace TM.Card.Runtime
         public RectTransform RectTransform { get; private set; }
 
         [field: SerializeField, InitializeRequireComponent]
-        public UIInputHandler InputHandler { get; private set; }
+        public PointerEnterTrigger PointerEnterTrigger { get; private set; }
+        
+        [field: SerializeField, InitializeRequireComponent]
+        public PointerExitTrigger PointerExitTrigger { get; private set; }
+        
+        [field: SerializeField, InitializeRequireComponent]
+        public PointerDownTrigger PointerDownTrigger { get; private set; }
+        
+        [field: SerializeField, InitializeRequireComponent]
+        public PointerUpTrigger PointerUpTrigger { get; private set; }
+        
         /// <summary>
         /// .. 카드의 효과 인터페이스를 제공합니다 CardData에서 정보를 받아와 런타임에 이펙트를 동적으로 생성합니다
         /// </summary>
@@ -238,10 +243,10 @@ namespace TM.Card.Runtime
         {
             if (_isInit) return;
 
-            InputHandler.DownAction += onPointerDown;
-            InputHandler.UpAction += onPointerUp;
-            InputHandler.EnterAction += onPointerEnter;
-            InputHandler.ExitAction += onPointerExit;
+            PointerDownTrigger.OnPointerDownEvent += onPointerDown;
+            PointerUpTrigger.OnPointerUpEvent += onPointerUp;
+            PointerEnterTrigger.OnPointerEnterEvent += onPointerEnter;
+            PointerExitTrigger.OnPointerExitEvent += onPointerExit;
 
             _onSafePointerEnterEvent.AddListener(_ => CardViewMover.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f));
             _onSafePointerExitEvent.AddListener(_ => CardViewMover.TargetPosition = Vector2.zero);
@@ -389,16 +394,7 @@ namespace TM.Card.Runtime
                 setOnMover(CardViewMover, true);
                 CardBodyMover.enabled = true;
                 IsDragging = false;
-                
-                // .. 코스트와 관련한 이벤트
-                if (WasCostPaid)
-                {
-                    _onEffectEvent.Invoke(this);
-                }
-                else
-                {
-                    
-                }
+                _onEffectEvent.Invoke(this);
             }
 
 

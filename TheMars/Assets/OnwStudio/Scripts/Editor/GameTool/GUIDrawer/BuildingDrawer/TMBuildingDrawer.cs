@@ -30,7 +30,7 @@ namespace TMGuiTool
 
             public void Awake()
             {
-                _buildings.AddRange(ScriptableObjectHandler<TMBuildingData>.LoadAllScriptableObjects());
+                _buildings.AddRange(ScriptableObjectHandler.LoadAllScriptableObjects<TMBuildingData>());
                 Page = 1;
             }
 
@@ -42,7 +42,7 @@ namespace TMGuiTool
                 {
                     if (!GUILayout.Button("새 건물 추가")) return;
                     
-                    _buildings.Add(ScriptableObjectHandler<TMBuildingData>.CreateScriptableObject(DATA_PATH, $"Building_No.{Guid.NewGuid().ToString()}"));
+                    _buildings.Add(ScriptableObjectHandler.CreateScriptableObject<TMBuildingData>(DATA_PATH, $"Building_No.{Guid.NewGuid().ToString()}"));
                 });
 
                 int page = Page - 1;

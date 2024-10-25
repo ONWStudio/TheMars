@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Onw.Attribute;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace TM.Class
 {

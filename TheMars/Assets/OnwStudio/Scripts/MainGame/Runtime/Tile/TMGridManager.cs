@@ -1,10 +1,11 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using Onw.Attribute;
 using Onw.HexGrid;
 using Onw.Manager;
+using Onw.Attribute;
 using TM.Building;
 
 namespace TM.Grid
@@ -51,6 +52,12 @@ namespace TM.Grid
             add => _onRemovedBuilding.AddListener(value);
             remove => _onRemovedBuilding.RemoveListener(value);
         }
+        
+        public event UnityAction<TMBuilding> OnChangedPointBuilding
+        {
+            add => _onChangedPointBuilding.AddListener(value);
+            remove => _onChangedPointBuilding.RemoveListener(value);
+        }
 
         public bool IsRender
         {
@@ -63,7 +70,8 @@ namespace TM.Grid
 
         [SerializeField, ReadOnly] private UnityEvent<TMBuilding> _onAddedBuilding;
         [SerializeField, ReadOnly] private UnityEvent<TMBuilding> _onRemovedBuilding;
-
+        [SerializeField, ReadOnly] private UnityEvent<TMBuilding> _onChangedPointBuilding;
+        
         protected override void Init() {}
 
         public void AddBuilding(TMBuilding building)
@@ -75,6 +83,13 @@ namespace TM.Grid
         public void AddBuildingWithoutNotify(TMBuilding building)
         {
             _buildings.Add(building);
+        }
+
+        public void ChangePointBuilding(TMBuilding building)
+        {
+            if (_buildings.All(b => building != b)) return;
+            
+            _onChangedPointBuilding.Invoke(building);
         }
 
         public void RemoveBuilding(TMBuilding building)

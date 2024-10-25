@@ -4,7 +4,7 @@ using TM.Class;
 
 namespace TM.Card.Effect
 {
-    public interface ITMCardResourceEffect : ITMNormalEffect, INotifier
+    public interface ITMCardResourceEffect : ITMNormalEffect
     {
         IReadOnlyDictionary<TMResourceKind, TMResourceDataForRuntime> Resources { get; }
 

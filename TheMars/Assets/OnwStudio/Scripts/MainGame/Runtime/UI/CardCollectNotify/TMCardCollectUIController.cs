@@ -34,7 +34,7 @@ namespace TM.Runtime.UI
 
                 foreach (KeyValuePair<TMCardModel, UnityAction<PointerEventData>> callbackPair in _cardCallbacks)
                 {
-                    callbackPair.Key.InputHandler.UpAction -= callbackPair.Value;
+                    callbackPair.Key.PointerUpTrigger.OnPointerUpEvent -= callbackPair.Value;
 
                     if (callbackPair.Key != _selectCard)
                     {
@@ -64,7 +64,7 @@ namespace TM.Runtime.UI
                 card.CanInteract = false;
                 UnityAction<PointerEventData> action = selectCard;
                 _cardCallbacks.Add(new(card, action));
-                card.InputHandler.UpAction += action;
+                card.PointerUpTrigger.OnPointerUpEvent += action;
                 
                 void selectCard(PointerEventData _)
                 {

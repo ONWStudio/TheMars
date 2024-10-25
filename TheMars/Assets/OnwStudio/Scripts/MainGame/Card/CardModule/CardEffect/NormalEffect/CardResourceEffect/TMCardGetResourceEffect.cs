@@ -8,49 +8,45 @@ using Onw.Helper;
 using TM.Card.Runtime;
 using TM.Card.Effect.Creator;
 using TM.Class;
+using UnityEngine.Localization;
 
 namespace TM.Card.Effect
 {
     [System.Serializable]
     public sealed class TMCardGetResourceEffect : ITMCardResourceEffect, ITMCardInitializeEffect<TMCardGetResourceEffectCreator>
     {
-        public string Description
-        {
-            get
-            {
-                return string
-                    .Join("\n", _resources
-                        .Values
-                        .Select(selector));
+        //public string Description
+        //{
+        //    get
+        //    {
+        //        return string
+        //            .Join("\n", _resources
+        //                .Values
+        //                .Select(selector));
 
-                string selector(TMResourceDataForRuntime resource)
-                {
-                    string description = $"{RichTextFormatter.SpriteIcon((int)resource.ResourceKind)}{(resource.FinalResource < 0 ? resource.FinalResource.ToString() : $"+{resource.FinalResource}")}";
+        //        string selector(TMResourceDataForRuntime resource)
+        //        {
+        //            string description = $"{RichTextFormatter.SpriteIcon((int)resource.ResourceKind)}{(resource.FinalResource < 0 ? resource.FinalResource.ToString() : $"+{resource.FinalResource}")}";
 
-                    if (resource.AdditionalResource != 0)
-                    {
-                        description +=
-                            resource.AdditionalResource > 0 ?
-                                RichTextFormatter.Colorize($"+{resource.AdditionalResource}", Color.green) :
-                                RichTextFormatter.Colorize(resource.AdditionalResource.ToString(), Color.red);
-                    }
+        //            if (resource.AdditionalResource != 0)
+        //            {
+        //                description +=
+        //                    resource.AdditionalResource > 0 ?
+        //                        RichTextFormatter.Colorize($"+{resource.AdditionalResource}", Color.green) :
+        //                        RichTextFormatter.Colorize(resource.AdditionalResource.ToString(), Color.red);
+        //            }
 
-                    return description;
-                }
-            }
-        }
+        //            return description;
+        //        }
+        //    }
+        //}
 
         public IReadOnlyDictionary<TMResourceKind, TMResourceDataForRuntime> Resources => _resources;
 
-        public event UnityAction<string> OnNotifyEvent
-        {
-            add => _onNotifyEvent.AddListener(value);
-            remove => _onNotifyEvent.RemoveListener(value);
-        }
+        [field: SerializeField] public LocalizedString LocalizedDescription { get; private set; }
+
 
         private Dictionary<TMResourceKind, TMResourceDataForRuntime> _resources = new();
-
-        [SerializeField, ReadOnly] private UnityEvent<string> _onNotifyEvent = new();
 
         public void AddResource(TMResourceKind resourceKind, int additionalAmount)
         {
@@ -61,7 +57,6 @@ namespace TM.Card.Effect
             }
 
             runtimeResource.AdditionalResources.Add(additionalAmount);
-            _onNotifyEvent.Invoke(Description);
         }
 
         public void Initialize(TMCardGetResourceEffectCreator effectCreator)
@@ -72,6 +67,7 @@ namespace TM.Card.Effect
                     resource => resource.ResourceKind,
                     resource => (TMResourceDataForRuntime)resource);
         }
+
 
         public void ApplyEffect(TMCardModel cardModel, ITMCardEffectTrigger trigger)
         {

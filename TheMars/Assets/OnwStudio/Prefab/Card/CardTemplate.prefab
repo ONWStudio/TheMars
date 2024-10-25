@@ -90,7 +90,10 @@ GameObject:
   - component: {fileID: 3845239031405876139}
   - component: {fileID: 2209908774391452699}
   - component: {fileID: -4764531829553090222}
-  - component: {fileID: 6471143285136272434}
+  - component: {fileID: 6250920461070493456}
+  - component: {fileID: 1158454837389364889}
+  - component: {fileID: 4981420602682547062}
+  - component: {fileID: 3958148853289546475}
   m_Layer: 5
   m_Name: CardTemplate
   m_TagString: Untagged
@@ -174,11 +177,13 @@ MonoBehaviour:
   <OnField>k__BackingField: 0
   <IsOverTombTransform>k__BackingField: 0
   <IsHide>k__BackingField: 0
-  <WasCostPaid>k__BackingField: 0
   <CardViewMover>k__BackingField: {fileID: 2790600352443847834}
   <CardBodyMover>k__BackingField: {fileID: -4764531829553090222}
   <RectTransform>k__BackingField: {fileID: 6485339371614455860}
-  <InputHandler>k__BackingField: {fileID: 6471143285136272434}
+  <PointerEnterTrigger>k__BackingField: {fileID: 6250920461070493456}
+  <PointerExitTrigger>k__BackingField: {fileID: 1158454837389364889}
+  <PointerDownTrigger>k__BackingField: {fileID: 4981420602682547062}
+  <PointerUpTrigger>k__BackingField: {fileID: 3958148853289546475}
   _onDragBeginCard:
     m_PersistentCalls:
       m_Calls: []
@@ -186,6 +191,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _onEffectEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _onRequestEffectEvent:
     m_PersistentCalls:
       m_Calls: []
   _onPayCost:
@@ -227,6 +235,7 @@ MonoBehaviour:
   _backgroundImage: {fileID: 1242621844710434452}
   _raycastImage: {fileID: 6760737446521074974}
   _descriptionText: {fileID: 6591190900603037062}
+  _descriptionStringEvent: {fileID: 0}
   _nameText: {fileID: 7651248644293903378}
   _costFieldImage: {fileID: 6179382308245379143}
   _costText: {fileID: 6181764584625278517}
@@ -259,7 +268,7 @@ MonoBehaviour:
   <TargetPosition>k__BackingField: {x: Infinity, y: Infinity}
   <Ratio>k__BackingField: 0.45
   <IsLocal>k__BackingField: 1
---- !u!114 &6471143285136272434
+--- !u!114 &6250920461070493456
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -268,22 +277,55 @@ MonoBehaviour:
   m_GameObject: {fileID: 1453917086621522708}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c61755dc3f034323a4ca33944d4baee, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fd03d12df618444cba28dd503a0b63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enterAction:
+  _onPointerEnterEvent:
     m_PersistentCalls:
       m_Calls: []
-  _exitAction:
+--- !u!114 &1158454837389364889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453917086621522708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e390610bd604c1583281473ccfdda6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onPointerExitEvent:
     m_PersistentCalls:
       m_Calls: []
-  _downAction:
+--- !u!114 &4981420602682547062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453917086621522708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82ca3b8e644244cccb9dc03d23f1a8c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onPointerDownEvent:
     m_PersistentCalls:
       m_Calls: []
-  _upAction:
-    m_PersistentCalls:
-      m_Calls: []
-  _dragAction:
+--- !u!114 &3958148853289546475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453917086621522708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2e30b1ff7654acba35f7a9deabd492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onPointerUpEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &2298580042782835436

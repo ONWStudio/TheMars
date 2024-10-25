@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Onw.Extensions;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
@@ -54,11 +56,9 @@ namespace Onw.Manager
             if (instances.Length > 1)
             {
                 // .. 하이어라키에 여러개의 싱글톤 객체가 존재할 경우 모두 삭제 .. 같은 오브젝트에 여러개의 싱글톤 객체가 있을 경우 위험할 수 있음
-                foreach (T instance in instances)
-                {
-                    if (instance == _instance) continue;
-                    Destroy(instance.gameObject);
-                }
+                instances
+                    .Where(instance => instance != _instance)
+                    .ForEach(instance => Destroy(instance.gameObject));
             }
         }
 

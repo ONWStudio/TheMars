@@ -43,13 +43,13 @@ namespace TM.Card.Editor
                 {
                     string path = AssetDatabase.GetAssetPath(targetObject);
 
-                    if (ScriptableObjectHandler<TMCardData>.CheckDuplicatedName(path, entryKeyName))
+                    if (ScriptableObjectHandler.CheckDuplicatedName(path, entryKeyName))
                     {
                         Debug.LogWarning("이미 해당 카드와 같은 이름을 가지고 있는 카드가 있으므로 카드의 이름을 설정 할 수 없습니다");
                     }
                     else
                     {
-                        ScriptableObjectHandler<TMCardData>.RenameScriptableObject(targetObject, entryKeyName);
+                        ScriptableObjectHandler.RenameScriptableObject(targetObject, entryKeyName);
                     }
                 }
             }
