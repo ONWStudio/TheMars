@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace TM.Event
 {
+    [Substitution("시민 자치 강화")]
     public sealed class TMStrengtheningCivilAutonomyEventData : TMEventData
     {
         public override bool CanFireTop =>

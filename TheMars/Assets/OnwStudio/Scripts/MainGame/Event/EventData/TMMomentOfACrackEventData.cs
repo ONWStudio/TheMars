@@ -6,7 +6,8 @@ using UnityEngine;
 
 namespace TM.Event
 {
-    public class TMMomentOfACrackEventData : TMEventData
+    [Substitution("균열의 순간")]
+    public sealed  class TMMomentOfACrackEventData : TMEventData
     {
         [field: InfoBox("효과 고유값 key \n \n" +
                         "\t 무작위 인구 감소 최소값 : PopulationSubtractMin \n" +

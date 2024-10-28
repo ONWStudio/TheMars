@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Onw.Attribute;
 using UnityEngine;
 
 namespace TM.Event
 {
+    [Substitution("허상의 발전")]
     public sealed class TMDevelopmentOfAnIllusionEventData : TMEventData
     {
         public override bool CanFireTop => true;

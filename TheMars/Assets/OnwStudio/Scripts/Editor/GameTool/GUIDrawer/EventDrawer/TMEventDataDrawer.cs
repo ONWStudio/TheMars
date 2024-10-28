@@ -3,10 +3,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using UnityEditor;
-using Onw.Editor.GUI;
 using Onw.Helper;
+using Onw.Editor.GUI;
+using Onw.Attribute;
 using Onw.ScriptableObjects.Editor;
 using TM.Event;
 using static Onw.Editor.EditorGUIHelper;
@@ -31,11 +33,24 @@ namespace TMGuiTool
             private readonly EditorScrollController _scrollViewController = new();
             private readonly EditorDropdownController<Type> _eventDataSubTypesDropdown = new(
                 "새 이벤트 추가",
-                ReflectionHelper.GetChildClassesFromBaseType(typeof(TMEventData)).ToDictionary(t => t.Name, t => t));
+                ReflectionHelper.GetChildClassesFromBaseType(typeof(TMEventData))
+                    .ToDictionary(t => t.GetCustomAttribute<SubstitutionAttribute>()?.Label ?? t.Name, t => t));
             
             public void Awake()
             {
-                _events.AddRange(ScriptableObjectHandler.LoadAllScriptableObjects<TMEventData>());
+                TMEventData[] events = ScriptableObjectHandler
+                    .LoadAllScriptableObjects<TMEventData>()
+                    .ToArray();
+
+                TMEventData[] unmadeTypes = _eventDataSubTypesDropdown
+                    .Options
+                    .Values
+                    .Where(t => events.All(evt => t != evt.GetType()))
+                    .Select(t => ScriptableObjectHandler.CreateScriptableObject(DATA_PATH, $"Event_No.{Guid.NewGuid().ToString()}", t))
+                    .OfType<TMEventData>()
+                    .ToArray();
+                
+                _events.AddRange(events.Concat(unmadeTypes));
                 Page = 1;
             }
 
@@ -57,6 +72,12 @@ namespace TMGuiTool
                 if (page >= 0 && _events.Count > page)
                 {
                     TMEventData eventData = _events[page];
+                    SubstitutionAttribute substitutionAttribute = eventData.GetType().GetCustomAttribute<SubstitutionAttribute>();
+
+                    if (substitutionAttribute is not null)
+                    {
+                        EditorGUILayout.LabelField(substitutionAttribute.Label);
+                    }
                     
                     _scrollViewController
                         .ActionScrollSpace(() => OnInspectorGUI(eventData));
