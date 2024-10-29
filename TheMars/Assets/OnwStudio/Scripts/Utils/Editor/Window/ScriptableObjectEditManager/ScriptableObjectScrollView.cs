@@ -17,17 +17,21 @@ namespace Onw.Editor.Window
             {
                 flexDirection = FlexDirection.Column,
                 flexGrow = 1
+
             },
             mode = ScrollViewMode.Vertical
         };
 
-        public event Action<ScriptableObject> OnSelectObject;
+        public event Action<ScriptableObjectButton> OnSelectObject;
 
-        public IReadOnlyList<ScriptableObject> ScriptableObjects => _scriptableObjects;
-        protected readonly List<ScriptableObject> _scriptableObjects = new();
+        public IReadOnlyList<ScriptableObjectButton> ScriptableObjects => _scriptableObjects;
+        protected readonly List<ScriptableObjectButton> _scriptableObjects = new();
+
+        protected ScriptableObjectButton _selectedObject = null;
 
         internal void Initialize()
         {
+            OnSelectObject += selectedObject => _selectedObject = selectedObject;
             VisualElement header = CreateHeader();
             if (header is not null)
             {
@@ -44,36 +48,66 @@ namespace Onw.Editor.Window
 
         public void AddRange(IEnumerable<ScriptableObject> objects)
         {
-            ScriptableObject[] soArray = objects.ToArray();
-            soArray
+            ScriptableObjectButton[] soArray = objects
                 .Select(CreateButton)
-                .ForEach(View.Add);
-            
+                .ToArray();
+
+            soArray.ForEach(View.Add);
             _scriptableObjects.AddRange(soArray);
         }
 
         public void AddSo(ScriptableObject obj)
         {
-            Button button = CreateButton(obj);
+            ScriptableObjectButton button = CreateButton(obj);
             View.Add(button);
-            _scriptableObjects.Add(obj);
+            _scriptableObjects.Add(button);
         }
 
-        protected virtual Button CreateButton(ScriptableObject so) => new(() => OnSelectObject?.Invoke(so))
+        public void RemoveSo(ScriptableObject obj)
         {
-            style =
+            int index = _scriptableObjects.FindIndex(button => button.ScriptableObject == obj);
+
+            if (index > -1)
             {
-                flexDirection = FlexDirection.Row,
-                unityTextAlign = TextAnchor.MiddleCenter,
-                flexGrow = 1,
-                height= 40,
-            },
-            text = so.name
-        };
+                ScriptableObjectButton soButton = _scriptableObjects[index];
+                _scriptableObjects.RemoveAt(index);
+                soButton.RemoveFromHierarchy();
+            }
+        }
+
+        protected virtual ScriptableObjectButton CreateButton(ScriptableObject so)
+        {
+            ScriptableObjectButton button = new(so)
+            {
+                style =
+                {
+                    flexDirection = FlexDirection.Row,
+                    unityTextAlign = TextAnchor.MiddleCenter,
+                    flexGrow = 1,
+                    height= 40,
+                },
+                text = so.name,
+            };
+            button.clicked += () => OnSelectObject?.Invoke(button);
+
+            return button;
+        }
 
         protected virtual VisualElement CreateHeader()
         {
             return null;
+        }
+
+        public ScriptableObjectScrollView()
+        {
+            style.borderBottomColor = Color.black;
+            style.borderTopColor = Color.black;
+            style.borderLeftColor = Color.black;
+            style.borderRightColor = Color.black;
+            style.borderBottomWidth = 1;
+            style.borderTopWidth = 1;
+            style.borderLeftWidth = 1;
+            style.borderRightWidth = 1;
         }
     }
 }

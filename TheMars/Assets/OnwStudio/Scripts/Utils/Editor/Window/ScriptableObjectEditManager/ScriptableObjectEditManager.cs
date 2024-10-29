@@ -10,13 +10,12 @@ using TM.Event;
 using TM.Synergy;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 namespace Onw.Editor.Window
 {
-    internal struct ScrollBuildOption
+    internal readonly struct ScrollBuildOption
     {
         public Type ScriptableObjectType { get; }
         public Type ScrollViewType { get; }
@@ -37,8 +36,22 @@ namespace Onw.Editor.Window
 
     internal abstract class ScriptableObjectEditManager : EditorWindow
     {
+        public event Action<string> OnChangedSearchString;
+
+        public string SeartchString 
+        {
+            get => _searchString;
+            set
+            {
+                _searchString = value;
+                OnChangedSearchString?.Invoke(_searchString);
+            }
+        }
+
         private ToolbarButton _selectedButton = null;
         private Color _originalColor = ColorUtility.TryParseHtmlString("#505050", out Color color) ? color : Color.grey;
+
+        private string _searchString = string.Empty;
 
         protected abstract ScrollBuildOption[] GetTargetScriptableObjectType();
 
@@ -57,12 +70,31 @@ namespace Onw.Editor.Window
                     paddingRight = 1,
                     paddingTop = 1,
                     paddingBottom = 1,
-                    height = 40,
-                    maxHeight = 40,
+                    height = 36,
+                    maxHeight = 36,
                     flexGrow = 1,
                     borderBottomColor = Color.white
                 }
             };
+
+            VisualElement contentElement = new()
+            {
+                style =
+                {
+                    flexDirection = FlexDirection.Row,
+                    flexGrow = 1,
+                    flexShrink = 1,
+                    borderBottomColor = Color.black,
+                    borderTopColor = Color.black,
+                    borderLeftColor = Color.black,
+                    borderRightColor = Color.black,
+                    borderBottomWidth = 1,
+                    borderTopWidth = 1,
+                    borderLeftWidth = 1,
+                    borderRightWidth = 1,
+                }
+            };
+
 
             foreach ((ToolbarButton, ScriptableObjectScrollView) buttonOption in GetTargetScriptableObjectType()
                 .Where(option => option.ScriptableObjectType.IsSubclassOf(typeof(ScriptableObject)))
@@ -76,11 +108,12 @@ namespace Onw.Editor.Window
                     VisualElement scrollView = root.Q<ScriptableObjectScrollView>("SOScrollView");
                     scrollView?.RemoveFromHierarchy();
 
-                    root.Add(buttonOption.Item2);
+                    contentElement.Add(buttonOption.Item2);
                 };
             }
 
             root.Add(toolbar);
+            root.Add(contentElement);
 
             static (ToolbarButton, ScriptableObjectScrollView) getButtonOption(ScrollBuildOption buildOption)
             {
@@ -91,7 +124,7 @@ namespace Onw.Editor.Window
                     text = buildOption.Label
                 };
 
-                buttonOption.Item2 = buildOption.ScrollViewType is null || buildOption.ScrollViewType.IsSubclassOf(typeof(ScriptableObjectScrollView)) ?
+                buttonOption.Item2 = buildOption.ScrollViewType is null || !buildOption.ScrollViewType.IsSubclassOf(typeof(ScriptableObjectScrollView)) ?
                     new() :
                     (Activator.CreateInstance(buildOption.ScrollViewType) as ScriptableObjectScrollView)!;
 
