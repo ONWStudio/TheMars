@@ -51,17 +51,18 @@ namespace Onw.ScriptableObjects.Editor
             return asset;
         }
 
-        public static IEnumerable<ScriptableObject> LoadAllScriptableObjects(Type type)
+        public static ScriptableObject[] LoadAllScriptableObjects(Type type)
         {
             return FindAssets($"t:{type.Name}")
-                .Select(GUIDToAssetPath)
-                .Select(LoadAssetAtPath<ScriptableObject>)
-                .Where(so => so);
+                .Select(guid => LoadAssetAtPath<ScriptableObject>(GUIDToAssetPath(guid)))
+                .Where(so => so)
+                .ToArray();
         }
 
-        public static IEnumerable<T> LoadAllScriptableObjects<T>() where T : ScriptableObject 
+        public static T[] LoadAllScriptableObjects<T>() where T : ScriptableObject 
             => FindAssets($"t:{typeof(T).Name}")
-                .Select(guid => LoadAssetAtPath<T>(GUIDToAssetPath(guid)));
+                .Select(guid => LoadAssetAtPath<T>(GUIDToAssetPath(guid)))
+                .ToArray();
 
         public static void RenameScriptableObject(ScriptableObject asset, string newName)
         {
