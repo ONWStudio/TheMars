@@ -34,9 +34,9 @@ namespace Onw.Helper
                    select type.Name;
         }
 
-        public static IEnumerable<string> GetClassNamesFromParent<BaseType>() where BaseType : class
+        public static IEnumerable<string> GetClassNamesFromParent<TBaseType>() where TBaseType : class
         {
-            Type type = typeof(BaseType);
+            Type type = typeof(TBaseType);
 
             foreach (Type someType in AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()))
             {
@@ -52,6 +52,7 @@ namespace Onw.Helper
         /// .. 어떤 클래스의 상속된 클래스와 부모 클래스를 포함해서 해당 클래스의 고유 라벨을 불러옵니다 Substitution 어트리뷰트가 부착되어 있어야합니다
         /// </summary>
         /// <typeparam name=""></typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         public static IEnumerable<string> GetCustomLabelFromNestedClass<T>() where T : class
         {

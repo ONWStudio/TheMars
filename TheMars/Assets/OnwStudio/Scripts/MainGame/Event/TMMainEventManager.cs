@@ -1,13 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using Onw.Manager;
-using Onw.Attribute;
-using Onw.Coroutine;
 using TM.Manager;
 
 namespace TM.Event

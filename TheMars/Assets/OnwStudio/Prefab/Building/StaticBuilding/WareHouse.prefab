@@ -22,7 +22,7 @@ PrefabInstance:
     - target: {fileID: 4999922940619862806, guid: baeffcb34e7ee4e9b8fdb369a1268a2a,
         type: 3}
       propertyPath: m_Name
-      value: WareHouse 1
+      value: WareHouse
       objectReference: {fileID: 0}
     - target: {fileID: 8017166585166154826, guid: baeffcb34e7ee4e9b8fdb369a1268a2a,
         type: 3}

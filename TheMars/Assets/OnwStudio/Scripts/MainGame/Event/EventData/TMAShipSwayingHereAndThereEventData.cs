@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace TM.Event
 {
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    [SuppressMessage("ReSharper", "InconsistentNaming"), Substitution("이리저리 흔들리는 배")]
     public sealed class TMAShipSwayingHereAndThereEventData : TMEventData
     {
         [field: InfoBox("효과 고유값 Key \n \n" +

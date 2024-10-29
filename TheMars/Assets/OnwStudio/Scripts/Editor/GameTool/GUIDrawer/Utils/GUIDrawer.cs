@@ -29,7 +29,7 @@ namespace TMGuiTool
             void SaveDataToLocal();
         }
 
-        private interface ISaveable
+        private interface ISavable
         {
             /// <summary>
             /// .. 불러오기 버튼을 눌렀을때 호출되는 메서드 입니다
@@ -37,7 +37,7 @@ namespace TMGuiTool
             void LoadDataFromLocal();
         }
 
-        private interface IDataHandler : ILoadable, ISaveable {}
+        private interface IDataHandler : ILoadable, ISavable {}
 
         /// <summary>
         /// .. gui기능을 구현하는 인터페이스입니다 
@@ -59,15 +59,15 @@ namespace TMGuiTool
             /// <summary>
             /// .. OnGUI에서 호출되는 메서드 입니다 해당 메서드 내에서 GUILayout 관련 메서드를 호출해야합니다
             /// </summary>
-            void OnDraw();
+            void OnDraw(GUIToolDrawer editor);
             /// <summary>
             /// .. 카테고리가 활성화 될때 호출되는 메서드 입니다
             /// </summary>
-            void OnEnable();
+            void OnEnable(GUIToolDrawer editor);
             /// <summary>
             /// .. TheMarsGUIToolDrawer의 창이 생성되었을때 처음 호출 됩니다.
             /// </summary>
-            void Awake();
+            void Awake(GUIToolDrawer editor);
         }
 
         /// <summary>

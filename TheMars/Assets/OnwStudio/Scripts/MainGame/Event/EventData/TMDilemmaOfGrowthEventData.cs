@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace TM.Event
 {
+    [Substitution("성장의 딜레마")]
     public sealed class TMDilemmaOfGrowthEventData : TMEventData
     {
         [field: InfoBox("효과 고유값 Key \n \n" +
