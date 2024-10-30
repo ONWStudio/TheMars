@@ -34,7 +34,7 @@ namespace Onw.Editor.Window
         {
             if (_selectedObject is not null)
             {
-                _selectedObject.style.backgroundColor = Color.gray;
+                _selectedObject.style.backgroundColor = ColorUtility.TryParseHtmlString("#3E3E3E", out Color color) ? color : Color.gray;
             }
 
             _selectedObject = null;
@@ -46,7 +46,7 @@ namespace Onw.Editor.Window
             {
                 if (_selectedObject is not null)
                 {
-                    _selectedObject.style.backgroundColor = Color.gray;
+                    _selectedObject.style.backgroundColor = ColorUtility.TryParseHtmlString("#3E3E3E", out Color color) ? color : Color.gray;
                 }
 
                 _selectedObject = selectedObject;
@@ -165,7 +165,7 @@ namespace Onw.Editor.Window
                     borderBottomRightRadius = 0,
                     borderTopRightRadius = 0,
                     whiteSpace = WhiteSpace.Normal,
-                    backgroundColor = Color.grey
+                    backgroundColor = ColorUtility.TryParseHtmlString("#3E3E3E", out Color color) ? color : Color.gray
                 },
                 text = so.name,
             };

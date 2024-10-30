@@ -21,12 +21,8 @@ namespace TM.Editor
                 style =
                 {
                     flexDirection = FlexDirection.Column,
-                    flexGrow = 1f,
-                    flexShrink = 1f,
                     borderBottomColor = Color.black,
                     borderBottomWidth = 1f,
-                    paddingTop = 2f,
-                    paddingBottom = 10f,
                     height = 25f,
                     maxHeight = 25f
                 },
@@ -52,6 +48,7 @@ namespace TM.Editor
                         flexGrow = 1,
                         height = 20f,
                         maxHeight = 20f,
+                        minHeight = 20f
                     },
                 };
 
@@ -62,6 +59,19 @@ namespace TM.Editor
         protected override ScriptableObjectButton CreateButton(ScriptableObject so)
         {
             ScriptableObjectButton button = base.CreateButton(so);
+            TMCardData card = (button.ScriptableObject as TMCardData)!;
+            button.text = "";
+            string cardName = card.GetLocalizedCardNameByLocale("ko-KR");
+            Label field = new(cardName)
+            {
+                style =
+                {
+                    unityTextAlign = TextAnchor.MiddleCenter,
+                    flexGrow = 1,
+                }
+            };
+            button.Add(field);
+
             Button removeButton = new(() =>
             {
                 if (_selectedObject?.ScriptableObject == so)

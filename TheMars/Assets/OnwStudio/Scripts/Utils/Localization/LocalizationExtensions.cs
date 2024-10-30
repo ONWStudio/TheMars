@@ -1,3 +1,4 @@
+using GluonGui.WorkspaceWindow.Views.WorkspaceExplorer.Explorer;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,6 +34,19 @@ namespace Onw.Localization
             }
 
             return entry.GetLocalizedString();
+        }
+
+        public static string GetLocalizedStringByLocale(this LocalizedString localizedString, string localeCode)
+        {
+            if (localizedString.IsEmpty) return string.Empty;
+
+            if (!LocalizationSettings.InitializationOperation.IsDone)
+            {
+                LocalizationSettings.InitializationOperation.WaitForCompletion();
+            }
+
+            Locale locale = LocalizationSettings.AvailableLocales.GetLocale(localeCode);
+            return localizedString.GetLocalizedString(locale);
         }
 
         public static string GetEntryKeyName(this LocalizedString localizedString)

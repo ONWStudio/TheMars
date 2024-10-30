@@ -124,6 +124,7 @@ namespace TM.Card.Editor
 
                     GameObject canvasGo = new("Preview Canvas");
                     _previewCamera = new GameObject("Preview Camera").AddComponent<Camera>();
+                    Debug.Log(EditorSceneManager.previewSceneCount);
 
                     SceneManager.MoveGameObjectToScene(canvasGo, (Scene)_previewScene);
                     SceneManager.MoveGameObjectToScene(_previewCamera.gameObject, (Scene)_previewScene);
@@ -174,6 +175,7 @@ namespace TM.Card.Editor
 
         private void OnDestroy()
         {
+            Debug.Log("Destroy");
             destroyPreviewObject();
         }
     }

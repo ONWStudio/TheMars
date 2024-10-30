@@ -25,14 +25,12 @@ namespace TM.Editor.Window
                 createEditor(target);
             }
 
-            if (!_editor.target || _editor.target != target || !_editor.serializedObject.targetObject)
+            if (_editor.target != target)
             {
                 destroyEditor();
-                createEditor(target);
+                return;
             }
 
-            Debug.Log(_attributeDrawers.Count);
-            
             if (!_attributeDrawers.TryGetValue(_editor.target.GetInstanceID().ToString(), out List<IObjectEditorAttributeDrawer> drawers))
             {
                 drawers = new(ReflectionHelper.CreateChildClassesFromType<IObjectEditorAttributeDrawer>());
@@ -68,7 +66,7 @@ namespace TM.Editor.Window
         {
             if (!_editor) return;
 
-            Object.DestroyImmediate(_editor);
+            Object.DestroyImmediate(_editor, true);
             _editor = null;
         }
     }

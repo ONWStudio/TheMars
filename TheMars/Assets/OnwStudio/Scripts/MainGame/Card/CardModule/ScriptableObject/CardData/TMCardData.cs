@@ -38,6 +38,9 @@ namespace TM.Card
 
         [field: SerializeField, DisplayAs("코스트"), Tooltip("소모할 재화들 입니다")]
         private List<TMCardCost> _cardCosts;
+
+        public string GetLocalizedCardNameByLocale(string localeCode) 
+            => _localizedCardName.GetLocalizedStringByLocale(localeCode);
         
         public ITMCardEffect CreateCardEffect()
         {
