@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace TM.Event
 {
+    [Substitution("기업 주도 체제")]
     public sealed class TMCorporateDrivenSystemEventData : TMEventData
     {
         public override bool CanFireTop => true;

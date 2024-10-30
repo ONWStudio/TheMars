@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace TM.Event
 {
+    [Substitution("진보와 균형 ")]
     public sealed class TMProgressAndBalanceEventData : TMEventData
     {
         [field: InfoBox("효과 고유값 Key \n \n" +

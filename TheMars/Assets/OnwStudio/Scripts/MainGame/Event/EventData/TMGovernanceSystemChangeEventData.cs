@@ -9,6 +9,7 @@ using UnityEngine;
 
 namespace TM.Event
 {
+    [Substitution("거버넌스 체제 변화")]
     public sealed class TMGovernanceSystemChangeEventData : TMEventData
     {
         [field: Header("시민들과 따로 얘기 할 장소를 만들자 선택지")]
