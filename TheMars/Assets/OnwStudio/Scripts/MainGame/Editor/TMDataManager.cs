@@ -16,7 +16,7 @@ using TM.Building;
 
 namespace TM.Editor
 {
-    internal sealed class TMDataManager : ScriptableObjectEditManager
+    internal sealed class TMDataManager : ScriptableObjectViewer
     {
         [MenuItem("Onw Studio/TM/Data")]
         private static void showWindow()
@@ -35,7 +35,6 @@ namespace TM.Editor
             };
 
             return types;
-
         }
     }
 }

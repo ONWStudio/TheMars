@@ -1,17 +1,14 @@
 #if UNITY_EDITOR
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Onw.ScriptableObjects.Editor;
-using TM.Building;
-using TM.Card;
-using TM.Event;
-using TM.Synergy;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEditor;
 using UnityEditor.UIElements;
-using UnityEngine.UIElements;
+using Onw.ScriptableObjects.Editor;
+using TM.Editor.Window;
 
 namespace Onw.Editor.Window
 {
@@ -34,26 +31,19 @@ namespace Onw.Editor.Window
         }
     }
 
-    internal abstract class ScriptableObjectEditManager : EditorWindow
+    internal abstract class ScriptableObjectViewer : EditorWindow
     {
-        public event Action<string> OnChangedSearchString;
-
-        public string SeartchString 
-        {
-            get => _searchString;
-            set
-            {
-                _searchString = value;
-                OnChangedSearchString?.Invoke(_searchString);
-            }
-        }
-
+        private readonly CustomInspectorEditorWindow _inspectorEditor = new();
         private ToolbarButton _selectedButton = null;
+        private ScriptableObject _selectedObject = null;
         private Color _originalColor = ColorUtility.TryParseHtmlString("#505050", out Color color) ? color : Color.grey;
 
-        private string _searchString = string.Empty;
-
         protected abstract ScrollBuildOption[] GetTargetScriptableObjectType();
+
+        protected void OnDestroy()
+        {
+            _inspectorEditor.OnDisable();
+        }
 
         protected void CreateGUI()
         {
@@ -73,7 +63,7 @@ namespace Onw.Editor.Window
                     height = 36,
                     maxHeight = 36,
                     flexGrow = 1,
-                    borderBottomColor = Color.white
+                    borderBottomColor = Color.white,
                 }
             };
 
@@ -91,11 +81,11 @@ namespace Onw.Editor.Window
                     borderBottomWidth = 1,
                     borderTopWidth = 1,
                     borderLeftWidth = 1,
-                    borderRightWidth = 1,
-                }
+                    borderRightWidth = 1
+                },
             };
 
-
+            
             foreach ((ToolbarButton, ScriptableObjectScrollView) buttonOption in GetTargetScriptableObjectType()
                 .Where(option => option.ScriptableObjectType.IsSubclassOf(typeof(ScriptableObject)))
                 .Select(getButtonOption))
@@ -105,12 +95,32 @@ namespace Onw.Editor.Window
                 buttonOption.Item2.name = "SOScrollView";
                 buttonOption.Item1.clicked += () =>
                 {
+                    buttonOption.Item2.OnEnable();
+                    _selectedObject = null;
                     VisualElement scrollView = root.Q<ScriptableObjectScrollView>("SOScrollView");
                     scrollView?.RemoveFromHierarchy();
-
-                    contentElement.Add(buttonOption.Item2);
+                    
+                    contentElement.Insert(0, buttonOption.Item2);
                 };
+                buttonOption.Item2.OnSelectObject += scriptableObject => _selectedObject = scriptableObject.ScriptableObject;
             }
+
+            Vector2 scrollPosition = Vector2.zero;
+            IMGUIContainer imguiContainerContainer = new(() =>
+            {
+                if (!_selectedObject) return;
+
+                using EditorGUILayout.ScrollViewScope scope = new(scrollPosition);
+                _inspectorEditor.OnInspectorGUI(_selectedObject);
+                scrollPosition = scope.scrollPosition;
+            })
+            {
+                style =
+                {
+                    flexGrow = 1
+                }
+            };
+            contentElement.Add(imguiContainerContainer);
 
             root.Add(toolbar);
             root.Add(contentElement);

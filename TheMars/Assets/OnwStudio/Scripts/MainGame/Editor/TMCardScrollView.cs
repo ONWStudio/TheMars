@@ -6,9 +6,9 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using Onw.Editor.Window;
+using Onw.Editor.Extensions;
 using Onw.ScriptableObjects.Editor;
 using TM.Card;
-using Onw.Editor.Extensions;
 
 namespace TM.Editor
 {
@@ -21,35 +21,24 @@ namespace TM.Editor
                 style =
                 {
                     flexDirection = FlexDirection.Column,
-                    flexGrow = 1,
+                    flexGrow = 1f,
+                    flexShrink = 1f,
                     borderBottomColor = Color.black,
-                    borderBottomWidth = 1,
-                    paddingTop = 2,
-                    paddingBottom = 10,
-                    minHeight = 50,
+                    borderBottomWidth = 1f,
+                    paddingTop = 2f,
+                    paddingBottom = 10f,
+                    height = 25f,
+                    maxHeight = 25f
                 },
             };
 
             Button addButton = createHeaderButton(()
                 => AddSo(ScriptableObjectHandler.CreateScriptableObject<TMCardData>("Assets/OnwStudio/ScriptableObject/Cards", $"Card_No.{Guid.NewGuid()}")));
-            addButton.text = "Ãß°¡";
+            addButton.text = "ì¶”ê°€";
             addButton.style.backgroundColor = ColorUtility.TryParseHtmlString("#1B5914", out Color addColor) ? addColor : Color.green;
             addButton.SetChangedColorButtonEvent();
-
-            Button removeButton = createHeaderButton(() => 
-            {
-                ScriptableObject scriptableObject = _selectedObject?.ScriptableObject;
-                RemoveSo(scriptableObject);
-                _selectedObject = null;
-                UnityEngine.Object.DestroyImmediate(scriptableObject, true);
-            });
-            removeButton.text = "Á¦°Å";
-            removeButton.style.backgroundColor = ColorUtility.TryParseHtmlString("#4C1212", out Color removeColor) ? removeColor : Color.red;
-            removeButton.SetChangedColorButtonEvent();
-
             header.Add(addButton);
-            header.Add(removeButton);
-
+            
             return header;
 
             static Button createHeaderButton(Action clickedEvent)
@@ -61,14 +50,46 @@ namespace TM.Editor
                         flexDirection = FlexDirection.Row,
                         unityTextAlign = TextAnchor.MiddleCenter,
                         flexGrow = 1,
-                        height = 20
+                        height = 20f,
+                        maxHeight = 20f,
                     },
                 };
 
-                button.clicked += clickedEvent;
-
                 return button;
             }
+        }
+
+        protected override ScriptableObjectButton CreateButton(ScriptableObject so)
+        {
+            ScriptableObjectButton button = base.CreateButton(so);
+            Button removeButton = new(() =>
+            {
+                if (_selectedObject?.ScriptableObject == so)
+                {
+                    _selectedObject = null;
+                }
+                
+                RemoveSo(so);
+                UnityEngine.Object.DestroyImmediate(so, true);
+            })
+            {
+                style =
+                {
+                    position = Position.Absolute,
+                    right = new Length(2, LengthUnit.Percent),
+                    top = new Length(50, LengthUnit.Percent),                    
+                    translate = new Translate(0, Length.Percent(-50)),
+                    unityTextAlign = TextAnchor.MiddleCenter,
+                    backgroundColor = ColorUtility.TryParseHtmlString("#4C1212", out Color removeColor) ? removeColor : Color.red,
+                    height = 20,
+                    width = 20,
+                },
+                text = "X",
+            };
+            
+            removeButton.SetChangedColorButtonEvent();
+            button.Add(removeButton);
+            return button;
         }
     }
 }

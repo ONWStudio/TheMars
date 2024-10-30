@@ -11,7 +11,7 @@ namespace TM.Event
         [field: InfoBox("효과 고유값 Key \n \n" +
                         "\t 건물 중 무작위 등급업시킬 건물개수 : TargetBuildingCount")]
         [field: Header("선택지 1")]
-        [field: SerializeField, DisplayAs(""), OnwMin(0)] public int TopTargetBuildingCount { get; private set; } = 3;
+        [field: SerializeField, DisplayAs("건물 중 무작위 등급업시킬 건물개수"), OnwMin(0)] public int TopTargetBuildingCount { get; private set; } = 3;
         
         public override bool CanFireTop => true;
         public override bool CanFireBottom => true;

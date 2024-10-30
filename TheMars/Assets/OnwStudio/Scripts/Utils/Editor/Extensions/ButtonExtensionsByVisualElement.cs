@@ -13,28 +13,29 @@ namespace Onw.Editor.Extensions
 {
     public static class ButtonExtensionsByVisualElement
     {
+        
+        /// <summary>
+        /// .. backgroundColorë³€ê²½ì‹œ ë§ˆìš°ìŠ¤ ì´ë²¤íŠ¸ë¡œ ì¸í•œ ë²„íŠ¼ View ìƒí˜¸ì‘ìš©ì´ ì¼ì–´ë‚˜ì§€ ì•ŠëŠ” í˜„ìƒì„ í•´ê²°í•©ë‹ˆë‹¤
+        /// </summary>
+        /// <param name="button"></param>
         public static void SetChangedColorButtonEvent(this Button button)
         {
             Color defaultColor = button.style.backgroundColor.value;
-            float hoverSaturationOffset = -0.2f;  // hover ½Ã Ã¤µµ °¨¼Ò Á¤µµ
-            float clickSaturationOffset = 0.5f;  // Å¬¸¯ ½Ã Ã¤µµ Áõ°¡ Á¤µµ
+            const float HOVER_OFFSET = 0.1f;  
+            const float CLICK_OFFSET = -0.05f; 
 
-            // ¸¶¿ì½º hover ½Ã Ã¤µµ ¹à°Ô
             button.RegisterCallback<MouseEnterEvent>(evt =>
-                button.style.backgroundColor = defaultColor.AdjustSaturation(hoverSaturationOffset));
+                button.style.backgroundColor = defaultColor.AdjustValue(HOVER_OFFSET));
 
-            // ¸¶¿ì½º°¡ ¶°³¯ ¶§ ¿ø·¡ »ö»óÀ¸·Î º¹¿ø
             button.RegisterCallback<MouseLeaveEvent>(evt =>
                 button.style.backgroundColor = defaultColor);
 
-            // Å¬¸¯ ½Ã Ã¤µµ ¾îµÓ°Ô
             button.RegisterCallback<MouseDownEvent>(evt =>
-                button.style.backgroundColor = defaultColor.AdjustSaturation(clickSaturationOffset), 
+                button.style.backgroundColor = defaultColor.AdjustValue(CLICK_OFFSET), 
                 TrickleDown.TrickleDown);
 
-            // Å¬¸¯ ÇØÁ¦ ½Ã hover »óÅÂ¸¦ À¯ÁöÇÏ°Å³ª ¿ø·¡ »ö»óÀ¸·Î º¹¿ø
             button.RegisterCallback<MouseUpEvent>(evt =>
-                button.style.backgroundColor = defaultColor.AdjustSaturation(hoverSaturationOffset), 
+                button.style.backgroundColor = defaultColor, 
                 TrickleDown.TrickleDown);
         }
     }

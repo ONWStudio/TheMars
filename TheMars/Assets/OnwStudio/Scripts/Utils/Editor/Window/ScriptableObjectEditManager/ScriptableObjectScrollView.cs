@@ -3,7 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Onw.Editor.Extensions;
 using Onw.Extensions;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,35 +13,64 @@ namespace Onw.Editor.Window
 {
     internal class ScriptableObjectScrollView : VisualElement
     {
+        public event Action<ScriptableObjectButton> OnSelectObject;
+
         public ScrollView View { get; } = new()
         {
             style =
             {
                 flexDirection = FlexDirection.Column,
                 flexGrow = 1
-
             },
             mode = ScrollViewMode.Vertical
         };
-
-        public event Action<ScriptableObjectButton> OnSelectObject;
 
         public IReadOnlyList<ScriptableObjectButton> ScriptableObjects => _scriptableObjects;
         protected readonly List<ScriptableObjectButton> _scriptableObjects = new();
 
         protected ScriptableObjectButton _selectedObject = null;
 
+        internal void OnEnable()
+        {
+            if (_selectedObject is not null)
+            {
+                _selectedObject.style.backgroundColor = Color.gray;
+            }
+
+            _selectedObject = null;
+        }
+
         internal void Initialize()
         {
-            OnSelectObject += selectedObject => _selectedObject = selectedObject;
+            OnSelectObject += selectedObject =>
+            {
+                if (_selectedObject is not null)
+                {
+                    _selectedObject.style.backgroundColor = Color.gray;
+                }
+
+                _selectedObject = selectedObject;
+                _selectedObject.style.backgroundColor = _selectedObject.selection.selectionColor;
+            };
+
             VisualElement header = CreateHeader();
             if (header is not null)
             {
                 Add(header);
             }
+            ToolbarSearchField searchField = new()
+            {
+                style =
+                {
+                    alignSelf = Align.Center,
+                    width = new(Length.Percent(95))
+                }
+            };
+            searchField.RegisterValueChangedCallback(BuildBySearchString);
+            Add(searchField);
             Add(View);
         }
-        
+
         internal void ClearList()
         {
             View.Clear();
@@ -75,6 +106,38 @@ namespace Onw.Editor.Window
             }
         }
 
+        protected virtual void BuildBySearchString(ChangeEvent<string> evt)
+        {
+            string searchString = evt.newValue;
+            if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrWhiteSpace(searchString))
+            {
+                foreach (IGrouping<bool, ScriptableObjectButton> group in _scriptableObjects
+                    .GroupBy(so => so.text.Contains(searchString)))
+                {
+                    foreach (ScriptableObjectButton button in group)
+                    {
+                        if (group.Key)
+                        {
+                            if (!View.Contains(button))
+                            {
+                                View.Add(button);
+                            }
+                        }
+                        else
+                        {
+                            button.RemoveFromHierarchy();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                _scriptableObjects
+                    .Where(button => !View.Contains(button))
+                    .ForEach(View.Add);
+            }
+        }
+
         protected virtual ScriptableObjectButton CreateButton(ScriptableObject so)
         {
             ScriptableObjectButton button = new(so)
@@ -84,7 +147,25 @@ namespace Onw.Editor.Window
                     flexDirection = FlexDirection.Row,
                     unityTextAlign = TextAnchor.MiddleCenter,
                     flexGrow = 1,
-                    height= 40,
+                    height = 40,
+                    borderBottomWidth = 0,
+                    borderTopWidth = 0,
+                    borderLeftWidth = 0,
+                    borderRightWidth = 0,
+                    marginBottom = 0,
+                    marginTop = 0,
+                    marginLeft = 0,
+                    marginRight = 0,
+                    paddingBottom = 0,
+                    paddingTop = 0,
+                    paddingLeft = 0,
+                    paddingRight = 0,
+                    borderBottomLeftRadius = 0,
+                    borderTopLeftRadius = 0,
+                    borderBottomRightRadius = 0,
+                    borderTopRightRadius = 0,
+                    whiteSpace = WhiteSpace.Normal,
+                    backgroundColor = Color.grey
                 },
                 text = so.name,
             };
@@ -108,6 +189,9 @@ namespace Onw.Editor.Window
             style.borderTopWidth = 1;
             style.borderLeftWidth = 1;
             style.borderRightWidth = 1;
+            style.width = new(Length.Percent(25));
+            style.minWidth = 150f;
+            style.maxWidth = 350f;
         }
     }
 }
