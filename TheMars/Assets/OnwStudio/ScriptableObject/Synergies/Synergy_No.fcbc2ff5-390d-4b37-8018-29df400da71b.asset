@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88efa2807f14b4c50b6687e145d4a238, type: 3}
   m_Name: Synergy_No.fcbc2ff5-390d-4b37-8018-29df400da71b
   m_EditorClassIdentifier: 
-  <BuildingCount>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 0}
+  _synergyEffects: []
   _localizedSynergyName:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:d1aec9023d60d4302b63cdf07385a2f1
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 177883570176
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

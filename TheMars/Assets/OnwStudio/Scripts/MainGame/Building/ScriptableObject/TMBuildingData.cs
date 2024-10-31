@@ -23,13 +23,13 @@ namespace TM.Building
     {
         public IReadOnlyList<TMSynergyData> Synergies => _synergies;
         
-        public string CardName => _localizedCardName.TryGetLocalizedString(out string buildingName) ? buildingName : "";
+        public string BuildingName => _localizedBuildingName.TryGetLocalizedString(out string buildingName) ? buildingName : "";
         
         [field: SerializeField] public TMCorporation TMCorporation { get; private set; }
         
         [field: SerializeField, DisplayAs("건물 프리팹")] public TMBuilding BuildingPrefab { get; private set; }
         
-        [SerializeField, DisplayAs("건물 이름"), Tooltip("건물 이름은 국가별로 지역화 옵션을 제공합니다")] private LocalizedString _localizedCardName;
+        [SerializeField, DisplayAs("건물 이름"), Tooltip("건물 이름은 국가별로 지역화 옵션을 제공합니다")] private LocalizedString _localizedBuildingName;
         
         [FormerlySerializedAs("effectCreators")]
         [SerializeReference, DisplayAs("건물 효과"), Tooltip("건물 효과 리스트"), SerializeReferenceDropdown]

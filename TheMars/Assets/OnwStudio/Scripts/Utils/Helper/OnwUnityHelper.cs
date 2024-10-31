@@ -6,7 +6,7 @@ namespace Onw.Helper
 {
     public static class OnwUnityHelper 
     {
-        public static void DestroyObject(ref Object @object)
+        public static void DestroyObject<T>(ref T @object) where T : Object
         {
             if (!@object) return;
 
@@ -40,7 +40,7 @@ namespace Onw.Helper
             component = null;
         }
 
-        public static void DestroyImmediateObject(ref Object @object)
+        public static void DestroyImmediateObject<T>(ref T @object) where T : Object
         {
             if (!@object) return;
 
