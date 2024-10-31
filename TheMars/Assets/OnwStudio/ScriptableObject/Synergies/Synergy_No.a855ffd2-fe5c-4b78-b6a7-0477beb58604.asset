@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88efa2807f14b4c50b6687e145d4a238, type: 3}
-  m_Name: Synergy_No.a3f9c3a1-65fc-42e0-a41b-5507d6d2bbcb
+  m_Name: Synergy_No.a855ffd2-fe5c-4b78-b6a7-0477beb58604
   m_EditorClassIdentifier: 
   <Icon>k__BackingField: {fileID: 0}
   _synergyEffects: []
@@ -18,7 +18,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:d1aec9023d60d4302b63cdf07385a2f1
     m_TableEntryReference:
-      m_KeyId: 173395664896
+      m_KeyId: 180987355136
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

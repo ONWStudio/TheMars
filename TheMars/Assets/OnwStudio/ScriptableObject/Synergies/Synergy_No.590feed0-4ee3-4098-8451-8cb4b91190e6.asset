@@ -20,9 +20,9 @@ MonoBehaviour:
   - rid: 8523894050543370252
   _localizedSynergyName:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:d1aec9023d60d4302b63cdf07385a2f1
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 15605948416
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

@@ -29,8 +29,8 @@ namespace TM.Editor
             ScrollBuildOption[] types =
             {
                 new(typeof(TMCardData), typeof(TMCardScrollView), "카드"),
-                new(typeof(TMBuildingData), "건물"),
-                new(typeof(TMSynergyData), "시너지"),
+                new(typeof(TMBuildingData), typeof(TMBuildingScrollView),"건물"),
+                new(typeof(TMSynergyData), typeof(TMSynergyScrollView), "시너지"),
                 new(typeof(TMEventData), "이벤트")
             };
 

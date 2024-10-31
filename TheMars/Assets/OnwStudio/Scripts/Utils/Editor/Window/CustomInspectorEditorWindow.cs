@@ -16,45 +16,32 @@ namespace TM.Editor.Window
     internal class CustomInspectorEditorWindow
     {
         private Editor _editor = null;
-        private readonly Dictionary<string, List<IObjectEditorAttributeDrawer>> _attributeDrawers = new();
+        private Object _currentTarget = null;
 
         public void OnInspectorGUI(Object target)
         {
-            if (!_editor)
+            if (target == null)
+            {
+                return;
+            }
+
+            if (_editor == null || _currentTarget != target)
             {
                 createEditor(target);
             }
 
-            if (_editor.target != target)
+            if (_editor != null)
             {
-                destroyEditor();
-                return;
+                _editor.OnInspectorGUI();
             }
-
-            if (!_attributeDrawers.TryGetValue(_editor.target.GetInstanceID().ToString(), out List<IObjectEditorAttributeDrawer> drawers))
-            {
-                drawers = new(ReflectionHelper.CreateChildClassesFromType<IObjectEditorAttributeDrawer>());
-                drawers.ForEach(drawer => drawer.OnEnable(_editor));
-                _attributeDrawers.Add(_editor.target.GetInstanceID().ToString(), drawers);
-            }
-
-            _editor.OnInspectorGUI();
-            drawers
-                .ForEach(drawer => drawer.OnInspectorGUI(_editor));
         }
 
         private void createEditor(Object target)
         {
-            _editor = Editor.CreateEditor(target);
-            Object prevObject = Selection.activeObject;
-            EditorApplication.delayCall += () => Selection.activeObject = prevObject;
-            Selection.activeObject = target;
-        }
+            destroyEditor();
 
-        private IEnumerator iESetSelectionActiveObjectPrevTarget(Object prevTarget)
-        {
-            yield return null;
-            Selection.activeObject = prevTarget;
+            _currentTarget = target;
+            _editor = Editor.CreateEditor(target);
         }
 
         public void OnDisable()
@@ -64,10 +51,12 @@ namespace TM.Editor.Window
 
         private void destroyEditor()
         {
-            if (!_editor) return;
-
-            Object.DestroyImmediate(_editor, true);
-            _editor = null;
+            if (_editor != null)
+            {
+                Object.DestroyImmediate(_editor);
+                _editor = null;
+                _currentTarget = null;
+            }
         }
     }
 }

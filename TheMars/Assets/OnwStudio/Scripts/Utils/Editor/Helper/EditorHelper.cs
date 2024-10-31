@@ -42,7 +42,7 @@ namespace Onw.Editor
         {
             if (scene is null) return;
 
-            EditorSceneManager.ClosePreviewScene((Scene)scene);
+            EditorSceneManager.CloseScene((Scene)scene, true);
         }
 
         public static void ClosePreviewSceneByReference(ref Scene? scene)

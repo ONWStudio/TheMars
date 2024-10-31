@@ -10,32 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: CardName_ko-KR
+  m_Name: SynergyNameTable_ko-KR
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: ko-KR
-  m_SharedData: {fileID: 11400000, guid: d980be908d5ad4cfc8c5ca05a4f17d26, type: 2}
+  m_SharedData: {fileID: 11400000, guid: d1aec9023d60d4302b63cdf07385a2f1, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 26343366656
-    m_Localized: "\uD1A0\uC591 \uC5F0\uAD6C"
+  - m_Id: 15605948416
+    m_Localized: "A\uAE30\uC5C5"
     m_Metadata:
       m_Items: []
-  - m_Id: 4628893234356224
-    m_Localized: "\uD654\uC131 \uACE0\uAD6C\uB9C8"
+  - m_Id: 173395664896
+    m_Localized: "B\uAE30\uC5C5"
     m_Metadata:
       m_Items: []
-  - m_Id: 4694772995231744
-    m_Localized: "\uACFC\uB85C"
+  - m_Id: 177883570176
+    m_Localized: "C\uAE30\uC5C5"
     m_Metadata:
       m_Items: []
-  - m_Id: 4700310189543424
-    m_Localized: "\uD654\uC131 \uCC9C\uBB38\uD559"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7973635925991424
-    m_Localized: "\uAC00"
+  - m_Id: 180987355136
+    m_Localized: "D\uAE30\uC5C5"
     m_Metadata:
       m_Items: []
   references:
