@@ -17,15 +17,9 @@ MonoBehaviour:
   <CardImage>k__BackingField: {fileID: 0}
   _localizedCardName:
     m_TableReference:
-<<<<<<< Updated upstream
       m_TableCollectionName: GUID:d980be908d5ad4cfc8c5ca05a4f17d26
     m_TableEntryReference:
       m_KeyId: 4628893234356224
-=======
-      m_TableCollectionName: 
-    m_TableEntryReference:
-      m_KeyId: 0
->>>>>>> Stashed changes
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
