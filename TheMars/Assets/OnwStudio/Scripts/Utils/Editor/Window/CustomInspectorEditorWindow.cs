@@ -30,7 +30,7 @@ namespace TM.Editor.Window
                 destroyEditor();
                 return;
             }
-
+            
             if (!_attributeDrawers.TryGetValue(_editor.target.GetInstanceID().ToString(), out List<IObjectEditorAttributeDrawer> drawers))
             {
                 drawers = new(ReflectionHelper.CreateChildClassesFromType<IObjectEditorAttributeDrawer>());
