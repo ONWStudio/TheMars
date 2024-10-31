@@ -25,14 +25,23 @@ namespace TM.Editor.Window
                 createEditor(target);
             }
 
+<<<<<<< Updated upstream
             if (_editor.target != target)
             {
                 destroyEditor();
                 return;
             }
 
+=======
+            if (!_editor.target || _editor.target != target || !_editor.serializedObject.targetObject)
+            {
+                destroyEditor();
+                createEditor(target);
+            }
+
             Debug.Log(_attributeDrawers.Count);
             
+>>>>>>> Stashed changes
             if (!_attributeDrawers.TryGetValue(_editor.target.GetInstanceID().ToString(), out List<IObjectEditorAttributeDrawer> drawers))
             {
                 drawers = new(ReflectionHelper.CreateChildClassesFromType<IObjectEditorAttributeDrawer>());
@@ -68,7 +77,11 @@ namespace TM.Editor.Window
         {
             if (!_editor) return;
 
+<<<<<<< Updated upstream
             Object.DestroyImmediate(_editor, true);
+=======
+            Object.DestroyImmediate(_editor);
+>>>>>>> Stashed changes
             _editor = null;
         }
     }
