@@ -34,7 +34,11 @@ namespace Onw.Editor.Window
         {
             if (_selectedObject is not null)
             {
+<<<<<<< Updated upstream
                 _selectedObject.style.backgroundColor = ColorUtility.TryParseHtmlString("#3E3E3E", out Color color) ? color : Color.gray;
+=======
+                _selectedObject.style.backgroundColor = Color.gray;
+>>>>>>> Stashed changes
             }
 
             _selectedObject = null;
@@ -46,7 +50,11 @@ namespace Onw.Editor.Window
             {
                 if (_selectedObject is not null)
                 {
+<<<<<<< Updated upstream
                     _selectedObject.style.backgroundColor = ColorUtility.TryParseHtmlString("#3E3E3E", out Color color) ? color : Color.gray;
+=======
+                    _selectedObject.style.backgroundColor = Color.gray;
+>>>>>>> Stashed changes
                 }
 
                 _selectedObject = selectedObject;
@@ -165,7 +173,11 @@ namespace Onw.Editor.Window
                     borderBottomRightRadius = 0,
                     borderTopRightRadius = 0,
                     whiteSpace = WhiteSpace.Normal,
+<<<<<<< Updated upstream
                     backgroundColor = ColorUtility.TryParseHtmlString("#3E3E3E", out Color color) ? color : Color.gray
+=======
+                    backgroundColor = Color.grey
+>>>>>>> Stashed changes
                 },
                 text = so.name,
             };
