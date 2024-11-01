@@ -34,6 +34,7 @@ namespace Onw.Editor.Window
     internal abstract class ScriptableObjectViewer : EditorWindow
     {
         private readonly CustomInspectorEditorWindow _inspectorEditor = new();
+        private readonly List<ScriptableObjectScrollView> _scrollViews = new();
         private ToolbarButton _selectedButton = null;
         private ScriptableObject _selectedObject = null;
         private Color _originalColor = ColorUtility.TryParseHtmlString("#505050", out Color color) ? color : Color.grey;
@@ -43,6 +44,7 @@ namespace Onw.Editor.Window
         protected void OnDestroy()
         {
             _inspectorEditor.OnDisable();
+            _scrollViews.ForEach(view => view.OnDisable());
         }
 
         protected void CreateGUI()
@@ -85,7 +87,6 @@ namespace Onw.Editor.Window
                 },
             };
 
-            
             foreach ((ToolbarButton, ScriptableObjectScrollView) buttonOption in GetTargetScriptableObjectType()
                 .Where(option => option.ScriptableObjectType.IsSubclassOf(typeof(ScriptableObject)))
                 .Select(getButtonOption))
@@ -103,10 +104,11 @@ namespace Onw.Editor.Window
                     contentElement.Insert(0, buttonOption.Item2);
                 };
                 buttonOption.Item2.OnSelectObject += scriptableObject => _selectedObject = scriptableObject.ScriptableObject;
+                _scrollViews.Add(buttonOption.Item2);
             }
 
             Vector2 scrollPosition = Vector2.zero;
-            IMGUIContainer imguiContainerContainer = new(() =>
+            IMGUIContainer imguiContainer = new(() =>
             {
                 if (!_selectedObject) return;
 
@@ -120,7 +122,7 @@ namespace Onw.Editor.Window
                     flexGrow = 1
                 }
             };
-            contentElement.Add(imguiContainerContainer);
+            contentElement.Add(imguiContainer);
 
             root.Add(toolbar);
             root.Add(contentElement);

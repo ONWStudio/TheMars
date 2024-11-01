@@ -30,7 +30,7 @@ namespace Onw.Editor.Window
 
         protected ScriptableObjectButton _selectedObject = null;
 
-        internal void OnEnable()
+        internal virtual void OnEnable()
         {
             if (_selectedObject is not null)
             {
@@ -40,6 +40,10 @@ namespace Onw.Editor.Window
             _selectedObject = null;
         }
 
+        internal virtual void OnDisable()
+        {
+        }
+        
         internal void Initialize()
         {
             OnSelectObject += selectedObject =>
@@ -85,6 +89,8 @@ namespace Onw.Editor.Window
 
             soArray.ForEach(View.Add);
             _scriptableObjects.AddRange(soArray);
+            
+            sortElements();
         }
 
         public void AddSo(ScriptableObject obj)
@@ -92,6 +98,8 @@ namespace Onw.Editor.Window
             ScriptableObjectButton button = CreateButton(obj);
             View.Add(button);
             _scriptableObjects.Add(button);
+            
+            sortElements();
         }
 
         public void RemoveSo(ScriptableObject obj)
@@ -108,11 +116,11 @@ namespace Onw.Editor.Window
 
         protected virtual void BuildBySearchString(ChangeEvent<string> evt)
         {
-            string searchString = evt.newValue;
+            string searchString = evt?.newValue ?? string.Empty;
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrWhiteSpace(searchString))
             {
                 foreach (IGrouping<bool, ScriptableObjectButton> group in _scriptableObjects
-                    .GroupBy(so => so.text.Contains(searchString)))
+                    .GroupBy(so => so.name.Contains(searchString)))
                 {
                     foreach (ScriptableObjectButton button in group)
                     {
@@ -136,6 +144,13 @@ namespace Onw.Editor.Window
                     .Where(button => !View.Contains(button))
                     .ForEach(View.Add);
             }
+            
+            sortElements();
+        }
+
+        private void sortElements()
+        {
+            View.Sort((a, b) => string.CompareOrdinal(a.name, b.name));
         }
 
         protected virtual ScriptableObjectButton CreateButton(ScriptableObject so)
