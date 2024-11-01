@@ -31,7 +31,7 @@ internal sealed class EnumeratedElementsEditor : Editor
 
     private void OnEnable()
     {
-        _enumeratedElements = target as EnumeratedElements;
+        _enumeratedElements = (target as EnumeratedElements)!;
         _contentSizeFitter = _enumeratedElements.GetComponent<ContentSizeFitter>();
         _gridLayoutGroup = _enumeratedElements.GetComponent<GridLayoutGroup>();
         _content = _enumeratedElements.GetComponent<RectTransform>();

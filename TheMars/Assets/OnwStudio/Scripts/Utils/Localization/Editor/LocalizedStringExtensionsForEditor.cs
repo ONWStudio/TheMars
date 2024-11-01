@@ -37,10 +37,10 @@ namespace Onw.Localization.Editor
                 }
             }
             
-            return EditorCoroutineUtility.StartCoroutineOwnerless(monitorEntryCoroutine(localizedString, targetLocale, onChanged));
+            return EditorCoroutineUtility.StartCoroutineOwnerless(iEMonitorEntryCoroutine(localizedString, targetLocale, onChanged));
         }
 
-        private static IEnumerator monitorEntryCoroutine(LocalizedString localizedString, Locale locale, System.Action<string> onChanged)
+        private static IEnumerator iEMonitorEntryCoroutine(LocalizedString localizedString, Locale locale, System.Action<string> onChanged)
         {
             // 테이블 비동기로 로드
             findTable:

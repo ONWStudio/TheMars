@@ -40,6 +40,18 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd64fbb58db9142948050c6a05e485a0
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMSuspiciousRumorEventData/TMSuspiciousRumorEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 31e360290dc8a498b9cb2086fcbef0a3
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMCorporatePartnershipEventData/TMCorporatePartnershipEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 3f430e5b5c626400b837c52ed98c1bc2, type: 2}
   m_SchemaSet:
