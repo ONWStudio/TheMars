@@ -17,7 +17,7 @@ MonoBehaviour:
   <EventImage>k__BackingField: {fileID: 0}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: TMUnfairTradeEventData
     m_TableEntryReference:
       m_KeyId: 0
       m_Key: 
@@ -26,7 +26,7 @@ MonoBehaviour:
     m_LocalVariables: []
   <TopButtonTextEvent>k__BackingField:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: TMUnfairTradeEventData
     m_TableEntryReference:
       m_KeyId: 0
       m_Key: 
@@ -35,7 +35,7 @@ MonoBehaviour:
     m_LocalVariables: []
   <BottomButtonTextEvent>k__BackingField:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: TMUnfairTradeEventData
     m_TableEntryReference:
       m_KeyId: 0
       m_Key: 
@@ -44,7 +44,7 @@ MonoBehaviour:
     m_LocalVariables: []
   <TitleTextEvent>k__BackingField:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: TMUnfairTradeEventData
     m_TableEntryReference:
       m_KeyId: 0
       m_Key: 
@@ -53,7 +53,7 @@ MonoBehaviour:
     m_LocalVariables: []
   <TopEffectTextEvent>k__BackingField:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: TMUnfairTradeEventData
     m_TableEntryReference:
       m_KeyId: 0
       m_Key: 
@@ -62,7 +62,7 @@ MonoBehaviour:
     m_LocalVariables: []
   <BottomEffectTextEvent>k__BackingField:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: TMUnfairTradeEventData
     m_TableEntryReference:
       m_KeyId: 0
       m_Key: 

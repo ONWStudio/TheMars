@@ -37,33 +37,34 @@ namespace Onw.Attribute.Editor
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            // 어트리뷰트 가져오기
             LocalizedStringAttribute attr = (LocalizedStringAttribute)attribute;
 
-            // 필드 타입이 LocalizedString인지 확인
             if (property.propertyType != SerializedPropertyType.Generic || property.type != nameof(LocalizedString))
             {
                 EditorGUI.LabelField(position, label.text, "LocalizedStringAttribute는 LocalizedString 타입에만 사용 가능합니다.");
                 return;
             }
 
-            // 프로퍼티 시작
             EditorGUI.BeginProperty(position, label, property);
 
-            // 인덴트 설정
             int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
-            
+
+
             Debug.Log(property.propertyPath);
-            
-            LocalizedString localizedString = (LocalizedString)property
+
+            FieldInfo fieldInfo = property
                 .serializedObject
                 .targetObject
                 .GetType()
-                .GetField(property.propertyPath, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)!
+                .GetField(property.propertyPath, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+
+            Debug.Log(fieldInfo);
+
+            LocalizedString localizedString = (LocalizedString)fieldInfo?
                 .GetValue(property.serializedObject.targetObject);
+
             Debug.Log(localizedString);
-            // SerializedProperty 가져오기
             SerializedProperty tableReferenceProp = property.FindPropertyRelative("m_TableReference");
             SerializedProperty tableNameProp = tableReferenceProp.FindPropertyRelative("m_TableCollectionName");
             SerializedProperty tableEntryReferenceProp = property.FindPropertyRelative("m_TableEntryReference");
