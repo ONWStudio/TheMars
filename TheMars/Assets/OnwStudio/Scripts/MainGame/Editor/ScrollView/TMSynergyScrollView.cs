@@ -1,19 +1,18 @@
 #if UNITY_EDITOR
 using System;
+using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
-using Onw.Editor.Extensions;
-using Onw.Editor.Window;
+using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEngine.Localization;
+using Unity.EditorCoroutines.Editor;
 using Onw.Extensions;
+using Onw.Editor.Window;
+using Onw.Editor.Extensions;
 using Onw.Localization.Editor;
 using Onw.ScriptableObjects.Editor;
-using TM.Building;
 using TM.Synergy;
-using Unity.EditorCoroutines.Editor;
-using UnityEngine;
-using UnityEngine.Localization;
-using UnityEngine.UIElements;
 
 namespace TM.Editor
 {

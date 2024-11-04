@@ -44,9 +44,9 @@ MonoBehaviour:
     m_LocalVariables: []
   <TitleTextEvent>k__BackingField:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:d980be908d5ad4cfc8c5ca05a4f17d26
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 4700310189543424
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
