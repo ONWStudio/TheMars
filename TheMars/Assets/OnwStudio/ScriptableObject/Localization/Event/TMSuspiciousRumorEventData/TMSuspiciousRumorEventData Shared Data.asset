@@ -14,11 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: TMSuspiciousRumorEventData
   m_TableCollectionNameGuidString: fd64fbb58db9142948050c6a05e485a0
-  m_Entries:
-  - m_Id: 14649876537344
-    m_Key: New Entry
-    m_Metadata:
-      m_Items: []
+  m_Entries: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

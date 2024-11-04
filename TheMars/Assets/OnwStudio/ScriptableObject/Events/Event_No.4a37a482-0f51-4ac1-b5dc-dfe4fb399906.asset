@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4206a5bddc6214b2f91f00c87831eda8, type: 3}
+  m_Name: Event_No.4a37a482-0f51-4ac1-b5dc-dfe4fb399906
+  m_EditorClassIdentifier: 
+  <TopEventData>k__BackingField: {fileID: 0}
+  <BottomEventData>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 0}
+  <DescriptionTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMCorporatePartnershipEventData
+    m_TableEntryReference:
+      m_KeyId: 11193540608
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TopButtonTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMCorporatePartnershipEventData
+    m_TableEntryReference:
+      m_KeyId: 1075318407290880
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <BottomButtonTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMCorporatePartnershipEventData
+    m_TableEntryReference:
+      m_KeyId: 1075318407290881
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TitleTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMCorporatePartnershipEventData
+    m_TableEntryReference:
+      m_KeyId: 1075318407290882
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TopEffectTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMCorporatePartnershipEventData
+    m_TableEntryReference:
+      m_KeyId: 1075318411485184
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <BottomEffectTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMCorporatePartnershipEventData
+    m_TableEntryReference:
+      m_KeyId: 1075318411485185
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []

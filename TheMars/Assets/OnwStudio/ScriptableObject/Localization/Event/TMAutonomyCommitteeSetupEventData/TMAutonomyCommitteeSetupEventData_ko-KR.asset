@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TMAutonomyCommitteeSetupEventData_ko-KR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ko-KR
+  m_SharedData: {fileID: 11400000, guid: b098bfdb8f2e84ca8bd284655f1a549a, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 4853453322907287645
+  m_TableData:
+  - m_Id: 3127894016
+    m_Localized: "\uC790\uCE58 \uC704\uC6D0\uD68C \uC124\uB9BD"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3123699713
+    m_Localized: "\uC544\uC9C1 \uC815\uBCF4\uAC00 \uB9CE\uC774 \uBD80\uC871\uD574
+      \uC870\uAE08 \uB354 \uBAA8\uC544\uBCF4\uC790"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3115311104
+    m_Localized: "\uC6B0\uB9AC\uB294 \uAD00\uC81C \uC13C\uD130\uC5D0 \uAC01 \uC139\uD130\uB9C8\uB2E4
+      \uC8FC\uBBFC\uB4E4\uC758 \uC758\uACAC\uC744 \uBC1B\uC744 \uC218 \uC788\uB294
+      \uAD00\uB9AC\uC18C\uB97C \uAC1C\uC124 \uD558\uC600\uB2E4.\n\uC8FC\uBBFC\uB4E4\uC774
+      \uC9C1\uC811 \uC9C0\uC5ED\uC758 \uC815\uCC45\uACFC \uC758\uC0AC\uACB0\uC815\uC744
+      \uCC38\uC5EC\uD560 \uC218 \uC788\uB294 \uAE30\uD68C\uB97C \uC81C\uACF5\uD558\uC5EC
+      \uADF8\uB4E4\uC758 \uC694\uAD6C\uC640\n\uC758\uACAC\uC774 \uC2E4\uC9C8\uC801\uC73C\uB85C
+      \uC815\uCC45\uC5D0 \uBC18\uC601\uB420 \uC218 \uC788\uB3C4\uB85D \uD558\uAE30
+      \uC704\uD568\uC774\uC5C8\uB2E4.\n\uC774\uB85C\uC778\uD574 \uB9CE\uC740 \uC758\uACAC\uC774
+      \uBAA8\uC600\uB294\uB370 \uC774\uAC83\uC73C\uB85C \uC5B4\uB5BB\uAC8C \uBBFC\uC8FC\uC801
+      \uCCB4\uC81C\uB97C \uAC15\uD654\uD560 \uBC29\uC548\uC744 \uC5BB\uC744 \uC218
+      \uC788\uC744\uAE4C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3127894018
+    m_Localized: "* \uBBFC\uC8FC\uC801 \uC790\uCE58, \uADF8 \uB2E4\uC74C\uC740? \uC5F0\uACC4"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3127894017
+    m_Localized: "* \uD558\uB8E8\uB9C8\uB2E4 \uB9CC\uC871\uB3C4 {SatisfactionAddByDay}%
+      \uC0C1\uC2B9 ({SatisfactionAddDayCount}\uC77C)\n* \uC774\uB9AC\uC800\uB9AC
+      \uD754\uB4E4\uB9AC\uB294 \uBC30 \uC5F0\uACC4"
+    m_Metadata:
+      m_Items:
+      - rid: 4853453322907287645
+  - m_Id: 3123699712
+    m_Localized: "\uADC0\uCC2E\uC740 \uC77C\uC740 \uBE60\uB974\uAC8C \uCC98\uB9AC
+      \uD558\uC790\uACE0"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4853453322907287645
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 01e06fba00000000

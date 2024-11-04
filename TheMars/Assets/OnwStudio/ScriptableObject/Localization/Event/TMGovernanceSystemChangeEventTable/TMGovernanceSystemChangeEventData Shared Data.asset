@@ -39,6 +39,10 @@ MonoBehaviour:
     m_Key: BottomEffect
     m_Metadata:
       m_Items: []
+  - m_Id: 4232448777904128
+    m_Key: NewEntryKey
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

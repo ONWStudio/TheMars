@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TMPriceOfGrowthEventData_ko-KR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ko-KR
+  m_SharedData: {fileID: 11400000, guid: 5008770f65cde4668bae3bd497c65b53, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 3859782033408
+    m_Localized: "\uB2F9\uC2E0\uC740 \uAE30\uC5C5\uC774 \uB354 \uC774\uC0C1 \uC131\uC7A5\uD558\uC9C0
+      \uBABB\uD558\uB3C4\uB85D \uACB0\uAD6D \uC815\uBD80\uC5D0 \uB3C4\uC6C0\uC744
+      \uCCAD\uD558\uAC8C \uB418\uC5C8\uB2E4.\n\uC815\uBD80\uB294 \uC704\uAE30 \uC0C1\uD669\u3147\uC744
+      \uBE60\uB974\uAC8C \uD655\uC778\uD558\uACE0 \uB2F9\uC2E0\uC758 \uC694\uCCAD\uC5D0
+      \uC751\uB2F5\uD574 \uC8FC\uC5C8\uB2E4.\n\uC774\uD6C4 \uAE30\uC5C5\uC758 \uBE44\uC724\uB9AC\uC801\uC778
+      \uD589\uC704\uB97C \uC870\uC0AC\uD558\uC5EC \uC2DC\uBBFC\uB4E4\uC5D0\uAC8C
+      \uC0AC\uC2E4\uC744 \uC54C\uB9AC\uACE0 \uB2E4\uC2DC\uAE08 \uC81C\uC815\uC744
+      \uC548\uC815\uC801\n\uC774\uAC8C \uB420 \uC218 \uC788\uC5C8\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4191375319040
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9475485327360
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22431107375107
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22431107375106
+    m_Localized: "\uC131\uC7A5\uC758 \uB300\uAC00"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22431107375104
+    m_Localized: "\"\uB2F9\uC2E0\uC744 \uBBFF\uC5C8\uB294\uB370...\uB2E4\uC2DC \uC2E0\uB8B0\uB97C
+      \uC313\uC73C\uB824\uBA74 \uC2DC\uAC04\uC774 \uD544\uC694\uD558\uACA0\uC5B4\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22431107375105
+    m_Localized: "\"\uB2F9\uC2E0\uC744 \uBBFF\uC5C8\uB294\uB370...\uB2E4\uC2DC \uC2E0\uB8B0\uB97C
+      \uC313\uC73C\uB824\uBA74 \uC2DC\uAC04\uC774 \uD544\uC694\uD558\uACA0\uC5B4\""
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

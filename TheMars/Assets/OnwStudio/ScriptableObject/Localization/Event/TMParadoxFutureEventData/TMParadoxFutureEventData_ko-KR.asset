@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TMParadoxFutureEventData_ko-KR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ko-KR
+  m_SharedData: {fileID: 11400000, guid: f526d638f29fc4e87aac7e86b0af51f4, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 4853453322907287647
+  m_TableData:
+  - m_Id: 18234974658560
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18818301681664
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38430888157184
+    m_Localized: "\uACFC\uD559 \uBC1C\uC804\uC5D0 \uB300\uD55C \uACFC\uB3C4\uD55C
+      \uC5F4\uC815\uC740 \uACB0\uAD6D \uD654\uC131\uC744 \uD669\uD3D0\uD654 \uC2DC\uD0A4\uACE0
+      \uB9D0\uC558\uB2E4.\n\uC7AC\uB09C\uC740 \uC2DC\uBBFC\uB4E4\uC774 \uC0DD\uC874\uC5D0
+      \uB354 \uD544\uC0AC\uC801\uC73C\uB85C \uB9CC\uB4E4\uAC8C \uD558\uACE0 \uC774\uB85C
+      \uC778\uD574 \uD658\uACBD\uC740 \uAE09\uC18D\uD788 \uC545\uD654 \uB418\uC5B4\uB9CC
+      \uAC14\uB2E4.\n\uC774\uB4E4\uC5D0\uAC8C \uC788\uC5B4 \uACFC\uD559\uC758 \uC9C4\uBCF4\uB294
+      \uC544\uBB34\uB7F0 \uC704\uC548\uC774 \uB418\uC9C0 \uC54A\uC558\uACE0\n\uC624\uD788\uB824
+      \uBE44\uB09C\uC758 \uB300\uC0C1\uC774 \uB418\uC5B4\uB9CC \uAC14\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38430888157185
+    m_Localized: "\uC7AC\uC548\uC73C\uB85C \uC778\uD574 \uC77C\uC5B4\uB09C \uD53C\uD574\uB97C
+      \uC904\uC5EC\uC57C \uB41C\uB2E4..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38430888157186
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38430892351488
+    m_Localized: "\uD30C\uB77C\uB3C5\uC2A4 \uD4E8\uCC98"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38430892351489
+    m_Localized: "* \uD558\uB8E8\uB9C8\uB2E4 \uB9CC\uC871\uB3C4 {SatisfactionSubtractByDay}%
+      \uAC10\uC18C(\uC601\uAD6C \uC9C0\uC18D)\n* \uD558\uB8E8\uB9C8\uB2E4 {CreditSubtractByDay}
+      \uD06C\uB808\uB527 \uC18C\uBAA8(\uC601\uAD6C \uC9C0\uC18D)\n* \uAC74\uBB3C
+      \uAC74\uC124 \uC2DC \uC18C\uBAA8 \uB418\uB294 \uC790\uC6D0 \uAC01\uAC01 +{ResourceSubtractByCreateBuilding}(\uC601\uAD6C
+      \uC9C0\uC18D)"
+    m_Metadata:
+      m_Items:
+      - rid: 4853453322907287647
+  references:
+    version: 2
+    RefIds:
+    - rid: 4853453322907287647
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 01e0afe3f3220000

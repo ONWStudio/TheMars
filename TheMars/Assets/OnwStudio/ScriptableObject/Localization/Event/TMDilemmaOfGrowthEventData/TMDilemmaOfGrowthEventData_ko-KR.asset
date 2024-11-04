@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TMDilemmaOfGrowthEventData_ko-KR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ko-KR
+  m_SharedData: {fileID: 11400000, guid: 90c37d5993f1d43aba36927e20807944, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 4853453322907287642
+  m_TableData:
+  - m_Id: 2767183876
+    m_Localized: "* \uD558\uB8E8\uB9C8\uB2E4 {PopulationSubtractByDayMin} ~ {PopulationSubtractByDayMax}\uBA85\uC758
+      \uC778\uAD6C\uAC00 \uBB34\uC791\uC704\uB85C \uAC10\uC18C({PopulationSubtractDayCount}\uC77C)\n*
+      \uAE30\uC5C5\uACFC\uC758 \uD30C\uD2B8\uB108\uC2ED \uC5F0\uACC4"
+    m_Metadata:
+      m_Items:
+      - rid: 4853453322907287642
+  - m_Id: 2767183874
+    m_Localized: "\uC131\uC7A5\uC758 \uB51C\uB808\uB9C8"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2762989568
+    m_Localized: "\uB2F9\uC2E0\uC740 \uC790\uBCF8\uC8FC\uC758\uB97C \uADF9\uB300\uD654
+      \uD558\uAE30\uB85C \uACB0\uC815\uD55C \uC774\uD6C4\n\uD654\uC131\uC740 \uBE60\uB978
+      \uACBD\uC81C \uC131\uC7A5\uACFC \uD568\uAED8 \uB2E4\uC591\uD55C \uC0B0\uC5C5\uC774
+      \uBC1C\uC804 \uD588\uB2E4.\n\uADF8\uB7EC\uB098 \uC774\uB85C \uC778\uD574 \uC790\uC6D0
+      \uACE0\uAC08\uACFC \uD658\uACBD \uC624\uC5FC\uC774 \uC2EC\uAC01\uD574\uC9C0\uACE0,
+      \n\uC2DC\uBBFC\uB4E4\uC740 \uC810\uC810 \uB354 \uB9CE\uC740 \uAC74\uAC15 \uBB38\uC81C\uC5D0
+      \uC2DC\uB2EC\uB9AC\uAC8C \uB418\uC5C8\uB2E4.\n\uC774\uB7EC\uD55C \uC0C1\uD669\uC5D0\uC11C
+      \uC815\uBD80\uB294 \uAE30\uC5C5\uC758 \uD65C\uB3D9\uC744 \uC870\uC815\uD560
+      \uD544\uC694\uAC00 \uC788\uB2E4\uB294 \uC5F0\uB77D\uC744 \uBC1B\uAC8C \uB418\uC5C8\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2767183872
+    m_Localized: "\uC9C0\uAE08\uC774\uB77C\uB3C4 \uADF8\uB4E4\uC744 \uC81C\uC9C0
+      \uD574\uC57C\uACA0\uC5B4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2767183873
+    m_Localized: "\"\uC800\uD76C\uAC00 \uCE5C\uD658\uACBD \uAE30\uC220\uC744 \uAC1C\uBC1C
+      \uD558\uACA0\uC2B5\uB2C8\uB2E4!\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2767183875
+    m_Localized: "* \uB9CC\uC871\uB3C4 +{SatisfactionAddByDay}%({SatisfactionAddDayCount}\uC77C)\n*
+      \uD604\uC7AC \uC124\uCE58\uB41C \uBB34\uC791\uC704 \uAC74\uBB3C\uC758 \uB4F1\uAE09
+      \uD558\uB77D({TargetBuildingCount}\uCC44)\n* \uD658\uACBD \uADDC\uC81C \uAC15\uD654
+      \uC5F0\uACC4"
+    m_Metadata:
+      m_Items:
+      - rid: 4853453322907287642
+  references:
+    version: 2
+    RefIds:
+    - rid: 4853453322907287642
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 03e0efa40000000004e0efa400000000

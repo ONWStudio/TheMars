@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TMMomentOfACrackEventData_ko-KR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ko-KR
+  m_SharedData: {fileID: 11400000, guid: f00a64013c0324d22ae1dd3fa9ddc0a0, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 4853453322907287632
+  m_TableData:
+  - m_Id: 2469388290
+    m_Localized: "\uADE0\uC5F4\uC758 \uC21C\uAC04"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2465193984
+    m_Localized: "\uD14C\uB77C\uD3EC\uBC0D\uC744 \uC704\uD55C \uB300\uADDC\uBAA8
+      \uC2E4\uD5D8 \uB3C4\uC911 \uC0AC\uACE0\uAC00 \uBC1C\uC0DD\uD574, \uD654\uC131\uC758
+      \uD2B9\uC815 \uC9C0\uC5ED\uC774 \uC704\uD5D8\uC5D0 \uCC28\uD574\uBC84\uB838\uB2E4.\n\uC5F0\uAD6C\uB97C
+      \uBA48\uCD94\uBA74 \uC548\uC804\uC744 \uBCF4\uC7A5\uD560 \uC218 \uC788\uC9C0\uB9CC,
+      \uACFC\uD559\uC801 \uBC1C\uACAC\uC758 \uAE30\uD68C\uB294 \uC0AC\uB77C\uC9C8
+      \uC218 \uC788\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2469388288
+    m_Localized: "* \uAE30\uC220\uC744 \uC9C0\uD0A8\uB2E4"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2469388289
+    m_Localized: "\uC0AC\uB78C\uB4E4\uC744 \uB300\uD53C \uC2DC\uD0A8\uB2E4"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2469388291
+    m_Localized: "* \uC778\uAD6C {PopulationSubtract}\uBA85 \uC18C\uBAA8\n* \uBB34\uC791\uC704\uB85C
+      {PopulationSubtractMin} ~ {PopulationSubtractMax}\uBA85 \uAC10\uC18C({PopulationSubtractMax}
+      \uC774\uD558 \uC77C \uC2DC \uC804\uBD80 \uC18C\uBAA8)\n* \uB9CC\uC871\uB3C4
+      {SatisfactionSubtractByDay}%\uAC10\uC18C ({SatisfactionSubtractDayCount}\uC77C)"
+    m_Metadata:
+      m_Items:
+      - rid: 4853453322907287632
+  - m_Id: 2469388292
+    m_Localized: "* \uB9CC\uC871\uB3C4 {SatisfactionAddByDay}%\uC99D\uAC00 ({SatisfactionDayCount}\uC77C\uB3D9\uC548
+      - \uD558\uB8E8\uC5D0 \uD55C\uBC88\uC529)"
+    m_Metadata:
+      m_Items:
+      - rid: 4853453322907287632
+  references:
+    version: 2
+    RefIds:
+    - rid: 4853453322907287632
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 03e02f930000000004e02f9300000000

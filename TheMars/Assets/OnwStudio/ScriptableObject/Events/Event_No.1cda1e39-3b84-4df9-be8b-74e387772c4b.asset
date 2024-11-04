@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0e44046b31d44509214e4f75e583f3, type: 3}
+  m_Name: Event_No.1cda1e39-3b84-4df9-be8b-74e387772c4b
+  m_EditorClassIdentifier: 
+  <TopEventData>k__BackingField: {fileID: 0}
+  <BottomEventData>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 0}
+  <DescriptionTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMGovernanceSystemChangeEventData
+    m_TableEntryReference:
+      m_KeyId: 127866494976
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TopButtonTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMGovernanceSystemChangeEventData
+    m_TableEntryReference:
+      m_KeyId: 153934094336
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <BottomButtonTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMGovernanceSystemChangeEventData
+    m_TableEntryReference:
+      m_KeyId: 179590651904
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TitleTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMGovernanceSystemChangeEventData
+    m_TableEntryReference:
+      m_KeyId: 27870093312
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TopEffectTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMGovernanceSystemChangeEventData
+    m_TableEntryReference:
+      m_KeyId: 2732344729600
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <BottomEffectTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMGovernanceSystemChangeEventData
+    m_TableEntryReference:
+      m_KeyId: 2741068881920
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TopSteelSubtract>k__BackingField: 20
+  <TopCreditSubtract>k__BackingField: 30
+  <TopSatisfactionAdd>k__BackingField: 20
+  <BottomCreditAdd>k__BackingField: 40
+  <BottomSatisfactionAdd>k__BackingField: 10
+  references:
+    version: 2
+    RefIds: []

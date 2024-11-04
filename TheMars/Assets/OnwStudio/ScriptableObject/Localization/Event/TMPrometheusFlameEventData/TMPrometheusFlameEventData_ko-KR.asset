@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TMPrometheusFlameEventData_ko-KR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ko-KR
+  m_SharedData: {fileID: 11400000, guid: 5ad8c4700f3d14fb8a7a19127295ceb8, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 4853453322907287646
+  m_TableData:
+  - m_Id: 15566231298048
+    m_Localized: "\uACFC\uD559\uC73C\uB85C \uCEE4\uBC84 \uD560 \uC218 \uC788\uC744
+      \uAC83\uC774\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17957102018560
+    m_Localized: "\uB2F9\uC2E0\uC740 \uACFC\uD559\uC758 \uAE30\uC220\uC774 \uC870\uAE08
+      \uB354 \uB3C4\uC6C0\uC774 \uB420 \uAC70\uB77C \uC0DD\uAC01\uD574 \uADF8\uB4E4\uC758
+      \uC190\uC5D0 \uC190\uC744 \uB4E4\uC5B4\uC92C\uB2E4.\n\uC778\uAC04\uC758 \uC0DD\uC874\uACFC
+      \uD3B8\uC758\uB97C \uC704\uD574 \uACFC\uD559\uC801 \uC9C4\uBCF4\uB97C \uCD5C\uC6B0\uC120\uC73C\uB85C
+      \uC0BC\uACE0 \uC774\uB85C\uC778\uD574 \uD654\uC131\uC5D0\uC11C\uC758 \uBC1C\uC804\uC740\n\uC9C0\uAD6C\uB97C
+      \uB2A5\uAC00\uD560 \uC815\uB3C4\uB85C \uBE60\uB974\uAC8C \uC774\uB8E8\uC5B4
+      \uC84C\uB2E4.\n\uD558\uC9C0\uB9CC \uADF8\uC640 \uB3D9\uC2DC\uC5D0 \uC790\uC5F0\uC740
+      \uC644\uC804\uD788 \uD30C\uAD34\uB418\uACE0 \uC0DD\uD0DC\uACC4 \uBCF5\uC6D0\uC740
+      \uBD88\uAC00\uB2A5\uD55C \uC0C1\uD0DC\uC5D0 \uAC00\uAE4C\uC6CC \uC84C\uB2E4.\n\uACFC\uD559\uC758
+      \uC131\uACFC\uB294 \uCC2C\uB780\uD588\uC9C0\uB9CC \uB4F1\uC794 \uBC11\uC740
+      \uC5EC\uC804\uD788 \uC5B4\uB450\uC6B8 \uBFD0\uC774\uC5C8\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31155591045120
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37771694563328
+    m_Localized: "\uD504\uB85C\uBA54\uD14C\uC6B0\uC2A4\uC758 \uBD88\uAF43"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38015324905472
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38078772142080
+    m_Localized: "* \uD558\uB8E8\uB9C8\uB2E4 [\uC790\uC6D0]\uC2DD\uBB3C \uAC10\uC18C
+      -{PlantsSubtractByDay}(\uC601\uAD6C \uC9C0\uC18D)[\uB9CC\uC77C \uC2DD\uBB3C
+      \uC790\uC6D0\uC774 0\uC5D0 \uC218\uB834\uD560 \uACBD\uC6B0 \uB354 \uC774\uC0C1
+      \uB0B4\uB824\uAC00\uC9C0\uB294 \uC54A\uC9C0\uB9CC \uD6A8\uACFC\uB294 \uC9C0\uC18D
+      \uB41C\uB2E4]\n* \uC7AC\uB09C \uD655\uB960\uC744 \uC601\uAD6C\uC801\uC73C\uB85C
+      {FixationDisasterProbability}\uB97C \uAE30\uBCF8 \uC218\uCE58\uB85C \uBCC0\uACBD\uD55C\uB2E4(\uC601\uAD6C
+      \uC9C0\uC18D)"
+    m_Metadata:
+      m_Items:
+      - rid: 4853453322907287646
+  - m_Id: 38078776336384
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4853453322907287646
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00e0afe7a1220000

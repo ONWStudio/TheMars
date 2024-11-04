@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333d763e725da42828c7419e9587766b, type: 3}
+  m_Name: Event_No.effc2e0b-e25c-4129-bd5e-ac23cf6010cd
+  m_EditorClassIdentifier: 
+  <TopEventData>k__BackingField: {fileID: 0}
+  <BottomEventData>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 0}
+  <DescriptionTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMMomentOfACrackEventData
+    m_TableEntryReference:
+      m_KeyId: 2465193984
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TopButtonTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMMomentOfACrackEventData
+    m_TableEntryReference:
+      m_KeyId: 2469388288
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <BottomButtonTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMMomentOfACrackEventData
+    m_TableEntryReference:
+      m_KeyId: 2469388289
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TitleTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMMomentOfACrackEventData
+    m_TableEntryReference:
+      m_KeyId: 2469388290
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TopEffectTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMMomentOfACrackEventData
+    m_TableEntryReference:
+      m_KeyId: 2469388291
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <BottomEffectTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMMomentOfACrackEventData
+    m_TableEntryReference:
+      m_KeyId: 2469388292
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TopPopulationSubtractMin>k__BackingField: 5
+  <TopPopulationSubtractMax>k__BackingField: 10
+  <TopSatisfactionSubtractByDay>k__BackingField: 5
+  <TopSatisfactionSubtractDayCount>k__BackingField: 5
+  <BottomSatisfactionAddByDay>k__BackingField: 5
+  <BottomSatisfactionAddDayCount>k__BackingField: 5
+  references:
+    version: 2
+    RefIds: []

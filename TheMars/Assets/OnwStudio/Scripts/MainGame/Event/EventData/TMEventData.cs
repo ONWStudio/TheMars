@@ -54,12 +54,12 @@ namespace TM.Event
 
         [field: SerializeField, DisplayAs("이벤트 대표 이미지"), SpritePreview] public Sprite EventImage { get; private set; }
 
-        [field: SerializeField, LocalizedString, DisplayAs("[로컬라이징] 이벤트 설명 텍스트")] public LocalizedString DescriptionTextEvent { get; private set; } = new();
-        [field: SerializeField, LocalizedString, DisplayAs("[로컬라이징] 위쪽 버튼 텍스트")] public LocalizedString TopButtonTextEvent { get; private set; } = new();
-        [field: SerializeField, LocalizedString, DisplayAs("[로컬라이징] 아래쪽 버튼 텍스트")] public LocalizedString BottomButtonTextEvent { get; private set; } = new();
-        [field: SerializeField, LocalizedString, DisplayAs("[로컬라이징] 타이틀 텍스트")] public LocalizedString TitleTextEvent { get; private set; } = new();
-        [field: SerializeField, LocalizedString, DisplayAs("[로컬라이징] 위쪽 선택지 효과 텍스트")] public LocalizedString TopEffectTextEvent { get; private set; } = new();
-        [field: SerializeField, LocalizedString, DisplayAs("[로컬라이징] 아래쪽 선택지 효과 텍스트")] public LocalizedString BottomEffectTextEvent { get; private set; } = new();
+        [field: SerializeField, LocalizedString(entryKey: "Description"), DisplayAs("[로컬라이징] 이벤트 설명 텍스트")] public LocalizedString DescriptionTextEvent { get; private set; } = new();
+        [field: SerializeField, LocalizedString(entryKey: "TopButton"), DisplayAs("[로컬라이징] 위쪽 버튼 텍스트")] public LocalizedString TopButtonTextEvent { get; private set; } = new();
+        [field: SerializeField, LocalizedString(entryKey: "BottomButton"), DisplayAs("[로컬라이징] 아래쪽 버튼 텍스트")] public LocalizedString BottomButtonTextEvent { get; private set; } = new();
+        [field: SerializeField, LocalizedString(entryKey: "Title"), DisplayAs("[로컬라이징] 타이틀 텍스트")] public LocalizedString TitleTextEvent { get; private set; } = new();
+        [field: SerializeField, LocalizedString(entryKey: "TopEffect"), DisplayAs("[로컬라이징] 위쪽 선택지 효과 텍스트")] public LocalizedString TopEffectTextEvent { get; private set; } = new();
+        [field: SerializeField, LocalizedString(entryKey: "BottomEffect"), DisplayAs("[로컬라이징] 아래쪽 선택지 효과 텍스트")] public LocalizedString BottomEffectTextEvent { get; private set; } = new();
         
         public abstract bool CanFireTop { get; }
         public abstract bool CanFireBottom { get; }
