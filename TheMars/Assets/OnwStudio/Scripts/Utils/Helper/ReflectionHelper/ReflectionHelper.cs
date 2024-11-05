@@ -56,7 +56,7 @@ namespace Onw.Helper
         /// <returns></returns>
         public static IEnumerable<string> GetCustomLabelFromNestedClass<T>() where T : class
         {
-            IEnumerable<Type> classTypes = GetChildClassesFromBaseType(typeof(T));
+            IEnumerable<Type> classTypes = GetChildTypesFromBaseType(typeof(T));
 
             foreach (Type type in classTypes)
             {
@@ -69,8 +69,19 @@ namespace Onw.Helper
             }
         }
 
-        public static IEnumerable<Type> GetChildClassesFromBaseType(Type baseType)
+        public static IEnumerable<Type> GetChildTypesFromBaseType(Type baseType)
         {
+            return AppDomain
+                .CurrentDomain
+                .GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(type => !type.IsInterface && !type.IsAbstract && baseType.IsAssignableFrom(type));
+        }
+
+        public static IEnumerable<Type> GetChildTypesFromBaseType<T>()
+        {
+            Type baseType = typeof(T);
+
             return AppDomain
                 .CurrentDomain
                 .GetAssemblies()
@@ -88,7 +99,7 @@ namespace Onw.Helper
                 return null;
             }
 
-            return GetChildClassesFromBaseType(baseType);
+            return GetChildTypesFromBaseType(baseType);
         }
 
         public static Type GetTypeFromFieldName(string typeName)

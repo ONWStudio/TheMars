@@ -52,6 +52,120 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2df8a079e2cd445038286dc574d143ac
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMAShipSwayingHereAndThereEventData/TMAShipSwayingHereAndThereEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5e9bf7a1d6ce34213928f4561094ea7a
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMCorporateDrivenSystemEventData/TMCorporateDrivenSystemEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ad8c4700f3d14fb8a7a19127295ceb8
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMPrometheusFlameEventData/TMPrometheusFlameEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f526d638f29fc4e87aac7e86b0af51f4
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMParadoxFutureEventData/TMParadoxFutureEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b3780e0bb5c5749409d065801b3e80bd
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMUnfairTradeEventData/TMUnfairTradeEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5008770f65cde4668bae3bd497c65b53
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMPriceOfGrowthEventData/TMPriceOfGrowthEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61fc015cbef984f209911981242bda63
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMEnvironmentRegulationEnhancementEventData/TMEnvironmentRegulationEnhancementEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9390b94bb1b4e44ed9eb64f1c3a51d99
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMGreenHopeEventData/TMGreenHopeEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: db1bd797164684f0095a8a60243145df
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/TMMarsEternalCycleEventData/TMMarsEternalCycleEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dbf932826834d4bfb8e4b0aa96eeb410
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMStrengtheningCivilAutonomyEventData/TMStrengtheningCivilAutonomyEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6cc962853d6a4484a2fe11775ce6062
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMProgressAndBalanceEventData/TMProgressAndBalanceEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce2f1ba07b36c4a559d574c5906249bc
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMAuroraInnovationEventData/TMAuroraInnovationEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b098bfdb8f2e84ca8bd284655f1a549a
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMAutonomyCommitteeSetupEventData/TMAutonomyCommitteeSetupEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f00a64013c0324d22ae1dd3fa9ddc0a0
+    m_Address: Assets/OnwStudio/ScriptableObject/TMMomentOfACrackEventData/TMMomentOfACrackEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5848bc8d3e45b4c38b93f1039b888bc5
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMWisdomComesWithAgeEventData/TMWisdomComesWithAgeEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c94b26c12e9e484d9eebb67a082380a
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMDemocraticAutonomyNextStepsEventData/TMDemocraticAutonomyNextStepsEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90c37d5993f1d43aba36927e20807944
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMDilemmaOfGrowthEventData/TMDilemmaOfGrowthEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f9f02a651071b4ec299802978efda231
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMDevelopmentOfAnIllusionEventData/TMDevelopmentOfAnIllusionEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2591dbe3466814d1ca7ca3ca89120b4b
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMTransferOfPowerEventData/TMTransferOfPowerEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 3f430e5b5c626400b837c52ed98c1bc2, type: 2}
   m_SchemaSet:

@@ -18,7 +18,7 @@ namespace TM.Editor
 {
     internal sealed class TMCardScrollView : ScriptableObjectScrollView
     {
-        private EditorCoroutine _cardNameObserver;
+        private readonly List<EditorCoroutine> _cardNameObservers = new();
         
         protected override VisualElement CreateHeader()
         {
@@ -83,7 +83,7 @@ namespace TM.Editor
                 BindingFlags.NonPublic | BindingFlags.Instance,
                 out LocalizedString localizedCardName))
             {
-                _cardNameObserver = localizedCardName.MonitorSpecificLocaleEntry("ko-KR", onChangedString);
+                _cardNameObservers.Add(localizedCardName.MonitorSpecificLocaleEntry("ko-KR", onChangedString));
                 if (localizedCardName.IsEmpty)
                 {
                     button.name = field.text = card.name;
@@ -137,10 +137,7 @@ namespace TM.Editor
 
         internal override void OnDisable()
         {
-            if (_cardNameObserver is not null)
-            {
-                EditorCoroutineUtility.StopCoroutine(_cardNameObserver); 
-            }
+            _cardNameObservers.ForEach(EditorCoroutineUtility.StopCoroutine);
         }
     }
 }

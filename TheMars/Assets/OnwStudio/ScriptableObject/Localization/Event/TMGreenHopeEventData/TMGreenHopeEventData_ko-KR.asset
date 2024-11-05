@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TMGreenHopeEventData_ko-KR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ko-KR
+  m_SharedData: {fileID: 11400000, guid: 9390b94bb1b4e44ed9eb64f1c3a51d99, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 4853453322907287643
+  m_TableData:
+  - m_Id: 20007181344768
+    m_Localized: "\uB2F9\uC2E0\uC740 \uD654\uC131\uC5D0\uC11C\uC758 \uC778\uB958\uC758
+      \uBBF8\uB798\uB97C \uC704\uD574 \uC790\uC5F0 \uBCF5\uC6D0\uC744 \uC6B0\uC120\uC2DC
+      \uD558\uAE30\uB85C \uD558\uC600\uB2E4.\n\uC790\uC5F0\uCE5C\uD654\uC801\uC778
+      \uBC29\uBC95\uC73C\uB85C \uC790\uC5F0\uC744 \uC81C\uC791 \uD560 \uC218 \uC788\uB294
+      \uAE30\uC5C5\uACFC \uCD5C\uB300\uD55C \uD611\uC5C5\uD558\uAE30\uB85C \uD558\uACE0\n\uADF8\uB4E4\uC5D0\uAC8C
+      \uB3C4\uC6C0\uC744 \uC694\uCCAD\uD558\uAE30\uB85C \uD558\uC600\uB2E4. \uBE44\uB85D
+      \uD14C\uB77C\uD3EC\uBC0D \uC18D\uB3C4\uB294 \uB290\uB9AC\uC9C0\uB9CC\n\uC7A5\uAE30\uC801\uC73C\uB85C
+      \uD654\uC131\uC758 \uC0DD\uD0DC\uACC4\uB294 \uC790\uAE09\uC790\uC871 \uD560
+      \uC218 \uC788\uB294 \uAE30\uBC18\uC744 \uAC16\uCD9C \uC218 \uC788\uAC8C \uB420
+      \uAC83\uC774\uB2E4.\n\uC774 \uACFC\uC815\uC5D0\uC11C \uACFC\uD559\uACC4 \uC77C\uBD80\uC758
+      \uBC18\uBC1C\uC774 \uC788\uC9C0\uB9CC \uC790\uC5F0 \uBCF5\uC6D0\uC758 \uC131\uACFC\uB294
+      \uBAA8\uB4E0 \uC774\uC5D0\uAC8C \uD76C\uB9DD\uC744 \uC904 \uAC83\uC774\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20007185539072
+    m_Localized: "\uBE44\uB85D \uBC1C\uC804\uC740 \uB290\uB9AC\uC9C0\uB9CC \uD654\uC131\uC758
+      \uC790\uC5F0\uC744 \uC9C0\uD0AC \uC218\uB294 \uC788\uC744 \uAC83\uC774\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20007185539073
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20007189733376
+    m_Localized: "\uCD08\uB85D\uBE5B \uD76C\uB9DD"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20007189733377
+    m_Localized: "* \uD558\uB8E8\uB9C8\uB2E4 \uB9CC\uC871\uB3C4\uAC00 -{SatisfactionSubtractByDay}%
+      \uAC10\uC18C(\uC601\uAD6C \uC9C0\uC18D)"
+    m_Metadata:
+      m_Items:
+      - rid: 4853453322907287643
+  references:
+    version: 2
+    RefIds:
+    - rid: 4853453322907287643
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 01e06f4932120000

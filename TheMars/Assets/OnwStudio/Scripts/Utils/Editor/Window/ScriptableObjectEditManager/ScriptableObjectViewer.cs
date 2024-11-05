@@ -41,7 +41,7 @@ namespace Onw.Editor.Window
 
         protected abstract ScrollBuildOption[] GetTargetScriptableObjectType();
 
-        protected void OnDestroy()
+        protected void OnDisable()
         {
             _inspectorEditor.OnDisable();
             _scrollViews.ForEach(view => view.OnDisable());
@@ -140,8 +140,8 @@ namespace Onw.Editor.Window
                     new() :
                     (Activator.CreateInstance(buildOption.ScrollViewType) as ScriptableObjectScrollView)!;
 
-                buttonOption.Item2.Initialize();
                 buttonOption.Item2.AddRange(ScriptableObjectHandler.LoadAllScriptableObjects(buildOption.ScriptableObjectType));
+                buttonOption.Item2.Initialize();
 
                 return buttonOption;
             }

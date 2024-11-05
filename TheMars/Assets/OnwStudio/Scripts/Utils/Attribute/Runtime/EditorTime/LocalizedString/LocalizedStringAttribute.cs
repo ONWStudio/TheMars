@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Onw.Attribute
 {
@@ -12,22 +13,11 @@ namespace Onw.Attribute
         public string TableName { get; }
         public string EntryKey { get; }
 
-        public LocalizedStringAttribute()
-        {
-            TableName = null;
-            EntryKey = null;
-        }
-        
-        public LocalizedStringAttribute(string tableName)
-        {
-            TableName = tableName;
-            EntryKey = null;
-        }
-
-        public LocalizedStringAttribute(string tableName, string entryKey)
+        public LocalizedStringAttribute(string tableName = null, string entryKey = null)
         {
             TableName = tableName;
             EntryKey = entryKey;
         }
+
     }
 }
