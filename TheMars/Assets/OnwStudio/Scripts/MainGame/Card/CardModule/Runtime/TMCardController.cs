@@ -12,15 +12,7 @@ namespace TM.Card.Runtime
     [DisallowMultipleComponent]
     public sealed class TMCardController : MonoBehaviour
     {
-        public TMCardData CardData
-        {
-            get => _cardData;
-            set
-            {
-                _cardData = value;
-                _cardViewer.SetUI(_cardData);
-            }
-        }
+        public TMCardData CardData { get; set; } = null;
 
         [Header("Model")]
         [SerializeField, InitializeRequireComponent]
@@ -30,20 +22,18 @@ namespace TM.Card.Runtime
         [SerializeField, InitializeRequireComponent]
         private TMCardViewer _cardViewer;
 
-        private TMCardData _cardData;
-
         private void Start()
         {
             if (_cardModel.CardData)
             {
-                CardData = _cardModel.CardData;
+                setCard(_cardModel.CardData);
             }
             else
             {
                 _cardModel
                     .ObserveEveryValueChanged(cardModel => cardModel.CardData)
                     .Take(1)
-                    .Subscribe(cardData => CardData = cardData)
+                    .Subscribe(setCard)
                     .AddTo(this);
             }
             
@@ -51,6 +41,12 @@ namespace TM.Card.Runtime
                 .ObserveEveryValueChanged(cardModel => cardModel.IsHide)
                 .Subscribe(isHide => _cardViewer.SetView(!isHide))
                 .AddTo(this);
+
+            void setCard(TMCardData cardData)
+            {
+                CardData = _cardModel.CardData;
+                _cardViewer.SetUI(_cardModel);
+            }
         }
     }
 }

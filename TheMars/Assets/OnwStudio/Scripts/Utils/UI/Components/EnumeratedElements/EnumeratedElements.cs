@@ -60,22 +60,20 @@ namespace Onw.UI.Components
                 ElementSizeToSpacingYRatio);
         }
 
-        internal void InitGridLayoutGroup(GridLayoutGroup gridLayoutGroup)
+        internal static void InitGridLayoutGroup(GridLayoutGroup gridLayoutGroup)
         {
-            gridLayoutGroup.startCorner = GridLayoutGroup.Corner.UpperLeft;
             gridLayoutGroup.startAxis = GridLayoutGroup.Axis.Horizontal;
-            gridLayoutGroup.childAlignment = TextAnchor.UpperLeft;
             gridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         }
 
-        internal RectOffset GetPadding(float contentWidth, float paddingLeftRatio, float paddingRightRatio, float paddingTopRatio, float paddingBottomRatio)
+        internal static RectOffset GetPadding(float contentWidth, float paddingLeftRatio, float paddingRightRatio, float paddingTopRatio, float paddingBottomRatio)
             => new(
                 (int)(contentWidth * paddingLeftRatio),
                 (int)(contentWidth * paddingRightRatio),
                 (int)(contentWidth * paddingTopRatio),
                 (int)(contentWidth * paddingBottomRatio));
 
-        internal Vector2 GetCellSize(float contentWidth, float elementSizeRatio, float widthToHeightRatio, int constraintCount)
+        internal static Vector2 GetCellSize(float contentWidth, float elementSizeRatio, float widthToHeightRatio, int constraintCount)
         {
             float cellWidth = contentWidth / constraintCount * elementSizeRatio;
             float cellHeight = cellWidth * widthToHeightRatio;
@@ -83,7 +81,7 @@ namespace Onw.UI.Components
             return new Vector2(cellWidth, cellHeight);
         }
 
-        internal Vector2 GetSpacing(Vector2 cellSize, float elementSizeToSpacingXRatio, float elementSizeToSpacingYRatio)
+        internal static Vector2 GetSpacing(Vector2 cellSize, float elementSizeToSpacingXRatio, float elementSizeToSpacingYRatio)
             => new(cellSize.x * elementSizeToSpacingXRatio, cellSize.y * elementSizeToSpacingYRatio);
     }
 }

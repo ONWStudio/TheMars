@@ -1,15 +1,18 @@
 #if UNITY_EDITOR
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using Onw.Editor;
+using Onw.Editor.Extensions;
 
 namespace Onw.Attribute.Editor
 {
     using GUI = UnityEngine.GUI;
 
+    // .. TODO : 추후 컴포넌트 참조시 구조적 문제해결
     [CustomPropertyDrawer(typeof(SelectableSerializeFieldAttribute), true)]
     internal sealed class SelectableSerializeFieldDrawer : PropertyDrawer
     {
@@ -27,7 +30,9 @@ namespace Onw.Attribute.Editor
         
         private readonly TreeViewState _dropdownState = new();
         private GUIContent _buttonContent = null;
-
+        private Type _listType = typeof(List<>);
+        private Type _arrayType = typeof(Array);
+        
         private readonly Dictionary<int, SelectableFieldPropState> _cachedSelectableFieldPropStates = new();
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -35,11 +40,18 @@ namespace Onw.Attribute.Editor
             _buttonContent ??= new(EditorGUIUtility.IconContent("icon dropdown").image);
 
             int hash = property.GetHashCode();
+            Type propertyType = fieldInfo.FieldType switch
+            {
+                var type when type == _listType => type.GetGenericArguments()[0],
+                var type when type.IsArray => type.GetElementType(),
+                var type => type
+            };
+            
             if (!_cachedSelectableFieldPropStates.TryGetValue(hash, out SelectableFieldPropState state))
             {
                 if (property.serializedObject.targetObject is MonoBehaviour monoBehaviour)
                 {
-                    ComponentDropdown dropdown = new(_dropdownState, monoBehaviour.gameObject, fieldInfo.FieldType, go =>
+                    ComponentDropdown dropdown = new(_dropdownState, monoBehaviour.gameObject, propertyType, go =>
                     {
                         if (fieldInfo.FieldType == typeof(GameObject))
                         {
