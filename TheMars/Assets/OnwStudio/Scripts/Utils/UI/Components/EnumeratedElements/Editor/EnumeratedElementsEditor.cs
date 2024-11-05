@@ -36,7 +36,7 @@ internal sealed class EnumeratedElementsEditor : Editor
         _gridLayoutGroup = _enumeratedElements.GetComponent<GridLayoutGroup>();
         _content = _enumeratedElements.GetComponent<RectTransform>();
 
-        _enumeratedElements.InitGridLayoutGroup(_gridLayoutGroup);
+        EnumeratedElements.InitGridLayoutGroup(_gridLayoutGroup);
         _contentSizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
 
         _widthToHeightRatio = serializedObject.FindProperty(GetBackingFieldName("WidthToHeightRatio"));
@@ -78,20 +78,20 @@ internal sealed class EnumeratedElementsEditor : Editor
             _paddingBottomRatio.floatValue = EditorGUILayout.Slider("Bottom", _paddingBottomRatio.floatValue, 0f, 0.1f);
         });
 
-        _gridLayoutGroup.padding = _enumeratedElements.GetPadding(
+        _gridLayoutGroup.padding = EnumeratedElements.GetPadding(
             _content.rect.width,
             _paddingLeftRatio.floatValue,
             _paddingRightRatio.floatValue,
             _paddingTopRatio.floatValue,
             _paddingBottomRatio.floatValue);
 
-        _gridLayoutGroup.cellSize = _enumeratedElements.GetCellSize(
+        _gridLayoutGroup.cellSize = EnumeratedElements.GetCellSize(
             _content.rect.width,
             _elementSizeRatio.floatValue,
             _widthToHeightRatio.floatValue,
             _gridLayoutGroup.constraintCount);
 
-        _gridLayoutGroup.spacing = _enumeratedElements.GetSpacing(
+        _gridLayoutGroup.spacing = EnumeratedElements.GetSpacing(
             _gridLayoutGroup.cellSize,
             _elementSizeToSpacingXRatio.floatValue,
             _elementSizeToSpacingYRatio.floatValue);

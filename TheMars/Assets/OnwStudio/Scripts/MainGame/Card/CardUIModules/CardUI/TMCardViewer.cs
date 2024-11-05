@@ -1,15 +1,14 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
 using UnityEngine.Serialization;
 using TMPro;
 using Onw.Attribute;
+using Onw.Extensions;
+using Onw.Interface;
 using TM.Card.Effect;
-using UnityEngine.Localization.Components;
 
 namespace TM.Card.Runtime
 {
@@ -27,29 +26,25 @@ namespace TM.Card.Runtime
         [FormerlySerializedAs("backgroundImage")]
         [SerializeField, SelectableSerializeField]
         private Image _backgroundImage;
-
-        [SerializeField, InitializeRequireComponent]
-        private Image _raycastImage;
         
-        [Header("Description Option")]
-        [SerializeField, SelectableSerializeField]
-        private TextMeshProUGUI _descriptionText;
-
-        [SerializeField, SelectableSerializeField]
-        private LocalizeStringEvent _descriptionStringEvent;
-
-        [Header("Name Option")]
-        [SerializeField, SelectableSerializeField]
-        private TextMeshProUGUI _nameText;
-
         [Header("Cost Option")]
         [SerializeField, SelectableSerializeField]
-        private Image _costFieldImage;
-        
-        [SerializeField, SelectableSerializeField]
         private TextMeshProUGUI _costText;
+
+        [SerializeField, SelectableSerializeField]
+        private Image _costImage;
         
         private Action<Locale> _onLanguageChanged = null;
+
+        [Header("Resource")]
+        [SerializeField]
+        private Sprite _electricitySprite;
+
+        [SerializeField]
+        private Sprite _creditSprite;
+
+        [FormerlySerializedAs("_viewerComponents")]
+        [SerializeField] private Behaviour[] _viewComponents;
         
         private void buildDescriptionText(ITMCardEffect[] effects)
         {
@@ -59,35 +54,15 @@ namespace TM.Card.Runtime
 
         public void SetView(bool isOn)
         {
-            _cardImage.enabled = isOn;
-            _backgroundImage.enabled = isOn;
-            _descriptionText.enabled = isOn;
-            _nameText.enabled = isOn;
-            _costFieldImage.enabled = isOn;
-            _costText.enabled = isOn;
+            _viewComponents.ForEach(component => component.enabled = isOn);
         }
         
-        public void SetUI(TMCardData cardData)
+        public void SetUI(TMCardModel cardModel)
         {
+            TMCardData cardData = cardModel.CardData;
             _cardImage.sprite = cardData.CardImage;
-
-            // buildDescriptionText(effects);
-            // _onLanguageChanged = locale => buildDescriptionText(effects);
-
-            // foreach (INotifier notifier in effects.OfType<INotifier>())
-            // {
-            //     notifier.Event.AddListener(eventType => buildDescriptionText(effects));
-            // }
-            
-            _nameText.text = cardData.CardName;
-            _onLanguageChanged += locale => _nameText.text = cardData.CardName;
-            
-            LocalizationSettings.SelectedLocaleChanged += _onLanguageChanged;
-        }
-
-        private void OnDestroy()
-        {
-            LocalizationSettings.SelectedLocaleChanged -= _onLanguageChanged;
+            _costText.text = cardData.MainCost.Cost.ToString();
+            _costImage.sprite = cardData.MainCost.CostKind == TMMainCost.ELECTRICITY ? _electricitySprite : _creditSprite;
         }
     }
 }
