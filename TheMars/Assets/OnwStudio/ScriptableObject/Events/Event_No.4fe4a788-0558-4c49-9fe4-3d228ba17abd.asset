@@ -19,7 +19,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMProgressAndBalanceEventData
     m_TableEntryReference:
-      m_KeyId: 2846875648
+      m_KeyId: 319847526293504
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMProgressAndBalanceEventData
     m_TableEntryReference:
-      m_KeyId: 2851069952
+      m_KeyId: 319847568236544
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMProgressAndBalanceEventData
     m_TableEntryReference:
-      m_KeyId: 2851069953
+      m_KeyId: 319847572430848
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMProgressAndBalanceEventData
     m_TableEntryReference:
-      m_KeyId: 2851069954
+      m_KeyId: 319847576625152
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMProgressAndBalanceEventData
     m_TableEntryReference:
-      m_KeyId: 2851069955
+      m_KeyId: 319847576625153
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMProgressAndBalanceEventData
     m_TableEntryReference:
-      m_KeyId: 2851069956
+      m_KeyId: 319847576625154
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

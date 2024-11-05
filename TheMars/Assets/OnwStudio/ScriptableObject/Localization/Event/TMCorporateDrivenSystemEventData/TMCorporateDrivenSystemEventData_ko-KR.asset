@@ -19,10 +19,6 @@ MonoBehaviour:
     m_Items:
     - rid: 4853453322907287635
   m_TableData:
-  - m_Id: 24976023552
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
   - m_Id: 76982388776964
     m_Localized: "* \uB4F1\uC7A5\uD558\uB294 \uCE74\uB4DC\uC758 \uC218 -{CollecCardCountSubtract}({CollectCardCountDayCount}\uC77C
       \uC9C0\uC18D)\n* \uC778\uAD6C \uC218 +{PopulationAdd} \uC99D\uAC00\n* \uD5C8\uC0C1\uC758
@@ -59,10 +55,67 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 4853453322907287635
+  - m_Id: 359427101155330
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 359427096961024
+    m_Localized: "\uD604\uC7AC \uD14C\uB77C\uD3EC\uBC0D \uACC4\uD68D\uC5D0 \uCC38\uC5EC\uD558\uACE0
+      \uC788\uB294 \uC758\uC6D0\uB4E4\uACFC \uC9C1\uC6D0\uB4E4\uC744 \uC18C\uC9D1\uD558\uC600\uB2E4.\n\uC6B0\uB9AC\uB294
+      \uD604\uC7AC \uC8FC\uBBFC\uC758 \uC0C1\uD669\uACFC\uD604\uC7AC \uD654\uC131\uC5D0
+      \uB300\uD574\uC11C \uB17C\uC758\uD588\uC9C0\uB9CC, \uACB0\uB860\uC740 \uB05D\uC5C6\uC774
+      \uB098\uC624\uC9C0 \uC54A\uB294 \uAC83 \uAC19\uB2E4.\n\uC0AC\uB78C\uB4E4\uC740
+      \uBAA8\uB450 \uB098\uC758 \uC758\uACAC\uACFC \uACB0\uC815\uB9CC\uC744 \uAE30\uB2E4\uB9AC\uACE0
+      \uC788\uB294 \uB4EF \uBCF4\uC778\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 360514256363520
+    m_Localized: "\u3134\u3141\u3139\u3147\u3134\u3141\u3139\u3134\u3141\u3139\u3134"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361013097521152
+    m_Localized: "\uD604\uC7AC \uD14C\uB77C\uD3EC\uBC0D \uACC4\uD68D\uC5D0 \uCC38\uC5EC\uD558\uACE0
+      \uC788\uB294 \uC758\uC6D0\uB4E4\uACFC \uC9C1\uC6D0\uB4E4\uC744 \uC18C\uC9D1\uD558\uC600\uB2E4.\n\uC6B0\uB9AC\uB294
+      \uD604\uC7AC \uC8FC\uBBFC\uC758 \uC0C1\uD669\uACFC \uD604\uC7AC \uD654\uC131\uC5D0
+      \uB300\uD574\uC11C \uB17C\uC758\uD588\uC9C0\uB9CC, \uACB0\uB860\uC740 \uB05D\uC5C6\uC774
+      \uB098\uC624\uC9C0 \uC54A\uB294 \uAC83 \uAC19\uB2EB.\n\uC0AC\uB78C\uB4E4\uC740
+      \uBAA8\uB450 \uB098\uC758 \uC758\uACAC\uACFC \uACB0\uC815\uB9CC\uC744 \uAE30\uB2E4\uB9AC\uACE0
+      \uC788\uB294 \uB4EF \uBCF4\uC778\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361013122686976
+    m_Localized: "\uC2DC\uC7A5\uC758 \uC790\uC720 \uACBD\uC81C\uB9CC \uC720\uC9C0\uD574
+      \uC900\uB2E4\uBA74 \uAC74\uB4E4\uC9C0\uB294 \uB9D0\uC790"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361013122686977
+    m_Localized: "\uAE30\uC5C5\uB3C4 \uB3C8\uC744 \uBC8C\uB824\uACE0 \uC5EC\uAE30
+      \uC628\uAC70\uC57C.\n\uC11C\uB85C \uC708\uC708 \uD558\uC790\uACE0"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361013126881280
+    m_Localized: "\uAE30\uC5C5 \uC8FC\uB3C4 \uCCB4\uC81C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361013126881281
+    m_Localized: "\uD6A8\uACFC\n* \uD558\uB8E8\uB9C8\uB2E4 \uB4F1\uC7A5\uD558\uB294
+      \uCE74\uB4DC\uC758 \uC218 -{CollectCardCountSubtract}({CollectCardCountDayCount}\uC77C)\n*
+      \uC778\uAD6C \uC218 +{PopulationAdd} \uC99D\uAC00"
+    m_Metadata:
+      m_Items:
+      - rid: 4853453322907287635
+  - m_Id: 361013126881282
+    m_Localized: "\uD6A8\uACFC\n* \uD558\uB8E8\uB9C8\uB2E4 \uB4F1\uC7A5\uD558\uB294
+      \uCE74\uB4DC \uAC1C\uC218 +{CollectCardCountAdd}({CollectCardCountDayCount}\uC77C)\n*
+      \uD558\uB8E8\uB9C8\uB2E4 \uAC74\uC124 \uB610\uB294 \uB9C8\uB974\uC2A4 \uB9AC\uD2AC
+      \uD68D\uB4DD +{ConstructionOrMarsLithiumAddByDay}({ConstructionOrMarsLithiumAddDayCount}\uC77C)"
+    m_Metadata:
+      m_Items:
+      - rid: 4853453322907287635
   references:
     version: 2
     RefIds:
     - rid: 4853453322907287635
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 04e0efdb0346000005e0efdb03460000
+        m_Entries: 04e0efdb0346000005e0efdb0346000001e02feb5648010002e02feb56480100

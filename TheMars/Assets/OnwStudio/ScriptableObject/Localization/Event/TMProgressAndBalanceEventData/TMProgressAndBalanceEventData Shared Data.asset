@@ -14,7 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: TMProgressAndBalanceEventData
   m_TableCollectionNameGuidString: c6cc962853d6a4484a2fe11775ce6062
-  m_Entries: []
+  m_Entries:
+  - m_Id: 319847526293504
+    m_Key: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 319847568236544
+    m_Key: TopButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 319847572430848
+    m_Key: BottomButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 319847576625152
+    m_Key: Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 319847576625153
+    m_Key: TopEffect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 319847576625154
+    m_Key: BottomEffect
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -14,7 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: TMDevelopmentOfAnIllusionEventData
   m_TableCollectionNameGuidString: f9f02a651071b4ec299802978efda231
-  m_Entries: []
+  m_Entries:
+  - m_Id: 306927987843072
+    m_Key: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 306928000425984
+    m_Key: TopButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 306928000425985
+    m_Key: BottomButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 306928004620288
+    m_Key: Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 306928004620289
+    m_Key: TopEffect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 306928004620290
+    m_Key: BottomEffect
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

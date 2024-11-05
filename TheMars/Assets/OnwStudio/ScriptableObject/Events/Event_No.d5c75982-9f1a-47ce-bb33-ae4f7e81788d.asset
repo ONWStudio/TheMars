@@ -19,7 +19,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDevelopmentOfAnIllusionEventData
     m_TableEntryReference:
-      m_KeyId: 2444222464
+      m_KeyId: 306927987843072
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDevelopmentOfAnIllusionEventData
     m_TableEntryReference:
-      m_KeyId: 2448416768
+      m_KeyId: 306928000425984
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDevelopmentOfAnIllusionEventData
     m_TableEntryReference:
-      m_KeyId: 2448416769
+      m_KeyId: 306928000425985
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDevelopmentOfAnIllusionEventData
     m_TableEntryReference:
-      m_KeyId: 2448416770
+      m_KeyId: 306928004620288
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDevelopmentOfAnIllusionEventData
     m_TableEntryReference:
-      m_KeyId: 2448416771
+      m_KeyId: 306928004620289
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDevelopmentOfAnIllusionEventData
     m_TableEntryReference:
-      m_KeyId: 2448416772
+      m_KeyId: 306928004620290
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

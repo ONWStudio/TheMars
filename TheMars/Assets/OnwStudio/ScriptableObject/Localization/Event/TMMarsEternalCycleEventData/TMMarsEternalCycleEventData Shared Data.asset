@@ -14,7 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: TMMarsEternalCycleEventData
   m_TableCollectionNameGuidString: db1bd797164684f0095a8a60243145df
-  m_Entries: []
+  m_Entries:
+  - m_Id: 322069244928000
+    m_Key: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322069282676736
+    m_Key: TopButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322069282676737
+    m_Key: BottomButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322069286871040
+    m_Key: Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322069286871041
+    m_Key: TopEffect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322069286871042
+    m_Key: BottomEffect
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

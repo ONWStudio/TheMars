@@ -52,7 +52,6 @@ namespace TM.Editor
 
             void onChangedString(string eventName)
             {
-                Debug.Log("Event!");
                 button.name = button.text = string.IsNullOrEmpty(eventName) ? eventData.name : eventName;
             }
         }

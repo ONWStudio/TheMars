@@ -14,7 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: TMWisdomComesWithAgeEventData
   m_TableCollectionNameGuidString: 5848bc8d3e45b4c38b93f1039b888bc5
-  m_Entries: []
+  m_Entries:
+  - m_Id: 286497096851456
+    m_Key: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 286497096851457
+    m_Key: TopButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 286497096851458
+    m_Key: BottomButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 286497101045760
+    m_Key: Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 286497109434368
+    m_Key: TopEffect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 286497109434369
+    m_Key: BottomEffect
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

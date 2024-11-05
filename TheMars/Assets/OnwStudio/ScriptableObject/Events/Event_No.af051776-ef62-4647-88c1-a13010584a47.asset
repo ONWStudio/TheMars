@@ -28,7 +28,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMUnfairTradeEventData
     m_TableEntryReference:
-      m_KeyId: 25151050604544
+      m_KeyId: 311372318498816
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMUnfairTradeEventData
     m_TableEntryReference:
-      m_KeyId: 25151050604545
+      m_KeyId: 311372318498817
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMUnfairTradeEventData
     m_TableEntryReference:
-      m_KeyId: 25151054798848
+      m_KeyId: 311372322693120
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMUnfairTradeEventData
     m_TableEntryReference:
-      m_KeyId: 25151054798849
+      m_KeyId: 311372326887424
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMUnfairTradeEventData
     m_TableEntryReference:
-      m_KeyId: 25151054798850
+      m_KeyId: 311372326887425
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

@@ -28,7 +28,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMPriceOfGrowthEventData
     m_TableEntryReference:
-      m_KeyId: 22431107375104
+      m_KeyId: 310624235020288
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMPriceOfGrowthEventData
     m_TableEntryReference:
-      m_KeyId: 22431107375105
+      m_KeyId: 310624260186112
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMPriceOfGrowthEventData
     m_TableEntryReference:
-      m_KeyId: 22431107375106
+      m_KeyId: 310624260186113
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMPriceOfGrowthEventData
     m_TableEntryReference:
-      m_KeyId: 22431107375107
+      m_KeyId: 310624264380416
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

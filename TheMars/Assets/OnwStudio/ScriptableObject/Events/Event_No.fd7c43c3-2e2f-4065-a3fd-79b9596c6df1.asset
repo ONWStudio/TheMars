@@ -19,7 +19,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDilemmaOfGrowthEventData
     m_TableEntryReference:
-      m_KeyId: 2762989568
+      m_KeyId: 313306358210560
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDilemmaOfGrowthEventData
     m_TableEntryReference:
-      m_KeyId: 2767183872
+      m_KeyId: 313306370793472
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDilemmaOfGrowthEventData
     m_TableEntryReference:
-      m_KeyId: 2767183873
+      m_KeyId: 313306370793473
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDilemmaOfGrowthEventData
     m_TableEntryReference:
-      m_KeyId: 2767183874
+      m_KeyId: 313306370793474
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDilemmaOfGrowthEventData
     m_TableEntryReference:
-      m_KeyId: 2767183875
+      m_KeyId: 313306370793475
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDilemmaOfGrowthEventData
     m_TableEntryReference:
-      m_KeyId: 2767183876
+      m_KeyId: 313306374987776
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

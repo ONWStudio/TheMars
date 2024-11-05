@@ -15,8 +15,28 @@ MonoBehaviour:
   m_TableCollectionName: TMCorporateDrivenSystemEventData
   m_TableCollectionNameGuidString: 5e9bf7a1d6ce34213928f4561094ea7a
   m_Entries:
-  - m_Id: 24976023552
-    m_Key: NewEntryKey
+  - m_Id: 361013097521152
+    m_Key: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361013122686976
+    m_Key: TopButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361013122686977
+    m_Key: BottomButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361013126881280
+    m_Key: Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361013126881281
+    m_Key: TopEffect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361013126881282
+    m_Key: BottomEffect
     m_Metadata:
       m_Items: []
   m_Metadata:

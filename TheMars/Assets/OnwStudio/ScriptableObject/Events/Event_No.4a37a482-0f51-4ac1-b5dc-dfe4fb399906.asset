@@ -28,7 +28,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMCorporatePartnershipEventData
     m_TableEntryReference:
-      m_KeyId: 1075318407290880
+      m_KeyId: 1376461100408832
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMCorporatePartnershipEventData
     m_TableEntryReference:
-      m_KeyId: 1075318407290881
+      m_KeyId: 1376461104603136
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMCorporatePartnershipEventData
     m_TableEntryReference:
-      m_KeyId: 1075318407290882
+      m_KeyId: 1376461104603137
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMCorporatePartnershipEventData
     m_TableEntryReference:
-      m_KeyId: 1075318411485184
+      m_KeyId: 1376461104603138
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMCorporatePartnershipEventData
     m_TableEntryReference:
-      m_KeyId: 1075318411485185
+      m_KeyId: 1376461108797440
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

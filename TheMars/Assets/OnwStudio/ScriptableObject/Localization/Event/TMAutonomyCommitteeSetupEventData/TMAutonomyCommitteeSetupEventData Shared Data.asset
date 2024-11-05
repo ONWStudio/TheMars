@@ -14,7 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: TMAutonomyCommitteeSetupEventData
   m_TableCollectionNameGuidString: b098bfdb8f2e84ca8bd284655f1a549a
-  m_Entries: []
+  m_Entries:
+  - m_Id: 298567951441920
+    m_Key: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 298567993384960
+    m_Key: TopButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 298567997579264
+    m_Key: BottomButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 298567997579265
+    m_Key: Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 298568001773568
+    m_Key: TopEffect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 298568001773569
+    m_Key: BottomEffect
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

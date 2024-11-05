@@ -31,6 +31,26 @@ MonoBehaviour:
     m_Key: NewEntryKey_3
     m_Metadata:
       m_Items: []
+  - m_Id: 1376461100408832
+    m_Key: TopButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1376461104603136
+    m_Key: BottomButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1376461104603137
+    m_Key: Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1376461104603138
+    m_Key: TopEffect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1376461108797440
+    m_Key: BottomEffect
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -19,7 +19,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMEnvironmentRegulationEnhancementEventData
     m_TableEntryReference:
-      m_KeyId: 22577023016960
+      m_KeyId: 337277342441472
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMEnvironmentRegulationEnhancementEventData
     m_TableEntryReference:
-      m_KeyId: 22577023016961
+      m_KeyId: 337277355024384
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMEnvironmentRegulationEnhancementEventData
     m_TableEntryReference:
-      m_KeyId: 22577027211264
+      m_KeyId: 337277355024385
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMEnvironmentRegulationEnhancementEventData
     m_TableEntryReference:
-      m_KeyId: 22577027211265
+      m_KeyId: 337277355024386
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMEnvironmentRegulationEnhancementEventData
     m_TableEntryReference:
-      m_KeyId: 22577027211266
+      m_KeyId: 337277359218688
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMEnvironmentRegulationEnhancementEventData
     m_TableEntryReference:
-      m_KeyId: 22577027211267
+      m_KeyId: 337277359218689
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

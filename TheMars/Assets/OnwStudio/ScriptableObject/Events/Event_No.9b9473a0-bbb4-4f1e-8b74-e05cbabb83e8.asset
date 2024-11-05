@@ -19,7 +19,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMWisdomComesWithAgeEventData
     m_TableEntryReference:
-      m_KeyId: 5099216896
+      m_KeyId: 286497096851456
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMWisdomComesWithAgeEventData
     m_TableEntryReference:
-      m_KeyId: 5099216897
+      m_KeyId: 286497096851457
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMWisdomComesWithAgeEventData
     m_TableEntryReference:
-      m_KeyId: 5099216898
+      m_KeyId: 286497096851458
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMWisdomComesWithAgeEventData
     m_TableEntryReference:
-      m_KeyId: 5099216899
+      m_KeyId: 286497101045760
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMWisdomComesWithAgeEventData
     m_TableEntryReference:
-      m_KeyId: 5103411200
+      m_KeyId: 286497109434368
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMWisdomComesWithAgeEventData
     m_TableEntryReference:
-      m_KeyId: 5103411201
+      m_KeyId: 286497109434369
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

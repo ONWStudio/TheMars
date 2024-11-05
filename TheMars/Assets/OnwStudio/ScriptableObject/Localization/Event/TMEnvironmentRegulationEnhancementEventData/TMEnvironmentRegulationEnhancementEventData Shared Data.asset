@@ -14,7 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: TMEnvironmentRegulationEnhancementEventData
   m_TableCollectionNameGuidString: 61fc015cbef984f209911981242bda63
-  m_Entries: []
+  m_Entries:
+  - m_Id: 337277342441472
+    m_Key: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 337277355024384
+    m_Key: TopButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 337277355024385
+    m_Key: BottomButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 337277355024386
+    m_Key: Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 337277359218688
+    m_Key: TopEffect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 337277359218689
+    m_Key: BottomEffect
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

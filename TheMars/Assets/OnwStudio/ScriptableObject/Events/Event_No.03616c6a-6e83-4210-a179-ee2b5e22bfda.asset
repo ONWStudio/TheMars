@@ -19,7 +19,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMSuspiciousRumorEventData
     m_TableEntryReference:
-      m_KeyId: 1089558304251904
+      m_KeyId: 1378879234105344
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMSuspiciousRumorEventData
     m_TableEntryReference:
-      m_KeyId: 1089558316834816
+      m_KeyId: 1378879238299648
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMSuspiciousRumorEventData
     m_TableEntryReference:
-      m_KeyId: 1089558316834817
+      m_KeyId: 1378879238299649
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMSuspiciousRumorEventData
     m_TableEntryReference:
-      m_KeyId: 1089558321029120
+      m_KeyId: 1378879238299650
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMSuspiciousRumorEventData
     m_TableEntryReference:
-      m_KeyId: 1089865419579392
+      m_KeyId: 1378879242493952
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMSuspiciousRumorEventData
     m_TableEntryReference:
-      m_KeyId: 1089865419579393
+      m_KeyId: 1378879242493953
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

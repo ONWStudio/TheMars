@@ -14,7 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: TMTransferOfPowerEventData
   m_TableCollectionNameGuidString: 2591dbe3466814d1ca7ca3ca89120b4b
-  m_Entries: []
+  m_Entries:
+  - m_Id: 253189424144384
+    m_Key: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 253189424144385
+    m_Key: TopButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 253189428338688
+    m_Key: BottomButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 253189428338689
+    m_Key: Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 253189428338690
+    m_Key: TopEffect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 253189428338691
+    m_Key: BottomEffect
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

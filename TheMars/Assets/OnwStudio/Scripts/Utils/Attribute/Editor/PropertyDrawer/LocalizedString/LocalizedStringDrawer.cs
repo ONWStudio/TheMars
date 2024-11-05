@@ -86,6 +86,7 @@ namespace Onw.Attribute.Editor
                 {
                     sharedTableEntry = tableCollection.SharedData.AddKey(entryKey);
                     EditorUtility.SetDirty(tableCollection);
+                    EditorUtility.SetDirty(tableCollection.SharedData);
                 }
             }
 
@@ -180,6 +181,7 @@ namespace Onw.Attribute.Editor
                             {
                                 entry.IsSmart = isSmart;
                                 EditorUtility.SetDirty(stringTable);
+                                EditorUtility.SetDirty(tableCollection);
                             }
 
                             // 값이 변경되었을 경우 업데이트
@@ -187,6 +189,7 @@ namespace Onw.Attribute.Editor
                             {
                                 entry.Value = newValue;
                                 EditorUtility.SetDirty(stringTable);
+                                EditorUtility.SetDirty(tableCollection);
                             }
                         }
                         else

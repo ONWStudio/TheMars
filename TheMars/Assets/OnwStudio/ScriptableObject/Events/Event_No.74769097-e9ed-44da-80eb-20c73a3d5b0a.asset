@@ -19,7 +19,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDemocraticAutonomyNextStepsEventData
     m_TableEntryReference:
-      m_KeyId: 2460999680
+      m_KeyId: 305587307929600
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDemocraticAutonomyNextStepsEventData
     m_TableEntryReference:
-      m_KeyId: 2460999681
+      m_KeyId: 305587337289728
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDemocraticAutonomyNextStepsEventData
     m_TableEntryReference:
-      m_KeyId: 2460999682
+      m_KeyId: 305587337289729
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDemocraticAutonomyNextStepsEventData
     m_TableEntryReference:
-      m_KeyId: 2460999683
+      m_KeyId: 305587341484032
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDemocraticAutonomyNextStepsEventData
     m_TableEntryReference:
-      m_KeyId: 2460999684
+      m_KeyId: 305587341484033
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMDemocraticAutonomyNextStepsEventData
     m_TableEntryReference:
-      m_KeyId: 2460999685
+      m_KeyId: 305587341484034
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

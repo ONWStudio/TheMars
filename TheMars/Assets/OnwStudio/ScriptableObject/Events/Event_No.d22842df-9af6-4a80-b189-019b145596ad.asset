@@ -19,7 +19,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMTransferOfPowerEventData
     m_TableEntryReference:
-      m_KeyId: 2872041472
+      m_KeyId: 253189424144384
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMTransferOfPowerEventData
     m_TableEntryReference:
-      m_KeyId: 2897207296
+      m_KeyId: 253189424144385
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMTransferOfPowerEventData
     m_TableEntryReference:
-      m_KeyId: 2897207297
+      m_KeyId: 253189428338688
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMTransferOfPowerEventData
     m_TableEntryReference:
-      m_KeyId: 2897207298
+      m_KeyId: 253189428338689
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMTransferOfPowerEventData
     m_TableEntryReference:
-      m_KeyId: 2897207299
+      m_KeyId: 253189428338690
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: TMTransferOfPowerEventData
     m_TableEntryReference:
-      m_KeyId: 2901401600
+      m_KeyId: 253189428338691
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

@@ -14,7 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: TMSuspiciousRumorEventData
   m_TableCollectionNameGuidString: fd64fbb58db9142948050c6a05e485a0
-  m_Entries: []
+  m_Entries:
+  - m_Id: 1378879234105344
+    m_Key: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1378879238299648
+    m_Key: TopButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1378879238299649
+    m_Key: BottomButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1378879238299650
+    m_Key: Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1378879242493952
+    m_Key: TopEffect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1378879242493953
+    m_Key: BottomEffect
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

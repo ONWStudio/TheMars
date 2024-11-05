@@ -14,7 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: TMAuroraInnovationEventData
   m_TableCollectionNameGuidString: ce2f1ba07b36c4a559d574c5906249bc
-  m_Entries: []
+  m_Entries:
+  - m_Id: 289477430861824
+    m_Key: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289477443444736
+    m_Key: TopButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289477447639040
+    m_Key: BottomButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289477447639041
+    m_Key: Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289477447639042
+    m_Key: TopEffect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289477447639043
+    m_Key: BottomEffect
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

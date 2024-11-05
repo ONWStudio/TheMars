@@ -15,12 +15,28 @@ MonoBehaviour:
   m_TableCollectionName: TMParadoxFutureEventData
   m_TableCollectionNameGuidString: f526d638f29fc4e87aac7e86b0af51f4
   m_Entries:
-  - m_Id: 18234974658560
-    m_Key: NewEntryKey_1
+  - m_Id: 326083013500928
+    m_Key: Description
     m_Metadata:
       m_Items: []
-  - m_Id: 18818301681664
-    m_Key: NewEntryKey_2
+  - m_Id: 326083017695232
+    m_Key: TopButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326083017695233
+    m_Key: BottomButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326083017695234
+    m_Key: Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326083017695235
+    m_Key: TopEffect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326083021889536
+    m_Key: BottomEffect
     m_Metadata:
       m_Items: []
   m_Metadata:

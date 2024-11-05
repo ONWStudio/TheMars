@@ -57,10 +57,31 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 4853453322907287636
+  - m_Id: 1376461100408832
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1376461104603136
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1376461104603137
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1376461104603138
+    m_Localized: 
+    m_Metadata:
+      m_Items:
+      - rid: 4853453322907287636
+  - m_Id: 1376461108797440
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
     - rid: 4853453322907287636
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 00e0ef13ffd1030001e0ef13ffd10300
+        m_Entries: 00e0ef13ffd1030001e0ef13ffd1030002e02f53e2e30400
