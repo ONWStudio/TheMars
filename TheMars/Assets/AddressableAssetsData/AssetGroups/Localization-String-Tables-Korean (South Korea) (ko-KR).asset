@@ -53,6 +53,120 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-ko-KR
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80ed0b37b5ed54bd69975a29a9d5277a
+    m_Address: TMAShipSwayingHereAndThereEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b2510f9bb05d04897a672d585501973c
+    m_Address: TMCorporateDrivenSystemEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23ab6f191d8ee4d6f88f9f751d03a54c
+    m_Address: TMPrometheusFlameEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b569b1ac073bc42c1b3e048f15253be8
+    m_Address: TMParadoxFutureEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65ddef232b2b942c7ad36b60b02f67f6
+    m_Address: TMUnfairTradeEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ceee1a67a82245b6a3b5202a99cd9c6
+    m_Address: TMPriceOfGrowthEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99cbece951f8f4279b1dcdce5f8f19d1
+    m_Address: TMEnvironmentRegulationEnhancementEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ddd6a114f9f8c4046a440e3edc118f36
+    m_Address: TMGreenHopeEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e4850a7d5b48f4239aa3a1712b83fa76
+    m_Address: TMMarsEternalCycleEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ed0026ee3073429d9762be928d69a65
+    m_Address: TMStrengtheningCivilAutonomyEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a020e9c0a9a6a47d9958e249b725111a
+    m_Address: TMProgressAndBalanceEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 30cec1d229ab641b78a9c1119fd43d15
+    m_Address: TMAuroraInnovationEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ecbcd2df7cdeb4fe0aec4b553905e971
+    m_Address: TMAutonomyCommitteeSetupEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0981bfe89b5a640249489f3cabb4ab6d
+    m_Address: TMMomentOfACrackEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c8442b6e91a44fa293aa156652f7af6
+    m_Address: TMWisdomComesWithAgeEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 84b701489eade4ddaaf31a6f8443eec1
+    m_Address: TMDemocraticAutonomyNextStepsEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44502d53fb382471fb1f4b42972f1c94
+    m_Address: TMDilemmaOfGrowthEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 55651cfa8fcd84ee4977218d6310bcbb
+    m_Address: TMDevelopmentOfAnIllusionEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2af46e8f6d1d7409d8a8067a2148f202
+    m_Address: TMTransferOfPowerEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 3f430e5b5c626400b837c52ed98c1bc2, type: 2}
   m_SchemaSet:

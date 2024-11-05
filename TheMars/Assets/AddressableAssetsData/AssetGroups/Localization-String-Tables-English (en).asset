@@ -53,6 +53,120 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64dbaeb5ae8804353b78e6f93c0142d1
+    m_Address: TMAShipSwayingHereAndThereEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a1467833bc6e5419284cd54cb7c2db8b
+    m_Address: TMCorporateDrivenSystemEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 585b4adf7add7438b968cccf6489fa48
+    m_Address: TMPrometheusFlameEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 96d5c78d7775541b0876d6105e0cfef2
+    m_Address: TMParadoxFutureEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a0b4e6a15cf7426da449b1f3faa631f
+    m_Address: TMUnfairTradeEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff99ce9c4fb8a4ae7a68980ef1e625d5
+    m_Address: TMPriceOfGrowthEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8ffbcd43bf6b54218b4a2e72c0b37424
+    m_Address: TMEnvironmentRegulationEnhancementEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9bf3fbe61ef0c4d8b9061b447a876e0e
+    m_Address: TMGreenHopeEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 53e7471c307414f698bf97a9eaf75833
+    m_Address: TMMarsEternalCycleEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 549a1c100400641ddba12d7b9ec6ede0
+    m_Address: TMStrengtheningCivilAutonomyEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec974ea6094b3410fb88048796a40222
+    m_Address: TMProgressAndBalanceEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54cea51d7408e4ca188c62b7caba2edb
+    m_Address: TMAuroraInnovationEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dedaecbe551784ef59fb3f7fe6602b55
+    m_Address: TMAutonomyCommitteeSetupEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b0887821b68a43e89f6806372812bdf
+    m_Address: TMMomentOfACrackEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d93fbd70e02184d66ae8568f122dd45c
+    m_Address: TMWisdomComesWithAgeEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8272cf125ff314061ba7ea96454fefb7
+    m_Address: TMDemocraticAutonomyNextStepsEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 45bdc8feec9a64f6aa5550766ad7563a
+    m_Address: TMDilemmaOfGrowthEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f101b751471ff41acb5b5a62301dea38
+    m_Address: TMDevelopmentOfAnIllusionEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c4d0ff3daaca342ac9dff8e66eb30119
+    m_Address: TMTransferOfPowerEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 3f430e5b5c626400b837c52ed98c1bc2, type: 2}
   m_SchemaSet:

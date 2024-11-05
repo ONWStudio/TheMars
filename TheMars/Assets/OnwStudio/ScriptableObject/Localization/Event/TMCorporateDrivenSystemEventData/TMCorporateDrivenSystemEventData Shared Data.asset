@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: TMCorporateDrivenSystemEventData Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: TMCorporateDrivenSystemEventData
+  m_TableCollectionNameGuidString: 5e9bf7a1d6ce34213928f4561094ea7a
+  m_Entries:
+  - m_Id: 361013097521152
+    m_Key: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361013122686976
+    m_Key: TopButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361013122686977
+    m_Key: BottomButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361013126881280
+    m_Key: Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361013126881281
+    m_Key: TopEffect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361013126881282
+    m_Key: BottomEffect
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4853453322907287559
+  references:
+    version: 2
+    RefIds:
+    - rid: 4853453322907287559
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1730684570767

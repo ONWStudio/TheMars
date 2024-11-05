@@ -1,12 +1,12 @@
 #if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
-using Unity.EditorCoroutines.Editor;
 using UnityEngine;
 using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
+using UnityEngine.Localization.Settings;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Unity.EditorCoroutines.Editor;
 
 namespace Onw.Localization.Editor
 {
@@ -42,7 +42,6 @@ namespace Onw.Localization.Editor
 
         private static IEnumerator iEMonitorEntryCoroutine(LocalizedString localizedString, Locale locale, System.Action<string> onChanged)
         {
-            // 테이블 비동기로 로드
             findTable:
             yield return new WaitUntil(() => localizedString.TableReference.ReferenceType != TableReference.Type.Empty);
             AsyncOperationHandle<StringTable> tableOperation = LocalizationSettings.StringDatabase.GetTableAsync(localizedString.TableReference, locale);
@@ -55,7 +54,6 @@ namespace Onw.Localization.Editor
                 yield break;
             }
 
-            // 초기 값 캐싱
             string previousValue = getEntryValue(stringTable, localizedString.TableEntryReference.KeyId);
             onChanged?.Invoke(previousValue);
             // 주기적으로 값 모니터링

@@ -18,7 +18,7 @@ namespace TM.Editor
 {
     internal sealed class TMSynergyScrollView : ScriptableObjectScrollView
     {
-        private EditorCoroutine _synergyNameObserver;
+        private readonly List<EditorCoroutine> _synergyNameObservers = new();
 
         protected override VisualElement CreateHeader()
         {
@@ -83,7 +83,7 @@ namespace TM.Editor
                 BindingFlags.NonPublic | BindingFlags.Instance,
                 out LocalizedString localizedSynergyName))
             {
-                _synergyNameObserver = localizedSynergyName.MonitorSpecificLocaleEntry("ko-KR", onChangedString);
+                _synergyNameObservers.Add(localizedSynergyName.MonitorSpecificLocaleEntry("ko-KR", onChangedString));
                 if (localizedSynergyName.IsEmpty)
                 {
                     button.name = field.text = synergy.name;
@@ -137,10 +137,7 @@ namespace TM.Editor
 
         internal override void OnDisable()
         {
-            if (_synergyNameObserver is not null)
-            {
-                EditorCoroutineUtility.StopCoroutine(_synergyNameObserver);
-            }
+            _synergyNameObservers.ForEach(EditorCoroutineUtility.StopCoroutine);
         }
     }
 }

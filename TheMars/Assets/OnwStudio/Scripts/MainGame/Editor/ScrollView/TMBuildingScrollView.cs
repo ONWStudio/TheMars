@@ -18,7 +18,7 @@ namespace TM.Editor
 {
     internal sealed class TMBuildingScrollView : ScriptableObjectScrollView
     {
-        private EditorCoroutine _buildingNameObserver;
+        private readonly List<EditorCoroutine> _buildingNameObservers = new();
 
         protected override VisualElement CreateHeader()
         {
@@ -83,7 +83,7 @@ namespace TM.Editor
                 BindingFlags.NonPublic | BindingFlags.Instance,
                 out LocalizedString localizedBuildingName))
             {
-                _buildingNameObserver = localizedBuildingName.MonitorSpecificLocaleEntry("ko-KR", onChangedString);
+                _buildingNameObservers.Add(localizedBuildingName.MonitorSpecificLocaleEntry("ko-KR", onChangedString));
                 if (localizedBuildingName.IsEmpty)
                 {
                     button.name = field.text = building.name;
@@ -137,10 +137,7 @@ namespace TM.Editor
 
         internal override void OnDisable()
         {
-            if (_buildingNameObserver is not null)
-            {
-                EditorCoroutineUtility.StopCoroutine(_buildingNameObserver);
-            }
+            _buildingNameObservers.ForEach(EditorCoroutineUtility.StopCoroutine);
         }
     }
 }

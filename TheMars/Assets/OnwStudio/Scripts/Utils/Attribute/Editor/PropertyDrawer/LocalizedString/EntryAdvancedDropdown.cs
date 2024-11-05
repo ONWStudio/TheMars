@@ -21,19 +21,19 @@ namespace Onw.Attribute.Editor
             private readonly SharedTableData _tableData;
             private readonly GUIStyle _labelStyle;
             private string _entryName;
-            
+
             public override Vector2 GetWindowSize()
             {
                 return new(300f, 200f);
             }
-            
+
             public override void OnGUI(Rect rect)
             {
                 EditorGUI.LabelField(new(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), "Rename", _labelStyle);
                 rect.y += EditorGUIUtility.singleLineHeight;
                 _entryName = EditorGUI.TextField(new(rect.x, rect.y, rect.y, EditorGUIUtility.singleLineHeight), _entryName);
                 rect.y += EditorGUIUtility.singleLineHeight;
-                
+
                 if (GUI.Button(new(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), "Modify"))
                 {
                     _tableData.RenameKey(_targetEntry.Id, _entryName);
@@ -46,27 +46,29 @@ namespace Onw.Attribute.Editor
                 _targetEntry = targetEntry;
                 _tableData = tableData;
                 _entryName = _targetEntry.Key;
-                
+
                 _labelStyle = new(EditorStyles.boldLabel)
                 {
                     alignment = TextAnchor.MiddleCenter
                 };
             }
         }
-        
+
         private sealed class EntryItem : AdvancedDropdownItem
         {
             public SharedTableData.SharedTableEntry Entry { get; }
-        
+
             public EntryItem(string name, SharedTableData.SharedTableEntry entry) : base(name)
             {
                 Entry = entry;
             }
         }
 
+        public SerializedProperty TargetProp { get; set; } = null;
+
         public event Action<SharedTableData.SharedTableEntry> OnEntrySelected;
         public event Action<SharedTableData.SharedTableEntry> OnCreatedEntry;
-        
+
         private SharedTableData _tableData;
         private StringTableCollection _tableCollection;
 
@@ -98,42 +100,54 @@ namespace Onw.Attribute.Editor
         {
             if (item is EntryItem entryItem)
             {
+                if (TargetProp is not null)
+                {
+                    TargetProp.stringValue = entryItem.Entry.Key;
+                    TargetProp.serializedObject.ApplyModifiedProperties();
+                }
                 // 기존 엔트리 선택됨
                 OnEntrySelected?.Invoke(entryItem.Entry);
             }
             else
             {
-                // 새로운 엔트리 생성 옵션 선택됨
                 createNewEntry();
             }
         }
-        
+
         private void createNewEntry()
         {
-            // 새로운 엔트리 키 입력 받기
             const string ENTRY_KEY = "NewEntryKey";
+            int count = _tableData.Entries.Count(entry => entry.Key.StartsWith(ENTRY_KEY)) + 1;
+            // 새로운 엔트리 키 입력 받기
+            string key = $"{ENTRY_KEY}_{count}";
 
-            if (_tableData.Entries.All(entry => entry.Key != ENTRY_KEY))
+            // 엔트리 추가
+            SharedTableData.SharedTableEntry newEntry = _tableData.AddKey(key);
+
+            // 변경사항 저장
+            EditorUtility.SetDirty(_tableData);
+
+            foreach (StringTable table in _tableCollection.StringTables)
             {
-                // 엔트리 추가
-                SharedTableData.SharedTableEntry newEntry = _tableData.AddKey(ENTRY_KEY);
-
-                // 변경사항 저장
-                EditorUtility.SetDirty(_tableData);
-
-                foreach (StringTable table in _tableCollection.StringTables)
-                {
-                    table.AddEntry(newEntry.Id, "");
-                    EditorUtility.SetDirty(table);
-                }
-
-                // 에셋 데이터베이스 저장
-                AssetDatabase.SaveAssets();
-                AssetDatabase.Refresh();
-
-                Debug.Log($"엔트리 '{ENTRY_KEY}'가 테이블 '{_tableCollection.TableCollectionName}'에 생성되었습니다.");
-                OnCreatedEntry?.Invoke(newEntry);
+                table.AddEntry(newEntry.Id, "");
+                EditorUtility.SetDirty(table);
             }
+
+            // 에셋 데이터베이스 저장
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+
+            Debug.Log($"엔트리 '{key}'가 테이블 '{_tableCollection.TableCollectionName}'에 생성되었습니다.");
+            OnCreatedEntry?.Invoke(newEntry);
+
+            if (TargetProp is not null)
+            {
+                TargetProp.stringValue = newEntry.Key;
+                TargetProp.serializedObject.ApplyModifiedProperties();
+            }
+
+            // 기존 엔트리 선택됨
+            OnEntrySelected?.Invoke(newEntry);
         }
     }
 }

@@ -1,13 +1,12 @@
 #if UNITY_EDITOR
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Onw.Editor.Extensions;
-using Onw.Extensions;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEditor.UIElements;
+using Onw.Extensions;
 
 namespace Onw.Editor.Window
 {
@@ -43,6 +42,11 @@ namespace Onw.Editor.Window
         internal virtual void OnDisable()
         {
         }
+
+        internal virtual void OnInitialize()
+        {
+            
+        }
         
         internal void Initialize()
         {
@@ -73,6 +77,8 @@ namespace Onw.Editor.Window
             searchField.RegisterValueChangedCallback(BuildBySearchString);
             Add(searchField);
             Add(View);
+
+            OnInitialize();
         }
 
         internal void ClearList()
