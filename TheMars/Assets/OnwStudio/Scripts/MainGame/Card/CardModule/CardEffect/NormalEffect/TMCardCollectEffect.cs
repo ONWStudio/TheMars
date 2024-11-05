@@ -1,5 +1,6 @@
 using UnityEngine;
 using Onw.Attribute;
+using Onw.Interface;
 using TM.Card.Runtime;
 using TM.Card.Effect.Creator;
 using UnityEngine.Localization;

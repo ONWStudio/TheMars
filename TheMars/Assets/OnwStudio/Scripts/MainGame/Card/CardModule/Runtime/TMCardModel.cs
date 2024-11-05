@@ -158,7 +158,7 @@ namespace TM.Card.Runtime
         /// </summary>
         public bool CanPayCost => CardData
             .CardCosts
-            .All(cardCost => cardCost.Cost <= getResourceFromPlayerByCost(cardCost.ResourceKind));
+            .All(cardCost => cardCost.Cost <= getResourceFromPlayerByCost(cardCost.CostKind));
 
         public bool CanInteract
         {
@@ -329,9 +329,9 @@ namespace TM.Card.Runtime
         /// </summary>
         public void PayCost()
         {
-            foreach (TMCardCost cost in CardData.CardCosts)
+            foreach (TMCardSubCost cost in CardData.CardCosts)
             {
-                switch (cost.ResourceKind)
+                switch (cost.CostKind)
                 {
                     case TMResourceKind.MARS_LITHIUM:
                         TMPlayerManager.Instance.MarsLithium -= cost.Cost;
