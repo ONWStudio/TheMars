@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Localization;
+using UnityEngine.Serialization;
 using UnityEngine.Localization.Settings;
 using Onw.Helper;
 using Onw.Manager;
@@ -10,6 +11,7 @@ namespace TM
 {
     public sealed class TMPlayerManager : SceneSingleton<TMPlayerManager>
     {
+        public const int MAX_SATISFACTION = 100;
         protected override string SceneName => "MainGameScene";
         
         public int Level
@@ -107,74 +109,156 @@ namespace TM
             get => _satisfaction;
             set
             {
-                _satisfaction = Mathf.Clamp(value, 0, 100);
+                _satisfaction = Mathf.Clamp(value, 0, MAX_SATISFACTION);
                 _onChangedSatisfaction.Invoke(_satisfaction);
+            }
+        }
+
+        public int TerraformValue
+        {
+            get => _terraformValue;
+            set
+            {
+                _terraformValue = Mathf.Clamp(value, 0, 100);
+                _onChangedTerraformValue.Invoke(_terraformValue);
             }
         }
 
         public event UnityAction<int> OnChangedLevel
         {
-            add => _onChangedLevel.AddListener(value);
+            add
+            {
+                if (value is null) return;
+                
+                _onChangedLevel.AddListener(value);
+                value.Invoke(_level);
+            }
             remove => _onChangedLevel.RemoveListener(value);
         }
 
         public event UnityAction<int> OnChangedMarsLithium
         {
-            add => _onChangedMarsLithium.AddListener(value);
+            add
+            {
+                if (value is null) return;
+                
+                _onChangedMarsLithium.AddListener(value);
+                value.Invoke(_marsLithium);
+            }
             remove => _onChangedMarsLithium.RemoveListener(value);
         }
 
         public event UnityAction<int> OnChangedCredit
         {
-            add => _onChangedCredit.AddListener(value);
+            add
+            {
+                if (value is null) return;
+                
+                _onChangedCredit.AddListener(value);
+                value.Invoke(_credit);
+            }
             remove => _onChangedCredit.RemoveListener(value);
         }
 
         public event UnityAction<int> OnChangedPopulation
         {
-            add => _onChangedPopulation.AddListener(value);
+            add
+            {
+                if (value is null) return;
+                
+                _onChangedPopulation.AddListener(value);
+                value.Invoke(_population);
+            }
             remove => _onChangedPopulation.RemoveListener(value);
         }
 
         public event UnityAction<int> OnChangedTotalPopulation
         {
-            add => _onChangedTotalPopulation.AddListener(value);
+            add
+            {
+                if (value is null) return;
+                
+                _onChangedTotalPopulation.AddListener(value);
+                value.Invoke(_totalPopulation);
+            }
             remove => _onChangedTotalPopulation.RemoveListener(value);
         }
 
         public event UnityAction<int> OnChangedSteel
         {
-            add => _onChangedSteel.AddListener(value);
+            add
+            {
+                if (value is null) return;
+
+                _onChangedSteel.AddListener(value);
+                value.Invoke(_steel);
+            }
             remove => _onChangedSteel.RemoveListener(value);
         }
 
         public event UnityAction<int> OnChangedPlants
         {
-            add => _onChangedPlants.AddListener(value);
+            add
+            {
+                if (value is null) return;
+                
+                _onChangedPlants.AddListener(value);
+                value.Invoke(_plants);
+            }
             remove => _onChangedPlants.RemoveListener(value);
         }
 
         public event UnityAction<int> OnChangedClay
         {
-            add => _onChangedClay.AddListener(value);
+            add
+            {
+                if (value is null) return;
+                
+                _onChangedClay.AddListener(value);
+                value.Invoke(_clay);
+            }
             remove => _onChangedClay.RemoveListener(value);
         }
 
         public event UnityAction<int> OnChangedElectricity
         {
-            add => _onChangedElectricity.AddListener(value);
+            add
+            {
+                if (value is null) return;
+                
+                _onChangedElectricity.AddListener(value);
+                value.Invoke(_electricity);
+            }
             remove => _onChangedElectricity.RemoveListener(value);
         }
         
         public event UnityAction<int> OnChangedSatisfaction
         {
-            add => _onChangedSatisfaction.AddListener(value);
+            add
+            {
+                if (value is null) return;
+            
+                _onChangedSatisfaction.AddListener(value);
+                value.Invoke(_satisfaction);
+            }
             remove => _onChangedSatisfaction.RemoveListener(value);
         }
+        
+        public event UnityAction<int> OnChangedTerraformValue
+        {
+            add
+            {
+                if (value is null) return;
+                
+                _onChangedTerraformValue.AddListener(value);
+                value.Invoke(_terraformValue);
+            }
+            remove => _onChangedTerraformValue.RemoveListener(value);
+        }
 
+        [Header("Resources")]
         [SerializeField, ReadOnly] private int _marsLithium = 0;
         [SerializeField, ReadOnly] private int _credit = 0;
-        [SerializeField, ReadOnly] private int _level = 0;
         [SerializeField, ReadOnly] private int _population = 0;
         [SerializeField, ReadOnly] private int _totalPopulation = 0;
         [SerializeField, ReadOnly] private int _steel = 0;
@@ -182,6 +266,11 @@ namespace TM
         [SerializeField, ReadOnly] private int _clay = 0;
         [SerializeField, ReadOnly] private int _electricity = 0;
         [SerializeField, ReadOnly] private int _satisfaction = 0;
+        
+        [Header("Player Info")]
+        [SerializeField, ReadOnly] private int _level = 0;
+        [SerializeField, ReadOnly] private int _exp = 0;
+        [SerializeField, ReadOnly] private int _terraformValue = 0;
 
         [SerializeField, ReadOnly] private UnityEvent<int> _onChangedMarsLithium = new();
         [SerializeField, ReadOnly] private UnityEvent<int> _onChangedCredit = new();
@@ -193,7 +282,8 @@ namespace TM
         [SerializeField, ReadOnly] private UnityEvent<int> _onChangedClay = new();
         [SerializeField, ReadOnly] private UnityEvent<int> _onChangedElectricity = new();
         [SerializeField, ReadOnly] private UnityEvent<int> _onChangedSatisfaction = new();
-
+        [SerializeField, ReadOnly] private UnityEvent<int> _onChangedTerraformValue = new();
+            
         public void AddResource(TMResourceKind kind, int resource)
         {
             switch (kind)

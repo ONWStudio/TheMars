@@ -1,15 +1,19 @@
 using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using Onw.Attribute;
 using TM.Manager;
-using UnityEngine;
-using TMPro;
 using UnityEngine.Serialization;
 
 namespace TM.UI
 {
     public sealed class PlayerViewer : MonoBehaviour
     {
+        [Header("Player Info")]
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _levelText;
+        
+        [Header("Resource Info")]
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _marsLithiumText;
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _creditText;
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _populationText;
@@ -17,7 +21,15 @@ namespace TM.UI
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _plantsText;
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _clayText;
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _electricityText;
-        [SerializeField, SelectableSerializeField] private TextMeshProUGUI _timeText;
+        [SerializeField, SelectableSerializeField] private Image _satisfactionProgressImage;
+        
+        [Header("Time Info")]
+        [SerializeField, SelectableSerializeField, FormerlySerializedAs("_timeBarImage")] private Image _timeProgressImage;
+        [SerializeField, SelectableSerializeField] private TextMeshProUGUI _dayText;
+        
+        [Header("Terraform Info")]
+        [SerializeField, SelectableSerializeField] private Image _terraformHexagonImage;
+        [SerializeField, SelectableSerializeField] private TextMeshProUGUI _terraformValueText;
 
         private void Start()
         {
@@ -30,14 +42,9 @@ namespace TM.UI
             TMPlayerManager.Instance.OnChangedPlants += plants => _plantsText.text = plants.ToString();
             TMPlayerManager.Instance.OnChangedClay += clay => _clayText.text = clay.ToString();
             TMPlayerManager.Instance.OnChangedElectricity += electricity => _electricityText.text = electricity.ToString();
-            TMSimulator.Instance.OnChangedSeconds += seconds => _timeText.text = buildTimeText(TMSimulator.Instance.NowDay, TMSimulator.Instance.NowMinutes, seconds);
-            TMSimulator.Instance.OnChangedMinutes += minutes => _timeText.text = buildTimeText(TMSimulator.Instance.NowDay, minutes, TMSimulator.Instance.NowSeconds);
-            TMSimulator.Instance.OnChangedDay += day => _timeText.text = buildTimeText(day, TMSimulator.Instance.NowMinutes, TMSimulator.Instance.NowSeconds);
-            _timeText.text = buildTimeText(TMSimulator.Instance.NowDay, TMSimulator.Instance.NowMinutes, TMSimulator.Instance.NowSeconds);
-
-            static string buildTimeText(int day, int minutes, int seconds) => $"{day} day {minutes}m {seconds}s";
+            TMPlayerManager.Instance.OnChangedSatisfaction += satisfaction => _satisfactionProgressImage.fillAmount = satisfaction / (float)TMPlayerManager.MAX_SATISFACTION;
+            TMSimulator.Instance.OnChangedSeconds += seconds => _timeProgressImage.fillAmount = TMSimulator.Instance.IntervalInSeconds / (seconds % TMSimulator.Instance.IntervalInSeconds);
+            TMSimulator.Instance.OnChangedDay += day => _dayText.text = $"Day {day}";
         }
-
-
     }
 }

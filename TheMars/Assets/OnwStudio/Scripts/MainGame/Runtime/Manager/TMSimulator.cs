@@ -21,19 +21,37 @@ namespace TM.Manager
 
         public event UnityAction<int> OnChangedDay
         {
-            add => _onChangedDay.AddListener(value);
+            add
+            {
+                if (value is null) return;
+                
+                _onChangedDay.AddListener(value);
+                value.Invoke(NowDay);
+            }
             remove => _onChangedDay.RemoveListener(value);
         }
         
         public event UnityAction<int> OnChangedMinutes
         {
-            add => _onChangedMinutes.AddListener(value);
+            add
+            {
+                if (value is null) return;
+                
+                _onChangedMinutes.AddListener(value);
+                value.Invoke(NowMinutes);
+            }
             remove => _onChangedMinutes.RemoveListener(value);
         }
-        
+
         public event UnityAction<int> OnChangedSeconds
         {
-            add => _onChangedSeconds.AddListener(value);
+            add
+            {
+                if (value is null) return;
+                
+                _onChangedSeconds.AddListener(value);
+                value.Invoke(NowSeconds);
+            }
             remove => _onChangedSeconds.RemoveListener(value);
         }
         
@@ -43,7 +61,9 @@ namespace TM.Manager
             set => _intervalInMinutes = Mathf.Clamp(value, INTERVAL_MIN, INTERVAL_MAX);
         }
 
-        [SerializeField, Range(INTERVAL_MIN, INTERVAL_MAX)] private int _intervalInMinutes = 10;
+        [field: SerializeField, ReadOnly] public float IntervalInSeconds { get; private set; } = 0f;
+
+        [SerializeField, Range(INTERVAL_MIN, INTERVAL_MAX)] private int _intervalInMinutes = 2;
 
         [Header("Event")]
         [SerializeField] private UnityEvent<int> _onChangedDay = new();
@@ -53,13 +73,12 @@ namespace TM.Manager
         private int _prevDay = 1;
         private int _prevMinutes = 0;
         private int _prevSeconds = 0;
-        private float _intervalInSeconds;
 
         protected override void Init() {}
 
         private void Start()
         {
-            _intervalInSeconds = _intervalInMinutes * 60f;
+            IntervalInSeconds = _intervalInMinutes * 60f;
         }
 
         private void Update()
@@ -72,7 +91,7 @@ namespace TM.Manager
 
             NowSeconds = (int)(AccumulatedTime / 1);
             NowMinutes = (int)(AccumulatedTime / 60);
-            NowDay = (int)(AccumulatedTime / _intervalInSeconds + 1);
+            NowDay = (int)(AccumulatedTime / IntervalInSeconds + 1);
 
             if (NowSeconds > _prevSeconds)
             {

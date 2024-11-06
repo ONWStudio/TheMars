@@ -62,7 +62,12 @@ namespace TM.Card.Runtime
             TMCardData cardData = cardModel.CardData;
             _cardImage.sprite = cardData.CardImage;
             _costText.text = cardData.MainCost.Cost.ToString();
-            _costImage.sprite = cardData.MainCost.CostKind == TMMainCost.ELECTRICITY ? _electricitySprite : _creditSprite;
+            _costImage.sprite = cardData.MainCost.CostKind switch
+            {
+                TMMainCost.CREDIT => _creditSprite,
+                TMMainCost.ELECTRICITY => _electricitySprite,
+                _ => null
+            };
         }
     }
 }

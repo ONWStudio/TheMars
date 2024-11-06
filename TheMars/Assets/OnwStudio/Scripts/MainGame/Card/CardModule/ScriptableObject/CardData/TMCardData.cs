@@ -8,8 +8,6 @@ using TM.Card.Effect.Creator;
 
 namespace TM.Card
 {
-
-    
     public sealed partial class TMCardData : ScriptableObject
     {
         public event LocalizedString.ChangeHandler OnChangedName
