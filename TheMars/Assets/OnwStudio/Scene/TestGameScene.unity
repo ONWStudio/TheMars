@@ -584,7 +584,11 @@ MonoBehaviour:
   _plantsText: {fileID: 0}
   _clayText: {fileID: 0}
   _electricityText: {fileID: 0}
-  _timeText: {fileID: 0}
+  _satisfactionProgressImage: {fileID: 0}
+  _timeProgressImage: {fileID: 0}
+  _dayText: {fileID: 0}
+  _terraformHexagonImage: {fileID: 0}
+  _terraformValueText: {fileID: 0}
 --- !u!1001 &103134798
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1195,7 +1199,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _marsLithium: 0
   _credit: 0
-  _level: 0
   _population: 0
   _totalPopulation: 0
   _steel: 0
@@ -1203,6 +1206,9 @@ MonoBehaviour:
   _clay: 0
   _electricity: 0
   _satisfaction: 0
+  _level: 0
+  _exp: 0
+  _terraformValue: 0
   _onChangedMarsLithium:
     m_PersistentCalls:
       m_Calls: []
@@ -1231,6 +1237,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _onChangedSatisfaction:
+    m_PersistentCalls:
+      m_Calls: []
+  _onChangedTerraformValue:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &146915404
@@ -2164,8 +2173,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1409365565}
   m_HandleRect: {fileID: 1409365564}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.99999887
+  m_Value: 0
+  m_Size: 0.9999982
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5145,8 +5154,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.56, y: -8.38}
-  m_SizeDelta: {x: 117.52, y: 146.17}
+  m_AnchoredPosition: {x: -0.37, y: -8.56}
+  m_SizeDelta: {x: 110.55, y: 138.46}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &501419902
 MonoBehaviour:
@@ -7262,7 +7271,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 35.957}
   m_AnchorMin: {x: 0.183513, y: 0.00000002644956}
   m_AnchorMax: {x: 1, y: 0.05562593}
-  m_AnchoredPosition: {x: 756, y: 10.986938}
+  m_AnchoredPosition: {x: 756, y: 10.986946}
   m_SizeDelta: {x: -545.62, y: 421.93}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &921509769
@@ -9929,7 +9938,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0080839, y: 0.050643813}
   m_AnchorMax: {x: 0.12705791, y: 0.2552602}
-  m_AnchoredPosition: {x: -11.160156, y: -169.97978}
+  m_AnchoredPosition: {x: -11.160156, y: -169.97981}
   m_SizeDelta: {x: 214.62, y: -65.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1392211612
@@ -10770,6 +10779,7 @@ MonoBehaviour:
   <NowDay>k__BackingField: 1
   <NowMinutes>k__BackingField: 0
   <NowSeconds>k__BackingField: 0
+  <IntervalInSeconds>k__BackingField: 0
   _intervalInMinutes: 10
   _onChangedDay:
     m_PersistentCalls:
@@ -17122,7 +17132,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.00000071199815, y: 0.0009099959}
   m_AnchorMax: {x: 0.00000071199815, y: 0.99910307}
-  m_AnchoredPosition: {x: -0.0036621094, y: 0}
+  m_AnchoredPosition: {x: -0.0012207031, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2064802127
