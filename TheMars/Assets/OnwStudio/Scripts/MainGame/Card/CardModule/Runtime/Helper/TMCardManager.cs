@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 using Onw.Manager;
 using Onw.Attribute;
 using Onw.Extensions;
+using Onw.UI.Components;
 using Image = UnityEngine.UI.Image;
 
 namespace TM.Card.Runtime
@@ -18,7 +19,7 @@ namespace TM.Card.Runtime
         [System.Serializable]
         public struct TMCardManagerUI
         {
-            [field: SerializeField, SelectableSerializeField] public ScrollRect CardCollectIconScrollView { get; private set; }
+            [field: SerializeField, SelectableSerializeField] public HorizontalEnumeratedItem CardCollectIconScrollView { get; private set; }
             [field: SerializeField, SelectableSerializeField] public Image DeckImage { get; private set; }
             [field: SerializeField, SelectableSerializeField] public Image HandImage { get; private set; }
 
@@ -48,7 +49,11 @@ namespace TM.Card.Runtime
 
         [field: SerializeReference, SerializeReferenceDropdown] public ITMCardSorter CardSorter { get; private set; }
 
+        [field: SerializeField] public int MaxCardCount { get; private set; } = 10;
+        
         public IReadOnlyList<TMCardModel> Cards => _cards;
+        public int CardCount => _cards.Count;
+        
 
         [SerializeField, ReadOnly] private List<TMCardModel> _cards = new();
 
@@ -57,7 +62,7 @@ namespace TM.Card.Runtime
         private void Start()
         {
             CardCreator.OnPostCreateCard += addListenerForCard;
-            AddCard(CardCreator.CreateCard());
+            AddCard(CardCreator.CreateRandomCard());
         }
 
         private void addListenerForCard(TMCardModel card)
@@ -68,6 +73,8 @@ namespace TM.Card.Runtime
 
         public void AddCard(TMCardModel card)
         {
+            if (_cards.Count >= MaxCardCount || !card) return;
+            
             _cards.Add(card);
             card.transform.SetParent(HandTransform, false);
 

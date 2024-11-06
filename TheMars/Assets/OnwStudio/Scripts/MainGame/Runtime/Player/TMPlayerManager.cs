@@ -12,6 +12,7 @@ namespace TM
     public sealed class TMPlayerManager : SceneSingleton<TMPlayerManager>
     {
         public const int MAX_SATISFACTION = 100;
+        public const int MAX_TERRAFORM_VALUE = 100;
         protected override string SceneName => "MainGameScene";
         
         public int Level
@@ -119,7 +120,7 @@ namespace TM
             get => _terraformValue;
             set
             {
-                _terraformValue = Mathf.Clamp(value, 0, 100);
+                _terraformValue = Mathf.Clamp(value, 0, MAX_TERRAFORM_VALUE);
                 _onChangedTerraformValue.Invoke(_terraformValue);
             }
         }

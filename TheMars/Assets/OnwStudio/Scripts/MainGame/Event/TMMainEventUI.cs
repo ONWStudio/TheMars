@@ -118,7 +118,7 @@ namespace TM.Runtime.UI
             _bottomEffectTextEvent.StringReference = null;
         }
         
-        private void onTriggerMainEvent(TMMainEvent mainEvent)
+        public void OnTriggerMainEvent(TMMainEvent mainEvent)
         {
             this.SetActiveGameObject(true);
 

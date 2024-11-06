@@ -51,10 +51,11 @@ internal sealed class EnumeratedElementsEditor : Editor
 
     public override void OnInspectorGUI()
     {
+        using EditorGUI.ChangeCheckScope scope = new();
         serializedObject.Update();
 
         EditorGUILayout.LabelField("Constraint Count");
-        _gridLayoutGroup.constraintCount = EditorGUILayout.IntSlider(_gridLayoutGroup.constraintCount, 1, 10);
+        _gridLayoutGroup.constraintCount = EditorGUILayout.IntField(_gridLayoutGroup.constraintCount);
 
         EditorGUILayout.LabelField("Width To Height Ratio");
         _widthToHeightRatio.floatValue = EditorGUILayout.Slider(_widthToHeightRatio.floatValue, 0.1f, 2.0f); ;
@@ -96,7 +97,7 @@ internal sealed class EnumeratedElementsEditor : Editor
             _elementSizeToSpacingXRatio.floatValue,
             _elementSizeToSpacingYRatio.floatValue);
 
-        if (EditorGUI.EndChangeCheck())
+        if (scope.changed)
         {
             serializedObject.ApplyModifiedProperties();
         }

@@ -46,46 +46,58 @@ internal sealed class HorizontalSelectorEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        serializedObject.Update();
 
         EditorGUILayout.LabelField("Viewport Option");
         ActionEditorVertical(() =>
         {
-            EditorGUILayout.PropertyField(_viewport, new GUIContent("Viewport"), true);
-            EditorGUILayout.PropertyField(_content, new GUIContent("Content"), true);
+            using EditorGUI.ChangeCheckScope scope = new();
+            EditorGUILayout.PropertyField(_viewport, new("Viewport"), true);
+            EditorGUILayout.PropertyField(_content, new("Content"), true);
+            
+            if (scope.changed)
+            {
+                serializedObject.ApplyModifiedProperties();
+            }
         }, GUI.skin.box);
 
-        EditorGUILayout.LabelField("Value");
-        ActionEditorVertical(() =>
+
+        serializedObject.Update();
+
+        if (_viewport.objectReferenceValue && _content.objectReferenceValue)
         {
-            RectTransform rectTransform = _horizontalSelector.transform as RectTransform;
-            RectTransform viewport = _viewport.objectReferenceValue as RectTransform;
-            RectTransform content = _content.objectReferenceValue as RectTransform;
+            using EditorGUI.ChangeCheckScope scope = new();
+            EditorGUILayout.LabelField("Value");
+            ActionEditorVertical(() =>
+            {
+                RectTransform rectTransform = _horizontalSelector.transform as RectTransform;
+                RectTransform viewport = _viewport.objectReferenceValue as RectTransform;
+                RectTransform content = _content.objectReferenceValue as RectTransform;
 
-            _horizontalSelector.InitRectTransforms(); 
+                _horizontalSelector.InitRectTransforms();
 
-            EditorGUILayout.IntSlider(_selectedIndex, 0, content.childCount - 1);
+                EditorGUILayout.IntSlider(_selectedIndex, 0, content.childCount - 1);
 
-            content.localPosition = _horizontalSelector.GetTargetPosition(
-                _selectedIndex.intValue,
-                content.childCount,
-                content.sizeDelta.x,
-                viewport.sizeDelta.x);
+                content.localPosition = _horizontalSelector.GetTargetPosition(
+                    _selectedIndex.intValue,
+                    content.childCount,
+                    content.sizeDelta.x,
+                    viewport.sizeDelta.x);
 
-        }, GUI.skin.box);
+            }, GUI.skin.box);
 
-        EditorGUILayout.LabelField("Buttons");
-        ActionEditorVertical(() =>
-        {
-            EditorGUILayout.PropertyField(_leftButton, new GUIContent("Left Button"), true);
-            EditorGUILayout.PropertyField(_rightButton, new GUIContent("Right Button"), true);
-        }, GUI.skin.box);
+            EditorGUILayout.LabelField("Buttons");
+            ActionEditorVertical(() =>
+            {
+                EditorGUILayout.PropertyField(_leftButton, new GUIContent("Left Button"), true);
+                EditorGUILayout.PropertyField(_rightButton, new GUIContent("Right Button"), true);
+            }, GUI.skin.box);
 
-        EditorGUILayout.PropertyField(_onChangedValue);
+            EditorGUILayout.PropertyField(_onChangedValue);
 
-        if (EditorGUI.EndChangeCheck())
-        {
-            serializedObject.ApplyModifiedProperties();
+            if (scope.changed)
+            {
+                serializedObject.ApplyModifiedProperties();
+            }
         }
     }
 }

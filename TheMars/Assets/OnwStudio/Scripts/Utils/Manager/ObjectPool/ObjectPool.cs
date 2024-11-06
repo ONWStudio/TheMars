@@ -6,9 +6,17 @@ using Onw.Extensions;
 
 namespace Onw.Manager.ObjectPool
 {
-    public interface IPooledObject
+    public interface IPooledObject : IPopHandler, IReturnHandler
+    {
+    }
+
+    public interface IPopHandler
     {
         void OnPopFromPool();
+    }
+
+    public interface IReturnHandler
+    {
         void OnReturnToPool();
     }
 
@@ -40,7 +48,7 @@ namespace Onw.Manager.ObjectPool
         {
             if (!genericComponent) return;
             
-            if (genericComponent is IPooledObject pooledObject)
+            if (genericComponent is IReturnHandler pooledObject)
             {
                 pooledObject.OnReturnToPool();
             }
@@ -53,7 +61,7 @@ namespace Onw.Manager.ObjectPool
 
         public static void ReleaseAllObject()
         {
-            _pool.ForEach(component => UnityEngine.Object.Destroy(component.gameObject));
+            _pool.ForEach(component => Object.Destroy(component.gameObject));
             _pool.Clear();
         }
 
@@ -61,7 +69,7 @@ namespace Onw.Manager.ObjectPool
         {
             genericComponent.transform.SetParent(null, false);
             genericComponent.gameObject.SetActive(true);
-            if (genericComponent is IPooledObject pooledObject)
+            if (genericComponent is IPopHandler pooledObject)
             {
                 pooledObject.OnPopFromPool();
             }
@@ -122,7 +130,7 @@ namespace Onw.Manager.ObjectPool
             }
 
             objectToReturn
-                .GetComponents<IPooledObject>()
+                .GetComponents<IReturnHandler>()
                 .ForEach(pooledComponent => pooledComponent.OnReturnToPool());
             
             objectToReturn.SetActive(false);
@@ -137,7 +145,7 @@ namespace Onw.Manager.ObjectPool
                 .Values
                 .SelectMany(stack => stack)
                 .Where(obj => obj)
-                .ForEach(UnityEngine.Object.Destroy);
+                .ForEach(Object.Destroy);
 
             _pool.Clear();
         }
@@ -147,7 +155,7 @@ namespace Onw.Manager.ObjectPool
             pooledObject.transform.SetParent(null, false);
             pooledObject.SetActive(true);
             pooledObject
-                .GetComponents<IPooledObject>()
+                .GetComponents<IPopHandler>()
                 .ForEach(pooledComponent => pooledComponent.OnPopFromPool());
         }
         
@@ -205,7 +213,7 @@ namespace Onw.Manager.ObjectPool
             }
 
             // ReSharper disable once ConvertIfStatementToSwitchStatement
-            if (objectToReturn is IPooledObject pooledObject)
+            if (objectToReturn is IReturnHandler pooledObject)
             {
                 pooledObject.OnReturnToPool();
             }
@@ -231,7 +239,7 @@ namespace Onw.Manager.ObjectPool
             genericComponent.transform.SetParent(null, false);
             genericComponent.gameObject.SetActive(true);
 
-            if (genericComponent is IPooledObject pooledObject)
+            if (genericComponent is IPopHandler pooledObject)
             {
                 pooledObject.OnPopFromPool();
             }

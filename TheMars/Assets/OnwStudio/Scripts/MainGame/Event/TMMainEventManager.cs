@@ -29,7 +29,6 @@ namespace TM.Event
         protected override void Init()
         {
             TMSimulator.Instance.OnChangedDay += onChangedDay;
-            onChangedDay(0);
         }
 
         private void onChangedDay(int day)
@@ -38,7 +37,7 @@ namespace TM.Event
             
             _onTriggerMainEvent.Invoke(_mainEvent);
 
-            TimeManager.IsFreeze = true;
+            TimeManager.IsPause = true;
             TMMainEvent mainEvent = _mainEvent;
             mainEvent.OnFireEvent += onFireEvent;
 
@@ -46,7 +45,7 @@ namespace TM.Event
             {
                 if (mainEvent is null) return;
                 
-                TimeManager.IsFreeze = false;
+                TimeManager.IsPause = false;
                 mainEvent.OnFireEvent -= onFireEvent;
                 _mainEvent = new(eventChoice == TMEventChoice.TOP ? 
                     mainEvent.EventData.TopEventData : 

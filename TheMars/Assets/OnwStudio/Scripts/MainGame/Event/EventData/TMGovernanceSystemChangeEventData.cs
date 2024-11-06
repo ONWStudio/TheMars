@@ -1,3 +1,4 @@
+using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,6 +6,7 @@ using Onw.Attribute;
 using TM.Card.Effect;
 using TM.Card.Effect.Creator;
 using TM.Card.Runtime;
+using TM.Runtime;
 using UnityEngine;
 
 namespace TM.Event
@@ -62,11 +64,14 @@ namespace TM.Event
         {
             TMPlayerManager.Instance.Credit += BottomCreditAdd;
             TMPlayerManager.Instance.Satisfaction += BottomSatisfactionAdd;
-            TMCardModel card = TMCardManager
+            TMCardModel[] cardArray = new TMCardModel[1];
+
+            cardArray[0] = TMCardManager
                 .Instance
                 .CardCreator
-                .CreateCardByCondition(cardData => cardData.CheckTypeEffectCreator<TMCardBuildingCreateEffectCreator>());
-            TMCardManager.Instance.AddCard(card);
+                .CreateRandomCardByWhere(cardData => cardData.CheckTypeEffectCreator<TMCardBuildingCreateEffectCreator>());
+            
+            TMCardNotifyIconSpawner.Instance.CreateIcon(cardArray);
         }
     }
 }
