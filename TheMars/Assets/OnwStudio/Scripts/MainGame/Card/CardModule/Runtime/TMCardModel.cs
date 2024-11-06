@@ -156,9 +156,9 @@ namespace TM.Card.Runtime
         /// <summary>
         /// .. 카드의 코스트를 지불 가능한 상태를 반환합니다
         /// </summary>
-        public bool CanPayCost => CardData
+        public bool CanPayCost => CardData.MainCost.Cost <= getResourceFromPlayerByMainCost(CardData.MainCost.CostKind) && CardData
             .CardCosts
-            .All(cardCost => cardCost.Cost <= getResourceFromPlayerByCost(cardCost.CostKind));
+            .All(cardCost => cardCost.Cost <= getResourceFromPlayerBySubCost(cardCost.CostKind));
 
         public bool CanInteract
         {
@@ -329,30 +329,31 @@ namespace TM.Card.Runtime
         /// </summary>
         public void PayCost()
         {
+            switch (CardData.MainCost.CostKind)
+            {
+                case TMMainCost.CREDIT:
+                    TMPlayerManager.Instance.Credit -= CardData.MainCost.Cost;
+                    break;
+                case TMMainCost.ELECTRICITY:
+                    TMPlayerManager.Instance.Electricity -= CardData.MainCost.Cost;
+                    break;
+            }
+            
             foreach (TMCardSubCost cost in CardData.CardCosts)
             {
                 switch (cost.CostKind)
                 {
-                    case TMResourceKind.MARS_LITHIUM:
+                    case TMSubCost.MARS_LITHIUM:
                         TMPlayerManager.Instance.MarsLithium -= cost.Cost;
                         break;
-                    case TMResourceKind.CREDIT:
-                        TMPlayerManager.Instance.Credit -= cost.Cost;
-                        break;
-                    case TMResourceKind.STEEL:
+                    case TMSubCost.STEEL:
                         TMPlayerManager.Instance.Steel -= cost.Cost;
                         break;
-                    case TMResourceKind.PLANTS:
+                    case TMSubCost.PLANTS:
                         TMPlayerManager.Instance.Plants -= cost.Cost;
                         break;
-                    case TMResourceKind.CLAY:
+                    case TMSubCost.CLAY:
                         TMPlayerManager.Instance.Clay -= cost.Cost;
-                        break;
-                    case TMResourceKind.ELECTRICITY:
-                        TMPlayerManager.Instance.Electricity -= cost.Cost;
-                        break;
-                    case TMResourceKind.POPULATION:
-                        TMPlayerManager.Instance.Population -= cost.Cost;
                         break;
                 }
             }
@@ -365,15 +366,19 @@ namespace TM.Card.Runtime
         /// </summary>
         /// <param name="resourceKind"></param>
         /// <returns></returns>
-        private static int getResourceFromPlayerByCost(TMResourceKind resourceKind) => resourceKind switch
+        private static int getResourceFromPlayerBySubCost(TMSubCost resourceKind) => resourceKind switch
         {
-            TMResourceKind.MARS_LITHIUM => TMPlayerManager.Instance.MarsLithium,
-            TMResourceKind.CREDIT => TMPlayerManager.Instance.Credit,
-            TMResourceKind.STEEL => TMPlayerManager.Instance.Steel,
-            TMResourceKind.PLANTS => TMPlayerManager.Instance.Plants,
-            TMResourceKind.CLAY => TMPlayerManager.Instance.Clay,
-            TMResourceKind.POPULATION => TMPlayerManager.Instance.Population,
-            TMResourceKind.ELECTRICITY => TMPlayerManager.Instance.Electricity,
+            TMSubCost.MARS_LITHIUM => TMPlayerManager.Instance.MarsLithium,
+            TMSubCost.STEEL => TMPlayerManager.Instance.Steel,
+            TMSubCost.PLANTS => TMPlayerManager.Instance.Plants,
+            TMSubCost.CLAY => TMPlayerManager.Instance.Clay,
+            _ => 0
+        };
+
+        private static int getResourceFromPlayerByMainCost(TMMainCost mainCostKind) => mainCostKind switch
+        {
+            TMMainCost.CREDIT => TMPlayerManager.Instance.Credit,
+            TMMainCost.ELECTRICITY => TMPlayerManager.Instance.Electricity,
             _ => 0
         };
 
@@ -396,7 +401,6 @@ namespace TM.Card.Runtime
                 IsDragging = false;
                 _onEffectEvent.Invoke(this);
             }
-
 
             this.StopCoroutineIfNotNull(_dragEnumerator);
             _onDragEndCard.Invoke(this);
