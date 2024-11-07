@@ -9,27 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
-  m_Name: Card_No.9fa90e83-a4cd-469c-9026-b108b3f71300
+  m_Script: {fileID: 11500000, guid: 29023a97855ba47afb2e17979280c141, type: 3}
+  m_Name: Building_No.b2c38890-71ca-4a92-a998-79197912c725
   m_EditorClassIdentifier: 
-  <MainCost>k__BackingField:
-    <CostKind>k__BackingField: 0
-    <Cost>k__BackingField: 0
-  <CardImage>k__BackingField: {fileID: 0}
-  _localizedCardName:
+  <TMCorporation>k__BackingField: 0
+  <BuildingPrefab>k__BackingField: {fileID: 0}
+  _localizedBuildingName:
     m_TableReference:
-      m_TableCollectionName: CardName
+      m_TableCollectionName: 
     m_TableEntryReference:
       m_KeyId: 0
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  _cardEffectCreator:
-    rid: -2
-  _cardCosts: []
+  _effectCreators: []
+  _synergies: []
   references:
     version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    RefIds: []

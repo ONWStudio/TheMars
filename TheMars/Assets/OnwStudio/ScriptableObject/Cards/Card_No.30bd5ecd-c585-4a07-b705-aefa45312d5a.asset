@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
   m_Name: Card_No.30bd5ecd-c585-4a07-b705-aefa45312d5a
   m_EditorClassIdentifier: 
-  <CardKind>k__BackingField: 1
-  <CardGroup>k__BackingField: 0
+  <MainCost>k__BackingField:
+    <CostKind>k__BackingField: 0
+    <Cost>k__BackingField: 0
   <CardImage>k__BackingField: {fileID: 0}
   _localizedCardName:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: CardName
     m_TableEntryReference:
-      m_KeyId: 0
-      m_Key: 
+      m_KeyId: 36205965576409088
+      m_Key: Someting
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
