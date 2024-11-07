@@ -19,7 +19,7 @@ namespace TM.Event
 
         ITMEventData TopReadData { get; }
         ITMEventData BottomReadData { get; }
-        
+
         bool CanFireTop { get; }
         bool CanFireBottom { get; }
     }
@@ -36,7 +36,7 @@ namespace TM.Event
         public ITMEventData BottomReadData => BottomEventData;
 
         // .. 추후 이벤트 매니저에서 다음 이벤트를 정할 수 있게끔..
-        [field: InfoBox("효과 텍스트 작성 팁 : 효과 텍스트 작성시 어떤 값을 불러와야 할때는 \"{Steel} 강철 소모\"와 같은 형태로 작성되어야 합니다 아래는 불러와야 할 값 별 Key입니다 \n \n" + 
+        [field: InfoBox("효과 텍스트 작성 팁 : 효과 텍스트 작성시 어떤 값을 불러와야 할때는 \"{Steel} 강철 소모\"와 같은 형태로 작성되어야 합니다 아래는 불러와야 할 값 별 Key입니다 \n \n" +
                         "\t 마르스 리튬 : MarsLithium \n" +
                         "\t 인구 : Population \n" +
                         "\t 크레딧 : Credit \n" +
@@ -60,13 +60,16 @@ namespace TM.Event
         [field: SerializeField, LocalizedString(entryKey: "Title"), DisplayAs("[로컬라이징] 타이틀 텍스트")] public LocalizedString TitleTextEvent { get; private set; } = new();
         [field: SerializeField, LocalizedString(entryKey: "TopEffect"), DisplayAs("[로컬라이징] 위쪽 선택지 효과 텍스트")] public LocalizedString TopEffectTextEvent { get; private set; } = new();
         [field: SerializeField, LocalizedString(entryKey: "BottomEffect"), DisplayAs("[로컬라이징] 아래쪽 선택지 효과 텍스트")] public LocalizedString BottomEffectTextEvent { get; private set; } = new();
-        
+
+        [field: SerializeField] public bool HasTopEvent { get; private set; } = true;
+        [field: SerializeField] public bool HasBottomEvent { get; private set; } = true;
+
         public abstract bool CanFireTop { get; }
         public abstract bool CanFireBottom { get; }
-        
+
         public abstract Dictionary<string, object> TopEffectLocalizedArguments { get; }
         public abstract Dictionary<string, object> BottomEffectLocalizedArguments { get; }
-        
+
         public void InvokeEvent(TMEventChoice eventChoice)
         {
             if (eventChoice == TMEventChoice.TOP)

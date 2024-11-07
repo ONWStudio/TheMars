@@ -10,27 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: SynergyNameTable Shared Data
+  m_Name: SynergyName Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: SynergyNameTable
+  m_TableCollectionName: SynergyName
   m_TableCollectionNameGuidString: d1aec9023d60d4302b63cdf07385a2f1
   m_Entries:
-  - m_Id: 15605948416
-    m_Key: 'ACorporation
-
-'
-    m_Metadata:
-      m_Items: []
   - m_Id: 173395664896
     m_Key: BCorporation
     m_Metadata:
       m_Items: []
   - m_Id: 177883570176
-    m_Key: CCorportation
+    m_Key: CCorporation
     m_Metadata:
       m_Items: []
   - m_Id: 180987355136
     m_Key: DCorporation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2503028883054592
+    m_Key: ACorporation
     m_Metadata:
       m_Items: []
   m_Metadata:

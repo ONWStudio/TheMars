@@ -6,6 +6,7 @@ using UnityEngine.Localization.Settings;
 using Onw.Helper;
 using Onw.Manager;
 using Onw.Attribute;
+using Onw.Event;
 
 namespace TM
 {
@@ -13,6 +14,7 @@ namespace TM
     {
         public const int MAX_SATISFACTION = 100;
         public const int MAX_TERRAFORM_VALUE = 100;
+        
         protected override string SceneName => "MainGameScene";
         
         public int Level
@@ -269,7 +271,7 @@ namespace TM
         [SerializeField, ReadOnly] private int _satisfaction = 0;
         
         [Header("Player Info")]
-        [SerializeField, ReadOnly] private int _level = 0;
+        [SerializeField, ReadOnly] private int _level = 1;
         [SerializeField, ReadOnly] private int _exp = 0;
         [SerializeField, ReadOnly] private int _terraformValue = 0;
 

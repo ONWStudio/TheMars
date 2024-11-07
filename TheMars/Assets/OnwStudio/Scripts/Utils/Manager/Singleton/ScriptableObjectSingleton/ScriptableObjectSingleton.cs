@@ -14,7 +14,7 @@ namespace Onw.Manager
         public static bool HasInstance => _instance != null;
 
         public static bool ScriptableObjectFileExists
-            => HasInstance || File.Exists(GetFilePathWithExtention(true));
+            => HasInstance || File.Exists(getFilePathWithExtension(true));
 
         private static T _instance = null;
 
@@ -22,9 +22,12 @@ namespace Onw.Manager
         {
             if (_instance == null)
             {
-                string filePath = GetFilePathWithExtention(false);
+                string filePath = getFilePathWithExtension(false);
                 string resourceFilePath = Path.GetFileNameWithoutExtension(
-                        filePath.Split(new string[] { "Resources" }, StringSplitOptions.None).Last());
+                    filePath.Split(new string[]
+                    {
+                        "Resources"
+                    }, StringSplitOptions.None).Last());
 
                 if (Resources.Load(resourceFilePath) is not T instance)
                 {
@@ -35,6 +38,11 @@ namespace Onw.Manager
                     string directory = Path.GetDirectoryName(completeFilePath);
                     if (!Directory.Exists(directory))
                     {
+                        if (directory == null)
+                        {
+                            return null;
+                        }
+                        
                         Directory.CreateDirectory(directory);
                     }
 
@@ -55,19 +63,19 @@ namespace Onw.Manager
             return _instance;
         }
 
-        protected virtual void OnAwake() {}
+        protected virtual void OnAwake() { }
 
-        private static string GetFilePathWithExtention(bool fullPath)
+        private static string getFilePathWithExtension(bool fullPath)
         {
             Type t = typeof(T);
-            FieldInfo prop = t.GetField("FILE_PATH", BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic) ?? throw new Exception($"No static Property 'FilePath' in {t}");
+            FieldInfo prop = t.GetField("FILE_PATH", BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic) ?? throw new($"No static Property 'FilePath' in {t}");
 
             // .. 하위 클래스에 식별자가 'FILE_PATH'인 전역 string type 필드가 선언되지 않았을 경우
-            if (prop.GetValue(null) is not string filePath) throw new Exception($"static property 'FILE_PATH' is not a string or null in {t}");
+            if (prop.GetValue(null) is not string filePath) throw new($"static property 'FILE_PATH' is not a string or null in {t}");
             // .. Resource를 통해 불러오므로 FILE_PATH에 Resources라는 경로가 포함되어 있어야 함 
-            if (!filePath.Contains("Resources")) throw new Exception("static property 'FILE_PATH' must contain a Resources folder.");
+            if (!filePath.Contains("Resources")) throw new("static property 'FILE_PATH' must contain a Resources folder.");
             // .. Plugins경로가 포함되어 있을 경우
-            if (filePath.Contains("Plugins")) throw new Exception("static property 'FILE_PATH' must not contain a Plugin folder.");
+            if (filePath.Contains("Plugins")) throw new("static property 'FILE_PATH' must not contain a Plugin folder.");
 
             // .. 스크립터블 오브젝트의 확장자는 .asset이므로 없다면 추가
             if (!filePath.EndsWith(".asset"))

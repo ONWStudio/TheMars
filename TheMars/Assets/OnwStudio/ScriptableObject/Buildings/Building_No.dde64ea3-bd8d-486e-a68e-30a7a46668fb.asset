@@ -15,12 +15,12 @@ MonoBehaviour:
   <TMCorporation>k__BackingField: 0
   <BuildingPrefab>k__BackingField: {fileID: 4797982682177862849, guid: 5f392c5154ae64a33be8118dba335450,
     type: 3}
-  _localizedCardName:
+  _localizedBuildingName:
     m_TableReference:
-      m_TableCollectionName: GUID:a3fba4155beff4ce684b2afe10973d87
+      m_TableCollectionName: BuildingName
     m_TableEntryReference:
       m_KeyId: 15740166144
-      m_Key: 
+      m_Key: SmallDigger
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []

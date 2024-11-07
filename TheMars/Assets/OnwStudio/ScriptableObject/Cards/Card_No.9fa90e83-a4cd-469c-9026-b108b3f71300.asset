@@ -12,23 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
   m_Name: Card_No.9fa90e83-a4cd-469c-9026-b108b3f71300
   m_EditorClassIdentifier: 
-  <CardKind>k__BackingField: 1
-  <CardGroup>k__BackingField: 0
+  <MainCost>k__BackingField:
+    <CostKind>k__BackingField: 0
+    <Cost>k__BackingField: 0
   <CardImage>k__BackingField: {fileID: 0}
   _localizedCardName:
     m_TableReference:
-      m_TableCollectionName: GUID:d980be908d5ad4cfc8c5ca05a4f17d26
+      m_TableCollectionName: CardName
     m_TableEntryReference:
-      m_KeyId: 7973635925991424
-      m_Key: 
+      m_KeyId: 4628893234356224
+      m_Key: "\uD654\uC131 \uACE0\uAD6C\uB9C8"
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   _cardEffectCreator:
-    rid: -2
+    rid: 4853453395557351426
   _cardCosts: []
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 4853453395557351426
+      type: {class: TMCardBuildingCreateEffectCreator, ns: TM.Card.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <BuildingData>k__BackingField: {fileID: 0}

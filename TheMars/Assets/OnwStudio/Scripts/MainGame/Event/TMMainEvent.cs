@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
-using TMPro;
 using Onw.Attribute;
 
 namespace TM.Event
 {
-    public interface ITMMainEvent
+    public interface ITMEvent
     {
         event UnityAction<TMEventChoice> OnFireEvent;
         ITMEventData EventReadData { get; }
     }
     
     [System.Serializable]
-    public sealed class TMMainEvent : ITMMainEvent
+    public sealed class TMEventRunner : ITMEvent
     {
         public event UnityAction<TMEventChoice> OnFireEvent
         {
@@ -38,7 +37,7 @@ namespace TM.Event
             _onFireEvent.Invoke(eventChoice);
         }
         
-        public TMMainEvent(TMEventData eventData)
+        public TMEventRunner(TMEventData eventData)
         {
             EventData = eventData;
         }

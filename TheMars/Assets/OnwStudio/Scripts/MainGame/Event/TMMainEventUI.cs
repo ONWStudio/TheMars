@@ -20,7 +20,7 @@ namespace TM.Runtime.UI
 
         [Header("Image")]
         [SerializeField, SelectableSerializeField] private Image _eventImage;
-        
+
         [Header("Text")]
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _descriptionText;
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _topButtonText;
@@ -40,23 +40,23 @@ namespace TM.Runtime.UI
         [SerializeField, SelectableSerializeField] private PointerEnterTrigger _bottomButtonEnterTrigger;
         [SerializeField, SelectableSerializeField] private PointerExitTrigger _topButtonExitTrigger;
         [SerializeField, SelectableSerializeField] private PointerExitTrigger _bottomButtonExitTrigger;
-        
+
         private string _description = string.Empty;
         private string _topEffectDescription = string.Empty;
         private string _bottomEffectDescription = string.Empty;
-        private TMMainEvent _mainEvent = null;
-        
+        private TMEventRunner _eventRunner = null;
+
         private void Start()
         {
             _topButton.onClick.AddListener(onClickTopButton);
             _bottomButton.onClick.AddListener(onClickBottomButton);
-            
+
             _topButtonEnterTrigger.OnPointerEnterEvent += onPointerEnterByTop;
             _bottomButtonEnterTrigger.OnPointerEnterEvent += onPointerEnterByBottom;
             _topButtonExitTrigger.OnPointerExitEvent += onPointerExitByTop;
             _bottomButtonExitTrigger.OnPointerExitEvent += onPointerExitByBottom;
 
-            _descriptionTextEvent.OnUpdateString.AddListener(description => _descriptionText.text = _description =  description);
+            _descriptionTextEvent.OnUpdateString.AddListener(description => _descriptionText.text = _description = description);
             _topButtonTextEvent.OnUpdateString.AddListener(topText => _topButtonText.text = topText);
             _bottomButtonTextEvent.OnUpdateString.AddListener(bottomText => _bottomButtonText.text = bottomText);
             _titleTextEvent.OnUpdateString.AddListener(titleText => _titleText.text = titleText);
@@ -86,19 +86,19 @@ namespace TM.Runtime.UI
 
         private void onClickTopButton()
         {
-            if (!_mainEvent?.CanFireTop ?? true) return;
+            if (!_eventRunner?.CanFireTop ?? true) return;
             onEffect(TMEventChoice.TOP);
         }
 
         private void onClickBottomButton()
         {
-            if (!_mainEvent?.CanFireBottom ?? true) return;
+            if (!_eventRunner?.CanFireBottom ?? true) return;
             onEffect(TMEventChoice.BOTTOM);
         }
 
         private void onEffect(TMEventChoice choice)
         {
-            _mainEvent.InvokeEvent(choice);
+            _eventRunner.InvokeEvent(choice);
             this.SetActiveGameObject(false);
             resetField();
         }
@@ -108,7 +108,7 @@ namespace TM.Runtime.UI
             _description = string.Empty;
             _topEffectDescription = string.Empty;
             _bottomEffectDescription = string.Empty;
-            _mainEvent = null;
+            _eventRunner = null;
             _eventImage.sprite = null;
             _descriptionTextEvent.StringReference = null;
             _topButtonTextEvent.StringReference = null;
@@ -117,28 +117,42 @@ namespace TM.Runtime.UI
             _topEffectTextEvent.StringReference = null;
             _bottomEffectTextEvent.StringReference = null;
         }
-        
-        public void OnTriggerMainEvent(TMMainEvent mainEvent)
+
+        public void OnTriggerMainEvent(TMEventRunner mainEventRunner)
         {
             this.SetActiveGameObject(true);
 
-            _mainEvent = mainEvent;
-            _eventImage.sprite = _mainEvent.EventData.EventImage;
-            _titleTextEvent.StringReference = _mainEvent.EventData.TitleTextEvent;
-            _descriptionTextEvent.StringReference = _mainEvent.EventData.DescriptionTextEvent;
-            _topButtonTextEvent.StringReference = _mainEvent.EventData.TopButtonTextEvent;
-            _bottomButtonTextEvent.StringReference = _mainEvent.EventData.BottomButtonTextEvent;
-            _topEffectTextEvent.StringReference = _mainEvent.EventData.TopEffectTextEvent;
-            _bottomEffectTextEvent.StringReference = _mainEvent.EventData.BottomEffectTextEvent;
+            _eventRunner = mainEventRunner;
+            _eventImage.sprite = _eventRunner.EventData.EventImage;
+            _titleTextEvent.StringReference = _eventRunner.EventData.TitleTextEvent;
+            _descriptionTextEvent.StringReference = _eventRunner.EventData.DescriptionTextEvent;
 
-            if (_mainEvent.EventData.TopEffectLocalizedArguments is not null)
+            _topButton.SetActiveGameObject(_eventRunner.EventData.HasTopEvent);
+            if (_eventRunner.EventData.HasTopEvent)
             {
-                _topEffectTextEvent.StringReference.Arguments = new object[] { _mainEvent.EventData.TopEffectLocalizedArguments };
+                _topButtonTextEvent.StringReference = _eventRunner.EventData.TopButtonTextEvent;
+                _topEffectTextEvent.StringReference = _eventRunner.EventData.TopEffectTextEvent;
+                if (_eventRunner.EventData.TopEffectLocalizedArguments is not null)
+                {
+                    _topEffectTextEvent.StringReference.Arguments = new object[]
+                    {
+                        _eventRunner.EventData.TopEffectLocalizedArguments
+                    };
+                }
             }
-
-            if (_mainEvent.EventData.BottomEffectLocalizedArguments is not null)
+            
+            _bottomButton.SetActiveGameObject(_eventRunner.EventData.HasBottomEvent);
+            if (_eventRunner.EventData.HasBottomEvent)
             {
-                _bottomEffectTextEvent.StringReference.Arguments = new object[] { _mainEvent.EventData.BottomEffectLocalizedArguments };
+                _bottomButtonTextEvent.StringReference = _eventRunner.EventData.BottomButtonTextEvent;
+                _bottomEffectTextEvent.StringReference = _eventRunner.EventData.BottomEffectTextEvent;
+                if (_eventRunner.EventData.BottomEffectLocalizedArguments is not null)
+                {
+                    _bottomEffectTextEvent.StringReference.Arguments = new object[]
+                    {
+                        _eventRunner.EventData.BottomEffectLocalizedArguments
+                    };
+                }
             }
         }
     }

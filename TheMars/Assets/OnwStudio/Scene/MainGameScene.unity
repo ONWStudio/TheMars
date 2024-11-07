@@ -8046,14 +8046,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a12d3c1366ed44b458514d828c96f5ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CheckDayCount>k__BackingField: 5
-  _mainEvent:
+  <CheckMainEventDayCount>k__BackingField: 5
+  _mainEventRunner:
     <EventData>k__BackingField: {fileID: 11400000, guid: 9758561fa106e44be90eef1dba2aedb3,
       type: 2}
     _onFireEvent:
       m_PersistentCalls:
         m_Calls: []
-  _onTriggerMainEvent:
+  _onTriggerEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1744811168}

@@ -143,11 +143,21 @@ namespace Onw.Attribute.Editor
                     {
                         SharedTableData tableData = tableCollection.SharedData;
 
-                        string key = EditorGUI.TextField(currentPosition, "Entry Key", sharedTableEntry.Key);
+                        float halfCurrentPositionWidth = currentPosition.width * 0.5f;
+                        Rect keyTextRect = new(currentPosition.x, currentPosition.y, halfCurrentPositionWidth - EditorGUIUtility.standardVerticalSpacing, currentPosition.height);
+                        Rect deleteButtonRect = new(currentPosition.x + halfCurrentPositionWidth, currentPosition.y, halfCurrentPositionWidth, currentPosition.height);
+                        string key = EditorGUI.TextField(keyTextRect, "Entry Key", sharedTableEntry.Key);
                         if (key != sharedTableEntry.Key && !string.IsNullOrEmpty(key) && !tableData.Entries.Any(entry => entry != sharedTableEntry && entry.Key == key))
                         {
                             tableData.RenameKey(sharedTableEntry.Key, key);
                             tableEntryKeyProp.stringValue = key;
+                            EditorUtility.SetDirty(tableData);
+                        }
+
+                        if (GUI.Button(deleteButtonRect, "Delete"))
+                        {
+                            tableData.RemoveKey(sharedTableEntry.Key);
+                            tableEntryKeyProp.stringValue = "";
                             EditorUtility.SetDirty(tableData);
                         }
 
@@ -164,7 +174,9 @@ namespace Onw.Attribute.Editor
                             // 엔트리 가져오기
                             // 엔트리가 없을 경우 생성
                             StringTableEntry entry = stringTable.GetEntry(sharedTableEntry.Id) ?? stringTable.AddEntry(sharedTableEntry.Id, "");
-
+                            
+                            EditorGUI.LabelField(currentPosition, locale.LocaleName);
+                            currentPosition.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                             // 번역 값 표시 및 편집
                             Rect optionRect = new(currentPosition.x, currentPosition.y, currentPosition.width, EditorGUIUtility.singleLineHeight * 5 + EditorGUIUtility.standardVerticalSpacing * 2);
                             EditorGUI.DrawRect(optionRect, ColorUtility.TryParseHtmlString("#413a4f", out Color color) ? color : Color.black);
@@ -261,7 +273,7 @@ namespace Onw.Attribute.Editor
                     {
                         // 로케일 목록 가져오기
                         List<Locale> locales = getLocales();
-                        totalHeight += locales.Sum(_ => EditorGUIUtility.singleLineHeight * 5 + EditorGUIUtility.standardVerticalSpacing * 2);
+                        totalHeight += locales.Sum(_ => EditorGUIUtility.singleLineHeight * 6 + EditorGUIUtility.standardVerticalSpacing * 3);
                     }
                 }
 

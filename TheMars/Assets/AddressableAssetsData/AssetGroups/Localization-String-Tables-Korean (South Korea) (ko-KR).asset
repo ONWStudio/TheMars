@@ -36,7 +36,7 @@ MonoBehaviour:
     - Locale-ko-KR
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 84d9a05f8531a42afb93780fdb533237
-    m_Address: SynergyNameTable_ko-KR
+    m_Address: SynergyName_ko-KR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko-KR
