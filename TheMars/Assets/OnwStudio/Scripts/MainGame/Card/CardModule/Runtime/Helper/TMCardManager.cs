@@ -5,8 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.Serialization;
 using Onw.Manager;
 using Onw.Attribute;
+using Onw.Event;
 using Onw.Extensions;
 using Onw.UI.Components;
+using UniRx;
 using Image = UnityEngine.UI.Image;
 
 namespace TM.Card.Runtime

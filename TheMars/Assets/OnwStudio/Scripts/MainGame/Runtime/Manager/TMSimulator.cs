@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using Onw.Manager;
 using Onw.Attribute;
+using Onw.Event;
+using UniRx;
 
 namespace TM.Manager
 {
@@ -15,45 +17,13 @@ namespace TM.Manager
         private const int INTERVAL_MAX = 15;
 
         [field: SerializeField, ReadOnly] public float AccumulatedTime { get; private set; } = 0f;
-        [field: SerializeField, ReadOnly] public int NowDay { get; private set; } = 1;
-        [field: SerializeField, ReadOnly] public int NowMinutes { get; private set; } = 0;
-        [field: SerializeField, ReadOnly] public int NowSeconds { get; private set; } = 0;
+        [SerializeField, ReadOnly] private ReactiveField<int> _nowDay = new() { Value = 1 };
+        [SerializeField, ReadOnly] private ReactiveField<int> _nowMinutes = new() { Value = 0 };
+        [SerializeField, ReadOnly] private ReactiveField<int> _nowSeconds = new() { Value = 0 };
 
-        public event UnityAction<int> OnChangedDay
-        {
-            add
-            {
-                if (value is null) return;
-                
-                _onChangedDay.AddListener(value);
-                value.Invoke(NowDay);
-            }
-            remove => _onChangedDay.RemoveListener(value);
-        }
-        
-        public event UnityAction<int> OnChangedMinutes
-        {
-            add
-            {
-                if (value is null) return;
-                
-                _onChangedMinutes.AddListener(value);
-                value.Invoke(NowMinutes);
-            }
-            remove => _onChangedMinutes.RemoveListener(value);
-        }
-
-        public event UnityAction<int> OnChangedSeconds
-        {
-            add
-            {
-                if (value is null) return;
-                
-                _onChangedSeconds.AddListener(value);
-                value.Invoke(NowSeconds);
-            }
-            remove => _onChangedSeconds.RemoveListener(value);
-        }
+        public IReactiveField<int> NowDay => _nowDay;
+        public IReactiveField<int> NowMinutes => _nowMinutes;
+        public IReactiveField<int> NowSeconds => _nowSeconds;
         
         public int IntervalInMinutes
         {
@@ -64,15 +34,6 @@ namespace TM.Manager
         [field: SerializeField, ReadOnly] public float IntervalInSeconds { get; private set; } = 0f;
 
         [SerializeField, Range(INTERVAL_MIN, INTERVAL_MAX)] private int _intervalInMinutes = 2;
-
-        [Header("Event")]
-        [SerializeField] private UnityEvent<int> _onChangedDay = new();
-        [SerializeField] private UnityEvent<int> _onChangedMinutes = new();
-        [SerializeField] private UnityEvent<int> _onChangedSeconds = new();
-        
-        private int _prevDay = 1;
-        private int _prevMinutes = 0;
-        private int _prevSeconds = 0;
 
         protected override void Init() {}
 
@@ -85,28 +46,9 @@ namespace TM.Manager
         {
             AccumulatedTime += Time.deltaTime * TimeManager.GameSpeed;
 
-            _prevSeconds = NowSeconds;
-            _prevMinutes = NowMinutes;
-            _prevDay = NowDay;
-
-            NowSeconds = (int)(AccumulatedTime / 1);
-            NowMinutes = (int)(AccumulatedTime / 60);
-            NowDay = (int)(AccumulatedTime / IntervalInSeconds + 1);
-
-            if (NowSeconds > _prevSeconds)
-            {
-                _onChangedSeconds.Invoke(NowSeconds);
-            }
-
-            if (NowMinutes > _prevMinutes)
-            {
-                _onChangedMinutes.Invoke(NowMinutes);
-            }
-            
-            if (NowDay > _prevDay)
-            {
-                _onChangedDay.Invoke(NowDay);
-            }
+            _nowSeconds.Value = (int)(AccumulatedTime / 1);
+            _nowMinutes.Value = (int)(AccumulatedTime / 60);
+            _nowDay.Value = (int)(AccumulatedTime / IntervalInSeconds + 1);
         }
     }
 }

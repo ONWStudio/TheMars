@@ -32,12 +32,12 @@ namespace TM.Event
         
         protected override void TriggerTopEvent()
         {
-            TMSimulator.Instance.OnChangedDay += onChangedDay;
+            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
             
             void onChangedDay(int day)
             {
-                TMPlayerManager.Instance.Satisfaction -= TopSatisfactionSubtractByDay;
-                TMPlayerManager.Instance.Credit -= TopCreditSubtractByDay;
+                TMPlayerManager.Instance.Satisfaction.Value -= TopSatisfactionSubtractByDay;
+                TMPlayerManager.Instance.Credit.Value -= TopCreditSubtractByDay;
             }
         }
         

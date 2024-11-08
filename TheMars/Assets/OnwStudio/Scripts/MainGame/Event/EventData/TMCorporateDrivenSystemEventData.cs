@@ -30,7 +30,7 @@ namespace TM.Event
 
         protected override void TriggerTopEvent()
         {
-            TMPlayerManager.Instance.Population += TopPopulationAdd;
+            TMPlayerManager.Instance.SetPopulation(TMPlayerManager.Instance.Population.Value + TopPopulationAdd);
         }
 
         protected override void TriggerBottomEvent()

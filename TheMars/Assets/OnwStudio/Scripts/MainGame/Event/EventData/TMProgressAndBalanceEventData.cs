@@ -44,7 +44,7 @@ namespace TM.Event
         protected override void TriggerTopEvent()
         {
             int dayCount = 0;
-            TMSimulator.Instance.OnChangedDay += onChangedDay;
+            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
 
             void onChangedDay(int day)
             {
@@ -52,19 +52,19 @@ namespace TM.Event
 
                 if (dayCount == TopRandResourceAddDayCount)
                 {
-                    TMSimulator.Instance.OnChangedDay -= onChangedDay;
+                    TMSimulator.Instance.NowDay.RemoveListener(onChangedDay);
                 }
 
                 switch (Random.Range(0, 3))
                 {
                     case 0:
-                        TMPlayerManager.Instance.Steel += TopRandResourceAddByDay;
+                        TMPlayerManager.Instance.Steel.Value += TopRandResourceAddByDay;
                         break;
                     case 1:
-                        TMPlayerManager.Instance.Plants += TopRandResourceAddByDay;
+                        TMPlayerManager.Instance.Plants.Value += TopRandResourceAddByDay;
                         break;
                     default:
-                        TMPlayerManager.Instance.Clay += TopRandResourceAddByDay;
+                        TMPlayerManager.Instance.Clay.Value += TopRandResourceAddByDay;
                         break;
                 }
             }

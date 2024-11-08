@@ -46,7 +46,7 @@ namespace TM.Event
         {
             if (TopPopulationSubtractMin <= TopPopulationSubtractMax)
             {
-                TMPlayerManager.Instance.Population -= Random.Range(TopPopulationSubtractMin, TopPopulationSubtractMax + 1);
+                TMPlayerManager.Instance.SetPopulation(TMPlayerManager.Instance.Population.Value - Random.Range(TopPopulationSubtractMin, TopPopulationSubtractMax + 1));
             }
             else
             {
@@ -54,7 +54,7 @@ namespace TM.Event
             }
 
             int dayCount = 0;
-            TMSimulator.Instance.OnChangedDay += onChangedDay;
+            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
             
             void onChangedDay(int day)
             {
@@ -62,17 +62,17 @@ namespace TM.Event
 
                 if (dayCount == TopSatisfactionSubtractDayCount)
                 {
-                    TMSimulator.Instance.OnChangedDay -= onChangedDay;
+                    TMSimulator.Instance.NowDay.RemoveListener(onChangedDay);
                 }
                 
-                TMPlayerManager.Instance.Population -= TopSatisfactionSubtractByDay;
+                TMPlayerManager.Instance.SetPopulation(TMPlayerManager.Instance.Population.Value - TopSatisfactionSubtractByDay);
             }
         }
         
         protected override void TriggerBottomEvent()
         {
             int dayCount = 0;
-            TMSimulator.Instance.OnChangedDay += onChangedDay;
+            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
             
             void onChangedDay(int day)
             {
@@ -80,10 +80,10 @@ namespace TM.Event
 
                 if (dayCount == BottomSatisfactionAddDayCount)
                 {
-                    TMSimulator.Instance.OnChangedDay -= onChangedDay;
+                    TMSimulator.Instance.NowDay.RemoveListener(onChangedDay);
                 }
 
-                TMPlayerManager.Instance.Population += BottomSatisfactionAddByDay;
+                TMPlayerManager.Instance.SetPopulation(TMPlayerManager.Instance.Population.Value + BottomSatisfactionAddByDay);
             }
         }
     }

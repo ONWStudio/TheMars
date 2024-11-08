@@ -1,4 +1,5 @@
 // using Onw.Attribute;
+// using TM.Card.Effect;
 // namespace TMCard.Effect
 // {
 //     using static ITMCardEffectCreator;
@@ -8,7 +9,8 @@
 //     {
 //         public ITMCardEffect CreateEffect()
 //         {
-//             return CardEffectGenerator.CreateEffect<DisposableEffect, DisposableEffectCreator>(this);
+//             TMCardEffectGenerator
+//             return TMCardEffectGenerator.CreateEffect<DisposableEffect, DisposableEffectCreator>(this);
 //         }
 //     }
 // }

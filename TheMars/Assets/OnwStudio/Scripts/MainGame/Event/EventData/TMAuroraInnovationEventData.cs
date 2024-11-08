@@ -36,8 +36,8 @@ namespace TM.Event
         {
             int dayCountByPopulation = 0;
 
-            TMSimulator.Instance.OnChangedDay += onChangedDayByPopulation;
-            TMSimulator.Instance.OnChangedDay += onChangedDayBySatisfaction;
+            TMSimulator.Instance.NowDay.AddListener(onChangedDayByPopulation);
+            TMSimulator.Instance.NowDay.AddListener(onChangedDayBySatisfaction);
             
             void onChangedDayByPopulation(int day)
             {
@@ -45,15 +45,15 @@ namespace TM.Event
 
                 if (dayCountByPopulation == TopPopulationAddDayCount)
                 {
-                    TMSimulator.Instance.OnChangedDay -= onChangedDayByPopulation;
+                    TMSimulator.Instance.NowDay.RemoveListener(onChangedDayByPopulation);
                 }
 
-                TMPlayerManager.Instance.Population += Random.Range(TopPopulationAddByDayMin, TopPopulationAddByDayMax + 1);
+                TMPlayerManager.Instance.SetPopulation(TMPlayerManager.Instance.Population.Value + Random.Range(TopPopulationAddByDayMin, TopPopulationAddByDayMax + 1));
             }
 
             void onChangedDayBySatisfaction(int day)
             {
-                TMPlayerManager.Instance.Satisfaction += TopSatisfactionAddByDay;
+                TMPlayerManager.Instance.Satisfaction.Value += TopSatisfactionAddByDay;
             }
         }
         

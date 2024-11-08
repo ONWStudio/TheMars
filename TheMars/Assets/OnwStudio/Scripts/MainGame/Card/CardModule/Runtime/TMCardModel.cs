@@ -332,10 +332,10 @@ namespace TM.Card.Runtime
             switch (CardData.MainCost.CostKind)
             {
                 case TMMainCost.CREDIT:
-                    TMPlayerManager.Instance.Credit -= CardData.MainCost.Cost;
+                    TMPlayerManager.Instance.Credit.Value -= CardData.MainCost.Cost;
                     break;
                 case TMMainCost.ELECTRICITY:
-                    TMPlayerManager.Instance.Electricity -= CardData.MainCost.Cost;
+                    TMPlayerManager.Instance.Electricity.Value -= CardData.MainCost.Cost;
                     break;
             }
             
@@ -344,16 +344,16 @@ namespace TM.Card.Runtime
                 switch (cost.CostKind)
                 {
                     case TMSubCost.MARS_LITHIUM:
-                        TMPlayerManager.Instance.MarsLithium -= cost.Cost;
+                        TMPlayerManager.Instance.MarsLithium.Value -= cost.Cost;
                         break;
                     case TMSubCost.STEEL:
-                        TMPlayerManager.Instance.Steel -= cost.Cost;
+                        TMPlayerManager.Instance.Steel.Value -= cost.Cost;
                         break;
                     case TMSubCost.PLANTS:
-                        TMPlayerManager.Instance.Plants -= cost.Cost;
+                        TMPlayerManager.Instance.Plants.Value -= cost.Cost;
                         break;
                     case TMSubCost.CLAY:
-                        TMPlayerManager.Instance.Clay -= cost.Cost;
+                        TMPlayerManager.Instance.Clay.Value -= cost.Cost;
                         break;
                 }
             }
@@ -368,17 +368,17 @@ namespace TM.Card.Runtime
         /// <returns></returns>
         private static int getResourceFromPlayerBySubCost(TMSubCost resourceKind) => resourceKind switch
         {
-            TMSubCost.MARS_LITHIUM => TMPlayerManager.Instance.MarsLithium,
-            TMSubCost.STEEL => TMPlayerManager.Instance.Steel,
-            TMSubCost.PLANTS => TMPlayerManager.Instance.Plants,
-            TMSubCost.CLAY => TMPlayerManager.Instance.Clay,
+            TMSubCost.MARS_LITHIUM => TMPlayerManager.Instance.MarsLithium.Value,
+            TMSubCost.STEEL => TMPlayerManager.Instance.Steel.Value,
+            TMSubCost.PLANTS => TMPlayerManager.Instance.Plants.Value,
+            TMSubCost.CLAY => TMPlayerManager.Instance.Clay.Value,
             _ => 0
         };
 
         private static int getResourceFromPlayerByMainCost(TMMainCost mainCostKind) => mainCostKind switch
         {
-            TMMainCost.CREDIT => TMPlayerManager.Instance.Credit,
-            TMMainCost.ELECTRICITY => TMPlayerManager.Instance.Electricity,
+            TMMainCost.CREDIT => TMPlayerManager.Instance.Credit.Value,
+            TMMainCost.ELECTRICITY => TMPlayerManager.Instance.Electricity.Value,
             _ => 0
         };
 
@@ -420,7 +420,7 @@ namespace TM.Card.Runtime
         {
             CardEffect.Is<IDisposable>(disposable => disposable.Dispose());
             CardEffect = null;
-            TMPlayerManager.Instance.Credit += 10;
+            TMPlayerManager.Instance.Credit.Value += 10;
             TMCardManager.Instance.RemoveCard(this);
             Destroy(gameObject);
         }

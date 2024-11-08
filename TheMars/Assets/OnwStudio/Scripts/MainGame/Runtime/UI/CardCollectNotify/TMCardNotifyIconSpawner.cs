@@ -38,8 +38,7 @@ namespace TM.Runtime
         
         private void Start()
         {
-            TMSimulator.Instance.OnChangedDay += onChangedDay;
-            onChangedDay(1);
+            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
 
             void onChangedDay(int day)
             {

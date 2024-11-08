@@ -9,8 +9,8 @@ namespace TM.Event
     public sealed class TMStrengtheningCivilAutonomyEventData : TMEventData
     {
         public override bool CanFireTop =>
-            TMPlayerManager.Instance.Credit >= TopCreditSubtract &&
-            TMPlayerManager.Instance.Satisfaction >= TopSatisfactionAdd;
+            TMPlayerManager.Instance.Credit.Value >= TopCreditSubtract &&
+            TMPlayerManager.Instance.Satisfaction.Value >= TopSatisfactionAdd;
 
         public override bool CanFireBottom => true;
         
@@ -46,13 +46,13 @@ namespace TM.Event
         
         protected override void TriggerTopEvent()
         {
-            TMPlayerManager.Instance.Credit -= TopCreditSubtract;
-            TMPlayerManager.Instance.Satisfaction += TopSatisfactionAdd;
+            TMPlayerManager.Instance.Credit.Value -= TopCreditSubtract;
+            TMPlayerManager.Instance.Satisfaction.Value += TopSatisfactionAdd;
         }
         
         protected override void TriggerBottomEvent()
         {
-            TMPlayerManager.Instance.Satisfaction -= BottomSatisfactionSubtract;
+            TMPlayerManager.Instance.Satisfaction.Value -= BottomSatisfactionSubtract;
         }
     }
 }

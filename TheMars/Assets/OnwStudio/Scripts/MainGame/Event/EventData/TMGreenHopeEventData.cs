@@ -26,11 +26,11 @@ namespace TM.Event
         
         protected override void TriggerTopEvent()
         {
-            TMSimulator.Instance.OnChangedDay += onChangedDay;
+            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
             
             void onChangedDay(int day)
             {
-                TMPlayerManager.Instance.Satisfaction -= TopSatisfactionSubtractByDay;
+                TMPlayerManager.Instance.Satisfaction.Value -= TopSatisfactionSubtractByDay;
             }
         }
         

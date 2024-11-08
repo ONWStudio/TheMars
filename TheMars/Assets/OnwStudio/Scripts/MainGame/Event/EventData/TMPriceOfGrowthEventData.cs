@@ -29,7 +29,7 @@ namespace TM.Event
         [field: SerializeField, DisplayAs("하루마다 감소시킬 만족도량"), OnwMin(0)] public int BottomSatisfactionSubtractByDay { get; private set; } = 10;
         [field: SerializeField, DisplayAs("만족도 감소 지속일수"), OnwMin(0)] public int BottomSatisfactionSubtractDayCount { get; private set; } = 2;
 
-        public override bool CanFireTop => TMPlayerManager.Instance.Population >= TopPopulationSubtract;
+        public override bool CanFireTop => TMPlayerManager.Instance.Population.Value >= TopPopulationSubtract;
         public override bool CanFireBottom => true;
         
         public override Dictionary<string, object> TopEffectLocalizedArguments => new()
@@ -50,11 +50,11 @@ namespace TM.Event
         
         protected override void TriggerTopEvent()
         {
-            TMPlayerManager.Instance.Satisfaction -= TopSatisfactionSubtract;
-            TMPlayerManager.Instance.Population -= TopPopulationSubtract;
+            TMPlayerManager.Instance.Satisfaction.Value -= TopSatisfactionSubtract;
+            TMPlayerManager.Instance.SetPopulation(TMPlayerManager.Instance.Population.Value - TopPopulationSubtract);
 
             int dayCount = 0;
-            TMSimulator.Instance.OnChangedDay += onChangedDay;
+            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
             
             void onChangedDay(int day)
             {
@@ -62,16 +62,16 @@ namespace TM.Event
 
                 if (dayCount == TopSatisfactionSubtractDayCount)
                 {
-                    TMSimulator.Instance.OnChangedDay -= onChangedDay;
+                    TMSimulator.Instance.NowDay.RemoveListener(onChangedDay);
                 }
 
-                TMPlayerManager.Instance.Satisfaction -= TopSatisfactionSubtractByDay;
+                TMPlayerManager.Instance.Satisfaction.Value -= TopSatisfactionSubtractByDay;
             }
         }
         protected override void TriggerBottomEvent()
         {
             int dayCount = 0;
-            TMSimulator.Instance.OnChangedDay += onChangedDay;
+            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
             
             void onChangedDay(int day)
             {
@@ -79,10 +79,10 @@ namespace TM.Event
 
                 if (dayCount == BottomSatisfactionSubtractDayCount)
                 {
-                    TMSimulator.Instance.OnChangedDay -= onChangedDay;
+                    TMSimulator.Instance.NowDay.RemoveListener(onChangedDay);
                 }
 
-                TMPlayerManager.Instance.Satisfaction -= BottomSatisfactionSubtractByDay;
+                TMPlayerManager.Instance.Satisfaction.Value -= BottomSatisfactionSubtractByDay;
             }
         }
     }

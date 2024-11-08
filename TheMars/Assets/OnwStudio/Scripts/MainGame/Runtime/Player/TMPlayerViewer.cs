@@ -36,19 +36,19 @@ namespace TM.UI
 
         private void Start()
         {
-            TMPlayerManager.Instance.OnChangedLevel += OnChangedLevel;
-            TMPlayerManager.Instance.OnChangedMarsLithium += OnChangedMarsLithium;
-            TMPlayerManager.Instance.OnChangedCredit += OnChangedCredit;
-            TMPlayerManager.Instance.OnChangedPopulation += OnChangedPopulation;
-            TMPlayerManager.Instance.OnChangedTotalPopulation += OnChangedTotalPopulation;
-            TMPlayerManager.Instance.OnChangedSteel += OnChangedSteel;
-            TMPlayerManager.Instance.OnChangedPlants += OnChangedPlants;
-            TMPlayerManager.Instance.OnChangedClay += OnChangedClay;
-            TMPlayerManager.Instance.OnChangedElectricity += OnChangedElectricity;
-            TMPlayerManager.Instance.OnChangedSatisfaction += OnChangedSatisfaction;
-            TMPlayerManager.Instance.OnChangedTerraformValue += OnChangedTerraformValue;
-            TMSimulator.Instance.OnChangedSeconds += OnChangedSeconds;
-            TMSimulator.Instance.OnChangedDay += OnChangedDay;
+            TMPlayerManager.Instance.Level.AddListener(OnChangedLevel);
+            TMPlayerManager.Instance.MarsLithium.AddListener(OnChangedMarsLithium);
+            TMPlayerManager.Instance.Credit.AddListener(OnChangedCredit);
+            TMPlayerManager.Instance.Population.AddListener(OnChangedPopulation);
+            TMPlayerManager.Instance.TotalPopulation.AddListener(OnChangedTotalPopulation);
+            TMPlayerManager.Instance.Steel.AddListener(OnChangedSteel);
+            TMPlayerManager.Instance.Plants.AddListener(OnChangedPlants);
+            TMPlayerManager.Instance.Clay.AddListener(OnChangedClay);
+            TMPlayerManager.Instance.Electricity.AddListener(OnChangedElectricity);
+            TMPlayerManager.Instance.Satisfaction.AddListener(OnChangedSatisfaction);
+            TMPlayerManager.Instance.TerraformValue.AddListener(OnChangedTerraformValue);
+            TMSimulator.Instance.NowSeconds.AddListener(OnChangedSeconds);
+            TMSimulator.Instance.NowDay.AddListener(OnChangedDay);
             _playButton.onClick.AddListener(OnClickAgainButton);
             _pauseButton.onClick.AddListener(OnClickStopButton);
             _fastButton.onClick.AddListener(OnClickFastButton);

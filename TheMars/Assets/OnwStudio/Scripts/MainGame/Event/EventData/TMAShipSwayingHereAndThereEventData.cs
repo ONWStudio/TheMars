@@ -51,8 +51,8 @@ namespace TM.Event
             int dayCountBySatisfaction = 0;
             int dayCountByCredit = 0;
 
-            TMSimulator.Instance.OnChangedDay += onChangedDayBySatisfaction;
-            TMSimulator.Instance.OnChangedDay += onChangedDayByCredit;
+            TMSimulator.Instance.NowDay.AddListener(onChangedDayBySatisfaction);
+            TMSimulator.Instance.NowDay.AddListener(onChangedDayByCredit);
 
             void onChangedDayBySatisfaction(int day)
             {
@@ -60,10 +60,10 @@ namespace TM.Event
 
                 if (dayCountBySatisfaction == TopSatisfactionAddDayCount)
                 {
-                    TMSimulator.Instance.OnChangedDay -= onChangedDayBySatisfaction;
+                    TMSimulator.Instance.NowDay.RemoveListener(onChangedDayBySatisfaction);
                 }
 
-                TMPlayerManager.Instance.Satisfaction += TopSatisfactionAddByDay;
+                TMPlayerManager.Instance.Satisfaction.Value += TopSatisfactionAddByDay;
             }
 
             void onChangedDayByCredit(int day)
@@ -72,17 +72,17 @@ namespace TM.Event
 
                 if (dayCountByCredit == TopCreditAddDayCount)
                 {
-                    TMSimulator.Instance.OnChangedDay -= onChangedDayByCredit;
+                    TMSimulator.Instance.NowDay.RemoveListener(onChangedDayByCredit);
                 }
                 
-                TMPlayerManager.Instance.Credit += TopCreditAddByDay;
+                TMPlayerManager.Instance.Credit.Value += TopCreditAddByDay;
             }
         }
 
         protected override void TriggerBottomEvent()
         {
             int dayCount = 0;
-            TMSimulator.Instance.OnChangedDay += onChangedDay;
+            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
             
             void onChangedDay(int day)
             {
@@ -90,10 +90,10 @@ namespace TM.Event
 
                 if (dayCount == BottomSatisfactionAddDayCount)
                 {
-                    TMSimulator.Instance.OnChangedDay -= onChangedDay;
+                    TMSimulator.Instance.NowDay.RemoveListener(onChangedDay);
                 }
                 
-                TMPlayerManager.Instance.Satisfaction += BottomSatisfactionAddByDay;
+                TMPlayerManager.Instance.Satisfaction.Value += BottomSatisfactionAddByDay;
             }
         }
     }

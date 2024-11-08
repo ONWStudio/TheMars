@@ -17,300 +17,80 @@ namespace TM
         
         protected override string SceneName => "MainGameScene";
         
-        public int Level
-        {
-            get => _level;
-            set
-            {
-                _level = DefaultValueHelper.Min(value, 0);
-                _onChangedLevel.Invoke(_level);
-            }
-        }
+        public IReactiveField<int> MarsLithium => _marsLithium;
+        public IReactiveField<int> Credit => _credit;
+        public IReadOnlyReactiveField<int> Population => _population;
+        public IReactiveField<int> TotalPopulation => _totalPopulation;
+        public IReactiveField<int> Steel => _steel;
+        public IReactiveField<int> Plants => _plants;
+        public IReactiveField<int> Clay => _clay;
+        public IReactiveField<int> Electricity => _electricity;
+        public IReactiveField<int> Satisfaction => _satisfaction;
 
-        public int MarsLithium
-        {
-            get => _marsLithium;
-            set
-            {
-                _marsLithium = DefaultValueHelper.Min(value, 0);
-                _onChangedMarsLithium.Invoke(_marsLithium);
-            }
-        }
-
-        public int Credit
-        {
-            get => _credit;
-            set
-            {
-                _credit = DefaultValueHelper.Min(value, 0);
-                _onChangedCredit.Invoke(_credit);
-            }
-        }
-
-        public int Population
-        {
-            get => _population;
-            set
-            {
-                _population = Mathf.Clamp(value, 0, _totalPopulation);
-                _onChangedPopulation.Invoke(_population);
-            }
-        }
-
-        public int TotalPopulation
-        {
-            get => _totalPopulation;
-            set
-            {
-                _totalPopulation = DefaultValueHelper.Min(value, 5);
-                _onChangedTotalPopulation.Invoke(_totalPopulation);
-            }
-        }
-
-        public int Steel
-        {
-            get => _steel;
-            set
-            {
-                _steel = DefaultValueHelper.Min(value, 0);
-                _onChangedSteel.Invoke(_steel);
-            }
-        }
-
-        public int Plants
-        {
-            get => _plants;
-            set
-            {
-                _plants = DefaultValueHelper.Min(value, 0);
-                _onChangedPlants.Invoke(_plants);
-            }
-        }
-
-        public int Clay
-        {
-            get => _clay;
-            set
-            {
-                _clay = DefaultValueHelper.Min(value, 0);
-                _onChangedClay.Invoke(_clay);
-            }
-        }
-
-        public int Electricity
-        {
-            get => _electricity;
-            set
-            {
-                _electricity = DefaultValueHelper.Min(value, 0);
-                _onChangedElectricity.Invoke(_electricity);
-            }
-        }
-
-        public int Satisfaction
-        {
-            get => _satisfaction;
-            set
-            {
-                _satisfaction = Mathf.Clamp(value, 0, MAX_SATISFACTION);
-                _onChangedSatisfaction.Invoke(_satisfaction);
-            }
-        }
-
-        public int TerraformValue
-        {
-            get => _terraformValue;
-            set
-            {
-                _terraformValue = Mathf.Clamp(value, 0, MAX_TERRAFORM_VALUE);
-                _onChangedTerraformValue.Invoke(_terraformValue);
-            }
-        }
-
-        public event UnityAction<int> OnChangedLevel
-        {
-            add
-            {
-                if (value is null) return;
-                
-                _onChangedLevel.AddListener(value);
-                value.Invoke(_level);
-            }
-            remove => _onChangedLevel.RemoveListener(value);
-        }
-
-        public event UnityAction<int> OnChangedMarsLithium
-        {
-            add
-            {
-                if (value is null) return;
-                
-                _onChangedMarsLithium.AddListener(value);
-                value.Invoke(_marsLithium);
-            }
-            remove => _onChangedMarsLithium.RemoveListener(value);
-        }
-
-        public event UnityAction<int> OnChangedCredit
-        {
-            add
-            {
-                if (value is null) return;
-                
-                _onChangedCredit.AddListener(value);
-                value.Invoke(_credit);
-            }
-            remove => _onChangedCredit.RemoveListener(value);
-        }
-
-        public event UnityAction<int> OnChangedPopulation
-        {
-            add
-            {
-                if (value is null) return;
-                
-                _onChangedPopulation.AddListener(value);
-                value.Invoke(_population);
-            }
-            remove => _onChangedPopulation.RemoveListener(value);
-        }
-
-        public event UnityAction<int> OnChangedTotalPopulation
-        {
-            add
-            {
-                if (value is null) return;
-                
-                _onChangedTotalPopulation.AddListener(value);
-                value.Invoke(_totalPopulation);
-            }
-            remove => _onChangedTotalPopulation.RemoveListener(value);
-        }
-
-        public event UnityAction<int> OnChangedSteel
-        {
-            add
-            {
-                if (value is null) return;
-
-                _onChangedSteel.AddListener(value);
-                value.Invoke(_steel);
-            }
-            remove => _onChangedSteel.RemoveListener(value);
-        }
-
-        public event UnityAction<int> OnChangedPlants
-        {
-            add
-            {
-                if (value is null) return;
-                
-                _onChangedPlants.AddListener(value);
-                value.Invoke(_plants);
-            }
-            remove => _onChangedPlants.RemoveListener(value);
-        }
-
-        public event UnityAction<int> OnChangedClay
-        {
-            add
-            {
-                if (value is null) return;
-                
-                _onChangedClay.AddListener(value);
-                value.Invoke(_clay);
-            }
-            remove => _onChangedClay.RemoveListener(value);
-        }
-
-        public event UnityAction<int> OnChangedElectricity
-        {
-            add
-            {
-                if (value is null) return;
-                
-                _onChangedElectricity.AddListener(value);
-                value.Invoke(_electricity);
-            }
-            remove => _onChangedElectricity.RemoveListener(value);
-        }
-        
-        public event UnityAction<int> OnChangedSatisfaction
-        {
-            add
-            {
-                if (value is null) return;
-            
-                _onChangedSatisfaction.AddListener(value);
-                value.Invoke(_satisfaction);
-            }
-            remove => _onChangedSatisfaction.RemoveListener(value);
-        }
-        
-        public event UnityAction<int> OnChangedTerraformValue
-        {
-            add
-            {
-                if (value is null) return;
-                
-                _onChangedTerraformValue.AddListener(value);
-                value.Invoke(_terraformValue);
-            }
-            remove => _onChangedTerraformValue.RemoveListener(value);
-        }
+        public IReactiveField<int> Level => _level;
+        public IReadOnlyReactiveField<int> Exp => _exp;
+        public IReactiveField<int> MaxExp => _maxExp;
+        public IReactiveField<int> TerraformValue => _terraformValue;
 
         [Header("Resources")]
-        [SerializeField, ReadOnly] private int _marsLithium = 0;
-        [SerializeField, ReadOnly] private int _credit = 0;
-        [SerializeField, ReadOnly] private int _population = 0;
-        [SerializeField, ReadOnly] private int _totalPopulation = 0;
-        [SerializeField, ReadOnly] private int _steel = 0;
-        [SerializeField, ReadOnly] private int _plants = 0;
-        [SerializeField, ReadOnly] private int _clay = 0;
-        [SerializeField, ReadOnly] private int _electricity = 0;
-        [SerializeField, ReadOnly] private int _satisfaction = 0;
+        [SerializeField, ReadOnly] private ReactiveField<int> _marsLithium = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField, ReadOnly] private ReactiveField<int> _credit = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField, ReadOnly] private ReactiveField<int> _population = new();
+        [SerializeField, ReadOnly] private ReactiveField<int> _totalPopulation = new() { ValueProcessors = new() { new MinIntProcessor(5) }};
+        [SerializeField, ReadOnly] private ReactiveField<int> _steel = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField, ReadOnly] private ReactiveField<int> _plants = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField, ReadOnly] private ReactiveField<int> _clay = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField, ReadOnly] private ReactiveField<int> _electricity = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField, ReadOnly] private ReactiveField<int> _satisfaction = new() { Value = 50, ValueProcessors = new() { new ClampIntProcessor(0, MAX_SATISFACTION)}};
         
         [Header("Player Info")]
-        [SerializeField, ReadOnly] private int _level = 1;
-        [SerializeField, ReadOnly] private int _exp = 0;
-        [SerializeField, ReadOnly] private int _terraformValue = 0;
+        [SerializeField, ReadOnly] private ReactiveField<int> _level = new() { Value = 1, ValueProcessors = new() { new MinIntProcessor(1) }};
+        [SerializeField, ReadOnly] private ReactiveField<int> _exp = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField, ReadOnly] private ReactiveField<int> _maxExp = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField, ReadOnly] private ReactiveField<int> _terraformValue = new() { ValueProcessors = new() { new ClampIntProcessor(0, MAX_TERRAFORM_VALUE) }};
 
-        [SerializeField, ReadOnly] private UnityEvent<int> _onChangedMarsLithium = new();
-        [SerializeField, ReadOnly] private UnityEvent<int> _onChangedCredit = new();
-        [SerializeField, ReadOnly] private UnityEvent<int> _onChangedLevel = new();
-        [SerializeField, ReadOnly] private UnityEvent<int> _onChangedPopulation = new();
-        [SerializeField, ReadOnly] private UnityEvent<int> _onChangedTotalPopulation = new();
-        [SerializeField, ReadOnly] private UnityEvent<int> _onChangedSteel = new();
-        [SerializeField, ReadOnly] private UnityEvent<int> _onChangedPlants = new();
-        [SerializeField, ReadOnly] private UnityEvent<int> _onChangedClay = new();
-        [SerializeField, ReadOnly] private UnityEvent<int> _onChangedElectricity = new();
-        [SerializeField, ReadOnly] private UnityEvent<int> _onChangedSatisfaction = new();
-        [SerializeField, ReadOnly] private UnityEvent<int> _onChangedTerraformValue = new();
+        /// <summary>
+        /// .. Population의 경우 _totalPopulation에 의해 값이 유동적으로 변경되므로 .. 별도의 세터 메서드 제공
+        /// </summary>
+        /// <param name="population"></param>
+        public void SetPopulation(int population)
+        {
+            _population.Value = Mathf.Clamp(population, 0, _totalPopulation.Value);
+        }
+
+        /// <summary>
+        /// .. Exp의 경우 _maxExp에 의해 값이 유동적으로 변경되므로 .. 별도의 세터 메서드 제공
+        /// </summary>
+        /// <param name="exp"></param>
+        public void SetExp(int exp)
+        {
+            _exp.Value = Mathf.Clamp(exp, 0, _maxExp.Value);
+        }
             
         public void AddResource(TMResourceKind kind, int resource)
         {
             switch (kind)
             {
                 case TMResourceKind.MARS_LITHIUM:
-                    MarsLithium += resource;
+                    _marsLithium.Value += resource;
                     break;
                 case TMResourceKind.CREDIT:
-                    Credit += resource;
+                    _credit.Value += resource;
                     break;
                 case TMResourceKind.STEEL:
-                    Steel += resource;
+                    _steel.Value += resource;
                     break;
                 case TMResourceKind.PLANTS:
-                    Plants += resource;
+                    _plants.Value += resource;
                     break;
                 case TMResourceKind.CLAY:
-                    Clay += resource;
+                    _clay.Value += resource;
                     break;
                 case TMResourceKind.ELECTRICITY:
-                    Electricity += resource;
+                    _electricity.Value += resource;
                     break;
                 case TMResourceKind.POPULATION:
-                    Population += resource;
+                    SetPopulation(_population.Value + resource);
                     break;
             }
         }
