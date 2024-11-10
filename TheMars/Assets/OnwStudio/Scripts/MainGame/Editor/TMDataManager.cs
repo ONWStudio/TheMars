@@ -31,7 +31,7 @@ namespace TM.Editor
                 new(typeof(TMCardData), typeof(TMCardScrollView), "카드"),
                 new(typeof(TMBuildingData), typeof(TMBuildingScrollView),"건물"),
                 new(typeof(TMSynergyData), typeof(TMSynergyScrollView), "시너지"),
-                new(typeof(TMEventData), typeof(TMMainEventScrollView), "이벤트")
+                new(typeof(TMEventData), typeof(TMEventScrollView), "이벤트")
             };
 
             return types;

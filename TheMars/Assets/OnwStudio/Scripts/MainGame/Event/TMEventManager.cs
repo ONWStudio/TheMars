@@ -74,7 +74,7 @@ namespace TM.Event
         private void handleMarsLithiumEvent(int day)
         {
             if (day % CheckMarsLithiumEventDayCount != 0 || !TMEventDataManager.Instance.MarsLithiumEvent) return;
-
+            
             _eventQueue.Enqueue(new(TMEventDataManager.Instance.MarsLithiumEvent));
         }
 
@@ -149,7 +149,7 @@ namespace TM.Event
 
         private void onChangedDay(int day)
         {
-            if (day is 0) return;
+            if (day == 0) return;
 
             handleMarsLithiumEvent(day);
             handleCalamityEvent(day);

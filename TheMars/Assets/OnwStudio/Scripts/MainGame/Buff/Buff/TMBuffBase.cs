@@ -13,7 +13,7 @@ namespace TM.Buff
     public abstract class TMBuffBase : IDisposable
     {
         [field: SerializeField] protected AssetReferenceSprite IconBackground { get; private set; } = new("Sprites/Buff_BG");
-        [field: SerializeField] public virtual Color IconBackgroundColor => Color.white;
+        public virtual Color IconBackgroundColor => Color.white;
         
         protected abstract AssetReferenceSprite IconReference { get; set; }
         
@@ -37,29 +37,15 @@ namespace TM.Buff
         {
             releaseReference(IconBackground);
             releaseReference(IconReference);
+            _onDestroyBuff.Invoke(this);
 
             static void releaseReference(AssetReferenceSprite spriteReference)
             {
                 if (spriteReference is null || !spriteReference.IsValid()) return;
-            
+
                 spriteReference.ReleaseAsset();
             }
         }
     }
-    
-    [Serializable]
-    public class TMSatisfactionAddBuff : TMBuffBase, ITMInitializeBuff<TMSatisfactionAddBuffTrigger>
-    {
-        [field: SerializeField] protected override AssetReferenceSprite IconReference { get; set; } = new("Sprites/Smile_Buff_Positive");
-        public override Color IconBackgroundColor => Color.blue;
-        
-        public void Initialize(TMSatisfactionAddBuffTrigger trigger)
-        {
-            
-        }
-        
-        protected override void ApplyBuffProtected()
-        {
-        }
-    }
+
 }

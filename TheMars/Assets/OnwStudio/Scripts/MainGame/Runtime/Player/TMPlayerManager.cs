@@ -66,6 +66,22 @@ namespace TM
         {
             _exp.Value = Mathf.Clamp(exp, 0, _maxExp.Value);
         }
+
+        public int GetResoucesByKind(TMResourceKind kind)
+        {
+            return kind switch
+            {
+                TMResourceKind.MARS_LITHIUM => _marsLithium.Value,
+                TMResourceKind.CREDIT => _credit.Value,
+                TMResourceKind.POPULATION => _population.Value,
+                TMResourceKind.STEEL => _steel.Value,
+                TMResourceKind.PLANTS => _plants.Value,
+                TMResourceKind.CLAY => _clay.Value,
+                TMResourceKind.ELECTRICITY => _electricity.Value,
+                TMResourceKind.SATISFACTION => _satisfaction.Value,
+                _ => 0,
+            };
+        }
             
         public void AddResource(TMResourceKind kind, int resource)
         {
@@ -91,6 +107,9 @@ namespace TM
                     break;
                 case TMResourceKind.POPULATION:
                     SetPopulation(_population.Value + resource);
+                    break;
+                case TMResourceKind.SATISFACTION:
+                    _satisfaction.Value += resource;
                     break;
             }
         }

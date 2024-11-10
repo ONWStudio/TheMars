@@ -9,6 +9,13 @@ using Onw.Attribute;
 using Onw.Extensions;
 using Onw.UI.Components;
 using TM.Event;
+using Onw.Localization;
+using Onw.Coroutine;
+using System.Linq;
+using TM.Event.Effect;
+using TM.Usage;
+using UnityEngine.Localization;
+using System;
 
 namespace TM.Runtime.UI
 {
@@ -32,8 +39,6 @@ namespace TM.Runtime.UI
         [SerializeField, SelectableSerializeField] private LocalizeStringEvent _topButtonTextEvent;
         [SerializeField, SelectableSerializeField] private LocalizeStringEvent _bottomButtonTextEvent;
         [SerializeField, SelectableSerializeField] private LocalizeStringEvent _titleTextEvent;
-        [SerializeField, SelectableSerializeField] private LocalizeStringEvent _topEffectTextEvent;
-        [SerializeField, SelectableSerializeField] private LocalizeStringEvent _bottomEffectTextEvent;
 
         [Header("Triggers")]
         [SerializeField, SelectableSerializeField] private PointerEnterTrigger _topButtonEnterTrigger;
@@ -45,6 +50,9 @@ namespace TM.Runtime.UI
         private string _topEffectDescription = string.Empty;
         private string _bottomEffectDescription = string.Empty;
         private TMEventRunner _eventRunner = null;
+
+        private readonly LocalizedString _paymentDescriptionHeader = new("TM_UI", "EventPaymentHeader");
+        private readonly LocalizedString _eventEffectHeader = new("TM_UI", "EventEffectHeader");
 
         private void Start()
         {
@@ -60,8 +68,6 @@ namespace TM.Runtime.UI
             _topButtonTextEvent.OnUpdateString.AddListener(topText => _topButtonText.text = topText);
             _bottomButtonTextEvent.OnUpdateString.AddListener(bottomText => _bottomButtonText.text = bottomText);
             _titleTextEvent.OnUpdateString.AddListener(titleText => _titleText.text = titleText);
-            _topEffectTextEvent.OnUpdateString.AddListener(topEffectText => _topEffectDescription = topEffectText);
-            _bottomEffectTextEvent.OnUpdateString.AddListener(bottomEffectText => _bottomEffectDescription = bottomEffectText);
         }
 
         private void onPointerEnterByTop(PointerEventData eventData)
@@ -114,8 +120,6 @@ namespace TM.Runtime.UI
             _topButtonTextEvent.StringReference = null;
             _bottomButtonTextEvent.StringReference = null;
             _titleTextEvent.StringReference = null;
-            _topEffectTextEvent.StringReference = null;
-            _bottomEffectTextEvent.StringReference = null;
         }
 
         public void OnTriggerMainEvent(TMEventRunner mainEventRunner)
@@ -131,27 +135,39 @@ namespace TM.Runtime.UI
             if (_eventRunner.EventData.HasTopEvent)
             {
                 _topButtonTextEvent.StringReference = _eventRunner.EventData.TopButtonTextEvent;
-                _topEffectTextEvent.StringReference = _eventRunner.EventData.TopEffectTextEvent;
-                if (_eventRunner.EventData.TopEffectLocalizedArguments is not null)
-                {
-                    _topEffectTextEvent.StringReference.Arguments = new object[]
-                    {
-                        _eventRunner.EventData.TopEffectLocalizedArguments
-                    };
-                }
+                buildDescription(_eventRunner.TopEffects, _eventRunner.TopUsages, buildedText => _topEffectDescription = buildedText);
             }
             
             _bottomButton.SetActiveGameObject(_eventRunner.EventData.HasBottomEvent);
             if (_eventRunner.EventData.HasBottomEvent)
             {
                 _bottomButtonTextEvent.StringReference = _eventRunner.EventData.BottomButtonTextEvent;
-                _bottomEffectTextEvent.StringReference = _eventRunner.EventData.BottomEffectTextEvent;
-                if (_eventRunner.EventData.BottomEffectLocalizedArguments is not null)
+                buildDescription(_eventRunner.BottomEffects, _eventRunner.BottomUsages, buildedText => _bottomEffectDescription = buildedText);
+            }
+
+            void buildDescription(IReadOnlyList<ITMEventEffect> effects, IReadOnlyList<ITMUsage> usages, Action<string> stringAction)
+            {
+                bool isReload = false;
+                effects.ForEach(effect => effect.EffectDescription.StringChanged += onUpdateString);
+                usages.ForEach(usage => usage.UsageLocalizedString.StringChanged += onUpdateString);
+
+                void onUpdateString(string text)
                 {
-                    _bottomEffectTextEvent.StringReference.Arguments = new object[]
+                    if (isReload) return;
+
+                    isReload = true;
+                    this.DoCallWaitForOneFrame(() => // .. 1프레임 대기 후 호출
                     {
-                        _eventRunner.EventData.BottomEffectLocalizedArguments
-                    };
+                        isReload = false;
+                        stringAction?.Invoke((usages.Count > 0 ?
+                                _paymentDescriptionHeader.GetLocalizedString() + 
+                                "\n" + 
+                                string.Join("\n", effects.Select(effect => effect.EffectDescription.GetLocalizedString())) : "") +
+                           (effects.Count > 0 ? 
+                                _eventEffectHeader.GetLocalizedString() + 
+                                "\n" +
+                                string.Join("\n", usages.Select(usage => usage.UsageLocalizedString.GetLocalizedString())) : ""));
+                    });
                 }
             }
         }

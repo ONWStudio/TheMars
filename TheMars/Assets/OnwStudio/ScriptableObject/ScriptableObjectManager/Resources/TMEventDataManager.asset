@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _marsLithiumEventData: {fileID: 0}
   _expansionEventData: {fileID: 0}
-  _rootMainEventData: {fileID: 11400000, guid: 9758561fa106e44be90eef1dba2aedb3, type: 2}
+  _rootMainEventData: {fileID: 11400000, guid: bc0209b7268acbc448c5f7c0c3d3f538, type: 2}
   _positiveEventList: []
   _negativeEventList: []
   _calamityEventList: []

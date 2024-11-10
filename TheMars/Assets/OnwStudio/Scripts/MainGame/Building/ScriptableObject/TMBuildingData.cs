@@ -29,7 +29,7 @@ namespace TM.Building
         
         [field: SerializeField, DisplayAs("건물 프리팹")] public TMBuilding BuildingPrefab { get; private set; }
         
-        [SerializeField, LocalizedString("BuildingName"), DisplayAs("건물 이름"), Tooltip("건물 이름은 국가별로 지역화 옵션을 제공합니다")] 
+        [SerializeField, LocalizedString(tableName: "BuildingName"), DisplayAs("건물 이름"), Tooltip("건물 이름은 국가별로 지역화 옵션을 제공합니다")] 
         private LocalizedString _localizedBuildingName;
         
         [FormerlySerializedAs("effectCreators")]

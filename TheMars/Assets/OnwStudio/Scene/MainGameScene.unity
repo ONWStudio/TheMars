@@ -947,51 +947,175 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc62e4c6994a43739788e7aa5755dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _marsLithium: 0
-  _credit: 0
-  _population: 0
-  _totalPopulation: 0
-  _steel: 0
-  _plants: 0
-  _clay: 0
-  _electricity: 0
-  _satisfaction: 0
-  _level: 0
-  _exp: 0
-  _terraformValue: 0
-  _onChangedMarsLithium:
-    m_PersistentCalls:
-      m_Calls: []
-  _onChangedCredit:
-    m_PersistentCalls:
-      m_Calls: []
-  _onChangedLevel:
-    m_PersistentCalls:
-      m_Calls: []
-  _onChangedPopulation:
-    m_PersistentCalls:
-      m_Calls: []
-  _onChangedTotalPopulation:
-    m_PersistentCalls:
-      m_Calls: []
-  _onChangedSteel:
-    m_PersistentCalls:
-      m_Calls: []
-  _onChangedPlants:
-    m_PersistentCalls:
-      m_Calls: []
-  _onChangedClay:
-    m_PersistentCalls:
-      m_Calls: []
-  _onChangedElectricity:
-    m_PersistentCalls:
-      m_Calls: []
-  _onChangedSatisfaction:
-    m_PersistentCalls:
-      m_Calls: []
-  _onChangedTerraformValue:
-    m_PersistentCalls:
-      m_Calls: []
+  _marsLithium:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField:
+    - rid: 3610285147714224128
+    <_value>k__BackingField: 0
+  _credit:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField:
+    - rid: 3610285147714224129
+    <_value>k__BackingField: 0
+  _population:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField: []
+    <_value>k__BackingField: 0
+  _totalPopulation:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField:
+    - rid: 3610285147714224130
+    <_value>k__BackingField: 0
+  _steel:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField:
+    - rid: 3610285147714224131
+    <_value>k__BackingField: 0
+  _plants:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField:
+    - rid: 3610285147714224132
+    <_value>k__BackingField: 0
+  _clay:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField:
+    - rid: 3610285147714224133
+    <_value>k__BackingField: 0
+  _electricity:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField:
+    - rid: 3610285147714224134
+    <_value>k__BackingField: 0
+  _satisfaction:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField:
+    - rid: 3610285147714224135
+    <_value>k__BackingField: 50
+  _level:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField:
+    - rid: 3610285147714224136
+    <_value>k__BackingField: 1
+  _exp:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField:
+    - rid: 3610285147714224137
+    <_value>k__BackingField: 0
+  _maxExp:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField:
+    - rid: 3610285147714224138
+    <_value>k__BackingField: 0
+  _terraformValue:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField:
+    - rid: 3610285147714224139
+    <_value>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 3610285147714224128
+      type: {class: MinIntProcessor, ns: Onw.Event, asm: AssemblyOnw}
+      data:
+        <Min>k__BackingField: 0
+    - rid: 3610285147714224129
+      type: {class: MinIntProcessor, ns: Onw.Event, asm: AssemblyOnw}
+      data:
+        <Min>k__BackingField: 0
+    - rid: 3610285147714224130
+      type: {class: MinIntProcessor, ns: Onw.Event, asm: AssemblyOnw}
+      data:
+        <Min>k__BackingField: 5
+    - rid: 3610285147714224131
+      type: {class: MinIntProcessor, ns: Onw.Event, asm: AssemblyOnw}
+      data:
+        <Min>k__BackingField: 0
+    - rid: 3610285147714224132
+      type: {class: MinIntProcessor, ns: Onw.Event, asm: AssemblyOnw}
+      data:
+        <Min>k__BackingField: 0
+    - rid: 3610285147714224133
+      type: {class: MinIntProcessor, ns: Onw.Event, asm: AssemblyOnw}
+      data:
+        <Min>k__BackingField: 0
+    - rid: 3610285147714224134
+      type: {class: MinIntProcessor, ns: Onw.Event, asm: AssemblyOnw}
+      data:
+        <Min>k__BackingField: 0
+    - rid: 3610285147714224135
+      type: {class: ClampIntProcessor, ns: Onw.Event, asm: AssemblyOnw}
+      data:
+        <Min>k__BackingField: 0
+        <Max>k__BackingField: 100
+    - rid: 3610285147714224136
+      type: {class: MinIntProcessor, ns: Onw.Event, asm: AssemblyOnw}
+      data:
+        <Min>k__BackingField: 1
+    - rid: 3610285147714224137
+      type: {class: MinIntProcessor, ns: Onw.Event, asm: AssemblyOnw}
+      data:
+        <Min>k__BackingField: 0
+    - rid: 3610285147714224138
+      type: {class: MinIntProcessor, ns: Onw.Event, asm: AssemblyOnw}
+      data:
+        <Min>k__BackingField: 0
+    - rid: 3610285147714224139
+      type: {class: ClampIntProcessor, ns: Onw.Event, asm: AssemblyOnw}
+      data:
+        <Min>k__BackingField: 0
+        <Max>k__BackingField: 100
 --- !u!4 &146915404
 Transform:
   m_ObjectHideFlags: 0
@@ -7652,20 +7776,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <AccumulatedTime>k__BackingField: 0
-  <NowDay>k__BackingField: 1
-  <NowMinutes>k__BackingField: 0
-  <NowSeconds>k__BackingField: 0
+  _nowDay:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField: []
+    <_value>k__BackingField: 1
+  _nowMinutes:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField: []
+    <_value>k__BackingField: 0
+  _nowSeconds:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField: []
+    <_value>k__BackingField: 0
   <IntervalInSeconds>k__BackingField: 0
   _intervalInMinutes: 2
-  _onChangedDay:
-    m_PersistentCalls:
-      m_Calls: []
-  _onChangedMinutes:
-    m_PersistentCalls:
-      m_Calls: []
-  _onChangedSeconds:
-    m_PersistentCalls:
-      m_Calls: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1475752091
 GameObject:
   m_ObjectHideFlags: 0
@@ -8046,10 +8185,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a12d3c1366ed44b458514d828c96f5ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CheckMainEventDayCount>k__BackingField: 5
+  <CheckMainEventLevelCount>k__BackingField: 10
+  <CheckMarsLithiumEventDayCount>k__BackingField: 5
+  <CheckCalamityEventDayCount>k__BackingField: 1
+  <CheckRegularEventDayCount>k__BackingField: 1
+  <CalamityEventProbability>k__BackingField: 0
+  <DefaultPositiveEventProbability>k__BackingField: 20
+  <DefaultNegativeEventProbability>k__BackingField: 20
   _mainEventRunner:
-    <EventData>k__BackingField: {fileID: 11400000, guid: 9758561fa106e44be90eef1dba2aedb3,
-      type: 2}
+    <EventData>k__BackingField: {fileID: 0}
     _onFireEvent:
       m_PersistentCalls:
         m_Calls: []

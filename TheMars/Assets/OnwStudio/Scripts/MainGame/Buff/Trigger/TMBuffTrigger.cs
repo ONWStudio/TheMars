@@ -23,24 +23,10 @@ namespace TM.Buff.Trigger
         TMBuffBase CreateBuff();
     }
 
-    [System.Serializable]
-    public abstract class TMRepeatBuffTrigger : ITMBuffTrigger
-    {
-        [field: SerializeField] public int RepeatTime { get; private set; }
-        
-        public abstract TMBuffBase CreateBuff();
-    }
 
     public interface ITMInitializeBuff<in TCreator> where TCreator : ITMBuffTrigger
     {
         void Initialize(TCreator creator);
     }
 
-    public class TMSatisfactionAddBuffTrigger : ITMBuffTrigger
-    {
-        public TMBuffBase CreateBuff()
-        {
-            return ITMBuffTrigger.CreateBuff<TMSatisfactionAddBuff, TMSatisfactionAddBuffTrigger>(this);
-        }
-    }
 }

@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
 using Onw.Attribute;
+using TM.Usage.Creator;
+using TM.Usage;
+using System.Linq;
+using TM.Event.Effect.Creator;
+using TM.Event.Effect;
 
 namespace TM.Event
 {
@@ -14,14 +19,9 @@ namespace TM.Event
         LocalizedString TopButtonTextEvent { get; }
         LocalizedString BottomButtonTextEvent { get; }
         LocalizedString TitleTextEvent { get; }
-        LocalizedString TopEffectTextEvent { get; }
-        LocalizedString BottomEffectTextEvent { get; }
 
         ITMEventData TopReadData { get; }
         ITMEventData BottomReadData { get; }
-
-        bool CanFireTop { get; }
-        bool CanFireBottom { get; }
     }
 
     public enum TMEventChoice : byte
@@ -30,7 +30,7 @@ namespace TM.Event
         BOTTOM = 1
     }
 
-    public abstract class TMEventData : ScriptableObject, ITMEventData
+    public class TMEventData : ScriptableObject, ITMEventData
     {
         public ITMEventData TopReadData => TopEventData;
         public ITMEventData BottomReadData => BottomEventData;
@@ -54,35 +54,47 @@ namespace TM.Event
 
         [field: SerializeField, DisplayAs("이벤트 대표 이미지"), SpritePreview] public Sprite EventImage { get; private set; }
 
-        [field: SerializeField, LocalizedString(entryKey: "Description"), DisplayAs("[로컬라이징] 이벤트 설명 텍스트")] public LocalizedString DescriptionTextEvent { get; private set; } = new();
-        [field: SerializeField, LocalizedString(entryKey: "TopButton"), DisplayAs("[로컬라이징] 위쪽 버튼 텍스트")] public LocalizedString TopButtonTextEvent { get; private set; } = new();
-        [field: SerializeField, LocalizedString(entryKey: "BottomButton"), DisplayAs("[로컬라이징] 아래쪽 버튼 텍스트")] public LocalizedString BottomButtonTextEvent { get; private set; } = new();
-        [field: SerializeField, LocalizedString(entryKey: "Title"), DisplayAs("[로컬라이징] 타이틀 텍스트")] public LocalizedString TitleTextEvent { get; private set; } = new();
-        [field: SerializeField, LocalizedString(entryKey: "TopEffect"), DisplayAs("[로컬라이징] 위쪽 선택지 효과 텍스트")] public LocalizedString TopEffectTextEvent { get; private set; } = new();
-        [field: SerializeField, LocalizedString(entryKey: "BottomEffect"), DisplayAs("[로컬라이징] 아래쪽 선택지 효과 텍스트")] public LocalizedString BottomEffectTextEvent { get; private set; } = new();
+        [field: SerializeField, LocalizedString(true, entryKey: "Description"), DisplayAs("[로컬라이징] 이벤트 설명 텍스트")] public LocalizedString DescriptionTextEvent { get; private set; } = new();
+        [field: SerializeField, LocalizedString(true, entryKey: "TopButton"), DisplayAs("[로컬라이징] 위쪽 버튼 텍스트")] public LocalizedString TopButtonTextEvent { get; private set; } = new();
+        [field: SerializeField, LocalizedString(true, entryKey: "BottomButton"), DisplayAs("[로컬라이징] 아래쪽 버튼 텍스트")] public LocalizedString BottomButtonTextEvent { get; private set; } = new();
+        [field: SerializeField, LocalizedString(true, entryKey: "Title"), DisplayAs("[로컬라이징] 타이틀 텍스트")] public LocalizedString TitleTextEvent { get; private set; } = new();
 
         [field: SerializeField] public bool HasTopEvent { get; private set; } = true;
         [field: SerializeField] public bool HasBottomEvent { get; private set; } = true;
 
-        public abstract bool CanFireTop { get; }
-        public abstract bool CanFireBottom { get; }
+        [SerializeReference, SerializeReferenceDropdown, DisplayAs("위쪽 선택지 효과")] private List<ITMEventEffectCreator> _topEffectCreator = new();
+        [SerializeReference, SerializeReferenceDropdown, DisplayAs("아래쪽 선택지 효과")] private List<ITMEventEffectCreator> _bottomEffectCreator = new();
 
-        public abstract Dictionary<string, object> TopEffectLocalizedArguments { get; }
-        public abstract Dictionary<string, object> BottomEffectLocalizedArguments { get; }
+        [SerializeReference, SerializeReferenceDropdown, DisplayAs("위쪽 선택지 소모 자원")] private List<ITMUsageCreator> _topUsageCreators = new();
+        [SerializeReference, SerializeReferenceDropdown, DisplayAs("아래쪽 선택지 소모 자원")] private List<ITMUsageCreator> _bottomUsageCreators = new();
 
-        public void InvokeEvent(TMEventChoice eventChoice)
+
+        public List<ITMEventEffect> CreateTopEffects()
         {
-            if (eventChoice == TMEventChoice.TOP)
-            {
-                TriggerTopEvent();
-            }
-            else
-            {
-                TriggerBottomEvent();
-            }
+            return _topEffectCreator
+                .Select(creator => creator.CreateEffect())
+                .ToList();
         }
 
-        protected abstract void TriggerTopEvent();
-        protected abstract void TriggerBottomEvent();
+        public List<ITMEventEffect> CreateBottomEffects()
+        {
+            return _bottomEffectCreator
+                .Select(creator => creator.CreateEffect())
+                .ToList();
+        }
+
+        public List<ITMUsage> CreateTopUsages()
+        {
+            return _topUsageCreators
+                .Select(creator => creator.CreateUsage())
+                .ToList(); 
+        }
+
+        public List<ITMUsage> CreateBottomUsage()
+        {
+            return _bottomUsageCreators
+                .Select(creator => creator.CreateUsage())
+                .ToList();
+        }
     }
 }

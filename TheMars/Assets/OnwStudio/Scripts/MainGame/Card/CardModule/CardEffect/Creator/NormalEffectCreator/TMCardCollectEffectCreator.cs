@@ -13,7 +13,7 @@ namespace TM.Card.Effect.Creator
         public int CollectCount { get; private set; } = 1;
 
         [field: SerializeField, FormerlySerializedAs("<SelectKind>k__BackingField"), DisplayAs("카드군")]
-        public TMCardKind SelectKind { get; private set; } = TMCardKind.NONE;
+        public TMCardKind SelectKind { get; private set; } = TMCardKind.CONSTRUCTION;
 
         public override ITMCardEffect CreateEffect()
         {
