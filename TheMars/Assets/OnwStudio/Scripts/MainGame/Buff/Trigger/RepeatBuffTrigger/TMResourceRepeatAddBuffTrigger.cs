@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace TM.Buff
 {
-    [System.Serializable, SerializeReferenceDropdownName("ÀÚ¿ø È¹µæ ¹öÇÁ")]
+    [System.Serializable, SerializeReferenceDropdownName("ìì› íšë“ ë²„í”„")]
     public class TMResourceRepeatAddBuffTrigger : TMRepeatBuffTrigger
     {
-        [field: SerializeField, DisplayAs("È¹µæ ÇÒ ÀÚ¿ø")] public TMResourceKind ResourceKind { get; private set; } = TMResourceKind.CREDIT;
-        [field: SerializeField, DisplayAs("È¹µæ ÇÒ ÀÚ¿ø·®")] public int Resource { get; private set; } = 0;
+        [field: SerializeField, DisplayAs("ìì› ì¢…ë¥˜")] public TMResourceKind ResourceKind { get; private set; } = TMResourceKind.CREDIT;
+        [field: SerializeField, DisplayAs("íšë“ëŸ‰")] public int Resource { get; private set; } = 0;
 
         public override TMBuffBase CreateBuff()
         {

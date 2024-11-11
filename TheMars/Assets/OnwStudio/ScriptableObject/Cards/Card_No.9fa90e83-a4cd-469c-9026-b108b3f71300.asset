@@ -26,12 +26,12 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   _cardEffectCreator:
-    rid: 4853453395557351426
+    rid: 4853453480464220175
   _cardCosts: []
   references:
     version: 2
     RefIds:
-    - rid: 4853453395557351426
+    - rid: 4853453480464220175
       type: {class: TMCardBuildingCreateEffectCreator, ns: TM.Card.Effect.Creator,
         asm: AssemblyTheMars}
       data:

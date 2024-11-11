@@ -12,7 +12,7 @@ namespace TM.Buff
     public sealed class TMResourceRepeatAddBuff : TMRepeatBuff, ITMInitializeBuff<TMResourceRepeatAddBuffTrigger>
     {
         [field: SerializeField, ReadOnly] protected override AssetReferenceSprite IconReference { get; set; } = new("Sprites/Smile_Buff_Positive");
-        [field: SerializeField, ReadOnly] TMResourceKind ResourceKind { get; set; }
+        [field: SerializeField, ReadOnly] public TMResourceKind ResourceKind { get; set; }
         [field: SerializeField, ReadOnly] public int Resource { get; set; }
 
         public override Color IconBackgroundColor => Color.blue;

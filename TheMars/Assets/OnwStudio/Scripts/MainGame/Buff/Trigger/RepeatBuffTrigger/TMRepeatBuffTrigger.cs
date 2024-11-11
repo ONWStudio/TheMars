@@ -10,9 +10,9 @@ namespace TM.Buff.Trigger
     [System.Serializable]
     public abstract class TMRepeatBuffTrigger : ITMBuffTrigger
     {
-        [field: SerializeField, DisplayAs("¹İº¹ ÀÏ¼ö °£°İ")] public int RepeatDay { get; private set; } = 1;
-        [field: SerializeField, DisplayAs("Áö¼Ó ÀÏ¼ö")] public int LimitDay { get; private set; } = 1;
-        [field: SerializeField, DisplayAs("¿µ±¸ Áö¼Ó ¿©ºÎ")] public bool IsTemporary { get; private set; } = false;
+        [field: SerializeField, DisplayAs("íš¨ê³¼ ë°œë™ í…€")] public int RepeatDay { get; private set; } = 1;
+        [field: SerializeField, DisplayAs("íš¨ê³¼ ì œí•œ ì¼ìˆ˜")] public int LimitDay { get; private set; } = 1;
+        [field: SerializeField, DisplayAs("ì˜êµ¬ ì§€ì† ì—¬ë¶€")] public bool IsTemporary { get; private set; } = false;
 
         public abstract TMBuffBase CreateBuff();
     }

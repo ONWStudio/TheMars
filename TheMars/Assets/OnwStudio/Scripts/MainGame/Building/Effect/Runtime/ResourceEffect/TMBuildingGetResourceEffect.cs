@@ -16,16 +16,8 @@ namespace TM.Building.Effect
     {
         public IReadOnlyDictionary<TMResourceKind, TMResourceDataForRuntime> Resources => _resources;
 
-        public event UnityAction<string> OnNotifyEvent
-        {
-            add => _onNotifyEvent.AddListener(value);
-            remove => _onNotifyEvent.RemoveListener(value);
-        }
-
         [field: SerializeField, ReadOnly] public float RepeatSeconds { get; set; } = 0f;
 
-        [SerializeField, ReadOnly] private UnityEvent<string> _onNotifyEvent = new();
-        
         private Dictionary<TMResourceKind, TMResourceDataForRuntime> _resources = new(); 
         private Coroutine _coroutine = null;
 
@@ -49,7 +41,6 @@ namespace TM.Building.Effect
             }
             
             runtimeResource.AdditionalResources.Add(additionalAmount);
-            _onNotifyEvent.Invoke("Description");
         }
         
         public void ApplyEffect(TMBuilding owner)
@@ -73,6 +64,8 @@ namespace TM.Building.Effect
 
                 while (true)
                 {
+                    if (!owner.IsActive.Value) yield return null;
+                    
                     timeAccumulator += Time.deltaTime * TimeManager.GameSpeed;
 
                     if (timeAccumulator >= RepeatSeconds)

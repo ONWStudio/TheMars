@@ -7,16 +7,16 @@ namespace TM.Event.Effect.Creator
 {
     public enum TMCardKindForWhere
     {
-        [InspectorName("°Ç¼³")] CONSTRUCTION,
-        [InspectorName("È¿°ú")] EFFECT,
-        [InspectorName("¸ğµÎ")] ALL
+        [InspectorName("ê±´ì„¤")] CONSTRUCTION,
+        [InspectorName("íš¨ê³¼")] EFFECT,
+        [InspectorName("ëª¨ë‘")] ALL
     }
 
-    [System.Serializable, SerializeReferenceDropdownName("Æ¯Á¤ Ä«µå ¹«ÀÛÀ§ ¹ö¸²")]
+    [System.Serializable, SerializeReferenceDropdownName("ëœë¤ ì¹´ë“œ ë²„ë¦¬ê¸° íš¨ê³¼")]
     public class TMEventRandCardDropEffectCreator : ITMEventEffectCreator
     {
-        [field: SerializeField, DisplayAs("Ä«µå Á¾·ù")] public TMCardKindForWhere Kind { get; private set; } = TMCardKindForWhere.ALL;
-        [field: SerializeField, DisplayAs("¹ö¸± Ä«µå °³¼ö")] public int DropCount { get; private set; } = 0;
+        [field: SerializeField, DisplayAs("ì¹´ë“œ ì¢…ë¥˜")] public TMCardKindForWhere Kind { get; private set; } = TMCardKindForWhere.ALL;
+        [field: SerializeField, DisplayAs("ë²„ë¦´ ì¹´ë“œ ê°œìˆ˜")] public int DropCount { get; private set; } = 0;
 
         public ITMEventEffect CreateEffect()
         {

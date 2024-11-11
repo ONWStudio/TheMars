@@ -17,9 +17,9 @@ namespace TM.Manager
         private const int INTERVAL_MAX = 15;
 
         [field: SerializeField, ReadOnly] public float AccumulatedTime { get; private set; } = 0f;
-        [SerializeField, ReadOnly] private ReactiveField<int> _nowDay = new() { Value = 1 };
-        [SerializeField, ReadOnly] private ReactiveField<int> _nowMinutes = new() { Value = 0 };
-        [SerializeField, ReadOnly] private ReactiveField<int> _nowSeconds = new() { Value = 0 };
+        [SerializeField] private ReactiveField<int> _nowDay = new() { Value = 1 };
+        [SerializeField] private ReactiveField<int> _nowMinutes = new() { Value = 0 };
+        [SerializeField] private ReactiveField<int> _nowSeconds = new() { Value = 0 };
 
         public IReactiveField<int> NowDay => _nowDay;
         public IReactiveField<int> NowMinutes => _nowMinutes;

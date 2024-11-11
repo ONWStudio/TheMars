@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace TM.Usage.Creator
 {
-    [SerializeReferenceDropdownName("ÀÚ¿ø ¼Ò¸ğ")]
+    [SerializeReferenceDropdownName("ìì› ì†Œëª¨")]
     public class TMResourceUsageCreator : ITMUsageCreator
     {
-        [field: SerializeField, DisplayAs("¼Ò¸ğ ÀÚ¿ø")] public TMResourceKind ResourceKind { get; private set; }
-        [field: SerializeField, DisplayAs("¼Ò¸ğ·®"), OnwMin(0)] public int ResourceUsage { get; private set; } = 0;
+        [field: SerializeField, DisplayAs("ìì› ì¢…ë¥˜")] public TMResourceKind ResourceKind { get; private set; }
+        [field: SerializeField, DisplayAs("ìì› ì†Œëª¨ëŸ‰"), OnwMin(0)] public int ResourceUsage { get; private set; } = 0;
 
         public ITMUsage CreateUsage()
         {

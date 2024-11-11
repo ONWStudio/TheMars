@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace TM.Event.Effect.Creator
 {
-    [System.Serializable, SerializeReferenceDropdownName("Ä«µå ¹«ÀÛÀ§ È¹µæ")]
+    [System.Serializable, SerializeReferenceDropdownName("ëœë¤ ì¹´ë“œ íšë“ íš¨ê³¼")]
     public class TMEventRandCardCollectEffectCreator : ITMEventEffectCreator
     {
-        [field: SerializeField, DisplayAs("Ä«µå Á¾·ù")] public TMCardKindForWhere Kind { get; private set; } = TMCardKindForWhere.ALL;
-        [field: SerializeField, DisplayAs("Ä«µå È¹µæ·®")] public int CollectCount { get; private set; } = 1;
+        [field: SerializeField, DisplayAs("ì¹´ë“œ ì¢…ë¥˜")] public TMCardKindForWhere Kind { get; private set; } = TMCardKindForWhere.ALL;
+        [field: SerializeField, DisplayAs("ì¹´ë“œ íšë“ëŸ‰")] public int CollectCount { get; private set; } = 1;
 
         public ITMEventEffect CreateEffect()
         {

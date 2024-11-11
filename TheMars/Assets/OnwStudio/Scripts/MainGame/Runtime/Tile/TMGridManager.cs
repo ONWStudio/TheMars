@@ -65,12 +65,14 @@ namespace TM.Grid
             set => _gridManager.IsRender = value;
         }
 
+        public IReadOnlyList<TMBuilding> Buildings => _buildings;        
+
         [SerializeField, InitializeRequireComponent] private GridManager _gridManager;
         [SerializeField, ReadOnly] private List<TMBuilding> _buildings = new();
 
-        [SerializeField, ReadOnly] private UnityEvent<TMBuilding> _onAddedBuilding;
-        [SerializeField, ReadOnly] private UnityEvent<TMBuilding> _onRemovedBuilding;
-        [SerializeField, ReadOnly] private UnityEvent<TMBuilding> _onChangedPointBuilding;
+        [SerializeField] private UnityEvent<TMBuilding> _onAddedBuilding;
+        [SerializeField] private UnityEvent<TMBuilding> _onRemovedBuilding;
+        [SerializeField] private UnityEvent<TMBuilding> _onChangedPointBuilding;
         
         protected override void Init() {}
 

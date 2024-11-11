@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Synergy_No.a3f9c3a1-65fc-42e0-a41b-5507d6d2bbcb
   m_EditorClassIdentifier: 
   <Icon>k__BackingField: {fileID: 0}
-  _synergyEffects: []
+  _synergyEffects:
+  - rid: -2
   _localizedSynergyName:
     m_TableReference:
       m_TableCollectionName: SynergyName
@@ -25,4 +26,6 @@ MonoBehaviour:
     m_LocalVariables: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

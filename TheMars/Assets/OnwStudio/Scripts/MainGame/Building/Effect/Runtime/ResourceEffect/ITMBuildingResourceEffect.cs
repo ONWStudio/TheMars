@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace TM.Building.Effect
 {
-    public interface ITMBuildingResourceEffect : ITMBuildingEffect, INotifier
+    public interface ITMBuildingResourceEffect : ITMBuildingEffect
     {
         IReadOnlyDictionary<TMResourceKind, TMResourceDataForRuntime> Resources { get; }
         float RepeatSeconds { get; set; }

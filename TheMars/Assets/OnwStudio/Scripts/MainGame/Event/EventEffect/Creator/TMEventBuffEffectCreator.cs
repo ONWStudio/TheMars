@@ -6,10 +6,10 @@ using UnityEngine;
 
 namespace TM.Event.Effect.Creator
 {
-    [System.Serializable, SerializeReferenceDropdownName("¹öÇÁ È¿°ú")]
+    [System.Serializable, SerializeReferenceDropdownName("ë²„í”„ íš¨ê³¼")]
     public class TMEventBuffEffectCreator : ITMEventEffectCreator
     {
-        [field: SerializeReference, SerializeReferenceDropdown, DisplayAs("¹öÇÁ")] public ITMBuffTrigger BuffTrigger { get; private set; }
+        [field: SerializeReference, SerializeReferenceDropdown, DisplayAs("ë²„í”„")] public ITMBuffTrigger BuffTrigger { get; private set; }
 
         public ITMEventEffect CreateEffect()
         {

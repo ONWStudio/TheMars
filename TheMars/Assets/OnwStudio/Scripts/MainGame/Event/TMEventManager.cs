@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Onw.Attribute;
+using Onw.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 using Onw.Manager;
 using TM.Manager;
 using TM.Card.Runtime;
+using TM.Event.Effect;
 
 namespace TM.Event
 {
@@ -14,12 +17,12 @@ namespace TM.Event
     {
         protected override string SceneName => "MainGameScene";
 
-        public event UnityAction<TMEventRunner> OnTriggerMainEvent
+        public event UnityAction<TMEventRunner> OnTriggerEvent
         {
             add => _onTriggerEvent.AddListener(value);
             remove => _onTriggerEvent.RemoveListener(value);
         }
-
+        
         [field: SerializeField, OnwMin(1)] public int CheckMainEventLevelCount { get; private set; } = 10;
         [field: SerializeField, OnwMin(1)] public int CheckMarsLithiumEventDayCount { get; private set; } = 5;
         [field: SerializeField, OnwMin(1)] public int CheckCalamityEventDayCount { get; private set; } = 1;
@@ -34,6 +37,9 @@ namespace TM.Event
         [FormerlySerializedAs("_onTriggerMainEvent")]
         [Header("Event")]
         [SerializeField] private UnityEvent<TMEventRunner> _onTriggerEvent = new();
+
+        [field: Header("Mars Lithium Event Option")]
+        [field: SerializeField, ReadOnly] public int MarsLithiumEventAddResource { get; set; } = 0;
 
         private bool _isApplicationQuit = false;
 
@@ -74,8 +80,15 @@ namespace TM.Event
         private void handleMarsLithiumEvent(int day)
         {
             if (day % CheckMarsLithiumEventDayCount != 0 || !TMEventDataManager.Instance.MarsLithiumEvent) return;
+
+            TMEventRunner eventRunner = new(TMEventDataManager.Instance.MarsLithiumEvent);
+            eventRunner
+                .TopEffects
+                .OfType<TMEventResourceAddEffect>()
+                .Where(effect => effect.ResourceKind == TMResourceKind.MARS_LITHIUM)
+                .ForEach(effect => effect.Resource += MarsLithiumEventAddResource);
             
-            _eventQueue.Enqueue(new(TMEventDataManager.Instance.MarsLithiumEvent));
+            _eventQueue.Enqueue(eventRunner);
         }
 
         private void handleCalamityEvent(int day)

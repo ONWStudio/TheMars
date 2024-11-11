@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7f740b46cfe4a008a02c30745352cf, type: 3}
   m_Name: TMCardDataManager
   m_EditorClassIdentifier: 
-  _cardDataList: []
+  _cardDataList:
+  - {fileID: 11400000, guid: ac8ba10ff4cf64b0d9f51db4777a138f, type: 2}

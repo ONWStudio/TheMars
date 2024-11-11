@@ -48,6 +48,7 @@ namespace Onw.HexGrid
         }
 
         [field: SerializeField, Range(HEXAGON_RADIUS_MIN, HEXAGON_RADIUS_MAX)] public float HexagonRadius { get; set; } = 0.025f;
+        [field: SerializeField] public GameObject RootObject { get; private set; } = null;
 
         public float HexagonWidth => HexagonRadius * _decalProjector.size.x * 2 * _decalProjector.transform.localScale.x;
 
@@ -92,8 +93,8 @@ namespace Onw.HexGrid
         [SerializeField, Min(0)] private int _tileLimit = 3;
 
         [SerializeField] private Camera _mainCamera = null;
-        private ComputeBuffer _hexOptionBuffer;
 
+        private ComputeBuffer _hexOptionBuffer;
         private HexGrid _currentHex = null;
 
         private void Awake()
@@ -161,7 +162,7 @@ namespace Onw.HexGrid
                 }
             }
         }
-
+        
         public void SetActiveAxialCoordinates(int q, int r, bool isActive)
         {
             if (!_hexGrids.TryGetValue(new(q, r), out HexGrid hex)) return;

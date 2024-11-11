@@ -30,7 +30,7 @@ namespace TM.Buff
             IsTemporary = creator.IsTemporary;
         }
 
-        protected override sealed void ApplyBuffProtected()
+        protected sealed override void ApplyBuffProtected()
         {
             int dayCount = 0;
             TMSimulator.Instance.NowDay.AddListener(onChangedDay);
@@ -47,6 +47,7 @@ namespace TM.Buff
                 if (!IsTemporary && dayCount == LimitDay)
                 {
                     TMSimulator.Instance.NowDay.RemoveListener(onChangedDay);
+                    Dispose();
                 }
             }
         }

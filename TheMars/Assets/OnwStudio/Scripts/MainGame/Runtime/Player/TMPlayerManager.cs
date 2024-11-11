@@ -33,21 +33,21 @@ namespace TM
         public IReactiveField<int> TerraformValue => _terraformValue;
 
         [Header("Resources")]
-        [SerializeField, ReadOnly] private ReactiveField<int> _marsLithium = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
-        [SerializeField, ReadOnly] private ReactiveField<int> _credit = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
-        [SerializeField, ReadOnly] private ReactiveField<int> _population = new();
-        [SerializeField, ReadOnly] private ReactiveField<int> _totalPopulation = new() { ValueProcessors = new() { new MinIntProcessor(5) }};
-        [SerializeField, ReadOnly] private ReactiveField<int> _steel = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
-        [SerializeField, ReadOnly] private ReactiveField<int> _plants = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
-        [SerializeField, ReadOnly] private ReactiveField<int> _clay = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
-        [SerializeField, ReadOnly] private ReactiveField<int> _electricity = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
-        [SerializeField, ReadOnly] private ReactiveField<int> _satisfaction = new() { Value = 50, ValueProcessors = new() { new ClampIntProcessor(0, MAX_SATISFACTION)}};
+        [SerializeField] private ReactiveField<int> _marsLithium = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField] private ReactiveField<int> _credit = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField] private ReactiveField<int> _population = new();
+        [SerializeField] private ReactiveField<int> _totalPopulation = new() { ValueProcessors = new() { new MinIntProcessor(5) }};
+        [SerializeField] private ReactiveField<int> _steel = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField] private ReactiveField<int> _plants = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField] private ReactiveField<int> _clay = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField] private ReactiveField<int> _electricity = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField] private ReactiveField<int> _satisfaction = new() { Value = 50, ValueProcessors = new() { new ClampIntProcessor(0, MAX_SATISFACTION)}};
         
         [Header("Player Info")]
-        [SerializeField, ReadOnly] private ReactiveField<int> _level = new() { Value = 1, ValueProcessors = new() { new MinIntProcessor(1) }};
-        [SerializeField, ReadOnly] private ReactiveField<int> _exp = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
-        [SerializeField, ReadOnly] private ReactiveField<int> _maxExp = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
-        [SerializeField, ReadOnly] private ReactiveField<int> _terraformValue = new() { ValueProcessors = new() { new ClampIntProcessor(0, MAX_TERRAFORM_VALUE) }};
+        [SerializeField] private ReactiveField<int> _level = new() { Value = 1, ValueProcessors = new() { new MinIntProcessor(1) }};
+        [SerializeField] private ReactiveField<int> _exp = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField] private ReactiveField<int> _maxExp = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField] private ReactiveField<int> _terraformValue = new() { ValueProcessors = new() { new ClampIntProcessor(0, MAX_TERRAFORM_VALUE) }};
 
         /// <summary>
         /// .. Population의 경우 _totalPopulation에 의해 값이 유동적으로 변경되므로 .. 별도의 세터 메서드 제공
