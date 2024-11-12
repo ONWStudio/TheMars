@@ -26,6 +26,17 @@ namespace TM.Buff
         {
             DelayDayCount = creator.DelayDayCount;
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            if (disposing)
+            {
+                _accrueDay.RemoveAllListener();
+                _accrueDay = null;
+            }
+        }
         
         protected sealed override void ApplyBuffProtected()
         {

@@ -11,12 +11,20 @@ using TM.Synergy;
 
 namespace TM.Building
 {
-    public enum TMCorporation
+    public enum TMCorporation : byte
     {
         A,
         B,
         C,
         D
+    }
+
+    public enum TMBuildingKind : byte
+    {
+        [InspectorName("개척형")] PIONEER = 0,
+        [InspectorName("자원형")] RESOURCEFUL,
+        [InspectorName("개발형")] BUILDER,
+        [InspectorName("외부형")] EXTERNAL
     }
     
     public sealed class TMBuildingData : ScriptableObject
@@ -24,8 +32,9 @@ namespace TM.Building
         public IReadOnlyList<TMSynergyData> Synergies => _synergies;
         
         public string BuildingName => _localizedBuildingName.TryGetLocalizedString(out string buildingName) ? buildingName : "";
-        
-        [field: SerializeField] public TMCorporation TMCorporation { get; private set; }
+
+        [field: SerializeField, DisplayAs("소속")] public TMCorporation Corporation { get; private set; } = TMCorporation.A;
+        [field: SerializeField, DisplayAs("종류")] public TMBuildingKind Kind { get; private set; } = TMBuildingKind.PIONEER;
         
         [field: SerializeField, DisplayAs("건물 프리팹")] public TMBuilding BuildingPrefab { get; private set; }
         

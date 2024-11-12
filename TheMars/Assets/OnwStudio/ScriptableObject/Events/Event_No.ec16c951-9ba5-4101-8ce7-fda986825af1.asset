@@ -55,6 +55,7 @@ MonoBehaviour:
   <HasBottomEvent>k__BackingField: 1
   _topEffectCreators:
   - rid: 4853453505639743502
+  - rid: 4853453505639743511
   _bottomEffectCreators:
   - rid: 4853453505639743504
   _topUsageCreators:
@@ -94,3 +95,14 @@ MonoBehaviour:
         <IsTemporary>k__BackingField: 0
         <ResourceKind>k__BackingField: 7
         <Resource>k__BackingField: -10
+    - rid: 4853453505639743511
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        <BuffTrigger>k__BackingField:
+          rid: 4853453505639743512
+    - rid: 4853453505639743512
+      type: {class: TMBuildingGradeModifyBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
+      data:
+        <DelayDayCount>k__BackingField: 2
+        <Kind>k__BackingField: 0
+        <TargetBuildingCount>k__BackingField: 2

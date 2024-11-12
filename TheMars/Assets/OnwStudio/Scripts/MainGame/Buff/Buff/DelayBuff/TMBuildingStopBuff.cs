@@ -25,6 +25,15 @@ namespace TM.Buff
             base.Initialize(creator);
             TargetBuildingCount = creator.TargetBuildingCount;
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            if (disposing)
+            {
+                _stoppedBuildings = null;
+            }
+        }
         
         protected override void OnApplyBuff()
         {

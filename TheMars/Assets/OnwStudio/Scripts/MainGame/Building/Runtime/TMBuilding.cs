@@ -17,6 +17,7 @@ namespace TM.Building
         
         [FormerlySerializedAs("_buildingLevel")]
         [Header("Building State")]
+        [SerializeField] private ReactiveField<int> _gradePlus = new() { Value = 0 };
         [SerializeField] private ReactiveField<int> _grade  = new() { Value = 1, ValueProcessors = new() { new ClampIntProcessor(1, 3) }};
         [SerializeField] private ReactiveField<bool> _onTile = new();
         
@@ -26,6 +27,9 @@ namespace TM.Building
         [field: Header("Components")]
         [field: SerializeField, SelectableSerializeField] public Renderer MeshRenderer { get; private set; }
 
+        public int LastGrade => Mathf.Clamp(_grade.Value + _gradePlus.Value, 1, 3);
+
+        public IReactiveField<int> GradePlus => _gradePlus;
         public IReactiveField<int> Grade => _grade;
         public IReactiveField<bool> OnTile => _onTile;
         public IReactiveField<bool> IsActive => _isActive;
