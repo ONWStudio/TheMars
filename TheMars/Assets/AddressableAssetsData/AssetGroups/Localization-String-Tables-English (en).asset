@@ -167,6 +167,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 46620a908fcc241ba84e319d2eb3bcfc
+    m_Address: TMCostOfDisappointmentEvent_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 3f430e5b5c626400b837c52ed98c1bc2, type: 2}
   m_SchemaSet:

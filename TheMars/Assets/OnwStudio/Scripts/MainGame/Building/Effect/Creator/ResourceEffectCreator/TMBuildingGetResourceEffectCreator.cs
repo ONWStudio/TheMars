@@ -18,7 +18,7 @@ namespace TM.Building.Effect.Creator
         
         public ITMBuildingEffect CreateEffect()
         {
-            return BuildingEffectGenerator.CreateEffect<TMBuildingGetResourceEffect, TMBuildingGetResourceEffectCreator>(this);
+            return CreateEffect<TMBuildingGetResourceEffect, TMBuildingGetResourceEffectCreator>(this);
         }
  
     }

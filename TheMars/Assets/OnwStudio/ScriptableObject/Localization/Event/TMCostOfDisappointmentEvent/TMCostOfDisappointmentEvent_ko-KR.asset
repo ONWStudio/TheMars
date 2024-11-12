@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TMCostOfDisappointmentEvent_ko-KR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ko-KR
+  m_SharedData: {fileID: 11400000, guid: d593d6f5ee0d24d8fb4de6b4b6f6dbad, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 2880430080
+    m_Localized: "\uC774\uC775\uC744 \uADF9\uB300\uD654 \uD558\uAE30 \uC704\uD574
+      \uB2F9\uC2E0\uC740 \uC790\uC6D0\uC744 \uBCF4\uB2E4 \uC804\uB7B5\uC801\uC73C\uB85C
+      \uBC30\uBD84\uD558\uB294 \uC815\uCC45\uC744 \uCD94\uC9C4\uD588\uB2E4.\n\uC2DC\uBBFC\uB4E4\uC740
+      \uAE30\uC5EC\uB3C4\uC640 \uC0DD\uC0B0\uC131\uC5D0 \uB530\uB77C \uD61C\uD0DD\uC744
+      \uBC1B\uC9C0\uB9CC, \uB2A5\uB825\uC774 \uBD80\uC871\uD55C \uC774\uB4E4\uC740
+      \uC790\uC6D0 \uBC30\uBD84\uC5D0\uC11C \uC18C\uC678\uB418\uACE4 \uD588\uB2E4.\n\uD558\uC9C0\uB9CC
+      \uC5EC\uAE30\uC11C \uBBFC\uC2EC\uC744 \uCC59\uAE30\uAE30\uC5D0\uB294 \uC5B4\uC601\uBD80\uC601
+      \uB420 \uAC83\uC774\uB2E4.\n\uC6B0\uB9AC\uB294 \uC55E\uC73C\uB85C \uB098\uC544\uAC00\uC57C
+      \uB41C\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20806885376
+    m_Localized: "\uC0C8\uB85C\uC6B4 \uB3C4\uC804\uC744 \uD574\uC57C \uB41C\uB2E4.
+      \uAE38\uC744 \uAC1C\uCC99\uD574\uBCF4\uC790."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52067033088
+    m_Localized: "\uC774\uBC88\uC5D0 \uC0C8\uB85C\uC6B4 \uC2E4\uD5D8\uC744 \uD55C\uB2E4\uB294\uB370
+      \uADF8\uCABD\uC5D0 \uD22C\uC790\uD574\uBCF4\uC790."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74414284800
+    m_Localized: "\uC131\uC7A5\uC758 \uB300\uAC00"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

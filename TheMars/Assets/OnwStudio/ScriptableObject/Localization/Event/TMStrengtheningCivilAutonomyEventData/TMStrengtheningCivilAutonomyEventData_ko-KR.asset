@@ -101,26 +101,10 @@ MonoBehaviour:
     m_Localized: "\uC2DC\uBBFC \uC790\uCE58 \uAC15\uD654"
     m_Metadata:
       m_Items: []
-  - m_Id: 323435556233219
-    m_Localized: "\uC18C\uBAA8 \uC790\uC6D0\n* {CreditSubtract} \uD06C\uB808\uB527
-      \uC18C\uBAA8\n\uD6A8\uACFC\n* \uB79C\uB364\uD55C \uAC74\uBB3C {TargetBuildingCount}\uAC1C
-      \uAC00\uB3D9 \uC911\uC9C0({StopDayCount}\uC77C)\n* \uB9CC\uC871\uB3C4 {SatisfactionAddByDay}%
-      \uC99D\uAC00({SatisfactionAddDayCount}\uC77C)"
-    m_Metadata:
-      m_Items:
-      - rid: 4853453322907287626
-  - m_Id: 323435556233220
-    m_Localized: "\uD6A8\uACFC\n* \uB9CC\uC871\uB3C4 {SatisfactionSubtractByDay}%
-      \uAC10\uC18C({SatisfactionSubtractDayCount}\uC77C)\n* \uB2E4\uC74C \"\uB9C8\uB974\uC2A4
-      \uB9AC\uD2AC \uB0A9\uBD80\"\uC774\uBCA4\uD2B8 \uB54C \uC9C0\uAE09\uB7C9 {MarsLithiumPaymentEventSubtract}
-      \uAC10\uC18C"
-    m_Metadata:
-      m_Items:
-      - rid: 4853453322907287626
   references:
     version: 2
     RefIds:
     - rid: 4853453322907287626
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 03e06fa20000000003e06fb52926010004e06fb529260100
+        m_Entries: 03e06fa200000000

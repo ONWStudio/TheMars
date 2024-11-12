@@ -20,9 +20,9 @@ namespace TM.Event.Effect
             Buff.ApplyBuff();
         }
 
-        public void Initialize(TMEventBuffEffectCreator effectCreator)
+        public void Initialize(TMEventBuffEffectCreator creator)
         {
-            Buff = effectCreator.BuffTrigger.CreateBuff();
+            Buff = creator.BuffTrigger.CreateBuff();
         }
     }
 }

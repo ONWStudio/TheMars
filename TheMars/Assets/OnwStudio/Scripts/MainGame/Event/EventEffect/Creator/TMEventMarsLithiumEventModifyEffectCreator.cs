@@ -12,7 +12,7 @@ namespace TM.Event.Effect.Creator
         
         public ITMEventEffect CreateEffect()
         {
-            return ITMEventEffectCreator.EventEffectGenerator.CreateEffect<TMEventMarsLithiumEventModifyEffect, TMEventMarsLithiumEventModifyEffectCreator>(this);
+            return ITMEventEffectCreator.CreateEffect<TMEventMarsLithiumEventModifyEffect, TMEventMarsLithiumEventModifyEffectCreator>(this);
         }
     }
 }

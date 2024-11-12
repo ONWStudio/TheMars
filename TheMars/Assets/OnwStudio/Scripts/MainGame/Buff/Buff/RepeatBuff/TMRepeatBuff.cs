@@ -3,26 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Onw.Attribute;
+using Onw.Event;
 using TM.Manager;
 using TM.Buff.Trigger;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace TM.Buff
 {
-    public abstract class TMRepeatBuff : TMBuffBase, ITMInitializeBuff<TMRepeatBuffTrigger>
+    [System.Serializable]
+    public abstract class TMRepeatBuff : TMBuffBase, ITMInitializeBuff<TMRepeatBuffTrigger>, IAccrueDayNotifier
     {
-        public event UnityAction<TMRepeatBuff> OnTriggerRepeatBuff
-        {
-            add => _onTriggerRepeatBuff.AddListener(value);
-            remove => _onTriggerRepeatBuff.RemoveListener(value);
-        }
-
+        [SerializeField, ReadOnly] private ReactiveField<int> _accrueDay = new();
+        public IReadOnlyReactiveField<int> AccrueDay => _accrueDay;
+        
         [field: SerializeField, ReadOnly] public int RepeatDay { get; set; }
         [field: SerializeField, ReadOnly] public int LimitDay { get; set; }
         [field: SerializeField, ReadOnly] public bool IsTemporary { get; set; }
-
-        [field: SerializeField] private UnityEvent<TMRepeatBuff> _onTriggerRepeatBuff = new();
-
+        
         public virtual void Initialize(TMRepeatBuffTrigger creator)
         {
             RepeatDay = creator.RepeatDay;
@@ -32,19 +30,19 @@ namespace TM.Buff
 
         protected sealed override void ApplyBuffProtected()
         {
-            int dayCount = 0;
+            _accrueDay.Value = 0;
             TMSimulator.Instance.NowDay.AddListener(onChangedDay);
 
             void onChangedDay(int day)
             {
-                dayCount++;
-
-                if (dayCount % RepeatDay == 0)
+                _accrueDay.Value++;
+                
+                if (_accrueDay.Value % RepeatDay == 0)
                 {
                     OnChangedDayByRepeatDay(day);
                 }
 
-                if (!IsTemporary && dayCount == LimitDay)
+                if (!IsTemporary && _accrueDay.Value == LimitDay)
                 {
                     TMSimulator.Instance.NowDay.RemoveListener(onChangedDay);
                     Dispose();
@@ -53,5 +51,6 @@ namespace TM.Buff
         }
 
         protected abstract void OnChangedDayByRepeatDay(int day);
+
     }
 }

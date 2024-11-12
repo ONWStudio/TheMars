@@ -13,9 +13,9 @@ namespace TM.Event.Effect
         [field: SerializeField, ReadOnly] public LocalizedString EffectDescription { get; private set; }
         [field: SerializeField, ReadOnly] public int MarsLithiumAdd { get; private set; }        
         
-        public void Initialize(TMEventMarsLithiumEventModifyEffectCreator effectCreator)
+        public void Initialize(TMEventMarsLithiumEventModifyEffectCreator creator)
         {
-            MarsLithiumAdd = effectCreator.MarsLithiumAdd;
+            MarsLithiumAdd = creator.MarsLithiumAdd;
         }
         
         public void ApplyEffect()

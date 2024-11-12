@@ -18,10 +18,10 @@ namespace TM.Event.Effect
         [field: SerializeField, ReadOnly] public TMCardKindForWhere Kind { get; private set; }
         [field: SerializeField, ReadOnly] public int CollectCount { get; private set; }
 
-        public void Initialize(TMEventRandCardCollectEffectCreator effectCreator)
+        public void Initialize(TMEventRandCardCollectEffectCreator creator)
         {
-            Kind = effectCreator.Kind;
-            CollectCount = effectCreator.CollectCount;  
+            Kind = creator.Kind;
+            CollectCount = creator.CollectCount;  
         }
 
         public void ApplyEffect()

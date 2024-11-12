@@ -86,21 +86,10 @@ MonoBehaviour:
     m_Localized: "\uC790\uCE58 \uC704\uC6D0\uD68C \uC124\uB9BD"
     m_Metadata:
       m_Items: []
-  - m_Id: 298568001773568
-    m_Localized: "* \uD558\uB8E8\uB9C8\uB2E4 \uB9CC\uC871\uB3C4 {SatisfactionAddByDay}%
-      \uC0C1\uC2B9({SatisfactionAddDayCount}\uC77C)\n* \uC774\uB9AC\uC800\uB9AC \uD754\uB4E4\uB9AC\uB294
-      \uBC30 \uC5F0\uACC4"
-    m_Metadata:
-      m_Items:
-      - rid: 4853453322907287645
-  - m_Id: 298568001773569
-    m_Localized: "* \uBBFC\uC8FC\uC801 \uC790\uCE58, \uADF8 \uB2E4\uC74C\uC740? \uC5F0\uACC4"
-    m_Metadata:
-      m_Items: []
   references:
     version: 2
     RefIds:
     - rid: 4853453322907287645
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 01e06fba0000000000e0afc78b0f0100
+        m_Entries: 01e06fba00000000

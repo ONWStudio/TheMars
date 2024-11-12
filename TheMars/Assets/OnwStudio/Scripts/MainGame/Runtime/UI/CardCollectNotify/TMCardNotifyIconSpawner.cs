@@ -18,7 +18,7 @@ namespace TM.Runtime
         private const float REPEAT_TIME_MAX = 10f;
 
         protected override string SceneName => "MainGameScene";
-        
+
         public event UnityAction<TMCardCollectNotifyIcon> OnCreateIcon
         {
             add => _onCreateIcon.AddListener(value);
@@ -26,16 +26,16 @@ namespace TM.Runtime
         }
 
         [field: SerializeField] public int CardCreationCount { get; set; } = 3;
-        
+
         [SerializeField] private TMCardCollectNotifyIcon _iconPrefab = null;
         [SerializeField, Range(REPEAT_TIME_MIN, REPEAT_TIME_MAX)] private float _repeatTime = 5f;
 
         [SerializeField] private UnityEvent<TMCardCollectNotifyIcon> _onCreateIcon = new();
-        
+
         protected override void Init()
         {
         }
-        
+
         private void Start()
         {
             TMSimulator.Instance.NowDay.AddListener(onChangedDay);
@@ -53,18 +53,19 @@ namespace TM.Runtime
         {
             if (cards is null)
             {
-                Debug.LogError("");
+                Debug.LogError("TMCardNotifyIconSpawner : 만들어진 카드가 0개입니다");
+                return;
             }
-            
+
             if (!GenericObjectPool<TMCardCollectNotifyIcon>.TryPop(out TMCardCollectNotifyIcon iconInstance))
             {
                 iconInstance = Instantiate(_iconPrefab.gameObject)
                     .GetComponent<TMCardCollectNotifyIcon>();
-                    
+
                 _onCreateIcon.Invoke(iconInstance);
                 iconInstance.SetCards(cards.ToList());
             }
-            
+
             TMCardManager.Instance.UIComponents.CardCollectIconScrollView.AddItem(iconInstance.gameObject);
         }
     }

@@ -7,6 +7,6 @@ namespace TM.Event.Effect
 {
     public interface ITMEventInitializeEffect<in T> where T : ITMEventEffectCreator
     {
-        void Initialize(T effectCreator);
+        void Initialize(T creator);
     }
 }

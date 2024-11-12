@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Onw.Attribute;
+using Onw.Event;
 using TM.Buff.Trigger;
 using TM.Manager;
 using UnityEngine;
@@ -9,8 +10,13 @@ using UnityEngine.Events;
 
 namespace TM.Buff
 {
-    public abstract class TMDelayBuff : TMBuffBase, ITMInitializeBuff<TMDelayBuffTrigger>
+    [System.Serializable]
+    public abstract class TMDelayBuff : TMBuffBase, ITMInitializeBuff<TMDelayBuffTrigger>, IAccrueDayNotifier
     {
+        [field: SerializeField, ReadOnly] private ReactiveField<int> _accrueDay = new();
+
+        public IReadOnlyReactiveField<int> AccrueDay => _accrueDay;
+        
         [field: SerializeField, ReadOnly] public int DelayDayCount { get; private set; }
         
         protected virtual void OnApplyBuff() { }
@@ -23,16 +29,16 @@ namespace TM.Buff
         
         protected sealed override void ApplyBuffProtected()
         {
-            int dayCount = 0;
+            _accrueDay.Value = 0;
             TMSimulator.Instance.NowDay.AddListener(onChangedDay);
             
             OnApplyBuff();
 
             void onChangedDay(int day)
             {
-                dayCount++;
+                _accrueDay.Value++;
 
-                if (dayCount >= DelayDayCount)
+                if (_accrueDay.Value >= DelayDayCount)
                 {
                     OnChangedDayByDelayCount(day);
                     TMSimulator.Instance.NowDay.RemoveListener(onChangedDay);

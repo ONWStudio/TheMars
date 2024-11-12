@@ -13,10 +13,10 @@ namespace TM.Event.Effect
         [field: SerializeField, ReadOnly] public TMResourceKind ResourceKind { get; set; }
         [field: SerializeField, ReadOnly] public int Resource { get; set; }
         
-        public void Initialize(TMEventResourceAddEffectCreator effectCreator)
+        public void Initialize(TMEventResourceAddEffectCreator creator)
         {
-            ResourceKind = effectCreator.ResourceKind;
-            Resource = effectCreator.Resource;
+            ResourceKind = creator.ResourceKind;
+            Resource = creator.Resource;
         }
         
         public void ApplyEffect()

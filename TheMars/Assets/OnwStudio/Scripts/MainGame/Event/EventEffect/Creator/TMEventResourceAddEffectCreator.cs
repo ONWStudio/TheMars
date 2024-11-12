@@ -13,7 +13,7 @@ namespace TM.Event.Effect.Creator
         
         public ITMEventEffect CreateEffect()
         {
-            return ITMEventEffectCreator.EventEffectGenerator.CreateEffect<TMEventResourceAddEffect, TMEventResourceAddEffectCreator>(this);
+            return ITMEventEffectCreator.CreateEffect<TMEventResourceAddEffect, TMEventResourceAddEffectCreator>(this);
         }
     }
 }

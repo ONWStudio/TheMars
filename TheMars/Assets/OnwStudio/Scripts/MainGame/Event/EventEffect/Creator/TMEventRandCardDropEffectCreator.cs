@@ -20,7 +20,7 @@ namespace TM.Event.Effect.Creator
 
         public ITMEventEffect CreateEffect()
         {
-            return ITMEventEffectCreator.EventEffectGenerator.CreateEffect<TMEventRandCardDropEffect, TMEventRandCardDropEffectCreator>(this);
+            return ITMEventEffectCreator.CreateEffect<TMEventRandCardDropEffect, TMEventRandCardDropEffectCreator>(this);
         }
     }
 }
