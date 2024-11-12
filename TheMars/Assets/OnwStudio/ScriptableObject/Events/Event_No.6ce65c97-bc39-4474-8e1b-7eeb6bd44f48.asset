@@ -53,10 +53,10 @@ MonoBehaviour:
     m_LocalVariables: []
   <HasTopEvent>k__BackingField: 1
   <HasBottomEvent>k__BackingField: 1
-  _topEffectCreator:
+  _topEffectCreators:
   - rid: 4853453480464220163
   - rid: 4853453480464220165
-  _bottomEffectCreator:
+  _bottomEffectCreators:
   - rid: 4853453480464220168
   - rid: 4853453480464220170
   _topUsageCreators:
