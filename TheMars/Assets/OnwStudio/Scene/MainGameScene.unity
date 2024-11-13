@@ -1697,6 +1697,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1515806360}
+  - {fileID: 724045085}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &99719989
@@ -20231,6 +20232,39 @@ MonoBehaviour:
         m_Calls: []
   <EventPlayer>k__BackingField: {fileID: 710063613}
   <IsPlaying>k__BackingField: 0
+--- !u!1 &724045084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 724045085}
+  m_Layer: 6
+  m_Name: TMBuliding
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &724045085
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724045084}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1366192318}
+  - {fileID: 1532774598}
+  m_Father: {fileID: 99719988}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &728582417
 GameObject:
   m_ObjectHideFlags: 0
@@ -36191,6 +36225,80 @@ MonoBehaviour:
         m_Calls: []
   <EventPlayer>k__BackingField: {fileID: 1325805204}
   <IsPlaying>k__BackingField: 0
+--- !u!1001 &1366192317
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 724045085}
+    m_Modifications:
+    - target: {fileID: 3638610632377156323, guid: 916fc064124db734a871bd341f518fb6,
+        type: 3}
+      propertyPath: m_Name
+      value: Control Center
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886342987047358836, guid: 916fc064124db734a871bd341f518fb6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 191.81567
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886342987047358836, guid: 916fc064124db734a871bd341f518fb6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 99.997894
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886342987047358836, guid: 916fc064124db734a871bd341f518fb6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 199.68008
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886342987047358836, guid: 916fc064124db734a871bd341f518fb6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886342987047358836, guid: 916fc064124db734a871bd341f518fb6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886342987047358836, guid: 916fc064124db734a871bd341f518fb6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886342987047358836, guid: 916fc064124db734a871bd341f518fb6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886342987047358836, guid: 916fc064124db734a871bd341f518fb6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886342987047358836, guid: 916fc064124db734a871bd341f518fb6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886342987047358836, guid: 916fc064124db734a871bd341f518fb6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 916fc064124db734a871bd341f518fb6, type: 3}
+--- !u!4 &1366192318 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6886342987047358836, guid: 916fc064124db734a871bd341f518fb6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1366192317}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1368584923
 GameObject:
   m_ObjectHideFlags: 0
@@ -42949,6 +43057,80 @@ MonoBehaviour:
         m_Calls: []
   <EventPlayer>k__BackingField: {fileID: 1529436601}
   <IsPlaying>k__BackingField: 0
+--- !u!1001 &1532774597
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 724045085}
+    m_Modifications:
+    - target: {fileID: 1013117465550631217, guid: 9ea9ad6889a804c42a47cc254cf5a532,
+        type: 3}
+      propertyPath: m_Name
+      value: Artifact Sensor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233300259868440343, guid: 9ea9ad6889a804c42a47cc254cf5a532,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 227.75328
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233300259868440343, guid: 9ea9ad6889a804c42a47cc254cf5a532,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 101.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233300259868440343, guid: 9ea9ad6889a804c42a47cc254cf5a532,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 188.88078
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233300259868440343, guid: 9ea9ad6889a804c42a47cc254cf5a532,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233300259868440343, guid: 9ea9ad6889a804c42a47cc254cf5a532,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233300259868440343, guid: 9ea9ad6889a804c42a47cc254cf5a532,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233300259868440343, guid: 9ea9ad6889a804c42a47cc254cf5a532,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233300259868440343, guid: 9ea9ad6889a804c42a47cc254cf5a532,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233300259868440343, guid: 9ea9ad6889a804c42a47cc254cf5a532,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233300259868440343, guid: 9ea9ad6889a804c42a47cc254cf5a532,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9ea9ad6889a804c42a47cc254cf5a532, type: 3}
+--- !u!4 &1532774598 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1233300259868440343, guid: 9ea9ad6889a804c42a47cc254cf5a532,
+    type: 3}
+  m_PrefabInstance: {fileID: 1532774597}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1549144792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44161,9 +44343,84 @@ MonoBehaviour:
   <CheckMarsLithiumEventDayCount>k__BackingField: 5
   <CheckCalamityEventDayCount>k__BackingField: 1
   <CheckRegularEventDayCount>k__BackingField: 1
-  <CalamityEventProbability>k__BackingField: 0
-  <DefaultPositiveEventProbability>k__BackingField: 20
-  <DefaultNegativeEventProbability>k__BackingField: 20
+  _calamityEventProbability:
+    <ReactDefaultProbability>k__BackingField:
+      <InvokeImmediately>k__BackingField: 1
+      <InvokeIfValueChanged>k__BackingField: 1
+      _onChangedValue:
+        m_PersistentCalls:
+          m_Calls: []
+      <ValueProcessors>k__BackingField:
+      - rid: 4649214858699472901
+      <_value>k__BackingField: 0
+    <ReactAdditionalProbability>k__BackingField:
+      <InvokeImmediately>k__BackingField: 1
+      <InvokeIfValueChanged>k__BackingField: 1
+      _onChangedValue:
+        m_PersistentCalls:
+          m_Calls: []
+      <ValueProcessors>k__BackingField: []
+      <_value>k__BackingField: 0
+    <ReactIsStatic>k__BackingField:
+      <InvokeImmediately>k__BackingField: 1
+      <InvokeIfValueChanged>k__BackingField: 1
+      _onChangedValue:
+        m_PersistentCalls:
+          m_Calls: []
+      <ValueProcessors>k__BackingField: []
+      <_value>k__BackingField: 0
+  _positiveEventProbability:
+    <ReactDefaultProbability>k__BackingField:
+      <InvokeImmediately>k__BackingField: 1
+      <InvokeIfValueChanged>k__BackingField: 1
+      _onChangedValue:
+        m_PersistentCalls:
+          m_Calls: []
+      <ValueProcessors>k__BackingField:
+      - rid: 4649214858699472902
+      <_value>k__BackingField: 0
+    <ReactAdditionalProbability>k__BackingField:
+      <InvokeImmediately>k__BackingField: 1
+      <InvokeIfValueChanged>k__BackingField: 1
+      _onChangedValue:
+        m_PersistentCalls:
+          m_Calls: []
+      <ValueProcessors>k__BackingField: []
+      <_value>k__BackingField: 0
+    <ReactIsStatic>k__BackingField:
+      <InvokeImmediately>k__BackingField: 1
+      <InvokeIfValueChanged>k__BackingField: 1
+      _onChangedValue:
+        m_PersistentCalls:
+          m_Calls: []
+      <ValueProcessors>k__BackingField: []
+      <_value>k__BackingField: 0
+  _negativeEventProbability:
+    <ReactDefaultProbability>k__BackingField:
+      <InvokeImmediately>k__BackingField: 1
+      <InvokeIfValueChanged>k__BackingField: 1
+      _onChangedValue:
+        m_PersistentCalls:
+          m_Calls: []
+      <ValueProcessors>k__BackingField:
+      - rid: 4649214858699472903
+      <_value>k__BackingField: 0
+    <ReactAdditionalProbability>k__BackingField:
+      <InvokeImmediately>k__BackingField: 1
+      <InvokeIfValueChanged>k__BackingField: 1
+      _onChangedValue:
+        m_PersistentCalls:
+          m_Calls: []
+      <ValueProcessors>k__BackingField: []
+      <_value>k__BackingField: 0
+    <ReactIsStatic>k__BackingField:
+      <InvokeImmediately>k__BackingField: 1
+      <InvokeIfValueChanged>k__BackingField: 1
+      _onChangedValue:
+        m_PersistentCalls:
+          m_Calls: []
+      <ValueProcessors>k__BackingField: []
+      <_value>k__BackingField: 0
   _mainEventRunner:
     <EventData>k__BackingField: {fileID: 0}
     _onFireEvent:
@@ -44185,6 +44442,24 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   <MarsLithiumEventAddResource>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 4649214858699472901
+      type: {class: ClampIntProcessor, ns: Onw.Event, asm: AssemblyOnw}
+      data:
+        <Min>k__BackingField: 0
+        <Max>k__BackingField: 100
+    - rid: 4649214858699472902
+      type: {class: ClampIntProcessor, ns: Onw.Event, asm: AssemblyOnw}
+      data:
+        <Min>k__BackingField: 0
+        <Max>k__BackingField: 100
+    - rid: 4649214858699472903
+      type: {class: ClampIntProcessor, ns: Onw.Event, asm: AssemblyOnw}
+      data:
+        <Min>k__BackingField: 0
+        <Max>k__BackingField: 100
 --- !u!4 &1582302495
 Transform:
   m_ObjectHideFlags: 0
