@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace TM.Buff.Trigger
 {
-    [System.Serializable, SerializeReferenceDropdownName("ÀÚ¿ø È¹µæ È¿°ú (¹üÀ§ ÁöÁ¤)")]
+    [System.Serializable, SerializeReferenceDropdownName("ìì› íšë“ ë²„í”„ (ëœë¤ ë²”ìœ„)")]
     public class TMResourceRepeatRangeAddBuffTrigger : TMResourceRepeatAddBuffBaseTrigger
     {
-        [field: SerializeField, DisplayAs("ÃÖ¼Ò È¹µæ·®")] public int Min { get; private set; } = 0;
-        [field: SerializeField, DisplayAs("ÃÖ´ë È¹µæ·®")] public int Max { get; private set; } = 0;
+        [field: SerializeField, DisplayAs("ìµœì†Œ")] public int Min { get; private set; } = 0;
+        [field: SerializeField, DisplayAs("ìµœëŒ€")] public int Max { get; private set; } = 0;
 
         public override TMBuffBase CreateBuff()
         {

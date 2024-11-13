@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace TM.Event.Effect.Creator
 {
-    [System.Serializable, SerializeReferenceDropdownName("ÀÚ¿ø È¹µæ È¿°ú (¹üÀ§)")]
+    [System.Serializable, SerializeReferenceDropdownName("ìì› íšë“ íš¨ê³¼ (ëœë¤ ë²”ìœ„)")]
     public class TMEventResourceRangeAddEffectCreator : TMEventResourceAddEffectBaseCreator
     {
-        [field: SerializeField, DisplayAs("ÃÖ¼Ò È¹µæ·®")] public int Min {get; private set; } = 0;
-        [field: SerializeField, DisplayAs("ÃÖ´ë È¹µæ·®")] public int Max { get; private set; } = 0;
+        [field: SerializeField, DisplayAs("ìµœì†Œ")] public int Min {get; private set; } = 0;
+        [field: SerializeField, DisplayAs("ìµœëŒ€")] public int Max { get; private set; } = 0;
 
         public override ITMEventEffect CreateEffect()
         {

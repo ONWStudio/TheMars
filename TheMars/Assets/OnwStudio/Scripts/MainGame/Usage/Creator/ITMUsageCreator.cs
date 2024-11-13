@@ -6,21 +6,18 @@ namespace TM.Usage.Creator
 {
     public interface ITMUsageCreator
     {
-        protected static class UsageGenerator
+        public static TEffect CreateEffect<TEffect, TCreator>(TCreator creator)
+            where TEffect : ITMUsage, new()
+            where TCreator : ITMUsageCreator
         {
-            public static TEffect CreateEffect<TEffect, TCreator>(TCreator creator)
-                where TEffect : ITMUsage, new()
-                where TCreator : ITMUsageCreator
+            TEffect effect = new();
+
+            if (effect is ITMInitializeUsage<TCreator> initializeEffect)
             {
-                TEffect effect = new();
-
-                if (effect is ITMInitializeUsage<TCreator> initializeEffect)
-                {
-                    initializeEffect.Initialize(creator);
-                }
-
-                return effect;
+                initializeEffect.Initialize(creator);
             }
+
+            return effect;
         }
 
         ITMUsage CreateUsage();

@@ -16,15 +16,17 @@ namespace TM.Buff
         [field: SerializeField, ReadOnly] private ReactiveField<int> _accrueDay = new();
 
         public IReadOnlyReactiveField<int> AccrueDay => _accrueDay;
-        
-        [field: SerializeField, ReadOnly] public int DelayDayCount { get; private set; }
-        
+
+        [field: SerializeField, ReadOnly] public int DelayDayCount { get; set; }
+        [field: SerializeField, ReadOnly] public bool IsTemporary { get; set; }
+
         protected virtual void OnApplyBuff() { }
         protected abstract void OnChangedDayByDelayCount(int day);
-        
+
         public void Initialize(TMDelayBuffTrigger creator)
         {
             DelayDayCount = creator.DelayDayCount;
+            IsTemporary = creator.IsTemporary;
         }
 
         protected override void Dispose(bool disposing)
@@ -37,19 +39,19 @@ namespace TM.Buff
                 _accrueDay = null;
             }
         }
-        
+
         protected sealed override void ApplyBuffProtected()
         {
             _accrueDay.Value = 0;
             TMSimulator.Instance.NowDay.AddListener(onChangedDay);
-            
+
             OnApplyBuff();
 
             void onChangedDay(int day)
             {
                 _accrueDay.Value++;
 
-                if (_accrueDay.Value >= DelayDayCount)
+                if (_accrueDay.Value >= DelayDayCount && !IsTemporary)
                 {
                     OnChangedDayByDelayCount(day);
                     TMSimulator.Instance.NowDay.RemoveListener(onChangedDay);

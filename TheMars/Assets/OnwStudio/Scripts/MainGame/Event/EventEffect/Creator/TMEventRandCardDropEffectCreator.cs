@@ -5,13 +5,6 @@ using UnityEngine;
 
 namespace TM.Event.Effect.Creator
 {
-    public enum TMCardKindForWhere
-    {
-        [InspectorName("건설")] CONSTRUCTION,
-        [InspectorName("효과")] EFFECT,
-        [InspectorName("모두")] ALL
-    }
-
     [System.Serializable, SerializeReferenceDropdownName("랜덤 카드 버리기 효과")]
     public class TMEventRandCardDropEffectCreator : ITMEventEffectCreator
     {

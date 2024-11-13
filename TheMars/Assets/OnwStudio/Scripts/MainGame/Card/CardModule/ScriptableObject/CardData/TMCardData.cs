@@ -8,8 +8,6 @@ using TM.Card.Effect.Creator;
 
 namespace TM.Card
 {
-
-
     public sealed partial class TMCardData : ScriptableObject
     {
         public event LocalizedString.ChangeHandler OnChangedName
@@ -20,7 +18,6 @@ namespace TM.Card
         
         [field: SerializeField, DisplayAs("메인 코스트")]
         public TMCardMainCost MainCost { get; private set; }
-
         
         [field: SerializeField, DisplayAs("카드 이미지"), Tooltip("카드의 대표 이미지"), SpritePreview]
         public Sprite CardImage { get; private set; } = null;

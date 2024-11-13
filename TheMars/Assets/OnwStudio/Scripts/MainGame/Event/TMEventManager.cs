@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Onw.Attribute;
+using Onw.Event;
 using Onw.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,6 +14,29 @@ using TM.Event.Effect;
 
 namespace TM.Event
 {
+    public interface ITMEventProbability
+    {
+        IReactiveField<int> DefaultProbability { get; }
+        IReactiveField<int> AdditionalProbability { get; }
+        IReactiveField<bool> IsStatic { get; }
+        
+        int FinalProbability { get; }
+    }
+    
+    [System.Serializable]
+    public class TMEventProbability : ITMEventProbability
+    {
+        public IReactiveField<int> DefaultProbability => ReactDefaultProbability;
+        public IReactiveField<int> AdditionalProbability => ReactAdditionalProbability;
+        public IReactiveField<bool> IsStatic => ReactIsStatic;
+
+        [field: SerializeField] public ReactiveField<int> ReactDefaultProbability { get; private set; } = new() { ValueProcessors = new() { new ClampIntProcessor(0, 100) }};
+        [field: SerializeField] public ReactiveField<int> ReactAdditionalProbability { get; private set; } = new();
+        [field: SerializeField] public ReactiveField<bool> ReactIsStatic { get; private set; } = new();
+
+        public int FinalProbability => ReactIsStatic.Value ? ReactDefaultProbability.Value : Mathf.Clamp(ReactDefaultProbability.Value + ReactAdditionalProbability.Value, 0, 100);
+    }
+    
     public sealed class TMEventManager : SceneSingleton<TMEventManager>
     {
         protected override string SceneName => "MainGameScene";
@@ -27,9 +51,14 @@ namespace TM.Event
         [field: SerializeField, OnwMin(1)] public int CheckMarsLithiumEventDayCount { get; private set; } = 5;
         [field: SerializeField, OnwMin(1)] public int CheckCalamityEventDayCount { get; private set; } = 1;
         [field: SerializeField, OnwMin(1)] public int CheckRegularEventDayCount { get; private set; } = 1;
-        [field: SerializeField, OnwMin(0), OnwMax(100)] public int CalamityEventProbability { get; private set; } = 0;
-        [field: SerializeField, OnwMin(0), OnwMax(100)] public int DefaultPositiveEventProbability { get; private set; } = 20;
-        [field: SerializeField, OnwMin(0), OnwMax(100)] public int DefaultNegativeEventProbability { get; private set; } = 20;
+        public ITMEventProbability CalamityEventProbability => _calamityEventProbability;
+        public ITMEventProbability PositiveEventProbability => _positiveEventProbability;
+        public ITMEventProbability NegativeEventProbability => _negativeEventProbability;
+
+        [Header("Event Probability")]
+        [SerializeField] private TMEventProbability _calamityEventProbability = new();
+        [SerializeField] private TMEventProbability _positiveEventProbability = new();
+        [SerializeField] private TMEventProbability _negativeEventProbability = new();
 
         [FormerlySerializedAs("_mainEvent")]
         [SerializeField] private TMEventRunner _mainEventRunner = null;
@@ -50,6 +79,9 @@ namespace TM.Event
             TMSimulator.Instance.NowDay.AddListener(onChangedDay);
             TMPlayerManager.Instance.Level.AddListener(onChangedLevel);
             _mainEventRunner = new(TMEventDataManager.Instance.RootMainEventData);
+
+            _positiveEventProbability.DefaultProbability.Value = 20;
+            _negativeEventProbability.DefaultProbability.Value = 20;
         }
 
         private void onChangedLevel(int level)
@@ -95,7 +127,7 @@ namespace TM.Event
         {
             if (day % CheckCalamityEventDayCount != 0 ||
                 TMEventDataManager.Instance.CalamityEventList.Count <= 0 ||
-                CalamityEventProbability < Random.Range(0, 101)) return;
+                CalamityEventProbability.FinalProbability <= Random.Range(0, 100)) return;
 
             TMEventRunner calamityEvent = new(
                 TMEventDataManager.Instance.CalamityEventList[Random.Range(0, TMEventDataManager.Instance.CalamityEventList.Count)]);
@@ -133,9 +165,12 @@ namespace TM.Event
             {
                 if (TMEventDataManager.Instance.PositiveEventList.Count <= 0) return;
 
-                int probability = DefaultPositiveEventProbability + (SATISFACTION_HALF / (satisfaction - SATISFACTION_HALF) + 1) * 10;
+                int probability = PositiveEventProbability.IsStatic.Value ? 
+                    PositiveEventProbability.DefaultProbability.Value : 
+                    PositiveEventProbability.FinalProbability + (SATISFACTION_HALF / (satisfaction - SATISFACTION_HALF) + 1) * 10;
+                
                 Debug.Log("Positive Probability : " + probability);
-                if (probability >= Random.Range(0, 101))
+                if (probability > Random.Range(0, 100))
                 {
                     TMEventRunner positiveEvent = new(
                         TMEventDataManager.Instance.PositiveEventList[Random.Range(0, TMEventDataManager.Instance.PositiveEventList.Count)]);
@@ -148,9 +183,12 @@ namespace TM.Event
             {
                 if (TMEventDataManager.Instance.NegativeEventList.Count <= 0) return;
 
-                int probability = DefaultNegativeEventProbability + (SATISFACTION_HALF / (SATISFACTION_HALF - satisfaction) + 1) * 10;
+                int probability = NegativeEventProbability.IsStatic.Value ?
+                    PositiveEventProbability.DefaultProbability.Value : 
+                    PositiveEventProbability.FinalProbability + (SATISFACTION_HALF / (SATISFACTION_HALF - satisfaction) + 1) * 10;
+                
                 Debug.Log("Negative Probability : " + probability);
-                if (probability >= Random.Range(0, 101))
+                if (probability > Random.Range(0, 100))
                 {
                     TMEventRunner negativeEvent = new(
                         TMEventDataManager.Instance.NegativeEventList[Random.Range(0, TMEventDataManager.Instance.NegativeEventList.Count)]);

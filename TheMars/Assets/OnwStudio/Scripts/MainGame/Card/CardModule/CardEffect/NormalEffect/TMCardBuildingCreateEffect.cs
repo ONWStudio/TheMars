@@ -84,7 +84,7 @@ namespace TM.Card.Effect
         private void onSafeDownCard(Vector2 mousePosition)
         {
             _building.gameObject.SetActive(true); // .. 드래그 활성화 타이밍이므로 건물 활성화
-            _cardModel.IsHide = true;             // .. 카드에 가려보이면 안되므로 카드 렌더링 x
+            _cardModel.IsHide.Value = true;             // .. 카드에 가려보이면 안되므로 카드 렌더링 x
 
             onSafeDrag(mousePosition); // .. 드래그 이벤트
         }
@@ -166,7 +166,7 @@ namespace TM.Card.Effect
                 else
                 {
                     _building.SetActiveGameObject(false); // .. 이전에 건물이 설치되었던 타일이 없다면 건물 비활성화
-                    _cardModel.IsHide = false;
+                    _cardModel.IsHide.Value = false;
                 }
             }
 
