@@ -168,7 +168,7 @@ MonoBehaviour:
     - Locale-ko-KR
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b509c5c731efe4ca1bb6aec66c54b01e
-    m_Address: TMCostOfDisappointmentEvent_ko-KR
+    m_Address: TMCostOfDisappointmentEventData_ko-KR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko-KR

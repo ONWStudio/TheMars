@@ -13,7 +13,7 @@ namespace TM.Usage.Creator
 
         public ITMUsage CreateUsage()
         {
-            return ITMUsageCreator.UsageGenerator.CreateEffect<TMResourceUsage, TMResourceUsageCreator>(this); 
+            return ITMUsageCreator.CreateEffect<TMResourceUsage, TMResourceUsageCreator>(this); 
         }
     }
 }

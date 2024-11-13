@@ -11,79 +11,52 @@ using Onw.Coroutine;
 using Onw.Extensions;
 using Onw.UI.Components;
 using Onw.Components.Movement;
+using Onw.Event;
 using TM.Card.Effect;
+using UnityEngine.Serialization;
 
 namespace TM.Card.Runtime
 {
+    public interface ICardCostRuntime
+    {
+        IReactiveField<int> AdditionalCost { get; }
+        int FinalCost { get; }
+    }
+    
+    [Serializable]
+    public sealed class TMCardMainCostRuntime : ICardCostRuntime
+    {
+        [field: SerializeField] public TMCardMainCost Cost { get; private set; }
+        [field: SerializeField] public ReactiveField<int> ReactAdditionalCost { get; private set; } = new();
+
+        public IReactiveField<int> AdditionalCost => ReactAdditionalCost;
+        public int FinalCost => Cost.Cost + ReactAdditionalCost.Value;
+        
+        public TMCardMainCostRuntime(TMCardMainCost cost)
+        {
+            Cost = cost;
+        }
+    }
+
+    [Serializable]
+    public sealed class TMCardSubCostRuntime : ICardCostRuntime
+    {
+        [field: SerializeField] public TMCardSubCost Cost { get; private set; }
+        [field: SerializeField] public ReactiveField<int> ReactAdditionalCost { get; private set; } = new();
+ 
+        public IReactiveField<int> AdditionalCost => ReactAdditionalCost;
+        public int FinalCost => Cost.Cost + ReactAdditionalCost.Value;
+        
+        public TMCardSubCostRuntime(TMCardSubCost cost)
+        {
+            Cost = cost;
+        }
+    }
+
     // .. Model
     [DisallowMultipleComponent]
     public sealed class TMCardModel : MonoBehaviour, ITMCardEffectTrigger
     {
-        /// <summary>
-        /// .. 카드에 필요한 정보등을 보유한 스크립터블 오브젝트입니다
-        /// </summary>
-        [field: SerializeField, ReadOnly] public TMCardData CardData { get; set; }
-
-        /// <summary>
-        /// .. 카드가 출력되는 카메라 입니다
-        /// </summary>
-        [field: Header("Runtime Option")]
-        [field: SerializeField, ReadOnly] public Camera CardCamera { get; private set; } = null;
-
-        /// <summary>
-        /// .. 현재가 카드가 드래그를 수행중인지에 대한 여부를 반환합니다
-        /// </summary>
-        [field: SerializeField, ReadOnly] public bool IsDragging { get; private set; } = false;
-        /// <summary>
-        /// .. 현재 카드가 패위에 있는 지에 대한 여부를 반환합니다 외부에서 수정될 수 있습니다
-        /// </summary>
-        [field: SerializeField, ReadOnly] public bool OnField { get; set; }
-        /// <summary>
-        /// .. 현재 카드가 버리기 칸위에 오버랩되고 있는지에 대한 여부를 반환합니다
-        /// </summary>
-        [field: SerializeField, ReadOnly] public bool IsOverTombTransform { get; private set; } = false;
-        /// <summary>
-        /// .. 카드의 View상태를 반환합니다 해당 값이 true일 경우 카드가 보이지 않게 됩니다 외부에서 수정될 수 있습니다
-        /// </summary>
-        [field: SerializeField, ReadOnly] public bool IsHide { get; set; } = false;
-
-        /// <summary>
-        /// .. 카드 위에 마우스 포인터 등이 올라올때등의 하이라이트 효과를 위한 컴포넌트입니다
-        /// </summary>
-        [field: Space]
-        [field: Header("Require Option")]
-        [field: SerializeField, SelectableSerializeField]
-        public Vector2SmoothMover CardViewMover { get; private set; }
-
-        /// <summary>
-        /// .. 카드의 움직임을 담당하는 무버 컴포넌트입니다
-        /// </summary>
-        [field: SerializeField, InitializeRequireComponent]
-        public Vector2SmoothMover CardBodyMover { get; private set; }
-
-        /// <summary>
-        /// .. 카드의 렉트 트랜스폼입니다
-        /// </summary>
-        [field: SerializeField, InitializeRequireComponent]
-        public RectTransform RectTransform { get; private set; }
-
-        [field: SerializeField, InitializeRequireComponent]
-        public PointerEnterTrigger PointerEnterTrigger { get; private set; }
-        
-        [field: SerializeField, InitializeRequireComponent]
-        public PointerExitTrigger PointerExitTrigger { get; private set; }
-        
-        [field: SerializeField, InitializeRequireComponent]
-        public PointerDownTrigger PointerDownTrigger { get; private set; }
-        
-        [field: SerializeField, InitializeRequireComponent]
-        public PointerUpTrigger PointerUpTrigger { get; private set; }
-        
-        /// <summary>
-        /// .. 카드의 효과 인터페이스를 제공합니다 CardData에서 정보를 받아와 런타임에 이펙트를 동적으로 생성합니다
-        /// </summary>
-        public ITMCardEffect CardEffect { get; private set; } = null;
-
         /// <summary>
         /// .. 드래그가 시작될때 호출됩니다
         /// </summary>
@@ -152,25 +125,7 @@ namespace TM.Card.Runtime
             add => _onSafeDragEvent.AddListener(value);
             remove => _onSafeDragEvent.RemoveListener(value);
         }
-
-        /// <summary>
-        /// .. 카드의 코스트를 지불 가능한 상태를 반환합니다
-        /// </summary>
-        public bool CanPayCost => CardData.MainCost.Cost <= getResourceFromPlayerByMainCost(CardData.MainCost.CostKind) && CardData
-            .CardCosts
-            .All(cardCost => cardCost.Cost <= getResourceFromPlayerBySubCost(cardCost.CostKind));
-
-        public bool CanInteract
-        {
-            get => _canInteract;
-            set
-            {
-                CardBodyMover.enabled = value;
-                CardViewMover.enabled = value;
-                _canInteract = value;
-            }
-        }
-
+        
         [Header("Card Events")]
         [SerializeField] private UnityEvent<TMCardModel> _onDragBeginCard = new();
         [SerializeField] private UnityEvent<TMCardModel> _onDragEndCard = new();
@@ -178,8 +133,13 @@ namespace TM.Card.Runtime
         [SerializeField] private UnityEvent<TMCardModel> _onRequestEffectEvent = new();
         [SerializeField] private UnityEvent<TMCardModel> _onPayCost = new();
 
+        [Header("Card Options")]
+        [SerializeField, ReadOnly] private TMCardData _cardData = null;
         [SerializeField, ReadOnly] private bool _isInit = false;
-        [SerializeField, ReadOnly] private bool _canInteract = true;
+        [SerializeField, ReadOnly] private ReactiveField<bool> _canInteract = new() { Value = true };
+        [SerializeField, ReadOnly] private ReactiveField<bool> _isHide = new();
+        [SerializeField, ReadOnly] private TMCardMainCostRuntime _mainCost;
+        [SerializeField, ReadOnly] private List<TMCardSubCostRuntime> _subCosts;
 
         [Header("Unsafe Input Events")]
         [SerializeField] private UnityEvent<Vector2> _onDragEvent = new();
@@ -194,6 +154,98 @@ namespace TM.Card.Runtime
         private bool? _keepIsHide = null;
         private IEnumerator _dragEnumerator = null;
 
+        /// <summary>
+        /// .. 카드에 필요한 정보등을 보유한 스크립터블 오브젝트입니다
+        /// </summary>
+        public TMCardData CardData
+        {
+            get => _cardData;
+            set
+            {
+                _cardData = value;
+                CardEffect = _cardData.CreateCardEffect();
+                CardEffect?.ApplyEffect(this, this);
+
+                _mainCost = new(_cardData.MainCost);
+                _subCosts = new(_cardData.CardCosts.Select(cost => new TMCardSubCostRuntime(cost)));
+            }
+        }
+        
+        /// <summary>
+        /// .. 카드가 출력되는 카메라 입니다
+        /// </summary>
+        [field: Header("Runtime Option")]
+        [field: SerializeField, ReadOnly] public Camera CardCamera { get; private set; } = null;
+
+        /// <summary>
+        /// .. 현재가 카드가 드래그를 수행중인지에 대한 여부를 반환합니다
+        /// </summary>
+        [field: SerializeField, ReadOnly] public bool IsDragging { get; private set; } = false;
+        /// <summary>
+        /// .. 현재 카드가 패위에 있는 지에 대한 여부를 반환합니다 외부에서 수정될 수 있습니다
+        /// </summary>
+        [field: SerializeField, ReadOnly] public bool OnField { get; set; }
+        /// <summary>
+        /// .. 현재 카드가 버리기 칸위에 오버랩되고 있는지에 대한 여부를 반환합니다
+        /// </summary>
+        [field: SerializeField, ReadOnly] public bool IsOverTombTransform { get; private set; } = false;
+        
+        /// <summary>
+        /// .. 카드 위에 마우스 포인터 등이 올라올때등의 하이라이트 효과를 위한 컴포넌트입니다
+        /// </summary>
+        [field: Space]
+        [field: Header("Require Option")]
+        [field: SerializeField, SelectableSerializeField]
+        public Vector2SmoothMover CardViewMover { get; private set; }
+
+        /// <summary>
+        /// .. 카드의 움직임을 담당하는 무버 컴포넌트입니다
+        /// </summary>
+        [field: SerializeField, InitializeRequireComponent]
+        public Vector2SmoothMover CardBodyMover { get; private set; }
+
+        /// <summary>
+        /// .. 카드의 렉트 트랜스폼입니다
+        /// </summary>
+        [field: SerializeField, InitializeRequireComponent]
+        public RectTransform RectTransform { get; private set; }
+
+        [field: SerializeField, InitializeRequireComponent]
+        public PointerEnterTrigger PointerEnterTrigger { get; private set; }
+        
+        [field: SerializeField, InitializeRequireComponent]
+        public PointerExitTrigger PointerExitTrigger { get; private set; }
+        
+        [field: SerializeField, InitializeRequireComponent]
+        public PointerDownTrigger PointerDownTrigger { get; private set; }
+        
+        [field: SerializeField, InitializeRequireComponent]
+        public PointerUpTrigger PointerUpTrigger { get; private set; }
+        
+        /// <summary>
+        /// .. 카드의 효과 인터페이스를 제공합니다 CardData에서 정보를 받아와 런타임에 이펙트를 동적으로 생성합니다
+        /// </summary>
+        public ITMCardEffect CardEffect { get; private set; } = null;
+
+        /// <summary>
+        /// .. 카드의 코스트를 지불 가능한 상태를 반환합니다
+        /// </summary>
+        public bool CanPayCost => _mainCost.FinalCost <= getResourceFromPlayerByMainCost(_mainCost.Cost.CostKind) && _subCosts
+            .All(cost => cost.FinalCost <= getResourceFromPlayerBySubCost(cost.Cost.CostKind));
+
+        public ICardCostRuntime MainCost => _mainCost;
+        public IReadOnlyList<ICardCostRuntime> SubCosts => _subCosts;
+
+        public IReadOnlyReactiveField<bool> CanInteract => _canInteract;
+        public IReactiveField<bool> IsHide => _isHide;
+
+        public void SetCanInteract(bool canInteract)
+        {
+            CardBodyMover.enabled = canInteract;
+            CardViewMover.enabled = canInteract;
+            _canInteract.Value = canInteract;
+        }
+
         private void Awake()
         {
             CardCamera = GameObject
@@ -203,35 +255,35 @@ namespace TM.Card.Runtime
 
         private void onPointerDown(PointerEventData pointerEventData)
         {
-            if (!_canInteract) return;
+            if (!_canInteract.Value) return;
 
             _onSafePointerDownEvent.Invoke(pointerEventData.position);
         }
 
         private void onPointerUp(PointerEventData pointerEventData)
         {
-            if (!_canInteract) return;
+            if (!_canInteract.Value) return;
 
             _onSafePointerUpEvent.Invoke(pointerEventData.position);
         }
 
         private void onPointerEnter(PointerEventData pointerEventData)
         {
-            if (!_canInteract) return;
+            if (!_canInteract.Value) return;
 
             _onSafePointerEnterEvent.Invoke(pointerEventData.position);
         }
 
         private void onPointerExit(PointerEventData pointerEventData)
         {
-            if (!_canInteract) return;
+            if (!_canInteract.Value) return;
 
             _onSafePointerExitEvent.Invoke(pointerEventData.position);
         }
 
         private void onDrag(Vector2 mousePosition)
         {
-            if (!_canInteract) return;
+            if (!_canInteract.Value) return;
 
             _onSafeDragEvent.Invoke(mousePosition);
         }
@@ -257,9 +309,6 @@ namespace TM.Card.Runtime
             CardViewMover.IsLocal = true;
             CardBodyMover.IsLocal = true;
 
-            CardEffect = CardData.CreateCardEffect();
-            CardEffect?.ApplyEffect(this, this);
-
             void onMouseDownCard(Vector2 mousePosition) => TriggerSelectCard();
         }
 
@@ -279,16 +328,16 @@ namespace TM.Card.Runtime
             {
                 if (_keepIsHide is null)
                 {
-                    _keepIsHide = IsHide;
+                    _keepIsHide = IsHide.Value;
                     IsOverTombTransform = true;
-                    IsHide = false;
+                    IsHide.Value = false;
                 }
             }
             else
             {
                 if (_keepIsHide is not null)
                 {
-                    IsHide = (bool)_keepIsHide;
+                    IsHide.Value = (bool)_keepIsHide;
                     IsOverTombTransform = false;
                     _keepIsHide = null;
                 }
@@ -329,31 +378,31 @@ namespace TM.Card.Runtime
         /// </summary>
         public void PayCost()
         {
-            switch (CardData.MainCost.CostKind)
+            switch (_mainCost.Cost.CostKind)
             {
                 case TMMainCost.CREDIT:
-                    TMPlayerManager.Instance.Credit.Value -= CardData.MainCost.Cost;
+                    TMPlayerManager.Instance.Credit.Value -= _mainCost.FinalCost;
                     break;
                 case TMMainCost.ELECTRICITY:
-                    TMPlayerManager.Instance.Electricity.Value -= CardData.MainCost.Cost;
+                    TMPlayerManager.Instance.Electricity.Value -= _mainCost.FinalCost;
                     break;
             }
             
-            foreach (TMCardSubCost cost in CardData.CardCosts)
+            foreach (TMCardSubCostRuntime cost in _subCosts)
             {
-                switch (cost.CostKind)
+                switch (cost.Cost.CostKind)
                 {
                     case TMSubCost.MARS_LITHIUM:
-                        TMPlayerManager.Instance.MarsLithium.Value -= cost.Cost;
+                        TMPlayerManager.Instance.MarsLithium.Value -= cost.FinalCost;
                         break;
                     case TMSubCost.STEEL:
-                        TMPlayerManager.Instance.Steel.Value -= cost.Cost;
+                        TMPlayerManager.Instance.Steel.Value -= cost.FinalCost;
                         break;
                     case TMSubCost.PLANTS:
-                        TMPlayerManager.Instance.Plants.Value -= cost.Cost;
+                        TMPlayerManager.Instance.Plants.Value -= cost.FinalCost;
                         break;
                     case TMSubCost.CLAY:
-                        TMPlayerManager.Instance.Clay.Value -= cost.Cost;
+                        TMPlayerManager.Instance.Clay.Value -= cost.FinalCost;
                         break;
                 }
             }
@@ -386,7 +435,7 @@ namespace TM.Card.Runtime
 
         private void onDragEnd(Vector2 mousePosition)
         {
-            if (!_canInteract) return;
+            if (!_canInteract.Value) return;
 
             IsOverTombTransform = false;
 

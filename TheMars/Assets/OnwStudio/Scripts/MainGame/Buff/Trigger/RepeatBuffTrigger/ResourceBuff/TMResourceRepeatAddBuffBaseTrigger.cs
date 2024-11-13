@@ -8,6 +8,6 @@ namespace TM.Buff.Trigger
     [System.Serializable]
     public abstract class TMResourceRepeatAddBuffBaseTrigger : TMRepeatBuffTrigger
     {
-        [field: SerializeField, DisplayAs("ÀÚ¿ø Á¾·ù")] public TMResourceKind ResourceKind { get; private set; } = TMResourceKind.CREDIT;
+        [field: SerializeField, DisplayAs("ìì› ì¢…ë¥˜")] public TMResourceKind ResourceKind { get; private set; } = TMResourceKind.CREDIT;
     }
 }

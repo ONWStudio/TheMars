@@ -80,25 +80,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 289477447639040
-    m_Localized: 
+    m_Localized: "\uCE58\uB8CC\uD560 \uC790\uC6D0\uC774 \uBAA8\uC790\u3139\uB2E4\uACE0?"
     m_Metadata:
       m_Items: []
   - m_Id: 289477447639041
     m_Localized: "\uC624\uB85C\uB77C \uD601\uC2E0"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 289477447639042
-    m_Localized: "\uC18C\uBAA8 \uC790\uC6D0\n* \uD06C\uB808\uB527 {CreditSubtract}\uAC1C
-      \uC18C\uBAA8\n* \uB9C8\uB974\uC2A4 \uB9AC\uD2AC {MarsLithiumSubtract}\uAC1C
-      \uC18C\uBAA8\n\uD6A8\uACFC\n* \uD558\uB8E8\uB9C8\uB2E4 \uC778\uAD6C {PopulationAddByDayMin}
-      ~ {PopulationAddByDayMax}\uBA85 \uBB34\uC791\uC704 \uD68D\uB4DD({PopulationAddDayCount}\uC77C
-      \uC9C0\uC18D)\n* \uD558\uB8E8\uB9C8\uB2E4 \uB9CC\uC871\uB3C4 +{SatisfactionAddByDay}%
-      \uC99D\uAC00(\uC601\uAD6C \uC9C0\uC18D)"
-    m_Metadata:
-      m_Items:
-      - rid: 4853453322907287640
-  - m_Id: 289477447639043
-    m_Localized: 
     m_Metadata:
       m_Items: []
   references:
@@ -107,4 +93,4 @@ MonoBehaviour:
     - rid: 4853453322907287640
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 02e0afaa0000000002e06f3847070100
+        m_Entries: 02e0afaa00000000

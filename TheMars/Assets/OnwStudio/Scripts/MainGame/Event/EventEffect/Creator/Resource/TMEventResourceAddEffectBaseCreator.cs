@@ -8,7 +8,7 @@ namespace TM.Event.Effect.Creator
     [System.Serializable]
     public abstract class TMEventResourceAddEffectBaseCreator : ITMEventEffectCreator
     {
-        [field: SerializeField, DisplayAs("ÀÚ¿ø Á¾·ù")] public TMResourceKind ResourceKind { get; private set; } = TMResourceKind.CREDIT;
+        [field: SerializeField, DisplayAs("ìì› ì¢…ë¥˜")] public TMResourceKind ResourceKind { get; private set; } = TMResourceKind.CREDIT;
 
         public abstract ITMEventEffect CreateEffect();
     }

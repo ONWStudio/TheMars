@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TM.Buff.Trigger
 {
-    [System.Serializable, SerializeReferenceDropdownName("°Ç¼³ ÀÚ¿ø È¹µæ ¹öÇÁ (¹üÀ§)")]
+    [System.Serializable, SerializeReferenceDropdownName("ê±´ì„¤ ìì› íšë“ (ëœë¤ ë²”ìœ„)")]
     public class TMConstructionRepeatRangeAddBuffTrigger : TMRepeatBuffTrigger
     {
         [field: SerializeField] public int Min {get; private set;} = 0;

@@ -37,10 +37,7 @@ namespace TM.Card.Runtime
                     .AddTo(this);
             }
             
-            _cardModel
-                .ObserveEveryValueChanged(cardModel => cardModel.IsHide)
-                .Subscribe(isHide => _cardViewer.SetView(!isHide))
-                .AddTo(this);
+            _cardModel.IsHide.AddListener(isHide => _cardViewer.SetView(!isHide));
 
             void setCard(TMCardData cardData)
             {
