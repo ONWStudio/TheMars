@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TMALabyrinthOfCorruptionEventData_ko-KR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ko-KR
+  m_SharedData: {fileID: 11400000, guid: 2094a323b1c8fd54d8ded9bcf2ed0b7a, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 3071086592
+    m_Localized: "\uB2F9\uC2E0\uC740 \uAE30\uC5C5\uC758 \uAC10\uC2DC \uC704\uC6D0\uD68C\uB97C
+      \uC124\uB9BD\uD558\uC5EC \uAE30\uC5C5\uC758 \uD65C\uB3D9\uC744 \uAC10\uC2DC\uD558\uACE0
+      \uD22C\uBA85\uC131\uC744 \uD655\uBCF4\uD558\uB824 \uD558\uC600\uB2E4.\n\uD558\uC9C0\uB9CC
+      \uC704\uC6D0\uD68C\uB294 \uC2E4\uC9C8\uC801\uC778 \uAD8C\uD55C \uC5C6\uC774
+      \uD5C8\uC220\uD558\uAC8C \uC6B4\uC601\uB418\uACE0 \uAE30\uC5C5\uB4E4\uC740
+      \uC774 \uD2C8\uC744 \uC774\uC6A9\uD574 \uC704\uC6D0\uD68C\uB97C \n\uC790\uC2E0\uB4E4\uC758
+      \uD3B8\uC73C\uB85C \uB9CC\uB4E4\uC5B4 \uADF8\uB4E4\uC758 \uD589\uC704\uB97C
+      \uC228\uAE30\uAE30 \uC704\uD574 \uD611\uC870\uD558\uACE0 \uC774 \uC0AC\uC2E4\uC744
+      \uC740\uD3D0\uD558\uC600\uB2E4.\n\uC774\uB85C \uC778\uD574 \uC2DC\uBBFC\uB4E4\uC740
+      \uC704\uC6D0\uD68C\uAC00 \uAE30\uC5C5\uC758 \uD65C\uB3D9\uC744 \uCCA0\uC800\uD788
+      \uAC10\uC2DC\uD558\uACE0 \uC788\uB2E4\uACE0 \uBBFF\uAC8C \uB418\uC9C0\uB9CC
+      \uD5C8\uC6B8\uBFD0\uC778 \uC548\uC815\uC744 \uB204\uB9AC\uAC8C \uB410\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17084256256
+    m_Localized: "\uC194\uC9C1\uD788 \uB098\uB3C4 \uC774\uC775\uC744 \uCC59\uACA8\uC57C
+      \uB41C\uB2E4 \uC0DD\uAC01\uD55C\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26953453568
+    m_Localized: "\uB098 \uD63C\uC790\uC11C\uB294 \uAC10\uB2F9\uD560 \uC218 \uC5C6\uB2E4
+      \uC815\uBD80\uC5D0\uAC8C \uB3C4\uC6C0\uC744 \uC694\uCCAD\uD558\uC790."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35979595776
+    m_Localized: "\uBD80\uD328\uC758 \uBBF8\uB85C"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

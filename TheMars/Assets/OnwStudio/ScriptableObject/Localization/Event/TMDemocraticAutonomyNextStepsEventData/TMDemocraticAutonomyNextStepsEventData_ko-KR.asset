@@ -93,24 +93,10 @@ MonoBehaviour:
     m_Localized: "\uBBFC\uC8FC\uC801 \uC790\uCE58, \uADF8 \uB2E4\uC74C\uC740?"
     m_Metadata:
       m_Items: []
-  - m_Id: 305587341484033
-    m_Localized: "\uD6A8\uACFC\n* \uB9CC\uC871\uB3C4 {SatisfactionAddByDay}% \uC99D\uAC00({SatisfactionAddDayCount}\uC77C)\n*
-      \uD558\uB8E8\uB9C8\uB2E4 \uD06C\uB808\uB527 \uD68D\uB4DD +{CreditAddByDay}({CreditAddDayCount}\uC77C)"
-    m_Metadata:
-      m_Items:
-      - rid: 4853453322907287639
-  - m_Id: 305587341484034
-    m_Localized: "\uD6A8\uACFC\n* \uD558\uB8E8\uB9C8\uB2E4 \uB9CC\uC871\uB3C4 {SatisfactionSubtractByDay}%
-      \uAC10\uC18C ({SatisfactionSubtractDayCount})\uC77C)\n* \uB2E4\uC74C \"\uB9C8\uB974\uC2A4
-      \uB9AC\uD2AC \uB0A9\uBD80\"\uC774\uBCA4\uD2B8 \uB54C \uC9C0\uAE09\uB7C9 {MarsLihthiumEventSubtract}
-      \uAC10\uC18C"
-    m_Metadata:
-      m_Items:
-      - rid: 4853453322907287639
   references:
     version: 2
     RefIds:
     - rid: 4853453322907287639
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 04e0af920000000005e0af920000000001e0ef18ee15010002e0ef18ee150100
+        m_Entries: 04e0af920000000005e0af9200000000

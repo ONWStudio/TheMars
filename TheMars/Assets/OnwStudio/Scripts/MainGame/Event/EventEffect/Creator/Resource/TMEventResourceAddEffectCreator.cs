@@ -6,12 +6,11 @@ using UnityEngine;
 namespace TM.Event.Effect.Creator
 {
     [System.Serializable, SerializeReferenceDropdownName("자원 획득 효과")]
-    public class TMEventResourceAddEffectCreator : ITMEventEffectCreator
+    public class TMEventResourceAddEffectCreator : TMEventResourceAddEffectBaseCreator
     {
-        [field: SerializeField, DisplayAs("자원 종류")] public TMResourceKind ResourceKind { get; private set; } = TMResourceKind.CLAY;
         [field: SerializeField, DisplayAs("자원 획득량")] public int Resource { get; private set; } = 0;
         
-        public ITMEventEffect CreateEffect()
+        public override ITMEventEffect CreateEffect()
         {
             return ITMEventEffectCreator.CreateEffect<TMEventResourceAddEffect, TMEventResourceAddEffectCreator>(this);
         }

@@ -172,6 +172,18 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2094a323b1c8fd54d8ded9bcf2ed0b7a
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMALabyrinthOfCorruptionEventData/TMALabyrinthOfCorruptionEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a653911902aad4a459d3e65b62d9c3ff
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/Event/TMDirectInterventionEventData/TMDirectInterventionEventData
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 3f430e5b5c626400b837c52ed98c1bc2, type: 2}
   m_SchemaSet:

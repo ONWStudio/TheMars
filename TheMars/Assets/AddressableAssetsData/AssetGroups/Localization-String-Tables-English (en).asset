@@ -173,6 +173,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7cda6f0679c05447b95799a3c9c48be
+    m_Address: TMALabyrinthOfCorruptionEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a4088447af4289a42a0548beca60c510
+    m_Address: TMDirectInterventionEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 3f430e5b5c626400b837c52ed98c1bc2, type: 2}
   m_SchemaSet:

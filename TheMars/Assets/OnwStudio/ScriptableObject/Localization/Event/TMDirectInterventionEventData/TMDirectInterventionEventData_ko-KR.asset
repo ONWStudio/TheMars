@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TMDirectInterventionEventData_ko-KR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ko-KR
+  m_SharedData: {fileID: 11400000, guid: a653911902aad4a459d3e65b62d9c3ff, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 2471301120
+    m_Localized: "\uD45C\uBA74\uC801\uC778 \uAC83\uB9CC \uCD94\uAD6C \uD558\uB824
+      \uD588\uB358 \uAE30\uC5C5\uC758 \uC18D\uB0B4\uB97C \uB354 \uC774\uC0C1 \uBABB
+      \uBD10\uC8FC\uACA0\uB294\uC9C0 \n\uD558\uB358 \uC77C\uC744 \uC804\uBD80 \uBBF8\uB8E8\uACE0
+      \uAE30\uC5C5\uACFC\uC758 \uD68C\uC758\uB97C \uAC00\uC9C0\uAC8C \uB418\uC5C8\uB2E4.\n\uCC98\uC74C\uC5D0\uB294
+      \uADF8\uB4E4\uB3C4 \uBC1C\uBE8C \uD558\uC600\uC9C0\uB9CC \uBAA8\uC544\uB193\uC740
+      \uC99D\uAC70\uC640 \uC815\uD669\uC744 \uBCF4\uC790\uB9C8\uC790 \uACB0\uAD6D
+      \uC778\uC815\uD574\uBC84\uB838\uB2E4.\n\uC774\uC81C \uC8FC\uB3C4\uAD8C\uC740
+      \uB0B4\uAC8C\uB85C \uB3CC\uC544\uC654\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24109715456
+    m_Localized: "\uD0C0\uD611\uC548\uC744 \uC81C\uC2DC\uD55C\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32397660160
+    m_Localized: "\uC0AC\uB0B4 \uC870\uC0AC\uB97C \uC2E4\uC2DC\uD55C\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40375226368
+    m_Localized: "\uC9C1\uC811\uC801 \uAC1C\uC785"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

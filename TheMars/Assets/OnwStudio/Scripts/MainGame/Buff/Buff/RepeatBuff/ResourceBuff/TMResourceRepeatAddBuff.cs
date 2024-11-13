@@ -9,10 +9,9 @@ using UnityEngine.AddressableAssets;
 namespace TM.Buff
 {
     [Serializable]
-    public sealed class TMResourceRepeatAddBuff : TMRepeatBuff, ITMInitializeBuff<TMResourceRepeatAddBuffTrigger>
+    public sealed class TMResourceRepeatAddBuff : TMResourceRepeatAddBuffBase, ITMInitializeBuff<TMResourceRepeatAddBuffTrigger>
     {
         [field: SerializeField, ReadOnly] protected override AssetReferenceSprite IconReference { get; set; } = new("Sprites/Smile_Buff_Positive");
-        [field: SerializeField, ReadOnly] public TMResourceKind ResourceKind { get; set; }
         [field: SerializeField, ReadOnly] public int Resource { get; set; }
 
         public override Color IconBackgroundColor => Color.blue;
@@ -20,8 +19,6 @@ namespace TM.Buff
         public void Initialize(TMResourceRepeatAddBuffTrigger trigger)
         {
             base.Initialize(trigger);
-
-            ResourceKind = trigger.ResourceKind;
             Resource = trigger.Resource;
         }
 
