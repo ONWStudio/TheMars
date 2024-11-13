@@ -582,19 +582,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd95cb1a7cc44e43828ea21904099e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CardData>k__BackingField: {fileID: 0}
-  <CardCamera>k__BackingField: {fileID: 0}
-  <IsDragging>k__BackingField: 0
-  <OnField>k__BackingField: 0
-  <IsOverTombTransform>k__BackingField: 0
-  <IsHide>k__BackingField: 0
-  <CardViewMover>k__BackingField: {fileID: 7790110200433617243}
-  <CardBodyMover>k__BackingField: {fileID: 2773294980090498079}
-  <RectTransform>k__BackingField: {fileID: 7277279708986865494}
-  <PointerEnterTrigger>k__BackingField: {fileID: 4452896480166252853}
-  <PointerExitTrigger>k__BackingField: {fileID: 6490310622561964982}
-  <PointerDownTrigger>k__BackingField: {fileID: 2307808775309863638}
-  <PointerUpTrigger>k__BackingField: {fileID: 6791109092436883567}
   _onDragBeginCard:
     m_PersistentCalls:
       m_Calls: []
@@ -610,8 +597,37 @@ MonoBehaviour:
   _onPayCost:
     m_PersistentCalls:
       m_Calls: []
+  _cardData: {fileID: 0}
   _isInit: 0
-  _canInteract: 1
+  _canInteract:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField: []
+    <_value>k__BackingField: 1
+  _isHide:
+    <InvokeImmediately>k__BackingField: 1
+    <InvokeIfValueChanged>k__BackingField: 1
+    _onChangedValue:
+      m_PersistentCalls:
+        m_Calls: []
+    <ValueProcessors>k__BackingField: []
+    <_value>k__BackingField: 0
+  _mainCost:
+    <Cost>k__BackingField:
+      <CostKind>k__BackingField: 0
+      <Cost>k__BackingField: 0
+    <ReactAdditionalCost>k__BackingField:
+      <InvokeImmediately>k__BackingField: 1
+      <InvokeIfValueChanged>k__BackingField: 1
+      _onChangedValue:
+        m_PersistentCalls:
+          m_Calls: []
+      <ValueProcessors>k__BackingField: []
+      <_value>k__BackingField: 0
+  _subCosts: []
   _onDragEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -630,6 +646,20 @@ MonoBehaviour:
   _onSafeDragEvent:
     m_PersistentCalls:
       m_Calls: []
+  <CardCamera>k__BackingField: {fileID: 0}
+  <IsDragging>k__BackingField: 0
+  <OnField>k__BackingField: 0
+  <IsOverTombTransform>k__BackingField: 0
+  <CardViewMover>k__BackingField: {fileID: 7790110200433617243}
+  <CardBodyMover>k__BackingField: {fileID: 2773294980090498079}
+  <RectTransform>k__BackingField: {fileID: 7277279708986865494}
+  <PointerEnterTrigger>k__BackingField: {fileID: 4452896480166252853}
+  <PointerExitTrigger>k__BackingField: {fileID: 6490310622561964982}
+  <PointerDownTrigger>k__BackingField: {fileID: 2307808775309863638}
+  <PointerUpTrigger>k__BackingField: {fileID: 6791109092436883567}
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &8444589798567620892
 MonoBehaviour:
   m_ObjectHideFlags: 0
