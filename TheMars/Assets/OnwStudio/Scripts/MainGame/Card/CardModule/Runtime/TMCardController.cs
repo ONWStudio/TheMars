@@ -24,24 +24,23 @@ namespace TM.Card.Runtime
 
         private void Start()
         {
-            if (_cardModel.CardData)
+            if (_cardModel.CardData.Value)
             {
-                setCard(_cardModel.CardData);
+                setCard(_cardModel.CardData.Value);
             }
             else
             {
-                _cardModel
-                    .ObserveEveryValueChanged(cardModel => cardModel.CardData)
-                    .Take(1)
-                    .Subscribe(setCard)
-                    .AddTo(this);
+                _cardModel.CardData.AddListener(setCard);
             }
-            
+
             _cardModel.IsHide.AddListener(isHide => _cardViewer.SetView(!isHide));
 
             void setCard(TMCardData cardData)
             {
-                CardData = _cardModel.CardData;
+                if (cardData == null) return;
+
+                _cardModel.CardData.RemoveListener(setCard);
+                CardData = _cardModel.CardData.Value;
                 _cardViewer.SetUI(_cardModel);
             }
         }

@@ -28,7 +28,7 @@ namespace TM.Event.Effect
             TMCardModel[] dropCards = TMCardManager
                 .Instance
                 .Cards
-                .Where(card => IsTargetCard(card.CardData))
+                .Where(card => IsTargetCard(card.CardData.Value))
                 .OrderBy(_ => Random.value)
                 .Take(DropCount)
                 .ToArray();

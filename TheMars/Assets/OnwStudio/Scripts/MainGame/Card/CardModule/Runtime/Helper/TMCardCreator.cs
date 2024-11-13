@@ -37,7 +37,9 @@ namespace TM.Card.Runtime
 
             for (int i = 0; i < creationCount; i++)
             {
-                cardArray[i] = createCardByCardData(TMCardDataManager.Instance.CardDataList[Random.Range(0, TMCardDataManager.Instance.CardDataList.Count)], shouldInitialize);
+                cardArray[i] = createCardByCardData(
+                    TMCardDataManager.Instance.CardDataList[Random.Range(0, TMCardDataManager.Instance.CardDataList.Count)], 
+                    shouldInitialize);
             }
 
             return cardArray;
@@ -57,7 +59,9 @@ namespace TM.Card.Runtime
             
                 for (int i = 0; i < creationCount; i++)
                 {
-                    cardArray[i] = createCardByCardData(filterCards[Random.Range(0, filterCards.Length)], shouldInitialize);
+                    cardArray[i] = createCardByCardData(
+                        filterCards[Random.Range(0, filterCards.Length)], 
+                        shouldInitialize);
                 }
 
                 return cardArray;
@@ -99,7 +103,7 @@ namespace TM.Card.Runtime
             TMCardModel card = Object.Instantiate(_templatePrefab);
             _onPreCreateCard.Invoke(card);
             
-            card.CardData = cardData;
+            card.CardData.Value = cardData;
 
             if (shouldInitialize)
             {

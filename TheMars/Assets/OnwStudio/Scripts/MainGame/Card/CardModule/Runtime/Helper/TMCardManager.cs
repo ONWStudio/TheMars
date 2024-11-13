@@ -79,13 +79,15 @@ namespace TM.Card.Runtime
             
             _cards.Add(card);
             card.transform.SetParent(HandTransform, false);
+            card.OnSellCard += RemoveCard;
 
             SortCards();
         }
 
+
         public void RemoveCard(TMCardModel card)
         {
-            _cards.Remove(card);
+            if (!_cards.Remove(card)) return;
 
             SortCards();
         }
@@ -96,6 +98,7 @@ namespace TM.Card.Runtime
                 .SortCards(_cards, HandTransform)
                 .ForEach(transformInfo => transformInfo.Target.CardBodyMover.TargetPosition = transformInfo.Position);
         }
+
 
         private void onDragBeginCard(TMCardModel card)
         {

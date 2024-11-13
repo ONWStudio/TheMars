@@ -21,6 +21,7 @@ namespace TM.Event
         public IReadOnlyList<TMEventData> NegativeEventList => _negativeEventList;
         public IReadOnlyList<TMEventData> CalamityEventList => _calamityEventList;
 
+
         public TMEventData MarsLithiumEvent
         {
             get => _marsLithiumEventData;
@@ -112,6 +113,7 @@ namespace TM.Event
         [SerializeField, ReadOnly] private List<TMEventData> _positiveEventList = new();
         [SerializeField, ReadOnly] private List<TMEventData> _negativeEventList = new();
         [SerializeField, ReadOnly] private List<TMEventData> _calamityEventList = new();
+        [SerializeField, ReadOnly] private List<TMEventData> _events = new();
         
         #if UNITY_EDITOR
         internal void AddEventFromPositive(TMEventData eventData)

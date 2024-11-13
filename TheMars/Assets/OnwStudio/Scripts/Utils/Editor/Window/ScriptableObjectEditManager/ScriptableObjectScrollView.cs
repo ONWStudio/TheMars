@@ -43,7 +43,7 @@ namespace Onw.Editor.Window
         {
         }
 
-        internal virtual void OnInitialize()
+        protected virtual void OnInitialize()
         {
             
         }

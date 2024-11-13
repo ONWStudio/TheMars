@@ -55,8 +55,8 @@ namespace TM.Buff
         
         private bool isEqualKind(TMCardModel card) => Kind switch
         {
-            TMCardKindForWhere.EFFECT => card.CardData.Kind == TMCardKind.EFFECT,
-            TMCardKindForWhere.CONSTRUCTION => card.CardData.Kind == TMCardKind.CONSTRUCTION,
+            TMCardKindForWhere.EFFECT => card.CardData.Value.Kind == TMCardKind.EFFECT,
+            TMCardKindForWhere.CONSTRUCTION => card.CardData.Value.Kind == TMCardKind.CONSTRUCTION,
             _ => true
         };
 

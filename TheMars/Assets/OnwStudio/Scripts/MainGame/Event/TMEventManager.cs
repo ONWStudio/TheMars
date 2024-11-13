@@ -78,10 +78,21 @@ namespace TM.Event
         {
             TMSimulator.Instance.NowDay.AddListener(onChangedDay);
             TMPlayerManager.Instance.Level.AddListener(onChangedLevel);
+            TMCardManager.Instance.CardCreator.OnPostCreateCard += onPostCreateCard;
             _mainEventRunner = new(TMEventDataManager.Instance.RootMainEventData);
 
             _positiveEventProbability.DefaultProbability.Value = 20;
             _negativeEventProbability.DefaultProbability.Value = 20;
+        }
+
+        private void onPostCreateCard(TMCardModel card)
+        {
+            card.OnSellCard += onSellCard;
+
+            void onSellCard(TMCardModel card)
+            {
+                CalamityEventProbability.AdditionalProbability.Value++;
+            }
         }
 
         private void onChangedLevel(int level)

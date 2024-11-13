@@ -13,7 +13,6 @@ using Onw.UI.Components;
 using Onw.Components.Movement;
 using Onw.Event;
 using TM.Card.Effect;
-using UnityEngine.Serialization;
 
 namespace TM.Card.Runtime
 {
@@ -96,6 +95,12 @@ namespace TM.Card.Runtime
             remove => _onPayCost.RemoveListener(value);
         }
 
+        public event UnityAction<TMCardModel> OnSellCard
+        {
+            add => _onSellCard.AddListener(value);
+            remove => _onSellCard.RemoveListener(value);
+        }
+
         public event UnityAction<Vector2> OnSafePointerDownEvent
         {
             add => _onSafePointerDownEvent.AddListener(value);
@@ -132,14 +137,15 @@ namespace TM.Card.Runtime
         [SerializeField] private UnityEvent<TMCardModel> _onEffectEvent = new();
         [SerializeField] private UnityEvent<TMCardModel> _onRequestEffectEvent = new();
         [SerializeField] private UnityEvent<TMCardModel> _onPayCost = new();
+        [SerializeField] private UnityEvent<TMCardModel> _onSellCard = new();
 
         [Header("Card Options")]
-        [SerializeField, ReadOnly] private TMCardData _cardData = null;
-        [SerializeField, ReadOnly] private bool _isInit = false;
+        [SerializeField, ReadOnly] private ReactiveField<TMCardData> _cardData = new() { Value = null };
         [SerializeField, ReadOnly] private ReactiveField<bool> _canInteract = new() { Value = true };
         [SerializeField, ReadOnly] private ReactiveField<bool> _isHide = new();
         [SerializeField, ReadOnly] private TMCardMainCostRuntime _mainCost;
         [SerializeField, ReadOnly] private List<TMCardSubCostRuntime> _subCosts;
+        [SerializeField, ReadOnly] private bool _isInit = false;
 
         [Header("Unsafe Input Events")]
         [SerializeField] private UnityEvent<Vector2> _onDragEvent = new();
@@ -153,22 +159,16 @@ namespace TM.Card.Runtime
 
         private bool? _keepIsHide = null;
         private IEnumerator _dragEnumerator = null;
+        public IReactiveField<TMCardData> CardData => _cardData;
 
-        /// <summary>
-        /// .. 카드에 필요한 정보등을 보유한 스크립터블 오브젝트입니다
-        /// </summary>
-        public TMCardData CardData
+        public void SetCardData(TMCardData cardData)
         {
-            get => _cardData;
-            set
-            {
-                _cardData = value;
-                CardEffect = _cardData.CreateCardEffect();
-                CardEffect?.ApplyEffect(this, this);
+            _cardData.Value = cardData;
+            CardEffect = _cardData.Value.CreateCardEffect();
+            CardEffect?.ApplyEffect(this, this);
 
-                _mainCost = new(_cardData.MainCost);
-                _subCosts = new(_cardData.CardCosts.Select(cost => new TMCardSubCostRuntime(cost)));
-            }
+            _mainCost = new(_cardData.Value.MainCost);
+            _subCosts = new(_cardData.Value.CardCosts.Select(cost => new TMCardSubCostRuntime(cost)));
         }
         
         /// <summary>
@@ -177,18 +177,6 @@ namespace TM.Card.Runtime
         [field: Header("Runtime Option")]
         [field: SerializeField, ReadOnly] public Camera CardCamera { get; private set; } = null;
 
-        /// <summary>
-        /// .. 현재가 카드가 드래그를 수행중인지에 대한 여부를 반환합니다
-        /// </summary>
-        [field: SerializeField, ReadOnly] public bool IsDragging { get; private set; } = false;
-        /// <summary>
-        /// .. 현재 카드가 패위에 있는 지에 대한 여부를 반환합니다 외부에서 수정될 수 있습니다
-        /// </summary>
-        [field: SerializeField, ReadOnly] public bool OnField { get; set; }
-        /// <summary>
-        /// .. 현재 카드가 버리기 칸위에 오버랩되고 있는지에 대한 여부를 반환합니다
-        /// </summary>
-        [field: SerializeField, ReadOnly] public bool IsOverTombTransform { get; private set; } = false;
         
         /// <summary>
         /// .. 카드 위에 마우스 포인터 등이 올라올때등의 하이라이트 효과를 위한 컴포넌트입니다
@@ -238,6 +226,14 @@ namespace TM.Card.Runtime
 
         public IReadOnlyReactiveField<bool> CanInteract => _canInteract;
         public IReactiveField<bool> IsHide => _isHide;
+        public IReadOnlyReactiveField<bool> IsDragging => _isDragging;
+        public IReadOnlyReactiveField<bool> OnField => _onField;
+        public IReadOnlyReactiveField<bool> IsOverTombTransform => _isOverTombTransform;
+
+
+        [SerializeField, ReadOnly] private ReactiveField<bool> _isDragging = new();
+        [SerializeField, ReadOnly] private ReactiveField<bool> _onField = new();
+        [SerializeField, ReadOnly] private ReactiveField<bool> _isOverTombTransform = new();
 
         public void SetCanInteract(bool canInteract)
         {
@@ -329,7 +325,7 @@ namespace TM.Card.Runtime
                 if (_keepIsHide is null)
                 {
                     _keepIsHide = IsHide.Value;
-                    IsOverTombTransform = true;
+                    _isOverTombTransform.Value = true;
                     IsHide.Value = false;
                 }
             }
@@ -338,7 +334,7 @@ namespace TM.Card.Runtime
                 if (_keepIsHide is not null)
                 {
                     IsHide.Value = (bool)_keepIsHide;
-                    IsOverTombTransform = false;
+                    _isOverTombTransform.Value = false;
                     _keepIsHide = null;
                 }
             }
@@ -364,7 +360,7 @@ namespace TM.Card.Runtime
         {
             setOnMover(CardViewMover, false);
             CardBodyMover.enabled = false;
-            IsDragging = true;
+            _isDragging.Value = true;
             _dragEnumerator = iEOnDrag();
             StartCoroutine(_dragEnumerator);
 
@@ -437,7 +433,7 @@ namespace TM.Card.Runtime
         {
             if (!_canInteract.Value) return;
 
-            IsOverTombTransform = false;
+            _isOverTombTransform.Value = false;
 
             if (RectTransformUtility.RectangleContainsScreenPoint(TMCardManager.Instance.DeckTransform, mousePosition, CardCamera))
             {
@@ -447,7 +443,7 @@ namespace TM.Card.Runtime
             {
                 setOnMover(CardViewMover, true);
                 CardBodyMover.enabled = true;
-                IsDragging = false;
+                _isDragging.Value = false;
                 _onEffectEvent.Invoke(this);
             }
 
@@ -467,10 +463,9 @@ namespace TM.Card.Runtime
 
         private void sellCard()
         {
+            _onSellCard.Invoke(this);
             CardEffect.Is<IDisposable>(disposable => disposable.Dispose());
             CardEffect = null;
-            TMPlayerManager.Instance.Credit.Value += 10;
-            TMCardManager.Instance.RemoveCard(this);
             Destroy(gameObject);
         }
     }

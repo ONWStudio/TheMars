@@ -59,7 +59,7 @@ namespace TM.Card.Runtime
         
         public void SetUI(TMCardModel cardModel)
         {
-            TMCardData cardData = cardModel.CardData;
+            TMCardData cardData = cardModel.CardData.Value;
             _cardImage.sprite = cardData.CardImage;
             _costText.text = cardData.MainCost.Cost.ToString();
             _costImage.sprite = cardData.MainCost.CostKind switch

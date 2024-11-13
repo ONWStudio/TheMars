@@ -91,7 +91,7 @@ namespace TM.Card.Effect
 
         private void onSafeDrag(Vector2 mousePosition)
         {
-            if (!_cardModel.IsOverTombTransform) // .. 카드가 버리기(쓰레기통)칸 위에 있지 않을 경우
+            if (!_cardModel.IsOverTombTransform.Value) // .. 카드가 버리기(쓰레기통)칸 위에 있지 않을 경우
             {
                 if (!_building.MeshRenderer.enabled) // .. 빌딩이 렌더링 되고 있지 않다면
                 {
