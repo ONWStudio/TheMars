@@ -129,7 +129,7 @@ MonoBehaviour:
     m_Value: 0.52
   contrast:
     m_OverrideState: 1
-    m_Value: 52
+    m_Value: 10
   colorFilter:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -283,7 +283,7 @@ MonoBehaviour:
     m_Value: 65472
   tint:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.45339823, b: 0.3254717, a: 1}
+    m_Value: {r: 1, g: 0.44726303, b: 0.3160377, a: 1}
   highQualityFiltering:
     m_OverrideState: 0
     m_Value: 0
