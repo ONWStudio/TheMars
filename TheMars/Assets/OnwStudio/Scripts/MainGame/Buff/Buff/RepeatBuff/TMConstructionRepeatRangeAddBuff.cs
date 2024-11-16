@@ -14,6 +14,9 @@ namespace TM.Buff
         [SerializeField, ReadOnly] private AssetReferenceSprite _iconReference;
         [SerializeField, ReadOnly] private LocalizedString _description = new("TM_Buff_Effect", "Construction_Repeat_Range_Add_Buff");
 
+        public override Color IconBackgroundColor => Min >= 0 || Max >= 0 ?
+              ColorUtility.TryParseHtmlString("#2C138E", out Color blue) ? blue : Color.blue : 
+              ColorUtility.TryParseHtmlString("#8E3214", out Color red) ? red : Color.red;
         public override AssetReferenceSprite IconReference => _iconReference;
 
         [field: SerializeField] public int Min { get; set; }
@@ -34,6 +37,8 @@ namespace TM.Buff
             int min = Mathf.Min(absMin, absMax);
             int max = Mathf.Max(absMin, absMax);
 
+            bool positive = Min >= 0 || Max >= 0;
+
             _description.Arguments = new object[]
             {
                 new
@@ -43,9 +48,11 @@ namespace TM.Buff
                     IsTemporary,
                     Min = min,
                     Max = max,
-                    Positive = Min >= 0 || Max >= 0
+                    Positive = positive
                 }
             };
+
+            _iconReference = new(positive ? "Construction-plus" : "Construction-minus");
         }
 
         protected override void OnChangedDayByRepeatDay(int day)

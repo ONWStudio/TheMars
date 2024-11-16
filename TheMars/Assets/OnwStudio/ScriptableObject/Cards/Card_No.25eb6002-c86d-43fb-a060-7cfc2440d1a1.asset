@@ -22,8 +22,8 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: CardName
     m_TableEntryReference:
-      m_KeyId: 39057165646630912
-      m_Key: MarsLithiumDigger
+      m_KeyId: 143571881984
+      m_Key: MarsLithiumMiner
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []

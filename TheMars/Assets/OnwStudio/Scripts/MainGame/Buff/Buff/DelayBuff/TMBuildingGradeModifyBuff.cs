@@ -18,8 +18,12 @@ namespace TM.Buff
     public class TMBuildingGradeModifyBuff : TMDelayBuff, ITMInitializeBuff<TMBuildingGradeModifyBuffTrigger>
     {
         private TMBuilding[] _targetBuildings = null;
-        [SerializeField, ReadOnly] private AssetReferenceSprite _iconReference;
+        [SerializeField, ReadOnly] private AssetReferenceSprite _iconReference = new("BuildingDowngrade");
         [SerializeField, ReadOnly] private LocalizedString _description = new("TM_Buff_Effect", "Building_Grade_Modify_Buff");
+
+        public override Color IconBackgroundColor => GradeUpValue >= 0 ?
+            ColorUtility.TryParseHtmlString("#2C138E", out Color blue) ? blue : Color.blue :
+            ColorUtility.TryParseHtmlString("#8E3214", out Color red) ? red : Color.red;
 
         public override AssetReferenceSprite IconReference => _iconReference;
         [field: SerializeField] public TMBuildingKindForWhere Kind { get; set; }

@@ -6,14 +6,22 @@ using UnityEngine.Serialization;
 using Onw.Event;
 using Onw.Attribute;
 using TM.Building.Effect;
+using UnityEngine.Events;
 
 namespace TM.Building
 {
     public sealed class TMBuilding : MonoBehaviour
     {
+        public event UnityAction<TMBuilding> OnBatchTile
+        {
+            add => _onBatchTile.AddListener(value);
+            remove => _onBatchTile.RemoveListener(value);
+        }
+
         [SerializeReference, SerializeReferenceDropdown, ReadOnly] private List<ITMBuildingEffect> _effects = new();
         
-        [SerializeField, ReadOnly] private ReactiveField<bool> _isActive = new() { Value = true };
+        [SerializeField] private ReactiveField<bool> _isActive = new() { Value = true };
+        [SerializeField] private UnityEvent<TMBuilding> _onBatchTile = new();
 
         [Header("Components")]
         [SerializeField] private List<Renderer> _meshRenderers = new();
@@ -70,6 +78,7 @@ namespace TM.Building
         public void BatchOnTile()
         {
             ApplyBuildingEffect();
+            _onBatchTile.Invoke(this);
             IsRender = true;
         }
 

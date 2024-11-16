@@ -8,6 +8,7 @@ using TM.Card.Runtime;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Localization;
+using UnityEngine.UIElements;
 
 namespace TM.Buff
 {
@@ -17,6 +18,10 @@ namespace TM.Buff
         [SerializeField, ReadOnly] private List<TMCardModel> _additionalCostCard = new();
         [SerializeField, ReadOnly] private AssetReferenceSprite _iconReference;
         [SerializeField, ReadOnly] private LocalizedString _description = new("TM_Buff_Effect", "Card_Cost_All_Modify_Buff");
+
+        public override Color IconBackgroundColor => AdditionalCost >= 0 ?
+            ColorUtility.TryParseHtmlString("#2C138E", out Color blue) ? blue : Color.blue :
+            ColorUtility.TryParseHtmlString("#8E3214", out Color red) ? red : Color.red;
 
         public override AssetReferenceSprite IconReference => _iconReference;
         [field: SerializeField] public TMCardKindForWhere Kind { get; set; }
@@ -30,6 +35,8 @@ namespace TM.Buff
 
             Kind = creator.Kind;
             AdditionalCost = creator.AdditionalCost;
+            bool positive = AdditionalCost >= 0;
+
             _description.Arguments = new object[]
             {
                 new
@@ -38,9 +45,11 @@ namespace TM.Buff
                     IsTemporary,
                     Kind,
                     Cost = Mathf.Abs(AdditionalCost),
-                    Positive = AdditionalCost >= 0
+                    Positive = positive
                 }
             };
+
+            _iconReference = new(positive ? "CardCost-plus" : "Cardcost-minus");
         }
 
         protected override void OnApplyBuff()

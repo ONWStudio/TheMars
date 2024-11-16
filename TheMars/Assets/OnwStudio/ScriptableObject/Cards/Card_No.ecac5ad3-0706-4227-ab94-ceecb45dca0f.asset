@@ -22,7 +22,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: CardName
     m_TableEntryReference:
-      m_KeyId: 39056382259695616
+      m_KeyId: 539849723904
       m_Key: CreditSupplyStation
     m_FallbackState: 0
     m_WaitForCompletion: 0

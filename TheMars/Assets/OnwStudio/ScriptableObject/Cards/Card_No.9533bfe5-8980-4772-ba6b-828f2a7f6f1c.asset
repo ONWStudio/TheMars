@@ -22,7 +22,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: CardName
     m_TableEntryReference:
-      m_KeyId: 39046077467136000
+      m_KeyId: 260823650304
       m_Key: NuclearPowerPlant
     m_FallbackState: 0
     m_WaitForCompletion: 0

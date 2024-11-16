@@ -18,9 +18,10 @@ namespace TM.Buff
     {
         private TMBuilding[] _stoppedBuildings = null;
 
-        [SerializeField, ReadOnly] private AssetReferenceSprite _iconReference;
+        [SerializeField, ReadOnly] private AssetReferenceSprite _iconReference = new("BuildingStopped");
         [SerializeField, ReadOnly] private LocalizedString _description = new("TM_Buff_Effect", "Building_Stop_Buff");
 
+        public override Color IconBackgroundColor => ColorUtility.TryParseHtmlString("#8E3214", out Color red) ? red : Color.red;
         public override AssetReferenceSprite IconReference => _iconReference;
         [field: SerializeField, ReadOnly] public int TargetBuildingCount { get; private set; }
 

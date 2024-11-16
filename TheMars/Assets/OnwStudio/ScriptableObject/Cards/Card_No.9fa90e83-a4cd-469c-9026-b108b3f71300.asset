@@ -22,7 +22,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: CardName
     m_TableEntryReference:
-      m_KeyId: 38579727594491904
+      m_KeyId: 101150691328
       m_Key: ATMOS
     m_FallbackState: 0
     m_WaitForCompletion: 0

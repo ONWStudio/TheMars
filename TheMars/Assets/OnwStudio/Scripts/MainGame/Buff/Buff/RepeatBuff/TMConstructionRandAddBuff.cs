@@ -6,6 +6,7 @@ using TM.Building.Effect;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Localization;
+using UnityEngine.UIElements;
 
 namespace TM.Buff
 {
@@ -15,6 +16,9 @@ namespace TM.Buff
         [SerializeField, ReadOnly] private AssetReferenceSprite _iconReference;
         [SerializeField, ReadOnly] private LocalizedString _description = new("TM_Buff_Effect", "Construction_Rand_Add_Buff");
 
+        public override Color IconBackgroundColor => ResourceAdd >= 0 ? 
+            ColorUtility.TryParseHtmlString("#2C138E", out Color blue) ? blue : Color.blue : 
+            ColorUtility.TryParseHtmlString("#8E3214", out Color red) ? red : Color.red;
         public override AssetReferenceSprite IconReference => _iconReference;
         [field: SerializeField] public int ResourceAdd { get; set; }
 
@@ -25,6 +29,8 @@ namespace TM.Buff
             base.Initialize(creator);
 
             ResourceAdd = creator.ResourceAdd;
+            bool positive = ResourceAdd >= 0;
+
             _description.Arguments = new object[]
             {
                 new
@@ -33,9 +39,11 @@ namespace TM.Buff
                     LimitDay,
                     IsTemporary,
                     Resource = Mathf.Abs(ResourceAdd),
-                    Positive = ResourceAdd > 0
+                    Positive = positive
                 }
             };
+
+            _iconReference = new(positive ? "Construction-plus" : "Construction-minus");
         }
 
         protected override void OnChangedDayByRepeatDay(int day)

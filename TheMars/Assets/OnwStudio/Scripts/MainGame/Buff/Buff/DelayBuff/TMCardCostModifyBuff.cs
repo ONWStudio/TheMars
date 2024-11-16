@@ -19,6 +19,10 @@ namespace TM.Buff
         [SerializeField, ReadOnly] private List<TMCardModel> _additionalCostCard = new();
         [SerializeField, ReadOnly] private LocalizedString _description = new("TM_Buff_Effect", "Card_Cost_Modify_Buff");
 
+        public override Color IconBackgroundColor => AdditionalCost >= 0 ?
+            ColorUtility.TryParseHtmlString("#2C138E", out Color blue) ? blue : Color.blue :
+            ColorUtility.TryParseHtmlString("#8E3214", out Color red) ? red : Color.red;
+
         public override AssetReferenceSprite IconReference => _iconReference;
 
         [field: SerializeField] public TMCardKindForWhere CardKind { get; private set; }
@@ -34,6 +38,7 @@ namespace TM.Buff
             CardKind = creator.CardKind;
             CostKind = creator.CostKind;
             AdditionalCost = creator.AdditionalCost;
+            bool positive = AdditionalCost >= 0;
 
             _description.Arguments = new object[]
             {
@@ -44,9 +49,11 @@ namespace TM.Buff
                     CardKind,
                     CostKind,
                     Cost = Mathf.Abs(AdditionalCost),
-                    Positive = AdditionalCost >=0
+                    Positive = positive
                 }
             };
+
+            _iconReference = new(positive ? "CardCost-plus" : "Cardcost-minus");
         }
 
         protected override void OnApplyBuff()

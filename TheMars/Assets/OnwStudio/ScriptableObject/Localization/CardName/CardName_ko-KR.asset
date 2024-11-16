@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: CardName_ko-KR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ko-KR
+  m_SharedData: {fileID: 11400000, guid: d980be908d5ad4cfc8c5ca05a4f17d26, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 17000370176
+    m_Localized: "\uAC15\uCCA0 \uCC44\uAD74\uC18C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 101150691328
+    m_Localized: ATMOS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 143571881984
+    m_Localized: "\uB9C8\uB974\uC2A4 \uB9AC\uD2AC \uACF5\uC815"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 260823650304
+    m_Localized: "\uC6D0\uC790\uB825 \uBC1C\uC804\uC18C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 465455353856
+    m_Localized: "\uC810\uD1A0 \uCC44\uAD74\uAE30"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 539849723904
+    m_Localized: "\uD06C\uB808\uB527 \uBCF4\uAE09\uC18C"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

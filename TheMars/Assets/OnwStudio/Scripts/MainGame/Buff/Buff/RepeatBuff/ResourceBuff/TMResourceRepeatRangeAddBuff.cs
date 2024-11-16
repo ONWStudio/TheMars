@@ -12,8 +12,11 @@ namespace TM.Buff
     public class TMResourceRepeatRangeAddBuff : TMResourceRepeatAddBuffBase, ITMInitializeBuff<TMResourceRepeatRangeAddBuffTrigger>
     {
         [SerializeField, ReadOnly] private AssetReferenceSprite _iconReference;
-        [SerializeField, ReadOnly] private LocalizedString _description = new("TM_Buff_Effect", "Resource_Repeat_Range_Add_Buff"); 
+        [SerializeField, ReadOnly] private LocalizedString _description = new("TM_Buff_Effect", "Resource_Repeat_Range_Add_Buff");
 
+        public override Color IconBackgroundColor => Min >= 0 || Max >= 0 ?
+            ColorUtility.TryParseHtmlString("#2C138E", out Color blue) ? blue : Color.blue :
+            ColorUtility.TryParseHtmlString("#8E3214", out Color red) ? red : Color.red;
         public override AssetReferenceSprite IconReference => _iconReference;
 
         [field: SerializeField] public int Min { get; set; }
@@ -33,19 +36,31 @@ namespace TM.Buff
             int min = Mathf.Min(absMin, absMax);
             int max = Mathf.Max(absMax, absMin);
 
+            bool positive = Min >= 0 || Max >= 0;
+
             _description.Arguments = new object[]
             {
                 new
                 {
-                    Kind = Kind.ToString(),
+                    Kind,
                     Min = min,
-                    Positive = Min >= 0 || Max >= 0,
+                    Positive = positive,
                     Max = max,
                     IsTemporary,
                     RepeatDay,
                     LimitDay
                 }
             };
+
+            string reference = Kind switch
+            {
+                TMResourceKind.POPULATION => positive ? "Population-plus" : "Popluation-minus",
+                TMResourceKind.STEEL or TMResourceKind.PLANTS or TMResourceKind.CLAY => positive ? "Construction-plus" : "Construction-minus",
+                TMResourceKind.SATISFACTION => positive ? "Satisfaction-Icon" : "Satisfaction-minus",
+                _ => positive ? "Cost-plus" : "Cost-minus",
+            };
+
+            _iconReference = new(reference);
         }
 
         protected override void OnChangedDayByRepeatDay(int day)

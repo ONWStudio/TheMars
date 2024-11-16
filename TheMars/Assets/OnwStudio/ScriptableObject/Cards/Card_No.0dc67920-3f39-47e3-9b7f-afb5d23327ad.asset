@@ -22,7 +22,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: CardName
     m_TableEntryReference:
-      m_KeyId: 39058038531624960
+      m_KeyId: 17000370176
       m_Key: SteelDigger
     m_FallbackState: 0
     m_WaitForCompletion: 0

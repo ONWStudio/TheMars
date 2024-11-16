@@ -15,43 +15,39 @@ MonoBehaviour:
   m_TableCollectionName: CardName
   m_TableCollectionNameGuidString: d980be908d5ad4cfc8c5ca05a4f17d26
   m_Entries:
-  - m_Id: 38579727594491904
-    m_Key: ATMOS
-    m_Metadata:
-      m_Items: []
-  - m_Id: 39046077467136000
-    m_Key: NuclearPowerPlant
-    m_Metadata:
-      m_Items: []
-  - m_Id: 39056382259695616
-    m_Key: CreditSupplyStation
-    m_Metadata:
-      m_Items: []
-  - m_Id: 39057165646630912
-    m_Key: MarsLithiumDigger
-    m_Metadata:
-      m_Items: []
-  - m_Id: 39058038531624960
+  - m_Id: 17000370176
     m_Key: SteelDigger
     m_Metadata:
       m_Items: []
-  - m_Id: 39058732974149632
+  - m_Id: 101150691328
+    m_Key: ATMOS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 143571881984
+    m_Key: MarsLithiumMiner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 260823650304
+    m_Key: NuclearPowerPlant
+    m_Metadata:
+      m_Items: []
+  - m_Id: 465455353856
     m_Key: ClayDigger
     m_Metadata:
       m_Items: []
-  - m_Id: 36205965576409088
-    m_Key: Someting
+  - m_Id: 539849723904
+    m_Key: CreditSupplyStation
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 2707483198628560912
+    rid: 3610285249959297379
   references:
     version: 2
     RefIds:
-    - rid: 2707483198628560912
+    - rid: 3610285249959297379
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
         asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1722326327529
+        m_CustomEpoch: 1731733451101

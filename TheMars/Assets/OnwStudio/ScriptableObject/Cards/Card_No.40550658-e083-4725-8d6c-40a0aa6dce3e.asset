@@ -22,7 +22,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: CardName
     m_TableEntryReference:
-      m_KeyId: 39058732974149632
+      m_KeyId: 465455353856
       m_Key: ClayDigger
     m_FallbackState: 0
     m_WaitForCompletion: 0

@@ -72,6 +72,81 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 69c27840552797446bdab26d108def85
+    m_Address: Construction-plus
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b93296c60ade79a47ad328765c083f48
+    m_Address: Construction-minus
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ee7322d849e91154ebcea3c0894505bd
+    m_Address: Cost-plus
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b11d47848a6c6fb47a6a161faf8c6595
+    m_Address: Cost-minus
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0348427b92946084ba50d41c5758ec80
+    m_Address: Cards-plus
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a675f3fef8d0c1b42ad21bdaed584495
+    m_Address: Cards-minus
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bf9d162d989b47a43b8b5dcc00a4cf97
+    m_Address: HoldingCards-minus
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9251681ba8eaa8d44a79eaa666fdec81
+    m_Address: HoldingCards-plus
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 93252b6784f51784abf4335b6acbeb33
+    m_Address: EventProbabilityChangesBuff
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f10692d959767f245966eb296976fd5f
+    m_Address: MarsLihtiumEventBuff
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e2fa3d5cc689d24b8a34181c0a885a9
+    m_Address: CardCost-plus
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d374ed8c9d0b52f4595bd5974abe07cc
+    m_Address: Assets/OnwStudio/Icon/Card_minus.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3972c1c689c37634bbbee4bb3ae32dad
+    m_Address: Assets/OnwStudio/Icon/Synthetic_Disabled.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87c987c18ed10d74bba37f80c0864a87
+    m_Address: BuildingStopped
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e6d23a4dab176b74eb5118ff07393145
+    m_Address: BuildingDowngrade
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3f430e5b5c626400b837c52ed98c1bc2, type: 2}
   m_SchemaSet:

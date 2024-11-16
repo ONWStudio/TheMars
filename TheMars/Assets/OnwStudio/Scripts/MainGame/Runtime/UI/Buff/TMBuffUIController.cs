@@ -1,6 +1,8 @@
 using Codice.Client.Common.GameUI;
 using Onw.Attribute;
+using Onw.Extensions;
 using Onw.Manager.ObjectPool;
+using Onw.Manager.Prototype;
 using System.Collections;
 using System.Collections.Generic;
 using TM.Buff;
@@ -30,10 +32,11 @@ namespace TM.UI
         {
             if (!GenericObjectPool<TMBuffIcon>.TryPop(out TMBuffIcon icon))
             {
-                icon = new GameObject("Buff_Icon").AddComponent<TMBuffIcon>();
+                icon = PrototypeManager.Instance.ClonePrototypeSync<TMBuffIcon>("Buff_Icon");
             }
 
             icon.SetUI(buff);
+            icon.SetParent(_buffScrollView.content.transform, false);
             _buffDictionary.Add(buff.GetHashCode(), icon);
         }
 

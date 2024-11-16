@@ -13,10 +13,11 @@ namespace TM.Buff
     [System.Serializable]
     public class TMMarsLihitumEventModifyBuff : TMBuffBase, ITMInitializeBuff<TMMarsLithiumEventModifyBuffTrigger>, IRemainingCountNotifier
     {
-        [SerializeField, ReadOnly] private AssetReferenceSprite _iconReference;
+        [SerializeField, ReadOnly] private AssetReferenceSprite _iconReference = new("MarsLithiumEventBuff");
         [SerializeField, ReadOnly] private LocalizedString _description = new("TM_Buff_Effect", "MarsLithium_Event_Modify_Buff");
         [SerializeField, ReadOnly] private ReactiveField<int> _remainingEndTriggerCount = new();
 
+        public override Color IconBackgroundColor => ColorUtility.TryParseHtmlString("#898E14", out Color yellow) ? yellow : Color.yellow;
         public override AssetReferenceSprite IconReference => _iconReference;
 
         public IReadOnlyReactiveField<int> RemainingCount => _remainingEndTriggerCount;

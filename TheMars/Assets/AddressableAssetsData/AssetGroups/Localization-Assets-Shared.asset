@@ -18,7 +18,8 @@ MonoBehaviour:
   m_GUID: 294dfdb54590f4773ad766d11bc0d73d
   m_SerializeEntries:
   - m_GUID: d980be908d5ad4cfc8c5ca05a4f17d26
-    m_Address: Assets/OnwStudio/ScriptableObject/Localization/CardName Shared Data.asset
+    m_Address: Assets/OnwStudio/ScriptableObject/Localization/CardName/CardName Shared
+      Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

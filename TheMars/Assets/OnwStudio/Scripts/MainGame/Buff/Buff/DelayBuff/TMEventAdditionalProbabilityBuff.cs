@@ -13,8 +13,10 @@ namespace TM.Buff
     [System.Serializable]
     public class TMEventAdditionalProbabilityBuff : TMDelayBuff, ITMInitializeBuff<TMEventAdditionalProbabilityBuffTrigger>
     {
-        [SerializeField, ReadOnly] private AssetReferenceSprite _iconReference;
+        [SerializeField, ReadOnly] private AssetReferenceSprite _iconReference = new("EventProbabilityChangesBuff");
         [SerializeField, ReadOnly] private LocalizedString _description = new("TM_Buff_Effect", "Event_Additional_Probability_Buff");
+
+        public override Color IconBackgroundColor => ColorUtility.TryParseHtmlString("#898E14", out Color yellow) ? yellow : Color.yellow;
 
         public override AssetReferenceSprite IconReference => _iconReference;
 
