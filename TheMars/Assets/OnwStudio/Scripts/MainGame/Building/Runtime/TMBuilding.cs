@@ -11,10 +11,14 @@ namespace TM.Building
 {
     public sealed class TMBuilding : MonoBehaviour
     {
-        [SerializeReference, SerializeReferenceDropdown, ReadOnly] private List<ITMBuildingEffect> _buildingEffects = new();
+        [SerializeReference, SerializeReferenceDropdown, ReadOnly] private List<ITMBuildingEffect> _effects = new();
         
         [SerializeField, ReadOnly] private ReactiveField<bool> _isActive = new() { Value = true };
-        
+
+        [Header("Components")]
+        [SerializeField] private List<Renderer> _meshRenderers = new();
+        [SerializeField] private bool _isRender = true;
+
         [FormerlySerializedAs("_buildingLevel")]
         [Header("Building State")]
         [SerializeField] private ReactiveField<int> _gradePlus = new() { Value = 0 };
@@ -23,9 +27,24 @@ namespace TM.Building
         
         [field: Header("Building Data")]
         [field: SerializeField, ReadOnly] public TMBuildingData BuildingData { get; private set; }
-        
-        [field: Header("Components")]
-        [field: SerializeField, SelectableSerializeField] public Renderer MeshRenderer { get; private set; }
+
+        public IReadOnlyList<ITMBuildingEffect> Effects => _effects;
+
+        public string LocalizedEffectDescription => string.Join(
+            "\n", 
+            _effects
+                .Where(effect => !effect.LocalizedDescription.IsEmpty)
+                .Select(effect => effect.LocalizedDescription.GetLocalizedString()));
+
+        public bool IsRender
+        {
+            get => _isRender;
+            set
+            {
+                _isRender = value;
+                _meshRenderers.ForEach(renderer => renderer.enabled = _isRender);
+            }
+        }
 
         public int LastGrade => Mathf.Clamp(_grade.Value + _gradePlus.Value, 1, 3);
 
@@ -33,34 +52,36 @@ namespace TM.Building
         public IReactiveField<int> Grade => _grade;
         public IReactiveField<bool> OnTile => _onTile;
         public IReactiveField<bool> IsActive => _isActive;
-        
+
         public TMBuilding Initialize(TMBuildingData buildingData)
         {
             if (BuildingData) return this;
 
             BuildingData = buildingData;
-            _buildingEffects = BuildingData
+            _effects = BuildingData
                 .CreateBuildingEffects()
                 .ToList();
-            
+
+            _meshRenderers.AddRange(gameObject.GetComponentsInChildren<Renderer>());
+
             return this;
         }
 
         public void BatchOnTile()
         {
             ApplyBuildingEffect();
-            MeshRenderer.enabled = true;
+            IsRender = true;
         }
 
         public void ApplyBuildingEffect()
         {
-            _buildingEffects
+            _effects
                 .ForEach(buildingEffect => buildingEffect.ApplyEffect(this));
         }
         
         public void DisableBuilding()
         {
-            _buildingEffects
+            _effects
                 .ForEach(effect => effect.DisableEffect(this));
         }
     }

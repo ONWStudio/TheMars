@@ -14,7 +14,7 @@ namespace TM.Building.Effect
     [System.Serializable]
     public class TMEventRandBuildingGradeModifyEffect : ITMEventEffect, ITMEventInitializeEffect<TMEventRandBuildingGradeModifyEffectCreator>
     {
-        [field: SerializeField, ReadOnly] public LocalizedString EffectDescription { get; private set; } 
+        [field: SerializeField, ReadOnly] public LocalizedString EffectDescription { get; private set; } = new("TM_Event_Effect", "Rand_Building_Grade_Modify_Effect");
         [field: SerializeField, ReadOnly] public int TargetBuildingCount { get; set; }
         [field: SerializeField, ReadOnly] public int GradeAdd { get; set; }
         
@@ -22,6 +22,15 @@ namespace TM.Building.Effect
         {
             TargetBuildingCount = creator.TargetBuildingCount;
             GradeAdd = creator.GradeAdd;
+            EffectDescription.Arguments = new object[]
+            {
+                new
+                {
+                    TargetBuildingCount,
+                    GradeAdd = Mathf.Abs(GradeAdd),
+                    Positive = GradeAdd >= 0
+                }
+            };
         }
         
         public void ApplyEffect()

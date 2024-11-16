@@ -58,7 +58,7 @@ MonoBehaviour:
   - rid: 3610285201848008751
   _bottomEffectCreators:
   - rid: 3610285201848008754
-  - rid: 3610285201848008756
+  - rid: 3610285249959297037
   _topUsageCreators: []
   _bottomUsageCreators: []
   references:
@@ -103,8 +103,14 @@ MonoBehaviour:
         <IsTemporary>k__BackingField: 0
         <ResourceKind>k__BackingField: 7
         <Resource>k__BackingField: -2
-    - rid: 3610285201848008756
-      type: {class: TMEventMarsLithiumEventModifyEffectCreator, ns: TM.Event.Effect.Creator,
-        asm: AssemblyTheMars}
+    - rid: 3610285249959297037
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
       data:
-        <MarsLithiumAdd>k__BackingField: -40
+        <BuffTrigger>k__BackingField:
+          rid: 3610285249959297038
+    - rid: 3610285249959297038
+      type: {class: TMMarsLithiumEventModifyBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
+      data:
+        <EndTriggerCount>k__BackingField: 1
+        <AddMarsLithium>k__BackingField: -40
+        <IsTemporay>k__BackingField: 0

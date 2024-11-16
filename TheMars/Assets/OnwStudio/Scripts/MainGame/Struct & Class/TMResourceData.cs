@@ -31,7 +31,8 @@ namespace TM.Class
 
         public int AdditionalResource => AdditionalResources.Sum();
         public int FinalResource => Resource + AdditionalResource;
-        
+
+
         public static implicit operator TMResourceDataForRuntime(in TMResourceData resourceData)
         {
             return new()

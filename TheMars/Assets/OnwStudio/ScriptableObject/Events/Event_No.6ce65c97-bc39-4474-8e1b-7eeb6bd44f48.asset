@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.6ce65c97-bc39-4474-8e1b-7eeb6bd44f48
   m_EditorClassIdentifier: 
-  <TopEventData>k__BackingField: {fileID: 0}
-  <BottomEventData>k__BackingField: {fileID: 0}
+  <TopEventData>k__BackingField: {fileID: 11400000, guid: dd310a6ead0de9747aecc044c1e6a911,
+    type: 2}
+  <BottomEventData>k__BackingField: {fileID: 11400000, guid: 9444f13473d1548589628c3c39bf4407,
+    type: 2}
   <EventImage>k__BackingField: {fileID: 0}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
@@ -58,13 +60,24 @@ MonoBehaviour:
   - rid: 4853453480464220165
   _bottomEffectCreators:
   - rid: 4853453480464220168
-  - rid: 4853453480464220170
+  - rid: 3610285249959297035
   _topUsageCreators:
   - rid: 4853453480464220162
   _bottomUsageCreators: []
   references:
     version: 2
     RefIds:
+    - rid: 3610285249959297035
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        <BuffTrigger>k__BackingField:
+          rid: 3610285249959297036
+    - rid: 3610285249959297036
+      type: {class: TMMarsLithiumEventModifyBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
+      data:
+        <EndTriggerCount>k__BackingField: 1
+        <AddMarsLithium>k__BackingField: -10
+        <IsTemporay>k__BackingField: 0
     - rid: 4853453480464220162
       type: {class: TMResourceUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
       data:
@@ -79,6 +92,7 @@ MonoBehaviour:
       type: {class: TMBuildingStopBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
       data:
         <DelayDayCount>k__BackingField: 1
+        <IsTemporary>k__BackingField: 0
         <TargetBuildingCount>k__BackingField: 2
     - rid: 4853453480464220165
       type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
@@ -106,8 +120,3 @@ MonoBehaviour:
         <IsTemporary>k__BackingField: 0
         <ResourceKind>k__BackingField: 7
         <Resource>k__BackingField: -10
-    - rid: 4853453480464220170
-      type: {class: TMEventMarsLithiumEventModifyEffectCreator, ns: TM.Event.Effect.Creator,
-        asm: AssemblyTheMars}
-      data:
-        <MarsLithiumAdd>k__BackingField: -10

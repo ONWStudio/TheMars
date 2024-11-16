@@ -5,21 +5,22 @@ using Onw.Event;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Events;
+using UnityEngine.Localization;
 
 namespace TM.Buff
 {
-    public interface IAccrueDayNotifier
+    public interface IRemainingCountNotifier
     {
-        IReadOnlyReactiveField<int> AccrueDay { get; }
+        IReadOnlyReactiveField<int> RemainingCount { get; }
     }
 
     [Serializable]
     public abstract class TMBuffBase : IDisposable
     {
-        [field: SerializeField] protected AssetReferenceSprite IconBackground { get; private set; } = new("Sprites/Buff_BG");
         public virtual Color IconBackgroundColor => Color.white;
 
-        protected abstract AssetReferenceSprite IconReference { get; set; }
+        public abstract LocalizedString Description { get; }
+        public abstract AssetReferenceSprite IconReference { get; }
 
         private bool _disposed = false;
 
@@ -55,7 +56,6 @@ namespace TM.Buff
             if (disposing)
             {
                 // 관리 리소스 해제
-                releaseReference(IconBackground);
                 releaseReference(IconReference);
                 _onDestroyBuff?.Invoke(this);
                 _onDestroyBuff?.RemoveAllListeners();

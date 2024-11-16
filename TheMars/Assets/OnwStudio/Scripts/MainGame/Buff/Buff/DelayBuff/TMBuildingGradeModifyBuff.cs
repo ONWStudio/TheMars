@@ -10,19 +10,24 @@ using TM.Grid;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Random = UnityEngine.Random;
+using UnityEngine.Localization;
 
 namespace TM.Buff
 {
     [System.Serializable]
     public class TMBuildingGradeModifyBuff : TMDelayBuff, ITMInitializeBuff<TMBuildingGradeModifyBuffTrigger>
     {
-        [field: SerializeField, ReadOnly] protected override AssetReferenceSprite IconReference { get; set; }
+        private TMBuilding[] _targetBuildings = null;
+        [SerializeField, ReadOnly] private AssetReferenceSprite _iconReference;
+        [SerializeField, ReadOnly] private LocalizedString _description = new("TM_Buff_Effect", "Building_Grade_Modify_Buff");
+
+        public override AssetReferenceSprite IconReference => _iconReference;
         [field: SerializeField] public TMBuildingKindForWhere Kind { get; set; }
         [field: SerializeField] public int TargetBuildingCount { get; set; }
         [field: SerializeField] public int GradeUpValue { get; set; }
 
-        private TMBuilding[] _targetBuildings = null;
-        
+        public override LocalizedString Description => _description;
+
         public void Initialize(TMBuildingGradeModifyBuffTrigger creator)
         {
             base.Initialize(creator);
@@ -30,6 +35,18 @@ namespace TM.Buff
             Kind = creator.Kind;
             TargetBuildingCount = creator.TargetBuildingCount;
             GradeUpValue = creator.GradeUpValue;
+            _description.Arguments = new object[]
+            {
+                new
+                {
+                    DelayDayCount,
+                    IsTemporary,
+                    Kind,
+                    TargetBuildingCount,
+                    GradeUp = Mathf.Abs(GradeUpValue),
+                    Positive = GradeUpValue >= 0
+                }
+            };
         }
 
         protected override void Dispose(bool disposing)

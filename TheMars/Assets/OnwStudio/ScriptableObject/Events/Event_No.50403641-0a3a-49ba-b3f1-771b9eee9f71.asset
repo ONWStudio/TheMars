@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.50403641-0a3a-49ba-b3f1-771b9eee9f71
   m_EditorClassIdentifier: 
-  <TopEventData>k__BackingField: {fileID: 0}
-  <BottomEventData>k__BackingField: {fileID: 0}
+  <TopEventData>k__BackingField: {fileID: 11400000, guid: f1aa8df7279e0544b88da19719821d5c,
+    type: 2}
+  <BottomEventData>k__BackingField: {fileID: 11400000, guid: 6960f91905d998b459beb383b6332529,
+    type: 2}
   <EventImage>k__BackingField: {fileID: 0}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
@@ -73,6 +75,7 @@ MonoBehaviour:
       type: {class: TMCollectCardModifyBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
       data:
         <DelayDayCount>k__BackingField: 4
+        <IsTemporary>k__BackingField: 0
         <CollectCardCountAdd>k__BackingField: -1
     - rid: 4853453505639743492
       type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
@@ -96,6 +99,7 @@ MonoBehaviour:
       type: {class: TMCollectCardModifyBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
       data:
         <DelayDayCount>k__BackingField: 3
+        <IsTemporary>k__BackingField: 0
         <CollectCardCountAdd>k__BackingField: 1
     - rid: 4853453505639743496
       type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}

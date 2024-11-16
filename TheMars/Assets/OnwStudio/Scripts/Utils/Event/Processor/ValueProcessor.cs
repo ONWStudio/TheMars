@@ -1,3 +1,4 @@
+using Onw.Helper;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Onw.Event
         [field: SerializeField] public int Min { get; private set; }
         public T Reprocess<T>(T value)
         {
-            return value is int intValue && Mathf.Min(intValue, Min) is T newValue ? newValue : value;
+            return value is int intValue && Mathf.Max(intValue, Min) is T newValue ? newValue : value;
         }
 
         public MinIntProcessor(int min) => Min = min;
@@ -20,13 +21,13 @@ namespace Onw.Event
     [System.Serializable]
     public class MaxIntProcessor : IValueProcessor
     {
-        [field: SerializeField] public int Min { get; private set; }
+        [field: SerializeField] public int Max { get; private set; }
         public T Reprocess<T>(T value)
         {
-            return value is int intValue && Mathf.Max(intValue, Min) is T newValue ? newValue : value;
+            return value is int intValue && Mathf.Min(intValue, Max) is T newValue ? newValue : value;
         }
 
-        public MaxIntProcessor(int min) => Min = min;
+        public MaxIntProcessor(int min) => Max = min;
     }
     
     [System.Serializable]

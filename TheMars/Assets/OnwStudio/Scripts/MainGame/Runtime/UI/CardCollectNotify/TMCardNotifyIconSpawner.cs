@@ -9,6 +9,7 @@ using TM.Card.Effect.Creator;
 using TM.Manager;
 using TM.Runtime.UI;
 using TM.Card.Runtime;
+using Onw.Manager.Prototype;
 
 namespace TM.Runtime
 {
@@ -27,7 +28,6 @@ namespace TM.Runtime
 
         [field: SerializeField] public int CardCreationCount { get; set; } = 3;
 
-        [SerializeField] private TMCardCollectNotifyIcon _iconPrefab = null;
         [SerializeField, Range(REPEAT_TIME_MIN, REPEAT_TIME_MAX)] private float _repeatTime = 5f;
 
         [SerializeField] private UnityEvent<TMCardCollectNotifyIcon> _onCreateIcon = new();
@@ -57,16 +57,22 @@ namespace TM.Runtime
                 return;
             }
 
-            if (!GenericObjectPool<TMCardCollectNotifyIcon>.TryPop(out TMCardCollectNotifyIcon iconInstance))
+            if (GenericObjectPool<TMCardCollectNotifyIcon>.TryPop(out TMCardCollectNotifyIcon iconInstance))
             {
-                iconInstance = Instantiate(_iconPrefab.gameObject)
-                    .GetComponent<TMCardCollectNotifyIcon>();
-
-                _onCreateIcon.Invoke(iconInstance);
-                iconInstance.SetCards(cards.ToList());
+                onLoadedNotifyIcon(iconInstance);
+            }
+            else
+            {
+                PrototypeManager.Instance.ClonePrototypeAsync<TMCardCollectNotifyIcon>("Card_Collect_Notify_Icon", onLoadedNotifyIcon);
             }
 
-            TMCardManager.Instance.UIComponents.CardCollectIconScrollView.AddItem(iconInstance.gameObject);
+            void onLoadedNotifyIcon(TMCardCollectNotifyIcon icon)
+            {
+                icon.SetCards(cards.ToList());
+                _onCreateIcon.Invoke(icon);
+
+                TMCardManager.Instance.UIComponents.CardCollectIconScrollView.AddItem(icon.gameObject);
+            }
         }
     }
 }

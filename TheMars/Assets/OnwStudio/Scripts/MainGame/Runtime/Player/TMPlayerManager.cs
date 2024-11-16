@@ -7,6 +7,9 @@ using Onw.Helper;
 using Onw.Manager;
 using Onw.Attribute;
 using Onw.Event;
+using TM.Manager;
+using TM.Event;
+using TM.Card.Runtime;
 
 namespace TM
 {
@@ -46,7 +49,7 @@ namespace TM
         [Header("Player Info")]
         [SerializeField] private ReactiveField<int> _level = new() { Value = 1, ValueProcessors = new() { new MinIntProcessor(1) }};
         [SerializeField] private ReactiveField<int> _exp = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
-        [SerializeField] private ReactiveField<int> _maxExp = new() { ValueProcessors = new() { new MinIntProcessor(0) }};
+        [SerializeField] private ReactiveField<int> _maxExp = new() { Value = 100, ValueProcessors = new() { new MinIntProcessor(0) }};
         [SerializeField] private ReactiveField<int> _terraformValue = new() { ValueProcessors = new() { new ClampIntProcessor(0, MAX_TERRAFORM_VALUE) }};
 
         /// <summary>
@@ -56,6 +59,49 @@ namespace TM
         public void SetPopulation(int population)
         {
             _population.Value = Mathf.Clamp(population, 0, _totalPopulation.Value);
+        }
+
+        protected override void Init()
+        {
+            Locale locale = LocalizationSettings.AvailableLocales.GetLocale("ko-KR");
+            if (locale)
+            {
+                LocalizationSettings.SelectedLocale = locale;
+            }
+            else
+            {
+                Debug.LogWarning("선택한 로케일을 찾을 수 없습니다: " + "ko-KR");
+            }
+
+            _exp.AddListener(onChangedExp);
+            TMSimulator.Instance.NowDay.AddListener(onChagnedDay);
+            TMCardManager.Instance.CardCreator.OnPostCreateCard += onPostCreateCard;
+            TMEventManager.Instance.OnTriggerEvent += onTriggerEvent;
+        }
+
+        private void onTriggerEvent(TMEventRunner runner)
+        {
+            _exp.Value += 10;
+        }
+
+        private void onPostCreateCard(TMCardModel card)
+        {
+            _exp.Value += 10;
+        }
+
+        private void onChangedExp(int exp)
+        {
+            if (_exp.Value < _maxExp.Value) return;
+
+            _exp.Value -= _maxExp.Value;
+            _level.Value++;
+        }
+
+        private void onChagnedDay(int day)
+        {
+            if (day == 0) return;
+
+            _exp.Value += 5;
         }
 
         /// <summary>
@@ -111,19 +157,6 @@ namespace TM
                 case TMResourceKind.SATISFACTION:
                     _satisfaction.Value += resource;
                     break;
-            }
-        }
-
-        protected override void Init()
-        {
-            Locale locale = LocalizationSettings.AvailableLocales.GetLocale("ko-KR");
-            if (locale)
-            {
-                LocalizationSettings.SelectedLocale = locale;
-            }
-            else
-            {
-                Debug.LogWarning("선택한 로케일을 찾을 수 없습니다: " + "ko-KR");
             }
         }
     }

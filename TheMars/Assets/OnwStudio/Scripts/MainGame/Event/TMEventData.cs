@@ -93,7 +93,7 @@ namespace TM.Event
                 .ToList(); 
         }
 
-        public List<ITMUsage> CreateBottomUsage()
+        public List<ITMUsage> CreateBottomUsages()
         {
             return _bottomUsageCreators
                 .Select(creator => creator.CreateUsage())

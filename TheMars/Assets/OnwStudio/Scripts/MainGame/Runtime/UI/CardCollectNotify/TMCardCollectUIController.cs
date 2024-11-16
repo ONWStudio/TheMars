@@ -68,7 +68,6 @@ namespace TM.Runtime.UI
                 
                 void selectCard(PointerEventData _)
                 {
-                    Debug.Log("Select");
                     if (_selectCard)
                     {
                         _selectCard.transform.localScale = new(1f, 1f, 1f);

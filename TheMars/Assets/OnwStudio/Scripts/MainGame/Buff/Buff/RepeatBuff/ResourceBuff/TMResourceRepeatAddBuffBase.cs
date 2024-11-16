@@ -8,12 +8,12 @@ namespace TM.Buff
     [System.Serializable]
     public abstract class TMResourceRepeatAddBuffBase : TMRepeatBuff, ITMInitializeBuff<TMResourceRepeatAddBuffBaseTrigger>
     {
-        [field: SerializeField] public TMResourceKind ResourceKind { get; set; }
+        [field: SerializeField] public TMResourceKind Kind { get; set; }
 
         public void Initialize(TMResourceRepeatAddBuffBaseTrigger creator)
         {
             base.Initialize(creator);
-            ResourceKind = creator.ResourceKind;
+            Kind = creator.ResourceKind;
         }
     }
 }

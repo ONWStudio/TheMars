@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
+  m_Name: Card_No.9533bfe5-8980-4772-ba6b-828f2a7f6f1c
+  m_EditorClassIdentifier: 
+  <MainCost>k__BackingField:
+    <CostKind>k__BackingField: 0
+    <Cost>k__BackingField: 70
+  <CardImage>k__BackingField: {fileID: 21300000, guid: e3d50391c88360c4e9ffb32c4d6c947b,
+    type: 3}
+  <CardKey>k__BackingField: NuclearPowerPlant
+  _localizedCardName:
+    m_TableReference:
+      m_TableCollectionName: CardName
+    m_TableEntryReference:
+      m_KeyId: 39046077467136000
+      m_Key: NuclearPowerPlant
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _cardEffectCreator:
+    rid: 3610285249959297175
+  _cardCosts:
+  - <CostKind>k__BackingField: 0
+    <Cost>k__BackingField: 80
+  - <CostKind>k__BackingField: 3
+    <Cost>k__BackingField: 20
+  references:
+    version: 2
+    RefIds:
+    - rid: 3610285249959297175
+      type: {class: TMCardBuildingCreateEffectCreator, ns: TM.Card.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <BuildingData>k__BackingField: {fileID: 11400000, guid: 0d1ebcf19b9efcb4eb43609a53cfc323,
+          type: 2}

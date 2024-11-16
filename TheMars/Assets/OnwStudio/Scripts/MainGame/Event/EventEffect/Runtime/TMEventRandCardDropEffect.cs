@@ -13,14 +13,22 @@ namespace TM.Event.Effect
     [System.Serializable]
     public class TMEventRandCardDropEffect : ITMEventEffect, ITMEventInitializeEffect<TMEventRandCardDropEffectCreator>
     {
-        [field: SerializeField, ReadOnly] public LocalizedString EffectDescription { get; private set; }
+        [field: SerializeField, ReadOnly] public LocalizedString EffectDescription { get; private set; } = new("TM_Event_Effect", "Rand_Card_Drop_Effect");
         [field: SerializeField, ReadOnly] public TMCardKindForWhere Kind { get; private set; }
         [field: SerializeField, ReadOnly] public int DropCount { get; private set; }
 
         public void Initialize(TMEventRandCardDropEffectCreator creator)
         {
             Kind = creator.Kind;
-            DropCount = creator.DropCount;  
+            DropCount = creator.DropCount;
+            EffectDescription.Arguments = new object[]
+            {
+                new
+                {
+                    Kind = Kind.ToString(),
+                    DropCount
+                }
+            };
         }
 
         public void ApplyEffect()

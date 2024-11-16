@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Localization;
 using UnityEngine.Serialization;
-using TMPro;
 using Onw.Attribute;
 using Onw.Extensions;
-using Onw.Interface;
-using TM.Card.Effect;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using Onw.Manager.Prototype;
 
 namespace TM.Card.Runtime
 {
@@ -23,51 +22,65 @@ namespace TM.Card.Runtime
         [SerializeField, SelectableSerializeField]
         private Image _cardImage;
 
-        [FormerlySerializedAs("backgroundImage")]
-        [SerializeField, SelectableSerializeField]
-        private Image _backgroundImage;
-        
-        [Header("Cost Option")]
-        [SerializeField, SelectableSerializeField]
-        private TextMeshProUGUI _costText;
+        [SerializeField, InitializeRequireComponent]
+        private Mask _mask;
 
-        [SerializeField, SelectableSerializeField]
-        private Image _costImage;
-        
         private Action<Locale> _onLanguageChanged = null;
 
-        [Header("Resource")]
-        [SerializeField]
-        private Sprite _electricitySprite;
+        [SerializeField, SelectableSerializeField] private TMCardCostIcon _mainCostIcon;
+        [SerializeField, SelectableSerializeField] private RectTransform _subCostField;
 
-        [SerializeField]
-        private Sprite _creditSprite;
-
-        [FormerlySerializedAs("_viewerComponents")]
-        [SerializeField] private Behaviour[] _viewComponents;
-        
-        private void buildDescriptionText(ITMCardEffect[] effects)
-        {
-            //_descriptionText.text =
-            //    string.Join("\n", effects.OfType<ITMNormalEffect>().Select(effect => effect.Description));
-        }
+        AsyncOperationHandle<Sprite> _costIconHandle;
 
         public void SetView(bool isOn)
         {
-            _viewComponents.ForEach(component => component.enabled = isOn);
+            _mask.enabled = !isOn;
         }
-        
+
         public void SetUI(TMCardModel cardModel)
         {
             TMCardData cardData = cardModel.CardData.Value;
             _cardImage.sprite = cardData.CardImage;
-            _costText.text = cardData.MainCost.Cost.ToString();
-            _costImage.sprite = cardData.MainCost.CostKind switch
+
+            TMResourceKind kind = cardData.MainCost.CostKind switch
             {
-                TMMainCost.CREDIT => _creditSprite,
-                TMMainCost.ELECTRICITY => _electricitySprite,
-                _ => null
+                TMMainCost.ELECTRICITY => TMResourceKind.ELECTRICITY,
+                _ => TMResourceKind.CREDIT,
             };
+
+            _mainCostIcon.SetIcon(kind);
+            cardModel.MainCost.AdditionalCost.AddListener(onChangedAdditionalCostByMain);
+
+            for (int i = 0; i < cardData.CardCosts.Count; i++)
+            {
+                TMCardSubCost subCost = cardData.CardCosts[i];
+                TMResourceKind subCostkind = subCost.CostKind switch
+                {
+                    TMSubCost.STEEL => TMResourceKind.STEEL,
+                    TMSubCost.PLANTS => TMResourceKind.PLANTS,
+                    TMSubCost.CLAY => TMResourceKind.CLAY,
+                    _ => TMResourceKind.MARS_LITHIUM,
+                };
+
+                ITMCardCostRuntime subCostRuntime = cardModel.SubCosts[i];
+                PrototypeManager.Instance.ClonePrototypeAsync<TMCardCostIcon>("CostUI", onLoadedCostIcon, _subCostField);
+
+                void onLoadedCostIcon(TMCardCostIcon icon)
+                {
+                    icon.SetIcon(subCostkind);
+                    subCostRuntime.AdditionalCost.AddListener(onChangedAddtionalCostBySub);
+
+                    void onChangedAddtionalCostBySub(int cost)
+                    {
+                        icon.SetCost(subCostRuntime.FinalCost);
+                    }
+                }
+            }
+
+            void onChangedAdditionalCostByMain(int cost)
+            {
+                _mainCostIcon.SetCost(cardModel.MainCost.FinalCost);
+            }
         }
     }
 }

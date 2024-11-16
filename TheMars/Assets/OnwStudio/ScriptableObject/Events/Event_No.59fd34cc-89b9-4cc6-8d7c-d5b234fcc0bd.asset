@@ -56,11 +56,15 @@ MonoBehaviour:
   _topEffectCreators:
   - rid: 4853453529831440386
   - rid: 4853453529831440389
+  - rid: 3610285249376026627
   - rid: 4853453529831440391
+  - rid: 3610285249376026626
   _bottomEffectCreators:
   - rid: 4853453529831440393
   - rid: 4853453529831440396
   - rid: 4853453529831440398
+  - rid: 3610285249376026630
+  - rid: 3610285249376026632
   _topUsageCreators:
   - rid: 4853453529831440400
   - rid: 4853453529831440405
@@ -71,6 +75,74 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 3610285249376026624
+      type: {class: TMCardCostModifyBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
+      data:
+        <DelayDayCount>k__BackingField: 1
+        <IsTemporary>k__BackingField: 1
+        <CardKind>k__BackingField: 0
+        <CostKind>k__BackingField: 3
+        <AdditionalCost>k__BackingField: 20
+    - rid: 3610285249376026625
+      type: {class: TMCardCostModifyBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
+      data:
+        <DelayDayCount>k__BackingField: 1
+        <IsTemporary>k__BackingField: 1
+        <CardKind>k__BackingField: 0
+        <CostKind>k__BackingField: 2
+        <AdditionalCost>k__BackingField: 30
+    - rid: 3610285249376026626
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        <BuffTrigger>k__BackingField:
+          rid: 3610285249376026628
+    - rid: 3610285249376026627
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        <BuffTrigger>k__BackingField:
+          rid: 3610285249376026629
+    - rid: 3610285249376026628
+      type: {class: TMCardCostModifyBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
+      data:
+        <DelayDayCount>k__BackingField: 1
+        <IsTemporary>k__BackingField: 1
+        <CardKind>k__BackingField: 0
+        <CostKind>k__BackingField: 4
+        <AdditionalCost>k__BackingField: 20
+    - rid: 3610285249376026629
+      type: {class: TMCardCostModifyBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
+      data:
+        <DelayDayCount>k__BackingField: 1
+        <IsTemporary>k__BackingField: 1
+        <CardKind>k__BackingField: 0
+        <CostKind>k__BackingField: 2
+        <AdditionalCost>k__BackingField: 20
+    - rid: 3610285249376026630
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        <BuffTrigger>k__BackingField:
+          rid: 3610285249376026631
+    - rid: 3610285249376026631
+      type: {class: TMCardCostModifyBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
+      data:
+        <DelayDayCount>k__BackingField: 1
+        <IsTemporary>k__BackingField: 1
+        <CardKind>k__BackingField: 0
+        <CostKind>k__BackingField: 3
+        <AdditionalCost>k__BackingField: 30
+    - rid: 3610285249376026632
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        <BuffTrigger>k__BackingField:
+          rid: 3610285249376026633
+    - rid: 3610285249376026633
+      type: {class: TMCardCostModifyBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
+      data:
+        <DelayDayCount>k__BackingField: 1
+        <IsTemporary>k__BackingField: 1
+        <CardKind>k__BackingField: 1
+        <CostKind>k__BackingField: 4
+        <AdditionalCost>k__BackingField: 30
     - rid: 4853453529831440386
       type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
       data:
@@ -101,14 +173,7 @@ MonoBehaviour:
       type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
       data:
         <BuffTrigger>k__BackingField:
-          rid: 4853453529831440392
-    - rid: 4853453529831440392
-      type: {class: TMCardCostAddBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
-      data:
-        <DelayDayCount>k__BackingField: 1
-        <IsTemporary>k__BackingField: 1
-        <Kind>k__BackingField: 0
-        <AdditionalCost>k__BackingField: 20
+          rid: 3610285249376026624
     - rid: 4853453529831440393
       type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
       data:
@@ -139,14 +204,7 @@ MonoBehaviour:
       type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
       data:
         <BuffTrigger>k__BackingField:
-          rid: 4853453529831440399
-    - rid: 4853453529831440399
-      type: {class: TMCardCostAddBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
-      data:
-        <DelayDayCount>k__BackingField: 1
-        <IsTemporary>k__BackingField: 1
-        <Kind>k__BackingField: 0
-        <AdditionalCost>k__BackingField: 30
+          rid: 3610285249376026625
     - rid: 4853453529831440400
       type: {class: TMResourceUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
       data:

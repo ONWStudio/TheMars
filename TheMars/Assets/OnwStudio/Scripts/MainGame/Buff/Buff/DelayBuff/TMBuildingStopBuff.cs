@@ -9,21 +9,37 @@ using TM.Grid;
 using TM.Manager;
 using TM.Building;
 using TM.Buff.Trigger;
+using UnityEngine.Localization;
 
 namespace TM.Buff
 {
     [System.Serializable]
     public sealed class TMBuildingStopBuff : TMDelayBuff, ITMInitializeBuff<TMBuildingStopBuffTrigger>
     {
-        [field: SerializeField, ReadOnly] protected override AssetReferenceSprite IconReference { get; set; }
+        private TMBuilding[] _stoppedBuildings = null;
+
+        [SerializeField, ReadOnly] private AssetReferenceSprite _iconReference;
+        [SerializeField, ReadOnly] private LocalizedString _description = new("TM_Buff_Effect", "Building_Stop_Buff");
+
+        public override AssetReferenceSprite IconReference => _iconReference;
         [field: SerializeField, ReadOnly] public int TargetBuildingCount { get; private set; }
 
-        private TMBuilding[] _stoppedBuildings = null;
-        
+        public override LocalizedString Description => _description;
+
         public void Initialize(TMBuildingStopBuffTrigger creator)
         {
             base.Initialize(creator);
             TargetBuildingCount = creator.TargetBuildingCount;
+
+            _description.Arguments = new object[]
+            {
+                new
+                {
+                    DelayDayCount,
+                    IsTemporary,
+                    TargetBuildingCount
+                }
+            };
         }
 
         protected override void Dispose(bool disposing)
@@ -37,7 +53,13 @@ namespace TM.Buff
         
         protected override void OnApplyBuff()
         {
-            _stoppedBuildings = TMGridManager.Instance.Buildings.OrderBy(_ => Random.value).Take(TargetBuildingCount).ToArray();
+            _stoppedBuildings = TMGridManager
+                .Instance
+                .Buildings
+                .OrderBy(_ => Random.value)
+                .Take(TargetBuildingCount)
+                .ToArray();
+
             _stoppedBuildings.ForEach(building => building.IsActive.Value = false);
         }
         

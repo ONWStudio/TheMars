@@ -4,6 +4,7 @@ using Onw.Manager;
 using Onw.Attribute;
 using UnityEngine;
 using UnityEngine.Events;
+using Onw.Extensions;
 
 namespace TM.Buff
 {
@@ -54,7 +55,9 @@ namespace TM.Buff
 
         private void OnDestroy()
         {
-            _buffs.ForEach(buff => buff.Dispose());
+            TMBuffBase[] buffs = _buffs.ToArray();
+            buffs.ForEach(buff => buff.Dispose());
+            _buffs.Clear();
         }
     }
 }

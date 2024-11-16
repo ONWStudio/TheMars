@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,6 @@ using Onw.UI.Components;
 using TM.Event;
 using Onw.Localization;
 using Onw.Coroutine;
-using System.Linq;
 using TM.Event.Effect;
 using TM.Usage;
 using UnityEngine.Localization;
@@ -51,8 +51,8 @@ namespace TM.Runtime.UI
         private string _bottomEffectDescription = string.Empty;
         private TMEventRunner _eventRunner = null;
 
-        private readonly LocalizedString _paymentDescriptionHeader = new("TM_UI", "EventPaymentHeader");
-        private readonly LocalizedString _eventEffectHeader = new("TM_UI", "EventEffectHeader");
+        [SerializeField, LocalizedString(tableName: "TM_UI", entryKey: "EventPaymentHeader")] private LocalizedString _paymentDescriptionHeader;
+        [SerializeField, LocalizedString(tableName: "TM_UI", entryKey: "EventEffectHeader")] private LocalizedString _eventEffectHeader;
 
         private void Start()
         {
@@ -92,13 +92,14 @@ namespace TM.Runtime.UI
 
         private void onClickTopButton()
         {
-            if (!_eventRunner?.CanFireTop ?? true) return;
+            Debug.Log(!_eventRunner.CanFireTop);
+            if (!_eventRunner.CanFireTop) return;
             onEffect(TMEventChoice.TOP);
         }
 
         private void onClickBottomButton()
         {
-            if (!_eventRunner?.CanFireBottom ?? true) return;
+            if (!_eventRunner.CanFireBottom) return;
             onEffect(TMEventChoice.BOTTOM);
         }
 
@@ -148,8 +149,17 @@ namespace TM.Runtime.UI
             void buildDescription(IReadOnlyList<ITMEventEffect> effects, IReadOnlyList<ITMUsage> usages, Action<string> stringAction)
             {
                 bool isReload = false;
-                effects.ForEach(effect => effect.EffectDescription.StringChanged += onUpdateString);
-                usages.ForEach(usage => usage.UsageLocalizedString.StringChanged += onUpdateString);
+
+                ITMEventEffect[] effectArray = effects
+                    .Where(effect => effect.EffectDescription is not null)
+                    .ToArray();
+
+                ITMUsage[] usageArray = usages
+                    .Where(usage => usage.UsageLocalizedString is not null)
+                    .ToArray();
+
+                effectArray.ForEach(effect => effect.EffectDescription.StringChanged += onUpdateString);
+                usageArray.ForEach(usage => usage.UsageLocalizedString.StringChanged += onUpdateString);
 
                 void onUpdateString(string text)
                 {
@@ -161,12 +171,13 @@ namespace TM.Runtime.UI
                         isReload = false;
                         stringAction?.Invoke((usages.Count > 0 ?
                                 _paymentDescriptionHeader.GetLocalizedString() + 
-                                "\n" + 
-                                string.Join("\n", effects.Select(effect => effect.EffectDescription.GetLocalizedString())) : "") +
+                                "\n \n" +
+                                string.Join("\n", usageArray.Select(usage => usage.UsageLocalizedString.GetLocalizedString()))
+                                 + "\n \n" : "") +
                            (effects.Count > 0 ? 
                                 _eventEffectHeader.GetLocalizedString() + 
-                                "\n" +
-                                string.Join("\n", usages.Select(usage => usage.UsageLocalizedString.GetLocalizedString())) : ""));
+                                "\n \n" +
+                                 string.Join("\n", effectArray.Select(effect => effect.EffectDescription.GetLocalizedString())) : ""));
                     });
                 }
             }

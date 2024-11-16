@@ -9,11 +9,11 @@ namespace TM.Buff.Trigger
 {
     public enum TMBuildingKindForWhere : byte
     {
-        [InspectorName("개척형"), NonSerialized] PIONEER = 0,
+        [InspectorName("개척형")] PIONEER = 0,
         [InspectorName("자원형")] RESOURCEFUL,
         [InspectorName("개발형")] BUILDER,
         [InspectorName("외부형")] EXTERNAL,
-        [InspectorName("모두")] ALL
+        [InspectorName("모든")] ALL
     }
     
     [System.Serializable, SerializeReferenceDropdownName("건물 등급 버프")]

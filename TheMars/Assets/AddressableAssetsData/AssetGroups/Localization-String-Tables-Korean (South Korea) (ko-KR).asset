@@ -84,7 +84,7 @@ MonoBehaviour:
     - Locale-ko-KR
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1ceee1a67a82245b6a3b5202a99cd9c6
-    m_Address: TMPriceOfGrowthEventData_ko-KR
+    m_Address: TMPriceOfDisappointmentEventData_ko-KR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko-KR
@@ -181,6 +181,144 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9b94f0c0558508d4cb3df75a633d9ef4
     m_Address: TMDirectInterventionEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74ab4f9f3a5de6943a70e1f146480109
+    m_Address: TMCrumblingAuthorityEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 856e0f7792a3676478f7a79a76fae9b7
+    m_Address: TMShadowOfUtopiaEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 677eb9834d3c3764aab746b79d91283e
+    m_Address: TMLegacyOfHopeEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 55a08f895935cac4ea0c0ddbbdfcda1d
+    m_Address: TMTheGreenregimentEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e4af90c4a49a33648a1f85d5c1604715
+    m_Address: TMShadowOfProfitEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9991af36c6a351d419bec87fe2b18042
+    m_Address: TMAbaritiaEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f44fcd924c096344e8bf38af34f0aead
+    m_Address: TMImplementationOfDefinitionEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d8a19f956a1297643818038005f8d583
+    m_Address: TMCorporateControlEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d9f4d8861c2f6834785c4a005a2beb1b
+    m_Address: TMPathToMutualGrowthEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3371de0adc7371640ba4c3d1e5a204ef
+    m_Address: TMCornerstoneOfChangeEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9cbee65660c03614d8ce673dfaa21029
+    m_Address: TMFestivalOfProsperityEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72680b38e19d0ad41bb0e659c030306e
+    m_Address: TMMigrationToMarsEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d5261f87805f7b4789cf3a5f1677abb
+    m_Address: TMNewSuppliesEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 89fdff81b6c3fed40b9fe500f1aa0e86
+    m_Address: TMProtestOfDiscontentEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f82acf167b02bf4ba3e4ac06e755371
+    m_Address: TMTyphoonEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3dd77ab764b058b4da11a4e191f9be82
+    m_Address: TMDesertificationEventData_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0577e585681a78e468aa50beaa68b92e
+    m_Address: TM_UI_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 62d0375b43a46e54f88b5478a7da51f3
+    m_Address: TM_Card_Effect_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d135ae97283eb814290b63301ed73ebb
+    m_Address: TM_Building_Effect_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: babfdee4ac0ec1940a06a7dbd8d15947
+    m_Address: TM_Buff_Effect_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac9185408698d344ea4fc1cefc90afab
+    m_Address: TM_Synergy_Effect_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 311b2faffa212c14b8e89b3207dbcc79
+    m_Address: TM_Event_Effect_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90703b916f2070945990028cf51c8808
+    m_Address: TM_Cost_ko-KR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko-KR

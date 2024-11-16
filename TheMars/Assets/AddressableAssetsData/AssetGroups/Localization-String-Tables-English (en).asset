@@ -84,7 +84,7 @@ MonoBehaviour:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ff99ce9c4fb8a4ae7a68980ef1e625d5
-    m_Address: TMPriceOfGrowthEventData_en
+    m_Address: TMPriceOfDisappointmentEventData_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
@@ -181,6 +181,144 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a4088447af4289a42a0548beca60c510
     m_Address: TMDirectInterventionEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ec0dd4804f6a6b449d0971c35799e3a
+    m_Address: TMCrumblingAuthorityEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3e7e41034c1168749ad463f0bb0cf74f
+    m_Address: TMShadowOfUtopiaEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aef8c92e1711b434890bba00c08ed328
+    m_Address: TMLegacyOfHopeEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4489a82a5c63cc546952b8a03edc37c8
+    m_Address: TMTheGreenregimentEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 75086f041c744084e827a17bd07e6304
+    m_Address: TMShadowOfProfitEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1af9f153845ec954fbe64dcb13a1010b
+    m_Address: TMAbaritiaEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd1f550ccf01bc74d9f19fb69f3de492
+    m_Address: TMImplementationOfDefinitionEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7bc125a6f44a4b743862280b1b6c1c0c
+    m_Address: TMCorporateControlEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba23562a3c2e3064f980672b9df1a83c
+    m_Address: TMPathToMutualGrowthEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f71edd4b72d7264fb8ace8c7c7fba9e
+    m_Address: TMCornerstoneOfChangeEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b890167e5e5fe294fbecb07436665dd6
+    m_Address: TMFestivalOfProsperityEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a2b55e19a419f9d4a9676a87af90247a
+    m_Address: TMMigrationToMarsEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e21ba66d01e97bc4faecb8f5bff35d34
+    m_Address: TMNewSuppliesEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 737e14ae9837a4d4bb09c79ec25487b1
+    m_Address: TMProtestOfDiscontentEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f91976431db851469a01eea9016d9a6
+    m_Address: TMTyphoonEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8ecb3b812514c8140bc7b95b88eaef1b
+    m_Address: TMDesertificationEventData_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bc20b6236aed7b34caaaa59946bc9379
+    m_Address: TM_UI_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85b4284ef7340654f8e91b6355f71694
+    m_Address: TM_Card_Effect_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: acddef4a615b90a46aee33ad2ebb72fd
+    m_Address: TM_Building_Effect_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: edfe5b6544b28c645b69808befc949df
+    m_Address: TM_Buff_Effect_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 687d3ca5e4f97d946b142bfdd793d057
+    m_Address: TM_Synergy_Effect_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e2c3993a95620745b6e8852c75d9185
+    m_Address: TM_Event_Effect_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dbfe81ffb4fed6f43bfdf798dcd20bd0
+    m_Address: TM_Cost_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

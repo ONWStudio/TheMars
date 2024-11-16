@@ -32,6 +32,9 @@ namespace TM.Building
         public IReadOnlyList<TMSynergyData> Synergies => _synergies;
         
         public string BuildingName => _localizedBuildingName.TryGetLocalizedString(out string buildingName) ? buildingName : "";
+        
+        [field: SerializeField, DisplayAs("건물 키 (건물 키는 고유한 값어야 합니다)")]
+        public string BuildingKey { get; private set; } = string.Empty;
 
         [field: SerializeField, DisplayAs("소속")] public TMCorporation Corporation { get; private set; } = TMCorporation.A;
         [field: SerializeField, DisplayAs("종류")] public TMBuildingKind Kind { get; private set; } = TMBuildingKind.PIONEER;

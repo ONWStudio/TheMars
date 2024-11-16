@@ -12,17 +12,24 @@ namespace TM.Event.Effect
     [System.Serializable]
     public class TMEventBuffEffect : ITMEventEffect, ITMEventInitializeEffect<TMEventBuffEffectCreator>
     {
-        [field: SerializeField, ReadOnly] public LocalizedString EffectDescription { get; private set; }
+        [field: SerializeField, ReadOnly] public LocalizedString EffectDescription { get; private set; } = new("TM_Event_Effect", "Buff_Effect");
         [field: SerializeReference] public TMBuffBase Buff { get; private set; }
-
-        public void ApplyEffect()
-        {
-            Buff.ApplyBuff();
-        }
 
         public void Initialize(TMEventBuffEffectCreator creator)
         {
             Buff = creator.BuffTrigger.CreateBuff();
+            EffectDescription.Arguments = new object[]
+            {
+                new
+                {
+                    Buff = Buff.Description.GetLocalizedString()
+                }
+            };
+        }
+
+        public void ApplyEffect()
+        {
+            Buff.ApplyBuff();
         }
     }
 }

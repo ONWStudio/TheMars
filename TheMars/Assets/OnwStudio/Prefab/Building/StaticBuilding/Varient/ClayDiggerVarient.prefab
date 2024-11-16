@@ -19,10 +19,15 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2837be1c7cd444540a88eb00bdf3f43f, type: 2}
+    - target: {fileID: 4786004868940077113, guid: baeffcb34e7ee4e9b8fdb369a1268a2a,
+        type: 3}
+      propertyPath: _onTile.<_value>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4999922940619862806, guid: baeffcb34e7ee4e9b8fdb369a1268a2a,
         type: 3}
       propertyPath: m_Name
-      value: SmallDigger
+      value: ClayDiggerVarient
       objectReference: {fileID: 0}
     - target: {fileID: 8017166585166154826, guid: baeffcb34e7ee4e9b8fdb369a1268a2a,
         type: 3}

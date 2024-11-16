@@ -1,13 +1,13 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Onw.Attribute;
 using Onw.Event;
+using Onw.Manager;
+using Onw.Attribute;
 using Onw.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
-using Onw.Manager;
 using TM.Manager;
 using TM.Card.Runtime;
 using TM.Event.Effect;
@@ -39,21 +39,9 @@ namespace TM.Event
     
     public sealed class TMEventManager : SceneSingleton<TMEventManager>
     {
-        protected override string SceneName => "MainGameScene";
+        private bool _isApplicationQuit = false;
 
-        public event UnityAction<TMEventRunner> OnTriggerEvent
-        {
-            add => _onTriggerEvent.AddListener(value);
-            remove => _onTriggerEvent.RemoveListener(value);
-        }
-        
-        [field: SerializeField, OnwMin(1)] public int CheckMainEventLevelCount { get; private set; } = 10;
-        [field: SerializeField, OnwMin(1)] public int CheckMarsLithiumEventDayCount { get; private set; } = 5;
-        [field: SerializeField, OnwMin(1)] public int CheckCalamityEventDayCount { get; private set; } = 1;
-        [field: SerializeField, OnwMin(1)] public int CheckRegularEventDayCount { get; private set; } = 1;
-        public ITMEventProbability CalamityEventProbability => _calamityEventProbability;
-        public ITMEventProbability PositiveEventProbability => _positiveEventProbability;
-        public ITMEventProbability NegativeEventProbability => _negativeEventProbability;
+        private readonly Queue<TMEventRunner> _eventQueue = new();
 
         [Header("Event Probability")]
         [SerializeField] private TMEventProbability _calamityEventProbability = new();
@@ -67,12 +55,26 @@ namespace TM.Event
         [Header("Event")]
         [SerializeField] private UnityEvent<TMEventRunner> _onTriggerEvent = new();
 
-        [field: Header("Mars Lithium Event Option")]
-        [field: SerializeField, ReadOnly] public int MarsLithiumEventAddResource { get; set; } = 0;
+        [Header("Mars Lithium Event Option")]
+        [SerializeField, ReadOnly] private ReactiveField<int> _marsLithiumEventAddResource = new();
 
-        private bool _isApplicationQuit = false;
+        protected override string SceneName => "MainGameScene";
 
-        private readonly Queue<TMEventRunner> _eventQueue = new();
+        public event UnityAction<TMEventRunner> OnTriggerEvent
+        {
+            add => _onTriggerEvent.AddListener(value);
+            remove => _onTriggerEvent.RemoveListener(value);
+        }
+        
+        [field: SerializeField, OnwMin(1)] public int CheckMainEventLevelCount { get; private set; } = 10;
+        [field: SerializeField, OnwMin(1)] public int CheckMarsLithiumEventDayCount { get; private set; } = 5;
+        [field: SerializeField, OnwMin(1)] public int CheckCalamityEventDayCount { get; private set; } = 1;
+        [field: SerializeField, OnwMin(1)] public int CheckRegularEventDayCount { get; private set; } = 1;
+       
+        public ITMEventProbability CalamityEventProbability => _calamityEventProbability;
+        public ITMEventProbability PositiveEventProbability => _positiveEventProbability;
+        public ITMEventProbability NegativeEventProbability => _negativeEventProbability;
+        public IReactiveField<int> MarsLithiumEventAddResource => _marsLithiumEventAddResource;
 
         protected override void Init()
         {
@@ -80,9 +82,10 @@ namespace TM.Event
             TMPlayerManager.Instance.Level.AddListener(onChangedLevel);
             TMCardManager.Instance.CardCreator.OnPostCreateCard += onPostCreateCard;
             _mainEventRunner = new(TMEventDataManager.Instance.RootMainEventData);
-
             _positiveEventProbability.DefaultProbability.Value = 20;
             _negativeEventProbability.DefaultProbability.Value = 20;
+            handleMainEvent(CheckMainEventLevelCount);
+            fireEvents();
         }
 
         private void onPostCreateCard(TMCardModel card)
@@ -128,8 +131,8 @@ namespace TM.Event
             eventRunner
                 .TopEffects
                 .OfType<TMEventResourceAddEffect>()
-                .Where(effect => effect.ResourceKind == TMResourceKind.MARS_LITHIUM)
-                .ForEach(effect => effect.Resource += MarsLithiumEventAddResource);
+                .Where(effect => effect.Kind == TMResourceKind.MARS_LITHIUM)
+                .ForEach(effect => effect.Resource += MarsLithiumEventAddResource.Value);
             
             _eventQueue.Enqueue(eventRunner);
         }
@@ -176,6 +179,8 @@ namespace TM.Event
             {
                 if (TMEventDataManager.Instance.PositiveEventList.Count <= 0) return;
 
+                Debug.Log(satisfaction - SATISFACTION_HALF);
+
                 int probability = PositiveEventProbability.IsStatic.Value ? 
                     PositiveEventProbability.DefaultProbability.Value : 
                     PositiveEventProbability.FinalProbability + (SATISFACTION_HALF / (satisfaction - SATISFACTION_HALF) + 1) * 10;
@@ -211,7 +216,7 @@ namespace TM.Event
 
         private void onChangedDay(int day)
         {
-            if (day == 0) return;
+            if (day == 1) return;
 
             handleMarsLithiumEvent(day);
             handleCalamityEvent(day);
@@ -233,6 +238,7 @@ namespace TM.Event
             void onEndEvent(TMEventChoice eventChoice)
             {
                 selectEvent.OnFireEvent -= onEndEvent;
+                TimeManager.IsPause = false;
                 fireEvents();
             }
         }

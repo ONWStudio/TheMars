@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TM_Building_Effect_ko-KR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ko-KR
+  m_SharedData: {fileID: 11400000, guid: 223a0ff45fe7385488d9c03c85fe9683, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 3610285249959297276
+  m_TableData:
+  - m_Id: 377538547712
+    m_Localized: "{RepeatSeconds}\uCD08\uB9C8\uB2E4 {Kind:cond:\uB9C8\uB974\uC2A4\uB9AC\uD2AC|\uD06C\uB808\uB527|\uC778\uAD6C|\uAC15\uCCA0|\uC2DD\uBB3C|\uC810\uD1A0|\uC804\uAE30|\uB9CC\uC871\uB3C4}
+      {Resource}{Kind:cond:\uAC1C|\uAC1C|\uBA85|\uAC1C|\uAC1C|\uAC1C|\uAC1C|%} {Positive:cond:\uC99D\uAC00|\uAC10\uC18C}"
+    m_Metadata:
+      m_Items:
+      - rid: 3610285249959297276
+  references:
+    version: 2
+    RefIds:
+    - rid: 3610285249959297276
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00100de757000000

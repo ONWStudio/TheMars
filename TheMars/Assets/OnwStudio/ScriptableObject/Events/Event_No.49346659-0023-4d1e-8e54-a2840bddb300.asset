@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
+  m_Name: Event_No.49346659-0023-4d1e-8e54-a2840bddb300
+  m_EditorClassIdentifier: 
+  <TopEventData>k__BackingField: {fileID: 11400000}
+  <BottomEventData>k__BackingField: {fileID: 11400000, guid: f678a3c75be3fa14fafa53e58f4d3b7d,
+    type: 2}
+  <EventImage>k__BackingField: {fileID: 0}
+  <DescriptionTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMShadowOfUtopiaEventData
+    m_TableEntryReference:
+      m_KeyId: 2978811904
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TopButtonTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMShadowOfUtopiaEventData
+    m_TableEntryReference:
+      m_KeyId: 368113946624
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <BottomButtonTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMShadowOfUtopiaEventData
+    m_TableEntryReference:
+      m_KeyId: 422782504960
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TitleTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMShadowOfUtopiaEventData
+    m_TableEntryReference:
+      m_KeyId: 451698036736
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <HasTopEvent>k__BackingField: 1
+  <HasBottomEvent>k__BackingField: 0
+  _topEffectCreators:
+  - rid: 3610285223757479971
+  - rid: 3610285223757479972
+  - rid: 3610285249376026634
+  _bottomEffectCreators: []
+  _topUsageCreators: []
+  _bottomUsageCreators: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3610285223757479971
+      type: {class: TMEventRandBuildingGradeModifyEffectCreator, ns: TM.Event.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <TargetBuildingCount>k__BackingField: 3
+        <GradeAdd>k__BackingField: 1
+    - rid: 3610285223757479972
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        <BuffTrigger>k__BackingField:
+          rid: 3610285223757479973
+    - rid: 3610285223757479973
+      type: {class: TMResourceRepeatAddBuffTrigger, ns: TM.Buff, asm: AssemblyTheMars}
+      data:
+        <RepeatDay>k__BackingField: 1
+        <LimitDay>k__BackingField: 1
+        <IsTemporary>k__BackingField: 1
+        <ResourceKind>k__BackingField: 4
+        <Resource>k__BackingField: 10
+    - rid: 3610285249376026634
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        <BuffTrigger>k__BackingField:
+          rid: 3610285249376026635
+    - rid: 3610285249376026635
+      type: {class: TMCardCostModifyBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
+      data:
+        <DelayDayCount>k__BackingField: 1
+        <IsTemporary>k__BackingField: 1
+        <CardKind>k__BackingField: 1
+        <CostKind>k__BackingField: 5
+        <AdditionalCost>k__BackingField: -10

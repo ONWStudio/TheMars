@@ -10,7 +10,7 @@ namespace TM.Event.Effect
     [System.Serializable]
     public class TMEventProbabilitySetStaticEffect : ITMEventEffect, ITMEventInitializeEffect<TMEventProbabilitySetStaticEffectCreator>
     {
-        [field: SerializeField, ReadOnly] public LocalizedString EffectDescription { get; private set; }
+        [field: SerializeField, ReadOnly] public LocalizedString EffectDescription { get; private set; } = new("TM_Event_Effect", "Probability_Set_Static_Effect");
         [field: SerializeField] public TMEventKind Kind { get; private set; }
         [field: SerializeField] public int Probability { get; private set; }
         
@@ -18,6 +18,15 @@ namespace TM.Event.Effect
         {
             Kind = creator.Kind;
             Probability = creator.Probability;
+
+            EffectDescription.Arguments = new object[]
+            {
+                new
+                {
+                    Kind = Kind.ToString(),
+                    Probability
+                }
+            };
         }
 
         public void ApplyEffect()

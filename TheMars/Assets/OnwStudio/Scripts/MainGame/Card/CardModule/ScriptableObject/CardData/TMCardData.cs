@@ -22,6 +22,8 @@ namespace TM.Card
         [field: SerializeField, DisplayAs("카드 이미지"), Tooltip("카드의 대표 이미지"), SpritePreview]
         public Sprite CardImage { get; private set; } = null;
 
+        [field: SerializeField, DisplayAs("카드 고유 키 (모든 카드의 키값은 달라야 합니다)")]
+        public string CardKey { get; private set; } = string.Empty;
         public string CardName => _localizedCardName.TryGetLocalizedString(out string cardName) ? cardName : "";
 
         public IReadOnlyList<TMCardSubCost> CardCosts => _cardCosts;

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.b202bfba-8493-499f-aa85-765965f14686
   m_EditorClassIdentifier: 
-  <TopEventData>k__BackingField: {fileID: 0}
-  <BottomEventData>k__BackingField: {fileID: 0}
+  <TopEventData>k__BackingField: {fileID: 11400000, guid: 72a564cb3ae2f473d8ea42337663a23b,
+    type: 2}
+  <BottomEventData>k__BackingField: {fileID: 11400000, guid: 29d7ad4cd593af840a96fa9df5775e68,
+    type: 2}
   <EventImage>k__BackingField: {fileID: 0}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:

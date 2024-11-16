@@ -7,15 +7,11 @@ namespace TM.Card.Effect.Creator
 {
     using static TMCardEffectCreator;
 
-    [SerializeReferenceDropdownName("자원 획득")]
+    [System.Serializable, SerializeReferenceDropdownName("자원 획득")]
     public sealed class TMCardGetResourceEffectCreator : TMCardNormalEffectCreator
     {
-        [field: SerializeField]
         public IReadOnlyList<TMResourceData> Resources => _resources;
 
-
-        // ReSharper disable once FieldCanBeMadeReadOnly.Local
-        // ReSharper disable once CollectionNeverUpdated.Local
         [SerializeField, DisplayAs("자원 획득")] private List<TMResourceData> _resources = new();
         
         public override ITMCardEffect CreateEffect()

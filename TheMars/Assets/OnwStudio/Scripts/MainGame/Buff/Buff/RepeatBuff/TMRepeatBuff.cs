@@ -12,10 +12,10 @@ using UnityEngine.Serialization;
 namespace TM.Buff
 {
     [System.Serializable]
-    public abstract class TMRepeatBuff : TMBuffBase, ITMInitializeBuff<TMRepeatBuffTrigger>, IAccrueDayNotifier
+    public abstract class TMRepeatBuff : TMBuffBase, ITMInitializeBuff<TMRepeatBuffTrigger>, IRemainingCountNotifier
     {
-        [SerializeField, ReadOnly] private ReactiveField<int> _accrueDay = new();
-        public IReadOnlyReactiveField<int> AccrueDay => _accrueDay;
+        [SerializeField, ReadOnly] private ReactiveField<int> _remainingDay = new();
+        public IReadOnlyReactiveField<int> RemainingCount => _remainingDay;
         
         [field: SerializeField, ReadOnly] public int RepeatDay { get; set; }
         [field: SerializeField, ReadOnly] public int LimitDay { get; set; }
@@ -30,19 +30,21 @@ namespace TM.Buff
 
         protected sealed override void ApplyBuffProtected()
         {
-            _accrueDay.Value = 0;
+            int dayCount = 0;
+            _remainingDay.Value = LimitDay - dayCount;
             TMSimulator.Instance.NowDay.AddListener(onChangedDay);
 
             void onChangedDay(int day)
             {
-                _accrueDay.Value++;
+                dayCount++;
+                _remainingDay.Value = LimitDay - dayCount;
                 
-                if (_accrueDay.Value % RepeatDay == 0)
+                if (dayCount % RepeatDay == 0)
                 {
                     OnChangedDayByRepeatDay(day);
                 }
 
-                if (!IsTemporary && _accrueDay.Value == LimitDay)
+                if (!IsTemporary && dayCount == LimitDay)
                 {
                     TMSimulator.Instance.NowDay.RemoveListener(onChangedDay);
                     Dispose();

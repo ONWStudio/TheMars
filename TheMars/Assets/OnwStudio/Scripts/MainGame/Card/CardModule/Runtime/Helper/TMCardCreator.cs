@@ -103,7 +103,7 @@ namespace TM.Card.Runtime
             TMCardModel card = Object.Instantiate(_templatePrefab);
             _onPreCreateCard.Invoke(card);
             
-            card.CardData.Value = cardData;
+            card.SetCardData(cardData);
 
             if (shouldInitialize)
             {

@@ -12,15 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29023a97855ba47afb2e17979280c141, type: 3}
   m_Name: Building_No.775b615a-8c5e-4b63-b5bd-8e39cfeaf1b5
   m_EditorClassIdentifier: 
-  <TMCorporation>k__BackingField: 0
+  <BuildingKey>k__BackingField: 
+  <Corporation>k__BackingField: 0
+  <Kind>k__BackingField: 0
   <BuildingPrefab>k__BackingField: {fileID: 7184357749070193511, guid: b49ea1fcd4c3747fe97cb59b3438449d,
     type: 3}
   _localizedBuildingName:
     m_TableReference:
       m_TableCollectionName: BuildingName
     m_TableEntryReference:
-      m_KeyId: 0
-      m_Key: 
+      m_KeyId: 27724728173924352
+      m_Key: ShoppingCenter
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []

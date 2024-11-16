@@ -34,28 +34,28 @@ namespace TM.Event
 
         [field: SerializeField] public TMEventData EventData { get; private set; }
 
-        [SerializeField, ReadOnly] private List<ITMEventEffect> _topEffects;
-        [SerializeField, ReadOnly] private List<ITMEventEffect> _bottomEffects;
+        [SerializeField, ReadOnly] private List<ITMEventEffect> _topEffects = new();
+        [SerializeField, ReadOnly] private List<ITMEventEffect> _bottomEffects = new();
 
-        [SerializeField, ReadOnly] private List<ITMUsage> _topUsages;
-        [SerializeField, ReadOnly] private List<ITMUsage> _bottomUsages;
+        [SerializeField, ReadOnly] private List<ITMUsage> _topUsages = new();
+        [SerializeField, ReadOnly] private List<ITMUsage> _bottomUsages = new();
 
-        [SerializeField, ReadOnly] private UnityEvent<TMEventChoice> _onFireEvent;
+        [SerializeField, ReadOnly] private UnityEvent<TMEventChoice> _onFireEvent = new();
 
-        public bool CanFireTop => _topUsages?.All(usage => usage.CanProcessPayment) ?? true;
-        public bool CanFireBottom => _bottomUsages?.All(usage => usage.CanProcessPayment) ?? true; 
+        public bool CanFireTop => _topUsages.All(usage => usage.CanProcessPayment);
+        public bool CanFireBottom => _bottomUsages.All(usage => usage.CanProcessPayment); 
 
         public void InvokeEvent(TMEventChoice eventChoice)
         {
             if (eventChoice == TMEventChoice.TOP)
             {
-                _topEffects?.ForEach(effect => effect.ApplyEffect());
-                _topUsages?.ForEach(usage => usage.ApplyUsage());
+                _topEffects.ForEach(effect => effect.ApplyEffect());
+                _topUsages.ForEach(usage => usage.ApplyUsage());
             }
             else
             {
                 _bottomEffects.ForEach(effect => effect.ApplyEffect());
-                _bottomUsages?.ForEach(usage => usage.ApplyUsage());
+                _bottomUsages.ForEach(usage => usage.ApplyUsage());
             }
 
             _onFireEvent.Invoke(eventChoice);
@@ -64,6 +64,12 @@ namespace TM.Event
         public TMEventRunner(TMEventData eventData)
         {
             EventData = eventData;
+
+            _topEffects = new(EventData.CreateTopEffects());
+            _bottomEffects = new(EventData.CreateBottomEffects());
+
+            _topUsages = new(EventData.CreateTopUsages());
+            _bottomUsages = new(EventData.CreateBottomUsages());
         }
     }
 }

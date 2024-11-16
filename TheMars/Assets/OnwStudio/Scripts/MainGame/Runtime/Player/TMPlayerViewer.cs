@@ -12,6 +12,7 @@ namespace TM.UI
     {
         [Header("Player Info")]
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _levelText;
+        [SerializeField, SelectableSerializeField] private Image _expProgressImage;
         
         [Header("Resource Info")]
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _marsLithiumText;
@@ -47,11 +48,23 @@ namespace TM.UI
             TMPlayerManager.Instance.Electricity.AddListener(OnChangedElectricity);
             TMPlayerManager.Instance.Satisfaction.AddListener(OnChangedSatisfaction);
             TMPlayerManager.Instance.TerraformValue.AddListener(OnChangedTerraformValue);
+            TMPlayerManager.Instance.Exp.AddListener(OnChangedExp);
+            TMPlayerManager.Instance.MaxExp.AddListener(OnChangedMaxExp);
             TMSimulator.Instance.NowSeconds.AddListener(OnChangedSeconds);
             TMSimulator.Instance.NowDay.AddListener(OnChangedDay);
             _playButton.onClick.AddListener(OnClickAgainButton);
             _pauseButton.onClick.AddListener(OnClickStopButton);
             _fastButton.onClick.AddListener(OnClickFastButton);
+        }
+
+        public void OnChangedMaxExp(int maxExp)
+        {
+            _expProgressImage.fillAmount = TMPlayerManager.Instance.Exp.Value / maxExp;
+        }
+
+        public void OnChangedExp(int exp)
+        {
+            _expProgressImage.fillAmount = exp / TMPlayerManager.Instance.MaxExp.Value;
         }
 
         public void OnClickAgainButton()
@@ -91,12 +104,12 @@ namespace TM.UI
 
         public void OnChangedPopulation(int population)
         {
-            _populationText.text = $"{population} / {TMPlayerManager.Instance.TotalPopulation}";
+            _populationText.text = $"{population} / {TMPlayerManager.Instance.TotalPopulation.Value}";
         }
 
         public void OnChangedTotalPopulation(int totalPopulation)
         {
-            _populationText.text = $"{TMPlayerManager.Instance.Population} / {totalPopulation}";
+            _populationText.text = $"{TMPlayerManager.Instance.Population.Value} / {totalPopulation}";
         }
 
         public void OnChangedSteel(int steel)

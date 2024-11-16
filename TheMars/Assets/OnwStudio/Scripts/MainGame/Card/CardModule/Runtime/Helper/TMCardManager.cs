@@ -10,32 +10,45 @@ using Onw.Extensions;
 using Onw.UI.Components;
 using UniRx;
 using Image = UnityEngine.UI.Image;
+using TM.Runtime.UI;
+using UnityEngine.Events;
 
 namespace TM.Card.Runtime
 {
     [DisallowMultipleComponent]
     public sealed class TMCardManager : SceneSingleton<TMCardManager>
     {
-        protected override string SceneName => "MainGameScene";
-        
         [System.Serializable]
         public struct TMCardManagerUI
         {
             [field: SerializeField, SelectableSerializeField] public HorizontalEnumeratedItem CardCollectIconScrollView { get; private set; }
             [field: SerializeField, SelectableSerializeField] public Image DeckImage { get; private set; }
             [field: SerializeField, SelectableSerializeField] public Image HandImage { get; private set; }
-
-            [field: Header("Hand Sprite Option")]
-            [field: SerializeField] public Sprite HandNormalSprite { get; private set; }
-            [field: SerializeField] public Sprite HandTombSprite { get; private set; }
+            [field: SerializeField, SelectableSerializeField] public RectTransform CollectField { get; private set; }
 
             public void SetDragView(bool isOn)
             {
-                CardCollectIconScrollView.gameObject.SetActive(isOn);
-                DeckImage.sprite = isOn ? HandNormalSprite : HandTombSprite;
+                CardCollectIconScrollView.SetActiveGameObject(isOn);
+                DeckImage.SetActiveGameObject(!isOn);
+                CollectField.SetActiveGameObject(!isOn);
                 HandImage.enabled = isOn;
             }
         }
+
+        protected override string SceneName => "MainGameScene";
+
+        public event UnityAction<TMCardModel> OnAddedCardEvent
+        {
+            add => _onAddedCardEvent.AddListener(value);
+            remove => _onRemovedCardEvent.RemoveListener(value);
+        }
+
+        public event UnityAction<TMCardModel> OnRemovedCardEvent
+        {
+            add => _onRemovedCardEvent.AddListener(value);
+            remove => _onRemovedCardEvent.RemoveListener(value);
+        }
+
 
         [field: FormerlySerializedAs("_uiComponents")]
         [field: SerializeField] public TMCardManagerUI UIComponents { get; private set; }
@@ -58,11 +71,15 @@ namespace TM.Card.Runtime
         
 
         [SerializeField, ReadOnly] private List<TMCardModel> _cards = new();
+        [SerializeField] private UnityEvent<TMCardModel> _onAddedCardEvent = new();
+        [SerializeField] private UnityEvent<TMCardModel> _onRemovedCardEvent = new();
 
         protected override void Init() {}
         
         private void Start()
         {
+            UIComponents.SetDragView(true);
+
             CardCreator.OnPostCreateCard += addListenerForCard;
             AddCard(CardCreator.CreateRandomCard());
         }
@@ -82,14 +99,15 @@ namespace TM.Card.Runtime
             card.OnSellCard += RemoveCard;
 
             SortCards();
+            _onAddedCardEvent.Invoke(card);
         }
-
 
         public void RemoveCard(TMCardModel card)
         {
             if (!_cards.Remove(card)) return;
 
             SortCards();
+            _onRemovedCardEvent.Invoke(card);
         }
 
         public void SortCards()
@@ -98,7 +116,6 @@ namespace TM.Card.Runtime
                 .SortCards(_cards, HandTransform)
                 .ForEach(transformInfo => transformInfo.Target.CardBodyMover.TargetPosition = transformInfo.Position);
         }
-
 
         private void onDragBeginCard(TMCardModel card)
         {
