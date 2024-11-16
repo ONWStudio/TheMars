@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1195d13c1bcb04f41bfcd51e3f68b827, type: 3}
+  m_Name: TMEventDataManager
+  m_EditorClassIdentifier: 
+  _marsLithiumEventData: {fileID: 0}
+  _expansionEventData: {fileID: 0}
+  _rootMainEventData: {fileID: 11400000, guid: bc0209b7268acbc448c5f7c0c3d3f538, type: 2}
+  _positiveEventList:
+  - {fileID: 11400000, guid: b4557929ed245a04c923d3d601c544e1, type: 2}
+  - {fileID: 11400000, guid: 4214dd419b47e224e960db8206b1fe36, type: 2}
+  - {fileID: 11400000, guid: 3816228d47b5ea747b3fab61b546cb9d, type: 2}
+  _negativeEventList:
+  - {fileID: 11400000, guid: c4b038eabccd50c40ab6ccb9a5348e52, type: 2}
+  - {fileID: 11400000, guid: 13218326f5fc4e847a5780a4c56edd1b, type: 2}
+  _calamityEventList: []
+  _events: []

@@ -12,30 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29023a97855ba47afb2e17979280c141, type: 3}
   m_Name: Building_No.dde64ea3-bd8d-486e-a68e-30a7a46668fb
   m_EditorClassIdentifier: 
-  <TMCorporation>k__BackingField: 0
+  <BuildingKey>k__BackingField: 
+  <Corporation>k__BackingField: 1
+  <Kind>k__BackingField: 1
   <BuildingPrefab>k__BackingField: {fileID: 4797982682177862849, guid: 5f392c5154ae64a33be8118dba335450,
     type: 3}
-  _localizedCardName:
+  _localizedBuildingName:
     m_TableReference:
-      m_TableCollectionName: GUID:a3fba4155beff4ce684b2afe10973d87
+      m_TableCollectionName: BuildingName
     m_TableEntryReference:
       m_KeyId: 15740166144
-      m_Key: 
+      m_Key: ClayDigger
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   _effectCreators:
-  - rid: 8523893798696386564
-  _synergies:
-  - {fileID: 11400000, guid: fb639bd6a0f52490ab55b77056a5cd11, type: 2}
+  - rid: 3610285223757479939
+  - rid: 3610285249959297186
+  _synergies: []
   references:
     version: 2
     RefIds:
-    - rid: 8523893798696386564
+    - rid: 3610285223757479939
       type: {class: TMBuildingGetResourceEffectCreator, ns: TM.Building.Effect.Creator,
         asm: AssemblyTheMars}
       data:
-        <RepeatSeconds>k__BackingField: 10
-        _resources:
-        - <ResourceKind>k__BackingField: 3
-          <Resource>k__BackingField: 5
+        <RepeatSeconds>k__BackingField: 20
+        <Kind>k__BackingField: 5
+        <AdditionalResource>k__BackingField: 1
+    - rid: 3610285249959297186
+      type: {class: TMBuildingGetResourceEffectCreator, ns: TM.Building.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <RepeatSeconds>k__BackingField: 60
+        <Kind>k__BackingField: 7
+        <AdditionalResource>k__BackingField: -20

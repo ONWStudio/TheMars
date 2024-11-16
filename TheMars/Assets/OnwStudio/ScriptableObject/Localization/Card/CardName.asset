@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: CardName
   m_EditorClassIdentifier: 
   m_SharedTableData: {fileID: 11400000, guid: d980be908d5ad4cfc8c5ca05a4f17d26, type: 2}
-  m_Tables:
-  - {fileID: 11400000, guid: 09247ee2a7cf5407fa70f461b169aa83, type: 2}
-  - {fileID: 11400000, guid: 3e39ee611274e449f9821f927af662cf, type: 2}
+  m_Tables: []
   m_Extensions: []
   m_Group: String Table
   references:

@@ -43,12 +43,6 @@ MonoBehaviour:
     m_Localized: "\uC774\uB7F0 \uD604\uC0C1\uC740 \uC77C\uC2DC\uC801\uC77C \uBFD0\uC774\uB2E4."
     m_Metadata:
       m_Items: []
-  - m_Id: 98228774100995
-    m_Localized: "* \uD558\uB8E8\uB9C8\uB2E4 \uB9CC\uC871\uB3C4 {SatisfactionAddByDay}%
-      \uAC10\uC18C({SatisfactionaddDayCount}\uC77C)\n* \uD558\uB8E8\uB9C8\uB2E4 \uB9C8\uB974\uC2A4
-      \uB9AC\uD2AC {MarsLithiumAddByDay}\uAC1C \uD68D\uB4DD(5\uC77C)"
-    m_Metadata:
-      m_Items: []
   references:
     version: 2
     RefIds: []

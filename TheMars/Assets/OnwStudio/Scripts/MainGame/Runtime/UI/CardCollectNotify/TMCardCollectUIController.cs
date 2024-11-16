@@ -42,33 +42,32 @@ namespace TM.Runtime.UI
                     }
                 }
 
-                TimeManager.IsFreeze = false;
+                TimeManager.IsPause = false;
                 _cardCallbacks.Clear();
                 _selectCard.Initialize();
                 _selectCard.transform.localScale = new(1f, 1f, 1f);
-                _selectCard.CanInteract = true;
+                _selectCard.SetCanInteract(true);
                 TMCardManager.Instance.AddCard(_selectCard);
                 _selectCard = null;
                 _canvas.enabled = false;
             });
         }
 
-        public void ActiveUI()
+        public void ActiveUI(List<TMCardModel> cards)
         {
             _canvas.enabled = true;
-            TimeManager.IsFreeze = true;
+            TimeManager.IsPause = true;
             
-            foreach (TMCardModel card in TMCardManager.Instance.CardCreator.CreateCards(3))
+            foreach (TMCardModel card in cards)
             {
                 card.transform.SetParent(_cardSelectField, false);
-                card.CanInteract = false;
+                card.SetCanInteract(false);
                 UnityAction<PointerEventData> action = selectCard;
                 _cardCallbacks.Add(new(card, action));
                 card.PointerUpTrigger.OnPointerUpEvent += action;
                 
                 void selectCard(PointerEventData _)
                 {
-                    Debug.Log("Select");
                     if (_selectCard)
                     {
                         _selectCard.transform.localScale = new(1f, 1f, 1f);

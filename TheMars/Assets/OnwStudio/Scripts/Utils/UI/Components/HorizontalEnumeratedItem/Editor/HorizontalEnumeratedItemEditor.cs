@@ -23,14 +23,13 @@ internal sealed class HorizontalEnumeratedItemEditor : Editor
     private SerializedProperty _elasticity;
 
     private SerializedProperty _selectedIndex;
-
     private SerializedProperty _onChangedValue;
 
     [MenuItem("GameObject/Create/UI/Horizontal Enumerated Item")]
     public static void CreateHorizontalEnumeratedItem(MenuCommand menuCommand)
     {
         GameObject horizontalEnumeratedPrefab = Resources.Load<GameObject>("HorizontalEnumeratedItem");
-        GameObject newUIInstance = Instantiate(horizontalEnumeratedPrefab, (menuCommand.context as GameObject).transform);
+        GameObject newUIInstance = Instantiate(horizontalEnumeratedPrefab, (menuCommand.context as GameObject)?.transform);
         newUIInstance.name = "HorizontalEnumeratedItem";
 
         Undo.RegisterCreatedObjectUndo(newUIInstance, "Create Horizontal Enumerated Item");
@@ -53,35 +52,41 @@ internal sealed class HorizontalEnumeratedItemEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        serializedObject.Update();
-
         ActionEditorVertical(() =>
         {
-            EditorGUILayout.PropertyField(_viewport, new GUIContent("Viewport", "열거된 아이템을 보여줄 UI 입니다 RectMask2D와 EventTrigger를 사용해주세요"), true);
-            EditorGUILayout.PropertyField(_content, new GUIContent("Content", "실제 열거되어있는 아이템을 보관할 컨텐츠 입니다. 스크롤에 관한 기능은 컨텐츠를 사용합니다."), true);
-        }, GUI.skin.box);
+            using EditorGUI.ChangeCheckScope scope = new();
+            EditorGUILayout.PropertyField(_viewport, new("Viewport", "열거된 아이템을 보여줄 UI 입니다 RectMask2D와 EventTrigger를 사용해주세요"), true);
+            EditorGUILayout.PropertyField(_content, new("Content", "실제 열거되어있는 아이템을 보관할 컨텐츠 입니다. 스크롤에 관한 기능은 컨텐츠를 사용합니다."), true);
 
+            if (scope.changed)
+            {
+                serializedObject.ApplyModifiedProperties();
+            }
+        }, GUI.skin.box);
+        
+        serializedObject.Update();
+
+        using EditorGUI.ChangeCheckScope scope = new();
         if (_viewport.objectReferenceValue && _content.objectReferenceValue)
         {
-            RectTransform content = _content.objectReferenceValue as RectTransform;
+            RectTransform content = (RectTransform)_content.objectReferenceValue;
 
             EditorGUILayout.LabelField("Selected Index");
-            ActionEditorVertical(() => EditorGUILayout.IntSlider(_selectedIndex, 0, content.childCount - 1, new GUIContent("Selected Index", ".. 현재 선택된 인덱스를 반환 값 변경시 OnChangedValue 이벤트 발생\n " +
-                "이벤트를 발생시키지 않으려면 SetSelectedIndexWithOutNotify 메서드를 사용해주세요")), GUI.skin.box);
+            ActionEditorVertical(() => _selectedIndex.intValue = EditorGUILayout.IntSlider(_selectedIndex.intValue, 0, content.childCount - 1), GUI.skin.box);
 
             EditorGUILayout.LabelField("Content Option");
             ActionEditorVertical(() =>
             {
                 EditorGUILayout.Slider(
                     _onPointerUpCorrection,
-                    ON_POINTER_UP_CORRECTION_LIMIT.Min,
-                    ON_POINTER_UP_CORRECTION_LIMIT.Max,
+                    OnPointerUpCorrectionLimit.Min,
+                    OnPointerUpCorrectionLimit.Max,
                     new GUIContent("OnPointerUpCorrection", "드래그 하다 놓을 시 중앙에 가까운 위치에 있는 아이템으로의 보정 속도"));
 
                 EditorGUILayout.Slider(
                     _elasticity,
-                    ELASTICITY_LIMIT.Min,
-                    ELASTICITY_LIMIT.Max,
+                    ElasticityLimit.Min,
+                    ElasticityLimit.Max,
                     new GUIContent("Elasticity", "뷰포트 내부의 콘텐츠가 뷰포트 범위에서 벗어났을때 원래대로 돌아가려는 힘"));
             }, GUI.skin.box);
 
@@ -90,29 +95,29 @@ internal sealed class HorizontalEnumeratedItemEditor : Editor
             {
                 EditorGUILayout.Slider(
                     _spacingRatio,
-                    SPACING_RATIO_LIMIT.Min,
-                    SPACING_RATIO_LIMIT.Max,
+                    SpacingRatioLimit.Min,
+                    SpacingRatioLimit.Max,
                     new GUIContent("SpacingRatio", "각 아이템은 어느정도의 간격으로 배치될건지의 비율"));
 
                 EditorGUILayout.Slider(
                     _itemHeightRatioFromContentHeight,
-                    ITEM_HEIGHT_RATIO_FROM_CONTENT_HEIGHT_LIMIT.Min,
-                    ITEM_HEIGHT_RATIO_FROM_CONTENT_HEIGHT_LIMIT.Max,
+                    ItemHeightRatioFromContentHeightLimit.Min,
+                    ItemHeightRatioFromContentHeightLimit.Max,
                     new GUIContent("ItemHeightRatioFromContentHeight", "아이템의 높이를 Content 높이의 기준의 비율로 정하는 값"));
 
                 EditorGUILayout.Slider(
                     _itemWidthRatioFromHeight,
-                    ITEM_WIDTH_RATIO_FROM_HEIGHT_LIMIT.Min,
-                    ITEM_WIDTH_RATIO_FROM_HEIGHT_LIMIT.Max,
+                    ItemWidthRatioFromHeightLimit.Min,
+                    ItemWidthRatioFromHeightLimit.Max,
                     new GUIContent("ItemWidthRatioFromHeight", "아이템의 넓이를 높이 기준의 비율로 정하는 값"));
 
                 if (!Application.isPlaying)
                 {
-                    _horizontalEnumeratedItem.Init(_viewport.objectReferenceValue as RectTransform, content);
+                    _horizontalEnumeratedItem.Init((RectTransform)_viewport.objectReferenceValue, content);
 
                     if (content.childCount > 0)
                     {
-                        content.localPosition = _horizontalEnumeratedItem.GetContentLocalPositionFromSelectedIndex(
+                        content.localPosition = GetContentLocalPositionFromSelectedIndex(
                             _selectedIndex.intValue,
                             content.childCount,
                             content.sizeDelta.x);
@@ -124,7 +129,7 @@ internal sealed class HorizontalEnumeratedItemEditor : Editor
         EditorGUILayout.LabelField("Event");
         EditorGUILayout.PropertyField(_onChangedValue, new GUIContent("OnChangedValue", "선택된 아이템이 변경될시 해당 아이템의 인덱스를 이벤트로 넘겨줍니다"), true);
 
-        if (EditorGUI.EndChangeCheck())
+        if (scope.changed)
         {
             serializedObject.ApplyModifiedProperties();
         }

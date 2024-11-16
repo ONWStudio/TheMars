@@ -16,8 +16,7 @@ MonoBehaviour:
     m_Code: ko-KR
   m_SharedData: {fileID: 11400000, guid: f9f02a651071b4ec299802978efda231, type: 2}
   m_Metadata:
-    m_Items:
-    - rid: 4853453347377381378
+    m_Items: []
   m_TableData:
   - m_Id: 2448416770
     m_Localized: "\uD5C8\uC0C1\uC758 \uBC1C\uC804"
@@ -76,25 +75,6 @@ MonoBehaviour:
     m_Localized: "\uD5C8\uC0C1\uC758 \uBC1C\uC804"
     m_Metadata:
       m_Items: []
-  - m_Id: 306928004620289
-    m_Localized: "\uC18C\uBAA8\uC790\uC6D0\n* \uAC74\uC124 \uC790\uC6D0 \uAC01\uAC01
-      {ConstructionResourceSubtract}\uAC1C \uC18C\uBAA8\n\uD6A8\uACFC\n* \uB9CC\uC871\uB3C4
-      {SatisfactionSubtractByDay}% \uAC10\uC18C({SatisfactionSubtractDayCount}\uC77C)\n*
-      \uBD80\uD328\uC758 \uBBF8\uB85C \uC5F0\uACC4"
-    m_Metadata:
-      m_Items:
-      - rid: 4853453347377381378
-  - m_Id: 306928004620290
-    m_Localized: "\uD6A8\uACFC\n* \uC124\uCE58\uB41C \uAC74\uBB3C \uC911 \uB79C\uB364\uD55C
-      \uAC74\uBB3C {TargetBuildingCount}\uCC44 \uB4F1\uAE09 \uD558\uB77D\n* \uC9C1\uC811\uC801
-      \uAC1C\uC785 \uC5F0\uACC4\n"
-    m_Metadata:
-      m_Items:
-      - rid: 4853453347377381378
   references:
     version: 2
-    RefIds:
-    - rid: 4853453347377381378
-      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
-      data:
-        m_Entries: 01e0af3e2617010002e0af3e26170100
+    RefIds: []

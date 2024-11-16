@@ -31,14 +31,6 @@ MonoBehaviour:
     m_Key: Title
     m_Metadata:
       m_Items: []
-  - m_Id: 316257160126464
-    m_Key: TopEffect
-    m_Metadata:
-      m_Items: []
-  - m_Id: 316257160126465
-    m_Key: BottomEffect
-    m_Metadata:
-      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

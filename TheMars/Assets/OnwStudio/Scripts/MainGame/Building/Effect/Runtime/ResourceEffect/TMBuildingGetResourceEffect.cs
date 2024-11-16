@@ -7,49 +7,54 @@ using Onw.Attribute;
 using Onw.Coroutine;
 using Onw.Extensions;
 using TM.Building.Effect.Creator;
-using TM.Class;
 using TM.Manager;
+using UnityEngine.Localization;
+using TM.Card.Effect;
 
 namespace TM.Building.Effect
 {
     public sealed class TMBuildingGetResourceEffect : ITMBuildingResourceEffect, ITMBuildingInitializeEffect<TMBuildingGetResourceEffectCreator>
     {
-        public IReadOnlyDictionary<TMResourceKind, TMResourceDataForRuntime> Resources => _resources;
-
-        public event UnityAction<string> OnNotifyEvent
-        {
-            add => _onNotifyEvent.AddListener(value);
-            remove => _onNotifyEvent.RemoveListener(value);
-        }
-
         [field: SerializeField, ReadOnly] public float RepeatSeconds { get; set; } = 0f;
 
-        [SerializeField, ReadOnly] private UnityEvent<string> _onNotifyEvent = new();
-        
-        private Dictionary<TMResourceKind, TMResourceDataForRuntime> _resources = new(); 
+        [field: SerializeField, ReadOnly] public TMResourceKind Kind { get; private set; }
+        [field: SerializeField, ReadOnly] public int AdditionalResource { get; private set; }
+
+        [field: SerializeField, ReadOnly] public LocalizedString LocalizedDescription { get; private set; } = new("TM_Building_Effect", "Get_Resource_Effect");
+
         private Coroutine _coroutine = null;
 
-        public void Initialize(TMBuildingGetResourceEffectCreator effectCreator)
+        public void Initialize(TMBuildingGetResourceEffectCreator creator)
         {
-            _resources = effectCreator
-                .Resources
-                .ToDictionary(
-                    resource => resource.ResourceKind,
-                    resource => (TMResourceDataForRuntime)resource);
+            Kind = creator.Kind;
+            AdditionalResource = creator.AdditionalResource;
+            RepeatSeconds = creator.RepeatSeconds;
 
-            RepeatSeconds = effectCreator.RepeatSeconds;
+            LocalizedDescription.Arguments = new object[]
+            {
+                new
+                {
+                    RepeatSeconds,
+                    Kind,
+                    Resource = Mathf.Abs(AdditionalResource),
+                    Positive = AdditionalResource >= 0
+                }
+            };
         }
         
-        public void AddResource(TMResourceKind resourceKind, int additionalAmount)
+        public void AddResource(int additionalAmount)
         {
-            if (!_resources.TryGetValue(resourceKind, out TMResourceDataForRuntime runtimeResource))
+            LocalizedDescription.Arguments = new object[]
             {
-                Debug.LogWarning($"{resourceKind} : 해당 자원 획득 효과가 존재하지 않습니다");
-                return;
-            }
-            
-            runtimeResource.AdditionalResources.Add(additionalAmount);
-            _onNotifyEvent.Invoke("Description");
+                new
+                {
+                    RepeatSeconds,
+                    Kind,
+                    AdditionalResource
+                }
+            };
+
+            AdditionalResource += additionalAmount;
         }
         
         public void ApplyEffect(TMBuilding owner)
@@ -73,11 +78,13 @@ namespace TM.Building.Effect
 
                 while (true)
                 {
+                    if (!owner.IsActive.Value) yield return null;
+                    
                     timeAccumulator += Time.deltaTime * TimeManager.GameSpeed;
 
                     if (timeAccumulator >= RepeatSeconds)
                     {
-                        _resources.Values.ForEach(resource => TMPlayerManager.Instance.AddResource(resource.ResourceKind, resource.FinalResource));
+                        TMPlayerManager.Instance.AddResource(Kind, AdditionalResource);
                         timeAccumulator -= RepeatSeconds;
                     }
 

@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:TheMars/Assets/OnwStudio/Icon.meta
 guid: 43d108c3dd0a9224f8b9e03af84f037c
 folderAsset: yes
+========
+guid: eb5070305a780664a92dc7fb490e9e12
+>>>>>>>> main:TheMars/Assets/VFX_Klaus/VFX_Lab/VFX_Lab_HyperCasualFX.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

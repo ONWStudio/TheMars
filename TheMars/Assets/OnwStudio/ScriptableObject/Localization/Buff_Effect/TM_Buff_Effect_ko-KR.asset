@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TM_Buff_Effect_ko-KR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ko-KR
+  m_SharedData: {fileID: 11400000, guid: db612b80113b74944977d40b1961c53b, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 3610285249959297309
+  m_TableData:
+  - m_Id: 9443010744320
+    m_Localized: "{IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|{LimitDay}\uC77C\uB3D9\uC548}
+      {RepeatDay}\uC77C\uB9C8\uB2E4 {Kind:cond:\uB9C8\uB974\uC2A4\uB9AC\uD2AC|\uD06C\uB808\uB527|\uC778\uAD6C|\uAC15\uCCA0|\uC2DD\uBB3C|\uC810\uD1A0|\uC804\uAE30|\uB9CC\uC871\uB3C4}
+      {Min} ~ {Max}{Kind:cond:\uAC1C|\uAC1C|\uBA85|\uAC1C|\uAC1C|\uAC1C|\uAC1C|%}
+      {Positive:cond:\uD68D\uB4DD|\uC18C\uBAA8}"
+    m_Metadata:
+      m_Items:
+      - rid: 3610285249959297309
+  - m_Id: 17483239854080
+    m_Localized: "{IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|{DelayDayCount}}\uC77C\uB3D9\uC548
+      {TargetBuildingCount}\uAC1C\uC758 [{Kind:cond:\uAC1C\uCC99\uD615|\uC790\uC6D0\uD615|\uAC1C\uBC1C\uD615|\uC678\uBD80\uD615|\uBAA8\uB4E0}]
+      \uAC74\uBB3C {GradeUp}\uB4F1\uAE09 {Positive:cond:\uC0C1\uC2B9:\uD558\uB77D}"
+    m_Metadata:
+      m_Items:
+      - rid: 3610285249959297309
+  - m_Id: 18864558379008
+    m_Localized: "{IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|{DelayDayCount}\uC77C\uB3D9\uC548}
+      {TargetBuildingCount}\uAC1C\uC758 \uAC74\uBB3C \uAC00\uB3D9 \uC911\uC9C0"
+    m_Metadata:
+      m_Items:
+      - rid: 3610285249959297309
+  - m_Id: 20700698841088
+    m_Localized: "{IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|{DelayDayCount}\uC77C\uB3D9\uC548}
+      [{Kind:cond:\uAC74\uC124\uD615|\uD6A8\uACFC\uD615|\uBAA8\uB4E0}] \uCE74\uB4DC\uC758\n\uCF54\uC2A4\uD2B8
+      {Cost} {Positive:cond:\uC99D\uAC00|\uAC10\uC18C}"
+    m_Metadata:
+      m_Items:
+      - rid: 3610285249959297309
+  - m_Id: 22802921754624
+    m_Localized: "{IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|{DelayDayCount}\uC77C\uB3D9\uC548}
+      [{CardKind:cond:\uAC74\uC124\uD615|\uD6A8\uACFC\uD615|\uBAA8\uB4E0}] \uCE74\uB4DC\uC758
+      [{CostKind:cond:\uB9C8\uB974\uC2A4 \uB9AC\uD2AC|\uD06C\uB808\uB527|\uAC15\uCCA0|\uC2DD\uBB3C|\uC810\uD1A0|\uC804\uAE30}]
+      \uCF54\uC2A4\uD2B8 {Cost} {Positive:cond:\uC99D\uAC00|\uAC10\uC18C}"
+    m_Metadata:
+      m_Items:
+      - rid: 3610285249959297309
+  - m_Id: 24330806038528
+    m_Localized: "{IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|{DelayDayCount}\uC77C\uB3D9\uC548}
+      \uD558\uB8E8\uB9C8\uB2E4 \uC9C0\uAE09 \uB418\uB294 \uCE74\uB4DC \uC120\uD0DD
+      \uC774\uBCA4\uD2B8\uC2DC \uB4F1\uC7A5\uD558\uB294 \uCE74\uB4DC {Count}\uAC1C
+      {Positive:cond:\uC99D\uAC00|\uAC10\uC18C}"
+    m_Metadata:
+      m_Items:
+      - rid: 3610285249959297309
+  - m_Id: 25028784361472
+    m_Localized: "{IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|{DelayDayCount}\uC77C\uB3D9\uC548}
+      [{Kind:cond:\uC7AC\uB09C|\uAE0D\uC815|\uBD80\uC815}] \uC774\uBCA4\uD2B8 \uD655\uB960
+      {Probability}% {Positive:cond:\uC99D\uAC00|\uAC10\uC18C}"
+    m_Metadata:
+      m_Items:
+      - rid: 3610285249959297309
+  - m_Id: 26708213043200
+    m_Localized: "{IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|{LimitDay}\uC77C\uB3D9\uC548}
+      {RepeatDay}\uC77C\uB9C8\uB2E4 {Kind:cond:\uB9C8\uB974\uC2A4\uB9AC\uD2AC|\uD06C\uB808\uB527|\uC778\uAD6C|\uAC15\uCCA0|\uC2DD\uBB3C|\uC810\uD1A0|\uC804\uAE30|\uB9CC\uC871\uB3C4}
+      {Resource}{Kind:cond:\uAC1C|\uAC1C|\uBA85|\uAC1C|\uAC1C|\uAC1C|\uAC1C|%} {Positive:cond:\uD68D\uB4DD|\uC18C\uBAA8}"
+    m_Metadata:
+      m_Items:
+      - rid: 3610285249959297309
+  - m_Id: 27942609293312
+    m_Localized: "{IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|{LimitDay}\uC77C\uB3D9\uC548}
+      {RepeatDay}\uC77C\uB9C8\uB2E4 \uB9C8\uB974\uC2A4\uB9AC\uD2AC \uB610\uB294 \uAC74\uC124\uC790\uC6D0(\uAC15\uCCA0,
+      \uC2DD\uBB3C, \uC810\uD1A0) {Resource}\uAC1C {Positive:cond:\uD68D\uB4DD:\uAC10\uC18C}"
+    m_Metadata:
+      m_Items:
+      - rid: 3610285249959297309
+  - m_Id: 29204390154240
+    m_Localized: "{IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|{LimitDay}\uC77C\uB3D9\uC548}
+      {RepeatDay}\uC77C\uB9C8\uB2E4 \uB79C\uB364\uC73C\uB85C \uAC74\uC124\uC790\uC6D0(\uAC15\uCCA0,
+      \uC2DD\uBB3C, \uC810\uD1A0) {Resource}\uAC1C {Positive:cond:\uD68D\uB4DD:\uAC10\uC18C}"
+    m_Metadata:
+      m_Items:
+      - rid: 3610285249959297309
+  - m_Id: 30864294350848
+    m_Localized: "{IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|{LimitDay}\uC77C\uB3D9\uC548}
+      {RepeatDay}\uC77C\uB9C8\uB2E4 \uAC74\uC124\uC790\uC6D0(\uAC15\uCCA0, \uC2DD\uBB3C,
+      \uC810\uD1A0) {Min} ~ {Max}\uAC1C {Positive:cond:\uD68D\uB4DD:\uAC10\uC18C}"
+    m_Metadata:
+      m_Items:
+      - rid: 3610285249959297309
+  - m_Id: 31840480858112
+    m_Localized: "\uB9C8\uB974\uC2A4 \uB9AC\uD2AC \uB0A9\uBD80 \uC774\uBCA4\uD2B8
+      \uBC1C\uC0DD\uC2DC {IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|\uC774\uBCA4\uD2B8
+      \uBC1C\uC0DD \uD69F\uC218 {EndTriggerCount}\uBC88\uB3D9\uC548} \uB0A9\uBD80\uB7C9
+      {MarsLithium} {Positive:cond:\uC99D\uAC00:\uAC10\uC18C}"
+    m_Metadata:
+      m_Items:
+      - rid: 3610285249959297309
+  references:
+    version: 2
+    RefIds:
+    - rid: 3610285249959297309
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00104d9f9608000000104da2e60f000000104d3f281100000010cdc1d312000000100d38bd14000000100df5201600000010cd77c316000000108d7d4a18000000104de56919000000104dad8f1a000000104d27121c000000108d70f51c0000

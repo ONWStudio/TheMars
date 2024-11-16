@@ -17,7 +17,7 @@ namespace TM.Synergy
 
         [SerializeReference, SerializeReferenceDropdown] private List<TMSynergyEffectCreator> _synergyEffects = new();
 
-        [SerializeField] private LocalizedString _localizedSynergyName;
+        [SerializeField, LocalizedString(tableName:"SynergyName")] private LocalizedString _localizedSynergyName;
 
         public TMSynergy CreateSynergy()
         {

@@ -16,10 +16,10 @@ MonoBehaviour:
   _synergyEffects: []
   _localizedSynergyName:
     m_TableReference:
-      m_TableCollectionName: GUID:d1aec9023d60d4302b63cdf07385a2f1
+      m_TableCollectionName: SynergyName
     m_TableEntryReference:
       m_KeyId: 177883570176
-      m_Key: 
+      m_Key: CCorporation
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []

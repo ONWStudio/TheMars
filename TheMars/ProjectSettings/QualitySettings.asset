@@ -178,7 +178,7 @@ QualitySettings:
     realtimeReflectionProbes: 0
     billboardsFaceCameraPosition: 0
     useLegacyDetailDistribution: 1
-    vSyncCount: 0
+    vSyncCount: 2
     realtimeGICPUUsage: 50
     lodBias: 2
     maximumLODLevel: 0
@@ -214,7 +214,7 @@ QualitySettings:
     PS4: 3
     PSM: 3
     PSP2: 1
-    Server: 0
+    Server: 3
     Stadia: 3
     Standalone: 3
     Tizen: 1

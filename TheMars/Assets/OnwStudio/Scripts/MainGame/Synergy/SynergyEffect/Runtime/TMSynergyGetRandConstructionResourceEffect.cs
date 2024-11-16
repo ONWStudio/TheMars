@@ -16,12 +16,12 @@ namespace TM.Synergy.Effect
 
         public override void ApplyEffect(TMSynergy synergy)
         {
-            TMSimulator.Instance.OnChangedDay += onChangedDay;
+            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
         }
         
         public override void UnapplyEffect(TMSynergy synergy)
         {
-            TMSimulator.Instance.OnChangedDay -= onChangedDay;
+            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
         }
 
         private void onChangedDay(int day)
@@ -31,13 +31,13 @@ namespace TM.Synergy.Effect
             switch (rand)
             {
                 case 0:
-                    TMPlayerManager.Instance.Steel += Resource;
+                    TMPlayerManager.Instance.Steel.Value += Resource;
                     break;
                 case 1:
-                    TMPlayerManager.Instance.Plants += Resource;
+                    TMPlayerManager.Instance.Plants.Value += Resource;
                     break;
                 case 2:
-                    TMPlayerManager.Instance.Clay += Resource;
+                    TMPlayerManager.Instance.Clay.Value += Resource;
                     break;
             }
         }

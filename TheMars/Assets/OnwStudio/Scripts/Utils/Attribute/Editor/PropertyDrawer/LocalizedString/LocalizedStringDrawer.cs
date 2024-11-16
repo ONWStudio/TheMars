@@ -44,54 +44,6 @@ namespace Onw.Attribute.Editor
             int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
             
-            SerializedProperty tableReferenceProp = property.FindPropertyRelative("m_TableReference");
-            SerializedProperty tableEntryReferenceProp = property.FindPropertyRelative("m_TableEntryReference");
-            SerializedProperty tableNameProp = tableReferenceProp.FindPropertyRelative("m_TableCollectionName");
-            SerializedProperty tableEntryKeyProp = tableEntryReferenceProp.FindPropertyRelative("m_Key");
-
-            // 테이블 이름 및 엔트리 키 설정
-            string tableName = attr.TableName;
-            if (string.IsNullOrEmpty(tableName))
-            {
-                tableName = tableNameProp.stringValue;
-                if (string.IsNullOrEmpty(tableName))
-                {
-                    tableName = tableNameProp.stringValue = property.serializedObject.targetObject.GetType().Name;
-                }
-                else
-                {
-                    if (tableName != property.serializedObject.targetObject.GetType().Name)
-                    {
-                        tableName = tableNameProp.stringValue = property.serializedObject.targetObject.GetType().Name;
-                    }
-                }
-            }
-
-            string entryKey = attr.EntryKey;
-            if (string.IsNullOrEmpty(entryKey))
-            {
-                entryKey = tableEntryKeyProp.stringValue;
-            }
-            
-            // 테이블 컬렉션 가져오기
-            StringTableCollection tableCollection = getTableCollection(tableName);
-            // 엔트리 가져오기
-            SharedTableData.SharedTableEntry sharedTableEntry = null;
-            if (tableCollection)
-            {
-                sharedTableEntry = getSharedTableEntry(tableCollection, entryKey);
-                tableReferenceProp.FindPropertyRelative("m_TableCollectionName").stringValue = tableCollection.SharedData.TableCollectionName;
-
-                if (sharedTableEntry is null && !string.IsNullOrEmpty(attr.EntryKey))
-                {
-                    sharedTableEntry = tableCollection.SharedData.AddKey(entryKey);
-                    EditorUtility.SetDirty(tableCollection);
-                    EditorUtility.SetDirty(tableCollection.SharedData);
-                }
-            }
-
-            tableEntryReferenceProp.FindPropertyRelative("m_KeyId").longValue = sharedTableEntry?.Id ?? 0;
-            
             // 현재 위치 저장
             Rect currentPosition = position;
 
@@ -104,30 +56,98 @@ namespace Onw.Attribute.Editor
 
             if (property.isExpanded)
             {
+                SerializedProperty tableReferenceProp = property.FindPropertyRelative("m_TableReference");
+                SerializedProperty tableEntryReferenceProp = property.FindPropertyRelative("m_TableEntryReference");
+                SerializedProperty tableNameProp = tableReferenceProp.FindPropertyRelative("m_TableCollectionName");
+                SerializedProperty tableEntryKeyProp = tableEntryReferenceProp.FindPropertyRelative("m_Key");
+
+                // 테이블 이름 및 엔트리 키 설정
+                string tableName = "";
+
+                if (!attr.CanSelectTable)
+                {
+                    tableName = attr.TableName;
+
+                    if (string.IsNullOrEmpty(tableName))
+                    {
+                        tableName = tableNameProp.stringValue;
+                        if (string.IsNullOrEmpty(tableName))
+                        {
+                            tableName = tableNameProp.stringValue = property.serializedObject.targetObject.GetType().Name;
+                        }
+                        else
+                        {
+                            if (tableName != property.serializedObject.targetObject.GetType().Name)
+                            {
+                                tableName = tableNameProp.stringValue = property.serializedObject.targetObject.GetType().Name;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    tableName = tableNameProp.stringValue;
+
+                    tableName = EditorGUI.TextField(currentPosition, "Table Name", tableName);
+                    currentPosition.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                    if (tableName != tableNameProp.stringValue)
+                    {
+                        tableNameProp.stringValue = tableName;
+                    }
+                }
+
+                string entryKey = attr.EntryKey;
+                if (string.IsNullOrEmpty(entryKey))
+                {
+                    entryKey = tableEntryKeyProp.stringValue;
+                }
+
+                // 테이블 컬렉션 가져오기
+                StringTableCollection tableCollection = getTableCollection(tableName);
+                // 엔트리 가져오기
+                SharedTableData.SharedTableEntry sharedTableEntry = null;
+                if (tableCollection)
+                {
+                    sharedTableEntry = getSharedTableEntry(tableCollection, entryKey);
+                    tableReferenceProp.FindPropertyRelative("m_TableCollectionName").stringValue = tableCollection.SharedData.TableCollectionName;
+
+                    if (sharedTableEntry is null && !string.IsNullOrEmpty(attr.EntryKey))
+                    {
+                        sharedTableEntry = tableCollection.SharedData.AddKey(entryKey);
+                        EditorUtility.SetDirty(tableCollection);
+                        EditorUtility.SetDirty(tableCollection.SharedData);
+                    }
+                }
+
+                tableEntryReferenceProp.FindPropertyRelative("m_KeyId").longValue = sharedTableEntry?.Id ?? 0;
+
                 if (!tableCollection)
                 {
                     EditorGUI.HelpBox(currentPosition, $"테이블 '{tableName}'이(가) 존재하지 않습니다.", MessageType.Error);
                     currentPosition.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 
                     // 테이블 생성 버튼 제공
-                    if (GUI.Button(new(currentPosition.x, currentPosition.y, currentPosition.width, EditorGUIUtility.singleLineHeight), "테이블 생성"))
+                    if (!string.IsNullOrEmpty(tableName))
                     {
-                        // 테이블 생성 로직
-                        string folderPath = EditorUtility.OpenFolderPanel("테이블을 생성할 폴더를 선택하세요.", "Assets", "") + $"/{tableName}/";
-                        if (!string.IsNullOrEmpty(folderPath))
+                        if (GUI.Button(new(currentPosition.x, currentPosition.y, currentPosition.width, EditorGUIUtility.singleLineHeight), "테이블 생성"))
                         {
-                            folderPath = FileUtil.GetProjectRelativePath(folderPath);
-                            if (string.IsNullOrEmpty(folderPath))
+                            // 테이블 생성 로직
+                            string folderPath = EditorUtility.OpenFolderPanel("테이블을 생성할 폴더를 선택하세요.", "Assets", "") + $"/{tableName}/";
+                            if (!string.IsNullOrEmpty(folderPath))
                             {
-                                Debug.LogError("선택한 폴더가 프로젝트 내에 없습니다.");
-                            }
-                            else
-                            {
-                                createStringTable(tableName, folderPath);
+                                folderPath = FileUtil.GetProjectRelativePath(folderPath);
+                                if (string.IsNullOrEmpty(folderPath))
+                                {
+                                    Debug.LogError("선택한 폴더가 프로젝트 내에 없습니다.");
+                                }
+                                else
+                                {
+                                    createStringTable(tableName, folderPath);
+                                }
                             }
                         }
+                        currentPosition.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                     }
-                    currentPosition.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                 }
                 else if (sharedTableEntry is null)
                 {
@@ -143,11 +163,21 @@ namespace Onw.Attribute.Editor
                     {
                         SharedTableData tableData = tableCollection.SharedData;
 
-                        string key = EditorGUI.TextField(currentPosition, "Entry Key", sharedTableEntry.Key);
+                        float halfCurrentPositionWidth = currentPosition.width * 0.5f;
+                        Rect keyTextRect = new(currentPosition.x, currentPosition.y, halfCurrentPositionWidth - EditorGUIUtility.standardVerticalSpacing, currentPosition.height);
+                        Rect deleteButtonRect = new(currentPosition.x + halfCurrentPositionWidth, currentPosition.y, halfCurrentPositionWidth, currentPosition.height);
+                        string key = EditorGUI.TextField(keyTextRect, "Entry Key", sharedTableEntry.Key);
                         if (key != sharedTableEntry.Key && !string.IsNullOrEmpty(key) && !tableData.Entries.Any(entry => entry != sharedTableEntry && entry.Key == key))
                         {
                             tableData.RenameKey(sharedTableEntry.Key, key);
                             tableEntryKeyProp.stringValue = key;
+                            EditorUtility.SetDirty(tableData);
+                        }
+
+                        if (GUI.Button(deleteButtonRect, "Delete"))
+                        {
+                            tableData.RemoveKey(sharedTableEntry.Key);
+                            tableEntryKeyProp.stringValue = "";
                             EditorUtility.SetDirty(tableData);
                         }
 
@@ -164,7 +194,9 @@ namespace Onw.Attribute.Editor
                             // 엔트리 가져오기
                             // 엔트리가 없을 경우 생성
                             StringTableEntry entry = stringTable.GetEntry(sharedTableEntry.Id) ?? stringTable.AddEntry(sharedTableEntry.Id, "");
-
+                            
+                            EditorGUI.LabelField(currentPosition, locale.LocaleName);
+                            currentPosition.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                             // 번역 값 표시 및 편집
                             Rect optionRect = new(currentPosition.x, currentPosition.y, currentPosition.width, EditorGUIUtility.singleLineHeight * 5 + EditorGUIUtility.standardVerticalSpacing * 2);
                             EditorGUI.DrawRect(optionRect, ColorUtility.TryParseHtmlString("#413a4f", out Color color) ? color : Color.black);
@@ -205,7 +237,7 @@ namespace Onw.Attribute.Editor
                 {
                     Rect buttonRect = new(currentPosition.x, currentPosition.y, currentPosition.width, EditorGUIUtility.singleLineHeight);
                     // 엔트리 생성 버튼 제공
-                    if (GUI.Button(buttonRect, "엔트리 생성"))
+                    if (GUI.Button(buttonRect, "엔트리 선택"))
                     {
                         _entryDropdown = new(new(), getTableCollection(tableName), tableCollection.SharedData)
                         {
@@ -241,6 +273,12 @@ namespace Onw.Attribute.Editor
 
                 StringTableCollection tableCollection = getTableCollection(tableName);
                 SharedTableData.SharedTableEntry sharedTableEntry = null;
+
+                if (attr.CanSelectTable)
+                {
+                    totalHeight += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                }
+
                 if (tableCollection)
                 {
                     sharedTableEntry = getSharedTableEntry(tableCollection, entryKey);
@@ -248,7 +286,10 @@ namespace Onw.Attribute.Editor
 
                 if (!tableCollection)
                 {
-                    totalHeight += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                    if (!string.IsNullOrEmpty(tableName))
+                    {
+                        totalHeight += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                    }
                 }
                 else
                 {
@@ -261,7 +302,7 @@ namespace Onw.Attribute.Editor
                     {
                         // 로케일 목록 가져오기
                         List<Locale> locales = getLocales();
-                        totalHeight += locales.Sum(_ => EditorGUIUtility.singleLineHeight * 5 + EditorGUIUtility.standardVerticalSpacing * 2);
+                        totalHeight += locales.Sum(_ => EditorGUIUtility.singleLineHeight * 6 + EditorGUIUtility.standardVerticalSpacing * 3);
                     }
                 }
 

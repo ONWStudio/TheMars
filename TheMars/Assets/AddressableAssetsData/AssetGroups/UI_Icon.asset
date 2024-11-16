@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UI_Icon
+  m_EditorClassIdentifier: 
+  m_GroupName: UI_Icon
+  m_Data:
+    m_SerializedData: []
+  m_GUID: ea2b52a386c7a43b4a426d091b55315c
+  m_SerializeEntries:
+  - m_GUID: 729fa1acfa3485e46bf498b3f8493e06
+    m_Address: Credit_Icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ff5d6fba10b2b544ac75fe449d694cb
+    m_Address: Electricity_Icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a1a1dc01f1aefb644b328792baa6b782
+    m_Address: Clay_Icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2c541aa4b89997d48b5e46055fc7f0be
+    m_Address: Plant_Icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 55b14bfbc4ccbb44c87fd44015055ccb
+    m_Address: Steel_Icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe42c8b526e77e54ab91d0590272d9e8
+    m_Address: MarsLithium_Icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f35238a7de36f264abdbef036bf7a39c
+    m_Address: Population_Icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 548fe7bff7960b243a7ce44defcfd620
+    m_Address: Satisfaction_Icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23d88dead969bc44dad23b0ae4598cee
+    m_Address: Population-plus
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ba54b880c23b0d4091300d2055a8863
+    m_Address: Population-minus
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 53eb3bd3621bf9b4889474f78d0a0d75
+    m_Address: Satisfaction-minus
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 3f430e5b5c626400b837c52ed98c1bc2, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: a253db8fa6c9e44cb9cbc8e0e60abf51, type: 2}
+    - {fileID: 11400000, guid: 2caecad4aaf224af4927c01b9fbbe582, type: 2}

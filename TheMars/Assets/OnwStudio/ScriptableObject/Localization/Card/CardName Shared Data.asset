@@ -15,24 +15,28 @@ MonoBehaviour:
   m_TableCollectionName: CardName
   m_TableCollectionNameGuidString: d980be908d5ad4cfc8c5ca05a4f17d26
   m_Entries:
-  - m_Id: 26343366656
-    m_Key: "\uD1A0\uC591 \uC5F0\uAD6C"
+  - m_Id: 38579727594491904
+    m_Key: ATMOS
     m_Metadata:
       m_Items: []
-  - m_Id: 4628893234356224
-    m_Key: "\uD654\uC131 \uACE0\uAD6C\uB9C8"
+  - m_Id: 39046077467136000
+    m_Key: NuclearPowerPlant
     m_Metadata:
       m_Items: []
-  - m_Id: 4694772995231744
-    m_Key: "\uACFC\uB85C"
+  - m_Id: 39056382259695616
+    m_Key: CreditSupplyStation
     m_Metadata:
       m_Items: []
-  - m_Id: 4700310189543424
-    m_Key: "\uD654\uC131 \uCC9C\uBB38\uD559"
+  - m_Id: 39057165646630912
+    m_Key: MarsLithiumDigger
     m_Metadata:
       m_Items: []
-  - m_Id: 7973635925991424
-    m_Key: "\uC9C0\uD45C \uD22C\uACFC \uB808\uC774\uB354"
+  - m_Id: 39058038531624960
+    m_Key: SteelDigger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39058732974149632
+    m_Key: ClayDigger
     m_Metadata:
       m_Items: []
   - m_Id: 36205965576409088

@@ -2173,8 +2173,12 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1409365565}
   m_HandleRect: {fileID: 1409365564}
   m_Direction: 0
+<<<<<<< Updated upstream
+  m_Value: 1
+=======
   m_Value: 0
-  m_Size: 1
+>>>>>>> Stashed changes
+  m_Size: 0.9999991
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2646,94 +2650,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 217083913}
   m_CullTransparentMesh: 1
---- !u!1001 &228031769
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 2a04fbf7ea270d74987b7f9e3d218371,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 4.5974216
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2a04fbf7ea270d74987b7f9e3d218371,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 4.5974216
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2a04fbf7ea270d74987b7f9e3d218371,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 4.5974216
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2a04fbf7ea270d74987b7f9e3d218371,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 255.36975
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2a04fbf7ea270d74987b7f9e3d218371,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 115.1377
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2a04fbf7ea270d74987b7f9e3d218371,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 263.22046
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2a04fbf7ea270d74987b7f9e3d218371,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2a04fbf7ea270d74987b7f9e3d218371,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2a04fbf7ea270d74987b7f9e3d218371,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2a04fbf7ea270d74987b7f9e3d218371,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2a04fbf7ea270d74987b7f9e3d218371,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2a04fbf7ea270d74987b7f9e3d218371,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2a04fbf7ea270d74987b7f9e3d218371,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: 2a04fbf7ea270d74987b7f9e3d218371,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 7f070b0d1ee20444b9ba3a401f421622, type: 2}
-    - target: {fileID: 919132149155446097, guid: 2a04fbf7ea270d74987b7f9e3d218371,
-        type: 3}
-      propertyPath: m_Name
-      value: ss
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2a04fbf7ea270d74987b7f9e3d218371, type: 3}
 --- !u!1 &237977791
 GameObject:
   m_ObjectHideFlags: 0
@@ -3006,7 +2922,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.9492188, y: -3.1987305}
+  m_AnchoredPosition: {x: -4.9492188, y: -3.1989746}
   m_SizeDelta: {x: -9.9, y: 6.3978}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &248756653
@@ -3654,7 +3570,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1293665493}
   - {fileID: 133379716}
   - {fileID: 173582849}
   - {fileID: 1309796624}
@@ -5046,81 +4961,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 491025568}
   m_CullTransparentMesh: 1
---- !u!1 &491302325
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 491302326}
-  - component: {fileID: 491302328}
-  - component: {fileID: 491302327}
-  m_Layer: 6
-  m_Name: Other_Event_Effects
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &491302326
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 491302325}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 998182974}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.39395833, y: 0.52496094}
-  m_AnchorMax: {x: 0.40697917, y: 0.54807293}
-  m_AnchoredPosition: {x: 4.401, y: -1.4092}
-  m_SizeDelta: {x: 26.84, y: 23.41}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &491302327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 491302325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 93252b6784f51784abf4335b6acbeb33, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &491302328
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 491302325}
-  m_CullTransparentMesh: 1
 --- !u!1 &500228973
 GameObject:
   m_ObjectHideFlags: 0
@@ -5230,8 +5070,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.37, y: -8.56}
-  m_SizeDelta: {x: 110.55, y: 138.46}
+  m_AnchoredPosition: {x: -0.56, y: -8.38}
+  m_SizeDelta: {x: 117.52, y: 146.17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &501419902
 MonoBehaviour:
@@ -7347,7 +7187,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 35.957}
   m_AnchorMin: {x: 0.183513, y: 0.00000002644956}
   m_AnchorMax: {x: 1, y: 0.05562593}
-  m_AnchoredPosition: {x: 756, y: 10.987061}
+  m_AnchoredPosition: {x: 756, y: 10.986938}
   m_SizeDelta: {x: -545.62, y: 421.93}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &921509769
@@ -7678,83 +7518,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975967797}
-  m_CullTransparentMesh: 1
---- !u!1 &998182973
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 998182974}
-  - component: {fileID: 998182976}
-  - component: {fileID: 998182975}
-  m_Layer: 6
-  m_Name: Other_Event_Effects_BG
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &998182974
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 998182973}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0002308, y: 1.0002308, z: 1.0002308}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 491302326}
-  - {fileID: 1602472060}
-  m_Father: {fileID: 1639751532}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.39395833, y: 0.52496094}
-  m_AnchorMax: {x: 0.40697917, y: 0.54807293}
-  m_AnchoredPosition: {x: 47.899662, y: -2.6534278}
-  m_SizeDelta: {x: 40.71, y: 36.91}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &998182975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 998182973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.7075472, g: 0.56323177, b: 0.1702118, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 697bfce85f55c8945a443bc933987dd0, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &998182976
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 998182973}
   m_CullTransparentMesh: 1
 --- !u!1 &1000219403
 GameObject:
@@ -9654,16 +9417,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293665492}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 341671886}
+  m_Father: {fileID: 1439010216}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000091552734, y: 0}
+  m_AnchoredPosition: {x: 277.19, y: -266.62}
   m_SizeDelta: {x: 212.38, y: 266.76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1293665494
@@ -10091,7 +9854,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0080839, y: 0.050643813}
   m_AnchorMax: {x: 0.12705791, y: 0.2552602}
-  m_AnchoredPosition: {x: -11.160156, y: -169.9795}
+<<<<<<< Updated upstream
+  m_AnchoredPosition: {x: -11.160156, y: -169.97978}
+=======
+  m_AnchoredPosition: {x: -11.160156, y: -169.97949}
+>>>>>>> Stashed changes
   m_SizeDelta: {x: 214.62, y: -65.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1392211612
@@ -10462,6 +10229,7 @@ RectTransform:
   - {fileID: 2123314864}
   - {fileID: 179834482}
   - {fileID: 341671886}
+  - {fileID: 1293665493}
   m_Father: {fileID: 1515806360}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -10986,7 +10754,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0255625, y: 0.95334613}
   m_AnchorMax: {x: 0.18520832, y: 1.0229502}
-  m_AnchoredPosition: {x: 747.76074, y: 58.999992}
+  m_AnchoredPosition: {x: 747.76013, y: 59.000122}
   m_SizeDelta: {x: 833.82, y: 364.39}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1475752093
@@ -11451,81 +11219,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519671292}
   m_CullTransparentMesh: 1
---- !u!1 &1602472059
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1602472060}
-  - component: {fileID: 1602472062}
-  - component: {fileID: 1602472061}
-  m_Layer: 6
-  m_Name: Other_Event_Effects
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1602472060
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1602472059}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 998182974}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.39395833, y: 0.52500004}
-  m_AnchorMax: {x: 0.40697917, y: 0.54807293}
-  m_AnchoredPosition: {x: 4.398041, y: -1.4091654}
-  m_SizeDelta: {x: 43.6305, y: 37.697483}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1602472061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1602472059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.85882354, g: 0.5951318, b: 0.09411765, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c154c31a2d9358e429e2dcc2d23b4894, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1602472062
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1602472059}
-  m_CullTransparentMesh: 1
 --- !u!1 &1626244289
 GameObject:
   m_ObjectHideFlags: 0
@@ -11634,7 +11327,6 @@ RectTransform:
   - {fileID: 500228974}
   - {fileID: 1868251320}
   - {fileID: 196016084}
-  - {fileID: 998182974}
   m_Father: {fileID: 1439010216}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -13672,7 +13364,7 @@ MonoBehaviour:
           <R>k__BackingField: -3
           <S>k__BackingField: 6
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -13992,7 +13684,7 @@ MonoBehaviour:
           <R>k__BackingField: -4
           <S>k__BackingField: 6
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -14024,7 +13716,7 @@ MonoBehaviour:
           <R>k__BackingField: -3
           <S>k__BackingField: 5
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -14056,7 +13748,7 @@ MonoBehaviour:
           <R>k__BackingField: -2
           <S>k__BackingField: 4
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -14088,7 +13780,7 @@ MonoBehaviour:
           <R>k__BackingField: -1
           <S>k__BackingField: 3
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -14344,7 +14036,7 @@ MonoBehaviour:
           <R>k__BackingField: -5
           <S>k__BackingField: 6
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -14376,7 +14068,7 @@ MonoBehaviour:
           <R>k__BackingField: -4
           <S>k__BackingField: 5
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -14408,7 +14100,7 @@ MonoBehaviour:
           <R>k__BackingField: -3
           <S>k__BackingField: 4
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -14440,7 +14132,7 @@ MonoBehaviour:
           <R>k__BackingField: -2
           <S>k__BackingField: 3
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -14472,7 +14164,7 @@ MonoBehaviour:
           <R>k__BackingField: -1
           <S>k__BackingField: 2
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -14760,7 +14452,7 @@ MonoBehaviour:
           <R>k__BackingField: -5
           <S>k__BackingField: 5
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -14792,7 +14484,7 @@ MonoBehaviour:
           <R>k__BackingField: -4
           <S>k__BackingField: 4
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -14824,7 +14516,7 @@ MonoBehaviour:
           <R>k__BackingField: -3
           <S>k__BackingField: 3
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -14856,7 +14548,7 @@ MonoBehaviour:
           <R>k__BackingField: -2
           <S>k__BackingField: 2
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -14888,7 +14580,7 @@ MonoBehaviour:
           <R>k__BackingField: -1
           <S>k__BackingField: 1
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -15144,7 +14836,7 @@ MonoBehaviour:
           <R>k__BackingField: -6
           <S>k__BackingField: 5
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -15176,7 +14868,7 @@ MonoBehaviour:
           <R>k__BackingField: -5
           <S>k__BackingField: 4
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -15208,7 +14900,7 @@ MonoBehaviour:
           <R>k__BackingField: -4
           <S>k__BackingField: 3
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -15240,7 +14932,7 @@ MonoBehaviour:
           <R>k__BackingField: -3
           <S>k__BackingField: 2
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -15272,7 +14964,7 @@ MonoBehaviour:
           <R>k__BackingField: -2
           <S>k__BackingField: 1
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -15304,7 +14996,7 @@ MonoBehaviour:
           <R>k__BackingField: -1
           <S>k__BackingField: 0
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.059979167, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -15528,7 +15220,7 @@ MonoBehaviour:
           <R>k__BackingField: -6
           <S>k__BackingField: 4
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -15560,7 +15252,7 @@ MonoBehaviour:
           <R>k__BackingField: -5
           <S>k__BackingField: 3
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -15592,7 +15284,7 @@ MonoBehaviour:
           <R>k__BackingField: -4
           <S>k__BackingField: 2
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -15624,7 +15316,7 @@ MonoBehaviour:
           <R>k__BackingField: -3
           <S>k__BackingField: 1
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -15656,7 +15348,7 @@ MonoBehaviour:
           <R>k__BackingField: -2
           <S>k__BackingField: 0
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -15688,7 +15380,7 @@ MonoBehaviour:
           <R>k__BackingField: -1
           <S>k__BackingField: -1
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -15880,7 +15572,7 @@ MonoBehaviour:
           <R>k__BackingField: -6
           <S>k__BackingField: 3
         _isActive: 1
-        _color: {r: 0.050980393, g: 0.4862745, b: 0.4, a: 1}
+        _color: {r: 1, g: 0.9098039, b: 0.09803922, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -15912,7 +15604,7 @@ MonoBehaviour:
           <R>k__BackingField: -5
           <S>k__BackingField: 2
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -15944,7 +15636,7 @@ MonoBehaviour:
           <R>k__BackingField: -4
           <S>k__BackingField: 1
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -15976,7 +15668,7 @@ MonoBehaviour:
           <R>k__BackingField: -3
           <S>k__BackingField: 0
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16008,7 +15700,7 @@ MonoBehaviour:
           <R>k__BackingField: -2
           <S>k__BackingField: -1
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16040,7 +15732,7 @@ MonoBehaviour:
           <R>k__BackingField: -1
           <S>k__BackingField: -2
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16072,7 +15764,7 @@ MonoBehaviour:
           <R>k__BackingField: 0
           <S>k__BackingField: -3
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16104,7 +15796,7 @@ MonoBehaviour:
           <R>k__BackingField: 1
           <S>k__BackingField: -4
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16232,7 +15924,7 @@ MonoBehaviour:
           <R>k__BackingField: -5
           <S>k__BackingField: 1
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16264,7 +15956,7 @@ MonoBehaviour:
           <R>k__BackingField: -4
           <S>k__BackingField: 0
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16296,7 +15988,7 @@ MonoBehaviour:
           <R>k__BackingField: -3
           <S>k__BackingField: -1
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16328,7 +16020,7 @@ MonoBehaviour:
           <R>k__BackingField: -2
           <S>k__BackingField: -2
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16360,7 +16052,7 @@ MonoBehaviour:
           <R>k__BackingField: -1
           <S>k__BackingField: -3
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16392,7 +16084,7 @@ MonoBehaviour:
           <R>k__BackingField: 0
           <S>k__BackingField: -4
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16520,7 +16212,7 @@ MonoBehaviour:
           <R>k__BackingField: -5
           <S>k__BackingField: 0
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16552,7 +16244,7 @@ MonoBehaviour:
           <R>k__BackingField: -4
           <S>k__BackingField: -1
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16584,7 +16276,7 @@ MonoBehaviour:
           <R>k__BackingField: -3
           <S>k__BackingField: -2
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16616,7 +16308,7 @@ MonoBehaviour:
           <R>k__BackingField: -2
           <S>k__BackingField: -3
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16648,7 +16340,7 @@ MonoBehaviour:
           <R>k__BackingField: -1
           <S>k__BackingField: -4
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.56231964, b: 0.5330188, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16776,7 +16468,7 @@ MonoBehaviour:
           <R>k__BackingField: -5
           <S>k__BackingField: -1
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16808,7 +16500,7 @@ MonoBehaviour:
           <R>k__BackingField: -4
           <S>k__BackingField: -2
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16840,7 +16532,7 @@ MonoBehaviour:
           <R>k__BackingField: -3
           <S>k__BackingField: -3
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.0627451, b: 0, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -16872,7 +16564,7 @@ MonoBehaviour:
           <R>k__BackingField: -2
           <S>k__BackingField: -4
         _isActive: 1
-        _color: {r: 0.6313726, g: 0.8392157, b: 0.69803923, a: 1}
+        _color: {r: 1, g: 0.34126896, b: 0.2971698, a: 1}
         _onHighlightTile:
           m_PersistentCalls:
             m_Calls: []
@@ -17360,7 +17052,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.00000071199815, y: 0.0009099959}
   m_AnchorMax: {x: 0.00000071199815, y: 0.99910307}
-  m_AnchoredPosition: {x: 0.0022125244, y: 0}
+<<<<<<< Updated upstream
+  m_AnchoredPosition: {x: -0.00012207031, y: 0}
+=======
+  m_AnchoredPosition: {x: -0.00077819824, y: 0}
+>>>>>>> Stashed changes
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2064802127
@@ -17547,7 +17243,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1868251320}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.39395833, y: 0.52500004}
+  m_AnchorMin: {x: 0.39395833, y: 0.52496094}
   m_AnchorMax: {x: 0.40697917, y: 0.54807293}
   m_AnchoredPosition: {x: 4.398041, y: -1.4091654}
   m_SizeDelta: {x: 43.6305, y: 37.697483}
@@ -17905,7 +17601,6 @@ SceneRoots:
   - {fileID: 324596371}
   - {fileID: 824873969}
   - {fileID: 649548569}
-  - {fileID: 228031769}
   - {fileID: 165808329}
   - {fileID: 1032013421}
   - {fileID: 1260435455}

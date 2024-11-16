@@ -27,7 +27,7 @@ namespace TM.Synergy
 
         private bool _isApplicationQuit = false;
 
-        [SerializeField, ReadOnly] private UnityEvent<IReadOnlyDictionary<string, TMSynergy>> _onUpdateSynergies = new();
+        [SerializeField] private UnityEvent<IReadOnlyDictionary<string, TMSynergy>> _onUpdateSynergies = new();
 
         private void Start()
         {

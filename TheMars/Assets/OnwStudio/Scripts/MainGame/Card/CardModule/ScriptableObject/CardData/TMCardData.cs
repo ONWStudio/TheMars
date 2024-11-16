@@ -22,17 +22,21 @@ namespace TM.Card
         [field: SerializeField, DisplayAs("카드 이미지"), Tooltip("카드의 대표 이미지"), SpritePreview]
         public Sprite CardImage { get; private set; } = null;
 
+        [field: SerializeField, DisplayAs("카드 고유 키 (모든 카드의 키값은 달라야 합니다)")]
+        public string CardKey { get; private set; } = string.Empty;
         public string CardName => _localizedCardName.TryGetLocalizedString(out string cardName) ? cardName : "";
 
         public IReadOnlyList<TMCardSubCost> CardCosts => _cardCosts;
         
-        [SerializeField, LocalizedString("CardName")] private LocalizedString _localizedCardName;
+        [SerializeField, LocalizedString(tableName: "CardName")] private LocalizedString _localizedCardName;
         
         [SerializeReference, SerializeReferenceDropdown, DisplayAs("카드 효과"), Tooltip("카드 효과")]
         private TMCardEffectCreator _cardEffectCreator = null;
 
         [field: SerializeField, DisplayAs("서브 코스트"), Tooltip("서브 코스트")]
         private List<TMCardSubCost> _cardCosts;
+
+        public TMCardKind Kind => CheckTypeEffectCreator<TMCardBuildingCreateEffectCreator>() ? TMCardKind.CONSTRUCTION : TMCardKind.EFFECT;
 
         public ITMCardEffect CreateCardEffect()
         {

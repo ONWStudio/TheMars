@@ -15,38 +15,21 @@ namespace TM.Card.Effect
     [System.Serializable]
     public sealed class TMCardGetResourceEffect : ITMCardResourceEffect, ITMCardInitializeEffect<TMCardGetResourceEffectCreator>
     {
-        //public string Description
-        //{
-        //    get
-        //    {
-        //        return string
-        //            .Join("\n", _resources
-        //                .Values
-        //                .Select(selector));
-
-        //        string selector(TMResourceDataForRuntime resource)
-        //        {
-        //            string description = $"{RichTextFormatter.SpriteIcon((int)resource.ResourceKind)}{(resource.FinalResource < 0 ? resource.FinalResource.ToString() : $"+{resource.FinalResource}")}";
-
-        //            if (resource.AdditionalResource != 0)
-        //            {
-        //                description +=
-        //                    resource.AdditionalResource > 0 ?
-        //                        RichTextFormatter.Colorize($"+{resource.AdditionalResource}", Color.green) :
-        //                        RichTextFormatter.Colorize(resource.AdditionalResource.ToString(), Color.red);
-        //            }
-
-        //            return description;
-        //        }
-        //    }
-        //}
-
         public IReadOnlyDictionary<TMResourceKind, TMResourceDataForRuntime> Resources => _resources;
 
-        [field: SerializeField] public LocalizedString LocalizedDescription { get; private set; }
-
+        public bool CanUseEffect => true;
 
         private Dictionary<TMResourceKind, TMResourceDataForRuntime> _resources = new();
+
+        public event LocalizedString.ChangeHandler OnChangedDescription
+        {
+            add => _localizedDescription.StringChanged += value;
+            remove => _localizedDescription.StringChanged -= value;
+        }
+
+        [SerializeField, ReadOnly]
+        private LocalizedString _localizedDescription = new("TM_Card_Effect", "Get_Resource_Effect");
+
 
         public void AddResource(TMResourceKind resourceKind, int additionalAmount)
         {
@@ -66,16 +49,29 @@ namespace TM.Card.Effect
                 .ToDictionary(
                     resource => resource.ResourceKind,
                     resource => (TMResourceDataForRuntime)resource);
-        }
 
 
-        public void ApplyEffect(TMCardModel cardModel, ITMCardEffectTrigger trigger)
-        {
-            trigger.OnEffectEvent += _ =>
-                _resources.Values.ForEach(resource
-                    => TMPlayerManager.Instance.AddResource(resource.ResourceKind, resource.FinalResource));
+            _localizedDescription.Arguments = new object[] 
+            { 
+                _resources.Values.Select(data => new
+                {
+                    Kind = data.ResourceKind,
+                    Resource = Mathf.Abs(data.FinalResource),
+                    Positive = data.FinalResource >= 0
+                }).ToList()
+            };
         }
 
         public void Dispose() { }
+
+        public void ApplyEffect(TMCardModel cardModel)
+        {
+        }
+
+        public void OnEffect(TMCardModel cardModel)
+        {
+            _resources.Values.ForEach(resource
+                    => TMPlayerManager.Instance.AddResource(resource.ResourceKind, resource.FinalResource));
+        }
     }
 }

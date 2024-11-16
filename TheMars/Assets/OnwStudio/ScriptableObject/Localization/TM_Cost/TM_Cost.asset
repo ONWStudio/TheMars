@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
+  m_Name: TM_Cost
+  m_EditorClassIdentifier: 
+  m_SharedTableData: {fileID: 11400000, guid: 718513ed77106ec49b29e688f13a7790, type: 2}
+  m_Tables:
+  - {fileID: 11400000, guid: 90703b916f2070945990028cf51c8808, type: 2}
+  - {fileID: 11400000, guid: dbfe81ffb4fed6f43bfdf798dcd20bd0, type: 2}
+  m_Extensions: []
+  m_Group: String Table
+  references:
+    version: 2
+    RefIds: []

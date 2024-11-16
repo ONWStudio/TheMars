@@ -9,137 +9,57 @@ namespace Onw.Helper
     {
         public static float GetHeightFromVertices(GameObject obj)
         {
-            List<Vector3> vertices = GetVertices(obj);
-
-            if (vertices.Count == 0)
-            {
-#if DEBUG
-                Debug.Log("vertices not found!");
-#endif
-                return 0f;
-            }
-
-            float maxPivot = float.NegativeInfinity;
-            float minPivot = float.PositiveInfinity;
-
-            foreach (Vector3 point in vertices.Select(obj.transform.TransformPoint))
-            {
-                if (point.y > maxPivot)
-                {
-                    maxPivot = point.y;
-                }
-
-                if (point.y < minPivot)
-                {
-                    minPivot = point.y;
-                }
-            }
-
-            return maxPivot - minPivot;
+            return GetTotalSize(obj).y;
         }
 
         public static float GetZWidthFromVertices(GameObject obj)
         {
-            List<Vector3> vertices = GetVertices(obj);
-
-            if (vertices.Count == 0)
-            {
-                Debug.Log("vertices not found!");
-
-                return 0f;
-            }
-
-            float maxPivot = float.NegativeInfinity;
-            float minPivot = float.PositiveInfinity;
-
-            foreach (Vector3 point in vertices.Select(obj.transform.TransformPoint))
-            {
-                if (point.z > maxPivot)
-                {
-                    maxPivot = point.z;
-                }
-
-                if (point.z < minPivot)
-                {
-                    minPivot = point.z;
-                }
-            }
-
-            return maxPivot - minPivot;
+            return GetTotalSize(obj).z;
         }
 
         public static float GetXWidthFromVertices(GameObject obj)
         {
-            List<Vector3> vertices = GetVertices(obj);
-            
-            if (vertices.Count == 0)
+            return GetTotalSize(obj).x;
+        }
+
+        public static Vector3 GetMinPoint(GameObject obj)
+        {
+            Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
+
+            if (renderers.Length == 0)
             {
                 Debug.Log("vertices not found!");
-
-                return 0f;
+                return Vector3.zero;
             }
 
-            float maxPivot = float.NegativeInfinity;
-            float minPivot = float.PositiveInfinity;
+            Bounds totalBounds = renderers[0].bounds;
 
-            foreach (Vector3 point in vertices.Select(obj.transform.TransformPoint))
+            foreach (Renderer renderer in renderers)
             {
-                if (point.x > maxPivot)
-                {
-                    maxPivot = point.x;
-                }
-
-                if (point.x < minPivot)
-                {
-                    minPivot = point.x;
-                }
+                totalBounds.Encapsulate(renderer.bounds);
             }
 
-            return maxPivot - minPivot;
+            return totalBounds.min;
         }
 
-        public static float GetMaxYFromVertices(GameObject obj)
+        public static Vector3 GetTotalSize(GameObject obj)
         {
-            return GetVertices(obj)
-                .Select(vertex => obj.transform.TransformPoint(vertex).y)
-                .Prepend(float.NegativeInfinity)
-                .Max();
-        }
+            Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
 
-        public static float GetMinYFromVertices(GameObject obj)
-        {
-            return GetVertices(obj)
-                .Select(vertex => obj.transform.TransformPoint(vertex).y)
-                .Prepend(float.PositiveInfinity)
-                .Min();
-        }
-
-        public static List<Vector3> GetVertices(GameObject obj)
-        {
-            List<Vector3> vertices = GetVerticesFromMeshFilter(obj);
-
-            if (vertices.Count == 0)
+            if (renderers.Length == 0)
             {
-                vertices.AddRange(GetVerticesFromSkinnedMeshRenderer(obj));
+                Debug.Log("vertices not found!");
+                return Vector3.zero;
             }
 
-            return vertices;
-        }
+            Bounds totalBounds = renderers[0].bounds;
 
-        public static List<Vector3> GetVerticesFromSkinnedMeshRenderer(GameObject obj)
-        {
-            return obj
-                .GetComponentsInChildren<SkinnedMeshRenderer>()
-                .SelectMany(skinnedMeshRenderer => skinnedMeshRenderer.sharedMesh.vertices)
-                .ToList();
-        }
+            foreach (Renderer renderer in renderers)
+            {
+                totalBounds.Encapsulate(renderer.bounds);
+            }
 
-        public static List<Vector3> GetVerticesFromMeshFilter(GameObject obj)
-        {
-            return obj
-                .GetComponentsInChildren<MeshFilter>()
-                .SelectMany(meshFilter => meshFilter.mesh.vertices)
-                .ToList();
+            return totalBounds.size;
         }
     }
 }

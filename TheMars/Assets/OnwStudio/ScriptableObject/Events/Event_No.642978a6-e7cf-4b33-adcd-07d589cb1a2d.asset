@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
+  m_Name: Event_No.642978a6-e7cf-4b33-adcd-07d589cb1a2d
+  m_EditorClassIdentifier: 
+  <TopEventData>k__BackingField: {fileID: 11400000, guid: 07056e1f7249b48b2ad26f041784ab76,
+    type: 2}
+  <BottomEventData>k__BackingField: {fileID: 11400000, guid: a9a114cdab3e94db68ae7f875a495b3f,
+    type: 2}
+  <EventImage>k__BackingField: {fileID: 0}
+  <DescriptionTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMMomentOfACrackEventData
+    m_TableEntryReference:
+      m_KeyId: 316257139154944
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TopButtonTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMMomentOfACrackEventData
+    m_TableEntryReference:
+      m_KeyId: 316257155932160
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <BottomButtonTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMMomentOfACrackEventData
+    m_TableEntryReference:
+      m_KeyId: 316257155932161
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TitleTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMMomentOfACrackEventData
+    m_TableEntryReference:
+      m_KeyId: 316257155932162
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <HasTopEvent>k__BackingField: 1
+  <HasBottomEvent>k__BackingField: 1
+  _topEffectCreators:
+  - rid: 3610285201848008723
+  - rid: 3610285201848008725
+  _bottomEffectCreators:
+  - rid: 3610285201848008730
+  - rid: 3610285201848008729
+  - rid: 3610285201848008731
+  - rid: 3610285201848008732
+  _topUsageCreators:
+  - rid: 3610285201848008734
+  _bottomUsageCreators: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3610285201848008723
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        <BuffTrigger>k__BackingField:
+          rid: 3610285201848008726
+    - rid: 3610285201848008725
+      type: {class: TMEventResourceRangeAddEffectCreator, ns: TM.Event.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <ResourceKind>k__BackingField: 2
+        <Min>k__BackingField: -10
+        <Max>k__BackingField: -5
+    - rid: 3610285201848008726
+      type: {class: TMResourceRepeatAddBuffTrigger, ns: TM.Buff, asm: AssemblyTheMars}
+      data:
+        <RepeatDay>k__BackingField: 1
+        <LimitDay>k__BackingField: 5
+        <IsTemporary>k__BackingField: 0
+        <ResourceKind>k__BackingField: 7
+        <Resource>k__BackingField: -5
+    - rid: 3610285201848008729
+      type: {class: TMEventResourceAddEffectCreator, ns: TM.Event.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <ResourceKind>k__BackingField: 4
+        <Resource>k__BackingField: -40
+    - rid: 3610285201848008730
+      type: {class: TMEventResourceAddEffectCreator, ns: TM.Event.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <ResourceKind>k__BackingField: 3
+        <Resource>k__BackingField: -40
+    - rid: 3610285201848008731
+      type: {class: TMEventResourceAddEffectCreator, ns: TM.Event.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <ResourceKind>k__BackingField: 5
+        <Resource>k__BackingField: -40
+    - rid: 3610285201848008732
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        <BuffTrigger>k__BackingField:
+          rid: 3610285201848008733
+    - rid: 3610285201848008733
+      type: {class: TMResourceRepeatAddBuffTrigger, ns: TM.Buff, asm: AssemblyTheMars}
+      data:
+        <RepeatDay>k__BackingField: 1
+        <LimitDay>k__BackingField: 5
+        <IsTemporary>k__BackingField: 0
+        <ResourceKind>k__BackingField: 7
+        <Resource>k__BackingField: 5
+    - rid: 3610285201848008734
+      type: {class: TMResourceUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
+      data:
+        <ResourceKind>k__BackingField: 2
+        <ResourceUsage>k__BackingField: 20

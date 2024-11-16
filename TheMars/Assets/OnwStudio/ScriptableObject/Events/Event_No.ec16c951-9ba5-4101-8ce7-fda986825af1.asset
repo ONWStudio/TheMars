@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
+  m_Name: Event_No.ec16c951-9ba5-4101-8ce7-fda986825af1
+  m_EditorClassIdentifier: 
+  <TopEventData>k__BackingField: {fileID: 11400000, guid: a0105463cabc1a947954fbe337d1c519,
+    type: 2}
+  <BottomEventData>k__BackingField: {fileID: 11400000, guid: c02bec81ca806c74fbcd4daf3824f51d,
+    type: 2}
+  <EventImage>k__BackingField: {fileID: 0}
+  <DescriptionTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMCostOfDisappointmentEventData
+    m_TableEntryReference:
+      m_KeyId: 2880430080
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TopButtonTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMCostOfDisappointmentEventData
+    m_TableEntryReference:
+      m_KeyId: 20806885376
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <BottomButtonTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMCostOfDisappointmentEventData
+    m_TableEntryReference:
+      m_KeyId: 52067033088
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TitleTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMCostOfDisappointmentEventData
+    m_TableEntryReference:
+      m_KeyId: 74414284800
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <HasTopEvent>k__BackingField: 1
+  <HasBottomEvent>k__BackingField: 1
+  _topEffectCreators:
+  - rid: 4853453505639743502
+  - rid: 4853453505639743511
+  _bottomEffectCreators:
+  - rid: 4853453505639743504
+  _topUsageCreators:
+  - rid: 4853453505639743505
+  _bottomUsageCreators: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4853453505639743502
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        <BuffTrigger>k__BackingField:
+          rid: 4853453505639743503
+    - rid: 4853453505639743503
+      type: {class: TMResourceRepeatAddBuffTrigger, ns: TM.Buff, asm: AssemblyTheMars}
+      data:
+        <RepeatDay>k__BackingField: 1
+        <LimitDay>k__BackingField: 2
+        <IsTemporary>k__BackingField: 0
+        <ResourceKind>k__BackingField: 7
+        <Resource>k__BackingField: -10
+    - rid: 4853453505639743504
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        <BuffTrigger>k__BackingField:
+          rid: 4853453505639743506
+    - rid: 4853453505639743505
+      type: {class: TMResourceUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
+      data:
+        <ResourceKind>k__BackingField: 2
+        <ResourceUsage>k__BackingField: 5
+    - rid: 4853453505639743506
+      type: {class: TMResourceRepeatAddBuffTrigger, ns: TM.Buff, asm: AssemblyTheMars}
+      data:
+        <RepeatDay>k__BackingField: 1
+        <LimitDay>k__BackingField: 2
+        <IsTemporary>k__BackingField: 0
+        <ResourceKind>k__BackingField: 7
+        <Resource>k__BackingField: -10
+    - rid: 4853453505639743511
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        <BuffTrigger>k__BackingField:
+          rid: 4853453505639743512
+    - rid: 4853453505639743512
+      type: {class: TMBuildingGradeModifyBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
+      data:
+        <DelayDayCount>k__BackingField: 2
+        <IsTemporary>k__BackingField: 0
+        <Kind>k__BackingField: 0
+        <TargetBuildingCount>k__BackingField: 2
+        <GradeUpValue>k__BackingField: 0

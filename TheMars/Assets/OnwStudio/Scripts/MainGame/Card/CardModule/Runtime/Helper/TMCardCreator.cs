@@ -23,33 +23,87 @@ namespace TM.Card.Runtime
             remove => _onPreCreateCard.RemoveListener(value);
         }
 
-        [SerializeField] private List<TMCardData> _cards = new();
         [SerializeField] private TMCardModel _templatePrefab;
 
         [Header("Event")]
         [SerializeField] private UnityEvent<TMCardModel> _onPreCreateCard = new();
         [SerializeField] private UnityEvent<TMCardModel> _onPostCreateCard = new();
         
-        public List<TMCardModel> CreateCards(int createCount, bool shouldInitialize = true)
+        public TMCardModel[] CreateRandomCards(int creationCount, bool shouldInitialize = true)
         {
-            if (_cards.Count <= 0) return null;
+            if (TMCardDataManager.Instance.CardDataList.Count <= 0) return null;
             
-            List<TMCardModel> cardList = new(createCount);
+            TMCardModel[] cardArray = new TMCardModel[creationCount];
 
-            for (int i = 0; i < createCount; i++)
+            for (int i = 0; i < creationCount; i++)
             {
-                cardList.Add(CreateCardByCardData(_cards[Random.Range(0, _cards.Count)], shouldInitialize));
+                cardArray[i] = createCardByCardData(
+                    TMCardDataManager.Instance.CardDataList[Random.Range(0, TMCardDataManager.Instance.CardDataList.Count)], 
+                    shouldInitialize);
             }
 
-            return cardList;
+            return cardArray;
         }
 
-        public TMCardModel CreateCardByCardData(TMCardData cardData, bool shouldInitialize = true)
+        public TMCardModel[] CreateRandomCardsByWhere(Func<TMCardData, bool> predicate, int creationCount, bool shouldInitialize = true)
+        {
+            if (TMCardDataManager.Instance.CardDataList.Count <= 0) return null;
+
+            TMCardData[] filterCards = TMCardDataManager.Instance.CardDataList
+                .Where(predicate)
+                .ToArray();
+            
+            if (filterCards.Length > 0)
+            {
+                TMCardModel[] cardArray = new TMCardModel[creationCount];
+            
+                for (int i = 0; i < creationCount; i++)
+                {
+                    cardArray[i] = createCardByCardData(
+                        filterCards[Random.Range(0, filterCards.Length)], 
+                        shouldInitialize);
+                }
+
+                return cardArray;
+            }
+
+            return Array.Empty<TMCardModel>();
+        }
+
+        public TMCardModel CreateRandomCard(bool shouldInitialize = true)
+        {
+            return TMCardDataManager.Instance.CardDataList.Count > 0 ? 
+                createCardByCardData(
+                    TMCardDataManager.Instance.CardDataList[Random.Range(0, TMCardDataManager.Instance.CardDataList.Count)], 
+                    shouldInitialize) : 
+                    null;
+        }
+
+        public TMCardModel CreateRandomCardByWhere(Func<TMCardData, bool> predicate, bool shouldInitialize = true)
+        {
+            TMCardData[] filterCards = TMCardDataManager
+                .Instance
+                .CardDataList
+                .Where(predicate)
+                .ToArray();
+
+            TMCardModel currentCard = null;
+            
+            if (filterCards.Length > 0)
+            {
+                TMCardData current = filterCards[Random.Range(0, filterCards.Length)];
+                currentCard = createCardByCardData(current, shouldInitialize);
+            }
+
+            return currentCard;
+        }
+        
+        private TMCardModel createCardByCardData(TMCardData cardData, bool shouldInitialize = true)
         {
             TMCardModel card = Object.Instantiate(_templatePrefab);
             _onPreCreateCard.Invoke(card);
             
-            card.CardData = cardData;
+            card.SetCardData(cardData);
 
             if (shouldInitialize)
             {
@@ -59,25 +113,6 @@ namespace TM.Card.Runtime
             _onPostCreateCard.Invoke(card);
 
             return card;
-        }
-
-        public TMCardModel CreateCard(bool shouldInitialize = true)
-        {
-            return _cards.Count > 0 ? CreateCardByCardData(_cards[Random.Range(0, _cards.Count)], shouldInitialize) : null;
-        }
-
-        public TMCardModel CreateCardByCondition(Func<TMCardData, bool> predicate, bool shouldInitialize = true)
-        {
-            TMCardData[] filterCards = _cards.Where(predicate).ToArray();
-            TMCardModel currentCard = null;
-            
-            if (filterCards.Length > 0)
-            {
-                TMCardData current = filterCards[Random.Range(0, filterCards.Length)];
-                currentCard = CreateCardByCardData(current, shouldInitialize);
-            }
-
-            return currentCard;
         }
     }
 }

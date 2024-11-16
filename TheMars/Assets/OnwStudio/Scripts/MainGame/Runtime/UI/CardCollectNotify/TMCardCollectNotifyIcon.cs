@@ -5,31 +5,63 @@ using UnityEngine.UI;
 using Onw.Attribute;
 using Onw.Manager.ObjectPool;
 using Onw.Components.Movement;
+using TM.Card.Runtime;
+using UnityEngine.Events;
 
 namespace TM.Runtime.UI
 {
-    public sealed class TMCardCollectNotifyIcon : MonoBehaviour
+    public sealed class TMCardCollectNotifyIcon : MonoBehaviour, IReturnHandler
     {
+        public event UnityAction OnNotifyCantCreateCard
+        {
+            add => _onNotifyCantCreateCard.AddListener(value);
+            remove => _onNotifyCantCreateCard.RemoveListener(value);
+        }
+        
+        [field: SerializeField] public float DestroyTime { get; private set; } = 60f;
+        
         [Header("Button")]
         [SerializeField, InitializeRequireComponent] private Button _collectCardButton;
         
         [Header("Option")]
         [SerializeField, InitializeRequireComponent] private Vector2SmoothMover _smoothMover;
 
+        [SerializeField, ReadOnly] private List<TMCardModel> _cards = new();
+
+        [Header("Notify")]
+        [SerializeField] private UnityEvent _onNotifyCantCreateCard = new();
+        
         private void Start()
         {
             _smoothMover.IsLocal = true;
             
             _collectCardButton.onClick.AddListener(() =>
             {
-                TMCardCollectUIController.Instance.ActiveUI();
+                if (TMCardManager.Instance.Cards.Count >= TMCardManager.Instance.MaxCardCount)
+                {
+                    _onNotifyCantCreateCard.Invoke();
+                    return;
+                }
+                
+                TMCardCollectUIController.Instance.ActiveUI(_cards);
                 GenericObjectPool<TMCardCollectNotifyIcon>.Return(this);
             });
+        }
+
+        public void SetCards(List<TMCardModel> cards)
+        {
+            _cards.Clear();
+            _cards.AddRange(cards);
         }
         
         public void SetTargetLocalPosition(Vector3 targetPosition)
         {
             _smoothMover.TargetPosition = targetPosition;
+        }
+        
+        public void OnReturnToPool()
+        {
+            _cards.Clear();
         }
     }
 }

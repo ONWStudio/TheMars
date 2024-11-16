@@ -77,31 +77,10 @@ MonoBehaviour:
     m_Localized: "\uD30C\uB77C\uB3C5\uC2A4 \uD4E8\uCC98"
     m_Metadata:
       m_Items: []
-  - m_Id: 326083017695235
-    m_Localized: "\uC18C\uBAA8\uC790\uC6D0\n* \uAC74\uC124\uC790\uC6D0[\uAC15\uCCA0,
-      \uC810\uD1A0, \uC2DD\uBB3C] {ConstructionResourceSubtract}\uAC1C \uC18C\uBAA8\n*
-      \uD06C\uB808\uB527 {CreditSubtract}\uAC1C \uC18C\uBAA8\n* \uC804\uAE30 {ElectricitySubtract}\uAC1C
-      \uC18C\uBAA8\n\uD6A8\uACFC\n* \uD558\uB8E8\uB9C8\uB2E4 \uB9CC\uC871\uB3C4 {SatisfactionSubtractByDay}%
-      \uAC10\uC18C(\uC601\uAD6C \uC9C0\uC18D)\n* \uD558\uB8E8\uB9C8\uB2E4 \uD06C\uB808\uB527
-      {CreditSubtractByDay} \uC18C\uBAA8(\uC601\uAD6C \uC9C0\uC18D)\n* \uAC74\uBB3C
-      \uAC74\uC124 \uC2DC \uC18C\uBAA8 \uB418\uB294 \uC790\uC6D0 \uAC01\uAC01 +{ResourceSubtractByCreateBuilding}(\uC601\uAD6C
-      \uC9C0\uC18D)"
-    m_Metadata:
-      m_Items:
-      - rid: 4853453322907287647
-  - m_Id: 326083021889536
-    m_Localized: "\uD6A8\uACFC\n* \uD558\uB8E8\uB9C8\uB2E4 \uB9CC\uC871\uB3C4 {SatisfactionSubtractByDay}%
-      \uAC10\uC18C(\uC601\uAD6C \uC9C0\uC18D)\n* \uD558\uB8E8\uB9C8\uB2E4 \uD06C\uB808\uB527
-      {CreditSubtractByDay} \uC18C\uBAA8(\uC601\uAD6C \uC9C0\uC18D)\n* \uAC74\uBB3C
-      \uAC74\uC124 \uC2DC \uC18C\uBAA8 \uB418\uB294 \uC790\uC6D0 \uAC01\uAC01 +{ResourceSubtractByCreateBuilding}(\uC601\uAD6C
-      \uC9C0\uC18D)"
-    m_Metadata:
-      m_Items:
-      - rid: 4853453322907287647
   references:
     version: 2
     RefIds:
     - rid: 4853453322907287647
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 01e0afe3f322000003e06f1e9228010000e0af1e92280100
+        m_Entries: 01e0afe3f3220000

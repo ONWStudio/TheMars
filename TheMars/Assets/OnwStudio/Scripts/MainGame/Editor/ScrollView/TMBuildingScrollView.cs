@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -13,6 +14,7 @@ using Onw.Extensions;
 using Onw.Localization.Editor;
 using Onw.ScriptableObjects.Editor;
 using TM.Building;
+using TM.Card;
 
 namespace TM.Editor
 {
@@ -64,10 +66,10 @@ namespace TM.Editor
 
         protected override ScriptableObjectButton CreateButton(ScriptableObject so)
         {
-            ScriptableObjectButton button = base.CreateButton(so);
-            TMBuildingData building = (button.ScriptableObject as TMBuildingData)!;
+            ScriptableObjectButton objectButton = base.CreateButton(so);
+            TMBuildingData building = (objectButton.ScriptableObject as TMBuildingData)!;
 
-            button.text = "";
+            objectButton.text = "";
 
             Label field = new()
             {
@@ -86,24 +88,24 @@ namespace TM.Editor
                 _buildingNameObservers.Add(localizedBuildingName.MonitorSpecificLocaleEntry("ko-KR", onChangedString));
                 if (localizedBuildingName.IsEmpty)
                 {
-                    button.name = field.text = building.name;
+                    objectButton.name = field.text = building.name;
                 }
                 else
                 {
-                    button.name = field.text = localizedBuildingName.GetLocalizedString();
+                    objectButton.name = field.text = localizedBuildingName.GetLocalizedString();
                 }
 
                 void onChangedString(string buildingName)
                 {
-                    button.name = field.text = string.IsNullOrEmpty(buildingName) ? building.name : buildingName;
+                    objectButton.name = field.text = string.IsNullOrEmpty(buildingName) ? building.name : buildingName;
                 }
             }
             else
             {
-                button.name = field.text = building.name;
+                objectButton.name = field.text = building.name;
             }
 
-            button.Add(field);
+            objectButton.Add(field);
 
             Button removeButton = new(() =>
             {
@@ -129,10 +131,54 @@ namespace TM.Editor
                 },
                 text = "X",
             };
+            
+            bool hasBuilding = TMBuildingDataManager.Instance.BuildingDataList.Contains(building);
+            
+            Button addButton = new()
+            {
+                style =
+                {
+                    position = Position.Absolute,
+                    right = new Length(10, LengthUnit.Percent),
+                    top = new Length(50, LengthUnit.Percent),                    
+                    translate = new Translate(0, Length.Percent(-50)),
+                    unityTextAlign = TextAnchor.MiddleCenter,
+                    backgroundColor = ColorUtility.TryParseHtmlString(
+                        hasBuilding ? "#4447A6" : "#2B2D6D", 
+                        out Color addButtonColor) ? 
+                        addButtonColor : 
+                        Color.blue,
+                    height = 20,
+                    width = 20,
+                },
+                text = hasBuilding ? "On" : "Off",
+            };
 
+            addButton.clicked += () =>
+            {
+                bool hasCardByClicked = TMBuildingDataManager.Instance.BuildingDataList.Contains(building);
+
+                if (hasCardByClicked)
+                {
+                    addButton.style.backgroundColor = ColorUtility.TryParseHtmlString("#2B2D6D", out Color color) ? color : Color.blue;
+                    addButton.text = "Off";
+                    TMBuildingDataManager.Instance.RemoveBuilding(building);
+                }
+                else
+                {
+                    addButton.style.backgroundColor = ColorUtility.TryParseHtmlString("#4447A6", out Color color) ? color : Color.blue;
+                    addButton.text = "On";
+                    TMBuildingDataManager.Instance.AddBuilding(building);
+                }
+                
+                addButton.SetChangedColorButtonEvent();
+            };
+
+            addButton.SetChangedColorButtonEvent();
             removeButton.SetChangedColorButtonEvent();
-            button.Add(removeButton);
-            return button;
+            objectButton.Add(addButton);
+            objectButton.Add(removeButton);
+            return objectButton;
         }
 
         internal override void OnDisable()

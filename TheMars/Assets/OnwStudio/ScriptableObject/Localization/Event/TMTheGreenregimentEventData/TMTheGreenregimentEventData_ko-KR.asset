@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TMTheGreenregimentEventData_ko-KR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ko-KR
+  m_SharedData: {fileID: 11400000, guid: 1761a6dddd940c2459b8675b71310fef, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 2592935936
+    m_Localized: "\uC2DC\uBBFC\uB4E4\uC740 \uACBD\uC81C\uC801 \uC790\uC720\uB97C
+      \uC8FC\uC7A5\uD558\uBA70 \uAE30\uC5C5\uACFC\uC758 \uD611\uB825\uC744 \uD558\uAE30\uB85C
+      \uD588\uB2E4. \n\uAE30\uC5C5\uC5D0 \uB300\uD55C \uD1B5\uC81C\uB97C \uAC15\uD654\uD558\uACE0
+      \uC2DC\uBBFC\uB4E4\uC740 \uC2A4\uC2A4\uB85C \uB178\uC870\uB97C \uACB0\uC131\uD558\uBA70
+      \n\uAE30\uC5C5\uC758 \uD65C\uB3D9\uC744 \uAC10\uC2DC\uD558\uACE0 \uACF5\uC815\uD55C
+      \uB300\uC6B0\uC640 \uD658\uACBD \uBCF4\uD638\uB97C \uC694\uAD6C \uD558\uAE30
+      \uC2DC\uC791\uD55C\uB2E4.\r\n\r\uC774\uB97C \uD1B5\uD574 \uC2DC\uBBFC\uB4E4\uC740
+      \uC790\uC2E0\uB4E4\uC758 \uAD8C\uB9AC\uB97C \uC8FC\uC7A5\uD558\uACE0 \uB178\uB3D9
+      \uC870\uAC74\uACFC \uD658\uACBD \uAE30\uC900\uC744 \uAC1C\uC120\uD558\uAE30
+      \uC704\uD55C \uC6B4\uB3D9\uC744 \uC804\uAC1C\uD558\uAE30\uB3C4 \uD588\uB2E4.\r\n\uD558\uC9C0\uB9CC
+      \uC774\uB7EC\uD55C \uBCC0\uD654\uB294 \uAE30\uC5C5\uACFC\uC758 \uAC08\uB4F1\uC744
+      \uC2EC\uD654 \uC2DC\uD0A4\uACE0, \uC77C\uBD80 \uAE30\uC5C5\uC740 \uBC18\uBC1C\uD560
+      \uB54C\uB3C4 \uC788\uC5C8\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34595475456
+    m_Localized: "\uC774 \uC0C1\uD669\uC744 \uC911\uC7AC \uC2DC\uCF1C\uC57C \uB41C\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43088941056
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51762761728
+    m_Localized: "\uB179\uC0C9 \uC5F0\uB300"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

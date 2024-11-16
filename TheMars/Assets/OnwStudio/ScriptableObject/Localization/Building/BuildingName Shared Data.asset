@@ -16,7 +16,31 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: a3fba4155beff4ce684b2afe10973d87
   m_Entries:
   - m_Id: 15740166144
-    m_Key: SmallDigger
+    m_Key: ClayDigger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27724728173924352
+    m_Key: ShoppingCenter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28165210561646592
+    m_Key: ATMOS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28179183033978880
+    m_Key: NuclearPowerPlant
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28193982035857408
+    m_Key: CreditSupplyStation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28200340609110016
+    m_Key: SteelDigger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28201354762457088
+    m_Key: MarsLithiumDigger
     m_Metadata:
       m_Items: []
   m_Metadata:

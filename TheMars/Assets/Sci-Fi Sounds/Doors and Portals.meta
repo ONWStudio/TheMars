@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:TheMars/Assets/Sci-Fi Sounds/Doors and Portals.meta
 guid: 6f062aa02e95200499b985438bd2bc93
 folderAsset: yes
+========
+guid: 62fd7db9b3b1b9744a64b6adfe10ff6a
+>>>>>>>> main:TheMars/Assets/_DLNK/Space Colony/Scenes/Space Colony.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

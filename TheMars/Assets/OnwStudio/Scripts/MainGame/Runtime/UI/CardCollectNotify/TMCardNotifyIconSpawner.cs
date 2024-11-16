@@ -1,65 +1,77 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
-using Onw.UI;
+using Onw.Manager;
 using Onw.Manager.ObjectPool;
+using TM.Card.Effect.Creator;
 using TM.Manager;
 using TM.Runtime.UI;
 using TM.Card.Runtime;
+using Onw.Manager.Prototype;
 
 namespace TM.Runtime
 {
-    public sealed class TMCardNotifyIconSpawner : MonoBehaviour
+    public sealed class TMCardNotifyIconSpawner : SceneSingleton<TMCardNotifyIconSpawner>
     {
         private const float REPEAT_TIME_MIN = 5f;
         private const float REPEAT_TIME_MAX = 10f;
+
+        protected override string SceneName => "MainGameScene";
 
         public event UnityAction<TMCardCollectNotifyIcon> OnCreateIcon
         {
             add => _onCreateIcon.AddListener(value);
             remove => _onCreateIcon.RemoveListener(value);
         }
-        
-        [SerializeField] private TMCardCollectNotifyIcon _iconPrefab = null;
+
+        [field: SerializeField] public int CardCreationCount { get; set; } = 3;
+
         [SerializeField, Range(REPEAT_TIME_MIN, REPEAT_TIME_MAX)] private float _repeatTime = 5f;
 
         [SerializeField] private UnityEvent<TMCardCollectNotifyIcon> _onCreateIcon = new();
-        
+
+        protected override void Init()
+        {
+        }
+
         private void Start()
         {
-            TMSimulator.Instance.OnChangedDay += onChangedDay;
-            onChangedDay(1);
+            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
 
             void onChangedDay(int day)
             {
-                if (!GenericObjectPool<TMCardCollectNotifyIcon>.TryPop(out TMCardCollectNotifyIcon iconInstance))
-                {
-                    iconInstance = Instantiate(_iconPrefab.gameObject)
-                        .GetComponent<TMCardCollectNotifyIcon>();
-                    
-                    _onCreateIcon.Invoke(iconInstance);
-                }
-                        
-                iconInstance.transform.SetParent(TMCardManager.Instance.UIComponents.CardCollectIconScrollView.content, false);
-                RectTransform content = TMCardManager
+                CreateIcon(TMCardManager
                     .Instance
-                    .UIComponents
-                    .CardCollectIconScrollView
-                    .content;
+                    .CardCreator
+                    .CreateRandomCardsByWhere(cardData => cardData.CheckTypeEffectCreator<TMCardBuildingCreateEffectCreator>(), CardCreationCount));
+            }
+        }
 
-                content.sizeDelta = new(content.GetChildWidthSum(), content.sizeDelta.y);
-                        
-                Vector3[] positionArray = content
-                    .GetHorizontalSortedPosition();
+        public void CreateIcon(TMCardModel[] cards)
+        {
+            if (cards is null)
+            {
+                Debug.LogError("TMCardNotifyIconSpawner : 만들어진 카드가 0개입니다");
+                return;
+            }
 
-                for (int i = 0; i < positionArray.Length; i++)
-                {
-                    TMCardCollectNotifyIcon icon = content
-                        .GetChild(i)
-                        .GetComponent<TMCardCollectNotifyIcon>();
-                            
-                    icon.SetTargetLocalPosition(positionArray[i]);
-                }
+            if (GenericObjectPool<TMCardCollectNotifyIcon>.TryPop(out TMCardCollectNotifyIcon iconInstance))
+            {
+                onLoadedNotifyIcon(iconInstance);
+            }
+            else
+            {
+                PrototypeManager.Instance.ClonePrototypeAsync<TMCardCollectNotifyIcon>("Card_Collect_Notify_Icon", onLoadedNotifyIcon);
+            }
+
+            void onLoadedNotifyIcon(TMCardCollectNotifyIcon icon)
+            {
+                icon.SetCards(cards.ToList());
+                _onCreateIcon.Invoke(icon);
+
+                TMCardManager.Instance.UIComponents.CardCollectIconScrollView.AddItem(icon.gameObject);
             }
         }
     }

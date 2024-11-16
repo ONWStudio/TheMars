@@ -9,10 +9,11 @@ namespace TM.Manager
         private const int SPEED_MAX = 3;
         private const int SPEED_MIN = 0;
 
-        public static bool IsFreeze { get; set; } = false;
+        public static bool IsPause { get; set; } = false;
+
         public static int GameSpeed
         {
-            get => IsFreeze ? 0 : _gameSpeed;
+            get => IsPause ? 0 : _gameSpeed;
             set => _gameSpeed = Mathf.Clamp(value, SPEED_MIN, SPEED_MAX);
         }
 
@@ -22,4 +23,3 @@ namespace TM.Manager
         public static float MinutesToSeconds(float minutes) => minutes * 60f;
     }
 }
-

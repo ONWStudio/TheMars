@@ -3,6 +3,7 @@ using System;
 using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Localization;
@@ -12,6 +13,7 @@ using Onw.Editor.Window;
 using Onw.Editor.Extensions;
 using Onw.Localization.Editor;
 using Onw.ScriptableObjects.Editor;
+using TM.Building;
 using TM.Synergy;
 
 namespace TM.Editor
@@ -64,10 +66,10 @@ namespace TM.Editor
 
         protected override ScriptableObjectButton CreateButton(ScriptableObject so)
         {
-            ScriptableObjectButton button = base.CreateButton(so);
-            TMSynergyData synergy = (button.ScriptableObject as TMSynergyData)!;
+            ScriptableObjectButton objectButton = base.CreateButton(so);
+            TMSynergyData synergy = (objectButton.ScriptableObject as TMSynergyData)!;
 
-            button.text = "";
+            objectButton.text = "";
 
             Label field = new()
             {
@@ -86,24 +88,24 @@ namespace TM.Editor
                 _synergyNameObservers.Add(localizedSynergyName.MonitorSpecificLocaleEntry("ko-KR", onChangedString));
                 if (localizedSynergyName.IsEmpty)
                 {
-                    button.name = field.text = synergy.name;
+                    objectButton.name = field.text = synergy.name;
                 }
                 else
                 {
-                    button.name = field.text = localizedSynergyName.GetLocalizedString();
+                    objectButton.name = field.text = localizedSynergyName.GetLocalizedString();
                 }
 
                 void onChangedString(string synergyName)
                 {
-                    button.name = field.text = string.IsNullOrEmpty(synergyName) ? synergy.name : synergyName;
+                    objectButton.name = field.text = string.IsNullOrEmpty(synergyName) ? synergy.name : synergyName;
                 }
             }
             else
             {
-                button.name = field.text = synergy.name;
+                objectButton.name = field.text = synergy.name;
             }
 
-            button.Add(field);
+            objectButton.Add(field);
 
             Button removeButton = new(() =>
             {
@@ -129,10 +131,54 @@ namespace TM.Editor
                 },
                 text = "X",
             };
+            
+            bool hasSynergy = TMSynergyDataManager.Instance.SynergyDataList.Contains(synergy);
+            
+            Button addButton = new()
+            {
+                style =
+                {
+                    position = Position.Absolute,
+                    right = new Length(10, LengthUnit.Percent),
+                    top = new Length(50, LengthUnit.Percent),                    
+                    translate = new Translate(0, Length.Percent(-50)),
+                    unityTextAlign = TextAnchor.MiddleCenter,
+                    backgroundColor = ColorUtility.TryParseHtmlString(
+                        hasSynergy ? "#4447A6" : "#2B2D6D", 
+                        out Color addButtonColor) ? 
+                        addButtonColor : 
+                        Color.blue,
+                    height = 20,
+                    width = 20,
+                },
+                text = hasSynergy ? "On" : "Off",
+            };
 
+            addButton.clicked += () =>
+            {
+                bool hasCardByClicked = TMSynergyDataManager.Instance.SynergyDataList.Contains(synergy);
+
+                if (hasCardByClicked)
+                {
+                    addButton.style.backgroundColor = ColorUtility.TryParseHtmlString("#2B2D6D", out Color color) ? color : Color.blue;
+                    addButton.text = "Off";
+                    TMSynergyDataManager.Instance.RemoveSynergyData(synergy);
+                }
+                else
+                {
+                    addButton.style.backgroundColor = ColorUtility.TryParseHtmlString("#4447A6", out Color color) ? color : Color.blue;
+                    addButton.text = "On";
+                    TMSynergyDataManager.Instance.AddSynergyData(synergy);
+                }
+                
+                addButton.SetChangedColorButtonEvent();
+            };
+
+            addButton.SetChangedColorButtonEvent();
             removeButton.SetChangedColorButtonEvent();
-            button.Add(removeButton);
-            return button;
+            objectButton.Add(addButton);
+            objectButton.Add(removeButton);
+            return objectButton;
         }
 
         internal override void OnDisable()

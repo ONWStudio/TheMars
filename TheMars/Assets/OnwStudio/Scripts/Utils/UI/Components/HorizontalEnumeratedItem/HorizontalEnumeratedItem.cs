@@ -13,7 +13,7 @@ using UnityEngine.EventSystems;
 namespace Onw.UI.Components
 {
     [DisallowMultipleComponent]
-    public sealed class HorizontalEnumeratedItem : MonoBehaviour
+    public sealed class HorizontalEnumeratedItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
     {
         internal readonly struct ValueLimit
         {
@@ -27,11 +27,11 @@ namespace Onw.UI.Components
             }
         }
 
-        internal static readonly ValueLimit SPACING_RATIO_LIMIT = new(0f, 1f);
-        internal static readonly ValueLimit ITEM_HEIGHT_RATIO_FROM_CONTENT_HEIGHT_LIMIT = new(0.25f, 1f);
-        internal static readonly ValueLimit ITEM_WIDTH_RATIO_FROM_HEIGHT_LIMIT = new(0.5f, 1.5f);
-        internal static readonly ValueLimit ON_POINTER_UP_CORRECTION_LIMIT = new(0.25f, 1f);
-        internal static readonly ValueLimit ELASTICITY_LIMIT = new(0.25f, 1f);
+        internal static readonly ValueLimit SpacingRatioLimit = new(0f, 1f);
+        internal static readonly ValueLimit ItemHeightRatioFromContentHeightLimit = new(0.25f, 1f);
+        internal static readonly ValueLimit ItemWidthRatioFromHeightLimit = new(0.5f, 1.5f);
+        internal static readonly ValueLimit OnPointerUpCorrectionLimit = new(0.25f, 1f);
+        internal static readonly ValueLimit ElasticityLimit = new(0.25f, 1f);
 
         [field: SerializeField] public RectTransform Viewport { get; private set; }
         [field: SerializeField] public RectTransform Content { get; private set; }
@@ -49,8 +49,8 @@ namespace Onw.UI.Components
             get => _spacingRatio;
             set => _spacingRatio = Mathf.Clamp(
                 value,
-                SPACING_RATIO_LIMIT.Min,
-                SPACING_RATIO_LIMIT.Max);
+                SpacingRatioLimit.Min,
+                SpacingRatioLimit.Max);
         }
 
         /// <summary>
@@ -61,8 +61,8 @@ namespace Onw.UI.Components
             get => _itemHeightRatioFromContentHeight;
             set => _itemHeightRatioFromContentHeight = Mathf.Clamp(
                 value,
-                ITEM_HEIGHT_RATIO_FROM_CONTENT_HEIGHT_LIMIT.Min,
-                ITEM_HEIGHT_RATIO_FROM_CONTENT_HEIGHT_LIMIT.Max);
+                ItemHeightRatioFromContentHeightLimit.Min,
+                ItemHeightRatioFromContentHeightLimit.Max);
         }
 
         /// <summary>
@@ -73,8 +73,8 @@ namespace Onw.UI.Components
             get => _itemWidthRatioFromHeight;
             set => _itemWidthRatioFromHeight = Mathf.Clamp(
                 value,
-                ITEM_WIDTH_RATIO_FROM_HEIGHT_LIMIT.Min,
-                ITEM_WIDTH_RATIO_FROM_HEIGHT_LIMIT.Max);
+                ItemWidthRatioFromHeightLimit.Min,
+                ItemWidthRatioFromHeightLimit.Max);
         }
         /// <summary>
         /// .. 드래그 하다 놓을 시 중앙에 가까운 위치에 있는 아이템으로의 보정 속도
@@ -84,8 +84,8 @@ namespace Onw.UI.Components
             get => _onPointerUpCorrection;
             set => _onPointerUpCorrection = Mathf.Clamp(
                 value,
-                ON_POINTER_UP_CORRECTION_LIMIT.Min,
-                ON_POINTER_UP_CORRECTION_LIMIT.Max);
+                OnPointerUpCorrectionLimit.Min,
+                OnPointerUpCorrectionLimit.Max);
         }
 
         /// <summary>
@@ -95,8 +95,8 @@ namespace Onw.UI.Components
         {
             get => _elasticity;
             set => _elasticity = Mathf.Clamp(value,
-                ELASTICITY_LIMIT.Min,
-                ELASTICITY_LIMIT.Max);
+                ElasticityLimit.Min,
+                ElasticityLimit.Max);
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace Onw.UI.Components
                 Vector2 direction = (_targetPosition - (Vector2)Content.localPosition).normalized;
                 float distance = Vector2.Distance(_targetPosition, Content.localPosition);
 
-                Content.localPosition += new Vector3((direction * distance * _onPointerUpCorrection).x, 0f, 0f);
+                Content.localPosition += new Vector3((direction * (distance * _onPointerUpCorrection)).x, 0f, 0f);
             }
         }
 
@@ -158,11 +158,12 @@ namespace Onw.UI.Components
         private void OnRectTransformDimensionsChange()
         {
             Init(Viewport, Content);
+            SelectedIndex = 0;
         }
 
         internal void Init(RectTransform viewport, RectTransform content)
         {
-            RectTransform rectTransform = transform as RectTransform;
+            RectTransform rectTransform = (transform as RectTransform)!;
 
             viewport.anchorMin = new(0.5f, 0.5f);
             viewport.anchorMax = new(0.5f, 0.5f);
@@ -180,22 +181,12 @@ namespace Onw.UI.Components
             float itemHalfWidth = itemWidth * 0.5f;
             float itemSpacing = itemWidth * _spacingRatio;
 
-#if DEBUG
-            Debug.Log($"Item Height : {itemHeight}");
-            Debug.Log($"Item Width : {itemWidth}");
-#endif
-
             content.sizeDelta = new((itemWidth + itemSpacing) * content.childCount, content.sizeDelta.y);
             float contentHalfWidth = content.sizeDelta.x * 0.5f;
 
-#if DEBUG
-            Debug.Log($"Content Width : {content.sizeDelta.x}");
-            Debug.Log($"Content childCount : {content.childCount}");
-#endif
-
             for (int i = 0; i < content.childCount; i++)
             {
-                RectTransform itemRectTransform = content.GetChild(i) as RectTransform;
+                RectTransform itemRectTransform = (RectTransform)content.GetChild(i);
 
                 float normalizedX = (float)i / content.childCount;
 
@@ -209,27 +200,24 @@ namespace Onw.UI.Components
                     0f);
             }
 
-            SelectedIndex = 0;
             _targetPosition = GetContentLocalPositionFromSelectedIndex(_selectedIndex, Content.childCount, Content.sizeDelta.x);
         }
 
-        internal Vector3 GetContentLocalPositionFromSelectedIndex(int selectedIndex, int childCount, float contentSizeX)
+        internal static Vector3 GetContentLocalPositionFromSelectedIndex(int selectedIndex, int childCount, float contentSizeX)
         {
             float itemSize = contentSizeX / childCount;
 
             return new(-1f * ((float)selectedIndex / childCount * contentSizeX - contentSizeX * 0.5f) - itemSize * 0.5f, 0f, 0f);
         }
 
-        public void OnBeginDrag(BaseEventData baseEventData)
+        public void OnBeginDrag(PointerEventData eventData)
         {
             _onDragged = true;
         }
-
-        public void OnDrag(BaseEventData baseEventData)
+        
+        public void OnDrag(PointerEventData pointerEventData)
         {
             if (!_onDragged) return;
-
-            PointerEventData pointerEventData = baseEventData as PointerEventData;
 
             Vector2 contentWorldLeft = Content.TransformPoint(Content.rect.min);
             Vector2 contentWorldRight = Content.TransformPoint(Content.rect.max);
@@ -257,7 +245,7 @@ namespace Onw.UI.Components
             Content.localPosition += new Vector3(pointerEventData.delta.x, 0f, 0f);
         }
 
-        public void OnEndDrag(BaseEventData baseEventData)
+        public void OnEndDrag(PointerEventData pointerEventData)
         {
             if (!_onDragged) return;
 

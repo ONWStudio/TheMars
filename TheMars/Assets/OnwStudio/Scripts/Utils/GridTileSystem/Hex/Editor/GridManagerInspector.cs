@@ -5,7 +5,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using AYellowpaper.SerializedCollections;
+using MoreMountains.Feedbacks;
 using Onw.Editor.GUI;
+using Onw.Extensions;
+using Onw.Feedback;
 
 namespace Onw.HexGrid.Editor
 {
@@ -92,6 +95,31 @@ namespace Onw.HexGrid.Editor
                 initializeTile();
                 EditorUtility.SetDirty(_gridManager);
                 serializedObject.ApplyModifiedProperties();
+            }
+
+            if (GUILayout.Button("Create Object") && _gridManager.RootObject)
+            {
+                if (!_gridManager.RootObject)
+                {
+                    Debug.LogWarning("Grid Manager의 Root Object가 설정되어 있지 않습니다 ");
+                }
+                else
+                {
+                    Undo.RecordObject(_gridManager.RootObject, "GridManager.RootObject");
+                    GameObject[] children = new GameObject[_gridManager.RootObject.transform.childCount];
+                    
+                    for (int i = 0; i < _gridManager.RootObject.transform.childCount; i++)
+                    {
+                        children[i] = _gridManager.RootObject.transform.GetChild(i).gameObject;
+                    }
+                    
+                    children.ForEach(DestroyImmediate);
+                    
+                    _hexGrids
+                        .Select(grid 
+                            => new GameObject($"Index_{grid.Value.Index}") { transform = { position = grid.Value.TilePosition }}.AddComponent<FeedbackPlayer>().gameObject.AddComponent<MMF_Player>())
+                        .ForEach(player => player.SetParent(_gridManager.RootObject, false));
+                }
             }
         }
 

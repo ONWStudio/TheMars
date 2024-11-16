@@ -38,8 +38,36 @@ MonoBehaviour:
     m_Localized: Surface Transmission Radar
     m_Metadata:
       m_Items: []
-  - m_Id: 36205965576409088
+  - m_Id: 36237343550595072
     m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36237524677419008
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38579727594491904
+    m_Localized: ATMOS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39046077467136000
+    m_Localized: Nuclear Power Plant Varient
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39056382259695616
+    m_Localized: Credit Supply Station
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39057165646630912
+    m_Localized: Mars Lithium Digger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39058038531624960
+    m_Localized: Steel Digger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39058732974149632
+    m_Localized: Clay Digger
     m_Metadata:
       m_Items: []
   references:

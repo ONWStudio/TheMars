@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
+  m_Name: Event_No.fb2cbfce-5ef7-4c2e-9d4f-c04b52340086
+  m_EditorClassIdentifier: 
+  <TopEventData>k__BackingField: {fileID: 0}
+  <BottomEventData>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 0}
+  <DescriptionTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMDesertificationEventData
+    m_TableEntryReference:
+      m_KeyId: 1737297920
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TopButtonTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMDesertificationEventData
+    m_TableEntryReference:
+      m_KeyId: 19156242432
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <BottomButtonTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMDesertificationEventData
+    m_TableEntryReference:
+      m_KeyId: 29293875200
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <TitleTextEvent>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TMDesertificationEventData
+    m_TableEntryReference:
+      m_KeyId: 35983790080
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <HasTopEvent>k__BackingField: 1
+  <HasBottomEvent>k__BackingField: 0
+  _topEffectCreators:
+  - rid: 3610285249959297150
+  - rid: 3610285249959297152
+  - rid: 3610285249959297153
+  - rid: 3610285249959297154
+  - rid: 3610285249959297155
+  _bottomEffectCreators: []
+  _topUsageCreators: []
+  _bottomUsageCreators: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3610285249959297150
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        <BuffTrigger>k__BackingField:
+          rid: 3610285249959297151
+    - rid: 3610285249959297151
+      type: {class: TMBuildingGradeModifyBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
+      data:
+        <DelayDayCount>k__BackingField: 1
+        <IsTemporary>k__BackingField: 1
+        <Kind>k__BackingField: 1
+        <TargetBuildingCount>k__BackingField: 2
+        <GradeUpValue>k__BackingField: -1
+    - rid: 3610285249959297152
+      type: {class: TMEventResourceAddEffectCreator, ns: TM.Event.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <ResourceKind>k__BackingField: 3
+        <Resource>k__BackingField: -40
+    - rid: 3610285249959297153
+      type: {class: TMEventResourceAddEffectCreator, ns: TM.Event.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <ResourceKind>k__BackingField: 4
+        <Resource>k__BackingField: -40
+    - rid: 3610285249959297154
+      type: {class: TMEventResourceAddEffectCreator, ns: TM.Event.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <ResourceKind>k__BackingField: 5
+        <Resource>k__BackingField: -40
+    - rid: 3610285249959297155
+      type: {class: TMEventResourceAddEffectCreator, ns: TM.Event.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <ResourceKind>k__BackingField: 0
+        <Resource>k__BackingField: -20

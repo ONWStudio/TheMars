@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:TheMars/Assets/Sci-Fi Sounds.meta
 guid: c377499ed0e52f04f940c973238e3cf4
 folderAsset: yes
+========
+guid: 4f0560d34eda2254ab3ab0d4e14166be
+>>>>>>>> main:TheMars/Assets/_DLNK/Space Colony/Scenes/DemoFactory.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
