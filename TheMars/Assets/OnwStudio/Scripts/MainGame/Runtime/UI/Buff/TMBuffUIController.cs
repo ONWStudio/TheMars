@@ -1,4 +1,3 @@
-using Codice.Client.Common.GameUI;
 using Onw.Attribute;
 using Onw.Extensions;
 using Onw.Manager.ObjectPool;
@@ -6,7 +5,6 @@ using Onw.Manager.Prototype;
 using System.Collections;
 using System.Collections.Generic;
 using TM.Buff;
-using UniRx.Toolkit;
 using UnityEngine;
 using UnityEngine.UI;
 

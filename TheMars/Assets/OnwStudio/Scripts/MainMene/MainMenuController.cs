@@ -19,9 +19,9 @@ namespace TM.MainMenu
         private void Start()
         {
             _startButton.onClick.AddListener(onClickStartButton);
-            _loadButton.onClick.AddListener(onClickLoadButton);
+            //_loadButton.onClick.AddListener(onClickLoadButton);
             _optionButton.onClick.AddListener(onClickOptionButton);
-            _collectionButton.onClick.AddListener(onClickCollectionButton);
+            //_collectionButton.onClick.AddListener(onClickCollectionButton);
             _gameExitButton.onClick.AddListener(onClickGameExitButton);
 
             static void onClickStartButton() => SceneManager.LoadScene("MainGameScene");

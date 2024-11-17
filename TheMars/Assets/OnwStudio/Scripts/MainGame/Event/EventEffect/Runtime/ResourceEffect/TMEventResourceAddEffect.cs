@@ -24,7 +24,7 @@ namespace TM.Event.Effect
             {
                 new
                 {
-                    Kind = Kind.ToString(),
+                    Kind,
                     Resource = Mathf.Abs(Resource),
                     Positive = Resource >= 0
                 }

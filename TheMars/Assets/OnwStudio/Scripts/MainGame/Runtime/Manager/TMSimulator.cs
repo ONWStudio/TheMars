@@ -31,16 +31,20 @@ namespace TM.Manager
             set => _intervalInMinutes = Mathf.Clamp(value, INTERVAL_MIN, INTERVAL_MAX);
         }
 
-        [field: SerializeField, ReadOnly] public float IntervalInSeconds { get; private set; } = 0f;
+        public int IntervalInSeconds 
+        { 
+            get
+            {
+                _intervalInSeconds ??= _intervalInMinutes * 60;
+                return (int)_intervalInSeconds;
+            }
+        }
 
         [SerializeField, Range(INTERVAL_MIN, INTERVAL_MAX)] private int _intervalInMinutes = 2;
 
-        protected override void Init() {}
+        [field: SerializeField, ReadOnly] private int? _intervalInSeconds = null;
 
-        private void Start()
-        {
-            IntervalInSeconds = _intervalInMinutes * 60f;
-        }
+        protected override void Init() {}
 
         private void Update()
         {

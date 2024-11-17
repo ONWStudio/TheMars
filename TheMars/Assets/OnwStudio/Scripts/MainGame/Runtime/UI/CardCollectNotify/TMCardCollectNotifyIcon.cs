@@ -45,6 +45,7 @@ namespace TM.Runtime.UI
                 
                 TMCardCollectUIController.Instance.ActiveUI(_cards);
                 GenericObjectPool<TMCardCollectNotifyIcon>.Return(this);
+
             });
         }
 

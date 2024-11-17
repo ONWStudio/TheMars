@@ -32,7 +32,7 @@ namespace TM.Event.Effect
             {
                 new
                 {
-                    Kind = Kind.ToString(),
+                    Kind = Kind,
                     Min = min,
                     Positive = Min >= 0 || Max >= 0, 
                     Max = max,

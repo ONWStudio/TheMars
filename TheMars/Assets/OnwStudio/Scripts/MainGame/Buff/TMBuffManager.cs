@@ -55,6 +55,8 @@ namespace TM.Buff
 
         private void OnDestroy()
         {
+            if (gameObject.scene.isLoaded) return;
+
             TMBuffBase[] buffs = _buffs.ToArray();
             buffs.ForEach(buff => buff.Dispose());
             _buffs.Clear();

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using Object = UnityEngine.Object;
@@ -68,6 +69,20 @@ namespace TM.Card.Runtime
             }
 
             return Array.Empty<TMCardModel>();
+        }
+
+        public bool TryCreateCardByKey(string key, out TMCardModel card, bool shouldInitialize = true)
+        {
+            card = null;
+            TMCardData cardData = TMCardDataManager.Instance.CardDataList.FirstOrDefault(cardData => cardData.CardKey == key);
+
+            if (cardData)
+            {
+                card = createCardByCardData(cardData,shouldInitialize);
+                return true;
+            }
+
+            return false;
         }
 
         public TMCardModel CreateRandomCard(bool shouldInitialize = true)

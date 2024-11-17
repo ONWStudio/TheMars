@@ -59,12 +59,12 @@ namespace TM.UI
 
         public void OnChangedMaxExp(int maxExp)
         {
-            _expProgressImage.fillAmount = TMPlayerManager.Instance.Exp.Value / maxExp;
+            _expProgressImage.fillAmount = TMPlayerManager.Instance.Exp.Value / (float)maxExp;
         }
 
         public void OnChangedExp(int exp)
         {
-            _expProgressImage.fillAmount = exp / TMPlayerManager.Instance.MaxExp.Value;
+            _expProgressImage.fillAmount = exp / (float)TMPlayerManager.Instance.MaxExp.Value;
         }
 
         public void OnClickAgainButton()
@@ -139,7 +139,7 @@ namespace TM.UI
 
         public void OnChangedSeconds(int seconds)
         {
-            _timeProgressImage.fillAmount = seconds % TMSimulator.Instance.IntervalInSeconds / TMSimulator.Instance.IntervalInSeconds;
+            _timeProgressImage.fillAmount = seconds % TMSimulator.Instance.IntervalInSeconds / (float)TMSimulator.Instance.IntervalInSeconds;
         }
 
         public void OnChangedDay(int day)

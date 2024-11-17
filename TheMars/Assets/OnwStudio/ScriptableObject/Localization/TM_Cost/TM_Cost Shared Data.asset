@@ -19,6 +19,10 @@ MonoBehaviour:
     m_Key: Resource_Usage
     m_Metadata:
       m_Items: []
+  - m_Id: 135539618287616
+    m_Key: MarsLithium_Usage
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

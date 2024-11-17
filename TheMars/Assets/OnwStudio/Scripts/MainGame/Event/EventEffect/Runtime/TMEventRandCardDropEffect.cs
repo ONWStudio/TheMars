@@ -25,7 +25,7 @@ namespace TM.Event.Effect
             {
                 new
                 {
-                    Kind = Kind.ToString(),
+                    Kind,
                     DropCount
                 }
             };

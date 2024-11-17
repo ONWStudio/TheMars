@@ -73,7 +73,6 @@ namespace TM
                 Debug.LogWarning("선택한 로케일을 찾을 수 없습니다: " + "ko-KR");
             }
 
-            _exp.AddListener(onChangedExp);
             TMSimulator.Instance.NowDay.AddListener(onChagnedDay);
             TMCardManager.Instance.CardCreator.OnPostCreateCard += onPostCreateCard;
             TMEventManager.Instance.OnTriggerEvent += onTriggerEvent;
@@ -81,27 +80,19 @@ namespace TM
 
         private void onTriggerEvent(TMEventRunner runner)
         {
-            _exp.Value += 10;
+            SetExp(_exp.Value + 10);
         }
 
         private void onPostCreateCard(TMCardModel card)
         {
-            _exp.Value += 10;
-        }
-
-        private void onChangedExp(int exp)
-        {
-            if (_exp.Value < _maxExp.Value) return;
-
-            _exp.Value -= _maxExp.Value;
-            _level.Value++;
+            SetExp(_exp.Value + 10);
         }
 
         private void onChagnedDay(int day)
         {
             if (day == 0) return;
 
-            _exp.Value += 5;
+            SetExp(_exp.Value + 5);
         }
 
         /// <summary>
@@ -110,7 +101,18 @@ namespace TM
         /// <param name="exp"></param>
         public void SetExp(int exp)
         {
-            _exp.Value = Mathf.Clamp(exp, 0, _maxExp.Value);
+            if (exp < 0)
+            {
+                exp = 0;
+            }
+
+            if (exp >= _maxExp.Value)
+            {
+                exp -= _maxExp.Value;
+                _level.Value++;
+            }
+
+            _exp.Value = exp;
         }
 
         public int GetResoucesByKind(TMResourceKind kind)

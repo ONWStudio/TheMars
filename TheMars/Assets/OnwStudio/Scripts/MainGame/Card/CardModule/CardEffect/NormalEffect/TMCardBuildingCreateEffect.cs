@@ -79,7 +79,8 @@ namespace TM.Card.Effect
                     .GetComponent<TMBuilding>()
                     .Initialize(BuildingData); // .. 프리팹 인스턴스화 후 초기화
 
-                _cardModel.IsOverTombTransform.AddListener(onChangedIsOverTombTransform);
+                _cardModel.IsOverTombTransform.AddListener(onChangedIsOverTransform);
+                _cardModel.IsOverCollectTransform.AddListener(onChangedIsOverTransform);
 
                 Vector3 totalSize = VerticesTo.GetTotalSize(_building.gameObject);
 
@@ -102,7 +103,7 @@ namespace TM.Card.Effect
                     }
                 };
 
-                void onChangedIsOverTombTransform(bool isOverTombTransform)
+                void onChangedIsOverTransform(bool isOverTombTransform)
                 {
                     if (isOverTombTransform)
                     {
@@ -126,10 +127,8 @@ namespace TM.Card.Effect
         {
             if (!_isFired)
             {
-
-                if (card.IsOverCollectTransform.Value)
+                if (card.IsOverCollectTransform.Value || card.IsOverTombTransform.Value)
                 {
-                    Debug.Log("??");
                     _prevTileData = null;
                 }
 
@@ -170,7 +169,6 @@ namespace TM.Card.Effect
         // .. 효과 발동시
         public void OnEffect(TMCardModel card)
         {
-            Debug.Log(card.CanPayCost);
             _building.IsRender = true;
             _building.BatchOnTile();
  
@@ -213,7 +211,7 @@ namespace TM.Card.Effect
         {
             if (!_building) return;
 
-            if (_prevTileData is { } prevTileData) // .. 이전에 건물이 설치되었던 타일이 있다면
+            if (_prevTileData is not null && _prevTileData is { } prevTileData) // .. 이전에 건물이 설치되었던 타일이 있다면
             {
                 _building.IsRender = true;
                 _building.SetPosition(prevTileData.PrevPosition); // .. 건물의 포지션 이전 타일의 위치로

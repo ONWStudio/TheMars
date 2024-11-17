@@ -14,43 +14,22 @@ namespace TM.Synergy
 {
     public sealed class TMSynergyManager : SceneSingleton<TMSynergyManager>
     {
-        protected override string SceneName => "MainGameScene";
-
         public event UnityAction<IReadOnlyDictionary<string, TMSynergy>> OnUpdateSynergies
         {
             add => _onUpdateSynergies.AddListener(value);
             remove => _onUpdateSynergies.RemoveListener(value);
         }
 
-        private IReadOnlyDictionary<string, TMSynergy> Synergies => _synergies;
         private readonly Dictionary<string, TMSynergy> _synergies = new();
-
-        private bool _isApplicationQuit = false;
 
         [SerializeField] private UnityEvent<IReadOnlyDictionary<string, TMSynergy>> _onUpdateSynergies = new();
 
-        private void Start()
-        {
-            TMGridManager.Instance.OnAddedBuilding += onAddedBuilding;
-            TMGridManager.Instance.OnRemovedBuilding += onRemovedBuilding;
-        }
+        public IReadOnlyDictionary<string, TMSynergy> Synergies => _synergies;
+        protected override string SceneName => "MainGameScene";
 
         protected override void Init() { }
 
-        private void OnDestroy()
-        {
-            if (_isApplicationQuit) return;
-            
-            TMGridManager.Instance.OnAddedBuilding -= onAddedBuilding;
-            TMGridManager.Instance.OnRemovedBuilding -= onRemovedBuilding;
-        }
-
-        private void OnApplicationQuit()
-        {
-            _isApplicationQuit = true;
-        }
-
-        private void onAddedBuilding(TMBuilding building)
+        public void OnAddedBuilding(TMBuilding building)
         {
             foreach (TMSynergyData synergyData in building.BuildingData.Synergies)
             {
@@ -67,7 +46,7 @@ namespace TM.Synergy
             _onUpdateSynergies.Invoke(_synergies);
         }
 
-        private void onRemovedBuilding(TMBuilding building)
+        public void OnRemovedBuilding(TMBuilding building)
         {
             foreach (TMSynergyData synergyData in building.BuildingData.Synergies)
             {

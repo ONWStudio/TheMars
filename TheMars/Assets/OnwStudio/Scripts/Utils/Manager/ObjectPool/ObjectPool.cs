@@ -23,11 +23,21 @@ namespace Onw.Manager.ObjectPool
     public static class GenericObjectPool<T> where T : Component
     {
         private static readonly Stack<T> _pool = new();
-        private static readonly GameObject _poolParent;
+        private static GameObject _poolParent = null;
+
+        private static GameObject getPoolParent()
+        {
+            if (_poolParent == null)
+            {
+                _poolParent = new(nameof(GenericObjectPool<T>));
+                _poolParent.AddComponent<DontDestroy>();
+            }
+
+            return _poolParent;
+        }
 
         public static bool TryPop(out T genericComponent)
         {
-            genericComponent = null;
             if (_pool.TryPop(out genericComponent) && genericComponent)
             {
                 onPop(genericComponent);
@@ -54,7 +64,7 @@ namespace Onw.Manager.ObjectPool
             }
             
             genericComponent.gameObject.SetActive(false);
-            genericComponent.transform.SetParent(_poolParent.transform, false);
+            genericComponent.transform.SetParent(getPoolParent().transform, false);
             
             _pool.Push(genericComponent);
         }
@@ -74,17 +84,23 @@ namespace Onw.Manager.ObjectPool
                 pooledObject.OnPopFromPool();
             }
         }
-        
-        static GenericObjectPool()
-        {
-            _poolParent = new(nameof(GenericObjectPool<T>));
-        }
     }
     
     public static class KeyedObjectPool
     {
         private static readonly Dictionary<string, Stack<GameObject>> _pool = new();
-        private static readonly GameObject _poolParent;
+        private static GameObject _poolParent = null;
+
+        private static GameObject getPoolParent()
+        {
+            if (_poolParent == null)
+            {
+                _poolParent = new(nameof(KeyedObjectPool));
+                _poolParent.AddComponent<DontDestroy>();
+            }
+
+            return _poolParent;
+        }
 
         public static bool TryPop(string key, out GameObject pooledObject)
         {
@@ -134,7 +150,7 @@ namespace Onw.Manager.ObjectPool
                 .ForEach(pooledComponent => pooledComponent.OnReturnToPool());
             
             objectToReturn.SetActive(false);
-            objectToReturn.transform.SetParent(_poolParent.transform, false);
+            objectToReturn.transform.SetParent(getPoolParent().transform, false);
             
             stack.Push(objectToReturn);
         }
@@ -158,17 +174,23 @@ namespace Onw.Manager.ObjectPool
                 .GetComponents<IPopHandler>()
                 .ForEach(pooledComponent => pooledComponent.OnPopFromPool());
         }
-        
-        static KeyedObjectPool()
-        {
-            _poolParent = new(nameof(KeyedObjectPool));
-        }
     }
     
     public static class GenericKeyedObjectPool<T> where T : Component
     {
         private static readonly Dictionary<string, Stack<T>> _pool = new();
-        private static readonly GameObject _poolParent;
+        private static GameObject _poolParent = null;
+
+        private static GameObject getPoolParent()
+        {
+            if (_poolParent == null)
+            {
+                _poolParent = new(nameof(GenericKeyedObjectPool<T>));
+                _poolParent.AddComponent<DontDestroy>();
+            }
+
+            return _poolParent;
+        }
 
         public static bool TryPop(string key, out T genericComponent)
         {
@@ -219,7 +241,7 @@ namespace Onw.Manager.ObjectPool
             }
             
             objectToReturn.gameObject.SetActive(false);
-            objectToReturn.transform.SetParent(_poolParent.transform, false);
+            objectToReturn.transform.SetParent(getPoolParent().transform, false);
             stack.Push(objectToReturn);
         }
         
@@ -229,7 +251,7 @@ namespace Onw.Manager.ObjectPool
                 .Values
                 .SelectMany(stack => stack)
                 .Where(obj => obj)
-                .ForEach(UnityEngine.Object.Destroy);
+                .ForEach(Object.Destroy);
 
             _pool.Clear();
         }
@@ -243,11 +265,6 @@ namespace Onw.Manager.ObjectPool
             {
                 pooledObject.OnPopFromPool();
             }
-        }
-        
-        static GenericKeyedObjectPool()
-        {
-            _poolParent = new(nameof(GenericObjectPool<T>));
         }
     }
 }

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1195d13c1bcb04f41bfcd51e3f68b827, type: 3}
   m_Name: TMEventDataManager
   m_EditorClassIdentifier: 
-  _marsLithiumEventData: {fileID: 0}
+  _marsLithiumEventData: {fileID: 11400000, guid: 298fd4a13442039428ea64b9e2665cbd,
+    type: 2}
   _expansionEventData: {fileID: 0}
   _rootMainEventData: {fileID: 11400000, guid: bc0209b7268acbc448c5f7c0c3d3f538, type: 2}
   _positiveEventList:

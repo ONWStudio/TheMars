@@ -68,8 +68,8 @@ namespace TM.Event
         [FormerlySerializedAs("_bottomEffectCreator")]
         [SerializeReference, SerializeReferenceDropdown, DisplayAs("아래쪽 선택지 효과")] private List<ITMEventEffectCreator> _bottomEffectCreators = new();
 
-        [SerializeReference, SerializeReferenceDropdown, DisplayAs("위쪽 선택지 소모 자원")] private List<ITMUsageCreator> _topUsageCreators = new();
-        [SerializeReference, SerializeReferenceDropdown, DisplayAs("아래쪽 선택지 소모 자원")] private List<ITMUsageCreator> _bottomUsageCreators = new();
+        [SerializeReference, SerializeReferenceDropdown, DisplayAs("위쪽 선택지 소모 자원")] private List<Usage.Creator.ITMUsageCreator> _topUsageCreators = new();
+        [SerializeReference, SerializeReferenceDropdown, DisplayAs("아래쪽 선택지 소모 자원")] private List<Usage.Creator.ITMUsageCreator> _bottomUsageCreators = new();
 
 
         public List<ITMEventEffect> CreateTopEffects()
@@ -86,14 +86,14 @@ namespace TM.Event
                 .ToList();
         }
 
-        public List<ITMUsage> CreateTopUsages()
+        public List<Usage.ITMUsage> CreateTopUsages()
         {
             return _topUsageCreators
                 .Select(creator => creator.CreateUsage())
                 .ToList(); 
         }
 
-        public List<ITMUsage> CreateBottomUsages()
+        public List<Usage.ITMUsage> CreateBottomUsages()
         {
             return _bottomUsageCreators
                 .Select(creator => creator.CreateUsage())

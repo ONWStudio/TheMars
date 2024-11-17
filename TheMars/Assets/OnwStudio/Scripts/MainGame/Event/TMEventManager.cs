@@ -39,8 +39,6 @@ namespace TM.Event
     
     public sealed class TMEventManager : SceneSingleton<TMEventManager>
     {
-        private bool _isApplicationQuit = false;
-
         private readonly Queue<TMEventRunner> _eventQueue = new();
 
         [Header("Event Probability")]
@@ -48,8 +46,10 @@ namespace TM.Event
         [SerializeField] private TMEventProbability _positiveEventProbability = new();
         [SerializeField] private TMEventProbability _negativeEventProbability = new();
 
+        [Header("Unique Events")]
         [FormerlySerializedAs("_mainEvent")]
-        [SerializeField] private TMEventRunner _mainEventRunner = null;
+        [SerializeField, ReadOnly] private TMEventRunner _mainEventRunner = null;
+        [SerializeField, ReadOnly] private TMEventRunner _marsLithiumEventRunner = null;
 
         [FormerlySerializedAs("_onTriggerMainEvent")]
         [Header("Event")]
@@ -82,10 +82,9 @@ namespace TM.Event
             TMPlayerManager.Instance.Level.AddListener(onChangedLevel);
             TMCardManager.Instance.CardCreator.OnPostCreateCard += onPostCreateCard;
             _mainEventRunner = new(TMEventDataManager.Instance.RootMainEventData);
+            _marsLithiumEventRunner = new(TMEventDataManager.Instance.MarsLithiumEvent);
             _positiveEventProbability.DefaultProbability.Value = 20;
             _negativeEventProbability.DefaultProbability.Value = 20;
-            handleMainEvent(CheckMainEventLevelCount);
-            fireEvents();
         }
 
         private void onPostCreateCard(TMCardModel card)
@@ -125,16 +124,9 @@ namespace TM.Event
 
         private void handleMarsLithiumEvent(int day)
         {
-            if (day % CheckMarsLithiumEventDayCount != 0 || !TMEventDataManager.Instance.MarsLithiumEvent) return;
+            if (day % CheckMarsLithiumEventDayCount != 0 || _marsLithiumEventRunner is null || !_marsLithiumEventRunner.EventData) return;
 
-            TMEventRunner eventRunner = new(TMEventDataManager.Instance.MarsLithiumEvent);
-            eventRunner
-                .TopEffects
-                .OfType<TMEventResourceAddEffect>()
-                .Where(effect => effect.Kind == TMResourceKind.MARS_LITHIUM)
-                .ForEach(effect => effect.Resource += MarsLithiumEventAddResource.Value);
-            
-            _eventQueue.Enqueue(eventRunner);
+            _eventQueue.Enqueue(_marsLithiumEventRunner);
         }
 
         private void handleCalamityEvent(int day)
@@ -179,13 +171,11 @@ namespace TM.Event
             {
                 if (TMEventDataManager.Instance.PositiveEventList.Count <= 0) return;
 
-                Debug.Log(satisfaction - SATISFACTION_HALF);
-
+                int satisfactionHalfCalc = SATISFACTION_HALF - satisfaction;
                 int probability = PositiveEventProbability.IsStatic.Value ? 
                     PositiveEventProbability.DefaultProbability.Value : 
-                    PositiveEventProbability.FinalProbability + (SATISFACTION_HALF / (satisfaction - SATISFACTION_HALF) + 1) * 10;
+                    PositiveEventProbability.FinalProbability + (satisfactionHalfCalc == 0 ? 0 : (SATISFACTION_HALF / satisfactionHalfCalc + 1) * 10);
                 
-                Debug.Log("Positive Probability : " + probability);
                 if (probability > Random.Range(0, 100))
                 {
                     TMEventRunner positiveEvent = new(
@@ -199,11 +189,11 @@ namespace TM.Event
             {
                 if (TMEventDataManager.Instance.NegativeEventList.Count <= 0) return;
 
+                int satisfactionHalfCalc = SATISFACTION_HALF - satisfaction;
                 int probability = NegativeEventProbability.IsStatic.Value ?
-                    PositiveEventProbability.DefaultProbability.Value : 
-                    PositiveEventProbability.FinalProbability + (SATISFACTION_HALF / (SATISFACTION_HALF - satisfaction) + 1) * 10;
+                    NegativeEventProbability.DefaultProbability.Value :
+                    NegativeEventProbability.FinalProbability + (satisfactionHalfCalc == 0 ? 0 : (SATISFACTION_HALF / satisfactionHalfCalc + 1) * 10);
                 
-                Debug.Log("Negative Probability : " + probability);
                 if (probability > Random.Range(0, 100))
                 {
                     TMEventRunner negativeEvent = new(
@@ -241,18 +231,6 @@ namespace TM.Event
                 TimeManager.IsPause = false;
                 fireEvents();
             }
-        }
-
-        private void OnApplicationQuit()
-        {
-            _isApplicationQuit = true;
-        }
-
-        private void OnDestroy()
-        {
-            if (_isApplicationQuit) return;
-
-            TMSimulator.Instance.NowDay.RemoveListener(onChangedDay);
         }
     }
 }

@@ -1,13 +1,11 @@
-using Onw.Attribute;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.UI;
-using static UnityEngine.Rendering.VirtualTexturing.Debugging;
+using TMPro;
+using Onw.Attribute;
 
 namespace TM.Card.Runtime
 {

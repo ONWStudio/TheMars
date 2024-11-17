@@ -81,7 +81,11 @@ namespace TM.Card.Runtime
             UIComponents.SetDragView(true);
 
             CardCreator.OnPostCreateCard += addListenerForCard;
-            AddCard(CardCreator.CreateRandomCard());
+
+            if (CardCreator.TryCreateCardByKey("CreditSupplyStation", out TMCardModel card))
+            {
+                AddCard(card);
+            }
         }
 
         private void addListenerForCard(TMCardModel card)

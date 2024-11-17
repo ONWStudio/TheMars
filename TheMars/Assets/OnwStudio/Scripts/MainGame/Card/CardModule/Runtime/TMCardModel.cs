@@ -6,12 +6,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using Onw.Event;
 using Onw.Attribute;
 using Onw.Coroutine;
 using Onw.Extensions;
 using Onw.UI.Components;
 using Onw.Components.Movement;
-using Onw.Event;
 using TM.Card.Effect;
 
 namespace TM.Card.Runtime
@@ -132,9 +132,6 @@ namespace TM.Card.Runtime
         [SerializeField, ReadOnly] private List<TMCardSubCostRuntime> _subCosts = new();
         [SerializeField, ReadOnly] private bool _isInit = false;
 
-        [Header("Unsafe Input Events")]
-        [SerializeField] private UnityEvent<TMCardModel> _onDragEvent = new();
-
         [Header("Safe Input Events")]
         [SerializeField] private UnityEvent<TMCardModel> _onSafePointerDownEvent = new();
         [SerializeField] private UnityEvent<TMCardModel> _onSafePointerUpEvent = new();
@@ -196,6 +193,8 @@ namespace TM.Card.Runtime
 
         private void OnDestroy()
         {
+            if (!gameObject.scene.isLoaded) return;
+
             CardEffect.Is<IDisposable>(disposable => disposable.Dispose());
             CardEffect = null;
         }
@@ -212,7 +211,6 @@ namespace TM.Card.Runtime
             _onSafePointerEnterEvent.AddListener(_ => CardViewMover.TargetPosition = 0.5f * RectTransform.rect.height * new Vector3(0f, 1f, 0f));
             _onSafePointerExitEvent.AddListener(_ => CardViewMover.TargetPosition = Vector2.zero);
             _onSafePointerDownEvent.AddListener(onMouseDownCard);
-            _onSafeDragEvent.AddListener(onDragCard);
 
             _isInit = true;
             CardViewMover.IsLocal = true;
@@ -225,12 +223,12 @@ namespace TM.Card.Runtime
         {
             setOnMover(CardViewMover, false);
             CardBodyMover.enabled = false;
-            _isDragging.Value = true;
             _dragEnumerator = iEOnDrag();
             StartCoroutine(_dragEnumerator);
+            dragCard();
 
             _onDragBeginCard.Invoke(this);
-            dragCard();
+            _isDragging.Value = true;
         }
 
         public void SetCardData(TMCardData cardData)
@@ -298,12 +296,12 @@ namespace TM.Card.Runtime
 
             _isOverTombTransform.Value = RectTransformUtility.RectangleContainsScreenPoint(
                 TMCardManager.Instance.DeckTransform,
-                mousePosition, 
+                mousePosition,
                 CardCamera);
 
             _isOverCollectTransform.Value = RectTransformUtility.RectangleContainsScreenPoint(
-                TMCardManager.Instance.UIComponents.CollectField, 
-                mousePosition, 
+                TMCardManager.Instance.UIComponents.CollectField,
+                mousePosition,
                 CardCamera);
 
             if (_isOverTombTransform.Value || _isOverCollectTransform.Value)
@@ -328,9 +326,14 @@ namespace TM.Card.Runtime
 
         private IEnumerator iEOnDrag()
         {
-            while (Mouse.current.leftButton.isPressed)
+            Mouse current = Mouse.current;
+            Vector2 mousePosition = current.position.ReadValue();
+
+            while (current.leftButton.isPressed)
             {
-                onDrag(Mouse.current.position.ReadValue());
+                dragCard();
+                onDrag(mousePosition);
+
                 yield return null;
             }
 
@@ -389,9 +392,6 @@ namespace TM.Card.Runtime
             _ => 0
         };
 
-        private void onDragCard(TMCardModel card) 
-            => dragCard();
-
         private void onDragEnd(Vector2 mousePosition)
         {
             if (!_canInteract.Value) return;
@@ -414,7 +414,6 @@ namespace TM.Card.Runtime
             {
                 setOnMover(CardViewMover, true);
                 CardBodyMover.enabled = true;
-                _isDragging.Value = false;
 
                 if (!_isOverCollectTransform.Value && CanPayCost && CardEffect.CanUseEffect)
                 {
@@ -424,8 +423,8 @@ namespace TM.Card.Runtime
             }
 
             this.StopCoroutineIfNotNull(_dragEnumerator);
+            _isDragging.Value = false;
             _onDragEndCard.Invoke(this);
-
             _isOverTombTransform.Value = false;
             _isOverCollectTransform.Value = false;
         }

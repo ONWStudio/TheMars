@@ -26,10 +26,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 3610285249959297316
+  - m_Id: 135539618287616
+    m_Localized: "\uB9C8\uB974\uC2A4 \uB9AC\uD2AC {MarsLithium}\uAC1C \uB0A9\uBD80"
+    m_Metadata:
+      m_Items:
+      - rid: 3610285249959297316
   references:
     version: 2
     RefIds:
     - rid: 3610285249959297316
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 00108d454a1b0000
+        m_Entries: 00108d454a1b00000010cdc6457b0000

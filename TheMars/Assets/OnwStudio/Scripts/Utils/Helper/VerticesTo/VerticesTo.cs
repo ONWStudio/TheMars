@@ -24,7 +24,10 @@ namespace Onw.Helper
 
         public static Vector3 GetMinPoint(GameObject obj)
         {
-            Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
+            Renderer[] renderers = obj
+                .GetComponentsInChildren<Renderer>()
+                .Where(renderer => renderer is not ParticleSystemRenderer)
+                .ToArray();
 
             if (renderers.Length == 0)
             {
@@ -44,7 +47,10 @@ namespace Onw.Helper
 
         public static Vector3 GetTotalSize(GameObject obj)
         {
-            Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
+            Renderer[] renderers = obj
+                .GetComponentsInChildren<Renderer>()
+                .Where(renderer => renderer is not ParticleSystemRenderer)
+                .ToArray();
 
             if (renderers.Length == 0)
             {

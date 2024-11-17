@@ -8,7 +8,6 @@ namespace Onw.Manager.Prototype
     internal class ReleaseAddressablesInstance : MonoBehaviour
     {
         protected string _primaryKey = null;
-        private bool _isApplicationQuit = false;
 
         internal virtual string PrimaryKey
         {
@@ -34,14 +33,9 @@ namespace Onw.Manager.Prototype
 
         private void OnDestroy()
         {
-            if (_primaryKey is null || _isApplicationQuit) return;
+            if (_primaryKey is null || !gameObject.scene.isLoaded) return;
 
             Release();
-        }
-
-        private void OnApplicationQuit()
-        {
-            _isApplicationQuit = true;
         }
     }
 }
