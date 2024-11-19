@@ -29,7 +29,8 @@ MonoBehaviour:
   _effectCreators:
   - rid: 3610285249959297184
   - rid: 3610285249959297185
-  _synergies: []
+  _synergies:
+  - {fileID: 0}
   references:
     version: 2
     RefIds:

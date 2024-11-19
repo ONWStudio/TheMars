@@ -39,6 +39,10 @@ MonoBehaviour:
     m_Key: CreditSupplyStation
     m_Metadata:
       m_Items: []
+  - m_Id: 1146247564922880
+    m_Key: JLK
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
