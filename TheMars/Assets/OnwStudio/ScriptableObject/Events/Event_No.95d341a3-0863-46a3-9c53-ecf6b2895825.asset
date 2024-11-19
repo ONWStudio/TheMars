@@ -56,6 +56,7 @@ MonoBehaviour:
   _topEffectCreators:
   - rid: 3610285249959297142
   - rid: 3610285249959297143
+  - rid: 7665316120208080900
   _bottomEffectCreators:
   - rid: 3610285249959297144
   - rid: 3610285249959297145
@@ -66,6 +67,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 3610285249959297142
       type: {class: TMEventResourceAddEffectCreator, ns: TM.Event.Effect.Creator,
         asm: AssemblyTheMars}
@@ -102,3 +105,8 @@ MonoBehaviour:
       data:
         <ResourceKind>k__BackingField: 0
         <Resource>k__BackingField: -20
+    - rid: 7665316120208080900
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        <BuffTrigger>k__BackingField:
+          rid: -2
