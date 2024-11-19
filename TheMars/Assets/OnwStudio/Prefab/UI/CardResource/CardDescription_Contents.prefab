@@ -383,6 +383,7 @@ MonoBehaviour:
   _cardNameText: {fileID: 742114377155699498}
   _cardDescriptionText: {fileID: 7135583071250077550}
   _rectTransform: {fileID: 8300173850693807590}
+  _canvas: {fileID: 4221986686737246607}
   _card: {fileID: 0}
   _multiflyOffset: {x: 0, y: 0}
 --- !u!223 &4221986686737246607

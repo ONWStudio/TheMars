@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StartupSelectors:
   - rid: 2707483192642240519
-  - rid: 2707483192642240520
   - rid: 2707483192642240521
   m_AvailableLocales:
     rid: 2707483192642240522
@@ -38,15 +37,12 @@ MonoBehaviour:
         asm: Unity.Localization}
       data:
         m_CommandLineArgument: -language=
-    - rid: 2707483192642240520
-      type: {class: SystemLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
-      data: 
     - rid: 2707483192642240521
       type: {class: SpecificLocaleSelector, ns: UnityEngine.Localization.Settings,
         asm: Unity.Localization}
       data:
         m_LocaleId:
-          m_Code: en
+          m_Code: ko-KR
     - rid: 2707483192642240522
       type: {class: LocalesProvider, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
       data: 
@@ -73,7 +69,7 @@ MonoBehaviour:
           rid: -2
         m_UseFallback: 0
         m_MissingTranslationState: 0
-        m_NoTranslationFoundMessage: No translation found for '{key}' in {table.TableCollectionName}
+        m_NoTranslationFoundMessage: 
         m_SmartFormat:
           rid: 2707483192642240525
     - rid: 2707483192642240525

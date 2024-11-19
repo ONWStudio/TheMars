@@ -35,7 +35,10 @@ namespace TM.Building.Effect
         
         public void ApplyEffect()
         {
-            TMGridManager.Instance.Buildings
+            TMGridManager
+                .Instance
+                .Buildings
+                .Values
                 .OrderBy(_ => Random.value)
                 .Take(TargetBuildingCount)
                 .ForEach(building => building.Grade.Value += GradeAdd);

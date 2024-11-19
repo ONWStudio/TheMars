@@ -8,6 +8,7 @@ using TM.Card.Runtime;
 using UnityEngine.Localization;
 using Onw.UI;
 using Onw.Extensions;
+using UnityEngine.Serialization;
 
 namespace TM.UI
 {
@@ -21,7 +22,8 @@ namespace TM.UI
 
         public TMCardModel _card = null;
 
-        [SerializeField] private Vector2 _multiflyOffset = Vector2.zero;
+        [FormerlySerializedAs("_multiflyOffset")]
+        [SerializeField] private Vector2 _multiOffset = Vector2.zero;
         private bool _canShow = true;
 
         public void OnAddedCardEvent(TMCardModel card)
@@ -61,6 +63,7 @@ namespace TM.UI
             if (card.IsDragging.Value)
             {
                 onDragBeginCard(card);
+                return; // 여기에 return을 추가합니다.
             }
 
             if (_card)
@@ -77,24 +80,6 @@ namespace TM.UI
             _card.OnDragBeginCard += onDragBeginCard;
 
             positionPopupAtCardTopRight();
-
-            void onDragBeginCard(TMCardModel card)
-            {
-                card.OnDragBeginCard -= onDragBeginCard;
-                card.OnDragEndCard += onDragEndCard;
-
-                _canShow = false;
-                _canvas.enabled = false;
-                card.CardData.Value.OnChangedName -= onChangedName;
-                card.CardEffect.OnChangedDescription -= onChangedDescription;
-                _card = null;
-            }
-
-            void onDragEndCard(TMCardModel card)
-            {
-                card.OnDragEndCard -= onDragEndCard;
-                _canShow = true;
-            }
         }
 
         private void positionPopupAtCardTopRight()
@@ -104,11 +89,11 @@ namespace TM.UI
             Vector2 cardSize = cardRect.GetWorldRectSize();
 
             Vector3 cardTopRightWorldPosition = new(
-                cardCorners[2].x + cardSize.x * _multiflyOffset.x,
-                cardCorners[2].y + cardSize.y * _multiflyOffset.y,
+                cardCorners[2].x + cardSize.x * _multiOffset.x,
+                cardCorners[2].y + cardSize.y * _multiOffset.y,
                 _rectTransform.GetPositionZ());
 
-            _rectTransform.pivot = new Vector2(0f, 0f);
+            _rectTransform.pivot = new(0f, 0f);
             _rectTransform.position = cardTopRightWorldPosition;
 
             _canvas.enabled = true;
@@ -122,6 +107,24 @@ namespace TM.UI
         private void onChangedName(string cardName)
         {
             _cardNameText.text = cardName;
+        }
+
+        private void onDragBeginCard(TMCardModel card)
+        {
+            card.OnDragBeginCard -= onDragBeginCard;
+            card.OnDragEndCard += onDragEndCard;
+
+            _canShow = false;
+            _canvas.enabled = false;
+            card.CardData.Value.OnChangedName -= onChangedName;
+            card.CardEffect.OnChangedDescription -= onChangedDescription;
+            _card = null;
+        }
+
+        private void onDragEndCard(TMCardModel card)
+        {
+            card.OnDragEndCard -= onDragEndCard;
+            _canShow = true;
         }
     }
 }

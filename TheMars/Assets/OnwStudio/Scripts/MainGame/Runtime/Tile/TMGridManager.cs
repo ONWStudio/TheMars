@@ -12,11 +12,13 @@ namespace TM.Grid
 {
     public sealed class TMGridManager : SceneSingleton<TMGridManager>
     {
-        protected override string SceneName => "MainGameScene";
+        [SerializeField, InitializeRequireComponent] private GridManager _gridManager;
+        private Dictionary<IHexGrid, TMBuilding> _buildings = new();
 
-        public float TileSize => _gridManager.HexagonWidth;
-        public int TileCount => _gridManager.TileCount;
-
+        [SerializeField] private UnityEvent<TMBuilding> _onAddedBuilding;
+        [SerializeField] private UnityEvent<TMBuilding> _onRemovedBuilding;
+        [SerializeField] private UnityEvent<TMBuilding> _onChangedPointBuilding;
+        
         public event UnityAction<IHexGrid> OnHighlightTile
         {
             add => _gridManager.OnHighlightTile += value;
@@ -58,6 +60,11 @@ namespace TM.Grid
             add => _onChangedPointBuilding.AddListener(value);
             remove => _onChangedPointBuilding.RemoveListener(value);
         }
+        
+        protected override string SceneName => "MainGameScene";
+
+        public float TileSize => _gridManager.HexagonWidth;
+        public int TileCount => _gridManager.TileCount;
 
         public bool IsRender
         {
@@ -65,38 +72,32 @@ namespace TM.Grid
             set => _gridManager.IsRender = value;
         }
 
-        public IReadOnlyList<TMBuilding> Buildings => _buildings;        
+        public IReadOnlyDictionary<IHexGrid, TMBuilding> Buildings => _buildings;        
 
-        [SerializeField, InitializeRequireComponent] private GridManager _gridManager;
-        [SerializeField, ReadOnly] private List<TMBuilding> _buildings = new();
-
-        [SerializeField] private UnityEvent<TMBuilding> _onAddedBuilding;
-        [SerializeField] private UnityEvent<TMBuilding> _onRemovedBuilding;
-        [SerializeField] private UnityEvent<TMBuilding> _onChangedPointBuilding;
-        
         protected override void Init() {}
 
-        public void AddBuilding(TMBuilding building)
+        public void AddBuilding(IHexGrid hex, TMBuilding building)
         {
-            _buildings.Add(building);
+            _buildings.Add(hex, building);
             _onAddedBuilding.Invoke(building);
         }
 
-        public void AddBuildingWithoutNotify(TMBuilding building)
+        public void AddBuildingWithoutNotify(IHexGrid hex, TMBuilding building)
         {
-            _buildings.Add(building);
+            _buildings.Add(hex, building);
         }
 
-        public void ChangePointBuilding(TMBuilding building)
+        public void ChangePointBuilding(IHexGrid hex, TMBuilding building)
         {
-            if (_buildings.All(b => building != b)) return;
+            if (!_buildings.ContainsKey(hex)) return;
             
             _onChangedPointBuilding.Invoke(building);
         }
 
-        public void RemoveBuilding(TMBuilding building)
+        public void RemoveBuilding(IHexGrid hex)
         {
-            if (!_buildings.Remove(building)) return;
+            if (!_buildings.Remove(hex, out TMBuilding building)) return;
+
             _onRemovedBuilding.Invoke(building);
         }
 

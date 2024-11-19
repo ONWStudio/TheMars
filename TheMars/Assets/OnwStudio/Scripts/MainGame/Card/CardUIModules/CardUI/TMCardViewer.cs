@@ -4,16 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Localization;
 using UnityEngine.Serialization;
-using Onw.Attribute;
-using Onw.Extensions;
+using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using Onw.Manager.Prototype;
+using TMPro;
+using Onw.Attribute;
 
 namespace TM.Card.Runtime
 {
-    /// <summary>
-    /// .. 눈에 보이는 정보(카드 설명, 효과, 이름, 코스트, 종류) 등에 관해 관리하는 Viewer클래스 입니다 CardData의 정보대로 최종적으로 카드를 출력하게 됩니다
-    /// </summary>
     [DisallowMultipleComponent]
     public sealed class TMCardViewer : MonoBehaviour
     {
@@ -22,65 +19,52 @@ namespace TM.Card.Runtime
         [SerializeField, SelectableSerializeField]
         private Image _cardImage;
 
-        [SerializeField, InitializeRequireComponent]
-        private Mask _mask;
+        [Header("Cost Option")]
+        [SerializeField, SelectableSerializeField]
+        private TextMeshProUGUI _costText;
 
+        [SerializeField, SelectableSerializeField]
+        private Image _costImage;
+
+        [SerializeField, SelectableSerializeField]
+        private Mask _mask = null;
+        
         private Action<Locale> _onLanguageChanged = null;
 
-        [SerializeField, SelectableSerializeField] private TMCardCostIcon _mainCostIcon;
-        [SerializeField, SelectableSerializeField] private RectTransform _subCostField;
-
-        AsyncOperationHandle<Sprite> _costIconHandle;
+        private AsyncOperationHandle<Sprite> _spriteHandle;
 
         public void SetView(bool isOn)
         {
             _mask.enabled = !isOn;
         }
-
+        
         public void SetUI(TMCardModel cardModel)
         {
             TMCardData cardData = cardModel.CardData.Value;
             _cardImage.sprite = cardData.CardImage;
-
-            TMResourceKind kind = cardData.MainCost.CostKind switch
+            _costText.text = cardData.MainCost.Cost.ToString();
+            
+            string reference = cardData.MainCost.CostKind switch
             {
-                TMMainCost.ELECTRICITY => TMResourceKind.ELECTRICITY,
-                _ => TMResourceKind.CREDIT,
+                TMMainCost.CREDIT => "Credit_Icon",
+                TMMainCost.ELECTRICITY => "Electricity_Icon",
+                _ => null
             };
 
-            _mainCostIcon.SetIcon(kind);
-            cardModel.MainCost.AdditionalCost.AddListener(onChangedAdditionalCostByMain);
+            _spriteHandle = Addressables.LoadAssetAsync<Sprite>(reference);
+            _spriteHandle.Completed += onCompletedSprite;
 
-            for (int i = 0; i < cardData.CardCosts.Count; i++)
+            void onCompletedSprite(AsyncOperationHandle<Sprite> spriteHandle)
             {
-                TMCardSubCost subCost = cardData.CardCosts[i];
-                TMResourceKind subCostkind = subCost.CostKind switch
-                {
-                    TMSubCost.STEEL => TMResourceKind.STEEL,
-                    TMSubCost.PLANTS => TMResourceKind.PLANTS,
-                    TMSubCost.CLAY => TMResourceKind.CLAY,
-                    _ => TMResourceKind.MARS_LITHIUM,
-                };
-
-                ITMCardCostRuntime subCostRuntime = cardModel.SubCosts[i];
-                PrototypeManager.Instance.ClonePrototypeAsync<TMCardCostIcon>("CostUI", onLoadedCostIcon, _subCostField);
-
-                void onLoadedCostIcon(TMCardCostIcon icon)
-                {
-                    icon.SetIcon(subCostkind);
-                    subCostRuntime.AdditionalCost.AddListener(onChangedAddtionalCostBySub);
-
-                    void onChangedAddtionalCostBySub(int cost)
-                    {
-                        icon.SetCost(subCostRuntime.FinalCost);
-                    }
-                }
+                _costImage.sprite = spriteHandle.Result;
             }
+        }
 
-            void onChangedAdditionalCostByMain(int cost)
-            {
-                _mainCostIcon.SetCost(cardModel.MainCost.FinalCost);
-            }
+        private void OnDestroy()
+        {
+            if (!_spriteHandle.IsValid()) return;
+            
+            Addressables.Release(_spriteHandle);
         }
     }
 }

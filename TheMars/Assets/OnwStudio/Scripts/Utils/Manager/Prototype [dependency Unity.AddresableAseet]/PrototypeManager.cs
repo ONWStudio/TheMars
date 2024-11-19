@@ -236,7 +236,7 @@ namespace Onw.Manager.Prototype
             return values;
         }
 
-        public T ClonePrototypeFromReferenceSync<T>(AssetReferenceGameObject assetReference, Transform parent) where T : MonoBehaviour
+        public T ClonePrototypeFromReferenceSync<T>(AssetReferenceGameObject assetReference, Transform parent = null) where T : MonoBehaviour
         {
             RefCountingOperationHandle<GameObject> resourceOperationHandle = _gameObjectFromReferenceHandles.GetHandle(assetReference);
             _ = resourceOperationHandle.Handle.WaitForCompletion();
@@ -245,7 +245,7 @@ namespace Onw.Manager.Prototype
                 _gameObjectFromReferenceHandles, assetReference.RuntimeKey.ToString(), resourceOperationHandle, parent);
         }
 
-        public GameObject ClonePrototypeFromReferenceSync(AssetReferenceGameObject assetReference, Transform parent)
+        public GameObject ClonePrototypeFromReferenceSync(AssetReferenceGameObject assetReference, Transform parent = null)
         {
             RefCountingOperationHandle<GameObject> resourceOperationHandle = _gameObjectFromReferenceHandles.GetHandle(assetReference);
             _ = resourceOperationHandle.Handle.WaitForCompletion();

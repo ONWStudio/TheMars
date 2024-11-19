@@ -2,14 +2,11 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using Onw.Attribute;
 using Onw.Coroutine;
-using Onw.Extensions;
 using TM.Building.Effect.Creator;
 using TM.Manager;
 using UnityEngine.Localization;
-using TM.Card.Effect;
 
 namespace TM.Building.Effect
 {
@@ -44,17 +41,18 @@ namespace TM.Building.Effect
         
         public void AddResource(int additionalAmount)
         {
+            AdditionalResource += additionalAmount;
+            
             LocalizedDescription.Arguments = new object[]
             {
                 new
                 {
                     RepeatSeconds,
                     Kind,
-                    AdditionalResource
+                    Resource = Mathf.Abs(AdditionalResource),
+                    Positive = AdditionalResource >= 0
                 }
             };
-
-            AdditionalResource += additionalAmount;
         }
         
         public void ApplyEffect(TMBuilding owner)
@@ -84,8 +82,10 @@ namespace TM.Building.Effect
 
                     if (timeAccumulator >= RepeatSeconds)
                     {
-                        TMPlayerManager.Instance.AddResource(Kind, AdditionalResource);
-                        timeAccumulator -= RepeatSeconds;
+                        int divideCount = (int)(timeAccumulator / RepeatSeconds);
+
+                        TMPlayerManager.Instance.AddResource(Kind, AdditionalResource * divideCount);
+                        timeAccumulator -= RepeatSeconds * divideCount;
                     }
 
                     yield return null;

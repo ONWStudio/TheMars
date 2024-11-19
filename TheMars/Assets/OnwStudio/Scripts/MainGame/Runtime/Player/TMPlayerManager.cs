@@ -3,12 +3,12 @@ using UnityEngine.Events;
 using UnityEngine.Localization;
 using UnityEngine.Serialization;
 using UnityEngine.Localization.Settings;
+using Onw.Event;
 using Onw.Helper;
 using Onw.Manager;
 using Onw.Attribute;
-using Onw.Event;
-using TM.Manager;
 using TM.Event;
+using TM.Manager;
 using TM.Card.Runtime;
 
 namespace TM
@@ -52,10 +52,6 @@ namespace TM
         [SerializeField] private ReactiveField<int> _maxExp = new() { Value = 100, ValueProcessors = new() { new MinIntProcessor(0) }};
         [SerializeField] private ReactiveField<int> _terraformValue = new() { ValueProcessors = new() { new ClampIntProcessor(0, MAX_TERRAFORM_VALUE) }};
 
-        /// <summary>
-        /// .. Population의 경우 _totalPopulation에 의해 값이 유동적으로 변경되므로 .. 별도의 세터 메서드 제공
-        /// </summary>
-        /// <param name="population"></param>
         public void SetPopulation(int population)
         {
             _population.Value = Mathf.Clamp(population, 0, _totalPopulation.Value);
@@ -63,17 +59,7 @@ namespace TM
 
         protected override void Init()
         {
-            Locale locale = LocalizationSettings.AvailableLocales.GetLocale("ko-KR");
-            if (locale)
-            {
-                LocalizationSettings.SelectedLocale = locale;
-            }
-            else
-            {
-                Debug.LogWarning("선택한 로케일을 찾을 수 없습니다: " + "ko-KR");
-            }
-
-            TMSimulator.Instance.NowDay.AddListener(onChagnedDay);
+            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
             TMCardManager.Instance.CardCreator.OnPostCreateCard += onPostCreateCard;
             TMEventManager.Instance.OnTriggerEvent += onTriggerEvent;
         }
@@ -88,7 +74,7 @@ namespace TM
             SetExp(_exp.Value + 10);
         }
 
-        private void onChagnedDay(int day)
+        private void onChangedDay(int day)
         {
             if (day == 0) return;
 
@@ -115,7 +101,7 @@ namespace TM
             _exp.Value = exp;
         }
 
-        public int GetResoucesByKind(TMResourceKind kind)
+        public int GetResourcesByKind(TMResourceKind kind)
         {
             return kind switch
             {

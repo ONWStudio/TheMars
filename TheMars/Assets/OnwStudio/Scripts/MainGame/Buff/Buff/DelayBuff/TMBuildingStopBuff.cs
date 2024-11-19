@@ -57,6 +57,7 @@ namespace TM.Buff
             _stoppedBuildings = TMGridManager
                 .Instance
                 .Buildings
+                .Values
                 .OrderBy(_ => Random.value)
                 .Take(TargetBuildingCount)
                 .ToArray();

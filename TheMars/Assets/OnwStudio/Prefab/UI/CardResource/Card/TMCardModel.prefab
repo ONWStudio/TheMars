@@ -491,6 +491,7 @@ GameObject:
   - component: {fileID: 2307808775309863638}
   - component: {fileID: 6791109092436883567}
   - component: {fileID: 895744402935819385}
+  - component: {fileID: 9038939321740603411}
   m_Layer: 6
   m_Name: TMCardModel
   m_TagString: Untagged
@@ -662,9 +663,6 @@ MonoBehaviour:
       <_value>k__BackingField: 0
   _subCosts: []
   _isInit: 0
-  _onDragEvent:
-    m_PersistentCalls:
-      m_Calls: []
   _onSafePointerDownEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -704,9 +702,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cardImage: {fileID: 7261407148150218330}
+  _costText: {fileID: 4337772742161904016}
+  _costImage: {fileID: 614980430791424304}
   _mask: {fileID: 895744402935819385}
-  _mainCostIcon: {fileID: 3628970997553551187}
-  _subCostField: {fileID: 9072132925784667344}
 --- !u!114 &2773294980090498079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -795,6 +793,108 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &9038939321740603411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5849416487096146530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Feedbacks: []
+  InitializationMode: 2
+  AutoInitialization: 1
+  SafeMode: 3
+  Direction: 0
+  AutoChangeDirectionOnEnd: 0
+  AutoPlayOnStart: 0
+  AutoPlayOnEnable: 0
+  ForceTimescaleMode: 0
+  ForcedTimescaleMode: 1
+  DurationMultiplier: 1
+  RandomizeDuration: 0
+  RandomDurationMultiplier: {x: 0.5, y: 1.5}
+  DisplayFullDurationDetails: 0
+  PlayerTimescaleMode: 1
+  OnlyPlayIfWithinRange: 0
+  RangeCenter: {fileID: 0}
+  RangeDistance: 5
+  UseRangeFalloff: 0
+  RangeFalloff:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  RemapRangeFalloff: {x: 0, y: 1}
+  IgnoreRangeEvents: 0
+  CooldownDuration: 0
+  InitialDelay: 0
+  CanPlay: 1
+  CanPlayWhileAlreadyPlaying: 1
+  ChanceToPlay: 100
+  FeedbacksIntensity: 1
+  Events:
+    TriggerMMFeedbacksEvents: 0
+    TriggerUnityEvents: 1
+    OnPlay:
+      m_PersistentCalls:
+        m_Calls: []
+    OnPause:
+      m_PersistentCalls:
+        m_Calls: []
+    OnResume:
+      m_PersistentCalls:
+        m_Calls: []
+    OnRevert:
+      m_PersistentCalls:
+        m_Calls: []
+    OnComplete:
+      m_PersistentCalls:
+        m_Calls: []
+    OnRestoreInitialValues:
+      m_PersistentCalls:
+        m_Calls: []
+    OnSkipToTheEnd:
+      m_PersistentCalls:
+        m_Calls: []
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+  DebugActive: 0
+  FeedbacksList: []
+  KeepPlayModeChanges: 0
+  PerformanceMode: 0
+  StopFeedbacksOnDisable: 0
+  PlayCount: 0
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &8363807512851160316
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,6 +978,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5365388536198109715}
     m_Modifications:
+    - target: {fileID: 1300180424335584032, guid: bbe3ee9a1bd884fcf845dda7e245be14,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1718597137348207262, guid: bbe3ee9a1bd884fcf845dda7e245be14,
         type: 3}
       propertyPath: m_Pivot.x
@@ -988,21 +1093,33 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe3ee9a1bd884fcf845dda7e245be14, type: 3}
---- !u!224 &863667632260669361 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1718597137348207262, guid: bbe3ee9a1bd884fcf845dda7e245be14,
-    type: 3}
-  m_PrefabInstance: {fileID: 2028295346626690351}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3628970997553551187 stripped
+--- !u!114 &614980430791424304 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3348780615777200764, guid: bbe3ee9a1bd884fcf845dda7e245be14,
+  m_CorrespondingSourceObject: {fileID: 1489893981132243999, guid: bbe3ee9a1bd884fcf845dda7e245be14,
     type: 3}
   m_PrefabInstance: {fileID: 2028295346626690351}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42530bfece3690d41950fc964be275c9, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &863667632260669361 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1718597137348207262, guid: bbe3ee9a1bd884fcf845dda7e245be14,
+    type: 3}
+  m_PrefabInstance: {fileID: 2028295346626690351}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4337772742161904016 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2312368114784554175, guid: bbe3ee9a1bd884fcf845dda7e245be14,
+    type: 3}
+  m_PrefabInstance: {fileID: 2028295346626690351}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

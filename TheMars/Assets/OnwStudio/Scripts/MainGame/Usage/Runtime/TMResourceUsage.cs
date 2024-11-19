@@ -10,7 +10,7 @@ namespace TM.Usage
     [System.Serializable]
     public class TMResourceUsage : ITMUsage, ITMInitializeUsage<TMResourceUsageCreator>
     {
-        public bool CanProcessPayment => TMPlayerManager.Instance.GetResoucesByKind(Kind) >= ResourceUsage;
+        public bool CanProcessPayment => TMPlayerManager.Instance.GetResourcesByKind(Kind) >= ResourceUsage;
 
         [field: SerializeField, ReadOnly] public LocalizedString UsageLocalizedString { get; private set; } = new("TM_Cost", "Resource_Usage");
         [field: SerializeField, ReadOnly] public TMResourceKind Kind { get; set; }

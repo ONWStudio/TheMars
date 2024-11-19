@@ -37,7 +37,7 @@ namespace TM.Card.Runtime
 
             void setCard(TMCardData cardData)
             {
-                if (cardData == null) return;
+                if (!cardData) return;
 
                 _cardModel.CardData.RemoveListener(setCard);
                 CardData = _cardModel.CardData.Value;

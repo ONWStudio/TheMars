@@ -171,11 +171,16 @@ namespace TM.Card.Effect
         {
             _building.IsRender = true;
             _building.BatchOnTile();
- 
+
+            if (_prevTileData is { } prevTileData)
+            {
+                TMGridManager.Instance.RemoveBuilding(prevTileData.Prev);
+            }
+            
             _prevTileData = null;
             _isFired = true;
 
-            TMGridManager.Instance.AddBuilding(_building); // .. 타일에 해당 건물이 배치되었다 알려주기
+            TMGridManager.Instance.AddBuilding(_currentHex, _building); // .. 타일에 해당 건물이 배치되었다 알려주기
             batchBuildingOnTile(_currentHex); // .. 건물이 배치된 타일 설정하기
         }
 
@@ -211,7 +216,7 @@ namespace TM.Card.Effect
         {
             if (!_building) return;
 
-            if (_prevTileData is not null && _prevTileData is { } prevTileData) // .. 이전에 건물이 설치되었던 타일이 있다면
+            if (_prevTileData is { } prevTileData) // .. 이전에 건물이 설치되었던 타일이 있다면
             {
                 _building.IsRender = true;
                 _building.SetPosition(prevTileData.PrevPosition); // .. 건물의 포지션 이전 타일의 위치로
@@ -227,7 +232,7 @@ namespace TM.Card.Effect
 
         public void Dispose()
         {
-            TMGridManager.Instance.RemoveBuilding(_building);       // .. 해당 카드는 파괴되었으므로 건물 제거
+            TMGridManager.Instance.RemoveBuilding(_currentHex);       // .. 해당 카드는 파괴되었으므로 건물 제거
             OnwUnityHelper.DestroyObjectByComponent(ref _building); // .. 해당 카드와 연결된 건물 파괴
         }
     }

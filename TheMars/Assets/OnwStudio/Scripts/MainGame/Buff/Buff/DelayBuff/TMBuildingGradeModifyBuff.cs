@@ -68,6 +68,7 @@ namespace TM.Buff
             _targetBuildings = TMGridManager
                 .Instance
                 .Buildings
+                .Values
                 .Where(isEqualKind)
                 .OrderBy(_ => Random.value)
                 .Take(TargetBuildingCount)
