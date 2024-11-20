@@ -3,8 +3,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Serialization;
 using TMPro;
+using UniRx;
 using Onw.Attribute;
 using TM.Manager;
+using UniRx.Triggers;
 
 namespace TM.UI
 {
@@ -26,6 +28,7 @@ namespace TM.UI
         
         [Header("Time Info")]
         [SerializeField, SelectableSerializeField, FormerlySerializedAs("_timeBarImage")] private Image _timeProgressImage;
+        [SerializeField, SelectableSerializeField] private TextMeshProUGUI _timeScaleText;
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _dayText;
         [SerializeField, SelectableSerializeField] private Button _playButton;
         [SerializeField, SelectableSerializeField] private Button _pauseButton;
@@ -52,9 +55,15 @@ namespace TM.UI
             TMPlayerManager.Instance.MaxExp.AddListener(OnChangedMaxExp);
             TMSimulator.Instance.NowSeconds.AddListener(OnChangedSeconds);
             TMSimulator.Instance.NowDay.AddListener(OnChangedDay);
+            TimeManager.TimeScale.Subscribe(OnChangedTimeScale);
             _playButton.onClick.AddListener(OnClickAgainButton);
             _pauseButton.onClick.AddListener(OnClickStopButton);
             _fastButton.onClick.AddListener(OnClickFastButton);
+        }
+
+        public void OnChangedTimeScale(int timeScale)
+        {
+            _timeScaleText.text = $"X{timeScale}";
         }
 
         public void OnChangedMaxExp(int maxExp)
@@ -79,12 +88,14 @@ namespace TM.UI
 
         public void OnClickFastButton()
         {
-            TimeManager.GameSpeed = TimeManager.GameSpeed switch
+            TimeManager.SetTimeScale(TimeManager.TimeScale.Value switch
             {
                 1 => 2,
                 2 => 3,
+                3 => 4,
+                4 => 5,
                 _ => 1
-            };
+            });
         }
         
         public void OnChangedLevel(int level)
@@ -152,7 +163,7 @@ namespace TM.UI
             float normalizedTerraformValue = terraformValue / (float)TMPlayerManager.MAX_TERRAFORM_VALUE;
             
             _terraformHexagonImage.fillAmount = normalizedTerraformValue;
-            _terraformValueText.text = $"{((int)(normalizedTerraformValue * 100f))}%";
+            _terraformValueText.text = $"{(int)(normalizedTerraformValue * 100f)}%";
         }
     }
 }

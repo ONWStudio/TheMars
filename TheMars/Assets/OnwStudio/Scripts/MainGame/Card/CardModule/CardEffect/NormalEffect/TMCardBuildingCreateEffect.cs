@@ -232,7 +232,11 @@ namespace TM.Card.Effect
 
         public void Dispose()
         {
-            TMGridManager.Instance.RemoveBuilding(_currentHex);       // .. 해당 카드는 파괴되었으므로 건물 제거
+            if (_currentHex is not null)
+            {
+                TMGridManager.Instance.RemoveBuilding(_currentHex); // .. 해당 카드는 파괴되었으므로 건물 제거
+            }
+            
             OnwUnityHelper.DestroyObjectByComponent(ref _building); // .. 해당 카드와 연결된 건물 파괴
         }
     }

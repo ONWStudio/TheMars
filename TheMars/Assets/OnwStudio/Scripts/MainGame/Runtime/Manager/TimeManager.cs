@@ -1,24 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 namespace TM.Manager
 {
     public static class TimeManager
     {
-        private const int SPEED_MAX = 3;
+        private const int SPEED_MAX = 5;
         private const int SPEED_MIN = 0;
 
         public static bool IsPause { get; set; } = false;
 
-        public static int GameSpeed
+        public static IReadOnlyReactiveProperty<int> TimeScale => _timeScale;
+ 
+        private static ReactiveProperty<int> _timeScale = new(1);
+
+        public static void SetTimeScale(int scale)
         {
-            get => IsPause ? 0 : _gameSpeed;
-            set => _gameSpeed = Mathf.Clamp(value, SPEED_MIN, SPEED_MAX);
+            _timeScale.Value = Mathf.Clamp(scale, SPEED_MIN, SPEED_MAX);
         }
-
-        private static int _gameSpeed = 1;
-
+        
         public static float SecondsToMinutes(float seconds) => seconds / 60f;
         public static float MinutesToSeconds(float minutes) => minutes * 60f;
     }

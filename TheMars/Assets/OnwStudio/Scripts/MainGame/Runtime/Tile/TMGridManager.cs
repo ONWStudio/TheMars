@@ -13,7 +13,7 @@ namespace TM.Grid
     public sealed class TMGridManager : SceneSingleton<TMGridManager>
     {
         [SerializeField, InitializeRequireComponent] private GridManager _gridManager;
-        private Dictionary<IHexGrid, TMBuilding> _buildings = new();
+        private readonly Dictionary<IHexGrid, TMBuilding> _buildings = new();
 
         [SerializeField] private UnityEvent<TMBuilding> _onAddedBuilding;
         [SerializeField] private UnityEvent<TMBuilding> _onRemovedBuilding;

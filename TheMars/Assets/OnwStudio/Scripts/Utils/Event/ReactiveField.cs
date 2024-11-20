@@ -35,7 +35,7 @@ namespace Onw.Event
             set
             {
                 T processedValue = value;
-                ValueProcessors?.ForEach(processor => processedValue = processor.Reprocess(processedValue));
+                ValueProcessors?.ForEach(processor => processedValue = processor.Process(processedValue));
 
                 if (!InvokeIfValueChanged || !EqualityComparer.Equals(_value, processedValue))
                 {

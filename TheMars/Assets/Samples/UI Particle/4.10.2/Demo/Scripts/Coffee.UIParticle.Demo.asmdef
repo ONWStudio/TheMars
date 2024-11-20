@@ -1,0 +1,17 @@
+{
+    "name": "Coffee.UIParticle.Demo",
+    "rootNamespace": "",
+    "references": [
+        "Coffee.UIParticle",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

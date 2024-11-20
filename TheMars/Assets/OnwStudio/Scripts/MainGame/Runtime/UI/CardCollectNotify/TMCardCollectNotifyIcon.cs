@@ -37,7 +37,7 @@ namespace TM.Runtime.UI
             
             _collectCardButton.onClick.AddListener(() =>
             {
-                if (TMCardManager.Instance.Cards.Count >= TMCardManager.Instance.MaxCardCount)
+                if (TMCardManager.Instance.Cards.Count >= TMCardManager.Instance.MaxCardCount.Value)
                 {
                     _onNotifyCantCreateCard.Invoke();
                     return;
@@ -45,7 +45,6 @@ namespace TM.Runtime.UI
                 
                 TMCardCollectUIController.Instance.ActiveUI(_cards);
                 GenericObjectPool<TMCardCollectNotifyIcon>.Return(this);
-
             });
         }
 

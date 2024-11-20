@@ -42,13 +42,13 @@ namespace TM.Manager
 
         [SerializeField, Range(INTERVAL_MIN, INTERVAL_MAX)] private int _intervalInMinutes = 2;
 
-        [field: SerializeField, ReadOnly] private int? _intervalInSeconds = null;
+        private int? _intervalInSeconds = null;
 
         protected override void Init() {}
 
         private void Update()
         {
-            AccumulatedTime += Time.deltaTime * TimeManager.GameSpeed;
+            AccumulatedTime += Time.deltaTime * TimeManager.TimeScale.Value;
 
             _nowSeconds.Value = (int)(AccumulatedTime / 1);
             _nowMinutes.Value = (int)(AccumulatedTime / 60);

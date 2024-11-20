@@ -10,7 +10,7 @@ namespace Onw.Event
     public class MinIntProcessor : IValueProcessor
     {
         [field: SerializeField] public int Min { get; private set; }
-        public T Reprocess<T>(T value)
+        public T Process<T>(T value)
         {
             return value is int intValue && Mathf.Max(intValue, Min) is T newValue ? newValue : value;
         }
@@ -22,7 +22,7 @@ namespace Onw.Event
     public class MaxIntProcessor : IValueProcessor
     {
         [field: SerializeField] public int Max { get; private set; }
-        public T Reprocess<T>(T value)
+        public T Process<T>(T value)
         {
             return value is int intValue && Mathf.Min(intValue, Max) is T newValue ? newValue : value;
         }
@@ -35,7 +35,7 @@ namespace Onw.Event
     {
         [field: SerializeField] public int Min { get; private set; }
         [field: SerializeField] public int Max { get; private set; }
-        public T Reprocess<T>(T value)
+        public T Process<T>(T value)
         {
             return value is int intValue && Mathf.Clamp(intValue, Min, Max) is T newValue ? newValue : value;
         }
@@ -49,6 +49,6 @@ namespace Onw.Event
     
     public interface IValueProcessor
     {
-        public T Reprocess<T>(T value);
+        public T Process<T>(T value);
     }
 }
