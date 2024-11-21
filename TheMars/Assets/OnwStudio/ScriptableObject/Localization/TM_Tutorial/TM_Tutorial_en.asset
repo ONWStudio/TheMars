@@ -128,6 +128,16 @@ MonoBehaviour:
       I, Sector, will stand by your side.
     m_Metadata:
       m_Items: []
+  - m_Id: 82852178726912
+    m_Localized: 'Satisfaction can be found in the top center.
+
+      This can change
+      for a variety of reasons, including events and demographics.
+
+      It''s
+      important to note that a drop in satisfaction can be detrimental.'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
