@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Building_No.7e430cf0-439a-43ac-bbb4-e1b72c176e28
   m_EditorClassIdentifier: 
   <BuildingKey>k__BackingField: 
-  <Corporation>k__BackingField: 0
   <Kind>k__BackingField: 2
   <BuildingPrefab>k__BackingField: {fileID: 5460877690735806139, guid: 8187f15ee66512d46a189db3f996260e,
     type: 3}
@@ -27,8 +26,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   _effectCreators: []
-  _synergies:
-  - {fileID: 0}
+  _synergies: []
   references:
     version: 2
     RefIds: []
