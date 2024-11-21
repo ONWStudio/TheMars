@@ -11,14 +11,6 @@ using TM.Synergy;
 
 namespace TM.Building
 {
-    public enum TMCorporation : byte
-    {
-        A,
-        B,
-        C,
-        D
-    }
-
     public enum TMBuildingKind : byte
     {
         [InspectorName("개척형")] PIONEER = 0,
@@ -36,7 +28,6 @@ namespace TM.Building
         [field: SerializeField, DisplayAs("건물 키 (건물 키는 고유한 값어야 합니다)")]
         public string BuildingKey { get; private set; } = string.Empty;
 
-        [field: SerializeField, DisplayAs("소속")] public TMCorporation Corporation { get; private set; } = TMCorporation.A;
         [field: SerializeField, DisplayAs("종류")] public TMBuildingKind Kind { get; private set; } = TMBuildingKind.PIONEER;
         
         [field: SerializeField, DisplayAs("건물 프리팹")] public TMBuilding BuildingPrefab { get; private set; }

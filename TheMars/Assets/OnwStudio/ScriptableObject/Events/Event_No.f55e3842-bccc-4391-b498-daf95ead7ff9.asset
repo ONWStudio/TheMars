@@ -55,8 +55,8 @@ MonoBehaviour:
   <HasBottomEvent>k__BackingField: 1
   _topEffectCreators: []
   _bottomEffectCreators:
-  - rid: 3610285249959297139
   - rid: 3610285249959297140
+  - rid: 3610285249959297139
   _topUsageCreators:
   - rid: 3610285249959297135
   - rid: 3610285249959297136

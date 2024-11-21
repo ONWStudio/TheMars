@@ -6,13 +6,17 @@ using UnityEngine.UI;
 using UnityEngine.Pool;
 using Onw.Attribute;
 using Onw.Manager.ObjectPool;
+using Onw.Manager.Prototype;
 using TM.Synergy;
+using UnityEngine.AddressableAssets;
 
 namespace TM.Runtime.UI
 {
+    using ListPool = ListPool<KeyValuePair<string, TMSynergyScrollItem>>;
+    
     public sealed class TMSynergyViewController : MonoBehaviour
     {
-        [SerializeField] private TMSynergyScrollItem _scrollItemPrefab;
+        [SerializeField] private AssetReferenceGameObject _scrollItemPrefabReference;
         [SerializeField, InitializeRequireComponent] private ScrollRect _scrollView;
         
         private readonly Dictionary<string, TMSynergyScrollItem> _scrollItems = new();
@@ -21,12 +25,12 @@ namespace TM.Runtime.UI
         {
             TMSynergyManager.Instance.OnUpdateSynergies += onUpdateSynergies;
 
-            void onUpdateSynergies(IReadOnlyDictionary<string, TMSynergy> dictionary)
+            void onUpdateSynergies(TMSynergy[] synergies)
             {
-                List<KeyValuePair<string, TMSynergyScrollItem>> removeKeys = ListPool<KeyValuePair<string, TMSynergyScrollItem>>.Get();
+                List<KeyValuePair<string, TMSynergyScrollItem>> removeKeys = ListPool.Get();
                 
                 removeKeys.AddRange(_scrollItems
-                    .Where(synergyScrollItemKvp => !dictionary.ContainsKey(synergyScrollItemKvp.Key)));
+                    .Where(synergyScrollItemKvp => synergies.All(synergy => synergy.SynergyName != synergyScrollItemKvp.Key)));
 
                 foreach (KeyValuePair<string, TMSynergyScrollItem> synergyScrollItemKvp in removeKeys)
                 {
@@ -34,22 +38,22 @@ namespace TM.Runtime.UI
                     GenericObjectPool<TMSynergyScrollItem>.Return(synergyScrollItemKvp.Value);
                 }
                 
-                ListPool<KeyValuePair<string, TMSynergyScrollItem>>.Release(removeKeys);
+                ListPool.Release(removeKeys);
                 
-                foreach (KeyValuePair<string, TMSynergy> synergyKvp in dictionary)
+                foreach (TMSynergy synergy in synergies)
                 {
-                    if (!_scrollItems.TryGetValue(synergyKvp.Key, out TMSynergyScrollItem scrollItem))
+                    if (!_scrollItems.TryGetValue(synergy.SynergyName, out TMSynergyScrollItem scrollItem))
                     {
                         if (!GenericObjectPool<TMSynergyScrollItem>.TryPop(out scrollItem))
                         {
-                            scrollItem = Instantiate(_scrollItemPrefab.gameObject).GetComponent<TMSynergyScrollItem>();
+                            scrollItem = PrototypeManager.Instance.ClonePrototypeFromReferenceSync<TMSynergyScrollItem>(_scrollItemPrefabReference);
                         }
                         
-                        _scrollItems.Add(synergyKvp.Key, scrollItem);
+                        _scrollItems.Add(synergy.SynergyName, scrollItem);
                     }
                     
                     scrollItem.transform.SetParent(_scrollView.content, false);
-                    scrollItem.SetView(synergyKvp.Value);
+                    scrollItem.SetView(synergy);
                 }
             }
         }
