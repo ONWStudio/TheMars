@@ -23,19 +23,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 173395664896
-    m_Localized: B Corporation
+    m_Localized: B Company
     m_Metadata:
       m_Items: []
   - m_Id: 177883570176
-    m_Localized: C Corporation
+    m_Localized: C Company
     m_Metadata:
       m_Items: []
   - m_Id: 180987355136
-    m_Localized: D Corporation
+    m_Localized: D Company
     m_Metadata:
       m_Items: []
   - m_Id: 2503028883054592
-    m_Localized: 
+    m_Localized: A Company
     m_Metadata:
       m_Items: []
   references:

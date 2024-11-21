@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Onw.Editor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Localization;
@@ -81,7 +82,7 @@ namespace TM.Editor
             };
 
             if (synergy.TryGetFieldByName(
-                "_localizedSynergyName",
+                EditorReflectionHelper.GetBackingFieldName("LocalizedSynergyName"),
                 BindingFlags.NonPublic | BindingFlags.Instance,
                 out LocalizedString localizedSynergyName))
             {

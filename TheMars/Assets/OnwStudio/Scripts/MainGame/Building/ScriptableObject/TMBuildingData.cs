@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Onw.Attribute;
@@ -24,6 +25,8 @@ namespace TM.Building
         public IReadOnlyList<TMSynergyData> Synergies => _synergies;
         
         public string BuildingName => _localizedBuildingName.TryGetLocalizedString(out string buildingName) ? buildingName : "";
+
+        [field: SerializeField, ReadOnly] public string ID { get; private set; } = Guid.NewGuid().ToString();        
         
         [field: SerializeField, DisplayAs("건물 키 (건물 키는 고유한 값어야 합니다)")]
         public string BuildingKey { get; private set; } = string.Empty;

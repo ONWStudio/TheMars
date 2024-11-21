@@ -112,7 +112,7 @@ namespace Onw.Attribute.Editor
         protected override TreeViewItem BuildRoot()
         {
             _itemsMap.Clear();
-            TreeViewItem root = new TreeViewItem(0, -1, "root");
+            TreeViewItem root = new(0, -1, "root");
 
             if (_filterType == typeof(GameObject))
             {
@@ -130,7 +130,7 @@ namespace Onw.Attribute.Editor
                 };
                 foreach (Component component in _rootObject.GetComponentsInChildren(_filterType, true))
                 {
-                    _itemsMap.Add(component.gameObject.GetHashCode(), component.gameObject);
+                    _itemsMap.Add(component.gameObject.GetInstanceID(), component.gameObject);
                     addComponentToDropdown(component.gameObject, visited);
                 }
 
@@ -261,7 +261,7 @@ namespace Onw.Attribute.Editor
 
         private TreeViewItem createItem(GameObject gameObject, int depth)
         {
-            return new(gameObject.GetHashCode(), depth, buildString(gameObject));
+            return new(gameObject.GetInstanceID(), depth, buildString(gameObject));
         }
 
         private string buildString(GameObject go)

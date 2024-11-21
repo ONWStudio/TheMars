@@ -13,7 +13,7 @@ namespace TM.Grid
     public sealed class TMGridManager : SceneSingleton<TMGridManager>
     {
         [SerializeField, InitializeRequireComponent] private GridManager _gridManager;
-        private readonly Dictionary<IHexGrid, TMBuilding> _buildings = new();
+        private readonly Dictionary<HexCoordinates, TMBuilding> _buildings = new();
 
         [SerializeField] private UnityEvent<TMBuilding> _onAddedBuilding;
         [SerializeField] private UnityEvent<TMBuilding> _onRemovedBuilding;
@@ -72,32 +72,35 @@ namespace TM.Grid
             set => _gridManager.IsRender = value;
         }
 
-        public IReadOnlyDictionary<IHexGrid, TMBuilding> Buildings => _buildings;        
+        public IReadOnlyDictionary<HexCoordinates, TMBuilding> Buildings => _buildings;        
 
         protected override void Init() {}
 
         public void AddBuilding(IHexGrid hex, TMBuilding building)
         {
-            _buildings.Add(hex, building);
+            hex.AddProperty("TileOff"); // .. 타일에 건물이 설치되었으므로 다른 건물을 배치할 수 없게 속성 추가
+
+            _buildings.Add(hex.HexPoint, building);
             _onAddedBuilding.Invoke(building);
         }
 
         public void AddBuildingWithoutNotify(IHexGrid hex, TMBuilding building)
         {
-            _buildings.Add(hex, building);
+            _buildings.Add(hex.HexPoint, building);
         }
 
         public void ChangePointBuilding(IHexGrid hex, TMBuilding building)
         {
-            if (!_buildings.ContainsKey(hex)) return;
+            if (!_buildings.ContainsKey(hex.HexPoint)) return;
             
             _onChangedPointBuilding.Invoke(building);
         }
 
         public void RemoveBuilding(IHexGrid hex)
         {
-            if (!_buildings.Remove(hex, out TMBuilding building)) return;
+            if (!_buildings.Remove(hex.HexPoint, out TMBuilding building)) return;
 
+            hex.RemoveProperty("TileOff"); // .. 타일에 건물이 설치되었으므로 다른 건물을 배치할 수 없게 속성 추가
             _onRemovedBuilding.Invoke(building);
         }
 

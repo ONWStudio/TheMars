@@ -32,8 +32,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a107dbd393c4def4fa2cf4a9044ca5b3
-    m_Address: SynergyScrollItem
+  - m_GUID: 8d352e8583b6045ac9cdb87bcf6af8cc
+    m_Address: SynergyField
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

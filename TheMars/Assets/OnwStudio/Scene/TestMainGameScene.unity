@@ -1275,6 +1275,7 @@ MonoBehaviour:
   _electricityText: {fileID: 1453324311}
   _satisfactionProgressImage: {fileID: 29490532}
   _timeProgressImage: {fileID: 104913847}
+  _timeParticleLine: {fileID: 0}
   _timeScaleText: {fileID: 0}
   _dayText: {fileID: 1263450976}
   _playButton: {fileID: 1626244293}
@@ -12312,7 +12313,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5313694, y: 0.20316395}
   m_AnchorMax: {x: 0.6261818, y: 0.482806}
-  m_AnchoredPosition: {x: -161.17, y: 501.6}
+  m_AnchoredPosition: {x: -161.17, y: 501.59998}
   m_SizeDelta: {x: -41.69, y: -147.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1328930693
@@ -14972,7 +14973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1671599901
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20739,7 +20740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2042489562
 RectTransform:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -15,6 +16,8 @@ namespace TM.Card
             add => _localizedCardName.StringChanged += value;
             remove => _localizedCardName.StringChanged -= value;
         }
+
+        [field: SerializeField, ReadOnly] public string ID { get; private set; } = Guid.NewGuid().ToString();
         
         [field: SerializeField, DisplayAs("메인 코스트")]
         public TMCardMainCost MainCost { get; private set; }

@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using Onw.Attribute;
 using Onw.Manager.ObjectPool;
 using Onw.Components.Movement;
 using TM.Card.Runtime;
-using UnityEngine.Events;
 
-namespace TM.Runtime.UI
+namespace TM.UI
 {
     public sealed class TMCardCollectNotifyIcon : MonoBehaviour, IReturnHandler
     {

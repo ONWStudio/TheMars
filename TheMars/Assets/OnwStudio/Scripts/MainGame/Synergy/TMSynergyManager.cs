@@ -1,14 +1,10 @@
-using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Onw.Attribute;
-using Onw.Components;
-using Onw.Manager;
-using TM.Grid;
-using TM.Building;
 using UnityEngine;
 using UnityEngine.Events;
+using Onw.Manager;
+using TM.Building;
 
 namespace TM.Synergy
 {
@@ -33,10 +29,10 @@ namespace TM.Synergy
         {
             foreach (TMSynergyData synergyData in building.BuildingData.Synergies.Where(synergy => synergy is not null))
             {
-                if (!_synergies.TryGetValue(synergyData.SynergyName, out TMSynergy synergy))
+                if (!_synergies.TryGetValue(synergyData.ID, out TMSynergy synergy))
                 {
                     synergy = synergyData.CreateSynergy();
-                    _synergies.Add(synergyData.SynergyName, synergy);
+                    _synergies.Add(synergyData.ID, synergy);
                 }
 
                 synergy.BuildingCount++;
@@ -50,14 +46,14 @@ namespace TM.Synergy
         {
             foreach (TMSynergyData synergyData in building.BuildingData.Synergies.Where(synergy => synergy is not null))
             {
-                if (!_synergies.TryGetValue(synergyData.SynergyName, out TMSynergy synergy)) return;
+                if (!_synergies.TryGetValue(synergyData.ID, out TMSynergy synergy)) return;
 
                 synergy.BuildingCount--;
                 synergy.ApplySynergy();
 
                 if (synergy.BuildingCount <= 0)
                 {
-                    _synergies.Remove(synergy.SynergyName);
+                    _synergies.Remove(synergyData.ID);
                 }
 
                 _onUpdateSynergies.Invoke(_synergies.Values.ToArray());

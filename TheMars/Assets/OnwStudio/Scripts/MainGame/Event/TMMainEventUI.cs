@@ -17,7 +17,7 @@ using TM.Usage;
 using UnityEngine.Localization;
 using System;
 
-namespace TM.Runtime.UI
+namespace TM.UI
 {
     public sealed class TMMainEventUI : MonoBehaviour
     {
@@ -166,7 +166,7 @@ namespace TM.Runtime.UI
                     if (isReload) return;
 
                     isReload = true;
-                    this.DoCallWaitForOneFrame(() => // .. 1ÇÁ·¹ÀÓ ´ë±â ÈÄ È£Ãâ
+                    this.DoCallWaitForOneFrame(() => // .. 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ È£ï¿½ï¿½
                     {
                         isReload = false;
                         stringAction?.Invoke((usages.Count > 0 ?

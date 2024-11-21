@@ -13,17 +13,17 @@ namespace Onw.Attribute.Editor
     [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
     internal sealed class ReadOnlyPropertyDrawer : PropertyDrawer
     {
-        private readonly Dictionary<int, int?> _cachedArraySizeDictionary = new();
+        private readonly Dictionary<SerializedProperty, int?> _cachedArraySizeDictionary = new();
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             int hash = property.GetHashCode();
             
-            if (!_cachedArraySizeDictionary.TryGetValue(hash, out int? arraySize))
+            if (!_cachedArraySizeDictionary.TryGetValue(property, out int? arraySize))
             {
                 arraySize = property.propertyType != SerializedPropertyType.Generic || !property.isArray ? null : property.FindPropertyRelative("Array.size").intValue;
 
-                _cachedArraySizeDictionary.Add(hash, arraySize);
+                _cachedArraySizeDictionary.Add(property, arraySize);
             }
             
             if (arraySize is null)
@@ -54,7 +54,7 @@ namespace Onw.Attribute.Editor
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            if (!_cachedArraySizeDictionary.TryGetValue(property.GetHashCode(), out int? arraySize) || arraySize is null)
+            if (!_cachedArraySizeDictionary.TryGetValue(property, out int? arraySize) || arraySize is null)
             {
                 return EditorGUI.GetPropertyHeight(property, label, true);
             }

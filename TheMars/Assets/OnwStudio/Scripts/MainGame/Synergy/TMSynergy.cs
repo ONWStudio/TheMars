@@ -1,24 +1,22 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using UnityEngine;
+using UnityEngine.Localization;
 using Onw.Attribute;
 using Onw.Extensions;
 using TM.Synergy.Effect;
-using UnityEngine;
 
 namespace TM.Synergy
 {
     public sealed class TMSynergy
     {
-        public TMSynergyData SynergyData { get; } = null;
+        public TMSynergyData SynergyData { get; }
 
-        [field: SerializeField, ReadOnly] public int BuildingCount { get; set; }
+        public int BuildingCount { get; set; }
 
-        public string[] DescriptionArray => _synergyEffects
-            .Select(synergyEffect => synergyEffect.Description)
-            .ToArray();
+        public LocalizedString LocalizedSynergyName => SynergyData ? SynergyData.LocalizedSynergyName : null;
         
-        public string SynergyName => SynergyData ? SynergyData.SynergyName : "";
         public IReadOnlyList<TMSynergyEffect> SynergyEffects => _synergyEffects;
         
         private readonly List<TMSynergyEffect> _synergyEffects = new();

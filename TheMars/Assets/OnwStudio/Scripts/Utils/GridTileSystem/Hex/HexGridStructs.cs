@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,7 +35,7 @@ namespace Onw.HexGrid
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Q, R);
+            return System.HashCode.Combine(Q, R);
         }
 
         public override string ToString()
@@ -76,7 +75,7 @@ namespace Onw.HexGrid
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Q, R, S);
+            return System.HashCode.Combine(Q, R, S);
         }
 
         public override string ToString()

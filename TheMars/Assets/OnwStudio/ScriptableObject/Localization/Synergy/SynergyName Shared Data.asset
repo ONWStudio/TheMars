@@ -16,19 +16,19 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: d1aec9023d60d4302b63cdf07385a2f1
   m_Entries:
   - m_Id: 173395664896
-    m_Key: BCorporation
+    m_Key: BCompany
     m_Metadata:
       m_Items: []
   - m_Id: 177883570176
-    m_Key: CCorporation
+    m_Key: CCompany
     m_Metadata:
       m_Items: []
   - m_Id: 180987355136
-    m_Key: DCorporation
+    m_Key: DCompany
     m_Metadata:
       m_Items: []
   - m_Id: 2503028883054592
-    m_Key: ACorporation
+    m_Key: ACompany
     m_Metadata:
       m_Items: []
   m_Metadata:

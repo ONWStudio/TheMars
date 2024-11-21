@@ -1,17 +1,14 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
+using Onw.Event;
 using Onw.Manager;
 using Onw.Attribute;
-using Onw.Event;
 using Onw.Extensions;
 using Onw.UI.Components;
-using UniRx;
 using Image = UnityEngine.UI.Image;
-using TM.Runtime.UI;
-using UnityEngine.Events;
 
 namespace TM.Card.Runtime
 {

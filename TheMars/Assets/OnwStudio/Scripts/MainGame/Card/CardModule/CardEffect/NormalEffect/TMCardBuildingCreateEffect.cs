@@ -19,6 +19,7 @@ namespace TM.Card.Effect
     /// <summary>
     /// .. 건물 설치 효과입니다 건물을 배치하고 배치시 코스트 사용, 조건 검사, 재배치시의 관한 로직, 회수등의 관한 로직을 해당 효과가 모두 담당합니다
     /// </summary>
+    [System.Serializable]
     public sealed class TMCardBuildingCreateEffect : ITMNormalEffect, ITMCardInitializeEffect<TMCardBuildingCreateEffectCreator>, IDisposable
     {
         public readonly struct PrevTileData
@@ -46,7 +47,7 @@ namespace TM.Card.Effect
         private float _buildingHalfHeight = 0;
 
         [SerializeField, ReadOnly] private TMBuilding _building = null;
-        [field: SerializeField] private LocalizedString _localizedDescription = new("TM_Card_Effect", "Building_Create_Effect");
+        [field: SerializeField, ReadOnly] private LocalizedString _localizedDescription = new("TM_Card_Effect", "Building_Create_Effect");
 
         public TMBuilding Building => _building;
 
@@ -129,6 +130,11 @@ namespace TM.Card.Effect
             {
                 if (card.IsOverCollectTransform.Value || card.IsOverTombTransform.Value)
                 {
+                    if (_prevTileData is { } prevTileData)
+                    {
+                        TMGridManager.Instance.RemoveBuilding(prevTileData.Prev);
+                    }
+                    
                     _prevTileData = null;
                 }
 
@@ -191,7 +197,6 @@ namespace TM.Card.Effect
             _prevTileData = new(tileData, _building.GetPosition()); // .. 설치되었던 타일의 데이터 미리 캐싱
 
             tileData.OnMouseDownTile -= onMouseDownTile;                 // .. 해당 타일은 이제 건물이 있지 않은 상태이므로 이벤트에서 딜리게이트 제거
-            tileData.RemoveProperty("TileOff");                          // .. 타일은 더 이상 설치 불가능한 상태가 아니므로 TileOff속성 제거
 
             _cardModel.SetActiveGameObject(true);
             _cardModel.TriggerSelectCard();
@@ -202,7 +207,6 @@ namespace TM.Card.Effect
 
         private void batchBuildingOnTile(IHexGrid currentTile) // .. 건물이 타일위에 배치되었을경우 해주어야할 처리를 하는 메서드
         {
-            currentTile.AddProperty("TileOff"); // .. 타일에 건물이 설치되었으므로 다른 건물을 배치할 수 없게 속성 추가
             currentTile.OnMouseDownTile += onMouseDownTile; // .. 건물을 철거하거나 재배치를 시켜주기 위해 건물이 설치된 타일에 이벤트 추가
 
             _cardModel.SetActiveGameObject(false);

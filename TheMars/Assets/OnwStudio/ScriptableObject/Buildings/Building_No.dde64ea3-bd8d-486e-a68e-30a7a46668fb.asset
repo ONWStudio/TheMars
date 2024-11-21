@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29023a97855ba47afb2e17979280c141, type: 3}
   m_Name: Building_No.dde64ea3-bd8d-486e-a68e-30a7a46668fb
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: fdaa6d61-3f21-4661-8417-e4509085635e
   <BuildingKey>k__BackingField: 
-  <Corporation>k__BackingField: 1
   <Kind>k__BackingField: 1
   <BuildingPrefab>k__BackingField: {fileID: 4797982682177862849, guid: 5f392c5154ae64a33be8118dba335450,
     type: 3}

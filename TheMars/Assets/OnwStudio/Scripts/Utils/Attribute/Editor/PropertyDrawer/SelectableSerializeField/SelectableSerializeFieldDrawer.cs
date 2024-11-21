@@ -33,13 +33,12 @@ namespace Onw.Attribute.Editor
         private Type _listType = typeof(List<>);
         private Type _arrayType = typeof(Array);
         
-        private readonly Dictionary<int, SelectableFieldPropState> _cachedSelectableFieldPropStates = new();
+        private readonly Dictionary<SerializedProperty, SelectableFieldPropState> _cachedSelectableFieldPropStates = new();
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             _buttonContent ??= new(EditorGUIUtility.IconContent("icon dropdown").image);
 
-            int hash = property.GetHashCode();
             Type propertyType = fieldInfo.FieldType switch
             {
                 var type when type == _listType => type.GetGenericArguments()[0],
@@ -47,7 +46,7 @@ namespace Onw.Attribute.Editor
                 var type => type
             };
             
-            if (!_cachedSelectableFieldPropStates.TryGetValue(hash, out SelectableFieldPropState state))
+            if (!_cachedSelectableFieldPropStates.TryGetValue(property, out SelectableFieldPropState state))
             {
                 if (property.serializedObject.targetObject is MonoBehaviour monoBehaviour)
                 {
@@ -72,7 +71,7 @@ namespace Onw.Attribute.Editor
                     state = new(null, false);
                 }
                 
-                _cachedSelectableFieldPropStates.Add(hash, state);
+                _cachedSelectableFieldPropStates.Add(property, state);
             }
             
             if (!state.IsMonoBehaviour)

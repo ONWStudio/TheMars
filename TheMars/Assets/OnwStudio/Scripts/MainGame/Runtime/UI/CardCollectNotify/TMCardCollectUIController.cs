@@ -10,7 +10,7 @@ using Onw.Manager;
 using TM.Card.Runtime;
 using TM.Manager;
 
-namespace TM.Runtime.UI
+namespace TM.UI
 {
     [DisallowMultipleComponent]
     public sealed class TMCardCollectUIController : SceneSingleton<TMCardCollectUIController>

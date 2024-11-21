@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Onw.Attribute;
 using Onw.Event;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -17,8 +18,10 @@ namespace TM.Buff
     [Serializable]
     public abstract class TMBuffBase : IDisposable
     {
+        [field: SerializeField, ReadOnly] public string ID { get; private set; } = Guid.NewGuid().ToString();
+        
         public virtual Color IconBackgroundColor => Color.white;
-
+        
         public abstract LocalizedString Description { get; }
         public abstract AssetReferenceSprite IconReference { get; }
 

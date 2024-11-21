@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29023a97855ba47afb2e17979280c141, type: 3}
   m_Name: Building_No.0b48b8af-fcca-421d-8466-cb90b62ae349
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: cafc1db8-139e-47e3-9743-4e906351cc0d
   <BuildingKey>k__BackingField: 
-  <Corporation>k__BackingField: 1
   <Kind>k__BackingField: 1
   <BuildingPrefab>k__BackingField: {fileID: 9127585549610250936, guid: c26f51315c4d761459d0e63bba835000,
     type: 3}
@@ -29,7 +29,8 @@ MonoBehaviour:
   _effectCreators:
   - rid: 3610285249959297177
   - rid: 3610285249959297182
-  _synergies: []
+  _synergies:
+  - {fileID: 11400000, guid: fb639bd6a0f52490ab55b77056a5cd11, type: 2}
   references:
     version: 2
     RefIds:

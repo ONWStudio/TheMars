@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88efa2807f14b4c50b6687e145d4a238, type: 3}
   m_Name: Synergy_No.a855ffd2-fe5c-4b78-b6a7-0477beb58604
   m_EditorClassIdentifier: 
-  <Icon>k__BackingField: {fileID: 0}
+  <ID>k__BackingField: 9ea63d51-cc41-42aa-ae1c-83ac626826d1
+  <Icon>k__BackingField: {fileID: 21300000, guid: b13c675fad5997748af0009209235df8,
+    type: 3}
   _synergyEffects: []
-  _localizedSynergyName:
+  <LocalizedSynergyName>k__BackingField:
     m_TableReference:
       m_TableCollectionName: SynergyName
     m_TableEntryReference:
       m_KeyId: 180987355136
-      m_Key: DCorporation
+      m_Key: DCompany
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []

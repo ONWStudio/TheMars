@@ -14,7 +14,7 @@ namespace TM.UI
     {
         [SerializeField, SelectableSerializeField] private ScrollRect _buffScrollView;
 
-        private readonly Dictionary<int, TMBuffIcon> _buffDictionary = new();
+        private readonly Dictionary<string, TMBuffIcon> _buffDictionary = new();
 
         private void Start()
         {
@@ -35,14 +35,13 @@ namespace TM.UI
 
             icon.SetUI(buff);
             icon.SetParent(_buffScrollView.content.transform, false);
-            _buffDictionary.Add(buff.GetHashCode(), icon);
+            _buffDictionary.Add(buff.ID, icon);
         }
 
         public void OnRemovedBuff(TMBuffBase buff)
         {
-            if (!_buffDictionary.TryGetValue(buff.GetHashCode(), out TMBuffIcon icon)) return;
-            
-            _buffDictionary.Remove(buff.GetHashCode());
+            if (!_buffDictionary.Remove(buff.ID, out TMBuffIcon icon)) return;
+
             GenericObjectPool<TMBuffIcon>.Return(icon);
         }
     }
