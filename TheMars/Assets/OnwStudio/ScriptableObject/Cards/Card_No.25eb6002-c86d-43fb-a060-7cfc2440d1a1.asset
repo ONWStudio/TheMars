@@ -12,12 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
   m_Name: Card_No.25eb6002-c86d-43fb-a060-7cfc2440d1a1
   m_EditorClassIdentifier: 
-  <MainCost>k__BackingField:
-    <CostKind>k__BackingField: 0
-    <Cost>k__BackingField: 30
-  <CardImage>k__BackingField: {fileID: 21300000, guid: 16c17a3cb2c1a4e4dad9956fed38b4ee,
-    type: 3}
-  <CardKey>k__BackingField: MarsLithiumDigger
   _localizedCardName:
     m_TableReference:
       m_TableCollectionName: CardName
@@ -29,9 +23,14 @@ MonoBehaviour:
     m_LocalVariables: []
   _cardEffectCreator:
     rid: 3610285249959297189
-  _cardCosts:
-  - <CostKind>k__BackingField: 1
-    <Cost>k__BackingField: 30
+  _mainCost:
+    rid: 3610285400346591251
+  _subCosts:
+  - rid: 3610285400346591252
+  <ID>k__BackingField: 16bc1a70-68f5-461d-9757-5a421eac7edb
+  <CardImage>k__BackingField: {fileID: 21300000, guid: 16c17a3cb2c1a4e4dad9956fed38b4ee,
+    type: 3}
+  <CardKey>k__BackingField: MarsLithiumDigger
   references:
     version: 2
     RefIds:
@@ -41,3 +40,13 @@ MonoBehaviour:
       data:
         <BuildingData>k__BackingField: {fileID: 11400000, guid: a5dc79f4b86c0bd4dbb99f539095875c,
           type: 2}
+    - rid: 3610285400346591251
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
+      data:
+        <Kind>k__BackingField: 1
+        <Cost>k__BackingField: 30
+    - rid: 3610285400346591252
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
+      data:
+        <Kind>k__BackingField: 3
+        <Cost>k__BackingField: 30

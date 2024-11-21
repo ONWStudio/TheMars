@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using TM.Usage.Creator;
+using TM.Cost.Creator;
 using UnityEngine;
 
-namespace TM.Usage
+namespace TM.Cost
 {
-    public interface ITMInitializeUsage<in T> where T : ITMUsageCreator
+    public interface ITMInitializeCost<in T> where T : ITMCostCreator
     {
         void Initialize(T creator);
     }

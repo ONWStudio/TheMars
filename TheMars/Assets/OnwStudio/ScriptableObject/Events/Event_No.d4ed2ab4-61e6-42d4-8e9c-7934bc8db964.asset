@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.d4ed2ab4-61e6-42d4-8e9c-7934bc8db964
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 424b902d-9d81-4e07-887f-610c8074aead
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
   <EventImage>k__BackingField: {fileID: 0}
@@ -60,10 +61,10 @@ MonoBehaviour:
   - rid: 3610285249959297098
   - rid: 3610285249959297100
   _topUsageCreators:
-  - rid: 3610285249959297103
-  - rid: 3610285249959297104
-  - rid: 3610285249959297105
-  - rid: 3610285249959297106
+  - rid: 3610285400346591264
+  - rid: 3610285400346591265
+  - rid: 3610285400346591266
+  - rid: 3610285400346591267
   _bottomUsageCreators: []
   references:
     version: 2
@@ -122,23 +123,23 @@ MonoBehaviour:
         <ResourceKind>k__BackingField: 2
         <Min>k__BackingField: -5
         <Max>k__BackingField: -1
-    - rid: 3610285249959297103
-      type: {class: TMResourceUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
+    - rid: 3610285400346591264
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
       data:
-        <ResourceKind>k__BackingField: 1
-        <ResourceUsage>k__BackingField: 10
-    - rid: 3610285249959297104
-      type: {class: TMResourceUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
+        <Kind>k__BackingField: 1
+        <Cost>k__BackingField: 10
+    - rid: 3610285400346591265
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
       data:
-        <ResourceKind>k__BackingField: 3
-        <ResourceUsage>k__BackingField: 10
-    - rid: 3610285249959297105
-      type: {class: TMResourceUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
+        <Kind>k__BackingField: 3
+        <Cost>k__BackingField: 10
+    - rid: 3610285400346591266
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
       data:
-        <ResourceKind>k__BackingField: 4
-        <ResourceUsage>k__BackingField: 10
-    - rid: 3610285249959297106
-      type: {class: TMResourceUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
+        <Kind>k__BackingField: 4
+        <Cost>k__BackingField: 10
+    - rid: 3610285400346591267
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
       data:
-        <ResourceKind>k__BackingField: 5
-        <ResourceUsage>k__BackingField: 10
+        <Kind>k__BackingField: 5
+        <Cost>k__BackingField: 10

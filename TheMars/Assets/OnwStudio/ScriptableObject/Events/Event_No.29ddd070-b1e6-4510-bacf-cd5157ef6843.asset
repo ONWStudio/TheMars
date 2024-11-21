@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.29ddd070-b1e6-4510-bacf-cd5157ef6843
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 8a59be16-0636-4fde-a6f5-15135616c4c4
   <TopEventData>k__BackingField: {fileID: 11400000, guid: fd2f3d929033d2c43a08ec15aa16b36f,
     type: 2}
   <BottomEventData>k__BackingField: {fileID: 11400000, guid: be39436f37a62ff43a66ae42ff0fe4b9,
@@ -59,9 +60,9 @@ MonoBehaviour:
   - rid: 3610285201848008744
   - rid: 3610285201848008746
   _bottomEffectCreators: []
-  _topUsageCreators:
-  - rid: 3610285201848008748
-  _bottomUsageCreators: []
+  _topCostCreators:
+  - rid: 3610285400346591272
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:
@@ -91,8 +92,8 @@ MonoBehaviour:
         <IsTemporary>k__BackingField: 0
         <ResourceKind>k__BackingField: 0
         <Resource>k__BackingField: 30
-    - rid: 3610285201848008748
-      type: {class: TMResourceUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
+    - rid: 3610285400346591272
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
       data:
-        <ResourceKind>k__BackingField: 7
-        <ResourceUsage>k__BackingField: 20
+        <Kind>k__BackingField: 7
+        <Cost>k__BackingField: 20

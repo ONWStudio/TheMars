@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.6ce65c97-bc39-4474-8e1b-7eeb6bd44f48
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: f48c46bb-a0d0-4455-8a68-80fffba06f22
   <TopEventData>k__BackingField: {fileID: 11400000, guid: dd310a6ead0de9747aecc044c1e6a911,
     type: 2}
   <BottomEventData>k__BackingField: {fileID: 11400000, guid: 9444f13473d1548589628c3c39bf4407,
@@ -61,9 +62,9 @@ MonoBehaviour:
   _bottomEffectCreators:
   - rid: 4853453480464220168
   - rid: 3610285249959297035
-  _topUsageCreators:
-  - rid: 4853453480464220162
-  _bottomUsageCreators: []
+  _topCostCreators:
+  - rid: 3610285400346591269
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:
@@ -78,11 +79,11 @@ MonoBehaviour:
         <EndTriggerCount>k__BackingField: 1
         <AddMarsLithium>k__BackingField: -10
         <IsTemporay>k__BackingField: 0
-    - rid: 4853453480464220162
-      type: {class: TMResourceUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
+    - rid: 3610285400346591269
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
       data:
-        <ResourceKind>k__BackingField: 1
-        <ResourceUsage>k__BackingField: 40
+        <Kind>k__BackingField: 1
+        <Cost>k__BackingField: 40
     - rid: 4853453480464220163
       type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
       data:

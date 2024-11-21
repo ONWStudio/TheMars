@@ -48,7 +48,7 @@ namespace TM.Manager
 
         private void Update()
         {
-            AccumulatedTime += Time.deltaTime * TimeManager.TimeScale.Value;
+            AccumulatedTime += Time.deltaTime * TimeManager.TimeScale;
 
             _nowSeconds.Value = (int)(AccumulatedTime / 1);
             _nowMinutes.Value = (int)(AccumulatedTime / 60);

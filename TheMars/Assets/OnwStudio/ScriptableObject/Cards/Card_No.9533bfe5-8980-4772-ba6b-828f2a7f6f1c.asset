@@ -12,12 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
   m_Name: Card_No.9533bfe5-8980-4772-ba6b-828f2a7f6f1c
   m_EditorClassIdentifier: 
-  <MainCost>k__BackingField:
-    <CostKind>k__BackingField: 0
-    <Cost>k__BackingField: 70
-  <CardImage>k__BackingField: {fileID: 21300000, guid: e3d50391c88360c4e9ffb32c4d6c947b,
-    type: 3}
-  <CardKey>k__BackingField: NuclearPowerPlant
   _localizedCardName:
     m_TableReference:
       m_TableCollectionName: CardName
@@ -29,11 +23,15 @@ MonoBehaviour:
     m_LocalVariables: []
   _cardEffectCreator:
     rid: 3610285249959297175
-  _cardCosts:
-  - <CostKind>k__BackingField: 0
-    <Cost>k__BackingField: 80
-  - <CostKind>k__BackingField: 3
-    <Cost>k__BackingField: 20
+  _mainCost:
+    rid: 3610285400346591245
+  _subCosts:
+  - rid: 3610285400346591246
+  - rid: 3610285400346591247
+  <ID>k__BackingField: 3907bbaa-54b7-4255-bf8a-c52556b05369
+  <CardImage>k__BackingField: {fileID: 21300000, guid: e3d50391c88360c4e9ffb32c4d6c947b,
+    type: 3}
+  <CardKey>k__BackingField: NuclearPowerPlant
   references:
     version: 2
     RefIds:
@@ -43,3 +41,18 @@ MonoBehaviour:
       data:
         <BuildingData>k__BackingField: {fileID: 11400000, guid: 0d1ebcf19b9efcb4eb43609a53cfc323,
           type: 2}
+    - rid: 3610285400346591245
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
+      data:
+        <Kind>k__BackingField: 1
+        <Cost>k__BackingField: 70
+    - rid: 3610285400346591246
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
+      data:
+        <Kind>k__BackingField: 3
+        <Cost>k__BackingField: 80
+    - rid: 3610285400346591247
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
+      data:
+        <Kind>k__BackingField: 5
+        <Cost>k__BackingField: 20

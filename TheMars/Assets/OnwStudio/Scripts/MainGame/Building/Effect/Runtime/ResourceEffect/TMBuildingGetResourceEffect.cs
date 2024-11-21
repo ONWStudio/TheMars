@@ -78,7 +78,7 @@ namespace TM.Building.Effect
                 {
                     if (!owner.IsActive.Value) yield return null;
                     
-                    timeAccumulator += Time.deltaTime * TimeManager.TimeScale.Value;
+                    timeAccumulator += Time.deltaTime * TimeManager.TimeScale;
 
                     if (timeAccumulator >= RepeatSeconds)
                     {

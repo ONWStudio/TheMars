@@ -13,13 +13,13 @@ using TM.Event;
 using Onw.Localization;
 using Onw.Coroutine;
 using TM.Event.Effect;
-using TM.Usage;
+using TM.Cost;
 using UnityEngine.Localization;
 using System;
 
 namespace TM.UI
 {
-    public sealed class TMMainEventUI : MonoBehaviour
+    public sealed class TMEventUIController : MonoBehaviour
     {
         [Header("Button")]
         [SerializeField, SelectableSerializeField] private Button _topButton;
@@ -136,17 +136,17 @@ namespace TM.UI
             if (_eventRunner.EventData.HasTopEvent)
             {
                 _topButtonTextEvent.StringReference = _eventRunner.EventData.TopButtonTextEvent;
-                buildDescription(_eventRunner.TopEffects, _eventRunner.TopUsages, buildedText => _topEffectDescription = buildedText);
+                buildDescription(_eventRunner.TopEffects, _eventRunner.TopCosts, buildedText => _topEffectDescription = buildedText);
             }
             
             _bottomButton.SetActiveGameObject(_eventRunner.EventData.HasBottomEvent);
             if (_eventRunner.EventData.HasBottomEvent)
             {
                 _bottomButtonTextEvent.StringReference = _eventRunner.EventData.BottomButtonTextEvent;
-                buildDescription(_eventRunner.BottomEffects, _eventRunner.BottomUsages, buildedText => _bottomEffectDescription = buildedText);
+                buildDescription(_eventRunner.BottomEffects, _eventRunner.BottomCosts, buildedText => _bottomEffectDescription = buildedText);
             }
 
-            void buildDescription(IReadOnlyList<ITMEventEffect> effects, IReadOnlyList<ITMUsage> usages, Action<string> stringAction)
+            void buildDescription(IReadOnlyList<ITMEventEffect> effects, IReadOnlyList<ITMCost> usages, Action<string> stringAction)
             {
                 bool isReload = false;
 
@@ -154,25 +154,25 @@ namespace TM.UI
                     .Where(effect => effect.EffectDescription is not null)
                     .ToArray();
 
-                ITMUsage[] usageArray = usages
-                    .Where(usage => usage.UsageLocalizedString is not null)
+                ITMCost[] usageArray = usages
+                    .Where(usage => usage.LocalizedDescription is not null)
                     .ToArray();
 
                 effectArray.ForEach(effect => effect.EffectDescription.StringChanged += onUpdateString);
-                usageArray.ForEach(usage => usage.UsageLocalizedString.StringChanged += onUpdateString);
+                usageArray.ForEach(usage => usage.LocalizedDescription.StringChanged += onUpdateString);
 
                 void onUpdateString(string text)
                 {
                     if (isReload) return;
 
                     isReload = true;
-                    this.DoCallWaitForOneFrame(() => // .. 1������ ��� �� ȣ��
+                    this.DoCallWaitForOneFrame(() =>
                     {
                         isReload = false;
                         stringAction?.Invoke((usages.Count > 0 ?
                                 _paymentDescriptionHeader.GetLocalizedString() + 
                                 "\n \n" +
-                                string.Join("\n", usageArray.Select(usage => usage.UsageLocalizedString.GetLocalizedString()))
+                                string.Join("\n", usageArray.Select(usage => usage.LocalizedDescription.GetLocalizedString()))
                                  + "\n \n" : "") +
                            (effects.Count > 0 ? 
                                 _eventEffectHeader.GetLocalizedString() + 

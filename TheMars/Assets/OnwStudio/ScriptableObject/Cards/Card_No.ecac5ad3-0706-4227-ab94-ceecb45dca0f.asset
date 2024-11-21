@@ -12,12 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
   m_Name: Card_No.ecac5ad3-0706-4227-ab94-ceecb45dca0f
   m_EditorClassIdentifier: 
-  <MainCost>k__BackingField:
-    <CostKind>k__BackingField: 0
-    <Cost>k__BackingField: 0
-  <CardImage>k__BackingField: {fileID: 21300000, guid: 8f1c2499ea238a147a853a1e23ed62d4,
-    type: 3}
-  <CardKey>k__BackingField: CreditSupplyStation
   _localizedCardName:
     m_TableReference:
       m_TableCollectionName: CardName
@@ -29,7 +23,13 @@ MonoBehaviour:
     m_LocalVariables: []
   _cardEffectCreator:
     rid: 3610285249959297188
-  _cardCosts: []
+  _mainCost:
+    rid: 3610285400346591248
+  _subCosts: []
+  <ID>k__BackingField: d3f96a20-34f0-4701-9b71-30215cb50045
+  <CardImage>k__BackingField: {fileID: 21300000, guid: 8f1c2499ea238a147a853a1e23ed62d4,
+    type: 3}
+  <CardKey>k__BackingField: CreditSupplyStation
   references:
     version: 2
     RefIds:
@@ -39,3 +39,8 @@ MonoBehaviour:
       data:
         <BuildingData>k__BackingField: {fileID: 11400000, guid: ca7d45b3d49e5ef4292ba43db4bf932c,
           type: 2}
+    - rid: 3610285400346591248
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
+      data:
+        <Kind>k__BackingField: 1
+        <Cost>k__BackingField: 0

@@ -8,7 +8,7 @@ namespace TM.Buff.Trigger
     public class TMCardCostModifyBuffTrigger : TMDelayBuffTrigger
     {
         [field: SerializeField] public TMCardKindForWhere CardKind { get; private set; } = TMCardKindForWhere.EFFECT;
-        [field: SerializeField] public TMCostKind CostKind { get; private set; } = TMCostKind.STEEL;
+        [field: SerializeField] public TMResourceKind CostKind { get; private set; } = TMResourceKind.MARS_LITHIUM;
         [field: SerializeField] public int AdditionalCost { get; private set; } = 0;
 
         public override TMBuffBase CreateBuff()

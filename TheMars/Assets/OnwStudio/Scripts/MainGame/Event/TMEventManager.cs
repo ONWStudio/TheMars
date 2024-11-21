@@ -39,6 +39,12 @@ namespace TM.Event
     
     public sealed class TMEventManager : SceneSingleton<TMEventManager>
     {
+        public event UnityAction<ITMEventRunner> OnTriggerEvent
+        {
+            add => _onTriggerEvent.AddListener(value);
+            remove => _onTriggerEvent.RemoveListener(value);
+        }
+
         private readonly Queue<TMEventRunner> _eventQueue = new();
 
         [Header("Event Probability")]
@@ -47,24 +53,17 @@ namespace TM.Event
         [SerializeField] private TMEventProbability _negativeEventProbability = new();
 
         [Header("Unique Events")]
-        [FormerlySerializedAs("_mainEvent")]
         [SerializeField, ReadOnly] private TMEventRunner _mainEventRunner = null;
         [SerializeField, ReadOnly] private TMEventRunner _marsLithiumEventRunner = null;
 
         [FormerlySerializedAs("_onTriggerMainEvent")]
         [Header("Event")]
-        [SerializeField] private UnityEvent<TMEventRunner> _onTriggerEvent = new();
-
-        [Header("Mars Lithium Event Option")]
-        [SerializeField, ReadOnly] private ReactiveField<int> _marsLithiumEventAddResource = new();
+        [SerializeField] private UnityEvent<ITMEventRunner> _onTriggerEvent = new();
 
         protected override string SceneName => "MainGameScene";
 
-        public event UnityAction<TMEventRunner> OnTriggerEvent
-        {
-            add => _onTriggerEvent.AddListener(value);
-            remove => _onTriggerEvent.RemoveListener(value);
-        }
+        public ITMEventRunner MainEventRunner => _mainEventRunner;
+        public ITMEventRunner MarsLithiumEventRunner => _marsLithiumEventRunner;
         
         [field: SerializeField, OnwMin(1)] public int CheckMainEventLevelCount { get; private set; } = 10;
         [field: SerializeField, OnwMin(1)] public int CheckMarsLithiumEventDayCount { get; private set; } = 5;
@@ -74,7 +73,6 @@ namespace TM.Event
         public ITMEventProbability CalamityEventProbability => _calamityEventProbability;
         public ITMEventProbability PositiveEventProbability => _positiveEventProbability;
         public ITMEventProbability NegativeEventProbability => _negativeEventProbability;
-        public IReactiveField<int> MarsLithiumEventAddResource => _marsLithiumEventAddResource;
 
         protected override void Init()
         {
@@ -114,7 +112,6 @@ namespace TM.Event
 
             void onFireMainEvent(TMEventChoice eventChoice)
             {
-                TimeManager.IsPause = false;
                 mainEventRunner.OnFireEvent -= onFireMainEvent;
                 _mainEventRunner = new(eventChoice == TMEventChoice.TOP ?
                     mainEventRunner.EventData.TopEventData :
@@ -221,15 +218,17 @@ namespace TM.Event
         {
             if (_eventQueue.Count <= 0) return;
 
-            TMEventRunner selectEvent = _eventQueue.Dequeue();
+            bool keepPause = TimeManager.IsPause;
             TimeManager.IsPause = true;
+
+            TMEventRunner selectEvent = _eventQueue.Dequeue();
             selectEvent.OnFireEvent += onEndEvent;
             _onTriggerEvent.Invoke(selectEvent);
 
             void onEndEvent(TMEventChoice eventChoice)
             {
                 selectEvent.OnFireEvent -= onEndEvent;
-                TimeManager.IsPause = false;
+                TimeManager.IsPause = keepPause;
                 fireEvents();
             }
         }

@@ -34,17 +34,20 @@ namespace TM.Event.Effect
             switch (Kind)
             {
                 case TMEventKind.CALAMITY:
-                    TMEventManager.Instance.CalamityEventProbability.IsStatic.Value = true;
-                    TMEventManager.Instance.CalamityEventProbability.DefaultProbability.Value = Probability;
+                    setCurrentEventProbability(TMEventManager.Instance.CalamityEventProbability);
                     break;
                 case TMEventKind.POSITIVE:
-                    TMEventManager.Instance.PositiveEventProbability.IsStatic.Value = true;
-                    TMEventManager.Instance.PositiveEventProbability.DefaultProbability.Value = Probability;
+                    setCurrentEventProbability(TMEventManager.Instance.PositiveEventProbability);
                     break;
                 case TMEventKind.NEGATIVE:
-                    TMEventManager.Instance.NegativeEventProbability.IsStatic.Value = true;
-                    TMEventManager.Instance.NegativeEventProbability.DefaultProbability.Value = Probability;
+                    setCurrentEventProbability(TMEventManager.Instance.NegativeEventProbability);
                     break;
+            }
+
+            void setCurrentEventProbability(ITMEventProbability eventProbability)
+            {
+                eventProbability.IsStatic.Value = true;
+                eventProbability.DefaultProbability.Value = Probability;
             }
         }
     }

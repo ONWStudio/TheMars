@@ -64,7 +64,7 @@ namespace TM
             TMEventManager.Instance.OnTriggerEvent += onTriggerEvent;
         }
 
-        private void onTriggerEvent(TMEventRunner runner)
+        private void onTriggerEvent(ITMEventRunner runner)
         {
             SetExp(_exp.Value + 10);
         }
@@ -101,7 +101,7 @@ namespace TM
             _exp.Value = exp;
         }
 
-        public int GetResourcesByKind(TMResourceKind kind)
+        public int GetResourceByKind(TMResourceKind kind)
         {
             return kind switch
             {
@@ -109,7 +109,7 @@ namespace TM
                 TMResourceKind.CREDIT => _credit.Value,
                 TMResourceKind.POPULATION => _population.Value,
                 TMResourceKind.STEEL => _steel.Value,
-                TMResourceKind.PLANTS => _plants.Value,
+                TMResourceKind.PLANT => _plants.Value,
                 TMResourceKind.CLAY => _clay.Value,
                 TMResourceKind.ELECTRICITY => _electricity.Value,
                 TMResourceKind.SATISFACTION => _satisfaction.Value,
@@ -130,7 +130,7 @@ namespace TM
                 case TMResourceKind.STEEL:
                     _steel.Value += resource;
                     break;
-                case TMResourceKind.PLANTS:
+                case TMResourceKind.PLANT:
                     _plants.Value += resource;
                     break;
                 case TMResourceKind.CLAY:

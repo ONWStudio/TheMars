@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29023a97855ba47afb2e17979280c141, type: 3}
   m_Name: Building_No.8aa30dfb-5053-47aa-8b95-245c917a4f82
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: fc8a0d6f-22d6-4534-812b-cd4cc097da78
   <BuildingKey>k__BackingField: 
   <Kind>k__BackingField: 0
   <BuildingPrefab>k__BackingField: {fileID: 3913292965785824235, guid: 151e5ffa33fc68e4eaaf217fc35a2d1a,
@@ -27,7 +28,6 @@ MonoBehaviour:
     m_LocalVariables: []
   _effectCreators:
   - rid: 3610285249959297184
-  - rid: 3610285249959297185
   _synergies: []
   references:
     version: 2
@@ -39,10 +39,3 @@ MonoBehaviour:
         <RepeatSeconds>k__BackingField: 20
         <Kind>k__BackingField: 3
         <AdditionalResource>k__BackingField: 1
-    - rid: 3610285249959297185
-      type: {class: TMBuildingGetResourceEffectCreator, ns: TM.Building.Effect.Creator,
-        asm: AssemblyTheMars}
-      data:
-        <RepeatSeconds>k__BackingField: 60
-        <Kind>k__BackingField: 7
-        <AdditionalResource>k__BackingField: -20

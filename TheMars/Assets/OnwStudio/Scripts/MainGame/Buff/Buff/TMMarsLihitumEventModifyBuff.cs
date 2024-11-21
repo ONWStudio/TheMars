@@ -2,8 +2,10 @@ using Onw.Attribute;
 using Onw.Event;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TM.Buff.Trigger;
 using TM.Event;
+using TM.Cost;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Localization;
@@ -51,12 +53,19 @@ namespace TM.Buff
             int eventCount = 0;
             _remainingEndTriggerCount.Value = EndTriggerCount - eventCount;
 
-            TMEventManager.Instance.OnTriggerEvent += onTriggerEvent;
-            TMEventManager.Instance.MarsLithiumEventAddResource.Value += AddMarsLithium;
+            TMMultiplyDayResourceCost marsLithiumCost = TMEventManager
+                .Instance
+                .MainEventRunner
+                .TopCosts
+                .OfType<TMMultiplyDayResourceCost>()
+                .FirstOrDefault(cost => cost.Kind == TMResourceKind.MARS_LITHIUM);
 
-            void onTriggerEvent(TMEventRunner runner)
+            TMEventManager.Instance.OnTriggerEvent += onTriggerEvent;
+            marsLithiumCost.AdditionalCost.Value += AddMarsLithium;
+
+            void onTriggerEvent(ITMEventRunner runner)
             {
-                if (runner.EventData != TMEventDataManager.Instance.MarsLithiumEvent) return;
+                if (runner.EventReadData.ID != TMEventDataManager.Instance.MarsLithiumEvent.ID) return;
 
                 eventCount++;
                 _remainingEndTriggerCount.Value = EndTriggerCount - eventCount;
@@ -64,7 +73,7 @@ namespace TM.Buff
                 if (EndTriggerCount % eventCount == 0 && !IsTemporary)
                 {
                     TMEventManager.Instance.OnTriggerEvent -= onTriggerEvent;
-                    TMEventManager.Instance.MarsLithiumEventAddResource.Value -= AddMarsLithium;
+                    marsLithiumCost.AdditionalCost.Value -= AddMarsLithium;
                     Dispose();
                 }
             }

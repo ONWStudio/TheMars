@@ -25,7 +25,7 @@ namespace TM.Card.Runtime
                 TMResourceKind.MARS_LITHIUM => "MarsLithium_Icon[MarsLithium_Icon]",
                 TMResourceKind.POPULATION => "Population_Icon",
                 TMResourceKind.STEEL => "Steel_Icon",
-                TMResourceKind.PLANTS => "Plant_Icon",
+                TMResourceKind.PLANT => "Plant_Icon",
                 TMResourceKind.CLAY => "Clay_Icon",
                 TMResourceKind.SATISFACTION => "Satisfaction_Icon",
                 _ => null

@@ -50,7 +50,7 @@ namespace TM.Buff
         {
             TMResourceKind kind = Random.Range(0, 5) switch
             {
-                0 => TMResourceKind.PLANTS,
+                0 => TMResourceKind.PLANT,
                 1 => TMResourceKind.CLAY,
                 2 => TMResourceKind.STEEL,
                 _ => TMResourceKind.MARS_LITHIUM,

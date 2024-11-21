@@ -26,6 +26,8 @@ namespace TM.UI
         [SerializeField] private Vector2 _multiOffset = Vector2.zero;
         private bool _canShow = true;
 
+        private bool? _isReload = false;
+
         public void OnAddedCardEvent(TMCardModel card)
         {
             card.OnSafePointerEnterEvent += SetUI;
@@ -40,6 +42,7 @@ namespace TM.UI
             if (_card == card)
             {
                 _card.CardData.Value.OnChangedName -= onChangedName;
+                _card.MainCost.LocalizedDescription.StringChangedName -=
                 _card.CardEffect.OnChangedDescription -= onChangedDescription;
                 _card = null;
                 _canvas.enabled = false;
@@ -99,9 +102,33 @@ namespace TM.UI
             _canvas.enabled = true;
         }
 
+        private void onChangedCostText(string costText)
+        {
+            reloadDescription();
+        }
+
+        private void reloadDescription()
+        {
+            if (_isReload is null || !_isReload.Value) return;
+
+        }
+
+        // .. TODO : 카드 설명 출력
+        private IEnumerator iEReloadDescription(TMCardModel card)
+        {
+            yield return null;
+
+            if (card == _card)
+            {
+
+            }
+
+            _isReload = false;
+        }
+
         private void onChangedDescription(string description)
         {
-            _cardDescriptionText.text = description;
+            reloadDescription();
         }
 
         private void onChangedName(string cardName)

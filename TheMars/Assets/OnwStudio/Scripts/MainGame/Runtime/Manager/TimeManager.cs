@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UniRx;
@@ -12,16 +13,28 @@ namespace TM.Manager
 
         public static bool IsPause { get; set; } = false;
 
-        public static IReadOnlyReactiveProperty<int> TimeScale => _timeScale;
+        public static int TimeScale => IsPause ? 0 : _timeScale.Value;
  
-        private static ReactiveProperty<int> _timeScale = new(1);
+        private static readonly ReactiveProperty<int> _timeScale = new(1);
+
+        private static readonly Dictionary<Action<int>, IDisposable> _subscriptions = new();
+
+        public static void AddListenerOnChangedTimeScale(Action<int> observer)
+        {
+            _subscriptions[observer] = _timeScale.Subscribe(observer);
+        }
+
+        public static void RemoveListenerOnChangedTimeScale(Action<int> observer)
+        {
+            if (!_subscriptions.TryGetValue(observer, out IDisposable subscription)) return;
+            
+            subscription.Dispose();
+            _subscriptions.Remove(observer);
+        }
 
         public static void SetTimeScale(int scale)
         {
             _timeScale.Value = Mathf.Clamp(scale, SPEED_MIN, SPEED_MAX);
         }
-        
-        public static float SecondsToMinutes(float seconds) => seconds / 60f;
-        public static float MinutesToSeconds(float minutes) => minutes * 60f;
     }
 }

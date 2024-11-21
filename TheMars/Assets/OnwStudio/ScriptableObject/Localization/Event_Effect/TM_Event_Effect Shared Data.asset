@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: Resource_Range_Add_Effect
     m_Metadata:
       m_Items: []
+  - m_Id: 2098227512676352
+    m_Key: Game_End_Effect
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

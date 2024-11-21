@@ -13,55 +13,11 @@ using Onw.Extensions;
 using Onw.UI.Components;
 using Onw.Components.Movement;
 using TM.Card.Effect;
+using TM.Event;
+using TM.Cost;
 
 namespace TM.Card.Runtime
 {
-    public interface ITMCardCostRuntime
-    {
-        IReactiveField<int> AdditionalCost { get; }
-        int FinalCost { get; }
-    }
-
-    public interface ITMCardMainCostRuntime : ITMCardCostRuntime
-    {
-        TMCardMainCost Cost { get; }
-    }
-
-    public interface ITMCardSubCostRuntime : ITMCardCostRuntime
-    {
-        TMCardSubCost Cost { get; }
-    }
-    
-    [Serializable]
-    public sealed class TMCardMainCostRuntime : ITMCardMainCostRuntime
-    {
-        [field: SerializeField] public TMCardMainCost Cost { get; private set; }
-        [field: SerializeField] public ReactiveField<int> ReactAdditionalCost { get; private set; } = new();
-
-        public IReactiveField<int> AdditionalCost => ReactAdditionalCost;
-        public int FinalCost => Cost.Cost + ReactAdditionalCost.Value;
-        
-        public TMCardMainCostRuntime(TMCardMainCost cost)
-        {
-            Cost = cost;
-        }
-    }
-
-    [Serializable]
-    public sealed class TMCardSubCostRuntime : ITMCardSubCostRuntime
-    {
-        [field: SerializeField] public TMCardSubCost Cost { get; private set; }
-        [field: SerializeField] public ReactiveField<int> ReactAdditionalCost { get; private set; } = new();
- 
-        public IReactiveField<int> AdditionalCost => ReactAdditionalCost;
-        public int FinalCost => Cost.Cost + ReactAdditionalCost.Value;
-        
-        public TMCardSubCostRuntime(TMCardSubCost cost)
-        {
-            Cost = cost;
-        }
-    }
-
     // .. Model
     [DisallowMultipleComponent]
     public sealed class TMCardModel : MonoBehaviour
@@ -128,8 +84,8 @@ namespace TM.Card.Runtime
         [SerializeField, ReadOnly] private ReactiveField<TMCardData> _cardData = new() { Value = null };
         [SerializeField, ReadOnly] private ReactiveField<bool> _canInteract = new() { Value = true };
         [SerializeField, ReadOnly] private ReactiveField<bool> _isHide = new();
-        [SerializeField, ReadOnly] private TMCardMainCostRuntime _mainCost;
-        [SerializeField, ReadOnly] private List<TMCardSubCostRuntime> _subCosts = new();
+        [SerializeReference, ReadOnly] private ITMResourceCost _mainCost;
+        [SerializeReference, ReadOnly] private List<ITMResourceCost> _subCosts = new();
         [SerializeField, ReadOnly] private bool _isInit = false;
 
         [Header("Safe Input Events")]
@@ -171,11 +127,11 @@ namespace TM.Card.Runtime
         
         public ITMCardEffect CardEffect { get; private set; } = null;
 
-        public bool CanPayCost => _mainCost.FinalCost <= getResourceFromPlayerByMainCost(_mainCost.Cost.CostKind) && 
-            _subCosts.All(cost => cost.FinalCost <= getResourceFromPlayerBySubCost(cost.Cost.CostKind));
+        public bool CanPayCost => _mainCost.FinalCost <= TMPlayerManager.Instance.GetResourceByKind(_mainCost.Kind) && 
+            _subCosts.All(cost => cost.FinalCost <= TMPlayerManager.Instance.GetResourceByKind(cost.Kind));
 
-        public ITMCardMainCostRuntime MainCost => _mainCost;
-        public IReadOnlyList<ITMCardSubCostRuntime> SubCosts => _subCosts;
+        public ITMResourceCost MainCost => _mainCost;
+        public IReadOnlyList<ITMResourceCost> SubCosts => _subCosts;
 
         public IReadOnlyReactiveField<bool> CanInteract => _canInteract;
         public IReactiveField<bool> IsHide => _isHide;
@@ -234,11 +190,11 @@ namespace TM.Card.Runtime
         public void SetCardData(TMCardData cardData)
         {
             _cardData.Value = cardData;
-            CardEffect = _cardData.Value.CreateCardEffect();
+            CardEffect = cardData.CreateCardEffect();
             CardEffect?.ApplyEffect(this);
 
-            _mainCost = new(_cardData.Value.MainCost);
-            _subCosts.AddRange(_cardData.Value.CardCosts.Select(cost => new TMCardSubCostRuntime(cost)));
+            _mainCost = cardData.CreateMainCost();
+            _subCosts.AddRange(cardData.CreateSubCosts());
         }
 
         public void SetCanInteract(bool canInteract)
@@ -329,7 +285,10 @@ namespace TM.Card.Runtime
             Mouse current = Mouse.current;
             Vector2 mousePosition = current.position.ReadValue();
 
-            while (current.leftButton.isPressed)
+            bool isCancel = false;
+            TMEventManager.Instance.OnTriggerEvent += onTriggerEvent;
+
+            while (current.leftButton.isPressed && !isCancel)
             {
                 dragCard();
                 onDrag(mousePosition);
@@ -337,7 +296,13 @@ namespace TM.Card.Runtime
                 yield return null;
             }
 
-            onDragEnd(Mouse.current.position.ReadValue());
+            onDragEnd(Mouse.current.position.ReadValue(), isCancel);
+
+            void onTriggerEvent(ITMEventRunner eventRunner)
+            {
+                TMEventManager.Instance.OnTriggerEvent -= onTriggerEvent;
+                isCancel = true;
+            }
         }
 
         /// <summary>
@@ -346,79 +311,40 @@ namespace TM.Card.Runtime
         /// </summary>
         private void payCost()
         {
-            switch (_mainCost.Cost.CostKind)
-            {
-                case TMMainCost.CREDIT:
-                    TMPlayerManager.Instance.Credit.Value -= _mainCost.FinalCost;
-                    break;
-                case TMMainCost.ELECTRICITY:
-                    TMPlayerManager.Instance.Electricity.Value -= _mainCost.FinalCost;
-                    break;
-            }
-            
-            foreach (TMCardSubCostRuntime cost in _subCosts)
-            {
-                switch (cost.Cost.CostKind)
-                {
-                    case TMSubCost.MARS_LITHIUM:
-                        TMPlayerManager.Instance.MarsLithium.Value -= cost.FinalCost;
-                        break;
-                    case TMSubCost.STEEL:
-                        TMPlayerManager.Instance.Steel.Value -= cost.FinalCost;
-                        break;
-                    case TMSubCost.PLANTS:
-                        TMPlayerManager.Instance.Plants.Value -= cost.FinalCost;
-                        break;
-                    case TMSubCost.CLAY:
-                        TMPlayerManager.Instance.Clay.Value -= cost.FinalCost;
-                        break;
-                }
-            }
+            TMPlayerManager.Instance.AddResource(_mainCost.Kind, -_mainCost.FinalCost);
+            _subCosts.ForEach(subCost => TMPlayerManager.Instance.AddResource(subCost.Kind, -subCost.FinalCost));
         }
 
-        private static int getResourceFromPlayerBySubCost(TMSubCost resourceKind) => resourceKind switch
-        {
-            TMSubCost.MARS_LITHIUM => TMPlayerManager.Instance.MarsLithium.Value,
-            TMSubCost.STEEL => TMPlayerManager.Instance.Steel.Value,
-            TMSubCost.PLANTS => TMPlayerManager.Instance.Plants.Value,
-            TMSubCost.CLAY => TMPlayerManager.Instance.Clay.Value,
-            _ => 0
-        };
-
-        private static int getResourceFromPlayerByMainCost(TMMainCost mainCostKind) => mainCostKind switch
-        {
-            TMMainCost.CREDIT => TMPlayerManager.Instance.Credit.Value,
-            TMMainCost.ELECTRICITY => TMPlayerManager.Instance.Electricity.Value,
-            _ => 0
-        };
-
-        private void onDragEnd(Vector2 mousePosition)
+        private void onDragEnd(Vector2 mousePosition, bool isCancel)
         {
             if (!_canInteract.Value) return;
 
-            _isOverTombTransform.Value = RectTransformUtility.RectangleContainsScreenPoint(
-                TMCardManager.Instance.DeckTransform, 
-                mousePosition, 
-                CardCamera);
-
-            _isOverCollectTransform.Value = RectTransformUtility.RectangleContainsScreenPoint(
-                TMCardManager.Instance.UIComponents.CollectField,
-                mousePosition, 
-                CardCamera);
-
-            if (_isOverTombTransform.Value)
+            if (!isCancel)
             {
-                sellCard();
-            }
-            else
-            {
-                setOnMover(CardViewMover, true);
-                CardBodyMover.enabled = true;
+                _isOverTombTransform.Value = RectTransformUtility.RectangleContainsScreenPoint(
+                    TMCardManager.Instance.DeckTransform,
+                    mousePosition,
+                    CardCamera);
 
-                if (!_isOverCollectTransform.Value && CanPayCost && CardEffect.CanUseEffect)
+                _isOverCollectTransform.Value = RectTransformUtility.RectangleContainsScreenPoint(
+                    TMCardManager.Instance.UIComponents.CollectField,
+                    mousePosition,
+                    CardCamera);
+
+                if (_isOverTombTransform.Value)
                 {
-                    CardEffect.OnEffect(this);
-                    payCost();
+                    sellCard();
+                }
+                else
+                {
+                    setOnMover(CardViewMover, true);
+                    CardBodyMover.enabled = true;
+
+                    if (!_isOverCollectTransform.Value && CanPayCost && CardEffect.CanUseEffect)
+                    {
+                        CardEffect.OnEffect(this);
+                        payCost();
+                    }
                 }
             }
 

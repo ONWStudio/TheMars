@@ -16,11 +16,7 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 718513ed77106ec49b29e688f13a7790
   m_Entries:
   - m_Id: 30005808402432
-    m_Key: Resource_Usage
-    m_Metadata:
-      m_Items: []
-  - m_Id: 135539618287616
-    m_Key: MarsLithium_Usage
+    m_Key: Resource_Cost
     m_Metadata:
       m_Items: []
   m_Metadata:

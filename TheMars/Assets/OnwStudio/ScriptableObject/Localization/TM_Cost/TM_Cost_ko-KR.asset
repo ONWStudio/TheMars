@@ -21,13 +21,7 @@ MonoBehaviour:
   m_TableData:
   - m_Id: 30005808402432
     m_Localized: "{Kind:cond:\uB9C8\uB974\uC2A4\uB9AC\uD2AC|\uD06C\uB808\uB527|\uC778\uAD6C|\uAC15\uCCA0|\uC2DD\uBB3C|\uC810\uD1A0|\uC804\uAE30|\uB9CC\uC871\uB3C4}
-      {Resource}\uAC1C {Kind:cond:\uAC1C|\uAC1C|\uBA85|\uAC1C|\uAC1C|\uAC1C|\uAC1C|%}
-      \uC18C\uBAA8 "
-    m_Metadata:
-      m_Items:
-      - rid: 3610285249959297316
-  - m_Id: 135539618287616
-    m_Localized: "\uB9C8\uB974\uC2A4 \uB9AC\uD2AC {MarsLithium}\uAC1C \uB0A9\uBD80"
+      {Cost} {Kind:cond:\uAC1C|\uAC1C|\uBA85|\uAC1C|\uAC1C|\uAC1C|\uAC1C|%} \uC18C\uBAA8 "
     m_Metadata:
       m_Items:
       - rid: 3610285249959297316
@@ -37,4 +31,4 @@ MonoBehaviour:
     - rid: 3610285249959297316
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 00108d454a1b00000010cdc6457b0000
+        m_Entries: 00108d454a1b0000

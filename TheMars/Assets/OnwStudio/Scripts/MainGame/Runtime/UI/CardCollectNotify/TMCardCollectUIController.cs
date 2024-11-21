@@ -23,6 +23,7 @@ namespace TM.UI
         
         private readonly List<KeyValuePair<TMCardModel, UnityAction<PointerEventData>>> _cardCallbacks = new();
         private TMCardModel _selectCard = null;
+        private bool? _keepPause = null; 
 
         protected override void Init() {}
 
@@ -42,7 +43,8 @@ namespace TM.UI
                     }
                 }
 
-                TimeManager.IsPause = false;
+                TimeManager.IsPause = _keepPause is not null && (bool)_keepPause;
+                _keepPause = null;
                 _cardCallbacks.Clear();
                 _selectCard.Initialize();
                 _selectCard.transform.localScale = new(1f, 1f, 1f);
@@ -56,6 +58,7 @@ namespace TM.UI
         public void ActiveUI(List<TMCardModel> cards)
         {
             _canvas.enabled = true;
+            _keepPause = TimeManager.IsPause;
             TimeManager.IsPause = true;
             
             foreach (TMCardModel card in cards)

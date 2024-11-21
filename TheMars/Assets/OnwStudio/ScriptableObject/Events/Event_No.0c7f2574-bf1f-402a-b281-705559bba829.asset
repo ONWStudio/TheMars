@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.0c7f2574-bf1f-402a-b281-705559bba829
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: fcb6a183-2977-4360-a939-8f9dac3112ee
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
   <EventImage>k__BackingField: {fileID: 0}
@@ -60,13 +61,23 @@ MonoBehaviour:
   - rid: 4853453529831440412
   - rid: 4853453529831440414
   - rid: 4853453529831440417
-  _topUsageCreators:
-  - rid: 4853453529831440419
-  - rid: 4853453529831440420
-  _bottomUsageCreators: []
+  _topCostCreators:
+  - rid: 3610285400346591270
+  - rid: 3610285400346591271
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:
+    - rid: 3610285400346591270
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
+      data:
+        <Kind>k__BackingField: 1
+        <Cost>k__BackingField: 20
+    - rid: 3610285400346591271
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
+      data:
+        <Kind>k__BackingField: 0
+        <Cost>k__BackingField: 10
     - rid: 4853453529831440408
       type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
       data:
@@ -134,13 +145,3 @@ MonoBehaviour:
         <IsTemporary>k__BackingField: 0
         <ResourceKind>k__BackingField: 1
         <Resource>k__BackingField: -40
-    - rid: 4853453529831440419
-      type: {class: TMResourceUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
-      data:
-        <ResourceKind>k__BackingField: 1
-        <ResourceUsage>k__BackingField: 20
-    - rid: 4853453529831440420
-      type: {class: TMResourceUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
-      data:
-        <ResourceKind>k__BackingField: 0
-        <ResourceUsage>k__BackingField: 10

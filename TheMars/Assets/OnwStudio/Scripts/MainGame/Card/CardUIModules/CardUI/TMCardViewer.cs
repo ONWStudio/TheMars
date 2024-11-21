@@ -40,23 +40,31 @@ namespace TM.Card.Runtime
         
         public void SetUI(TMCardModel cardModel)
         {
-            TMCardData cardData = cardModel.CardData.Value;
-            _cardImage.sprite = cardData.CardImage;
-            _costText.text = cardData.MainCost.Cost.ToString();
+            _cardImage.sprite = cardModel.CardData.Value.CardImage;
+            _costText.text = cardModel.MainCost.FinalCost.ToString();
             
-            string reference = cardData.MainCost.CostKind switch
+            string reference = cardModel.MainCost.Kind switch
             {
-                TMMainCost.CREDIT => "Credit_Icon",
-                TMMainCost.ELECTRICITY => "Electricity_Icon",
+                TMResourceKind.CREDIT => "Credit_Icon",
+                TMResourceKind.ELECTRICITY => "Electricity_Icon",
+                TMResourceKind.MARS_LITHIUM => "MarsLithium_Icon",
+                TMResourceKind.POPULATION => "Population_Icon",
+                TMResourceKind.STEEL => "Steel_Icon",
+                TMResourceKind.PLANT => "Plant_Icon",
+                TMResourceKind.CLAY => "Clay_Icon",
+                TMResourceKind.SATISFACTION => "Satisfaction_Icon",
                 _ => null
             };
 
-            _spriteHandle = Addressables.LoadAssetAsync<Sprite>(reference);
-            _spriteHandle.Completed += onCompletedSprite;
-
-            void onCompletedSprite(AsyncOperationHandle<Sprite> spriteHandle)
+            if (reference is not null)
             {
-                _costImage.sprite = spriteHandle.Result;
+                _spriteHandle = Addressables.LoadAssetAsync<Sprite>(reference);
+                _spriteHandle.Completed += onCompletedSprite;
+
+                void onCompletedSprite(AsyncOperationHandle<Sprite> spriteHandle)
+                {
+                    _costImage.sprite = spriteHandle.Result;
+                }
             }
         }
 

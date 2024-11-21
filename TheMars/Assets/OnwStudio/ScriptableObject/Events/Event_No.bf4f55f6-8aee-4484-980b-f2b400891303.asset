@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.bf4f55f6-8aee-4484-980b-f2b400891303
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 3ea9cacf-cb53-4f3b-bcf7-d611924d5812
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
   <EventImage>k__BackingField: {fileID: 0}
@@ -57,7 +58,7 @@ MonoBehaviour:
   _bottomEffectCreators:
   - rid: 3610285280145179426
   _topUsageCreators:
-  - rid: 3610285280145179427
+  - rid: 3610285400346591259
   _bottomUsageCreators: []
   references:
     version: 2
@@ -65,7 +66,8 @@ MonoBehaviour:
     - rid: 3610285280145179426
       type: {class: TMEventGameEndEffectCreator, ns: TM.Event.Creator, asm: AssemblyTheMars}
       data: 
-    - rid: 3610285280145179427
-      type: {class: TMMarsLithiumUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
+    - rid: 3610285400346591259
+      type: {class: TMMultiplyDayResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
       data:
-        <MarsLithium>k__BackingField: 10
+        <Kind>k__BackingField: 0
+        <Cost>k__BackingField: 10

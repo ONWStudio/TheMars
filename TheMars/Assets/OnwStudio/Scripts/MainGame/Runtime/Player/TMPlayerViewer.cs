@@ -58,7 +58,7 @@ namespace TM.UI
             TMPlayerManager.Instance.MaxExp.AddListener(OnChangedMaxExp);
             TMSimulator.Instance.NowSeconds.AddListener(OnChangedSeconds);
             TMSimulator.Instance.NowDay.AddListener(OnChangedDay);
-            TimeManager.TimeScale.Subscribe(OnChangedTimeScale);
+            TimeManager.AddListenerOnChangedTimeScale(OnChangedTimeScale);
             _playButton.onClick.AddListener(OnClickAgainButton);
             _pauseButton.onClick.AddListener(OnClickStopButton);
             _fastButton.onClick.AddListener(OnClickFastButton);
@@ -91,7 +91,7 @@ namespace TM.UI
 
         public void OnClickFastButton()
         {
-            TimeManager.SetTimeScale(TimeManager.TimeScale.Value switch
+            TimeManager.SetTimeScale(TimeManager.TimeScale switch
             {
                 1 => 2,
                 2 => 3,

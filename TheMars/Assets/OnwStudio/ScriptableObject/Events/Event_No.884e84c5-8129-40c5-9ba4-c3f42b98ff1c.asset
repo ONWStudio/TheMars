@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.884e84c5-8129-40c5-9ba4-c3f42b98ff1c
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 0307ac26-5574-4904-8724-b06833251135
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
   <EventImage>k__BackingField: {fileID: 0}
@@ -58,9 +59,9 @@ MonoBehaviour:
   _bottomEffectCreators:
   - rid: 3610285249959297115
   _topUsageCreators:
-  - rid: 3610285249959297117
-  - rid: 3610285249959297118
-  - rid: 3610285249959297119
+  - rid: 3610285400346591253
+  - rid: 3610285400346591254
+  - rid: 3610285400346591255
   _bottomUsageCreators: []
   references:
     version: 2
@@ -91,18 +92,18 @@ MonoBehaviour:
         <IsTemporary>k__BackingField: 0
         <ResourceKind>k__BackingField: 7
         <Resource>k__BackingField: -30
-    - rid: 3610285249959297117
-      type: {class: TMResourceUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
+    - rid: 3610285400346591253
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
       data:
-        <ResourceKind>k__BackingField: 1
-        <ResourceUsage>k__BackingField: 50
-    - rid: 3610285249959297118
-      type: {class: TMResourceUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
+        <Kind>k__BackingField: 1
+        <Cost>k__BackingField: 50
+    - rid: 3610285400346591254
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
       data:
-        <ResourceKind>k__BackingField: 4
-        <ResourceUsage>k__BackingField: 20
-    - rid: 3610285249959297119
-      type: {class: TMResourceUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
+        <Kind>k__BackingField: 4
+        <Cost>k__BackingField: 20
+    - rid: 3610285400346591255
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
       data:
-        <ResourceKind>k__BackingField: 3
-        <ResourceUsage>k__BackingField: 30
+        <Kind>k__BackingField: 3
+        <Cost>k__BackingField: 30

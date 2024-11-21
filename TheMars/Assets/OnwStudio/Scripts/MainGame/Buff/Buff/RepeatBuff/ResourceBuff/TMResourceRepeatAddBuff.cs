@@ -45,7 +45,7 @@ namespace TM.Buff
             string reference = Kind switch
             {
                 TMResourceKind.POPULATION => positive ? "Population-plus" : "Popluation-minus",
-                TMResourceKind.STEEL or TMResourceKind.PLANTS or TMResourceKind.CLAY => positive ? "Construction-plus" : "Construction-minus",
+                TMResourceKind.STEEL or TMResourceKind.PLANT or TMResourceKind.CLAY => positive ? "Construction-plus" : "Construction-minus",
                 TMResourceKind.SATISFACTION => positive ? "Satisfaction_Icon" : "Satisfaction-minus",
                 _ => positive ? "Cost-plus" : "Cost-minus",
             };

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.ec16c951-9ba5-4101-8ce7-fda986825af1
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 889c55e1-fe04-425f-8f4a-6b2485cb8a8f
   <TopEventData>k__BackingField: {fileID: 11400000, guid: a0105463cabc1a947954fbe337d1c519,
     type: 2}
   <BottomEventData>k__BackingField: {fileID: 11400000, guid: c02bec81ca806c74fbcd4daf3824f51d,
@@ -60,12 +61,17 @@ MonoBehaviour:
   - rid: 4853453505639743511
   _bottomEffectCreators:
   - rid: 4853453505639743504
-  _topUsageCreators:
-  - rid: 4853453505639743505
-  _bottomUsageCreators: []
+  _topCostCreators:
+  - rid: 3610285400346591268
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:
+    - rid: 3610285400346591268
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
+      data:
+        <Kind>k__BackingField: 2
+        <Cost>k__BackingField: 5
     - rid: 4853453505639743502
       type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
       data:
@@ -84,11 +90,6 @@ MonoBehaviour:
       data:
         <BuffTrigger>k__BackingField:
           rid: 4853453505639743506
-    - rid: 4853453505639743505
-      type: {class: TMResourceUsageCreator, ns: TM.Usage.Creator, asm: AssemblyTheMars}
-      data:
-        <ResourceKind>k__BackingField: 2
-        <ResourceUsage>k__BackingField: 5
     - rid: 4853453505639743506
       type: {class: TMResourceRepeatAddBuffTrigger, ns: TM.Buff, asm: AssemblyTheMars}
       data:

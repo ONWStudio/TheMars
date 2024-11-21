@@ -1,14 +1,14 @@
-using Onw.Attribute;
-using Onw.Extensions;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using TM.Buff.Trigger;
+using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.AddressableAssets;
+using Onw.Attribute;
+using Onw.Extensions;
 using TM.Card;
 using TM.Card.Runtime;
-using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.Localization;
+using TM.Buff.Trigger;
 
 namespace TM.Buff
 {
@@ -26,7 +26,7 @@ namespace TM.Buff
         public override AssetReferenceSprite IconReference => _iconReference;
 
         [field: SerializeField] public TMCardKindForWhere CardKind { get; private set; }
-        [field: SerializeField] public TMCostKind CostKind { get; private set; }
+        [field: SerializeField] public TMResourceKind CostKind { get; private set; }
         [field: SerializeField] public int AdditionalCost { get; set; }
 
         public override LocalizedString Description => throw new System.NotImplementedException();
@@ -91,29 +91,19 @@ namespace TM.Buff
         private void modifyCost(TMCardModel card, bool isAdd)
         {
             int additionalCost = isAdd ? AdditionalCost : -AdditionalCost;
-
-            if (CostKind == TMCostKind.CREDIT || CostKind == TMCostKind.ELECTRICITY)
+            
+            if (card.MainCost.Kind == CostKind)
             {
-                _additionalCostCard.ForEach(card => card.MainCost.AdditionalCost.Value += additionalCost);
+                card.MainCost.AdditionalCost.Value += additionalCost;
             }
             else
             {
-                TMCardData cardData = card.CardData.Value;
                 card
                     .SubCosts
-                    .Where(isEqualSubCostKind)
+                    .Where(subCost => subCost.Kind == CostKind)
                     .ForEach(subCost => subCost.AdditionalCost.Value += additionalCost);
             }
         }
-
-        private bool isEqualSubCostKind(ITMCardSubCostRuntime subCost) => subCost.Cost.CostKind switch
-        {
-            TMSubCost.MARS_LITHIUM => CostKind == TMCostKind.MARS_LITHIUM,
-            TMSubCost.PLANTS => CostKind == TMCostKind.PLANTS,
-            TMSubCost.CLAY => CostKind == TMCostKind.CLAY,
-            TMSubCost.STEEL => CostKind == TMCostKind.STEEL,
-            _ => false
-        };
 
         private bool isEqualCard(TMCardModel card)
         {
@@ -123,22 +113,6 @@ namespace TM.Buff
                 TMCardKindForWhere.CONSTRUCTION => card.CardData.Value.Kind == TMCardKind.CONSTRUCTION,
                 _ => true,
             };
-
-            if (isEqual)
-            {
-                TMCardData cardData = card.CardData.Value;
-
-                isEqual = CostKind switch
-                {
-                    TMCostKind.MARS_LITHIUM => cardData.CardCosts.Any(cost => cost.CostKind == TMSubCost.MARS_LITHIUM),
-                    TMCostKind.CREDIT => cardData.MainCost.CostKind == TMMainCost.CREDIT,
-                    TMCostKind.STEEL => cardData.CardCosts.Any(cost => cost.CostKind == TMSubCost.STEEL),
-                    TMCostKind.PLANTS => cardData.CardCosts.Any(cost => cost.CostKind == TMSubCost.PLANTS),
-                    TMCostKind.CLAY => cardData.CardCosts.Any(cost => cost.CostKind == TMSubCost.CLAY),
-                    TMCostKind.ELECTRICITY => cardData.MainCost.CostKind == TMMainCost.ELECTRICITY,
-                    _ => false,
-                };
-            }
 
             return isEqual;
         }

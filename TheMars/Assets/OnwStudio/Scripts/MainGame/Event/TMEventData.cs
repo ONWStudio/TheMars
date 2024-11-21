@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
 using Onw.Attribute;
-using TM.Usage.Creator;
-using TM.Usage;
+using TM.Cost.Creator;
+using TM.Cost;
 using System.Linq;
 using TM.Event.Effect.Creator;
 using TM.Event.Effect;
@@ -15,6 +15,7 @@ namespace TM.Event
 {
     public interface ITMEventData
     {
+        string ID { get; }
         Sprite EventImage { get; }
 
         LocalizedString DescriptionTextEvent { get; }
@@ -56,9 +57,10 @@ namespace TM.Event
         [FormerlySerializedAs("_bottomEffectCreator")]
         [SerializeReference, SerializeReferenceDropdown, DisplayAs("아래쪽 선택지 효과")] private List<ITMEventEffectCreator> _bottomEffectCreators = new();
 
-        [SerializeReference, SerializeReferenceDropdown, DisplayAs("위쪽 선택지 소모 자원")] private List<Usage.Creator.ITMUsageCreator> _topUsageCreators = new();
-        [SerializeReference, SerializeReferenceDropdown, DisplayAs("아래쪽 선택지 소모 자원")] private List<Usage.Creator.ITMUsageCreator> _bottomUsageCreators = new();
-
+        [FormerlySerializedAs("_topUsageCreators")]
+        [SerializeReference, SerializeReferenceDropdown, DisplayAs("위쪽 선택지 소모 자원")] private List<ITMCostCreator> _topCostCreators = new();
+        [FormerlySerializedAs("_bottomUsageCreators")]
+        [SerializeReference, SerializeReferenceDropdown, DisplayAs("아래쪽 선택지 소모 자원")] private List<ITMCostCreator> _bottomCostCreators = new();
 
         public List<ITMEventEffect> CreateTopEffects()
         {
@@ -74,17 +76,17 @@ namespace TM.Event
                 .ToList();
         }
 
-        public List<Usage.ITMUsage> CreateTopUsages()
+        public List<ITMCost> CreateTopCosts()
         {
-            return _topUsageCreators
-                .Select(creator => creator.CreateUsage())
+            return _topCostCreators
+                .Select(creator => creator.CreateCost())
                 .ToList(); 
         }
 
-        public List<Usage.ITMUsage> CreateBottomUsages()
+        public List<ITMCost> CreateBottomCosts()
         {
-            return _bottomUsageCreators
-                .Select(creator => creator.CreateUsage())
+            return _bottomCostCreators
+                .Select(creator => creator.CreateCost())
                 .ToList();
         }
     }
