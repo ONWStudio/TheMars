@@ -35,37 +35,37 @@ namespace Onw.Extensions
         public static void SetParent(this Component component, Transform parentTransform, bool worldPositionStays)
             => component.transform.SetParent(parentTransform, worldPositionStays);
         
-        public static void SetPosition(this Component component, Vector3 position)
+        public static void SetPosition(this Component component, in Vector3 position)
             => component.transform.position = position;
         
         public static void SetPositionX(this Component component, float x)
-            => component.transform.position.Set(x, component.transform.position.y, component.transform.position.z);
+            => component.transform.position = new(x, component.transform.position.y, component.transform.position.z);
         
         public static void SetPositionY(this Component component, float y)
-            => component.transform.position.Set(component.transform.position.x, y, component.transform.position.z);
+            => component.transform.position = new(component.transform.position.x, y, component.transform.position.z);
 
         public static void SetPositionZ(this Component component, float z)
-            => component.transform.position.Set(component.transform.position.x, component.transform.position.y, z);
+            => component.transform.position = new(component.transform.position.x, component.transform.position.y, z);
 
         public static void SetLocalPositionX(this Component component, float x)
-            => component.transform.localPosition.Set(x, component.transform.localPosition.y, component.transform.localPosition.z);
+            => component.transform.localPosition = new(x, component.transform.localPosition.y, component.transform.localPosition.z);
 
         public static void SetLocalPositionY(this Component component, float y)
-            => component.transform.localPosition.Set(component.transform.localPosition.x, y, component.transform.localPosition.z);
+            => component.transform.localPosition = new(component.transform.localPosition.x, y, component.transform.localPosition.z);
 
         public static void SetLocalPositionZ(this Component component, float z)
-            => component.transform.localPosition.Set(component.transform.localPosition.x, component.transform.localPosition.y, z);
+            => component.transform.localPosition = new(component.transform.localPosition.x, component.transform.localPosition.y, z);
 
-        public static void SetLocalScale(this Component component, Vector3 scale)
+        public static void SetLocalScale(this Component component, in Vector3 scale)
             => component.transform.localScale = scale;
 
         public static void SetLocalScaleX(this Component component, float scale)
-            => component.transform.localScale.Set(scale, component.transform.localScale.y, component.transform.localScale.z);
+            => component.transform.localScale = new(scale, component.transform.localScale.y, component.transform.localScale.z);
 
         public static void SetLocalScaleY(this Component component, float scale)
-            => component.transform.localScale.Set(component.transform.localScale.x, scale, component.transform.localScale.z);
+            => component.transform.localScale = new(component.transform.localScale.x, scale, component.transform.localScale.z);
 
         public static void SetLocalScaleZ(this Component component, float scale)
-            => component.transform.localScale.Set(component.transform.localScale.x, component.transform.localScale.y, scale);
+            => component.transform.localScale = new(component.transform.localScale.x, component.transform.localScale.y, scale);
     }
 }

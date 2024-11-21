@@ -14,7 +14,7 @@ namespace TM.Synergy
 {
     public sealed class TMSynergyManager : SceneSingleton<TMSynergyManager>
     {
-        public event UnityAction<IReadOnlyDictionary<string, TMSynergy>> OnUpdateSynergies
+        public event UnityAction<TMSynergy[]> OnUpdateSynergies
         {
             add => _onUpdateSynergies.AddListener(value);
             remove => _onUpdateSynergies.RemoveListener(value);
@@ -22,7 +22,7 @@ namespace TM.Synergy
 
         private readonly Dictionary<string, TMSynergy> _synergies = new();
 
-        [SerializeField] private UnityEvent<IReadOnlyDictionary<string, TMSynergy>> _onUpdateSynergies = new();
+        [SerializeField] private UnityEvent<TMSynergy[]> _onUpdateSynergies = new();
 
         public IReadOnlyDictionary<string, TMSynergy> Synergies => _synergies;
         protected override string SceneName => "MainGameScene";
@@ -31,7 +31,7 @@ namespace TM.Synergy
 
         public void OnAddedBuilding(TMBuilding building)
         {
-            foreach (TMSynergyData synergyData in building.BuildingData.Synergies)
+            foreach (TMSynergyData synergyData in building.BuildingData.Synergies.Where(synergy => synergy is not null))
             {
                 if (!_synergies.TryGetValue(synergyData.SynergyName, out TMSynergy synergy))
                 {
@@ -43,12 +43,12 @@ namespace TM.Synergy
                 synergy.ApplySynergy();
             }
 
-            _onUpdateSynergies.Invoke(_synergies);
+            _onUpdateSynergies.Invoke(_synergies.Values.ToArray());
         }
 
         public void OnRemovedBuilding(TMBuilding building)
         {
-            foreach (TMSynergyData synergyData in building.BuildingData.Synergies)
+            foreach (TMSynergyData synergyData in building.BuildingData.Synergies.Where(synergy => synergy is not null))
             {
                 if (!_synergies.TryGetValue(synergyData.SynergyName, out TMSynergy synergy)) return;
 
@@ -60,7 +60,7 @@ namespace TM.Synergy
                     _synergies.Remove(synergy.SynergyName);
                 }
 
-                _onUpdateSynergies.Invoke(_synergies);
+                _onUpdateSynergies.Invoke(_synergies.Values.ToArray());
             }
         }
     }

@@ -1,10 +1,12 @@
 using System.Collections;
+using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Serialization;
 using TMPro;
 using UniRx;
 using Onw.Attribute;
+using Onw.Extensions;
 using TM.Manager;
 using UniRx.Triggers;
 
@@ -28,6 +30,7 @@ namespace TM.UI
         
         [Header("Time Info")]
         [SerializeField, SelectableSerializeField, FormerlySerializedAs("_timeBarImage")] private Image _timeProgressImage;
+        [SerializeField, SelectableSerializeField] private RectTransform _timeParticleLine;
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _timeScaleText;
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _dayText;
         [SerializeField, SelectableSerializeField] private Button _playButton;
@@ -150,7 +153,10 @@ namespace TM.UI
 
         public void OnChangedSeconds(int seconds)
         {
-            _timeProgressImage.fillAmount = seconds % TMSimulator.Instance.IntervalInSeconds / (float)TMSimulator.Instance.IntervalInSeconds;
+            float ratio = seconds % TMSimulator.Instance.IntervalInSeconds / (float)TMSimulator.Instance.IntervalInSeconds;
+            _timeProgressImage.fillAmount = ratio;
+            float xPosition = ratio * _timeProgressImage.rectTransform.rect.width;
+            _timeParticleLine.SetLocalPositionX(xPosition - _timeParticleLine.rect.width * 0.5f);
         }
 
         public void OnChangedDay(int day)
