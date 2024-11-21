@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Icon>k__BackingField: {fileID: 0}
   _synergyEffects:
-  - rid: -2
+  - rid: 4853453710346682370
   _localizedSynergyName:
     m_TableReference:
       m_TableCollectionName: SynergyName
@@ -27,5 +27,9 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 4853453710346682370
+      type: {class: TMSynergyGetRandConstructionResourceEffectCreator, ns: TM.Synergy.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <TargetBuildingCount>k__BackingField: 0
+        <Resource>k__BackingField: 10
