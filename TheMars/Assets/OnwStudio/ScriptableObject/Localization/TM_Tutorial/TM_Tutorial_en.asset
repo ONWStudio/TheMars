@@ -19,7 +19,17 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 14586646528
-    m_Localized: Tutorial 0/7
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14313325498368
+    m_Localized: 'It''s an honor to meet you, sir.
+
+      I''m an AI ''Septer''
+      designed to raise the minister this time.
+
+      I will inform you of what
+      the minister has to do in the future, so please follow him well.'
     m_Metadata:
       m_Items: []
   references:
