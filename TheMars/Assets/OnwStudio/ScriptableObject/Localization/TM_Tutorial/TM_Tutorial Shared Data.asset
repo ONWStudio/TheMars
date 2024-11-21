@@ -43,6 +43,54 @@ MonoBehaviour:
     m_Key: TutorialDescription_5
     m_Metadata:
       m_Items: []
+  - m_Id: 68373344849920
+    m_Key: TutorialDescription_6
+    m_Metadata:
+      m_Items: []
+  - m_Id: 68418941128704
+    m_Key: TutorialDescription_7
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70562977058816
+    m_Key: TutorialDescription_8
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70938715394048
+    m_Key: TutorialDescription_9
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70969799380992
+    m_Key: TutorialDescription_10
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71008550555648
+    m_Key: TutorialDescription_11
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71038539829248
+    m_Key: TutorialDescription_12
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71081619525632
+    m_Key: TutorialDescription_13
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71112816758784
+    m_Key: TutorialDescription_14
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71153526673408
+    m_Key: TutorialDescription_15
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71187492147200
+    m_Key: TutorialDescription_16
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82852178726912
+    m_Key: SatisfactionDescription
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

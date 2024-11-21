@@ -32,6 +32,112 @@ MonoBehaviour:
       the minister has to do in the future, so please follow him well.'
     m_Metadata:
       m_Items: []
+  - m_Id: 54589834301440
+    m_Localized: First, let's talk about how to get the card.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55069813673984
+    m_Localized: The cards will be replenished each morning and the Minister can
+      select a card by clicking on the icon in the 'bottom left'.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55085919801344
+    m_Localized: The cards will be randomized each time, but since this is a simple
+      demonstration, please select the card you see on the screen.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55103460380672
+    m_Localized: 'Well done.
+
+      The cards you choose will be placed in the bottom
+      center and you can keep up to 10 cards in total, so be mindful of the limit'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55121009348608
+    m_Localized: 'Now, let''s put the cards to work.
+
+      First, ''hold'' the
+      card you want to install and ''drop'' it onto the desired tile.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 68373344849920
+    m_Localized: Dropped cards are installed on tiles as shown on the [Construction]
+      card machine and consume goods [Credits] and resources [Construction Resources].
+      Please note that this only applies to cards labeled [Construction].
+    m_Metadata:
+      m_Items: []
+  - m_Id: 68418941128704
+    m_Localized: 'Next, we will learn how to demolish them.
+
+      ''Hold'' the
+      placed building and move it to the bottom center.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70562977058816
+    m_Localized: 'If the buildings are not placed where the minister wants them.
+      You can pick up the building again.
+
+      However, it is important to note
+      that retrieving a building does not cost resources, but installing it does.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70938715394048
+    m_Localized: Next, you'll learn how to destroy the card.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70969799380992
+    m_Localized: Hold the cards that are currently in your hand and 'drop' them into
+      the 'trash can' that exists in the bottom right corner.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71008550555648
+    m_Localized: Congratulations, you can now destroy the cards that the Secretary
+      has deemed obsolete. However, please note that once a card is destroyed, it
+      cannot be retrieved again.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71038539829248
+    m_Localized: 'Right now there are only two of us, you and me, but in the future
+      there will be many people living here.
+
+      Of course, it will also depend
+      on your ability to meet their needs and motivate them to live here.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71081619525632
+    m_Localized: As a minister, you can see how your residents are doing with a satisfaction
+      rating.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71112816758784
+    m_Localized: 'We''re a government agency, so sometimes we have to show proof
+      that we''re doing our job, even if we''re terraforming.
+
+      Today I''m
+      going to post an example email so you can try it out.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71153526673408
+    m_Localized: All future emails will be reviewed by the secretary at the end of
+      the day and posted to the minister, as they are important and should be checked
+      off before the day begins.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71187492147200
+    m_Localized: That concludes the process, and I wish you the best of luck, and
+      I, Sector, will stand by your side.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82852178726912
+    m_Localized: 'Satisfaction can be found in the top center.
+
+      This can change
+      for a variety of reasons, including events and demographics.
+
+      It''s
+      important to note that a drop in satisfaction can be detrimental.'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
