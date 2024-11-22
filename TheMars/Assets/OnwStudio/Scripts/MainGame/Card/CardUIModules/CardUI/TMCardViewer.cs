@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Localization;
 using UnityEngine.Serialization;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using TMPro;
 using Onw.Attribute;
+using Onw.Extensions;
+using Onw.Manager.Prototype;
+using Onw.UI.Components;
+using TM.Cost;
+using UnityEngine.AddressableAssets;
 
 namespace TM.Card.Runtime
 {
@@ -19,20 +20,18 @@ namespace TM.Card.Runtime
         [SerializeField, SelectableSerializeField]
         private Image _cardImage;
 
-        [Header("Cost Option")]
         [SerializeField, SelectableSerializeField]
-        private TextMeshProUGUI _costText;
+        private TMCardCostIcon _mainCostViewer;
 
         [SerializeField, SelectableSerializeField]
-        private Image _costImage;
+        private Mask _mask;
 
         [SerializeField, SelectableSerializeField]
-        private Mask _mask = null;
+        private RectTransform _subCostField;
+
+        [SerializeField]
+        private AssetReferenceGameObject _costIconReference;
         
-        private Action<Locale> _onLanguageChanged = null;
-
-        private AsyncOperationHandle<Sprite> _spriteHandle;
-
         public void SetView(bool isOn)
         {
             _mask.enabled = !isOn;
@@ -41,38 +40,23 @@ namespace TM.Card.Runtime
         public void SetUI(TMCardModel cardModel)
         {
             _cardImage.sprite = cardModel.CardData.Value.CardImage;
-            _costText.text = cardModel.MainCost.FinalCost.ToString();
-            
-            string reference = cardModel.MainCost.Kind switch
-            {
-                TMResourceKind.CREDIT => "Credit_Icon",
-                TMResourceKind.ELECTRICITY => "Electricity_Icon",
-                TMResourceKind.MARS_LITHIUM => "MarsLithium_Icon",
-                TMResourceKind.POPULATION => "Population_Icon",
-                TMResourceKind.STEEL => "Steel_Icon",
-                TMResourceKind.PLANT => "Plant_Icon",
-                TMResourceKind.CLAY => "Clay_Icon",
-                TMResourceKind.SATISFACTION => "Satisfaction_Icon",
-                _ => null
-            };
 
-            if (reference is not null)
-            {
-                _spriteHandle = Addressables.LoadAssetAsync<Sprite>(reference);
-                _spriteHandle.Completed += onCompletedSprite;
+            setCost(_mainCostViewer, cardModel.MainCost);
 
-                void onCompletedSprite(AsyncOperationHandle<Sprite> spriteHandle)
-                {
-                    _costImage.sprite = spriteHandle.Result;
-                }
+            Debug.Log("??");
+            cardModel.SubCosts.ForEach(cost => PrototypeManager.Instance.ClonePrototypeFromReferenceAsync<TMCardCostIcon>(_costIconReference, icon => onLoadedCostIcon(icon, cost)));
+
+            void onLoadedCostIcon(TMCardCostIcon costViewer, ITMResourceCost cost)
+            {
+                costViewer.SetParent(_subCostField, false);
+                setCost(costViewer, cost);
             }
-        }
 
-        private void OnDestroy()
-        {
-            if (!_spriteHandle.IsValid()) return;
-            
-            Addressables.Release(_spriteHandle);
+            void setCost(TMCardCostIcon costViewer, ITMResourceCost cost)
+            {
+                costViewer.SetIcon(cost.Kind);
+                costViewer.SetCost(cost.FinalCost);
+            }
         }
     }
 }

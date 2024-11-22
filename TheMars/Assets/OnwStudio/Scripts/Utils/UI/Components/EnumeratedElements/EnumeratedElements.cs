@@ -78,7 +78,7 @@ namespace Onw.UI.Components
             float cellWidth = contentWidth / constraintCount * elementSizeRatio;
             float cellHeight = cellWidth * widthToHeightRatio;
 
-            return new Vector2(cellWidth, cellHeight);
+            return new(cellWidth, cellHeight);
         }
 
         internal static Vector2 GetSpacing(Vector2 cellSize, float elementSizeToSpacingXRatio, float elementSizeToSpacingYRatio)

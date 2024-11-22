@@ -23,6 +23,8 @@ namespace TM.Event
 
         bool CanFireTop { get; }
         bool CanFireBottom { get; }
+
+        void InvokeEvent(TMEventChoice eventChoice);
     }
 
     [System.Serializable]

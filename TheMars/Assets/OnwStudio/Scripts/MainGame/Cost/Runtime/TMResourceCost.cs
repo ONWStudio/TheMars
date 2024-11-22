@@ -13,7 +13,7 @@ namespace TM.Cost
     {
         [SerializeField] private ReactiveField<int> _additionalCost = new();
 
-        [field: SerializeField, ReadOnly] public LocalizedString LocalizedDescription { get; private set; } = new("TM_Cost", "Resource_Usage");
+        [field: SerializeField, ReadOnly] public LocalizedString LocalizedDescription { get; private set; } = new("TM_Cost", "Resource_Cost");
         [field: SerializeField, ReadOnly] public TMResourceKind Kind { get; private set; }
         [field: SerializeField, ReadOnly] public int Cost { get; private set; }
 

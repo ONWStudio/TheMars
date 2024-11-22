@@ -84,7 +84,6 @@ namespace TM.Card.Runtime
         [SerializeField, ReadOnly] private ReactiveField<TMCardData> _cardData = new() { Value = null };
         [SerializeField, ReadOnly] private ReactiveField<bool> _canInteract = new() { Value = true };
         [SerializeField, ReadOnly] private ReactiveField<bool> _isHide = new();
-        [SerializeReference, ReadOnly] private ITMResourceCost _mainCost;
         [SerializeReference, ReadOnly] private List<ITMResourceCost> _subCosts = new();
         [SerializeField, ReadOnly] private bool _isInit = false;
 
@@ -125,12 +124,13 @@ namespace TM.Card.Runtime
         [field: SerializeField, InitializeRequireComponent]
         public PointerUpTrigger PointerUpTrigger { get; private set; }
         
-        public ITMCardEffect CardEffect { get; private set; } = null;
+        [field: SerializeReference, ReadOnly] public ITMCardEffect CardEffect { get; private set; } = null;
 
-        public bool CanPayCost => _mainCost.FinalCost <= TMPlayerManager.Instance.GetResourceByKind(_mainCost.Kind) && 
+        public bool CanPayCost => MainCost.FinalCost <= TMPlayerManager.Instance.GetResourceByKind(MainCost.Kind) && 
             _subCosts.All(cost => cost.FinalCost <= TMPlayerManager.Instance.GetResourceByKind(cost.Kind));
 
-        public ITMResourceCost MainCost => _mainCost;
+        [field: SerializeReference, ReadOnly] public ITMResourceCost MainCost { get; private set; }
+
         public IReadOnlyList<ITMResourceCost> SubCosts => _subCosts;
 
         public IReadOnlyReactiveField<bool> CanInteract => _canInteract;
@@ -193,7 +193,7 @@ namespace TM.Card.Runtime
             CardEffect = cardData.CreateCardEffect();
             CardEffect?.ApplyEffect(this);
 
-            _mainCost = cardData.CreateMainCost();
+            MainCost = cardData.CreateMainCost();
             _subCosts.AddRange(cardData.CreateSubCosts());
         }
 
@@ -311,7 +311,7 @@ namespace TM.Card.Runtime
         /// </summary>
         private void payCost()
         {
-            TMPlayerManager.Instance.AddResource(_mainCost.Kind, -_mainCost.FinalCost);
+            TMPlayerManager.Instance.AddResource(MainCost.Kind, -MainCost.FinalCost);
             _subCosts.ForEach(subCost => TMPlayerManager.Instance.AddResource(subCost.Kind, -subCost.FinalCost));
         }
 

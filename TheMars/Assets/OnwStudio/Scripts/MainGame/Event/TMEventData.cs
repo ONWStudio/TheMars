@@ -17,6 +17,9 @@ namespace TM.Event
     {
         string ID { get; }
         Sprite EventImage { get; }
+        
+        bool HasTopEvent { get;}
+        bool HasBottomEvent { get;}
 
         LocalizedString DescriptionTextEvent { get; }
         LocalizedString TopButtonTextEvent { get; }
@@ -30,7 +33,7 @@ namespace TM.Event
     public enum TMEventChoice : byte
     {
         TOP = 0,
-        BOTTOM = 1
+        BOTTOM
     }
 
     public class TMEventData : ScriptableObject, ITMEventData
@@ -39,15 +42,22 @@ namespace TM.Event
         public ITMEventData BottomReadData => BottomEventData;
 
         [field: SerializeField, ReadOnly] public string ID { get; private set; } = Guid.NewGuid().ToString();
-        [field: SerializeField, DisplayAs("위쪽 선택지")] public TMEventData TopEventData { get; private set; }
-        [field: SerializeField, DisplayAs("아래쪽 선택지")] public TMEventData BottomEventData { get; private set; }
+        [field: SerializeField, DisplayAs("위쪽 선택지")] 
+        public TMEventData TopEventData { get; private set; }
+        [field: SerializeField, DisplayAs("아래쪽 선택지")]
+        public TMEventData BottomEventData { get; private set; }
 
-        [field: SerializeField, DisplayAs("이벤트 대표 이미지"), SpritePreview] public Sprite EventImage { get; private set; }
+        [field: SerializeField, DisplayAs("이벤트 대표 이미지"), SpritePreview] 
+        public Sprite EventImage { get; private set; }
 
-        [field: SerializeField, LocalizedString(true, entryKey: "Description"), DisplayAs("[로컬라이징] 이벤트 설명 텍스트")] public LocalizedString DescriptionTextEvent { get; private set; } = new();
-        [field: SerializeField, LocalizedString(true, entryKey: "TopButton"), DisplayAs("[로컬라이징] 위쪽 버튼 텍스트")] public LocalizedString TopButtonTextEvent { get; private set; } = new();
-        [field: SerializeField, LocalizedString(true, entryKey: "BottomButton"), DisplayAs("[로컬라이징] 아래쪽 버튼 텍스트")] public LocalizedString BottomButtonTextEvent { get; private set; } = new();
-        [field: SerializeField, LocalizedString(true, entryKey: "Title"), DisplayAs("[로컬라이징] 타이틀 텍스트")] public LocalizedString TitleTextEvent { get; private set; } = new();
+        [field: SerializeField, LocalizedString(true, entryKey: "Description"), DisplayAs("[로컬라이징] 이벤트 설명 텍스트")] 
+        public LocalizedString DescriptionTextEvent { get; private set; } = new();
+        [field: SerializeField, LocalizedString(true, entryKey: "TopButton"), DisplayAs("[로컬라이징] 위쪽 버튼 텍스트")] 
+        public LocalizedString TopButtonTextEvent { get; private set; } = new();
+        [field: SerializeField, LocalizedString(true, entryKey: "BottomButton"), DisplayAs("[로컬라이징] 아래쪽 버튼 텍스트")] 
+        public LocalizedString BottomButtonTextEvent { get; private set; } = new();
+        [field: SerializeField, LocalizedString(true, entryKey: "Title"), DisplayAs("[로컬라이징] 타이틀 텍스트")]
+        public LocalizedString TitleTextEvent { get; private set; } = new();
 
         [field: SerializeField] public bool HasTopEvent { get; private set; } = true;
         [field: SerializeField] public bool HasBottomEvent { get; private set; } = true;

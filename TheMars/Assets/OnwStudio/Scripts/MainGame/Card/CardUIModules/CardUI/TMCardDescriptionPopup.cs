@@ -1,14 +1,16 @@
+
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using Onw.Attribute;
-using TM.Card.Runtime;
 using UnityEngine.Localization;
-using Onw.UI;
-using Onw.Extensions;
 using UnityEngine.Serialization;
+using TMPro;
+using Onw.UI;
+using Onw.Attribute;
+using Onw.Extensions;
+using TM.Card.Runtime;
 
 namespace TM.UI
 {
@@ -20,13 +22,16 @@ namespace TM.UI
         [SerializeField, InitializeRequireComponent] private RectTransform _rectTransform;
         [SerializeField, InitializeRequireComponent] private Canvas _canvas;
 
+        [SerializeField, LocalizedString(tableName: "TM_UI", entryKey: "PaymentHeader")] private LocalizedString _paymentHeader;
+        [SerializeField, LocalizedString(tableName: "TM_UI", entryKey: "EffectHeader")] private LocalizedString _effectHeader;
+
         public TMCardModel _card = null;
 
         [FormerlySerializedAs("_multiflyOffset")]
         [SerializeField] private Vector2 _multiOffset = Vector2.zero;
+        
         private bool _canShow = true;
-
-        private bool? _isReload = false;
+        private bool _isReload;
 
         public void OnAddedCardEvent(TMCardModel card)
         {
@@ -41,22 +46,39 @@ namespace TM.UI
 
             if (_card == card)
             {
-                _card.CardData.Value.OnChangedName -= onChangedName;
-                _card.MainCost.LocalizedDescription.StringChangedName -=
-                _card.CardEffect.OnChangedDescription -= onChangedDescription;
+                removeListenerToLocalizedString(card);
                 _card = null;
+                _cardDescriptionText.text = string.Empty;
+                _cardNameText.text = string.Empty;
                 _canvas.enabled = false;
             }
+        }
+
+        private void addListenerToLocalizedString(TMCardModel card)
+        {
+            card.CardData.Value.OnChangedName += onChangedName;
+            card.MainCost.LocalizedDescription.StringChanged += onChangedLocalizedString;
+            card.SubCosts.ForEach(cost => cost.LocalizedDescription.StringChanged += onChangedLocalizedString);
+            card.CardEffect.LocalizedDescription.StringChanged += onChangedLocalizedString;
+        }
+
+        private void removeListenerToLocalizedString(TMCardModel card)
+        {
+            card.CardData.Value.OnChangedName -= onChangedName;
+            card.MainCost.LocalizedDescription.StringChanged -= onChangedLocalizedString;
+            card.SubCosts.ForEach(cost => cost.LocalizedDescription.StringChanged -= onChangedLocalizedString);
+            card.CardEffect.LocalizedDescription.StringChanged -= onChangedLocalizedString;
         }
 
         private void onPointerExitEvent(TMCardModel card)
         {
             if (!_card || _card != card) return;
 
-            _card.CardData.Value.OnChangedName -= onChangedName;
-            _card.CardEffect.OnChangedDescription -= onChangedDescription;
+            removeListenerToLocalizedString(_card);
             _card = null;
             _canvas.enabled = false;
+            _cardDescriptionText.text = string.Empty;
+            _cardNameText.text = string.Empty;
         }
 
         public void SetUI(TMCardModel card)
@@ -71,13 +93,11 @@ namespace TM.UI
 
             if (_card)
             {
-                _card.CardData.Value.OnChangedName -= onChangedName;
-                _card.CardEffect.OnChangedDescription -= onChangedDescription;
+                removeListenerToLocalizedString(_card);
             }
 
             _card = card;
-            _card.CardData.Value.OnChangedName += onChangedName;
-            _card.CardEffect.OnChangedDescription += onChangedDescription;
+            addListenerToLocalizedString(_card);
 
             _card.OnDragBeginCard -= onDragBeginCard;
             _card.OnDragBeginCard += onDragBeginCard;
@@ -102,15 +122,12 @@ namespace TM.UI
             _canvas.enabled = true;
         }
 
-        private void onChangedCostText(string costText)
+        private void onChangedLocalizedString(string _)
         {
-            reloadDescription();
-        }
+            if (_isReload) return;
 
-        private void reloadDescription()
-        {
-            if (_isReload is null || !_isReload.Value) return;
-
+            _isReload = true;
+            StartCoroutine(iEReloadDescription(_card));
         }
 
         // .. TODO : 카드 설명 출력
@@ -118,19 +135,19 @@ namespace TM.UI
         {
             yield return null;
 
-            if (card == _card)
-            {
-
-            }
+            StringBuilder descriptionBuilder = new();
+            descriptionBuilder.AppendLine(_paymentHeader.GetLocalizedString());
+            descriptionBuilder.AppendLine("");
+            descriptionBuilder.AppendLine(card.MainCost.LocalizedDescription.GetLocalizedString());
+            card.SubCosts.ForEach(cost => descriptionBuilder.AppendLine(cost.LocalizedDescription.GetLocalizedString()));
+            descriptionBuilder.AppendLine("");
+            descriptionBuilder.AppendLine(_effectHeader.GetLocalizedString());
+            descriptionBuilder.AppendLine("");
+            descriptionBuilder.AppendLine(card.CardEffect.LocalizedDescription.GetLocalizedString());
+            _cardDescriptionText.text = descriptionBuilder.ToString();
 
             _isReload = false;
         }
-
-        private void onChangedDescription(string description)
-        {
-            reloadDescription();
-        }
-
         private void onChangedName(string cardName)
         {
             _cardNameText.text = cardName;
@@ -143,9 +160,10 @@ namespace TM.UI
 
             _canShow = false;
             _canvas.enabled = false;
-            card.CardData.Value.OnChangedName -= onChangedName;
-            card.CardEffect.OnChangedDescription -= onChangedDescription;
+            removeListenerToLocalizedString(card);
             _card = null;
+            _cardDescriptionText.text = string.Empty;
+            _cardNameText.text = string.Empty;
         }
 
         private void onDragEndCard(TMCardModel card)

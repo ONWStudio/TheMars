@@ -649,18 +649,6 @@ MonoBehaviour:
         m_Calls: []
     <ValueProcessors>k__BackingField: []
     <_value>k__BackingField: 0
-  _mainCost:
-    <Cost>k__BackingField:
-      <CostKind>k__BackingField: 0
-      <Cost>k__BackingField: 0
-    <ReactAdditionalCost>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
-      _onChangedValue:
-        m_PersistentCalls:
-          m_Calls: []
-      <ValueProcessors>k__BackingField: []
-      <_value>k__BackingField: 0
   _subCosts: []
   _isInit: 0
   _onSafePointerDownEvent:
@@ -686,9 +674,15 @@ MonoBehaviour:
   <PointerExitTrigger>k__BackingField: {fileID: 6490310622561964982}
   <PointerDownTrigger>k__BackingField: {fileID: 2307808775309863638}
   <PointerUpTrigger>k__BackingField: {fileID: 6791109092436883567}
+  <CardEffect>k__BackingField:
+    rid: -2
+  <MainCost>k__BackingField:
+    rid: -2
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!114 &8444589798567620892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,9 +696,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cardImage: {fileID: 7261407148150218330}
-  _costText: {fileID: 4337772742161904016}
-  _costImage: {fileID: 614980430791424304}
+  _mainCostViewer: {fileID: 3628970997553551187}
   _mask: {fileID: 895744402935819385}
+  _subCostField: {fileID: 9072132925784667344}
+  _costIconReference:
+    m_AssetGUID: bbe3ee9a1bd884fcf845dda7e245be14
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!114 &2773294980090498079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,33 +1092,21 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe3ee9a1bd884fcf845dda7e245be14, type: 3}
---- !u!114 &614980430791424304 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1489893981132243999, guid: bbe3ee9a1bd884fcf845dda7e245be14,
-    type: 3}
-  m_PrefabInstance: {fileID: 2028295346626690351}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &863667632260669361 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1718597137348207262, guid: bbe3ee9a1bd884fcf845dda7e245be14,
     type: 3}
   m_PrefabInstance: {fileID: 2028295346626690351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4337772742161904016 stripped
+--- !u!114 &3628970997553551187 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2312368114784554175, guid: bbe3ee9a1bd884fcf845dda7e245be14,
+  m_CorrespondingSourceObject: {fileID: 3348780615777200764, guid: bbe3ee9a1bd884fcf845dda7e245be14,
     type: 3}
   m_PrefabInstance: {fileID: 2028295346626690351}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 42530bfece3690d41950fc964be275c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

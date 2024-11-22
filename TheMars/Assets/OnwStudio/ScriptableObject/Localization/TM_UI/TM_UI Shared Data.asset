@@ -16,11 +16,11 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 4b8007a92f242c6428c3e2564b65531f
   m_Entries:
   - m_Id: 3213692928
-    m_Key: EventPaymentHeader
+    m_Key: PaymentHeader
     m_Metadata:
       m_Items: []
   - m_Id: 64295342080
-    m_Key: EventEffectHeader
+    m_Key: EffectHeader
     m_Metadata:
       m_Items: []
   - m_Id: 249022020128768
