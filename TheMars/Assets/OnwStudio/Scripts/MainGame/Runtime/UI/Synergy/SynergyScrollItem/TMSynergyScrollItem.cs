@@ -2,13 +2,13 @@ using System.Text;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Localization;
 using TMPro;
-using Onw.Attribute;
 using Onw.Helper;
+using Onw.Attribute;
 using Onw.Manager.ObjectPool;
 using TM.Synergy;
 using TM.Synergy.Effect;
-using UnityEngine.Localization;
 // ReSharper disable PossibleNullReferenceException
 
 namespace TM.UI
@@ -23,7 +23,7 @@ namespace TM.UI
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _synergyNameText;
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _synergyLevelText;
 
-        private LocalizedString _synergyNameLocalizedName = null;
+        private LocalizedString _synergyNameLocalizedName;
         
         public void SetView(TMSynergy synergy)
         {

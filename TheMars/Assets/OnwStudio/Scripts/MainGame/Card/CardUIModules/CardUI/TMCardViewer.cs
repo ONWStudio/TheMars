@@ -43,7 +43,6 @@ namespace TM.Card.Runtime
 
             setCost(_mainCostViewer, cardModel.MainCost);
 
-            Debug.Log("??");
             cardModel.SubCosts.ForEach(cost => PrototypeManager.Instance.ClonePrototypeFromReferenceAsync<TMCardCostIcon>(_costIconReference, icon => onLoadedCostIcon(icon, cost)));
 
             void onLoadedCostIcon(TMCardCostIcon costViewer, ITMResourceCost cost)

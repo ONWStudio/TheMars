@@ -1,21 +1,20 @@
+using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
 using TMPro;
+using Onw.Coroutine;
 using Onw.Attribute;
 using Onw.Extensions;
 using Onw.UI.Components;
-using TM.Event;
-using Onw.Localization;
-using Onw.Coroutine;
-using TM.Event.Effect;
 using TM.Cost;
-using UnityEngine.Localization;
-using System;
+using TM.Event;
+using TM.Event.Effect;
 
 namespace TM.UI
 {
@@ -92,7 +91,6 @@ namespace TM.UI
 
         private void onClickTopButton()
         {
-            Debug.Log(!_eventRunner.CanFireTop);
             if (!_eventRunner.CanFireTop) return;
             onEffect(TMEventChoice.TOP);
         }
@@ -166,7 +164,7 @@ namespace TM.UI
                 {
                     if (isReload) return;
 
-                    isReload = true;
+                    isReload = true; // .. 1프레임 대기후 호출
                     this.DoCallWaitForOneFrame(() =>
                     {
                         isReload = false;

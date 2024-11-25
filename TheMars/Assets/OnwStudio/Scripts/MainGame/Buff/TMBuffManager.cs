@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Onw.Manager;
 using Onw.Attribute;
+using Onw.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
-using Onw.Extensions;
 
 namespace TM.Buff
 {
@@ -51,6 +51,11 @@ namespace TM.Buff
         
         protected override void Init()
         {
+            TMResourceRepeatAddBuffTrigger repeatAddBuff = new(1, 5, false, TMResourceKind.CLAY, 10);
+            TMResourceRepeatAddBuffTrigger repeatAddBuffTwo = new(1, 3, false, TMResourceKind.MARS_LITHIUM, 5);
+
+            repeatAddBuff.CreateBuff().ApplyBuff();
+            repeatAddBuffTwo.CreateBuff().ApplyBuff();
         }
 
         private void OnDestroy()

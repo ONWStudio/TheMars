@@ -7,6 +7,7 @@ using TM.Manager;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Events;
+using UnityEngine.Localization;
 
 namespace TM.Buff
 {
@@ -19,6 +20,8 @@ namespace TM.Buff
 
         [field: SerializeField, ReadOnly] public int DelayDayCount { get; set; }
         [field: SerializeField, ReadOnly] public bool IsTemporary { get; set; }
+
+        [field: SerializeField, ReadOnly] public LocalizedString DelayTimeDescription { get; private set; } = new("TM_UI", "Delay_Buff_Time_Description");
 
         protected virtual void OnApplyBuff() { }
         protected abstract void OnChangedDayByDelayCount(int day);
@@ -42,14 +45,16 @@ namespace TM.Buff
 
         protected sealed override void ApplyBuffProtected()
         {
-            int dayCount = 0;
-            _remainingDay.Value = DelayDayCount - dayCount;
+            int dayCount = -1;
+            _remainingDay.Value = DelayDayCount;
             TMSimulator.Instance.NowDay.AddListener(onChangedDay);
 
             OnApplyBuff();
 
             void onChangedDay(int day)
             {
+                Debug.Log("InvokeDay");
+                
                 dayCount++;
                 _remainingDay.Value = DelayDayCount - dayCount;
 
@@ -59,7 +64,21 @@ namespace TM.Buff
                     TMSimulator.Instance.NowDay.RemoveListener(onChangedDay);
                     Dispose();
                 }
+
+                setArguments();
             }
+        }
+
+        private void setArguments()
+        {
+            DelayTimeDescription.Arguments = new object[]
+            {
+                new
+                {
+                    RemainingDay = _remainingDay.Value,
+                    IsTemporary
+                }
+            };
         }
     }
 }
