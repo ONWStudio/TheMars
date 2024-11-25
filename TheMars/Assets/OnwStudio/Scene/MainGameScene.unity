@@ -5270,6 +5270,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buffScrollView: {fileID: 648399617}
+  _buffDescriptor: {fileID: 0}
+  _onAddedBuffIcon:
+    m_PersistentCalls:
+      m_Calls: []
+  _onRemovedBuffIcon:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &531277824
 GameObject:
   m_ObjectHideFlags: 0
@@ -7556,7 +7563,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.3
+  m_fontSize: 31.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -14137,8 +14144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e72a3900c4c4906a6209510ebcf864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buffs:
-  - rid: -2
+  _buffs: []
   _onAddedBuff:
     m_PersistentCalls:
       m_Calls: []
@@ -14147,9 +14153,7 @@ MonoBehaviour:
       m_Calls: []
   references:
     version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    RefIds: []
 --- !u!4 &1111224901
 Transform:
   m_ObjectHideFlags: 0
@@ -19099,6 +19103,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buffScrollView: {fileID: 648399617}
+  _buffDescriptor: {fileID: 0}
+  _onAddedBuffIcon:
+    m_PersistentCalls:
+      m_Calls: []
+  _onRemovedBuffIcon:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1671599900
 GameObject:
   m_ObjectHideFlags: 0
