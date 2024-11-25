@@ -25,6 +25,7 @@ namespace TM.Synergy
 
         protected override void Init() { }
 
+        // TODO : 시너지 레벨 별로 효과를 지정할 수 있게 변경
         public void OnAddedBuilding(TMBuilding building)
         {
             foreach (TMSynergyData synergyData in building.BuildingData.Synergies.Where(synergy => synergy is not null))

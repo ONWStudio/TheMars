@@ -49,12 +49,12 @@ namespace TM.UI
         private string _description = string.Empty;
         private string _topEffectDescription = string.Empty;
         private string _bottomEffectDescription = string.Empty;
-        private TMEventRunner _eventRunner = null;
+        private ITMEventRunner _eventRunner = null;
 
-        [SerializeField, LocalizedString(tableName: "TM_UI", entryKey: "EventPaymentHeader")] private LocalizedString _paymentDescriptionHeader;
-        [SerializeField, LocalizedString(tableName: "TM_UI", entryKey: "EventEffectHeader")] private LocalizedString _eventEffectHeader;
+        [SerializeField, LocalizedString(tableName: "TM_UI", entryKey: "PaymentHeader")] private LocalizedString _paymentDescriptionHeader;
+        [SerializeField, LocalizedString(tableName: "TM_UI", entryKey: "EffectHeader")] private LocalizedString _eventEffectHeader;
 
-        private void Start()
+        private void Awake()
         {
             _topButton.onClick.AddListener(onClickTopButton);
             _bottomButton.onClick.AddListener(onClickBottomButton);
@@ -123,27 +123,28 @@ namespace TM.UI
             _titleTextEvent.StringReference = null;
         }
 
-        public void OnTriggerMainEvent(TMEventRunner mainEventRunner)
+        // TODO : 이벤트 여러개 중첩되서 발동될경우 UI 활성화 되지 않는 현상
+        public void OnTriggerMainEvent(ITMEventRunner mainEventRunner)
         {
             this.SetActiveGameObject(true);
 
             _eventRunner = mainEventRunner;
-            _eventImage.sprite = _eventRunner.EventData.EventImage;
-            _titleTextEvent.StringReference = _eventRunner.EventData.TitleTextEvent;
-            _descriptionTextEvent.StringReference = _eventRunner.EventData.DescriptionTextEvent;
+            _eventImage.sprite = _eventRunner.EventReadData.EventImage;
+            _titleTextEvent.StringReference = _eventRunner.EventReadData.TitleTextEvent;
+            _descriptionTextEvent.StringReference = _eventRunner.EventReadData.DescriptionTextEvent;
 
-            _topButton.SetActiveGameObject(_eventRunner.EventData.HasTopEvent);
-            if (_eventRunner.EventData.HasTopEvent)
+            _topButton.SetActiveGameObject(_eventRunner.EventReadData.HasTopEvent);
+            if (_eventRunner.EventReadData.HasTopEvent)
             {
-                _topButtonTextEvent.StringReference = _eventRunner.EventData.TopButtonTextEvent;
-                buildDescription(_eventRunner.TopEffects, _eventRunner.TopCosts, buildedText => _topEffectDescription = buildedText);
+                _topButtonTextEvent.StringReference = _eventRunner.EventReadData.TopButtonTextEvent;
+                buildDescription(_eventRunner.TopEffects, _eventRunner.TopCosts, buildText => _topEffectDescription = buildText);
             }
             
-            _bottomButton.SetActiveGameObject(_eventRunner.EventData.HasBottomEvent);
-            if (_eventRunner.EventData.HasBottomEvent)
+            _bottomButton.SetActiveGameObject(_eventRunner.EventReadData.HasBottomEvent);
+            if (_eventRunner.EventReadData.HasBottomEvent)
             {
-                _bottomButtonTextEvent.StringReference = _eventRunner.EventData.BottomButtonTextEvent;
-                buildDescription(_eventRunner.BottomEffects, _eventRunner.BottomCosts, buildedText => _bottomEffectDescription = buildedText);
+                _bottomButtonTextEvent.StringReference = _eventRunner.EventReadData.BottomButtonTextEvent;
+                buildDescription(_eventRunner.BottomEffects, _eventRunner.BottomCosts, buildText => _bottomEffectDescription = buildText);
             }
 
             void buildDescription(IReadOnlyList<ITMEventEffect> effects, IReadOnlyList<ITMCost> usages, Action<string> stringAction)

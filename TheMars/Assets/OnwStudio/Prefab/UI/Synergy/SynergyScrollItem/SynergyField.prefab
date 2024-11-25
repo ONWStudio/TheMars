@@ -86,7 +86,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2627764809726853568}
   - component: {fileID: 2489181360879812345}
-  - component: {fileID: 5672407445342818618}
   m_Layer: 6
   m_Name: SynergyField
   m_TagString: Untagged
@@ -122,22 +121,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 571554865739355549}
   m_CullTransparentMesh: 1
---- !u!114 &5672407445342818618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571554865739355549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fbc28cf67d004cd39605fe0674a0e1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _synergyIcon: {fileID: 3234567119991094018}
-  _buildingCountText: {fileID: 9097412491923529414}
-  _synergyNameText: {fileID: 2373958096308838547}
-  _synergyLevelText: {fileID: 9097412491923529414}
 --- !u!1 &1806255737359365646
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,10 +153,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3834718404845343922}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.20600002, y: 0.13139696}
+  m_AnchorMin: {x: 0.132, y: 0.13139696}
   m_AnchorMax: {x: 0.32100475, y: 0.8473079}
-  m_AnchoredPosition: {x: -0.21820068, y: 0}
-  m_SizeDelta: {x: 0.4362998, y: 0}
+  m_AnchoredPosition: {x: 0.1700058, y: 0}
+  m_SizeDelta: {x: -0.32999992, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5430169887134241172
 CanvasRenderer:
@@ -651,6 +634,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8090952879628178792}
+  - component: {fileID: 5062698900846196527}
   m_Layer: 6
   m_Name: SynergyField
   m_TagString: Untagged
@@ -678,6 +662,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 195.8, y: 64}
   m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &5062698900846196527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6759852112666841353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fbc28cf67d004cd39605fe0674a0e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _synergyIcon: {fileID: 3234567119991094018}
+  _buildingCountText: {fileID: 9097412491923529414}
+  _synergyNameText: {fileID: 2373958096308838547}
+  _synergyLevelText: {fileID: 9168029313497274893}
 --- !u!1 &7168040184681747083
 GameObject:
   m_ObjectHideFlags: 0

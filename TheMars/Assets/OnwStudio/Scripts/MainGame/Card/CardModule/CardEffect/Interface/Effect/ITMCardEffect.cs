@@ -6,7 +6,7 @@ namespace TM.Card.Effect
 {
     public interface ITMCardEffect
     {
-        event LocalizedString.ChangeHandler OnChangedDescription;
+        public LocalizedString LocalizedDescription { get; }
         bool CanUseEffect { get;}
         /// <summary>
         /// .. 카드 사용시

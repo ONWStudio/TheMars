@@ -32,18 +32,17 @@ namespace TM.UI
             _synergyNameLocalizedName = synergy.LocalizedSynergyName;
             _synergyNameLocalizedName.StringChanged += onChangedSynergyName;
 
-            TMSynergyEffect selectLastEffect = synergy
+            TMSynergyEffect[] sortedEffects = synergy
                 .SynergyEffects
-                .Where(synergyEffect => synergyEffect.TargetBuildingCount <= synergy.BuildingCount)
-                .OrderBy(targetCount => targetCount) // .. GC 발생
-                .LastOrDefault();
+                .OrderBy(effect => effect.TargetBuildingCount)
+                .ToArray();
 
             StringBuilder synergyLevelBuilder = new();
             
-            for (int i = 0; i < synergy.SynergyEffects.Count; i++)
+            for (int i = 0; i < sortedEffects.Length; i++)
             {
-                TMSynergyEffect effect = synergy.SynergyEffects[i];
-                bool isEnabled = effect == selectLastEffect;
+                TMSynergyEffect effect = sortedEffects[i];
+                bool isEnabled = effect.TargetBuildingCount <= synergy.BuildingCount;
                 if (isEnabled)
                 {
                     synergyLevelBuilder.Append(effect.TargetBuildingCount.ToString());
@@ -55,12 +54,15 @@ namespace TM.UI
                 }
                 else
                 {
-                    synergyLevelBuilder.Append(RichTextFormatter.Colorize(" > ", Color.gray));
+                    synergyLevelBuilder.Append(RichTextFormatter.Colorize(effect.TargetBuildingCount.ToString(), Color.gray));
+
                     if (i < synergy.SynergyEffects.Count - 1)
                     {
-                        synergyLevelBuilder.Append(RichTextFormatter.Colorize(effect.TargetBuildingCount.ToString(), Color.gray));
+                        synergyLevelBuilder.Append(RichTextFormatter.Colorize(" > ", Color.gray));
                     }
                 }
+
+                _synergyLevelText.text = synergyLevelBuilder.ToString();
             }
         }
 

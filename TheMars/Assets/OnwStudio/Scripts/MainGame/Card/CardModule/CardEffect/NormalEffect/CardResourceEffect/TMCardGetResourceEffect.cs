@@ -17,19 +17,12 @@ namespace TM.Card.Effect
     {
         public IReadOnlyDictionary<TMResourceKind, TMResourceDataForRuntime> Resources => _resources;
 
+        [field: SerializeField, ReadOnly]
+        public LocalizedString LocalizedDescription { get; private set; } = new("TM_Card_Effect", "Get_Resource_Effect");
+
         public bool CanUseEffect => true;
 
         private Dictionary<TMResourceKind, TMResourceDataForRuntime> _resources = new();
-
-        public event LocalizedString.ChangeHandler OnChangedDescription
-        {
-            add => _localizedDescription.StringChanged += value;
-            remove => _localizedDescription.StringChanged -= value;
-        }
-
-        [SerializeField, ReadOnly]
-        private LocalizedString _localizedDescription = new("TM_Card_Effect", "Get_Resource_Effect");
-
 
         public void AddResource(TMResourceKind resourceKind, int additionalAmount)
         {
@@ -51,7 +44,7 @@ namespace TM.Card.Effect
                     resource => (TMResourceDataForRuntime)resource);
 
 
-            _localizedDescription.Arguments = new object[] 
+            LocalizedDescription.Arguments = new object[] 
             { 
                 _resources.Values.Select(data => new
                 {

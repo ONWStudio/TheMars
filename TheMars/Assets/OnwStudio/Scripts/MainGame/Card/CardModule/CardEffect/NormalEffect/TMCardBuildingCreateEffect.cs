@@ -13,13 +13,14 @@ using TM.Card.Runtime;
 using TM.Card.Effect.Creator;
 using Object = UnityEngine.Object;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace TM.Card.Effect
 {
     /// <summary>
     /// .. 건물 설치 효과입니다 건물을 배치하고 배치시 코스트 사용, 조건 검사, 재배치시의 관한 로직, 회수등의 관한 로직을 해당 효과가 모두 담당합니다
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public sealed class TMCardBuildingCreateEffect : ITMNormalEffect, ITMCardInitializeEffect<TMCardBuildingCreateEffectCreator>, IDisposable
     {
         public readonly struct PrevTileData
@@ -34,27 +35,21 @@ namespace TM.Card.Effect
             }
         }
 
-        public event LocalizedString.ChangeHandler OnChangedDescription
-        {
-            add => _localizedDescription.StringChanged += value;
-            remove => _localizedDescription.StringChanged -= value;
-        }
-
         private PrevTileData? _prevTileData = null;
         private IHexGrid _currentHex = null;
         private TMCardModel _cardModel = null;
         private Camera _mainCamera = null;
         private float _buildingHalfHeight = 0;
+        private bool _isFired = false;
 
         [SerializeField, ReadOnly] private TMBuilding _building = null;
-        [field: SerializeField, ReadOnly] private LocalizedString _localizedDescription = new("TM_Card_Effect", "Building_Create_Effect");
+
+        [field: SerializeField, ReadOnly] public LocalizedString LocalizedDescription { get; private set; } = new("TM_Card_Effect", "Building_Create_Effect");
+        [field: SerializeField, ReadOnly] public TMBuildingData BuildingData { get; private set; }
 
         public TMBuilding Building => _building;
 
-        [field: SerializeField, ReadOnly] public TMBuildingData BuildingData { get; private set; } = null;
-
         public bool CanUseEffect => _currentHex is not null && _prevTileData?.Prev != _currentHex;
-        private bool _isFired = false;
 
 
         public void Initialize(TMCardBuildingCreateEffectCreator effectCreator)
@@ -95,7 +90,7 @@ namespace TM.Card.Effect
                 _buildingHalfHeight = _building.transform.position.y - VerticesTo.GetMinPoint(_building.gameObject).y;
                 _building.SetActiveGameObject(false);           // .. 인스턴스화 된 건물 비활성화
 
-                _localizedDescription.Arguments = new object[]
+                LocalizedDescription.Arguments = new object[]
                 {
                     new 
                     {

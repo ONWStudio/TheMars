@@ -14,7 +14,7 @@ namespace TM.Card.Runtime
         [SerializeField, SelectableSerializeField] private Image _icon;
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _costText;
 
-        AsyncOperationHandle<Sprite> _costIconHandle;
+        private AsyncOperationHandle<Sprite> _costIconHandle;
 
         public void SetIcon(TMResourceKind kind)
         {
