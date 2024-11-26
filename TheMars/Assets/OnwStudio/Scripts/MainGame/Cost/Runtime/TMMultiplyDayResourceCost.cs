@@ -20,7 +20,7 @@ namespace TM.Cost
 
         public bool CanProcessPayment => FinalCost <= TMPlayerManager.Instance.MarsLithium.Value;
 
-        [field: SerializeField, ReadOnly] public LocalizedString LocalizedDescription { get; private set; } = new("TM_Cost", "Resource_Cost");
+        [field: SerializeField, ReadOnly] public LocalizedString CostDescription { get; private set; } = new("TM_Cost", "Resource_Cost");
 
         [field: SerializeField, ReadOnly] public TMResourceKind Kind { get; private set; }
         [field: SerializeField] public int Cost { get; private set; }
@@ -39,7 +39,7 @@ namespace TM.Cost
             {
                 _nowDay = day;
 
-                LocalizedDescription.Arguments = new object[]
+                CostDescription.Arguments = new object[]
                 {
                     new
                     {

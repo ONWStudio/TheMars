@@ -11,6 +11,7 @@ using UnityEngine.Serialization;
 using TM.Manager;
 using TM.Card.Runtime;
 using TM.Event.Effect;
+using JetBrains.Annotations;
 
 namespace TM.Event
 {
@@ -83,6 +84,11 @@ namespace TM.Event
             _marsLithiumEventRunner = new(TMEventDataManager.Instance.MarsLithiumEvent);
             _positiveEventProbability.DefaultProbability.Value = 20;
             _negativeEventProbability.DefaultProbability.Value = 20;
+
+            _eventQueue.Enqueue(_mainEventRunner);
+            _eventQueue.Enqueue(_marsLithiumEventRunner);
+
+            fireEvents();
         }
 
         private void onPostCreateCard(TMCardModel card)
@@ -227,6 +233,7 @@ namespace TM.Event
 
             void onEndEvent(TMEventChoice eventChoice)
             {
+                Debug.Log("?");
                 selectEvent.OnFireEvent -= onEndEvent;
                 TimeManager.IsPause = keepPause;
                 fireEvents();

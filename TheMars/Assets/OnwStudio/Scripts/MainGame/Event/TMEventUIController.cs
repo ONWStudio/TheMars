@@ -15,11 +15,42 @@ using Onw.UI.Components;
 using TM.Cost;
 using TM.Event;
 using TM.Event.Effect;
+using System.Text;
 
 namespace TM.UI
 {
     public sealed class TMEventUIController : MonoBehaviour
     {
+        public struct TMDescriptionCallbackPair : IDisposable
+        {
+            public LocalizedString LocalizedDescription { get; private set; }
+            public LocalizedString.ChangeHandler ChangeHandler { get; private set; }
+
+            public void Dispose()
+            {
+                if (ChangeHandler is not null) 
+                {
+                    LocalizedDescription.StringChanged -= ChangeHandler;
+                }
+
+                LocalizedDescription = null;
+            }
+
+            public TMDescriptionCallbackPair(LocalizedString localizedDescription, LocalizedString.ChangeHandler changeHandler)
+            {
+                LocalizedDescription = localizedDescription;
+                ChangeHandler = changeHandler;
+
+                if (ChangeHandler is not null)
+                {
+                    LocalizedDescription.StringChanged += ChangeHandler;
+                }
+            }
+        }
+
+        [Header("Canvas")]
+        [SerializeField, InitializeRequireComponent] private Canvas _canvas;
+
         [Header("Button")]
         [SerializeField, SelectableSerializeField] private Button _topButton;
         [SerializeField, SelectableSerializeField] private Button _bottomButton;
@@ -49,6 +80,8 @@ namespace TM.UI
         private string _topEffectDescription = string.Empty;
         private string _bottomEffectDescription = string.Empty;
         private ITMEventRunner _eventRunner = null;
+        private readonly List<TMDescriptionCallbackPair> _topEffectPairs = new();
+        private readonly List<TMDescriptionCallbackPair> _bottomEffectPairs = new();
 
         [SerializeField, LocalizedString(tableName: "TM_UI", entryKey: "PaymentHeader")] private LocalizedString _paymentDescriptionHeader;
         [SerializeField, LocalizedString(tableName: "TM_UI", entryKey: "EffectHeader")] private LocalizedString _eventEffectHeader;
@@ -67,6 +100,11 @@ namespace TM.UI
             _topButtonTextEvent.OnUpdateString.AddListener(topText => _topButtonText.text = topText);
             _bottomButtonTextEvent.OnUpdateString.AddListener(bottomText => _bottomButtonText.text = bottomText);
             _titleTextEvent.OnUpdateString.AddListener(titleText => _titleText.text = titleText);
+        }
+
+        public void SetActiveEventUI(bool isActive)
+        {
+            _canvas.enabled = isActive;
         }
 
         private void onPointerEnterByTop(PointerEventData eventData)
@@ -101,10 +139,15 @@ namespace TM.UI
             onEffect(TMEventChoice.BOTTOM);
         }
 
+        // TODO : 이벤트 호출 순서가 맞지않음
         private void onEffect(TMEventChoice choice)
         {
+            SetActiveEventUI(false);
+            _topEffectPairs.ForEach(pair => pair.Dispose());
+            _topEffectPairs.Clear();
+            _bottomEffectPairs.ForEach(pair => pair.Dispose());
+            _bottomEffectPairs.Clear();
             _eventRunner.InvokeEvent(choice);
-            this.SetActiveGameObject(false);
             resetField();
         }
 
@@ -124,7 +167,7 @@ namespace TM.UI
         // TODO : 이벤트 여러개 중첩되서 발동될경우 UI 활성화 되지 않는 현상
         public void OnTriggerMainEvent(ITMEventRunner mainEventRunner)
         {
-            this.SetActiveGameObject(true);
+            SetActiveEventUI(true);
 
             _eventRunner = mainEventRunner;
             _eventImage.sprite = _eventRunner.EventReadData.EventImage;
@@ -135,32 +178,34 @@ namespace TM.UI
             if (_eventRunner.EventReadData.HasTopEvent)
             {
                 _topButtonTextEvent.StringReference = _eventRunner.EventReadData.TopButtonTextEvent;
-                buildDescription(_eventRunner.TopEffects, _eventRunner.TopCosts, buildText => _topEffectDescription = buildText);
+                _topEffectPairs.AddRange(buildDescription(_eventRunner.TopEffects, _eventRunner.TopCosts, buildText => _topEffectDescription = buildText));
             }
             
             _bottomButton.SetActiveGameObject(_eventRunner.EventReadData.HasBottomEvent);
             if (_eventRunner.EventReadData.HasBottomEvent)
             {
                 _bottomButtonTextEvent.StringReference = _eventRunner.EventReadData.BottomButtonTextEvent;
-                buildDescription(_eventRunner.BottomEffects, _eventRunner.BottomCosts, buildText => _bottomEffectDescription = buildText);
+                _bottomEffectPairs.AddRange(buildDescription(_eventRunner.BottomEffects, _eventRunner.BottomCosts, buildText => _bottomEffectDescription = buildText));
             }
 
-            void buildDescription(IReadOnlyList<ITMEventEffect> effects, IReadOnlyList<ITMCost> usages, Action<string> stringAction)
+            TMDescriptionCallbackPair[] buildDescription(IReadOnlyList<ITMEventEffect> effects, IReadOnlyList<ITMCost> costs, Action<string> onBuildedDescription)
             {
-                bool isReload = false;
-
                 ITMEventEffect[] effectArray = effects
                     .Where(effect => effect.EffectDescription is not null)
                     .ToArray();
 
-                ITMCost[] usageArray = usages
-                    .Where(usage => usage.LocalizedDescription is not null)
+                ITMCost[] costArray = costs
+                    .Where(cost => cost.CostDescription is not null)
                     .ToArray();
 
-                effectArray.ForEach(effect => effect.EffectDescription.StringChanged += onUpdateString);
-                usageArray.ForEach(usage => usage.LocalizedDescription.StringChanged += onUpdateString);
+                bool isReload = false;
 
-                void onUpdateString(string text)
+                return effectArray
+                    .Select(effect => new TMDescriptionCallbackPair(effect.EffectDescription, _ => onBuildDescription(effectArray, costArray, onBuildedDescription)))
+                    .Concat(costArray.Select(cost => new TMDescriptionCallbackPair(cost.CostDescription, _ => onBuildDescription(effectArray, costArray, onBuildedDescription))))
+                    .ToArray();
+
+                void onBuildDescription(ITMEventEffect[] effects, ITMCost[] costs, Action<string> onBuildedDescription)
                 {
                     if (isReload) return;
 
@@ -168,15 +213,28 @@ namespace TM.UI
                     this.DoCallWaitForOneFrame(() =>
                     {
                         isReload = false;
-                        stringAction?.Invoke((usages.Count > 0 ?
-                                _paymentDescriptionHeader.GetLocalizedString() + 
-                                "\n \n" +
-                                string.Join("\n", usageArray.Select(usage => usage.LocalizedDescription.GetLocalizedString()))
-                                 + "\n \n" : "") +
-                           (effects.Count > 0 ? 
-                                _eventEffectHeader.GetLocalizedString() + 
-                                "\n \n" +
-                                 string.Join("\n", effectArray.Select(effect => effect.EffectDescription.GetLocalizedString())) : ""));
+
+                        if (onBuildedDescription is not null)
+                        {
+                            StringBuilder descriptionBuilder = new();
+
+                            if (costs.Length > 0)
+                            {
+                                descriptionBuilder.Append(_paymentDescriptionHeader.GetLocalizedString());
+                                descriptionBuilder.Append("\n \n");
+                                descriptionBuilder.Append(string.Join("\n", costs.Select(cost => cost.CostDescription.GetLocalizedString())));
+                                descriptionBuilder.Append("\n \n");
+                            }
+
+                            if (effects.Length > 0)
+                            {
+                                descriptionBuilder.Append(_eventEffectHeader.GetLocalizedString());
+                                descriptionBuilder.Append("\n \n");
+                                descriptionBuilder.Append(string.Join("\n", effects.Select(effect => effect.EffectDescription.GetLocalizedString())));
+                            }
+
+                            onBuildedDescription.Invoke(descriptionBuilder.ToString());
+                        }
                     });
                 }
             }

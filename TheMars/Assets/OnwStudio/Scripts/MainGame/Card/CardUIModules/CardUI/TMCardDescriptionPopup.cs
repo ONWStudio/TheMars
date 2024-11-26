@@ -57,16 +57,16 @@ namespace TM.UI
         private void addListenerToLocalizedString(TMCardModel card)
         {
             card.CardData.Value.OnChangedName += onChangedName;
-            card.MainCost.LocalizedDescription.StringChanged += onChangedLocalizedString;
-            card.SubCosts.ForEach(cost => cost.LocalizedDescription.StringChanged += onChangedLocalizedString);
+            card.MainCost.CostDescription.StringChanged += onChangedLocalizedString;
+            card.SubCosts.ForEach(cost => cost.CostDescription.StringChanged += onChangedLocalizedString);
             card.CardEffect.LocalizedDescription.StringChanged += onChangedLocalizedString;
         }
 
         private void removeListenerToLocalizedString(TMCardModel card)
         {
             card.CardData.Value.OnChangedName -= onChangedName;
-            card.MainCost.LocalizedDescription.StringChanged -= onChangedLocalizedString;
-            card.SubCosts.ForEach(cost => cost.LocalizedDescription.StringChanged -= onChangedLocalizedString);
+            card.MainCost.CostDescription.StringChanged -= onChangedLocalizedString;
+            card.SubCosts.ForEach(cost => cost.CostDescription.StringChanged -= onChangedLocalizedString);
             card.CardEffect.LocalizedDescription.StringChanged -= onChangedLocalizedString;
         }
 
@@ -138,8 +138,8 @@ namespace TM.UI
             StringBuilder descriptionBuilder = new();
             descriptionBuilder.AppendLine(_paymentHeader.GetLocalizedString());
             descriptionBuilder.AppendLine("");
-            descriptionBuilder.AppendLine(card.MainCost.LocalizedDescription.GetLocalizedString());
-            card.SubCosts.ForEach(cost => descriptionBuilder.AppendLine(cost.LocalizedDescription.GetLocalizedString()));
+            descriptionBuilder.AppendLine(card.MainCost.CostDescription.GetLocalizedString());
+            card.SubCosts.ForEach(cost => descriptionBuilder.AppendLine(cost.CostDescription.GetLocalizedString()));
             descriptionBuilder.AppendLine("");
             descriptionBuilder.AppendLine(_effectHeader.GetLocalizedString());
             descriptionBuilder.AppendLine("");

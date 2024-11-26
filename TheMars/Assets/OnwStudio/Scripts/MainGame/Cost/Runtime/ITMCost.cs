@@ -17,7 +17,7 @@ namespace TM.Cost
     public interface ITMCost
     {
         bool CanProcessPayment { get; }
-        LocalizedString LocalizedDescription { get; } 
+        LocalizedString CostDescription { get; } 
         void ApplyCosts();
     }
 }
