@@ -58,21 +58,16 @@ MonoBehaviour:
   - rid: 4853453529831440408
   - rid: 4853453529831440410
   _bottomEffectCreators:
-  - rid: 4853453529831440412
-  - rid: 4853453529831440414
-  - rid: 4853453529831440417
+  - rid: 7665316277361049606
+  - rid: 7665316277361049608
+  - rid: 7665316277361049613
   _topCostCreators:
-  - rid: 3610285400346591270
+  - rid: 7665316277361049602
   - rid: 3610285400346591271
   _bottomCostCreators: []
   references:
     version: 2
     RefIds:
-    - rid: 3610285400346591270
-      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
-      data:
-        <Kind>k__BackingField: 1
-        <Cost>k__BackingField: 20
     - rid: 3610285400346591271
       type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
       data:
@@ -105,39 +100,22 @@ MonoBehaviour:
         <IsTemporary>k__BackingField: 1
         <ResourceKind>k__BackingField: 7
         <Resource>k__BackingField: 10
-    - rid: 4853453529831440412
+    - rid: 7665316277361049602
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
+      data:
+        <Kind>k__BackingField: 1
+        <Cost>k__BackingField: 20
+    - rid: 7665316277361049606
       type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
       data:
         <BuffTrigger>k__BackingField:
-          rid: 4853453529831440413
-    - rid: 4853453529831440413
-      type: {class: TMResourceRepeatRangeAddBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
-      data:
-        <RepeatDay>k__BackingField: 1
-        <LimitDay>k__BackingField: 7
-        <IsTemporary>k__BackingField: 0
-        <ResourceKind>k__BackingField: 2
-        <Min>k__BackingField: -4
-        <Max>k__BackingField: -2
-    - rid: 4853453529831440414
+          rid: 7665316277361049610
+    - rid: 7665316277361049608
       type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
       data:
         <BuffTrigger>k__BackingField:
-          rid: 4853453529831440416
-    - rid: 4853453529831440416
-      type: {class: TMResourceRepeatAddBuffTrigger, ns: TM.Buff, asm: AssemblyTheMars}
-      data:
-        <RepeatDay>k__BackingField: 1
-        <LimitDay>k__BackingField: 7
-        <IsTemporary>k__BackingField: 0
-        <ResourceKind>k__BackingField: 7
-        <Resource>k__BackingField: -5
-    - rid: 4853453529831440417
-      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
-      data:
-        <BuffTrigger>k__BackingField:
-          rid: 4853453529831440418
-    - rid: 4853453529831440418
+          rid: 7665316277361049609
+    - rid: 7665316277361049609
       type: {class: TMResourceRepeatAddBuffTrigger, ns: TM.Buff, asm: AssemblyTheMars}
       data:
         <RepeatDay>k__BackingField: 1
@@ -145,3 +123,25 @@ MonoBehaviour:
         <IsTemporary>k__BackingField: 0
         <ResourceKind>k__BackingField: 1
         <Resource>k__BackingField: -40
+    - rid: 7665316277361049610
+      type: {class: TMResourceRepeatAddBuffTrigger, ns: TM.Buff, asm: AssemblyTheMars}
+      data:
+        <RepeatDay>k__BackingField: 1
+        <LimitDay>k__BackingField: 7
+        <IsTemporary>k__BackingField: 0
+        <ResourceKind>k__BackingField: 7
+        <Resource>k__BackingField: -5
+    - rid: 7665316277361049613
+      type: {class: TMEventBuffEffectCreator, ns: TM.Event.Effect.Creator, asm: AssemblyTheMars}
+      data:
+        <BuffTrigger>k__BackingField:
+          rid: 7665316277361049614
+    - rid: 7665316277361049614
+      type: {class: TMResourceRepeatRangeAddBuffTrigger, ns: TM.Buff.Trigger, asm: AssemblyTheMars}
+      data:
+        <RepeatDay>k__BackingField: 1
+        <LimitDay>k__BackingField: 7
+        <IsTemporary>k__BackingField: 0
+        <ResourceKind>k__BackingField: 2
+        <Min>k__BackingField: -2
+        <Max>k__BackingField: -4
