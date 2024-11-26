@@ -6,6 +6,6 @@ namespace Onw.Interface
 {
     public interface IDescriptable
     {
-        string Description { get; }
+        string LocalizedDescription { get; }
     }
 }

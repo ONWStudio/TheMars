@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: TM_Synergy_Effect
   m_TableCollectionNameGuidString: bfeeddc8584e91541b64eacd719a8f20
-  m_Entries: []
+  m_Entries:
+  - m_Id: 3714646216269824
+    m_Key: Get_Rand_Construction_Resource_Effect
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

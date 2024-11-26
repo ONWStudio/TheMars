@@ -341,8 +341,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 2020625308039163711}
-  _timeText: {fileID: 0}
-  _descriptionText: {fileID: 0}
+  _timeText: {fileID: 1040423720775051275}
+  _descriptionText: {fileID: 7627862732227370015}
 --- !u!223 &2020625308039163711
 Canvas:
   m_ObjectHideFlags: 0
@@ -350,7 +350,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5396760212867815107}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
