@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 96464422354338140}
   - component: {fileID: 3490343676516881566}
   m_Layer: 6
-  m_Name: Good_Event_Effects_BG
+  m_Name: Buff_Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

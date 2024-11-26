@@ -1,23 +1,60 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using Onw.Attribute;
 using Onw.Extensions;
 using Onw.Manager.ObjectPool;
-using System.Collections;
-using System.Collections.Generic;
 using TM.Buff;
-using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.UI;
 
 namespace TM.UI
 {
-    public class TMBuffIcon : MonoBehaviour, IReturnHandler
+    public class TMBuffIcon : MonoBehaviour, IReturnHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        public event UnityAction OnPointerEnterEvent
+        {
+            add => _onPointerEnterEvent.AddListener(value);
+            remove => _onPointerEnterEvent.RemoveListener(value);
+        }
+        
+        public event UnityAction OnPointerExitEvent
+        {
+            add => _onPointerExitEvent.AddListener(value);
+            remove => _onPointerExitEvent.RemoveListener(value);
+        }
+        
         [SerializeField, InitializeRequireComponent] private Image _iconBackground;
         [SerializeField, SelectableSerializeField] private Image _iconFrame;
         [SerializeField, SelectableSerializeField] private Image _icon;
 
+        [SerializeField] private UnityEvent _onPointerEnterEvent = new();
+        [SerializeField] private UnityEvent _onPointerExitEvent  = new();
+
         private AsyncOperationHandle<Sprite> _iconHandle;
+
+        private void OnDestroy()
+        {
+            resetIcon();
+        }
+        
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            _onPointerEnterEvent.Invoke();
+        }
+        
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            _onPointerExitEvent.Invoke();
+        }
+        
+        public void OnReturnToPool()
+        {
+            resetIcon();
+        }
 
         public void SetUI(TMBuffBase buff)
         {
@@ -33,19 +70,15 @@ namespace TM.UI
             _icon.sprite = _iconHandle.Result;
         }
 
-        private void OnDestroy()
+        private void resetIcon()
         {
-            if (!_iconHandle.IsValid()) return;
-
-            Addressables.Release(_iconHandle);
-        }
-
-        public void OnReturnToPool()
-        {
-            if (!_iconHandle.IsValid()) return;
-
-            Addressables.Release(_iconHandle);
-            _icon.sprite = null;
+            _onPointerEnterEvent.RemoveAllListeners();
+            _onPointerExitEvent.RemoveAllListeners();
+            
+            if (_iconHandle.IsValid())
+            {
+                Addressables.Release(_iconHandle);
+            }
         }
     }
 }

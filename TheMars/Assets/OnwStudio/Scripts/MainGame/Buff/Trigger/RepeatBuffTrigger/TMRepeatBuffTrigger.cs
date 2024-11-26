@@ -15,5 +15,13 @@ namespace TM.Buff.Trigger
         [field: SerializeField, DisplayAs("영구 지속 여부")] public bool IsTemporary { get; private set; } = false;
 
         public abstract TMBuffBase CreateBuff();
+
+        protected TMRepeatBuffTrigger() {}
+        protected TMRepeatBuffTrigger(int repeatDay, int limitDay, bool isTemporary)
+        {
+            RepeatDay = repeatDay;
+            LimitDay = limitDay;
+            IsTemporary = isTemporary;
+        }
     }
 }

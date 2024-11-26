@@ -28,9 +28,9 @@ MonoBehaviour:
       m_Items:
       - rid: 3610285249959297309
   - m_Id: 17483239854080
-    m_Localized: "{IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|{DelayDayCount}}\uC77C\uB3D9\uC548
+    m_Localized: "{IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|{DelayDayCount}\uC77C\uB3D9\uC548}
       {TargetBuildingCount}\uAC1C\uC758 [{Kind:cond:\uAC1C\uCC99\uD615|\uC790\uC6D0\uD615|\uAC1C\uBC1C\uD615|\uC678\uBD80\uD615|\uBAA8\uB4E0}]
-      \uAC74\uBB3C {GradeUp}\uB4F1\uAE09 {Positive:cond:\uC0C1\uC2B9:\uD558\uB77D}"
+      \uAC74\uBB3C {GradeUp}\uB4F1\uAE09 {Positive:cond:\uC0C1\uC2B9|\uD558\uB77D}"
     m_Metadata:
       m_Items:
       - rid: 3610285249959297309
@@ -80,21 +80,21 @@ MonoBehaviour:
   - m_Id: 27942609293312
     m_Localized: "{IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|{LimitDay}\uC77C\uB3D9\uC548}
       {RepeatDay}\uC77C\uB9C8\uB2E4 \uB9C8\uB974\uC2A4\uB9AC\uD2AC \uB610\uB294 \uAC74\uC124\uC790\uC6D0(\uAC15\uCCA0,
-      \uC2DD\uBB3C, \uC810\uD1A0) {Resource}\uAC1C {Positive:cond:\uD68D\uB4DD:\uAC10\uC18C}"
+      \uC2DD\uBB3C, \uC810\uD1A0) {Resource}\uAC1C {Positive:cond:\uD68D\uB4DD|\uAC10\uC18C}"
     m_Metadata:
       m_Items:
       - rid: 3610285249959297309
   - m_Id: 29204390154240
     m_Localized: "{IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|{LimitDay}\uC77C\uB3D9\uC548}
       {RepeatDay}\uC77C\uB9C8\uB2E4 \uB79C\uB364\uC73C\uB85C \uAC74\uC124\uC790\uC6D0(\uAC15\uCCA0,
-      \uC2DD\uBB3C, \uC810\uD1A0) {Resource}\uAC1C {Positive:cond:\uD68D\uB4DD:\uAC10\uC18C}"
+      \uC2DD\uBB3C, \uC810\uD1A0) {Resource}\uAC1C {Positive:cond:\uD68D\uB4DD|\uAC10\uC18C}"
     m_Metadata:
       m_Items:
       - rid: 3610285249959297309
   - m_Id: 30864294350848
     m_Localized: "{IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|{LimitDay}\uC77C\uB3D9\uC548}
       {RepeatDay}\uC77C\uB9C8\uB2E4 \uAC74\uC124\uC790\uC6D0(\uAC15\uCCA0, \uC2DD\uBB3C,
-      \uC810\uD1A0) {Min} ~ {Max}\uAC1C {Positive:cond:\uD68D\uB4DD:\uAC10\uC18C}"
+      \uC810\uD1A0) {Min} ~ {Max}\uAC1C {Positive:cond:\uD68D\uB4DD|\uAC10\uC18C}"
     m_Metadata:
       m_Items:
       - rid: 3610285249959297309
@@ -102,7 +102,7 @@ MonoBehaviour:
     m_Localized: "\uB9C8\uB974\uC2A4 \uB9AC\uD2AC \uB0A9\uBD80 \uC774\uBCA4\uD2B8
       \uBC1C\uC0DD\uC2DC {IsTemporary:cond:\uC601\uAD6C\uC801\uC73C\uB85C|\uC774\uBCA4\uD2B8
       \uBC1C\uC0DD \uD69F\uC218 {EndTriggerCount}\uBC88\uB3D9\uC548} \uB0A9\uBD80\uB7C9
-      {MarsLithium} {Positive:cond:\uC99D\uAC00:\uAC10\uC18C}"
+      {MarsLithium} {Positive:cond:\uC99D\uAC00|\uAC10\uC18C}"
     m_Metadata:
       m_Items:
       - rid: 3610285249959297309
