@@ -20,7 +20,9 @@ MonoBehaviour:
     - rid: 3610285249959297310
   m_TableData:
   - m_Id: 9443010744320
-    m_Localized: 
+    m_Localized: "{IsTemporary:cond:permanently|{LimitDay}for a few days} {RepeatDay}every
+      few days {Kind:cond:MarsLithium|Credit|Citizen|Steel|Plants|Clay\r|electricity|Satisfaction}
+      {Min} ~ {Max}{Kind:cond:pcs|pcs|Citizen|pcs|pcs|pcs|pcs|%} {Positive:cond:Acquire|Consume}"
     m_Metadata:
       m_Items:
       - rid: 3610285249959297310
@@ -55,7 +57,9 @@ MonoBehaviour:
       m_Items:
       - rid: 3610285249959297310
   - m_Id: 26708213043200
-    m_Localized: 
+    m_Localized: "{IsTemporary:cond:permanently|{LimitDay}for a few days} {RepeatDay}every
+      few days {Kind:cond:MarsLithium|Credit|Citizen|Steel|Plants|Clay\r|electricity|Satisfaction}
+      {Min} ~ {Max}{Kind:cond:pcs|pcs|Citizen|pcs|pcs|pcs|pcs|%} {Positive:cond:Acquire|Consume}"
     m_Metadata:
       m_Items:
       - rid: 3610285249959297310
@@ -75,7 +79,8 @@ MonoBehaviour:
       m_Items:
       - rid: 3610285249959297310
   - m_Id: 31840480858112
-    m_Localized: 
+    m_Localized: 'When a Mars Lithium event occurs, the amount of payment is {Positive:cond:acquire|produced}
+      by {MarsLithium} {IsTemporary:cond: |for {EndTriggerCount} Count}'
     m_Metadata:
       m_Items:
       - rid: 3610285249959297310
