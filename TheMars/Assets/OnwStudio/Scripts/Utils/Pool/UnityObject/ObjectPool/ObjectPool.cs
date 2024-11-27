@@ -4,11 +4,9 @@ using UnityEngine;
 using Onw.Extensions;
 // ReSharper disable SuspiciousTypeConversion.Global
 
-namespace Onw.Manager.ObjectPool
+namespace Onw.ObjectPool
 {
-    public interface IPooledObject : IPopHandler, IReturnHandler
-    {
-    }
+    public interface IPooledObject : IPopHandler, IReturnHandler {}
 
     public interface IPopHandler
     {

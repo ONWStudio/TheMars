@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Reflection;
 using Onw.Editor.GUI;
+using Onw.Scope;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
@@ -76,7 +77,6 @@ namespace Onw.Attribute.Editor
         private readonly Type _filterType;
         private readonly Texture2D _gameObjectImage;
         private readonly Dictionary<int, GameObject> _itemsMap = new();
-        private readonly StringBuilder _stringBuilder = new();
         private readonly ComponentDropdownPopupContent _content;
         private Texture2D _targetTexture = null;
 
@@ -96,14 +96,14 @@ namespace Onw.Attribute.Editor
                 FieldInfo guiFieldInfo = typeof(TreeView).GetField("m_GUI", BindingFlags.Instance | BindingFlags.NonPublic);
                 if (null == guiFieldInfo)
                 {
-                    throw new Exception("TreeView API has changed.");
+                    throw new("TreeView API has changed.");
                 }
                 object gui = guiFieldInfo.GetValue(this);
 
                 FieldInfo useHorizontalScrollFieldInfo = gui.GetType().GetField("m_UseHorizontalScroll", BindingFlags.Instance | BindingFlags.NonPublic);
                 if (null == useHorizontalScrollFieldInfo)
                 {
-                    throw new Exception("TreeView API has changed.");
+                    throw new("TreeView API has changed.");
                 }
                 useHorizontalScrollFieldInfo.SetValue(gui, value);
             }
@@ -266,12 +266,14 @@ namespace Onw.Attribute.Editor
 
         private string buildString(GameObject go)
         {
-            _stringBuilder.Append(go.name);
-            _stringBuilder.Append(" (");
-            _stringBuilder.Append(_filterType == _defaultType || go.TryGetComponent(_filterType, out Component _) ? _filterType.Name : _defaultType.Name);
-            _stringBuilder.Append(")");
-            string name = _stringBuilder.ToString();
-            _stringBuilder.Clear();
+            using StringBuilderPoolScope scope = new();
+            StringBuilder builder = scope.Get();
+            builder.Append(go.name);
+            builder.Append(" (");
+            builder.Append(_filterType == _defaultType || go.TryGetComponent(_filterType, out Component _) ? _filterType.Name : _defaultType.Name);
+            builder.Append(")");
+            string name = builder.ToString();
+            builder.Clear();
             return name;
         }
     }

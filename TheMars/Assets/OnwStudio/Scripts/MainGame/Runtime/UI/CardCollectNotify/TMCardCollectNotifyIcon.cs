@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using Onw.Attribute;
-using Onw.Manager.ObjectPool;
+using Onw.ObjectPool;
 using Onw.Components.Movement;
 using TM.Card.Runtime;
 

@@ -11,9 +11,10 @@ using Onw.Scope;
 using Onw.Helper;
 using Onw.Attribute;
 using Onw.Coroutine;
+using Onw.Prototype;
+using Onw.ObjectPool;
 using Onw.Extensions;
-using Onw.Manager.Prototype;
-using Onw.Manager.ObjectPool;
+using Onw.UI;
 using TM.Synergy;
 using TM.Synergy.Effect;
 
@@ -58,7 +59,8 @@ namespace TM.UI
         [SerializeField] private AssetReferenceGameObject _scrollItemPrefabReference;
         [SerializeField, SelectableSerializeField] private ScrollRect _scrollView;
         [SerializeField, SelectableSerializeField] private TMSynergyDescriptor _descriptor;
-
+        [SerializeField] private Vector2 _multiOffset = Vector2.zero;
+        
         private readonly Dictionary<string, SynergyArguments> _scrollItems = new();
         private string _currentSynergyId = string.Empty;
         private bool _popupReload = false;
@@ -110,7 +112,19 @@ namespace TM.UI
 
                     void onPointerEnterEvent()
                     {
+                        RectTransform itemRect = pair.ScrollItem.RectTransform;
+                        Vector3[] itemCorners = itemRect.GetWorldCorners();
+                        Vector2 itemSize = itemRect.GetWorldRectSize();
+
+                        Vector3 descriptorPosition = new(
+                            itemCorners[2].x + itemSize.x * _multiOffset.x,
+                            itemCorners[2].y + itemSize.y * _multiOffset.y,
+                            _descriptor.GetPositionZ());
+
+                        _descriptor.RectTransform.pivot = new(1f, 1f);
+                        _descriptor.SetPosition(descriptorPosition);
                         _descriptor.SetActiveDescriptor(true);
+                        
                         _currentSynergyId = pair.Synergy.SynergyData.ID;
                         pair.CallbackFairs.AddRange(pair
                             .Synergy
@@ -156,30 +170,30 @@ namespace TM.UI
                         .OrderBy(effect => effect.TargetBuildingCount)
                         .ToArray();
 
-                    StringBuilder descriptionBuilder = new();
-
+                    using StringBuilderPoolScope scope = new();
+                    StringBuilder builder = scope.Get();
                     foreach (TMSynergyEffect effect in sortedEffects)
                     {
                         bool isEnabled = effect.TargetBuildingCount <= synergy.BuildingCount;
                         if (isEnabled)
                         {
-                            descriptionBuilder.Append("(");
-                            descriptionBuilder.Append(effect.TargetBuildingCount.ToString());
-                            descriptionBuilder.Append(") ");
-                            descriptionBuilder.Append(effect.LocalizedDescription.GetLocalizedString());
+                            builder.Append("(");
+                            builder.Append(effect.TargetBuildingCount.ToString());
+                            builder.Append(") ");
+                            builder.Append(effect.LocalizedDescription.GetLocalizedString());
                         }
                         else
                         {
-                            descriptionBuilder.Append(RichTextFormatter.Colorize("(", Color.gray));
-                            descriptionBuilder.Append(RichTextFormatter.Colorize(effect.TargetBuildingCount.ToString(), Color.gray));
-                            descriptionBuilder.Append(RichTextFormatter.Colorize(") ", Color.gray));
-                            descriptionBuilder.Append(RichTextFormatter.Colorize(effect.LocalizedDescription.GetLocalizedString(), Color.gray));
+                            builder.Append(RichTextFormatter.Colorize("(", Color.gray));
+                            builder.Append(RichTextFormatter.Colorize(effect.TargetBuildingCount.ToString(), Color.gray));
+                            builder.Append(RichTextFormatter.Colorize(") ", Color.gray));
+                            builder.Append(RichTextFormatter.Colorize(effect.LocalizedDescription.GetLocalizedString(), Color.gray));
                         }
 
-                        descriptionBuilder.Append("\n \n");
+                        builder.Append("\n \n");
                     }
 
-                    _descriptor.Description = descriptionBuilder.ToString();
+                    _descriptor.Description = builder.ToString();
                 }
             });
         }

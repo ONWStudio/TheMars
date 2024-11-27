@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using Onw.Attribute;
 using Onw.Extensions;
-using Onw.Manager.ObjectPool;
-using Onw.Manager.Prototype;
+using Onw.ObjectPool;
+using Onw.Prototype;
 using TM.Buff;
 
 namespace TM.UI

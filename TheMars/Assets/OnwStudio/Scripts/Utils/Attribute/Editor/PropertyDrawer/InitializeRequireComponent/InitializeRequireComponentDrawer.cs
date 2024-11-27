@@ -11,8 +11,6 @@ namespace Onw.Attribute.Editor
     [CustomPropertyDrawer(typeof(InitializeRequireComponentAttribute), false)]
     internal sealed class InitializeRequireComponentDrawer : PropertyDrawer
     {
-        private bool? _isVaildate = null;
-
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             GUI.enabled = false;
@@ -20,12 +18,12 @@ namespace Onw.Attribute.Editor
             GUI.enabled = true;
 
             Type requireComponentType = property.GetPropertyType();
-            _isVaildate ??= typeof(MonoBehaviour).IsSubclassOf(requireComponentType) && 
-                            typeof(Component).IsSubclassOf(requireComponentType);
+            bool isValidate = typeof(MonoBehaviour).IsSubclassOf(requireComponentType) && 
+                              typeof(Component).IsSubclassOf(requireComponentType);
             
-            if (!(bool)_isVaildate && !property.IsNestedAttribute<SerializeField>())
+            if (!isValidate && !property.IsNestedAttribute<SerializeField>())
             {
-                Debug.LogWarning("Not MonoBehaviour or Component! and check in Contain SerializeField Attirbute");
+                Debug.LogWarning("Not MonoBehaviour or Component! and check in Contain SerializeField Attribute");
                 return;
             }
 

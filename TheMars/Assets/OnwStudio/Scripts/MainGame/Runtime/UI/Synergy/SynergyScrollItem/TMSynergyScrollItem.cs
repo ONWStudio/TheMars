@@ -2,15 +2,16 @@ using System.Text;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Localization;
-using TMPro;
-using Onw.Helper;
-using Onw.Attribute;
-using Onw.Manager.ObjectPool;
-using TM.Synergy;
-using TM.Synergy.Effect;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization;
+using TMPro;
+using Onw.Scope;
+using Onw.Helper;
+using Onw.Attribute;
+using Onw.ObjectPool;
+using TM.Synergy;
+using TM.Synergy.Effect;
 // ReSharper disable PossibleNullReferenceException
 
 namespace TM.UI
@@ -37,10 +38,14 @@ namespace TM.UI
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _synergyNameText;
         [SerializeField, SelectableSerializeField] private TextMeshProUGUI _synergyLevelText;
 
+        [Header("Event")]
         [SerializeField] private UnityEvent _onPointerEnterEvent = new();
         [SerializeField] private UnityEvent _onPointerExitEvent = new();
 
         private LocalizedString _synergyNameLocalizedName;
+        
+        [field: Header("Rect Transform")]
+        [field: SerializeField, InitializeRequireComponent] public RectTransform RectTransform { get; private set; }
 
         private void OnDestroy()
         {
@@ -73,7 +78,8 @@ namespace TM.UI
                 .OrderBy(effect => effect.TargetBuildingCount)
                 .ToArray();
 
-            StringBuilder synergyLevelBuilder = new();
+            using StringBuilderPoolScope scope = new();
+            StringBuilder synergyLevelBuilder = scope.Get();
 
             for (int i = 0; i < sortedEffects.Length; i++)
             {

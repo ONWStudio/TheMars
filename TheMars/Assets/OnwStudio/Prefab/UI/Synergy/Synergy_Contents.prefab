@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7615483789099678053}
   - component: {fileID: 7176322026331601477}
   - component: {fileID: 8490235509122608318}
+  - component: {fileID: 7361501165674645175}
   m_Layer: 6
   m_Name: Synergy_Contents
   m_TagString: Untagged
@@ -84,7 +85,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966123041820230378}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
@@ -100,6 +101,22 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &7361501165674645175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966123041820230378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f853fa1c2b3974283bb3ad0c13df3885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvas: {fileID: 8490235509122608318}
+  _nameText: {fileID: 7887592973305557713}
+  _descriptionText: {fileID: 7982534515520616922}
+  <RectTransform>k__BackingField: {fileID: 1141326083540783928}
 --- !u!1 &1475789675554255973
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +129,7 @@ GameObject:
   - component: {fileID: 4474476205720021340}
   - component: {fileID: 7887592973305557713}
   m_Layer: 6
-  m_Name: CompanyName
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +182,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CompanyName
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e66011e4b0dfee745b0bdcceedc236fd, type: 2}
   m_sharedMaterial: {fileID: -6863981358275783805, guid: e66011e4b0dfee745b0bdcceedc236fd,
@@ -193,7 +210,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.2
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -249,7 +266,7 @@ GameObject:
   - component: {fileID: 7516640885216256222}
   - component: {fileID: 2223430055743752219}
   m_Layer: 6
-  m_Name: Synergy_Contents_Parts
+  m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

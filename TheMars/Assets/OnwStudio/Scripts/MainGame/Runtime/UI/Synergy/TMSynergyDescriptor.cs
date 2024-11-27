@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Onw.Attribute;
-using UnityEngine.Serialization;
 
 namespace TM.UI
 {
     public class TMSynergyDescriptor : MonoBehaviour
     {
+        [SerializeField, InitializeRequireComponent] private Canvas _canvas;
+        [SerializeField, SelectableSerializeField] private TextMeshProUGUI _nameText;
+        [SerializeField, SelectableSerializeField] private TextMeshProUGUI _descriptionText;
+        
         public string Name
         {
             get => _nameText.text;
@@ -20,10 +23,8 @@ namespace TM.UI
             get => _descriptionText.text;
             set => _descriptionText.text = value;
         }
-        
-        [SerializeField, InitializeRequireComponent] private Canvas _canvas;
-        [SerializeField, SelectableSerializeField] private TextMeshProUGUI _nameText;
-        [SerializeField, SelectableSerializeField] private TextMeshProUGUI _descriptionText;
+
+        [field: SerializeField, InitializeRequireComponent] public RectTransform RectTransform { get; private set; }
 
         public void SetActiveDescriptor(bool isActive)
         {

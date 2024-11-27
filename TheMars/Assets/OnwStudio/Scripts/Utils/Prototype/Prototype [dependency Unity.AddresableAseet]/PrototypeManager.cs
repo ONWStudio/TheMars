@@ -5,8 +5,9 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
+using Onw.Manager;
 
-namespace Onw.Manager.Prototype
+namespace Onw.Prototype
 {
     using Coroutine = UnityEngine.Coroutine;
 
@@ -26,11 +27,11 @@ namespace Onw.Manager.Prototype
         internal void ReleaseInstanceFromRuntimeKey(string runtimeKey)
             => _gameObjectFromReferenceHandles.ReleaseInstance(runtimeKey);
 
-        private GameObject getSuccessedObject<T>(
+        private static GameObject getSuccessObject<T>(
             Dictionary<string, RefCountingOperationHandle<GameObject>> handles,
             string key,
             RefCountingOperationHandle<GameObject> resourceOperationHandle,
-            Transform parent) where T : ReleaseAddressablesInstance
+            Transform parent) where T : ReleaseAddressableInstance
         {
             GameObject resource = null;
 
@@ -51,7 +52,7 @@ namespace Onw.Manager.Prototype
             Dictionary<string, RefCountingOperationHandle<GameObject>> handles,
             string key,
             RefCountingOperationHandle<GameObject> resourceOperationHandle,
-            Transform parent) where T : MonoBehaviour where TR : ReleaseAddressablesInstance
+            Transform parent) where T : MonoBehaviour where TR : ReleaseAddressableInstance
         {
             T cloneComponent = null;
 
@@ -134,7 +135,7 @@ namespace Onw.Manager.Prototype
             RefCountingOperationHandle<GameObject> resourceOperationHandle = _gameObjectHandles.GetHandle(key);
             _ = resourceOperationHandle.Handle.WaitForCompletion();
 
-            return getSuccessesComponent<T, ReleaseAddressablesInstance>(
+            return getSuccessesComponent<T, ReleaseAddressableInstance>(
                 _gameObjectHandles, key, resourceOperationHandle, parent);
         }
 
@@ -149,7 +150,7 @@ namespace Onw.Manager.Prototype
             RefCountingOperationHandle<GameObject> resourceOperationHandle = _gameObjectHandles.GetHandle(key);
             _ = resourceOperationHandle.Handle.WaitForCompletion();
 
-            return getSuccessedObject<ReleaseAddressablesInstance>(
+            return getSuccessObject<ReleaseAddressableInstance>(
                 _gameObjectHandles, key, resourceOperationHandle, parent);
         }
 
@@ -174,7 +175,7 @@ namespace Onw.Manager.Prototype
                     RefCountingOperationHandle<GameObject> resourceOperationHandle = _gameObjectHandles.GetHandle(resourceLocation);
                     _ = resourceOperationHandle.Handle.WaitForCompletion();
 
-                    T component = getSuccessesComponent<T, ReleaseAddressablesInstance>(
+                    T component = getSuccessesComponent<T, ReleaseAddressableInstance>(
                         _gameObjectHandles, resourceLocation.PrimaryKey, resourceOperationHandle, parent);
 
                     if (component)
@@ -215,7 +216,7 @@ namespace Onw.Manager.Prototype
                     RefCountingOperationHandle<GameObject> resourceOperationHandle = _gameObjectHandles.GetHandle(resourceLocation);
                     _ = resourceOperationHandle.Handle.WaitForCompletion();
 
-                    GameObject resource = getSuccessedObject<ReleaseAddressablesInstance>(
+                    GameObject resource = getSuccessObject<ReleaseAddressableInstance>(
                         _gameObjectHandles, resourceLocation.PrimaryKey, resourceOperationHandle, parent);
 
                     if (resource)
@@ -241,7 +242,7 @@ namespace Onw.Manager.Prototype
             RefCountingOperationHandle<GameObject> resourceOperationHandle = _gameObjectFromReferenceHandles.GetHandle(assetReference);
             _ = resourceOperationHandle.Handle.WaitForCompletion();
 
-            return getSuccessesComponent<T, ReleaseAdressablesInstanceFromAssetReference>(
+            return getSuccessesComponent<T, ReleaseAddressableInstanceFromAssetReference>(
                 _gameObjectFromReferenceHandles, assetReference.RuntimeKey.ToString(), resourceOperationHandle, parent);
         }
 
@@ -250,7 +251,7 @@ namespace Onw.Manager.Prototype
             RefCountingOperationHandle<GameObject> resourceOperationHandle = _gameObjectFromReferenceHandles.GetHandle(assetReference);
             _ = resourceOperationHandle.Handle.WaitForCompletion();
 
-            return getSuccessedObject<ReleaseAdressablesInstanceFromAssetReference>(
+            return getSuccessObject<ReleaseAddressableInstanceFromAssetReference>(
                 _gameObjectFromReferenceHandles, assetReference.RuntimeKey.ToString(), resourceOperationHandle, parent);
         }
         #endregion
@@ -262,7 +263,7 @@ namespace Onw.Manager.Prototype
 
             yield return resourceOperationHandle.Handle;
 
-            callback?.Invoke(getSuccessesComponent<T, ReleaseAddressablesInstance>(
+            callback?.Invoke(getSuccessesComponent<T, ReleaseAddressableInstance>(
                 _gameObjectHandles, key, resourceOperationHandle, parent));
         }
 
@@ -272,7 +273,7 @@ namespace Onw.Manager.Prototype
 
             yield return resourceOperationHandle.Handle;
 
-            callback?.Invoke(getSuccessedObject<ReleaseAddressablesInstance>(
+            callback?.Invoke(getSuccessObject<ReleaseAddressableInstance>(
                 _gameObjectHandles, key, resourceOperationHandle, parent));
         }
 
@@ -289,7 +290,7 @@ namespace Onw.Manager.Prototype
 
                     yield return resourceOperationHandle.Handle;
 
-                    callback?.Invoke(getSuccessesComponent<T, ReleaseAddressablesInstance>(
+                    callback?.Invoke(getSuccessesComponent<T, ReleaseAddressableInstance>(
                         _gameObjectHandles, resourceLocation.PrimaryKey, resourceOperationHandle, parent));
                 }
             }
@@ -316,7 +317,7 @@ namespace Onw.Manager.Prototype
 
                     yield return resourceOperationHandle.Handle;
 
-                    callback?.Invoke(getSuccessedObject<ReleaseAddressablesInstance>(
+                    callback?.Invoke(getSuccessObject<ReleaseAddressableInstance>(
                         _gameObjectHandles, t.PrimaryKey, resourceOperationHandle, parent));
                 }
             }
@@ -336,7 +337,7 @@ namespace Onw.Manager.Prototype
 
             yield return resourceOperationHandle.Handle;
 
-            callback?.Invoke(getSuccessesComponent<T, ReleaseAdressablesInstanceFromAssetReference>(
+            callback?.Invoke(getSuccessesComponent<T, ReleaseAddressableInstanceFromAssetReference>(
                 _gameObjectFromReferenceHandles, assetReference.RuntimeKey.ToString(), resourceOperationHandle, parent));
         }
 
@@ -346,7 +347,7 @@ namespace Onw.Manager.Prototype
 
             yield return resourceOperationHandle.Handle;
 
-            callback?.Invoke(getSuccessedObject<ReleaseAdressablesInstanceFromAssetReference>(
+            callback?.Invoke(getSuccessObject<ReleaseAddressableInstanceFromAssetReference>(
                 _gameObjectFromReferenceHandles, assetReference.RuntimeKey.ToString(), resourceOperationHandle, parent));
         }
         #endregion

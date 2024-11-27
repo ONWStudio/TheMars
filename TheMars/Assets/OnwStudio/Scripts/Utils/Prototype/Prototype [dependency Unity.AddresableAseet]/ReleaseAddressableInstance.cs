@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Onw.Manager.Prototype
+namespace Onw.Prototype
 {
     [DisallowMultipleComponent]
-    internal class ReleaseAddressablesInstance : MonoBehaviour
+    internal class ReleaseAddressableInstance : MonoBehaviour
     {
         protected string _primaryKey = null;
 
@@ -17,7 +17,7 @@ namespace Onw.Manager.Prototype
                 if (_primaryKey is not null)
                 {
 #if DEBUG
-                    Debug.LogWarning("ReleaseAddressablesInstance : 키가 이미 할당되어 있습니다");
+                    Debug.LogWarning("ReleaseAddressableInstance : 키가 이미 할당되어 있습니다");
 #endif
                     return;
                 }

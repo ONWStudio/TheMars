@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Onw.Manager.Prototype
+namespace Onw.Prototype
 {
     internal sealed class RefCountingOperationHandle<T> where T : class
     {

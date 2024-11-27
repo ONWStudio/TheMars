@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEditor;
 using Unity.EditorCoroutines.Editor;
 using Onw.Attribute;
+using Onw.Scope;
 using static Onw.Editor.EditorHelper;
 
 namespace Onw.Editor
@@ -89,32 +90,37 @@ namespace Onw.Editor
             if (Application.isPlaying) return;
 
             bool isUpdate = false;
-
-            for (int i = 0; i < _prevProperties.Count; i++)
+            using (StringBuilderPoolScope scope = new())
             {
-                StringBuilder builder = new();
-                string key = _prevProperties[i].Key;
-                PropertyMethodPair propertyMethodPair = _observerMethods[key];
-                object target = propertyMethodPair.TargetField.GetValue(propertyMethodPair.TargetInstance);
-                bool isCollection = false;
+                StringBuilder builder = scope.Get();
 
-                builder.Append(GetPropertyValueFromObject(target)?.ToString() ?? "NULL");
-
-                if (target is ICollection collection)
+                for (int i = 0; i < _prevProperties.Count; i++)
                 {
-                    isCollection = true;
-                    builder.Append(computeCollectionState(collection));
+                    string key = _prevProperties[i].Key;
+                    PropertyMethodPair propertyMethodPair = _observerMethods[key];
+                    object target = propertyMethodPair.TargetField.GetValue(propertyMethodPair.TargetInstance);
+                    bool isCollection = false;
+
+                    builder.Append(GetPropertyValueFromObject(target)?.ToString() ?? "NULL");
+
+                    if (target is ICollection collection)
+                    {
+                        isCollection = true;
+                        builder.Append(computeCollectionState(collection));
+                    }
+
+                    string nowValue = builder.ToString();
+
+                    if (_prevProperties[i].Value != nowValue)
+                    {
+                        isUpdate = isCollection;
+
+                        EditorCoroutineUtility.StartCoroutineOwnerless(iEInvokeMethod(propertyMethodPair));
+                        _prevProperties[i] = new(key, nowValue);
+                    }
                 }
 
-                string nowValue = builder.ToString();
-
-                if (_prevProperties[i].Value != nowValue)
-                {
-                    isUpdate = isCollection;
-
-                    EditorCoroutineUtility.StartCoroutineOwnerless(iEInvokeMethod(propertyMethodPair));
-                    _prevProperties[i] = new KeyValuePair<string, string>(key, nowValue);
-                }
+                builder.Clear();
             }
 
             if (isUpdate)

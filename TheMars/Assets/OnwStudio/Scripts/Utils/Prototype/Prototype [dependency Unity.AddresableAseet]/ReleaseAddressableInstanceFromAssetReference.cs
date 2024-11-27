@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Onw.Manager.Prototype
+namespace Onw.Prototype
 {
-    internal sealed class ReleaseAdressablesInstanceFromAssetReference : ReleaseAddressablesInstance
+    internal sealed class ReleaseAddressableInstanceFromAssetReference : ReleaseAddressableInstance
     {
         protected override void Release()
         {

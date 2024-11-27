@@ -7,23 +7,39 @@ using UnityEngine.Pool;
 
 namespace Onw.Scope
 {
-    public struct ListPoolScope<T> : ICollectionScope<List<T>, T>
+    public sealed class ListPoolScope<T> : ICollectionScope<List<T>, T>
     {
-        private List<T> _pooledList;
-        
+        private readonly List<T> _pooledList = ListPool<T>.Get();
+        private bool _disposed;
+
         public List<T> Get()
         {
-            _pooledList ??= ListPool<T>.Get();
+            if (_disposed) throw new ObjectDisposedException(nameof(ListPoolScope<T>));
+
             return _pooledList;
         }
-        
+
         public void Dispose()
         {
-            if (_pooledList is null) return;
+            if (_disposed) return;
+
+            if (_pooledList is not null)
+            {
+                _pooledList.Clear();
+                ListPool<T>.Release(_pooledList);
+            }
             
-            _pooledList.Clear();
-            ListPool<T>.Release(_pooledList);
-            _pooledList = null;
+            _disposed = true;
+            GC.SuppressFinalize(this);
+        }
+
+        ~ListPoolScope()
+        {
+            if (!_disposed)
+            {
+                Debug.LogWarning($"{nameof(ListPoolScope<T>)} was not disposed properly.");
+                Dispose();
+            }
         }
     }
 }

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Serialization;
+using UnityEngine.AddressableAssets;
 using Onw.Attribute;
 using Onw.Extensions;
-using Onw.Manager.Prototype;
+using Onw.Prototype;
 using Onw.UI.Components;
 using TM.Cost;
-using UnityEngine.AddressableAssets;
 
 namespace TM.Card.Runtime
 {
