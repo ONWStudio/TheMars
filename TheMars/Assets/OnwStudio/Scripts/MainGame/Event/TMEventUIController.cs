@@ -1,4 +1,6 @@
 using System;
+using System.Buffers;
+using System.Text;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,7 +17,6 @@ using Onw.UI.Components;
 using TM.Cost;
 using TM.Event;
 using TM.Event.Effect;
-using System.Text;
 
 namespace TM.UI
 {
@@ -28,7 +29,7 @@ namespace TM.UI
 
             public void Dispose()
             {
-                if (ChangeHandler is not null) 
+                if (LocalizedDescription is not null && ChangeHandler is not null) 
                 {
                     LocalizedDescription.StringChanged -= ChangeHandler;
                 }
@@ -142,13 +143,13 @@ namespace TM.UI
         // TODO : 이벤트 호출 순서가 맞지않음
         private void onEffect(TMEventChoice choice)
         {
-            SetActiveEventUI(false);
             _topEffectPairs.ForEach(pair => pair.Dispose());
             _topEffectPairs.Clear();
             _bottomEffectPairs.ForEach(pair => pair.Dispose());
             _bottomEffectPairs.Clear();
             _eventRunner.InvokeEvent(choice);
             resetField();
+            SetActiveEventUI(false);
         }
 
         private void resetField()
@@ -201,11 +202,11 @@ namespace TM.UI
                 bool isReload = false;
 
                 return effectArray
-                    .Select(effect => new TMDescriptionCallbackPair(effect.EffectDescription, _ => onBuildDescription(effectArray, costArray, onBuildedDescription)))
-                    .Concat(costArray.Select(cost => new TMDescriptionCallbackPair(cost.CostDescription, _ => onBuildDescription(effectArray, costArray, onBuildedDescription))))
+                    .Select(effect => new TMDescriptionCallbackPair(effect.EffectDescription, _ => onBuildDescription()))
+                    .Concat(costArray.Select(cost => new TMDescriptionCallbackPair(cost.CostDescription, _ => onBuildDescription())))
                     .ToArray();
 
-                void onBuildDescription(ITMEventEffect[] effects, ITMCost[] costs, Action<string> onBuildedDescription)
+                void onBuildDescription()
                 {
                     if (isReload) return;
 
@@ -218,19 +219,19 @@ namespace TM.UI
                         {
                             StringBuilder descriptionBuilder = new();
 
-                            if (costs.Length > 0)
+                            if (costArray.Length > 0)
                             {
                                 descriptionBuilder.Append(_paymentDescriptionHeader.GetLocalizedString());
                                 descriptionBuilder.Append("\n \n");
-                                descriptionBuilder.Append(string.Join("\n", costs.Select(cost => cost.CostDescription.GetLocalizedString())));
+                                descriptionBuilder.Append(string.Join("\n", costArray.Select(cost => cost.CostDescription.GetLocalizedString())));
                                 descriptionBuilder.Append("\n \n");
                             }
 
-                            if (effects.Length > 0)
+                            if (effectArray.Length > 0)
                             {
                                 descriptionBuilder.Append(_eventEffectHeader.GetLocalizedString());
                                 descriptionBuilder.Append("\n \n");
-                                descriptionBuilder.Append(string.Join("\n", effects.Select(effect => effect.EffectDescription.GetLocalizedString())));
+                                descriptionBuilder.Append(string.Join("\n", effectArray.Select(effect => effect.EffectDescription.GetLocalizedString())));
                             }
 
                             onBuildedDescription.Invoke(descriptionBuilder.ToString());

@@ -125,7 +125,6 @@ namespace TM.Event
             }
         }
 
-        // .. TODO : 이벤트 코스트, 효과등 적용되지 않는 버그? (UI 업데이트가 적용되지 않는걸로 추정)
         private void handleMarsLithiumEvent(int day)
         {
             if (day % CheckMarsLithiumEventDayCount != 0 || _marsLithiumEventRunner is null || !_marsLithiumEventRunner.EventData) return;
@@ -233,7 +232,6 @@ namespace TM.Event
 
             void onEndEvent(TMEventChoice eventChoice)
             {
-                Debug.Log("?");
                 selectEvent.OnFireEvent -= onEndEvent;
                 TimeManager.IsPause = keepPause;
                 fireEvents();
