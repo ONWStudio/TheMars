@@ -15,7 +15,8 @@ MonoBehaviour:
   <ID>k__BackingField: fceb3023-89f4-4d36-95d4-36ca012313e5
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 77331895065a81640a2f27852ac5f149,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMMigrationToMarsEventData

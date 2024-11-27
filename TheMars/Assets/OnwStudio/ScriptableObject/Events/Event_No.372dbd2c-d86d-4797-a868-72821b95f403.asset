@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.372dbd2c-d86d-4797-a868-72821b95f403
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 5094e163-d4c8-495c-a124-e72a2bfa1933
   <TopEventData>k__BackingField: {fileID: 11400000, guid: 84dfb2e7529f6a441826ad29bc0a4e9f,
     type: 2}
   <BottomEventData>k__BackingField: {fileID: 11400000, guid: a676409fe7cc2214c8c5defe3901e05a,
     type: 2}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: a8198bab5a6827d4c8edbf0357c8e2aa,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMAutonomyCommitteeSetupEventData
@@ -58,8 +60,8 @@ MonoBehaviour:
   _topEffectCreators:
   - rid: 3610285201848008704
   _bottomEffectCreators: []
-  _topUsageCreators: []
-  _bottomUsageCreators: []
+  _topCostCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

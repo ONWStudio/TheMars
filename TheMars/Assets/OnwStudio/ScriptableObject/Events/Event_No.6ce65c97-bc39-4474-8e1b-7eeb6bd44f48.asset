@@ -17,7 +17,8 @@ MonoBehaviour:
     type: 2}
   <BottomEventData>k__BackingField: {fileID: 11400000, guid: 9444f13473d1548589628c3c39bf4407,
     type: 2}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: a168fc6281ecee04291468c55d4c19d5,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMStrengtheningCivilAutonomyEventData

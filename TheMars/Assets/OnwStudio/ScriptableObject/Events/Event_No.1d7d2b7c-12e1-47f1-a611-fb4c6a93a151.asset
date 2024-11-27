@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.1d7d2b7c-12e1-47f1-a611-fb4c6a93a151
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: f063b2d0-e146-4ed3-a72d-4aa397baf37c
   <TopEventData>k__BackingField: {fileID: 11400000, guid: e40736863f274354e9c8425af4c3f84d,
     type: 2}
   <BottomEventData>k__BackingField: {fileID: 11400000, guid: cc291b4fcc652f44989ac4fc7e100702,
     type: 2}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 3ecfeb6bdfe121142b95d32591fdac94,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMALabyrinthOfCorruptionEventData
@@ -60,8 +62,8 @@ MonoBehaviour:
   - rid: 3610285201848008780
   - rid: 3610285201848008782
   _bottomEffectCreators: []
-  _topUsageCreators: []
-  _bottomUsageCreators: []
+  _topCostCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

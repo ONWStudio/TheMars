@@ -17,7 +17,8 @@ MonoBehaviour:
     type: 2}
   <BottomEventData>k__BackingField: {fileID: 11400000, guid: be39436f37a62ff43a66ae42ff0fe4b9,
     type: 2}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: f1e937c3cb64dae4cb08b66fadaa15c7,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMAShipSwayingHereAndThereEventData

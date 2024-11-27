@@ -15,7 +15,8 @@ MonoBehaviour:
   <ID>k__BackingField: aa982118-ebb4-42c5-9efe-eaf0dec84272
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 6a9cc73ebe0a9d440a762ac9292a1025,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMParadoxFutureEventData

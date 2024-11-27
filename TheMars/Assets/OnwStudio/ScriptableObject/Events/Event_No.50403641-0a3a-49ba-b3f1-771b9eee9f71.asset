@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.50403641-0a3a-49ba-b3f1-771b9eee9f71
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 96f8d2a4-9b50-4196-bb7e-3b1101a76717
   <TopEventData>k__BackingField: {fileID: 11400000, guid: f1aa8df7279e0544b88da19719821d5c,
     type: 2}
   <BottomEventData>k__BackingField: {fileID: 11400000, guid: 6960f91905d998b459beb383b6332529,
     type: 2}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 142cc99dec44d6a46a08235fb5ebda48,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMCorporateDrivenSystemEventData
@@ -61,8 +63,8 @@ MonoBehaviour:
   _bottomEffectCreators:
   - rid: 4853453505639743494
   - rid: 4853453505639743496
-  _topUsageCreators: []
-  _bottomUsageCreators: []
+  _topCostCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

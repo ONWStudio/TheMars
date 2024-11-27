@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.49346659-0023-4d1e-8e54-a2840bddb300
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: e44fc2bd-6e08-48e6-8bca-c1fabeba56d9
   <TopEventData>k__BackingField: {fileID: 11400000}
   <BottomEventData>k__BackingField: {fileID: 11400000, guid: f678a3c75be3fa14fafa53e58f4d3b7d,
     type: 2}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: f553d924981c824479c960bc16ce98ed,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMShadowOfUtopiaEventData
@@ -59,8 +61,8 @@ MonoBehaviour:
   - rid: 3610285223757479972
   - rid: 3610285249376026634
   _bottomEffectCreators: []
-  _topUsageCreators: []
-  _bottomUsageCreators: []
+  _topCostCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

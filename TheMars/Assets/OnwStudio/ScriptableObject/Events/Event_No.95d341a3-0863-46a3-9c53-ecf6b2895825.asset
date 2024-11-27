@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.95d341a3-0863-46a3-9c53-ecf6b2895825
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 7d47f457-06de-4f0e-843a-5f18b5813d80
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: f9bd3005badd0d84e93c711e4fe0a4eb,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMTyphoonEventData
@@ -61,8 +63,8 @@ MonoBehaviour:
   - rid: 3610285249959297145
   - rid: 3610285249959297146
   - rid: 3610285249959297147
-  _topUsageCreators: []
-  _bottomUsageCreators: []
+  _topCostCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

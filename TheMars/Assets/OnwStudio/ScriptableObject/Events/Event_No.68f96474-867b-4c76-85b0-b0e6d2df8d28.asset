@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.68f96474-867b-4c76-85b0-b0e6d2df8d28
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 041125e9-0ae6-4dbc-bf20-7ec8c5c476bd
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 9adf2989d5a18b145938d297f0f1528a,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMGreenHopeEventData
@@ -56,8 +58,8 @@ MonoBehaviour:
   _topEffectCreators:
   - rid: 3610285223757479959
   _bottomEffectCreators: []
-  _topUsageCreators: []
-  _bottomUsageCreators: []
+  _topCostCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:
