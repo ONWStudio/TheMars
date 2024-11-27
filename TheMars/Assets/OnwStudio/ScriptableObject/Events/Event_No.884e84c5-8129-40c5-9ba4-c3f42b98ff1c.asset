@@ -15,7 +15,8 @@ MonoBehaviour:
   <ID>k__BackingField: 0307ac26-5574-4904-8724-b06833251135
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 4ce57cea7e65d8f49b6c1726f44542b1,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMFestivalOfProsperityEventData
@@ -58,11 +59,11 @@ MonoBehaviour:
   - rid: 3610285249959297113
   _bottomEffectCreators:
   - rid: 3610285249959297115
-  _topUsageCreators:
+  _topCostCreators:
   - rid: 3610285400346591253
   - rid: 3610285400346591254
   - rid: 3610285400346591255
-  _bottomUsageCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

@@ -17,7 +17,26 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 69174405fe48f2e4eb76507cbf462844, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 1796018176
+    m_Localized: "The corporate watchdog you set up has been properly responsible
+      for corruption and capabilities \r\nIt failed to function and companies used
+      it to overwhelm the government.\r\nI don't think companies will benefit you
+      anymore."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 115075780608
+    m_Localized: '"I don''t need you anymore"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 123141427200
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 130389184512
+    m_Localized: Corporate control
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

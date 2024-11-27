@@ -19,7 +19,8 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 20007185539072
-    m_Localized: 
+    m_Localized: Progress will be slow, but it will be possible to preserve nature
+      on Mars.
     m_Metadata:
       m_Items: []
   - m_Id: 20007185539073
@@ -27,11 +28,25 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 20007189733376
-    m_Localized: 
+    m_Localized: The Green Hope
     m_Metadata:
       m_Items: []
   - m_Id: 20007181344768
-    m_Localized: 
+    m_Localized: 'You''ve decided to prioritize nature restoration for humanity''s
+      future on Mars.
+
+      You''ve decided to collaborate as much as possible
+      with companies that can produce nature in an environmentally friendly way
+
+      and
+      you''ve decided to ask them for help. Although terraforming is slow
+
+      In
+      the long run, the Martian ecosystem will be able to become self-sustaining.
+
+      Although
+      there will be pushback from some in the scientific community along the way,
+      the results of restoring nature should give everyone hope.'
     m_Metadata:
       m_Items: []
   references:

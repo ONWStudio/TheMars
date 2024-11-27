@@ -17,7 +17,23 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 3e04b8048da45bb47871aa0a7d0c05d4, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 54124154880
+    m_Localized: Not yet. Preserve resources.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63557144576
+    m_Localized: Prosperous festival
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32099864576
+    m_Localized: It holds a festival for its citizens.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728909312
+    m_Localized: How about holding a festival for the prosperity of Mars?
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

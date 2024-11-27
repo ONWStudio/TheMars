@@ -34,15 +34,18 @@ MonoBehaviour:
       m_Items:
       - rid: 1062196933775327234
   - m_Id: 127866494976
-    m_Localized: 
+    m_Localized: The discussion on reforming the political system on Mars has begun.
+      Citizens want more participation only when they strengthen their democratic
+      autonomy system, but companies are proposing a system that they lead for economic
+      efficiency.
     m_Metadata:
       m_Items: []
   - m_Id: 153934094336
-    m_Localized: 
+    m_Localized: Let's make a place to talk to the citizens
     m_Metadata:
       m_Items: []
   - m_Id: 179590651904
-    m_Localized: 
+    m_Localized: I need to talk to the company
     m_Metadata:
       m_Items: []
   references:

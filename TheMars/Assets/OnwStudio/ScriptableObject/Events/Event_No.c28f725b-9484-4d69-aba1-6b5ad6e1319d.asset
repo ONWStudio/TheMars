@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.c28f725b-9484-4d69-aba1-6b5ad6e1319d
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: e5e8c3c1-c344-4f3f-a604-eea1d3a3bc92
   <TopEventData>k__BackingField: {fileID: 11400000, guid: 85a1db248ab90da48985e1b917a15cd0,
     type: 2}
   <BottomEventData>k__BackingField: {fileID: 11400000, guid: 72fedbd1aa1df9640895e33f8e04618c,
     type: 2}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 7464107c5eb176345b8499198df1ecbd,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMDilemmaOfGrowthEventData
@@ -60,8 +62,8 @@ MonoBehaviour:
   - rid: 3610285201848008711
   _bottomEffectCreators:
   - rid: 3610285201848008714
-  _topUsageCreators: []
-  _bottomUsageCreators: []
+  _topCostCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

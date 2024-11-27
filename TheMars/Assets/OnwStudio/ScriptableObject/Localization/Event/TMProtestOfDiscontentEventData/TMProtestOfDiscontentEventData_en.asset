@@ -17,7 +17,23 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 3a853ac3d5bbde649a679368b2fc30b4, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 1707937792
+    m_Localized: Martians are starting to complain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26496274432
+    m_Localized: Let's appease the residents
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33903415296
+    m_Localized: I can't fulfill everyone's needs!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40685604864
+    m_Localized: Discontent protest
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

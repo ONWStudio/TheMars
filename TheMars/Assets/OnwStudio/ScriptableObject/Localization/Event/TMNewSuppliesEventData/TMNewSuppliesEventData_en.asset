@@ -17,7 +17,23 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 5aab0af095174a4428b1eea2a5b806f7, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 38374543360
+    m_Localized: New upplies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31856594944
+    m_Localized: I have nowhere to put my supplies right now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24508174336
+    m_Localized: Thank you for your help.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1775046656
+    m_Localized: New supplies have arrived on Mars.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

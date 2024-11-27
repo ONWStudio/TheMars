@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.51e0feb4-36b6-40a6-8384-bda594147669
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: eedf3363-5234-4084-aa52-9d1e09f0b24b
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 80896f3792eaccd4d97c8b59e8e9bde4,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMLegacyOfHopeEventData
@@ -58,8 +60,8 @@ MonoBehaviour:
   - rid: 3610285249376026639
   - rid: 3610285249959297024
   _bottomEffectCreators: []
-  _topUsageCreators: []
-  _bottomUsageCreators: []
+  _topCostCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

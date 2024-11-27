@@ -15,7 +15,8 @@ MonoBehaviour:
   <ID>k__BackingField: fcb6a183-2977-4360-a939-8f9dac3112ee
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 00a00f3c2a09dc841a931ecccad776ed,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMAuroraInnovationEventData

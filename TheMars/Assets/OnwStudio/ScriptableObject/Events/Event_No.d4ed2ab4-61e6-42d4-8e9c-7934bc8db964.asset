@@ -15,7 +15,8 @@ MonoBehaviour:
   <ID>k__BackingField: 424b902d-9d81-4e07-887f-610c8074aead
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 22a8475a35757bf45aad225321298c73,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMPathToMutualGrowthEventData
@@ -60,12 +61,12 @@ MonoBehaviour:
   _bottomEffectCreators:
   - rid: 3610285249959297098
   - rid: 3610285249959297100
-  _topUsageCreators:
+  _topCostCreators:
   - rid: 3610285400346591264
   - rid: 3610285400346591265
   - rid: 3610285400346591266
   - rid: 3610285400346591267
-  _bottomUsageCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

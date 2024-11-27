@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.4c9559d6-f7f9-45c0-9f8b-f305a0a947d0
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 193238ee-8e57-4bc6-9ff5-b3c705519ad4
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: c8f6ee308b934024d9a8b3567a81c01b,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMCrumblingAuthorityEventData
@@ -57,8 +59,8 @@ MonoBehaviour:
   - rid: 3610285223757479961
   - rid: 3610285223757479963
   _bottomEffectCreators: []
-  _topUsageCreators: []
-  _bottomUsageCreators: []
+  _topCostCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

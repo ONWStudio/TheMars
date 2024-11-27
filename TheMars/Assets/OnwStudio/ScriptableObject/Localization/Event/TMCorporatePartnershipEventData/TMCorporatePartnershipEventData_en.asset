@@ -20,7 +20,15 @@ MonoBehaviour:
     - rid: 4853453322907287636
   m_TableData:
   - m_Id: 11193540608
-    m_Localized: 
+    m_Localized: 'Companies have deceived you by advocating eco-friendly technology
+      development.
+
+      Pretending to cooperate with citizens, they have actually
+      used unethical methods to maximize their capital gains.
+
+      Businesses
+      seem to have avoided environmental regulations, tightened lobbying activities
+      and eased regulations through fraudulent transactions with government officials.'
     m_Metadata:
       m_Items: []
   - m_Id: 1075318407290882
@@ -46,15 +54,15 @@ MonoBehaviour:
       m_Items:
       - rid: 4853453322907287636
   - m_Id: 1376461100408832
-    m_Localized: 
+    m_Localized: It's okay if I'm the only one with my eyes closed.
     m_Metadata:
       m_Items: []
   - m_Id: 1376461104603136
-    m_Localized: 
+    m_Localized: This should be known to the people.
     m_Metadata:
       m_Items: []
   - m_Id: 1376461104603137
-    m_Localized: 
+    m_Localized: Partenrship with the company
     m_Metadata:
       m_Items: []
   references:

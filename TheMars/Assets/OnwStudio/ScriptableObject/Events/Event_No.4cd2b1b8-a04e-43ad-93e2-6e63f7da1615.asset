@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.4cd2b1b8-a04e-43ad-93e2-6e63f7da1615
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 0afd8850-478e-4a93-911f-c4ed4adf3bc5
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 91c6e60447caca04a8c9643e115776bf,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMPriceOfDisappointmentEventData
@@ -56,8 +58,8 @@ MonoBehaviour:
   _topEffectCreators:
   - rid: 3610285249959297090
   _bottomEffectCreators: []
-  _topUsageCreators: []
-  _bottomUsageCreators: []
+  _topCostCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

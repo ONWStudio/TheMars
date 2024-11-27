@@ -17,7 +17,8 @@ MonoBehaviour:
     type: 2}
   <BottomEventData>k__BackingField: {fileID: 11400000, guid: c02bec81ca806c74fbcd4daf3824f51d,
     type: 2}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: de096db07e9332d4c9aae2105270bf63,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMCostOfDisappointmentEventData

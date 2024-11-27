@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.fb2cbfce-5ef7-4c2e-9d4f-c04b52340086
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 80b35e21-9452-44de-a4fa-78a80dba9228
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 47ae5632de86c564697480e8f601e070,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMDesertificationEventData
@@ -60,8 +62,8 @@ MonoBehaviour:
   - rid: 3610285249959297154
   - rid: 3610285249959297155
   _bottomEffectCreators: []
-  _topUsageCreators: []
-  _bottomUsageCreators: []
+  _topCostCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

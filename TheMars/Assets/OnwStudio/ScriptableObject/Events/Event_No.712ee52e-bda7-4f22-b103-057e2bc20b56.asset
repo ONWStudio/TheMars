@@ -17,7 +17,8 @@ MonoBehaviour:
     type: 2}
   <BottomEventData>k__BackingField: {fileID: 11400000, guid: d228abe02745b264ab220141e6c90b98,
     type: 2}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 128cd93a8182c6e4a8e182f5890f1ffc,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMDevelopmentOfAnIllusionEventData

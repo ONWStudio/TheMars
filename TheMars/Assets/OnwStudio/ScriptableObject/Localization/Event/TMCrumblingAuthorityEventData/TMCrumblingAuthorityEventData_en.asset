@@ -17,7 +17,29 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 8ee60d5454c98ea4b948d387c6b0cb7e, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 261272440832
+    m_Localized: "Your political failure and the incompetence of the self-governing
+      council have pushed the patience of the citizens to the limit.\r\nThey called
+      for the dissolution of the self-governing committee and staged a massive strike
+      and protest movement. \r\nThe union represented the voices of the citizens
+      and demanded a new political system,\r\nYou were crushed by their pressure.\r\nMars
+      may now enter a new era led by workers or become more devastated.\r\nYou will
+      go down in history as a failed leader."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273670803456
+    m_Localized: There is nothing I can do now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 281514151936
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2894925824
+    m_Localized: Crumbling authority
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

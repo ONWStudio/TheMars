@@ -46,19 +46,23 @@ MonoBehaviour:
       m_Items:
       - rid: 4853453322907287633
   - m_Id: 316257139154944
-    m_Localized: 
+    m_Localized: 'An accident occurred during a large-scale experiment for terraforming,
+      putting certain areas of Mars in danger.
+
+      Stopping research can ensure
+      safety, but the opportunity for scientific discovery can be lost.'
     m_Metadata:
       m_Items: []
   - m_Id: 316257155932160
-    m_Localized: 
+    m_Localized: Keep the technology.
     m_Metadata:
       m_Items: []
   - m_Id: 316257155932161
-    m_Localized: 
+    m_Localized: Let's evacuate people
     m_Metadata:
       m_Items: []
   - m_Id: 316257155932162
-    m_Localized: 
+    m_Localized: the moment of a crack
     m_Metadata:
       m_Items: []
   references:

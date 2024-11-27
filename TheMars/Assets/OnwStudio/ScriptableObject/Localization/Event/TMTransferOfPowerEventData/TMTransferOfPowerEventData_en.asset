@@ -17,7 +17,35 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 2591dbe3466814d1ca7ca3ca89120b4b, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 253189428338688
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 253189428338689
+    m_Localized: Deplotment of power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 253189424144385
+    m_Localized: It's all over now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 253189424144384
+    m_Localized: 'Your inability to correct the confusion of the council has eventually
+      led to a backlash from the closest staff.
+
+      The government turns to the
+      person who''s closest to you, and eventually you get kicked out of the government''s
+      chess horse.
+
+      All the policies and ideals you have left behind will
+      be revised at the hands of the new commander, and the citizens will forget
+      you.
+
+      The power flows towards him and you are no longer the leader of
+      this place.'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

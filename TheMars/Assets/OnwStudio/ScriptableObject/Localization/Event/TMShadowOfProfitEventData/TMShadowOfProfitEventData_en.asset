@@ -17,7 +17,28 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 168893a26ae2f354db921073c5455c1e, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 2563575808
+    m_Localized: "You listen to the complaints of businesses and eventually deregulate.
+      \r\nJobs grow and the economy revitalizes, but companies begin to focus on
+      short-term profits with little regard for environmental protection and ethics.\r\nCitizens
+      initially benefit from the economic growth, \r\nbut over time, they begin to
+      divide between those who care about ethical issues and those who are loyal
+      to capital."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24017440768
+    m_Localized: But it's none of my business
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33769197568
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42170388480
+    m_Localized: Shade of profit
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

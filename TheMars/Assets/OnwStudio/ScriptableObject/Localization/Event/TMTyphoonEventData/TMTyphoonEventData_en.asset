@@ -17,7 +17,23 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: b86c10c1bf7a3ec4b822897875b2d912, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 1707937792
+    m_Localized: A giant typhoon has hit Mars.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35027488768
+    m_Localized: Protect your resources!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51095867392
+    m_Localized: Protect the citizens!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58687557632
+    m_Localized: Hurricanes
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

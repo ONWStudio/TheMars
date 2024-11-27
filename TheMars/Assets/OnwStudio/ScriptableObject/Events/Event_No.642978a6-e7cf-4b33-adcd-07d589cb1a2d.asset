@@ -17,7 +17,8 @@ MonoBehaviour:
     type: 2}
   <BottomEventData>k__BackingField: {fileID: 11400000, guid: a9a114cdab3e94db68ae7f875a495b3f,
     type: 2}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 890ba119343d12a4eb8babef5da63020,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMMomentOfACrackEventData
@@ -64,9 +65,9 @@ MonoBehaviour:
   - rid: 3610285201848008729
   - rid: 3610285201848008731
   - rid: 3610285201848008732
-  _topUsageCreators:
+  _topCostCreators:
   - rid: 3610285400346591258
-  _bottomUsageCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.19c50200-212d-42e9-b702-0f643c263929
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: bfe1adda-1c3c-48c5-b6e0-49c3346e5688
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 929162d9af4b76548be9ee0fa13297b5,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMPrometheusFlameEventData
@@ -57,8 +59,8 @@ MonoBehaviour:
   - rid: 4853453529831440421
   - rid: 4853453529831440431
   _bottomEffectCreators: []
-  _topUsageCreators: []
-  _bottomUsageCreators: []
+  _topCostCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

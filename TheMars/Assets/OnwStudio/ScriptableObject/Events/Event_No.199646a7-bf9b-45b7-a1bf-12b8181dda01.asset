@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.199646a7-bf9b-45b7-a1bf-12b8181dda01
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: b29c0ebb-79ea-4639-a55e-d439939f04a0
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: bb00347550bb7334e926986dfedc7c6f,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMTheGreenregimentEventData
@@ -59,8 +61,8 @@ MonoBehaviour:
   - rid: 3610285249959297043
   - rid: 3610285249959297045
   _bottomEffectCreators: []
-  _topUsageCreators: []
-  _bottomUsageCreators: []
+  _topCostCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

@@ -19,11 +19,23 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 3859782033408
-    m_Localized: 
+    m_Localized: 'You ended up turning to the government for help to prevent your
+      business from growing any further.
+
+      The government quickly recognized
+      the crisis and responded to your request.
+
+      It investigated the company''s
+      unethical behavior, informed its citizens, and stabilized the system once again.
+
+      However,
+      after this incident, the government seemed disappointed in you and said that
+      you needed to provide more resources.'
     m_Metadata:
       m_Items: []
   - m_Id: 310624235020288
-    m_Localized: 
+    m_Localized: "\u201CI trusted you...but it's going to take time to rebuild that
+      trust.\u201D"
     m_Metadata:
       m_Items: []
   - m_Id: 310624260186112
@@ -31,7 +43,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 310624260186113
-    m_Localized: 
+    m_Localized: The price od disappointment
     m_Metadata:
       m_Items: []
   references:

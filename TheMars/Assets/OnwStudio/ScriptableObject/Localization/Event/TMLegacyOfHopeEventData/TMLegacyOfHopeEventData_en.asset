@@ -17,7 +17,29 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: b05b449ed510fe8408b4ab182a841c97, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 2437746688
+    m_Localized: "The balanced policy allowed the planet to embark on a new path.
+      Although there was no monetary change, the lives of your citizens steadily
+      improved and your government's support stabilized. \r\nOver time, your policies
+      will be referred to as a \u201Clegacy of hope\u201D and Mars will continue
+      its slow but steady progress.\r\n Future generations will remember your careful
+      decisions and realize that the foundation of Martian society was built on your
+      choices."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 244335841280
+    m_Localized: Let's keep it that way
+    m_Metadata:
+      m_Items: []
+  - m_Id: 255354277888
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 266909585408
+    m_Localized: A legacy of hope
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

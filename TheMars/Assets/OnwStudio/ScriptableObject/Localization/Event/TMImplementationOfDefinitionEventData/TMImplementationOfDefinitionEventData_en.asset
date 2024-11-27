@@ -17,7 +17,26 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: df3e195a3b2f7904a860a8bde6eb9320, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 1754075136
+    m_Localized: "Publicizing companies' unethical behavior wasn't that big of a
+      deal. \r\nBad rumors travel fast, people ask rumor to rumor. \r\nEventually,
+      it starts to get worse, and I think companies realize this and want to make
+      a good impression again."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28572454912
+    m_Localized: 'Now is the time to take control of your organization. '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37363716096
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44389175296
+    m_Localized: Definition phrases
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

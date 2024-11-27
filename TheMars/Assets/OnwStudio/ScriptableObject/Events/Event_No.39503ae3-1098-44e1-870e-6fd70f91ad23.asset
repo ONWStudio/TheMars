@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.39503ae3-1098-44e1-870e-6fd70f91ad23
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: e06521c0-0f64-41fa-a15d-dd6dc8132e37
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: e00b3a7030f8f174cba8959bd1f98c36,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMTransferOfPowerEventData
@@ -56,8 +58,8 @@ MonoBehaviour:
   _topEffectCreators:
   - rid: 3610285223757479969
   _bottomEffectCreators: []
-  _topUsageCreators: []
-  _bottomUsageCreators: []
+  _topCostCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

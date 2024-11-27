@@ -17,7 +17,33 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: d593d6f5ee0d24d8fb4de6b4b6f6dbad, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 2880430080
+    m_Localized: 'To maximize profits, you have pursued a policy of allocating resources
+      more strategically.
+
+      Citizens benefit according to their contributions
+      and productivity, but the less able have been marginalized from resource allocation.
+
+      But
+      it would be futile to take care of the people here.
+
+      We need to move
+      forward.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20806885376
+    m_Localized: We need to take on new challenges. Let's blaze a trail.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52067033088
+    m_Localized: Let's invest in a new experiment this time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74414284800
+    m_Localized: Price of growth
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

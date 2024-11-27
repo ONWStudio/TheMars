@@ -46,19 +46,29 @@ MonoBehaviour:
       m_Items:
       - rid: 4853453322907287638
   - m_Id: 361013097521152
-    m_Localized: 
+    m_Localized: 'Members and staff who are currently participating in the Terraforming
+      scheme were called up.
+
+      We''ve discussed the current situation of the
+      residents and the current Mars, but the conclusion doesn''t seem to be endless.
+
+      Everyone
+      seems to be waiting for my opinions and decisions.'
     m_Metadata:
       m_Items: []
   - m_Id: 361013122686976
-    m_Localized: 
+    m_Localized: Let's not touch it as long as we keep the free market economy
     m_Metadata:
       m_Items: []
   - m_Id: 361013122686977
-    m_Localized: 
+    m_Localized: 'Businesses are here to make money, too.
+
+      Let''s reach an
+      agreement.'
     m_Metadata:
       m_Items: []
   - m_Id: 361013126881280
-    m_Localized: 
+    m_Localized: A corporate-led system
     m_Metadata:
       m_Items: []
   references:

@@ -45,19 +45,28 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 323435543650304
-    m_Localized: 
+    m_Localized: 'As citizen autonomy increases, governments require more time and
+      resources,
+
+      decision-making processes can become more complex. Governments
+      expand their authority for efficiency
+
+      While governments want to make
+      decisions quickly for efficiency, citizens are insisting that their voices
+      be heard.'
     m_Metadata:
       m_Items: []
   - m_Id: 323435556233216
-    m_Localized: 
+    m_Localized: This is too much work for me to do... Should I create a sub-organization
+      instead?
     m_Metadata:
       m_Items: []
   - m_Id: 323435556233217
-    m_Localized: 
+    m_Localized: The government is right. Efficiency is key right now.
     m_Metadata:
       m_Items: []
   - m_Id: 323435556233218
-    m_Localized: 
+    m_Localized: Citizens Autonomy Enhancing
     m_Metadata:
       m_Items: []
   references:

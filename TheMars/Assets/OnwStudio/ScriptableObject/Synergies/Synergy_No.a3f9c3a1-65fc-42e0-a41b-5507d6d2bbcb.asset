@@ -35,3 +35,4 @@ MonoBehaviour:
       data:
         <TargetBuildingCount>k__BackingField: 0
         <Resource>k__BackingField: 10
+        <RepeatDay>k__BackingField: 1

@@ -15,7 +15,8 @@ MonoBehaviour:
   <ID>k__BackingField: 654627c1-d65c-4956-aa58-6f31e3f76e5b
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 27aedcaa958488b4ba52ec3db5ecb252,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMProtestOfDiscontentEventData
@@ -58,12 +59,12 @@ MonoBehaviour:
   _bottomEffectCreators:
   - rid: 3610285249959297140
   - rid: 3610285249959297139
-  _topUsageCreators:
+  _topCostCreators:
   - rid: 3610285400346591260
   - rid: 3610285400346591261
   - rid: 3610285400346591262
   - rid: 3610285400346591263
-  _bottomUsageCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

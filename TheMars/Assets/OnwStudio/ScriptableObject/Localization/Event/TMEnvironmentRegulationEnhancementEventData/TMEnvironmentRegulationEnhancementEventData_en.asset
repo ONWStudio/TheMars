@@ -19,19 +19,28 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 337277342441472
-    m_Localized: 
+    m_Localized: 'You''ve tightened environmental regulations in your market, and
+      companies are looking for ways to adapt to the regulations,
+
+      citizens
+      have become increasingly frustrated. A conflict between those who support environmental
+      protection and those who want economic growth
+
+      between those who support
+      environmental protection and those who want economic growth, and social tensions
+      are beginning to be felt on Mars.'
     m_Metadata:
       m_Items: []
   - m_Id: 337277355024384
-    m_Localized: 
+    m_Localized: Be more conscious of your environment.
     m_Metadata:
       m_Items: []
   - m_Id: 337277355024385
-    m_Localized: 
+    m_Localized: You can't stop the growth of competition; let it happen.
     m_Metadata:
       m_Items: []
   - m_Id: 337277355024386
-    m_Localized: 
+    m_Localized: Increased environmental regulations
     m_Metadata:
       m_Items: []
   references:

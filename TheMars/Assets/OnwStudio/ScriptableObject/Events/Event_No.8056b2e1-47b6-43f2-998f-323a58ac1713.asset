@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.8056b2e1-47b6-43f2-998f-323a58ac1713
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 756cb1b3-ea95-4b76-98e1-4f754fc32770
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 0ad5649300c430045be308499683aedc,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMAbaritiaEventData
@@ -58,8 +60,8 @@ MonoBehaviour:
   - rid: 3610285249959297062
   - rid: 3610285249959297064
   _bottomEffectCreators: []
-  _topUsageCreators: []
-  _bottomUsageCreators: []
+  _topCostCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

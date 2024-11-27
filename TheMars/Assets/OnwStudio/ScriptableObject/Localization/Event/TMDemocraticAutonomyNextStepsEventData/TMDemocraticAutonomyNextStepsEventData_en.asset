@@ -46,19 +46,25 @@ MonoBehaviour:
       m_Items:
       - rid: 4853453322907287634
   - m_Id: 305587307929600
-    m_Localized: 
+    m_Localized: "The autonomous committee gathered a lot of residents' voices. However,
+      various demands poured out from each region, \r\nThe government should now
+      build on these opinions.\r\nThe government has reached a major point in deciding
+      to what extent to reflect the voices of citizens.\r\nWill we strike a balance
+      between the citizens and the government, or will we fully accept the opinions
+      of the citizens"
     m_Metadata:
       m_Items: []
   - m_Id: 305587337289728
-    m_Localized: 
+    m_Localized: I think you'd better listen to the government.
     m_Metadata:
       m_Items: []
   - m_Id: 305587337289729
-    m_Localized: 
+    m_Localized: I am the representative of the citizens. Their opinions are precious,
+      too.
     m_Metadata:
       m_Items: []
   - m_Id: 305587341484032
-    m_Localized: 
+    m_Localized: Democratic autonomy, then?
     m_Metadata:
       m_Items: []
   references:

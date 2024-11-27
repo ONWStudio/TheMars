@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3b556de61324f06a35ecefbf10713b, type: 3}
   m_Name: Event_No.1d1a913f-7fa0-49d5-a4b1-028099b02778
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 5462ae55-a4c1-4f67-a37f-5eb127f1227b
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 646d0a589f6ff89488f7893a94ac16aa,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMShadowOfProfitEventData
@@ -59,8 +61,8 @@ MonoBehaviour:
   - rid: 3610285249959297054
   - rid: 3610285249959297056
   _bottomEffectCreators: []
-  _topUsageCreators: []
-  _bottomUsageCreators: []
+  _topCostCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:
