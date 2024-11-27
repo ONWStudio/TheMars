@@ -19,19 +19,26 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 326083013500928
-    m_Localized: 
+    m_Localized: 'Excessive enthusiasm for scientific advancement eventually led
+      to the devastation of Mars.
+
+      The disaster made the citizens more desperate
+      to survive, which caused the environment to deteriorate rapidly.
+
+      For
+      them, scientific progress was no consolation, but rather something to be blamed.'
     m_Metadata:
       m_Items: []
   - m_Id: 326083017695232
-    m_Localized: 
+    m_Localized: We need to mitigate the damage caused by disasters...
     m_Metadata:
       m_Items: []
   - m_Id: 326083017695233
-    m_Localized: 
+    m_Localized: There are not enough materials to repair this...
     m_Metadata:
       m_Items: []
   - m_Id: 326083017695234
-    m_Localized: 
+    m_Localized: Paradox Future
     m_Metadata:
       m_Items: []
   references:

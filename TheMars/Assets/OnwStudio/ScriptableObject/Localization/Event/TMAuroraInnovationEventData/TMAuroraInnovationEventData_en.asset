@@ -19,19 +19,23 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 289477430861824
-    m_Localized: 
+    m_Localized: "You decided that life is more important than science.\r\n and evacuated
+      citizens from the disaster area at the cost of temporary losses.\r\nBut soon
+      after, new resources were discovered in the disaster area.\r\n scientists told
+      you that you could use them to develop even more technology."
     m_Metadata:
       m_Items: []
   - m_Id: 289477443444736
-    m_Localized: 
+    m_Localized: Let's heal the wounded and do what's best for the well-being of
+      our citizens.
     m_Metadata:
       m_Items: []
   - m_Id: 289477447639040
-    m_Localized: 
+    m_Localized: Not enough resources to treat?
     m_Metadata:
       m_Items: []
   - m_Id: 289477447639041
-    m_Localized: 
+    m_Localized: Aurora Innovation
     m_Metadata:
       m_Items: []
   references:

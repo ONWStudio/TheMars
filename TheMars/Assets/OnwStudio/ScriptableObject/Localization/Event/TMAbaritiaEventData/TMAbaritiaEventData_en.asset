@@ -17,7 +17,31 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 712fdd8838c68c74d82d8f2478a3b937, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 1825378304
+    m_Localized: 'You''ve earned a lot of money and their trust.
+
+      They ignore
+      environmental regulations, exploit resources, and engage in unethical activities
+      that jeopardize the health and safety of citizens.
+
+      You turn a blind
+      eye and stand by their side because you can''t afford to break your promise
+      to them.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 142301007872
+    m_Localized: They do this because they are weak.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 150794473472
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 159321493504
+    m_Localized: Abaritia
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

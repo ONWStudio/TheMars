@@ -17,7 +17,25 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 7fd3648f51a538948a8735cd1adee701, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 35983790080
+    m_Localized: Desertitication
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29293875200
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19156242432
+    m_Localized: It shouldn't be this way.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1737297920
+    m_Localized: "When did the land become so quiet?\r\nThe land that seemed to have
+      golden resources just around the corner. \r\nAs if it existed only in memory,
+      only the sandy wind blows today."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

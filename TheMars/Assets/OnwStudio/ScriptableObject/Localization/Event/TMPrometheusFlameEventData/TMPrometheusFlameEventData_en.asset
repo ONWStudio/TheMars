@@ -19,15 +19,33 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 15566231298048
-    m_Localized: 
+    m_Localized: You should be able to cover it with science.
     m_Metadata:
       m_Items: []
   - m_Id: 17957102018560
-    m_Localized: 
+    m_Localized: 'You raised your hand to theirs, thinking that a little more science
+      would help.
+
+      Scientific progress was prioritized for human survival
+      and comfort, and because of this, development on Mars
+
+      has been so rapid
+      that it has surpassed that of Earth.
+
+      At the same time, however, nature
+      has been completely destroyed and ecosystems are close to impossible to restore.
+
+      Despite
+      the brilliance of science''s achievements, the light at the end of the tunnel
+      was still dark.'
     m_Metadata:
       m_Items: []
   - m_Id: 31155591045120
     m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361040347914240
+    m_Localized: Prometheus' Flame
     m_Metadata:
       m_Items: []
   references:

@@ -17,7 +17,24 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 2144de34a409d4145a8d08bb049a4b2a, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 1724715008
+    m_Localized: The technology to get to Mars has gotten good enough that it's within
+      reach of civilians.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30552166400
+    m_Localized: Help migrate to Mars.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37888004096
+    m_Localized: They will come on their own.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 47769784320
+    m_Localized: Moving to Mars
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

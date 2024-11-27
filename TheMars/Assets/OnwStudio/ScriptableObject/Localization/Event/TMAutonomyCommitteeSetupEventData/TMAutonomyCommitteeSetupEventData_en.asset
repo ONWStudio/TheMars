@@ -19,19 +19,24 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 298567951441920
-    m_Localized: 
+    m_Localized: "We have opened management offices in each sector at the control
+      center to receive feedback from residents.\r\nWe wanted to provide residents
+      with the opportunity to directly participate in local policy and decision-making
+      \r\nso that their needs and opinions can actually be reflected in policy.\r\nThis
+      has generated a lot of opinions, but how can we use this to strengthen the
+      democratic system?"
     m_Metadata:
       m_Items: []
   - m_Id: 298567993384960
-    m_Localized: 
+    m_Localized: Let's do the hard stuff fast
     m_Metadata:
       m_Items: []
   - m_Id: 298567997579264
-    m_Localized: 
+    m_Localized: We don't have a lot of information yet, so let's gather some more
     m_Metadata:
       m_Items: []
   - m_Id: 298567997579265
-    m_Localized: 
+    m_Localized: Self-Governance Committee Setup
     m_Metadata:
       m_Items: []
   references:

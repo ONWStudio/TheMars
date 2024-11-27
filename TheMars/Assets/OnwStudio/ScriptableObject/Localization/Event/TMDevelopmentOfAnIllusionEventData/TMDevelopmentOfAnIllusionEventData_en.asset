@@ -19,19 +19,27 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 306927987843072
-    m_Localized: 
+    m_Localized: 'Businesses were encouraged to operate freely and citizens were
+      encouraged to participate in the economy.
+
+      While the Martian economy
+      appears to be growing steadily, businesses have pursued superficial progress
+      without real improvement.
+
+      Businesses implemented green policies, campaigned
+      for citizens, and tried to project a positive image to citizens.'
     m_Metadata:
       m_Items: []
   - m_Id: 306928000425984
-    m_Localized: 
+    m_Localized: Establish a corporate audit committee.
     m_Metadata:
       m_Items: []
   - m_Id: 306928000425985
-    m_Localized: 
+    m_Localized: I'll have to do it myself.
     m_Metadata:
       m_Items: []
   - m_Id: 306928004620288
-    m_Localized: 
+    m_Localized: Advances in fiction
     m_Metadata:
       m_Items: []
   references:

@@ -28,7 +28,7 @@ MonoBehaviour:
     m_LocalVariables: []
   _effectCreators: []
   _synergies:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 95edd2c9b814b478a8c056f2fe765222, type: 2}
   references:
     version: 2
     RefIds: []

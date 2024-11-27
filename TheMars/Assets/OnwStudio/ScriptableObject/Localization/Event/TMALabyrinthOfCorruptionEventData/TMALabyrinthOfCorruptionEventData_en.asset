@@ -17,7 +17,29 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 2094a323b1c8fd54d8ded9bcf2ed0b7a, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 35979595776
+    m_Localized: Deauty of corruption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26953453568
+    m_Localized: I can't handle it on my own. Let's ask the government for help.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17084256256
+    m_Localized: To be honest, I think I should take care of the profits, too.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3071086592
+    m_Localized: "You set up a corporate monitoring committee to monitor corporate
+      activities and ensure transparency.\r\nBut the commission operates poorly without
+      real authority, and companies take advantage of this opportunity to set up
+      a commission \r\nThey cooperated with their side to hide their actions and
+      concealed this fact.\r\nAs a result, citizens believe that the committee is
+      thoroughly monitoring the activities of the company, and they enjoy a false
+      sense of stability."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

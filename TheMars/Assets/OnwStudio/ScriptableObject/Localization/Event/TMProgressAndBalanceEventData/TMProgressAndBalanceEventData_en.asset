@@ -19,19 +19,32 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 319847526293504
-    m_Localized: 
+    m_Localized: 'As the terraforming of Mars accelerates, factions of scientists
+      and colonizers form.
+
+      and their conflicts began to escalate. The scientific
+      faction wants to use technological breakthroughs
+
+      life support systems
+      and raise humanity''s standard of living.
+
+      The nature faction advocates
+      for preserving and restoring the ecology of Mars to the greatest extent possible.
+
+      Whose
+      opinion should we listen to?'
     m_Metadata:
       m_Items: []
   - m_Id: 319847568236544
-    m_Localized: 
+    m_Localized: We have to be technologically innovative.
     m_Metadata:
       m_Items: []
   - m_Id: 319847572430848
-    m_Localized: 
+    m_Localized: Without nature...then
     m_Metadata:
       m_Items: []
   - m_Id: 319847576625152
-    m_Localized: 
+    m_Localized: Progress and balance
     m_Metadata:
       m_Items: []
   references:

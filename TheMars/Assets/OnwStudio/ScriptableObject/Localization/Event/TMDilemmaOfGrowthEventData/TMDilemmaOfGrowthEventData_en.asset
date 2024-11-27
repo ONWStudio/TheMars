@@ -46,19 +46,27 @@ MonoBehaviour:
       m_Items:
       - rid: 4853453322907287641
   - m_Id: 313306358210560
-    m_Localized: 
+    m_Localized: 'Since you decided to maximize capitalism, Mars has experienced
+      rapid economic growth and the development of various industries.
+
+      However,
+      this has led to resource depletion and environmental pollution, and citizens
+      are suffering from more and more health problems.
+
+      In this situation,
+      the government has been informed that you need to adjust your activities.'
     m_Metadata:
       m_Items: []
   - m_Id: 313306370793472
-    m_Localized: 
+    m_Localized: I need to stop them now.
     m_Metadata:
       m_Items: []
   - m_Id: 313306370793473
-    m_Localized: 
+    m_Localized: "\u201CWe will develop green technology!\u201D"
     m_Metadata:
       m_Items: []
   - m_Id: 313306370793474
-    m_Localized: 
+    m_Localized: Dilemma of growth
     m_Metadata:
       m_Items: []
   references:

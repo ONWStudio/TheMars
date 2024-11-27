@@ -17,7 +17,37 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 1761a6dddd940c2459b8675b71310fef, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 51762761728
+    m_Localized: Green Soliderity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43088941056
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34595475456
+    m_Localized: This situation needs to be mediated.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2592935936
+    m_Localized: 'Citizens have decided to cooperate with businesses, claiming economic
+      freedom.
+
+      Strengthen control of businesses, and citizens form their
+      own unions
+
+      It monitors corporate activities and begins to demand fair
+      treatment and environmental protection.
+
+      Through this, citizens claimed
+      their rights and launched a movement to improve working conditions and environmental
+      standards.
+
+      However, these changes have intensified conflicts with companies,
+      and some companies have protested.'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

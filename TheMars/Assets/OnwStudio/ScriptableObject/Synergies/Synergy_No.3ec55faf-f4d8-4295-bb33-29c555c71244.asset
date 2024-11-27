@@ -1,29 +1,2 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88efa2807f14b4c50b6687e145d4a238, type: 3}
-  m_Name: Synergy_No.3ec55faf-f4d8-4295-bb33-29c555c71244
-  m_EditorClassIdentifier: 
-  <ID>k__BackingField: 05eccdbb-9426-45c3-a234-37e573128418
-  <Icon>k__BackingField: {fileID: 0}
-  _synergyEffects: []
-  <LocalizedSynergyName>k__BackingField:
-    m_TableReference:
-      m_TableCollectionName: 
-    m_TableEntryReference:
-      m_KeyId: 0
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  references:
-    version: 2
-    RefIds: []

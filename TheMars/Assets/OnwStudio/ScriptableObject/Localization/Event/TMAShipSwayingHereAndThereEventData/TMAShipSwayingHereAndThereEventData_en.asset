@@ -19,19 +19,23 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 98228774100994
-    m_Localized: 
+    m_Localized: Wobbly Ship
     m_Metadata:
       m_Items: []
   - m_Id: 98228769906688
-    m_Localized: 
+    m_Localized: "Autonomous councils react to voices from one side of the political
+      spectrum and change \r\nchanging policies and frequently changing political
+      direction. \r\nThis leads to policy inconsistency and growing confusion and
+      discontent among citizens. \r\nThe constant chaos can be devastating to economic
+      and social stability. \r\nHow to solve this problem"
     m_Metadata:
       m_Items: []
   - m_Id: 98228774100992
-    m_Localized: 
+    m_Localized: Let's change the policy now.
     m_Metadata:
       m_Items: []
   - m_Id: 98228774100993
-    m_Localized: 
+    m_Localized: This is only temporary.
     m_Metadata:
       m_Items: []
   references:

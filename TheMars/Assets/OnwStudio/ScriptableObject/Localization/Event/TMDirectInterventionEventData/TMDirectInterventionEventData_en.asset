@@ -17,7 +17,27 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: a653911902aad4a459d3e65b62d9c3ff, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 40375226368
+    m_Localized: Direct intervention
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32397660160
+    m_Localized: Conduct an internal investigation.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24109715456
+    m_Localized: Offer a compromise.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2471301120
+    m_Localized: "I had had enough of companies that were only looking at the surface.
+      \r\nI postponed everything I was doing and had a meeting with the company.\r\nAt
+      first, they were reluctant, but as soon as they saw the evidence and circumstances
+      I had gathered, they finally admitted it.\r\nNow the initiative was back in
+      my hands."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
