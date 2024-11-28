@@ -91,6 +91,10 @@ MonoBehaviour:
     m_Key: SatisfactionDescription
     m_Metadata:
       m_Items: []
+  - m_Id: 2587822539051008
+    m_Key: MarsLithium_Payment_Event_Tutorial
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -22,59 +22,73 @@ MonoBehaviour:
   - m_Id: 9443010744320
     m_Localized: "{IsTemporary:cond:permanently|{LimitDay}for a few days} {RepeatDay}every
       few days {Kind:cond:MarsLithium|Credit|Citizen|Steel|Plants|Clay\r|electricity|Satisfaction}
-      {Min} ~ {Max}{Kind:cond:pcs|pcs|Citizen|pcs|pcs|pcs|pcs|%} {Positive:cond:Acquire|Consume}"
+      {Min} ~ {Max}{Kind:cond:pcs|pcs|Citizen|pcs|pcs|pcs|pcs|%} {Positive:cond:acquire|consume}"
     m_Metadata:
       m_Items:
       - rid: 3610285249959297310
   - m_Id: 17483239854080
-    m_Localized: 
+    m_Localized: '{IsTemporary:cond:permanently|{DelayDayCount} for a few days} {TargetBuildingCount}pcs
+      [{Kind:cond:pioneer|mining|development|externalAll}]building {Positive:cond:acquire|consume}
+      to Grade {GradeUp}'
     m_Metadata:
       m_Items:
       - rid: 3610285249959297310
   - m_Id: 18864558379008
-    m_Localized: 
+    m_Localized: '{IsTemporary:cond:permanently|{DelayDayCount} for a few days} shutting
+      down {TargetBuildingCount}pcs buildings'
     m_Metadata:
       m_Items:
       - rid: 3610285249959297310
   - m_Id: 20700698841088
-    m_Localized: 
+    m_Localized: '{IsTemporary:cond:permanently|{DelayDayCount} for a few days} [{CardKind:cond:BuildType|EffectType|All}]
+      {Positive:cond:acquire|consume} the cost of [{Kind:cond:BuildType|EffectType|All}]
+      cards by {Cost}'
     m_Metadata:
       m_Items:
       - rid: 3610285249959297310
   - m_Id: 22802921754624
-    m_Localized: 
+    m_Localized: "{IsTemporary:cond:permanently|{DelayDayCount} for a few days} [{CardKind:cond:BuildType|EffectType|All}]
+      {Positive:cond:acquire|consume} the card's [{CostKind:cond:MarsLithium|Credit|Citizen|Steel|Plants|Clay\r|electricity}]
+      cost by {Cost}"
     m_Metadata:
       m_Items:
       - rid: 3610285249959297310
   - m_Id: 24330806038528
-    m_Localized: 
+    m_Localized: '{IsTemporary:cond:permanently|{DelayDayCount} for a few days} {Count}pcs
+      cards featured in the daily card selection event {Positive:cond:acquire|consume}'
     m_Metadata:
       m_Items:
       - rid: 3610285249959297310
   - m_Id: 25028784361472
-    m_Localized: 
+    m_Localized: '{IsTemporary:cond:permanently|{DelayDayCount}for a few days} [{Kind:cond:Disaster|positive|negative}]
+      event occurs {Probability}% {Positive:cond:acquire|consume}'
     m_Metadata:
       m_Items:
       - rid: 3610285249959297310
   - m_Id: 26708213043200
     m_Localized: "{IsTemporary:cond:permanently|{LimitDay}for a few days} {RepeatDay}every
       few days {Kind:cond:MarsLithium|Credit|Citizen|Steel|Plants|Clay\r|electricity|Satisfaction}
-      {Min} ~ {Max}{Kind:cond:pcs|pcs|Citizen|pcs|pcs|pcs|pcs|%} {Positive:cond:Acquire|Consume}"
+      {Min} ~ {Max}{Kind:cond:pcs|pcs|Citizen|pcs|pcs|pcs|pcs|%} {Positive:cond:acquire|consume}"
     m_Metadata:
       m_Items:
       - rid: 3610285249959297310
   - m_Id: 27942609293312
-    m_Localized: 
+    m_Localized: '{IsTemporary:cond:permanently|{LimitDay} for a few days} MatsLithium
+      or construction resources(Steel, Plants, Clay) {RepeatDay}every few days {Resource}pcs
+      {Positive:cond:acquire|consume}'
     m_Metadata:
       m_Items:
       - rid: 3610285249959297310
   - m_Id: 29204390154240
-    m_Localized: 
+    m_Localized: '{IsTemporary:cond:permanently|{LimitDay} for a few days} randomly
+      construction resources(Steel, Plants, Clay) {RepeatDay}every few days {Resource}pcs
+      {Positive:cond:acquire|consume}'
     m_Metadata:
       m_Items:
       - rid: 3610285249959297310
   - m_Id: 30864294350848
-    m_Localized: 
+    m_Localized: '{IsTemporary:cond:permanently|{LimitDay} for a few days} construction
+      resources(Steel, Plants, Clay) {RepeatDay}every few days {Min} ~ {Max}pcs {Positive:cond:acquire|consume}'
     m_Metadata:
       m_Items:
       - rid: 3610285249959297310

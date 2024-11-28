@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047e55a2e1fea4a35b6f19592cc62b84, type: 3}
+  m_Name: Card_No.34248268-c599-422f-94cc-780b673809e7
+  m_EditorClassIdentifier: 
+  _localizedCardName:
+    m_TableReference:
+      m_TableCollectionName: CardName
+    m_TableEntryReference:
+      m_KeyId: 4369178998771712
+      m_Key: "\uBBF8\uC0DD\uBB3C \uBC30\uC591\uAE30"
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _cardEffectCreator:
+    rid: 7665316321679114249
+  _mainCost:
+    rid: 7665316321679114250
+  _subCosts:
+  - rid: 7665316321679114251
+  - rid: 7665316321679114252
+  <ID>k__BackingField: 8f379d20-2701-4be6-a3a7-52ec943f24c2
+  <CardImage>k__BackingField: {fileID: 21300000, guid: 0e6f8929517c9334f8cdc4920f9037be,
+    type: 3}
+  <CardKey>k__BackingField: MicrobialIncubator
+  references:
+    version: 2
+    RefIds:
+    - rid: 7665316321679114249
+      type: {class: TMCardBuildingCreateEffectCreator, ns: TM.Card.Effect.Creator,
+        asm: AssemblyTheMars}
+      data:
+        <BuildingData>k__BackingField: {fileID: 0}
+    - rid: 7665316321679114250
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
+      data:
+        <Kind>k__BackingField: 1
+        <Cost>k__BackingField: 70
+    - rid: 7665316321679114251
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
+      data:
+        <Kind>k__BackingField: 3
+        <Cost>k__BackingField: 20
+    - rid: 7665316321679114252
+      type: {class: TMResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
+      data:
+        <Kind>k__BackingField: 4
+        <Cost>k__BackingField: 50

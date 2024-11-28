@@ -28,16 +28,17 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3213692928
-    m_Localized: 
+    m_Localized: Consumable resources
     m_Metadata:
       m_Items: []
   - m_Id: 3637250729435136
-    m_Localized: 
+    m_Localized: Next Effective {Next} days later({IsTemporary:cond:permanently|{RemainingDay}days
+      remaining duration})
     m_Metadata:
       m_Items:
       - rid: 4853453803608342531
   - m_Id: 3637271956807680
-    m_Localized: 
+    m_Localized: ({IsTemporary:cond:permanently|{RemainingDay}days remaining duration})
     m_Metadata:
       m_Items:
       - rid: 4853453803608342531

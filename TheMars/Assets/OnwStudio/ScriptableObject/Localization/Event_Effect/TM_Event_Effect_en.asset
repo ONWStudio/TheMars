@@ -20,7 +20,8 @@ MonoBehaviour:
     - rid: 3610285249959297299
   m_TableData:
   - m_Id: 638034186240
-    m_Localized: 
+    m_Localized: '{Kind:cond:Disaster|positive|negative} fixed event occurs at {Probability}%
+      .'
     m_Metadata:
       m_Items:
       - rid: 3610285249959297299
@@ -30,30 +31,35 @@ MonoBehaviour:
       m_Items:
       - rid: 3610285249959297299
   - m_Id: 4301351882752
-    m_Localized: 
+    m_Localized: '{TargetBuildingCount} random buildings {Positive:cond:acquire|consume}
+      to Grade{GradeAdd}.'
     m_Metadata:
       m_Items:
       - rid: 3610285249959297299
   - m_Id: 5293023760384
-    m_Localized: 
+    m_Localized: Gain {CollectCount} random card from the {Kind:cond:BuildType|EffectType|All}.
     m_Metadata:
       m_Items:
       - rid: 3610285249959297299
   - m_Id: 6333706080256
-    m_Localized: 
+    m_Localized: Discard {DropCount} random card from your hand that is an {Kind:cond:BuildType|EffectType|All}.
     m_Metadata:
       m_Items:
       - rid: 3610285249959297299
   - m_Id: 7863096119296
-    m_Localized: 
+    m_Localized: "{Positive:cond:acquire|consume} {Resource} {Kind:cond:MarsLithium|Credit|Citizen|Steel|Plants|Clay\r|electricity|Satisfaction}."
     m_Metadata:
       m_Items:
       - rid: 3610285249959297299
   - m_Id: 9859144421376
-    m_Localized: 
+    m_Localized: "{Positive:cond:acquire|consume} {Min} ~ {Max}{Kind:cond:MarsLithium|Credit|Citizen|Steel|Plants|Clay\r|electricity|Satisfaction}."
     m_Metadata:
       m_Items:
       - rid: 3610285249959297299
+  - m_Id: 2098227512676352
+    m_Localized: You're fired.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

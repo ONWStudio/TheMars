@@ -25,11 +25,11 @@ MonoBehaviour:
   - m_Id: 14313325498368
     m_Localized: 'It''s an honor to meet you, sir.
 
-      I''m an AI ''Septer''
-      designed to raise the minister this time.
+      I''m an AI ''Septer'' designed
+      to raise the minister this time.
 
-      I will inform you of what
-      the minister has to do in the future, so please follow him well.'
+      I will inform you of what the minister
+      has to do in the future, so please follow him well.'
     m_Metadata:
       m_Items: []
   - m_Id: 54589834301440
@@ -56,8 +56,8 @@ MonoBehaviour:
   - m_Id: 55121009348608
     m_Localized: 'Now, let''s put the cards to work.
 
-      First, ''hold'' the
-      card you want to install and ''drop'' it onto the desired tile.'
+      First, ''hold'' the card
+      you want to install and ''drop'' it onto the desired tile.'
     m_Metadata:
       m_Items: []
   - m_Id: 68373344849920
@@ -69,8 +69,8 @@ MonoBehaviour:
   - m_Id: 68418941128704
     m_Localized: 'Next, we will learn how to demolish them.
 
-      ''Hold'' the
-      placed building and move it to the bottom center.'
+      ''Hold'' the placed
+      building and move it to the bottom center.'
     m_Metadata:
       m_Items: []
   - m_Id: 70562977058816
@@ -113,8 +113,8 @@ MonoBehaviour:
     m_Localized: 'We''re a government agency, so sometimes we have to show proof
       that we''re doing our job, even if we''re terraforming.
 
-      Today I''m
-      going to post an example email so you can try it out.'
+      Today I''m going
+      to post an example email so you can try it out.'
     m_Metadata:
       m_Items: []
   - m_Id: 71153526673408
@@ -134,8 +134,16 @@ MonoBehaviour:
       This can change
       for a variety of reasons, including events and demographics.
 
-      It''s
-      important to note that a drop in satisfaction can be detrimental.'
+      It''s important
+      to note that a drop in satisfaction can be detrimental.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2587822539051008
+    m_Localized: 'We have two choices, as shown below. The government will ask us
+      to pay, but the minister believes we can afford it.
+
+      If we don''t pay
+      the minister will resign immediately.'
     m_Metadata:
       m_Items: []
   references:
