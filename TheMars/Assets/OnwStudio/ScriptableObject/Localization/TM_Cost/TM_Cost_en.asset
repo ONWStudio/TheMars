@@ -20,7 +20,8 @@ MonoBehaviour:
     - rid: 3610285249959297317
   m_TableData:
   - m_Id: 30005808402432
-    m_Localized: 
+    m_Localized: "{Kind:cond:MarsLithium|Credit|Citizen|Steel|Plants|Clay\r|electricity|Satisfaction}
+      {Cost}\n{Kind:cond:pcs|pcs|Citizen|pcs|pcs|pcs|pcs|%} Consume"
     m_Metadata:
       m_Items:
       - rid: 3610285249959297317
