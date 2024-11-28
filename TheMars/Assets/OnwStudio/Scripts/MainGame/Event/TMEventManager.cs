@@ -1,17 +1,14 @@
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using Onw.Event;
-using Onw.Manager;
-using Onw.Attribute;
-using Onw.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using Onw.Event;
+using Onw.Manager;
+using Onw.Attribute;
 using TM.Manager;
 using TM.Card.Runtime;
-using TM.Event.Effect;
-using JetBrains.Annotations;
 
 namespace TM.Event
 {
@@ -77,18 +74,13 @@ namespace TM.Event
 
         protected override void Init()
         {
-            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
-            TMPlayerManager.Instance.Level.AddListener(onChangedLevel);
+            TMSimulator.Instance.NowDay.AddListenerWithoutNotify(onChangedDay);
+            TMPlayerManager.Instance.Level.AddListenerWithoutNotify(onChangedLevel);
             TMCardManager.Instance.CardCreator.OnPostCreateCard += onPostCreateCard;
             _mainEventRunner = new(TMEventDataManager.Instance.RootMainEventData);
             _marsLithiumEventRunner = new(TMEventDataManager.Instance.MarsLithiumEvent);
             _positiveEventProbability.DefaultProbability.Value = 20;
             _negativeEventProbability.DefaultProbability.Value = 20;
-
-            _eventQueue.Enqueue(_mainEventRunner);
-            _eventQueue.Enqueue(_marsLithiumEventRunner);
-
-            fireEvents();
         }
 
         private void onPostCreateCard(TMCardModel card)

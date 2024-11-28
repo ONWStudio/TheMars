@@ -9,10 +9,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
 using TMPro;
+using Onw.Scope;
 using Onw.Coroutine;
 using Onw.Attribute;
 using Onw.Extensions;
-using Onw.Scope;
 using Onw.UI.Components;
 using TM.Cost;
 using TM.Event;
@@ -143,13 +143,14 @@ namespace TM.UI
         // TODO : 이벤트 호출 순서가 맞지않음
         private void onEffect(TMEventChoice choice)
         {
+            ITMEventRunner eventRunner = _eventRunner;
             _topEffectPairs.ForEach(pair => pair.Dispose());
             _topEffectPairs.Clear();
             _bottomEffectPairs.ForEach(pair => pair.Dispose());
             _bottomEffectPairs.Clear();
-            _eventRunner.InvokeEvent(choice);
             resetField();
             SetActiveEventUI(false);
+            eventRunner.InvokeEvent(choice); // .. OnTriggerEvent => this.SetActive(true);
         }
 
         private void resetField()

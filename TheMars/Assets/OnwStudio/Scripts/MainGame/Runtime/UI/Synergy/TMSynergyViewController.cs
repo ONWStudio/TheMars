@@ -121,7 +121,7 @@ namespace TM.UI
                             itemCorners[2].y + itemSize.y * _multiOffset.y,
                             _descriptor.GetPositionZ());
 
-                        _descriptor.RectTransform.pivot = new(1f, 1f);
+                        _descriptor.RectTransform.pivot = new(0f, 1f);
                         _descriptor.SetPosition(descriptorPosition);
                         _descriptor.SetActiveDescriptor(true);
                         

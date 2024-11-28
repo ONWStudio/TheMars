@@ -18,24 +18,43 @@ namespace Onw.Attribute.Editor
             GUI.enabled = true;
 
             Type requireComponentType = property.GetPropertyType();
-            bool isValidate = typeof(MonoBehaviour).IsSubclassOf(requireComponentType) && 
-                              typeof(Component).IsSubclassOf(requireComponentType);
-            
-            if (!isValidate && !property.IsNestedAttribute<SerializeField>())
+
+            if (requireComponentType is null)
             {
-                Debug.LogWarning("Not MonoBehaviour or Component! and check in Contain SerializeField Attribute");
+                Debug.LogWarning("Component Type is null");
+                return;
+            }
+            
+            if (typeof(Component).IsAssignableFrom(requireComponentType))
+            {
+                Debug.LogWarning("Type is not component");
+                return;
+            }
+            
+            if (!property.IsNestedAttribute<SerializeField>())
+            {
+                Debug.LogWarning("check in Contain SerializeField Attribute");
                 return;
             }
 
-            if (!property.objectReferenceValue && property.serializedObject.targetObject is Component component)
+            if (property.serializedObject.targetObject is not Component component)
+            {
+                Debug.LogWarning("This Attribute not in Component Context");
+                return;
+            }
+
+            if (!property.objectReferenceValue)
             {
                 if (!component.TryGetComponent(requireComponentType, out Component requireComponent))
                 {
                     requireComponent = component.gameObject.AddComponent(requireComponentType);
                 }
-
-                property.objectReferenceValue = requireComponent;
-                property.serializedObject.ApplyModifiedProperties();
+                
+                if (property.objectReferenceValue != requireComponent)
+                {
+                    property.objectReferenceValue = requireComponent;
+                    property.serializedObject.ApplyModifiedProperties();
+                }
             }
         }
 

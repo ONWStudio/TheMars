@@ -6,7 +6,8 @@ namespace Onw.Scope
 {
     public sealed class StringBuilderPoolScope : IDisposable
     {
-        private readonly StringBuilder _stringBuilder = StringBuilderPool.Shared.Get();
+        private readonly StringBuilderPool _selectPool;
+        private readonly StringBuilder _stringBuilder;
         private bool _disposed;
 
         public StringBuilder Get()
@@ -19,13 +20,19 @@ namespace Onw.Scope
         {
             if (_disposed) return;
 
-            if (_stringBuilder is null)
+            if (_stringBuilder is not null)
             {
-                StringBuilderPool.Shared.Release(_stringBuilder);
+                _selectPool.Release(_stringBuilder);
             }
 
             _disposed = true;
             GC.SuppressFinalize(this);
+        }
+
+        public StringBuilderPoolScope(StringBuilderPool selectPool = null)
+        {
+            _selectPool = selectPool ?? StringBuilderPool.Shared;
+            _stringBuilder = _selectPool!.Get();
         }
 
         ~StringBuilderPoolScope()

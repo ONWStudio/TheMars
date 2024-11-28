@@ -10,16 +10,36 @@ namespace Onw.Event
     public interface IReadOnlyReactiveField<T>
     {
         T Value { get; }
-        
+
+        /// <summary>
+        /// .. 리스너를 추가시킵니다. 리스너 등록과 동시에 이벤트가 한번 호출됩니다
+        /// </summary>
+        /// <param name="onChangedValue"></param>
         void AddListener(UnityAction<T> onChangedValue);
+        /// <summary>
+        /// .. 리스너를 제거합니다
+        /// </summary>
+        /// <param name="onChangedValue"></param>
         void RemoveListener(UnityAction<T> onChangedValue);
+        /// <summary>
+        /// .. 리스너를 추가시 이벤트를 발생시키지 않습니다
+        /// </summary>
+        /// <param name="onChangedValue"> .. 이벤트 메서드 </param>
+        void AddListenerWithoutNotify(UnityAction<T> onChangedValue);
     }
 
     public interface IReactiveField<T> : IReadOnlyReactiveField<T>
     {
+        /// <summary>
+        /// .. 값을 읽거나 쓸 수 있습니다. 값을 변경시 이전의 값과 다른 값일 경우에만 이벤트를 트리거합니다
+        /// </summary>
         new T Value { get; set; }
-        bool InvokeImmediately { get; }
-        bool InvokeIfValueChanged { get; }
+
+        /// <summary>
+        /// .. 설정할 값이 이전의 값과 같은 값이어도 이벤트를 강제로 트리거시킵니다 
+        /// </summary>
+        /// <param name="value"> value </param>
+        void SetValueAndForceInvoke(T value);
     }
 
     [System.Serializable]
@@ -27,6 +47,12 @@ namespace Onw.Event
     {
         private static readonly EqualityComparer<T> _defaultEqualityComparer = EqualityComparer<T>.Default;
         protected virtual EqualityComparer<T> EqualityComparer => _defaultEqualityComparer;
+        
+        /// <summary>
+        /// .. SetValueAndForceInvoke 메서드와 Value의 Setter 호출 시 인자로 들어온 값을
+        /// 필터링하는 프로세서 인터페이스입니다 사용자 정의 프로세서를 추가시킬시 값을
+        /// 프로세서에 한번 필터 시킨후 값을 초기화 시킵니다.
+        /// </summary>
         [field: SerializeReference, SerializeReferenceDropdown] public List<IValueProcessor> ValueProcessors { get; set; } = new();
 
         public override T Value
@@ -34,48 +60,67 @@ namespace Onw.Event
             get => _value;
             set
             {
-                T processedValue = value;
-                ValueProcessors?.ForEach(processor => processedValue = processor.Process(processedValue));
+                T processedValue = GetProcessedValue(value);
 
-                if (!InvokeIfValueChanged || !EqualityComparer.Equals(_value, processedValue))
+                if (!EqualityComparer.Equals(_value, processedValue))
                 {
                     _value = processedValue;
                     _onChangedValue.Invoke(_value);
                 }
             }
         }
-        
-        [field: SerializeField] protected virtual T _value { get; set; }
+
+        public override void SetValueAndForceInvoke(T value)
+        {
+            _value = GetProcessedValue(value);
+            _onChangedValue.Invoke(_value);
+        }
+
+        protected T GetProcessedValue(T value)
+        {
+            T processedValue = value;
+            ValueProcessors?.ForEach(processor => processedValue = processor.Process(processedValue));
+
+            return processedValue;
+        }
+
+        [field: SerializeField] protected T _value { get; set; }
     }
 
 
     [System.Serializable]
     public abstract class ReactiveFieldBase<T> : IReactiveField<T>
     {
-        [field: SerializeField] public virtual bool InvokeImmediately { get; set; } = true;
-        [field: SerializeField] public virtual bool InvokeIfValueChanged { get; set; } = true;
+        [SerializeField] protected UnityEvent<T> _onChangedValue = new();
 
         public abstract T Value { get; set; }
 
-        [SerializeField] protected UnityEvent<T> _onChangedValue = new();
 
-        public virtual void AddListener(UnityAction<T> onChangedValue)
+        public virtual void SetValueAndForceInvoke(T value)
+        {
+            Value = value;
+            _onChangedValue.Invoke(Value);
+        }
+
+        public void AddListener(UnityAction<T> onChangedValue)
         {
             if (onChangedValue is null) return;
 
             _onChangedValue.AddListener(onChangedValue);
-
-            if (InvokeImmediately)
-            {
-                onChangedValue.Invoke(Value);
-            }
+            onChangedValue.Invoke(Value);
         }
 
-        public virtual void RemoveListener(UnityAction<T> onChangedValue)
+        public void RemoveListener(UnityAction<T> onChangedValue)
         {
             if (onChangedValue is null) return;
 
             _onChangedValue.RemoveListener(onChangedValue);
+        }
+
+        public void AddListenerWithoutNotify(UnityAction<T> onChangedValue)
+        {
+            if (onChangedValue is null) return;
+            _onChangedValue.AddListener(onChangedValue);
         }
 
         public int GetPersistentEventCount() => _onChangedValue.GetPersistentEventCount();

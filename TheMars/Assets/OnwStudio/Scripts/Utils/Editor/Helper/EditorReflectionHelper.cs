@@ -295,7 +295,10 @@ namespace Onw.Editor
             {
                 fieldInfo = currentType?.GetField(part, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
                 if (fieldInfo == null)
+                {
+                    Debug.LogWarning($"Field not found: {part} in {currentType}");
                     return null; // 필드를 찾을 수 없으면 null 반환
+                }
 
                 // 현재 필드의 타입을 다음 경로의 타입으로 설정합니다.
                 currentType = fieldInfo.FieldType;
@@ -317,6 +320,7 @@ namespace Onw.Editor
         public static Type GetPropertyType(object targetObject, string propertyPath)
         {
             FieldInfo field = GetFieldInfo(targetObject, propertyPath);
+            if (field is null) return null;
 
             if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(UnityEngine.Object))
             {

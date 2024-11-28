@@ -686,6 +686,7 @@ MonoBehaviour:
   _onPointerExitEvent:
     m_PersistentCalls:
       m_Calls: []
+  <RectTransform>k__BackingField: {fileID: 8090952879628178792}
 --- !u!222 &4162523940243696900
 CanvasRenderer:
   m_ObjectHideFlags: 0

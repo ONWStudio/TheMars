@@ -1049,8 +1049,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxCardCount:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1108,11 +1106,11 @@ MonoBehaviour:
   <DeckTransform>k__BackingField: {fileID: 921509768}
   <CardSystemCamera>k__BackingField: {fileID: 1515806359}
   <CardSorter>k__BackingField:
-    rid: 8523893782630629378
+    rid: 4853453869862354947
   references:
     version: 2
     RefIds:
-    - rid: 8523893782630629378
+    - rid: 4853453869862354947
       type: {class: LineSorter, ns: TM.Card.Runtime, asm: AssemblyTheMars}
       data: 
 --- !u!114 &99719990
@@ -1508,8 +1506,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _marsLithium:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1517,8 +1513,6 @@ MonoBehaviour:
     - rid: 3610285147714224128
     <_value>k__BackingField: 100
   _credit:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1526,8 +1520,6 @@ MonoBehaviour:
     - rid: 3610285147714224129
     <_value>k__BackingField: 100
   _population:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1535,8 +1527,6 @@ MonoBehaviour:
     - rid: 3610285249959297212
     <_value>k__BackingField: 100
   _totalPopulation:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1544,8 +1534,6 @@ MonoBehaviour:
     - rid: 3610285147714224130
     <_value>k__BackingField: 150
   _steel:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1553,8 +1541,6 @@ MonoBehaviour:
     - rid: 3610285147714224131
     <_value>k__BackingField: 100
   _plants:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1562,8 +1548,6 @@ MonoBehaviour:
     - rid: 3610285147714224132
     <_value>k__BackingField: 100
   _clay:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1571,8 +1555,6 @@ MonoBehaviour:
     - rid: 3610285147714224133
     <_value>k__BackingField: 100
   _electricity:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1580,8 +1562,6 @@ MonoBehaviour:
     - rid: 3610285147714224134
     <_value>k__BackingField: 100
   _satisfaction:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1589,8 +1569,6 @@ MonoBehaviour:
     - rid: 3610285147714224135
     <_value>k__BackingField: 50
   _level:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1598,8 +1576,6 @@ MonoBehaviour:
     - rid: 3610285147714224136
     <_value>k__BackingField: 1
   _exp:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1607,8 +1583,6 @@ MonoBehaviour:
     - rid: 3610285147714224137
     <_value>k__BackingField: 0
   _maxExp:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1616,8 +1590,6 @@ MonoBehaviour:
     - rid: 3610285147714224138
     <_value>k__BackingField: 100
   _terraformValue:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls:
@@ -6208,7 +6180,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 659136822}
   m_HandleRect: {fileID: 659136821}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -17730,24 +17702,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AccumulatedTime>k__BackingField: 0
   _nowDay:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
     <ValueProcessors>k__BackingField: []
     <_value>k__BackingField: 1
   _nowMinutes:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
     <ValueProcessors>k__BackingField: []
     <_value>k__BackingField: 0
   _nowSeconds:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -18256,8 +18222,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _calamityEventProbability:
     <ReactDefaultProbability>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
@@ -18265,16 +18229,12 @@ MonoBehaviour:
       - rid: 4649214858699472901
       <_value>k__BackingField: 0
     <ReactAdditionalProbability>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
       <ValueProcessors>k__BackingField: []
       <_value>k__BackingField: 0
     <ReactIsStatic>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
@@ -18282,8 +18242,6 @@ MonoBehaviour:
       <_value>k__BackingField: 0
   _positiveEventProbability:
     <ReactDefaultProbability>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
@@ -18291,16 +18249,12 @@ MonoBehaviour:
       - rid: 4649214858699472902
       <_value>k__BackingField: 0
     <ReactAdditionalProbability>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
       <ValueProcessors>k__BackingField: []
       <_value>k__BackingField: 0
     <ReactIsStatic>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
@@ -18308,8 +18262,6 @@ MonoBehaviour:
       <_value>k__BackingField: 0
   _negativeEventProbability:
     <ReactDefaultProbability>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
@@ -18317,16 +18269,12 @@ MonoBehaviour:
       - rid: 4649214858699472903
       <_value>k__BackingField: 0
     <ReactAdditionalProbability>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
       <ValueProcessors>k__BackingField: []
       <_value>k__BackingField: 0
     <ReactIsStatic>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
@@ -25847,7 +25795,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 902370264}
-  - {fileID: 1935485975211334433}
+  - {fileID: 4239066633090530969}
   m_Father: {fileID: 1439010216}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: -0.036979165, y: 0.25744444}
@@ -25911,7 +25859,8 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   _scrollView: {fileID: 638645472}
-  _descriptor: {fileID: 6424432858548618952}
+  _descriptor: {fileID: 5993078259547187990}
+  _multiOffset: {x: 0, y: 0}
 --- !u!1 &2059693715
 GameObject:
   m_ObjectHideFlags: 0
@@ -26373,29 +26322,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2142499015}
   m_CullTransparentMesh: 1
---- !u!114 &58762603757530041 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7887592973305557713, guid: f4960876538e6467ba260fcee435adae,
-    type: 3}
-  m_PrefabInstance: {fileID: 3819895405882404257}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1509671545195961658 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1509671546987543979, guid: 1658b4a4e401436498d34e18eed4e7ca,
     type: 3}
   m_PrefabInstance: {fileID: 1868521617}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &1935485975211334433 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-    type: 3}
-  m_PrefabInstance: {fileID: 3819895405882404257}
   m_PrefabAsset: {fileID: 0}
 --- !u!64 &2423911624228052336
 MeshCollider:
@@ -26419,170 +26350,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1608785674506393167, guid: d3bfb0d57c0878b459d060887c306a02, type: 3}
---- !u!1 &3083562098177413129 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 966123041820230378, guid: f4960876538e6467ba260fcee435adae,
-    type: 3}
-  m_PrefabInstance: {fileID: 3819895405882404257}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &3819895405882404257
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2042489562}
-    m_Modifications:
-    - target: {fileID: 966123041820230378, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_Name
-      value: Synergy_Contents
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 3.9887834
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 1.8000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.46436527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -0.070007324
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0.11999512
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.15997314
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.1000061
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141326083540783928, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1475789675554255973, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_Name
-      value: Name
-      objectReference: {fileID: 0}
-    - target: {fileID: 2283436914845710642, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_Name
-      value: Line
-      objectReference: {fileID: 0}
-    - target: {fileID: 7887592973305557713, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7887592973305557713, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 8490235509122608318, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8490235509122608318, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 966123041820230378, guid: f4960876538e6467ba260fcee435adae,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6424432858548618952}
-  m_SourcePrefab: {fileID: 100100000, guid: f4960876538e6467ba260fcee435adae, type: 3}
---- !u!223 &3819895405882404258 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 8490235509122608318, guid: f4960876538e6467ba260fcee435adae,
-    type: 3}
-  m_PrefabInstance: {fileID: 3819895405882404257}
-  m_PrefabAsset: {fileID: 0}
 --- !u!64 &4055368974496006544
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -26627,18 +26394,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: abc00000000011844622664395290210, type: 3}
---- !u!114 &5286212044251583925 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7982534515520616922, guid: f4960876538e6467ba260fcee435adae,
+--- !u!224 &4239066633090530969 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
     type: 3}
-  m_PrefabInstance: {fileID: 3819895405882404257}
+  m_PrefabInstance: {fileID: 6169479620504552715}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!64 &5886854369954573976
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -26683,21 +26444,136 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: abc00000000014408308734134547259, type: 3}
---- !u!114 &6424432858548618952
+--- !u!114 &5993078259547187990 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 3579623561007286966, guid: f4960876538e6467ba260fcee435adae,
+    type: 3}
+  m_PrefabInstance: {fileID: 6169479620504552715}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3083562098177413129}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f853fa1c2b3974283bb3ad0c13df3885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvas: {fileID: 3819895405882404258}
-  _nameText: {fileID: 58762603757530041}
-  _descriptionText: {fileID: 5286212044251583925}
+--- !u!1001 &6169479620504552715
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2042489562}
+    m_Modifications:
+    - target: {fileID: 1567131304643658164, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_Name
+      value: Synergy_Contents
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 3.9887834
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1.8000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.46436527
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -0.070007324
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.11999512
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.15997314
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.1000061
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205043021501441274, guid: f4960876538e6467ba260fcee435adae,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f4960876538e6467ba260fcee435adae, type: 3}
 --- !u!64 &6669203848972267576
 MeshCollider:
   m_ObjectHideFlags: 0

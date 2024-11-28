@@ -17,7 +17,7 @@ namespace Onw.Editor.Extensions
     {
         public static Type GetPropertyType(this SerializedProperty serializedProperty)
         {
-            Object targetObject = serializedProperty.serializedObject.targetObject;
+            Object targetObject = serializedProperty?.serializedObject.targetObject;
             return !targetObject ? null : EditorReflectionHelper.GetPropertyType(targetObject, serializedProperty.propertyPath);
         }
 
