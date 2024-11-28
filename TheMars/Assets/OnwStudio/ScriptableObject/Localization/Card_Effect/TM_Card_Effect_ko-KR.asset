@@ -20,8 +20,8 @@ MonoBehaviour:
     - rid: 3610285249959297227
   m_TableData:
   - m_Id: 67755642880
-    m_Localized: "{0:list:{Kind:cond:\uB9C8\uB974\uC2A4\uB9AC\uD2AC|\uD06C\uB808\uB527|\uC778\uAD6C|\uAC15\uCCA0|\uC2DD\uBB3C|\uC810\uD1A0|\uC804\uAE30|\uB9CC\uC871\uB3C4}{Kind:cond:\uAC1C|\uAC1C|\uBA85|\uAC1C|\uAC1C|\uAC1C|\uAC1C|%}
-      {Positive:cond:\uD68D\uB4DD|\uAC10\uC18C}\n}\n "
+    m_Localized: "{0:list:{Kind:cond:\uB9C8\uB974\uC2A4\uB9AC\uD2AC|\uD06C\uB808\uB527|\uC778\uAD6C|\uAC15\uCCA0|\uC2DD\uBB3C|\uC810\uD1A0|\uC804\uAE30|\uB9CC\uC871\uB3C4}
+      {Resource}{Kind:cond:\uAC1C|\uAC1C|\uBA85|\uAC1C|\uAC1C|\uAC1C|\uAC1C|%} {Positive:cond:\uD68D\uB4DD|\uAC10\uC18C}\n}\n "
     m_Metadata:
       m_Items:
       - rid: 3610285249959297227
