@@ -32,7 +32,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2155784902156813076}
-  - {fileID: 4441610565544207133}
+  - {fileID: 872410667739976650}
   - {fileID: 863667632260669361}
   - {fileID: 9072132925784667344}
   m_Father: {fileID: 7277279708986865494}
@@ -120,17 +120,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1057801728727377385}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5365388536198109715}
+  m_Father: {fileID: 872410667739976650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.18081653, y: 0.29122424}
   m_AnchorMax: {x: 0.81914145, y: 0.813697}
-  m_AnchoredPosition: {x: 0, y: 0.0000038146973}
-  m_SizeDelta: {x: 0, y: 0.0000038146973}
+  m_AnchoredPosition: {x: 0.0020599365, y: -5.653154}
+  m_SizeDelta: {x: 36.167507, y: 51.458336}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3115019975022073610
 CanvasRenderer:
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c002af955bfd6fd4cac2216ef0d0c9c5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -170,6 +170,66 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2361220288497834145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 872410667739976650}
+  - component: {fileID: 5317679153319278156}
+  - component: {fileID: 6278809945528354770}
+  m_Layer: 6
+  m_Name: CardImage_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &872410667739976650
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2361220288497834145}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4441610565544207133}
+  m_Father: {fileID: 5365388536198109715}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.18081653, y: 0.29122424}
+  m_AnchorMax: {x: 0.81914145, y: 0.813697}
+  m_AnchoredPosition: {x: 0, y: 0.0000038146973}
+  m_SizeDelta: {x: 0, y: 0.0000038146973}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5317679153319278156
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2361220288497834145}
+  m_CullTransparentMesh: 1
+--- !u!114 &6278809945528354770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2361220288497834145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 28, y: 42}
 --- !u!1 &3791710687005855213
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,32 +645,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isDragging:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
     <ValueProcessors>k__BackingField: []
     <_value>k__BackingField: 0
   _onField:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
     <ValueProcessors>k__BackingField: []
     <_value>k__BackingField: 0
   _isOverTombTransform:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
     <ValueProcessors>k__BackingField: []
     <_value>k__BackingField: 0
   _isOverCollectTransform:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -626,24 +678,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _cardData:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
     <ValueProcessors>k__BackingField: []
     <_value>k__BackingField: {fileID: 0}
   _canInteract:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
     <ValueProcessors>k__BackingField: []
     <_value>k__BackingField: 1
   _isHide:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
