@@ -25,7 +25,7 @@ namespace Onw.Attribute.Editor
                 return;
             }
             
-            if (typeof(Component).IsAssignableFrom(requireComponentType))
+            if (requireComponentType.IsAssignableFrom(typeof(Component)))
             {
                 Debug.LogWarning("Type is not component");
                 return;
