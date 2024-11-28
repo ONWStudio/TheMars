@@ -24,12 +24,10 @@ namespace Onw.Helper
 
         public static IEnumerable<string> GetClassNamesFromParent(string baseClass)
         {
-            return from assembly 
-                       in AppDomain.CurrentDomain.GetAssemblies() 
+            return from assembly in AppDomain.CurrentDomain.GetAssemblies() 
                    let baseType = assembly.GetType(baseClass) 
                    where baseType is not null 
-                   from type 
-                       in assembly.GetTypes() 
+                   from type in assembly.GetTypes() 
                    where type.IsSubclassOf(baseType) && type.GetInterfaces().Contains(type) 
                    select type.Name;
         }
@@ -158,7 +156,7 @@ namespace Onw.Helper
                     .GetTypes()
                     .FirstOrDefault(t => t.IsEnum && t.Name == enumTypeName);
 
-                if (enumType != null)
+                if (enumType is not null)
                 {
                     Type underlyingType = Enum.GetUnderlyingType(enumType);
 

@@ -15,7 +15,7 @@ namespace Onw.HexGrid
         Vector3 TilePosition { get; }
         Vector2 NormalizedPosition { get; }
         
-        event UnityAction<IHexGrid> OnHighlightTile;
+        event UnityAction<IHexGrid> OnEnterTile;
         event UnityAction<IHexGrid> OnExitTile;
         event UnityAction<IHexGrid> OnMouseDownTile;
         event UnityAction<IHexGrid> OnMouseUpTile;

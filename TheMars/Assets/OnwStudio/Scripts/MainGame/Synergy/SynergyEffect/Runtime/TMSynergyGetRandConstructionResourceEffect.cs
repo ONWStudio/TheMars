@@ -18,7 +18,7 @@ namespace TM.Synergy.Effect
         [field: SerializeField, ReadOnly] public int Resource { get; private set; } = 10;
         [field: SerializeField, ReadOnly] public int RepeatDay { get; private set; }
 
-        private int _dayCount = -1;
+        private int _dayCount;
         
         public void Initialize(TMSynergyGetRandConstructionResourceEffectCreator effectCreator)
         {
@@ -40,12 +40,12 @@ namespace TM.Synergy.Effect
         
         public override void ApplyEffect(TMSynergy synergy)
         {
-            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
+            TMSimulator.Instance.NowDay.AddListenerWithoutNotify(onChangedDay);
         }
         
         public override void UnapplyEffect(TMSynergy synergy)
         {
-            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
+            TMSimulator.Instance.NowDay.RemoveListener(onChangedDay);
             _dayCount = 0;
             
             _localizedDescription.Arguments = new object[]

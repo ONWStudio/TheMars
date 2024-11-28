@@ -45,16 +45,14 @@ namespace TM.Buff
 
         protected sealed override void ApplyBuffProtected()
         {
-            int dayCount = -1;
+            int dayCount = 0;
             _remainingDay.Value = DelayDayCount;
-            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
+            TMSimulator.Instance.NowDay.AddListenerWithoutNotify(onChangedDay);
 
             OnApplyBuff();
 
             void onChangedDay(int day)
             {
-                Debug.Log("InvokeDay");
-                
                 dayCount++;
                 _remainingDay.Value = DelayDayCount - dayCount;
 

@@ -59,7 +59,7 @@ namespace TM
 
         protected override void Init()
         {
-            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
+            TMSimulator.Instance.NowDay.AddListenerWithoutNotify(onChangedDay);
             TMCardManager.Instance.CardCreator.OnPostCreateCard += onPostCreateCard;
             TMEventManager.Instance.OnTriggerEvent += onTriggerEvent;
         }
@@ -76,8 +76,6 @@ namespace TM
 
         private void onChangedDay(int day)
         {
-            if (day == 0) return;
-
             SetExp(_exp.Value + 5);
         }
 

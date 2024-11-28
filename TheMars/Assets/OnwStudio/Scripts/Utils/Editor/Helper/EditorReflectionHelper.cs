@@ -16,7 +16,7 @@ namespace Onw.Editor
     {
         public static FieldInfo GetFieldFromMethod(MethodInfo method, string fieldName)
         {
-            if (method == null || string.IsNullOrEmpty(fieldName)) return null;
+            if (method is null || string.IsNullOrEmpty(fieldName)) return null;
 
             // 메서드가 속한 클래스의 타입을 가져옴
             Type targetType = method.DeclaringType;
@@ -67,9 +67,6 @@ namespace Onw.Editor
         /// <summary>
         /// .. 자동구현 프로퍼티의 백킹 필드의 직렬화 된 이름을 가져옵니다.
         /// </summary>
-        /// 프로퍼티 이름
-        /// </param>
-        /// <returns></returns>
         public static IEnumerable<Attribute> GetAttributes(object targetField)
         {
             if (targetField is null) yield break;
@@ -283,8 +280,7 @@ namespace Onw.Editor
 
         public static FieldInfo GetFieldInfo(object targetObject, string propertyPath)
         {
-            if (targetObject == null || string.IsNullOrEmpty(propertyPath))
-                return null;
+            if (targetObject == null || string.IsNullOrEmpty(propertyPath)) return null;
 
             Type currentType = targetObject.GetType();
             FieldInfo fieldInfo = null;
@@ -294,7 +290,7 @@ namespace Onw.Editor
             foreach (string part in pathParts)
             {
                 fieldInfo = currentType?.GetField(part, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-                if (fieldInfo == null)
+                if (fieldInfo is null)
                 {
                     Debug.LogWarning($"Field not found: {part} in {currentType}");
                     return null; // 필드를 찾을 수 없으면 null 반환
@@ -320,7 +316,9 @@ namespace Onw.Editor
         public static Type GetPropertyType(object targetObject, string propertyPath)
         {
             FieldInfo field = GetFieldInfo(targetObject, propertyPath);
-            if (field is null) return null;
+            
+            if (field is null) 
+                return null;
 
             if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(UnityEngine.Object))
             {

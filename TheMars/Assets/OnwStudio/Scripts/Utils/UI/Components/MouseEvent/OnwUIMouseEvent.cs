@@ -8,6 +8,9 @@ using UnityEngine.Events;
 
 namespace Onw.UI.Components
 {
+    /// <summary>
+    /// .. 미완성 버그 많음
+    /// </summary>
     public sealed class OnwUIMouseEvent : MonoBehaviour
     {
         public event UnityAction<Vector2> OnPointerDown

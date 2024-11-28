@@ -1,12 +1,11 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Events;
-using Onw.Extensions;
 using Onw.Attribute;
-using Onw.Helper;
+using Onw.Extensions;
+using UnityEngine.Serialization;
 
 namespace Onw.HexGrid
 {
@@ -46,9 +45,6 @@ namespace Onw.HexGrid
 
         public IReadOnlyList<string> Properties => _properties;
 
-        /// <summary>
-        /// .. 호출 시 박싱이 발생합니다
-        /// </summary>
         public HexCoordinates HexPoint => _hexPoint;
 
         [SerializeField] private List<string> _properties = new();
@@ -57,10 +53,10 @@ namespace Onw.HexGrid
         [SerializeField] private bool _isActive = true;
         [SerializeField] private Color _color = Color.cyan;
 
-        public event UnityAction<IHexGrid> OnHighlightTile
+        public event UnityAction<IHexGrid> OnEnterTile
         {
-            add => _onHighlightTile.AddListener(value);
-            remove => _onHighlightTile.RemoveListener(value);
+            add => _onEnterTile.AddListener(value);
+            remove => _onEnterTile.RemoveListener(value);
         }
 
         public event UnityAction<IHexGrid> OnExitTile
@@ -93,8 +89,9 @@ namespace Onw.HexGrid
             remove => _onChangedColor.RemoveListener(value);
         }
 
+        [FormerlySerializedAs("_onHighlightTile")]
         [Header("Interactable Events")]
-        [SerializeField] private UnityEvent<IHexGrid> _onHighlightTile = new();
+        [SerializeField] private UnityEvent<IHexGrid> _onEnterTile = new();
         [SerializeField] private UnityEvent<IHexGrid> _onExitTile = new();
         [SerializeField] private UnityEvent<IHexGrid> _onMouseUpTile = new();
         [SerializeField] private UnityEvent<IHexGrid> _onMouseDownTile = new();
@@ -115,7 +112,7 @@ namespace Onw.HexGrid
 
         public void InvokeOnHighlightTile()
         {
-            _onHighlightTile.Invoke(this);
+            _onEnterTile.Invoke(this);
         }
 
         public void InvokeOnExitTile()

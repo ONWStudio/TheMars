@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,14 +14,16 @@ namespace TM.Grid
         [SerializeField, InitializeRequireComponent] private GridManager _gridManager;
         private readonly Dictionary<HexCoordinates, TMBuilding> _buildings = new();
 
+        [Header("Building Event")]
         [SerializeField] private UnityEvent<TMBuilding> _onAddedBuilding;
         [SerializeField] private UnityEvent<TMBuilding> _onRemovedBuilding;
-        [SerializeField] private UnityEvent<TMBuilding> _onChangedPointBuilding;
+        [SerializeField] private UnityEvent<TMBuilding> _onEnterBuilding;
+        [SerializeField] private UnityEvent<TMBuilding> _onExitBuilding;
         
-        public event UnityAction<IHexGrid> OnHighlightTile
+        public event UnityAction<IHexGrid> OnEnterTile
         {
-            add => _gridManager.OnHighlightTile += value;
-            remove => _gridManager.OnHighlightTile -= value;
+            add => _gridManager.OnEnterTile += value;
+            remove => _gridManager.OnEnterTile -= value;
         }
 
         public event UnityAction<IHexGrid> OnMouseDownTile
@@ -55,10 +56,16 @@ namespace TM.Grid
             remove => _onRemovedBuilding.RemoveListener(value);
         }
         
-        public event UnityAction<TMBuilding> OnChangedPointBuilding
+        public event UnityAction<TMBuilding> OnEnterBuilding
         {
-            add => _onChangedPointBuilding.AddListener(value);
-            remove => _onChangedPointBuilding.RemoveListener(value);
+            add => _onEnterBuilding.AddListener(value);
+            remove => _onEnterBuilding.RemoveListener(value);
+        }
+        
+        public event UnityAction<TMBuilding> OnExitBuilding
+        {
+            add => _onExitBuilding.AddListener(value);
+            remove => _onExitBuilding.AddListener(value);
         }
         
         protected override string SceneName => "MainGameScene";
@@ -72,9 +79,27 @@ namespace TM.Grid
             set => _gridManager.IsRender = value;
         }
 
-        public IReadOnlyDictionary<HexCoordinates, TMBuilding> Buildings => _buildings;        
+        public IReadOnlyDictionary<HexCoordinates, TMBuilding> Buildings => _buildings;
 
-        protected override void Init() {}
+        protected override void Init()
+        {
+            _gridManager.OnEnterTile += onEnterTile;
+            _gridManager.OnExitTile += onExitTile;
+        }
+
+        private void onEnterTile(IHexGrid hex)
+        {
+            if (!_buildings.TryGetValue(hex.HexPoint, out TMBuilding building)) return;
+            
+            _onEnterBuilding.Invoke(building);
+        }
+
+        private void onExitTile(IHexGrid hex)
+        {
+            if (!_buildings.TryGetValue(hex.HexPoint, out TMBuilding building)) return;
+            
+            _onExitBuilding.Invoke(building);
+        }
 
         public void AddBuilding(IHexGrid hex, TMBuilding building)
         {
@@ -87,13 +112,6 @@ namespace TM.Grid
         public void AddBuildingWithoutNotify(IHexGrid hex, TMBuilding building)
         {
             _buildings.Add(hex.HexPoint, building);
-        }
-
-        public void ChangePointBuilding(IHexGrid hex, TMBuilding building)
-        {
-            if (!_buildings.ContainsKey(hex.HexPoint)) return;
-            
-            _onChangedPointBuilding.Invoke(building);
         }
 
         public void RemoveBuilding(IHexGrid hex)

@@ -30,15 +30,13 @@ namespace TM.Card.Runtime
             }
             else
             {
-                _cardModel.CardData.AddListener(setCard);
+                _cardModel.CardData.AddListenerWithoutNotify(setCard);
             }
 
             _cardModel.IsHide.AddListener(isHide => _cardViewer.SetView(!isHide));
 
             void setCard(TMCardData cardData)
             {
-                if (!cardData) return;
-
                 _cardModel.CardData.RemoveListener(setCard);
                 CardData = _cardModel.CardData.Value;
                 _cardViewer.SetUI(_cardModel);

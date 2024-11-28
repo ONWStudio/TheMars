@@ -39,7 +39,7 @@ namespace TM.Buff
             int dayCount = 0;
             _remainingDay.Value = LimitDay;
             _remainingDayByNextEffect.Value = RepeatDay;
-            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
+            TMSimulator.Instance.NowDay.AddListenerWithoutNotify(onChangedDay);
 
             void onChangedDay(int day)
             {

@@ -21033,8 +21033,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821b6133d6692406aa9c22b093e53344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HexagonRadius>k__BackingField: 0.038
-  <RootObject>k__BackingField: {fileID: 0}
   _onHighlightTile:
     m_PersistentCalls:
       m_Calls: []
@@ -25117,6 +25115,8 @@ MonoBehaviour:
   _mouseInputEvent: {fileID: 1944097348}
   _tileLimit: 6
   _mainCamera: {fileID: 1486505849}
+  <HexagonRadius>k__BackingField: 0.038
+  <RootObject>k__BackingField: {fileID: 0}
 --- !u!114 &1944097347
 MonoBehaviour:
   m_ObjectHideFlags: 0

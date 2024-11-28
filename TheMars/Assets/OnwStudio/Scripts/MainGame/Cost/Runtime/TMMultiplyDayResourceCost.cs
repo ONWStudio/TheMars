@@ -33,12 +33,11 @@ namespace TM.Cost
         {
             Kind = creator.Kind;
             Cost = creator.Cost;
-            TMSimulator.Instance.NowDay.AddListener(onChagendDay);
+            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
 
-            void onChagendDay(int day)
+            void onChangedDay(int day)
             {
                 _nowDay = day;
-
                 CostDescription.Arguments = new object[]
                 {
                     new

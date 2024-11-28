@@ -35,6 +35,7 @@ namespace TM.UI
                 }
 
                 LocalizedDescription = null;
+                ChangeHandler = null;
             }
 
             public TMDescriptionCallbackPair(LocalizedString localizedDescription, LocalizedString.ChangeHandler changeHandler)
@@ -190,7 +191,7 @@ namespace TM.UI
                 _bottomEffectPairs.AddRange(buildDescription(_eventRunner.BottomEffects, _eventRunner.BottomCosts, buildText => _bottomEffectDescription = buildText));
             }
 
-            TMDescriptionCallbackPair[] buildDescription(IReadOnlyList<ITMEventEffect> effects, IReadOnlyList<ITMCost> costs, Action<string> buildDescriptionAction)
+            IEnumerable<TMDescriptionCallbackPair> buildDescription(IReadOnlyList<ITMEventEffect> effects, IReadOnlyList<ITMCost> costs, Action<string> buildDescriptionAction)
             {
                 ITMEventEffect[] effectArray = effects
                     .Where(effect => effect.EffectDescription is not null)
@@ -204,8 +205,7 @@ namespace TM.UI
 
                 return effectArray
                     .Select(effect => new TMDescriptionCallbackPair(effect.EffectDescription, _ => onBuildDescription()))
-                    .Concat(costArray.Select(cost => new TMDescriptionCallbackPair(cost.CostDescription, _ => onBuildDescription())))
-                    .ToArray();
+                    .Concat(costArray.Select(cost => new TMDescriptionCallbackPair(cost.CostDescription, _ => onBuildDescription())));
 
                 void onBuildDescription()
                 {

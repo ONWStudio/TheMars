@@ -1936,9 +1936,9 @@ MonoBehaviour:
   _bottomButtonExitTrigger: {fileID: 5159738580355617165}
   _paymentDescriptionHeader:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: TM_UI
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 3213692928
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

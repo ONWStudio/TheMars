@@ -95,7 +95,6 @@ namespace Onw.Event
 
         public abstract T Value { get; set; }
 
-
         public virtual void SetValueAndForceInvoke(T value)
         {
             Value = value;
