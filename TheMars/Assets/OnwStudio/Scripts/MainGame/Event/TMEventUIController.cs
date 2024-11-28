@@ -1,5 +1,4 @@
 using System;
-using System.Buffers;
 using System.Text;
 using System.Linq;
 using System.Collections;
@@ -13,6 +12,7 @@ using TMPro;
 using Onw.Coroutine;
 using Onw.Attribute;
 using Onw.Extensions;
+using Onw.Scope;
 using Onw.UI.Components;
 using TM.Cost;
 using TM.Event;
@@ -77,10 +77,10 @@ namespace TM.UI
         [SerializeField, SelectableSerializeField] private PointerExitTrigger _topButtonExitTrigger;
         [SerializeField, SelectableSerializeField] private PointerExitTrigger _bottomButtonExitTrigger;
 
+        private ITMEventRunner _eventRunner;
         private string _description = string.Empty;
         private string _topEffectDescription = string.Empty;
         private string _bottomEffectDescription = string.Empty;
-        private ITMEventRunner _eventRunner = null;
         private readonly List<TMDescriptionCallbackPair> _topEffectPairs = new();
         private readonly List<TMDescriptionCallbackPair> _bottomEffectPairs = new();
 
@@ -189,7 +189,7 @@ namespace TM.UI
                 _bottomEffectPairs.AddRange(buildDescription(_eventRunner.BottomEffects, _eventRunner.BottomCosts, buildText => _bottomEffectDescription = buildText));
             }
 
-            TMDescriptionCallbackPair[] buildDescription(IReadOnlyList<ITMEventEffect> effects, IReadOnlyList<ITMCost> costs, Action<string> onBuildedDescription)
+            TMDescriptionCallbackPair[] buildDescription(IReadOnlyList<ITMEventEffect> effects, IReadOnlyList<ITMCost> costs, Action<string> buildDescriptionAction)
             {
                 ITMEventEffect[] effectArray = effects
                     .Where(effect => effect.EffectDescription is not null)
@@ -215,9 +215,10 @@ namespace TM.UI
                     {
                         isReload = false;
 
-                        if (onBuildedDescription is not null)
+                        if (buildDescriptionAction is not null)
                         {
-                            StringBuilder descriptionBuilder = new();
+                            using StringBuilderPoolScope scope = new();
+                            StringBuilder descriptionBuilder = scope.Get();
 
                             if (costArray.Length > 0)
                             {
@@ -234,7 +235,7 @@ namespace TM.UI
                                 descriptionBuilder.Append(string.Join("\n", effectArray.Select(effect => effect.EffectDescription.GetLocalizedString())));
                             }
 
-                            onBuildedDescription.Invoke(descriptionBuilder.ToString());
+                            buildDescriptionAction.Invoke(descriptionBuilder.ToString());
                         }
                     });
                 }

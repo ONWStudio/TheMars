@@ -8,7 +8,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Onw.Attribute;
 using Onw.Extensions;
-using Onw.Manager.ObjectPool;
+using Onw.ObjectPool;
 using TM.Buff;
 
 namespace TM.UI

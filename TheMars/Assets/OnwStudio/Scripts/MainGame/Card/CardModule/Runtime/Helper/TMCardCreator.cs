@@ -1,13 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Onw.Manager.Prototype;
-using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
-using Object = UnityEngine.Object;
+using TMPro;
+using Onw.Prototype;
 using Random = UnityEngine.Random;
 
 namespace TM.Card.Runtime

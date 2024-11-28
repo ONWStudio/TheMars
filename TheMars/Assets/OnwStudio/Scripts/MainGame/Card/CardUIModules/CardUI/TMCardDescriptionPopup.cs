@@ -10,6 +10,7 @@ using TMPro;
 using Onw.UI;
 using Onw.Attribute;
 using Onw.Extensions;
+using Onw.Scope;
 using TM.Card.Runtime;
 
 namespace TM.UI
@@ -135,16 +136,19 @@ namespace TM.UI
         {
             yield return null;
 
-            StringBuilder descriptionBuilder = new();
-            descriptionBuilder.AppendLine(_paymentHeader.GetLocalizedString());
-            descriptionBuilder.AppendLine("");
-            descriptionBuilder.AppendLine(card.MainCost.CostDescription.GetLocalizedString());
-            card.SubCosts.ForEach(cost => descriptionBuilder.AppendLine(cost.CostDescription.GetLocalizedString()));
-            descriptionBuilder.AppendLine("");
-            descriptionBuilder.AppendLine(_effectHeader.GetLocalizedString());
-            descriptionBuilder.AppendLine("");
-            descriptionBuilder.AppendLine(card.CardEffect.LocalizedDescription.GetLocalizedString());
-            _cardDescriptionText.text = descriptionBuilder.ToString();
+            using (StringBuilderPoolScope scope = new())
+            {
+                StringBuilder descriptionBuilder = scope.Get();
+                descriptionBuilder.AppendLine(_paymentHeader.GetLocalizedString());
+                descriptionBuilder.AppendLine("");
+                descriptionBuilder.AppendLine(card.MainCost.CostDescription.GetLocalizedString());
+                card.SubCosts.ForEach(cost => descriptionBuilder.AppendLine(cost.CostDescription.GetLocalizedString()));
+                descriptionBuilder.AppendLine("");
+                descriptionBuilder.AppendLine(_effectHeader.GetLocalizedString());
+                descriptionBuilder.AppendLine("");
+                descriptionBuilder.AppendLine(card.CardEffect.LocalizedDescription.GetLocalizedString());
+                _cardDescriptionText.text = descriptionBuilder.ToString();
+            }
 
             _isReload = false;
         }

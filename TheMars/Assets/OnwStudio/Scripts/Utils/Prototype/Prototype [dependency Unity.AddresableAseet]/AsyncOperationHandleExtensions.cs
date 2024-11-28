@@ -5,9 +5,9 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
 
-namespace Onw.Manager.Prototype
+namespace Onw.Prototype
 {
-    internal static class AsyncOperationHandleExtentions
+    internal static class AsyncOperationHandleExtensions
     {
         internal static void ReleaseErrorHandle<T>(this AsyncOperationHandle<T> handle) where T : class
         {
