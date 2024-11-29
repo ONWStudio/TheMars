@@ -27,7 +27,7 @@ MonoBehaviour:
     rid: 3610285400346591249
   _subCosts: []
   <ID>k__BackingField: 9c0feaf4-749b-416b-b13e-0aa7067c1f76
-  <CardImage>k__BackingField: {fileID: 21300000, guid: 1d776e2cb062ee5418b9040c25330fee,
+  <CardImage>k__BackingField: {fileID: 21300000, guid: abadc85bb5f0340468dc3b1d88af7926,
     type: 3}
   <CardKey>k__BackingField: SteelDigger
   references:

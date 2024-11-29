@@ -29,7 +29,7 @@ MonoBehaviour:
   - rid: 3610285400346591246
   - rid: 3610285400346591247
   <ID>k__BackingField: 3907bbaa-54b7-4255-bf8a-c52556b05369
-  <CardImage>k__BackingField: {fileID: 21300000, guid: e3d50391c88360c4e9ffb32c4d6c947b,
+  <CardImage>k__BackingField: {fileID: 21300000, guid: f8b5a698359e7224e85fc980bf0ad15e,
     type: 3}
   <CardKey>k__BackingField: NuclearPowerPlant
   references:
