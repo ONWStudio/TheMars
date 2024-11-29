@@ -7,11 +7,11 @@ using TM.Manager;
 
 namespace TM.Cost.Creator
 {
-    [SerializeField, SerializeReferenceDropdownName("¸¶¸£½º ¸®Æ¬ ¼Ò¸ğ (nÀÏÂ÷ÀÇ ¹è¼ö)")]
+    [SerializeField, SerializeReferenceDropdownName("nì¼ì°¨ ë°°ìˆ˜ ìì› ë‚©ë¶€")]
     public class TMMultiplyDayResourceCostCreator : ITMCostCreator
     {
-        [field: SerializeField, DisplayAs("ÄÚ½ºÆ® Á¾·ù")] public TMResourceKind Kind { get; private set; }
-        [field: SerializeField, DisplayAs("±âº» ³³ºÎ·®")] public int Cost { get; private set; } = 10;
+        [field: SerializeField, DisplayAs("ìì› ì¢…ë¥˜")] public TMResourceKind Kind { get; private set; }
+        [field: SerializeField, DisplayAs("ë‚©ë¶€ëŸ‰")] public int Cost { get; private set; } = 10;
 
         public ITMCost CreateCost()
         {

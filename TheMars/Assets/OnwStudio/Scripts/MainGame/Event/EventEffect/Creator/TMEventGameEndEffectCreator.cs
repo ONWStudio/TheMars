@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace TM.Event.Creator
 {
-    [System.Serializable, SerializeReferenceDropdownName("°ÔÀÓ Á¾·á È¿°ú")]
+    [System.Serializable, SerializeReferenceDropdownName("ê²Œìž„ ì¢…ë£Œ íš¨ê³¼")]
     public sealed class TMEventGameEndEffectCreator : ITMEventEffectCreator
     {
         public ITMEventEffect CreateEffect()

@@ -69,7 +69,10 @@ namespace TM.UI
             building.BuildingData.LocalizedBuildingName.StringChanged += onChangedName;
             _buildingEffectCallbackFairs.Add(
                 building.GetInstanceID(), 
-                building.Effects.Select(effect => new BuildingEffectCallbackFair(effect.LocalizedDescription, _ => onChangedEffectDescription())).ToArray());
+                building
+                    .Effects
+                    .Select(effect => new BuildingEffectCallbackFair(effect.LocalizedDescription, _ => onChangedEffectDescription()))
+                    .ToArray());
             
             // .. 성능 최적화
             void onChangedEffectDescription()

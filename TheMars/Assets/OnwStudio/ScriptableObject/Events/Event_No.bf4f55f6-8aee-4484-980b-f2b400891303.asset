@@ -57,18 +57,18 @@ MonoBehaviour:
   <HasBottomEvent>k__BackingField: 1
   _topEffectCreators: []
   _bottomEffectCreators:
-  - rid: 3610285280145179426
+  - rid: 4853453890639626251
   _topCostCreators:
   - rid: 3610285400346591259
   _bottomCostCreators: []
   references:
     version: 2
     RefIds:
-    - rid: 3610285280145179426
-      type: {class: TMEventGameEndEffectCreator, ns: TM.Event.Creator, asm: AssemblyTheMars}
-      data: 
     - rid: 3610285400346591259
       type: {class: TMMultiplyDayResourceCostCreator, ns: TM.Cost.Creator, asm: AssemblyTheMars}
       data:
         <Kind>k__BackingField: 0
         <Cost>k__BackingField: 10
+    - rid: 4853453890639626251
+      type: {class: TMEventGameEndEffectCreator, ns: TM.Event.Creator, asm: AssemblyTheMars}
+      data: 
