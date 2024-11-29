@@ -19,19 +19,19 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 2253197312
-    m_Localized: 
+    m_Localized: Paying for Mars Lithium
     m_Metadata:
       m_Items: []
   - m_Id: 48684142592
-    m_Localized: 
+    m_Localized: I can't pay.
     m_Metadata:
       m_Items: []
   - m_Id: 53574701056
-    m_Localized: 
+    m_Localized: Pay Mars Lithium.
     m_Metadata:
       m_Items: []
   - m_Id: 58565922816
-    m_Localized: 
+    m_Localized: The day came when I had to make my periodic Mars Lithium payment.
     m_Metadata:
       m_Items: []
   references:

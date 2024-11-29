@@ -28,7 +28,7 @@ MonoBehaviour:
   _subCosts:
   - rid: 7665316321679114255
   <ID>k__BackingField: b7adaae6-3e21-405f-9c53-8fed87aa79f6
-  <CardImage>k__BackingField: {fileID: 21300000, guid: 68b1b01bf0636b54787355fcf21b6554,
+  <CardImage>k__BackingField: {fileID: 21300000, guid: 78c63f1996f2be14098819dbec40b001,
     type: 3}
   <CardKey>k__BackingField: DroneHangar
   references:

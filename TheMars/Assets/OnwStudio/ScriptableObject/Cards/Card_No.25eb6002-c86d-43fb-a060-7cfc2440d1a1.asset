@@ -28,7 +28,7 @@ MonoBehaviour:
   _subCosts:
   - rid: 3610285400346591252
   <ID>k__BackingField: 16bc1a70-68f5-461d-9757-5a421eac7edb
-  <CardImage>k__BackingField: {fileID: 21300000, guid: 16c17a3cb2c1a4e4dad9956fed38b4ee,
+  <CardImage>k__BackingField: {fileID: 21300000, guid: 9ee931600b5f00f4cbe0a7df080ad452,
     type: 3}
   <CardKey>k__BackingField: MarsLithiumDigger
   references:

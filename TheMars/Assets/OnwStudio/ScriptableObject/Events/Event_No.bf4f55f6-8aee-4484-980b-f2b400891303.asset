@@ -15,7 +15,8 @@ MonoBehaviour:
   <ID>k__BackingField: 3ea9cacf-cb53-4f3b-bcf7-d611924d5812
   <TopEventData>k__BackingField: {fileID: 0}
   <BottomEventData>k__BackingField: {fileID: 0}
-  <EventImage>k__BackingField: {fileID: 0}
+  <EventImage>k__BackingField: {fileID: 21300000, guid: 35e21d5675be2524a8cf3ab34e0ab662,
+    type: 3}
   <DescriptionTextEvent>k__BackingField:
     m_TableReference:
       m_TableCollectionName: TMMarsLithiumEventData
@@ -57,9 +58,9 @@ MonoBehaviour:
   _topEffectCreators: []
   _bottomEffectCreators:
   - rid: 3610285280145179426
-  _topUsageCreators:
+  _topCostCreators:
   - rid: 3610285400346591259
-  _bottomUsageCreators: []
+  _bottomCostCreators: []
   references:
     version: 2
     RefIds:

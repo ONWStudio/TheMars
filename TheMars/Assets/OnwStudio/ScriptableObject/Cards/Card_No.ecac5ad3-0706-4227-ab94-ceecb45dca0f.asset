@@ -27,7 +27,7 @@ MonoBehaviour:
     rid: 3610285400346591248
   _subCosts: []
   <ID>k__BackingField: d3f96a20-34f0-4701-9b71-30215cb50045
-  <CardImage>k__BackingField: {fileID: 21300000, guid: 8f1c2499ea238a147a853a1e23ed62d4,
+  <CardImage>k__BackingField: {fileID: 21300000, guid: 1f4b7dfdeba786c469683fb71b9233f3,
     type: 3}
   <CardKey>k__BackingField: CreditSupplyStation
   references:
