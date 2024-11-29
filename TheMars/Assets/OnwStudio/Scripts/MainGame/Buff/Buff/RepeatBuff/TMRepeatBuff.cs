@@ -36,11 +36,11 @@ namespace TM.Buff
 
         protected sealed override void ApplyBuffProtected()
         {
-            int dayCount = 0;
+            int dayCount = -1;
             _remainingDay.Value = LimitDay;
             _remainingDayByNextEffect.Value = RepeatDay;
-            TMSimulator.Instance.NowDay.AddListenerWithoutNotify(onChangedDay);
-
+            TMSimulator.Instance.NowDay.AddListener(onChangedDay);
+            
             void onChangedDay(int day)
             {
                 dayCount++;
@@ -70,7 +70,7 @@ namespace TM.Buff
                 new
                 {
                     Next = _remainingDayByNextEffect.Value,
-                    RemainingDay = RemainingCount.Value,
+                    RemainingDay = _remainingDay.Value,
                     IsTemporary
                 }
             };

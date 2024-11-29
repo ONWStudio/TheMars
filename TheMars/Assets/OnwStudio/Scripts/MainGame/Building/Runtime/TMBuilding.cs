@@ -31,7 +31,6 @@ namespace TM.Building
         [Header("Building State")]
         [SerializeField] private ReactiveField<int> _gradePlus = new() { Value = 0 };
         [SerializeField] private ReactiveField<int> _grade  = new() { Value = 1, ValueProcessors = new() { new ClampIntProcessor(1, 3) }};
-        [SerializeField] private ReactiveField<bool> _onTile = new();
         
         [field: Header("Building Data")]
         [field: SerializeField, ReadOnly] public TMBuildingData BuildingData { get; private set; }
@@ -58,7 +57,6 @@ namespace TM.Building
 
         public IReactiveField<int> GradePlus => _gradePlus;
         public IReactiveField<int> Grade => _grade;
-        public IReactiveField<bool> OnTile => _onTile;
         public IReactiveField<bool> IsActive => _isActive;
 
         public TMBuilding Initialize(TMBuildingData buildingData)

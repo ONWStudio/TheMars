@@ -33,6 +33,12 @@ namespace Onw.Components
             remove => _onHoverMouseForNowScene.AddListener(value);
         } 
         
+        public event UnityAction<Vector2> OnUpdateMouseForNowScene
+        {
+            add => _onUpdateMouseForNowScene.AddListener(value);
+            remove => _onUpdateMouseForNowScene.RemoveListener(value);
+        }
+        
         public event UnityAction<Vector2> OnMoveBeginMouseForRuntime
         {
             add => _onMoveBeginMouseForRuntime.AddListener(value);
@@ -50,14 +56,22 @@ namespace Onw.Components
             add => _onHoverMouseRuntime.AddListener(value);
             remove => _onHoverMouseRuntime.RemoveListener(value);
         }
+        
+        public event UnityAction<Vector2> OnUpdateMouseRuntime
+        {
+            add => _onUpdateMouseRuntime.AddListener(value);
+            remove => _onUpdateMouseRuntime.RemoveListener(value);
+        }
 
         [field: SerializeField] private UnityEvent<Vector2> _onMoveBeginMouseForNowScene = new();
         [field: SerializeField] private UnityEvent<Vector2> _onMoveEndMouseForNowScene = new();
         [field: SerializeField] private UnityEvent<Vector2> _onHoverMouseForNowScene = new();
+        [field: SerializeField] private UnityEvent<Vector2> _onUpdateMouseForNowScene = new();
         
         [field: SerializeField] private UnityEvent<Vector2> _onMoveBeginMouseForRuntime = new();
         [field: SerializeField] private UnityEvent<Vector2> _onMoveEndMouseRuntime = new();
         [field: SerializeField] private UnityEvent<Vector2> _onHoverMouseRuntime = new();
+        [field: SerializeField] private UnityEvent<Vector2> _onUpdateMouseRuntime = new();
 
         private bool _isMove = false;
         
@@ -83,7 +97,10 @@ namespace Onw.Components
             Vector2 mousePosition = Mouse.current.position.ReadValue();
             Vector2 delta = Mouse.current.delta.ReadValue();
             bool isMoving = delta.sqrMagnitude > MovementThreshold * MovementThreshold;
-
+            
+            _onUpdateMouseForNowScene.Invoke(mousePosition);
+            _onUpdateMouseRuntime.Invoke(mousePosition);
+            
             if (isMoving)
             {
                 _onHoverMouseForNowScene.Invoke(mousePosition);

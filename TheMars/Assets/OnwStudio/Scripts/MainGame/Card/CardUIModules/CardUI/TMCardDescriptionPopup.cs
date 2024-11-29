@@ -28,8 +28,7 @@ namespace TM.UI
 
         public TMCardModel _card = null;
 
-        [FormerlySerializedAs("_multiflyOffset")]
-        [SerializeField] private Vector2 _multiOffset = Vector2.zero;
+        [SerializeField] private Vector2 _multiplyOffset = Vector2.zero;
         
         private bool _canShow = true;
         private bool _isReload;
@@ -113,8 +112,8 @@ namespace TM.UI
             Vector2 cardSize = cardRect.GetWorldRectSize();
 
             Vector3 cardTopRightWorldPosition = new(
-                cardCorners[2].x + cardSize.x * _multiOffset.x,
-                cardCorners[2].y + cardSize.y * _multiOffset.y,
+                cardCorners[2].x + cardSize.x * _multiplyOffset.x,
+                cardCorners[2].y + cardSize.y * _multiplyOffset.y,
                 _rectTransform.GetPositionZ());
 
             _rectTransform.pivot = new(0f, 0f);

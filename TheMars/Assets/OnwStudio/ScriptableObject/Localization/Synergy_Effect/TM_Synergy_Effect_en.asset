@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: bfeeddc8584e91541b64eacd719a8f20, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 4853453890639626242
   m_TableData:
   - m_Id: 3714646216269824
     m_Localized: 'Every {RepeatDay} days, you {Positive:cond:acquired|decrease}{Resource}
@@ -25,7 +26,12 @@ MonoBehaviour:
       {IsActive:cond:({RemainingDay}days
       until next trigger)|}'
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 4853453890639626242
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 4853453890639626242
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00e02f7873320d00

@@ -22,7 +22,7 @@ namespace TM.UI
 {
     public sealed class TMSynergyViewController : MonoBehaviour
     {
-        public struct SynergyEffectCallbackFair : IDisposable
+        private struct SynergyEffectCallbackFair : IDisposable
         {
             public TMSynergyEffect Effect { get; private set; }
             public LocalizedString.ChangeHandler ChangeHandler { get; private set; }
@@ -42,7 +42,7 @@ namespace TM.UI
             }
         }
 
-        public readonly struct SynergyArguments
+        private readonly struct SynergyArguments
         {
             public TMSynergy Synergy { get; }
             public TMSynergyScrollItem ScrollItem { get; }

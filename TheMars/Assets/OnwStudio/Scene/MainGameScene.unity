@@ -1088,7 +1088,6 @@ MonoBehaviour:
   <UIComponents>k__BackingField:
     <CardCollectIconScrollView>k__BackingField: {fileID: 129953373}
     <DeckImage>k__BackingField: {fileID: 921509769}
-    <HandImage>k__BackingField: {fileID: 1816942116}
     <CollectField>k__BackingField: {fileID: 1760253016}
   <CardCreator>k__BackingField:
     _templateReference:
@@ -6360,7 +6359,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7105545, y: 0.032314025}
   m_AnchorMax: {x: 2.828, y: 0.96500003}
-  m_AnchoredPosition: {x: 0.35006714, y: -0.5}
+  m_AnchoredPosition: {x: 0.35003662, y: -0.5}
   m_SizeDelta: {x: 0.70000076, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &638645471
@@ -15425,6 +15424,165 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191570519}
   m_Mesh: {fileID: 4300000, guid: abc00000000014138694689345106722, type: 3}
+--- !u!1001 &1255369625
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1439010216}
+    m_Modifications:
+    - target: {fileID: 336948303440739225, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 336948303440739225, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_fontSizeMax
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 336948303440739225, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201283480188645561, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_Name
+      value: BuildingDescriptor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6132188160747513399, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 21.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6132188160747513399, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6132188160747513399, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_fontSizeMax
+      value: 21.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491134135545451189, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 311.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 387.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 803.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b48006c2b4cef4f02ae3d778e5a01ec9, type: 3}
+--- !u!224 &1255369626 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8783369111698764223, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1255369625}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1263450974
 GameObject:
   m_ObjectHideFlags: 0
@@ -17449,6 +17607,7 @@ RectTransform:
   - {fileID: 1954262785}
   - {fileID: 1707394312}
   - {fileID: 1590562887}
+  - {fileID: 1255369626}
   m_Father: {fileID: 1515806360}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -19498,7 +19657,7 @@ PrefabInstance:
     - target: {fileID: 4130907041994167556, guid: 9d262434a4252394dbc996cce7ad3a7c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.5
+      value: -0.49998474
       objectReference: {fileID: 0}
     - target: {fileID: 4130907041994167556, guid: 9d262434a4252394dbc996cce7ad3a7c,
         type: 3}
@@ -19955,6 +20114,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793838251}
   m_CullTransparentMesh: 1
+--- !u!114 &1812809215 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9015539067183903855, guid: b48006c2b4cef4f02ae3d778e5a01ec9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1255369625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe86208d5309450cb725b92220252f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1816942114
 GameObject:
   m_ObjectHideFlags: 0
@@ -19965,7 +20136,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1816942115}
   - component: {fileID: 1816942117}
-  - component: {fileID: 1816942116}
   m_Layer: 6
   m_Name: HandField
   m_TagString: Untagged
@@ -19993,36 +20163,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1816942116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1816942114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1816942117
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20039,6 +20179,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1639751532}
     m_Modifications:
+    - target: {fileID: 10234326580474647, guid: 1658b4a4e401436498d34e18eed4e7ca,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 345522146946606616, guid: 1658b4a4e401436498d34e18eed4e7ca,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -20098,6 +20243,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontSizeMin
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040423720775051275, guid: 1658b4a4e401436498d34e18eed4e7ca,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1509671546987543979, guid: 1658b4a4e401436498d34e18eed4e7ca,
         type: 3}
@@ -20209,6 +20359,11 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 2128417714810451373, guid: 1658b4a4e401436498d34e18eed4e7ca,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5396760212867815107, guid: 1658b4a4e401436498d34e18eed4e7ca,
         type: 3}
       propertyPath: m_Name
@@ -20263,6 +20418,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontSizeMax
       value: 13.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627862732227370015, guid: 1658b4a4e401436498d34e18eed4e7ca,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7736140255354063816, guid: 1658b4a4e401436498d34e18eed4e7ca,
         type: 3}
@@ -20992,7 +21152,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 955.3, y: 96.9, z: 1612}
-  m_LocalScale: {x: 394.8486, y: 394.84875, z: 394.84875}
+  m_LocalScale: {x: 394.8486, y: 394.8488, z: 394.8488}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -21033,7 +21193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821b6133d6692406aa9c22b093e53344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onHighlightTile:
+  _onEnterTile:
     m_PersistentCalls:
       m_Calls: []
   _onExitTile:
@@ -21061,7 +21221,7 @@ MonoBehaviour:
           <S>k__BackingField: 6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21093,7 +21253,7 @@ MonoBehaviour:
           <S>k__BackingField: 5
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21125,7 +21285,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21157,7 +21317,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21189,7 +21349,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21221,7 +21381,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21253,7 +21413,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21285,7 +21445,7 @@ MonoBehaviour:
           <S>k__BackingField: 6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21317,7 +21477,7 @@ MonoBehaviour:
           <S>k__BackingField: 5
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21349,7 +21509,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21381,7 +21541,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21413,7 +21573,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21445,7 +21605,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21477,7 +21637,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21509,7 +21669,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21541,7 +21701,7 @@ MonoBehaviour:
           <S>k__BackingField: 6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21573,7 +21733,7 @@ MonoBehaviour:
           <S>k__BackingField: 5
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21605,7 +21765,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21637,7 +21797,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21669,7 +21829,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21701,7 +21861,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21733,7 +21893,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21765,7 +21925,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21797,7 +21957,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21829,7 +21989,7 @@ MonoBehaviour:
           <S>k__BackingField: 6
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21861,7 +22021,7 @@ MonoBehaviour:
           <S>k__BackingField: 5
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21893,7 +22053,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21925,7 +22085,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21957,7 +22117,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -21989,7 +22149,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22021,7 +22181,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22053,7 +22213,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22085,7 +22245,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22117,7 +22277,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22149,7 +22309,7 @@ MonoBehaviour:
           <S>k__BackingField: 6
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22181,7 +22341,7 @@ MonoBehaviour:
           <S>k__BackingField: 5
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22213,7 +22373,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22245,7 +22405,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22277,7 +22437,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22309,7 +22469,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22341,7 +22501,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22373,7 +22533,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22405,7 +22565,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22437,7 +22597,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22469,7 +22629,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22501,7 +22661,7 @@ MonoBehaviour:
           <S>k__BackingField: 6
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22533,7 +22693,7 @@ MonoBehaviour:
           <S>k__BackingField: 5
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22565,7 +22725,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22597,7 +22757,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22629,7 +22789,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22661,7 +22821,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22693,7 +22853,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22725,7 +22885,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22757,7 +22917,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22789,7 +22949,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22821,7 +22981,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22853,7 +23013,7 @@ MonoBehaviour:
           <S>k__BackingField: -5
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22885,7 +23045,7 @@ MonoBehaviour:
           <S>k__BackingField: 6
         _isActive: 0
         _color: {r: 1, g: 0.9091709, b: 0.0990566, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22917,7 +23077,7 @@ MonoBehaviour:
           <S>k__BackingField: 5
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22949,7 +23109,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -22981,7 +23141,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23013,7 +23173,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23045,7 +23205,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23077,7 +23237,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23109,7 +23269,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23141,7 +23301,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23173,7 +23333,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23205,7 +23365,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23237,7 +23397,7 @@ MonoBehaviour:
           <S>k__BackingField: -5
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23269,7 +23429,7 @@ MonoBehaviour:
           <S>k__BackingField: -6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23301,7 +23461,7 @@ MonoBehaviour:
           <S>k__BackingField: 5
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23333,7 +23493,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23365,7 +23525,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23397,7 +23557,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23429,7 +23589,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23461,7 +23621,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23493,7 +23653,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23525,7 +23685,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23557,7 +23717,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23589,7 +23749,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23621,7 +23781,7 @@ MonoBehaviour:
           <S>k__BackingField: -5
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23653,7 +23813,7 @@ MonoBehaviour:
           <S>k__BackingField: -6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23685,7 +23845,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23717,7 +23877,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23749,7 +23909,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23781,7 +23941,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23813,7 +23973,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23845,7 +24005,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23877,7 +24037,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23909,7 +24069,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23941,7 +24101,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -23973,7 +24133,7 @@ MonoBehaviour:
           <S>k__BackingField: -5
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24005,7 +24165,7 @@ MonoBehaviour:
           <S>k__BackingField: -6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24037,7 +24197,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24069,7 +24229,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24101,7 +24261,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24133,7 +24293,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24165,7 +24325,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24197,7 +24357,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24229,7 +24389,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24261,7 +24421,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24293,7 +24453,7 @@ MonoBehaviour:
           <S>k__BackingField: -5
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24325,7 +24485,7 @@ MonoBehaviour:
           <S>k__BackingField: -6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24357,7 +24517,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24389,7 +24549,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24421,7 +24581,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24453,7 +24613,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24485,7 +24645,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24517,7 +24677,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24549,7 +24709,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24581,7 +24741,7 @@ MonoBehaviour:
           <S>k__BackingField: -5
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24613,7 +24773,7 @@ MonoBehaviour:
           <S>k__BackingField: -6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24645,7 +24805,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24677,7 +24837,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24709,7 +24869,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24741,7 +24901,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24773,7 +24933,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24805,7 +24965,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24837,7 +24997,7 @@ MonoBehaviour:
           <S>k__BackingField: -5
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24869,7 +25029,7 @@ MonoBehaviour:
           <S>k__BackingField: -6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24901,7 +25061,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24933,7 +25093,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24965,7 +25125,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -24997,7 +25157,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -25029,7 +25189,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -25061,7 +25221,7 @@ MonoBehaviour:
           <S>k__BackingField: -5
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -25093,7 +25253,7 @@ MonoBehaviour:
           <S>k__BackingField: -6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -25117,6 +25277,9 @@ MonoBehaviour:
   _mainCamera: {fileID: 1486505849}
   <HexagonRadius>k__BackingField: 0.038
   <RootObject>k__BackingField: {fileID: 0}
+  <LayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &1944097347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25160,9 +25323,48 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _onChangedPointBuilding:
+      - m_Target: {fileID: 1812809215}
+        m_TargetAssemblyTypeName: TM.UI.TMBuildingUIController, AssemblyTheMars
+        m_MethodName: OnEnterBuilding
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onEnterBuilding:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1812809215}
+        m_TargetAssemblyTypeName: TM.UI.TMBuildingUIController, AssemblyTheMars
+        m_MethodName: OnEnterBuilding
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onExitBuilding:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1812809215}
+        m_TargetAssemblyTypeName: TM.UI.TMBuildingUIController, AssemblyTheMars
+        m_MethodName: ResetDescriptor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1944097348
 MonoBehaviour:
   m_ObjectHideFlags: 0

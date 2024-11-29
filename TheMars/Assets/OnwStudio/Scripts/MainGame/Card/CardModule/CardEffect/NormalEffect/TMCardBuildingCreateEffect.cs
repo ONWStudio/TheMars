@@ -1,19 +1,19 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using UnityEngine.Localization;
 using Onw.Helper;
 using Onw.HexGrid;
 using Onw.Attribute;
+using Onw.Coroutine;
 using Onw.Extensions;
 using TM.Grid;
 using TM.Building;
 using TM.Card.Runtime;
 using TM.Card.Effect.Creator;
 using Object = UnityEngine.Object;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace TM.Card.Effect
 {
@@ -50,7 +50,7 @@ namespace TM.Card.Effect
         public TMBuilding Building => _building;
 
         public bool CanUseEffect => _currentHex is not null && _prevTileData?.Prev != _currentHex;
-
+        private bool _isUpdateLocalizedString = false;
 
         public void Initialize(TMCardBuildingCreateEffectCreator effectCreator)
         {
@@ -90,14 +90,8 @@ namespace TM.Card.Effect
                 _buildingHalfHeight = _building.transform.position.y - VerticesTo.GetMinPoint(_building.gameObject).y;
                 _building.SetActiveGameObject(false);           // .. 인스턴스화 된 건물 비활성화
 
-                LocalizedDescription.Arguments = new object[]
-                {
-                    new 
-                    {
-                        _building.BuildingData.BuildingName,
-                        BuildingEffects = _building.LocalizedEffectDescription
-                    }
-                };
+                _building.BuildingData.LocalizedBuildingName.StringChanged += onChangedLocalizedString;
+                _building.Effects.ForEach(effect => effect.LocalizedDescription.StringChanged += onChangedLocalizedString);
 
                 void onChangedIsOverTransform(bool isOverTombTransform)
                 {
@@ -118,6 +112,24 @@ namespace TM.Card.Effect
                 }
             }
         }
+        
+        private void onChangedLocalizedString(string _)
+        {
+            if (_isUpdateLocalizedString) return;
+            
+            _isUpdateLocalizedString = true;
+            LocalizedDescription.Arguments = new object[]
+            {
+                new 
+                {
+                    BuildingName = _building.BuildingData.LocalizedBuildingName.GetLocalizedString(),
+                    BuildingEffects = _building.LocalizedEffectDescription
+                }
+            };
+
+            CoroutineManager.Instance.DoCallWaitForOneFrame(() => _isUpdateLocalizedString = false);
+        }
+        
 
         private void onDragEndCard(TMCardModel card)
         {
@@ -231,6 +243,12 @@ namespace TM.Card.Effect
 
         public void Dispose()
         {
+            if (_building)
+            {
+                _building.BuildingData.LocalizedBuildingName.StringChanged -= onChangedLocalizedString;
+                _building.Effects.ForEach(effect => effect.LocalizedDescription.StringChanged -= onChangedLocalizedString);
+            }
+
             if (_currentHex is not null)
             {
                 TMGridManager.Instance.RemoveBuilding(_currentHex); // .. 해당 카드는 파괴되었으므로 건물 제거

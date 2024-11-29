@@ -20,7 +20,6 @@ namespace TM.Card.Runtime
         {
             [field: SerializeField, SelectableSerializeField] public HorizontalEnumeratedItem CardCollectIconScrollView { get; private set; }
             [field: SerializeField, SelectableSerializeField] public Image DeckImage { get; private set; }
-            [field: SerializeField, SelectableSerializeField] public Image HandImage { get; private set; }
             [field: SerializeField, SelectableSerializeField] public RectTransform CollectField { get; private set; }
 
             public void SetDragView(bool isOn)
@@ -28,7 +27,6 @@ namespace TM.Card.Runtime
                 CardCollectIconScrollView.SetActiveGameObject(isOn);
                 DeckImage.SetActiveGameObject(!isOn);
                 CollectField.SetActiveGameObject(!isOn);
-                HandImage.enabled = isOn;
             }
         }
 

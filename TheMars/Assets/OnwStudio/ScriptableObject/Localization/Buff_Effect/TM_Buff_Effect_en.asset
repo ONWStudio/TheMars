@@ -68,7 +68,7 @@ MonoBehaviour:
   - m_Id: 26708213043200
     m_Localized: "{IsTemporary:cond:permanently|{LimitDay}for a few days} {RepeatDay}every
       few days {Kind:cond:MarsLithium|Credit|Citizen|Steel|Plants|Clay\r|electricity|Satisfaction}
-      {Min} ~ {Max}{Kind:cond:pcs|pcs|Citizen|pcs|pcs|pcs|pcs|%} {Positive:cond:acquire|consume}"
+      {Resource}{Kind:cond:pcs|pcs|Citizen|pcs|pcs|pcs|pcs|%} {Positive:cond:acquire|consume}"
     m_Metadata:
       m_Items:
       - rid: 3610285249959297310

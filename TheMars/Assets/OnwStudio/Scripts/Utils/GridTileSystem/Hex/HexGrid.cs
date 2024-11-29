@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Onw.Attribute;
 using Onw.Extensions;
-using UnityEngine.Serialization;
 
 namespace Onw.HexGrid
 {
@@ -41,7 +41,6 @@ namespace Onw.HexGrid
                 _onChangedColor.Invoke(this, _color);
             }
         }
-
 
         public IReadOnlyList<string> Properties => _properties;
 
@@ -110,7 +109,7 @@ namespace Onw.HexGrid
             return _properties.RemoveByConditionAll(p => property == p);
         }
 
-        public void InvokeOnHighlightTile()
+        public void InvokeOnEnterTile()
         {
             _onEnterTile.Invoke(this);
         }

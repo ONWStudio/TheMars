@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -10,7 +9,6 @@ using AYellowpaper.SerializedCollections;
 using Onw.Helper;
 using Onw.Attribute;
 using Onw.Components;
-using Onw.Event;
 using Onw.Extensions;
 
 namespace Onw.HexGrid
@@ -21,12 +19,10 @@ namespace Onw.HexGrid
         private const float HEXAGON_RADIUS_MAX = 0.5f;
 
         private const float SQUARE_ROOT_THREE = 1.732051f;
-
-        public const int LAYER_MASK_TILE = 1 << 3;
-        
-        private static readonly int _absoluteLimit = Shader.PropertyToID("_AbsoluteLimit");
-        private static readonly int _bufferOn = Shader.PropertyToID("_BufferOn");
-        private static readonly int _hexOptions = Shader.PropertyToID("_HexOptions");
+        private const float SQUARE_ROOT_THREE_HALF = SQUARE_ROOT_THREE * 0.5f;
+        private const float SQUARE_ROOT_THREE_DIVIDE_THREE = SQUARE_ROOT_THREE / 3;
+        private const float TWO_F_DIVIDE_THREE = 2f / 3;
+        private const float NEGATIVE_ONE_F_DIVIDE_THREE = -1f / 3;
 
         public event UnityAction<IHexGrid> OnEnterTile
         {
@@ -52,6 +48,10 @@ namespace Onw.HexGrid
             remove => _onMouseUpTile.RemoveListener(value);
         }
         
+        private static readonly int _absoluteLimit = Shader.PropertyToID("_AbsoluteLimit");
+        private static readonly int _bufferOn = Shader.PropertyToID("_BufferOn");
+        private static readonly int _hexOptions = Shader.PropertyToID("_HexOptions");
+
         [FormerlySerializedAs("_onHighlightTile")]
         [Header("Events")]
         [SerializeField] private UnityEvent<IHexGrid> _onEnterTile = new();
@@ -68,10 +68,10 @@ namespace Onw.HexGrid
         [FormerlySerializedAs("_qLimit")]
         [SerializeField, Min(0)] private int _tileLimit = 3;
 
-        [SerializeField] private Camera _mainCamera = null;
+        [SerializeField] private Camera _mainCamera;
 
         private ComputeBuffer _hexOptionBuffer;
-        private ReactiveField<HexGrid> _currentHex = null;
+        private HexGrid _currentHex = null;
         private static readonly int _radius = Shader.PropertyToID("_Radius");
 
         [field: SerializeField, Range(HEXAGON_RADIUS_MIN, HEXAGON_RADIUS_MAX)] public float HexagonRadius { get; set; } = 0.025f;
@@ -104,6 +104,8 @@ namespace Onw.HexGrid
             }
         }
 
+        [field: SerializeField] public LayerMask LayerMask { get; set; }
+
         private void Awake()
         {
             SendToShaderHexOption();
@@ -125,11 +127,13 @@ namespace Onw.HexGrid
         private void OnApplicationQuit()
         {
             _hexOptionBuffer?.Release();
+            _hexOptionBuffer = null;
         }
 
         private void OnDestroy()
         {
             _hexOptionBuffer?.Release();
+            _hexOptionBuffer = null;
         }
 
         private void onMouseDownEvent(Vector2 mousePosition)
@@ -139,6 +143,7 @@ namespace Onw.HexGrid
             if (tryGetTileDataByRay(ray, out (bool, RaycastHit) _, out HexGrid hex))
             {
                 hex.InvokeOnMouseDownTile();
+                _onMouseDownTile.Invoke(hex);
             }
         }
 
@@ -149,6 +154,7 @@ namespace Onw.HexGrid
             if (tryGetTileDataByRay(ray, out (bool, RaycastHit) _, out HexGrid hex))
             {
                 hex.InvokeOnMouseUpTile();
+                _onMouseUpTile.Invoke(hex);
             }
         }
 
@@ -156,12 +162,30 @@ namespace Onw.HexGrid
         {
             Ray ray = _mainCamera.ScreenPointToRay(mousePosition);
 
-            if (tryGetTileDataByRay(ray, out (bool, RaycastHit) _, out HexGrid hex) && _currentHex.Value != hex)
+            if (tryGetTileDataByRay(ray, out (bool, RaycastHit) _, out HexGrid hex))
             {
-                HexGrid prevHex = _currentHex.Value;
-                _currentHex.Value = hex;
-                _currentHex.Value.InvokeOnHighlightTile();
-                prevHex?.InvokeOnExitTile();
+                if (_currentHex != hex)
+                {
+                    HexGrid prevHex = _currentHex;
+                    _currentHex = hex;
+                    _currentHex.InvokeOnEnterTile();
+                    _onEnterTile.Invoke(_currentHex);
+
+                    if (prevHex is not null)
+                    {
+                        prevHex.InvokeOnExitTile();
+                        _onExitTile.Invoke(prevHex);
+                    }
+                }
+            }
+            else
+            {
+                if (_currentHex is not null)
+                {
+                    _currentHex.InvokeOnExitTile();
+                    _onExitTile.Invoke(_currentHex);
+                    _currentHex = null;
+                }
             }
         }
 
@@ -177,7 +201,7 @@ namespace Onw.HexGrid
             hexGrid = null;
             hitTuple.Item1 = false;
 
-            if (Physics.Raycast(ray, out hitTuple.Item2))
+            if (Physics.Raycast(ray, out hitTuple.Item2, Mathf.Infinity, LayerMask))
             {
                 hitTuple.Item1 = true;
                 
@@ -188,8 +212,8 @@ namespace Onw.HexGrid
                 convertedPosition /= _decalProjector.size.x * _decalProjector.GetLocalScaleX();
 
                 Vector2 axialCoordinates = new(
-                    2f / 3 * convertedPosition.x / HexagonRadius,
-                    (-1f / 3 * convertedPosition.x + SQUARE_ROOT_THREE / 3 * convertedPosition.y) / HexagonRadius);
+                    TWO_F_DIVIDE_THREE * convertedPosition.x / HexagonRadius,
+                    (NEGATIVE_ONE_F_DIVIDE_THREE * convertedPosition.x + SQUARE_ROOT_THREE_DIVIDE_THREE * convertedPosition.y) / HexagonRadius);
 
                 float sFloat = -axialCoordinates.x - axialCoordinates.y;
 
@@ -257,7 +281,7 @@ namespace Onw.HexGrid
                     {
                         Vector2 hexNormalizedPosition = new(
                             HexagonRadius * (1.5f * q),
-                            HexagonRadius * (SQUARE_ROOT_THREE * 0.5f * q + SQUARE_ROOT_THREE * r));
+                            HexagonRadius * (SQUARE_ROOT_THREE_HALF * q + SQUARE_ROOT_THREE * r));
 
                         Vector3 hexPosition = projectorSize.x * hexNormalizedPosition;
 
@@ -323,7 +347,11 @@ namespace Onw.HexGrid
 
         public void SendToShaderHexOption()
         {
-            HexOption[] hexOptions = _hexGrids.Values.Select(hex => hex.GetShaderOption()).ToArray();
+            HexOption[] hexOptions = _hexGrids
+                .Values
+                .Select(hex => hex.GetShaderOption())
+                .ToArray();
+            
             int stride = Marshal.SizeOf<HexOption>();
             bool isZero = hexOptions.Length > 0;
 
@@ -334,7 +362,6 @@ namespace Onw.HexGrid
                 _hexOptionBuffer?.Release();
                 _hexOptionBuffer = new(hexOptions.Length, stride);
                 _hexOptionBuffer.SetData(hexOptions);
-
                 _decalProjector.material.SetBuffer(_hexOptions, _hexOptionBuffer);
             }
         }
