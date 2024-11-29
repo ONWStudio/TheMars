@@ -1186,8 +1186,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxCardCount:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1608,8 +1606,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _marsLithium:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1617,8 +1613,6 @@ MonoBehaviour:
     - rid: 3610285147714224128
     <_value>k__BackingField: 100
   _credit:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1626,8 +1620,6 @@ MonoBehaviour:
     - rid: 3610285147714224129
     <_value>k__BackingField: 100
   _population:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1635,8 +1627,6 @@ MonoBehaviour:
     - rid: 3610285249959297212
     <_value>k__BackingField: 100
   _totalPopulation:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1644,8 +1634,6 @@ MonoBehaviour:
     - rid: 3610285147714224130
     <_value>k__BackingField: 150
   _steel:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1653,8 +1641,6 @@ MonoBehaviour:
     - rid: 3610285147714224131
     <_value>k__BackingField: 100
   _plants:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1662,8 +1648,6 @@ MonoBehaviour:
     - rid: 3610285147714224132
     <_value>k__BackingField: 100
   _clay:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1671,8 +1655,6 @@ MonoBehaviour:
     - rid: 3610285147714224133
     <_value>k__BackingField: 100
   _electricity:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1680,8 +1662,6 @@ MonoBehaviour:
     - rid: 3610285147714224134
     <_value>k__BackingField: 100
   _satisfaction:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1689,8 +1669,6 @@ MonoBehaviour:
     - rid: 3610285147714224135
     <_value>k__BackingField: 50
   _level:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1698,8 +1676,6 @@ MonoBehaviour:
     - rid: 3610285147714224136
     <_value>k__BackingField: 1
   _exp:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1707,8 +1683,6 @@ MonoBehaviour:
     - rid: 3610285147714224137
     <_value>k__BackingField: 0
   _maxExp:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -1716,8 +1690,6 @@ MonoBehaviour:
     - rid: 3610285147714224138
     <_value>k__BackingField: 100
   _terraformValue:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -2545,81 +2517,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 201059736}
   m_Mesh: {fileID: 4300000, guid: abc00000000011743191958246458171, type: 3}
---- !u!1 &207556609
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 207556610}
-  - component: {fileID: 207556612}
-  - component: {fileID: 207556611}
-  m_Layer: 6
-  m_Name: SatisfactionFrame
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &207556610
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 207556609}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 355338267}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1306.96, y: 667.61}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &207556611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 207556609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 31577c0d9e9b3a44daf4f0c24ee3c85d, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &207556612
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 207556609}
-  m_CullTransparentMesh: 1
 --- !u!1 &216096208
 GameObject:
   m_ObjectHideFlags: 0
@@ -2907,143 +2804,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!1 &259915184
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 259915185}
-  - component: {fileID: 259915187}
-  - component: {fileID: 259915186}
-  m_Layer: 6
-  m_Name: TutorialTitle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &259915185
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259915184}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 931959063}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000041962, y: 207}
-  m_SizeDelta: {x: 255.85, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &259915186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259915184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: "\uD29C\uD1A0\uB9AC\uC5BC \uB2E8\uACC4"
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8e8f97682e668e94cb30d2e6b8e13d84, type: 2}
-  m_sharedMaterial: {fileID: -7304394381272760782, guid: 8e8f97682e668e94cb30d2e6b8e13d84,
-    type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &259915187
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259915184}
-  m_CullTransparentMesh: 1
 --- !u!33 &261107232
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4049,84 +3809,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 337218790}
   m_CullTransparentMesh: 1
---- !u!1 &355338266
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 355338267}
-  - component: {fileID: 355338269}
-  - component: {fileID: 355338268}
-  m_Layer: 6
-  m_Name: SatisfactionTutorial
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &355338267
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 355338266}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 207556610}
-  - {fileID: 884262211}
-  - {fileID: 961998401}
-  m_Father: {fileID: 931959063}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -922.48, y: -7.49}
-  m_SizeDelta: {x: 1306.96, y: 667.61}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &355338268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 355338266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 06dc17c28e8b5a443920e557be1a61cc, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &355338269
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 355338266}
-  m_CullTransparentMesh: 1
 --- !u!1 &363546144
 GameObject:
   m_ObjectHideFlags: 0
@@ -4748,81 +4430,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 434706155}
-  m_CullTransparentMesh: 1
---- !u!1 &458657663
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 458657664}
-  - component: {fileID: 458657666}
-  - component: {fileID: 458657665}
-  m_Layer: 6
-  m_Name: Satisfaction_Progress
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &458657664
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 458657663}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1369797032}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.00000003175474, y: -0.44537824}
-  m_AnchorMax: {x: 0.99999994, y: 1.4453782}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &458657665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 458657663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a3fd9449bd66e78459d5ba8f5a744428, type: 3}
-  m_Type: 3
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 0
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &458657666
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 458657663}
   m_CullTransparentMesh: 1
 --- !u!1 &464819275
 GameObject:
@@ -5797,6 +5404,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buffScrollView: {fileID: 648399617}
+  _buffDescriptor: {fileID: 0}
+  _onAddedBuffIcon:
+    m_PersistentCalls:
+      m_Calls: []
+  _onRemovedBuffIcon:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &531277824
 GameObject:
   m_ObjectHideFlags: 0
@@ -7636,81 +7250,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 688798546}
   m_Mesh: {fileID: 4300000, guid: abc00000000014138694689345106722, type: 3}
---- !u!1 &711849297
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 711849298}
-  - component: {fileID: 711849300}
-  - component: {fileID: 711849299}
-  m_Layer: 6
-  m_Name: Separator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &711849298
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 711849297}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 931959063}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.99, y: 151.23}
-  m_SizeDelta: {x: 374.02, y: 61.54}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &711849299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 711849297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.5707547, b: 0.5707547, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6a1e2f7d4a7bd6945a790b6454158f33, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &711849300
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 711849297}
-  m_CullTransparentMesh: 1
 --- !u!1 &728582417
 GameObject:
   m_ObjectHideFlags: 0
@@ -8390,82 +7929,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 826625430}
   m_CullTransparentMesh: 1
---- !u!1 &884262210
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 884262211}
-  - component: {fileID: 884262213}
-  - component: {fileID: 884262212}
-  m_Layer: 6
-  m_Name: Satisfaction_Icon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &884262211
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884262210}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.00008, y: 1.00008, z: 1.00008}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 975050928}
-  m_Father: {fileID: 355338267}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.18255103, y: 0.13144024}
-  m_AnchorMax: {x: 0.22291616, y: 0.23615803}
-  m_AnchoredPosition: {x: -49.00464, y: 425.58887}
-  m_SizeDelta: {x: 101.53438, y: 57.939377}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &884262212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884262210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 548fe7bff7960b243a7ce44defcfd620, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &884262213
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884262210}
-  m_CullTransparentMesh: 1
 --- !u!1 &887329505
 GameObject:
   m_ObjectHideFlags: 0
@@ -8991,47 +8454,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927159495}
   m_CullTransparentMesh: 1
---- !u!1 &931959062
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 931959063}
-  m_Layer: 6
-  m_Name: Tutorial
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &931959063
+--- !u!224 &931959063 stripped
 RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+    type: 3}
+  m_PrefabInstance: {fileID: 1119825940936822672}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 931959062}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1476159013}
-  - {fileID: 1137645340}
-  - {fileID: 711849298}
-  - {fileID: 259915185}
-  - {fileID: 1971100584}
-  - {fileID: 355338267}
-  m_Father: {fileID: 1439010216}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 665.99994, y: 5.33}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &944279245
 GameObject:
   m_ObjectHideFlags: 0
@@ -9129,143 +8557,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &961998400
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 961998401}
-  - component: {fileID: 961998403}
-  - component: {fileID: 961998402}
-  m_Layer: 6
-  m_Name: SatisfactionDescriptionText
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &961998401
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 961998400}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 355338267}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.7, y: -62.58}
-  m_SizeDelta: {x: 1117.83, y: 408.98}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &961998402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 961998400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: "\uB9CC\uC871\uB3C4 \uC124\uBA85\uB780"
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8e8f97682e668e94cb30d2e6b8e13d84, type: 2}
-  m_sharedMaterial: {fileID: -7304394381272760782, guid: 8e8f97682e668e94cb30d2e6b8e13d84,
-    type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 1
-  m_fontSizeMin: 0
-  m_fontSizeMax: 40
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &961998403
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 961998400}
-  m_CullTransparentMesh: 1
 --- !u!1 &968628917
 GameObject:
   m_ObjectHideFlags: 0
@@ -9342,82 +8633,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 968628917}
-  m_CullTransparentMesh: 1
---- !u!1 &975050927
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 975050928}
-  - component: {fileID: 975050930}
-  - component: {fileID: 975050929}
-  m_Layer: 6
-  m_Name: Satisfaction_BG
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &975050928
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 975050927}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1369797032}
-  m_Father: {fileID: 884262211}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1.022051, y: 0.31707525}
-  m_AnchorMax: {x: 6.2416906, y: 0.6273077}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &975050929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 975050927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 22c4271612895a146a8e02cfbea86d98, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 4
---- !u!222 &975050930
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 975050927}
   m_CullTransparentMesh: 1
 --- !u!1 &975967797
 GameObject:
@@ -10500,81 +9715,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1134415539}
-  m_CullTransparentMesh: 1
---- !u!1 &1137645339
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1137645340}
-  - component: {fileID: 1137645342}
-  - component: {fileID: 1137645341}
-  m_Layer: 6
-  m_Name: Tutorial_Frame
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1137645340
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1137645339}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 931959063}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 494.2, y: 603.33}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1137645341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1137645339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4b234ff7a65a7464eaf3d0e38b640043, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1137645342
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1137645339}
   m_CullTransparentMesh: 1
 --- !u!1 &1173762104
 GameObject:
@@ -13031,82 +12171,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &1369797031
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1369797032}
-  - component: {fileID: 1369797034}
-  - component: {fileID: 1369797033}
-  m_Layer: 6
-  m_Name: Satisfaction_Frame
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1369797032
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1369797031}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 458657664}
-  m_Father: {fileID: 975050928}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: -0.0000026356436, y: -0.00000003339196}
-  m_AnchorMax: {x: 0.9999973, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1369797033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1369797031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5155a539dc13fdb4b9b0a1f5b533201d, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 5.34
---- !u!222 &1369797034
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1369797031}
-  m_CullTransparentMesh: 1
 --- !u!1 &1385303470
 GameObject:
   m_ObjectHideFlags: 0
@@ -14199,24 +13263,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AccumulatedTime>k__BackingField: 0
   _nowDay:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
     <ValueProcessors>k__BackingField: []
     <_value>k__BackingField: 1
   _nowMinutes:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
     <ValueProcessors>k__BackingField: []
     <_value>k__BackingField: 0
   _nowSeconds:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
     _onChangedValue:
       m_PersistentCalls:
         m_Calls: []
@@ -14309,81 +13367,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1475752091}
-  m_CullTransparentMesh: 1
---- !u!1 &1476159012
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1476159013}
-  - component: {fileID: 1476159015}
-  - component: {fileID: 1476159014}
-  m_Layer: 6
-  m_Name: Tutorial_BG
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1476159013
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1476159012}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 931959063}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 494.2, y: 603.33}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1476159014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1476159012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c11828257afb9fb45a2ab780051b7e9f, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1476159015
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1476159012}
   m_CullTransparentMesh: 1
 --- !u!1 &1486505847
 GameObject:
@@ -14719,8 +13702,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _calamityEventProbability:
     <ReactDefaultProbability>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
@@ -14728,16 +13709,12 @@ MonoBehaviour:
       - rid: 4649214858699472901
       <_value>k__BackingField: 0
     <ReactAdditionalProbability>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
       <ValueProcessors>k__BackingField: []
       <_value>k__BackingField: 0
     <ReactIsStatic>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
@@ -14745,8 +13722,6 @@ MonoBehaviour:
       <_value>k__BackingField: 0
   _positiveEventProbability:
     <ReactDefaultProbability>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
@@ -14754,16 +13729,12 @@ MonoBehaviour:
       - rid: 4649214858699472902
       <_value>k__BackingField: 0
     <ReactAdditionalProbability>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
       <ValueProcessors>k__BackingField: []
       <_value>k__BackingField: 0
     <ReactIsStatic>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
@@ -14771,8 +13742,6 @@ MonoBehaviour:
       <_value>k__BackingField: 0
   _negativeEventProbability:
     <ReactDefaultProbability>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
@@ -14780,16 +13749,12 @@ MonoBehaviour:
       - rid: 4649214858699472903
       <_value>k__BackingField: 0
     <ReactAdditionalProbability>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
       <ValueProcessors>k__BackingField: []
       <_value>k__BackingField: 0
     <ReactIsStatic>k__BackingField:
-      <InvokeImmediately>k__BackingField: 1
-      <InvokeIfValueChanged>k__BackingField: 1
       _onChangedValue:
         m_PersistentCalls:
           m_Calls: []
@@ -14797,11 +13762,19 @@ MonoBehaviour:
       <_value>k__BackingField: 0
   _mainEventRunner:
     <EventData>k__BackingField: {fileID: 0}
+    _topEffects: []
+    _bottomEffects: []
+    _topCosts: []
+    _bottomCosts: []
     _onFireEvent:
       m_PersistentCalls:
         m_Calls: []
   _marsLithiumEventRunner:
     <EventData>k__BackingField: {fileID: 0}
+    _topEffects: []
+    _bottomEffects: []
+    _topCosts: []
+    _bottomCosts: []
     _onFireEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -14820,14 +13793,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _marsLithiumEventAddResource:
-    <InvokeImmediately>k__BackingField: 1
-    <InvokeIfValueChanged>k__BackingField: 1
-    _onChangedValue:
-      m_PersistentCalls:
-        m_Calls: []
-    <ValueProcessors>k__BackingField: []
-    <_value>k__BackingField: 0
   <CheckMainEventLevelCount>k__BackingField: 5
   <CheckMarsLithiumEventDayCount>k__BackingField: 5
   <CheckCalamityEventDayCount>k__BackingField: 1
@@ -15681,6 +14646,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buffScrollView: {fileID: 648399617}
+  _buffDescriptor: {fileID: 0}
+  _onAddedBuffIcon:
+    m_PersistentCalls:
+      m_Calls: []
+  _onRemovedBuffIcon:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1671599900
 GameObject:
   m_ObjectHideFlags: 0
@@ -15698,7 +14670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1671599901
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16792,9 +15764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821b6133d6692406aa9c22b093e53344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HexagonRadius>k__BackingField: 0.038
-  <RootObject>k__BackingField: {fileID: 0}
-  _onHighlightTile:
+  _onEnterTile:
     m_PersistentCalls:
       m_Calls: []
   _onExitTile:
@@ -16822,7 +15792,7 @@ MonoBehaviour:
           <S>k__BackingField: 6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -16854,7 +15824,7 @@ MonoBehaviour:
           <S>k__BackingField: 5
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -16886,7 +15856,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -16918,7 +15888,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -16950,7 +15920,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -16982,7 +15952,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17014,7 +15984,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17046,7 +16016,7 @@ MonoBehaviour:
           <S>k__BackingField: 6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17078,7 +16048,7 @@ MonoBehaviour:
           <S>k__BackingField: 5
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17110,7 +16080,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17142,7 +16112,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17174,7 +16144,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17206,7 +16176,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17238,7 +16208,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17270,7 +16240,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17302,7 +16272,7 @@ MonoBehaviour:
           <S>k__BackingField: 6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17334,7 +16304,7 @@ MonoBehaviour:
           <S>k__BackingField: 5
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17366,7 +16336,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17398,7 +16368,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17430,7 +16400,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17462,7 +16432,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17494,7 +16464,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17526,7 +16496,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17558,7 +16528,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17590,7 +16560,7 @@ MonoBehaviour:
           <S>k__BackingField: 6
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17622,7 +16592,7 @@ MonoBehaviour:
           <S>k__BackingField: 5
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17654,7 +16624,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17686,7 +16656,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17718,7 +16688,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17750,7 +16720,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17782,7 +16752,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17814,7 +16784,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17846,7 +16816,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17878,7 +16848,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17910,7 +16880,7 @@ MonoBehaviour:
           <S>k__BackingField: 6
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17942,7 +16912,7 @@ MonoBehaviour:
           <S>k__BackingField: 5
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -17974,7 +16944,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18006,7 +16976,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18038,7 +17008,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18070,7 +17040,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18102,7 +17072,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18134,7 +17104,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18166,7 +17136,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18198,7 +17168,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18230,7 +17200,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18262,7 +17232,7 @@ MonoBehaviour:
           <S>k__BackingField: 6
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18294,7 +17264,7 @@ MonoBehaviour:
           <S>k__BackingField: 5
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18326,7 +17296,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18358,7 +17328,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18390,7 +17360,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18422,7 +17392,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 1, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18454,7 +17424,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18486,7 +17456,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18518,7 +17488,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18550,7 +17520,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18582,7 +17552,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18614,7 +17584,7 @@ MonoBehaviour:
           <S>k__BackingField: -5
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18646,7 +17616,7 @@ MonoBehaviour:
           <S>k__BackingField: 6
         _isActive: 0
         _color: {r: 1, g: 0.9091709, b: 0.0990566, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18678,7 +17648,7 @@ MonoBehaviour:
           <S>k__BackingField: 5
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18710,7 +17680,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18742,7 +17712,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18774,7 +17744,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18806,7 +17776,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18838,7 +17808,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18870,7 +17840,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18902,7 +17872,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18934,7 +17904,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18966,7 +17936,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -18998,7 +17968,7 @@ MonoBehaviour:
           <S>k__BackingField: -5
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19030,7 +18000,7 @@ MonoBehaviour:
           <S>k__BackingField: -6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19062,7 +18032,7 @@ MonoBehaviour:
           <S>k__BackingField: 5
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19094,7 +18064,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19126,7 +18096,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19158,7 +18128,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19190,7 +18160,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19222,7 +18192,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19254,7 +18224,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19286,7 +18256,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19318,7 +18288,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19350,7 +18320,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19382,7 +18352,7 @@ MonoBehaviour:
           <S>k__BackingField: -5
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19414,7 +18384,7 @@ MonoBehaviour:
           <S>k__BackingField: -6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19446,7 +18416,7 @@ MonoBehaviour:
           <S>k__BackingField: 4
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19478,7 +18448,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19510,7 +18480,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19542,7 +18512,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19574,7 +18544,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19606,7 +18576,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19638,7 +18608,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19670,7 +18640,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19702,7 +18672,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19734,7 +18704,7 @@ MonoBehaviour:
           <S>k__BackingField: -5
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19766,7 +18736,7 @@ MonoBehaviour:
           <S>k__BackingField: -6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19798,7 +18768,7 @@ MonoBehaviour:
           <S>k__BackingField: 3
         _isActive: 1
         _color: {r: 0.07450981, g: 0.24313726, b: 0.5294118, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19830,7 +18800,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19862,7 +18832,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19894,7 +18864,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19926,7 +18896,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19958,7 +18928,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -19990,7 +18960,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20022,7 +18992,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20054,7 +19024,7 @@ MonoBehaviour:
           <S>k__BackingField: -5
         _isActive: 1
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20086,7 +19056,7 @@ MonoBehaviour:
           <S>k__BackingField: -6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20118,7 +19088,7 @@ MonoBehaviour:
           <S>k__BackingField: 2
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20150,7 +19120,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20182,7 +19152,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20214,7 +19184,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20246,7 +19216,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20278,7 +19248,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20310,7 +19280,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20342,7 +19312,7 @@ MonoBehaviour:
           <S>k__BackingField: -5
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20374,7 +19344,7 @@ MonoBehaviour:
           <S>k__BackingField: -6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20406,7 +19376,7 @@ MonoBehaviour:
           <S>k__BackingField: 1
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20438,7 +19408,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20470,7 +19440,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20502,7 +19472,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20534,7 +19504,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20566,7 +19536,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20598,7 +19568,7 @@ MonoBehaviour:
           <S>k__BackingField: -5
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20630,7 +19600,7 @@ MonoBehaviour:
           <S>k__BackingField: -6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20662,7 +19632,7 @@ MonoBehaviour:
           <S>k__BackingField: 0
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20694,7 +19664,7 @@ MonoBehaviour:
           <S>k__BackingField: -1
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20726,7 +19696,7 @@ MonoBehaviour:
           <S>k__BackingField: -2
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20758,7 +19728,7 @@ MonoBehaviour:
           <S>k__BackingField: -3
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20790,7 +19760,7 @@ MonoBehaviour:
           <S>k__BackingField: -4
         _isActive: 1
         _color: {r: 0.3764706, g: 0.54509807, b: 0.75686276, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20822,7 +19792,7 @@ MonoBehaviour:
           <S>k__BackingField: -5
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20854,7 +19824,7 @@ MonoBehaviour:
           <S>k__BackingField: -6
         _isActive: 0
         _color: {r: 0, g: 1, b: 1, a: 1}
-        _onHighlightTile:
+        _onEnterTile:
           m_PersistentCalls:
             m_Calls: []
         _onExitTile:
@@ -20876,6 +19846,8 @@ MonoBehaviour:
   _mouseInputEvent: {fileID: 1944097348}
   _tileLimit: 6
   _mainCamera: {fileID: 1486505849}
+  <HexagonRadius>k__BackingField: 0.038
+  <RootObject>k__BackingField: {fileID: 0}
 --- !u!114 &1944097347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20919,7 +19891,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _onChangedPointBuilding:
+  _onEnterBuilding:
+    m_PersistentCalls:
+      m_Calls: []
+  _onExitBuilding:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &1944097348
@@ -20948,143 +19923,6 @@ MonoBehaviour:
         _onDownEvent:
           m_PersistentCalls:
             m_Calls: []
---- !u!1 &1971100583
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1971100584}
-  - component: {fileID: 1971100586}
-  - component: {fileID: 1971100585}
-  m_Layer: 6
-  m_Name: TutorialContent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1971100584
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971100583}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 931959063}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.99, y: -63.63}
-  m_SizeDelta: {x: 374.02, y: 397.29}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1971100585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971100583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: "\uD29C\uD1A0\uB9AC\uC5BC \uC124\uBA85\uB780"
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8e8f97682e668e94cb30d2e6b8e13d84, type: 2}
-  m_sharedMaterial: {fileID: -7304394381272760782, guid: 8e8f97682e668e94cb30d2e6b8e13d84,
-    type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1971100586
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971100583}
-  m_CullTransparentMesh: 1
 --- !u!1 &1971746124
 GameObject:
   m_ObjectHideFlags: 0
@@ -22249,6 +21087,124 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &1119825940936822672
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1439010216}
+    m_Modifications:
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 665.99994
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834770406538034157, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477543626987287114, guid: aa058e38dc173054886fa3177cd59a39,
+        type: 3}
+      propertyPath: m_Name
+      value: Tutorial
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aa058e38dc173054886fa3177cd59a39, type: 3}
 --- !u!222 &1120908922455917214
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22309,6 +21265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86fc711508b1443185f39ac565d5eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvas: {fileID: 0}
   _topButton: {fileID: 8543742358067840477}
   _bottomButton: {fileID: 8365438728514207529}
   _eventImage: {fileID: 2155183712241869082}
@@ -22876,8 +21833,29 @@ MonoBehaviour:
   _cardDescriptionText: {fileID: 7135583071948403786}
   _rectTransform: {fileID: 8300173851211828930}
   _canvas: {fileID: 4221986687360060075}
+  _paymentHeader:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _effectHeader:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   _card: {fileID: 0}
   _multiOffset: {x: 0, y: 0}
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &2849970695154108983
 MonoBehaviour:
   m_ObjectHideFlags: 0
