@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eefa1e16dcafe5468693ef8514f4e5f, type: 3}
+  m_Name: TMTutorialData_0
+  m_EditorClassIdentifier: 
+  _property: []
+  <ID>k__BackingField: 1d26c442-3d10-4130-92da-bf0857f6aac8
+  <LocalizedDescription>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: TM_Tutorial
+    m_TableEntryReference:
+      m_KeyId: 14313325498368
+      m_Key: TutorialDescription_0
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <AudioClip>k__BackingField: {fileID: 0}
+  references:
+    version: 2
+    RefIds: []

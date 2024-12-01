@@ -48,15 +48,8 @@ namespace TM.Buff
                 }
             }
         }
-        
-        protected override void Init()
-        {
-            TMResourceRepeatAddBuffTrigger repeatAddBuff = new(1, 5, false, TMResourceKind.CLAY, 10);
-            TMResourceRepeatAddBuffTrigger repeatAddBuffTwo = new(1, 3, false, TMResourceKind.MARS_LITHIUM, 5);
 
-            repeatAddBuff.CreateBuff().ApplyBuff();
-            repeatAddBuffTwo.CreateBuff().ApplyBuff();
-        }
+        protected override void Init() {}
 
         private void OnDestroy()
         {
