@@ -15,13 +15,28 @@ namespace TM.UI
     [DisallowMultipleComponent]
     public sealed class TMCardCollectUIController : SceneSingleton<TMCardCollectUIController>
     {
+        public event UnityAction<TMCardModel> OnAddedCardEvent
+        {
+            add => _onAddedCardEvent.AddListener(value);
+            remove => _onAddedCardEvent.RemoveListener(value);
+        }
+        public event UnityAction<TMCardModel> OnRemovedCardEvent
+        {
+            add => _onRemovedCardEvent.AddListener(value);
+            remove => _onRemovedCardEvent.RemoveListener(value);
+        }
+
         protected override string SceneName => "MainGameScene";
-        
+
+        [SerializeField] private UnityEvent<TMCardModel> _onAddedCardEvent = new();
+        [SerializeField] private UnityEvent<TMCardModel> _onRemovedCardEvent = new();
+
         [SerializeField, InitializeRequireComponent] private Canvas _canvas;
         [SerializeField, SelectableSerializeField] private RectTransform _cardSelectField;
         [SerializeField, SelectableSerializeField] private Button _selectButton;
         
         private readonly List<KeyValuePair<TMCardModel, UnityAction<PointerEventData>>> _cardCallbacks = new();
+        private readonly List<TMCardModel> _cards = new();
         private TMCardModel _selectCard = null;
         private bool? _keepPause = null; 
 
@@ -43,6 +58,8 @@ namespace TM.UI
                     }
                 }
 
+                _cards.ForEach(_onRemovedCardEvent.Invoke);
+
                 TimeManager.IsPause = _keepPause is not null && (bool)_keepPause;
                 _keepPause = null;
                 _cardCallbacks.Clear();
@@ -52,6 +69,7 @@ namespace TM.UI
                 TMCardManager.Instance.AddCard(_selectCard);
                 _selectCard = null;
                 _canvas.enabled = false;
+                _cards.Clear();
             });
         }
 
@@ -60,9 +78,11 @@ namespace TM.UI
             _canvas.enabled = true;
             _keepPause = TimeManager.IsPause;
             TimeManager.IsPause = true;
-            
+            _cards.AddRange(cards);
+
             foreach (TMCardModel card in cards)
             {
+                _onAddedCardEvent.Invoke(card);
                 card.transform.SetParent(_cardSelectField, false);
                 card.SetCanInteract(false);
                 UnityAction<PointerEventData> action = selectCard;

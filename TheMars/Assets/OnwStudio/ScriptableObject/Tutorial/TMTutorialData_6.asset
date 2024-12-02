@@ -23,7 +23,8 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  <AudioClip>k__BackingField: {fileID: 0}
+  <AudioClip>k__BackingField: {fileID: 8300000, guid: 70faf46e07c219b478aa6ccd08a9a934,
+    type: 3}
   references:
     version: 2
     RefIds: []

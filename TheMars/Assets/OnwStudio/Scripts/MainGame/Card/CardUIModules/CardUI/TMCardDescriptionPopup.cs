@@ -12,6 +12,9 @@ using Onw.Attribute;
 using Onw.Extensions;
 using Onw.Scope;
 using TM.Card.Runtime;
+using UnityEngine.Events;
+using Onw.UI.Components;
+using UnityEngine.EventSystems;
 
 namespace TM.UI
 {
@@ -33,13 +36,34 @@ namespace TM.UI
         private bool _canShow = true;
         private bool _isReload;
 
-        public void OnAddedCardEvent(TMCardModel card)
+        public void OnAddedCardForCollect(TMCardModel card)
+        {
+            card.OnUnSafePointerEnterEvent += SetUI;
+            card.OnUnSafePointerExitEvent += onPointerExitEvent;
+        }
+
+        public void OnRemovedCardForCollect(TMCardModel card)
+        {
+            card.OnUnSafePointerEnterEvent -= SetUI;
+            card.OnUnSafePointerExitEvent -= onPointerExitEvent;
+
+            if (_card == card)
+            {
+                removeListenerToLocalizedString(card);
+                _card = null;
+                _cardDescriptionText.text = string.Empty;
+                _cardNameText.text = string.Empty;
+                _canvas.enabled = false;
+            }
+        }
+
+        public void OnAddedCard(TMCardModel card)
         {
             card.OnSafePointerEnterEvent += SetUI;
             card.OnSafePointerExitEvent += onPointerExitEvent;
         }
 
-        public void OnRemovedCardEvent(TMCardModel card)
+        public void OnRemovedCard(TMCardModel card)
         {
             card.OnSafePointerEnterEvent -= SetUI;
             card.OnSafePointerExitEvent -= onPointerExitEvent;

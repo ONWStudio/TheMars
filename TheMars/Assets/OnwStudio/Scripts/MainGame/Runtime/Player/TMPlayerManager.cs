@@ -52,6 +52,20 @@ namespace TM
         [SerializeField] private ReactiveField<int> _maxExp = new() { Value = 100, ValueProcessors = new() { new MinIntProcessor(0) }};
         [SerializeField] private ReactiveField<int> _terraformValue = new() { ValueProcessors = new() { new ClampIntProcessor(0, MAX_TERRAFORM_VALUE) }};
 
+        private void Start()
+        {
+            TMSimulator.Instance.NowDay.AddListenerWithoutNotify(OnChangedDay);   
+        }
+
+        public void OnChangedDay(int day)
+        {
+            if (day % 2 == 0)
+            {
+                int value = Random.Range(0, Mathf.Clamp(day, 0, 5));
+                _terraformValue.Value += value;
+            }
+        }
+
         public void SetPopulation(int population)
         {
             _population.Value = Mathf.Clamp(population, 0, _totalPopulation.Value);

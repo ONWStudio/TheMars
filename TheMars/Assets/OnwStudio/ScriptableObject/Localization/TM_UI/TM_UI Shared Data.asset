@@ -35,6 +35,30 @@ MonoBehaviour:
     m_Key: Delay_Buff_Time_Description
     m_Metadata:
       m_Items: []
+  - m_Id: 6135466265743360
+    m_Key: Clay
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6135576596910080
+    m_Key: Plant
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6135636739035136
+    m_Key: Electricity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6135714891501568
+    m_Key: Credit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6135778598785024
+    m_Key: MarsLithium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6136423720488960
+    m_Key: Steel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

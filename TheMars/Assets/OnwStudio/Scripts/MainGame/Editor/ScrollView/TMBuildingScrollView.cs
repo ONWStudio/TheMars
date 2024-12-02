@@ -80,29 +80,21 @@ namespace TM.Editor
                 }
             };
 
-            if (building.TryGetFieldByName(
-                "_localizedBuildingName",
-                BindingFlags.NonPublic | BindingFlags.Instance,
-                out LocalizedString localizedBuildingName))
-            {
-                _buildingNameObservers.Add(localizedBuildingName.MonitorSpecificLocaleEntry("ko-KR", onChangedString));
-                if (localizedBuildingName.IsEmpty)
-                {
-                    objectButton.name = field.text = building.name;
-                }
-                else
-                {
-                    objectButton.name = field.text = localizedBuildingName.GetLocalizedString();
-                }
+            LocalizedString localizedBuildingName = building.LocalizedBuildingName;
 
-                void onChangedString(string buildingName)
-                {
-                    objectButton.name = field.text = string.IsNullOrEmpty(buildingName) ? building.name : buildingName;
-                }
+            _buildingNameObservers.Add(localizedBuildingName.MonitorSpecificLocaleEntry("ko-KR", onChangedString));
+            if (localizedBuildingName.IsEmpty)
+            {
+                objectButton.name = field.text = building.name;
             }
             else
             {
-                objectButton.name = field.text = building.name;
+                objectButton.name = field.text = localizedBuildingName.GetLocalizedString();
+            }
+
+            void onChangedString(string buildingName)
+            {
+                objectButton.name = field.text = string.IsNullOrEmpty(buildingName) ? building.name : buildingName;
             }
 
             objectButton.Add(field);

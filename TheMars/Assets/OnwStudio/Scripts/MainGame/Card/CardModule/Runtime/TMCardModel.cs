@@ -18,7 +18,6 @@ using TM.Cost;
 
 namespace TM.Card.Runtime
 {
-    // .. Model
     [DisallowMultipleComponent]
     public sealed class TMCardModel : MonoBehaviour
     {
@@ -70,6 +69,30 @@ namespace TM.Card.Runtime
             remove => _onSafeDragEvent.RemoveListener(value);
         }
 
+        public event UnityAction<TMCardModel> OnUnSafePointerDownEvent
+        {
+            add => _onUnSafePointerDownEvent.AddListener(value);
+            remove => _onUnSafePointerDownEvent.RemoveListener(value);
+        }
+
+        public event UnityAction<TMCardModel> OnUnSafePointerUpEvent
+        {
+            add => _onUnSafePointerUpEvent.AddListener(value);
+            remove => _onUnSafePointerUpEvent.RemoveListener(value);
+        }
+
+        public event UnityAction<TMCardModel> OnUnSafePointerEnterEvent
+        {
+            add => _onUnSafePointerEnterEvent.AddListener(value);
+            remove => _onUnSafePointerEnterEvent.RemoveListener(value);
+        }
+
+        public event UnityAction<TMCardModel> OnUnSafePointerExitEvent
+        {
+            add => _onUnSafePointerExitEvent.AddListener(value);
+            remove => _onUnSafePointerExitEvent.RemoveListener(value);
+        }
+
         [SerializeField, ReadOnly] private ReactiveField<bool> _isDragging = new();
         [SerializeField, ReadOnly] private ReactiveField<bool> _onField = new();
         [SerializeField, ReadOnly] private ReactiveField<bool> _isOverTombTransform = new();
@@ -93,6 +116,12 @@ namespace TM.Card.Runtime
         [SerializeField] private UnityEvent<TMCardModel> _onSafePointerEnterEvent = new();
         [SerializeField] private UnityEvent<TMCardModel> _onSafePointerExitEvent = new();
         [SerializeField] private UnityEvent<TMCardModel> _onSafeDragEvent = new();
+
+        [Header("Un Safe Events")]
+        [SerializeField] private UnityEvent<TMCardModel> _onUnSafePointerDownEvent = new();
+        [SerializeField] private UnityEvent<TMCardModel> _onUnSafePointerUpEvent = new();
+        [SerializeField] private UnityEvent<TMCardModel> _onUnSafePointerEnterEvent = new();
+        [SerializeField] private UnityEvent<TMCardModel> _onUnSafePointerExitEvent = new();
 
         private bool? _keepIsHide = null;
         private IEnumerator _dragEnumerator = null;
@@ -145,6 +174,11 @@ namespace TM.Card.Runtime
             CardCamera = GameObject
                 .FindWithTag("CardCamera")
                 .GetComponent<Camera>();
+
+            PointerDownTrigger.OnPointerDownEvent += _ => _onUnSafePointerDownEvent.Invoke(this);
+            PointerUpTrigger.OnPointerUpEvent += _ => _onUnSafePointerUpEvent.Invoke(this);
+            PointerEnterTrigger.OnPointerEnterEvent += _ => _onUnSafePointerEnterEvent.Invoke(this);
+            PointerExitTrigger.OnPointerExitEvent += _ => _onUnSafePointerExitEvent.Invoke(this);
         }
 
         private void OnDestroy()
